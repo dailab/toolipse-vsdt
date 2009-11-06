@@ -43,6 +43,9 @@ import de.dailab.vsdt.diagram.part.VsdtDiagramEditorUtil;
 /**
  * Derived from VSDT Meta Diagram Editor's Open Diagram Edit Policy
  * 
+ * Shall be used for opening Independent Subprocesses in a new Editor, but not
+ * finished yet.
+ * 
  * @generated NOT
  */
 public class OpenDiagramEditPolicy extends OpenEditPolicy {
