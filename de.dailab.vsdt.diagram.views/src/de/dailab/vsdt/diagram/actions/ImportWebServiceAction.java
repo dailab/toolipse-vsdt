@@ -139,10 +139,17 @@ public class ImportWebServiceAction extends Action {
 		
 		try {
 			// Active Editor of Type BPMN Editor ?
-			if (editor instanceof VsdtDiagramEditor || editor instanceof de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditor) {
+			if (editor instanceof DiagramEditor) { // || editor instanceof de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditor) {
 				DiagramEditor diagramEditor= (DiagramEditor) editor;
+				if (! ( "de.dailab.vsdt.diagram".equals(diagramEditor.getContributorId()) || 
+						"de.dailab.vsdt.diagram.meta".equals(diagramEditor.getContributorId()))) {
+					// not a VSDT Diagram Editor
+					MessageDialog.openWarning(window.getShell(), TITLE, ERROR_NO_EDITOR);
+					return;
+				}
+				
 				final DiagramEditPart diagramEditPart= diagramEditor.getDiagramEditPart();
-
+				
 				EObject modelElement= (EObject) ((View)diagramEditPart.getModel()).getElement(); 
 				if (modelElement instanceof BusinessProcessDiagram) {
 					bps = ((BusinessProcessDiagram) modelElement).getBusinessProcessSystem();
@@ -252,9 +259,6 @@ public class ImportWebServiceAction extends Action {
 				}
 	
 				diagramEditPart.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
-			} else {
-				MessageDialog.openWarning(window.getShell(), TITLE, ERROR_NO_EDITOR);
-				return;
 			}
 		} catch (Exception e) {
 			MessageDialog.openError(window.getShell(), TITLE, ERROR_GENERAL);

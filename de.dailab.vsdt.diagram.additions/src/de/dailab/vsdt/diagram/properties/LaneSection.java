@@ -4,7 +4,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.ui.IWorkbenchPart;
 
 import de.dailab.vsdt.Lane;
@@ -18,9 +17,6 @@ public class LaneSection extends AbstractVsdtPropertySection {
 
 	protected Lane lane;
     
-    private Button moveUpButton;
-    private Button moveDownButton;
-
     @Override
     protected EClass getObjectClass() {
     	return VsdtPackage.eINSTANCE.getLane();
