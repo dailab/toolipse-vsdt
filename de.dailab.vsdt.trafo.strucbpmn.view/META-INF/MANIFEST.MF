@@ -13,7 +13,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.gmf.runtime.diagram.ui.providers,
  de.dailab.common.gmf,
  de.dailab.vsdt.diagram,
- de.dailab.vsdt.diagram.views,
  de.dailab.vsdt.trafo.strucbpmn.export
 Bundle-Activator: de.dailab.vsdt.trafo.strucbpmn.VsdtStructureViewPlugin
 Bundle-ActivationPolicy: lazy
