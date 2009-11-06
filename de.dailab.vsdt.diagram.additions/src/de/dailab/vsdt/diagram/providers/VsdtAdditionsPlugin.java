@@ -4,17 +4,17 @@
  *
  * $Id$
  */
-package de.dailab.vsdt.diagram.views;
+package de.dailab.vsdt.diagram.providers;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
- * The VSDT Views PlugIn, providing access to icons.
+ * The VSDT Additions PlugIn, providing access to icons.
  */
-public final class VsdtViewsPlugin extends AbstractUIPlugin {
+public final class VsdtAdditionsPlugin extends AbstractUIPlugin {
 	
-	public static final String PLUGIN_ID= "de.dailab.vsdt.diagram.views";
+	public static final String PLUGIN_ID= "de.dailab.vsdt.diagram.additions";
 	
 	public static final String IMAGE_OPEN= "Open.gif";
 	public static final String IMAGE_IMPORT= "Import.gif";

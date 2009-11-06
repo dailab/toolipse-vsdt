@@ -55,8 +55,8 @@ import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.diagram.edit.parts.PoolEditPart;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
+import de.dailab.vsdt.diagram.providers.VsdtAdditionsPlugin;
 import de.dailab.vsdt.diagram.providers.VsdtElementTypes;
-import de.dailab.vsdt.diagram.views.VsdtViewsPlugin;
 import de.dailab.vsdt.diagram.views.webservices.WebSeviceAccessor;
 
 /**
@@ -93,7 +93,7 @@ public class ImportWebServiceAction extends Action {
 		this.viewer= viewer;
 		this.setText(TITLE);
 		this.setToolTipText(TOOLTIP);
-		this.setImageDescriptor(VsdtViewsPlugin.getImageDescriptor(VsdtViewsPlugin.IMAGE_IMPORT));
+		this.setImageDescriptor(VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_IMPORT));
 	}
 
 	/**

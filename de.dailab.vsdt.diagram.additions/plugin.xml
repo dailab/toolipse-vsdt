@@ -402,7 +402,7 @@
 	<!-- Perspective -->
 	<extension point="org.eclipse.ui.perspectives">
 		<perspective
-			class="de.dailab.vsdt.diagram.views.VsdtPerspectiveFactory"
+			class="de.dailab.vsdt.diagram.providers.VsdtPerspectiveFactory"
 			icon="icons/Perspective.gif" 
 			id="de.dailab.vsdt.perspective"
 			name="VSDT">

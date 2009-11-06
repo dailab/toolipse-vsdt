@@ -1,4 +1,4 @@
-package de.dailab.vsdt.diagram.views;
+package de.dailab.vsdt.diagram.providers;
 
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
@@ -18,7 +18,7 @@ public class VsdtPerspectiveFactory implements IPerspectiveFactory {
 		 
 		 // Top left: Resource Navigator
 		 IFolderLayout topLeft = layout.createFolder("topLeft", IPageLayout.LEFT, 0.25f,editorArea);
-		 topLeft.addView(IPageLayout.ID_RES_NAV);
+		 topLeft.addView(IPageLayout.ID_PROJECT_EXPLORER);
 		 
 		 // Bottom left: Outline view
 		 IFolderLayout bottomLeft = layout.createFolder("bottomLeft", IPageLayout.BOTTOM, 0.6f,"topLeft");

@@ -14,7 +14,7 @@ import javax.wsdl.PortType;
 import org.eclipse.jface.resource.ImageDescriptor;
 
 import de.dailab.common.gmf.ui.views.AbstractLabelProvider;
-import de.dailab.vsdt.diagram.views.VsdtViewsPlugin;
+import de.dailab.vsdt.diagram.providers.VsdtAdditionsPlugin;
 
 /**
  * This class is used to provide the Labels used in the BPMN WebServices View
@@ -37,28 +37,28 @@ public class WebServiceViewLabelProvider extends AbstractLabelProvider {
 			}
 		}
 		if (actualElement instanceof Definition) {
-		   descriptor= VsdtViewsPlugin.getImageDescriptor(VsdtViewsPlugin.IMAGE_WSDL);
+		   descriptor= VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_WSDL);
 		}
 		if (actualElement instanceof Message) {
-		   descriptor= VsdtViewsPlugin.getImageDescriptor(VsdtViewsPlugin.IMAGE_MESSAGE);
+		   descriptor= VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_MESSAGE);
 		}
 		if (actualElement instanceof Part) {
-		   descriptor= VsdtViewsPlugin.getImageDescriptor(VsdtViewsPlugin.IMAGE_PART);
+		   descriptor= VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_PART);
 		}
 		if (actualElement instanceof PortType) {
-			descriptor= VsdtViewsPlugin.getImageDescriptor(VsdtViewsPlugin.IMAGE_PORTTYPE);			
+			descriptor= VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_PORTTYPE);			
 		}
 		if (actualElement instanceof Operation) {
-			descriptor= VsdtViewsPlugin.getImageDescriptor(VsdtViewsPlugin.IMAGE_OPERATION);
+			descriptor= VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_OPERATION);
 		}
 		if (actualElement instanceof Input) {
-			descriptor= VsdtViewsPlugin.getImageDescriptor(VsdtViewsPlugin.IMAGE_INPUT);			
+			descriptor= VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_INPUT);			
 		}
 		if (actualElement instanceof Output) {
-			descriptor= VsdtViewsPlugin.getImageDescriptor(VsdtViewsPlugin.IMAGE_OUTPUT);
+			descriptor= VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_OUTPUT);
 		}
 		if (actualElement instanceof Fault) {
-			descriptor= VsdtViewsPlugin.getImageDescriptor(VsdtViewsPlugin.IMAGE_FAULT);
+			descriptor= VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_FAULT);
 		}
 		return descriptor;
 	}

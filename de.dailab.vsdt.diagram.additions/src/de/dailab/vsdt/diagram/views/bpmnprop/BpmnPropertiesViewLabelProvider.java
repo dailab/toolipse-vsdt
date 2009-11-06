@@ -7,7 +7,7 @@ import org.eclipse.swt.graphics.Image;
 import de.dailab.vsdt.IdObject;
 import de.dailab.vsdt.Message;
 import de.dailab.vsdt.Property;
-import de.dailab.vsdt.diagram.views.VsdtViewsPlugin;
+import de.dailab.vsdt.diagram.providers.VsdtAdditionsPlugin;
 
 /**
  * This class is used to provide the Labels used in the BPMN Properties View
@@ -43,7 +43,7 @@ public class BpmnPropertiesViewLabelProvider extends LabelProvider implements IT
 
 	public Image getColumnImage(Object obj, int index) {
 		if (index == 0) {
-			return VsdtViewsPlugin.getImageDescriptor(VsdtViewsPlugin.IMAGE_PROPERTY).createImage();
+			return VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_PROPERTY).createImage();
 		} else {
 			return null;
 		}

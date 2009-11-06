@@ -6,7 +6,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 
 import de.dailab.common.gmf.ui.views.AbstractLabelProvider;
 import de.dailab.vsdt.Pool;
-import de.dailab.vsdt.diagram.views.VsdtViewsPlugin;
+import de.dailab.vsdt.diagram.providers.VsdtAdditionsPlugin;
 
 /**
  * This class is used to provide the Labels used in the Pool Visibility View
@@ -19,7 +19,7 @@ public class PoolVisibilityViewLabelProvider extends AbstractLabelProvider {
 		ImageDescriptor descriptor= null;
 		EObject actualElement= getActualElement(element);
 		if (actualElement instanceof Pool) {
-		   descriptor= VsdtViewsPlugin.getImageDescriptor(VsdtViewsPlugin.IMAGE_POOL);
+		   descriptor= VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_POOL);
 		}
 		return descriptor;
 	}

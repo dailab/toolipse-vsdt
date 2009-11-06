@@ -20,3 +20,4 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5,
  JavaSE-1.6
 Bundle-ClassPath: lib/wsdl4j-1.5.1.jar,
  .
+Bundle-Activator: de.dailab.vsdt.diagram.providers.VsdtAdditionsPlugin
