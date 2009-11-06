@@ -1,4 +1,4 @@
-package de.dailab.vsdt.diagram.actions;
+package de.dailab.vsdt.diagram.actions.structuring;
 
 
 /**
