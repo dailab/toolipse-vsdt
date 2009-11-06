@@ -1,0 +1,7 @@
+# Tracing options for the de.dailab.vsdt.diagram.meta plug-in
+
+# Common issues
+de.dailab.vsdt.diagram.meta/debug=false
+
+# Visual IDs
+de.dailab.vsdt.diagram.meta/debug/visualID=false

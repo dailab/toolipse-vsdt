@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+	<!-- layout -->
+	<extension point="org.eclipse.gmf.runtime.diagram.ui.layoutProviders">
+		<layoutProvider
+			class="de.dailab.vsdt.diagram.providers.VsdtLayoutProvider">
+			<Priority name="High" />
+		</layoutProvider>
+	</extension>
+
+	<!-- Additonal Views -->
+	<extension point="org.eclipse.ui.views">
+		<category name="VSDT" id="de.dailab.vsdt.diagram.views"/>
+		<view name="Web Services" icon="icons/WebService.gif"
+			category="de.dailab.vsdt.diagram.views"
+			class="de.dailab.vsdt.diagram.views.webservices.WebServicesView"
+			id="de.dailab.vsdt.diagram.views.webservices.WebServicesView">
+		</view>
+		<view name="Bpmn Properties" icon="icons/Property.gif"
+			category="de.dailab.vsdt.diagram.views"
+			class="de.dailab.vsdt.diagram.views.bpmnprop.BpmnPropertiesView"
+			id="de.dailab.vsdt.diagram.views.bpmnprop.BpmnPropertiesView">
+		</view>
+		<view name="Pool Visibility" icon="icons/Pool.gif"
+			category="de.dailab.vsdt.diagram.views"
+			class="de.dailab.vsdt.diagram.views.pools.PoolVisibilityView"
+			id="de.dailab.vsdt.diagram.views.pools.PoolVisibilityView">
+		</view>
+	</extension>
+	
+	<!-- Perspective -->
+	<extension point="org.eclipse.ui.perspectives">
+		<perspective
+			class="de.dailab.vsdt.diagram.views.VsdtPerspectiveFactory"
+			icon="icons/Perspective.gif" 
+			id="de.dailab.vsdt.perspective"
+			name="VSDT">
+			<description>
+				This perspective is recommended for the work with the
+				Visual Service Design Tool
+			</description>
+		</perspective>
+	</extension>
+
+	<!-- Perspective Extensions -->
+	<extension point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension
+			targetID="de.dailab.vsdt.perspective">
+			<!--<newWizardShortcut id="de.dailab.vsdt.diagram.part.VsdtCreationWizardID" />-->
+			<newWizardShortcut id="de.dailab.vsdt.meta.diagram.part.VsdtCreationWizardID" />
+			<viewShortcut id="org.eclipse.ui.views.PropertySheet" />
+			<viewShortcut id="org.eclipse.ui.views.ProblemView" />
+			<viewShortcut id="org.eclipse.ui.views.ResourceNavigator" />
+			<viewShortcut id="org.eclipse.ui.views.ContentOutline" />
+			<viewShortcut id="org.eclipse.ui.views.TaskList" />
+			<viewShortcut id="org.eclipse.ui.views.PropertySheet" />
+			<viewShortcut id="de.dailab.vsdt.diagram.views.webservices.WebServicesView" />
+			<viewShortcut id="de.dailab.vsdt.diagram.views.bpmnprop.BpmnPropertiesView" />
+			<viewShortcut id="de.dailab.vsdt.diagram.views.pools.PoolVisibilityView" />
+			<view id="de.dailab.vsdt.diagram.views.bpmnprop.BpmnPropertiesView"
+				relationship="bottom" relative="org.eclipse.ui.views.ResourceNavigator">
+			</view>
+			<view id="de.dailab.vsdt.diagram.views.webservices.WebServicesView"
+				relationship="stack" relative="de.dailab.vsdt.diagram.views.bpmnprop.BpmnPropertiesView">
+			</view>
+			<view id="de.dailab.vsdt.diagram.views.pools.PoolVisibilityView"
+				relationship="stack" relative="org.eclipse.ui.views.ContentOutline">
+			</view>
+		</perspectiveExtension>
+	</extension>
+
+</plugin>

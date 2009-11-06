@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vsdt:BusinessProcessSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vsdt="http://de.dailab.vsdt" name="New Business Process Diagram" id="_6TS3kIf_Ed6bqtdru5lcdg" version="0.1" creationDate="2009-08-13T13:53:26.665+0200" modificationDate="2009-08-13T13:53:26.665+0200">
+  <businessProcesses name="Order Pizza" id="__cEvQIf_Ed6bqtdru5lcdg" participants="_67nb0If_Ed6bqtdru5lcdg _7vFgIIf_Ed6bqtdru5lcdg">
+    <pools name="Customer" id="_nt7CcIgAEd6bqtdru5lcdg" participant="_67nb0If_Ed6bqtdru5lcdg">
+      <process name="Customer_Process" id="_nt7CcogAEd6bqtdru5lcdg"/>
+      <lanes id="_nt7CcYgAEd6bqtdru5lcdg" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" name="Feeling Hungry" id="_udOMAIgAEd6bqtdru5lcdg" trigger="RULE"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Decide what &#xD;&#xA;to eat" id="_wfF9IIgAEd6bqtdru5lcdg"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_zMuBAIgAEd6bqtdru5lcdg" markerVisible="true"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_4VzasIgAEd6bqtdru5lcdg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Send Out &#xD;&#xA;Pizza Order" id="_57HLoIgAEd6bqtdru5lcdg">
+          <loopAttributes xsi:type="vsdt:MultiLoopAttSet"/>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Collect &#xD;&#xA;Offers" id="_AHcyEIgBEd6bqtdru5lcdg">
+          <loopAttributes xsi:type="vsdt:MultiLoopAttSet"/>
+          <boundaryEvents id="_VJ2akIgREd6QUJb35Lrnzg" trigger="TIMER"/>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Pick best &#xD;&#xA;Offer" id="_BFo4oIgBEd6bqtdru5lcdg"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_F-W7EIgBEd6bqtdru5lcdg" markerVisible="true"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Order Pizza" id="_IZFREIgBEd6bqtdru5lcdg"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_NXdPkIgBEd6bqtdru5lcdg"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_Oe3jkIgBEd6bqtdru5lcdg"/>
+      </lanes>
+    </pools>
+    <pools name="Pizzeria" id="_nuqpUIgAEd6bqtdru5lcdg" participant="_7vFgIIf_Ed6bqtdru5lcdg">
+      <process name="Pizzeria_Process" id="_nuqpUogAEd6bqtdru5lcdg"/>
+      <lanes name="Pizzeria" id="_nuqpUYgAEd6bqtdru5lcdg">
+        <containedFlowObjects xsi:type="vsdt:Start" name="Rec. Req." id="_QiiEcIgBEd6bqtdru5lcdg" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Check Availability" id="_SXBg4IgBEd6bqtdru5lcdg" activityType="EMBEDDED">
+          <containedFlowObjects xsi:type="vsdt:Activity" name="Check Products" id="_1tW7UIgMEd6f8YlN1lIN7w"/>
+          <containedFlowObjects xsi:type="vsdt:Activity" name="Check Schedule" id="_2uOicIgMEd6f8YlN1lIN7w"/>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_WOlBQIgBEd6bqtdru5lcdg" markerVisible="true"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Estimate &#xD;&#xA;Price" id="_Wfi1cIgBEd6bqtdru5lcdg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Send offer" id="_YdQfUIgBEd6bqtdru5lcdg"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_ce8MEIgBEd6bqtdru5lcdg" gatewayType="XOR_EVENT"/>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" name="timeout" id="_dwUUYIgBEd6bqtdru5lcdg" trigger="TIMER"/>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" name="receive order" id="_fSNk8IgBEd6bqtdru5lcdg" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_UzlB4IgMEd6f8YlN1lIN7w"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_VKV8EIgMEd6f8YlN1lIN7w"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_cxvLQIgMEd6f8YlN1lIN7w"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Discard &#xD;&#xA;Order" id="_AIeSgIgREd6QUJb35Lrnzg"/>
+      </lanes>
+      <lanes name="Bakery" id="_Kt5OgIgQEd6QUJb35Lrnzg">
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Bake &#xD;&#xA;Pizza" id="_gU3UwIgBEd6bqtdru5lcdg" activityType="INDEPENDENT" diagramRef="_FT3CAIgAEd6bqtdru5lcdg" processRef="_tDK1kogQEd6QUJb35Lrnzg"/>
+      </lanes>
+      <lanes name="Delivery" id="_LropIIgQEd6QUJb35Lrnzg">
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Deliver &#xD;&#xA;Pizza" id="_iGYVsIgBEd6bqtdru5lcdg" activityType="INDEPENDENT" diagramRef="_GEqM0IgAEd6bqtdru5lcdg" processRef="_sHWtkogQEd6QUJb35Lrnzg"/>
+      </lanes>
+    </pools>
+    <connections xsi:type="vsdt:SequenceFlow" id="_wkTNQIgAEd6bqtdru5lcdg" source="_udOMAIgAEd6bqtdru5lcdg" target="_wfF9IIgAEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_zMuBBogAEd6bqtdru5lcdg" source="_wfF9IIgAEd6bqtdru5lcdg" target="_zMuBAIgAEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_4WjBkogAEd6bqtdru5lcdg" conditionType="DEFAULT" source="_zMuBAIgAEd6bqtdru5lcdg" target="_4VzasIgAEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" name="Pizza!" id="_57Q8oIgAEd6bqtdru5lcdg" conditionType="EXPRESSION" source="_zMuBAIgAEd6bqtdru5lcdg" target="_57HLoIgAEd6bqtdru5lcdg">
+      <conditionExpression expression="'eat pizza'"/>
+    </connections>
+    <connections xsi:type="vsdt:SequenceFlow" id="_AHcyGYgBEd6bqtdru5lcdg" source="_57HLoIgAEd6bqtdru5lcdg" target="_AHcyEIgBEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_BFyCkIgBEd6bqtdru5lcdg" source="_AHcyEIgBEd6bqtdru5lcdg" target="_BFo4oIgBEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_F-W7FogBEd6bqtdru5lcdg" source="_BFo4oIgBEd6bqtdru5lcdg" target="_F-W7EIgBEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_IZObAIgBEd6bqtdru5lcdg" conditionType="DEFAULT" source="_F-W7EIgBEd6bqtdru5lcdg" target="_IZFREIgBEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" name="no acceptable offer" id="_NXmZgIgBEd6bqtdru5lcdg" conditionType="EXPRESSION" source="_F-W7EIgBEd6bqtdru5lcdg" target="_NXdPkIgBEd6bqtdru5lcdg">
+      <conditionExpression expression="'no acceptable offer'"/>
+    </connections>
+    <connections xsi:type="vsdt:SequenceFlow" id="_OfAtgIgBEd6bqtdru5lcdg" source="_IZFREIgBEd6bqtdru5lcdg" target="_Oe3jkIgBEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_SXKq0IgBEd6bqtdru5lcdg" source="_QiiEcIgBEd6bqtdru5lcdg" target="_SXBg4IgBEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_WOlBRogBEd6bqtdru5lcdg" source="_SXBg4IgBEd6bqtdru5lcdg" target="_WOlBQIgBEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_Wfi1eYgBEd6bqtdru5lcdg" source="_WOlBQIgBEd6bqtdru5lcdg" target="_Wfi1cIgBEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_YdjaQIgBEd6bqtdru5lcdg" source="_Wfi1cIgBEd6bqtdru5lcdg" target="_YdQfUIgBEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_cfFWAIgBEd6bqtdru5lcdg" source="_YdQfUIgBEd6bqtdru5lcdg" target="_ce8MEIgBEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_dwnPUIgBEd6bqtdru5lcdg" source="_ce8MEIgBEd6bqtdru5lcdg" target="_dwUUYIgBEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_fSNk9ogBEd6bqtdru5lcdg" source="_ce8MEIgBEd6bqtdru5lcdg" target="_fSNk8IgBEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_gVAesIgBEd6bqtdru5lcdg" source="_fSNk8IgBEd6bqtdru5lcdg" target="_gU3UwIgBEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_iGhfoIgBEd6bqtdru5lcdg" source="_gU3UwIgBEd6bqtdru5lcdg" target="_iGYVsIgBEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_U3TEQIgMEd6f8YlN1lIN7w" source="_iGYVsIgBEd6bqtdru5lcdg" target="_UzlB4IgMEd6f8YlN1lIN7w"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_abxZcIgMEd6f8YlN1lIN7w" source="_57HLoIgAEd6bqtdru5lcdg" target="_QiiEcIgBEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_bW1TgIgMEd6f8YlN1lIN7w" source="_YdQfUIgBEd6bqtdru5lcdg" target="_AHcyEIgBEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_cx4VNYgMEd6f8YlN1lIN7w" source="_WOlBQIgBEd6bqtdru5lcdg" target="_cxvLQIgMEd6f8YlN1lIN7w"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_o71JkIgMEd6f8YlN1lIN7w" source="_IZFREIgBEd6bqtdru5lcdg" target="_fSNk8IgBEd6bqtdru5lcdg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_AMyKwIgREd6QUJb35Lrnzg" source="_AIeSgIgREd6QUJb35Lrnzg" target="_VKV8EIgMEd6f8YlN1lIN7w"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_VKV8FogMEd6f8YlN1lIN7w" source="_dwUUYIgBEd6bqtdru5lcdg" target="_AIeSgIgREd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_XTBtkIgREd6QUJb35Lrnzg" source="_VJ2akIgREd6QUJb35Lrnzg" target="_BFo4oIgBEd6bqtdru5lcdg"/>
+  </businessProcesses>
+  <businessProcesses name="Bake Pizza" id="_FT3CAIgAEd6bqtdru5lcdg" participants="_kT-EEIgAEd6bqtdru5lcdg">
+    <pools name="Bakery" id="_tDK1kIgQEd6QUJb35Lrnzg" participant="_kT-EEIgAEd6bqtdru5lcdg">
+      <process name="Bakery_Process" id="_tDK1kogQEd6QUJb35Lrnzg"/>
+      <lanes id="_tDK1kYgQEd6QUJb35Lrnzg" boundaryVisible="false"/>
+    </pools>
+  </businessProcesses>
+  <businessProcesses name="Deliver Pizza" id="_GEqM0IgAEd6bqtdru5lcdg" participants="_k8vUQIgAEd6bqtdru5lcdg _67nb0If_Ed6bqtdru5lcdg">
+    <pools name="Delivery" id="_sHWtkIgQEd6QUJb35Lrnzg" participant="_k8vUQIgAEd6bqtdru5lcdg">
+      <process name="Delivery_Process" id="_sHWtkogQEd6QUJb35Lrnzg"/>
+      <lanes id="_sHWtkYgQEd6QUJb35Lrnzg" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" name="Doorbell" id="_UjqH0IgSEd6QUJb35Lrnzg" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Open Door" id="_Xsm1wIgSEd6QUJb35Lrnzg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Take Pizza" id="_YUvMwIgSEd6QUJb35Lrnzg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Moan  about the &#xD;&#xA;Pizza being late" id="_epoSQIgSEd6QUJb35Lrnzg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Pay anyway" id="_jOfkkIgSEd6QUJb35Lrnzg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Eat Pizza" id="_lEMh8IgSEd6QUJb35Lrnzg"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_l_d3YIgSEd6QUJb35Lrnzg"/>
+      </lanes>
+    </pools>
+    <pools name="Customer" id="_sHgel4gQEd6QUJb35Lrnzg" participant="_67nb0If_Ed6bqtdru5lcdg">
+      <process name="Customer_Process" id="_sHgemYgQEd6QUJb35Lrnzg"/>
+      <lanes id="_sHgemIgQEd6QUJb35Lrnzg" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" id="_nT8McIgREd6QUJb35Lrnzg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Pick up &#xD;&#xA;Pizza" id="_o0WPQIgREd6QUJb35Lrnzg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Get Customer's &#xD;&#xA;Address" id="_qP184IgREd6QUJb35Lrnzg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Drive to &#xD;&#xA;Customer" id="_rx6zoIgREd6QUJb35Lrnzg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Ring" id="_CBKdAIgSEd6QUJb35Lrnzg"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_DPf4YIgSEd6QUJb35Lrnzg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Hand over &#xD;&#xA;Pizza" id="_Dr12IIgSEd6QUJb35Lrnzg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Eat Pizza" id="_FZV5wIgSEd6QUJb35Lrnzg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Drive back" id="_J1PdUIgSEd6QUJb35Lrnzg"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_MLeU4IgSEd6QUJb35Lrnzg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Demand &#xD;&#xA;Payment" id="_Na2SEIgSEd6QUJb35Lrnzg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Receive &#xD;&#xA;Payment" id="_OfnhwIgSEd6QUJb35Lrnzg"/>
+      </lanes>
+    </pools>
+    <connections xsi:type="vsdt:SequenceFlow" id="_o0gAQIgREd6QUJb35Lrnzg" source="_nT8McIgREd6QUJb35Lrnzg" target="_o0WPQIgREd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_qP_t4IgREd6QUJb35Lrnzg" source="_o0WPQIgREd6QUJb35Lrnzg" target="_qP184IgREd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_ryEkoIgREd6QUJb35Lrnzg" source="_qP184IgREd6QUJb35Lrnzg" target="_rx6zoIgREd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_CBKdCYgSEd6QUJb35Lrnzg" source="_rx6zoIgREd6QUJb35Lrnzg" target="_CBKdAIgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_DPpCUIgSEd6QUJb35Lrnzg" source="_CBKdAIgSEd6QUJb35Lrnzg" target="_DPf4YIgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_Dr_AEIgSEd6QUJb35Lrnzg" source="_DPf4YIgSEd6QUJb35Lrnzg" target="_Dr12IIgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_FZfqwIgSEd6QUJb35Lrnzg" source="_DPf4YIgSEd6QUJb35Lrnzg" target="_FZV5wIgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_J1ZOVYgSEd6QUJb35Lrnzg" source="_FZV5wIgSEd6QUJb35Lrnzg" target="_J1PdUIgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_MLeU5ogSEd6QUJb35Lrnzg" source="_J1PdUIgSEd6QUJb35Lrnzg" target="_MLeU4IgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_NbADFYgSEd6QUJb35Lrnzg" source="_Dr12IIgSEd6QUJb35Lrnzg" target="_Na2SEIgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_OfnhyYgSEd6QUJb35Lrnzg" source="_Na2SEIgSEd6QUJb35Lrnzg" target="_OfnhwIgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_SghLYIgSEd6QUJb35Lrnzg" source="_OfnhwIgSEd6QUJb35Lrnzg" target="_J1PdUIgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_XswmwIgSEd6QUJb35Lrnzg" source="_UjqH0IgSEd6QUJb35Lrnzg" target="_Xsm1wIgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_YUvMyYgSEd6QUJb35Lrnzg" source="_Xsm1wIgSEd6QUJb35Lrnzg" target="_YUvMwIgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_epoSSYgSEd6QUJb35Lrnzg" source="_YUvMwIgSEd6QUJb35Lrnzg" target="_epoSQIgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_jOfkmYgSEd6QUJb35Lrnzg" source="_epoSQIgSEd6QUJb35Lrnzg" target="_jOfkkIgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_lEMh-YgSEd6QUJb35Lrnzg" source="_jOfkkIgSEd6QUJb35Lrnzg" target="_lEMh8IgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_l_noYIgSEd6QUJb35Lrnzg" source="_lEMh8IgSEd6QUJb35Lrnzg" target="_l_d3YIgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_oJh7MIgSEd6QUJb35Lrnzg" source="_CBKdAIgSEd6QUJb35Lrnzg" target="_UjqH0IgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_qWs9YIgSEd6QUJb35Lrnzg" source="_Dr12IIgSEd6QUJb35Lrnzg" target="_YUvMwIgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_rMdgsIgSEd6QUJb35Lrnzg" source="_Na2SEIgSEd6QUJb35Lrnzg" target="_epoSQIgSEd6QUJb35Lrnzg"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_s6qu8IgSEd6QUJb35Lrnzg" source="_jOfkkIgSEd6QUJb35Lrnzg" target="_OfnhwIgSEd6QUJb35Lrnzg"/>
+  </businessProcesses>
+  <participants name="Customer" id="_67nb0If_Ed6bqtdru5lcdg" associatedProcesses="__cEvQIf_Ed6bqtdru5lcdg _GEqM0IgAEd6bqtdru5lcdg" associatedPools="_nt7CcIgAEd6bqtdru5lcdg _sHgel4gQEd6QUJb35Lrnzg"/>
+  <participants name="Pizzeria" id="_7vFgIIf_Ed6bqtdru5lcdg" associatedProcesses="__cEvQIf_Ed6bqtdru5lcdg" associatedPools="_nuqpUIgAEd6bqtdru5lcdg"/>
+  <participants name="Bakery" id="_kT-EEIgAEd6bqtdru5lcdg" associatedProcesses="_FT3CAIgAEd6bqtdru5lcdg" associatedPools="_tDK1kIgQEd6QUJb35Lrnzg"/>
+  <participants name="Delivery" id="_k8vUQIgAEd6bqtdru5lcdg" associatedProcesses="_GEqM0IgAEd6bqtdru5lcdg" associatedPools="_sHWtkIgQEd6QUJb35Lrnzg"/>
+</vsdt:BusinessProcessSystem>

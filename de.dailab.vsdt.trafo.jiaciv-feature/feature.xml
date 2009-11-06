@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="de.dailab.vsdt.trafo.jiaciv.feature"
+      label="VSDT: BPMN - JIAC IV Transformation"
+      version="0.1.2"
+      provider-name="DAI-Labor, TU Berlin">
+
+   <description url="http://www.dai-labor.de">
+      This feature provides a transformation from BPMN to JIAC IV to be
+integrated into the Visual Service Design Tool for easy service
+creation.
+   </description>
+
+   <copyright url="http://www.dai-labor.de">
+      (c) by DAI-Labor, TU Berlin
+Programmers: Tobias Küster and others of Cluster Software Engineering Tools
+   </copyright>
+
+   <license url="http://www.dai-labor.de">
+      [Enter License Description here.]
+   </license>
+
+   <url>
+      <discovery label="DAI-Labor" url="http://www.dai-labor.de"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="de.dailab.vsdt"/>
+      <import plugin="de.dailab.vsdt.trafo"/>
+      <import plugin="de.dailab.vsdt.trafo.strucbpmn"/>
+      <import plugin="de.dailab.vsdt.trafo.strucbpmn.export"/>
+      <import plugin="de.dailab.vsdt.trafo.base"/>
+      <import plugin="de.dailab.vsdt.trafo.jiaciv"/>
+   </requires>
+
+   <plugin
+         id="de.dailab.vsdt.trafo.jiaciv"
+         download-size="0"
+         install-size="0"
+         version="1.0.0.20071114"
+         unpack="false"/>
+
+   <plugin
+         id="de.dailab.vsdt.trafo.jiaciv.export"
+         download-size="0"
+         install-size="0"
+         version="0.1.2.20081125"
+         unpack="false"/>
+
+</feature>

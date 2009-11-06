@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpws:process xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://EnergySaving/WSDL/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="EnergySaving" targetNamespace="http://EnergySaving">
+   <bpws:partnerLinks>
+      <bpws:partnerLink myRole="EnergySaving_Participant_myRole" name="EnergySaving_Participant" partnerLinkType="ns1:EnergySaving_Participant_PLT"/>
+      <bpws:partnerLink name="Logging_Participant" partnerLinkType="ns1:Logging_Participant_PLT" partnerRole="Logging_Participant_partnerRole"/>
+      <bpws:partnerLink name="Location_Participant" partnerLinkType="ns1:Location_Participant_PLT" partnerRole="Location_Participant_partnerRole"/>
+      <bpws:partnerLink name="Light_Participant" partnerLinkType="ns1:Light_Participant_PLT" partnerRole="Light_Participant_partnerRole"/>
+      <bpws:partnerLink name="Radio_Participant" partnerLinkType="ns1:Radio_Participant_PLT" partnerRole="Radio_Participant_partnerRole"/>
+   </bpws:partnerLinks>
+   <bpws:variables>
+      <bpws:variable messageType="ns1:StartMessage_MessageDataMessage" name="StartMessage_MessageData"/>
+      <bpws:variable messageType="ns1:logRequest_MessageDataMessage" name="logRequest_MessageData"/>
+      <bpws:variable messageType="ns1:IsInZoneRequest_MessageDataMessage" name="IsInZoneRequest_MessageData"/>
+      <bpws:variable messageType="ns1:IsInZoneResponse_MessageDataMessage" name="IsInZoneResponse_MessageData"/>
+      <bpws:variable messageType="ns1:SetValueRequest_MessageDataMessage" name="SetValueRequest_MessageData"/>
+      <bpws:variable messageType="ns1:PlayPauseRequest_MessageDataMessage" name="PlayPauseRequest_MessageData"/>
+      <bpws:variable name="CheckPosition_loopCounter" type="xsd:integer"/>
+      <bpws:variable messageType="ns1:StopMessage_MessageDataMessage" name="StopMessage_MessageData"/>
+      <bpws:variable messageType="ns1:EnergySavingProcess_ProcessDataMessage" name="EnergySavingProcess_ProcessData"/>
+   </bpws:variables>
+   <bpws:sequence>
+      <bpws:receive createInstance="yes" name="Start" operation="start" partnerLink="EnergySaving_Participant" portType="ns1:EnergySavingPT" variable="StartMessage_MessageData"/>
+      <bpws:assign name="EnergySaving_startAssignments_and_Start_endAssignments_and_log_startAssignments">
+         <bpws:copy>
+            <bpws:from expression="1"/>
+            <bpws:to part="tmpState" variable="EnergySavingProcess_ProcessData"/>
+         </bpws:copy>
+         <bpws:copy>
+            <bpws:from expression="1"/>
+            <bpws:to part="tmpLastState" variable="EnergySavingProcess_ProcessData"/>
+         </bpws:copy>
+         <bpws:copy>
+            <bpws:from expression="bpws:getVariableData('StartMessage_MessageData','paramUserName')"/>
+            <bpws:to part="inUserName" variable="EnergySavingProcess_ProcessData"/>
+         </bpws:copy>
+         <bpws:copy>
+            <bpws:from expression="bpws:getVariableData('StartMessage_MessageData','paramDelaySec')"/>
+            <bpws:to part="inDelay" variable="EnergySavingProcess_ProcessData"/>
+         </bpws:copy>
+         <bpws:copy>
+            <bpws:from expression="bpws:getVariableData('StartMessage_MessageData','paramZone')"/>
+            <bpws:to part="inZone" variable="EnergySavingProcess_ProcessData"/>
+         </bpws:copy>
+         <bpws:copy>
+            <bpws:from expression="bpws:getVariableData('StartMessage_MessageData','paramLightLine')"/>
+            <bpws:to part="inLightLine" variable="EnergySavingProcess_ProcessData"/>
+         </bpws:copy>
+         <bpws:copy>
+            <bpws:from expression="bpws:getVariableData('StartMessage_MessageData','paramRoom')"/>
+            <bpws:to part="inRoom" variable="EnergySavingProcess_ProcessData"/>
+         </bpws:copy>
+         <bpws:copy>
+            <bpws:from expression="&quot;Energy Saving Process started&quot;"/>
+            <bpws:to part="message" variable="logRequest_MessageData"/>
+         </bpws:copy>
+         <bpws:copy>
+            <bpws:from expression="1"/>
+            <bpws:to part="level" variable="logRequest_MessageData"/>
+         </bpws:copy>
+      </bpws:assign>
+      <bpws:invoke inputVariable="logRequest_MessageData" name="log" operation="log" partnerLink="Logging_Participant" portType="ns1:LoggingPT"/>
+      <bpws:scope>
+         <bpws:faultHandlers>
+            <bpws:catch faultName="StopMessage_Exit">
+               <bpws:empty/>
+            </bpws:catch>
+         </bpws:faultHandlers>
+         <bpws:eventHandlers>
+            <bpws:onMessage operation="stop" partnerLink="EnergySaving_Participant" portType="ns1:EnergySavingPT" variable="StopMessage_MessageData">
+               <bpws:throw faultName="StopMessage_Exit"/>
+            </bpws:onMessage>
+         </bpws:eventHandlers>
+         <bpws:sequence name="CheckPosition">
+            <bpws:assign name="CheckPosition_initialize_loopCounter">
+               <bpws:copy>
+                  <bpws:from expression="0"/>
+                  <bpws:to variable="CheckPosition_loopCounter"/>
+               </bpws:copy>
+            </bpws:assign>
+            <bpws:while condition="true()">
+               <bpws:sequence>
+                  <bpws:scope name="CheckPosition">
+                     <bpws:sequence>
+                        <bpws:assign name="wait_startAssignments">
+                           <bpws:copy>
+                              <bpws:from expression="bpws:getVariableData('EnergySavingProcess_ProcessData','tmpState')"/>
+                              <bpws:to part="tmpLastState" variable="EnergySavingProcess_ProcessData"/>
+                           </bpws:copy>
+                        </bpws:assign>
+                        <bpws:wait for="concat( 'PT' , string( bpws:getVariableData('EnergySavingProcess_ProcessData','inDelay') ) , 'S' )" name="wait"/>
+                        <bpws:assign name="getPos_startAssignments">
+                           <bpws:copy>
+                              <bpws:from expression="bpws:getVariableData('EnergySavingProcess_ProcessData','inUserName')"/>
+                              <bpws:to part="username" variable="IsInZoneRequest_MessageData"/>
+                           </bpws:copy>
+                           <bpws:copy>
+                              <bpws:from expression="bpws:getVariableData('EnergySavingProcess_ProcessData','inZone')"/>
+                              <bpws:to part="zone" variable="IsInZoneRequest_MessageData"/>
+                           </bpws:copy>
+                        </bpws:assign>
+                        <bpws:invoke inputVariable="IsInZoneRequest_MessageData" name="getPos" operation="IsInZone" outputVariable="IsInZoneResponse_MessageData" partnerLink="Location_Participant" portType="ns1:SheaSimulatorPT"/>
+                        <bpws:assign name="getPos_endAssignments_and_log_startAssignments">
+                           <bpws:copy>
+                              <bpws:from expression="bpws:getVariableData('IsInZoneResponse_MessageData','isin')"/>
+                              <bpws:to part="tmpState" variable="EnergySavingProcess_ProcessData"/>
+                           </bpws:copy>
+                           <bpws:copy>
+                              <bpws:from expression="concat('State: ',string(bpws:getVariableData('EnergySavingProcess_ProcessData','tmpState')),', last State: ',string(bpws:getVariableData('EnergySavingProcess_ProcessData','tmpLastState')) )"/>
+                              <bpws:to part="message" variable="logRequest_MessageData"/>
+                           </bpws:copy>
+                           <bpws:copy>
+                              <bpws:from expression="1"/>
+                              <bpws:to part="level" variable="logRequest_MessageData"/>
+                           </bpws:copy>
+                        </bpws:assign>
+                        <bpws:invoke inputVariable="logRequest_MessageData" name="log" operation="log" partnerLink="Logging_Participant" portType="ns1:LoggingPT"/>
+                        <bpws:switch>
+                           <bpws:case condition="bpws:getVariableData('EnergySavingProcess_ProcessData','tmpState') != bpws:getVariableData('EnergySavingProcess_ProcessData','tmpLastState')">
+                              <bpws:sequence>
+                                 <bpws:assign name="log_startAssignments">
+                                    <bpws:copy>
+                                       <bpws:from expression="&quot;State changed&quot;"/>
+                                       <bpws:to part="message" variable="logRequest_MessageData"/>
+                                    </bpws:copy>
+                                    <bpws:copy>
+                                       <bpws:from expression="1"/>
+                                       <bpws:to part="level" variable="logRequest_MessageData"/>
+                                    </bpws:copy>
+                                 </bpws:assign>
+                                 <bpws:invoke inputVariable="logRequest_MessageData" name="log" operation="log" partnerLink="Logging_Participant" portType="ns1:LoggingPT"/>
+                                 <bpws:assign name="SwitchLight_startAssignments">
+                                    <bpws:copy>
+                                       <bpws:from expression="bpws:getVariableData('EnergySavingProcess_ProcessData','tmpState') * 100"/>
+                                       <bpws:to part="value" variable="SetValueRequest_MessageData"/>
+                                    </bpws:copy>
+                                    <bpws:copy>
+                                       <bpws:from expression="bpws:getVariableData('EnergySavingProcess_ProcessData','inLightLine')"/>
+                                       <bpws:to part="line" variable="SetValueRequest_MessageData"/>
+                                    </bpws:copy>
+                                    <bpws:copy>
+                                       <bpws:from expression="bpws:getVariableData('EnergySavingProcess_ProcessData','inRoom')"/>
+                                       <bpws:to part="room" variable="SetValueRequest_MessageData"/>
+                                    </bpws:copy>
+                                 </bpws:assign>
+                                 <bpws:invoke inputVariable="SetValueRequest_MessageData" name="SwitchLight" operation="SetValue" partnerLink="Light_Participant" portType="ns1:IvistarProxyPT"/>
+                                 <bpws:assign name="SwitchMusic_startAssignments">
+                                    <bpws:copy>
+                                       <bpws:from expression="bpws:getVariableData('EnergySavingProcess_ProcessData','tmpState')"/>
+                                       <bpws:to part="paramState" variable="PlayPauseRequest_MessageData"/>
+                                    </bpws:copy>
+                                 </bpws:assign>
+                                 <bpws:invoke inputVariable="PlayPauseRequest_MessageData" name="SwitchMusic" operation="PlayPause" partnerLink="Radio_Participant" portType="ns1:UPnPRadioPT"/>
+                              </bpws:sequence>
+                           </bpws:case>
+                           <bpws:otherwise>
+                              <bpws:empty name="DoNothing"/>
+                           </bpws:otherwise>
+                        </bpws:switch>
+                     </bpws:sequence>
+                  </bpws:scope>
+                  <bpws:assign name="CheckPosition_increment_loopCounter">
+                     <bpws:copy>
+                        <bpws:from expression="bpws:getVariableData('CheckPosition_loopCounter') + 1"/>
+                        <bpws:to variable="CheckPosition_loopCounter"/>
+                     </bpws:copy>
+                  </bpws:assign>
+               </bpws:sequence>
+            </bpws:while>
+         </bpws:sequence>
+      </bpws:scope>
+      <bpws:empty name="End_MERGE"/>
+      <bpws:assign name="End_startAssignments">
+         <bpws:copy>
+            <bpws:from expression="&quot;Energy Saving Process stopped&quot;"/>
+            <bpws:to part="message" variable="logRequest_MessageData"/>
+         </bpws:copy>
+         <bpws:copy>
+            <bpws:from expression="1"/>
+            <bpws:to part="level" variable="logRequest_MessageData"/>
+         </bpws:copy>
+      </bpws:assign>
+      <bpws:invoke inputVariable="logRequest_MessageData" name="End" operation="log" partnerLink="Logging_Participant" portType="ns1:LoggingPT"/>
+   </bpws:sequence>
+</bpws:process>

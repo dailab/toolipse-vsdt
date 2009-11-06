@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://sercho.org/IvistarProxyWS/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="IvistarProxyWS" targetNamespace="http://sercho.org/IvistarProxyWS/">
+
+  <wsdl:message name="GetRoomsRequest"/>
+  
+  <wsdl:message name="GetRoomsResponse">
+      <wsdl:part name="rooms" type="xsd:string"/>
+  </wsdl:message>
+  
+  <wsdl:message name="GetLightsRequest">
+      <wsdl:part name="room" type="xsd:string"/>
+  </wsdl:message>
+  
+  <wsdl:message name="GetLightsResponse">
+      <wsdl:part name="lights" type="xsd:string"/>
+  </wsdl:message>
+  
+  <wsdl:message name="GetShadesRequest">
+      <wsdl:part name="room" type="xsd:string"/>
+  </wsdl:message>
+  
+  <wsdl:message name="GetShadesResponse">
+      <wsdl:part name="shades" type="xsd:string"/>
+  </wsdl:message>
+  
+  <wsdl:message name="GetValueRequest">
+      <wsdl:part name="room" type="xsd:string"/>
+      <wsdl:part name="line" type="xsd:string"/>
+  </wsdl:message>
+  
+  <wsdl:message name="GetValueResponse">
+      <wsdl:part name="value" type="xsd:string"/>
+  </wsdl:message>
+  
+  <wsdl:message name="SetValueRequest">
+      <wsdl:part name="room" type="xsd:string"/>
+      <wsdl:part name="line" type="xsd:string"/>
+      <wsdl:part name="value" type="xsd:string"/>
+  </wsdl:message>
+  
+  <wsdl:message name="SetValueResponse"/>
+
+  
+  <wsdl:portType name="IvistarProxyPT">
+    <wsdl:operation name="GetRooms">
+      <wsdl:input message="tns:GetRoomsRequest"/>
+      <wsdl:output message="tns:GetRoomsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetLights">
+      <wsdl:input message="tns:GetLightsRequest"/>
+      <wsdl:output message="tns:GetLightsResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetShades">
+      <wsdl:input message="tns:GetShadesRequest"/>
+      <wsdl:output message="tns:GetShadesResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetValue">
+      <wsdl:input message="tns:GetValueRequest"/>
+      <wsdl:output message="tns:GetValueResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="SetValue">
+      <wsdl:input message="tns:SetValueRequest"/>
+      <wsdl:output message="tns:SetValueResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="IvistarProxySOAP" type="tns:IvistarProxyPT">
+  	<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  	<wsdl:operation name="GetRooms">
+  		<soap:operation soapAction="http://sercho.org/Ivistar/GetRooms"/>
+  		<wsdl:input>
+	 		<soap:body namespace="http://sercho.org/Ivistar/" use="literal"/>
+  		</wsdl:input>
+  		<wsdl:output>
+	 		<soap:body namespace="http://sercho.org/Ivistar/" use="literal"/>
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="GetLights">
+  		<soap:operation soapAction="http://sercho.org/Ivistar/GetLights"/>
+  		<wsdl:input>
+	 		<soap:body namespace="http://sercho.org/Ivistar/" use="literal"/>
+  		</wsdl:input>
+  		<wsdl:output>
+	 		<soap:body namespace="http://sercho.org/Ivistar/" use="literal"/>
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="GetShades">
+  		<soap:operation soapAction="http://sercho.org/Ivistar/GetShades"/>
+  		<wsdl:input>
+	 		<soap:body namespace="http://sercho.org/Ivistar/" use="literal"/>
+  		</wsdl:input>
+  		<wsdl:output>
+	 		<soap:body namespace="http://sercho.org/Ivistar/" use="literal"/>
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="GetValue">
+  		<soap:operation soapAction="http://sercho.org/Ivistar/GetValue"/>
+  		<wsdl:input>
+	 		<soap:body namespace="http://sercho.org/Ivistar/" use="literal"/>
+  		</wsdl:input>
+  		<wsdl:output>
+	 		<soap:body namespace="http://sercho.org/Ivistar/" use="literal"/>
+  		</wsdl:output>
+  	</wsdl:operation>
+  	<wsdl:operation name="SetValue">
+  		<soap:operation soapAction="http://sercho.org/Ivistar/SetValue"/>
+  		<wsdl:input>
+	 		<soap:body namespace="http://sercho.org/Ivistar/" use="literal"/>
+  		</wsdl:input>
+  		<wsdl:output>
+	 		<soap:body namespace="http://sercho.org/Ivistar/" use="literal"/>
+  		</wsdl:output>
+  	</wsdl:operation>
+  </wsdl:binding>
+  
+  <wsdl:service name="IvistarProxyService">
+    <wsdl:port binding="tns:IvistarProxySOAP" name="IvistarProxyServiceSOAP">
+      <soap:address location="http://localhost:8080/IvistarProxyWS/services/IvistarProxyServiceSOAP"/>
+    </wsdl:port>
+  </wsdl:service>
+  
+</wsdl:definitions>

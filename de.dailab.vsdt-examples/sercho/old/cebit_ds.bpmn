@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vsdt:BusinessProcessDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vsdt="http://de.dailab.vsdt" name="CeBit-Demonstrator" documentation="SerCHo-Example 1 v2.0:&#xD;&#xA;Benutzer bewegt sich im Raum -> Lampe an, sonst aus" id="BusinessProcessDiagram_1203419898505" version="3.0.0" author="Tobias Küster" language="en-GB" expressionLanguage="" queryLanguage="" creationDate="2007-11-23T16:44:07.678+0100" modificationDate="2008-02-05T12:19:57.037+0100">
+  <pools name="Position Map" documentation="Dieser Blackbox-Prozess steht für den Localization-Dienst über UBI." id="Pool_1203419898537" participant="//@participants.0">
+    <process name="Position Map_Process" id="BpmnProcess_1203419898537" processType="NONE">
+      <adHocCompletionCondition/>
+    </process>
+  </pools>
+  <pools name="CeBit-Demo-Prozess" documentation="Dieser Pool ist der eigentliche Prozess. Nachdem er über eine eingehende Message &quot;start&quot;&#xD;&#xA;gestartet wird, meldet er sich zunächst über die Notification beim Benutzer. Danach wird &#xD;&#xA;eine (Endlos-)Schleife betreten, in der kontinuiertlich die Position des Benutzers abgefragt &#xD;&#xA;wird. Wenn die Position (0,0,0) und die Lampe  an ist (state==true), dann wird die Lampe &#xD;&#xA;ausgeschaltet, bis die Position wieder ungleich (0,0,0) ist. Der  Prozess wird über eine weitere &#xD;&#xA;Message beendet (&quot;stop&quot;), die die Schleife abbricht. Wird der Prozess beendet, so meldet er &#xD;&#xA;sich nocheinmal beim Benutzer ab.&#x9;" id="Pool_1203419898537" participant="//@participants.1">
+    <process name="LNProcess" id="BpmnProcess_1203419898537">
+      <adHocCompletionCondition/>
+      <properties name="userName" type="xsd:string"/>
+      <properties name="posX" type="xsd:float"/>
+      <properties name="posY" type="xsd:float"/>
+      <properties name="posZ" type="xsd:float"/>
+      <properties name="delay" type="xsd:integer"/>
+      <properties name="state" type="xsd:integer"/>
+      <assignments to="//@pools.1/@process/@properties.1">
+        <from expression="0"/>
+      </assignments>
+      <assignments to="//@pools.1/@process/@properties.2">
+        <from expression="0"/>
+      </assignments>
+      <assignments to="//@pools.1/@process/@properties.3">
+        <from expression="0"/>
+      </assignments>
+      <assignments to="//@pools.1/@process/@properties.5">
+        <from expression="1"/>
+      </assignments>
+    </process>
+    <lanes name="Default Lane" id="Lane_1203419898552" boundaryVisible="false">
+      <containedFlowObjects xsi:type="vsdt:Start" name="Start" documentation="Empfängt die Message und initialisiert die Variablen." id="Start_1203419898552" message="//@messages.3" implementation="//@implementations.0" trigger="MESSAGE">
+        <assignments to="//@pools.1/@process/@properties.0" assignTime="END">
+          <from expression="paramUserName"/>
+        </assignments>
+        <assignments to="//@pools.1/@process/@properties.4" assignTime="END">
+          <from expression="paramDelaySec"/>
+        </assignments>
+        <assignments to="//@pools.1/@process/@properties.5">
+          <from expression="1"/>
+        </assignments>
+      </containedFlowObjects>
+      <containedFlowObjects xsi:type="vsdt:Activity" name="Check  Position" documentation="Endlosschleife, wird beendet, indem die stop-Operation aufgerufen wird." id="Activity_1203419898552" loopType="STANDARD" activityType="EMBEDDED">
+        <adHocCompletionCondition/>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" name="wait" documentation="Wartet ein paar Sekunden" id="Intermediate_1203419898552" timeCycle="concat( 'PT' , string( delay ) , 'S' )" trigger="TIMER"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Get Pos Data" documentation="Fragt die Position des Benutzers bei der SHEA-GUI ab und extrahiert aus dem Rückgabewert&#xD;&#xA;die Werte für die einzelnen Positions-Variablen" id="Activity_1203419898552" activityType="SERVICE" inMessage="//@messages.0" outMessage="//@messages.1" implementation="//@implementations.2">
+          <assignments to="//@messages.0/@properties.0">
+            <from expression="userName"/>
+          </assignments>
+          <assignments to="//@pools.1/@process/@properties.1" assignTime="END">
+            <from expression="returnPos/x"/>
+          </assignments>
+          <assignments to="//@pools.1/@process/@properties.2" assignTime="END" toQuery="">
+            <from expression="returnPos/y"/>
+          </assignments>
+          <assignments to="//@pools.1/@process/@properties.3" assignTime="END">
+            <from expression="returnPos/z"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Switch Light" documentation="Dieser Task ruft die Schalten-Operation des Licht-Dienstes auf &#xD;&#xA;um die Lampe an oder aus zu schalten." id="Activity_1203419898568" activityType="SEND" inMessage="//@messages.5" implementation="//@implementations.4">
+          <assignments to="//@pools.1/@process/@properties.5">
+            <from expression="(state - 1) * (state - 1)"/>
+          </assignments>
+          <assignments to="//@messages.5/@properties.0">
+            <from expression="state"/>
+          </assignments>
+          <adHocCompletionCondition/>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Do Nothing" documentation="Tue nichts, gehe in die nächste Iteration der Schleife &#xD;&#xA;(notwendig, damit beim Export ein Switch-Konstrukt erkannt wird)." id="Activity_1203419898568">
+          <adHocCompletionCondition/>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Print State" documentation="Hier werden die Position und der Zustand der Lampe ausgegeben&#xD;&#xA;(nur für den Entwickler)" id="Activity_1203419898568" activityType="SEND" inMessage="//@messages.2" implementation="//@implementations.3">
+          <assignments to="//@messages.2/@properties.0">
+            <from expression="concat('State: ',string(state),', Position: ',string(posX),', ',string(posY),', ',string(posZ))"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Switch Music" id="Activity_1206719331615" activityType="SEND" inMessage="//@messages.8">
+          <adHocCompletionCondition/>
+        </containedFlowObjects>
+        <loopAttributes xsi:type="vsdt:StandardLoopAttSet" testTime="BEFORE">
+          <loopCondition expression="true()"/>
+        </loopAttributes>
+        <boundaryEvents documentation="Unterbricht die Schleife und leitet damit die Terminierung des Prozesses ein." id="Intermediate_1203419898568" message="//@messages.4" implementation="//@implementations.1" trigger="MESSAGE">
+          <ruleExpression/>
+        </boundaryEvents>
+      </containedFlowObjects>
+      <containedFlowObjects xsi:type="vsdt:End" documentation="Sendet Beendet-Nachricht an die SHEA-GUI und beendet den Prozess." id="End_1203419898568" message="//@messages.2" implementation="//@implementations.3" trigger="MESSAGE">
+        <assignments to="//@messages.2/@properties.0">
+          <from expression="&quot;Locate and Notify Process stopped&quot;"/>
+        </assignments>
+        <ruleExpression/>
+      </containedFlowObjects>
+      <containedFlowObjects xsi:type="vsdt:Activity" name="Inform" documentation="Sendet Start-Nachricht an die SHEA-GUI." id="Activity_1203419898568" activityType="SEND" inMessage="//@messages.2" implementation="//@implementations.3">
+        <assignments to="//@messages.2/@properties.0">
+          <from expression="&quot;Locate and Notify Process started&quot;"/>
+        </assignments>
+      </containedFlowObjects>
+    </lanes>
+  </pools>
+  <pools name="Debug Info" documentation="Dieser Blackbox-Prozess steht für den Notification-Dienst über die SHEA-GUI." id="Pool_1203419898568" participant="//@participants.2">
+    <process name="Debug Info_Process" id="BpmnProcess_1203419898568" processType="NONE"/>
+  </pools>
+  <pools name="Light Control" documentation="Dieser Blackbox-Prozess steht für den Light-Dienst, &#xD;&#xA;der die Lampe über UPnP an und aus schalten kann." id="Pool_1203419898568" participant="//@participants.3">
+    <process name="Light Control_Process" id="BpmnProcess_1203419898568" processType="NONE"/>
+  </pools>
+  <pools name="Interface" documentation="Das User-Interface (Abstraktion)" id="Pool_1203419898568" participant="//@participants.4">
+    <process name="Interface_Process" id="BpmnProcess_1203419898568" processType="NONE"/>
+  </pools>
+  <pools name="Music Control" id="Pool_1206719245590" participant="//@participants.5">
+    <process name="Music Control_Process" id="BpmnProcess_1206719245590">
+      <adHocCompletionCondition/>
+    </process>
+  </pools>
+  <connections xsi:type="vsdt:SequenceFlow" name=" " id="SequenceFlow_1203419898583" source="//@pools.1/@lanes.0/@containedFlowObjects.0" target="//@pools.1/@lanes.0/@containedFlowObjects.3"/>
+  <connections xsi:type="vsdt:SequenceFlow" name=" " id="SequenceFlow_1203419898583" source="//@pools.1/@lanes.0/@containedFlowObjects.1/@containedFlowObjects.0" target="//@pools.1/@lanes.0/@containedFlowObjects.1/@containedFlowObjects.1"/>
+  <connections xsi:type="vsdt:SequenceFlow" name=" " id="SequenceFlow_1203419898583" source="//@pools.1/@lanes.0/@containedFlowObjects.1/@boundaryEvents.0" target="//@pools.1/@lanes.0/@containedFlowObjects.2"/>
+  <connections xsi:type="vsdt:SequenceFlow" name=" " documentation="Dies ist der Default-Pfad." id="SequenceFlow_1203419898583" conditionType="DEFAULT" source="//@pools.1/@lanes.0/@containedFlowObjects.1/@containedFlowObjects.4" target="//@pools.1/@lanes.0/@containedFlowObjects.1/@containedFlowObjects.3"/>
+  <connections xsi:type="vsdt:SequenceFlow" name="Position changed" documentation="Die Condition für diesen Pfad ist, dass die Lampe an ist (state=1) und die Position = 0, &#xD;&#xA;oder die Lampe aus (state=0) und die Position != 0. Anstatt die einzelnen Komponenten &#xD;&#xA;der Position einzleln zu prüfen werden sie einfach aufsummiert. Wegen der hohen Genauigkeit &#xD;&#xA;der Messung ist es praktisch ausgeschlossen, dass sich die Werte zu genau 0 aufsummieren." id="SequenceFlow_1203419898583" conditionType="EXPRESSION" source="//@pools.1/@lanes.0/@containedFlowObjects.1/@containedFlowObjects.4" target="//@pools.1/@lanes.0/@containedFlowObjects.1/@containedFlowObjects.2">
+    <conditionExpression expression="(state=1 and (posX+posY+posZ = 0)) or ( state=0 and (posX + posY + posZ != 0))"/>
+  </connections>
+  <connections xsi:type="vsdt:SequenceFlow" name=" " id="SequenceFlow_1203419898599" source="//@pools.1/@lanes.0/@containedFlowObjects.1" target="//@pools.1/@lanes.0/@containedFlowObjects.2"/>
+  <connections xsi:type="vsdt:SequenceFlow" name=" " id="SequenceFlow_1203419898599" source="//@pools.1/@lanes.0/@containedFlowObjects.3" target="//@pools.1/@lanes.0/@containedFlowObjects.1"/>
+  <connections xsi:type="vsdt:MessageFlow" name="PositionRequest" documentation="Mit diesem Message Flow wird eine Nachricht an den Localization-Service gesandt&#xD;&#xA;und die Position des Benutzers abgefragt." id="MessageFlow_1203419898583" message="//@messages.0" source="//@pools.1/@lanes.0/@containedFlowObjects.1/@containedFlowObjects.1" target="//@pools.0"/>
+  <connections xsi:type="vsdt:MessageFlow" name="PositionResponse" documentation="Dieser MessageFlow steht für den Rückgabewert des Service-Calls beim Localization-Dienst." id="MessageFlow_1203419898583" message="//@messages.1" source="//@pools.0" target="//@pools.1/@lanes.0/@containedFlowObjects.1/@containedFlowObjects.1"/>
+  <connections xsi:type="vsdt:MessageFlow" name="SwitchRequest" documentation="Sendet die Schalt-Message an die UPnP-PowerControl&#xD;&#xA;1: anschalten, -1: ausschalten, 0: umschalten" id="MessageFlow_1203419898599" message="//@messages.5" source="//@pools.1/@lanes.0/@containedFlowObjects.1/@containedFlowObjects.2" target="//@pools.3"/>
+  <connections xsi:type="vsdt:MessageFlow" name="Inform: End" documentation="Mit diesem Message Flow wird eine Nachricht an den Notification-Service gesandt." id="MessageFlow_1203419898599" message="//@messages.2" source="//@pools.1/@lanes.0/@containedFlowObjects.2" target="//@pools.2"/>
+  <connections xsi:type="vsdt:MessageFlow" name="Inform: State" id="MessageFlow_1203419898599" message="//@messages.2" source="//@pools.1/@lanes.0/@containedFlowObjects.1/@containedFlowObjects.4" target="//@pools.2"/>
+  <connections xsi:type="vsdt:MessageFlow" name="Inform: Start" documentation="Mit diesem Message Flow wird eine Nachricht an den Notification-Service gesandt." id="MessageFlow_1203419898599" message="//@messages.2" source="//@pools.1/@lanes.0/@containedFlowObjects.3" target="//@pools.2"/>
+  <connections xsi:type="vsdt:MessageFlow" name="Start Process" id="MessageFlow_1203419898599" message="//@messages.3" source="//@pools.4" target="//@pools.1/@lanes.0/@containedFlowObjects.0"/>
+  <connections xsi:type="vsdt:MessageFlow" name="Stop Process" id="MessageFlow_1203419898599" message="//@messages.4" source="//@pools.4" target="//@pools.1/@lanes.0/@containedFlowObjects.1/@boundaryEvents.0"/>
+  <connections xsi:type="vsdt:SequenceFlow" name=" " id="SequenceFlow_1204035727623" source="//@pools.1/@lanes.0/@containedFlowObjects.1/@containedFlowObjects.1" target="//@pools.1/@lanes.0/@containedFlowObjects.1/@containedFlowObjects.4"/>
+  <connections xsi:type="vsdt:MessageFlow" name="from Switch Music to Music Control" id="MessageFlow_1206719384462" message="//@messages.8" source="//@pools.1/@lanes.0/@containedFlowObjects.1/@containedFlowObjects.5" target="//@pools.5"/>
+  <connections xsi:type="vsdt:SequenceFlow" id="SequenceFlow_1206719497394" source="//@pools.1/@lanes.0/@containedFlowObjects.1/@containedFlowObjects.2" target="//@pools.1/@lanes.0/@containedFlowObjects.1/@containedFlowObjects.5"/>
+  <messages name="GetLocationMessage" from="//@participants.1" to="//@participants.0">
+    <properties name="paramUserName" type="xsd:string"/>
+  </messages>
+  <messages name="GetLocationResponse" from="//@participants.0" to="//@participants.1">
+    <properties name="returnPos" type="tns:poss"/>
+  </messages>
+  <messages name="InformMessage" from="//@participants.1" to="//@participants.2">
+    <properties name="msg" type="xsd:string"/>
+  </messages>
+  <messages name="StartMessage" from="//@participants.4" to="//@participants.1">
+    <properties name="paramUserName" type="xsd:string"/>
+    <properties name="paramDelaySec" type="xsd:integer"/>
+  </messages>
+  <messages name="StopMessage" from="//@participants.4" to="//@participants.1"/>
+  <messages name="lightInputMessage" from="//@participants.1" to="//@participants.3">
+    <properties name="desiredState" type="xsd:integer"/>
+  </messages>
+  <messages name="GetStateResponse" from="//@participants.3" to="//@participants.1">
+    <properties name="returnState" type="xsd:integer"/>
+  </messages>
+  <messages name="GetStateRequest" from="//@participants.1" to="//@participants.3">
+    <properties name="paramDeviceName" type="xsd:string"/>
+  </messages>
+  <messages name="PlayPauseRequest" from="//@participants.1" to="//@participants.5">
+    <properties name="state" type="xsd:integer"/>
+  </messages>
+  <participants name="Position Map_Participant"/>
+  <participants name="CeBit-Demo-Prozess_Participant"/>
+  <participants name="Debug Info_Participant"/>
+  <participants name="Light Control_Participant"/>
+  <participants name="Interface_Participant"/>
+  <participants name="Music Control_Participant"/>
+  <implementations participant="//@participants.1" interface="locAndNotInterface" operation="startExecution"/>
+  <implementations participant="//@participants.1" interface="locAndNotInterface" operation="stopExecution"/>
+  <implementations participant="//@participants.0" interface="LocationMapPT" operation="getLocation"/>
+  <implementations participant="//@participants.2" interface="MyNotificationPT" operation="notify"/>
+  <implementations participant="//@participants.3" interface="DigiStromPT" operation="setState"/>
+</vsdt:BusinessProcessDiagram>

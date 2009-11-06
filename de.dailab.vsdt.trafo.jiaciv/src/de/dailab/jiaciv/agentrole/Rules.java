@@ -1,0 +1,46 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package de.dailab.jiaciv.agentrole;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Rules</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link de.dailab.jiaciv.agentrole.Rules#getRule <em>Rule</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @see de.dailab.jiaciv.agentrole.AgentRolePackage#getRules()
+ * @model extendedMetaData="name='Rules' kind='elementOnly'"
+ * @generated
+ */
+public interface Rules extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Rule</b></em>' containment reference list.
+	 * The list contents are of type {@link de.dailab.jiaciv.agentrole.RuleType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Rule</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Rule</em>' containment reference list.
+	 * @see de.dailab.jiaciv.agentrole.AgentRolePackage#getRules_Rule()
+	 * @model containment="true"
+	 *        extendedMetaData="kind='element' name='Rule' namespace='##targetNamespace'"
+	 * @generated
+	 */
+	EList<RuleType> getRule();
+
+} // Rules

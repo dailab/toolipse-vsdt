@@ -1,0 +1,18 @@
+
+
+service HelloUser ( in $param1 : string ) ( out $result1 : string ) {
+    var $userName : string ;
+    var $message : string ;
+    {
+        {
+            $userName = $param1 ;
+        }
+        {
+            $message = "Hello " + $userName ;
+            print $message ;
+        }
+        {
+            $result1 = $message ;
+        }
+    }
+}

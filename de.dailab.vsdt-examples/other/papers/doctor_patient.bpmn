@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vsdt:BusinessProcessDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:vsdt="http://de.dailab.vsdt" xmi:id="_q43NIB2SEdy5jJCip_lq5Q" name="bpd4" id="_jM65MRhyEd6L34e68kdZHg" creationDate="2008-01-24T13:38:37.034+0100" modificationDate="2008-01-24T13:38:37.034+0100">
+  <pools xmi:type="vsdt:Pool" xmi:id="_rtoR8B2SEdy5jJCip_lq5Q" name="p1: Patient" id="_jM65MhhyEd6L34e68kdZHg">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_rtqHIR2SEdy5jJCip_lq5Q" name="proc10" id="_jM65MxhyEd6L34e68kdZHg"/>
+    <lanes xmi:type="vsdt:Lane" xmi:id="_vvBq0B2SEdy5jJCip_lq5Q" name="Lane" id="_jM65NBhyEd6L34e68kdZHg" boundaryVisible="false">
+      <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_xgNUkB2SEdy5jJCip_lq5Q" name="s1" id="_jM65NRhyEd6L34e68kdZHg"/>
+      <containedFlowObjects xmi:type="vsdt:End" xmi:id="_zF9xcB2SEdy5jJCip_lq5Q" name="e1" id="_jM65NhhyEd6L34e68kdZHg"/>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_0L8iEB2SEdy5jJCip_lq5Q" name="a11:Request Prescription" id="_jM65NxhyEd6L34e68kdZHg"/>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_4p4tAB2SEdy5jJCip_lq5Q" name="a12: Receive Prescription" id="_jM65OBhyEd6L34e68kdZHg"/>
+    </lanes>
+  </pools>
+  <pools xmi:type="vsdt:Pool" xmi:id="_tsH-8B2SEdy5jJCip_lq5Q" name="p2: Doctor" id="_jM65ORhyEd6L34e68kdZHg">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_tsH-8h2SEdy5jJCip_lq5Q" name="proc11" id="_jM65OhhyEd6L34e68kdZHg"/>
+    <lanes xmi:type="vsdt:Lane" xmi:id="_wtpPMB2SEdy5jJCip_lq5Q" name="Lane" id="_jM65OxhyEd6L34e68kdZHg" boundaryVisible="false">
+      <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_ybyMAB2SEdy5jJCip_lq5Q" name="s2" id="_jM65PBhyEd6L34e68kdZHg"/>
+      <containedFlowObjects xmi:type="vsdt:End" xmi:id="_zghmgB2SEdy5jJCip_lq5Q" name="e2" id="_jM65PRhyEd6L34e68kdZHg"/>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_3xNYkB2SEdy5jJCip_lq5Q" name="a21: Receive Request" id="_jM65PhhyEd6L34e68kdZHg"/>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_8g9FMB2SEdy5jJCip_lq5Q" name="a22: Fill Out Prescription" id="_jM65PxhyEd6L34e68kdZHg"/>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_-cyfwB2SEdy5jJCip_lq5Q" name="a24: Accounting" id="_jM65QBhyEd6L34e68kdZHg" activityType="EMBEDDED">
+        <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_Bq8d0B2TEdy5jJCip_lq5Q" name="a31: Look up Patient Data" id="_jM65QRhyEd6L34e68kdZHg"/>
+        <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_D5QIcB2TEdy5jJCip_lq5Q" name="a32: Register Request in Database" id="_jM65QhhyEd6L34e68kdZHg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_SWKd8B2TEdy5jJCip_lq5Q" name="g1" id="_jM65QxhyEd6L34e68kdZHg" gatewayType="AND">
+        <gates xmi:type="vsdt:Gate" xmi:id="_kPWtEB2TEdy5jJCip_lq5Q" outgoingSequenceFlow="_kPPYUB2TEdy5jJCip_lq5Q"/>
+        <gates xmi:type="vsdt:Gate" xmi:id="_mcaagB2TEdy5jJCip_lq5Q" outgoingSequenceFlow="_mcU68B2TEdy5jJCip_lq5Q"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_TAHZ4B2TEdy5jJCip_lq5Q" name="g2" id="_jM65RBhyEd6L34e68kdZHg" gatewayType="AND">
+        <gates xmi:type="vsdt:Gate" xmi:id="_lnm5cB2TEdy5jJCip_lq5Q" outgoingSequenceFlow="_lnj2IB2TEdy5jJCip_lq5Q"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_XEnKEB2TEdy5jJCip_lq5Q" name="a23: Send Prescription" id="_jM65RRhyEd6L34e68kdZHg"/>
+    </lanes>
+  </pools>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_HCVZQB2TEdy5jJCip_lq5Q" id="_jM65RhhyEd6L34e68kdZHg" source="_xgNUkB2SEdy5jJCip_lq5Q" target="_0L8iEB2SEdy5jJCip_lq5Q"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_HX_gMB2TEdy5jJCip_lq5Q" id="_jM65RxhyEd6L34e68kdZHg" source="_0L8iEB2SEdy5jJCip_lq5Q" target="_4p4tAB2SEdy5jJCip_lq5Q"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_HqAdQB2TEdy5jJCip_lq5Q" id="_jM65SBhyEd6L34e68kdZHg" source="_4p4tAB2SEdy5jJCip_lq5Q" target="_zF9xcB2SEdy5jJCip_lq5Q"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_ic4C0B2TEdy5jJCip_lq5Q" id="_jM65SRhyEd6L34e68kdZHg" source="_0L8iEB2SEdy5jJCip_lq5Q" target="_3xNYkB2SEdy5jJCip_lq5Q"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_i39cUB2TEdy5jJCip_lq5Q" id="_jM65ShhyEd6L34e68kdZHg" source="_XEnKEB2TEdy5jJCip_lq5Q" target="_4p4tAB2SEdy5jJCip_lq5Q"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_jahW0B2TEdy5jJCip_lq5Q" id="_jM65SxhyEd6L34e68kdZHg" source="_ybyMAB2SEdy5jJCip_lq5Q" target="_3xNYkB2SEdy5jJCip_lq5Q"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_juNH0B2TEdy5jJCip_lq5Q" id="_jM65TBhyEd6L34e68kdZHg" source="_3xNYkB2SEdy5jJCip_lq5Q" target="_SWKd8B2TEdy5jJCip_lq5Q"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_j-YR0B2TEdy5jJCip_lq5Q" id="_jM65TRhyEd6L34e68kdZHg" source="_Bq8d0B2TEdy5jJCip_lq5Q" target="_D5QIcB2TEdy5jJCip_lq5Q"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_kPPYUB2TEdy5jJCip_lq5Q" id="_jM65ThhyEd6L34e68kdZHg" source="_SWKd8B2TEdy5jJCip_lq5Q" target="_8g9FMB2SEdy5jJCip_lq5Q"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_kmKqkB2TEdy5jJCip_lq5Q" id="_jM65TxhyEd6L34e68kdZHg" source="_8g9FMB2SEdy5jJCip_lq5Q" target="_XEnKEB2TEdy5jJCip_lq5Q"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_k-XvMB2TEdy5jJCip_lq5Q" id="_jM65UBhyEd6L34e68kdZHg" source="_XEnKEB2TEdy5jJCip_lq5Q" target="_TAHZ4B2TEdy5jJCip_lq5Q"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_lnj2IB2TEdy5jJCip_lq5Q" id="_jM65URhyEd6L34e68kdZHg" source="_TAHZ4B2TEdy5jJCip_lq5Q" target="_zghmgB2SEdy5jJCip_lq5Q"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_l2rQMB2TEdy5jJCip_lq5Q" id="_jM65UhhyEd6L34e68kdZHg" source="_-cyfwB2SEdy5jJCip_lq5Q" target="_TAHZ4B2TEdy5jJCip_lq5Q"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_mcU68B2TEdy5jJCip_lq5Q" id="_jM65UxhyEd6L34e68kdZHg" source="_SWKd8B2TEdy5jJCip_lq5Q" target="_-cyfwB2SEdy5jJCip_lq5Q"/>
+</vsdt:BusinessProcessDiagram>

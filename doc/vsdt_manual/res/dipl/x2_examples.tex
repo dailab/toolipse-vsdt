@@ -1,0 +1,135 @@
+\chapter{Examples}
+\label{chapter:examples}
+
+% This chapter will illustrate the transformation from BPMN to JIAC by giving two examples. Firstly the several stages of the mapping will be visualized. Then a realistic example of modeling and generating a JIAC planelement will be given.
+
+% the stages of the mapping have changed in the 2.2 release (and are not very relevant to the user anyway)
+
+% \section{Stages of the Mapping}
+% 
+% In this first example we will illustrate the several steps of the mapping with a small example. Figure \ref{fig:ex_trafoBpmn} shows a simple workflow, mainly consisting of a loop structure.
+% 
+% \begin{figure*}[htp]
+% \centering
+% \includegraphics[width=.4\textwidth]{figures/examples/trafoExampleBpmn.png}
+% \caption[Transformation Example: BPMN Diagram]{The BPMN-Diagram to be transformed}
+% \label{fig:ex_trafoBpmn}
+% \end{figure*}
+% 
+% In the following (figures \ref{fig:ex_trafo0} to \ref{fig:ex_trafo4}) we will present the source model (yellow), the reference model (green) and the target model (red) for the initial BPMN diagram as well as after each stage of the mapping. Note that we will show only the most relevant parts of the instance models. Neither the wrapping Pool and Process nor non-graphical elements like for instance for the loop's condition or the Activity References will be shown. Also all attributes as well as some references will be left out, e.g. the \verb|incoming| and \verb|outgoing| references from the Sequence References to the Sequence Flows. For the target model an abstract notation has been chosen, showing only the basic concepts, like activities, sequences and loops.
+% 
+% \begin{figure*}[htp]
+% \centering
+% \includegraphics[width=1\textwidth]{figures/examples/trafoExample_0.png}
+% \caption[Transformation Example: Initial]{The Instance diagram of the initial source model.}
+% \label{fig:ex_trafo0}
+% \end{figure*}
+% 
+% \begin{figure*}[htp]
+% \centering
+% \includegraphics[width=1\textwidth]{figures/examples/trafoExample_1.png}
+% \caption[Transformation Example: After Normalization]{After the Normalization Stage: Two additional Gateways and an Activity were added, along with the necessary Sequence Flows.}
+% \label{fig:ex_trafo1}
+% \end{figure*}
+% 
+% \begin{figure*}[htp]
+% \centering
+% \includegraphics[width=1\textwidth]{figures/examples/trafoExample_2.png}
+% \caption[Transformation Example: After Element Mapping]{After the Element Mapping: Each element has been mapped to a activity of the target language and wrapped in a sequence. Sequence Reference are connecting the source and the target model.}
+% \label{fig:ex_trafo2}
+% \end{figure*}
+% 
+% \begin{figure*}[htp]
+% \centering
+% \includegraphics[width=1\textwidth]{figures/examples/trafoExample_3.png}
+% \caption[Transformation Example: After Structure Mapping]{After the Structure Mapping: The singleton sequences have been combined to larger sequences and a loop structure. Note that the sequence making up the until-part of the loop has been copied and inserted before the loop.}
+% \label{fig:ex_trafo3}
+% \end{figure*}
+% 
+% \begin{figure*}[htp]
+% \centering
+% \includegraphics[width=1\textwidth]{figures/examples/trafoExample_4.png}
+% \caption[Transformation Example: After Clean Up]{After Cleaning Up: The sequences have been flattened and the no-op activity resulting from the Activity inserted in the Normalization stage has been removed. The source model has been left out in this diagram.}
+% \label{fig:ex_trafo4}
+% \end{figure*}
+% 
+% \pagebreak
+
+
+% \section{Code Generation}
+
+In this example a simple BPMN diagram as shown in figure \ref{fig:rss_client} will be transformed to JIAC.
+
+\begin{figure*}[htp]
+\centering
+\includegraphics[width=1\textwidth]{figures/examples/rss-client.png}
+\caption{RSS-Client Example}
+\label{fig:rss_client}
+\end{figure*}
+
+The diagram is showing a simple RSS client. After being started the client is connecting to a server and requesting the news feeds the user subscribed on. After having received the response a Script Task will build the GUI. If there are any new messages in the feed those messages will be parsed and displayed, which is done calling a separate action. Otherwise a message will be displayed.
+
+Note that the resulting code displayed in the following listing is not yet executable. Variables have to be passed to the speechacts and conditions. Further, the actual logic for displaying the GUI, parsing the news data etc. has been left out and the plan element still has to be put in the context of a service and given a precondition and effect.
+
+\newpage
+\footnotesize
+\begin{verbatim}
+  (act RSS_Client_act
+    (pre true )
+    (eff true )
+    (script
+      (par
+        (seq
+          (loginfo "Start" ) 
+          (Request_News)
+          (Receive_Data)
+          (loginfo "Initialize GUI" ) 
+          (branch (Any_News_conditional)
+            (seq
+              (seq
+                (loop (Display_News_loopCondition)
+                  (Display_News)
+                  break
+                ) // End loop
+              ) // End seq
+            ) // End seq
+            (seq
+              (loginfo "Display Message" ) 
+            ) // End seq
+          ) // End branch
+          (loginfo "End" ) 
+        ) // End seq
+      ) // End par
+    )
+  ) // End RSS_Client_act
+
+  (act Display_News
+    (pre true )
+    (eff true )
+    (script
+      (par
+        (seq
+          (loginfo "Parse News Data" ) 
+          (loginfo "Display Formatted News" ) 
+        ) // End seq
+      ) // End par
+    )
+  ) // End Display_News
+
+  (cond Display_News_loopCondition
+    (comp hasMoreNews )
+    true
+  ) // End cond Display_News_loopCondition
+
+  (cond Any_News_conditional
+    (comp gotNews )
+    true
+  ) // End cond Any_News_conditional
+
+  (send Request_News
+  ) // End send Request_News
+
+  (receive Receive_Data
+  ) // End receive Receive_Data
+\end{verbatim}
+\normalsize

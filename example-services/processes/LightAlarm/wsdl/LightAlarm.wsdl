@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="ASCII"?>
+<wsdl:definitions xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://LightAlarm/WSDL/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://LightAlarm/WSDL/">
+  <plnk:partnerLinkType name="LightAlarm_Participant_PLT">
+    <plnk:role name="LightAlarm_Participant_myRole" portType="tns:LightAlarmPT"/>
+  </plnk:partnerLinkType>
+  <plnk:partnerLinkType name="Logging_Participant_PLT">
+    <plnk:role name="Logging_Participant_partnerRole" portType="tns:LoggingPT"/>
+  </plnk:partnerLinkType>
+  <plnk:partnerLinkType name="WeatherProxy_Participant_PLT">
+    <plnk:role name="WeatherProxy_Participant_partnerRole" portType="tns:WeatherProxyPT"/>
+  </plnk:partnerLinkType>
+  <plnk:partnerLinkType name="IvistarProxy_Participant_PLT">
+    <plnk:role name="IvistarProxy_Participant_partnerRole" portType="tns:IvistarProxyPT"/>
+  </plnk:partnerLinkType>
+  <plnk:partnerLinkType name="SheaSimulator_Participant_PLT">
+    <plnk:role name="SheaSimulator_Participant_partnerRole" portType="tns:SheaSimulatorPT"/>
+  </plnk:partnerLinkType>
+  <plnk:partnerLinkType name="UPnPRadio_Participant_PLT">
+    <plnk:role name="UPnPRadio_Participant_partnerRole" portType="tns:UPnPRadioPT"/>
+  </plnk:partnerLinkType>
+  <wsdl:message name="initProcessRequest_MessageDataMessage">
+    <wsdl:part name="paramUsername" type="xsd:string"/>
+    <wsdl:part name="paramWaketime" type="xsd:string"/>
+    <wsdl:part name="paramCity" type="xsd:string"/>
+    <wsdl:part name="paramCountry" type="xsd:string"/>
+    <wsdl:part name="paramRoomName" type="xsd:string"/>
+    <wsdl:part name="paramLightIDs" type="xsd:string"/>
+    <wsdl:part name="paramBlindsIDs" type="xsd:string"/>
+    <wsdl:part name="paramUseLight" type="xsd:boolean"/>
+    <wsdl:part name="paramUseMusic" type="xsd:boolean"/>
+  </wsdl:message>
+  <wsdl:message name="logRequest_MessageDataMessage">
+    <wsdl:part name="message" type="xsd:string"/>
+    <wsdl:part name="level" type="xsd:integer"/>
+  </wsdl:message>
+  <wsdl:message name="GetWeatherRequest_MessageDataMessage">
+    <wsdl:part name="country" type="xsd:string"/>
+    <wsdl:part name="city" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:message name="GetWeatherResponse_MessageDataMessage">
+    <wsdl:part name="weatherdata" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:message name="SetValueRequest_MessageDataMessage">
+    <wsdl:part name="value" type="xsd:string"/>
+    <wsdl:part name="line" type="xsd:string"/>
+    <wsdl:part name="room" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:message name="IsInZoneRequest_MessageDataMessage">
+    <wsdl:part name="username" type="xsd:string"/>
+    <wsdl:part name="zone" type="xsd:string"/>
+  </wsdl:message>
+  <wsdl:message name="IsInZoneResponse_MessageDataMessage">
+    <wsdl:part name="isin" type="xsd:integer"/>
+  </wsdl:message>
+  <wsdl:message name="PlayRequest_MessageDataMessage"/>
+  <wsdl:message name="PauseRequest_MessageDataMessage"/>
+  <wsdl:message name="LightAlarm_Process_ProcessDataMessage">
+    <wsdl:part name="inUsername" type="xsd:string"/>
+    <wsdl:part name="inWaketime" type="xsd:string"/>
+    <wsdl:part name="inCity" type="xsd:string"/>
+    <wsdl:part name="inCountry" type="xsd:string"/>
+    <wsdl:part name="inRoomName" type="xsd:string"/>
+    <wsdl:part name="inLightIDs" type="xsd:string"/>
+    <wsdl:part name="inBlindsIDs" type="xsd:string"/>
+    <wsdl:part name="inUseLight" type="xsd:boolean"/>
+    <wsdl:part name="inUseMusic" type="xsd:boolean"/>
+    <wsdl:part name="tmpWeather" type="xsd:string"/>
+    <wsdl:part name="tmpDimStep" type="xsd:integer"/>
+    <wsdl:part name="tmpInBed" type="xsd:integer"/>
+    <wsdl:part name="tmpVolume" type="xsd:integer"/>
+  </wsdl:message>
+  <wsdl:portType name="LightAlarmPT">
+    <wsdl:operation name="initProcess">
+      <wsdl:input message="tns:initProcessRequest_MessageDataMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="LoggingPT">
+    <wsdl:operation name="log">
+      <wsdl:input message="tns:logRequest_MessageDataMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WeatherProxyPT">
+    <wsdl:operation name="GetWeather">
+      <wsdl:input message="tns:GetWeatherRequest_MessageDataMessage"/>
+      <wsdl:output message="tns:GetWeatherResponse_MessageDataMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="IvistarProxyPT">
+    <wsdl:operation name="SetValue">
+      <wsdl:input message="tns:SetValueRequest_MessageDataMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SheaSimulatorPT">
+    <wsdl:operation name="IsInZone">
+      <wsdl:input message="tns:IsInZoneRequest_MessageDataMessage"/>
+      <wsdl:output message="tns:IsInZoneResponse_MessageDataMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="UPnPRadioPT">
+    <wsdl:operation name="Play">
+      <wsdl:input message="tns:PlayRequest_MessageDataMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="Pause">
+      <wsdl:input message="tns:PauseRequest_MessageDataMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  
+  <wsdl:binding name="Logging" type="tns:LoggingPT">
+  	<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  	<wsdl:operation name="log">
+  		<soap:operation soapAction="http://de.dailab.service/Logging/log"/>
+  		<wsdl:input>
+	 		<soap:body namespace="http://de.dailab.service/Logging/" use="literal"/>
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body namespace="http://de.dailab.service/Logging/" use="literal"/>
+  		</wsdl:output>
+  	</wsdl:operation>
+  </wsdl:binding>
+  
+  <wsdl:service name="LoggingService">
+    <wsdl:port binding="tns:Logging" name="LoggingPort">
+      <soap:address location="http://localhost:8080/LoggingWS/services/LoggingPort"/>
+    </wsdl:port>
+  </wsdl:service>
+  
+  
+ 
+
+  <wsdl:binding name="WeatherProxySOAP" type="tns:WeatherProxyPT">
+  	<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  	<wsdl:operation name="GetWeather">
+  		<soap:operation soapAction="http://sercho.org/WeatherProxyWS/GetWeather"/>
+  		<wsdl:input>
+	 		<soap:body namespace="http://sercho.org/WeatherProxyWS/" use="literal"/>
+  		</wsdl:input>
+  		<wsdl:output>
+	 		<soap:body namespace="http://sercho.org/WeatherProxyWS/" use="literal"/>
+  		</wsdl:output>
+  	</wsdl:operation>
+  </wsdl:binding>
+  
+  <wsdl:service name="WeatherProxyService">
+    <wsdl:port binding="tns:WeatherProxySOAP" name="WeatherProxyServiceSOAP">
+      <soap:address location="http://localhost:8080/WeatherProxyWS/services/WeatherProxyServiceSOAP"/>
+    </wsdl:port>
+  </wsdl:service>
+  
+  
+  <wsdl:binding name="UPnPRadioSOAP" type="tns:UPnPRadioPT">
+  	<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  	<wsdl:operation name="Play">
+  		<soap:operation soapAction="http://sercho.org/UPnPRadio/Play"/>
+  		<wsdl:input>
+	 		<soap:body namespace="http://sercho.org/UPnPRadio/" use="literal"/>
+  		</wsdl:input>
+  	</wsdl:operation>
+  	<wsdl:operation name="Pause">
+  		<soap:operation soapAction="http://sercho.org/UPnPRadio/Pause"/>
+  		<wsdl:input>
+	 		<soap:body namespace="http://sercho.org/UPnPRadio/" use="literal"/>
+  		</wsdl:input>
+  	</wsdl:operation>
+  </wsdl:binding>
+  
+  <wsdl:service name="UPnPRadioService">
+    <wsdl:port binding="tns:UPnPRadioSOAP" name="UPnPRadioServiceSOAP">
+      <soap:address location="http://localhost:8080/UPnPRadioWS/services/UPnPRadioServiceSOAP"/>
+    </wsdl:port>
+  </wsdl:service>
+  
+  
+ <wsdl:binding name="SheaSimulatorSOAP" type="tns:SheaSimulatorPT">
+  	<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  	<wsdl:operation name="IsInZone">
+  		<soap:operation soapAction="http://sercho.org/SheaSimulator/IsInZone"/>
+  		<wsdl:input>
+	 		<soap:body namespace="http://sercho.org/SheaSimulator/" use="literal"/>
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body namespace="http://sercho.org/SheaSimulator/" use="literal"/>
+  		</wsdl:output>
+  	</wsdl:operation>
+  </wsdl:binding>
+  
+  
+  <wsdl:service name="SheaSimulatorService">
+    <wsdl:port binding="tns:SheaSimulatorSOAP" name="SheaSimulatorServiceSOAP">
+      <soap:address location="http://localhost:8080/SheaSimulatorWS/services/SheaSimulatorServiceSOAP"/>
+    </wsdl:port>
+  </wsdl:service>
+  
+  
+  
+  <wsdl:binding name="IvistarProxySOAP" type="tns:IvistarProxyPT">
+  	<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  	<wsdl:operation name="SetValue">
+  		<soap:operation soapAction="http://sercho.org/Ivistar/SetValue"/>
+  		<wsdl:input>
+	 		<soap:body namespace="http://sercho.org/Ivistar/" use="literal"/>
+  		</wsdl:input>
+  		<wsdl:output>
+	 		<soap:body namespace="http://sercho.org/Ivistar/" use="literal"/>
+  		</wsdl:output>
+  	</wsdl:operation>
+  </wsdl:binding>
+  
+  <wsdl:service name="IvistarProxyService">
+    <wsdl:port binding="tns:IvistarProxySOAP" name="IvistarProxyServiceSOAP">
+      <soap:address location="http://localhost:8080/IvistarProxyWS/services/IvistarProxyServiceSOAP"/>
+    </wsdl:port>
+  </wsdl:service>
+  
+</wsdl:definitions>

@@ -1,0 +1,51 @@
+\documentclass[lnbip]{svmultln}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+%\usepackage[pdfpagelabels,hypertexnames=false,breaklinks=true,bookmarksopen=true,bookmarksopenlevel=2]{hyperref}
+%\usepackage{hyperref}
+
+%\usepackage{makeidx}  % allows for indexgeneration
+%\makeindex            % be prepared for an author index
+
+\usepackage{color}
+\newcommand{\Comment}[1]{\begin{center}\fbox{\parbox{.8\columnwidth}{\sc\color{blue}#1}}\end{center}}
+
+
+
+\begin{document}
+
+\mainmatter
+
+\pagestyle{empty}
+
+\title{Towards Transformations from BPMN to Heterogeneous Systems}
+
+\author{Tobias K\"{u}ster \and Axel He\ss{}ler} % '\and' making problems with hyperref
+
+\institute{
+	DAI-Labor, Technische Universit\"{a}t Berlin\\
+	Faculty of Electrical Engineering and Computer Science\\
+	%\email{tobias.kuester@dai-labor.de}\\
+	%\email{axel.hessler@dai-labor.de}
+	\email{{tobias.kuester|axel.hessler}@dai-labor.de}
+}
+
+\maketitle
+
+\begin{abstract}
+% 98 of 70-150 words
+By now, the mapping from BPMN to BPEL has been implemented in numerous tools, greatly assisting the business architect in the creation of BPEL processes.  However, most of these tools are tailored especially for this transformation, neglecting the original purpose of BPMN: Providing a language independent process model.  To address this shortcoming, a pure BPMN editor is needed, being dynamically extensible with several export features and added editing functionality.  In this paper, we present a tool that follows this approach, not only providing a compelling transformation to BPEL but at the same time being extensible to other languages.
+\keywords{BPMN, Process Design Tools, Model Driven Development, Transformations, Multi-agent Systems}
+\end{abstract}
+
+
+\input{10-introduction}
+\input{20-editor}
+\input{30-transformation}
+\input{40-related_work}
+\input{50-conclusion}
+
+\bibliographystyle{plain}
+\bibliography{act-db}
+
+\end{document}

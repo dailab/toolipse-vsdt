@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.dailab.vsdt/src"
+    editDirectory="/de.dailab.vsdt.edit/src" editorDirectory="/de.dailab.vsdt.editor/src"
+    modelPluginID="de.dailab.vsdt" modelName="Vsdt" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>vsdt.ecore</foreignModel>
+  <genPackages prefix="Vsdt" basePackage="de.dailab" resource="XML" disposableProviderFactory="true"
+      ecorePackage="vsdt.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="vsdt.ecore#//ProcessType">
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ProcessType/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ProcessType/PRIVATE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ProcessType/ABSTRACT"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ProcessType/COLLABORATION"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="vsdt.ecore#//StatusType">
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//StatusType/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//StatusType/READY"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//StatusType/ACTIVE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//StatusType/CANCELLED"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//StatusType/ABORTING"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//StatusType/ABORTED"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//StatusType/COMPLETING"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//StatusType/COMPLETED"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="vsdt.ecore#//TriggerType">
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//TriggerType/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//TriggerType/MESSAGE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//TriggerType/TIMER"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//TriggerType/RULE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//TriggerType/LINK"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//TriggerType/ERROR"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//TriggerType/COMPENSATION"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//TriggerType/CANCEL"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//TriggerType/MULTIPLE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//TriggerType/TERMINATE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//TriggerType/SIGNAL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="vsdt.ecore#//ActivityType">
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/SERVICE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/RECEIVE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/SEND"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/USER"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/SCRIPT"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/MANUAL"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/TASKREFERENCE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/EMBEDDED"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/INDEPENDENT"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/SUBPROCESSREFERENCE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="vsdt.ecore#//LoopType">
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//LoopType/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//LoopType/STANDARD"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//LoopType/MULTIINSTANCE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="vsdt.ecore#//FlowConditionTypes">
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//FlowConditionTypes/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//FlowConditionTypes/ONE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//FlowConditionTypes/ALL"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//FlowConditionTypes/COMPLEX"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="vsdt.ecore#//TransactionMethodType">
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//TransactionMethodType/COMPENSATE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//TransactionMethodType/STORE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//TransactionMethodType/IMAGE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="vsdt.ecore#//GatewayType">
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//GatewayType/XOR_DATA"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//GatewayType/XOR_EVENT"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//GatewayType/OR"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//GatewayType/COMPLEX"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//GatewayType/AND"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="vsdt.ecore#//ConditionType">
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ConditionType/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ConditionType/EXPRESSION"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ConditionType/DEFAULT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="vsdt.ecore#//DirectionType">
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//DirectionType/ONE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//DirectionType/NONE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//DirectionType/BOTH"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="vsdt.ecore#//ParticipantType">
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ParticipantType/ROLE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ParticipantType/ENTITY"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="vsdt.ecore#//AssignTimeType">
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//AssignTimeType/START"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//AssignTimeType/END"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="vsdt.ecore#//IdObject">
+      <genFeatures createChild="false" propertyCategory="General" ecoreFeature="ecore:EAttribute vsdt.ecore#//IdObject/name"/>
+      <genFeatures createChild="false" propertyCategory="General" ecoreFeature="ecore:EAttribute vsdt.ecore#//IdObject/documentation"/>
+      <genFeatures createChild="false" propertyCategory="General" ecoreFeature="ecore:EAttribute vsdt.ecore#//IdObject/id"/>
+      <genFeatures createChild="false" propertyCategory="General" ecoreFeature="ecore:EAttribute vsdt.ecore#//IdObject/categories"/>
+      <genOperations ecoreOperation="vsdt.ecore#//IdObject/getNameOrId"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//BusinessProcessSystem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//BusinessProcessSystem/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//BusinessProcessSystem/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//BusinessProcessSystem/language"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//BusinessProcessSystem/expressionLanguage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//BusinessProcessSystem/queryLanguage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//BusinessProcessSystem/creationDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//BusinessProcessSystem/modificationDate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessSystem/businessProcesses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessSystem/participants"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessSystem/messages"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessSystem/implementations"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//BusinessProcessDiagram">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessDiagram/pools"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessDiagram/artifacts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessDiagram/connections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessDiagram/participants"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessDiagram/businessProcessSystem"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="vsdt.ecore#//AbstractProcess">
+      <genFeatures createChild="false" propertyCategory="Process" ecoreFeature="ecore:EAttribute vsdt.ecore#//AbstractProcess/adHoc"/>
+      <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Process"
+          ecoreFeature="ecore:EReference vsdt.ecore#//AbstractProcess/adHocCompletionCondition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//AbstractProcess/properties"/>
+      <genOperations ecoreOperation="vsdt.ecore#//AbstractProcess/getGraphicalElements"/>
+      <genOperations ecoreOperation="vsdt.ecore#//AbstractProcess/getTransitiveGraphicalElements"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//BpmnProcess">
+      <genFeatures property="None" notify="false" createChild="false" propertyCategory=""
+          propertyDescription="" ecoreFeature="ecore:EReference vsdt.ecore#//BpmnProcess/parentPool"/>
+      <genFeatures createChild="false" propertyCategory="Process" ecoreFeature="ecore:EAttribute vsdt.ecore#//BpmnProcess/processType"/>
+      <genFeatures createChild="false" propertyCategory="Process" ecoreFeature="ecore:EAttribute vsdt.ecore#//BpmnProcess/status"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BpmnProcess/assignments"/>
+      <genFeatures createChild="false" propertyCategory="Process" ecoreFeature="ecore:EAttribute vsdt.ecore#//BpmnProcess/suppressJoinFailure"/>
+      <genFeatures createChild="false" propertyCategory="Process" ecoreFeature="ecore:EAttribute vsdt.ecore#//BpmnProcess/enableInstanceCompensation"/>
+      <genOperations ecoreOperation="vsdt.ecore#//BpmnProcess/getVisibleProperties"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="vsdt.ecore#//FlowObjectContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//FlowObjectContainer/containedFlowObjects"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="vsdt.ecore#//GraphicalObject">
+      <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference vsdt.ecore#//GraphicalObject/outgoingAss"/>
+      <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference vsdt.ecore#//GraphicalObject/incomingAss"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="vsdt.ecore#//Node">
+      <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Node/outgoingMsg"/>
+      <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Node/incomingMsg"/>
+      <genOperations ecoreOperation="vsdt.ecore#//Node/getPool"/>
+      <genOperations ecoreOperation="vsdt.ecore#//Node/adaptToMessage">
+        <genParameters ecoreParameter="vsdt.ecore#//Node/adaptToMessage/message"/>
+        <genParameters ecoreParameter="vsdt.ecore#//Node/adaptToMessage/incoming"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="vsdt.ecore#//FlowObject">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference vsdt.ecore#//FlowObject/flowObjectContainer"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//FlowObject/assignments"/>
+      <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference vsdt.ecore#//FlowObject/outgoingSeq"/>
+      <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference vsdt.ecore#//FlowObject/incomingSeq"/>
+      <genOperations ecoreOperation="vsdt.ecore#//FlowObject/getProcess"/>
+      <genOperations ecoreOperation="vsdt.ecore#//FlowObject/isStartingNode"/>
+      <genOperations ecoreOperation="vsdt.ecore#//FlowObject/isEndingNode"/>
+      <genOperations ecoreOperation="vsdt.ecore#//FlowObject/getAbstractProcess"/>
+      <genOperations ecoreOperation="vsdt.ecore#//FlowObject/getVisibleProperties"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="vsdt.ecore#//Event">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Event/trigger"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Trigger Attributes"
+          propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Event/message"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Trigger Attributes"
+          propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Event/implementation"/>
+      <genFeatures createChild="false" propertyCategory="Trigger Attributes" ecoreFeature="ecore:EReference vsdt.ecore#//Event/timeDate"/>
+      <genFeatures createChild="false" propertyCategory="Trigger Attributes" ecoreFeature="ecore:EReference vsdt.ecore#//Event/timeCycle"/>
+      <genFeatures createChild="false" propertyCategory="Trigger Attributes" ecoreFeature="ecore:EAttribute vsdt.ecore#//Event/ruleName"/>
+      <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Trigger Attributes"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Event/ruleExpression"/>
+      <genFeatures createChild="false" propertyCategory="Trigger Attributes" ecoreFeature="ecore:EAttribute vsdt.ecore#//Event/errorCode"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Trigger Attributes"
+          propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Event/activity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Event/signal"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Event/linkedTo"/>
+      <genOperations ecoreOperation="vsdt.ecore#//Event/getValidTriggerTypes"/>
+      <genOperations ecoreOperation="vsdt.ecore#//Event/isThrowing"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//Start"/>
+    <genClasses ecoreClass="vsdt.ecore#//Intermediate">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference vsdt.ecore#//Intermediate/attachedTo"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//End"/>
+    <genClasses ecoreClass="vsdt.ecore#//Activity">
+      <genFeatures createChild="false" propertyCategory="Activity" ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/status"/>
+      <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Activity"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Activity/inputSets"/>
+      <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Activity"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Activity/outputSets"/>
+      <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Activity"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Activity/IORules"/>
+      <genFeatures createChild="false" propertyCategory="Activity" ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/startQuantity"/>
+      <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Activity"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Activity/loopAttributes"/>
+      <genFeatures property="None" createChild="false" propertyCategory="Activity"
+          ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/isCompensation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/boundaryEvents"/>
+      <genFeatures createChild="false" propertyCategory="General" ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/activityType"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Activity Type Attributes"
+          propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/inMessage"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Activity Type Attributes"
+          propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/outMessage"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Activity Type Attributes"
+          propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/implementation"/>
+      <genFeatures createChild="false" propertyCategory="Activity Type Attributes"
+          ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/instantiate"/>
+      <genFeatures createChild="false" propertyCategory="Activity Type Attributes"
+          ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/performers"/>
+      <genFeatures createChild="false" propertyCategory="Activity Type Attributes"
+          ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/script"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Activity Type Attributes"
+          propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/activityRef"/>
+      <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Subprocess Attributes"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Activity/transaction"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Subprocess Attributes"
+          propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/diagramRef"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Subprocess Attributes"
+          propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/processRef"/>
+      <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Subprocess Attributes"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Activity/inputPropertyMaps"/>
+      <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Subprocess Attributes"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Activity/outputPropertyMaps"/>
+      <genOperations ecoreOperation="vsdt.ecore#//Activity/initializeInputSet"/>
+      <genOperations ecoreOperation="vsdt.ecore#//Activity/initializeOutputSet"/>
+      <genOperations ecoreOperation="vsdt.ecore#//Activity/calculateIsCompensation"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="vsdt.ecore#//LoopAttributeSet">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference vsdt.ecore#//LoopAttributeSet/parentActivity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//LoopAttributeSet/loopCounter"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//StandardLoopAttSet">
+      <genFeatures property="Readonly" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//StandardLoopAttSet/loopCondition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//StandardLoopAttSet/loopMaximum"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//StandardLoopAttSet/testBefore"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//MultiLoopAttSet">
+      <genFeatures property="Readonly" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//MultiLoopAttSet/MI_Condition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//MultiLoopAttSet/MI_FlowCondition"/>
+      <genFeatures property="Readonly" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//MultiLoopAttSet/complexMI_FlowCondition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//MultiLoopAttSet/sequential"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//InputSet">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//InputSet/inputs"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//OutputSet">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//OutputSet/outputs"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//Transaction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Transaction/transactionId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Transaction/transactionProtocol"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Transaction/transactionMethod"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//Gateway">
+      <genFeatures createChild="false" propertyCategory="General" ecoreFeature="ecore:EAttribute vsdt.ecore#//Gateway/gatewayType"/>
+      <genFeatures createChild="false" propertyCategory="Gateway Type Atributes" ecoreFeature="ecore:EAttribute vsdt.ecore#//Gateway/markerVisible"/>
+      <genFeatures createChild="false" propertyCategory="Gateway Type Atributes" ecoreFeature="ecore:EAttribute vsdt.ecore#//Gateway/instantiate"/>
+      <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Gateway Type Atributes"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Gateway/incomingCondition"/>
+      <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Gateway Type Atributes"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Gateway/outgoingCondition"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//Pool">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference vsdt.ecore#//Pool/parentDiagram"/>
+      <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Pool"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Pool/process"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Pool" propertySortChoices="true"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Pool/participant"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Pool/lanes"/>
+      <genFeatures createChild="false" propertyCategory="Pool" ecoreFeature="ecore:EAttribute vsdt.ecore#//Pool/boundaryVisible"/>
+      <genOperations ecoreOperation="vsdt.ecore#//Pool/initializeParticipant"/>
+      <genOperations ecoreOperation="vsdt.ecore#//Pool/setBoundaryVisibility"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//Lane">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference vsdt.ecore#//Lane/parentPool"/>
+      <genFeatures property="None" createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Lane/boundaryVisible"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="vsdt.ecore#//Artifact">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference vsdt.ecore#//Artifact/parentDiagram"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Artifact"
+          propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Artifact/pool"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//DataObject">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//DataObject/properties"/>
+      <genFeatures createChild="false" propertyCategory="Artifact" ecoreFeature="ecore:EAttribute vsdt.ecore#//DataObject/requiredForStart"/>
+      <genFeatures createChild="false" propertyCategory="Artifact" ecoreFeature="ecore:EAttribute vsdt.ecore#//DataObject/producedAtCompletion"/>
+      <genFeatures createChild="false" propertyCategory="Artifact" ecoreFeature="ecore:EAttribute vsdt.ecore#//DataObject/state"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//TextAnnotation"/>
+    <genClasses ecoreClass="vsdt.ecore#//Group"/>
+    <genClasses image="false" ecoreClass="vsdt.ecore#//ConnectingObject">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference vsdt.ecore#//ConnectingObject/parentDiagram"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//SequenceFlow">
+      <genFeatures createChild="false" propertyCategory="Connection" ecoreFeature="ecore:EAttribute vsdt.ecore#//SequenceFlow/conditionType"/>
+      <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Connection"
+          ecoreFeature="ecore:EReference vsdt.ecore#//SequenceFlow/conditionExpression"/>
+      <genFeatures createChild="false" propertyCategory="Connection" ecoreFeature="ecore:EAttribute vsdt.ecore#//SequenceFlow/quantity"/>
+      <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference vsdt.ecore#//SequenceFlow/source"/>
+      <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference vsdt.ecore#//SequenceFlow/target"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//MessageFlow">
+      <genFeatures notify="false" createChild="false" propertyCategory="Connection"
+          propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//MessageFlow/message"/>
+      <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference vsdt.ecore#//MessageFlow/source"/>
+      <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference vsdt.ecore#//MessageFlow/target"/>
+      <genOperations ecoreOperation="vsdt.ecore#//MessageFlow/initializeMessage"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//Association">
+      <genFeatures createChild="false" propertyCategory="Connection" ecoreFeature="ecore:EAttribute vsdt.ecore#//Association/direction"/>
+      <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Association/source"/>
+      <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Association/target"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//Participant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Participant/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Participant/associatedProcesses"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Participant/associatedPools"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//Message">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Message/name"/>
+      <genFeatures property="Readonly" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Message/properties"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="vsdt.ecore#//Implementation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Implementation/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Implementation/participant"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Implementation/interface"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Implementation/operation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Implementation/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Implementation/location"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Implementation/inputMessage"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Implementation/outputMessage"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//Assignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Assignment/to"/>
+      <genFeatures property="Readonly" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Assignment/from"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Assignment/assignTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Assignment/toQuery"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//Property">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Property/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Property/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Property/correlation"/>
+      <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference vsdt.ecore#//Property/assignments"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//Expression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Expression/expression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Expression/language"/>
+      <genOperations ecoreOperation="vsdt.ecore#//Expression/getGlobalExpressionLanguage"/>
+      <genOperations ecoreOperation="vsdt.ecore#//Expression/getExpressionLanguageToBeUsed"/>
+      <genOperations ecoreOperation="vsdt.ecore#//Expression/validate"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

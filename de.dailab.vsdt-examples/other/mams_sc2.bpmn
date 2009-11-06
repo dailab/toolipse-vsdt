@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vsdt:BusinessProcessDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:vsdt="http://de.dailab.vsdt" xmi:id="_vwnYYRh0Ed66E93M8g1yVg" name="MAMS-ShowCase 2" id="BusinessProcessDiagram_1208781896943" creationDate="2008-04-21T14:44:56.943+0200" modificationDate="2008-04-21T14:44:56.943+0200">
+  <pools xmi:type="vsdt:Pool" xmi:id="_vwnYYxh0Ed66E93M8g1yVg" name="MAMS ShowCase2" id="Pool_1208781902254" participant="_vwnYwBh0Ed66E93M8g1yVg">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_vwnYZRh0Ed66E93M8g1yVg" name="id_b2fac401_e488_4243_99d1_b678522f203c" id="id_b2fac401_e488_4243_99d1_b678522f203c">
+      <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_vwnYZhh0Ed66E93M8g1yVg"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_vwnYZxh0Ed66E93M8g1yVg" name="Nachricht-3a02737a-b26d-41b0-b597-ba3f012e63b5" type="xsd:string"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_vwnYaBh0Ed66E93M8g1yVg" name="Benutzer-eadffe7b-e83e-4f37-9106-4e81fc373448" type="s:userType"/>
+    </process>
+    <lanes xmi:type="vsdt:Lane" xmi:id="_vwnYahh0Ed66E93M8g1yVg" name="Default Lane" id="Lane_1208781902257" boundaryVisible="false">
+      <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_vwnYbBh0Ed66E93M8g1yVg" name="Start" id="Start_1208782419628" trigger="MESSAGE" message="_vwnYrxh0Ed66E93M8g1yVg" implementation="_vwnYxBh0Ed66E93M8g1yVg">
+        <ruleExpression xmi:type="vsdt:Expression" xmi:id="_vwnYbRh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_vwnYbxh0Ed66E93M8g1yVg" name="Check Position" id="Activity_1208782432613" activityType="SERVICE" inMessage="_vwnYsBh0Ed66E93M8g1yVg" outMessage="_vwnYthh0Ed66E93M8g1yVg" implementation="_vwnYxRh0Ed66E93M8g1yVg">
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_vwnYcBh0Ed66E93M8g1yVg" to="_vwnYsxh0Ed66E93M8g1yVg">
+          <from xmi:type="vsdt:Expression" xmi:id="_vwnYcRh0Ed66E93M8g1yVg" expression="string('12345')"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_vwnYchh0Ed66E93M8g1yVg" to="_vwnYtBh0Ed66E93M8g1yVg">
+          <from xmi:type="vsdt:Expression" xmi:id="_vwnYcxh0Ed66E93M8g1yVg" expression="string('Unnamedville')"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_vwnYdBh0Ed66E93M8g1yVg" to="_vwnYtRh0Ed66E93M8g1yVg">
+          <from xmi:type="vsdt:Expression" xmi:id="_vwnYdRh0Ed66E93M8g1yVg" expression="int('50')"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_vwnYdhh0Ed66E93M8g1yVg" to="_vwnYshh0Ed66E93M8g1yVg">
+          <from xmi:type="vsdt:Expression" xmi:id="_vwnYdxh0Ed66E93M8g1yVg" expression="string('Main Street 42')"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_vwnYeBh0Ed66E93M8g1yVg" to="_vwnYsRh0Ed66E93M8g1yVg">
+          <from xmi:type="vsdt:Expression" xmi:id="_vwnYeRh0Ed66E93M8g1yVg" expression="string('group')"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_vwnYehh0Ed66E93M8g1yVg" to="_vwnYaBh0Ed66E93M8g1yVg" assignTime="END">
+          <from xmi:type="vsdt:Expression" xmi:id="_vwnYexh0Ed66E93M8g1yVg" expression="locateduser"/>
+        </assignments>
+        <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_vwnYfBh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_vwnYfhh0Ed66E93M8g1yVg" name="Get Text Content" id="Activity_1208782438173" activityType="SERVICE" inMessage="_vwnYuBh0Ed66E93M8g1yVg" outMessage="_vwnYuhh0Ed66E93M8g1yVg" implementation="_vwnYxxh0Ed66E93M8g1yVg">
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_vwnYfxh0Ed66E93M8g1yVg" to="_vwnYuRh0Ed66E93M8g1yVg">
+          <from xmi:type="vsdt:Expression" xmi:id="_vwnYgBh0Ed66E93M8g1yVg" expression="string('message')"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_vwnYgRh0Ed66E93M8g1yVg" to="_vwnYZxh0Ed66E93M8g1yVg" assignTime="END">
+          <from xmi:type="vsdt:Expression" xmi:id="_vwnYghh0Ed66E93M8g1yVg" expression="messagetext"/>
+        </assignments>
+        <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_vwnYgxh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_vwnYhRh0Ed66E93M8g1yVg" name="Send SMS" id="Activity_1208782442248" activityType="SEND" inMessage="_vwnYvBh0Ed66E93M8g1yVg" implementation="_vwnYxhh0Ed66E93M8g1yVg">
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_vwnYhhh0Ed66E93M8g1yVg" to="_vwnYvRh0Ed66E93M8g1yVg">
+          <from xmi:type="vsdt:Expression" xmi:id="_vwnYhxh0Ed66E93M8g1yVg" expression="Benutzer-eadffe7b-e83e-4f37-9106-4e81fc373448"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_vwnYiBh0Ed66E93M8g1yVg" to="_vwnYvhh0Ed66E93M8g1yVg">
+          <from xmi:type="vsdt:Expression" xmi:id="_vwnYiRh0Ed66E93M8g1yVg" expression="Nachricht-3a02737a-b26d-41b0-b597-ba3f012e63b5"/>
+        </assignments>
+        <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_vwnYihh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:End" xmi:id="_vwnYjBh0Ed66E93M8g1yVg" id="End_1208782446835">
+        <ruleExpression xmi:type="vsdt:Expression" xmi:id="_vwnYjRh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+    </lanes>
+  </pools>
+  <pools xmi:type="vsdt:Pool" xmi:id="_vwnYjxh0Ed66E93M8g1yVg" name="Ortspruefung" id="Pool_1208782623651" participant="_vwnYwRh0Ed66E93M8g1yVg">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_vwnYkRh0Ed66E93M8g1yVg" name="Ortspruefung_Process" id="BpmnProcess_1208782623654" processType="NONE">
+      <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_vwnYkhh0Ed66E93M8g1yVg"/>
+    </process>
+  </pools>
+  <pools xmi:type="vsdt:Pool" xmi:id="_vwnYlBh0Ed66E93M8g1yVg" name="SMS-Service" id="Pool_1208782640139" participant="_vwnYwhh0Ed66E93M8g1yVg">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_vwnYlhh0Ed66E93M8g1yVg" name="SMS-Service_Process" id="BpmnProcess_1208782640140" processType="NONE">
+      <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_vwnYlxh0Ed66E93M8g1yVg"/>
+    </process>
+  </pools>
+  <pools xmi:type="vsdt:Pool" xmi:id="_vwnYmRh0Ed66E93M8g1yVg" name="Textinhalt" id="Pool_1208782657313" participant="_vwnYwxh0Ed66E93M8g1yVg">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_vwnYmxh0Ed66E93M8g1yVg" name="Textinhalt_Process" id="BpmnProcess_1208782657313" processType="NONE">
+      <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_vwnYnBh0Ed66E93M8g1yVg"/>
+    </process>
+  </pools>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_vwnYnhh0Ed66E93M8g1yVg" id="SequenceFlow_1208782432632" source="_vwnYbBh0Ed66E93M8g1yVg" target="_vwnYbxh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_vwnYoBh0Ed66E93M8g1yVg" id="SequenceFlow_1208782438191" source="_vwnYbxh0Ed66E93M8g1yVg" target="_vwnYfhh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_vwnYohh0Ed66E93M8g1yVg" id="SequenceFlow_1208782442261" source="_vwnYfhh0Ed66E93M8g1yVg" target="_vwnYhRh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_vwnYpBh0Ed66E93M8g1yVg" id="SequenceFlow_1208782446868" source="_vwnYhRh0Ed66E93M8g1yVg" target="_vwnYjBh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_vwnYphh0Ed66E93M8g1yVg" name="OrtspruefungRequest&#xD;&#xA;" id="MessageFlow_1208782704800" message="_vwnYsBh0Ed66E93M8g1yVg" source="_vwnYbxh0Ed66E93M8g1yVg" target="_vwnYjxh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_vwnYqBh0Ed66E93M8g1yVg" name="Ortspruefung Response" id="MessageFlow_1208782708143" message="_vwnYthh0Ed66E93M8g1yVg" source="_vwnYjxh0Ed66E93M8g1yVg" target="_vwnYbxh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_vwnYqhh0Ed66E93M8g1yVg" name="TextinhaltRequest" id="MessageFlow_1208782711115" message="_vwnYuBh0Ed66E93M8g1yVg" source="_vwnYfhh0Ed66E93M8g1yVg" target="_vwnYlBh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_vwnYrBh0Ed66E93M8g1yVg" name="TextinhaltResponse" id="MessageFlow_1208782714698" message="_vwnYuhh0Ed66E93M8g1yVg" source="_vwnYlBh0Ed66E93M8g1yVg" target="_vwnYfhh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_vwnYrhh0Ed66E93M8g1yVg" name="SMSServiceRequest" id="MessageFlow_1208782718471" message="_vwnYvBh0Ed66E93M8g1yVg" source="_vwnYhRh0Ed66E93M8g1yVg" target="_vwnYmRh0Ed66E93M8g1yVg"/>
+  <messages xmi:type="vsdt:Message" xmi:id="_vwnYrxh0Ed66E93M8g1yVg" name="id_b2fac401_e488_4243_99d1_b678522f203cRequest" from="_vwnYvxh0Ed66E93M8g1yVg" to="_vwnYwBh0Ed66E93M8g1yVg"/>
+  <messages xmi:type="vsdt:Message" xmi:id="_vwnYsBh0Ed66E93M8g1yVg" name="InputMessage" from="_vwnYwBh0Ed66E93M8g1yVg" to="_vwnYwRh0Ed66E93M8g1yVg">
+    <properties xmi:type="vsdt:Property" xmi:id="_vwnYsRh0Ed66E93M8g1yVg" name="allowedgroup" type="xsd:string"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_vwnYshh0Ed66E93M8g1yVg" name="address" type="xsd:string"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_vwnYsxh0Ed66E93M8g1yVg" name="zip" type="xsd:string"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_vwnYtBh0Ed66E93M8g1yVg" name="city" type="xsd:string"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_vwnYtRh0Ed66E93M8g1yVg" name="radius" type="xsd:int"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_vwnYthh0Ed66E93M8g1yVg" name="UserMessage" from="_vwnYwRh0Ed66E93M8g1yVg" to="_vwnYwBh0Ed66E93M8g1yVg">
+    <properties xmi:type="vsdt:Property" xmi:id="_vwnYtxh0Ed66E93M8g1yVg" name="locateduser" type="s:userType"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_vwnYuBh0Ed66E93M8g1yVg" name="TextInputMessage" from="_vwnYwBh0Ed66E93M8g1yVg" to="_vwnYwhh0Ed66E93M8g1yVg">
+    <properties xmi:type="vsdt:Property" xmi:id="_vwnYuRh0Ed66E93M8g1yVg" name="messagetext" type="xsd:string"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_vwnYuhh0Ed66E93M8g1yVg" name="TextOutputMessage" from="_vwnYwhh0Ed66E93M8g1yVg" to="_vwnYwBh0Ed66E93M8g1yVg">
+    <properties xmi:type="vsdt:Property" xmi:id="_vwnYuxh0Ed66E93M8g1yVg" name="messagetext" type="xsd:string"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_vwnYvBh0Ed66E93M8g1yVg" name="SMSMessage" from="_vwnYwBh0Ed66E93M8g1yVg" to="_vwnYwxh0Ed66E93M8g1yVg">
+    <properties xmi:type="vsdt:Property" xmi:id="_vwnYvRh0Ed66E93M8g1yVg" name="receiver" type="s:userType"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_vwnYvhh0Ed66E93M8g1yVg" name="messagetext" type="xsd:string"/>
+  </messages>
+  <participants xmi:type="vsdt:Participant" xmi:id="_vwnYvxh0Ed66E93M8g1yVg" name="Interface"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_vwnYwBh0Ed66E93M8g1yVg" name="id_b2fac401_e488_4243_99d1_b678522f203c"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_vwnYwRh0Ed66E93M8g1yVg" name="Ortspruefung_Participant"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_vwnYwhh0Ed66E93M8g1yVg" name="SMS-Service_Participant"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_vwnYwxh0Ed66E93M8g1yVg" name="Textinhalt_Participant"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_vwnYxBh0Ed66E93M8g1yVg" participant="_vwnYwBh0Ed66E93M8g1yVg" interface="id_b2fac401_e488_4243_99d1_b678522f203cServicePortType" operation="id_b2fac401_e488_4243_99d1_b678522f203c"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_vwnYxRh0Ed66E93M8g1yVg" participant="_vwnYwRh0Ed66E93M8g1yVg" interface="OrtspruefungServicePortType" operation="Ortspruefung"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_vwnYxhh0Ed66E93M8g1yVg" participant="_vwnYwhh0Ed66E93M8g1yVg" interface="MAMS-SendSMSServiceServicePortType" operation="MAMS-SendSMSService"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_vwnYxxh0Ed66E93M8g1yVg" participant="_vwnYwxh0Ed66E93M8g1yVg" interface="TextinhaltServicePortType" operation="Textinhalt"/>
+</vsdt:BusinessProcessDiagram>

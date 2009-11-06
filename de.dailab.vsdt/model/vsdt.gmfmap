@@ -1,0 +1,1130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmfmap:Mapping xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:gmfmap="http://www.eclipse.org/gmf/2008/mappings"
+    xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
+  <nodes>
+    <containmentFeature
+        href="vsdt.ecore#//BusinessProcessDiagram/artifacts"/>
+    <ownedChild>
+      <domainMetaElement
+          href="vsdt.ecore#//Group"/>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="vsdt.gmftool#//@palette/@tools.0/@tools.9"/>
+      <diagramNode
+          href="vsdt.gmfgraph#Group"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="vsdt.ecore#//BusinessProcessDiagram/artifacts"/>
+    <ownedChild>
+      <domainMetaElement
+          href="vsdt.ecore#//TextAnnotation"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="">
+        <diagramLabel
+            href="vsdt.gmfgraph#TextAnnotationText"/>
+        <features
+            href="vsdt.ecore#//IdObject/documentation"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="vsdt.gmftool#//@palette/@tools.0/@tools.8"/>
+      <diagramNode
+          href="vsdt.gmfgraph#TextAnnotation"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="vsdt.ecore#//BusinessProcessDiagram/artifacts"/>
+    <ownedChild>
+      <domainMetaElement
+          href="vsdt.ecore#//DataObject"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="">
+        <diagramLabel
+            href="vsdt.gmfgraph#PlainTextLabel"/>
+        <features
+            href="vsdt.ecore#//IdObject/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="vsdt.gmftool#//@palette/@tools.0/@tools.7"/>
+      <diagramNode
+          href="vsdt.gmfgraph#DataObject"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="vsdt.ecore#//BusinessProcessDiagram/pools"/>
+    <ownedChild>
+      <domainMetaElement
+          href="vsdt.ecore#//Pool"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
+        <diagramLabel
+            href="vsdt.gmfgraph#SwimlaneName"/>
+        <features
+            href="vsdt.ecore#//IdObject/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="vsdt.gmftool#//@palette/@tools.0/@tools.0"/>
+      <diagramNode
+          href="vsdt.gmfgraph#Pool"/>
+      <children
+          compartment="//@nodes.3/@ownedChild/@compartments.0">
+        <containmentFeature
+            href="vsdt.ecore#//Pool/lanes"/>
+        <ownedChild>
+          <domainMetaElement
+              href="vsdt.ecore#//Lane"/>
+          <labelMappings
+              xsi:type="gmfmap:FeatureLabelMapping">
+            <diagramLabel
+                href="vsdt.gmfgraph#SwimlaneName"/>
+            <features
+                href="vsdt.ecore#//IdObject/name"/>
+          </labelMappings>
+          <tool
+              xsi:type="gmftool:CreationTool"
+              href="vsdt.gmftool#//@palette/@tools.0/@tools.1"/>
+          <diagramNode
+              href="vsdt.gmfgraph#Lane"/>
+          <children
+              compartment="//@nodes.3/@ownedChild/@children.0/@ownedChild/@compartments.0">
+            <containmentFeature
+                href="vsdt.ecore#//FlowObjectContainer/containedFlowObjects"/>
+            <ownedChild>
+              <domainMetaElement
+                  href="vsdt.ecore#//Start"/>
+              <labelMappings
+                  xsi:type="gmfmap:FeatureLabelMapping">
+                <diagramLabel
+                    href="vsdt.gmfgraph#PlainTextLabel"/>
+                <features
+                    href="vsdt.ecore#//IdObject/name"/>
+              </labelMappings>
+              <tool
+                  xsi:type="gmftool:CreationTool"
+                  href="vsdt.gmftool#//@palette/@tools.0/@tools.3"/>
+              <diagramNode
+                  href="vsdt.gmfgraph#Start"/>
+            </ownedChild>
+          </children>
+          <children
+              compartment="//@nodes.3/@ownedChild/@children.0/@ownedChild/@compartments.0">
+            <containmentFeature
+                href="vsdt.ecore#//FlowObjectContainer/containedFlowObjects"/>
+            <ownedChild>
+              <domainMetaElement
+                  href="vsdt.ecore#//Intermediate"/>
+              <labelMappings
+                  xsi:type="gmfmap:FeatureLabelMapping"
+                  editPattern="">
+                <diagramLabel
+                    href="vsdt.gmfgraph#PlainTextLabel"/>
+                <features
+                    href="vsdt.ecore#//IdObject/name"/>
+              </labelMappings>
+              <tool
+                  xsi:type="gmftool:CreationTool"
+                  href="vsdt.gmftool#//@palette/@tools.0/@tools.3"/>
+              <diagramNode
+                  href="vsdt.gmfgraph#Intermediate"/>
+            </ownedChild>
+          </children>
+          <children
+              compartment="//@nodes.3/@ownedChild/@children.0/@ownedChild/@compartments.0">
+            <containmentFeature
+                href="vsdt.ecore#//FlowObjectContainer/containedFlowObjects"/>
+            <ownedChild>
+              <domainMetaElement
+                  href="vsdt.ecore#//End"/>
+              <labelMappings
+                  xsi:type="gmfmap:FeatureLabelMapping">
+                <diagramLabel
+                    href="vsdt.gmfgraph#PlainTextLabel"/>
+                <features
+                    href="vsdt.ecore#//IdObject/name"/>
+              </labelMappings>
+              <tool
+                  xsi:type="gmftool:CreationTool"
+                  href="vsdt.gmftool#//@palette/@tools.0/@tools.3"/>
+              <diagramNode
+                  href="vsdt.gmfgraph#End"/>
+            </ownedChild>
+          </children>
+          <children
+              compartment="//@nodes.3/@ownedChild/@children.0/@ownedChild/@compartments.0">
+            <containmentFeature
+                href="vsdt.ecore#//FlowObjectContainer/containedFlowObjects"/>
+            <ownedChild>
+              <domainMetaElement
+                  href="vsdt.ecore#//Activity"/>
+              <labelMappings
+                  xsi:type="gmfmap:FeatureLabelMapping">
+                <diagramLabel
+                    href="vsdt.gmfgraph#ActivityName"/>
+                <features
+                    href="vsdt.ecore#//IdObject/name"/>
+              </labelMappings>
+              <tool
+                  xsi:type="gmftool:CreationTool"
+                  href="vsdt.gmftool#//@palette/@tools.0/@tools.5"/>
+              <diagramNode
+                  href="vsdt.gmfgraph#Activity"/>
+              <children
+                  compartment="//@nodes.3/@ownedChild/@children.0/@ownedChild/@children.3/@ownedChild/@compartments.0"
+                  referencedChild="//@nodes.3/@ownedChild/@children.0/@ownedChild/@children.3/@ownedChild">
+                <containmentFeature
+                    href="vsdt.ecore#//FlowObjectContainer/containedFlowObjects"/>
+              </children>
+              <children
+                  compartment="//@nodes.3/@ownedChild/@children.0/@ownedChild/@children.3/@ownedChild/@compartments.0"
+                  referencedChild="//@nodes.3/@ownedChild/@children.0/@ownedChild/@children.2/@ownedChild">
+                <containmentFeature
+                    href="vsdt.ecore#//FlowObjectContainer/containedFlowObjects"/>
+              </children>
+              <children
+                  compartment="//@nodes.3/@ownedChild/@children.0/@ownedChild/@children.3/@ownedChild/@compartments.0"
+                  referencedChild="//@nodes.3/@ownedChild/@children.0/@ownedChild/@children.4/@ownedChild">
+                <containmentFeature
+                    href="vsdt.ecore#//FlowObjectContainer/containedFlowObjects"/>
+              </children>
+              <children
+                  compartment="//@nodes.3/@ownedChild/@children.0/@ownedChild/@children.3/@ownedChild/@compartments.0"
+                  referencedChild="//@nodes.3/@ownedChild/@children.0/@ownedChild/@children.1/@ownedChild">
+                <containmentFeature
+                    href="vsdt.ecore#//FlowObjectContainer/containedFlowObjects"/>
+              </children>
+              <children
+                  compartment="//@nodes.3/@ownedChild/@children.0/@ownedChild/@children.3/@ownedChild/@compartments.0"
+                  referencedChild="//@nodes.3/@ownedChild/@children.0/@ownedChild/@children.0/@ownedChild">
+                <containmentFeature
+                    href="vsdt.ecore#//FlowObjectContainer/containedFlowObjects"/>
+              </children>
+              <children>
+                <containmentFeature
+                    href="vsdt.ecore#//Activity/boundaryEvents"/>
+                <childrenFeature
+                    href="vsdt.ecore#//Activity/boundaryEvents"/>
+                <ownedChild>
+                  <domainMetaElement
+                      href="vsdt.ecore#//Intermediate"/>
+                  <tool
+                      xsi:type="gmftool:CreationTool"
+                      href="vsdt.gmftool#//@palette/@tools.0/@tools.3"/>
+                  <diagramNode
+                      href="vsdt.gmfgraph#IntermediateBorderItem"/>
+                </ownedChild>
+              </children>
+              <compartments
+                  children="//@nodes.3/@ownedChild/@children.0/@ownedChild/@children.3/@ownedChild/@children.0 //@nodes.3/@ownedChild/@children.0/@ownedChild/@children.3/@ownedChild/@children.1 //@nodes.3/@ownedChild/@children.0/@ownedChild/@children.3/@ownedChild/@children.2 //@nodes.3/@ownedChild/@children.0/@ownedChild/@children.3/@ownedChild/@children.3 //@nodes.3/@ownedChild/@children.0/@ownedChild/@children.3/@ownedChild/@children.4">
+                <compartment
+                    href="vsdt.gmfgraph#SubprocessCompartment"/>
+              </compartments>
+            </ownedChild>
+          </children>
+          <children
+              compartment="//@nodes.3/@ownedChild/@children.0/@ownedChild/@compartments.0">
+            <containmentFeature
+                href="vsdt.ecore#//FlowObjectContainer/containedFlowObjects"/>
+            <ownedChild>
+              <domainMetaElement
+                  href="vsdt.ecore#//Gateway"/>
+              <labelMappings
+                  xsi:type="gmfmap:FeatureLabelMapping">
+                <diagramLabel
+                    href="vsdt.gmfgraph#PlainTextLabel"/>
+                <features
+                    href="vsdt.ecore#//IdObject/name"/>
+              </labelMappings>
+              <tool
+                  xsi:type="gmftool:CreationTool"
+                  href="vsdt.gmftool#//@palette/@tools.0/@tools.4"/>
+              <diagramNode
+                  href="vsdt.gmfgraph#Gateway"/>
+            </ownedChild>
+          </children>
+          <compartments
+              children="//@nodes.3/@ownedChild/@children.0/@ownedChild/@children.0 //@nodes.3/@ownedChild/@children.0/@ownedChild/@children.1 //@nodes.3/@ownedChild/@children.0/@ownedChild/@children.2 //@nodes.3/@ownedChild/@children.0/@ownedChild/@children.3 //@nodes.3/@ownedChild/@children.0/@ownedChild/@children.4">
+            <compartment
+                href="vsdt.gmfgraph#LaneCompartment"/>
+          </compartments>
+        </ownedChild>
+      </children>
+      <compartments
+          children="//@nodes.3/@ownedChild/@children.0">
+        <compartment
+            href="vsdt.gmfgraph#PoolCompartment"/>
+      </compartments>
+    </ownedChild>
+  </nodes>
+  <links>
+    <domainMetaElement
+        href="vsdt.ecore#//SequenceFlow"/>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping">
+      <diagramLabel
+          href="vsdt.gmfgraph#PlainTextLabel"/>
+      <features
+          href="vsdt.ecore#//IdObject/name"/>
+    </labelMappings>
+    <containmentFeature
+        href="vsdt.ecore#//BusinessProcessDiagram/connections"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="vsdt.gmftool#//@palette/@tools.1/@tools.1"/>
+    <diagramLink
+        href="vsdt.gmfgraph#SequenceFlow"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="vsdt.ecore#//SequenceFlow/source"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="vsdt.ecore#//SequenceFlow/target"/>
+    <creationConstraints>
+      <targetEnd
+          body="self.getAbstractProcess() = oppositeEnd.getAbstractProcess()"/>
+    </creationConstraints>
+  </links>
+  <links>
+    <domainMetaElement
+        href="vsdt.ecore#//MessageFlow"/>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping">
+      <diagramLabel
+          href="vsdt.gmfgraph#PlainTextLabel"/>
+      <features
+          href="vsdt.ecore#//IdObject/name"/>
+    </labelMappings>
+    <containmentFeature
+        href="vsdt.ecore#//BusinessProcessDiagram/connections"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="vsdt.gmftool#//@palette/@tools.1/@tools.2"/>
+    <diagramLink
+        href="vsdt.gmfgraph#MessageFlow"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="vsdt.ecore#//MessageFlow/source"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="vsdt.ecore#//MessageFlow/target"/>
+    <creationConstraints>
+      <targetEnd
+          body="self.getPool() &lt;> oppositeEnd.getPool()"/>
+    </creationConstraints>
+  </links>
+  <links>
+    <domainMetaElement
+        href="vsdt.ecore#//Association"/>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping">
+      <diagramLabel
+          href="vsdt.gmfgraph#PlainTextLabel"/>
+      <features
+          href="vsdt.ecore#//IdObject/name"/>
+    </labelMappings>
+    <containmentFeature
+        href="vsdt.ecore#//BusinessProcessDiagram/connections"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="vsdt.gmftool#//@palette/@tools.1/@tools.3"/>
+    <diagramLink
+        href="vsdt.gmfgraph#Association"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="vsdt.ecore#//Association/source"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="vsdt.ecore#//Association/target"/>
+  </links>
+  <diagram>
+    <diagramCanvas
+        href="vsdt.gmfgraph#model"/>
+    <domainModel
+        href="vsdt.ecore#/"/>
+    <domainMetaElement
+        href="vsdt.ecore#//BusinessProcessDiagram"/>
+    <palette
+        href="vsdt.gmftool#//@palette"/>
+  </diagram>
+  <audits
+      id="Audit_1"
+      name="VsdtAudits"
+      description="Audits for the VSDT">
+    <audits
+        name="bpd1max1PoolInvisible"
+        description="Only one Pool may have an invisible boundary"
+        id="bpd1"
+        message="Only one Pool may have an invisible boundary">
+      <rule
+          body="bpd1max1PoolInvisible"
+          language="java"/>
+      <target
+          xsi:type="gmfmap:DomainElementTarget">
+        <element
+            href="vsdt.ecore#//BusinessProcessDiagram"/>
+      </target>
+    </audits>
+    <audits
+        name="expression1validExpression"
+        description="The Expression is not valid w.r.t. the given Expression Language."
+        id="expression1validExpression"
+        message="Invalid Expression.">
+      <rule
+          body="self->validate()"/>
+      <target
+          xsi:type="gmfmap:DomainElementTarget">
+        <element
+            href="vsdt.ecore#//Expression"/>
+      </target>
+    </audits>
+    <childContainers
+        id="event"
+        name="EventAudits"
+        description="Audits for Events">
+      <audits
+          name="event1outgoingAreUnconditioned"
+          description="Events may not have outgoing conditional Sequence Flows"
+          id="event1"
+          message="Events may not have outgoing conditional Sequence Flows">
+        <rule
+            body="event1outgoingAreUnconditioned"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//Event"/>
+        </target>
+      </audits>
+      <audits
+          name="eventTriggerAttributes"
+          description="Not all Attributes that are required for the given Event Trigger are set."
+          id="eventTriggerAttributes"
+          message="Not all Attributes that are required for the given Event Trigger are set.">
+        <rule
+            body="eventType"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//Event"/>
+        </target>
+      </audits>
+      <audits
+          name="eventTriggerAllowed"
+          description="The selected Event Trigger is not allowed for the current Event Type."
+          id="eventTriggerAllowed"
+          message="The selected Event Trigger is not allowed for the current Event Type.">
+        <rule
+            body="eventType"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//Event"/>
+        </target>
+      </audits>
+      <childContainers
+          id="start"
+          name="StartAudits"
+          description="Audits for StartEvents">
+        <audits
+            name="start1hasOutgoingSequenceFlows"
+            description="A Start Event must have at least one outgoing Sequence Flow"
+            id="start1"
+            message="A Start Event must have at least one outgoing Sequence Flow">
+          <rule
+              body="start1hasOutgoingSequenceFlows"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Start"/>
+          </target>
+        </audits>
+        <audits
+            name="start2hasNoIncomingSequenceFlows"
+            description="A Start Event must not have Incoming Sequence Flows"
+            id="start2"
+            message="A Start Event must not have Incoming Sequence Flows">
+          <rule
+              body="start2hasNoIncomingSequenceFlows"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Start"/>
+          </target>
+        </audits>
+        <audits
+            name="start3hasNoOutgoingMessageFlows"
+            description="A Start Event must not have outgoing Message Flows"
+            id="start3"
+            message="A Start Event must not have outgoing Message Flows">
+          <rule
+              body="start3hasNoOutgoingMessageFlows"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Start"/>
+          </target>
+        </audits>
+        <audits
+            name="start4messageFlowHasMessageTrigger"
+            description="A Start Event with incoming Message Flow must be of type Message"
+            id="start4"
+            message="A Start Event with incoming Message Flow must be of type Message">
+          <rule
+              body="start4messageFlowHasMessageTrigger"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Start"/>
+          </target>
+        </audits>
+      </childContainers>
+      <childContainers
+          id="intermediate"
+          name="IntermeditateAudits"
+          description="Audits for IntermediateEvents">
+        <audits
+            name="intermediate1hasNoOutgoingMessageFlows"
+            description="An Intermediate Event must not have outgoing Message Flows"
+            id="intermediate1"
+            message="An Intermediate Event must not have outgoing Message Flows">
+          <rule
+              body="intermediate1hasNoOutgoingMessageFlows"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Intermediate"/>
+          </target>
+        </audits>
+        <audits
+            name="intermediate2activitySetNotNoneOrLink"
+            description="An Intermediate Event that is attached to an activity must not be of type None or Link"
+            id="intermediate2"
+            message="An Intermediate Event that is attached to an activity must not be of type None or Link">
+          <rule
+              body="intermediate2activitySetNotNoneOrLink"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Intermediate"/>
+          </target>
+        </audits>
+        <audits
+            name="intermediate3cancelOnTransactionOnly"
+            description="An Intermediate Event with a Cancel trigger must be attached to a Trancsaction Activity"
+            id="intermediate3"
+            message="An Intermediate Event with a Cancel trigger must be attached to a Trancsaction Activity">
+          <rule
+              body="intermediate3cancelOnTransactionOnly"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Intermediate"/>
+          </target>
+        </audits>
+        <audits
+            name="intermediate4activityNoIncoming"
+            description="An Intermediate Event bound to an Activity must not have incoming Sequence Flows"
+            id="intermediate4"
+            message="An Intermediate Event bound to an Activity must not have incoming Sequence Flows">
+          <rule
+              body="intermediate4activityNoIncoming"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Intermediate"/>
+          </target>
+        </audits>
+        <audits
+            name="intermediate5compensationNoOutgoing"
+            description="An Intermediate Event of type Compensation must not have outgoing Sequence Flows."
+            id="intermediate5"
+            message="An Intermediate Event of type Compensation must not have outgoing Sequence Flows.">
+          <rule
+              body="intermediate5compensationNoOutgoing"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Intermediate"/>
+          </target>
+        </audits>
+        <audits
+            name="intermediate6normalFlowNotCancelMultiple"
+            description="An Intermediate Event in normal flow must not be of type Cancel or Multiple"
+            id="intermediate6"
+            message="An Intermediate Event in normal flow must not be of type Cancel or Multiple">
+          <rule
+              body="intermediate6normalFlowNotCancelMultiple"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Intermediate"/>
+          </target>
+        </audits>
+        <audits
+            name="intermediate7normalFlowNoneErrorCompOneIncoming"
+            description="An Intermediate Event in normal flow with None, Error or Compensation trigger must have exactly one incoming Sequence Flow"
+            id="intermediate7"
+            message="An Intermediate Event in normal flow with None, Error or Compensation trigger must have exactly one incoming Sequence Flow">
+          <rule
+              body="intermediate7normalFlowNoneErrorCompOneIncoming"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Intermediate"/>
+          </target>
+        </audits>
+        <audits
+            name="intermediate8incomingMaxOne"
+            description="An Intermediate Event in normal flow must not have more than one incoming Sequence Flows"
+            id="intermediate8"
+            message="An Intermediate Event in normal flow must not have more than one incoming Sequence Flows">
+          <rule
+              body="intermediate8incomingMaxOne"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Intermediate"/>
+          </target>
+        </audits>
+        <audits
+            name="intermediate9oneOutgoingIfNotLinkOrComp"
+            description="An Intermediate Event must have exactly one outgoing Sequence Flow (exceptions: Link, Compensation)"
+            id="intermediate9"
+            message="An Intermediate Event must have exactly one outgoing Sequence Flow (exceptions: Link, Compensation)">
+          <rule
+              body="intermediate9oneOutgoingIfNotLinkOrComp"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Intermediate"/>
+          </target>
+        </audits>
+        <audits
+            name="intermediate10linkOneIncomingOrOutgoing"
+            description="An Intermediate Event of type Link must have exacly one incoming OR outgoing Sequence Flow"
+            id="intermediate10"
+            message="An Intermediate Event of type Link must have exacly one incoming OR outgoing Sequence Flow">
+          <rule
+              body="intermediate10linkOneIncomingOrOutgoing"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Intermediate"/>
+          </target>
+        </audits>
+        <audits
+            name="intermediate11sourceLinkMustHaveTarget"
+            description="An Intermediate Event of type Link (source) must have exactly one target with the same link ID"
+            id="intermediate11"
+            message="An Intermediate Event of type Link (source) must have exactly one target with the same link ID">
+          <rule
+              body="intermediate11sourceLinkMustHaveTarget"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Intermediate"/>
+          </target>
+        </audits>
+        <audits
+            name="intermediate12messageMaxOneIncomingMsg"
+            description="Only Intermediate Events of type Message may have exactly one incoming Message Flow"
+            id="intermediate12"
+            message="Only Intermediate Events of type Message may have exactly one incoming Message Flow">
+          <rule
+              body="intermediate12messageMaxOneIncomingMsg"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Intermediate"/>
+          </target>
+        </audits>
+        <audits
+            name="intermediate13doNotUseIntLinkIfTargetInSamePool"
+            description="When a Link Event's Target is in the same Pool then a Link End Event should be used"
+            id="intermediate13"
+            severity="WARNING"
+            message="When a Link Event's Target is in the same Pool then a Link End Event should be used">
+          <rule
+              body="intermediate13doNotUseIntLinkIfTargetInSamePool"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Intermediate"/>
+          </target>
+        </audits>
+        <audits
+            name="intermediate14errorCodeInNormalFlowGiven"
+            description="An Intermediate Error Event in normal flow must provide an ErrorCode"
+            id="intermediate14"
+            message="An Intermediate Error Event in normal flow must provide an ErrorCode">
+          <rule
+              body="intermediate14errorCodeInNormalFlowGiven"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//Intermediate"/>
+          </target>
+        </audits>
+      </childContainers>
+      <childContainers
+          id="end"
+          name="EndAudits"
+          description="Audits for EndEvents">
+        <audits
+            name="end1hasIncomingSequenceFlows"
+            description="An End Event must have at least one incoming Sequence Flow"
+            id="end1"
+            message="An End Event must have at least one incoming Sequence Flow">
+          <rule
+              body="end1hasIncomingSequenceFlows"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//End"/>
+          </target>
+        </audits>
+        <audits
+            name="end2hasNoOutgoingSequenceFlows"
+            description="An End Event must not have Outgoing Sequence Flows"
+            id="end2"
+            message="An End Event must not have Outgoing Sequence Flows">
+          <rule
+              body="end2hasNoOutgoingSequenceFlows"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//End"/>
+          </target>
+        </audits>
+        <audits
+            name="end3hasNoIncomingMessageFlows"
+            description="An End Event must not have incoming Message Flows"
+            id="end3"
+            message="An End Event must not have incoming Message Flows">
+          <rule
+              body="end3hasNoIncomingMessageFlows"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//End"/>
+          </target>
+        </audits>
+      </childContainers>
+    </childContainers>
+    <childContainers
+        id="connections"
+        name="Connections"
+        description="Audits for Connections">
+      <childContainers
+          id="seq"
+          name="SequenceFlowAudits"
+          description="Audits for Sequence Flows">
+        <audits
+            name="seq1isSameProcess"
+            description="Sequence Flows can not cross process boundaries"
+            id="seq1"
+            message="Sequence Flows can not cross process boundaries">
+          <rule
+              body="seq1isSameProcess"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//SequenceFlow"/>
+          </target>
+        </audits>
+        <audits
+            name="seq2notNonewhenXORorOR"
+            description="A Sequence Flow's Condition Type may not be None if the source is a XOR Data or Inclusve OR Gateway"
+            id="seq2"
+            message="A Sequence Flow's Condition Type may not be None if the source is a XOR Data or Inclusve OR Gateway">
+          <rule
+              body="seq2notNonewhenXORorOR"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//SequenceFlow"/>
+          </target>
+        </audits>
+        <audits
+            name="seq3noSingleConditionals"
+            description="There must be no single conditional outgoing Sequence Flows"
+            id="seq3"
+            message="There must be no single conditional outgoing Sequence Flows">
+          <rule
+              body="seq3noSingleConditionals"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//SequenceFlow"/>
+          </target>
+        </audits>
+        <audits
+            name="seq4noneConditionType"
+            description="A Sequence Flow with a source of Type XOR Event, Complex or And Gateway or Event must have the Condition Type None"
+            id="seq4"
+            message="A Sequence Flow with a source of Type XOR Event, Complex or And Gateway or Event must have the Condition Type None">
+          <rule
+              body="seq4noneConditionType"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//SequenceFlow"/>
+          </target>
+        </audits>
+        <audits
+            name="seq5defaultAllowed"
+            description="The Default Condition Type may be used only if the source is an Activity or a Gateway with the Sequence Flow being set as default"
+            id="seq5"
+            message="The Default Condition Type may be used only if the source is an Activity or a Gateway with the Sequence Flow being set as default">
+          <rule
+              body="seq5defaultAllowed"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//SequenceFlow"/>
+          </target>
+        </audits>
+        <audits
+            name="seq6quantityAtLeastOne"
+            description="A Sequence Flow's Quantity may not be less than 1"
+            id="seq6"
+            message="A Sequence Flow's Quantity may not be less than 1">
+          <rule
+              body="seq6quantityAtLeastOne"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//SequenceFlow"/>
+          </target>
+        </audits>
+      </childContainers>
+      <childContainers
+          id="msg"
+          name="MessageFlowAudits"
+          description="Audits for Message Flows">
+        <audits
+            name="msg1notSamePool"
+            description="Message Flows can only connect different pools"
+            id="msg1"
+            message="Message Flows can only connect different pools">
+          <rule
+              body="msg1notSamePool"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//MessageFlow"/>
+          </target>
+        </audits>
+        <audits
+            name="msg2NotGatewayLaneArtifact"
+            description="Message Flows may not connect to Lanes, Gateways or Artifacts"
+            id="msg2"
+            message="Message Flows may not connect to Lanes, Gateways or Artifacts">
+          <rule
+              body="msg2NotGatewayLaneArtifact"
+              language="java"/>
+          <target
+              xsi:type="gmfmap:DomainElementTarget">
+            <element
+                href="vsdt.ecore#//MessageFlow"/>
+          </target>
+        </audits>
+      </childContainers>
+    </childContainers>
+    <childContainers
+        id="activities"
+        name="ActivityAudits"
+        description="Audits for Activities">
+      <audits
+          name="act1IsAtomicOrEmbedded"
+          description="Only Activities of Type Embedded may hold other Flow Objects"
+          id="act1"
+          message="Only Activities of Type Embedded may hold other Flow Objects">
+        <rule
+            body="act1IsAtomicOrEmbedded"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//Activity"/>
+        </target>
+      </audits>
+      <audits
+          name="act2TaskSingleMessage"
+          description="Tasks must not have more than one incoming or Outgoing Message Flow"
+          id="act2"
+          message="Tasks must not have more than one incoming or Outgoing Message Flow">
+        <rule
+            body="act2TaskSingleMessage"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//Activity"/>
+        </target>
+      </audits>
+      <audits
+          name="act3CompensationNoOutgoingSeq"
+          description="Compensation Activities must not have outgoing Sequence Flows"
+          id="act3"
+          message="Compensation Activities must not have outgoing Sequence Flows">
+        <rule
+            body="act3CompensationNoOutgoingSeq"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//Activity"/>
+        </target>
+      </audits>
+      <audits
+          name="act4startQuantityNotLowerThanOne"
+          description="An Activitiy' StartQuantity must be at least 1"
+          id="act4"
+          message="An Activity's StartQuantity must be at least 1">
+        <rule
+            body="act4startQuantityNotLowerThanOne"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//Activity"/>
+        </target>
+      </audits>
+      <audits
+          name="activityType"
+          description="Not all Attributes that are required for the given Activity Type are set."
+          id="activityType"
+          message="Not all Attributes that are required for the given Activity Type are set.">
+        <rule
+            body="activityType"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//Activity"/>
+        </target>
+      </audits>
+    </childContainers>
+    <childContainers
+        id="process"
+        name="ProcessAudits"
+        description="Audits for Processes">
+      <audits
+          name="proc1startAndEnd"
+          description="When there is a Start Event there has to be an End Event and vice versa"
+          id="proc1"
+          message="When there is a Start Event there has to be an End Event and vice versa">
+        <rule
+            body="proc1startAndEnd"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//AbstractProcess"/>
+        </target>
+      </audits>
+      <audits
+          name="proc2noPseudoStarts"
+          description="When there is a Start Event there must not be any Flow Objects with no incoming Sequence Flow"
+          id="proc2"
+          message="When there is a Start Event there must not be any Flow Objects with no incoming Sequence Flow">
+        <rule
+            body="proc2noPseudoStarts"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//AbstractProcess"/>
+        </target>
+      </audits>
+      <audits
+          name="proc3NoPseudoEnds"
+          description="When there is an End Event there must not be any Flow Objects with no outgoing Sequence Flow"
+          id="proc3"
+          message="When there is an End Event there must not be any Flow Objects with no outgoing Sequence Flow">
+        <rule
+            body="proc3NoPseudoEnds"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//AbstractProcess"/>
+        </target>
+      </audits>
+      <audits
+          name="absProcAdHoc"
+          description="If the Ad Hoc Flag is set the other Ad Hoc Attributes have to be specified, too."
+          id="absProcAdHoc"
+          message="If the Ad Hoc Flag is set the other Ad Hoc Attributes have to be specified, too.">
+        <rule
+            body="absProcAdHoc"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//AbstractProcess"/>
+        </target>
+      </audits>
+    </childContainers>
+    <childContainers
+        id="gateway"
+        name="GatewayAudits"
+        description="Audits for Gateways">
+      <audits
+          name="gate1noMessageFlows"
+          description="Gateways must not have incoming or outgoing Message Flows"
+          id="gate1"
+          message="Gateways must not have incoming or outgoing Message Flows">
+        <rule
+            body="gate1noMessageFlows"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//Gateway"/>
+        </target>
+      </audits>
+      <audits
+          name="gate2AndNoOutgoingConditional"
+          description="AND-Gateways must not have outgoing conditional Sequence Flows"
+          id="gate2"
+          message="AND-Gateways must not have outgoing conditional Sequence Flows">
+        <rule
+            body="gate2AndNoOutgoingConditional"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//Gateway"/>
+        </target>
+      </audits>
+      <audits
+          name="gate3XOREventOutgoingConditonNone"
+          description="An XOR-Event-Gateway's outgoing Sequence Flow's Condition must be set to None"
+          id="gate3"
+          message="An XOR-Event-Gateway's outgoing Sequence Flow's Condition must be set to None">
+        <rule
+            body="gate3XOREventOutgoingConditonNone"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//Gateway"/>
+        </target>
+      </audits>
+      <audits
+          name="gate4XOREventOutgoingTargetRecMsgTimerRuleLink"
+          description="An XOR-Event-Gateway's outgoing Sequence Flow's target must be a Receive Task or an int. Event of Type Message, Timer, Rule or Link"
+          id="gate4"
+          message="An XOR-Event-Gateway's outgoing Sequence Flow's target must be a Receive Task or an int. Event of Type Message, Timer, Rule or Link">
+        <rule
+            body="gate4XOREventOutgoingTargetRecMsgTimerRuleLink"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//Gateway"/>
+        </target>
+      </audits>
+      <audits
+          name="gate5XOREventNotBothRecTaskAndMsgEvent"
+          description="An XOR-Event-Gateway's outgoing Sequence Flow's target must not be both Receive Tasks and Intermediate Message Events"
+          id="gate5"
+          message="An XOR-Event-Gateway's outgoing Sequence Flow's target must not be both Receive Tasks and Intermediate Message Events">
+        <rule
+            body="gate5XOREventNotBothRecTaskAndMsgEvent"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//Gateway"/>
+        </target>
+      </audits>
+      <audits
+          name="gate6complexInputCond"
+          description="When a Complex Gateway has more than one incoming Sequence Flow the IncomingCondition must be given"
+          id="gate6"
+          message="When a Complex Gateway has more than one incoming Sequence Flow the IncomingCondition must be given">
+        <rule
+            body="gate6complexInputCond"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//Gateway"/>
+        </target>
+      </audits>
+      <audits
+          name="gate7complexOutgoingCond"
+          description="When a Complex Gateway has more than one outgoing Sequence Flow the OutgoingCondition must be given"
+          id="gate7"
+          message="When a Complex Gateway has more than one outgoing Sequence Flow the OutgoingCondition must be given">
+        <rule
+            body="gate7complexOutgoingCond"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//Gateway"/>
+        </target>
+      </audits>
+      <audits
+          name="gatewayType"
+          description="Not all Attributes that are required for the given Gateway Type are set."
+          id="gatewayType"
+          message="Not all Attributes that are required for the given Gateway Type are set.">
+        <rule
+            body="gatewayType"
+            language="java"/>
+        <target
+            xsi:type="gmfmap:DomainElementTarget">
+          <element
+              href="vsdt.ecore#//Gateway"/>
+        </target>
+      </audits>
+    </childContainers>
+  </audits>
+</gmfmap:Mapping>

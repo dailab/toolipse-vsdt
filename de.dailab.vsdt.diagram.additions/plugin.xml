@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   
+   <extension point="org.eclipse.ui.commands">
+		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.insertGateway" name="Insert Gateway" />
+		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.insertActivity" name="Insert Activity" />
+		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.insertIntermediate" name="Insert Intermediate Event" />
+		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.insertBlock" name="Insert Block" />
+		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.insertLoop" name="Insert Loop" />
+		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.insertLinkEvents" name="Insert Link Events" />
+		
+		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.appendActivity" name="Append Activity" />
+		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.appendGateway" name="Append Gateway" />
+		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.appendIntermediate" name="Append Intermediate Event" />
+		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.appendEnd" name="Append End Event" />
+		
+		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.initializePools" name="Initialize Pools" />
+	</extension>
+	
+	<extension point="org.eclipse.ui.bindings">
+		<key commandId="de.dailab.vsdt.diagram.commands.appendActivity" contextId="de.dailab.vsdt.diagram.ui.diagramContext" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" sequence="Ctrl+Shift+A"/>
+		<key commandId="de.dailab.vsdt.diagram.commands.appendGateway" contextId="de.dailab.vsdt.diagram.ui.diagramContext" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" sequence="Ctrl+Shift+G"/>
+		<key commandId="de.dailab.vsdt.diagram.commands.appendIntermediate" contextId="de.dailab.vsdt.diagram.ui.diagramContext" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" sequence="Ctrl+Shift+I"/>
+		<key commandId="de.dailab.vsdt.diagram.commands.appendEnd" contextId="de.dailab.vsdt.diagram.ui.diagramContext" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" sequence="Ctrl+Shift+E"/>
+	</extension>
+	
+	
+   
+   <extension point="org.eclipse.ui.popupMenus">
+		<objectContribution adaptable="false"
+			id="de.dailab.vsdt.popupmenuContributor"
+			objectClass="de.dailab.vsdt.diagram.edit.parts.SequenceFlowEditPart">
+			
+   		<!-- Insert Actions -->
+   		
+   		<menu id="bpmn_insert" label="&amp;Insert..." path="additions" />
+			
+			<action
+				class="de.dailab.vsdt.diagram.actions.InsertLinkEventsAction"
+				definitionId="de.dailab.vsdt.diagram.commands.insertLinkEvents"
+				enablesFor="1"
+				icon="icons/Link.gif"
+				id="de.dailab.vsdt.actions.InsertLinkEvents"
+				label="&amp;Insert Link Events"
+				menubarPath="bpmn_insert/group1"
+				tooltip="Split Sequence Flow using two Link Events">
+			</action>
+			<action
+				class="de.dailab.vsdt.diagram.actions.InsertLoopAction"
+				definitionId="de.dailab.vsdt.diagram.commands.insertLoop"
+				enablesFor="1"
+				id="de.dailab.vsdt.actions.InsertLoop"
+				label="&amp;Insert Loop"
+				menubarPath="bpmn_insert/group1"
+				tooltip="Insert Loop on this Sequence Flow">
+			</action>
+			<action
+				class="de.dailab.vsdt.diagram.actions.InsertBlockAction"
+				definitionId="de.dailab.vsdt.diagram.commands.insertBlock"
+				enablesFor="1"
+				id="de.dailab.vsdt.actions.InsertBlock"
+				label="&amp;Insert Block"
+				menubarPath="bpmn_insert/group1"
+				tooltip="Insert Block on this Sequence Flow">
+			</action>
+			<action
+				class="de.dailab.vsdt.diagram.actions.InsertGatewayAction"
+				definitionId="de.dailab.vsdt.diagram.commands.insertGateway"
+				enablesFor="1"
+				icon="icons/Gateway.gif"
+				id="de.dailab.vsdt.actions.InsertGateway"
+				label="&amp;Insert Gateway"
+				menubarPath="bpmn_insert/group1"
+				tooltip="Insert Gateway on this Sequence Flow">
+			</action>
+			<action
+				class="de.dailab.vsdt.diagram.actions.InsertIntermediateAction"
+				definitionId="de.dailab.vsdt.diagram.commands.insertIntermediate"
+				enablesFor="1"
+				icon="icons/Intermediate.gif"
+				id="de.dailab.vsdt.actions.InsertIntermediate"
+				label="&amp;Insert Intermediate"
+				menubarPath="bpmn_insert/group1"
+				tooltip="Insert Intermediate Event on this Sequence Flow">
+			</action>
+			<action
+				class="de.dailab.vsdt.diagram.actions.InsertActivityAction"
+				definitionId="de.dailab.vsdt.diagram.commands.insertActivity"
+				enablesFor="1"
+				icon="icons/Activity.gif"
+				id="de.dailab.vsdt.actions.InsertActivity"
+				label="&amp;Insert Activity"
+				menubarPath="bpmn_insert/group1"
+				tooltip="Insert Activity on this Sequence Flow">
+			</action>
+		</objectContribution>
+		
+		<!-- Append Actions -->
+		
+		<objectContribution adaptable="false"
+			id="de.dailab.vsdt.popupmenuContributor"
+			objectClass="de.dailab.vsdt.diagram.edit.parts.IVsdtEditPart">
+			
+			<menu id="bpmn_append" label="&amp;Append..." path="additions" />
+			
+			<action
+	         class="de.dailab.vsdt.diagram.actions.AppendEndAction"
+	         definitionId="de.dailab.vsdt.diagram.commands.appendEnd"
+	         enablesFor="1"
+	         icon="icons/End.gif"
+	         id="de.dailab.vsdt.actions.AppendEnd"
+	         label="&amp;Append End Event"
+	         menubarPath="bpmn_append/group1"
+	         tooltip="Sequentially append a new End Event after this element.">
+				<enablement>
+					<or>
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractActivityEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractGatewayEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractStartEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractIntermediateEditPart" />
+					</or>
+				</enablement>
+			</action>
+			<action
+	         class="de.dailab.vsdt.diagram.actions.AppendIntermediateAction"
+	         definitionId="de.dailab.vsdt.diagram.commands.appendIntermediate"
+	         enablesFor="1"
+	         icon="icons/Intermediate.gif"
+	         id="de.dailab.vsdt.actions.AppendIntermediate"
+	         label="&amp;Append Intermediate Event"
+	         menubarPath="bpmn_append/group1"
+	         tooltip="Sequentially append a new Intermediate Event after this element.">
+				<enablement>
+					<or>
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractActivityEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractGatewayEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractStartEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractIntermediateEditPart" />
+					</or>
+				</enablement>
+			</action>
+			<action
+	         class="de.dailab.vsdt.diagram.actions.AppendGatewayAction"
+	         definitionId="de.dailab.vsdt.diagram.commands.appendGateway"
+	         enablesFor="1"
+	         icon="icons/Gateway.gif"
+	         id="de.dailab.vsdt.actions.AppendGateway"
+	         label="&amp;Append Gateway"
+	         menubarPath="bpmn_append/group1"
+	         tooltip="Sequentially append a new Gateway after this element.">
+				<enablement>
+					<or>
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractActivityEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractGatewayEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractStartEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractIntermediateEditPart" />
+					</or>
+				</enablement>
+			</action>
+			<action
+	         class="de.dailab.vsdt.diagram.actions.AppendActivityAction"
+	         definitionId="de.dailab.vsdt.diagram.commands.appendActivity"
+	         enablesFor="1"
+	         icon="icons/Activity.gif"
+	         id="de.dailab.vsdt.actions.AppendActivity"
+	         label="&amp;Append Activity"
+	         menubarPath="bpmn_append/group1"
+	         tooltip="Sequentially append a new Activity after this element.">
+				<enablement>
+					<or>
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractActivityEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractGatewayEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractStartEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractIntermediateEditPart" />
+					</or>
+				</enablement>
+			</action>
+			
+		</objectContribution>
+		
+		
+		<!-- Initialize Pool Action -->
+		
+		<objectContribution adaptable="false"
+			id="de.dailab.vsdt.popupmenuContributor"
+			objectClass="de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart">
+			
+			<action
+	         class="de.dailab.vsdt.diagram.actions.InitializePoolsAction"
+	         definitionId="de.dailab.vsdt.diagram.commands.initializePools"
+	         enablesFor="1"
+	         icon="icons/Pool.gif"
+	         id="de.dailab.vsdt.actions.InitializePools"
+	         label="&amp;Initialize Pools"
+	         menubarPath="bpmn_init/group1"
+	         tooltip="Create one Pool for each Participant of this Business Process Diagram.">
+	         <enablement>
+	         	<objectClass
+                 name="de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart">
+	         	</objectClass>
+	         </enablement>
+			</action>
+			
+		</objectContribution>
+   </extension>
+	
+   <!-- Overview Property Sheet -->
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <propertyContributor
+            contributorId="de.dailab.vsdt.diagram"
+            labelProvider="de.dailab.vsdt.diagram.sheet.VsdtSheetLabelProvider">
+         <propertyCategory category="custom"/>
+      </propertyContributor>
+   </extension>
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <propertyContributor
+            contributorId="de.dailab.vsdt.diagram.meta"
+            labelProvider="de.dailab.vsdt.diagram.sheet.VsdtSheetLabelProvider">
+         <propertyCategory category="custom"/>
+      </propertyContributor>
+   </extension>
+   
+   
+	<extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <propertyTabs contributorId="de.dailab.vsdt.diagram">
+         <propertyTab
+            category="custom"
+            id="de.dailab.vsdt.diagram.properties.category"
+            label="Overview"/>
+      </propertyTabs>
+   </extension>
+	<extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <propertyTabs contributorId="de.dailab.vsdt.diagram.meta">
+         <propertyTab
+            category="custom"
+            id="de.dailab.vsdt.diagram.properties.category"
+            label="Overview"/>
+      </propertyTabs>
+   </extension>
+
+	<extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <propertySections contributorId="de.dailab.vsdt.diagram">
+         <propertySection
+               class="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               filter="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               id="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               tab="de.dailab.vsdt.diagram.properties.category">
+         </propertySection>
+         <propertySection
+               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               class="de.dailab.vsdt.diagram.properties.BusinessProcessDiagramSection"
+               filter="de.dailab.vsdt.diagram.properties.BusinessProcessDiagramSection"
+               id="de.dailab.vsdt.diagram.properties.BusinessProcessDiagramSection"
+               tab="de.dailab.vsdt.diagram.properties.category">
+         </propertySection>
+         <propertySection
+               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               class="de.dailab.vsdt.diagram.properties.PoolSection"
+               filter="de.dailab.vsdt.diagram.properties.PoolSection"
+               id="de.dailab.vsdt.diagram.properties.PoolSection"
+               tab="de.dailab.vsdt.diagram.properties.category">
+         </propertySection>
+         <propertySection
+               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               class="de.dailab.vsdt.diagram.properties.LaneSection"
+               filter="de.dailab.vsdt.diagram.properties.LaneSection"
+               id="de.dailab.vsdt.diagram.properties.LaneSection"
+               tab="de.dailab.vsdt.diagram.properties.category">
+         </propertySection>
+         <propertySection
+               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               class="de.dailab.vsdt.diagram.properties.AssociationSection"
+               filter="de.dailab.vsdt.diagram.properties.AssociationSection"
+               id="de.dailab.vsdt.diagram.properties.AssociationSection"
+               tab="de.dailab.vsdt.diagram.properties.category">
+         </propertySection>
+         <propertySection
+               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               class="de.dailab.vsdt.diagram.properties.SequenceFlowSection"
+               filter="de.dailab.vsdt.diagram.properties.SequenceFlowSection"
+               id="de.dailab.vsdt.diagram.properties.SequenceFlowSection"
+               tab="de.dailab.vsdt.diagram.properties.category">
+         </propertySection>
+         <propertySection
+               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               class="de.dailab.vsdt.diagram.properties.MessageFlowSection"
+               filter="de.dailab.vsdt.diagram.properties.MessageFlowSection"
+               id="de.dailab.vsdt.diagram.properties.MessageFlowSection"
+               tab="de.dailab.vsdt.diagram.properties.category">
+         </propertySection>
+         <propertySection
+               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               class="de.dailab.vsdt.diagram.properties.ActivitySection"
+               filter="de.dailab.vsdt.diagram.properties.ActivitySection"
+               id="de.dailab.vsdt.diagram.properties.ActivitySection"
+               tab="de.dailab.vsdt.diagram.properties.category">
+         </propertySection>
+         <propertySection
+               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               class="de.dailab.vsdt.diagram.properties.EventSection"
+               filter="de.dailab.vsdt.diagram.properties.EventSection"
+               id="de.dailab.vsdt.diagram.properties.EventSection"
+               tab="de.dailab.vsdt.diagram.properties.category">
+         </propertySection>
+         <propertySection
+               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               class="de.dailab.vsdt.diagram.properties.GatewaySection"
+               filter="de.dailab.vsdt.diagram.properties.GatewaySection"
+               id="de.dailab.vsdt.diagram.properties.GatewaySection"
+               tab="de.dailab.vsdt.diagram.properties.category">
+         </propertySection>
+         <propertySection
+               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               class="de.dailab.vsdt.diagram.properties.DataObjectSection"
+               filter="de.dailab.vsdt.diagram.properties.DataObjectSection"
+               id="de.dailab.vsdt.diagram.properties.DataObjectSection"
+               tab="de.dailab.vsdt.diagram.properties.category">
+         </propertySection>
+      </propertySections>
+   </extension>
+
+	<extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <propertySections contributorId="de.dailab.vsdt.diagram.meta">
+         <propertySection
+               class="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               filter="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               id="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               tab="de.dailab.vsdt.diagram.properties.category">
+         </propertySection>
+         <propertySection
+               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               class="de.dailab.vsdt.diagram.properties.BusinessProcessSystemSection"
+               filter="de.dailab.vsdt.diagram.properties.BusinessProcessSystemSection"
+               id="de.dailab.vsdt.diagram.properties.BusinessProcessSystemSection"
+               tab="de.dailab.vsdt.diagram.properties.category">
+         </propertySection>
+         <propertySection
+               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               class="de.dailab.vsdt.diagram.properties.BusinessProcessDiagramSection"
+               filter="de.dailab.vsdt.diagram.properties.BusinessProcessDiagramSection"
+               id="de.dailab.vsdt.diagram.properties.BusinessProcessDiagramSection"
+               tab="de.dailab.vsdt.diagram.properties.category">
+         </propertySection>
+         <propertySection
+         	   afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
+               class="de.dailab.vsdt.diagram.properties.ParticipantSection"
+               filter="de.dailab.vsdt.diagram.properties.ParticipantSection"
+               id="de.dailab.vsdt.diagram.properties.ParticipantSection"
+               tab="de.dailab.vsdt.diagram.properties.category">
+         </propertySection>
+      </propertySections>
+   </extension>
+   
+   
+   <!-- Register the clipboard support for the BPMN metamodel 
+   no need to register a special resource as GMFResource are already used
+   both for the domain model and the diagram notation -->
+   <!--
+   <extension point="org.eclipse.gmf.runtime.emf.clipboard.core.clipboardSupport">
+      <factory
+            class="de.dailab.vsdt.diagram.clipboard.VsdtClipboardFactory"
+            nsURI="http://de.dailab.vsdt"
+            priority="highest"/>
+      <factory
+            class="de.dailab.vsdt.diagram.clipboard.VsdtClipboardFactory"
+            nsURI="http://www.eclipse.org/gmf/runtime/1.0.0/notation"
+            priority="highest"/>
+   </extension>
+	-->
+
+</plugin>

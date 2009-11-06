@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://schemas.xmlsoap.org/ws/2003/03/business-process/" 
+       class = "org.xmlsoap.schemas.ws._2003._03.business.process.ProcessPackage" />
+  </extension>
+
+  <extension point="org.eclipse.emf.ecore.extension_parser">
+    <parser 
+       type="process" 
+       class="org.xmlsoap.schemas.ws._2003._03.business.process.util.ProcessResourceFactoryImpl" />
+  </extension>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://schemas.xmlsoap.org/wsdl/" 
+       class = "org.xmlsoap.schemas.wsdl.WsdlPackage" />
+  </extension>
+
+  <extension point="org.eclipse.emf.ecore.extension_parser">
+    <parser 
+       type="wsdl" 
+       class="org.xmlsoap.schemas.wsdl.util.WsdlResourceFactoryImpl" />
+  </extension>
+
+</plugin>
+

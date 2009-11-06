@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Visual Service Design Tool Interpreter
+Bundle-SymbolicName: de.dailab.vsdt.diagram.interpreter;singleton:=true
+Bundle-Version: 1.3.0.20091027
+Bundle-Vendor: DAI-Labor, TU Berlin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.ui.ide,
+ org.eclipse.gmf.runtime.diagram.ui,
+ org.eclipse.gmf.runtime.diagram.ui.resources.editor,
+ org.eclipse.gmf.runtime.diagram.ui.providers,
+ de.dailab.common.gmf,
+ de.dailab.vsdt.diagram,
+ de.dailab.vsdt.diagram.views
+Bundle-Activator: de.dailab.vsdt.diagram.interpreter.VsdtInterpreterPlugin
+Bundle-ActivationPolicy: lazy

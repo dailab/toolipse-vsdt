@@ -1,0 +1,59 @@
+
+
+service Pong-Agent ( in ) ( out ) {
+    listen "PongAgent_Pung" ;
+    listen "PongAgent_Peng" ;
+    var $lastMessage : string ;
+    var $b : bool ;
+    {
+        {
+            print "Pong-Agent started" ;
+        }
+        {
+            var $ping : string ;
+            var $paramB : bool ;
+            var $s1 : string ;
+            var $s2 : string ;
+            var $s3 : string ;
+            var $s4 : string ;
+            var $s5 : string ;
+            {
+                $ping = receive timeout 10000 "PongAgent_Ping" string ;
+                $paramB = receive timeout 10000 "PongAgent_Ping" bool ;
+                $s1 = receive timeout 10000 "PongAgent_Ping" string ;
+                $s2 = receive timeout 10000 "PongAgent_Ping" string ;
+                $s3 = receive timeout 10000 "PongAgent_Ping" string ;
+                $s4 = receive timeout 10000 "PongAgent_Ping" string ;
+                $s5 = receive timeout 10000 "PongAgent_Ping" string ;
+            }
+            $lastMessage = $ping ;
+            $b = $paramB ;
+        }
+        {
+            var $pong : string ;
+            $pong = "pong" ;
+            send "PingAgent_Pong" ( $pong ) ;
+        }
+        {
+            print $lastMessage ;
+        }
+        switch {
+            case ( onmessage "PongAgent_Peng" string ) {
+                var $peng : string ;
+                $peng = receive timeout 10000 "PongAgent_Peng" string ;
+                $lastMessage = $peng ;
+            }
+            case ( onmessage "PongAgent_Pung" string ) {
+                var $pung : string ;
+                $pung = receive timeout 10000 "PongAgent_Pung" string ;
+                $lastMessage = $pung ;
+            }
+            case ( ontimer timeout 2000 ) {
+            	print "interpreter meckert wenn er hier eine leere seq findet";
+            }
+        }
+        {
+            print $lastMessage ;
+        }
+    }
+}

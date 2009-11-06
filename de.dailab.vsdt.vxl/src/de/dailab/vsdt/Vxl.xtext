@@ -1,0 +1,36 @@
+grammar de.dailab.vsdt.Vxl with org.eclipse.xtext.common.Terminals
+
+generate vXL "http://www.dailab.de/vsdt/Vxl"
+
+// COMPLEX TERMS
+Term:			head = Head (tail = Tail)?;
+Head:			BracketTerm | Negation | Atom;
+Tail:			operator = Operator term = Term;
+BracketTerm:	"(" term = Term ")";
+Negation:		"!" term = Term;
+Atom:			Value | Variable;
+
+// VARIABLES & ACCESSORS
+Variable:		"$" name = ID (accessor = Accessor)?;
+Accessor:		ArrayAccessor | FieldAccessor;
+ArrayAccessor:	"[" index = Term "]" (accessor = Accessor)?;
+FieldAccessor:	"." name = ID (accessor = Accessor)?;
+
+// CONSTANTS
+Value:			StringConst | BooleanConst | NumericConst | NullConst;
+StringConst:	const = STRING;
+//NumericConst:	const = INT; // keine kommazahlen 
+NumericConst:	const = NUMERIC;
+BooleanConst:	isTrue ?= "true" | "false";
+NullConst:		const = "null";
+
+// OPERATIONS
+enum Operator: 
+	LT = "<" | LE = "<=" | EQ = "==" | NEQ = "!=" | GT = ">" | GE = ">=" |	// Term ** Term -> Bool
+	ADD = "+" | SUB = "-" | MULT = "*" | DIV = "/" | MOD = "%" |			// Num ** Num -> Num
+	AND = "&&" | OR = "||" |												// Bool ** Bool -> Bool
+	CONCAT = "++"; 															// String ** String -> String
+
+// NATIVES
+//terminal Numeric: "('-')?('0'..'9')+('.' ('0'..'9')+)?";
+NUMERIC : '-'? INT ('.' INT)? ;

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmlns:vsdt="http://de.dailab.vsdt" xmi:id="_Ey0N0AGJEd2ELI0uhGsPhQ" type="Vsdt" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_E4eJ4AGJEd2ELI0uhGsPhQ" type="1004">
+    <children xmi:type="notation:Node" xmi:id="_E4eJ4wGJEd2ELI0uhGsPhQ" type="4009"/>
+    <children xmi:type="notation:Node" xmi:id="_E4eJ5AGJEd2ELI0uhGsPhQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_E4eJ6AGJEd2ELI0uhGsPhQ" type="2001">
+        <children xmi:type="notation:Node" xmi:id="_E4eJ6wGJEd2ELI0uhGsPhQ" type="4008"/>
+        <children xmi:type="notation:Node" xmi:id="_E4eJ7AGJEd2ELI0uhGsPhQ" type="5002">
+          <children xmi:type="notation:Node" xmi:id="_E4eJ7wGJEd2ELI0uhGsPhQ" type="2005">
+            <children xmi:type="notation:Node" xmi:id="_E4eJ8gGJEd2ELI0uhGsPhQ" type="4007"/>
+            <children xmi:type="notation:Node" xmi:id="_E4eJ8wGJEd2ELI0uhGsPhQ" type="5003">
+              <styles xmi:type="notation:DrawerStyle" xmi:id="_E4eJ9AGJEd2ELI0uhGsPhQ"/>
+              <styles xmi:type="notation:SortingStyle" xmi:id="_E4eJ9QGJEd2ELI0uhGsPhQ"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_E4eJ9gGJEd2ELI0uhGsPhQ"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_E4eJ8AGJEd2ELI0uhGsPhQ" fontName="Segoe UI" fillColor="12632256"/>
+            <element xmi:type="vsdt:Activity" href="references.bpmn#//@pools.0/@lanes.0/@containedFlowObjects.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E4eJ8QGJEd2ELI0uhGsPhQ" x="8" y="4"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_E4eJ9wGJEd2ELI0uhGsPhQ" type="2005">
+            <children xmi:type="notation:Node" xmi:id="_E4eJ-gGJEd2ELI0uhGsPhQ" type="4007"/>
+            <children xmi:type="notation:Node" xmi:id="_E4eJ-wGJEd2ELI0uhGsPhQ" type="5003">
+              <styles xmi:type="notation:DrawerStyle" xmi:id="_E4eJ_AGJEd2ELI0uhGsPhQ"/>
+              <styles xmi:type="notation:SortingStyle" xmi:id="_E4eJ_QGJEd2ELI0uhGsPhQ"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_E4eJ_gGJEd2ELI0uhGsPhQ"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_E4eJ-AGJEd2ELI0uhGsPhQ" fontName="Segoe UI" fillColor="12632256"/>
+            <element xmi:type="vsdt:Activity" href="references.bpmn#//@pools.0/@lanes.0/@containedFlowObjects.1"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E4eJ-QGJEd2ELI0uhGsPhQ" x="152" y="4"/>
+          </children>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_E4eJ7QGJEd2ELI0uhGsPhQ"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_E4eJ7gGJEd2ELI0uhGsPhQ"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_E4eJ6QGJEd2ELI0uhGsPhQ" fontName="Segoe UI" fillColor="12632256"/>
+        <element xmi:type="vsdt:Lane" href="references.bpmn#//@pools.0/@lanes.0"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E4eJ6gGJEd2ELI0uhGsPhQ"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_E4eJ5QGJEd2ELI0uhGsPhQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_E4eJ5gGJEd2ELI0uhGsPhQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_E4eJ5wGJEd2ELI0uhGsPhQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_E4eJ4QGJEd2ELI0uhGsPhQ" fontName="Segoe UI" fillColor="12632256"/>
+    <element xmi:type="vsdt:Pool" href="references.bpmn#//@pools.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_E4eJ4gGJEd2ELI0uhGsPhQ" x="48" y="36"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_YtOGwAGJEd2ELI0uhGsPhQ" type="1002">
+    <children xmi:type="notation:Node" xmi:id="_YtOGwwGJEd2ELI0uhGsPhQ" type="4001"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_YtOGwQGJEd2ELI0uhGsPhQ" fontName="Segoe UI" fillColor="12632256"/>
+    <element xmi:type="vsdt:TextAnnotation" href="references.bpmn#//@artifacts.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YtOGwgGJEd2ELI0uhGsPhQ" x="72" y="192" width="253" height="73"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_Ey0N0QGJEd2ELI0uhGsPhQ"/>
+  <element xmi:type="vsdt:BusinessProcessDiagram" href="references.bpmn#/"/>
+</notation:Diagram>

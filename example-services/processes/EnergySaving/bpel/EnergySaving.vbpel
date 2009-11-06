@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graph id="0" name="PROCESS">
+   <att name="processName" value="EnergySaving"/>
+   <att name="targetNamespace" value="http://EnergySaving"/>
+   <att name="suppressJoinFailure" value="false"/>
+   <att name="enableInstanceCompensation" value="false"/>
+   <att name="exitStandardFault" value="false"/>
+   <att name="disableSelectionFailure" value="false"/>
+   <att name="createXPath" value="false"/>
+   <att name="modelVersion" value="3"/>
+   <att name="processNamespace" value="http://schemas.xmlsoap.org/ws/2003/03/business-process/"/>
+   <att name="objectId" value="122000965686408523"/>
+   <att name="layoutNeeded" value="false"/>
+   <att name="processInitiatorSim" value=""/>
+   <att name="processInitiatorExec" value=""/>
+   <att name="writePortType" value="true"/>
+   <att name="bpelDigest" value="5fd512a493ccd88a6c3af027851e4829"/>
+   <att>
+      <graph id="1" name="IMPORTS">
+         <att name="ImportCount" value="2"/>
+         <node id="2" name="IMPORT">
+            <att name="ImportLocation" value="../wsdl/EnergySaving_ParticipantService.wsdl;http://EnergySaving/WSDL/;http://schemas.xmlsoap.org/wsdl/"/>
+            <att name="ImportNamespace" value="http://EnergySaving/WSDL/"/>
+            <att name="ImportType" value="http://schemas.xmlsoap.org/wsdl/"/>
+            <att name="objectId" value="122000965686408551"/>
+         </node>
+         <node id="3" name="IMPORT">
+            <att name="ImportLocation" value="../wsdl/EnergySaving.wsdl;http://EnergySaving/WSDL/;http://schemas.xmlsoap.org/wsdl/"/>
+            <att name="ImportNamespace" value="http://EnergySaving/WSDL/"/>
+            <att name="ImportType" value="http://schemas.xmlsoap.org/wsdl/"/>
+            <att name="objectId" value="122000965688008553"/>
+         </node>
+      </graph>
+   </att>
+   <att>
+      <graph id="4" name="NAMESPACES">
+         <att name="NamespaceCount" value="3"/>
+         <node id="5" name="NAMESPACE">
+            <att name="Prefix" value="ns1"/>
+            <att name="Namespace" value="http://EnergySaving/WSDL/"/>
+            <att name="objectId" value="122000965686408549"/>
+         </node>
+         <node id="6" name="NAMESPACE">
+            <att name="Prefix" value="bpws"/>
+            <att name="Namespace" value="http://schemas.xmlsoap.org/ws/2003/03/business-process/"/>
+            <att name="objectId" value="122000965688008555"/>
+         </node>
+         <node id="7" name="NAMESPACE">
+            <att name="Prefix" value="xsd"/>
+            <att name="Namespace" value="http://www.w3.org/2001/XMLSchema"/>
+            <att name="objectId" value="122000965688008557"/>
+         </node>
+      </graph>
+   </att>
+   <att>
+      <graph id="8" name="PARTNER_LINKS">
+         <att name="PartnerLinkCount" value="5"/>
+         <node id="9" name="PARTNER_LINK">
+            <att name="PartnerLinkName" value="EnergySaving_Participant"/>
+            <att name="PartnerLinkType" value="ns1:EnergySaving_Participant_PLT"/>
+            <att name="MyRole" value="EnergySaving_Participant_myRole"/>
+            <att name="visible" value="false,false,false,false,false,"/>
+            <att name="objectId" value="122000965689508559"/>
+            <att name="InitializePartnerRole" value=""/>
+         </node>
+         <node id="10" name="PARTNER_LINK">
+            <att name="PartnerLinkName" value="Logging_Participant"/>
+            <att name="PartnerLinkType" value="ns1:Logging_Participant_PLT"/>
+            <att name="PartnerRole" value="Logging_Participant_partnerRole"/>
+            <att name="visible" value="false,false,false,false,false,"/>
+            <att name="objectId" value="122000965689508571"/>
+            <att name="InitializePartnerRole" value=""/>
+         </node>
+         <node id="11" name="PARTNER_LINK">
+            <att name="PartnerLinkName" value="Location_Participant"/>
+            <att name="PartnerLinkType" value="ns1:Location_Participant_PLT"/>
+            <att name="PartnerRole" value="Location_Participant_partnerRole"/>
+            <att name="visible" value="false,false,false,false,false,"/>
+            <att name="objectId" value="122000965689508583"/>
+            <att name="InitializePartnerRole" value=""/>
+         </node>
+         <node id="12" name="PARTNER_LINK">
+            <att name="PartnerLinkName" value="Light_Participant"/>
+            <att name="PartnerLinkType" value="ns1:Light_Participant_PLT"/>
+            <att name="PartnerRole" value="Light_Participant_partnerRole"/>
+            <att name="visible" value="false,false,false,false,false,"/>
+            <att name="objectId" value="122000965689508595"/>
+            <att name="InitializePartnerRole" value=""/>
+         </node>
+         <node id="13" name="PARTNER_LINK">
+            <att name="PartnerLinkName" value="Radio_Participant"/>
+            <att name="PartnerLinkType" value="ns1:Radio_Participant_PLT"/>
+            <att name="PartnerRole" value="Radio_Participant_partnerRole"/>
+            <att name="visible" value="false,false,false,false,false,"/>
+            <att name="objectId" value="122000965689508607"/>
+            <att name="InitializePartnerRole" value=""/>
+         </node>
+      </graph>
+   </att>
+   <node id="14" name="PARTNERS">
+      <att name="partnerCount" value="0"/>
+   </node>
+   <att>
+      <graph id="15" name="VARIABLE_CONTAINERS">
+         <att name="VariableCount" value="9"/>
+         <node id="16" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="StartMessage_MessageData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:StartMessage_MessageDataMessage"/>
+            <att name="objectId" value="122000965689508619"/>
+         </node>
+         <node id="17" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="logRequest_MessageData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:logRequest_MessageDataMessage"/>
+            <att name="objectId" value="122000965689508621"/>
+         </node>
+         <node id="18" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="IsInZoneRequest_MessageData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:IsInZoneRequest_MessageDataMessage"/>
+            <att name="objectId" value="122000965689508623"/>
+         </node>
+         <node id="19" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="IsInZoneResponse_MessageData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:IsInZoneResponse_MessageDataMessage"/>
+            <att name="objectId" value="122000965689508625"/>
+         </node>
+         <node id="20" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="SetValueRequest_MessageData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:SetValueRequest_MessageDataMessage"/>
+            <att name="objectId" value="122000965689508627"/>
+         </node>
+         <node id="21" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="PlayPauseRequest_MessageData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:PlayPauseRequest_MessageDataMessage"/>
+            <att name="objectId" value="122000965689508629"/>
+         </node>
+         <node id="22" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="CheckPosition_loopCounter"/>
+            <att name="VariableSpecification" value="Type=xsd:integer"/>
+            <att name="objectId" value="122000965689508631"/>
+         </node>
+         <node id="23" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="StopMessage_MessageData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:StopMessage_MessageDataMessage"/>
+            <att name="objectId" value="122000965689508633"/>
+         </node>
+         <node id="24" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="EnergySavingProcess_ProcessData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:EnergySavingProcess_ProcessDataMessage"/>
+            <att name="objectId" value="122000965689508635"/>
+         </node>
+      </graph>
+   </att>
+   <node id="25" name="CORRELATION_CONTAINERS">
+      <att name="CorrSetCount" value="0"/>
+   </node>
+   <att>
+      <graph id="26" name="SCOPE_ACTIVITY">
+         <att name="text" value="Process Activities"/>
+         <att>
+            <graph id="27" name="SEQUENCE">
+               <att name="objectId" value="122000965689508637"/>
+               <att name="location" value="LOC {5,5}"/>
+               <att name="size" value="DIM {980,2819}"/>
+               <att name="gap" value="50"/>
+               <node id="28" name="RECEIVE">
+                  <att name="objectId" value="122000965689508639"/>
+                  <att name="size" value="DIM {97,56}"/>
+                  <att name="name" value="Start"/>
+                  <att name="partnerLink" value="EnergySaving_Participant"/>
+                  <att name="portType" value="{http://EnergySaving/WSDL/}EnergySavingPT"/>
+                  <att name="operation" value="start"/>
+                  <att name="createInstance" value="true"/>
+                  <att name="variable" value="StartMessage_MessageData"/>
+                  <att name="attachments" value=""/>
+                  <att name="fromParts" value="0"/>
+               </node>
+               <att>
+                  <graph id="29" name="ASSIGN">
+                     <att name="objectId" value="122000965689508641"/>
+                     <att name="size" value="DIM {499,56}"/>
+                     <att name="name" value="EnergySaving_startAssignments_and_Start_endAssignments_and_log_startAssignments"/>
+                     <att name="copy" value="9"/>
+                     <att name="validateVars" value="false"/>
+                     <node id="30" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="1"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="122000965689508643"/>
+                        <att name="toVariable" value="EnergySavingProcess_ProcessData"/>
+                        <att name="toPart" value="tmpState"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="31" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="1"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="122000965689508645"/>
+                        <att name="toVariable" value="EnergySavingProcess_ProcessData"/>
+                        <att name="toPart" value="tmpLastState"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="32" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="bpws:getVariableData('StartMessage_MessageData','paramUserName')"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="122000965689508647"/>
+                        <att name="toVariable" value="EnergySavingProcess_ProcessData"/>
+                        <att name="toPart" value="inUserName"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="33" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="bpws:getVariableData('StartMessage_MessageData','paramDelaySec')"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="122000965689508649"/>
+                        <att name="toVariable" value="EnergySavingProcess_ProcessData"/>
+                        <att name="toPart" value="inDelay"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="34" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="bpws:getVariableData('StartMessage_MessageData','paramZone')"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="122000965689508651"/>
+                        <att name="toVariable" value="EnergySavingProcess_ProcessData"/>
+                        <att name="toPart" value="inZone"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="35" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="bpws:getVariableData('StartMessage_MessageData','paramLightLine')"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="122000965689508653"/>
+                        <att name="toVariable" value="EnergySavingProcess_ProcessData"/>
+                        <att name="toPart" value="inLightLine"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="36" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="bpws:getVariableData('StartMessage_MessageData','paramRoom')"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="122000965689508655"/>
+                        <att name="toVariable" value="EnergySavingProcess_ProcessData"/>
+                        <att name="toPart" value="inRoom"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="37" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="&quot;Energy Saving Process started&quot;"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="122000965689508657"/>
+                        <att name="toVariable" value="logRequest_MessageData"/>
+                        <att name="toPart" value="message"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="38" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="1"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="122000965689508659"/>
+                        <att name="toVariable" value="logRequest_MessageData"/>
+                        <att name="toPart" value="level"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                  </graph>
+               </att>
+               <node id="39" name="INVOKE">
+                  <att name="objectId" value="122000965689508661"/>
+                  <att name="size" value="DIM {87,56}"/>
+                  <att name="name" value="log"/>
+                  <att name="partnerLink" value="Logging_Participant"/>
+                  <att name="portType" value="{http://EnergySaving/WSDL/}LoggingPT"/>
+                  <att name="operation" value="log"/>
+                  <att name="inputVariable" value="logRequest_MessageData"/>
+                  <att name="fromParts" value="0"/>
+                  <att name="toParts" value="0"/>
+               </node>
+               <att>
+                  <graph id="40" name="SCOPE">
+                     <att name="objectId" value="122000965689508663"/>
+                     <att name="size" value="DIM {960,2116}"/>
+                     <att name="exitStandardFaultScope" value=""/>
+                     <att name="showFaultHandler" value="true"/>
+                     <att name="showEventHandler" value="true"/>
+                     <att name="showTerminationHandler" value="false"/>
+                     <node id="41" name="VARIABLE_CONTAINERS">
+                        <att name="VariableCount" value="0"/>
+                     </node>
+                     <node id="42" name="CORRELATION_CONTAINERS">
+                        <att name="CorrSetCount" value="0"/>
+                     </node>
+                     <node id="43" name="PARTNER_LINKS">
+                        <att name="PartnerLinkCount" value="0"/>
+                     </node>
+                     <att>
+                        <graph id="44" name="SCOPE_ACTIVITY">
+                           <att name="objectId" value="122000965689508671"/>
+                           <att name="font" value="FONT {Segoe UI,9,0}"/>
+                           <att name="size" value="DIM {580,2048}"/>
+                           <att>
+                              <graph id="45" name="SEQUENCE">
+                                 <att name="objectId" value="122000965689508687"/>
+                                 <att name="location" value="LOC {5,5}"/>
+                                 <att name="size" value="DIM {560,2000}"/>
+                                 <att name="name" value="CheckPosition"/>
+                                 <att name="gap" value="50"/>
+                                 <att>
+                                    <graph id="46" name="ASSIGN">
+                                       <att name="objectId" value="122000965689508689"/>
+                                       <att name="size" value="DIM {247,56}"/>
+                                       <att name="name" value="CheckPosition_initialize_loopCounter"/>
+                                       <att name="copy" value="1"/>
+                                       <att name="validateVars" value="false"/>
+                                       <node id="47" name="ASSIGN_COPY">
+                                          <att name="fromExpression" value="0"/>
+                                          <att name="fromType" value="3"/>
+                                          <att name="objectId" value="122000965689508691"/>
+                                          <att name="toVariable" value="CheckPosition_loopCounter"/>
+                                          <att name="ignoreMissingFromData" value="false"/>
+                                       </node>
+                                    </graph>
+                                 </att>
+                                 <att>
+                                    <graph id="48" name="WHILE">
+                                       <att name="objectId" value="122000965689508693"/>
+                                       <att name="size" value="DIM {540,1827}"/>
+                                       <att name="whileCondition" value="true()"/>
+                                       <att>
+                                          <graph id="49" name="SEQUENCE">
+                                             <att name="objectId" value="122000965689508695"/>
+                                             <att name="location" value="LOC {5,5}"/>
+                                             <att name="size" value="DIM {520,1761}"/>
+                                             <att name="gap" value="50"/>
+                                             <att>
+                                                <graph id="50" name="SCOPE">
+                                                   <att name="objectId" value="122000965689508697"/>
+                                                   <att name="size" value="DIM {500,1588}"/>
+                                                   <att name="name" value="CheckPosition"/>
+                                                   <att name="exitStandardFaultScope" value=""/>
+                                                   <att name="showTerminationHandler" value="false"/>
+                                                   <node id="51" name="VARIABLE_CONTAINERS">
+                                                      <att name="VariableCount" value="0"/>
+                                                   </node>
+                                                   <node id="52" name="CORRELATION_CONTAINERS">
+                                                      <att name="CorrSetCount" value="0"/>
+                                                   </node>
+                                                   <node id="53" name="PARTNER_LINKS">
+                                                      <att name="PartnerLinkCount" value="0"/>
+                                                   </node>
+                                                   <att>
+                                                      <graph id="54" name="SCOPE_ACTIVITY">
+                                                         <att name="objectId" value="122000965689508705"/>
+                                                         <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                                         <att name="size" value="DIM {470,1520}"/>
+                                                         <att>
+                                                            <graph id="55" name="SEQUENCE">
+                                                               <att name="objectId" value="122000965689508715"/>
+                                                               <att name="location" value="LOC {5,5}"/>
+                                                               <att name="size" value="DIM {450,1472}"/>
+                                                               <att name="gap" value="50"/>
+                                                               <att>
+                                                                  <graph id="56" name="ASSIGN">
+                                                                     <att name="objectId" value="122000965689508717"/>
+                                                                     <att name="size" value="DIM {182,56}"/>
+                                                                     <att name="name" value="wait_startAssignments"/>
+                                                                     <att name="copy" value="1"/>
+                                                                     <att name="validateVars" value="false"/>
+                                                                     <node id="57" name="ASSIGN_COPY">
+                                                                        <att name="fromExpression" value="bpws:getVariableData('EnergySavingProcess_ProcessData','tmpState')"/>
+                                                                        <att name="fromType" value="3"/>
+                                                                        <att name="objectId" value="122000965689508719"/>
+                                                                        <att name="toVariable" value="EnergySavingProcess_ProcessData"/>
+                                                                        <att name="toPart" value="tmpLastState"/>
+                                                                        <att name="ignoreMissingFromData" value="false"/>
+                                                                     </node>
+                                                                  </graph>
+                                                               </att>
+                                                               <node id="58" name="WAIT">
+                                                                  <att name="objectId" value="122000965689508721"/>
+                                                                  <att name="size" value="DIM {93,56}"/>
+                                                                  <att name="name" value="wait"/>
+                                                                  <att name="waitType" value="1"/>
+                                                                  <att name="waitExpression" value="concat( 'PT' , string( bpws:getVariableData('EnergySavingProcess_ProcessData','inDelay') ) , 'S' )"/>
+                                                               </node>
+                                                               <att>
+                                                                  <graph id="59" name="ASSIGN">
+                                                                     <att name="objectId" value="122000965689508723"/>
+                                                                     <att name="size" value="DIM {195,56}"/>
+                                                                     <att name="name" value="getPos_startAssignments"/>
+                                                                     <att name="copy" value="2"/>
+                                                                     <att name="validateVars" value="false"/>
+                                                                     <node id="60" name="ASSIGN_COPY">
+                                                                        <att name="fromExpression" value="bpws:getVariableData('EnergySavingProcess_ProcessData','inUserName')"/>
+                                                                        <att name="fromType" value="3"/>
+                                                                        <att name="objectId" value="122000965689508725"/>
+                                                                        <att name="toVariable" value="IsInZoneRequest_MessageData"/>
+                                                                        <att name="toPart" value="username"/>
+                                                                        <att name="ignoreMissingFromData" value="false"/>
+                                                                     </node>
+                                                                     <node id="61" name="ASSIGN_COPY">
+                                                                        <att name="fromExpression" value="bpws:getVariableData('EnergySavingProcess_ProcessData','inZone')"/>
+                                                                        <att name="fromType" value="3"/>
+                                                                        <att name="objectId" value="122000965689508727"/>
+                                                                        <att name="toVariable" value="IsInZoneRequest_MessageData"/>
+                                                                        <att name="toPart" value="zone"/>
+                                                                        <att name="ignoreMissingFromData" value="false"/>
+                                                                     </node>
+                                                                  </graph>
+                                                               </att>
+                                                               <node id="62" name="INVOKE">
+                                                                  <att name="objectId" value="122000965689508729"/>
+                                                                  <att name="size" value="DIM {106,56}"/>
+                                                                  <att name="name" value="getPos"/>
+                                                                  <att name="partnerLink" value="Location_Participant"/>
+                                                                  <att name="portType" value="{http://EnergySaving/WSDL/}SheaSimulatorPT"/>
+                                                                  <att name="operation" value="IsInZone"/>
+                                                                  <att name="inputVariable" value="IsInZoneRequest_MessageData"/>
+                                                                  <att name="outputVariable" value="IsInZoneResponse_MessageData"/>
+                                                                  <att name="fromParts" value="0"/>
+                                                                  <att name="toParts" value="0"/>
+                                                                  <att name="attachments" value=""/>
+                                                               </node>
+                                                               <att>
+                                                                  <graph id="63" name="ASSIGN">
+                                                                     <att name="objectId" value="122000965689508731"/>
+                                                                     <att name="size" value="DIM {323,56}"/>
+                                                                     <att name="name" value="getPos_endAssignments_and_log_startAssignments"/>
+                                                                     <att name="copy" value="3"/>
+                                                                     <att name="validateVars" value="false"/>
+                                                                     <node id="64" name="ASSIGN_COPY">
+                                                                        <att name="fromExpression" value="bpws:getVariableData('IsInZoneResponse_MessageData','isin')"/>
+                                                                        <att name="fromType" value="3"/>
+                                                                        <att name="objectId" value="122000965689508733"/>
+                                                                        <att name="toVariable" value="EnergySavingProcess_ProcessData"/>
+                                                                        <att name="toPart" value="tmpState"/>
+                                                                        <att name="ignoreMissingFromData" value="false"/>
+                                                                     </node>
+                                                                     <node id="65" name="ASSIGN_COPY">
+                                                                        <att name="fromExpression" value="concat('State: ',string(bpws:getVariableData('EnergySavingProcess_ProcessData','tmpState')),', last State: ',string(bpws:getVariableData('EnergySavingProcess_ProcessData','tmpLastState')) )"/>
+                                                                        <att name="fromType" value="3"/>
+                                                                        <att name="objectId" value="122000965689508735"/>
+                                                                        <att name="toVariable" value="logRequest_MessageData"/>
+                                                                        <att name="toPart" value="message"/>
+                                                                        <att name="ignoreMissingFromData" value="false"/>
+                                                                     </node>
+                                                                     <node id="66" name="ASSIGN_COPY">
+                                                                        <att name="fromExpression" value="1"/>
+                                                                        <att name="fromType" value="3"/>
+                                                                        <att name="objectId" value="122000965689508737"/>
+                                                                        <att name="toVariable" value="logRequest_MessageData"/>
+                                                                        <att name="toPart" value="level"/>
+                                                                        <att name="ignoreMissingFromData" value="false"/>
+                                                                     </node>
+                                                                  </graph>
+                                                               </att>
+                                                               <node id="67" name="INVOKE">
+                                                                  <att name="objectId" value="122000965689508739"/>
+                                                                  <att name="size" value="DIM {87,56}"/>
+                                                                  <att name="name" value="log"/>
+                                                                  <att name="partnerLink" value="Logging_Participant"/>
+                                                                  <att name="portType" value="{http://EnergySaving/WSDL/}LoggingPT"/>
+                                                                  <att name="operation" value="log"/>
+                                                                  <att name="inputVariable" value="logRequest_MessageData"/>
+                                                                  <att name="fromParts" value="0"/>
+                                                                  <att name="toParts" value="0"/>
+                                                               </node>
+                                                               <att>
+                                                                  <graph id="68" name="SWITCH">
+                                                                     <att name="objectId" value="122000965689508741"/>
+                                                                     <att name="size" value="DIM {430,769}"/>
+                                                                     <att>
+                                                                        <graph id="69" name="CASE">
+                                                                           <att name="CASE_EXPRESSION" value="bpws:getVariableData('EnergySavingProcess_ProcessData','tmpState') != bpws:getVariableData('EnergySavingProcess_ProcessData','tmpLastState')"/>
+                                                                           <att name="IF_EXPRESSION" value="bpws:getVariableData('EnergySavingProcess_ProcessData','tmpState') != bpws:getVariableData('EnergySavingProcess_ProcessData','tmpLastState')"/>
+                                                                           <att name="objectId" value="122000965689508743"/>
+                                                                           <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                                                           <att name="imageLocation" value="icons/activity/case.png"/>
+                                                                           <att name="sizeToFit" value="true"/>
+                                                                           <att name="size" value="DIM {260,701}"/>
+                                                                           <att>
+                                                                              <graph id="70" name="SEQUENCE">
+                                                                                 <att name="objectId" value="122000965689508745"/>
+                                                                                 <att name="location" value="LOC {5,5}"/>
+                                                                                 <att name="size" value="DIM {240,653}"/>
+                                                                                 <att name="gap" value="50"/>
+                                                                                 <att>
+                                                                                    <graph id="71" name="ASSIGN">
+                                                                                       <att name="objectId" value="122000965689508747"/>
+                                                                                       <att name="size" value="DIM {176,56}"/>
+                                                                                       <att name="name" value="log_startAssignments"/>
+                                                                                       <att name="copy" value="2"/>
+                                                                                       <att name="validateVars" value="false"/>
+                                                                                       <node id="72" name="ASSIGN_COPY">
+                                                                                          <att name="fromExpression" value="&quot;State changed&quot;"/>
+                                                                                          <att name="fromType" value="3"/>
+                                                                                          <att name="objectId" value="122000965689508749"/>
+                                                                                          <att name="toVariable" value="logRequest_MessageData"/>
+                                                                                          <att name="toPart" value="message"/>
+                                                                                          <att name="ignoreMissingFromData" value="false"/>
+                                                                                       </node>
+                                                                                       <node id="73" name="ASSIGN_COPY">
+                                                                                          <att name="fromExpression" value="1"/>
+                                                                                          <att name="fromType" value="3"/>
+                                                                                          <att name="objectId" value="122000965689508751"/>
+                                                                                          <att name="toVariable" value="logRequest_MessageData"/>
+                                                                                          <att name="toPart" value="level"/>
+                                                                                          <att name="ignoreMissingFromData" value="false"/>
+                                                                                       </node>
+                                                                                    </graph>
+                                                                                 </att>
+                                                                                 <node id="74" name="INVOKE">
+                                                                                    <att name="objectId" value="122000965689508753"/>
+                                                                                    <att name="size" value="DIM {87,56}"/>
+                                                                                    <att name="name" value="log"/>
+                                                                                    <att name="partnerLink" value="Logging_Participant"/>
+                                                                                    <att name="portType" value="{http://EnergySaving/WSDL/}LoggingPT"/>
+                                                                                    <att name="operation" value="log"/>
+                                                                                    <att name="inputVariable" value="logRequest_MessageData"/>
+                                                                                    <att name="fromParts" value="0"/>
+                                                                                    <att name="toParts" value="0"/>
+                                                                                 </node>
+                                                                                 <att>
+                                                                                    <graph id="75" name="ASSIGN">
+                                                                                       <att name="objectId" value="122000965689508755"/>
+                                                                                       <att name="size" value="DIM {216,56}"/>
+                                                                                       <att name="name" value="SwitchLight_startAssignments"/>
+                                                                                       <att name="copy" value="3"/>
+                                                                                       <att name="validateVars" value="false"/>
+                                                                                       <node id="76" name="ASSIGN_COPY">
+                                                                                          <att name="fromExpression" value="bpws:getVariableData('EnergySavingProcess_ProcessData','tmpState') * 100"/>
+                                                                                          <att name="fromType" value="3"/>
+                                                                                          <att name="objectId" value="122000965689508757"/>
+                                                                                          <att name="toVariable" value="SetValueRequest_MessageData"/>
+                                                                                          <att name="toPart" value="value"/>
+                                                                                          <att name="ignoreMissingFromData" value="false"/>
+                                                                                       </node>
+                                                                                       <node id="77" name="ASSIGN_COPY">
+                                                                                          <att name="fromExpression" value="bpws:getVariableData('EnergySavingProcess_ProcessData','inLightLine')"/>
+                                                                                          <att name="fromType" value="3"/>
+                                                                                          <att name="objectId" value="122000965689508759"/>
+                                                                                          <att name="toVariable" value="SetValueRequest_MessageData"/>
+                                                                                          <att name="toPart" value="line"/>
+                                                                                          <att name="ignoreMissingFromData" value="false"/>
+                                                                                       </node>
+                                                                                       <node id="78" name="ASSIGN_COPY">
+                                                                                          <att name="fromExpression" value="bpws:getVariableData('EnergySavingProcess_ProcessData','inRoom')"/>
+                                                                                          <att name="fromType" value="3"/>
+                                                                                          <att name="objectId" value="122000965689508761"/>
+                                                                                          <att name="toVariable" value="SetValueRequest_MessageData"/>
+                                                                                          <att name="toPart" value="room"/>
+                                                                                          <att name="ignoreMissingFromData" value="false"/>
+                                                                                       </node>
+                                                                                    </graph>
+                                                                                 </att>
+                                                                                 <node id="79" name="INVOKE">
+                                                                                    <att name="objectId" value="122000965689508763"/>
+                                                                                    <att name="size" value="DIM {127,56}"/>
+                                                                                    <att name="name" value="SwitchLight"/>
+                                                                                    <att name="partnerLink" value="Light_Participant"/>
+                                                                                    <att name="portType" value="{http://EnergySaving/WSDL/}IvistarProxyPT"/>
+                                                                                    <att name="operation" value="SetValue"/>
+                                                                                    <att name="inputVariable" value="SetValueRequest_MessageData"/>
+                                                                                    <att name="fromParts" value="0"/>
+                                                                                    <att name="toParts" value="0"/>
+                                                                                 </node>
+                                                                                 <att>
+                                                                                    <graph id="80" name="ASSIGN">
+                                                                                       <att name="objectId" value="122000965689508765"/>
+                                                                                       <att name="size" value="DIM {219,56}"/>
+                                                                                       <att name="name" value="SwitchMusic_startAssignments"/>
+                                                                                       <att name="copy" value="1"/>
+                                                                                       <att name="validateVars" value="false"/>
+                                                                                       <node id="81" name="ASSIGN_COPY">
+                                                                                          <att name="fromExpression" value="bpws:getVariableData('EnergySavingProcess_ProcessData','tmpState')"/>
+                                                                                          <att name="fromType" value="3"/>
+                                                                                          <att name="objectId" value="122000965691108767"/>
+                                                                                          <att name="toVariable" value="PlayPauseRequest_MessageData"/>
+                                                                                          <att name="toPart" value="paramState"/>
+                                                                                          <att name="ignoreMissingFromData" value="false"/>
+                                                                                       </node>
+                                                                                    </graph>
+                                                                                 </att>
+                                                                                 <node id="82" name="INVOKE">
+                                                                                    <att name="objectId" value="122000965691108769"/>
+                                                                                    <att name="size" value="DIM {130,56}"/>
+                                                                                    <att name="name" value="SwitchMusic"/>
+                                                                                    <att name="partnerLink" value="Radio_Participant"/>
+                                                                                    <att name="portType" value="{http://EnergySaving/WSDL/}UPnPRadioPT"/>
+                                                                                    <att name="operation" value="PlayPause"/>
+                                                                                    <att name="inputVariable" value="PlayPauseRequest_MessageData"/>
+                                                                                    <att name="fromParts" value="0"/>
+                                                                                    <att name="toParts" value="0"/>
+                                                                                 </node>
+                                                                              </graph>
+                                                                           </att>
+                                                                        </graph>
+                                                                     </att>
+                                                                     <att>
+                                                                        <graph id="83" name="OTHERWISE">
+                                                                           <att name="objectId" value="122000965691108771"/>
+                                                                           <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                                                           <att name="sizeToFit" value="true"/>
+                                                                           <att name="size" value="DIM {140,109}"/>
+                                                                           <node id="84" name="EMPTY">
+                                                                              <att name="objectId" value="122000965691108773"/>
+                                                                              <att name="location" value="LOC {5,5}"/>
+                                                                              <att name="size" value="DIM {123,56}"/>
+                                                                              <att name="name" value="DoNothing"/>
+                                                                           </node>
+                                                                        </graph>
+                                                                     </att>
+                                                                  </graph>
+                                                               </att>
+                                                            </graph>
+                                                         </att>
+                                                      </graph>
+                                                   </att>
+                                                   <node id="85" name="SCOPE_FAULTHANDLER">
+                                                      <att name="objectId" value="122000965689508709"/>
+                                                      <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                                   </node>
+                                                   <node id="86" name="SCOPE_EVENTHANDLER">
+                                                      <att name="objectId" value="122000965689508711"/>
+                                                      <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                                   </node>
+                                                   <node id="87" name="SCOPE_TERMINATIONHANDLER">
+                                                      <att name="objectId" value="122000965689508713"/>
+                                                      <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                                   </node>
+                                                   <node id="88" name="SCOPE_COMPENSATOR">
+                                                      <att name="objectId" value="122000965689508707"/>
+                                                      <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                                   </node>
+                                                </graph>
+                                             </att>
+                                             <att>
+                                                <graph id="89" name="ASSIGN">
+                                                   <att name="objectId" value="122000965691108775"/>
+                                                   <att name="size" value="DIM {257,56}"/>
+                                                   <att name="name" value="CheckPosition_increment_loopCounter"/>
+                                                   <att name="copy" value="1"/>
+                                                   <att name="validateVars" value="false"/>
+                                                   <node id="90" name="ASSIGN_COPY">
+                                                      <att name="fromExpression" value="bpws:getVariableData('CheckPosition_loopCounter') + 1"/>
+                                                      <att name="fromType" value="3"/>
+                                                      <att name="objectId" value="122000965691108777"/>
+                                                      <att name="toVariable" value="CheckPosition_loopCounter"/>
+                                                      <att name="ignoreMissingFromData" value="false"/>
+                                                   </node>
+                                                </graph>
+                                             </att>
+                                          </graph>
+                                       </att>
+                                    </graph>
+                                 </att>
+                              </graph>
+                           </att>
+                        </graph>
+                     </att>
+                     <att>
+                        <graph id="91" name="SCOPE_FAULTHANDLER">
+                           <att name="objectId" value="122000965689508675"/>
+                           <att name="font" value="FONT {Segoe UI,9,0}"/>
+                           <att name="size" value="DIM {190,193}"/>
+                           <att>
+                              <graph id="92" name="CATCH">
+                                 <att name="catchFaultName" value="StopMessage_Exit faultType=0"/>
+                                 <att name="catchFaultVariableDef" value="(none)"/>
+                                 <att name="BPELComment" value=""/>
+                                 <att name="text" value="Catch StopMessage_Exit"/>
+                                 <att name="objectId" value="122000965689508681"/>
+                                 <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                 <att name="imageLocation" value="icons/activity/catch.png"/>
+                                 <att name="sizeToFit" value="true"/>
+                                 <att name="size" value="DIM {160,142}"/>
+                                 <node id="93" name="EMPTY">
+                                    <att name="objectId" value="122000967806710229"/>
+                                    <att name="location" value="LOC {49,43}"/>
+                                    <att name="size" value="DIM {103,56}"/>
+                                 </node>
+                              </graph>
+                           </att>
+                        </graph>
+                     </att>
+                     <att>
+                        <graph id="94" name="SCOPE_EVENTHANDLER">
+                           <att name="objectId" value="122000965689508677"/>
+                           <att name="font" value="FONT {Segoe UI,9,0}"/>
+                           <att name="size" value="DIM {150,160}"/>
+                           <att>
+                              <graph id="95" name="ON_MESSAGE">
+                                 <att name="partnerLink" value="EnergySaving_Participant"/>
+                                 <att name="portType" value="{http://EnergySaving/WSDL/}EnergySavingPT"/>
+                                 <att name="operation" value="stop"/>
+                                 <att name="variable" value="StopMessage_MessageData"/>
+                                 <att name="correlations" value="#false"/>
+                                 <att name="fromParts" value="0"/>
+                                 <att name="BPELComment" value=""/>
+                                 <att name="attachments" value=""/>
+                                 <att name="objectId" value="122000965689508683"/>
+                                 <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                 <att name="sizeToFit" value="true"/>
+                                 <att name="size" value="DIM {120,109}"/>
+                                 <node id="96" name="THROW">
+                                    <att name="objectId" value="122000965689508685"/>
+                                    <att name="location" value="LOC {5,5}"/>
+                                    <att name="size" value="DIM {103,56}"/>
+                                    <att name="throwFaultName" value="StopMessage_Exit faultType=0"/>
+                                 </node>
+                              </graph>
+                           </att>
+                        </graph>
+                     </att>
+                     <node id="97" name="SCOPE_TERMINATIONHANDLER">
+                        <att name="objectId" value="122000965689508679"/>
+                        <att name="font" value="FONT {Segoe UI,9,0}"/>
+                     </node>
+                     <node id="98" name="SCOPE_COMPENSATOR">
+                        <att name="objectId" value="122000965689508673"/>
+                        <att name="font" value="FONT {Segoe UI,9,0}"/>
+                     </node>
+                  </graph>
+               </att>
+               <node id="99" name="EMPTY">
+                  <att name="objectId" value="122000965691108779"/>
+                  <att name="size" value="DIM {131,56}"/>
+                  <att name="name" value="End_MERGE"/>
+               </node>
+               <att>
+                  <graph id="100" name="ASSIGN">
+                     <att name="objectId" value="122000965691108781"/>
+                     <att name="size" value="DIM {180,56}"/>
+                     <att name="name" value="End_startAssignments"/>
+                     <att name="copy" value="2"/>
+                     <att name="validateVars" value="false"/>
+                     <node id="101" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="&quot;Energy Saving Process stopped&quot;"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="122000965691108783"/>
+                        <att name="toVariable" value="logRequest_MessageData"/>
+                        <att name="toPart" value="message"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="102" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="1"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="122000965691108785"/>
+                        <att name="toVariable" value="logRequest_MessageData"/>
+                        <att name="toPart" value="level"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                  </graph>
+               </att>
+               <node id="103" name="INVOKE">
+                  <att name="objectId" value="122000965691108787"/>
+                  <att name="size" value="DIM {91,56}"/>
+                  <att name="name" value="End"/>
+                  <att name="partnerLink" value="Logging_Participant"/>
+                  <att name="portType" value="{http://EnergySaving/WSDL/}LoggingPT"/>
+                  <att name="operation" value="log"/>
+                  <att name="inputVariable" value="logRequest_MessageData"/>
+                  <att name="fromParts" value="0"/>
+                  <att name="toParts" value="0"/>
+               </node>
+            </graph>
+         </att>
+      </graph>
+   </att>
+   <node id="104" name="SCOPE_FAULTHANDLER"/>
+   <node id="105" name="SCOPE_EVENTHANDLER"/>
+   <node id="106" name="SCOPE_COMPENSATOR"/>
+</graph>

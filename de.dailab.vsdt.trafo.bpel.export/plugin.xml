@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+		id="de.dailab.vsdt.trafo.bpel.export.wizard"
+		name="BPMN to WS-BPEL"
+		point="org.eclipse.ui.exportWizards">
+         
+        <wizard
+              category="Bpmn.export"
+              class="de.dailab.vsdt.trafo.bpel.export.wizard.Bpmn2BpelExportWizard"
+              icon="icons/exportBpel.gif"
+              id="de.dailab.vsdt.trafo.bpel.export.wizard"
+              name="BPMN to BPEL">
+			<description>A Wizard for Transforming BPMN Diagrams to WS-BPEL Processes</description>
+		</wizard>
+        <category
+              id="Bpmn.export"
+              name="BPMN Export">
+        </category>
+  
+   </extension>
+
+</plugin>

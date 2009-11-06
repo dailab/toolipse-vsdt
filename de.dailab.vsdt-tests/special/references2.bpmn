@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vsdt:BusinessProcessDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vsdt="http://de.dailab.vsdt" name="ReferenceTest2" id="BusinessProcessDiagram_1211275845657" creationDate="2008-05-20T11:30:45.657+0200" modificationDate="2008-05-20T11:30:45.657+0200">
+  <pools name="Pool" id="Pool_1211275849967" participant="//@participants.0">
+    <process name="Pool_Process" id="BpmnProcess_1211275849969">
+      <adHocCompletionCondition/>
+      <properties name="test" type="xsd:integer"/>
+    </process>
+    <lanes name="Default Lane" id="Lane_1211275849969" boundaryVisible="false">
+      <containedFlowObjects xsi:type="vsdt:Start" name="" id="Start_1211275857228">
+        <ruleExpression/>
+      </containedFlowObjects>
+      <containedFlowObjects xsi:type="vsdt:Activity" name="Referenced Activity" id="Activity_1211275863411" loopType="STANDARD" activityType="SERVICE" inMessage="//@messages.0" outMessage="//@messages.1" implementation="//@implementations.0">
+        <assignments to="//@pools.0/@process/@properties.0">
+          <from expression="foo"/>
+        </assignments>
+        <adHocCompletionCondition/>
+        <loopAttributes xsi:type="vsdt:StandardLoopAttSet">
+          <loopCondition expression="true"/>
+        </loopAttributes>
+        <boundaryEvents name="Intermediate" id="Intermediate_1211281303030" timeDate="foo" trigger="TIMER">
+          <assignments to="//@pools.0/@process/@properties.0">
+            <from expression="eh_before"/>
+          </assignments>
+          <assignments to="//@pools.0/@process/@properties.0" assignTime="END">
+            <from expression="eh_after"/>
+          </assignments>
+          <ruleExpression/>
+        </boundaryEvents>
+      </containedFlowObjects>
+      <containedFlowObjects xsi:type="vsdt:End" name="" id="End_1211275875016">
+        <ruleExpression/>
+      </containedFlowObjects>
+      <containedFlowObjects xsi:type="vsdt:Activity" name="Referencing Acivity" id="Activity_1211276376715" activityType="TASKREFERENCE" activityRef="//@pools.0/@lanes.0/@containedFlowObjects.1">
+        <assignments to="//@pools.0/@process/@properties.0">
+          <from expression="bar"/>
+        </assignments>
+        <adHocCompletionCondition/>
+      </containedFlowObjects>
+      <containedFlowObjects xsi:type="vsdt:Gateway" name="" id="Gateway_1211277406723">
+        <assignments to="//@pools.0/@process/@properties.0">
+          <from expression="foobar"/>
+        </assignments>
+        <gates name="SequenceFlow_1211277464385" outgoingSequenceFlow="//@connections.3"/>
+        <gates name="SequenceFlow_1211277475640" outgoingSequenceFlow="//@connections.4"/>
+      </containedFlowObjects>
+      <containedFlowObjects xsi:type="vsdt:Activity" name="Compensation" id="Activity_1211281218340">
+        <adHocCompletionCondition/>
+      </containedFlowObjects>
+    </lanes>
+  </pools>
+  <connections xsi:type="vsdt:SequenceFlow" id="SequenceFlow_1211275879046" source="//@pools.0/@lanes.0/@containedFlowObjects.0" target="//@pools.0/@lanes.0/@containedFlowObjects.4"/>
+  <connections xsi:type="vsdt:SequenceFlow" id="SequenceFlow_1211275881215" source="//@pools.0/@lanes.0/@containedFlowObjects.1" target="//@pools.0/@lanes.0/@containedFlowObjects.2"/>
+  <connections xsi:type="vsdt:SequenceFlow" id="SequenceFlow_1211276385203" source="//@pools.0/@lanes.0/@containedFlowObjects.3" target="//@pools.0/@lanes.0/@containedFlowObjects.2"/>
+  <connections xsi:type="vsdt:SequenceFlow" id="SequenceFlow_1211277464385" source="//@pools.0/@lanes.0/@containedFlowObjects.4" target="//@pools.0/@lanes.0/@containedFlowObjects.1"/>
+  <connections xsi:type="vsdt:SequenceFlow" id="SequenceFlow_1211277475640" source="//@pools.0/@lanes.0/@containedFlowObjects.4" target="//@pools.0/@lanes.0/@containedFlowObjects.3"/>
+  <connections xsi:type="vsdt:SequenceFlow" id="SequenceFlow_1211281228603" source="//@pools.0/@lanes.0/@containedFlowObjects.5" target="//@pools.0/@lanes.0/@containedFlowObjects.2"/>
+  <connections xsi:type="vsdt:SequenceFlow" id="SequenceFlow_1211281305679" source="//@pools.0/@lanes.0/@containedFlowObjects.1/@boundaryEvents.0" target="//@pools.0/@lanes.0/@containedFlowObjects.5"/>
+  <messages name="in" from="//@participants.0" to="//@participants.1"/>
+  <messages name="out" from="//@participants.1" to="//@participants.0"/>
+  <participants name="Pool_Participant"/>
+  <participants name="test"/>
+  <implementations participant="//@participants.1" interface="i" operation="o"/>
+</vsdt:BusinessProcessDiagram>

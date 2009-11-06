@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmftool:ToolRegistry xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
+  <palette>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Nodes"
+        description="BPMN Nodes">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Business Process"
+          description="Create new Business Process">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Participant"
+          description="Create new Participant">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Connections"
+        description="BPMN Connections">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Process Association"
+          description="Create Participant to Process Association">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/ParticipantProcessAssociation.gif"
+            bundle="de.dailab.vsdt.edit"/>
+      </tools>
+    </tools>
+  </palette>
+</gmftool:ToolRegistry>

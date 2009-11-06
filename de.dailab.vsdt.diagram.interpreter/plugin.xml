@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+	<!-- Additonal Views -->
+	<extension point="org.eclipse.ui.views">
+		<view name="Process Interpreter" icon="icons/ProcessSimulation.gif"
+			category="de.dailab.vsdt.diagram.views"
+			class="de.dailab.vsdt.diagram.interpreter.view.InterpreterView"
+			id="de.dailab.vsdt.diagram.interpreter.view.InterpreterView">
+		</view>
+	</extension>
+	
+	<!-- Perspective Extensions -->
+	<extension point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension
+			targetID="de.dailab.vsdt.perspective">
+			<viewShortcut id="de.dailab.vsdt.diagram.interpreter.view.InterpreterView" />
+			<view id="de.dailab.vsdt.diagram.interpreter.view.InterpreterView"
+				relationship="stack" relative="org.eclipse.ui.views.ContentOutline">
+			</view>
+		</perspectiveExtension>
+	</extension>
+
+
+	<!--
+	<extension id="simulationDecoratorProvider" name="SimulationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <decoratorProvider class="de.dailab.vsdt.diagram.interpreter.SimulationDecoratorProvider">
+         <Priority name="Low"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
+   -->
+
+</plugin>

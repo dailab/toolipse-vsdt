@@ -1,0 +1,1538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+            xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+            jaxb:extensionBindingPrefixes="xjc"
+            jaxb:version="1.0">
+
+
+
+<!-- ***** ***** -->
+<!--  for JAXB   -->
+<!-- ***** ***** bindingStyle="modelGroupBinding" -->
+
+
+<xsd:annotation>
+   <xsd:appinfo>
+      <jaxb:globalBindings
+         
+         choiceContentProperty="true" >
+         <xjc:typeSubstitution type="complex"/>
+      </jaxb:globalBindings>
+   </xsd:appinfo>
+</xsd:annotation>
+
+
+
+<!-- ***** ***** -->
+<!--   General   -->
+<!-- ***** ***** -->
+
+
+  <xsd:element name="jadlfile" type="JADLFileModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.JADLDocument"/>
+    </xsd:appinfo></xsd:annotation>
+  </xsd:element>
+
+  <xsd:complexType name="FileContentModel">
+    <xsd:attribute name="startLine" type="xsd:int" default="-1"/>
+    <xsd:attribute name="startColumn" type="xsd:int" default="-1"/>
+    <xsd:attribute name="endLine" type="xsd:int" default="-1"/>
+    <xsd:attribute name="endColumn" type="xsd:int" default="-1"/>
+    <xsd:attribute name="startOffset" type="xsd:int" default="-1"/>
+    <xsd:attribute name="endOffset" type="xsd:int" default="-1"/>
+  </xsd:complexType> 
+
+  <!-- JADLFileType -->
+  <xsd:complexType name="JADLFileModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.JADLFileTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="packagedoc" type="packageDocModel" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="declarations" type="declarationsModel" minOccurs="0" maxOccurs="1"/>
+
+      <xsd:element name="ontology" type="ontoModel" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="act" type="actModel" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="conditional" type="conditionalModel" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="sendSpeechact" type="sendSpeechactModel" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="receiveSpeechact" type="receiveSpeechactModel" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="fact" type="factModel" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="rule" type="ruleModel" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="stateGoal" type="stateGoalModel" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="serviceGoal" type="serviceGoalModel" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="package" type="xsd:string"/>
+    <xsd:attribute name="file" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- Declarations -->
+  <xsd:complexType name="declarationsModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.declarations.DeclarationsTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+          <xsd:sequence>
+            <xsd:element name="include" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="import" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="javaimport" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="objref" type="objrefDeclModel" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="objrefDeclModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.declarations.ObjrefDeclTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+        <xsd:attribute name="name" type="xsd:string"/>
+        <xsd:attribute name="type" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+
+  <!-- comments -->
+
+  <xsd:complexType name="packageDocModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.PackageDocTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="info" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="author" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="version" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="since" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="see" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>    
+  </xsd:complexType>
+
+  <xsd:complexType name="docModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.DocTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="info" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="see" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="MetaTagModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.content.MetaTagTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="name" type="xsd:string"/>
+      <xsd:element name="value" type="termModel"/>
+    </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+
+<!-- ***** ***** -->
+<!-- Ontologies  -->
+<!-- ***** ***** -->
+
+    <xsd:complexType name="ontoModel">
+      <xsd:annotation><xsd:appinfo>
+            <jaxb:class implClass="de.dailab.jadltools.model.tree.ontology.OntoTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+          <xsd:sequence>
+            <xsd:element name="doc" type="docModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="constant" type="constantModel" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="category" type="categoryDeclModel" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="function" type="functionDeclModel" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="comparison" type="comparisonDeclModel" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+          <xsd:attribute name="name" type="xsd:string"/>
+          <xsd:attribute name="version" type="xsd:string"/>
+          <xsd:attribute name="qualifiedName" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="constantModel">
+      <xsd:annotation><xsd:appinfo>
+            <jaxb:class implClass="de.dailab.jadltools.model.tree.ontology.ConstantTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+          <xsd:sequence>
+            <xsd:element name="doc" type="docModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="value" type="valueModel"/>
+          </xsd:sequence>
+          <xsd:attribute name="name" type="xsd:string"/>
+          <xsd:attribute name="type" type="xsd:string"/>
+          <xsd:attribute name="qualifiedName" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="categoryDeclModel">
+      <xsd:annotation><xsd:appinfo>
+            <jaxb:class implClass="de.dailab.jadltools.model.tree.ontology.CategoryDeclTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">      
+         <xsd:sequence>
+           <xsd:element name="doc" type="docModel" minOccurs="0" maxOccurs="1"/>
+           <xsd:element name="extends" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+           <xsd:element name="attribute" type="attributeDeclModel" minOccurs="0" maxOccurs="unbounded"/>
+         </xsd:sequence>
+         <xsd:attribute name="name" type="xsd:string"/>
+         <xsd:attribute name="qualifiedName" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="attributeDeclModel">
+      <xsd:annotation><xsd:appinfo>
+            <jaxb:class implClass="de.dailab.jadltools.model.tree.ontology.AttributeDeclTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+      <xsd:sequence>
+	      <xsd:group ref="AttributeKeyModel" minOccurs="0" maxOccurs="3"/>
+      </xsd:sequence>
+      <xsd:attribute name="name" type="xsd:string"/>
+      <xsd:attribute name="type" type="xsd:string"/>
+      <xsd:attribute name="fixed" type="xsd:boolean"/> 
+      <xsd:attribute name="needed" type="xsd:boolean"/> 
+      <xsd:attribute name="defined" type="xsd:boolean"/> 
+      <xsd:attribute name="private" type="xsd:boolean"/> 
+      <xsd:attribute name="qualifiedName" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+     </xsd:complexType>
+
+    <xsd:group name="AttributeKeyModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.ontology.AttributeKeyTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:choice>
+      	<xsd:element name="init" type="termModel"/>
+	      <xsd:element name="default" type="termModel"/>
+	      <xsd:sequence>
+	        <xsd:element name="constriant_vars" type="VarDeclListModel"/>
+	        <xsd:element name="constraint" type="formulaModel"/>
+	      </xsd:sequence>
+      </xsd:choice>
+    </xsd:group>
+
+    <xsd:complexType name="functionDeclModel">
+      <xsd:annotation><xsd:appinfo>
+            <jaxb:class implClass="de.dailab.jadltools.model.tree.ontology.FunctionDeclTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+          <xsd:sequence>
+            <xsd:element name="doc" type="docModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="argument" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="code" type="xsd:string"/>
+          </xsd:sequence>
+          <xsd:attribute name="name" type="xsd:string"/>
+          <xsd:attribute name="returnType" type="xsd:string"/>
+          <xsd:attribute name="qualifiedName" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="comparisonDeclModel">
+      <xsd:annotation><xsd:appinfo>
+            <jaxb:class implClass="de.dailab.jadltools.model.tree.ontology.ComparisonDeclTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+          <xsd:sequence>
+            <xsd:element name="doc" type="docModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="argument" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="code" type="xsd:string"/>
+          </xsd:sequence>
+          <xsd:attribute name="name" type="xsd:string"/>
+          <xsd:attribute name="qualifiedName" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+     </xsd:complexType>
+
+<!-- ***** ***** -->
+<!--     Acts    -->
+<!-- ***** ***** -->
+
+  <!-- Planelements -->
+    <xsd:complexType name="actModel">
+      <xsd:annotation><xsd:appinfo>
+            <jaxb:class implClass="de.dailab.jadltools.model.tree.content.ActTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+          <xsd:sequence>
+            <xsd:element name="doc" type="docModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="varList" type="VarDeclListModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="protocol" type="protocolModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="precondition" type="formulaModel"/>
+            <xsd:element name="execcondition" type="formulaModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="effect" type="conjunctiveModel" minOccurs="1" maxOccurs="unbounded"/>
+            <xsd:element name="metatag" type="MetaTagModel" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="body" type="bodyModel" minOccurs="0" maxOccurs="1"/>
+          </xsd:sequence>
+          <xsd:attribute name="name" type="xsd:string"/>
+          <xsd:attribute name="exectype">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="abstract"/>
+                <xsd:enumeration value="inference"/>
+                <xsd:enumeration value="script"/>
+                <xsd:enumeration value="service"/>
+                <xsd:enumeration value="primitive"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+          <xsd:attribute name="qualifiedName" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+
+  <xsd:complexType name="protocolModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.content.ProtocolTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:attribute name="servicename" type="xsd:string"/>
+    <xsd:attribute name="protocolname" type="xsd:string"/>
+    <xsd:attribute name="role">
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="user"/>
+          <xsd:enumeration value="provider"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="multi" type="xsd:boolean"/>
+    <xsd:attribute name="servicevar" type="xsd:string"/>
+    <xsd:attribute name="multivar" type="xsd:string"/>
+    <xsd:attribute name="acceptvar" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- Planelement Body -->
+  <xsd:complexType name="bodyModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.content.BodyTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="primitiveModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.content.PrimitiveTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="bodyModel">
+    <xsd:sequence>
+      <xsd:element name="param" type="termModel" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="role" type="xsd:string"/>
+    <xsd:attribute name="id" type="xsd:integer"/>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="serviceObjModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.content.ServiceObjTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="bodyModel">
+    <xsd:sequence>
+      <xsd:element name="keyword" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="protocol" type="protocolObjModel" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="ontology" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="requires" type="termModel" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="provider" type="termModel" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="protocolObjModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.content.ProtocolObjTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="ontology" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string"/>
+    <xsd:attribute name="provider" type="xsd:boolean"/>
+    <xsd:attribute name="multi" type="xsd:boolean"/>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- Script content -->
+  <xsd:complexType name="scriptModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.ScriptTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="bodyModel">
+      <xsd:sequence>
+        <xsd:element name="localVars" type="VarDeclListModel" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="script" type="scriptbodyModel"/>
+      </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- Script content -->
+  <xsd:complexType name="scriptrootModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.ScriptrootTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="scriptbodyModel">
+  </xsd:extension>
+  </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="scriptbodyModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.ScriptbodyTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+  </xsd:extension>
+  </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="stepModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.StepTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="scriptbodyModel">
+    <xsd:sequence>
+      <xsd:element name="pecall" type="planelementCallModel" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="fail" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="end" type="endModel" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="break" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="cont" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="bind" type="bindModel" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="unbind" type="unbindModel" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="add" type="addModel" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="remove" type="removeModel" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="eval" type="evalModel" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="update" type="updateModel" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="branch" type="branchModel" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="loop" type="branchModel" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="logging" type="loggingModel" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="goal" type="goalExecModel" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="fbget" type="fbGetModel" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="fbgetall" type="fbGetAllModel" minOccurs="0" maxOccurs="1"/>
+   </xsd:sequence>
+        </xsd:extension>
+    </xsd:complexContent>  
+  </xsd:complexType>
+
+  <!--xsd:complexType name="executionModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.ExecutionTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="scriptrootModel">
+      <xsd:choice>
+        <xsd:element name="seq" type="scriptbodyModel"/>
+        <xsd:element name="par" type="scriptbodyModel"/>
+        <xsd:element name="alt" type="scriptbodyModel"/>
+      </xsd:choice>
+        </xsd:extension>
+    </xsd:complexContent>  
+  </xsd:complexType-->
+  
+  <xsd:complexType name="seqExecutionModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.SeqExecutionTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="scriptrootModel">
+      <xsd:sequence>
+      <xsd:element name="steps" type="scriptbodyModel" minOccurs="1" maxOccurs="unbounded"/>
+      </xsd:sequence>
+        </xsd:extension>
+    </xsd:complexContent>  
+  </xsd:complexType>
+  
+  <xsd:complexType name="parExecutionModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.ParExecutionTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="scriptrootModel">
+      <xsd:sequence>
+      <xsd:element name="steps" type="scriptbodyModel" minOccurs="1" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        </xsd:extension>
+    </xsd:complexContent>  
+  </xsd:complexType>
+  
+  <xsd:complexType name="altExecutionModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.AltExecutionTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="scriptrootModel">
+      <xsd:sequence>
+      <xsd:element name="steps" type="scriptbodyModel" minOccurs="1" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        </xsd:extension>
+    </xsd:complexContent>  
+  </xsd:complexType>
+  
+
+  <xsd:complexType name="iterSeqExecModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.IterSeqExecTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="scriptrootModel">
+     <xsd:sequence>
+     <xsd:element name="iseq" type="iterationModel"/>
+      </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>  
+  </xsd:complexType>
+
+  <xsd:complexType name="iterParExecModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.IterParExecTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="scriptrootModel">
+     <xsd:sequence>
+     <xsd:element name="ipar" type="iterationModel"/>
+      </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>  
+  </xsd:complexType>
+  
+    <xsd:complexType name="iterAltExecModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.IterAltExecTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="scriptrootModel">
+      <xsd:sequence>
+     <xsd:element name="ialt" type="iterationModel"/>
+      </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>  
+  </xsd:complexType>
+
+  <xsd:complexType name="multiAltExecModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.MultiAltExecTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="scriptrootModel">
+     <xsd:sequence>
+     <xsd:element name="malt" type="scriptrootModel"/> <!-- TODO -->
+      </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>  
+  </xsd:complexType>
+
+  <xsd:complexType name="multiSeqExecModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.MultiSeqExecTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="scriptrootModel">
+     <xsd:sequence>
+     <xsd:element name="mseq" type="scriptrootModel"/> <!-- TODO -->
+      </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>  
+  </xsd:complexType>
+  
+    <xsd:complexType name="multiParExecModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.MultiParExecTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="scriptrootModel">
+     <xsd:sequence>
+     <xsd:element name="mpar" type="scriptrootModel"/> <!-- TODO -->
+      </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>  
+  </xsd:complexType>
+
+  <xsd:complexType name="iterationModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.IterationTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="collection" type="termModel"/>
+      <xsd:element name="var" type="VarDeclListModel"/>
+      <xsd:element name="body" type="scriptrootModel"/>
+    </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="planelementCallModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.PlanelementCallTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="scriptrootModel">
+    <xsd:sequence>
+      <xsd:element name="arg" type="termModel" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="planelement" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="endModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.EndTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:attribute name="result" type="xsd:integer" use="optional"/>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="bindModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.BindTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="var" type="varModel"/>
+      <xsd:element name="value" type="termModel"/>
+    </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="unbindModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.UnbindTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="var" type="varModel"/>
+    </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="addModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.AddTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="value" type="termModel"/>
+      <xsd:element name="fbname" type="termModel" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <!--xsd:attribute name="fbname" type="xsd:string" use="optional"/-->
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="removeModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.RemoveTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="value" type="termModel"/>
+    </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="evalModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.EvalTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="formula" type="formulaModel"/>
+    </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="updateModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.UpdateTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="formula" type="formulaModel"/>
+    </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="branchModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.BranchTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="planelement" type="planelementCallModel"/>
+      <xsd:element name="case" type="scriptbodyModel" minOccurs="2" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="type" type="xsd:string"/> <!-- branch or loop -->
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="loggingModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.LoggingTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="message" type="termModel"/>
+      <xsd:element name="value" type="termModel" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="level">
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="error"/>
+          <xsd:enumeration value="warn"/>
+          <xsd:enumeration value="info"/>
+          <xsd:enumeration value="debug"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="goalExecModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.GoalExecTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="formula" type="conjunctiveModel"/>
+      <xsd:element name="metatag" type="MetaTagModel" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="fbGetModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.FbGetTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="resultVar" type="varModel"/>
+      <xsd:element name="formula" type="conjunctiveModel"/>
+    </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="fbGetAllModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.script.FbGetAllTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="resultVar" type="varModel"/>
+      <xsd:element name="iterationVar" type="VarDeclListModel" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="formula" type="conjunctiveModel"/>
+    </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+
+<!-- ***** ***** -->
+<!--   Elements  -->
+<!-- ***** ***** -->
+
+  <!-- rules -->
+    <xsd:complexType name="ruleModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.content.RuleTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+          <xsd:sequence>
+            <xsd:element name="doc" type="docModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="varList" type="VarDeclListModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="formula" type="formulaModel"/>
+            <xsd:element name="metatag" type="MetaTagModel" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:choice>
+              <xsd:element name="goal" type="goalRuleModel"/>
+              <xsd:element name="bean" type="beanRuleModel"/>
+            </xsd:choice>
+          </xsd:sequence>
+          <xsd:attribute name="name" type="xsd:string"/>
+          <xsd:attribute name="qualifiedName" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="RuleActionModel">
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">    
+                </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+
+    <xsd:complexType name="goalRuleModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.content.GoalRuleTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="RuleActionModel">
+          <xsd:sequence>
+            <xsd:element name="true" minOccurs="0" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="formula" type="conjunctiveModel"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="false" minOccurs="0" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="formula" type="conjunctiveModel"/>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="beanRuleModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.content.BeanRuleTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="RuleActionModel">
+          <xsd:sequence>
+            <xsd:element name="true" type="xsd:integer" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="false" type="xsd:integer" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+          <xsd:attribute name="role" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+
+  <!-- facts -->
+    <xsd:complexType name="factModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.content.FactTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+          <xsd:sequence>
+            <xsd:element name="doc" type="docModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="obj" type="jadlObjectModel"/>
+            <xsd:element name="metatag" type="MetaTagModel" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+          <xsd:attribute name="qualifiedName" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+
+  <!-- goals -->
+    <xsd:complexType name="stateGoalModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.content.StateGoalTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+          <xsd:sequence>
+            <xsd:element name="doc" type="docModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="varList" type="VarDeclListModel"/>
+            <xsd:element name="formula" type="conjunctiveModel"/>
+            <xsd:element name="metatag" type="MetaTagModel" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+          <xsd:attribute name="qualifiedName" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="serviceGoalModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.content.ServiceGoalTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+          <xsd:sequence>
+            <xsd:element name="doc" type="docModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="varList" type="VarDeclListModel"/>
+            <xsd:element name="service" type="jadlObjectModel"/>
+            <xsd:element name="metatag" type="MetaTagModel" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+          <xsd:attribute name="qualifiedName" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+
+  <!-- conditionals -->
+    <xsd:complexType name="conditionalModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.content.ConditionalTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+          <xsd:sequence>
+            <xsd:element name="doc" type="docModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="varList" type="VarDeclListModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="formula" type="formulaModel" minOccurs="2" maxOccurs="unbounded"/>
+            <xsd:element name="metatag" type="MetaTagModel" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+          <xsd:attribute name="name" type="xsd:string"/>
+          <xsd:attribute name="qualifiedName" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+
+  <!-- speechacts -->
+    <xsd:complexType name="sendSpeechactModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.content.SendSpeechactTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+          <xsd:sequence>
+            <xsd:element name="doc" type="docModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="varList" type="VarDeclListModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="replytag" type="replytagModel" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="speechact" type="speechactModel" minOccurs="1" maxOccurs="unbounded"/>
+            <xsd:element name="metatag" type="MetaTagModel" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+          <xsd:attribute name="name" type="xsd:string"/>
+          <xsd:attribute name="qualifiedName" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="receiveSpeechactModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.content.ReceiveSpeechactTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">
+          <xsd:sequence>
+            <xsd:element name="doc" type="docModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="varList" type="VarDeclListModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="replytag" type="replytagModel" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="speechact" type="speechactModel" minOccurs="1" maxOccurs="unbounded"/>
+            <xsd:element name="metatag" type="MetaTagModel" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+          <xsd:attribute name="name" type="xsd:string"/>
+          <xsd:attribute name="qualifiedName" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="replytagModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.content.ReplytagTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">    
+      <xsd:sequence>
+        <xsd:element name="name" type="xsd:string"/>
+        <xsd:element name="value" type="termModel"/>
+      </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+  <xsd:complexType name="speechactModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.content.SpeechactTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">    
+    <xsd:sequence>
+      <xsd:element name="definition" type="jadlObjectModel" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="content" type="contentModel" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="performativeModel">
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="request"/>
+          <xsd:enumeration value="request_when"/>
+          <xsd:enumeration value="request_whenever"/>
+          <xsd:enumeration value="agree"/>
+          <xsd:enumeration value="refuse"/>
+          <xsd:enumeration value="cancel"/>
+          <xsd:enumeration value="done"/>
+          <xsd:enumeration value="inform"/>
+          <xsd:enumeration value="data"/>
+          <xsd:enumeration value="query"/>
+          <xsd:enumeration value="query_if"/>
+          <xsd:enumeration value="cfp"/>
+          <xsd:enumeration value="propose"/>
+          <xsd:enumeration value="accept_proposal"/>
+          <xsd:enumeration value="reject_proposal"/>
+          <xsd:enumeration value="failure"/>
+          <xsd:enumeration value="not_understood"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="contentModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.content.ContentTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">    
+    <xsd:sequence>
+      <xsd:element name="term" type="termModel" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="formula" type="formulaModel" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="type" type="xsd:string"/> <!-- act, par, inf, data, cond, reason -->
+    <xsd:attribute name="reason" type="xsd:integer"/> <!-- reason only-->
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+
+<!-- ***** ***** -->
+<!--  Formulas   -->
+<!-- ***** ***** -->
+
+  <!-- Variable Declaration -->
+  <xsd:complexType name="VarDeclListModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.declarations.VarDeclListTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">    
+    <xsd:sequence>
+        <xsd:element name="variable" type="VarDeclModel" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+
+  <!-- a single declared Variable (may include initialization)-->
+    <xsd:complexType name="VarDeclModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.declarations.VarDeclTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">    
+      <xsd:sequence>
+        <xsd:element name="initvalue" type="valueModel" minOccurs="0" maxOccurs="1"/>
+      </xsd:sequence>
+      <xsd:attribute name="name" type="xsd:string"/>
+      <xsd:attribute name="type" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+
+  <!-- Formulas (formula, disjunction, conjunction)-->
+  <xsd:complexType name="formulaModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.formula.FormulaTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">    
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="disjunctionModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.formula.DisjunctionTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="formulaModel">    
+    <xsd:sequence>
+      <xsd:element name="conjunctive" type="conjunctiveModel" minOccurs="2" maxOccurs="unbounded"/>
+    </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="conjunctiveModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.formula.ConjunctiveTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="formulaModel">    
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="conjunctionModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.formula.ConjunctionTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="conjunctiveModel">    
+      <xsd:sequence>
+      <xsd:element name="literal" type="literalModel" minOccurs="2" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+
+  <!-- literals (truth, quantor, objectFormula, proposition, comp, known, unknown)-->
+  <xsd:complexType name="literalModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.formula.LiteralTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="conjunctiveModel">
+         <xsd:attribute name="negation" type="xsd:boolean"/>
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+    <xsd:complexType name="truthModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.formula.TruthTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="literalModel">    
+          <xsd:attribute name="value">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="true"/>
+                <xsd:enumeration value="false"/>
+                <xsd:enumeration value="unknown"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="quantorModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.formula.QuantorTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="literalModel">    
+          <xsd:sequence>
+            <xsd:element name="collection" type="termModel"/>
+            <xsd:element name="var" type="VarDeclListModel"/>
+            <xsd:element name="formula" type="conjunctiveModel"/>
+          </xsd:sequence>
+          <xsd:attribute name="type">
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:string">
+                <xsd:enumeration value="forall"/>
+                <xsd:enumeration value="exists"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:attribute>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="objectFormulaModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.formula.ObjectFormulaTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="literalModel">    
+          <xsd:sequence>
+            <!--xsd:choice>
+              <xsd:element name="var" type="varModel"/>
+              <xsd:element name="ref" type="objrefModel"/>
+            </xsd:choice-->
+            <xsd:element name="varOrRef" type="termModel"/>
+            <xsd:element name="attribute" type="attributeTermModel" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+          <xsd:attribute name="type" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="propositionModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.formula.PropositionTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="literalModel">    
+          <xsd:sequence>
+            <xsd:element name="object" type="termModel"/>
+            <xsd:element name="value" type="termModel"/>
+          </xsd:sequence>
+          <xsd:attribute name="attribute" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="compFormulaModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.formula.CompFormulaTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="literalModel">    
+        <xsd:sequence>
+          <xsd:element name="args" type="termModel" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string"/>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="knownModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.formula.KnownTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="literalModel">    
+          <xsd:sequence>
+            <xsd:element name="var" type="VarDeclListModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="formula" type="conjunctiveModel"/>
+          </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="unknownModel">
+      <xsd:annotation><xsd:appinfo>
+        <jaxb:class implClass="de.dailab.jadltools.model.tree.formula.UnknownTree"/>
+      </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="literalModel">    
+          <xsd:sequence>
+            <xsd:element name="var" type="VarDeclListModel" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="literal" type="literalModel"/>
+          </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+
+
+<!-- ***** ***** -->
+<!--   Values    -->
+<!-- ***** ***** -->
+
+  <!-- complexTypes for term and value -->
+  <xsd:complexType name="termModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.TermTree"/>
+    </xsd:appinfo></xsd:annotation>
+      <xsd:complexContent>
+        <xsd:extension base="FileContentModel">    
+        </xsd:extension>
+      </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="valueModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.ValueTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="termModel"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="boolModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.BoolTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="valueModel">
+        <xsd:sequence>
+          <xsd:element name="bool" type="xsd:boolean"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="intModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.IntTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="valueModel">
+        <xsd:sequence>
+          <xsd:element name="int" type="xsd:integer"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="realModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.RealTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="valueModel">
+        <xsd:sequence>
+          <xsd:element name="real" type="xsd:decimal"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="stringModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.StringTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="valueModel">
+        <xsd:sequence>
+          <xsd:element name="string" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="agentnameModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.AgentnameTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="valueModel">
+        <xsd:sequence>
+          <xsd:element name="name" type="xsd:string"/>
+          <xsd:element name="ap" type="xsd:anyURI"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="URLModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.URLTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="valueModel">
+        <xsd:sequence>
+          <xsd:element name="url" type="xsd:anyURI"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="timestampModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.TimestampTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="valueModel">
+        <xsd:sequence>
+          <xsd:element name="timestamp" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="javaclassModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.JavaclassTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="valueModel">
+        <xsd:sequence>
+          <xsd:element name="javaclass" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+
+  <!-- indirect values (Variables, FB-References, Castings & Functions -->
+  <xsd:complexType name="varModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.VarTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="termModel">
+        <xsd:sequence>
+          <xsd:element name="variable" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="objrefModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.ObjrefTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="termModel">
+        <xsd:sequence>
+          <xsd:element name="name" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="castModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.CastTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="termModel">
+        <xsd:sequence>
+          <xsd:element name="value" type="termModel"/>
+        </xsd:sequence>
+        <xsd:attribute name="into" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="functionModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.FunctionTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="termModel">
+        <xsd:sequence>
+          <xsd:element name="args" type="termModel" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="comparisonModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.ComparisonTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="termModel">
+        <xsd:sequence>
+          <xsd:element name="args" type="termModel" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="listModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.ListTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="valueModel">
+        <xsd:sequence>
+          <xsd:element name="listitem" type="termModel" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="listtype" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="setModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.SetTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="valueModel">
+        <xsd:sequence>
+          <xsd:element name="setitem" type="termModel" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="settype" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+
+
+  <!-- primitive values: bool, int , real, string, URL, agentname, timestamp, javaClass -->
+
+  <!-- category objects -->
+  <xsd:complexType name="jadlObjectModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.JadlObjectTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="valueModel">
+        <xsd:sequence>
+          <xsd:element name="attribute" type="attributeTermModel" minOccurs="0" maxOccurs="unbounded"/> <!-- TODO: qualified names -->
+        </xsd:sequence>
+        <xsd:attribute name="name" type="xsd:string"/>
+        <xsd:attribute name="category" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="attributeTermModel">
+    <xsd:annotation><xsd:appinfo>
+      <jaxb:class implClass="de.dailab.jadltools.model.tree.value.AttributeTermTree"/>
+    </xsd:appinfo></xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="FileContentModel">
+    <xsd:sequence>
+      <xsd:element name="value" type="termModel"/>
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+</xsd:schema>

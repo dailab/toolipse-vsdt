@@ -1,0 +1,230 @@
+\chapter{The Mappings to BPEL and JIAC IV}
+\label{chapter:jiacMapping}
+
+In this chapter we will introduce the mappings from BPMN to BPEL and JIAC. While the mapping from BPMN to BPEL is given in the BPMN specification there was no mapping from BPMN to JIAC yet. We will explain how agents could be modeled in BPMN and how the various elements of BPMN can be mapped to JADL.
+
+\section{BPEL}
+For the mapping to BPEL we kept close to the mapping proposed in the BPMN Specification \footnote{\url{http://www.bpmn.org/Documents/OMG Final Adopted BPMN 1-0 Spec 06-02-01.pdf}}. However, the implementation of the Element Mapping is not yet complete. While the basic concepts of the mapping to BPEL are already implemented there are some features that require a more in-depth knowledge of BPEL, for instance parallel multi instance loops or Timer and Rule Events, which require a separate process to trigger the Event. The mapping of these elements has been put back for now and will be implemented later.
+
+\section{JIAC}
+\label{sec:jiacMapping}
+
+% The greatest challenge in finding a mapping from BPMN to JIAC was that the BPMN specification does not include agent concepts.
+
+% Though on the first sight it might stand to reason to map Pools to agent platforms and Lanes to agents this approach left many questions open, for instance what the various Flow Objects should be mapped to in this case. The only possibility would have been to map the Flow Objects to service and plan element calls, executed in the order given by the Sequence Flows. Following this approach most BPMN elements would have been mapped to the same JIAC elements, regardless if Sequence Flow or Message Flow or what type of Task or Event.
+
+% Another approach was to map Pools to agents, Lanes to planelements of that agent and Flow Objects to the planelement's control flow. Changing a Lane could then be interpreted as calling a planelement, and returning to the initial Lane would be returning from that plan. However, there are a number of open questions in the case of forking on one Lane and joining on another. Further the same behavior can be achieved using Subprocesses.
+
+% mehrere mappings für verschiedene levels of detail?
+% Also it would be possible to provide more than one mapping from BPMN to JIAC. For instance, in one mapping a Process could map to a planelement and Flow Objects to the planelement's control flown, and in another mapping Pools could be mapped to platforms, Lanes to agents and Flow Objects to planelement calls. However, this approach raises the problem that the interpretation of a given BPMN diagram would be dependent on the specific mapping intended by the modeler.
+
+% A possible solution to this problem might be the introduction of custom Artifacts to represent the concepts of agents and platforms.
+
+
+% \subsection{Modeling Agents with Custom Artifacts}
+% 
+% The Business Process Modeling Notation may be extended by custom \emph{Artifacts}. While the existing elements may not be altered and no additional Flow Objects should be introduced, modelers and modeling tools are free to add non-standard elements as Artifacts, which can be connected to the other elements via Associations. Examples for Artifacts that are currently part of the BPMN are Data Objects, Groups and Text Annotations.
+% 
+% It might be interesting for the mapping to JIAC to introduce custom Artifacts. These new Artifacts could represent the concepts of ontologies, agents and agent platforms (see figure \ref{fig:bpmn_agents}), which do not have a representation in the original BPMN.
+% 
+% \begin{figure}[htp]
+% 	\centering
+% 	\includegraphics[width=.8\textwidth]{figures/impl/bpmn_agents.png}
+% 	\caption[Custom Artifacts]{Mockup of custom Artifacts representing agents and agent platforms}
+% 	\label{fig:bpmn_agents}
+% \end{figure}
+% 
+% Introducing these artifacts would solve the problems with mapping Pools and Processes to agents: If a Pool is mapped to a single agent this would result in a $1:1$ relation between agents and plan elements, which is not wanted. However, using Artifacts to represent agents and platforms they can be arbitrarily associated to Pools, allowing $n:m$ relations of agents and plan elements.
+
+
+% \subsection{Element Mapping}
+
+The mapping to JIAC presented in this %thesis
+document is concentrating on the control flow within a plan element. Pools are mapped to plan elements and Flow Objects to various JADL statements within that plan. Message Flow is mapped to the exchange of messages with speechacts. Lanes do not have any semantics in this mapping. This way it was possible to exhaust the additional information and semantics given in the Flow Object's subtypes and attributes.
+
+The following tables will give an overview of the current stage of the mapping from BPMN to JIAC. Note that not each element of BPMN has been successfully mapped to JIAC yet, and that not all the mappings proposed in these lists are already implemented in the \textsc{Visual Service Design Tool}. Some of which will require further reconcilement.
+
+\newpage
+
+\subsection{Diagram, Pool and Process}
+
+\begin{longtable}{|p{3.5cm}|p{10.5cm}|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Business Process Diagram}}
+\\\hline
+Pool                    &A Pool as a whole is mapped to a \verb|jadl| file holding an \verb|action| element. The names of both the file and the main action element will be derived from the Pool's name.
+\\\hline
+Process                 & The process type could be used to decide what kind of action to create, but the default will be a \verb|script|. The Flow Objects inside of the Process are mapped to the JADL elements that make up the \verb|script|.
+\\\hline
+Lane                    & Lanes are not regarded in the current mapping.
+\\\hline
+\end{longtable}
+
+
+\subsection{Events}
+It is not yet clear how to map Intermediate Events attached to an Activity boundary. Thus the mappings presented here are only for the case when the Events are in normal flow.
+
+\begin{longtable}{|p{3.5cm}|p{10.5cm}|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Start Event}}
+\\\hline
+Rule                    & The rule attribute could define the Action's \verb|pre| and \verb|eff|. However it is not yet clear how to handle multiple Start Events in this case.
+\\\hline
+Timer                   & A timer could be implemented with a ``Timer Bean'', triggering the action at a given time.
+\\\hline
+Message                 & A Message Start Event will be mapped to a \verb|receive| speechact. It is not yet clear how the several attributes of the Message Start Event could best map to the attributes of the speechact.
+\\\hline
+Link                    &
+\\\hline
+Multiple                & 
+\\\hline
+
+\hline
+\multicolumn{2}{|c|}{\textbf{Intermediate Event}}
+\\\hline
+Rule                    & This could map to an \verb|eval| statement wrapped in a loop, so the rule will be tested until it is true.
+\\\hline
+Timer                   & This could map to a call to an ontology function. In this function Java could be used to wait for a given time or up to a certain time/date. \\ & Another possibility would be to implement the timer as a separate planelement, sending a speechact when the time is over. This would be advantageous when being used as part of a event-based decision (see Gateway mappings).
+\\\hline
+Message                 & This will map to a \verb|receive| speechact (see Message Start Event).
+\\\hline
+Link                    & 
+\\\hline
+Multiple                & The mapping for a Multi-Trigger Event could be realized as a \verb|par| holding the mappings for the other triggers.
+\\\hline
+Cancel                  &  
+\\\hline
+Compensate              &  
+\\\hline
+Error                   & This will map to a \verb|fail| statement.
+\\\hline
+
+\hline
+\multicolumn{2}{|c|}{\textbf{End Event}}
+\\\hline
+Message                 & The mapping for a Message End Event should be a \verb|send| speechact, analogue to the Message Start Event.
+\\\hline
+Link                    & 
+\\\hline
+Multiple                & The mapping for a Multi-Trigger Event could be realized as a \verb|par| holding the mappings for the other triggers.
+\\\hline
+Cancel                  & 
+\\\hline
+Compensate              & 
+\\\hline
+Error                   & This will map to a \verb|fail| statement.
+\\\hline
+Terminate               & This will map to a \verb|end| statement.
+\\\hline
+\end{longtable}
+
+
+\subsection{Activities}
+
+\begin{longtable}{|p{3.5cm}|p{10.5cm}|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Activity}}
+\\\hline
+Standard Loop           & A standard loop can be mapped to a \verb|while| element. If the test time is \verb|AFTER| the looping activity has to be executed twice. This can be archived by the use of auxiliary variables or code duplication.
+\\\hline
+Multi Instance Loop     &
+\\\hline
+With Event Handler & There is no mapping for Event Handlers (Events on the Activity's boundary) yet.
+\\\hline
+
+\hline
+\multicolumn{2}{|c|}{\textbf{Task}}
+\\\hline
+Manual                  & There will be no mapping for a Manual Task.
+\\\hline
+Receive                 & This will map to a \verb|receive| speechact, similar to the Message Start Event.
+\\\hline
+Send                    & This will map to a \verb|send| speechact, similar to the Message End Event
+\\\hline
+Service                 & This could either map to a combination of \verb|send| and \verb|receive| speechact or to a service call. In this case the message sent would be the service call and the message received the result of the call.
+\\\hline
+Script                  & This could map to arbitrary JADL code, depending on the content of the given script string.
+\\\hline
+Reference               & This will map to a copy of the mapping of the referenced Task.
+\\\hline
+User                    & A User Task will require interaction with the user, for instance using a GUI. A marker will be set, remembering the designer to implement the required logic.
+\\\hline
+
+\hline
+\multicolumn{2}{|c|}{\textbf{Subprocess}}
+\\\hline
+Embedded                & The content of the Subprocess will make up a new \verb|action| element while the Subprocess itself will be mapped to a \verb|call| element, calling this action.
+\\\hline
+Reference               & Like the Embedded Subprocess this will be mapped to a \verb|call| element, with the action element already being implemented with the original Subprocess's mapping.
+\\\hline
+Independent             & An Independent subprocess could be mapped to a service or planelement call.
+\\\hline
+Transaction             &
+\\\hline
+\end{longtable}
+
+
+\subsection{Gateways}
+Gateways in general define the extent of blocks and loops. Whether a loop or a block will be created is dependent of the Gateway's context. For a loop only a XOR-Data Gateway will be allowed. The merging Gateway of both blocks and loops is not taken into account yet.
+
+\begin{longtable}{|p{3.5cm}|p{10.5cm}|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Gateway}}
+\\\hline
+XOR Data (Loop)         & Being part of a loop the Gateway will be mapped to a \verb|while|, similar to the Activity Standard Loop mapping. The sequence going from the first to the second Gateway, that is, the until-part of the loop, will be copied and inserted before the \verb|while|. The loop body will be made up of the second sequence, going from the second Gateway back to the first, and the copy of the first sequence. The loop condition will be derived from the condition expressions of one of the Sequence Flows going out of the second Gateway.
+\\\hline
+XOR Data (Block)        & Being part of a block the Gateway will be mapped to a \verb|branch| element. The sequences starting at the Gateway will make up the branch cases. A \verb|cond| will be created. The formulas for the condition will be derived from the outgoing Sequence Flows' condition expressions. The default sequence will be the last case, being triggered if no other does apply. \\& Another mapping would be to create a \verb|alt| block with a \verb|seq| for each sequence starting at the Gateway. Each \verb|seq|, except that for the default sequence, would start with a \verb|eval|, holding the condition.
+\\\hline
+XOR Event               & This will map to a \verb|branch| element. The sequences starting at the Gateway will make up the branch cases. A \verb|receive| will be created. The messages for the receive will be derived from the Message Events and Receive Tasks following the Gateway. \\&
+However, this does not work if one of the Events has a Timer trigger.
+\\\hline
+AND                     & This will map to a \verb|par| block, holding the sequences starting at the Gateway.
+\\\hline
+OR                      & This could be mapped to a \verb|par| block, holding one \verb|alt| block per sequence. The alt blocks will each contain a \verb|seq| starting with a \verb|eval| and a \verb|cont|, like \verb|(par (alt (seq (eval [1]) [2]) cont) [3] )| with [1] being the condition expression of the Sequence Flow, [2] being the elements of that sequence starting at the Gateway and [3] being the other sequences. If there is a default Gate on the Gateway auxiliary variables will have to be introduced.
+\\\hline
+Complex                 & Complex Gateways do not have a mapping yet.
+\\\hline
+\end{longtable}
+
+\subsection{Other Elements}
+
+\begin{longtable}{|p{3.5cm}|p{10.5cm}|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Connections}}
+\\\hline
+Sequence Flow           & Sequence Flows do not have a mapping on their own, but they are used to identify the flow of control and to arrange the other elements to sequences, blocks and loops. Further, the condition expression is used in the mappings of some of the Gateways.
+\\\hline
+Message Flow            & Currently Message Flows do not have a mapping. For identifying speechacts only the Message Events and Send and Receive Tasks are taken into account. However, the Message Flows could be used for the mapping of speechacts, too. They could be regarded with a lower priority in case the Tasks and Events do not provide enough information for deriving speechacts from them. This could increase the usability.
+\\\hline
+Association             & Associations will be needed in some of the other mappings, especially in case additional, custom Artifacts are introduced. However, an Association itself will not be mapped.
+\\\hline
+
+\hline
+\multicolumn{2}{|c|}{\textbf{Artifact}}
+\\\hline
+Data Object             & Data Objects do not have a mapping yet.
+\\\hline
+Text Annotation         & Text Annotations could be used to provide additional Documentation for the associated element.
+\\\hline
+Group                   & There is no mapping for the Group element.
+\\\hline
+Custom Artifacts        & Custom Artifacts could be used to represent agent-oriented concepts that were not considered in the specification of the original BPMN. They could be used to associate Scripts to Agents and Agents to Platforms or to identify Services. Currently there are no custom Artifacts defined.
+\\\hline
+
+\hline
+\multicolumn{2}{|c|}{\textbf{Supporting Types}}
+\\\hline
+Property                & For each Property a \verb|var| is declared. The Property's name and type will be the variable's name and type. If the property is declared on a Activity the variable will be declared for the whole script. An exception to this is when the Activity is an Embedded Subprocess. In that case the variable is declared in the script of the action the Subprocess is mapped to.
+\\\hline
+Assignment              & Assignments are mapped to \verb|bind| and \verb|unbind| elements. If the from-Expression is not null then a \verb|bind| will be created, binding the term specified in the from-Expression to the variable, referenced by the to-Property. If the from-Expression is null, then a \verb|unbind| will be created for the given variable.
+\\\hline
+Message                 & Messages are mapped to speechacts when used by Message Events or Send or Receive Tasks. How exactly the various attributes will be mapped to the attributes of the speechact is not decided yet.
+\\\hline
+Participant             & The Participant could be used to group the planelements their Pools have been mapped to to services and to determine which one will be the user and which the provider.
+\\\hline
+\end{longtable}
+
+
+% This chapter explained in detail the present state of the mapping from BPMN to JIAC and presented some ideas how agent concepts, which are not considered in the BPMN specification, could be modeled.
+
+% The next two chapters will describe in detail the implementation of the \textsc{Visual Service Design Tool}. Firstly we will have a look on the editor, which has been realized using Eclipse GMF. Then we will introduce the implementation of the mapping, describe how the EMT has been used for the transformation and explain the most important rules.

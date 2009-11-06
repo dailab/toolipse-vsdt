@@ -1,0 +1,807 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd2ecore:XSD2EcoreMappingRoot xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd2ecore="http://www.eclipse.org/emf/2002/XSD2Ecore" inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#/ http://schemas.xmlsoap.org/wsdl/#/"
+    outputs="wsdl.ecore#/ process.ecore#/" topToBottom="true">
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tDocumentation;XSDComplexTypeDefinition"
+      outputs="wsdl.ecore#//TDocumentation">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tDocumentation;XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="wsdl.ecore#//TDocumentation/any"/>
+  </nested>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tDocumented;XSDComplexTypeDefinition=1"
+      outputs="wsdl.ecore#//TDocumented">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tDocumented;XSDComplexTypeDefinition=1/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="wsdl.ecore#//TDocumented/documentation"/>
+  </nested>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tExtensibleDocumented;XSDComplexTypeDefinition=3"
+      outputs="wsdl.ecore#//TExtensibleDocumented">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tExtensibleDocumented;XSDComplexTypeDefinition=3/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="wsdl.ecore#//TExtensibleDocumented/any"/>
+  </nested>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tExtensibleAttributesDocumented;XSDComplexTypeDefinition=2"
+      outputs="wsdl.ecore#//TExtensibleAttributesDocumented">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tExtensibleAttributesDocumented;XSDComplexTypeDefinition=2/XSDWildcard"
+        outputs="wsdl.ecore#//TExtensibleAttributesDocumented/anyAttribute"/>
+  </nested>
+  <nested inputs="bundleentry://1463/cache/www.w3.org/2001/XMLSchema.xsd#//anyURI;XSDSimpleTypeDefinition=23"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//AnyURI"/>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tImport;XSDComplexTypeDefinition=5"
+      outputs="wsdl.ecore#//TImport">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tImport;XSDComplexTypeDefinition=5/XSDAttributeUse=1"
+        outputs="wsdl.ecore#//TImport/location"/>
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tImport;XSDComplexTypeDefinition=5/XSDAttributeUse"
+        outputs="wsdl.ecore#//TImport/namespace"/>
+  </nested>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//anyTopLevelOptionalElement;XSDModelGroupDefinition/XSDModelGroup/XSDParticle"
+      outputs="wsdl.ecore#//TDefinitions/import"/>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tTypes;XSDComplexTypeDefinition=6"
+      outputs="wsdl.ecore#//TTypes"/>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//anyTopLevelOptionalElement;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=1"
+      outputs="wsdl.ecore#//TDefinitions/types"/>
+  <nested inputs="bundleentry://1463/cache/www.w3.org/2001/XMLSchema.xsd#//QName;XSDSimpleTypeDefinition=24"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//QName"/>
+  <nested inputs="bundleentry://1463/cache/www.w3.org/2001/XMLSchema.xsd#//NCName;XSDSimpleTypeDefinition=34"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//NCName"/>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tPart;XSDComplexTypeDefinition=8"
+      outputs="wsdl.ecore#//TPart">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tPart;XSDComplexTypeDefinition=8/XSDAttributeUse=1"
+        outputs="wsdl.ecore#//TPart/element"/>
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tPart;XSDComplexTypeDefinition=8/XSDAttributeUse"
+        outputs="wsdl.ecore#//TPart/name"/>
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tPart;XSDComplexTypeDefinition=8/XSDAttributeUse=2"
+        outputs="wsdl.ecore#//TPart/type"/>
+  </nested>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tMessage;XSDComplexTypeDefinition=7"
+      outputs="wsdl.ecore#//TMessage">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tMessage;XSDComplexTypeDefinition=7/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="wsdl.ecore#//TMessage/part"/>
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tMessage;XSDComplexTypeDefinition=7/XSDAttributeUse"
+        outputs="wsdl.ecore#//TMessage/name"/>
+  </nested>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//anyTopLevelOptionalElement;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=2"
+      outputs="wsdl.ecore#//TDefinitions/message"/>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tParam;XSDComplexTypeDefinition=11"
+      outputs="wsdl.ecore#//TParam">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tParam;XSDComplexTypeDefinition=11/XSDAttributeUse=1"
+        outputs="wsdl.ecore#//TParam/message"/>
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tParam;XSDComplexTypeDefinition=11/XSDAttributeUse"
+        outputs="wsdl.ecore#//TParam/name"/>
+  </nested>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//request-response-or-one-way-operation;XSDModelGroupDefinition=1/XSDModelGroup/XSDParticle"
+      outputs="wsdl.ecore#//TOperation/input"/>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//request-response-or-one-way-operation;XSDModelGroupDefinition=1/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle"
+      outputs="wsdl.ecore#//TOperation/output"/>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tFault;XSDComplexTypeDefinition=12"
+      outputs="wsdl.ecore#//TFault">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tFault;XSDComplexTypeDefinition=12/XSDAttributeUse=1"
+        outputs="wsdl.ecore#//TFault/message"/>
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tFault;XSDComplexTypeDefinition=12/XSDAttributeUse"
+        outputs="wsdl.ecore#//TFault/name"/>
+  </nested>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//request-response-or-one-way-operation;XSDModelGroupDefinition=1/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle=1"
+      outputs="wsdl.ecore#//TOperation/fault"/>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//solicit-response-or-notification-operation;XSDModelGroupDefinition=2/XSDModelGroup/XSDParticle"
+      outputs="wsdl.ecore#//TOperation/output1"/>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//solicit-response-or-notification-operation;XSDModelGroupDefinition=2/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle"
+      outputs="wsdl.ecore#//TOperation/input1"/>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//solicit-response-or-notification-operation;XSDModelGroupDefinition=2/XSDModelGroup/XSDParticle=1/XSDModelGroup/XSDParticle=1"
+      outputs="wsdl.ecore#//TOperation/fault1"/>
+  <nested inputs="bundleentry://1463/cache/www.w3.org/2001/XMLSchema.xsd#//NMTOKENS;XSDSimpleTypeDefinition=32"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//NMTOKENS"/>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tOperation;XSDComplexTypeDefinition=10"
+      outputs="wsdl.ecore#//TOperation">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tOperation;XSDComplexTypeDefinition=10/XSDAttributeUse"
+        outputs="wsdl.ecore#//TOperation/name"/>
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tOperation;XSDComplexTypeDefinition=10/XSDAttributeUse=1"
+        outputs="wsdl.ecore#//TOperation/parameterOrder"/>
+  </nested>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tPortType;XSDComplexTypeDefinition=9"
+      outputs="wsdl.ecore#//TPortType">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tPortType;XSDComplexTypeDefinition=9/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="wsdl.ecore#//TPortType/operation"/>
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tPortType;XSDComplexTypeDefinition=9/XSDAttributeUse"
+        outputs="wsdl.ecore#//TPortType/name"/>
+  </nested>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//anyTopLevelOptionalElement;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=3"
+      outputs="wsdl.ecore#//TDefinitions/portType"/>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tBindingOperationMessage;XSDComplexTypeDefinition=14"
+      outputs="wsdl.ecore#//TBindingOperationMessage">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tBindingOperationMessage;XSDComplexTypeDefinition=14/XSDAttributeUse"
+        outputs="wsdl.ecore#//TBindingOperationMessage/name"/>
+  </nested>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tBindingOperationFault;XSDComplexTypeDefinition=15"
+      outputs="wsdl.ecore#//TBindingOperationFault">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tBindingOperationFault;XSDComplexTypeDefinition=15/XSDAttributeUse"
+        outputs="wsdl.ecore#//TBindingOperationFault/name"/>
+  </nested>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tBindingOperation;XSDComplexTypeDefinition=16"
+      outputs="wsdl.ecore#//TBindingOperation">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tBindingOperation;XSDComplexTypeDefinition=16/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="wsdl.ecore#//TBindingOperation/input"/>
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tBindingOperation;XSDComplexTypeDefinition=16/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="wsdl.ecore#//TBindingOperation/output"/>
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tBindingOperation;XSDComplexTypeDefinition=16/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="wsdl.ecore#//TBindingOperation/fault"/>
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tBindingOperation;XSDComplexTypeDefinition=16/XSDAttributeUse"
+        outputs="wsdl.ecore#//TBindingOperation/name"/>
+  </nested>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tBinding;XSDComplexTypeDefinition=13"
+      outputs="wsdl.ecore#//TBinding">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tBinding;XSDComplexTypeDefinition=13/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="wsdl.ecore#//TBinding/operation"/>
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tBinding;XSDComplexTypeDefinition=13/XSDAttributeUse"
+        outputs="wsdl.ecore#//TBinding/name"/>
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tBinding;XSDComplexTypeDefinition=13/XSDAttributeUse=1"
+        outputs="wsdl.ecore#//TBinding/type"/>
+  </nested>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//anyTopLevelOptionalElement;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=4"
+      outputs="wsdl.ecore#//TDefinitions/binding"/>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tPort;XSDComplexTypeDefinition=18"
+      outputs="wsdl.ecore#//TPort">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tPort;XSDComplexTypeDefinition=18/XSDAttributeUse=1"
+        outputs="wsdl.ecore#//TPort/binding"/>
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tPort;XSDComplexTypeDefinition=18/XSDAttributeUse"
+        outputs="wsdl.ecore#//TPort/name"/>
+  </nested>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tService;XSDComplexTypeDefinition=17"
+      outputs="wsdl.ecore#//TService">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tService;XSDComplexTypeDefinition=17/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="wsdl.ecore#//TService/port"/>
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tService;XSDComplexTypeDefinition=17/XSDAttributeUse"
+        outputs="wsdl.ecore#//TService/name"/>
+  </nested>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//anyTopLevelOptionalElement;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=5"
+      outputs="wsdl.ecore#//TDefinitions/service"/>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tDefinitions;XSDComplexTypeDefinition=4"
+      outputs="wsdl.ecore#//TDefinitions">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tDefinitions;XSDComplexTypeDefinition=4/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="wsdl.ecore#//TDefinitions/anyTopLevelOptionalElement"/>
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tDefinitions;XSDComplexTypeDefinition=4/XSDAttributeUse=1"
+        outputs="wsdl.ecore#//TDefinitions/name"/>
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tDefinitions;XSDComplexTypeDefinition=4/XSDAttributeUse"
+        outputs="wsdl.ecore#//TDefinitions/targetNamespace"/>
+  </nested>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//definitions;XSDElementDeclaration"
+      outputs="wsdl.ecore#//DocumentRoot/definitions"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tExtensibleElements;XSDComplexTypeDefinition"
+      outputs="process.ecore#//TExtensibleElements">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tExtensibleElements;XSDComplexTypeDefinition/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TExtensibleElements/any"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tExtensibleElements;XSDComplexTypeDefinition/XSDWildcard"
+        outputs="process.ecore#//TExtensibleElements/anyAttribute"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tRoles;XSDSimpleTypeDefinition=4"
+      outputs="process.ecore#//TRoles">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tRoles;XSDSimpleTypeDefinition=4/XSDEnumerationFacet"
+        outputs="process.ecore#//TRoles/myRole"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tRoles;XSDSimpleTypeDefinition=4/XSDEnumerationFacet=1"
+        outputs="process.ecore#//TRoles/partnerRole"/>
+  </nested>
+  <nested inputs="bundleentry://1463/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=7"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//String"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tBoolean;XSDSimpleTypeDefinition=3"
+      outputs="process.ecore#//TBoolean">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tBoolean;XSDSimpleTypeDefinition=3/XSDEnumerationFacet"
+        outputs="process.ecore#//TBoolean/yes"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tBoolean;XSDSimpleTypeDefinition=3/XSDEnumerationFacet=1"
+        outputs="process.ecore#//TBoolean/no"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tFrom;XSDComplexTypeDefinition=31"
+      outputs="process.ecore#//TFrom">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tFrom;XSDComplexTypeDefinition=31/XSDAttributeUse=5"
+        outputs="process.ecore#//TFrom/endpointReference"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tFrom;XSDComplexTypeDefinition=31/XSDAttributeUse=6"
+        outputs="process.ecore#//TFrom/expression"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tFrom;XSDComplexTypeDefinition=31/XSDAttributeUse=7"
+        outputs="process.ecore#//TFrom/opaque"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tFrom;XSDComplexTypeDefinition=31/XSDAttributeUse=1"
+        outputs="process.ecore#//TFrom/part"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tFrom;XSDComplexTypeDefinition=31/XSDAttributeUse=4"
+        outputs="process.ecore#//TFrom/partnerLink"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tFrom;XSDComplexTypeDefinition=31/XSDAttributeUse=3"
+        outputs="process.ecore#//TFrom/property"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tFrom;XSDComplexTypeDefinition=31/XSDAttributeUse=2"
+        outputs="process.ecore#//TFrom/query"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tFrom;XSDComplexTypeDefinition=31/XSDAttributeUse"
+        outputs="process.ecore#//TFrom/variable"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//from;XSDElementDeclaration=1"
+      outputs="process.ecore#//DocumentRoot/from"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPartnerLink;XSDComplexTypeDefinition=3"
+      outputs="process.ecore#//TPartnerLink">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPartnerLink;XSDComplexTypeDefinition=3/XSDAttributeUse=2"
+        outputs="process.ecore#//TPartnerLink/myRole"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPartnerLink;XSDComplexTypeDefinition=3/XSDAttributeUse"
+        outputs="process.ecore#//TPartnerLink/name"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPartnerLink;XSDComplexTypeDefinition=3/XSDAttributeUse=1"
+        outputs="process.ecore#//TPartnerLink/partnerLinkType"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPartnerLink;XSDComplexTypeDefinition=3/XSDAttributeUse=3"
+        outputs="process.ecore#//TPartnerLink/partnerRole"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPartnerLinks;XSDComplexTypeDefinition=2"
+      outputs="process.ecore#//TPartnerLinks">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPartnerLinks;XSDComplexTypeDefinition=2/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TPartnerLinks/partnerLink"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPartner;XSDComplexTypeDefinition=5/XSDParticle/XSDModelGroup/XSDParticle/partnerLink;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="process.ecore#//PartnerLinkType">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPartner;XSDComplexTypeDefinition=5/XSDParticle/XSDModelGroup/XSDParticle/partnerLink;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="process.ecore#//PartnerLinkType/name"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPartner;XSDComplexTypeDefinition=5"
+      outputs="process.ecore#//TPartner">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPartner;XSDComplexTypeDefinition=5/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TPartner/partnerLink"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPartner;XSDComplexTypeDefinition=5/XSDAttributeUse"
+        outputs="process.ecore#//TPartner/name"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPartners;XSDComplexTypeDefinition=4"
+      outputs="process.ecore#//TPartners">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPartners;XSDComplexTypeDefinition=4/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TPartners/partner"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tVariable;XSDComplexTypeDefinition=15"
+      outputs="process.ecore#//TVariable">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tVariable;XSDComplexTypeDefinition=15/XSDAttributeUse=3"
+        outputs="process.ecore#//TVariable/element"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tVariable;XSDComplexTypeDefinition=15/XSDAttributeUse=1"
+        outputs="process.ecore#//TVariable/messageType"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tVariable;XSDComplexTypeDefinition=15/XSDAttributeUse"
+        outputs="process.ecore#//TVariable/name"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tVariable;XSDComplexTypeDefinition=15/XSDAttributeUse=2"
+        outputs="process.ecore#//TVariable/type"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tVariable;XSDComplexTypeDefinition=15/XSDWildcard"
+        outputs="process.ecore#//TVariable/anyAttribute"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tVariables;XSDComplexTypeDefinition=14"
+      outputs="process.ecore#//TVariables">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tVariables;XSDComplexTypeDefinition=14/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TVariables/variable"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelationSet;XSDComplexTypeDefinition=17/XSDAttributeUse/properties;XSDAttributeDeclaration/XSDSimpleTypeDefinition"
+      outputs="process.ecore#//PropertiesType"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelationSet;XSDComplexTypeDefinition=17"
+      outputs="process.ecore#//TCorrelationSet">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelationSet;XSDComplexTypeDefinition=17/XSDAttributeUse=1"
+        outputs="process.ecore#//TCorrelationSet/name"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelationSet;XSDComplexTypeDefinition=17/XSDAttributeUse"
+        outputs="process.ecore#//TCorrelationSet/properties"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelationSets;XSDComplexTypeDefinition=16"
+      outputs="process.ecore#//TCorrelationSets">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelationSets;XSDComplexTypeDefinition=16/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TCorrelationSets/correlationSet"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tTarget;XSDComplexTypeDefinition=20"
+      outputs="process.ecore#//TTarget">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tTarget;XSDComplexTypeDefinition=20/XSDAttributeUse"
+        outputs="process.ecore#//TTarget/linkName"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tBoolean-expr;XSDSimpleTypeDefinition"
+      outputs="process.ecore#//TBooleanExpr"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tSource;XSDComplexTypeDefinition=19"
+      outputs="process.ecore#//TSource">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tSource;XSDComplexTypeDefinition=19/XSDAttributeUse"
+        outputs="process.ecore#//TSource/linkName"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tSource;XSDComplexTypeDefinition=19/XSDAttributeUse=1"
+        outputs="process.ecore#//TSource/transitionCondition"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tActivity;XSDComplexTypeDefinition=18"
+      outputs="process.ecore#//TActivity">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tActivity;XSDComplexTypeDefinition=18/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TActivity/target"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tActivity;XSDComplexTypeDefinition=18/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="process.ecore#//TActivity/source"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tActivity;XSDComplexTypeDefinition=18/XSDAttributeUse=1"
+        outputs="process.ecore#//TActivity/joinCondition"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tActivity;XSDComplexTypeDefinition=18/XSDAttributeUse"
+        outputs="process.ecore#//TActivity/name"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tActivity;XSDComplexTypeDefinition=18/XSDAttributeUse=2"
+        outputs="process.ecore#//TActivity/suppressJoinFailure"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tEmpty;XSDComplexTypeDefinition=21"
+      outputs="process.ecore#//TEmpty"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle"
+      outputs="process.ecore#//TActivityOrCompensateContainer/empty"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelation;XSDComplexTypeDefinition=23"
+      outputs="process.ecore#//TCorrelation">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelation;XSDComplexTypeDefinition=23/XSDAttributeUse=1"
+        outputs="process.ecore#//TCorrelation/initiate"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelation;XSDComplexTypeDefinition=23/XSDAttributeUse"
+        outputs="process.ecore#//TCorrelation/set"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelationWithPattern;XSDComplexTypeDefinition=25/XSDAttributeUse/pattern;XSDAttributeDeclaration/XSDSimpleTypeDefinition"
+      outputs="process.ecore#//PatternType">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelationWithPattern;XSDComplexTypeDefinition=25/XSDAttributeUse/pattern;XSDAttributeDeclaration/XSDSimpleTypeDefinition/XSDEnumerationFacet"
+        outputs="process.ecore#//PatternType/in"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelationWithPattern;XSDComplexTypeDefinition=25/XSDAttributeUse/pattern;XSDAttributeDeclaration/XSDSimpleTypeDefinition/XSDEnumerationFacet=1"
+        outputs="process.ecore#//PatternType/out"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelationWithPattern;XSDComplexTypeDefinition=25/XSDAttributeUse/pattern;XSDAttributeDeclaration/XSDSimpleTypeDefinition/XSDEnumerationFacet=2"
+        outputs="process.ecore#//PatternType/outIn"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelationWithPattern;XSDComplexTypeDefinition=25"
+      outputs="process.ecore#//TCorrelationWithPattern">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelationWithPattern;XSDComplexTypeDefinition=25/XSDAttributeUse"
+        outputs="process.ecore#//TCorrelationWithPattern/pattern"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelationsWithPattern;XSDComplexTypeDefinition=24"
+      outputs="process.ecore#//TCorrelationsWithPattern">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelationsWithPattern;XSDComplexTypeDefinition=24/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TCorrelationsWithPattern/correlation"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCompensationHandler;XSDComplexTypeDefinition=13"
+      outputs="process.ecore#//TCompensationHandler"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tInvoke;XSDComplexTypeDefinition=26"
+      outputs="process.ecore#//TInvoke">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tInvoke;XSDComplexTypeDefinition=26/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TInvoke/correlations"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tInvoke;XSDComplexTypeDefinition=26/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="process.ecore#//TInvoke/catch"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tInvoke;XSDComplexTypeDefinition=26/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="process.ecore#//TInvoke/catchAll"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tInvoke;XSDComplexTypeDefinition=26/XSDParticle/XSDModelGroup/XSDParticle=3"
+        outputs="process.ecore#//TInvoke/compensationHandler"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tInvoke;XSDComplexTypeDefinition=26/XSDAttributeUse=3"
+        outputs="process.ecore#//TInvoke/inputVariable"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tInvoke;XSDComplexTypeDefinition=26/XSDAttributeUse=2"
+        outputs="process.ecore#//TInvoke/operation"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tInvoke;XSDComplexTypeDefinition=26/XSDAttributeUse=4"
+        outputs="process.ecore#//TInvoke/outputVariable"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tInvoke;XSDComplexTypeDefinition=26/XSDAttributeUse"
+        outputs="process.ecore#//TInvoke/partnerLink"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tInvoke;XSDComplexTypeDefinition=26/XSDAttributeUse=1"
+        outputs="process.ecore#//TInvoke/portType"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=1"
+      outputs="process.ecore#//TActivityOrCompensateContainer/invoke"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelations;XSDComplexTypeDefinition=22"
+      outputs="process.ecore#//TCorrelations">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCorrelations;XSDComplexTypeDefinition=22/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TCorrelations/correlation"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tReceive;XSDComplexTypeDefinition=27"
+      outputs="process.ecore#//TReceive">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tReceive;XSDComplexTypeDefinition=27/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TReceive/correlations"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tReceive;XSDComplexTypeDefinition=27/XSDAttributeUse=4"
+        outputs="process.ecore#//TReceive/createInstance"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tReceive;XSDComplexTypeDefinition=27/XSDAttributeUse=2"
+        outputs="process.ecore#//TReceive/operation"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tReceive;XSDComplexTypeDefinition=27/XSDAttributeUse"
+        outputs="process.ecore#//TReceive/partnerLink"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tReceive;XSDComplexTypeDefinition=27/XSDAttributeUse=1"
+        outputs="process.ecore#//TReceive/portType"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tReceive;XSDComplexTypeDefinition=27/XSDAttributeUse=3"
+        outputs="process.ecore#//TReceive/variable"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=2"
+      outputs="process.ecore#//TActivityOrCompensateContainer/receive"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tReply;XSDComplexTypeDefinition=28"
+      outputs="process.ecore#//TReply">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tReply;XSDComplexTypeDefinition=28/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TReply/correlations"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tReply;XSDComplexTypeDefinition=28/XSDAttributeUse=4"
+        outputs="process.ecore#//TReply/faultName"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tReply;XSDComplexTypeDefinition=28/XSDAttributeUse=2"
+        outputs="process.ecore#//TReply/operation"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tReply;XSDComplexTypeDefinition=28/XSDAttributeUse"
+        outputs="process.ecore#//TReply/partnerLink"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tReply;XSDComplexTypeDefinition=28/XSDAttributeUse=1"
+        outputs="process.ecore#//TReply/portType"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tReply;XSDComplexTypeDefinition=28/XSDAttributeUse=3"
+        outputs="process.ecore#//TReply/variable"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=3"
+      outputs="process.ecore#//TActivityOrCompensateContainer/reply"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//to;XSDElementDeclaration=2/XSDComplexTypeDefinition"
+      outputs="process.ecore#//ToType"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCopy;XSDComplexTypeDefinition=30"
+      outputs="process.ecore#//TCopy">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCopy;XSDComplexTypeDefinition=30/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TCopy/from"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCopy;XSDComplexTypeDefinition=30/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="process.ecore#//TCopy/to"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tAssign;XSDComplexTypeDefinition=29"
+      outputs="process.ecore#//TAssign">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tAssign;XSDComplexTypeDefinition=29/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TAssign/copy"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=4"
+      outputs="process.ecore#//TActivityOrCompensateContainer/assign"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tDuration-expr;XSDSimpleTypeDefinition=1"
+      outputs="process.ecore#//TDurationExpr"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tDeadline-expr;XSDSimpleTypeDefinition=2"
+      outputs="process.ecore#//TDeadlineExpr"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tWait;XSDComplexTypeDefinition=32"
+      outputs="process.ecore#//TWait">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tWait;XSDComplexTypeDefinition=32/XSDAttributeUse"
+        outputs="process.ecore#//TWait/for"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tWait;XSDComplexTypeDefinition=32/XSDAttributeUse=1"
+        outputs="process.ecore#//TWait/until"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=5"
+      outputs="process.ecore#//TActivityOrCompensateContainer/wait"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tThrow;XSDComplexTypeDefinition=33"
+      outputs="process.ecore#//TThrow">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tThrow;XSDComplexTypeDefinition=33/XSDAttributeUse"
+        outputs="process.ecore#//TThrow/faultName"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tThrow;XSDComplexTypeDefinition=33/XSDAttributeUse=1"
+        outputs="process.ecore#//TThrow/faultVariable"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=6"
+      outputs="process.ecore#//TActivityOrCompensateContainer/throw"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tTerminate;XSDComplexTypeDefinition=35"
+      outputs="process.ecore#//TTerminate"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=7"
+      outputs="process.ecore#//TActivityOrCompensateContainer/terminate"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tLink;XSDComplexTypeDefinition=38"
+      outputs="process.ecore#//TLink">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tLink;XSDComplexTypeDefinition=38/XSDAttributeUse"
+        outputs="process.ecore#//TLink/name"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tLinks;XSDComplexTypeDefinition=37"
+      outputs="process.ecore#//TLinks">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tLinks;XSDComplexTypeDefinition=37/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TLinks/link"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle"
+      outputs="process.ecore#//TFlow/empty"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=1"
+      outputs="process.ecore#//TFlow/invoke"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=2"
+      outputs="process.ecore#//TFlow/receive"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=3"
+      outputs="process.ecore#//TFlow/reply"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=4"
+      outputs="process.ecore#//TFlow/assign"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=5"
+      outputs="process.ecore#//TFlow/wait"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=6"
+      outputs="process.ecore#//TFlow/throw"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=7"
+      outputs="process.ecore#//TFlow/terminate"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=8"
+      outputs="process.ecore#//TFlow/flow"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle"
+      outputs="process.ecore#//TActivityContainer/empty"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=1"
+      outputs="process.ecore#//TActivityContainer/invoke"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=2"
+      outputs="process.ecore#//TActivityContainer/receive"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=3"
+      outputs="process.ecore#//TActivityContainer/reply"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=4"
+      outputs="process.ecore#//TActivityContainer/assign"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=5"
+      outputs="process.ecore#//TActivityContainer/wait"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=6"
+      outputs="process.ecore#//TActivityContainer/throw"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=7"
+      outputs="process.ecore#//TActivityContainer/terminate"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=8"
+      outputs="process.ecore#//TActivityContainer/flow"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=9"
+      outputs="process.ecore#//TActivityContainer/switch"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle"
+      outputs="process.ecore#//TWhile/empty"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=1"
+      outputs="process.ecore#//TWhile/invoke"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=2"
+      outputs="process.ecore#//TWhile/receive"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=3"
+      outputs="process.ecore#//TWhile/reply"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=4"
+      outputs="process.ecore#//TWhile/assign"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=5"
+      outputs="process.ecore#//TWhile/wait"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=6"
+      outputs="process.ecore#//TWhile/throw"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=7"
+      outputs="process.ecore#//TWhile/terminate"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=8"
+      outputs="process.ecore#//TWhile/flow"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=9"
+      outputs="process.ecore#//TWhile/switch"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=10"
+      outputs="process.ecore#//TWhile/while"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle"
+      outputs="process.ecore#//TSequence/empty"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=1"
+      outputs="process.ecore#//TSequence/invoke"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=2"
+      outputs="process.ecore#//TSequence/receive"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=3"
+      outputs="process.ecore#//TSequence/reply"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=4"
+      outputs="process.ecore#//TSequence/assign"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=5"
+      outputs="process.ecore#//TSequence/wait"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=6"
+      outputs="process.ecore#//TSequence/throw"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=7"
+      outputs="process.ecore#//TSequence/terminate"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=8"
+      outputs="process.ecore#//TSequence/flow"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=9"
+      outputs="process.ecore#//TSequence/switch"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=10"
+      outputs="process.ecore#//TSequence/while"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=11"
+      outputs="process.ecore#//TSequence/sequence"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle"
+      outputs="process.ecore#//TOnMessage/empty"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=1"
+      outputs="process.ecore#//TOnMessage/invoke"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=2"
+      outputs="process.ecore#//TOnMessage/receive"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=3"
+      outputs="process.ecore#//TOnMessage/reply"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=4"
+      outputs="process.ecore#//TOnMessage/assign"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=5"
+      outputs="process.ecore#//TOnMessage/wait"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=6"
+      outputs="process.ecore#//TOnMessage/throw"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=7"
+      outputs="process.ecore#//TOnMessage/terminate"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=8"
+      outputs="process.ecore#//TOnMessage/flow"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=9"
+      outputs="process.ecore#//TOnMessage/switch"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=10"
+      outputs="process.ecore#//TOnMessage/while"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=11"
+      outputs="process.ecore#//TOnMessage/sequence"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=12"
+      outputs="process.ecore#//TOnMessage/pick"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tOnAlarm;XSDComplexTypeDefinition=12"
+      outputs="process.ecore#//TOnAlarm">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tOnAlarm;XSDComplexTypeDefinition=12/XSDAttributeUse"
+        outputs="process.ecore#//TOnAlarm/for"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tOnAlarm;XSDComplexTypeDefinition=12/XSDAttributeUse=1"
+        outputs="process.ecore#//TOnAlarm/until"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tEventHandlers;XSDComplexTypeDefinition=10"
+      outputs="process.ecore#//TEventHandlers">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tEventHandlers;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TEventHandlers/onMessage"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tEventHandlers;XSDComplexTypeDefinition=10/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="process.ecore#//TEventHandlers/onAlarm"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle"
+      outputs="process.ecore#//TScope/empty"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=1"
+      outputs="process.ecore#//TScope/invoke"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=2"
+      outputs="process.ecore#//TScope/receive"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=3"
+      outputs="process.ecore#//TScope/reply"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=4"
+      outputs="process.ecore#//TScope/assign"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=5"
+      outputs="process.ecore#//TScope/wait"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=6"
+      outputs="process.ecore#//TScope/throw"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=7"
+      outputs="process.ecore#//TScope/terminate"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=8"
+      outputs="process.ecore#//TScope/flow"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=9"
+      outputs="process.ecore#//TScope/switch"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=10"
+      outputs="process.ecore#//TScope/while"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=11"
+      outputs="process.ecore#//TScope/sequence"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=12"
+      outputs="process.ecore#//TScope/pick"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=13"
+      outputs="process.ecore#//TScope/scope"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tScope;XSDComplexTypeDefinition=43"
+      outputs="process.ecore#//TScope">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tScope;XSDComplexTypeDefinition=43/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TScope/variables"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tScope;XSDComplexTypeDefinition=43/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="process.ecore#//TScope/correlationSets"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tScope;XSDComplexTypeDefinition=43/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="process.ecore#//TScope/faultHandlers"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tScope;XSDComplexTypeDefinition=43/XSDParticle/XSDModelGroup/XSDParticle=3"
+        outputs="process.ecore#//TScope/compensationHandler"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tScope;XSDComplexTypeDefinition=43/XSDParticle/XSDModelGroup/XSDParticle=4"
+        outputs="process.ecore#//TScope/eventHandlers"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tScope;XSDComplexTypeDefinition=43/XSDAttributeUse"
+        outputs="process.ecore#//TScope/variableAccessSerializable"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=13"
+      outputs="process.ecore#//TOnMessage/scope"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tOnMessage;XSDComplexTypeDefinition=11"
+      outputs="process.ecore#//TOnMessage">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tOnMessage;XSDComplexTypeDefinition=11/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TOnMessage/correlations"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tOnMessage;XSDComplexTypeDefinition=11/XSDAttributeUse=2"
+        outputs="process.ecore#//TOnMessage/operation"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tOnMessage;XSDComplexTypeDefinition=11/XSDAttributeUse"
+        outputs="process.ecore#//TOnMessage/partnerLink"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tOnMessage;XSDComplexTypeDefinition=11/XSDAttributeUse=1"
+        outputs="process.ecore#//TOnMessage/portType"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tOnMessage;XSDComplexTypeDefinition=11/XSDAttributeUse=3"
+        outputs="process.ecore#//TOnMessage/variable"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPick;XSDComplexTypeDefinition=42"
+      outputs="process.ecore#//TPick">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPick;XSDComplexTypeDefinition=42/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TPick/onMessage"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPick;XSDComplexTypeDefinition=42/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="process.ecore#//TPick/onAlarm"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tPick;XSDComplexTypeDefinition=42/XSDAttributeUse"
+        outputs="process.ecore#//TPick/createInstance"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=12"
+      outputs="process.ecore#//TSequence/pick"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=13"
+      outputs="process.ecore#//TSequence/scope"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tSequence;XSDComplexTypeDefinition=41"
+      outputs="process.ecore#//TSequence">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tSequence;XSDComplexTypeDefinition=41/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TSequence/activity"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=11"
+      outputs="process.ecore#//TWhile/sequence"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=12"
+      outputs="process.ecore#//TWhile/pick"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=13"
+      outputs="process.ecore#//TWhile/scope"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tWhile;XSDComplexTypeDefinition=40"
+      outputs="process.ecore#//TWhile">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tWhile;XSDComplexTypeDefinition=40/XSDAttributeUse"
+        outputs="process.ecore#//TWhile/condition"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=10"
+      outputs="process.ecore#//TActivityContainer/while"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=11"
+      outputs="process.ecore#//TActivityContainer/sequence"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=12"
+      outputs="process.ecore#//TActivityContainer/pick"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=13"
+      outputs="process.ecore#//TActivityContainer/scope"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tActivityContainer;XSDComplexTypeDefinition=8"
+      outputs="process.ecore#//TActivityContainer"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tSwitch;XSDComplexTypeDefinition=39/XSDParticle/XSDModelGroup/XSDParticle/case;XSDElementDeclaration/XSDComplexTypeDefinition"
+      outputs="process.ecore#//CaseType">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tSwitch;XSDComplexTypeDefinition=39/XSDParticle/XSDModelGroup/XSDParticle/case;XSDElementDeclaration/XSDComplexTypeDefinition/XSDAttributeUse"
+        outputs="process.ecore#//CaseType/condition"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tSwitch;XSDComplexTypeDefinition=39"
+      outputs="process.ecore#//TSwitch">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tSwitch;XSDComplexTypeDefinition=39/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TSwitch/case"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tSwitch;XSDComplexTypeDefinition=39/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="process.ecore#//TSwitch/otherwise"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=9"
+      outputs="process.ecore#//TFlow/switch"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=10"
+      outputs="process.ecore#//TFlow/while"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=11"
+      outputs="process.ecore#//TFlow/sequence"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=12"
+      outputs="process.ecore#//TFlow/pick"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=13"
+      outputs="process.ecore#//TFlow/scope"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tFlow;XSDComplexTypeDefinition=36"
+      outputs="process.ecore#//TFlow">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tFlow;XSDComplexTypeDefinition=36/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TFlow/links"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tFlow;XSDComplexTypeDefinition=36/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="process.ecore#//TFlow/activity"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=8"
+      outputs="process.ecore#//TActivityOrCompensateContainer/flow"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=9"
+      outputs="process.ecore#//TActivityOrCompensateContainer/switch"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=10"
+      outputs="process.ecore#//TActivityOrCompensateContainer/while"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=11"
+      outputs="process.ecore#//TActivityOrCompensateContainer/sequence"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=12"
+      outputs="process.ecore#//TActivityOrCompensateContainer/pick"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=13"
+      outputs="process.ecore#//TActivityOrCompensateContainer/scope"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCompensate;XSDComplexTypeDefinition=34"
+      outputs="process.ecore#//TCompensate">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCompensate;XSDComplexTypeDefinition=34/XSDAttributeUse"
+        outputs="process.ecore#//TCompensate/scope"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tActivityOrCompensateContainer;XSDComplexTypeDefinition=9"
+      outputs="process.ecore#//TActivityOrCompensateContainer">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tActivityOrCompensateContainer;XSDComplexTypeDefinition=9/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="process.ecore#//TActivityOrCompensateContainer/compensate"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCatch;XSDComplexTypeDefinition=7"
+      outputs="process.ecore#//TCatch">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCatch;XSDComplexTypeDefinition=7/XSDAttributeUse"
+        outputs="process.ecore#//TCatch/faultName"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tCatch;XSDComplexTypeDefinition=7/XSDAttributeUse=1"
+        outputs="process.ecore#//TCatch/faultVariable"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tFaultHandlers;XSDComplexTypeDefinition=6"
+      outputs="process.ecore#//TFaultHandlers">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tFaultHandlers;XSDComplexTypeDefinition=6/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TFaultHandlers/catch"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tFaultHandlers;XSDComplexTypeDefinition=6/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="process.ecore#//TFaultHandlers/catchAll"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle"
+      outputs="process.ecore#//TProcess/empty"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=1"
+      outputs="process.ecore#//TProcess/invoke"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=2"
+      outputs="process.ecore#//TProcess/receive"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=3"
+      outputs="process.ecore#//TProcess/reply"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=4"
+      outputs="process.ecore#//TProcess/assign"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=5"
+      outputs="process.ecore#//TProcess/wait"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=6"
+      outputs="process.ecore#//TProcess/throw"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=7"
+      outputs="process.ecore#//TProcess/terminate"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=8"
+      outputs="process.ecore#//TProcess/flow"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=9"
+      outputs="process.ecore#//TProcess/switch"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=10"
+      outputs="process.ecore#//TProcess/while"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=11"
+      outputs="process.ecore#//TProcess/sequence"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=12"
+      outputs="process.ecore#//TProcess/pick"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//activity;XSDModelGroupDefinition/XSDModelGroup/XSDParticle=13"
+      outputs="process.ecore#//TProcess/scope"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tProcess;XSDComplexTypeDefinition=1"
+      outputs="process.ecore#//TProcess">
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tProcess;XSDComplexTypeDefinition=1/XSDParticle/XSDModelGroup/XSDParticle"
+        outputs="process.ecore#//TProcess/partnerLinks"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tProcess;XSDComplexTypeDefinition=1/XSDParticle/XSDModelGroup/XSDParticle=1"
+        outputs="process.ecore#//TProcess/partners"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tProcess;XSDComplexTypeDefinition=1/XSDParticle/XSDModelGroup/XSDParticle=2"
+        outputs="process.ecore#//TProcess/variables"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tProcess;XSDComplexTypeDefinition=1/XSDParticle/XSDModelGroup/XSDParticle=3"
+        outputs="process.ecore#//TProcess/correlationSets"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tProcess;XSDComplexTypeDefinition=1/XSDParticle/XSDModelGroup/XSDParticle=4"
+        outputs="process.ecore#//TProcess/faultHandlers"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tProcess;XSDComplexTypeDefinition=1/XSDParticle/XSDModelGroup/XSDParticle=5"
+        outputs="process.ecore#//TProcess/compensationHandler"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tProcess;XSDComplexTypeDefinition=1/XSDParticle/XSDModelGroup/XSDParticle=6"
+        outputs="process.ecore#//TProcess/eventHandlers"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tProcess;XSDComplexTypeDefinition=1/XSDAttributeUse=6"
+        outputs="process.ecore#//TProcess/abstractProcess"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tProcess;XSDComplexTypeDefinition=1/XSDAttributeUse=5"
+        outputs="process.ecore#//TProcess/enableInstanceCompensation"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tProcess;XSDComplexTypeDefinition=1/XSDAttributeUse=3"
+        outputs="process.ecore#//TProcess/expressionLanguage"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tProcess;XSDComplexTypeDefinition=1/XSDAttributeUse"
+        outputs="process.ecore#//TProcess/name"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tProcess;XSDComplexTypeDefinition=1/XSDAttributeUse=2"
+        outputs="process.ecore#//TProcess/queryLanguage"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tProcess;XSDComplexTypeDefinition=1/XSDAttributeUse=4"
+        outputs="process.ecore#//TProcess/suppressJoinFailure"/>
+    <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//tProcess;XSDComplexTypeDefinition=1/XSDAttributeUse=1"
+        outputs="process.ecore#//TProcess/targetNamespace"/>
+  </nested>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//process;XSDElementDeclaration"
+      outputs="process.ecore#//DocumentRoot/process"/>
+  <nested inputs="file:/home/tkuester/Documents/Programme/GMF/bpel/BPEL/model/bpel.xsd#//to;XSDElementDeclaration=2"
+      outputs="process.ecore#//DocumentRoot/to"/>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//arrayType;XSDAttributeDeclaration"
+      outputs="wsdl.ecore#//DocumentRoot/arrayType"/>
+  <nested inputs="bundleentry://1463/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=8"
+      outputs="http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//required;XSDAttributeDeclaration=1"
+      outputs="wsdl.ecore#//DocumentRoot/required"/>
+  <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tExtensibilityElement;XSDComplexTypeDefinition=19"
+      outputs="wsdl.ecore#//TExtensibilityElement">
+    <nested inputs="http://schemas.xmlsoap.org/wsdl/#//tExtensibilityElement;XSDComplexTypeDefinition=19/XSDAttributeUse"
+        outputs="wsdl.ecore#//TExtensibilityElement/required"/>
+  </nested>
+</xsd2ecore:XSD2EcoreMappingRoot>

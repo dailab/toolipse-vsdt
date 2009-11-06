@@ -1,0 +1,353 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id$
+ */
+package de.dailab.vsdt;
+
+import org.eclipse.emf.common.util.EList;
+
+
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Event</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link de.dailab.vsdt.Event#getTrigger <em>Trigger</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Event#getMessage <em>Message</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Event#getImplementation <em>Implementation</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Event#getTimeDate <em>Time Date</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Event#getTimeCycle <em>Time Cycle</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Event#getRuleName <em>Rule Name</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Event#getRuleExpression <em>Rule Expression</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Event#getErrorCode <em>Error Code</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Event#getActivity <em>Activity</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Event#getSignal <em>Signal</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Event#getLinkedTo <em>Linked To</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @see de.dailab.vsdt.VsdtPackage#getEvent()
+ * @model abstract="true"
+ * @generated
+ */
+public interface Event extends FlowObject {
+	/**
+	 * Returns the value of the '<em><b>Trigger</b></em>' attribute.
+	 * The literals are from the enumeration {@link de.dailab.vsdt.TriggerType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Trigger</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Trigger</em>' attribute.
+	 * @see de.dailab.vsdt.TriggerType
+	 * @see #setTrigger(TriggerType)
+	 * @see de.dailab.vsdt.VsdtPackage#getEvent_Trigger()
+	 * @model required="true"
+	 * @generated
+	 */
+	TriggerType getTrigger();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.Event#getTrigger <em>Trigger</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Trigger</em>' attribute.
+	 * @see de.dailab.vsdt.TriggerType
+	 * @see #getTrigger()
+	 * @generated
+	 */
+	void setTrigger(TriggerType value);
+
+	/**
+	 * Returns the value of the '<em><b>Message</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Message</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Message</em>' reference.
+	 * @see #setMessage(Message)
+	 * @see de.dailab.vsdt.VsdtPackage#getEvent_Message()
+	 * @model
+	 * @generated
+	 */
+	Message getMessage();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.Event#getMessage <em>Message</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Message</em>' reference.
+	 * @see #getMessage()
+	 * @generated
+	 */
+	void setMessage(Message value);
+
+	/**
+	 * Returns the value of the '<em><b>Implementation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Implementation</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Implementation</em>' reference.
+	 * @see #setImplementation(Implementation)
+	 * @see de.dailab.vsdt.VsdtPackage#getEvent_Implementation()
+	 * @model
+	 * @generated
+	 */
+	Implementation getImplementation();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.Event#getImplementation <em>Implementation</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Implementation</em>' reference.
+	 * @see #getImplementation()
+	 * @generated
+	 */
+	void setImplementation(Implementation value);
+
+	/**
+	 * Returns the value of the '<em><b>Time Date</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Time Date</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Time Date</em>' containment reference.
+	 * @see #setTimeDate(Expression)
+	 * @see de.dailab.vsdt.VsdtPackage#getEvent_TimeDate()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Expression getTimeDate();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.Event#getTimeDate <em>Time Date</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Time Date</em>' containment reference.
+	 * @see #getTimeDate()
+	 * @generated
+	 */
+	void setTimeDate(Expression value);
+
+	/**
+	 * Returns the value of the '<em><b>Time Cycle</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Time Cycle</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Time Cycle</em>' containment reference.
+	 * @see #setTimeCycle(Expression)
+	 * @see de.dailab.vsdt.VsdtPackage#getEvent_TimeCycle()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Expression getTimeCycle();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.Event#getTimeCycle <em>Time Cycle</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Time Cycle</em>' containment reference.
+	 * @see #getTimeCycle()
+	 * @generated
+	 */
+	void setTimeCycle(Expression value);
+
+	/**
+	 * Returns the value of the '<em><b>Rule Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Rule Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Rule Name</em>' attribute.
+	 * @see #setRuleName(String)
+	 * @see de.dailab.vsdt.VsdtPackage#getEvent_RuleName()
+	 * @model
+	 * @generated
+	 */
+	String getRuleName();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.Event#getRuleName <em>Rule Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Rule Name</em>' attribute.
+	 * @see #getRuleName()
+	 * @generated
+	 */
+	void setRuleName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Rule Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Rule Expression</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Rule Expression</em>' containment reference.
+	 * @see #setRuleExpression(Expression)
+	 * @see de.dailab.vsdt.VsdtPackage#getEvent_RuleExpression()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Expression getRuleExpression();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.Event#getRuleExpression <em>Rule Expression</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Rule Expression</em>' containment reference.
+	 * @see #getRuleExpression()
+	 * @generated
+	 */
+	void setRuleExpression(Expression value);
+
+	/**
+	 * Returns the value of the '<em><b>Error Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Error Code</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Error Code</em>' attribute.
+	 * @see #setErrorCode(String)
+	 * @see de.dailab.vsdt.VsdtPackage#getEvent_ErrorCode()
+	 * @model
+	 * @generated
+	 */
+	String getErrorCode();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.Event#getErrorCode <em>Error Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Error Code</em>' attribute.
+	 * @see #getErrorCode()
+	 * @generated
+	 */
+	void setErrorCode(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Activity</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Activity</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Activity</em>' reference.
+	 * @see #setActivity(Activity)
+	 * @see de.dailab.vsdt.VsdtPackage#getEvent_Activity()
+	 * @model
+	 * @generated
+	 */
+	Activity getActivity();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.Event#getActivity <em>Activity</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Activity</em>' reference.
+	 * @see #getActivity()
+	 * @generated
+	 */
+	void setActivity(Activity value);
+
+	/**
+	 * Returns the value of the '<em><b>Signal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Signal</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Signal</em>' attribute.
+	 * @see #setSignal(String)
+	 * @see de.dailab.vsdt.VsdtPackage#getEvent_Signal()
+	 * @model
+	 * @generated
+	 */
+	String getSignal();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.Event#getSignal <em>Signal</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Signal</em>' attribute.
+	 * @see #getSignal()
+	 * @generated
+	 */
+	void setSignal(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Linked To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Linked To</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Linked To</em>' reference.
+	 * @see #setLinkedTo(Event)
+	 * @see de.dailab.vsdt.VsdtPackage#getEvent_LinkedTo()
+	 * @model
+	 * @generated
+	 */
+	Event getLinkedTo();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.Event#getLinkedTo <em>Linked To</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Linked To</em>' reference.
+	 * @see #getLinkedTo()
+	 * @generated
+	 */
+	void setLinkedTo(Event value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * This method returns the trigger types that may be used for this event in the
+	 * context it is used in. The trigger type depends on the event's type (Start, End,
+	 * Intermediate), and in case of Intermediate whether it is attached to an activity
+	 * and whether it is throwing or catching.
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	EList<TriggerType> getValidTriggerTypes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Returns whether this event is throwing or catching. Start events are always catching,
+	 * End events are always throwing. Intermediate events are always catching, if attached
+	 * to an activity. Ambiguities exist in the case of Message and Signal trigger. In the first
+	 * case, the Message's participant can be taken into account. The default is false.
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isThrowing();
+
+} // Event

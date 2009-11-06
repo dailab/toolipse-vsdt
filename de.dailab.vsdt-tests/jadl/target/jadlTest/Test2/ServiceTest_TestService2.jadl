@@ -1,0 +1,19 @@
+
+
+service TestService2 ( in $in1 : int ) ( out $out1 : string $out2 : double ) {
+    var $d : double ;
+    var $i : int ;
+    {
+        {
+            $i = $in1 ;
+        }
+        {
+            $d = 2 * $i ;
+            print "Executing DoSomething" ;
+        }
+        {
+            $out1 = "invoke" ;
+            $out2 = $d ;
+        }
+    }
+}

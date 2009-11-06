@@ -1,0 +1,1382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin> 
+
+   <extension point="org.eclipse.team.core.fileTypes">
+      <?gmfgen generated="true"?>
+      <fileTypes
+         type="text"
+         extension="bpmn_diagram">
+      </fileTypes>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <?gmfgen generated="true"?>
+      <parser
+         type="bpmn_diagram"
+         class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
+      </parser>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <?gmfgen generated="true"?>
+      <editor
+         id="de.dailab.vsdt.diagram.part.VsdtDiagramEditorID"
+         name="%editorName"
+         icon="icons/obj16/VsdtDiagramFile.gif"
+         extensions="bpmn_diagram"
+         default="true"
+         class="de.dailab.vsdt.diagram.part.VsdtDiagramEditor"
+         matchingStrategy="de.dailab.vsdt.diagram.part.VsdtMatchingStrategy"
+         contributorClass="de.dailab.vsdt.diagram.part.VsdtDiagramActionBarContributor">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.contexts">
+      <?gmfgen generated="true"?>
+      <context
+         description="%context.description"
+         id="de.dailab.vsdt.diagram.ui.diagramContext"
+         name="%context.name"
+         parentId="org.eclipse.gmf.runtime.diagram.ui.diagramContext">
+      </context>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <?gmfgen generated="true"?>
+  	  <wizard
+  	     name="%newWizardName"
+  	     icon="icons/obj16/VsdtDiagramFile.gif"
+  	     category="de.dailab.vsdt"
+  	     class="de.dailab.vsdt.diagram.part.VsdtCreationWizard"
+  	     id="de.dailab.vsdt.diagram.part.VsdtCreationWizardID">
+  	  	 <description>%newWizardDesc</description>  
+      </wizard>
+     <category
+           id="de.dailab.vsdt"
+           name="Easy Service Creation">
+     </category>
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            adaptable="false"
+            id="de.dailab.vsdt.diagram.LoadResource"
+            objectClass="de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart">
+         <action
+               class="de.dailab.vsdt.diagram.part.VsdtLoadResourceAction"
+               enablesFor="1"
+               id="de.dailab.vsdt.diagram.LoadResourceAction"
+               label="%loadResourceActionLabel"
+               menubarPath="additions">
+         </action>
+      </objectContribution>           
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            id="de.dailab.vsdt.diagram.InitDiagram"
+            nameFilter="*.bpmn"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="de.dailab.vsdt.diagram.part.VsdtInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="de.dailab.vsdt.diagram.InitDiagramAction">
+         </action>
+      </objectContribution>
+   </extension>
+	
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders">
+      <?gmfgen generated="true"?>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
+         id="VsdtPresentation">
+         <Priority name="Lowest"/>
+         <ViewId id="de.dailab.vsdt.diagram.part.VsdtDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="delete"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart">
+               <GlobalActionId actionId="save"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
+         id="VsdtPresentationIDE">
+         <Priority name="Lowest"/>
+         <ViewId id="de.dailab.vsdt.diagram.part.VsdtDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="bookmark"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+            class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
+            id="VsdtRender">
+         <Priority name="Lowest"/>
+         <ViewId id="de.dailab.vsdt.diagram.part.VsdtDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="cut"/>
+               <GlobalActionId actionId="copy"/>
+               <GlobalActionId actionId="paste"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <?gmfgen generated="true"?>
+      <contributionItemProvider
+            class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContributionItemProvider"
+            checkPluginLoaded="false">
+         <Priority name="Low"/>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="de.dailab.vsdt.diagram.edit.parts.DataObjectNameEditPart"/>
+            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
+            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
+         </popupContribution>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="de.dailab.vsdt.diagram.edit.parts.AgentNameEditPart"/>
+            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
+            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
+         </popupContribution>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="de.dailab.vsdt.diagram.edit.parts.ServiceNameEditPart"/>
+            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
+            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
+         </popupContribution>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="de.dailab.vsdt.diagram.edit.parts.StartNameEditPart"/>
+            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
+            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
+         </popupContribution>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="de.dailab.vsdt.diagram.edit.parts.IntermediateNameEditPart"/>
+            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
+            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
+         </popupContribution>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="de.dailab.vsdt.diagram.edit.parts.EndNameEditPart"/>
+            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
+            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
+         </popupContribution>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="de.dailab.vsdt.diagram.edit.parts.GatewayNameEditPart"/>
+            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
+            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
+         </popupContribution>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="de.dailab.vsdt.diagram.edit.parts.SequenceFlowNameEditPart"/>
+            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
+            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
+         </popupContribution>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="de.dailab.vsdt.diagram.edit.parts.MessageFlowNameEditPart"/>
+            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
+            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
+         </popupContribution>
+         <popupContribution class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider">
+            <popupStructuredContributionCriteria objectClass="de.dailab.vsdt.diagram.edit.parts.AssociationNameEditPart"/>
+            <popupPredefinedItem id="deleteFromDiagramAction" remove="true"/>
+            <popupPredefinedItem id="deleteFromModelAction" remove="true"/>
+         </popupContribution>
+      </contributionItemProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders">
+      <?gmfgen generated="true"?>
+      <MarkerNavigationProvider class="de.dailab.vsdt.diagram.providers.VsdtMarkerNavigationProvider">
+         <MarkerType name="de.dailab.vsdt.diagram.diagnostic"/>
+         <Priority name="Lowest"/>
+      </MarkerNavigationProvider>
+   </extension>
+
+   <extension id="diagnostic" name="Vsdt Plugin problems" point="org.eclipse.core.resources.markers">
+      <?gmfgen generated="true"?>
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>   
+
+   <extension point="org.eclipse.core.runtime.preferences">
+      <?gmfgen generated="true"?>
+      <initializer class="de.dailab.vsdt.diagram.preferences.DiagramPreferenceInitializer"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.preferencePages">
+      <?gmfgen generated="true"?>
+      <page
+            id="de.dailab.vsdt.diagram.general"
+            name="%preference.page.title.de.dailab.vsdt.diagram.general"
+            class="de.dailab.vsdt.diagram.preferences.DiagramGeneralPreferencePage">
+      </page>
+      <page
+            id="de.dailab.vsdt.diagram.appearance"
+            name="%preference.page.title.de.dailab.vsdt.diagram.appearance"
+            category="de.dailab.vsdt.diagram.general"
+            class="de.dailab.vsdt.diagram.preferences.DiagramAppearancePreferencePage">
+      </page>
+      <page
+            id="de.dailab.vsdt.diagram.connections"
+            name="%preference.page.title.de.dailab.vsdt.diagram.connections"
+            category="de.dailab.vsdt.diagram.general"
+            class="de.dailab.vsdt.diagram.preferences.DiagramConnectionsPreferencePage">
+      </page>
+      <page
+            id="de.dailab.vsdt.diagram.printing"
+            name="%preference.page.title.de.dailab.vsdt.diagram.printing"
+            category="de.dailab.vsdt.diagram.general"
+            class="de.dailab.vsdt.diagram.preferences.DiagramPrintingPreferencePage">
+      </page>
+      <page
+            id="de.dailab.vsdt.diagram.rulersAndGrid"
+            name="%preference.page.title.de.dailab.vsdt.diagram.rulersAndGrid"
+            category="de.dailab.vsdt.diagram.general"
+            class="de.dailab.vsdt.diagram.preferences.DiagramRulersAndGridPreferencePage">
+      </page>
+      <page
+            id="de.dailab.vsdt.diagram.pathmaps"
+            name="%preference.page.title.de.dailab.vsdt.diagram.pathmaps"
+            category="de.dailab.vsdt.diagram.general"
+            class="org.eclipse.gmf.runtime.emf.ui.preferences.PathmapsPreferencePage">
+      </page>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <?gmfgen generated="true"?>
+      <propertyContributor
+            contributorId="de.dailab.vsdt.diagram"
+            labelProvider="de.dailab.vsdt.diagram.sheet.VsdtSheetLabelProvider">
+         <propertyCategory category="domain"/>
+         <propertyCategory category="visual"/>
+         <propertyCategory category="extra"/>
+      </propertyContributor>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <?gmfgen generated="true"?>   
+      <propertyTabs contributorId="de.dailab.vsdt.diagram">
+         <propertyTab
+             category="visual"
+             id="property.tab.AppearancePropertySection"
+             label="%tab.appearance"/>
+          <propertyTab
+             category="visual"
+             id="property.tab.DiagramPropertySection"
+             label="%tab.diagram"/>
+          <propertyTab
+             category="domain"
+             id="property.tab.domain"
+             label="%tab.domain"/>
+      </propertyTabs>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <?gmfgen generated="true"?>   
+      <propertySections contributorId="de.dailab.vsdt.diagram">
+         <propertySection id="property.section.ConnectorAppearancePropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>
+         <propertySection id="property.section.ShapeColorAndFontPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ShapeEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ShapeColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection> 
+         <propertySection id="property.section.DiagramColorsAndFontsPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.DiagramColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>     
+         <propertySection id="property.section.RulerGridPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.grid.RulerGridPropertySection" 
+            tab="property.tab.DiagramPropertySection">
+         </propertySection>     
+         <propertySection
+            id="property.section.domain" 
+            tab="property.tab.domain"
+            class="de.dailab.vsdt.diagram.sheet.VsdtPropertySection">
+            <input type="org.eclipse.gmf.runtime.notation.View"/>
+            <input type="org.eclipse.gef.EditPart"/>
+            <input type="de.dailab.vsdt.diagram.navigator.VsdtAbstractNavigatorItem"/>
+         </propertySection>
+      </propertySections>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders">
+      <?gmfgen generated="true"?>
+      <viewProvider class="de.dailab.vsdt.diagram.providers.VsdtViewProvider">
+         <Priority name="Lowest"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Vsdt"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints=""/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints=""/>
+      </viewProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders">
+      <?gmfgen generated="true"?>
+      <editpartProvider class="de.dailab.vsdt.diagram.providers.VsdtEditPartProvider">
+         <Priority name="Lowest"/>
+      </editpartProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders">
+      <?gmfgen generated="true"?>
+      <modelingAssistantProvider class="de.dailab.vsdt.diagram.providers.VsdtModelingAssistantProvider">
+         <Priority name="Lowest"/>
+      </modelingAssistantProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders">
+      <?gmfgen generated="true"?>
+      <IconProvider class="de.dailab.vsdt.diagram.providers.VsdtIconProvider">
+         <Priority name="Low"/>
+      </IconProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders">
+      <?gmfgen generated="true"?>
+      <ParserProvider class="de.dailab.vsdt.diagram.providers.VsdtParserProvider">
+         <Priority name="Lowest"/>
+      </ParserProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes">
+      <?gmfgen generated="true"?>
+      <metamodel nsURI="http://de.dailab.vsdt">
+         <metamodelType
+               id="de.dailab.vsdt.diagram.BusinessProcessDiagram_79"
+               name="%metatype.name.BusinessProcessDiagram_79"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="BusinessProcessDiagram"
+               edithelper="de.dailab.vsdt.diagram.edit.helpers.BusinessProcessDiagramEditHelper">
+            <param name="semanticHint" value="79"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://de.dailab.vsdt">
+         <metamodelType
+               id="de.dailab.vsdt.diagram.Group_1001"
+               name="%metatype.name.Group_1001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Group"
+               edithelper="de.dailab.vsdt.diagram.edit.helpers.GroupEditHelper">
+            <param name="semanticHint" value="1001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://de.dailab.vsdt">
+         <metamodelType
+               id="de.dailab.vsdt.diagram.TextAnnotation_1002"
+               name="%metatype.name.TextAnnotation_1002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="TextAnnotation"
+               edithelper="de.dailab.vsdt.diagram.edit.helpers.TextAnnotationEditHelper">
+            <param name="semanticHint" value="1002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://de.dailab.vsdt">
+         <metamodelType
+               id="de.dailab.vsdt.diagram.DataObject_1003"
+               name="%metatype.name.DataObject_1003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DataObject"
+               edithelper="de.dailab.vsdt.diagram.edit.helpers.DataObjectEditHelper">
+            <param name="semanticHint" value="1003"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://de.dailab.vsdt">
+         <metamodelType
+               id="de.dailab.vsdt.diagram.Pool_1004"
+               name="%metatype.name.Pool_1004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Pool"
+               edithelper="de.dailab.vsdt.diagram.edit.helpers.PoolEditHelper">
+            <param name="semanticHint" value="1004"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://de.dailab.vsdt">
+         <metamodelType
+               id="de.dailab.vsdt.diagram.Agent_1005"
+               name="%metatype.name.Agent_1005"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Agent"
+               edithelper="de.dailab.vsdt.diagram.edit.helpers.AgentEditHelper">
+            <param name="semanticHint" value="1005"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://de.dailab.vsdt">
+         <metamodelType
+               id="de.dailab.vsdt.diagram.Service_1006"
+               name="%metatype.name.Service_1006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Service"
+               edithelper="de.dailab.vsdt.diagram.edit.helpers.ServiceEditHelper">
+            <param name="semanticHint" value="1006"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://de.dailab.vsdt">
+         <metamodelType
+               id="de.dailab.vsdt.diagram.Lane_2001"
+               name="%metatype.name.Lane_2001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Lane"
+               edithelper="de.dailab.vsdt.diagram.edit.helpers.LaneEditHelper">
+            <param name="semanticHint" value="2001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://de.dailab.vsdt">
+         <metamodelType
+               id="de.dailab.vsdt.diagram.Start_2002"
+               name="%metatype.name.Start_2002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Start"
+               edithelper="de.dailab.vsdt.diagram.edit.helpers.StartEditHelper">
+            <param name="semanticHint" value="2002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://de.dailab.vsdt">
+         <metamodelType
+               id="de.dailab.vsdt.diagram.Intermediate_2003"
+               name="%metatype.name.Intermediate_2003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Intermediate"
+               edithelper="de.dailab.vsdt.diagram.edit.helpers.IntermediateEditHelper">
+            <param name="semanticHint" value="2003"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://de.dailab.vsdt">
+         <metamodelType
+               id="de.dailab.vsdt.diagram.End_2004"
+               name="%metatype.name.End_2004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="End"
+               edithelper="de.dailab.vsdt.diagram.edit.helpers.EndEditHelper">
+            <param name="semanticHint" value="2004"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://de.dailab.vsdt">
+         <metamodelType
+               id="de.dailab.vsdt.diagram.Activity_2005"
+               name="%metatype.name.Activity_2005"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Activity"
+               edithelper="de.dailab.vsdt.diagram.edit.helpers.ActivityEditHelper">
+            <param name="semanticHint" value="2005"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://de.dailab.vsdt">
+         <metamodelType
+               id="de.dailab.vsdt.diagram.Gateway_2006"
+               name="%metatype.name.Gateway_2006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Gateway"
+               edithelper="de.dailab.vsdt.diagram.edit.helpers.GatewayEditHelper">
+            <param name="semanticHint" value="2006"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://de.dailab.vsdt">
+         <specializationType
+               id="de.dailab.vsdt.diagram.Intermediate_2007"
+               name="%metatype.name.Intermediate_2007"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="de.dailab.vsdt.diagram.Intermediate_2003"/>
+            <param name="semanticHint" value="2007"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://de.dailab.vsdt">
+         <metamodelType
+               id="de.dailab.vsdt.diagram.SequenceFlow_3001"
+               name="%metatype.name.SequenceFlow_3001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="SequenceFlow"
+               edithelper="de.dailab.vsdt.diagram.edit.helpers.SequenceFlowEditHelper">
+            <param name="semanticHint" value="3001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://de.dailab.vsdt">
+         <metamodelType
+               id="de.dailab.vsdt.diagram.MessageFlow_3002"
+               name="%metatype.name.MessageFlow_3002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="MessageFlow"
+               edithelper="de.dailab.vsdt.diagram.edit.helpers.MessageFlowEditHelper">
+            <param name="semanticHint" value="3002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://de.dailab.vsdt">
+         <metamodelType
+               id="de.dailab.vsdt.diagram.Association_3003"
+               name="%metatype.name.Association_3003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Association"
+               edithelper="de.dailab.vsdt.diagram.edit.helpers.AssociationEditHelper">
+            <param name="semanticHint" value="3003"/>
+         </metamodelType>
+      </metamodel>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings">
+      <?gmfgen generated="true"?>
+      <clientContext id="VsdtClientContext">
+         <enablement>
+            <test
+               property="org.eclipse.gmf.runtime.emf.core.editingDomain"
+               value="de.dailab.vsdt.diagram.EditingDomain"/>
+         </enablement>
+      </clientContext> 
+      <binding context="VsdtClientContext">
+         <elementType ref="de.dailab.vsdt.diagram.BusinessProcessDiagram_79"/>
+         <elementType ref="de.dailab.vsdt.diagram.Group_1001"/>
+         <elementType ref="de.dailab.vsdt.diagram.TextAnnotation_1002"/>
+         <elementType ref="de.dailab.vsdt.diagram.DataObject_1003"/>
+         <elementType ref="de.dailab.vsdt.diagram.Pool_1004"/>
+         <elementType ref="de.dailab.vsdt.diagram.Agent_1005"/>
+         <elementType ref="de.dailab.vsdt.diagram.Service_1006"/>
+         <elementType ref="de.dailab.vsdt.diagram.Lane_2001"/>
+         <elementType ref="de.dailab.vsdt.diagram.Start_2002"/>
+         <elementType ref="de.dailab.vsdt.diagram.Intermediate_2003"/>
+         <elementType ref="de.dailab.vsdt.diagram.End_2004"/>
+         <elementType ref="de.dailab.vsdt.diagram.Activity_2005"/>
+         <elementType ref="de.dailab.vsdt.diagram.Gateway_2006"/>
+         <elementType ref="de.dailab.vsdt.diagram.Intermediate_2007"/>
+         <elementType ref="de.dailab.vsdt.diagram.SequenceFlow_3001"/>
+         <elementType ref="de.dailab.vsdt.diagram.MessageFlow_3002"/>
+         <elementType ref="de.dailab.vsdt.diagram.Association_3003"/>
+         <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
+      </binding>
+   </extension>
+	   <extension point="org.eclipse.core.expressions.propertyTesters">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="de.dailab.vsdt.diagram.URIEditorInputPropertyTester"
+           type="org.eclipse.emf.common.ui.URIEditorInput"
+           namespace="de.dailab.vsdt.diagram"
+           properties="isURIEditorInput"
+           class="de.dailab.vsdt.diagram.part.VsdtUriEditorInputTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.core.expressions.propertyTesters">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="de.dailab.vsdt.diagram.DomainModelElementPropertyTester"
+           type="org.eclipse.emf.ecore.EObject"
+           namespace="de.dailab.vsdt.diagram"
+           properties="isDomainModelElement"
+           class="de.dailab.vsdt.diagram.part.VsdtDomainModelElementTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.ui.navigator.viewer">
+      <?gmfgen generated="true"?>
+      <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <contentExtension pattern="de.dailab.vsdt.diagram.resourceContent"/>
+			<contentExtension pattern="de.dailab.vsdt.diagram.domainResourceContent"/>
+            <contentExtension pattern="de.dailab.vsdt.diagram.navigatorLinkHelper"/>
+         </includes>
+      </viewerContentBinding>
+      <viewerActionBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <actionExtension pattern="de.dailab.vsdt.diagram.navigatorActionProvider"/>
+         </includes>
+      </viewerActionBinding>
+   </extension>
+
+   <extension point="org.eclipse.ui.navigator.navigatorContent">
+      <?gmfgen generated="true"?>
+      <navigatorContent
+            id="de.dailab.vsdt.diagram.resourceContent" 
+            name="%navigatorContentName" 
+            priority="normal" 
+            contentProvider="de.dailab.vsdt.diagram.navigator.VsdtNavigatorContentProvider" 
+            labelProvider="de.dailab.vsdt.diagram.navigator.VsdtNavigatorLabelProvider"
+            icon="icons/obj16/VsdtDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="bpmn_diagram"/>
+               </and>
+               <instanceof value="de.dailab.vsdt.diagram.navigator.VsdtAbstractNavigatorItem"/>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <or>
+         	   <instanceof value="de.dailab.vsdt.diagram.navigator.VsdtAbstractNavigatorItem"/>
+            </or>
+         </possibleChildren>
+         <commonSorter 
+               id="de.dailab.vsdt.diagram.navigatorSorter" 
+               class="de.dailab.vsdt.diagram.navigator.VsdtNavigatorSorter">
+            <parentExpression>
+               <or>
+	              <and>
+    	             <instanceof value="org.eclipse.core.resources.IFile"/>
+        	         <test property="org.eclipse.core.resources.extension" value="bpmn_diagram"/>
+                  </and>
+                  <instanceof value="de.dailab.vsdt.diagram.navigator.VsdtAbstractNavigatorItem"/>
+               </or>
+            </parentExpression>
+         </commonSorter>
+      </navigatorContent>
+      <navigatorContent
+            id="de.dailab.vsdt.diagram.domainResourceContent" 
+            name="%domainNavigatorContentName" 
+            priority="normal" 
+            contentProvider="de.dailab.vsdt.diagram.navigator.VsdtDomainNavigatorContentProvider" 
+            labelProvider="de.dailab.vsdt.diagram.navigator.VsdtDomainNavigatorLabelProvider"
+            icon="icons/obj16/VsdtDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="bpmn"/>
+               </and>
+               <and>
+                  <instanceof value="org.eclipse.emf.ecore.EObject"/>
+                  <test property="de.dailab.vsdt.diagram.isDomainModelElement"/>
+               </and>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <and>
+       	       <instanceof value="org.eclipse.emf.ecore.EObject"/>
+       	       <test property="de.dailab.vsdt.diagram.isDomainModelElement"/>
+       	    </and>
+         </possibleChildren>
+      </navigatorContent>
+      <actionProvider
+            id="de.dailab.vsdt.diagram.navigatorActionProvider"
+            class="de.dailab.vsdt.diagram.navigator.VsdtNavigatorActionProvider">
+         <enablement>
+            <or>
+               <instanceof value="de.dailab.vsdt.diagram.navigator.VsdtAbstractNavigatorItem"/>
+            </or>
+         </enablement>
+      </actionProvider>
+   </extension>
+   
+	   <extension point="org.eclipse.ui.navigator.linkHelper">
+      <?gmfgen generated="true"?>
+      <linkHelper
+            id="de.dailab.vsdt.diagram.navigatorLinkHelper"
+            class="de.dailab.vsdt.diagram.navigator.VsdtNavigatorLinkHelper">
+         <editorInputEnablement>
+            <and>
+               <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
+               <test property="de.dailab.vsdt.diagram.isURIEditorInput"/>
+            </and>
+         </editorInputEnablement>
+         <selectionEnablement>
+            <instanceof value="de.dailab.vsdt.diagram.navigator.VsdtAbstractNavigatorItem"/>
+         </selectionEnablement>
+      </linkHelper>
+   </extension>
+   <extension point="org.eclipse.emf.validation.constraintProviders">
+      <?gmfgen generated="true"?>
+            <category id="Audit_1" mandatory="false" name="VsdtAudits">
+         <![CDATA[Audits for the VSDT]]>
+      </category>
+      <category id="Audit_1/event" mandatory="false" name="EventAudits">
+         <![CDATA[Audits for Events]]>
+      </category>
+      <category id="Audit_1/connections" mandatory="false" name="Connections">
+         <![CDATA[Audits for Connections]]>
+      </category>
+      <category id="Audit_1/activities" mandatory="false" name="ActivityAudits">
+         <![CDATA[Audits for Activities]]>
+      </category>
+      <category id="Audit_1/process" mandatory="false" name="ProcessAudits">
+         <![CDATA[Audits for Processes]]>
+      </category>
+      <category id="Audit_1/gateway" mandatory="false" name="GatewayAudits">
+         <![CDATA[Audits for Gateways]]>
+      </category>
+      <category id="Audit_1/event/start" mandatory="false" name="StartAudits">
+         <![CDATA[Audits for StartEvents]]>
+      </category>
+      <category id="Audit_1/event/intermediate" mandatory="false" name="IntermeditateAudits">
+         <![CDATA[Audits for IntermediateEvents]]>
+      </category>
+      <category id="Audit_1/event/end" mandatory="false" name="EndAudits">
+         <![CDATA[Audits for EndEvents]]>
+      </category>
+      <category id="Audit_1/connections/seq" mandatory="false" name="SequenceFlowAudits">
+         <![CDATA[Audits for Sequence Flows]]>
+      </category>
+      <category id="Audit_1/connections/msg" mandatory="false" name="MessageFlowAudits">
+         <![CDATA[Audits for Message Flows]]>
+      </category>
+      <constraintProvider cache="true">
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+         <package namespaceUri="http://de.dailab.vsdt"/>
+               <constraints categories="Audit_1">
+                  <constraint id="bpd1"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter1"
+            name="bpd1max1PoolInvisible"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[Only one Pool may have an invisible boundary]]></description>
+            <message><![CDATA[Only one Pool may have an invisible boundary]]></message>
+            <target class="vsdt.BusinessProcessDiagram"/>
+         </constraint>
+                  </constraints>
+         <constraints categories="Audit_1/event">
+                  <constraint id="event1"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter2"
+            name="event1outgoingAreUnconditioned"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[Events may not have outgoing conditional Sequence Flows]]></description>
+            <message><![CDATA[Events may not have outgoing conditional Sequence Flows]]></message>
+            <target class="vsdt.Event"/>
+         </constraint>
+                  <constraint id="eventType"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter3"
+            name="eventType"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[Not all Attributes that are required for the given Event Type are set.]]></description>
+            <message><![CDATA[Not all Attributes that are required for the given Event Type are set.]]></message>
+            <target class="vsdt.Event"/>
+         </constraint>
+                  </constraints>
+         <constraints categories="Audit_1/connections">
+                  </constraints>
+         <constraints categories="Audit_1/activities">
+                  <constraint id="act1"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter4"
+            name="act1IsAtomicOrEmbedded"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[Only Activities of Type Embedded may hold other Flow Objects]]></description>
+            <message><![CDATA[Only Activities of Type Embedded may hold other Flow Objects]]></message>
+            <target class="vsdt.Activity"/>
+         </constraint>
+                  <constraint id="act2"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter5"
+            name="act2TaskSingleMessage"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[Tasks must not have more than one incoming or Outgoing Message Flow]]></description>
+            <message><![CDATA[Tasks must not have more than one incoming or Outgoing Message Flow]]></message>
+            <target class="vsdt.Activity"/>
+         </constraint>
+                  <constraint id="act3"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter6"
+            name="act3CompensationNoOutgoingSeq"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[Compensation Activities must not have outgoing Sequence Flows]]></description>
+            <message><![CDATA[Compensation Activities must not have outgoing Sequence Flows]]></message>
+            <target class="vsdt.Activity"/>
+         </constraint>
+                  <constraint id="act4"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter7"
+            name="act4startQuantityNotLowerThanOne"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An Activitiy' StartQuantity must be at least 1]]></description>
+            <message><![CDATA[An Activity's StartQuantity must be at least 1]]></message>
+            <target class="vsdt.Activity"/>
+         </constraint>
+                  <constraint id="activityType"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter8"
+            name="activityType"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[Not all Attributes that are required for the given Activity Type are set.]]></description>
+            <message><![CDATA[Not all Attributes that are required for the given Activity Type are set.]]></message>
+            <target class="vsdt.Activity"/>
+         </constraint>
+                  </constraints>
+         <constraints categories="Audit_1/process">
+                  <constraint id="proc1"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter9"
+            name="proc1startAndEnd"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[When there is a Start Event there has to be an End Event and vice versa]]></description>
+            <message><![CDATA[When there is a Start Event there has to be an End Event and vice versa]]></message>
+            <target class="vsdt.AbstractProcess"/>
+         </constraint>
+                  <constraint id="proc2"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter10"
+            name="proc2noPseudoStarts"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[When there is a Start Event there must not be any Flow Objects with no incoming Sequence Flow]]></description>
+            <message><![CDATA[When there is a Start Event there must not be any Flow Objects with no incoming Sequence Flow]]></message>
+            <target class="vsdt.AbstractProcess"/>
+         </constraint>
+                  <constraint id="proc3"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter11"
+            name="proc3NoPseudoEnds"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[When there is an End Event there must not be any Flow Objects with no outgoing Sequence Flow]]></description>
+            <message><![CDATA[When there is an End Event there must not be any Flow Objects with no outgoing Sequence Flow]]></message>
+            <target class="vsdt.AbstractProcess"/>
+         </constraint>
+                  <constraint id="absProcAdHoc"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter12"
+            name="absProcAdHoc"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[If the Ad Hoc Flag is set the other Ad Hoc Attributes have to be specified, too.]]></description>
+            <message><![CDATA[If the Ad Hoc Flag is set the other Ad Hoc Attributes have to be specified, too.]]></message>
+            <target class="vsdt.AbstractProcess"/>
+         </constraint>
+                  </constraints>
+         <constraints categories="Audit_1/gateway">
+                  <constraint id="gate1"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter13"
+            name="gate1noMessageFlows"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[Gateways must not have incoming or outgoing Message Flows]]></description>
+            <message><![CDATA[Gateways must not have incoming or outgoing Message Flows]]></message>
+            <target class="vsdt.Gateway"/>
+         </constraint>
+                  <constraint id="gate2"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter14"
+            name="gate2AndNoOutgoingConditional"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[AND-Gateways must not have outgoing conditional Sequence Flows]]></description>
+            <message><![CDATA[AND-Gateways must not have outgoing conditional Sequence Flows]]></message>
+            <target class="vsdt.Gateway"/>
+         </constraint>
+                  <constraint id="gate3"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter15"
+            name="gate3XOREventOutgoingConditonNone"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An XOR-Event-Gateway's outgoing Sequence Flow's Condition must be set to None]]></description>
+            <message><![CDATA[An XOR-Event-Gateway's outgoing Sequence Flow's Condition must be set to None]]></message>
+            <target class="vsdt.Gateway"/>
+         </constraint>
+                  <constraint id="gate4"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter16"
+            name="gate4XOREventOutgoingTargetRecMsgTimerRuleLink"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An XOR-Event-Gateway's outgoing Sequence Flow's target must be a Receive Task or an int. Event of Type Message, Timer, Rule or Link]]></description>
+            <message><![CDATA[An XOR-Event-Gateway's outgoing Sequence Flow's target must be a Receive Task or an int. Event of Type Message, Timer, Rule or Link]]></message>
+            <target class="vsdt.Gateway"/>
+         </constraint>
+                  <constraint id="gate5"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter17"
+            name="gate5XOREventNotBothRecTaskAndMsgEvent"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An XOR-Event-Gateway's outgoing Sequence Flow's target must not be both Receive Tasks and Intermediate Message Events]]></description>
+            <message><![CDATA[An XOR-Event-Gateway's outgoing Sequence Flow's target must not be both Receive Tasks and Intermediate Message Events]]></message>
+            <target class="vsdt.Gateway"/>
+         </constraint>
+                  <constraint id="gate6"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter18"
+            name="gate6complexInputCond"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[When a Complex Gateway has more than one incoming Sequence Flow the IncomingCondition must be given]]></description>
+            <message><![CDATA[When a Complex Gateway has more than one incoming Sequence Flow the IncomingCondition must be given]]></message>
+            <target class="vsdt.Gateway"/>
+         </constraint>
+                  <constraint id="gate7"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter19"
+            name="gate7complexOutgoingCond"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[When a Complex Gateway has more than one outgoing Sequence Flow the OutgoingCondition must be given]]></description>
+            <message><![CDATA[When a Complex Gateway has more than one outgoing Sequence Flow the OutgoingCondition must be given]]></message>
+            <target class="vsdt.Gateway"/>
+         </constraint>
+                  <constraint id="gatewayType"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter20"
+            name="gatewayType"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[Not all Attributes that are required for the given Gateway Type are set.]]></description>
+            <message><![CDATA[Not all Attributes that are required for the given Gateway Type are set.]]></message>
+            <target class="vsdt.Gateway"/>
+         </constraint>
+                  </constraints>
+         <constraints categories="Audit_1/event/start">
+                  <constraint id="start1"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter21"
+            name="start1hasOutgoingSequenceFlows"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[A Start Event must have at least one outgoing Sequence Flow]]></description>
+            <message><![CDATA[A Start Event must have at least one outgoing Sequence Flow]]></message>
+            <target class="vsdt.Start"/>
+         </constraint>
+                  <constraint id="start2"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter22"
+            name="start2hasNoIncomingSequenceFlows"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[A Start Event must not have Incoming Sequence Flows]]></description>
+            <message><![CDATA[A Start Event must not have Incoming Sequence Flows]]></message>
+            <target class="vsdt.Start"/>
+         </constraint>
+                  <constraint id="start3"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter23"
+            name="start3hasNoOutgoingMessageFlows"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[A Start Event must not have outgoing Message Flows]]></description>
+            <message><![CDATA[A Start Event must not have outgoing Message Flows]]></message>
+            <target class="vsdt.Start"/>
+         </constraint>
+                  <constraint id="start4"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter24"
+            name="start4messageFlowHasMessageTrigger"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[A Start Event with incoming Message Flow must be of type Message]]></description>
+            <message><![CDATA[A Start Event with incoming Message Flow must be of type Message]]></message>
+            <target class="vsdt.Start"/>
+         </constraint>
+                  </constraints>
+         <constraints categories="Audit_1/event/intermediate">
+                  <constraint id="intermediate1"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter25"
+            name="intermediate1hasNoOutgoingMessageFlows"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An Intermediate Event must not have outgoing Message Flows]]></description>
+            <message><![CDATA[An Intermediate Event must not have outgoing Message Flows]]></message>
+            <target class="vsdt.Intermediate"/>
+         </constraint>
+                  <constraint id="intermediate2"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter26"
+            name="intermediate2activitySetNotNoneOrLink"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An Intermediate Event that is attached to an activity must not be of type None or Link]]></description>
+            <message><![CDATA[An Intermediate Event that is attached to an activity must not be of type None or Link]]></message>
+            <target class="vsdt.Intermediate"/>
+         </constraint>
+                  <constraint id="intermediate3"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter27"
+            name="intermediate3cancelOnTransactionOnly"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An Intermediate Event with a Cancel trigger must be attached to a Trancsaction Activity]]></description>
+            <message><![CDATA[An Intermediate Event with a Cancel trigger must be attached to a Trancsaction Activity]]></message>
+            <target class="vsdt.Intermediate"/>
+         </constraint>
+                  <constraint id="intermediate4"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter28"
+            name="intermediate4activityNoIncoming"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An Intermediate Event bound to an Activity must not have incoming Sequence Flows]]></description>
+            <message><![CDATA[An Intermediate Event bound to an Activity must not have incoming Sequence Flows]]></message>
+            <target class="vsdt.Intermediate"/>
+         </constraint>
+                  <constraint id="intermediate5"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter29"
+            name="intermediate5compensationNoOutgoing"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An Intermediate Event of type Compensation must not have outgoing Sequence Flows.]]></description>
+            <message><![CDATA[An Intermediate Event of type Compensation must not have outgoing Sequence Flows.]]></message>
+            <target class="vsdt.Intermediate"/>
+         </constraint>
+                  <constraint id="intermediate6"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter30"
+            name="intermediate6normalFlowNotCancelMultiple"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An Intermediate Event in normal flow must not be of type Cancel or Multiple]]></description>
+            <message><![CDATA[An Intermediate Event in normal flow must not be of type Cancel or Multiple]]></message>
+            <target class="vsdt.Intermediate"/>
+         </constraint>
+                  <constraint id="intermediate7"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter31"
+            name="intermediate7normalFlowNoneErrorCompOneIncoming"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An Intermediate Event in normal flow with None, Error or Compensation trigger must have exactly one incoming Sequence Flow]]></description>
+            <message><![CDATA[An Intermediate Event in normal flow with None, Error or Compensation trigger must have exactly one incoming Sequence Flow]]></message>
+            <target class="vsdt.Intermediate"/>
+         </constraint>
+                  <constraint id="intermediate8"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter32"
+            name="intermediate8incomingMaxOne"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An Intermediate Event in normal flow must not have more than one incoming Sequence Flows]]></description>
+            <message><![CDATA[An Intermediate Event in normal flow must not have more than one incoming Sequence Flows]]></message>
+            <target class="vsdt.Intermediate"/>
+         </constraint>
+                  <constraint id="intermediate9"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter33"
+            name="intermediate9oneOutgoingIfNotLinkOrComp"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An Intermediate Event must have exactly one outgoing Sequence Flow (exceptions: Link, Compensation)]]></description>
+            <message><![CDATA[An Intermediate Event must have exactly one outgoing Sequence Flow (exceptions: Link, Compensation)]]></message>
+            <target class="vsdt.Intermediate"/>
+         </constraint>
+                  <constraint id="intermediate10"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter34"
+            name="intermediate10linkOneIncomingOrOutgoing"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An Intermediate Event of type Link must have exacly one incoming OR outgoing Sequence Flow]]></description>
+            <message><![CDATA[An Intermediate Event of type Link must have exacly one incoming OR outgoing Sequence Flow]]></message>
+            <target class="vsdt.Intermediate"/>
+         </constraint>
+                  <constraint id="intermediate11"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter35"
+            name="intermediate11sourceLinkMustHaveTarget"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An Intermediate Event of type Link (source) must have exactly one target with the same link ID]]></description>
+            <message><![CDATA[An Intermediate Event of type Link (source) must have exactly one target with the same link ID]]></message>
+            <target class="vsdt.Intermediate"/>
+         </constraint>
+                  <constraint id="intermediate12"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter36"
+            name="intermediate12messageMaxOneIncomingMsg"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[Only Intermediate Events of type Message may have exactly one incoming Message Flow]]></description>
+            <message><![CDATA[Only Intermediate Events of type Message may have exactly one incoming Message Flow]]></message>
+            <target class="vsdt.Intermediate"/>
+         </constraint>
+                  <constraint id="intermediate13"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter37"
+            name="intermediate13doNotUseIntLinkIfTargetInSamePool"
+            mode="Batch"
+            severity="WARNING" statusCode="200">
+            
+            <description><![CDATA[When a Link Event's Target is in the same Pool then a Link End Event should be used]]></description>
+            <message><![CDATA[When a Link Event's Target is in the same Pool then a Link End Event should be used]]></message>
+            <target class="vsdt.Intermediate"/>
+         </constraint>
+                  <constraint id="intermediate14"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter38"
+            name="intermediate14errorCodeInNormalFlowGiven"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An Intermediate Error Event in normal flow must provide an ErrorCode]]></description>
+            <message><![CDATA[An Intermediate Error Event in normal flow must provide an ErrorCode]]></message>
+            <target class="vsdt.Intermediate"/>
+         </constraint>
+                  </constraints>
+         <constraints categories="Audit_1/event/end">
+                  <constraint id="end1"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter39"
+            name="end1hasIncomingSequenceFlows"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An End Event must have at least one incoming Sequence Flow]]></description>
+            <message><![CDATA[An End Event must have at least one incoming Sequence Flow]]></message>
+            <target class="vsdt.End"/>
+         </constraint>
+                  <constraint id="end2"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter40"
+            name="end2hasNoOutgoingSequenceFlows"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An End Event must not have Outgoing Sequence Flows]]></description>
+            <message><![CDATA[An End Event must not have Outgoing Sequence Flows]]></message>
+            <target class="vsdt.End"/>
+         </constraint>
+                  <constraint id="end3"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter41"
+            name="end3hasNoIncomingMessageFlows"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[An End Event must not have incoming Message Flows]]></description>
+            <message><![CDATA[An End Event must not have incoming Message Flows]]></message>
+            <target class="vsdt.End"/>
+         </constraint>
+                  </constraints>
+         <constraints categories="Audit_1/connections/seq">
+                  <constraint id="seq1"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter42"
+            name="seq1isSameProcess"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[Sequence Flows can not cross process boundaries]]></description>
+            <message><![CDATA[Sequence Flows can not cross process boundaries]]></message>
+            <target class="vsdt.SequenceFlow"/>
+         </constraint>
+                  <constraint id="seq2"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter43"
+            name="seq2notNonewhenXORorOR"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[A Sequence Flow's Condition Type may not be None if the source is a XOR Data or Inclusve OR Gateway]]></description>
+            <message><![CDATA[A Sequence Flow's Condition Type may not be None if the source is a XOR Data or Inclusve OR Gateway]]></message>
+            <target class="vsdt.SequenceFlow"/>
+         </constraint>
+                  <constraint id="seq3"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter44"
+            name="seq3noSingleConditionals"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[There must be no single conditional outgoing Sequence Flows]]></description>
+            <message><![CDATA[There must be no single conditional outgoing Sequence Flows]]></message>
+            <target class="vsdt.SequenceFlow"/>
+         </constraint>
+                  <constraint id="seq4"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter45"
+            name="seq4noneConditionType"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[A Sequence Flow with a source of Type XOR Event, Complex or And Gateway or Event must have the Condition Type None]]></description>
+            <message><![CDATA[A Sequence Flow with a source of Type XOR Event, Complex or And Gateway or Event must have the Condition Type None]]></message>
+            <target class="vsdt.SequenceFlow"/>
+         </constraint>
+                  <constraint id="seq5"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter46"
+            name="seq5defaultAllowed"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[The Default Condition Type may be used only if the source is an Activity or a Gateway with the Sequence Flow being set as default]]></description>
+            <message><![CDATA[The Default Condition Type may be used only if the source is an Activity or a Gateway with the Sequence Flow being set as default]]></message>
+            <target class="vsdt.SequenceFlow"/>
+         </constraint>
+                  <constraint id="seq6"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter47"
+            name="seq6quantityAtLeastOne"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[A Sequence Flow's Quantity may not be less than 1]]></description>
+            <message><![CDATA[A Sequence Flow's Quantity may not be less than 1]]></message>
+            <target class="vsdt.SequenceFlow"/>
+         </constraint>
+                  </constraints>
+         <constraints categories="Audit_1/connections/msg">
+                  <constraint id="msg1"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter48"
+            name="msg1notSamePool"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[Message Flows can only connect different pools]]></description>
+            <message><![CDATA[Message Flows can only connect different pools]]></message>
+            <target class="vsdt.MessageFlow"/>
+         </constraint>
+                  <constraint id="msg2"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$Adapter49"
+            name="msg2NotGatewayLaneArtifact"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[Message Flows may not connect to Lanes, Gateways or Artifacts]]></description>
+            <message><![CDATA[Message Flows may not connect to Lanes, Gateways or Artifacts]]></message>
+            <target class="vsdt.MessageFlow"/>
+         </constraint>
+                  </constraints>
+      </constraintProvider>
+   </extension>
+
+   <extension point="org.eclipse.emf.validation.constraintBindings">
+      <?gmfgen generated="true"?>
+                  <clientContext default="false" id="de.dailab.vsdt.diagram.DefaultCtx">
+         <selector class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$DefaultCtx1"/>
+      </clientContext>
+      <binding context="de.dailab.vsdt.diagram.DefaultCtx">
+                  <constraint ref="de.dailab.vsdt.diagram.bpd1"/>
+                  <constraint ref="de.dailab.vsdt.diagram.event1"/>
+                  <constraint ref="de.dailab.vsdt.diagram.eventType"/>
+                  <constraint ref="de.dailab.vsdt.diagram.act1"/>
+                  <constraint ref="de.dailab.vsdt.diagram.act2"/>
+                  <constraint ref="de.dailab.vsdt.diagram.act3"/>
+                  <constraint ref="de.dailab.vsdt.diagram.act4"/>
+                  <constraint ref="de.dailab.vsdt.diagram.activityType"/>
+                  <constraint ref="de.dailab.vsdt.diagram.proc1"/>
+                  <constraint ref="de.dailab.vsdt.diagram.proc2"/>
+                  <constraint ref="de.dailab.vsdt.diagram.proc3"/>
+                  <constraint ref="de.dailab.vsdt.diagram.absProcAdHoc"/>
+                  <constraint ref="de.dailab.vsdt.diagram.gate1"/>
+                  <constraint ref="de.dailab.vsdt.diagram.gate2"/>
+                  <constraint ref="de.dailab.vsdt.diagram.gate3"/>
+                  <constraint ref="de.dailab.vsdt.diagram.gate4"/>
+                  <constraint ref="de.dailab.vsdt.diagram.gate5"/>
+                  <constraint ref="de.dailab.vsdt.diagram.gate6"/>
+                  <constraint ref="de.dailab.vsdt.diagram.gate7"/>
+                  <constraint ref="de.dailab.vsdt.diagram.gatewayType"/>
+                  <constraint ref="de.dailab.vsdt.diagram.start1"/>
+                  <constraint ref="de.dailab.vsdt.diagram.start2"/>
+                  <constraint ref="de.dailab.vsdt.diagram.start3"/>
+                  <constraint ref="de.dailab.vsdt.diagram.start4"/>
+                  <constraint ref="de.dailab.vsdt.diagram.intermediate1"/>
+                  <constraint ref="de.dailab.vsdt.diagram.intermediate2"/>
+                  <constraint ref="de.dailab.vsdt.diagram.intermediate3"/>
+                  <constraint ref="de.dailab.vsdt.diagram.intermediate4"/>
+                  <constraint ref="de.dailab.vsdt.diagram.intermediate5"/>
+                  <constraint ref="de.dailab.vsdt.diagram.intermediate6"/>
+                  <constraint ref="de.dailab.vsdt.diagram.intermediate7"/>
+                  <constraint ref="de.dailab.vsdt.diagram.intermediate8"/>
+                  <constraint ref="de.dailab.vsdt.diagram.intermediate9"/>
+                  <constraint ref="de.dailab.vsdt.diagram.intermediate10"/>
+                  <constraint ref="de.dailab.vsdt.diagram.intermediate11"/>
+                  <constraint ref="de.dailab.vsdt.diagram.intermediate12"/>
+                  <constraint ref="de.dailab.vsdt.diagram.intermediate13"/>
+                  <constraint ref="de.dailab.vsdt.diagram.intermediate14"/>
+                  <constraint ref="de.dailab.vsdt.diagram.end1"/>
+                  <constraint ref="de.dailab.vsdt.diagram.end2"/>
+                  <constraint ref="de.dailab.vsdt.diagram.end3"/>
+                  <constraint ref="de.dailab.vsdt.diagram.seq1"/>
+                  <constraint ref="de.dailab.vsdt.diagram.seq2"/>
+                  <constraint ref="de.dailab.vsdt.diagram.seq3"/>
+                  <constraint ref="de.dailab.vsdt.diagram.seq4"/>
+                  <constraint ref="de.dailab.vsdt.diagram.seq5"/>
+                  <constraint ref="de.dailab.vsdt.diagram.seq6"/>
+                  <constraint ref="de.dailab.vsdt.diagram.msg1"/>
+                  <constraint ref="de.dailab.vsdt.diagram.msg2"/>
+               </binding>
+               </extension>
+   <extension point="org.eclipse.ui.commands">
+      <?gmfgen generated="true"?>
+      <command
+         categoryId="org.eclipse.ui.category.edit"
+         defaultHandler="de.dailab.vsdt.diagram.part.VsdtDiagramUpdateCommand"
+         description="%update.diagram.description"
+         id="de.dailab.vsdt.diagram.updateDiagram"
+         name="%update.diagram.name"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.bindings">
+      <?gmfgen generated="true"?>
+      <key 
+         commandId="de.dailab.vsdt.diagram.updateDiagram"
+         contextId="de.dailab.vsdt.diagram.ui.diagramContext"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="F5"/>
+   </extension><extension id="ValidationContributionItemProvider" name="Validation"
+      point="org.eclipse.gmf.runtime.common.ui.services.action.contributionItemProviders">
+      <?gmfgen generated="true"?>
+      <contributionItemProvider
+         class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider">
+         <Priority name="Low"/>
+         <partContribution id="de.dailab.vsdt.diagram.part.VsdtDiagramEditorID">
+            <partMenuGroup
+                  id="validationGroup"
+                  menubarPath="/diagramMenu/"
+                  toolbarPath="/"/>
+            <partAction toolbarPath="/validationGroup" id="validateAction" menubarPath="/diagramMenu/validationGroup"/>
+         </partContribution>
+      </contributionItemProvider>
+   </extension>
+<extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="de.dailab.vsdt.diagram.providers.VsdtValidationDecoratorProvider">
+         <Priority name="Low"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
+   
+</plugin>

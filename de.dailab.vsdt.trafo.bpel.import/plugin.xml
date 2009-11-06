@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+   
+  <!-- This is useful for debugging the Workflow-Mapping, but should not be part of a release --> 
+   <extension
+         id="de.dailab.vsdt.trafo.bpel.import.wizard"
+         name="BPEL to BPMN"
+         point="org.eclipse.ui.importWizards">
+      <wizard
+            category="Bpmn.import"
+            class="de.dailab.vsdt.trafo.bpel.imprt.wizard.BpelImportWizard"
+            icon="icons/importBpel.gif"
+            id="de.dailab.vsdt.trafo.bpel.import.wizard"
+            name="BPEL to BPMN">
+         <description>
+            A Wizard for importing BPEL Processes
+         </description>
+      </wizard>
+      <category
+            id="Bpmn.import"
+            name="BPMN Import">
+      </category>
+   </extension>
+
+</plugin>
+

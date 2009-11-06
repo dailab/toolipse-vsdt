@@ -1,0 +1,47 @@
+<html><head><title>Math</head><body>
+<h1>Math</h1>
+<ul>
+	<li>Author: Tobias Küster</li>
+	<li>Version: 0.1</li>
+	<li>Created: Tue Aug 11 17:38:23 CEST 2009</li>
+	<li>Modified: Thu Aug 27 17:05:44 CEST 2009</li>
+	
+</ul>
+Process Diagrams to be transformed to both BPEL and JIAC<br>
+
+<h2>Algorithms</h2>
+This diagram contains a few pools representing simple algorithms. While algorithms surely are not a typical usecase for BPMN, they do well for presenting the capabilities of the VSDT. The algorithms can equally well be translated to BPEL and JIAC, they can be interpreted by the VSDT's built-in interpreter and a textual representation can be generated.<br>
+
+<h3>Extract Root</h3>
+In this process the square root of the input value is approximated.<br>
+The Pool '<em>Extract Root</em>' belongs to Participant '<em>Mathematican</em>'. The Pool's Process is of type <span style='font-variant:small-caps'>private</span>. In that Process,  a number of elements are conducted in sequence. <div style='border-left:solid thin; margin-left: .5em; padding-left: .5em'>
+	First,  in Event '<em>start</em>' the Message '<em>GetSquareRootRequest</em>' of the Service '<em>TestService.SquareRoot</em>' is received. The input message is received and its payload is bound to the respective process properties. <br>
+	Next,  starting at the Gateway '<em>input valid?</em>',  one out of several branches will be processed: <div style='border-left:solid thin; margin-left: .5em; padding-left: .5em'>
+		If the condition '<span style='font-family:courier'>($number < 0) && ($eps <= 0)</span>' holds true,  in Event '<em>invalid input</em>' the Message '<em>GetSquareRootResponse</em>' of the Service '<em>TestService.SquareRoot</em>' is sent. In case of invalid input, the return value will be zero. Further, an error message is returned. <br>
+		If no condition applies, by default  a number of elements are performed in sequence. <div style='border-left:solid thin; margin-left: .5em; padding-left: .5em'>
+			First,  the  Task '<em>initialize
+variables</em>' is conducted. This initializes the variables: The upper and lower bounds and the currently tested number. <br>
+			After that,  starting at the Gateway '<em>(join)_2</em>',  a part of the Process will be accomplished in a loop.  At first,  a number of elements are carried out in sequence. <div style='border-left:solid thin; margin-left: .5em; padding-left: .5em'>
+				First,  the <span style='font-variant:small-caps'>script</span> Task '<em>print</em>' is executed, running a script. Here, the currently tested number is printed. The script's body can not be translated to BPEL, thus this works only when translating to JIAC. <br>
+				Next,  the  Task '<em>calculate delta</em>' is processed. Delta is the difference between the input number and the square of the currently tested number. <br>
+				
+			</div>
+			Thereafter,  the loop condition will be tested. While the condition <span style='font-family:courier'>(($d < 0) && ((0 - $d) > $eps)) || (($d > 0) && ($d > $eps))</span> holds true, the loop will continue and  starting at the Gateway '<em>too large?</em>',  one out of several branches will be processed: <div style='border-left:solid thin; margin-left: .5em; padding-left: .5em'>
+				If the condition '<span style='font-family:courier'>($current*$current) > $number</span>' holds true,  the  Task '<em>try smaller 
+number</em>' is carried out. The currently tested number is used as the new upper bound and is then set to be the average of itself and the lower bound. <br>
+				If no condition applies, by default  the <span style='font-variant:small-caps'>user</span> Task '<em>try greater 
+number</em>' is performed, invoking a Service. The currently tested number is used as the new lower bound and is then set to be the average of itself and the upper bound. <br>
+				
+			</div>
+			<br>
+			Thereafter,  in Event '<em>return result</em>' the Message '<em>GetSquareRootResponse</em>' of the Service '<em>TestService.SquareRoot</em>' is sent. Returns the result of the approximation and a success message. <br>
+			
+		</div>
+		<br>
+		
+	</div>
+	<br>
+	
+</div>
+<br>
+</body></html></body></html>

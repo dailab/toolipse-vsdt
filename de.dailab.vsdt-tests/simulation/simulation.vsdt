@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vsdt:BusinessProcessSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vsdt="http://de.dailab.vsdt" xmi:id="_ebNy4UExEd6uwJUN4Rtmyw" name="Simulation" documentation="Process Simulation Tests" id="_ebNy4EExEd6uwJUN4Rtmyw" version="0.1" creationDate="2009-05-15T11:19:21.870+0200" modificationDate="2009-05-15T11:19:21.870+0200">
+  <businessProcesses name="Simulation" documentation="Various processes for testing simulation/interpretation" id="_YZaz8o5eEd6dBsjVQXPs6w" participants="_z6JIkI5fEd6dBsjVQXPs6w">
+    <pools xmi:id="_c5_LsUFoEd68P5DdLSanQA" name="Sequence" id="_c5_LsEFoEd68P5DdLSanQA" participant="_z6JIkI5fEd6dBsjVQXPs6w">
+      <process xmi:id="_c5_LtUFoEd68P5DdLSanQA" name="Sequence_Process" id="_c5_LtEFoEd68P5DdLSanQA">
+        <properties xmi:id="_uarDgEuVEd6ezoaabcowbA" name="n" type="int"/>
+        <properties xmi:id="_ve9yEEuVEd6ezoaabcowbA" name="m" type="int"/>
+        <properties xmi:id="_xW3u4EuVEd6ezoaabcowbA" name="s" type="string"/>
+      </process>
+      <lanes xmi:id="_c5_Ls0FoEd68P5DdLSanQA" id="_c5_LskFoEd68P5DdLSanQA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" xmi:id="_d_8HIUFoEd68P5DdLSanQA" name="A" id="_d_8HIEFoEd68P5DdLSanQA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_eqDbIUFoEd68P5DdLSanQA" name="B" id="_eqDbIEFoEd68P5DdLSanQA">
+          <assignments xmi:id="_ywSY4EuVEd6ezoaabcowbA" to="_uarDgEuVEd6ezoaabcowbA">
+            <from xmi:id="_0BOcUkuVEd6ezoaabcowbA" expression="42"/>
+          </assignments>
+          <assignments xmi:id="_0B0SMEuVEd6ezoaabcowbA" to="_ve9yEEuVEd6ezoaabcowbA" assignTime="END">
+            <from xmi:id="_VFApgUuaEd6H_ZwxxbyFvg" expression="(29*2)+$n"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_fOXpIUFoEd68P5DdLSanQA" name="C" id="_fOXpIEFoEd68P5DdLSanQA">
+          <assignments xmi:id="_4i5QsEuVEd6ezoaabcowbA" to="_xW3u4EuVEd6ezoaabcowbA">
+            <from xmi:id="_7UYg4EuVEd6ezoaabcowbA" expression="&quot;Hello &quot;"/>
+          </assignments>
+          <assignments xmi:id="_79JKAEuVEd6ezoaabcowbA" to="_xW3u4EuVEd6ezoaabcowbA">
+            <from xmi:id="_yhRlIEuYEd6H_ZwxxbyFvg" expression="$s ++ &quot;World&quot;"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:End" xmi:id="_f0nw0UFoEd68P5DdLSanQA" name="E" id="_f0nw0EFoEd68P5DdLSanQA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_vn5m4UFpEd68P5DdLSanQA" name="D" id="_vn5m4EFpEd68P5DdLSanQA">
+          <assignments xmi:id="__pjKUEuVEd6ezoaabcowbA" to="_-Uv6kEuVEd6ezoaabcowbA">
+            <from xmi:id="_BRsM0kuWEd6ezoaabcowbA" expression="$n"/>
+          </assignments>
+          <assignments xmi:id="_BSbzsEuWEd6ezoaabcowbA" to="_ve9yEEuVEd6ezoaabcowbA">
+            <from xmi:id="_DCKr8UuWEd6ezoaabcowbA" expression="$x"/>
+          </assignments>
+          <properties xmi:id="_-Uv6kEuVEd6ezoaabcowbA" name="x" type="int"/>
+        </containedFlowObjects>
+      </lanes>
+    </pools>
+    <pools xmi:id="_gVXGYUFoEd68P5DdLSanQA" name="Subprocess" id="_gVXGYEFoEd68P5DdLSanQA" participant="_z6JIkI5fEd6dBsjVQXPs6w">
+      <process xmi:id="_gVXGZUFoEd68P5DdLSanQA" name="Subprocess_Process" id="_gVXGZEFoEd68P5DdLSanQA"/>
+      <lanes xmi:id="_gVXGY0FoEd68P5DdLSanQA" id="_gVXGYkFoEd68P5DdLSanQA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" xmi:id="_hQcOkUFoEd68P5DdLSanQA" name="A" id="_hQcOkEFoEd68P5DdLSanQA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_hq7yMUFoEd68P5DdLSanQA" name="B" id="_hq7yMEFoEd68P5DdLSanQA" activityType="EMBEDDED">
+          <assignments xmi:id="_pMg5UExVEd6PfpbLRvb98Q" to="_mpTVsExVEd6PfpbLRvb98Q">
+            <from xmi:id="_cRQccUxYEd6IBec2P7xbDg" expression="0"/>
+          </assignments>
+          <properties xmi:id="_mpTVsExVEd6PfpbLRvb98Q" name="n" type="int"/>
+          <containedFlowObjects xsi:type="vsdt:Start" xmi:id="_j5qTkUFoEd68P5DdLSanQA" name="A" id="_j5qTkEFoEd68P5DdLSanQA"/>
+          <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_kYUlgUFoEd68P5DdLSanQA" name="B" id="_kYUlgEFoEd68P5DdLSanQA">
+            <assignments xmi:id="_KcqnAEw4Ed6sf7ilzNhU1w" to="_mpTVsExVEd6PfpbLRvb98Q">
+              <from xmi:id="_8CgmYEw-Ed6_-64s4qIzkQ" expression="$n+1"/>
+            </assignments>
+          </containedFlowObjects>
+          <containedFlowObjects xsi:type="vsdt:End" xmi:id="_k6s50UFoEd68P5DdLSanQA" name="C" id="_k6s50EFoEd68P5DdLSanQA"/>
+          <loopAttributes xsi:type="vsdt:StandardLoopAttSet" xmi:id="_MVjA4EqbEd64G5u010_3FQ" loopMaximum="5">
+            <loopCondition xmi:id="_35QO0Ew6Ed6u98u-et6M4w" expression="$n &lt; 10"/>
+          </loopAttributes>
+          <boundaryEvents xmi:id="_wKVDgUOjEd6MMqarg7KLiw" id="_wKVDgEOjEd6MMqarg7KLiw" trigger="TIMER">
+            <timeDate xmi:id="_DUqt8ExWEd6PfpbLRvb98Q" expression="sometimes"/>
+          </boundaryEvents>
+          <boundaryEvents xmi:id="_wYTOEUOjEd6MMqarg7KLiw" id="_wYTOEEOjEd6MMqarg7KLiw" trigger="ERROR"/>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:End" xmi:id="_lg9BgUFoEd68P5DdLSanQA" name="C" id="_lg9BgEFoEd68P5DdLSanQA"/>
+      </lanes>
+    </pools>
+    <pools xmi:id="_l-bAoUFoEd68P5DdLSanQA" name="Parallel" id="_l-bAoEFoEd68P5DdLSanQA" participant="_z6JIkI5fEd6dBsjVQXPs6w">
+      <process xmi:id="_l-bApUFoEd68P5DdLSanQA" name="Parallel_Process" id="_l-bApEFoEd68P5DdLSanQA"/>
+      <lanes xmi:id="_l-bAo0FoEd68P5DdLSanQA" id="_l-bAokFoEd68P5DdLSanQA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" xmi:id="_nO7mQUFoEd68P5DdLSanQA" name="A" id="_nO7mQEFoEd68P5DdLSanQA"/>
+        <containedFlowObjects xsi:type="vsdt:End" xmi:id="_oEqUYUFoEd68P5DdLSanQA" name="F" id="_oEqUYEFoEd68P5DdLSanQA"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" xmi:id="_pU3_EUFoEd68P5DdLSanQA" name="B" id="_pU3_EEFoEd68P5DdLSanQA" gatewayType="AND"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" xmi:id="_pU3_GEFoEd68P5DdLSanQA" name="E" id="_pU3_F0FoEd68P5DdLSanQA" gatewayType="AND"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_qUlIkUFoEd68P5DdLSanQA" name="C" id="_qUlIkEFoEd68P5DdLSanQA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_q2p64UFoEd68P5DdLSanQA" name="D" id="_q2p64EFoEd68P5DdLSanQA"/>
+      </lanes>
+    </pools>
+    <pools xmi:id="_89dIMUFoEd68P5DdLSanQA" name="Decision" id="_89dIMEFoEd68P5DdLSanQA" participant="_z6JIkI5fEd6dBsjVQXPs6w">
+      <process xmi:id="_89dINUFoEd68P5DdLSanQA" name="Decision_Process" id="_89dINEFoEd68P5DdLSanQA">
+        <properties xmi:id="_4GiyQEudEd6lE-QSF_1upw" name="n" type="int"/>
+      </process>
+      <lanes xmi:id="_89dIM0FoEd68P5DdLSanQA" id="_89dIMkFoEd68P5DdLSanQA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" xmi:id="_CuujQUFpEd68P5DdLSanQA" name="A" id="_CuujQEFpEd68P5DdLSanQA">
+          <assignments xmi:id="_5s5FAEudEd6lE-QSF_1upw" to="_4GiyQEudEd6lE-QSF_1upw">
+            <from xmi:id="_6P2oIkudEd6lE-QSF_1upw" expression="42"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:End" xmi:id="_Df8k0UFpEd68P5DdLSanQA" name="F" id="_Df8k0EFpEd68P5DdLSanQA"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" xmi:id="_F8OaAUFpEd68P5DdLSanQA" name="B" id="_F8OaAEFpEd68P5DdLSanQA" gatewayType="OR"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" xmi:id="_F8OaCEFpEd68P5DdLSanQA" name="E" id="_F8OaB0FpEd68P5DdLSanQA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_G2XHAUFpEd68P5DdLSanQA" name="D" id="_G2XHAEFpEd68P5DdLSanQA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_HTzQ8UFpEd68P5DdLSanQA" name="C" id="_HTzQ8EFpEd68P5DdLSanQA"/>
+      </lanes>
+    </pools>
+    <pools xmi:id="_LM3NMUFpEd68P5DdLSanQA" name="Loop" id="_LM3NMEFpEd68P5DdLSanQA" participant="_z6JIkI5fEd6dBsjVQXPs6w">
+      <process xmi:id="_LM3NNUFpEd68P5DdLSanQA" name="Loop_Process" id="_LM3NNEFpEd68P5DdLSanQA">
+        <properties xmi:id="_u6E4IEucEd6lE-QSF_1upw" name="n" type="int"/>
+      </process>
+      <lanes xmi:id="_LM3NM0FpEd68P5DdLSanQA" id="_LM3NMkFpEd68P5DdLSanQA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" xmi:id="_QTskIUFpEd68P5DdLSanQA" name="A" id="_QTskIEFpEd68P5DdLSanQA">
+          <assignments xmi:id="_AFv58EudEd6lE-QSF_1upw" to="_u6E4IEucEd6lE-QSF_1upw">
+            <from xmi:id="_AuzeAkudEd6lE-QSF_1upw" expression="0"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:End" xmi:id="_SlaIEUFpEd68P5DdLSanQA" name="F" id="_SlaIEEFpEd68P5DdLSanQA"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" xmi:id="_T4h80UFpEd68P5DdLSanQA" name="B" id="_T4h80EFpEd68P5DdLSanQA"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" xmi:id="_T4rt1kFpEd68P5DdLSanQA" name="D" id="_T4rt1UFpEd68P5DdLSanQA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_WrQjIUFpEd68P5DdLSanQA" name="C" id="_WrQjIEFpEd68P5DdLSanQA">
+          <assignments xmi:id="_wx1rAEucEd6lE-QSF_1upw" to="_u6E4IEucEd6lE-QSF_1upw">
+            <from xmi:id="_xsv0EkucEd6lE-QSF_1upw" expression="$n + 1"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_ZPah8UFpEd68P5DdLSanQA" name="E" id="_ZPah8EFpEd68P5DdLSanQA"/>
+      </lanes>
+    </pools>
+    <pools xmi:id="_hBYpcUFpEd68P5DdLSanQA" name="Service 1" id="_hBYpcEFpEd68P5DdLSanQA" participant="_z6JIkI5fEd6dBsjVQXPs6w">
+      <process xmi:id="_hBYpdUFpEd68P5DdLSanQA" name="Service 1_Process" id="_hBYpdEFpEd68P5DdLSanQA">
+        <properties xmi:id="_cAtM4Ew1Ed6sf7ilzNhU1w" name="x" type="int"/>
+        <properties xmi:id="_X1UYIFAzEd6pL-lWbUI4OA" name="s2" type="string"/>
+      </process>
+      <lanes xmi:id="_hBYpc0FpEd68P5DdLSanQA" id="_hBYpckFpEd68P5DdLSanQA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" xmi:id="_ioIk0UFpEd68P5DdLSanQA" name="A" id="_ioIk0EFpEd68P5DdLSanQA">
+          <assignments xmi:id="_hSa-IEw1Ed6sf7ilzNhU1w" to="_cAtM4Ew1Ed6sf7ilzNhU1w">
+            <from xmi:id="_iVqj0kw1Ed6sf7ilzNhU1w" expression="1"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:End" xmi:id="_jmlxIUFpEd68P5DdLSanQA" name="D" id="_jmlxIEFpEd68P5DdLSanQA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_leIhkUFpEd68P5DdLSanQA" name="B" id="_leIhkEFpEd68P5DdLSanQA" activityType="SEND" inMessage="_joF1AEw1Ed6sf7ilzNhU1w" implementation="_z65fsEw2Ed6sf7ilzNhU1w">
+          <assignments xmi:id="_HTwnQEw2Ed6sf7ilzNhU1w" to="_FxbR0Ew2Ed6sf7ilzNhU1w">
+            <from xmi:id="_Ie49oEw2Ed6sf7ilzNhU1w" expression="$x"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_nFVI4UFpEd68P5DdLSanQA" name="C" id="_nFVI4EFpEd68P5DdLSanQA" activityType="RECEIVE" outMessage="_khEEYEw1Ed6sf7ilzNhU1w" implementation="_z65fsEw2Ed6sf7ilzNhU1w">
+          <assignments xmi:id="_A67c8Ew2Ed6sf7ilzNhU1w" to="_X1UYIFAzEd6pL-lWbUI4OA" assignTime="END">
+            <from xmi:id="_Dn9D4Ew2Ed6sf7ilzNhU1w" expression="&quot;Result is &quot; ++ $s"/>
+          </assignments>
+        </containedFlowObjects>
+      </lanes>
+    </pools>
+    <pools xmi:id="_0lHu0UFpEd68P5DdLSanQA" name="Service 2" id="_0lHu0EFpEd68P5DdLSanQA" participant="_z6JIkI5fEd6dBsjVQXPs6w">
+      <process xmi:id="_0lHu1UFpEd68P5DdLSanQA" name="Service 2_Process" id="_0lHu1EFpEd68P5DdLSanQA">
+        <properties xmi:id="_djM6YEw1Ed6sf7ilzNhU1w" name="x" type="int"/>
+      </process>
+      <lanes xmi:id="_0lHu00FpEd68P5DdLSanQA" id="_0lHu0kFpEd68P5DdLSanQA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" xmi:id="_4pMoQUFpEd68P5DdLSanQA" name="A" id="_4pMoQEFpEd68P5DdLSanQA"/>
+        <containedFlowObjects xsi:type="vsdt:End" xmi:id="_5MwoUUFpEd68P5DdLSanQA" name="E" id="_5MwoUEFpEd68P5DdLSanQA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_9pstsUFpEd68P5DdLSanQA" name="B" id="_9pstsEFpEd68P5DdLSanQA" activityType="RECEIVE" outMessage="_joF1AEw1Ed6sf7ilzNhU1w" implementation="_z65fsEw2Ed6sf7ilzNhU1w">
+          <assignments xmi:id="_ZDhYIEw3Ed6sf7ilzNhU1w" to="_djM6YEw1Ed6sf7ilzNhU1w" assignTime="END">
+            <from xmi:id="_aTGwsEw3Ed6sf7ilzNhU1w" expression="$n"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_ABwxQUFqEd68P5DdLSanQA" name="C" id="_ABwxQEFqEd68P5DdLSanQA" activityType="SEND" inMessage="_khEEYEw1Ed6sf7ilzNhU1w" implementation="_z65fsEw2Ed6sf7ilzNhU1w">
+          <assignments xmi:id="_5L9mIEw1Ed6sf7ilzNhU1w" to="_zaZ3MEw1Ed6sf7ilzNhU1w">
+            <from xmi:id="_7I7pIkw1Ed6sf7ilzNhU1w" expression="&quot;Hello World&quot;"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_CpvgIUFqEd68P5DdLSanQA" name="D" id="_CpvgIEFqEd68P5DdLSanQA" activityType="SERVICE" inMessage="_oO9ScEw1Ed6sf7ilzNhU1w" outMessage="_orhSoEw1Ed6sf7ilzNhU1w" implementation="_z-niEEw2Ed6sf7ilzNhU1w">
+          <assignments xmi:id="_GWfRQEw3Ed6sf7ilzNhU1w" to="_1iryUEw1Ed6sf7ilzNhU1w">
+            <from xmi:id="_I-J3EEw3Ed6sf7ilzNhU1w" expression="$x"/>
+          </assignments>
+          <assignments xmi:id="_GfQywEw3Ed6sf7ilzNhU1w" to="_djM6YEw1Ed6sf7ilzNhU1w" assignTime="END">
+            <from xmi:id="_K2M90Ew3Ed6sf7ilzNhU1w" expression="$n2"/>
+          </assignments>
+        </containedFlowObjects>
+      </lanes>
+    </pools>
+    <pools xmi:id="_144cwUFpEd68P5DdLSanQA" name="Service 3" id="_144cwEFpEd68P5DdLSanQA" participant="_z6JIkI5fEd6dBsjVQXPs6w">
+      <process xmi:id="_144cxUFpEd68P5DdLSanQA" name="Service 3_Process" id="_144cxEFpEd68P5DdLSanQA">
+        <properties xmi:id="_fkL6sEw1Ed6sf7ilzNhU1w" name="x" type="int"/>
+      </process>
+      <lanes xmi:id="_144cw0FpEd68P5DdLSanQA" id="_144cwkFpEd68P5DdLSanQA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" xmi:id="_5xz2IUFpEd68P5DdLSanQA" name="A" id="_5xz2IEFpEd68P5DdLSanQA" trigger="MESSAGE" message="_oO9ScEw1Ed6sf7ilzNhU1w" implementation="_z-niEEw2Ed6sf7ilzNhU1w">
+          <assignments xmi:id="_QXPZ8Ew2Ed6sf7ilzNhU1w" to="_fkL6sEw1Ed6sf7ilzNhU1w" assignTime="END">
+            <from xmi:id="_ZXmAIkw2Ed6sf7ilzNhU1w" expression="$n1"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:End" xmi:id="_6tLSMUFpEd68P5DdLSanQA" name="D" id="_6tLSMEFpEd68P5DdLSanQA" trigger="MESSAGE" message="_orhSoEw1Ed6sf7ilzNhU1w" implementation="_z-niEEw2Ed6sf7ilzNhU1w">
+          <assignments xmi:id="_UfdzkEw2Ed6sf7ilzNhU1w" to="_3QCE8Ew1Ed6sf7ilzNhU1w">
+            <from xmi:id="_a6OQgEw2Ed6sf7ilzNhU1w" expression="$x"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_7jCjMUFpEd68P5DdLSanQA" name="C" id="_7jCjMEFpEd68P5DdLSanQA">
+          <assignments xmi:id="_SI5k0Ew2Ed6sf7ilzNhU1w" to="_fkL6sEw1Ed6sf7ilzNhU1w">
+            <from xmi:id="_TxpEQEw2Ed6sf7ilzNhU1w" expression="$x * 2"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" xmi:id="_ix14EUOmEd6MMqarg7KLiw" name="to B" id="_ix14EEOmEd6MMqarg7KLiw" trigger="LINK" linkedTo="_jQrJIUOmEd6MMqarg7KLiw"/>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" xmi:id="_jQrJIUOmEd6MMqarg7KLiw" name="B" id="_jQrJIEOmEd6MMqarg7KLiw" trigger="LINK" linkedTo="_ix14EUOmEd6MMqarg7KLiw"/>
+      </lanes>
+    </pools>
+    <pools xmi:id="_pqBycUk5Ed6cyu4ZIKyh3A" name="Nested Subprocess" id="_pqBycEk5Ed6cyu4ZIKyh3A" participant="_z6JIkI5fEd6dBsjVQXPs6w">
+      <process xmi:id="_pqBydUk5Ed6cyu4ZIKyh3A" name="Nested Subprocess_Process" id="_pqBydEk5Ed6cyu4ZIKyh3A"/>
+      <lanes xmi:id="_pqByc0k5Ed6cyu4ZIKyh3A" id="_pqByckk5Ed6cyu4ZIKyh3A" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" xmi:id="_soXL0Uk5Ed6cyu4ZIKyh3A" name="A" id="_soXL0Ek5Ed6cyu4ZIKyh3A"/>
+        <containedFlowObjects xsi:type="vsdt:End" xmi:id="_uZOFcUk5Ed6cyu4ZIKyh3A" id="_uZOFcEk5Ed6cyu4ZIKyh3A"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_viYs8Uk5Ed6cyu4ZIKyh3A" name="B" id="_viYs8Ek5Ed6cyu4ZIKyh3A" activityType="EMBEDDED">
+          <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_1w5doUk5Ed6cyu4ZIKyh3A" name="C" id="_1w5doEk5Ed6cyu4ZIKyh3A" activityType="EMBEDDED">
+            <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_56UxIUk5Ed6cyu4ZIKyh3A" name="D" id="_56UxIEk5Ed6cyu4ZIKyh3A"/>
+          </containedFlowObjects>
+          <boundaryEvents xmi:id="_-tF8kUk5Ed6cyu4ZIKyh3A" id="_-tF8kEk5Ed6cyu4ZIKyh3A" trigger="ERROR"/>
+        </containedFlowObjects>
+      </lanes>
+    </pools>
+    <pools xmi:id="_jfAVYUoPEd6_-__ulVzvUA" name="Activity Loop" id="_jfAVYEoPEd6_-__ulVzvUA" participant="_z6JIkI5fEd6dBsjVQXPs6w">
+      <process xmi:id="_jfAVZUoPEd6_-__ulVzvUA" name="Activity Loop_Process" id="_jfAVZEoPEd6_-__ulVzvUA"/>
+      <lanes xmi:id="_jfAVY0oPEd6_-__ulVzvUA" id="_jfAVYkoPEd6_-__ulVzvUA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" xmi:id="_nIdIUUoPEd6_-__ulVzvUA" name="A" id="_nIdIUEoPEd6_-__ulVzvUA"/>
+        <containedFlowObjects xsi:type="vsdt:End" xmi:id="_qWXOwUoPEd6_-__ulVzvUA" name="D" id="_qWXOwEoPEd6_-__ulVzvUA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_rLXkIUoPEd6_-__ulVzvUA" name="B" id="_rLXkIEoPEd6_-__ulVzvUA" activityType="SEND" inMessage="_6fgEEExVEd6PfpbLRvb98Q" implementation="_2C588ExVEd6PfpbLRvb98Q">
+          <loopAttributes xsi:type="vsdt:StandardLoopAttSet" xmi:id="_s5ZMMEoPEd6_-__ulVzvUA"/>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_BQExcUoQEd6_-__ulVzvUA" name="C" id="_BQExcEoQEd6_-__ulVzvUA" activityType="RECEIVE" outMessage="_7cyywExVEd6PfpbLRvb98Q" implementation="_2C588ExVEd6PfpbLRvb98Q">
+          <loopAttributes xsi:type="vsdt:MultiLoopAttSet" xmi:id="_CKADEEoQEd6_-__ulVzvUA">
+            <MI_Condition xmi:id="_0NrgskxVEd6PfpbLRvb98Q" expression="true"/>
+          </loopAttributes>
+        </containedFlowObjects>
+      </lanes>
+    </pools>
+    <pools xmi:id="_3Ma7MUoPEd6_-__ulVzvUA" name="Act. Loop 2" id="_3Ma7MEoPEd6_-__ulVzvUA" participant="_z6JIkI5fEd6dBsjVQXPs6w">
+      <process xmi:id="_3MkFI0oPEd6_-__ulVzvUA" name="Act. Loop 2_Process" id="_3MkFIkoPEd6_-__ulVzvUA"/>
+      <lanes xmi:id="_3MkFIUoPEd6_-__ulVzvUA" id="_3MkFIEoPEd6_-__ulVzvUA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" xmi:id="_4S_hsUoPEd6_-__ulVzvUA" name="A" id="_4S_hsEoPEd6_-__ulVzvUA" trigger="MESSAGE" message="_6fgEEExVEd6PfpbLRvb98Q" implementation="_2C588ExVEd6PfpbLRvb98Q"/>
+        <containedFlowObjects xsi:type="vsdt:End" xmi:id="_7kyCkUoPEd6_-__ulVzvUA" name="E" id="_7kyCkEoPEd6_-__ulVzvUA" trigger="MESSAGE" message="_7cyywExVEd6PfpbLRvb98Q" implementation="_2C588ExVEd6PfpbLRvb98Q"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_Dn8nwUoQEd6_-__ulVzvUA" name="B" id="_Dn8nwEoQEd6_-__ulVzvUA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_Egh1kUoQEd6_-__ulVzvUA" name="C" id="_Egh1kEoQEd6_-__ulVzvUA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_FZs5QUoQEd6_-__ulVzvUA" name="D" id="_FZs5QEoQEd6_-__ulVzvUA"/>
+      </lanes>
+    </pools>
+    <pools xmi:id="_UqYwcU9zEd6-wO9o2B8wag" name="Subprocess 2" id="_UqYwcE9zEd6-wO9o2B8wag" participant="_z6JIkI5fEd6dBsjVQXPs6w">
+      <process xmi:id="_UqYwdU9zEd6-wO9o2B8wag" name="Subprocess 2_Process" id="_UqYwdE9zEd6-wO9o2B8wag"/>
+      <lanes xmi:id="_UqYwc09zEd6-wO9o2B8wag" id="_UqYwck9zEd6-wO9o2B8wag" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" xmi:id="_V3KFkU9zEd6-wO9o2B8wag" name="A" id="_V3KFkE9zEd6-wO9o2B8wag"/>
+        <containedFlowObjects xsi:type="vsdt:End" xmi:id="_XApdMU9zEd6-wO9o2B8wag" name="C" id="_XApdME9zEd6-wO9o2B8wag"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_YHBPYU9zEd6-wO9o2B8wag" name="B" id="_YHBPYE9zEd6-wO9o2B8wag" activityType="EMBEDDED">
+          <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_fHIcIU9zEd6-wO9o2B8wag" name="B" id="_fHIcIE9zEd6-wO9o2B8wag"/>
+          <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_ldSF4U9zEd6-wO9o2B8wag" name="C" id="_ldSF4E9zEd6-wO9o2B8wag"/>
+          <containedFlowObjects xsi:type="vsdt:Gateway" xmi:id="_4w7g0U9zEd6-wO9o2B8wag" id="_4w7g0E9zEd6-wO9o2B8wag" gatewayType="AND"/>
+          <containedFlowObjects xsi:type="vsdt:Gateway" xmi:id="_C3uxsU90Ed6-wO9o2B8wag" id="_C3uxsE90Ed6-wO9o2B8wag" gatewayType="AND"/>
+          <boundaryEvents xmi:id="_bG9V0U90Ed6-wO9o2B8wag" id="_bG9V0E90Ed6-wO9o2B8wag" trigger="RULE" ruleName="da rule">
+            <ruleExpression expression="'some rule expression'"/>
+          </boundaryEvents>
+        </containedFlowObjects>
+      </lanes>
+    </pools>
+    <pools xmi:id="_Ci320U-GEd6NQ49J3R5agw" name="ActivityForking" id="_Ci320E-GEd6NQ49J3R5agw" participant="_z6JIkI5fEd6dBsjVQXPs6w">
+      <process xmi:id="_Ci321U-GEd6NQ49J3R5agw" name="ActivityForking_Process" id="_Ci321E-GEd6NQ49J3R5agw"/>
+      <lanes xmi:id="_Ci3200-GEd6NQ49J3R5agw" id="_Ci320k-GEd6NQ49J3R5agw" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" xmi:id="_E5SUkU-GEd6NQ49J3R5agw" name="A" id="_E5SUkE-GEd6NQ49J3R5agw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_GDOYIU-GEd6NQ49J3R5agw" name="B" id="_GDOYIE-GEd6NQ49J3R5agw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_HReT8U-GEd6NQ49J3R5agw" name="D" id="_HReT8E-GEd6NQ49J3R5agw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_HypuYU-GEd6NQ49J3R5agw" name="F" id="_HypuYE-GEd6NQ49J3R5agw"/>
+        <containedFlowObjects xsi:type="vsdt:End" xmi:id="_IjTIMU-GEd6NQ49J3R5agw" name="G" id="_IjTIME-GEd6NQ49J3R5agw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_J4jD4U-GEd6NQ49J3R5agw" name="C" id="_J4jD4E-GEd6NQ49J3R5agw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_K5HJAU-GEd6NQ49J3R5agw" name="E" id="_K5HJAE-GEd6NQ49J3R5agw"/>
+      </lanes>
+    </pools>
+    <pools xmi:id="_PbNBgVGyEd6OvsFLEtAjTQ" name="External Service" id="_PbNBgFGyEd6OvsFLEtAjTQ" participant="_z6JIkI5fEd6dBsjVQXPs6w">
+      <process xmi:id="_PbWyg1GyEd6OvsFLEtAjTQ" name="External Service_Process" id="_PbWyglGyEd6OvsFLEtAjTQ">
+        <properties xmi:id="_BQkSUFGzEd6OvsFLEtAjTQ" name="userName" type="string"/>
+        <properties xmi:id="_FWj3UFGzEd6OvsFLEtAjTQ" name="phoneNumber" type="int"/>
+        <properties xmi:id="_gL2L0FHAEd6K28eH7SXDhg" name="internal" type="boolean"/>
+      </process>
+      <lanes xmi:id="_PbWygVGyEd6OvsFLEtAjTQ" id="_PbWygFGyEd6OvsFLEtAjTQ" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" xmi:id="_S8cToVGyEd6OvsFLEtAjTQ" name="A" id="_S8cToFGyEd6OvsFLEtAjTQ" trigger="MESSAGE" message="_rPPwMFGyEd6OvsFLEtAjTQ" implementation="_lNoMAFGyEd6OvsFLEtAjTQ">
+          <assignments xmi:id="_PH2yQFGzEd6OvsFLEtAjTQ" to="_BQkSUFGzEd6OvsFLEtAjTQ" assignTime="END">
+            <from xmi:id="_TeD9gFGzEd6OvsFLEtAjTQ" expression="$paramUser"/>
+          </assignments>
+          <assignments xmi:id="_5aPG4FHAEd6K28eH7SXDhg" to="_gL2L0FHAEd6K28eH7SXDhg" assignTime="END">
+            <from xmi:id="_6ncg4lHAEd6K28eH7SXDhg" expression="$b"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" xmi:id="_TxHR0VGyEd6OvsFLEtAjTQ" name="B" id="_TxHR0FGyEd6OvsFLEtAjTQ" activityType="SERVICE" inMessage="_rnDMMFGyEd6OvsFLEtAjTQ" outMessage="_rorj4FGyEd6OvsFLEtAjTQ" implementation="_3DJcEFGyEd6OvsFLEtAjTQ">
+          <assignments xmi:id="_aViysFGzEd6OvsFLEtAjTQ" to="_MZ8agFGzEd6OvsFLEtAjTQ">
+            <from xmi:id="_cHDzoFGzEd6OvsFLEtAjTQ" expression="$userName"/>
+          </assignments>
+          <assignments xmi:id="_yi3mcFHAEd6K28eH7SXDhg" to="_wBAGoFHAEd6K28eH7SXDhg">
+            <from xmi:id="_1N96wFHAEd6K28eH7SXDhg" expression="! $internal"/>
+          </assignments>
+          <assignments xmi:id="_aldeAFGzEd6OvsFLEtAjTQ" to="_FWj3UFGzEd6OvsFLEtAjTQ" assignTime="END">
+            <from xmi:id="_dag_l1GzEd6OvsFLEtAjTQ" expression="$res"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:End" xmi:id="_UkSbMVGyEd6OvsFLEtAjTQ" name="C" id="_UkSbMFGyEd6OvsFLEtAjTQ" trigger="MESSAGE" message="_rTQtgFGyEd6OvsFLEtAjTQ" implementation="_lNoMAFGyEd6OvsFLEtAjTQ">
+          <assignments xmi:id="_Yt2cIFGzEd6OvsFLEtAjTQ" to="_LNBUYFGzEd6OvsFLEtAjTQ">
+            <from xmi:id="_ZmhwkFGzEd6OvsFLEtAjTQ" expression="$phoneNumber"/>
+          </assignments>
+        </containedFlowObjects>
+      </lanes>
+    </pools>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_eqNMJUFoEd68P5DdLSanQA" id="_eqNMJEFoEd68P5DdLSanQA" source="_d_8HIUFoEd68P5DdLSanQA" target="_eqDbIUFoEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_fOXpK0FoEd68P5DdLSanQA" id="_fOXpKkFoEd68P5DdLSanQA" source="_eqDbIUFoEd68P5DdLSanQA" target="_fOXpIUFoEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_hrFjMUFoEd68P5DdLSanQA" id="_hrFjMEFoEd68P5DdLSanQA" source="_hQcOkUFoEd68P5DdLSanQA" target="_hq7yMUFoEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_kYUli0FoEd68P5DdLSanQA" id="_kYUlikFoEd68P5DdLSanQA" source="_j5qTkUFoEd68P5DdLSanQA" target="_kYUlgUFoEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_k62DxkFoEd68P5DdLSanQA" id="_k62DxUFoEd68P5DdLSanQA" source="_kYUlgUFoEd68P5DdLSanQA" target="_k6s50UFoEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_lg9BiEFoEd68P5DdLSanQA" id="_lg9Bh0FoEd68P5DdLSanQA" source="_hq7yMUFoEd68P5DdLSanQA" target="_lg9BgUFoEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_pVLhEUFoEd68P5DdLSanQA" id="_pVLhEEFoEd68P5DdLSanQA" source="_pU3_GEFoEd68P5DdLSanQA" target="_oEqUYUFoEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_pVLhGkFoEd68P5DdLSanQA" id="_oE0FYEFoEd68P5DdLSanQA" source="_nO7mQUFoEd68P5DdLSanQA" target="_pU3_EUFoEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_qUuSgUFoEd68P5DdLSanQA" id="_qUuSgEFoEd68P5DdLSanQA" source="_qUlIkUFoEd68P5DdLSanQA" target="_pU3_GEFoEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_qUuSiUFoEd68P5DdLSanQA" id="_pVBwEEFoEd68P5DdLSanQA" source="_pU3_EUFoEd68P5DdLSanQA" target="_qUlIkUFoEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_q2zr4UFoEd68P5DdLSanQA" id="_q2zr4EFoEd68P5DdLSanQA" source="_q2p64UFoEd68P5DdLSanQA" target="_pU3_GEFoEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_q2zr6UFoEd68P5DdLSanQA" id="_pVBwGUFoEd68P5DdLSanQA" source="_pU3_EUFoEd68P5DdLSanQA" target="_q2p64UFoEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_F8Xj8UFpEd68P5DdLSanQA" id="_F8Xj8EFpEd68P5DdLSanQA" source="_F8OaCEFpEd68P5DdLSanQA" target="_Df8k0UFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_F8Xj-kFpEd68P5DdLSanQA" id="_DgGV0EFpEd68P5DdLSanQA" source="_CuujQUFpEd68P5DdLSanQA" target="_F8OaAUFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_G2g4BkFpEd68P5DdLSanQA" id="_G2g4BUFpEd68P5DdLSanQA" source="_G2XHAUFpEd68P5DdLSanQA" target="_F8OaCEFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_G2g4DkFpEd68P5DdLSanQA" name="$n &lt; 100" id="_F8OaDkFpEd68P5DdLSanQA" conditionType="EXPRESSION" source="_F8OaAUFpEd68P5DdLSanQA" target="_G2XHAUFpEd68P5DdLSanQA">
+      <conditionExpression xmi:id="_DvZZkUw_Ed6_-64s4qIzkQ" expression="$n &lt; 100"/>
+    </connections>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_HT9B8UFpEd68P5DdLSanQA" id="_HT9B8EFpEd68P5DdLSanQA" source="_HTzQ8UFpEd68P5DdLSanQA" target="_F8OaCEFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_HUGL4UFpEd68P5DdLSanQA" name="$n == 42" id="_F8OaF0FpEd68P5DdLSanQA" conditionType="EXPRESSION" source="_F8OaAUFpEd68P5DdLSanQA" target="_HTzQ8UFpEd68P5DdLSanQA">
+      <conditionExpression xmi:id="_C7epUUw_Ed6_-64s4qIzkQ" expression="$n == 42"/>
+    </connections>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_T4-ow0FpEd68P5DdLSanQA" id="_T4-owkFpEd68P5DdLSanQA" conditionType="DEFAULT" source="_T4rt1kFpEd68P5DdLSanQA" target="_SlaIEUFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_T5HysUFpEd68P5DdLSanQA" id="_SlaIF0FpEd68P5DdLSanQA" source="_QTskIUFpEd68P5DdLSanQA" target="_T4h80UFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_WraUIUFpEd68P5DdLSanQA" id="_WraUIEFpEd68P5DdLSanQA" source="_WrQjIUFpEd68P5DdLSanQA" target="_T4rt1kFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_WraUKUFpEd68P5DdLSanQA" id="_T403wEFpEd68P5DdLSanQA" source="_T4h80UFpEd68P5DdLSanQA" target="_WrQjIUFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_ZPkS8UFpEd68P5DdLSanQA" id="_ZPkS8EFpEd68P5DdLSanQA" source="_ZPah8UFpEd68P5DdLSanQA" target="_T4h80UFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_ZPkS-UFpEd68P5DdLSanQA" id="_T403yUFpEd68P5DdLSanQA" conditionType="EXPRESSION" source="_T4rt1kFpEd68P5DdLSanQA" target="_ZPah8UFpEd68P5DdLSanQA">
+      <conditionExpression xmi:id="_VfdpgEudEd6lE-QSF_1upw" expression="$n &lt; 3"/>
+    </connections>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_leSSmUFpEd68P5DdLSanQA" id="_jnVYAEFpEd68P5DdLSanQA" source="_ioIk0UFpEd68P5DdLSanQA" target="_leIhkUFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_nFe54UFpEd68P5DdLSanQA" id="_nFe54EFpEd68P5DdLSanQA" source="_nFVI4UFpEd68P5DdLSanQA" target="_jmlxIUFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_nFe56UFpEd68P5DdLSanQA" id="_leSSkEFpEd68P5DdLSanQA" source="_leIhkUFpEd68P5DdLSanQA" target="_nFVI4UFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_vn5m60FpEd68P5DdLSanQA" id="_vn5m6kFpEd68P5DdLSanQA" source="_vn5m4UFpEd68P5DdLSanQA" target="_f0nw0UFoEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_voCw0UFpEd68P5DdLSanQA" id="_f06rxUFoEd68P5DdLSanQA" source="_fOXpIUFoEd68P5DdLSanQA" target="_vn5m4UFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_9p13sUFpEd68P5DdLSanQA" id="_8UcK8EFpEd68P5DdLSanQA" source="_4pMoQUFpEd68P5DdLSanQA" target="_9pstsUFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_ACDsMUFqEd68P5DdLSanQA" id="_9p13qEFpEd68P5DdLSanQA" source="_9pstsUFpEd68P5DdLSanQA" target="_ABwxQUFqEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_Cp5RIUFqEd68P5DdLSanQA" id="_Cp5RIEFqEd68P5DdLSanQA" source="_CpvgIUFqEd68P5DdLSanQA" target="_5MwoUUFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_CqV9EUFqEd68P5DdLSanQA" id="_AB57MEFqEd68P5DdLSanQA" source="_ABwxQUFqEd68P5DdLSanQA" target="_CpvgIUFqEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:MessageFlow" xmi:id="_GwD1QUFqEd68P5DdLSanQA" name="from B to B" id="_GwD1QEFqEd68P5DdLSanQA" message="_joF1AEw1Ed6sf7ilzNhU1w" source="_leIhkUFpEd68P5DdLSanQA" target="_9pstsUFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:MessageFlow" xmi:id="_HbgmAUFqEd68P5DdLSanQA" name="from C to C" id="_HbgmAEFqEd68P5DdLSanQA" message="_khEEYEw1Ed6sf7ilzNhU1w" source="_ABwxQUFqEd68P5DdLSanQA" target="_nFVI4UFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:MessageFlow" xmi:id="_IF6N4UFqEd68P5DdLSanQA" name="from D to A" id="_IF6N4EFqEd68P5DdLSanQA" message="_oO9ScEw1Ed6sf7ilzNhU1w" source="_CpvgIUFqEd68P5DdLSanQA" target="_5xz2IUFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:MessageFlow" xmi:id="_I7Uy8UFqEd68P5DdLSanQA" name="from D to D" id="_I7Uy8EFqEd68P5DdLSanQA" message="_orhSoEw1Ed6sf7ilzNhU1w" source="_6tLSMUFpEd68P5DdLSanQA" target="_CpvgIUFqEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_yPRWwUOjEd6MMqarg7KLiw" id="_yPRWwEOjEd6MMqarg7KLiw" source="_wYTOEUOjEd6MMqarg7KLiw" target="_lg9BgUFoEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_0pL0cUOjEd6MMqarg7KLiw" id="_0pL0cEOjEd6MMqarg7KLiw" source="_wKVDgUOjEd6MMqarg7KLiw" target="_lg9BgUFoEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_iyR88UOmEd6MMqarg7KLiw" id="_6tVDMEFpEd68P5DdLSanQA" source="_5xz2IUFpEd68P5DdLSanQA" target="_ix14EUOmEd6MMqarg7KLiw"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_jRH1EUOmEd6MMqarg7KLiw" id="_jRH1EEOmEd6MMqarg7KLiw" source="_jQrJIUOmEd6MMqarg7KLiw" target="_7jCjMUFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_xnts4UO2Ed6vb5byrJLAOA" id="_xnts4EO2Ed6vb5byrJLAOA" conditionType="DEFAULT" source="_F8OaAUFpEd68P5DdLSanQA" target="_F8OaCEFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_viYs-0k5Ed6cyu4ZIKyh3A" id="_viYs-kk5Ed6cyu4ZIKyh3A" source="_viYs8Uk5Ed6cyu4ZIKyh3A" target="_uZOFcUk5Ed6cyu4ZIKyh3A"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_vih250k5Ed6cyu4ZIKyh3A" id="_uZOFd0k5Ed6cyu4ZIKyh3A" source="_soXL0Uk5Ed6cyu4ZIKyh3A" target="_viYs8Uk5Ed6cyu4ZIKyh3A"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="__OjD0Uk5Ed6cyu4ZIKyh3A" id="__OjD0Ek5Ed6cyu4ZIKyh3A" source="_-tF8kUk5Ed6cyu4ZIKyh3A" target="_uZOFcUk5Ed6cyu4ZIKyh3A"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_8qWaAUk_Ed6ec9s_VOOmvw" id="_8qWaAEk_Ed6ec9s_VOOmvw" source="_7jCjMUFpEd68P5DdLSanQA" target="_6tLSMUFpEd68P5DdLSanQA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_rLqfGUoPEd6_-__ulVzvUA" id="_qXaXoEoPEd6_-__ulVzvUA" source="_nIdIUUoPEd6_-__ulVzvUA" target="_rLXkIUoPEd6_-__ulVzvUA"/>
+    <connections xsi:type="vsdt:MessageFlow" xmi:id="_5As8QUoPEd6_-__ulVzvUA" name="from B to A" id="_5As8QEoPEd6_-__ulVzvUA" message="_6fgEEExVEd6PfpbLRvb98Q" source="_rLXkIUoPEd6_-__ulVzvUA" target="_4S_hsUoPEd6_-__ulVzvUA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_BQN7YUoQEd6_-__ulVzvUA" id="_BQN7YEoQEd6_-__ulVzvUA" source="_BQExcUoQEd6_-__ulVzvUA" target="_qWXOwUoPEd6_-__ulVzvUA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_BQXsYUoQEd6_-__ulVzvUA" id="_rLqfEEoPEd6_-__ulVzvUA" source="_rLXkIUoPEd6_-__ulVzvUA" target="_BQExcUoQEd6_-__ulVzvUA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_DoPisUoQEd6_-__ulVzvUA" id="_7k7MhUoPEd6_-__ulVzvUA" source="_4S_hsUoPEd6_-__ulVzvUA" target="_Dn8nwUoQEd6_-__ulVzvUA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_EgrmkUoQEd6_-__ulVzvUA" id="_DoGYwEoQEd6_-__ulVzvUA" source="_Dn8nwUoQEd6_-__ulVzvUA" target="_Egh1kUoQEd6_-__ulVzvUA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_FZ2qQUoQEd6_-__ulVzvUA" id="_FZ2qQEoQEd6_-__ulVzvUA" source="_FZs5QUoQEd6_-__ulVzvUA" target="_7kyCkUoPEd6_-__ulVzvUA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_FZ_0MUoQEd6_-__ulVzvUA" id="_Egh1mkoQEd6_-__ulVzvUA" source="_Egh1kUoQEd6_-__ulVzvUA" target="_FZs5QUoQEd6_-__ulVzvUA"/>
+    <connections xsi:type="vsdt:MessageFlow" xmi:id="_GoUBcUoQEd6_-__ulVzvUA" name="from E to C" id="_GoUBcEoQEd6_-__ulVzvUA" message="_7cyywExVEd6PfpbLRvb98Q" source="_7kyCkUoPEd6_-__ulVzvUA" target="_BQExcUoQEd6_-__ulVzvUA"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_YHBPa09zEd6-wO9o2B8wag" id="_YHBPak9zEd6-wO9o2B8wag" source="_YHBPYU9zEd6-wO9o2B8wag" target="_XApdMU9zEd6-wO9o2B8wag"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_YHUKUU9zEd6-wO9o2B8wag" id="_XA8_NU9zEd6-wO9o2B8wag" source="_V3KFkU9zEd6-wO9o2B8wag" target="_YHBPYU9zEd6-wO9o2B8wag"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_6XlVkU9zEd6-wO9o2B8wag" id="_6XlVkE9zEd6-wO9o2B8wag" source="_fHIcIU9zEd6-wO9o2B8wag" target="_4w7g0U9zEd6-wO9o2B8wag"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_6zjf4U9zEd6-wO9o2B8wag" id="_6zjf4E9zEd6-wO9o2B8wag" source="_ldSF4U9zEd6-wO9o2B8wag" target="_4w7g0U9zEd6-wO9o2B8wag"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_D61NcU90Ed6-wO9o2B8wag" id="_D61NcE90Ed6-wO9o2B8wag" source="_C3uxsU90Ed6-wO9o2B8wag" target="_fHIcIU9zEd6-wO9o2B8wag"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_FaMucU90Ed6-wO9o2B8wag" id="_FaMucE90Ed6-wO9o2B8wag" source="_C3uxsU90Ed6-wO9o2B8wag" target="_ldSF4U9zEd6-wO9o2B8wag"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_dtlZ0U90Ed6-wO9o2B8wag" id="_dtlZ0E90Ed6-wO9o2B8wag" source="_bG9V0U90Ed6-wO9o2B8wag" target="_YHBPYU9zEd6-wO9o2B8wag"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_GDXiEU-GEd6NQ49J3R5agw" id="_GDXiEE-GEd6NQ49J3R5agw" source="_E5SUkU-GEd6NQ49J3R5agw" target="_GDOYIU-GEd6NQ49J3R5agw"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_HRoE8U-GEd6NQ49J3R5agw" id="_HRoE8E-GEd6NQ49J3R5agw" source="_GDOYIU-GEd6NQ49J3R5agw" target="_HReT8U-GEd6NQ49J3R5agw"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_Hy8pUU-GEd6NQ49J3R5agw" id="_Hy8pUE-GEd6NQ49J3R5agw" source="_HReT8U-GEd6NQ49J3R5agw" target="_HypuYU-GEd6NQ49J3R5agw"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_Ijv0IU-GEd6NQ49J3R5agw" id="_Ijv0IE-GEd6NQ49J3R5agw" source="_HypuYU-GEd6NQ49J3R5agw" target="_IjTIMU-GEd6NQ49J3R5agw"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_QCpOoU-GEd6NQ49J3R5agw" id="_QCpOoE-GEd6NQ49J3R5agw" source="_GDOYIU-GEd6NQ49J3R5agw" target="_J4jD4U-GEd6NQ49J3R5agw"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_Qn_XYU-GEd6NQ49J3R5agw" id="_Qn_XYE-GEd6NQ49J3R5agw" source="_GDOYIU-GEd6NQ49J3R5agw" target="_K5HJAU-GEd6NQ49J3R5agw"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_RfoKAU-GEd6NQ49J3R5agw" id="_RfoKAE-GEd6NQ49J3R5agw" source="_K5HJAU-GEd6NQ49J3R5agw" target="_HypuYU-GEd6NQ49J3R5agw"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_SYUFgU-GEd6NQ49J3R5agw" id="_SYUFgE-GEd6NQ49J3R5agw" source="_J4jD4U-GEd6NQ49J3R5agw" target="_HypuYU-GEd6NQ49J3R5agw"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_TyS9kVGyEd6OvsFLEtAjTQ" id="_TyS9kFGyEd6OvsFLEtAjTQ" source="_S8cToVGyEd6OvsFLEtAjTQ" target="_TxHR0VGyEd6OvsFLEtAjTQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" xmi:id="_UkvHI1GyEd6OvsFLEtAjTQ" id="_UkvHIlGyEd6OvsFLEtAjTQ" source="_TxHR0VGyEd6OvsFLEtAjTQ" target="_UkSbMVGyEd6OvsFLEtAjTQ"/>
+  </businessProcesses>
+  <participants name="P" id="_z6JIkI5fEd6dBsjVQXPs6w" associatedProcesses="_YZaz8o5eEd6dBsjVQXPs6w" associatedPools="_c5_LsUFoEd68P5DdLSanQA _gVXGYUFoEd68P5DdLSanQA _pqBycUk5Ed6cyu4ZIKyh3A _LM3NMUFpEd68P5DdLSanQA _l-bAoUFoEd68P5DdLSanQA _89dIMUFoEd68P5DdLSanQA _hBYpcUFpEd68P5DdLSanQA _0lHu0UFpEd68P5DdLSanQA _3Ma7MUoPEd6_-__ulVzvUA _jfAVYUoPEd6_-__ulVzvUA _UqYwcU9zEd6-wO9o2B8wag _PbNBgVGyEd6OvsFLEtAjTQ _Ci320U-GEd6NQ49J3R5agw _144cwUFpEd68P5DdLSanQA"/>
+  <messages xmi:id="_joF1AEw1Ed6sf7ilzNhU1w" name="from B to B">
+    <properties xmi:id="_FxbR0Ew2Ed6sf7ilzNhU1w" name="n" type="int"/>
+  </messages>
+  <messages xmi:id="_khEEYEw1Ed6sf7ilzNhU1w" name="from C to C">
+    <properties xmi:id="_zaZ3MEw1Ed6sf7ilzNhU1w" name="s" type="string"/>
+  </messages>
+  <messages xmi:id="_oO9ScEw1Ed6sf7ilzNhU1w" name="from D to A">
+    <properties xmi:id="_1iryUEw1Ed6sf7ilzNhU1w" name="n1" type="int"/>
+  </messages>
+  <messages xmi:id="_orhSoEw1Ed6sf7ilzNhU1w" name="from D to D">
+    <properties xmi:id="_3QCE8Ew1Ed6sf7ilzNhU1w" name="n2" type="int"/>
+  </messages>
+  <messages xmi:id="_6fgEEExVEd6PfpbLRvb98Q" name="from B to A">
+    <properties xmi:id="_x9ZAAFQfEd6Nc6jnLDFPOw" name="newProperty" type="xsd:integer"/>
+    <properties xmi:id="_x-4NwFQfEd6Nc6jnLDFPOw" name="newProperty" type="xsd:integer"/>
+    <properties xmi:id="_yAqWcFQfEd6Nc6jnLDFPOw" name="newProperty" type="xsd:integer"/>
+    <properties xmi:id="_yCTVMFQfEd6Nc6jnLDFPOw" name="newProperty" type="xsd:integer"/>
+    <properties xmi:id="_yDyi8FQfEd6Nc6jnLDFPOw" name="newProperty" type="xsd:integer"/>
+    <properties xmi:id="_yFa6oFQfEd6Nc6jnLDFPOw" name="newProperty" type="xsd:integer"/>
+    <properties xmi:id="_yG6IYFQfEd6Nc6jnLDFPOw" name="newProperty" type="xsd:integer"/>
+    <properties xmi:id="_yIQMMFQfEd6Nc6jnLDFPOw" name="newProperty" type="xsd:integer"/>
+    <properties xmi:id="_yJvZ8FQfEd6Nc6jnLDFPOw" name="newProperty" type="xsd:integer"/>
+    <properties xmi:id="_yLOnsFQfEd6Nc6jnLDFPOw" name="newProperty" type="xsd:integer"/>
+    <properties xmi:id="_yMaTcFQfEd6Nc6jnLDFPOw" name="newProperty" type="xsd:integer"/>
+    <properties xmi:id="_yPYu8FQfEd6Nc6jnLDFPOw" name="newProperty" type="xsd:integer"/>
+    <properties xmi:id="_yQ38sFQfEd6Nc6jnLDFPOw" name="newProperty" type="xsd:integer"/>
+  </messages>
+  <messages xmi:id="_7cyywExVEd6PfpbLRvb98Q" name="from E to C"/>
+  <messages xmi:id="_rPPwMFGyEd6OvsFLEtAjTQ" name="ExtService_InMessage">
+    <properties xmi:id="_JWJ5YFGzEd6OvsFLEtAjTQ" name="paramUser" type="string"/>
+    <properties xmi:id="_bcMl0FHAEd6K28eH7SXDhg" name="b" type="boolean"/>
+  </messages>
+  <messages xmi:id="_rTQtgFGyEd6OvsFLEtAjTQ" name="ExtService_OutMessage">
+    <properties xmi:id="_LNBUYFGzEd6OvsFLEtAjTQ" name="result" type="int"/>
+  </messages>
+  <messages xmi:id="_rnDMMFGyEd6OvsFLEtAjTQ" name="ExtService_InvokeIn">
+    <properties xmi:id="_MZ8agFGzEd6OvsFLEtAjTQ" name="parUser" type="string"/>
+    <properties xmi:id="_wBAGoFHAEd6K28eH7SXDhg" name="ext" type="boolean"/>
+  </messages>
+  <messages xmi:id="_rorj4FGyEd6OvsFLEtAjTQ" name="ExtService_InvokeOut">
+    <properties xmi:id="_Np-fAFGzEd6OvsFLEtAjTQ" name="res" type="int"/>
+  </messages>
+  <implementations xmi:id="_z65fsEw2Ed6sf7ilzNhU1w" participant="_z6JIkI5fEd6dBsjVQXPs6w" interface="ServiceTest" operation="Service2" inputMessage="_joF1AEw1Ed6sf7ilzNhU1w" outputMessage="_khEEYEw1Ed6sf7ilzNhU1w"/>
+  <implementations xmi:id="_z-niEEw2Ed6sf7ilzNhU1w" participant="_z6JIkI5fEd6dBsjVQXPs6w" interface="ServiceTest" operation="Service3" inputMessage="_oO9ScEw1Ed6sf7ilzNhU1w" outputMessage="_orhSoEw1Ed6sf7ilzNhU1w"/>
+  <implementations xmi:id="_2C588ExVEd6PfpbLRvb98Q" participant="_z6JIkI5fEd6dBsjVQXPs6w" interface="LoopServiceTest" operation="Service1" inputMessage="_6fgEEExVEd6PfpbLRvb98Q" outputMessage="_7cyywExVEd6PfpbLRvb98Q"/>
+  <implementations xmi:id="_lNoMAFGyEd6OvsFLEtAjTQ" participant="_z6JIkI5fEd6dBsjVQXPs6w" interface="ExternalService" operation="Service1" inputMessage="_rPPwMFGyEd6OvsFLEtAjTQ" outputMessage="_rTQtgFGyEd6OvsFLEtAjTQ"/>
+  <implementations xmi:id="_3DJcEFGyEd6OvsFLEtAjTQ" participant="_z6JIkI5fEd6dBsjVQXPs6w" interface="ExternalService" operation="Service2" inputMessage="_rnDMMFGyEd6OvsFLEtAjTQ" outputMessage="_rorj4FGyEd6OvsFLEtAjTQ"/>
+</vsdt:BusinessProcessSystem>

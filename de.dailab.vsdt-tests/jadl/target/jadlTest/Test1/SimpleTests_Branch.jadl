@@ -1,0 +1,21 @@
+
+
+service Branch ( in $param1 : int ) ( out $result1 : int ) {
+    var $n : int ;
+    {
+        {
+            $n = $param1 ;
+        }
+        if ( $n == 1 ) {
+            $n = 1 ;
+            print "Executing Assign1" ;
+        }
+        else {
+            $n = 2 ;
+            print "Executing Assign2" ;
+        }
+        {
+            $result1 = $n ;
+        }
+    }
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+		id="de.dailab.vsdt.trafo.stp.export.wizard"
+		name="BPMN to STP BPMN"
+		point="org.eclipse.ui.exportWizards">
+      <wizard
+            category="Bpmn.export"
+            class="de.dailab.vsdt.trafo.stp.export.wizard.Bpmn2StpExportWizard"
+            icon="icons/exportStp.gif"
+            id="de.dailab.vsdt.trafo.stp.export.wizard"
+            name="BPMN to STP BPMN">
+         <description>
+            A Wizard for Transforming BPMN Diagrams to BPMN Diagrams for the STP Editor
+         </description>
+      </wizard>
+      <category
+            id="Bpmn.export"
+            name="BPMN Export">
+      </category>
+         
+  
+   </extension>
+
+</plugin>

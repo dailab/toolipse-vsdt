@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ASCII"?>
+<agentworld:AgentWorld xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:agentworld="agentworld" name="Math" namespace="Math" author="Tobias K&#xfc;ster" date="2009-08-27T17:05:44.025+0200" version="0.1">
+  <hosts xsi:type="agentworld:Role" name="MathematicanRole" componentLinks="//@hosts.2"/>
+  <hosts xsi:type="agentworld:Component" name="ExtractRoot" users="//@hosts.2" class="Algorithms.ExtractRoot.jadl"/>
+  <hosts xsi:type="agentworld:ComponentLink" component="//@hosts.1" user="//@hosts.0"/>
+</agentworld:AgentWorld>

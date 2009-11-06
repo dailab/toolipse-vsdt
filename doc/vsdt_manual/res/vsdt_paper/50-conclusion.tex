@@ -1,0 +1,20 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+% BPMN->BPEL, erweiterbar, Trafos und Editor-Features reinpluggen
+In this paper the \emph{Visual Service Design Tool} (VSDT) has been introduced: a BPMN editor featuring a state of the art transformation to BPEL, while at the same time being easily extensible with export functionality targeting other languages.  The editor itself has been designed to be language independent, so it can be used for generating code for any language, given that a respective mapping from BPMN to that language exists.
+% Trafo-Framework
+Transformations implementing these mappings can be plugged in to the VSDT together with additional editing features helping the user in the creation of diagrams to be exported to that language.  For supporting the developer of these plugins, the VSDT comes with a transformation framework, based on the EMT graph transformation tool.  Being subdivided into several stages, large parts of it can be reused throughout different mappings, such as the refactoring of the process graph to block-oriented structures.
+
+% Dieser Teil ueber die Trafo nach BPEL
+With respect to its BPMN editing functionality and the transformation to BPEL, the VSDT does not have to hide behind its commercial competitors.  Implementing the mapping to BPEL as given in the BPMN specification, the tool can be used to generate readily executable code.  Still it is recommended to validate the results with a native BPEL editor:  While the creation of processes will be easier and faster using the VSDT, its desired independence of a specific language prohibits some BPEL specific features, such as editing assistance for assignment expressions.  However, due to the plugin architecture provided by the Eclipse platform, such functionality can be added together with the actual transformation features.
+
+As the key feature of the VSDT is the extensibility with additional export features, further transformations from BPMN to executable languages are currently under development.  One of the main goals of our research in this field is a mapping from BPMN to multi-agent systems, combining the intuitive design of business processes with the flexibility of software agent.
+
+
+\subsection{Future Work}
+\label{sec:conc_future}
+
+Some work still can be done in the field of transformation of unstructured processes.  Currently the tool can handle slightly unstructured workflows, such as one Gateway being used for merging multiple decision blocks, but will fail when faced with e.g.\ overlapping blocks or multiple exits from a loop.  Here, further evaluations of the different possibilities to handle such workflows and ways of adapting them to the more complex BPMN diagrams will be necessary.
+
+Concerning the transformation to BPEL, the support for complex data types will need further refinement.  Here, the \emph{Rich Service Directory} introduced earlier will be of great use, providing the necessary information about the involved Web services.  Finally, the mapping to multi-agent systems has to be completed, and mappings to further languages will be evaluated.

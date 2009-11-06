@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Transformation Rules Framework
+Bundle-SymbolicName: de.dailab.vsdt.trafo.base;singleton:=true
+Bundle-Version: 1.1.2.20081125
+Bundle-ClassPath: .,
+ lib/log4j-1.2.15.jar
+Bundle-Vendor: TFS and DAI-Labor, TU Berlin
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport
+Bundle-ActivationPolicy: lazy
+Export-Package: de.dailab.vsdt.trafo.base,
+ de.dailab.vsdt.trafo.base.logger,
+ de.dailab.vsdt.trafo.base.queries,
+ org.apache.log4j

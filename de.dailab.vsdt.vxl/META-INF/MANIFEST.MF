@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: de.dailab.vsdt.vxl
+Bundle-Vendor: My Company
+Bundle-Version: 1.3.0.20091026
+Bundle-SymbolicName: de.dailab.vsdt.vxl; singleton:=true
+Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: de.dailab.vsdt,
+ de.dailab.vsdt.parseTreeConstruction,
+ de.dailab.vsdt.parser.antlr,
+ de.dailab.vsdt.services,
+ de.dailab.vsdt.validation,
+ de.dailab.vsdt.vxl,
+ de.dailab.vsdt.vxl.impl,
+ de.dailab.vsdt.vxl.util

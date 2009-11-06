@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.dailab.vsdt.export.bpel/src"
+    editDirectory="/de.dailab.vsdt.export.bpel.edit/src" editorDirectory="/de.dailab.vsdt.export.bpel.editor/src"
+    modelPluginID="de.dailab.vsdt.export.bpel" modelName="Bpel" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>process.ecore</foreignModel>
+  <foreignModel>wsdl.ecore</foreignModel>
+  <genPackages prefix="Process" basePackage="org.xmlsoap.schemas.ws._2003._03.business"
+      resource="XML" disposableProviderFactory="true" ecorePackage="process.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="process.ecore#//PatternType">
+      <genEnumLiterals ecoreEnumLiteral="process.ecore#//PatternType/in"/>
+      <genEnumLiterals ecoreEnumLiteral="process.ecore#//PatternType/out"/>
+      <genEnumLiterals ecoreEnumLiteral="process.ecore#//PatternType/outIn"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="process.ecore#//TBoolean">
+      <genEnumLiterals ecoreEnumLiteral="process.ecore#//TBoolean/yes"/>
+      <genEnumLiterals ecoreEnumLiteral="process.ecore#//TBoolean/no"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="process.ecore#//TRoles">
+      <genEnumLiterals ecoreEnumLiteral="process.ecore#//TRoles/myRole"/>
+      <genEnumLiterals ecoreEnumLiteral="process.ecore#//TRoles/partnerRole"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="process.ecore#//PatternTypeObject"/>
+    <genDataTypes ecoreDataType="process.ecore#//PropertiesType"/>
+    <genDataTypes ecoreDataType="process.ecore#//TBooleanExpr"/>
+    <genDataTypes ecoreDataType="process.ecore#//TBooleanObject"/>
+    <genDataTypes ecoreDataType="process.ecore#//TDeadlineExpr"/>
+    <genDataTypes ecoreDataType="process.ecore#//TDurationExpr"/>
+    <genDataTypes ecoreDataType="process.ecore#//TRolesObject"/>
+    <genClasses ecoreClass="process.ecore#//CaseType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//CaseType/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//DocumentRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//DocumentRoot/from"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//DocumentRoot/process"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//DocumentRoot/to"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//PartnerLinkType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//PartnerLinkType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TActivity">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivity/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivity/source"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TActivity/joinCondition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TActivity/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TActivity/suppressJoinFailure"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TActivityContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityContainer/empty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityContainer/invoke"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityContainer/receive"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityContainer/reply"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityContainer/assign"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityContainer/wait"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityContainer/throw"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityContainer/terminate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityContainer/flow"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityContainer/switch"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityContainer/while"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityContainer/sequence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityContainer/pick"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityContainer/scope"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TActivityOrCompensateContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityOrCompensateContainer/empty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityOrCompensateContainer/invoke"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityOrCompensateContainer/receive"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityOrCompensateContainer/reply"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityOrCompensateContainer/assign"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityOrCompensateContainer/wait"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityOrCompensateContainer/throw"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityOrCompensateContainer/terminate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityOrCompensateContainer/flow"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityOrCompensateContainer/switch"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityOrCompensateContainer/while"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityOrCompensateContainer/sequence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityOrCompensateContainer/pick"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityOrCompensateContainer/scope"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TActivityOrCompensateContainer/compensate"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TAssign">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TAssign/copy"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TCatch">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TCatch/faultName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TCatch/faultVariable"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TCompensate">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TCompensate/scope"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TCompensationHandler"/>
+    <genClasses ecoreClass="process.ecore#//TCopy">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TCopy/from"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TCopy/to"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TCorrelation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TCorrelation/initiate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TCorrelation/set"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TCorrelations">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TCorrelations/correlation"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TCorrelationSet">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TCorrelationSet/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TCorrelationSet/properties"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TCorrelationSets">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TCorrelationSets/correlationSet"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TCorrelationsWithPattern">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TCorrelationsWithPattern/correlation"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TCorrelationWithPattern">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TCorrelationWithPattern/pattern"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TEmpty"/>
+    <genClasses ecoreClass="process.ecore#//TEventHandlers">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TEventHandlers/onMessage"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TEventHandlers/onAlarm"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TExtensibleElements">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute process.ecore#//TExtensibleElements/any"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute process.ecore#//TExtensibleElements/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TFaultHandlers">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TFaultHandlers/catch"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TFaultHandlers/catchAll"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TFlow">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TFlow/links"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute process.ecore#//TFlow/activity"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TFlow/empty"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TFlow/invoke"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TFlow/receive"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TFlow/reply"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TFlow/assign"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TFlow/wait"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TFlow/throw"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TFlow/terminate"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TFlow/flow"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TFlow/switch"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TFlow/while"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TFlow/sequence"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TFlow/pick"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TFlow/scope"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TFrom">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TFrom/endpointReference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TFrom/expression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TFrom/opaque"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TFrom/part"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TFrom/partnerLink"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TFrom/property"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TFrom/query"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TFrom/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TInvoke">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TInvoke/correlations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TInvoke/catch"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TInvoke/catchAll"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TInvoke/compensationHandler"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TInvoke/inputVariable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TInvoke/operation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TInvoke/outputVariable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TInvoke/partnerLink"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TInvoke/portType"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TLink">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TLink/name"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TLinks">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TLinks/link"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TOnAlarm">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TOnAlarm/for"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TOnAlarm/until"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TOnMessage">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TOnMessage/correlations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TOnMessage/empty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TOnMessage/invoke"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TOnMessage/receive"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TOnMessage/reply"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TOnMessage/assign"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TOnMessage/wait"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TOnMessage/throw"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TOnMessage/terminate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TOnMessage/flow"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TOnMessage/switch"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TOnMessage/while"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TOnMessage/sequence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TOnMessage/pick"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TOnMessage/scope"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TOnMessage/operation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TOnMessage/partnerLink"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TOnMessage/portType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TOnMessage/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//ToType"/>
+    <genClasses ecoreClass="process.ecore#//TPartner">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TPartner/partnerLink"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TPartner/name"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TPartnerLink">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TPartnerLink/myRole"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TPartnerLink/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TPartnerLink/partnerLinkType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TPartnerLink/partnerRole"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TPartnerLinks">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TPartnerLinks/partnerLink"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TPartners">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TPartners/partner"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TPick">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TPick/onMessage"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TPick/onAlarm"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TPick/createInstance"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TProcess">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/partnerLinks"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/partners"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/variables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/correlationSets"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/faultHandlers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/compensationHandler"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/eventHandlers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/empty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/invoke"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/receive"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/reply"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/assign"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/wait"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/throw"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/terminate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/flow"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/switch"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/while"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/sequence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/pick"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TProcess/scope"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TProcess/abstractProcess"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TProcess/enableInstanceCompensation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TProcess/expressionLanguage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TProcess/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TProcess/queryLanguage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TProcess/suppressJoinFailure"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TProcess/targetNamespace"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TReceive">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TReceive/correlations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TReceive/createInstance"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TReceive/operation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TReceive/partnerLink"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TReceive/portType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TReceive/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TReply">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TReply/correlations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TReply/faultName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TReply/operation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TReply/partnerLink"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TReply/portType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TReply/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TScope">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/variables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/correlationSets"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/faultHandlers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/compensationHandler"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/eventHandlers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/empty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/invoke"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/receive"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/reply"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/assign"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/wait"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/throw"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/terminate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/flow"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/switch"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/while"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/sequence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/pick"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TScope/scope"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TScope/variableAccessSerializable"/>
+      <genOperations ecoreOperation="process.ecore#//TScope/setActivity">
+        <genParameters ecoreParameter="process.ecore#//TScope/setActivity/activity"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TSequence">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute process.ecore#//TSequence/activity"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TSequence/empty"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TSequence/invoke"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TSequence/receive"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TSequence/reply"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TSequence/assign"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TSequence/wait"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TSequence/throw"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TSequence/terminate"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TSequence/flow"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TSequence/switch"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TSequence/while"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TSequence/sequence"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TSequence/pick"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference process.ecore#//TSequence/scope"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TSource">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TSource/linkName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TSource/transitionCondition"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TSwitch">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TSwitch/case"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TSwitch/otherwise"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TTarget">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TTarget/linkName"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TTerminate"/>
+    <genClasses ecoreClass="process.ecore#//TThrow">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TThrow/faultName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TThrow/faultVariable"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TVariable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TVariable/element"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TVariable/messageType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TVariable/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TVariable/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute process.ecore#//TVariable/anyAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TVariables">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TVariables/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TWait">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TWait/for"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TWait/until"/>
+    </genClasses>
+    <genClasses ecoreClass="process.ecore#//TWhile">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TWhile/empty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TWhile/invoke"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TWhile/receive"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TWhile/reply"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TWhile/assign"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TWhile/wait"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TWhile/throw"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TWhile/terminate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TWhile/flow"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TWhile/switch"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TWhile/while"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TWhile/sequence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TWhile/pick"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//TWhile/scope"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//TWhile/condition"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Wsdl" basePackage="org.xmlsoap.schemas" resource="XML" disposableProviderFactory="true"
+      ecorePackage="wsdl.ecore#/">
+    <genClasses ecoreClass="wsdl.ecore#//DocumentRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference wsdl.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference wsdl.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference wsdl.ecore#//DocumentRoot/definitions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//DocumentRoot/arrayType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//DocumentRoot/required"/>
+    </genClasses>
+    <genClasses ecoreClass="wsdl.ecore#//TBinding">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference wsdl.ecore#//TBinding/operation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TBinding/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TBinding/type"/>
+    </genClasses>
+    <genClasses ecoreClass="wsdl.ecore#//TBindingOperation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference wsdl.ecore#//TBindingOperation/input"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference wsdl.ecore#//TBindingOperation/output"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference wsdl.ecore#//TBindingOperation/fault"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TBindingOperation/name"/>
+    </genClasses>
+    <genClasses ecoreClass="wsdl.ecore#//TBindingOperationFault">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TBindingOperationFault/name"/>
+    </genClasses>
+    <genClasses ecoreClass="wsdl.ecore#//TBindingOperationMessage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TBindingOperationMessage/name"/>
+    </genClasses>
+    <genClasses ecoreClass="wsdl.ecore#//TDefinitions">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute wsdl.ecore#//TDefinitions/anyTopLevelOptionalElement"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference wsdl.ecore#//TDefinitions/import"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference wsdl.ecore#//TDefinitions/types"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference wsdl.ecore#//TDefinitions/message"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference wsdl.ecore#//TDefinitions/portType"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference wsdl.ecore#//TDefinitions/binding"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference wsdl.ecore#//TDefinitions/service"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TDefinitions/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TDefinitions/targetNamespace"/>
+    </genClasses>
+    <genClasses ecoreClass="wsdl.ecore#//TDocumentation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute wsdl.ecore#//TDocumentation/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TDocumentation/any"/>
+    </genClasses>
+    <genClasses ecoreClass="wsdl.ecore#//TDocumented">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference wsdl.ecore#//TDocumented/documentation"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="wsdl.ecore#//TExtensibilityElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TExtensibilityElement/required"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="wsdl.ecore#//TExtensibleAttributesDocumented">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute wsdl.ecore#//TExtensibleAttributesDocumented/anyAttribute"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="wsdl.ecore#//TExtensibleDocumented">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute wsdl.ecore#//TExtensibleDocumented/any"/>
+    </genClasses>
+    <genClasses ecoreClass="wsdl.ecore#//TFault">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TFault/message"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TFault/name"/>
+    </genClasses>
+    <genClasses ecoreClass="wsdl.ecore#//TImport">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TImport/location"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TImport/namespace"/>
+    </genClasses>
+    <genClasses ecoreClass="wsdl.ecore#//TMessage">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference wsdl.ecore#//TMessage/part"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TMessage/name"/>
+    </genClasses>
+    <genClasses ecoreClass="wsdl.ecore#//TOperation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference wsdl.ecore#//TOperation/input"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference wsdl.ecore#//TOperation/output"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference wsdl.ecore#//TOperation/fault"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference wsdl.ecore#//TOperation/output1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference wsdl.ecore#//TOperation/input1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference wsdl.ecore#//TOperation/fault1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TOperation/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TOperation/parameterOrder"/>
+    </genClasses>
+    <genClasses ecoreClass="wsdl.ecore#//TParam">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TParam/message"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TParam/name"/>
+    </genClasses>
+    <genClasses ecoreClass="wsdl.ecore#//TPart">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TPart/element"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TPart/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TPart/type"/>
+    </genClasses>
+    <genClasses ecoreClass="wsdl.ecore#//TPort">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TPort/binding"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TPort/name"/>
+    </genClasses>
+    <genClasses ecoreClass="wsdl.ecore#//TPortType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference wsdl.ecore#//TPortType/operation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TPortType/name"/>
+    </genClasses>
+    <genClasses ecoreClass="wsdl.ecore#//TService">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference wsdl.ecore#//TService/port"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wsdl.ecore#//TService/name"/>
+    </genClasses>
+    <genClasses ecoreClass="wsdl.ecore#//TTypes"/>
+  </genPackages>
+</genmodel:GenModel>

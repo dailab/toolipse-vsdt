@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vsdt:BusinessProcessDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:vsdt="http://de.dailab.vsdt" xmi:id="_yHCCYGn6Ed2LUfz3aQwBDA" name="Anomaly Detection" documentation="Security-Example&#xD;&#xA;Anomalie entdeckt -> Benachrichtigung per SMS" id="BusinessProcessDiagram_1203419898505" version="1.0.0" author="Tobias Küster" language="de-DE" expressionLanguage="VXL" queryLanguage="" creationDate="2007-11-23T16:44:07.678+0100" modificationDate="2008-04-09T17:33:30.709+0200">
+  <pools xmi:type="vsdt:Pool" xmi:id="_yHCCYWn6Ed2LUfz3aQwBDA" name="Anomaly Detection" id="Pool_1203419898537" participant="_yHLMgmn6Ed2LUfz3aQwBDA">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_yHCCYmn6Ed2LUfz3aQwBDA" name="ADProcess" id="BpmnProcess_1203419898537">
+      <properties xmi:type="vsdt:Property" xmi:id="_yHCCZGn6Ed2LUfz3aQwBDA" name="inInterval" type="xsd:string"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_yHCCZWn6Ed2LUfz3aQwBDA" name="inThreshold" type="xsd:double"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_yHCCZmn6Ed2LUfz3aQwBDA" name="inMaxAlarm" type="xsd:integer"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_yHCCZ2n6Ed2LUfz3aQwBDA" name="inSMS" type="xsd:string"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_yHCCaGn6Ed2LUfz3aQwBDA" name="inEMail" type="xsd:string"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_yHCCaWn6Ed2LUfz3aQwBDA" name="tmpAnomLevel" type="xsd:double"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_yHCCamn6Ed2LUfz3aQwBDA" name="tmpAlarmLevel" type="xsd:integer"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_yHCCa2n6Ed2LUfz3aQwBDA" name="tmpNotification" type="xsd:string"/>
+      <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCbGn6Ed2LUfz3aQwBDA" to="_yHCCaWn6Ed2LUfz3aQwBDA">
+        <from xmi:type="vsdt:Expression" xmi:id="_yHCCbWn6Ed2LUfz3aQwBDA" expression="0"/>
+      </assignments>
+      <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCbmn6Ed2LUfz3aQwBDA" to="_yHCCamn6Ed2LUfz3aQwBDA">
+        <from xmi:type="vsdt:Expression" xmi:id="_yHCCb2n6Ed2LUfz3aQwBDA" expression="0.0"/>
+      </assignments>
+    </process>
+    <lanes xmi:type="vsdt:Lane" xmi:id="_yHCCcGn6Ed2LUfz3aQwBDA" name="Default Lane" id="Lane_1203419898552" boundaryVisible="false">
+      <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_yHCCcWn6Ed2LUfz3aQwBDA" id="Start_1203419898552" trigger="MESSAGE" message="_yHLMa2n6Ed2LUfz3aQwBDA" implementation="_yHLMh2n6Ed2LUfz3aQwBDA">
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCcmn6Ed2LUfz3aQwBDA" to="_yHCCZGn6Ed2LUfz3aQwBDA" assignTime="END">
+          <from xmi:type="vsdt:Expression" xmi:id="_yHCCc2n6Ed2LUfz3aQwBDA" expression="$paramInterval"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCdGn6Ed2LUfz3aQwBDA" to="_yHCCZmn6Ed2LUfz3aQwBDA" assignTime="END">
+          <from xmi:type="vsdt:Expression" xmi:id="_yHCCdWn6Ed2LUfz3aQwBDA" expression="$paramMaxAlarm"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCdmn6Ed2LUfz3aQwBDA" to="_yHCCZWn6Ed2LUfz3aQwBDA" assignTime="END">
+          <from xmi:type="vsdt:Expression" xmi:id="_yHCCd2n6Ed2LUfz3aQwBDA" expression="$paramThreshold"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCeGn6Ed2LUfz3aQwBDA" to="_yHCCZ2n6Ed2LUfz3aQwBDA" assignTime="END">
+          <from xmi:type="vsdt:Expression" xmi:id="_yHCCeWn6Ed2LUfz3aQwBDA" expression="$paramSMS"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCemn6Ed2LUfz3aQwBDA" to="_yHCCaGn6Ed2LUfz3aQwBDA" assignTime="END">
+          <from xmi:type="vsdt:Expression" xmi:id="_yHCCe2n6Ed2LUfz3aQwBDA" expression="$paramEMail"/>
+        </assignments>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_yHCCfWn6Ed2LUfz3aQwBDA" name="Monitor Anomaly Level" id="Activity_1203419898552" activityType="EMBEDDED">
+        <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_yHCCgGn6Ed2LUfz3aQwBDA" name="wait" documentation="Wartet ein paar Sekunden" id="Intermediate_1203419898552" trigger="TIMER">
+          <timeCycle xmi:type="vsdt:Expression" xmi:id="_eMWVR7DKEd2IV4uRQFwDaA" expression="'PT' ++ $inInterval ++ 'S'"/>
+        </containedFlowObjects>
+        <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_yHCCgmn6Ed2LUfz3aQwBDA" name="Get Last Status" id="_iez5kLI2Ed2NB_bTDIpiMA" activityType="SERVICE" inMessage="_yHLMfmn6Ed2LUfz3aQwBDA" outMessage="_yHLMgGn6Ed2LUfz3aQwBDA" implementation="_yHLMjGn6Ed2LUfz3aQwBDA">
+          <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCg2n6Ed2LUfz3aQwBDA" to="_yHLMf2n6Ed2LUfz3aQwBDA">
+            <from xmi:type="vsdt:Expression" xmi:id="_yHCChGn6Ed2LUfz3aQwBDA" expression="0"/>
+          </assignments>
+          <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCChWn6Ed2LUfz3aQwBDA" to="_yHCCaWn6Ed2LUfz3aQwBDA" assignTime="END">
+            <from xmi:type="vsdt:Expression" xmi:id="_yHCChmn6Ed2LUfz3aQwBDA" expression="$status"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_yHCCiGn6Ed2LUfz3aQwBDA" id="Gateway_1207754918185" markerVisible="true">
+          <gates xmi:type="vsdt:Gate" xmi:id="_yHCCiWn6Ed2LUfz3aQwBDA" name="SequenceFlow_1211190297703" outgoingSequenceFlow="_yHCC1Wn6Ed2LUfz3aQwBDA"/>
+          <gates xmi:type="vsdt:Gate" xmi:id="_yHCCimn6Ed2LUfz3aQwBDA" name="SequenceFlow_1211190299967" outgoingSequenceFlow="_yHLMUGn6Ed2LUfz3aQwBDA"/>
+        </containedFlowObjects>
+        <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_yHCCi2n6Ed2LUfz3aQwBDA" id="Gateway_1211190293999" markerVisible="true">
+          <gates xmi:type="vsdt:Gate" xmi:id="_yHCCjGn6Ed2LUfz3aQwBDA" name="SequenceFlow_1211190710974" outgoingSequenceFlow="_yHLMUmn6Ed2LUfz3aQwBDA"/>
+          <gates xmi:type="vsdt:Gate" xmi:id="_yHCCjWn6Ed2LUfz3aQwBDA" name="SequenceFlow_1211273389214" outgoingSequenceFlow="_yHLMZmn6Ed2LUfz3aQwBDA"/>
+        </containedFlowObjects>
+        <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_yHCCjmn6Ed2LUfz3aQwBDA" name="Max Alarm" id="Activity_1211190371826">
+          <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCj2n6Ed2LUfz3aQwBDA" to="_yHCCamn6Ed2LUfz3aQwBDA">
+            <from xmi:type="vsdt:Expression" xmi:id="_yHCCkGn6Ed2LUfz3aQwBDA" expression="$inMaxAlarm"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_yHCCkmn6Ed2LUfz3aQwBDA" name="Decrease Alarm" id="Activity_1211190434738">
+          <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCk2n6Ed2LUfz3aQwBDA" to="_yHCCamn6Ed2LUfz3aQwBDA">
+            <from xmi:type="vsdt:Expression" xmi:id="_yHCClGn6Ed2LUfz3aQwBDA" expression="$tmpAlarmLevel - 1"/>
+          </assignments>
+          <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCClWn6Ed2LUfz3aQwBDA" to="_yHCCa2n6Ed2LUfz3aQwBDA">
+            <from xmi:type="vsdt:Expression" xmi:id="_yHCClmn6Ed2LUfz3aQwBDA" expression="'SerCHo Home Security System: All-clear: No more Anomalies.'"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_yHCCmGn6Ed2LUfz3aQwBDA" id="Gateway_1211190863901" markerVisible="true">
+          <gates xmi:type="vsdt:Gate" xmi:id="_yHCCmWn6Ed2LUfz3aQwBDA" name="SequenceFlow_1211197054586" outgoingSequenceFlow="_yHLMVWn6Ed2LUfz3aQwBDA"/>
+          <gates xmi:type="vsdt:Gate" xmi:id="_yHCCmmn6Ed2LUfz3aQwBDA" name="SequenceFlow_1211272691915" outgoingSequenceFlow="_yHLMXmn6Ed2LUfz3aQwBDA"/>
+        </containedFlowObjects>
+        <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_yHCCm2n6Ed2LUfz3aQwBDA" name="" id="Gateway_1211196108231">
+          <gates xmi:type="vsdt:Gate" xmi:id="_yHCCnGn6Ed2LUfz3aQwBDA" name="SequenceFlow_1211196133208" outgoingSequenceFlow="_yHLMVGn6Ed2LUfz3aQwBDA"/>
+        </containedFlowObjects>
+        <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_yHCCnWn6Ed2LUfz3aQwBDA" name="log" id="Activity_1211209221807" activityType="SEND" inMessage="_yHLMcmn6Ed2LUfz3aQwBDA" implementation="_yHLMiWn6Ed2LUfz3aQwBDA">
+          <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCnmn6Ed2LUfz3aQwBDA" to="_yHLMc2n6Ed2LUfz3aQwBDA">
+            <from xmi:type="vsdt:Expression" xmi:id="_eg7H4K_qEd2FYOiI0Hwtpg" expression="'Alarm Level: ' ++ $tmpAlarmLevel"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_yHCCoWn6Ed2LUfz3aQwBDA" id="Gateway_1211271614662" markerVisible="true">
+          <gates xmi:type="vsdt:Gate" xmi:id="_yHCComn6Ed2LUfz3aQwBDA" name="SequenceFlow_1211273154733" outgoingSequenceFlow="_yHLMYWn6Ed2LUfz3aQwBDA"/>
+          <gates xmi:type="vsdt:Gate" xmi:id="_yHCCo2n6Ed2LUfz3aQwBDA" name="SequenceFlow_1211273386599" outgoingSequenceFlow="_yHLMZWn6Ed2LUfz3aQwBDA"/>
+        </containedFlowObjects>
+        <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_yHCCpGn6Ed2LUfz3aQwBDA" name="Send All-Clear" id="Activity_1211271617115" activityType="SUBPROCESSREFERENCE" activityRef="_yHCCpmn6Ed2LUfz3aQwBDA"/>
+        <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_yHCCpmn6Ed2LUfz3aQwBDA" name="Send Alarm" id="Activity_1211272274395" activityType="EMBEDDED">
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_yHCCqGn6Ed2LUfz3aQwBDA" name="" id="Gateway_1211272579611" gatewayType="OR">
+            <gates xmi:type="vsdt:Gate" xmi:id="_yHCCqWn6Ed2LUfz3aQwBDA" name="SequenceFlow_1211272638611" outgoingSequenceFlow="_yHLMWmn6Ed2LUfz3aQwBDA"/>
+            <gates xmi:type="vsdt:Gate" xmi:id="_yHCCqmn6Ed2LUfz3aQwBDA" name="SequenceFlow_1211272641892" outgoingSequenceFlow="_yHLMXGn6Ed2LUfz3aQwBDA"/>
+          </containedFlowObjects>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_yHCCq2n6Ed2LUfz3aQwBDA" name="Send SMS" id="Activity_1211272585010" activityType="SERVICE" inMessage="_yHLMeWn6Ed2LUfz3aQwBDA" outMessage="_yHLMfGn6Ed2LUfz3aQwBDA" implementation="_yHLMi2n6Ed2LUfz3aQwBDA">
+            <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCrGn6Ed2LUfz3aQwBDA" to="_yHLMemn6Ed2LUfz3aQwBDA">
+              <from xmi:type="vsdt:Expression" xmi:id="_yHCCrWn6Ed2LUfz3aQwBDA" expression="$inSMS"/>
+            </assignments>
+            <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCrmn6Ed2LUfz3aQwBDA" to="_yHLMe2n6Ed2LUfz3aQwBDA">
+              <from xmi:type="vsdt:Expression" xmi:id="_yHCCr2n6Ed2LUfz3aQwBDA" expression="$tmpNotification"/>
+            </assignments>
+          </containedFlowObjects>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_yHCCsWn6Ed2LUfz3aQwBDA" name="Send E-Mail" id="Activity_1211272592466" activityType="SERVICE" inMessage="_yHLMdGn6Ed2LUfz3aQwBDA" outMessage="_yHLMd2n6Ed2LUfz3aQwBDA" implementation="_yHLMimn6Ed2LUfz3aQwBDA">
+            <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCsmn6Ed2LUfz3aQwBDA" to="_yHLMdWn6Ed2LUfz3aQwBDA">
+              <from xmi:type="vsdt:Expression" xmi:id="_yHCCs2n6Ed2LUfz3aQwBDA" expression="$inEMail"/>
+            </assignments>
+            <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCtGn6Ed2LUfz3aQwBDA" to="_yHLMdmn6Ed2LUfz3aQwBDA">
+              <from xmi:type="vsdt:Expression" xmi:id="_yHCCtWn6Ed2LUfz3aQwBDA" expression="$tmpNotification"/>
+            </assignments>
+          </containedFlowObjects>
+        </containedFlowObjects>
+        <containedFlowObjects xmi:type="vsdt:End" xmi:id="_yHCCt2n6Ed2LUfz3aQwBDA" name="" id="End_1211273368257"/>
+        <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_yHCCuWn6Ed2LUfz3aQwBDA" name="" id="Start_1211273415375">
+          <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCumn6Ed2LUfz3aQwBDA" to="_yHCCa2n6Ed2LUfz3aQwBDA">
+            <from xmi:type="vsdt:Expression" xmi:id="_yHCCu2n6Ed2LUfz3aQwBDA" expression="'SerCHo Home Security System: Warning! Anomaly Detected!'"/>
+          </assignments>
+        </containedFlowObjects>
+        <loopAttributes xmi:type="vsdt:StandardLoopAttSet" xmi:id="_yHCCvWn6Ed2LUfz3aQwBDA" testBefore="true">
+          <loopCondition xmi:type="vsdt:Expression" xmi:id="_7xHEcK_qEd2FYOiI0Hwtpg" expression="true"/>
+        </loopAttributes>
+        <boundaryEvents xmi:type="vsdt:Intermediate" xmi:id="_yHCCv2n6Ed2LUfz3aQwBDA" name="Intermediate" id="Intermediate_1203419898568" trigger="MESSAGE" message="_yHLMcWn6Ed2LUfz3aQwBDA" implementation="_yHLMiGn6Ed2LUfz3aQwBDA"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:End" xmi:id="_yHCCwWn6Ed2LUfz3aQwBDA" name="" id="End_1203419898568" trigger="MESSAGE" message="_yHLMcmn6Ed2LUfz3aQwBDA" implementation="_yHLMiWn6Ed2LUfz3aQwBDA">
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCwmn6Ed2LUfz3aQwBDA" to="_yHLMc2n6Ed2LUfz3aQwBDA">
+          <from xmi:type="vsdt:Expression" xmi:id="_yHCCw2n6Ed2LUfz3aQwBDA" expression="'Anomaly Detection Process Finished'"/>
+        </assignments>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_yHCCxWn6Ed2LUfz3aQwBDA" name="log" id="Activity_1203419898568" activityType="SEND" inMessage="_yHLMcmn6Ed2LUfz3aQwBDA" implementation="_yHLMiWn6Ed2LUfz3aQwBDA">
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_yHCCxmn6Ed2LUfz3aQwBDA" to="_yHLMc2n6Ed2LUfz3aQwBDA">
+          <from xmi:type="vsdt:Expression" xmi:id="_yHCCx2n6Ed2LUfz3aQwBDA" expression="'Anomaly Detection Process started'"/>
+        </assignments>
+      </containedFlowObjects>
+    </lanes>
+  </pools>
+  <pools xmi:type="vsdt:Pool" xmi:id="_yHCCyWn6Ed2LUfz3aQwBDA" name="Notification" id="Pool_1211192413846" participant="_yHLMhGn6Ed2LUfz3aQwBDA">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_yHCCymn6Ed2LUfz3aQwBDA" name="Notification_Process" id="BpmnProcess_1211192413848" processType="NONE"/>
+  </pools>
+  <pools xmi:type="vsdt:Pool" xmi:id="_yHCCzGn6Ed2LUfz3aQwBDA" name="SensorService" id="Pool_1211200848324" participant="_yHLMhmn6Ed2LUfz3aQwBDA">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_yHCCzWn6Ed2LUfz3aQwBDA" name="SensorService_Process" id="BpmnProcess_1211200848325" processType="NONE"/>
+  </pools>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHCCz2n6Ed2LUfz3aQwBDA" name=" " id="SequenceFlow_1203419898583" source="_yHCCcWn6Ed2LUfz3aQwBDA" target="_yHCCxWn6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHCC0Gn6Ed2LUfz3aQwBDA" id="_iF0KwLI2Ed2NB_bTDIpiMA" source="_yHCCnWn6Ed2LUfz3aQwBDA" target="_yHCCgGn6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHCC0Wn6Ed2LUfz3aQwBDA" id="_jBMN4LI2Ed2NB_bTDIpiMA" source="_yHCCv2n6Ed2LUfz3aQwBDA" target="_yHCCwWn6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHCC0mn6Ed2LUfz3aQwBDA" name=" " id="SequenceFlow_1203419898599" source="_yHCCfWn6Ed2LUfz3aQwBDA" target="_yHCCwWn6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHCC02n6Ed2LUfz3aQwBDA" id="_hr7EELI2Ed2NB_bTDIpiMA" source="_yHCCxWn6Ed2LUfz3aQwBDA" target="_yHCCfWn6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHCC1Gn6Ed2LUfz3aQwBDA" id="SequenceFlow_1211190269008" source="_yHCCgGn6Ed2LUfz3aQwBDA" target="_yHCCgmn6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHCC1Wn6Ed2LUfz3aQwBDA" name="" id="SequenceFlow_1211190297703" conditionType="DEFAULT" source="_yHCCiGn6Ed2LUfz3aQwBDA" target="_yHCCmGn6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHLMUGn6Ed2LUfz3aQwBDA" name="anomaly &lt; threshold" id="SequenceFlow_1211190299967" conditionType="EXPRESSION" source="_yHCCiGn6Ed2LUfz3aQwBDA" target="_yHCCi2n6Ed2LUfz3aQwBDA">
+    <conditionExpression xmi:type="vsdt:Expression" xmi:id="_dhQ-55RsEd2f7IA1VAeW4Q" expression="$tmpAnomLevel &lt; $inThreshold"/>
+  </connections>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHLMUmn6Ed2LUfz3aQwBDA" name="alarm > 0" id="SequenceFlow_1211190710974" conditionType="EXPRESSION" source="_yHCCi2n6Ed2LUfz3aQwBDA" target="_yHCCkmn6Ed2LUfz3aQwBDA">
+    <conditionExpression xmi:type="vsdt:Expression" xmi:id="_dhQ-6ZRsEd2f7IA1VAeW4Q" expression="$tmpAlarmLevel > 0"/>
+  </connections>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHLMVGn6Ed2LUfz3aQwBDA" id="SequenceFlow_1211196133208" source="_yHCCm2n6Ed2LUfz3aQwBDA" target="_yHCCjmn6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHLMVWn6Ed2LUfz3aQwBDA" name="" id="SequenceFlow_1211197054586" conditionType="DEFAULT" source="_yHCCmGn6Ed2LUfz3aQwBDA" target="_yHCCm2n6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_yHLMVmn6Ed2LUfz3aQwBDA" name="" id="MessageFlow_1211200848735" message="_yHLMfmn6Ed2LUfz3aQwBDA" source="_yHCCgmn6Ed2LUfz3aQwBDA" target="_yHCCzGn6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_yHLMV2n6Ed2LUfz3aQwBDA" name="" id="MessageFlow_1211200848745" message="_yHLMgGn6Ed2LUfz3aQwBDA" source="_yHCCzGn6Ed2LUfz3aQwBDA" target="_yHCCgmn6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHLMWGn6Ed2LUfz3aQwBDA" id="SequenceFlow_1211209239103" source="_yHCCgmn6Ed2LUfz3aQwBDA" target="_yHCCiGn6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHLMWWn6Ed2LUfz3aQwBDA" id="SequenceFlow_1211271622284" source="_yHCCkmn6Ed2LUfz3aQwBDA" target="_yHCCoWn6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHLMWmn6Ed2LUfz3aQwBDA" name="" id="SequenceFlow_1211272638611" conditionType="EXPRESSION" source="_yHCCqGn6Ed2LUfz3aQwBDA" target="_yHCCq2n6Ed2LUfz3aQwBDA">
+    <conditionExpression xmi:type="vsdt:Expression" xmi:id="_dhQ-8ZRsEd2f7IA1VAeW4Q" expression="$inSMS != ''"/>
+  </connections>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHLMXGn6Ed2LUfz3aQwBDA" name="" id="SequenceFlow_1211272641892" conditionType="EXPRESSION" source="_yHCCqGn6Ed2LUfz3aQwBDA" target="_yHCCsWn6Ed2LUfz3aQwBDA">
+    <conditionExpression xmi:type="vsdt:Expression" xmi:id="_dhQ-85RsEd2f7IA1VAeW4Q" expression="$inEMail != ''"/>
+  </connections>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHLMXmn6Ed2LUfz3aQwBDA" name="Alarm = 0" id="SequenceFlow_1211272691915" conditionType="EXPRESSION" source="_yHCCmGn6Ed2LUfz3aQwBDA" target="_yHCCpmn6Ed2LUfz3aQwBDA">
+    <conditionExpression xmi:type="vsdt:Expression" xmi:id="_PY6xgK_rEd2FYOiI0Hwtpg" expression="$tmpAlarmLevel == 0"/>
+  </connections>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHLMYGn6Ed2LUfz3aQwBDA" id="SequenceFlow_1211272698939" source="_yHCCpmn6Ed2LUfz3aQwBDA" target="_yHCCm2n6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHLMYWn6Ed2LUfz3aQwBDA" name="alarm = 0" id="SequenceFlow_1211273154733" conditionType="EXPRESSION" source="_yHCCoWn6Ed2LUfz3aQwBDA" target="_yHCCpGn6Ed2LUfz3aQwBDA">
+    <conditionExpression xmi:type="vsdt:Expression" xmi:id="_QIhpgK_rEd2FYOiI0Hwtpg" expression="$tmpAlarmLevel == 0"/>
+  </connections>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHLMY2n6Ed2LUfz3aQwBDA" id="SequenceFlow_1211273377182" source="_yHCCpGn6Ed2LUfz3aQwBDA" target="_yHCCt2n6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHLMZGn6Ed2LUfz3aQwBDA" id="SequenceFlow_1211273384359" source="_yHCCjmn6Ed2LUfz3aQwBDA" target="_yHCCt2n6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHLMZWn6Ed2LUfz3aQwBDA" name="" id="SequenceFlow_1211273386599" conditionType="DEFAULT" source="_yHCCoWn6Ed2LUfz3aQwBDA" target="_yHCCt2n6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHLMZmn6Ed2LUfz3aQwBDA" name="" id="SequenceFlow_1211273389214" conditionType="DEFAULT" source="_yHCCi2n6Ed2LUfz3aQwBDA" target="_yHCCt2n6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yHLMZ2n6Ed2LUfz3aQwBDA" id="SequenceFlow_1211273415392" source="_yHCCuWn6Ed2LUfz3aQwBDA" target="_yHCCnWn6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:Association" xmi:id="_yHLMaGn6Ed2LUfz3aQwBDA" name="&lt;&lt;ref>>" id="Association_1211273887972" direction="ONE" source="_yHCCpGn6Ed2LUfz3aQwBDA" target="_yHCCpmn6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_yHLMaWn6Ed2LUfz3aQwBDA" name="" id="MessageFlow_1211275182737" message="_yHLMeWn6Ed2LUfz3aQwBDA" source="_yHCCq2n6Ed2LUfz3aQwBDA" target="_yHCCyWn6Ed2LUfz3aQwBDA"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_yHLMamn6Ed2LUfz3aQwBDA" name="" id="MessageFlow_1211275185169" message="_yHLMdGn6Ed2LUfz3aQwBDA" source="_yHCCsWn6Ed2LUfz3aQwBDA" target="_yHCCyWn6Ed2LUfz3aQwBDA"/>
+  <messages xmi:type="vsdt:Message" xmi:id="_yHLMa2n6Ed2LUfz3aQwBDA" name="StartMessage" from="_yHLMg2n6Ed2LUfz3aQwBDA" to="_yHLMgmn6Ed2LUfz3aQwBDA">
+    <properties xmi:type="vsdt:Property" xmi:id="_yHLMbGn6Ed2LUfz3aQwBDA" name="paramSMS" type="xsd:string"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_yHLMbWn6Ed2LUfz3aQwBDA" name="paramEMail" type="xsd:string"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_yHLMbmn6Ed2LUfz3aQwBDA" name="paramInterval" type="xsd:integer"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_yHLMb2n6Ed2LUfz3aQwBDA" name="paramThreshold" type="xsd:float"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_yHLMcGn6Ed2LUfz3aQwBDA" name="paramMaxAlarm" type="xsd:integer"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_yHLMcWn6Ed2LUfz3aQwBDA" name="StopMessage" from="_yHLMg2n6Ed2LUfz3aQwBDA" to="_yHLMgmn6Ed2LUfz3aQwBDA"/>
+  <messages xmi:type="vsdt:Message" xmi:id="_yHLMcmn6Ed2LUfz3aQwBDA" name="printRequest" from="_yHLMgmn6Ed2LUfz3aQwBDA" to="_yHLMhWn6Ed2LUfz3aQwBDA">
+    <properties xmi:type="vsdt:Property" xmi:id="_yHLMc2n6Ed2LUfz3aQwBDA" name="message" type="xsd:string"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_yHLMdGn6Ed2LUfz3aQwBDA" name="SendMailRequest" from="_yHLMgmn6Ed2LUfz3aQwBDA" to="_yHLMhGn6Ed2LUfz3aQwBDA">
+    <properties xmi:type="vsdt:Property" xmi:id="_yHLMdWn6Ed2LUfz3aQwBDA" name="to" type="xsd:string"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_yHLMdmn6Ed2LUfz3aQwBDA" name="text" type="xsd:string"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_yHLMd2n6Ed2LUfz3aQwBDA" name="SendMailResponse" from="_yHLMhGn6Ed2LUfz3aQwBDA" to="_yHLMgmn6Ed2LUfz3aQwBDA">
+    <properties xmi:type="vsdt:Property" xmi:id="_yHLMeGn6Ed2LUfz3aQwBDA" name="result" type="xsd:boolean"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_yHLMeWn6Ed2LUfz3aQwBDA" name="SendSMSRequest" from="_yHLMgmn6Ed2LUfz3aQwBDA" to="_yHLMhGn6Ed2LUfz3aQwBDA">
+    <properties xmi:type="vsdt:Property" xmi:id="_yHLMemn6Ed2LUfz3aQwBDA" name="to" type="xsd:string"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_yHLMe2n6Ed2LUfz3aQwBDA" name="text" type="xsd:string"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_yHLMfGn6Ed2LUfz3aQwBDA" name="SendSMSResponse" from="_yHLMhGn6Ed2LUfz3aQwBDA" to="_yHLMgmn6Ed2LUfz3aQwBDA">
+    <properties xmi:type="vsdt:Property" xmi:id="_yHLMfWn6Ed2LUfz3aQwBDA" name="result" type="xsd:boolean"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_yHLMfmn6Ed2LUfz3aQwBDA" name="getLastStatusRequest" from="_yHLMgmn6Ed2LUfz3aQwBDA" to="_yHLMhmn6Ed2LUfz3aQwBDA">
+    <properties xmi:type="vsdt:Property" xmi:id="_yHLMf2n6Ed2LUfz3aQwBDA" name="timeframe" type="xsd:long"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_yHLMgGn6Ed2LUfz3aQwBDA" name="getLastStatusResponse" from="_yHLMhmn6Ed2LUfz3aQwBDA" to="_yHLMgmn6Ed2LUfz3aQwBDA">
+    <properties xmi:type="vsdt:Property" xmi:id="_yHLMgWn6Ed2LUfz3aQwBDA" name="status" type="xsd:double"/>
+  </messages>
+  <participants xmi:type="vsdt:Participant" xmi:id="_yHLMgmn6Ed2LUfz3aQwBDA" name="Anomaly Detection_Participant"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_yHLMg2n6Ed2LUfz3aQwBDA" name="UserInterface"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_yHLMhGn6Ed2LUfz3aQwBDA" name="Notification_Participant"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_yHLMhWn6Ed2LUfz3aQwBDA" name="Debugger_Participant"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_yHLMhmn6Ed2LUfz3aQwBDA" name="SensorService_Participant"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_yHLMh2n6Ed2LUfz3aQwBDA" participant="_yHLMgmn6Ed2LUfz3aQwBDA" interface="AbnormalyDetectionPT" operation="startExecution" inputMessage="_yHLMa2n6Ed2LUfz3aQwBDA"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_yHLMiGn6Ed2LUfz3aQwBDA" participant="_yHLMgmn6Ed2LUfz3aQwBDA" interface="AbnormalyDetectionPT" operation="stopExecution" inputMessage="_yHLMcWn6Ed2LUfz3aQwBDA"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_yHLMiWn6Ed2LUfz3aQwBDA" participant="_yHLMhWn6Ed2LUfz3aQwBDA" interface="DebuggerPT" operation="print" inputMessage="_yHLMcmn6Ed2LUfz3aQwBDA"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_yHLMimn6Ed2LUfz3aQwBDA" participant="_yHLMhGn6Ed2LUfz3aQwBDA" interface="MailAndSMSPT" operation="SendMail" inputMessage="_yHLMdGn6Ed2LUfz3aQwBDA" outputMessage="_yHLMeWn6Ed2LUfz3aQwBDA"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_yHLMi2n6Ed2LUfz3aQwBDA" participant="_yHLMhGn6Ed2LUfz3aQwBDA" interface="MailAndSMSPT" operation="SendSMS" inputMessage="_yHLMeWn6Ed2LUfz3aQwBDA" outputMessage="_yHLMfGn6Ed2LUfz3aQwBDA"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_yHLMjGn6Ed2LUfz3aQwBDA" participant="_yHLMhmn6Ed2LUfz3aQwBDA" interface="SensorInterface" operation="getLastStatus" inputMessage="_yHLMfmn6Ed2LUfz3aQwBDA" outputMessage="_yHLMgGn6Ed2LUfz3aQwBDA"/>
+</vsdt:BusinessProcessDiagram>

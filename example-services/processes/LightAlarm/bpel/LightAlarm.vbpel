@@ -1,0 +1,1083 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graph id="0" name="PROCESS">
+   <att name="processName" value="LightAlarm"/>
+   <att name="targetNamespace" value="http://LightAlarm"/>
+   <att name="queryLanguage" value="http://www.w3.org/TR/1999/REC-xpath-19991116"/>
+   <att name="expressionLanguage" value="http://www.w3.org/TR/1999/REC-xpath-19991116"/>
+   <att name="suppressJoinFailure" value="false"/>
+   <att name="enableInstanceCompensation" value="false"/>
+   <att name="exitStandardFault" value="false"/>
+   <att name="disableSelectionFailure" value="false"/>
+   <att name="createXPath" value="false"/>
+   <att name="modelVersion" value="3"/>
+   <att name="processNamespace" value="http://schemas.xmlsoap.org/ws/2003/03/business-process/"/>
+   <att name="objectId" value="121613593504305431"/>
+   <att name="layoutNeeded" value="false"/>
+   <att name="processInitiatorSim" value=""/>
+   <att name="processInitiatorExec" value=""/>
+   <att name="writePortType" value="true"/>
+   <att name="bpelDigest" value="44a99e9f1f3d069069035c7760a46155"/>
+   <att>
+      <graph id="1" name="IMPORTS">
+         <att name="ImportCount" value="2"/>
+         <node id="2" name="IMPORT">
+            <att name="ImportLocation" value="../wsdl/LightAlarm_ParticipantService.wsdl;http://LightAlarm/WSDL/;http://schemas.xmlsoap.org/wsdl/"/>
+            <att name="ImportNamespace" value="http://LightAlarm/WSDL/"/>
+            <att name="ImportType" value="http://schemas.xmlsoap.org/wsdl/"/>
+            <att name="objectId" value="121613593510505459"/>
+         </node>
+         <node id="3" name="IMPORT">
+            <att name="ImportLocation" value="../wsdl/LightAlarm.wsdl;http://LightAlarm/WSDL/;http://schemas.xmlsoap.org/wsdl/"/>
+            <att name="ImportNamespace" value="http://LightAlarm/WSDL/"/>
+            <att name="ImportType" value="http://schemas.xmlsoap.org/wsdl/"/>
+            <att name="objectId" value="121613593510505461"/>
+         </node>
+      </graph>
+   </att>
+   <att>
+      <graph id="4" name="NAMESPACES">
+         <att name="NamespaceCount" value="3"/>
+         <node id="5" name="NAMESPACE">
+            <att name="Prefix" value="ns1"/>
+            <att name="Namespace" value="http://LightAlarm/WSDL/"/>
+            <att name="objectId" value="121613593504305457"/>
+         </node>
+         <node id="6" name="NAMESPACE">
+            <att name="Prefix" value="bpws"/>
+            <att name="Namespace" value="http://schemas.xmlsoap.org/ws/2003/03/business-process/"/>
+            <att name="objectId" value="121613593510505463"/>
+         </node>
+         <node id="7" name="NAMESPACE">
+            <att name="Prefix" value="xsd"/>
+            <att name="Namespace" value="http://www.w3.org/2001/XMLSchema"/>
+            <att name="objectId" value="121613593510505465"/>
+         </node>
+      </graph>
+   </att>
+   <att>
+      <graph id="8" name="PARTNER_LINKS">
+         <att name="PartnerLinkCount" value="6"/>
+         <node id="9" name="PARTNER_LINK">
+            <att name="PartnerLinkName" value="LightAlarm_Participant"/>
+            <att name="PartnerLinkType" value="ns1:LightAlarm_Participant_PLT"/>
+            <att name="MyRole" value="LightAlarm_Participant_myRole"/>
+            <att name="visible" value="false,false,false,false,false,"/>
+            <att name="objectId" value="121613593512105467"/>
+            <att name="InitializePartnerRole" value=""/>
+         </node>
+         <node id="10" name="PARTNER_LINK">
+            <att name="PartnerLinkName" value="Logging_Participant"/>
+            <att name="PartnerLinkType" value="ns1:Logging_Participant_PLT"/>
+            <att name="PartnerRole" value="Logging_Participant_partnerRole"/>
+            <att name="visible" value="false,false,false,false,false,"/>
+            <att name="objectId" value="121613593512105479"/>
+            <att name="InitializePartnerRole" value=""/>
+         </node>
+         <node id="11" name="PARTNER_LINK">
+            <att name="PartnerLinkName" value="WeatherProxy_Participant"/>
+            <att name="PartnerLinkType" value="ns1:WeatherProxy_Participant_PLT"/>
+            <att name="PartnerRole" value="WeatherProxy_Participant_partnerRole"/>
+            <att name="visible" value="false,false,false,false,false,"/>
+            <att name="objectId" value="121613593512105491"/>
+            <att name="InitializePartnerRole" value=""/>
+         </node>
+         <node id="12" name="PARTNER_LINK">
+            <att name="PartnerLinkName" value="IvistarProxy_Participant"/>
+            <att name="PartnerLinkType" value="ns1:IvistarProxy_Participant_PLT"/>
+            <att name="PartnerRole" value="IvistarProxy_Participant_partnerRole"/>
+            <att name="visible" value="false,false,false,false,false,"/>
+            <att name="objectId" value="121613593512105503"/>
+            <att name="InitializePartnerRole" value=""/>
+         </node>
+         <node id="13" name="PARTNER_LINK">
+            <att name="PartnerLinkName" value="SheaSimulator_Participant"/>
+            <att name="PartnerLinkType" value="ns1:SheaSimulator_Participant_PLT"/>
+            <att name="PartnerRole" value="SheaSimulator_Participant_partnerRole"/>
+            <att name="visible" value="false,false,false,false,false,"/>
+            <att name="objectId" value="121613593512105515"/>
+            <att name="InitializePartnerRole" value=""/>
+         </node>
+         <node id="14" name="PARTNER_LINK">
+            <att name="PartnerLinkName" value="UPnPRadio_Participant"/>
+            <att name="PartnerLinkType" value="ns1:UPnPRadio_Participant_PLT"/>
+            <att name="PartnerRole" value="UPnPRadio_Participant_partnerRole"/>
+            <att name="visible" value="false,false,false,false,false,"/>
+            <att name="objectId" value="121613593512105527"/>
+            <att name="InitializePartnerRole" value=""/>
+         </node>
+      </graph>
+   </att>
+   <node id="15" name="PARTNERS">
+      <att name="partnerCount" value="0"/>
+   </node>
+   <att>
+      <graph id="16" name="VARIABLE_CONTAINERS">
+         <att name="VariableCount" value="11"/>
+         <node id="17" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="initProcessRequest_MessageData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:initProcessRequest_MessageDataMessage"/>
+            <att name="objectId" value="121613593512105539"/>
+         </node>
+         <node id="18" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="logRequest_MessageData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:logRequest_MessageDataMessage"/>
+            <att name="objectId" value="121613593512105541"/>
+         </node>
+         <node id="19" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="GetWeatherRequest_MessageData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:GetWeatherRequest_MessageDataMessage"/>
+            <att name="objectId" value="121613593512105543"/>
+         </node>
+         <node id="20" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="GetWeatherResponse_MessageData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:GetWeatherResponse_MessageDataMessage"/>
+            <att name="objectId" value="121613593512105545"/>
+         </node>
+         <node id="21" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="SetValueRequest_MessageData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:SetValueRequest_MessageDataMessage"/>
+            <att name="objectId" value="121613593512105547"/>
+         </node>
+         <node id="22" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="GraduallyBrightenLights_loopCounter"/>
+            <att name="VariableSpecification" value="Type=xsd:integer"/>
+            <att name="objectId" value="121613593512105549"/>
+         </node>
+         <node id="23" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="IsInZoneRequest_MessageData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:IsInZoneRequest_MessageDataMessage"/>
+            <att name="objectId" value="121613593512105551"/>
+         </node>
+         <node id="24" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="IsInZoneResponse_MessageData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:IsInZoneResponse_MessageDataMessage"/>
+            <att name="objectId" value="121613593512105553"/>
+         </node>
+         <node id="25" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="PlayRequest_MessageData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:PlayRequest_MessageDataMessage"/>
+            <att name="objectId" value="121613593512105555"/>
+         </node>
+         <node id="26" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="PauseRequest_MessageData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:PauseRequest_MessageDataMessage"/>
+            <att name="objectId" value="121613593512105557"/>
+         </node>
+         <node id="27" name="VARIABLE_CONTAINER">
+            <att name="VariableName" value="LightAlarm_Process_ProcessData"/>
+            <att name="VariableSpecification" value="MessageType=ns1:LightAlarm_Process_ProcessDataMessage"/>
+            <att name="objectId" value="121613593512105559"/>
+         </node>
+      </graph>
+   </att>
+   <node id="28" name="CORRELATION_CONTAINERS">
+      <att name="CorrSetCount" value="0"/>
+   </node>
+   <att>
+      <graph id="29" name="SCOPE_ACTIVITY">
+         <att name="text" value="Process Activities"/>
+         <att>
+            <graph id="30" name="SEQUENCE">
+               <att name="objectId" value="121613593512105561"/>
+               <att name="location" value="LOC {5,5}"/>
+               <att name="size" value="DIM {1080,4656}"/>
+               <att name="gap" value="50"/>
+               <node id="31" name="RECEIVE">
+                  <att name="objectId" value="121613593512105563"/>
+                  <att name="size" value="DIM {97,56}"/>
+                  <att name="name" value="Start"/>
+                  <att name="partnerLink" value="LightAlarm_Participant"/>
+                  <att name="portType" value="{http://LightAlarm/WSDL/}LightAlarmPT"/>
+                  <att name="operation" value="initProcess"/>
+                  <att name="createInstance" value="true"/>
+                  <att name="variable" value="initProcessRequest_MessageData"/>
+                  <att name="attachments" value=""/>
+                  <att name="fromParts" value="0"/>
+               </node>
+               <att>
+                  <graph id="32" name="ASSIGN">
+                     <att name="objectId" value="121613593512105565"/>
+                     <att name="size" value="DIM {483,56}"/>
+                     <att name="name" value="LightAlarm_startAssignments_and_Start_endAssignments_and_log_startAssignments"/>
+                     <att name="copy" value="13"/>
+                     <att name="validateVars" value="false"/>
+                     <node id="33" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="0"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="121613593512105567"/>
+                        <att name="toVariable" value="LightAlarm_Process_ProcessData"/>
+                        <att name="toPart" value="tmpDimStep"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="34" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="0"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="121613593512105569"/>
+                        <att name="toVariable" value="LightAlarm_Process_ProcessData"/>
+                        <att name="toPart" value="tmpVolume"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="35" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="bpws:getVariableData('initProcessRequest_MessageData','paramUsername')"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="121613593512105571"/>
+                        <att name="toVariable" value="LightAlarm_Process_ProcessData"/>
+                        <att name="toPart" value="inUsername"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="36" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="bpws:getVariableData('initProcessRequest_MessageData','paramWaketime')"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="121613593512105573"/>
+                        <att name="toVariable" value="LightAlarm_Process_ProcessData"/>
+                        <att name="toPart" value="inWaketime"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="37" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="bpws:getVariableData('initProcessRequest_MessageData','paramRoomName')"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="121613593512105575"/>
+                        <att name="toVariable" value="LightAlarm_Process_ProcessData"/>
+                        <att name="toPart" value="inRoomName"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="38" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="bpws:getVariableData('initProcessRequest_MessageData','paramLightIDs')"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="121613593512105577"/>
+                        <att name="toVariable" value="LightAlarm_Process_ProcessData"/>
+                        <att name="toPart" value="inLightIDs"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="39" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="bpws:getVariableData('initProcessRequest_MessageData','paramBlindsIDs')"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="121613593512105579"/>
+                        <att name="toVariable" value="LightAlarm_Process_ProcessData"/>
+                        <att name="toPart" value="inBlindsIDs"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="40" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="bpws:getVariableData('initProcessRequest_MessageData','paramCity')"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="121613593512105581"/>
+                        <att name="toVariable" value="LightAlarm_Process_ProcessData"/>
+                        <att name="toPart" value="inCity"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="41" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="bpws:getVariableData('initProcessRequest_MessageData','paramCountry')"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="121613593512105583"/>
+                        <att name="toVariable" value="LightAlarm_Process_ProcessData"/>
+                        <att name="toPart" value="inCountry"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="42" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="bpws:getVariableData('initProcessRequest_MessageData','paramUseLight')"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="121613593512105585"/>
+                        <att name="toVariable" value="LightAlarm_Process_ProcessData"/>
+                        <att name="toPart" value="inUseLight"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="43" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="bpws:getVariableData('initProcessRequest_MessageData','paramUseMusic')"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="121613593512105587"/>
+                        <att name="toVariable" value="LightAlarm_Process_ProcessData"/>
+                        <att name="toPart" value="inUseMusic"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="44" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="'Process started'"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="121613593512105589"/>
+                        <att name="toVariable" value="logRequest_MessageData"/>
+                        <att name="toPart" value="message"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="45" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="1"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="121613593512105591"/>
+                        <att name="toVariable" value="logRequest_MessageData"/>
+                        <att name="toPart" value="level"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                  </graph>
+               </att>
+               <node id="46" name="INVOKE">
+                  <att name="objectId" value="121613593512105593"/>
+                  <att name="size" value="DIM {87,56}"/>
+                  <att name="name" value="log"/>
+                  <att name="partnerLink" value="Logging_Participant"/>
+                  <att name="portType" value="{http://LightAlarm/WSDL/}LoggingPT"/>
+                  <att name="operation" value="log"/>
+                  <att name="inputVariable" value="logRequest_MessageData"/>
+                  <att name="fromParts" value="0"/>
+                  <att name="toParts" value="0"/>
+               </node>
+               <node id="47" name="WAIT">
+                  <att name="objectId" value="121613593512105595"/>
+                  <att name="size" value="DIM {118,56}"/>
+                  <att name="name" value="waketime"/>
+                  <att name="waitExpression" value="bpws:getVariableData('LightAlarm_Process_ProcessData','inWaketime')"/>
+               </node>
+               <att>
+                  <graph id="48" name="SWITCH">
+                     <att name="objectId" value="121613593512105597"/>
+                     <att name="size" value="DIM {1060,1652}"/>
+                     <att name="name" value="BpmnBlock"/>
+                     <att>
+                        <graph id="49" name="CASE">
+                           <att name="CASE_EXPRESSION" value="bpws:getVariableData('LightAlarm_Process_ProcessData','inUseLight')"/>
+                           <att name="IF_EXPRESSION" value="bpws:getVariableData('LightAlarm_Process_ProcessData','inUseLight')"/>
+                           <att name="objectId" value="121613593513705599"/>
+                           <att name="font" value="FONT {Segoe UI,9,0}"/>
+                           <att name="imageLocation" value="icons/activity/case.png"/>
+                           <att name="sizeToFit" value="true"/>
+                           <att name="size" value="DIM {1030,1584}"/>
+                           <att>
+                              <graph id="50" name="SEQUENCE">
+                                 <att name="objectId" value="121613593513705601"/>
+                                 <att name="location" value="LOC {5,5}"/>
+                                 <att name="size" value="DIM {1010,1536}"/>
+                                 <att name="name" value="BpmnSequence"/>
+                                 <att name="gap" value="50"/>
+                                 <att>
+                                    <graph id="51" name="ASSIGN">
+                                       <att name="objectId" value="121613593513705603"/>
+                                       <att name="size" value="DIM {221,56}"/>
+                                       <att name="name" value="GetWeather_startAssignments"/>
+                                       <att name="copy" value="2"/>
+                                       <att name="validateVars" value="false"/>
+                                       <node id="52" name="ASSIGN_COPY">
+                                          <att name="fromExpression" value="bpws:getVariableData('LightAlarm_Process_ProcessData','inCity')"/>
+                                          <att name="fromType" value="3"/>
+                                          <att name="objectId" value="121613593513705605"/>
+                                          <att name="toVariable" value="GetWeatherRequest_MessageData"/>
+                                          <att name="toPart" value="city"/>
+                                          <att name="ignoreMissingFromData" value="false"/>
+                                       </node>
+                                       <node id="53" name="ASSIGN_COPY">
+                                          <att name="fromExpression" value="bpws:getVariableData('LightAlarm_Process_ProcessData','inCountry')"/>
+                                          <att name="fromType" value="3"/>
+                                          <att name="objectId" value="121613593513705607"/>
+                                          <att name="toVariable" value="GetWeatherRequest_MessageData"/>
+                                          <att name="toPart" value="country"/>
+                                          <att name="ignoreMissingFromData" value="false"/>
+                                       </node>
+                                    </graph>
+                                 </att>
+                                 <node id="54" name="INVOKE">
+                                    <att name="objectId" value="121613593513705609"/>
+                                    <att name="size" value="DIM {132,56}"/>
+                                    <att name="name" value="GetWeather"/>
+                                    <att name="partnerLink" value="WeatherProxy_Participant"/>
+                                    <att name="portType" value="{http://LightAlarm/WSDL/}WeatherProxyPT"/>
+                                    <att name="operation" value="GetWeather"/>
+                                    <att name="inputVariable" value="GetWeatherRequest_MessageData"/>
+                                    <att name="outputVariable" value="GetWeatherResponse_MessageData"/>
+                                    <att name="fromParts" value="0"/>
+                                    <att name="toParts" value="0"/>
+                                    <att name="attachments" value=""/>
+                                 </node>
+                                 <att>
+                                    <graph id="55" name="ASSIGN">
+                                       <att name="objectId" value="121613593513705611"/>
+                                       <att name="size" value="DIM {349,56}"/>
+                                       <att name="name" value="GetWeather_endAssignments_and_log_startAssignments"/>
+                                       <att name="copy" value="3"/>
+                                       <att name="validateVars" value="false"/>
+                                       <node id="56" name="ASSIGN_COPY">
+                                          <att name="fromExpression" value="bpws:getVariableData('GetWeatherResponse_MessageData','weatherdata')"/>
+                                          <att name="fromType" value="3"/>
+                                          <att name="objectId" value="121613593513705613"/>
+                                          <att name="toVariable" value="LightAlarm_Process_ProcessData"/>
+                                          <att name="toPart" value="tmpWeather"/>
+                                          <att name="ignoreMissingFromData" value="false"/>
+                                       </node>
+                                       <node id="57" name="ASSIGN_COPY">
+                                          <att name="fromExpression" value="concat('got weather: ' , bpws:getVariableData('LightAlarm_Process_ProcessData','tmpWeather'))"/>
+                                          <att name="fromType" value="3"/>
+                                          <att name="objectId" value="121613593513705615"/>
+                                          <att name="toVariable" value="logRequest_MessageData"/>
+                                          <att name="toPart" value="message"/>
+                                          <att name="ignoreMissingFromData" value="false"/>
+                                       </node>
+                                       <node id="58" name="ASSIGN_COPY">
+                                          <att name="fromExpression" value="1"/>
+                                          <att name="fromType" value="3"/>
+                                          <att name="objectId" value="121613593513705617"/>
+                                          <att name="toVariable" value="logRequest_MessageData"/>
+                                          <att name="toPart" value="level"/>
+                                          <att name="ignoreMissingFromData" value="false"/>
+                                       </node>
+                                    </graph>
+                                 </att>
+                                 <node id="59" name="INVOKE">
+                                    <att name="objectId" value="121613593513705619"/>
+                                    <att name="size" value="DIM {87,56}"/>
+                                    <att name="name" value="log"/>
+                                    <att name="partnerLink" value="Logging_Participant"/>
+                                    <att name="portType" value="{http://LightAlarm/WSDL/}LoggingPT"/>
+                                    <att name="operation" value="log"/>
+                                    <att name="inputVariable" value="logRequest_MessageData"/>
+                                    <att name="fromParts" value="0"/>
+                                    <att name="toParts" value="0"/>
+                                 </node>
+                                 <att>
+                                    <graph id="60" name="FLOW">
+                                       <att name="objectId" value="121613593513705621"/>
+                                       <att name="size" value="DIM {990,1045}"/>
+                                       <att name="name" value="BpmnBlock"/>
+                                       <att>
+                                          <graph id="61" name="SWITCH">
+                                             <att name="objectId" value="121613593513705623"/>
+                                             <att name="location" value="LOC {5,322}"/>
+                                             <att name="size" value="DIM {390,345}"/>
+                                             <att>
+                                                <graph id="62" name="CASE">
+                                                   <att name="CASE_EXPRESSION" value="true()"/>
+                                                   <att name="IF_EXPRESSION" value="true()"/>
+                                                   <att name="objectId" value="121613593513705625"/>
+                                                   <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                                   <att name="imageLocation" value="icons/activity/case.png"/>
+                                                   <att name="sizeToFit" value="true"/>
+                                                   <att name="size" value="DIM {240,277}"/>
+                                                   <att>
+                                                      <graph id="63" name="SEQUENCE">
+                                                         <att name="objectId" value="121613593513705627"/>
+                                                         <att name="location" value="LOC {5,5}"/>
+                                                         <att name="size" value="DIM {220,229}"/>
+                                                         <att name="name" value="Blindsup"/>
+                                                         <att name="gap" value="50"/>
+                                                         <att>
+                                                            <graph id="64" name="ASSIGN">
+                                                               <att name="objectId" value="121613593513705629"/>
+                                                               <att name="size" value="DIM {201,56}"/>
+                                                               <att name="name" value="Blindsup_startAssignments"/>
+                                                               <att name="copy" value="3"/>
+                                                               <att name="validateVars" value="false"/>
+                                                               <node id="65" name="ASSIGN_COPY">
+                                                                  <att name="fromExpression" value="bpws:getVariableData('LightAlarm_Process_ProcessData','inRoomName')"/>
+                                                                  <att name="fromType" value="3"/>
+                                                                  <att name="objectId" value="121613593513705631"/>
+                                                                  <att name="toVariable" value="SetValueRequest_MessageData"/>
+                                                                  <att name="toPart" value="room"/>
+                                                                  <att name="ignoreMissingFromData" value="false"/>
+                                                               </node>
+                                                               <node id="66" name="ASSIGN_COPY">
+                                                                  <att name="fromExpression" value="bpws:getVariableData('LightAlarm_Process_ProcessData','inBlindsIDs')"/>
+                                                                  <att name="fromType" value="3"/>
+                                                                  <att name="objectId" value="121613593513705633"/>
+                                                                  <att name="toVariable" value="SetValueRequest_MessageData"/>
+                                                                  <att name="toPart" value="line"/>
+                                                                  <att name="ignoreMissingFromData" value="false"/>
+                                                               </node>
+                                                               <node id="67" name="ASSIGN_COPY">
+                                                                  <att name="fromExpression" value="'100'"/>
+                                                                  <att name="fromType" value="3"/>
+                                                                  <att name="objectId" value="121613593513705635"/>
+                                                                  <att name="toVariable" value="SetValueRequest_MessageData"/>
+                                                                  <att name="toPart" value="value"/>
+                                                                  <att name="ignoreMissingFromData" value="false"/>
+                                                               </node>
+                                                            </graph>
+                                                         </att>
+                                                         <node id="68" name="INVOKE">
+                                                            <att name="objectId" value="121613593513705637"/>
+                                                            <att name="size" value="DIM {112,56}"/>
+                                                            <att name="name" value="Blindsup"/>
+                                                            <att name="partnerLink" value="IvistarProxy_Participant"/>
+                                                            <att name="portType" value="{http://LightAlarm/WSDL/}IvistarProxyPT"/>
+                                                            <att name="operation" value="SetValue"/>
+                                                            <att name="inputVariable" value="SetValueRequest_MessageData"/>
+                                                            <att name="fromParts" value="0"/>
+                                                            <att name="toParts" value="0"/>
+                                                         </node>
+                                                      </graph>
+                                                   </att>
+                                                </graph>
+                                             </att>
+                                             <att>
+                                                <graph id="69" name="OTHERWISE">
+                                                   <att name="objectId" value="121613593513705639"/>
+                                                   <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                                   <att name="sizeToFit" value="true"/>
+                                                   <att name="size" value="DIM {120,109}"/>
+                                                   <node id="70" name="EMPTY">
+                                                      <att name="objectId" value="121613593513705641"/>
+                                                      <att name="location" value="LOC {5,5}"/>
+                                                      <att name="size" value="DIM {103,56}"/>
+                                                   </node>
+                                                </graph>
+                                             </att>
+                                          </graph>
+                                       </att>
+                                       <att>
+                                          <graph id="71" name="SWITCH">
+                                             <att name="objectId" value="121613593513705643"/>
+                                             <att name="location" value="LOC {445,5}"/>
+                                             <att name="size" value="DIM {530,979}"/>
+                                             <att>
+                                                <graph id="72" name="CASE">
+                                                   <att name="CASE_EXPRESSION" value="true()"/>
+                                                   <att name="IF_EXPRESSION" value="true()"/>
+                                                   <att name="objectId" value="121613593513705645"/>
+                                                   <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                                   <att name="imageLocation" value="icons/activity/case.png"/>
+                                                   <att name="sizeToFit" value="true"/>
+                                                   <att name="size" value="DIM {380,911}"/>
+                                                   <att>
+                                                      <graph id="73" name="SEQUENCE">
+                                                         <att name="objectId" value="121613593513705647"/>
+                                                         <att name="location" value="LOC {5,5}"/>
+                                                         <att name="size" value="DIM {360,863}"/>
+                                                         <att name="name" value="GraduallyBrightenLights"/>
+                                                         <att name="gap" value="50"/>
+                                                         <att>
+                                                            <graph id="74" name="ASSIGN">
+                                                               <att name="objectId" value="121613593513705649"/>
+                                                               <att name="size" value="DIM {294,56}"/>
+                                                               <att name="name" value="GraduallyBrightenLights_initialize_loopCounter"/>
+                                                               <att name="copy" value="1"/>
+                                                               <att name="validateVars" value="false"/>
+                                                               <node id="75" name="ASSIGN_COPY">
+                                                                  <att name="fromExpression" value="0"/>
+                                                                  <att name="fromType" value="3"/>
+                                                                  <att name="objectId" value="121613593513705651"/>
+                                                                  <att name="toVariable" value="GraduallyBrightenLights_loopCounter"/>
+                                                                  <att name="ignoreMissingFromData" value="false"/>
+                                                               </node>
+                                                            </graph>
+                                                         </att>
+                                                         <att>
+                                                            <graph id="76" name="WHILE">
+                                                               <att name="objectId" value="121613593513705653"/>
+                                                               <att name="size" value="DIM {340,690}"/>
+                                                               <att name="whileCondition" value="bpws:getVariableData('LightAlarm_Process_ProcessData','tmpDimStep') &lt; 100"/>
+                                                               <att>
+                                                                  <graph id="77" name="SEQUENCE">
+                                                                     <att name="objectId" value="121613593513705655"/>
+                                                                     <att name="location" value="LOC {5,5}"/>
+                                                                     <att name="size" value="DIM {320,624}"/>
+                                                                     <att name="gap" value="50"/>
+                                                                     <att>
+                                                                        <graph id="78" name="SCOPE">
+                                                                           <att name="objectId" value="121613593513705657"/>
+                                                                           <att name="size" value="DIM {270,451}"/>
+                                                                           <att name="name" value="GraduallyBrightenLights"/>
+                                                                           <att name="exitStandardFaultScope" value=""/>
+                                                                           <att name="showTerminationHandler" value="false"/>
+                                                                           <node id="79" name="VARIABLE_CONTAINERS">
+                                                                              <att name="VariableCount" value="0"/>
+                                                                           </node>
+                                                                           <node id="80" name="CORRELATION_CONTAINERS">
+                                                                              <att name="CorrSetCount" value="0"/>
+                                                                           </node>
+                                                                           <node id="81" name="PARTNER_LINKS">
+                                                                              <att name="PartnerLinkCount" value="0"/>
+                                                                           </node>
+                                                                           <att>
+                                                                              <graph id="82" name="SCOPE_ACTIVITY">
+                                                                                 <att name="objectId" value="121613593513705665"/>
+                                                                                 <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                                                                 <att name="size" value="DIM {240,383}"/>
+                                                                                 <att>
+                                                                                    <graph id="83" name="SEQUENCE">
+                                                                                       <att name="objectId" value="121613593513705675"/>
+                                                                                       <att name="location" value="LOC {5,5}"/>
+                                                                                       <att name="size" value="DIM {220,335}"/>
+                                                                                       <att name="name" value="BpmnSequence"/>
+                                                                                       <att name="gap" value="50"/>
+                                                                                       <node id="84" name="WAIT">
+                                                                                          <att name="objectId" value="121613593513705677"/>
+                                                                                          <att name="size" value="DIM {92,56}"/>
+                                                                                          <att name="name" value="w2s"/>
+                                                                                          <att name="waitType" value="1"/>
+                                                                                          <att name="waitExpression" value="'PT2S'"/>
+                                                                                       </node>
+                                                                                       <att>
+                                                                                          <graph id="85" name="ASSIGN">
+                                                                                             <att name="objectId" value="121613593513705679"/>
+                                                                                             <att name="size" value="DIM {202,56}"/>
+                                                                                             <att name="name" value="Lightson_startAssignments"/>
+                                                                                             <att name="copy" value="4"/>
+                                                                                             <att name="validateVars" value="false"/>
+                                                                                             <node id="86" name="ASSIGN_COPY">
+                                                                                                <att name="fromExpression" value="bpws:getVariableData('LightAlarm_Process_ProcessData','tmpDimStep') + 10"/>
+                                                                                                <att name="fromType" value="3"/>
+                                                                                                <att name="objectId" value="121613593513705681"/>
+                                                                                                <att name="toVariable" value="LightAlarm_Process_ProcessData"/>
+                                                                                                <att name="toPart" value="tmpDimStep"/>
+                                                                                                <att name="ignoreMissingFromData" value="false"/>
+                                                                                             </node>
+                                                                                             <node id="87" name="ASSIGN_COPY">
+                                                                                                <att name="fromExpression" value="bpws:getVariableData('LightAlarm_Process_ProcessData','inRoomName')"/>
+                                                                                                <att name="fromType" value="3"/>
+                                                                                                <att name="objectId" value="121613593513705683"/>
+                                                                                                <att name="toVariable" value="SetValueRequest_MessageData"/>
+                                                                                                <att name="toPart" value="room"/>
+                                                                                                <att name="ignoreMissingFromData" value="false"/>
+                                                                                             </node>
+                                                                                             <node id="88" name="ASSIGN_COPY">
+                                                                                                <att name="fromExpression" value="bpws:getVariableData('LightAlarm_Process_ProcessData','inLightIDs')"/>
+                                                                                                <att name="fromType" value="3"/>
+                                                                                                <att name="objectId" value="121613593513705685"/>
+                                                                                                <att name="toVariable" value="SetValueRequest_MessageData"/>
+                                                                                                <att name="toPart" value="line"/>
+                                                                                                <att name="ignoreMissingFromData" value="false"/>
+                                                                                             </node>
+                                                                                             <node id="89" name="ASSIGN_COPY">
+                                                                                                <att name="fromExpression" value="bpws:getVariableData('LightAlarm_Process_ProcessData','tmpDimStep')"/>
+                                                                                                <att name="fromType" value="3"/>
+                                                                                                <att name="objectId" value="121613593513705687"/>
+                                                                                                <att name="toVariable" value="SetValueRequest_MessageData"/>
+                                                                                                <att name="toPart" value="value"/>
+                                                                                                <att name="ignoreMissingFromData" value="false"/>
+                                                                                             </node>
+                                                                                          </graph>
+                                                                                       </att>
+                                                                                       <node id="90" name="INVOKE">
+                                                                                          <att name="objectId" value="121613593513705689"/>
+                                                                                          <att name="size" value="DIM {113,56}"/>
+                                                                                          <att name="name" value="Lightson"/>
+                                                                                          <att name="partnerLink" value="IvistarProxy_Participant"/>
+                                                                                          <att name="portType" value="{http://LightAlarm/WSDL/}IvistarProxyPT"/>
+                                                                                          <att name="operation" value="SetValue"/>
+                                                                                          <att name="inputVariable" value="SetValueRequest_MessageData"/>
+                                                                                          <att name="fromParts" value="0"/>
+                                                                                          <att name="toParts" value="0"/>
+                                                                                       </node>
+                                                                                    </graph>
+                                                                                 </att>
+                                                                              </graph>
+                                                                           </att>
+                                                                           <node id="91" name="SCOPE_FAULTHANDLER">
+                                                                              <att name="objectId" value="121613593513705669"/>
+                                                                              <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                                                           </node>
+                                                                           <node id="92" name="SCOPE_EVENTHANDLER">
+                                                                              <att name="objectId" value="121613593513705671"/>
+                                                                              <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                                                           </node>
+                                                                           <node id="93" name="SCOPE_TERMINATIONHANDLER">
+                                                                              <att name="objectId" value="121613593513705673"/>
+                                                                              <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                                                           </node>
+                                                                           <node id="94" name="SCOPE_COMPENSATOR">
+                                                                              <att name="objectId" value="121613593513705667"/>
+                                                                              <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                                                           </node>
+                                                                        </graph>
+                                                                     </att>
+                                                                     <att>
+                                                                        <graph id="95" name="ASSIGN">
+                                                                           <att name="objectId" value="121613593513705691"/>
+                                                                           <att name="size" value="DIM {304,56}"/>
+                                                                           <att name="name" value="GraduallyBrightenLights_increment_loopCounter"/>
+                                                                           <att name="copy" value="1"/>
+                                                                           <att name="validateVars" value="false"/>
+                                                                           <node id="96" name="ASSIGN_COPY">
+                                                                              <att name="fromExpression" value="bpws:getVariableData('GraduallyBrightenLights_loopCounter') + 1"/>
+                                                                              <att name="fromType" value="3"/>
+                                                                              <att name="objectId" value="121613593513705693"/>
+                                                                              <att name="toVariable" value="GraduallyBrightenLights_loopCounter"/>
+                                                                              <att name="ignoreMissingFromData" value="false"/>
+                                                                           </node>
+                                                                        </graph>
+                                                                     </att>
+                                                                  </graph>
+                                                               </att>
+                                                            </graph>
+                                                         </att>
+                                                      </graph>
+                                                   </att>
+                                                </graph>
+                                             </att>
+                                             <att>
+                                                <graph id="97" name="OTHERWISE">
+                                                   <att name="objectId" value="121613593513705695"/>
+                                                   <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                                   <att name="sizeToFit" value="true"/>
+                                                   <att name="size" value="DIM {120,109}"/>
+                                                   <node id="98" name="EMPTY">
+                                                      <att name="objectId" value="121613593513705697"/>
+                                                      <att name="location" value="LOC {5,5}"/>
+                                                      <att name="size" value="DIM {103,56}"/>
+                                                   </node>
+                                                </graph>
+                                             </att>
+                                          </graph>
+                                       </att>
+                                    </graph>
+                                 </att>
+                              </graph>
+                           </att>
+                        </graph>
+                     </att>
+                  </graph>
+               </att>
+               <att>
+                  <graph id="99" name="ASSIGN">
+                     <att name="objectId" value="121613593513705699"/>
+                     <att name="size" value="DIM {176,56}"/>
+                     <att name="name" value="log_startAssignments"/>
+                     <att name="copy" value="2"/>
+                     <att name="validateVars" value="false"/>
+                     <node id="100" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="'monitoring position'"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="121613593513705701"/>
+                        <att name="toVariable" value="logRequest_MessageData"/>
+                        <att name="toPart" value="message"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="101" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="1"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="121613593513705703"/>
+                        <att name="toVariable" value="logRequest_MessageData"/>
+                        <att name="toPart" value="level"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                  </graph>
+               </att>
+               <node id="102" name="INVOKE">
+                  <att name="objectId" value="121613593513705705"/>
+                  <att name="size" value="DIM {87,56}"/>
+                  <att name="name" value="log"/>
+                  <att name="partnerLink" value="Logging_Participant"/>
+                  <att name="portType" value="{http://LightAlarm/WSDL/}LoggingPT"/>
+                  <att name="operation" value="log"/>
+                  <att name="inputVariable" value="logRequest_MessageData"/>
+                  <att name="fromParts" value="0"/>
+                  <att name="toParts" value="0"/>
+               </node>
+               <att>
+                  <graph id="103" name="SWITCH">
+                     <att name="objectId" value="121613593513705707"/>
+                     <att name="size" value="DIM {380,1933}"/>
+                     <att name="name" value="BpmnBlock"/>
+                     <att>
+                        <graph id="104" name="CASE">
+                           <att name="CASE_EXPRESSION" value="bpws:getVariableData('LightAlarm_Process_ProcessData','inUseMusic')"/>
+                           <att name="IF_EXPRESSION" value="bpws:getVariableData('LightAlarm_Process_ProcessData','inUseMusic')"/>
+                           <att name="objectId" value="121613593513705709"/>
+                           <att name="font" value="FONT {Segoe UI,9,0}"/>
+                           <att name="imageLocation" value="icons/activity/case.png"/>
+                           <att name="sizeToFit" value="true"/>
+                           <att name="size" value="DIM {350,1865}"/>
+                           <att>
+                              <graph id="105" name="SEQUENCE">
+                                 <att name="objectId" value="121613593513705711"/>
+                                 <att name="location" value="LOC {5,5}"/>
+                                 <att name="size" value="DIM {330,1817}"/>
+                                 <att name="name" value="BpmnSequence"/>
+                                 <att name="gap" value="50"/>
+                                 <att>
+                                    <graph id="106" name="ASSIGN">
+                                       <att name="objectId" value="121613593513705713"/>
+                                       <att name="size" value="DIM {204,56}"/>
+                                       <att name="name" value="StillinBed_startAssignments"/>
+                                       <att name="copy" value="2"/>
+                                       <att name="validateVars" value="false"/>
+                                       <node id="107" name="ASSIGN_COPY">
+                                          <att name="fromExpression" value="bpws:getVariableData('LightAlarm_Process_ProcessData','inUsername')"/>
+                                          <att name="fromType" value="3"/>
+                                          <att name="objectId" value="121613593515205715"/>
+                                          <att name="toVariable" value="IsInZoneRequest_MessageData"/>
+                                          <att name="toPart" value="username"/>
+                                          <att name="ignoreMissingFromData" value="false"/>
+                                       </node>
+                                       <node id="108" name="ASSIGN_COPY">
+                                          <att name="fromExpression" value="'Sofa'"/>
+                                          <att name="fromType" value="3"/>
+                                          <att name="objectId" value="121613593515205717"/>
+                                          <att name="toVariable" value="IsInZoneRequest_MessageData"/>
+                                          <att name="toPart" value="zone"/>
+                                          <att name="ignoreMissingFromData" value="false"/>
+                                       </node>
+                                    </graph>
+                                 </att>
+                                 <node id="109" name="INVOKE">
+                                    <att name="objectId" value="121613593515205719"/>
+                                    <att name="size" value="DIM {115,56}"/>
+                                    <att name="name" value="StillinBed"/>
+                                    <att name="partnerLink" value="SheaSimulator_Participant"/>
+                                    <att name="portType" value="{http://LightAlarm/WSDL/}SheaSimulatorPT"/>
+                                    <att name="operation" value="IsInZone"/>
+                                    <att name="inputVariable" value="IsInZoneRequest_MessageData"/>
+                                    <att name="outputVariable" value="IsInZoneResponse_MessageData"/>
+                                    <att name="fromParts" value="0"/>
+                                    <att name="toParts" value="0"/>
+                                    <att name="attachments" value=""/>
+                                 </node>
+                                 <att>
+                                    <graph id="110" name="ASSIGN">
+                                       <att name="objectId" value="121613593515205721"/>
+                                       <att name="size" value="DIM {199,56}"/>
+                                       <att name="name" value="StillinBed_endAssignments"/>
+                                       <att name="copy" value="1"/>
+                                       <att name="validateVars" value="false"/>
+                                       <node id="111" name="ASSIGN_COPY">
+                                          <att name="fromExpression" value="bpws:getVariableData('IsInZoneResponse_MessageData','isin')"/>
+                                          <att name="fromType" value="3"/>
+                                          <att name="objectId" value="121613593515205723"/>
+                                          <att name="toVariable" value="LightAlarm_Process_ProcessData"/>
+                                          <att name="toPart" value="tmpInBed"/>
+                                          <att name="ignoreMissingFromData" value="false"/>
+                                       </node>
+                                    </graph>
+                                 </att>
+                                 <att>
+                                    <graph id="112" name="SWITCH">
+                                       <att name="objectId" value="121613593515205725"/>
+                                       <att name="size" value="DIM {310,1432}"/>
+                                       <att name="name" value="BpmnBlock"/>
+                                       <att>
+                                          <graph id="113" name="CASE">
+                                             <att name="CASE_EXPRESSION" value="bpws:getVariableData('LightAlarm_Process_ProcessData','tmpInBed') = 1"/>
+                                             <att name="IF_EXPRESSION" value="bpws:getVariableData('LightAlarm_Process_ProcessData','tmpInBed') = 1"/>
+                                             <att name="objectId" value="121613593515205727"/>
+                                             <att name="font" value="FONT {Segoe UI,9,0}"/>
+                                             <att name="imageLocation" value="icons/activity/case.png"/>
+                                             <att name="sizeToFit" value="true"/>
+                                             <att name="size" value="DIM {280,1364}"/>
+                                             <att>
+                                                <graph id="114" name="SEQUENCE">
+                                                   <att name="objectId" value="121613593515205729"/>
+                                                   <att name="location" value="LOC {5,5}"/>
+                                                   <att name="size" value="DIM {260,1316}"/>
+                                                   <att name="name" value="BpmnSequence"/>
+                                                   <att name="gap" value="50"/>
+                                                   <node id="115" name="INVOKE">
+                                                      <att name="objectId" value="121613593515205731"/>
+                                                      <att name="size" value="DIM {119,56}"/>
+                                                      <att name="name" value="PlayMusic"/>
+                                                      <att name="partnerLink" value="UPnPRadio_Participant"/>
+                                                      <att name="portType" value="{http://LightAlarm/WSDL/}UPnPRadioPT"/>
+                                                      <att name="operation" value="Play"/>
+                                                      <att name="inputVariable" value="PlayRequest_MessageData"/>
+                                                      <att name="fromParts" value="0"/>
+                                                      <att name="toParts" value="0"/>
+                                                   </node>
+                                                   <node id="116" name="WAIT">
+                                                      <att name="objectId" value="121613593515205733"/>
+                                                      <att name="size" value="DIM {93,56}"/>
+                                                      <att name="name" value="wait"/>
+                                                      <att name="waitType" value="1"/>
+                                                      <att name="waitExpression" value="'PT2S'"/>
+                                                   </node>
+                                                   <att>
+                                                      <graph id="117" name="ASSIGN">
+                                                         <att name="objectId" value="121613593515205735"/>
+                                                         <att name="size" value="DIM {204,56}"/>
+                                                         <att name="name" value="StillinBed_startAssignments"/>
+                                                         <att name="copy" value="2"/>
+                                                         <att name="validateVars" value="false"/>
+                                                         <node id="118" name="ASSIGN_COPY">
+                                                            <att name="fromExpression" value="bpws:getVariableData('LightAlarm_Process_ProcessData','inUsername')"/>
+                                                            <att name="fromType" value="3"/>
+                                                            <att name="objectId" value="121613593515205737"/>
+                                                            <att name="toVariable" value="IsInZoneRequest_MessageData"/>
+                                                            <att name="toPart" value="username"/>
+                                                            <att name="ignoreMissingFromData" value="false"/>
+                                                         </node>
+                                                         <node id="119" name="ASSIGN_COPY">
+                                                            <att name="fromExpression" value="'Sofa'"/>
+                                                            <att name="fromType" value="3"/>
+                                                            <att name="objectId" value="121613593515205739"/>
+                                                            <att name="toVariable" value="IsInZoneRequest_MessageData"/>
+                                                            <att name="toPart" value="zone"/>
+                                                            <att name="ignoreMissingFromData" value="false"/>
+                                                         </node>
+                                                      </graph>
+                                                   </att>
+                                                   <node id="120" name="INVOKE">
+                                                      <att name="objectId" value="121613593515205741"/>
+                                                      <att name="size" value="DIM {115,56}"/>
+                                                      <att name="name" value="StillinBed"/>
+                                                      <att name="partnerLink" value="SheaSimulator_Participant"/>
+                                                      <att name="portType" value="{http://LightAlarm/WSDL/}SheaSimulatorPT"/>
+                                                      <att name="operation" value="IsInZone"/>
+                                                      <att name="inputVariable" value="IsInZoneRequest_MessageData"/>
+                                                      <att name="outputVariable" value="IsInZoneResponse_MessageData"/>
+                                                      <att name="fromParts" value="0"/>
+                                                      <att name="toParts" value="0"/>
+                                                      <att name="attachments" value=""/>
+                                                   </node>
+                                                   <att>
+                                                      <graph id="121" name="ASSIGN">
+                                                         <att name="objectId" value="121613593515205743"/>
+                                                         <att name="size" value="DIM {199,56}"/>
+                                                         <att name="name" value="StillinBed_endAssignments"/>
+                                                         <att name="copy" value="1"/>
+                                                         <att name="validateVars" value="false"/>
+                                                         <node id="122" name="ASSIGN_COPY">
+                                                            <att name="fromExpression" value="bpws:getVariableData('IsInZoneResponse_MessageData','isin')"/>
+                                                            <att name="fromType" value="3"/>
+                                                            <att name="objectId" value="121613593515205745"/>
+                                                            <att name="toVariable" value="LightAlarm_Process_ProcessData"/>
+                                                            <att name="toPart" value="tmpInBed"/>
+                                                            <att name="ignoreMissingFromData" value="false"/>
+                                                         </node>
+                                                      </graph>
+                                                   </att>
+                                                   <att>
+                                                      <graph id="123" name="WHILE">
+                                                         <att name="objectId" value="121613593515205747"/>
+                                                         <att name="size" value="DIM {240,613}"/>
+                                                         <att name="name" value="_StillinBed_FORK_loop"/>
+                                                         <att name="whileCondition" value="bpws:getVariableData('LightAlarm_Process_ProcessData','tmpInBed') = 1"/>
+                                                         <att>
+                                                            <graph id="124" name="SEQUENCE">
+                                                               <att name="objectId" value="121613593515205749"/>
+                                                               <att name="location" value="LOC {5,5}"/>
+                                                               <att name="size" value="DIM {220,547}"/>
+                                                               <att name="gap" value="50"/>
+                                                               <node id="125" name="EMPTY">
+                                                                  <att name="objectId" value="121613593515205751"/>
+                                                                  <att name="size" value="DIM {149,56}"/>
+                                                                  <att name="name" value="IncreaseVolume"/>
+                                                               </node>
+                                                               <node id="126" name="WAIT">
+                                                                  <att name="objectId" value="121613593515205753"/>
+                                                                  <att name="size" value="DIM {93,56}"/>
+                                                                  <att name="name" value="wait"/>
+                                                                  <att name="waitType" value="1"/>
+                                                                  <att name="waitExpression" value="'PT2S'"/>
+                                                               </node>
+                                                               <att>
+                                                                  <graph id="127" name="ASSIGN">
+                                                                     <att name="objectId" value="121613593515205755"/>
+                                                                     <att name="size" value="DIM {204,56}"/>
+                                                                     <att name="name" value="StillinBed_startAssignments"/>
+                                                                     <att name="copy" value="2"/>
+                                                                     <att name="validateVars" value="false"/>
+                                                                     <node id="128" name="ASSIGN_COPY">
+                                                                        <att name="fromExpression" value="bpws:getVariableData('LightAlarm_Process_ProcessData','inUsername')"/>
+                                                                        <att name="fromType" value="3"/>
+                                                                        <att name="objectId" value="121613593515205757"/>
+                                                                        <att name="toVariable" value="IsInZoneRequest_MessageData"/>
+                                                                        <att name="toPart" value="username"/>
+                                                                        <att name="ignoreMissingFromData" value="false"/>
+                                                                     </node>
+                                                                     <node id="129" name="ASSIGN_COPY">
+                                                                        <att name="fromExpression" value="'Sofa'"/>
+                                                                        <att name="fromType" value="3"/>
+                                                                        <att name="objectId" value="121613593515205759"/>
+                                                                        <att name="toVariable" value="IsInZoneRequest_MessageData"/>
+                                                                        <att name="toPart" value="zone"/>
+                                                                        <att name="ignoreMissingFromData" value="false"/>
+                                                                     </node>
+                                                                  </graph>
+                                                               </att>
+                                                               <node id="130" name="INVOKE">
+                                                                  <att name="objectId" value="121613593515205761"/>
+                                                                  <att name="size" value="DIM {115,56}"/>
+                                                                  <att name="name" value="StillinBed"/>
+                                                                  <att name="partnerLink" value="SheaSimulator_Participant"/>
+                                                                  <att name="portType" value="{http://LightAlarm/WSDL/}SheaSimulatorPT"/>
+                                                                  <att name="operation" value="IsInZone"/>
+                                                                  <att name="inputVariable" value="IsInZoneRequest_MessageData"/>
+                                                                  <att name="outputVariable" value="IsInZoneResponse_MessageData"/>
+                                                                  <att name="fromParts" value="0"/>
+                                                                  <att name="toParts" value="0"/>
+                                                                  <att name="attachments" value=""/>
+                                                               </node>
+                                                               <att>
+                                                                  <graph id="131" name="ASSIGN">
+                                                                     <att name="objectId" value="121613593515205763"/>
+                                                                     <att name="size" value="DIM {199,56}"/>
+                                                                     <att name="name" value="StillinBed_endAssignments"/>
+                                                                     <att name="copy" value="1"/>
+                                                                     <att name="validateVars" value="false"/>
+                                                                     <node id="132" name="ASSIGN_COPY">
+                                                                        <att name="fromExpression" value="bpws:getVariableData('IsInZoneResponse_MessageData','isin')"/>
+                                                                        <att name="fromType" value="3"/>
+                                                                        <att name="objectId" value="121613593515205765"/>
+                                                                        <att name="toVariable" value="LightAlarm_Process_ProcessData"/>
+                                                                        <att name="toPart" value="tmpInBed"/>
+                                                                        <att name="ignoreMissingFromData" value="false"/>
+                                                                     </node>
+                                                                  </graph>
+                                                               </att>
+                                                            </graph>
+                                                         </att>
+                                                      </graph>
+                                                   </att>
+                                                   <node id="133" name="INVOKE">
+                                                      <att name="objectId" value="121613593515205767"/>
+                                                      <att name="size" value="DIM {137,56}"/>
+                                                      <att name="name" value="StopPlayback"/>
+                                                      <att name="partnerLink" value="UPnPRadio_Participant"/>
+                                                      <att name="portType" value="{http://LightAlarm/WSDL/}UPnPRadioPT"/>
+                                                      <att name="operation" value="Pause"/>
+                                                      <att name="inputVariable" value="PauseRequest_MessageData"/>
+                                                      <att name="fromParts" value="0"/>
+                                                      <att name="toParts" value="0"/>
+                                                   </node>
+                                                </graph>
+                                             </att>
+                                          </graph>
+                                       </att>
+                                    </graph>
+                                 </att>
+                              </graph>
+                           </att>
+                        </graph>
+                     </att>
+                  </graph>
+               </att>
+               <att>
+                  <graph id="134" name="ASSIGN">
+                     <att name="objectId" value="121613593515205769"/>
+                     <att name="size" value="DIM {176,56}"/>
+                     <att name="name" value="log_startAssignments"/>
+                     <att name="copy" value="2"/>
+                     <att name="validateVars" value="false"/>
+                     <node id="135" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="'Process finished'"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="121613593515205771"/>
+                        <att name="toVariable" value="logRequest_MessageData"/>
+                        <att name="toPart" value="message"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                     <node id="136" name="ASSIGN_COPY">
+                        <att name="fromExpression" value="1"/>
+                        <att name="fromType" value="3"/>
+                        <att name="objectId" value="121613593515205773"/>
+                        <att name="toVariable" value="logRequest_MessageData"/>
+                        <att name="toPart" value="level"/>
+                        <att name="ignoreMissingFromData" value="false"/>
+                     </node>
+                  </graph>
+               </att>
+               <node id="137" name="INVOKE">
+                  <att name="objectId" value="121613593515205775"/>
+                  <att name="size" value="DIM {87,56}"/>
+                  <att name="name" value="log"/>
+                  <att name="partnerLink" value="Logging_Participant"/>
+                  <att name="portType" value="{http://LightAlarm/WSDL/}LoggingPT"/>
+                  <att name="operation" value="log"/>
+                  <att name="inputVariable" value="logRequest_MessageData"/>
+                  <att name="fromParts" value="0"/>
+                  <att name="toParts" value="0"/>
+               </node>
+               <node id="138" name="EMPTY">
+                  <att name="objectId" value="121613593515205777"/>
+                  <att name="size" value="DIM {91,56}"/>
+                  <att name="name" value="End"/>
+               </node>
+            </graph>
+         </att>
+      </graph>
+   </att>
+   <node id="139" name="SCOPE_FAULTHANDLER"/>
+   <node id="140" name="SCOPE_EVENTHANDLER"/>
+   <node id="141" name="SCOPE_COMPENSATOR"/>
+</graph>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="strucbpmn"
+    nsURI="http://de.dailab.vsdt.trafo.strucbpmn" nsPrefix="strucbpmn">
+  <eClassifiers xsi:type="ecore:EClass" name="BpmnSequence" eSuperTypes="../../de.dailab.vsdt/model/vsdt.ecore#//FlowObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="ecore:EClass ../../de.dailab.vsdt/model/vsdt.ecore#//FlowObject" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="needsToPersist" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BpmnBlock" eSuperTypes="../../de.dailab.vsdt/model/vsdt.ecore#//FlowObject">
+    <eOperations name="getDefaultElement" eType="ecore:EClass ../../de.dailab.vsdt/model/vsdt.ecore#//FlowObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//BpmnBranch" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="firstGateway" lowerBound="1"
+        eType="ecore:EClass ../../de.dailab.vsdt/model/vsdt.ecore#//Gateway" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondGateway" lowerBound="1"
+        eType="ecore:EClass ../../de.dailab.vsdt/model/vsdt.ecore#//Gateway" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BpmnBranch" eSuperTypes="../../de.dailab.vsdt/model/vsdt.ecore#//FlowObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+        eType="ecore:EClass ../../de.dailab.vsdt/model/vsdt.ecore#//FlowObject" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass ../../de.dailab.vsdt/model/vsdt.ecore#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BpmnLoopBlock" eSuperTypes="../../de.dailab.vsdt/model/vsdt.ecore#//FlowObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="firstBranch" lowerBound="1"
+        eType="#//BpmnBranch" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondBranch" lowerBound="1"
+        eType="#//BpmnBranch" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exitBranch" lowerBound="1"
+        eType="#//BpmnBranch" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="firstGateway" lowerBound="1"
+        eType="ecore:EClass ../../de.dailab.vsdt/model/vsdt.ecore#//Gateway" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondGateway" lowerBound="1"
+        eType="ecore:EClass ../../de.dailab.vsdt/model/vsdt.ecore#//Gateway" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BpmnDerivedProcess" eSuperTypes="../../de.dailab.vsdt/model/vsdt.ecore#//FlowObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+        eType="ecore:EClass ../../de.dailab.vsdt/model/vsdt.ecore#//FlowObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="processName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="waitForCompletion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BpmnEventHandlerBlock" eSuperTypes="../../de.dailab.vsdt/model/vsdt.ecore#//FlowObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eventHandlerCases" upperBound="-1"
+        eType="#//BpmnEventHandlerCase" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activity" lowerBound="1"
+        eType="ecore:EClass ../../de.dailab.vsdt/model/vsdt.ecore#//Activity" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BpmnEventHandlerCase" eSuperTypes="../../de.dailab.vsdt/model/vsdt.ecore#//FlowObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="intermediate" lowerBound="1"
+        eType="ecore:EClass ../../de.dailab.vsdt/model/vsdt.ecore#//Intermediate"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compensationElement" lowerBound="1"
+        eType="ecore:EClass ../../de.dailab.vsdt/model/vsdt.ecore#//FlowObject" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementToSkip" eType="#//BpmnElementToSkip"
+        eOpposite="#//BpmnElementToSkip/eventHandlerCase"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gateway" eType="ecore:EClass ../../de.dailab.vsdt/model/vsdt.ecore#//Gateway"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BpmnElementToSkip" eSuperTypes="../../de.dailab.vsdt/model/vsdt.ecore#//FlowObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+        eType="ecore:EClass ../../de.dailab.vsdt/model/vsdt.ecore#//FlowObject" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="variableName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eventHandlerCase" eType="#//BpmnEventHandlerCase"
+        eOpposite="#//BpmnEventHandlerCase/elementToSkip"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DisjunctiveExpression" eSuperTypes="../../de.dailab.vsdt/model/vsdt.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expressions" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/de.dailab.vsdt.trafo.jiacv.feature_1.2.0.jar" id="de.dailab.vsdt.trafo.jiacv.feature" version="1.2.0">
+      <category name="VSDT"/>
+   </feature>
+   <feature url="features/de.dailab.vsdt.feature_1.2.1.jar" id="de.dailab.vsdt.feature" version="1.2.1">
+      <category name="VSDT"/>
+   </feature>
+   <feature url="features/de.dailab.vsdt.trafo.bpel.feature_1.2.1.jar" id="de.dailab.vsdt.trafo.bpel.feature" version="1.2.1">
+      <category name="VSDT"/>
+   </feature>
+   <feature url="features/de.dailab.vsdt.trafo.stp.feature_1.2.0.jar" id="de.dailab.vsdt.trafo.stp.feature" version="1.2.0">
+      <category name="VSDT"/>
+   </feature>
+   <feature url="features/de.dailab.agentWorldEditor_feature_1.1.1.jar" id="de.dailab.agentWorldEditor_feature" version="1.1.1">
+      <category name="AWE"/>
+   </feature>
+   <feature url="features/de.dailab.vsdt.feature_1.2.2.jar" id="de.dailab.vsdt.feature" version="1.2.2">
+      <category name="VSDT"/>
+   </feature>
+   <category-def name="VSDT" label="VSDT">
+      <description>
+         Features related to the Visual Service Design Tool, e.g. the BPMN modeller, and various transformation features.
+      </description>
+   </category-def>
+   <category-def name="AWE" label="AWE">
+      <description>
+         Features related to the Agent World Editor
+      </description>
+   </category-def>
+</site>

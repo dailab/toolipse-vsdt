@@ -1,0 +1,58 @@
+
+
+service Pong-Agent ( in ) ( out ) {
+    listen "PongAgent_Pung" ;
+    listen "PongAgent_Peng" ;
+    var $lastMessage : string ;
+    var $b : bool ;
+    {
+        {
+            print "Pong-Agent started" ;
+        }
+        {
+            var $ping : string ;
+            var $paramB : bool ;
+            var $s1 : string ;
+            var $s2 : string ;
+            var $s3 : string ;
+            var $s4 : string ;
+            var $s5 : string ;
+            {
+                receive timeout 10000 "PongAgent_Ping" $ping ;
+                receive timeout 10000 "PongAgent_Ping" $paramB ;
+                receive timeout 10000 "PongAgent_Ping" $s1 ;
+                receive timeout 10000 "PongAgent_Ping" $s2 ;
+                receive timeout 10000 "PongAgent_Ping" $s3 ;
+                receive timeout 10000 "PongAgent_Ping" $s4 ;
+                receive timeout 10000 "PongAgent_Ping" $s5 ;
+            }
+            $lastMessage = $ping ;
+            $b = $paramB ;
+        }
+        {
+            var $pong : string ;
+            $pong = "pong" ;
+            send "PingAgent_Pong" $pong ;
+        }
+        {
+            print $lastMessage ;
+        }
+        switch {
+            case ( onmessage "PongAgent_Peng" string ) {
+                var $peng : string ;
+                receive timeout 10000 "PongAgent_Peng" $peng ;
+                $lastMessage = $peng ;
+            }
+            case ( onmessage "PongAgent_Pung" string ) {
+                var $pung : string ;
+                receive timeout 10000 "PongAgent_Pung" $pung ;
+                $lastMessage = $pung ;
+            }
+            case ( ontimer timeout 2000 ) {
+            }
+        }
+        {
+            print $lastMessage ;
+        }
+    }
+}

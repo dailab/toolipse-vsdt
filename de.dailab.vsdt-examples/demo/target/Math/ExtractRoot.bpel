@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="ASCII"?>
+<bpws:process xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://ExtractRoot/WSDL/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" abstractProcess="no" enableInstanceCompensation="no" expressionLanguage="http://www.w3.org/TR/1999/REC-xpath-19991116" name="ExtractRoot" queryLanguage="http://www.w3.org/TR/1999/REC-xpath-19991116" suppressJoinFailure="no" targetNamespace="http://ExtractRoot">
+  <bpws:partnerLinks>
+    <bpws:partnerLink myRole="Mathematican_myRole" name="Mathematican" partnerLinkType="ns1:Mathematican_PLT" partnerRole="Mathematican_partnerRole"/>
+  </bpws:partnerLinks>
+  <bpws:variables>
+    <bpws:variable messageType="ns1:GetSquareRootRequest_MessageDataMessage" name="GetSquareRootRequest_MessageData"/>
+    <bpws:variable messageType="ns1:GetSquareRootResponse_MessageDataMessage" name="GetSquareRootResponse_MessageData"/>
+    <bpws:variable messageType="ns1:ExtractRoot_Process_ProcessDataMessage" name="ExtractRoot_Process_ProcessData"/>
+  </bpws:variables>
+  <bpws:sequence name="">
+    <bpws:receive name="start" createInstance="yes" operation="SquareRoot" partnerLink="Mathematican" portType="ns1:TestService" variable="GetSquareRootRequest_MessageData"/>
+    <bpws:assign name="start_endAssignments">
+      <bpws:copy>
+        <bpws:from expression="bpws:getVariableData('GetSquareRootRequest_MessageData','input')"/>
+        <bpws:to part="number" variable="ExtractRoot_Process_ProcessData"/>
+      </bpws:copy>
+      <bpws:copy>
+        <bpws:from expression="bpws:getVariableData('GetSquareRootRequest_MessageData','epsilon')"/>
+        <bpws:to part="eps" variable="ExtractRoot_Process_ProcessData"/>
+      </bpws:copy>
+    </bpws:assign>
+    <bpws:switch>
+      <bpws:case condition=" (bpws:getVariableData('ExtractRoot_Process_ProcessData','number') &lt; 0)  and  (bpws:getVariableData('ExtractRoot_Process_ProcessData','eps') &lt;= 0) ">
+        <bpws:sequence>
+          <bpws:assign name="invalidinput_startAssignments">
+            <bpws:copy>
+              <bpws:from expression="0"/>
+              <bpws:to part="result" variable="GetSquareRootResponse_MessageData"/>
+            </bpws:copy>
+            <bpws:copy>
+              <bpws:from expression="concat('input ',concat(bpws:getVariableData('ExtractRoot_Process_ProcessData','number'),concat(',',concat(bpws:getVariableData('ExtractRoot_Process_ProcessData','eps'),' is invalid'))))"/>
+              <bpws:to part="message" variable="GetSquareRootResponse_MessageData"/>
+            </bpws:copy>
+          </bpws:assign>
+          <bpws:reply name="invalidinput" operation="SquareRoot" partnerLink="Mathematican" portType="ns1:TestService" variable="GetSquareRootResponse_MessageData"/>
+        </bpws:sequence>
+      </bpws:case>
+      <bpws:otherwise>
+        <bpws:sequence>
+          <bpws:empty name="initializevariables"/>
+          <bpws:assign name="initializevariables_endAssignments">
+            <bpws:copy>
+              <bpws:from expression="0"/>
+              <bpws:to part="current" variable="ExtractRoot_Process_ProcessData"/>
+            </bpws:copy>
+            <bpws:copy>
+              <bpws:from expression="0"/>
+              <bpws:to part="lastLesser" variable="ExtractRoot_Process_ProcessData"/>
+            </bpws:copy>
+            <bpws:copy>
+              <bpws:from expression="bpws:getVariableData('ExtractRoot_Process_ProcessData','number')"/>
+              <bpws:to part="lastGreater" variable="ExtractRoot_Process_ProcessData"/>
+            </bpws:copy>
+          </bpws:assign>
+          <bpws:empty name="print"/>
+          <bpws:empty name="calculatedelta"/>
+          <bpws:assign name="calculatedelta_endAssignments">
+            <bpws:copy>
+              <bpws:from expression="bpws:getVariableData('ExtractRoot_Process_ProcessData','number') -  (bpws:getVariableData('ExtractRoot_Process_ProcessData','current') * bpws:getVariableData('ExtractRoot_Process_ProcessData','current')) "/>
+              <bpws:to part="d" variable="ExtractRoot_Process_ProcessData"/>
+            </bpws:copy>
+          </bpws:assign>
+          <bpws:while name="(join)_2_epsgreaterthand_loop" condition=" ( (bpws:getVariableData('ExtractRoot_Process_ProcessData','d') &lt; 0)  and  ( (0 - bpws:getVariableData('ExtractRoot_Process_ProcessData','d'))  > bpws:getVariableData('ExtractRoot_Process_ProcessData','eps')) )  or  ( (bpws:getVariableData('ExtractRoot_Process_ProcessData','d') > 0)  and  (bpws:getVariableData('ExtractRoot_Process_ProcessData','d') > bpws:getVariableData('ExtractRoot_Process_ProcessData','eps')) ) ">
+            <bpws:sequence>
+              <bpws:switch>
+                <bpws:case condition=" (bpws:getVariableData('ExtractRoot_Process_ProcessData','current') * bpws:getVariableData('ExtractRoot_Process_ProcessData','current'))  > bpws:getVariableData('ExtractRoot_Process_ProcessData','number')">
+                  <bpws:sequence>
+                    <bpws:empty name="trysmallernumber"/>
+                    <bpws:assign name="trysmallernumber_endAssignments">
+                      <bpws:copy>
+                        <bpws:from expression="bpws:getVariableData('ExtractRoot_Process_ProcessData','current')"/>
+                        <bpws:to part="lastGreater" variable="ExtractRoot_Process_ProcessData"/>
+                      </bpws:copy>
+                      <bpws:copy>
+                        <bpws:from expression=" (bpws:getVariableData('ExtractRoot_Process_ProcessData','current') + bpws:getVariableData('ExtractRoot_Process_ProcessData','lastLesser'))  div 2"/>
+                        <bpws:to part="current" variable="ExtractRoot_Process_ProcessData"/>
+                      </bpws:copy>
+                    </bpws:assign>
+                  </bpws:sequence>
+                </bpws:case>
+                <bpws:otherwise>
+                  <bpws:sequence>
+                    <bpws:empty name="trygreaternumber"/>
+                    <bpws:assign name="trygreaternumber_endAssignments">
+                      <bpws:copy>
+                        <bpws:from expression="bpws:getVariableData('ExtractRoot_Process_ProcessData','current')"/>
+                        <bpws:to part="lastLesser" variable="ExtractRoot_Process_ProcessData"/>
+                      </bpws:copy>
+                      <bpws:copy>
+                        <bpws:from expression=" (bpws:getVariableData('ExtractRoot_Process_ProcessData','current') + bpws:getVariableData('ExtractRoot_Process_ProcessData','lastGreater'))  div 2"/>
+                        <bpws:to part="current" variable="ExtractRoot_Process_ProcessData"/>
+                      </bpws:copy>
+                    </bpws:assign>
+                  </bpws:sequence>
+                </bpws:otherwise>
+              </bpws:switch>
+              <bpws:empty name="print"/>
+              <bpws:empty name="calculatedelta"/>
+              <bpws:assign name="calculatedelta_endAssignments">
+                <bpws:copy>
+                  <bpws:from expression="bpws:getVariableData('ExtractRoot_Process_ProcessData','number') -  (bpws:getVariableData('ExtractRoot_Process_ProcessData','current') * bpws:getVariableData('ExtractRoot_Process_ProcessData','current')) "/>
+                  <bpws:to part="d" variable="ExtractRoot_Process_ProcessData"/>
+                </bpws:copy>
+              </bpws:assign>
+            </bpws:sequence>
+          </bpws:while>
+          <bpws:assign name="returnresult_startAssignments">
+            <bpws:copy>
+              <bpws:from expression="bpws:getVariableData('ExtractRoot_Process_ProcessData','current')"/>
+              <bpws:to part="result" variable="GetSquareRootResponse_MessageData"/>
+            </bpws:copy>
+            <bpws:copy>
+              <bpws:from expression="'square root found'"/>
+              <bpws:to part="message" variable="GetSquareRootResponse_MessageData"/>
+            </bpws:copy>
+          </bpws:assign>
+          <bpws:reply name="returnresult" operation="SquareRoot" partnerLink="Mathematican" portType="ns1:TestService" variable="GetSquareRootResponse_MessageData"/>
+        </bpws:sequence>
+      </bpws:otherwise>
+    </bpws:switch>
+  </bpws:sequence>
+</bpws:process>

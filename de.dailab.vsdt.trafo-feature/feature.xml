@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="de.dailab.vsdt.trafo.feature"
+      label="VSDT: Transformation Base"
+      version="1.1.3"
+      provider-name="DAI-Labor, TU Berlin">
+
+   <description url="http://www.dai-labor.de">
+      This feature provides a framework for the transformation from BPMN to executable languages to be integrated into the Visual Service Design Tool for easy service
+creation.
+   </description>
+
+   <copyright url="http://www.dai-labor.de">
+      (c) by DAI-Labor, TU Berlin
+Programmers: Tobias Küster and others of Cluster Software Engineering Tools
+   </copyright>
+
+   <license url="http://www.dai-labor.de">
+      [Enter License Description here.]
+   </license>
+
+   <url>
+      <discovery label="DAI-Labor" url="http://www.dai-labor.de"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="de.dailab.vsdt"/>
+      <import plugin="de.dailab.vsdt.trafo.base"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="de.dailab.vsdt.trafo"/>
+      <import plugin="de.dailab.vsdt.trafo.strucbpmn"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="de.dailab.vsdt.trafo.strucbpmn.export"/>
+      <import plugin="org.eclipse.gmf.runtime.diagram.ui"/>
+      <import plugin="org.eclipse.gmf.runtime.diagram.ui.resources.editor"/>
+      <import plugin="org.eclipse.gmf.runtime.diagram.ui.providers"/>
+      <import plugin="de.dailab.vsdt.diagram"/>
+      <import plugin="de.dailab.vsdt.diagram.actions"/>
+      <import plugin="de.dailab.common.gmf"/>
+      <import plugin="de.dailab.vsdt.vxl"/>
+   </requires>
+
+   <plugin
+         id="de.dailab.vsdt.trafo"
+         download-size="0"
+         install-size="0"
+         version="1.1.2.20081125"
+         unpack="false"/>
+
+   <plugin
+         id="de.dailab.vsdt.trafo.base"
+         download-size="0"
+         install-size="0"
+         version="1.1.2.20081125"
+         unpack="false"/>
+
+   <plugin
+         id="de.dailab.vsdt.trafo.strucbpmn"
+         download-size="0"
+         install-size="0"
+         version="1.0.1.20080807"
+         unpack="false"/>
+
+   <plugin
+         id="de.dailab.vsdt.trafo.strucbpmn.export"
+         download-size="0"
+         install-size="0"
+         version="1.1.3.20090702"
+         unpack="false"/>
+
+   <plugin
+         id="de.dailab.vsdt.trafo.strucbpmn.import"
+         download-size="0"
+         install-size="0"
+         version="1.1.2.20081120"
+         unpack="false"/>
+
+   <plugin
+         id="de.dailab.vsdt.trafo.text.export"
+         download-size="0"
+         install-size="0"
+         version="0.1.2.20090717"
+         unpack="false"/>
+
+   <plugin
+         id="de.dailab.vsdt.trafo.strucbpmn.view"
+         download-size="0"
+         install-size="0"
+         version="1.1.3.20090716"
+         unpack="false"/>
+
+</feature>

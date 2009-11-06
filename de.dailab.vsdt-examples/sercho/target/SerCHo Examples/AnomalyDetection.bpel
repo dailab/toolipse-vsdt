@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="ASCII"?>
+<bpws:process xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://AnomalyDetection/WSDL/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" abstractProcess="no" enableInstanceCompensation="no" expressionLanguage="http://www.w3.org/TR/1999/REC-xpath-19991116" name="AnomalyDetection" queryLanguage="" suppressJoinFailure="no" targetNamespace="http://AnomalyDetection">
+  <bpws:partnerLinks>
+    <bpws:partnerLink myRole="SHEA_myRole" name="SHEA" partnerLinkType="ns1:SHEA_PLT"/>
+    <bpws:partnerLink name="Logger" partnerLinkType="ns1:Logger_PLT" partnerRole="Logger_partnerRole"/>
+    <bpws:partnerLink name="AnomalySensor" partnerLinkType="ns1:AnomalySensor_PLT" partnerRole="AnomalySensor_partnerRole"/>
+    <bpws:partnerLink name="Notificator" partnerLinkType="ns1:Notificator_PLT" partnerRole="Notificator_partnerRole"/>
+  </bpws:partnerLinks>
+  <bpws:variables>
+    <bpws:variable messageType="ns1:ADStartMessage_MessageDataMessage" name="ADStartMessage_MessageData"/>
+    <bpws:variable messageType="ns1:logRequest_MessageDataMessage" name="logRequest_MessageData"/>
+    <bpws:variable messageType="ns1:getLastStatusRequest_MessageDataMessage" name="getLastStatusRequest_MessageData"/>
+    <bpws:variable messageType="ns1:getLastStatusResponse_MessageDataMessage" name="getLastStatusResponse_MessageData"/>
+    <bpws:variable messageType="ns1:SendSMSRequest_MessageDataMessage" name="SendSMSRequest_MessageData"/>
+    <bpws:variable messageType="ns1:SendSMSResponse_MessageDataMessage" name="SendSMSResponse_MessageData"/>
+    <bpws:variable messageType="ns1:SendMailRequest_MessageDataMessage" name="SendMailRequest_MessageData"/>
+    <bpws:variable messageType="ns1:SendMailResponse_MessageDataMessage" name="SendMailResponse_MessageData"/>
+    <bpws:variable name="MonitorAnomalyLevel_loopCounter" type="xsd:integer"/>
+    <bpws:variable messageType="ns1:ADStopMessage_MessageDataMessage" name="ADStopMessage_MessageData"/>
+    <bpws:variable messageType="ns1:ADProcess_ProcessDataMessage" name="ADProcess_ProcessData"/>
+  </bpws:variables>
+  <bpws:sequence>
+    <bpws:receive name="" createInstance="yes" operation="start" partnerLink="SHEA" portType="ns1:AnomalyDetectionPT" variable="ADStartMessage_MessageData"/>
+    <bpws:assign name="AnomalyDetection_startAssignments_and__endAssignments_and_log_startAssignments">
+      <bpws:copy>
+        <bpws:from expression="0"/>
+        <bpws:to part="tmpAnomLevel" variable="ADProcess_ProcessData"/>
+      </bpws:copy>
+      <bpws:copy>
+        <bpws:from expression="0.0"/>
+        <bpws:to part="tmpAlarmLevel" variable="ADProcess_ProcessData"/>
+      </bpws:copy>
+      <bpws:copy>
+        <bpws:from expression="bpws:getVariableData('ADStartMessage_MessageData','paramInterval')"/>
+        <bpws:to part="inInterval" variable="ADProcess_ProcessData"/>
+      </bpws:copy>
+      <bpws:copy>
+        <bpws:from expression="bpws:getVariableData('ADStartMessage_MessageData','paramMaxAlarm')"/>
+        <bpws:to part="inMaxAlarm" variable="ADProcess_ProcessData"/>
+      </bpws:copy>
+      <bpws:copy>
+        <bpws:from expression="bpws:getVariableData('ADStartMessage_MessageData','paramThreshold')"/>
+        <bpws:to part="inThreshold" variable="ADProcess_ProcessData"/>
+      </bpws:copy>
+      <bpws:copy>
+        <bpws:from expression="bpws:getVariableData('ADStartMessage_MessageData','paramSMS')"/>
+        <bpws:to part="inSMS" variable="ADProcess_ProcessData"/>
+      </bpws:copy>
+      <bpws:copy>
+        <bpws:from expression="bpws:getVariableData('ADStartMessage_MessageData','paramEMail')"/>
+        <bpws:to part="inEMail" variable="ADProcess_ProcessData"/>
+      </bpws:copy>
+      <bpws:copy>
+        <bpws:from expression="'Anomaly Detection Process started'"/>
+        <bpws:to part="message" variable="logRequest_MessageData"/>
+      </bpws:copy>
+      <bpws:copy>
+        <bpws:from expression="1"/>
+        <bpws:to part="level" variable="logRequest_MessageData"/>
+      </bpws:copy>
+    </bpws:assign>
+    <bpws:invoke name="log" inputVariable="logRequest_MessageData" operation="log" partnerLink="Logger" portType="ns1:LoggingPT"/>
+    <bpws:scope>
+      <bpws:faultHandlers>
+        <bpws:catch faultName="ADStopMessage_Exit">
+          <bpws:empty/>
+        </bpws:catch>
+      </bpws:faultHandlers>
+      <bpws:eventHandlers>
+        <bpws:onMessage operation="stop" partnerLink="SHEA" portType="ns1:AnomalyDetectionPT" variable="ADStopMessage_MessageData">
+          <bpws:throw faultName="ADStopMessage_Exit"/>
+        </bpws:onMessage>
+      </bpws:eventHandlers>
+      <bpws:sequence>
+        <bpws:assign name="MonitorAnomalyLevel_initialize_loopCounter">
+          <bpws:copy>
+            <bpws:from expression="0"/>
+            <bpws:to variable="MonitorAnomalyLevel_loopCounter"/>
+          </bpws:copy>
+        </bpws:assign>
+        <bpws:while condition="true()">
+          <bpws:sequence>
+            <bpws:scope name="MonitorAnomalyLevel">
+              <bpws:sequence>
+                <bpws:assign name="_startAssignments">
+                  <bpws:copy>
+                    <bpws:from expression="'SerCHo Home Security System: Warning! Anomaly Detected!'"/>
+                    <bpws:to part="tmpNotification" variable="ADProcess_ProcessData"/>
+                  </bpws:copy>
+                </bpws:assign>
+                <bpws:empty name=""/>
+                <bpws:assign name="log_startAssignments">
+                  <bpws:copy>
+                    <bpws:from expression="concat('Alarm Level: ',bpws:getVariableData('ADProcess_ProcessData','tmpAlarmLevel'))"/>
+                    <bpws:to part="message" variable="logRequest_MessageData"/>
+                  </bpws:copy>
+                  <bpws:copy>
+                    <bpws:from expression="1"/>
+                    <bpws:to part="level" variable="logRequest_MessageData"/>
+                  </bpws:copy>
+                </bpws:assign>
+                <bpws:invoke name="log" inputVariable="logRequest_MessageData" operation="log" partnerLink="Logger" portType="ns1:LoggingPT"/>
+                <bpws:wait name="wait" for="concat('PT',concat(bpws:getVariableData('ADProcess_ProcessData','inInterval'),'S'))"/>
+                <bpws:assign name="GetLastStatus_startAssignments">
+                  <bpws:copy>
+                    <bpws:from expression="0"/>
+                    <bpws:to part="timeframe" variable="getLastStatusRequest_MessageData"/>
+                  </bpws:copy>
+                </bpws:assign>
+                <bpws:invoke name="GetLastStatus" inputVariable="getLastStatusRequest_MessageData" operation="getLastStatus" outputVariable="getLastStatusResponse_MessageData" partnerLink="AnomalySensor" portType="ns1:SensorInterface"/>
+                <bpws:assign name="GetLastStatus_endAssignments">
+                  <bpws:copy>
+                    <bpws:from expression="bpws:getVariableData('getLastStatusResponse_MessageData','status')"/>
+                    <bpws:to part="tmpAnomLevel" variable="ADProcess_ProcessData"/>
+                  </bpws:copy>
+                </bpws:assign>
+                <bpws:switch>
+                  <bpws:case condition="bpws:getVariableData('ADProcess_ProcessData','tmpAnomLevel') &lt; bpws:getVariableData('ADProcess_ProcessData','inThreshold')">
+                    <bpws:switch>
+                      <bpws:case condition="bpws:getVariableData('ADProcess_ProcessData','tmpAlarmLevel') > 0">
+                        <bpws:sequence>
+                          <bpws:assign name="DecreaseAlarm_startAssignments">
+                            <bpws:copy>
+                              <bpws:from expression="bpws:getVariableData('ADProcess_ProcessData','tmpAlarmLevel') - 1"/>
+                              <bpws:to part="tmpAlarmLevel" variable="ADProcess_ProcessData"/>
+                            </bpws:copy>
+                            <bpws:copy>
+                              <bpws:from expression="'SerCHo Home Security System: All-clear: No more Anomalies.'"/>
+                              <bpws:to part="tmpNotification" variable="ADProcess_ProcessData"/>
+                            </bpws:copy>
+                          </bpws:assign>
+                          <bpws:empty name="DecreaseAlarm"/>
+                          <bpws:switch>
+                            <bpws:case condition="bpws:getVariableData('ADProcess_ProcessData','tmpAlarmLevel') = 0">
+                              <bpws:scope name="SendAll-Clear">
+                                <bpws:flow>
+                                  <bpws:switch>
+                                    <bpws:case condition="bpws:getVariableData('ADProcess_ProcessData','inSMS') != ''">
+                                      <bpws:sequence>
+                                        <bpws:assign name="SendSMS_startAssignments">
+                                          <bpws:copy>
+                                            <bpws:from expression="bpws:getVariableData('ADProcess_ProcessData','inSMS')"/>
+                                            <bpws:to part="to" variable="SendSMSRequest_MessageData"/>
+                                          </bpws:copy>
+                                          <bpws:copy>
+                                            <bpws:from expression="bpws:getVariableData('ADProcess_ProcessData','tmpNotification')"/>
+                                            <bpws:to part="text" variable="SendSMSRequest_MessageData"/>
+                                          </bpws:copy>
+                                        </bpws:assign>
+                                        <bpws:invoke name="SendSMS" inputVariable="SendSMSRequest_MessageData" operation="SendSMS" outputVariable="SendSMSResponse_MessageData" partnerLink="Notificator" portType="ns1:MailAndSMSPT"/>
+                                      </bpws:sequence>
+                                    </bpws:case>
+                                    <bpws:otherwise>
+                                      <bpws:empty/>
+                                    </bpws:otherwise>
+                                  </bpws:switch>
+                                  <bpws:switch>
+                                    <bpws:case condition="bpws:getVariableData('ADProcess_ProcessData','inEMail') != ''">
+                                      <bpws:sequence>
+                                        <bpws:assign name="SendE-Mail_startAssignments">
+                                          <bpws:copy>
+                                            <bpws:from expression="bpws:getVariableData('ADProcess_ProcessData','inEMail')"/>
+                                            <bpws:to part="to" variable="SendMailRequest_MessageData"/>
+                                          </bpws:copy>
+                                          <bpws:copy>
+                                            <bpws:from expression="bpws:getVariableData('ADProcess_ProcessData','tmpNotification')"/>
+                                            <bpws:to part="text" variable="SendMailRequest_MessageData"/>
+                                          </bpws:copy>
+                                        </bpws:assign>
+                                        <bpws:invoke name="SendE-Mail" inputVariable="SendMailRequest_MessageData" operation="SendMail" outputVariable="SendMailResponse_MessageData" partnerLink="Notificator" portType="ns1:MailAndSMSPT"/>
+                                      </bpws:sequence>
+                                    </bpws:case>
+                                    <bpws:otherwise>
+                                      <bpws:empty/>
+                                    </bpws:otherwise>
+                                  </bpws:switch>
+                                </bpws:flow>
+                              </bpws:scope>
+                            </bpws:case>
+                            <bpws:otherwise>
+                              <bpws:empty name="_DO_NOTHING_"/>
+                            </bpws:otherwise>
+                          </bpws:switch>
+                        </bpws:sequence>
+                      </bpws:case>
+                      <bpws:otherwise>
+                        <bpws:empty name="_DO_NOTHING_"/>
+                      </bpws:otherwise>
+                    </bpws:switch>
+                  </bpws:case>
+                  <bpws:otherwise>
+                    <bpws:sequence>
+                      <bpws:switch>
+                        <bpws:case condition="bpws:getVariableData('ADProcess_ProcessData','tmpAlarmLevel') = 0">
+                          <bpws:scope name="SendAlarm">
+                            <bpws:flow>
+                              <bpws:switch>
+                                <bpws:case condition="bpws:getVariableData('ADProcess_ProcessData','inSMS') != ''">
+                                  <bpws:sequence>
+                                    <bpws:assign name="SendSMS_startAssignments">
+                                      <bpws:copy>
+                                        <bpws:from expression="bpws:getVariableData('ADProcess_ProcessData','inSMS')"/>
+                                        <bpws:to part="to" variable="SendSMSRequest_MessageData"/>
+                                      </bpws:copy>
+                                      <bpws:copy>
+                                        <bpws:from expression="bpws:getVariableData('ADProcess_ProcessData','tmpNotification')"/>
+                                        <bpws:to part="text" variable="SendSMSRequest_MessageData"/>
+                                      </bpws:copy>
+                                    </bpws:assign>
+                                    <bpws:invoke name="SendSMS" inputVariable="SendSMSRequest_MessageData" operation="SendSMS" outputVariable="SendSMSResponse_MessageData" partnerLink="Notificator" portType="ns1:MailAndSMSPT"/>
+                                  </bpws:sequence>
+                                </bpws:case>
+                                <bpws:otherwise>
+                                  <bpws:empty/>
+                                </bpws:otherwise>
+                              </bpws:switch>
+                              <bpws:switch>
+                                <bpws:case condition="bpws:getVariableData('ADProcess_ProcessData','inEMail') != ''">
+                                  <bpws:sequence>
+                                    <bpws:assign name="SendE-Mail_startAssignments">
+                                      <bpws:copy>
+                                        <bpws:from expression="bpws:getVariableData('ADProcess_ProcessData','inEMail')"/>
+                                        <bpws:to part="to" variable="SendMailRequest_MessageData"/>
+                                      </bpws:copy>
+                                      <bpws:copy>
+                                        <bpws:from expression="bpws:getVariableData('ADProcess_ProcessData','tmpNotification')"/>
+                                        <bpws:to part="text" variable="SendMailRequest_MessageData"/>
+                                      </bpws:copy>
+                                    </bpws:assign>
+                                    <bpws:invoke name="SendE-Mail" inputVariable="SendMailRequest_MessageData" operation="SendMail" outputVariable="SendMailResponse_MessageData" partnerLink="Notificator" portType="ns1:MailAndSMSPT"/>
+                                  </bpws:sequence>
+                                </bpws:case>
+                                <bpws:otherwise>
+                                  <bpws:empty/>
+                                </bpws:otherwise>
+                              </bpws:switch>
+                            </bpws:flow>
+                          </bpws:scope>
+                        </bpws:case>
+                        <bpws:otherwise>
+                          <bpws:empty name="_DO_NOTHING_"/>
+                        </bpws:otherwise>
+                      </bpws:switch>
+                      <bpws:assign name="MaxAlarm_startAssignments">
+                        <bpws:copy>
+                          <bpws:from expression="bpws:getVariableData('ADProcess_ProcessData','inMaxAlarm')"/>
+                          <bpws:to part="tmpAlarmLevel" variable="ADProcess_ProcessData"/>
+                        </bpws:copy>
+                      </bpws:assign>
+                      <bpws:empty name="MaxAlarm"/>
+                    </bpws:sequence>
+                  </bpws:otherwise>
+                </bpws:switch>
+                <bpws:empty name=""/>
+              </bpws:sequence>
+            </bpws:scope>
+            <bpws:assign name="MonitorAnomalyLevel_increment_loopCounter">
+              <bpws:copy>
+                <bpws:from expression="bpws:getVariableData('MonitorAnomalyLevel_loopCounter') + 1"/>
+                <bpws:to variable="MonitorAnomalyLevel_loopCounter"/>
+              </bpws:copy>
+            </bpws:assign>
+          </bpws:sequence>
+        </bpws:while>
+      </bpws:sequence>
+    </bpws:scope>
+    <bpws:empty name="_MERGE"/>
+    <bpws:assign name="_startAssignments">
+      <bpws:copy>
+        <bpws:from expression="'Anomaly Detection Process Finished'"/>
+        <bpws:to part="message" variable="logRequest_MessageData"/>
+      </bpws:copy>
+      <bpws:copy>
+        <bpws:from expression="1"/>
+        <bpws:to part="level" variable="logRequest_MessageData"/>
+      </bpws:copy>
+    </bpws:assign>
+    <bpws:invoke name="" inputVariable="logRequest_MessageData" operation="log" partnerLink="Logger" portType="ns1:LoggingPT"/>
+  </bpws:sequence>
+</bpws:process>
