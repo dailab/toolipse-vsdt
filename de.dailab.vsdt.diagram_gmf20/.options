@@ -1,7 +1,0 @@
-# Tracing options for the de.dailab.vsdt.diagram plug-in
-
-# Common issues
-de.dailab.vsdt.diagram/debug=false
-
-# Visual IDs
-de.dailab.vsdt.diagram/debug/visualID=false
