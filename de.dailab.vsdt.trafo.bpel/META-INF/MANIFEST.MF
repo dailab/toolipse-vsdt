@@ -2,16 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: de.dailab.vsdt.trafo.bpel;singleton:=true
-Bundle-Version: 1.0.2.20080910
+Bundle-Version: 1.3.0.20091109
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: org.xmlsoap.schemas.ws._2003._03.business.process,
- org.xmlsoap.schemas.ws._2003._03.business.process.impl,
- org.xmlsoap.schemas.ws._2003._03.business.process.util,
- org.xmlsoap.schemas.wsdl,
- org.xmlsoap.schemas.wsdl.impl,
- org.xmlsoap.schemas.wsdl.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.xmi,

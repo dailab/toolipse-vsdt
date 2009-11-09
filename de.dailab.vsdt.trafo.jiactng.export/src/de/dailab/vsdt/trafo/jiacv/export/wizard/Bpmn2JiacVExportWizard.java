@@ -9,7 +9,7 @@ import de.dailab.vsdt.trafo.jiacv.export.stages.Bpmn2JiacVElementMapping;
 import de.dailab.vsdt.trafo.jiacv.export.stages.Bpmn2JiacVValidation;
 import de.dailab.vsdt.trafo.jiacv.export.stages.JiacVExportWrapper;
 import de.dailab.vsdt.trafo.jiacv.export.stages.JiacVResultSaver;
-import de.dailab.vsdt.trafo.strucbpmn.export.stages.Bpmn2StrucBpmnTransformation;
+import de.dailab.vsdt.trafo.strucbpmn.export.Bpmn2StrucBpmnTransformation;
 import de.dailab.vsdt.trafo.wizard.BpmnExportWizard;
 import de.dailab.vsdt.trafo.wizard.BpmnTrafoWizardOptionsPage;
 
