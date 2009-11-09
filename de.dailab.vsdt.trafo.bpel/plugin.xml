@@ -42,7 +42,7 @@
          
         <wizard
               category="Bpmn.export"
-              class="de.dailab.vsdt.trafo.bpel.export.wizard.Bpmn2BpelExportWizard"
+              class="de.dailab.vsdt.trafo.bpel.wizard.Bpmn2BpelExportWizard"
               icon="icons/exportBpel.gif"
               id="de.dailab.vsdt.trafo.bpel.export.wizard"
               name="BPMN to BPEL">
@@ -61,7 +61,7 @@
          
       <wizard
             category="Bpmn.import"
-            class="de.dailab.vsdt.trafo.bpel.imprt.wizard.BpelImportWizard"
+            class="de.dailab.vsdt.trafo.bpel.wizard.BpelImportWizard"
             icon="icons/importBpel.gif"
             id="de.dailab.vsdt.trafo.bpel.import.wizard"
             name="BPEL to BPMN">

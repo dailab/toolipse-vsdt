@@ -58,7 +58,7 @@ import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.trafo.MappingStage;
 import de.dailab.vsdt.trafo.base.logger.TrafoLog;
-import de.dailab.vsdt.trafo.bpel.wizards.BpelImportWizardOptionsPage;
+import de.dailab.vsdt.trafo.bpel.wizard.BpelImportWizardOptionsPage;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBranch;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerBlock;

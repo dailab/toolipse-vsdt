@@ -1,4 +1,4 @@
-package de.dailab.vsdt.trafo.bpel.wizards;
+package de.dailab.vsdt.trafo.bpel.wizard;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;

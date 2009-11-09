@@ -1,4 +1,4 @@
-package de.dailab.vsdt.trafo.bpel.wizards;
+package de.dailab.vsdt.trafo.bpel.wizard;
 
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
