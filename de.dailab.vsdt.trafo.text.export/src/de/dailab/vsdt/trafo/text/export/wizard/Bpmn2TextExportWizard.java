@@ -2,7 +2,7 @@ package de.dailab.vsdt.trafo.text.export.wizard;
 
 import org.eclipse.jface.viewers.IStructuredSelection;
 
-import de.dailab.vsdt.trafo.strucbpmn.export.stages.Bpmn2StrucBpmnTransformation;
+import de.dailab.vsdt.trafo.strucbpmn.export.Bpmn2StrucBpmnTransformation;
 import de.dailab.vsdt.trafo.text.export.stages.Bpmn2TextElementMapping;
 import de.dailab.vsdt.trafo.text.export.stages.TextResultSaver;
 import de.dailab.vsdt.trafo.wizard.BpmnExportWizard;

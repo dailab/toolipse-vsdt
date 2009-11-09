@@ -41,7 +41,7 @@ import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerCase;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnLoopBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnSequence;
 import de.dailab.vsdt.trafo.strucbpmn.VsdtStructureViewPlugin;
-import de.dailab.vsdt.trafo.strucbpmn.export.stages.Bpmn2StrucBpmnTransformation;
+import de.dailab.vsdt.trafo.strucbpmn.export.Bpmn2StrucBpmnTransformation;
 import de.dailab.vsdt.trafo.strucbpmn.layout.StructureLayout;
 import de.dailab.vsdt.util.VsdtHelper;
 
