@@ -7,7 +7,7 @@
 		point="org.eclipse.ui.exportWizards">
       <wizard
             category="Bpmn.export"
-            class="de.dailab.vsdt.trafo.stp.export.wizard.Bpmn2StpExportWizard"
+            class="de.dailab.vsdt.trafo.stp.wizard.Bpmn2StpExportWizard"
             icon="icons/exportStp.gif"
             id="de.dailab.vsdt.trafo.stp.export.wizard"
             name="BPMN to STP BPMN">
@@ -19,8 +19,26 @@
             id="Bpmn.export"
             name="BPMN Export">
       </category>
-         
-  
+    </extension>
+    
+    <extension
+		id="de.dailab.vsdt.trafo.stp.import.wizard"
+		name="STP BPMN to BPMN"
+		point="org.eclipse.ui.importWizards">
+      <wizard
+            category="Bpmn.import"
+            class="de.dailab.vsdt.trafo.stp.wizard.StpBpmnImportWizard"
+            icon="icons/importStp.gif"
+            id="de.dailab.vsdt.trafo.stp.import.wizard"
+            name="STP BPMN to BPMN">
+         <description>
+            A Wizard for Transforming STP BPMN Diagrams to BPMN Diagrams for the VSDT Editor
+         </description>
+      </wizard>
+      <category
+            id="Bpmn.import"
+            name="BPMN Import">
+      </category>   
    </extension>
 
 </plugin>

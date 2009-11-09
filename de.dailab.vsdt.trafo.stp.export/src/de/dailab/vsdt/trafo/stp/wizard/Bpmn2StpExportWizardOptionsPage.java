@@ -1,4 +1,4 @@
-package de.dailab.vsdt.trafo.stp.export.wizard;
+package de.dailab.vsdt.trafo.stp.wizard;
 
 import org.eclipse.jface.viewers.IStructuredSelection;
 

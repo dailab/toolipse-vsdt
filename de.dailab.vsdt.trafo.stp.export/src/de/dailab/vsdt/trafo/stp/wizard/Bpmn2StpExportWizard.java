@@ -1,9 +1,9 @@
-package de.dailab.vsdt.trafo.stp.export.wizard;
+package de.dailab.vsdt.trafo.stp.wizard;
 
 import org.eclipse.jface.viewers.IStructuredSelection;
 
-import de.dailab.vsdt.trafo.stp.export.stages.Bpmn2StpBpmnElementMapping;
-import de.dailab.vsdt.trafo.stp.export.stages.StpBpmnResultSaver;
+import de.dailab.vsdt.trafo.stp.export.Bpmn2StpBpmnElementMapping;
+import de.dailab.vsdt.trafo.stp.export.StpBpmnResultSaver;
 import de.dailab.vsdt.trafo.wizard.BpmnExportWizard;
 import de.dailab.vsdt.trafo.wizard.BpmnTrafoWizardOptionsPage;
 

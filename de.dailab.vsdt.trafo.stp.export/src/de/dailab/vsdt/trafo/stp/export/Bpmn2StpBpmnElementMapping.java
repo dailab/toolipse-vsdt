@@ -1,4 +1,4 @@
-package de.dailab.vsdt.trafo.stp.export.stages;
+package de.dailab.vsdt.trafo.stp.export;
 
 import org.eclipse.stp.bpmn.BpmnDiagram;
 import org.eclipse.stp.bpmn.BpmnFactory;

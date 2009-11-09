@@ -1,4 +1,4 @@
-package de.dailab.vsdt.trafo.stp.export.stages;
+package de.dailab.vsdt.trafo.stp.export;
 
 import java.io.File;
 import java.io.IOException;
