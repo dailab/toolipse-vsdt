@@ -31,7 +31,6 @@ import de.dailab.jiactng.jadl.Script;
 import de.dailab.jiactng.jadl.Send;
 import de.dailab.jiactng.jadl.Seq;
 import de.dailab.jiactng.jadl.Service;
-import de.dailab.jiactng.jadl.StringConst;
 import de.dailab.jiactng.jadl.Switch;
 import de.dailab.jiactng.jadl.TimeConst;
 import de.dailab.jiactng.jadl.TimerEvent;
@@ -228,7 +227,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		// add listeners
 		for (String address : messageListeners.get(_currentService)) {
 			Listen listen= jadlFac.createListen();
-			listen.setAddress(jef.createExpression(address));
+			listen.setAddress(address);
 			seq.getScripts().add(0, listen);
 		}
 		
@@ -722,7 +721,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 					Receive receive= (Receive) event;
 					// will be preceded by listen and onMessage
 					MessageEvent messageEvent= jadlFac.createMessageEvent();
-					messageEvent.setAddress( (Expression) EcoreUtil.copy(receive.getAddress()));
+					messageEvent.setAddress(receive.getAddress());
 //					messageEvent.setType( (Type) EcoreUtil.copy(receive.getType()));
 					Property property= (Property) wrapper.getMapping(receive);
 					messageEvent.setType(jef.createType(property.getType()));
@@ -731,8 +730,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 					messageCase.setBody(body);
 					block.getCases().add(messageCase);
 					// add listen
-					String address= ((StringConst) receive.getAddress().getHeadTerm()).getConst();
-					messageListeners.get(_currentService).add(address);
+					messageListeners.get(_currentService).add(receive.getAddress());
 				}
 			}
 			mapping= block;

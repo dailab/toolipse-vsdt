@@ -225,7 +225,7 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 	 */
 	public Send createSend(String address, Property message) {
 		Send send= jadlFac.createSend();
-		send.setAddress(createExpression(address));
+		send.setAddress(address);
 		send.setMessage(createVariable(message.getName()));
 		return send;
 	}
@@ -242,7 +242,7 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 	public Receive createReceive(int timeout, String address, String type, String variable) {
 		Receive receive= jadlFac.createReceive();
 		receive.setTimeout(createExpression(timeout));
-		receive.setAddress(createExpression(address));
+		receive.setAddress(address);
 //		receive.setType(createType(type));
 		receive.setVariable(createVariableName(variable));
 		return receive;
