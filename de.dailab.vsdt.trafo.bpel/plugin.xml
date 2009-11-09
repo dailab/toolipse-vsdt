@@ -34,5 +34,47 @@
        class="org.xmlsoap.schemas.wsdl.util.WsdlResourceFactoryImpl" />
   </extension>
 
+
+ 	<extension
+		id="de.dailab.vsdt.trafo.bpel.export.wizard"
+		name="BPMN to WS-BPEL"
+		point="org.eclipse.ui.exportWizards">
+         
+        <wizard
+              category="Bpmn.export"
+              class="de.dailab.vsdt.trafo.bpel.export.wizard.Bpmn2BpelExportWizard"
+              icon="icons/exportBpel.gif"
+              id="de.dailab.vsdt.trafo.bpel.export.wizard"
+              name="BPMN to BPEL">
+			<description>A Wizard for Transforming BPMN Diagrams to WS-BPEL Processes</description>
+		</wizard>
+        <category
+              id="Bpmn.export"
+              name="BPMN Export">
+        </category>
+   </extension>
+        
+ 	<extension
+		id="de.dailab.vsdt.trafo.bpel.import.wizard"
+		name="WS-BPEL to BPMN"
+		point="org.eclipse.ui.importWizards">
+         
+      <wizard
+            category="Bpmn.import"
+            class="de.dailab.vsdt.trafo.bpel.imprt.wizard.BpelImportWizard"
+            icon="icons/importBpel.gif"
+            id="de.dailab.vsdt.trafo.bpel.import.wizard"
+            name="BPEL to BPMN">
+         <description>
+            A Wizard for importing BPEL Processes
+         </description>
+      </wizard>
+      <category
+            id="Bpmn.import"
+            name="BPMN Import">
+      </category>
+  
+   </extension>
+   
 </plugin>
 
