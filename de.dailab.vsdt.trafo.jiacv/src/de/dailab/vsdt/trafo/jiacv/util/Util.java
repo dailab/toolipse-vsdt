@@ -1,4 +1,4 @@
-package de.dailab.vsdt.trafo.jiacv.export;
+package de.dailab.vsdt.trafo.jiacv.util;
 
 import de.dailab.jiactng.jadl.Agent;
 import de.dailab.jiactng.jadl.Service;

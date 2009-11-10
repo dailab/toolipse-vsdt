@@ -1,4 +1,4 @@
-package de.dailab.vsdt.trafo.jiacv.export;
+package de.dailab.vsdt.trafo.jiacv.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

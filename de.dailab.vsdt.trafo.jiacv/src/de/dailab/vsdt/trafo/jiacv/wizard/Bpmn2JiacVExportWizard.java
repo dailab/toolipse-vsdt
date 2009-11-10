@@ -1,14 +1,14 @@
-package de.dailab.vsdt.trafo.jiacv.export.wizard;
+package de.dailab.vsdt.trafo.jiacv.wizard;
 
 import org.eclipse.jface.viewers.IStructuredSelection;
 
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.trafo.MappingWrapper;
-import de.dailab.vsdt.trafo.jiacv.export.stages.Bpmn2JiacVCleanUp;
-import de.dailab.vsdt.trafo.jiacv.export.stages.Bpmn2JiacVElementMapping;
-import de.dailab.vsdt.trafo.jiacv.export.stages.Bpmn2JiacVValidation;
-import de.dailab.vsdt.trafo.jiacv.export.stages.JiacVExportWrapper;
-import de.dailab.vsdt.trafo.jiacv.export.stages.JiacVResultSaver;
+import de.dailab.vsdt.trafo.jiacv.export.Bpmn2JiacVCleanUp;
+import de.dailab.vsdt.trafo.jiacv.export.Bpmn2JiacVElementMapping;
+import de.dailab.vsdt.trafo.jiacv.export.Bpmn2JiacVValidation;
+import de.dailab.vsdt.trafo.jiacv.export.JiacVExportWrapper;
+import de.dailab.vsdt.trafo.jiacv.export.JiacVResultSaver;
 import de.dailab.vsdt.trafo.strucbpmn.export.Bpmn2StrucBpmnTransformation;
 import de.dailab.vsdt.trafo.wizard.BpmnExportWizard;
 import de.dailab.vsdt.trafo.wizard.BpmnTrafoWizardOptionsPage;

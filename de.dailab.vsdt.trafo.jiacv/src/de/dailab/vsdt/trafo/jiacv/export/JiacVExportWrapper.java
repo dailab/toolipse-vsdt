@@ -1,4 +1,4 @@
-package de.dailab.vsdt.trafo.jiacv.export.stages;
+package de.dailab.vsdt.trafo.jiacv.export;
 
 import java.util.HashMap;
 import java.util.Map;
