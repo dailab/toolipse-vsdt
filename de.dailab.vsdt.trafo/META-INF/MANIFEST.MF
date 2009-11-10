@@ -5,10 +5,10 @@ Bundle-SymbolicName: de.dailab.vsdt.trafo;singleton:=true
 Bundle-Version: 1.3.0.20091105
 Bundle-ClassPath: .
 Bundle-Vendor: DAI-Labor, TU Berlin
-Require-Bundle: org.eclipse.core.resources,
- org.eclipse.core.runtime,
- org.eclipse.ui.ide,
- org.eclipse.jface,
+Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
+ org.eclipse.core.runtime;visibility:=reexport,
+ org.eclipse.ui.ide;visibility:=reexport,
+ org.eclipse.jface;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport,
  de.dailab.vsdt;visibility:=reexport,
  de.dailab.vsdt.trafo.base;visibility:=reexport

@@ -46,7 +46,7 @@
               icon="icons/exportBpel.gif"
               id="de.dailab.vsdt.trafo.bpel.export.wizard"
               name="BPMN to BPEL">
-			<description>A Wizard for Transforming BPMN Diagrams to WS-BPEL Processes</description>
+			<description>A Wizard for Transforming BPMN Diagrams to BPEL Processes</description>
 		</wizard>
    </extension>
         
@@ -61,7 +61,7 @@
             id="de.dailab.vsdt.trafo.bpel.import.wizard"
             name="BPEL to BPMN">
          <description>
-            A Wizard for importing BPEL Processes
+            A Wizard for Importing BPEL Processes
          </description>
       </wizard>
    </extension>
