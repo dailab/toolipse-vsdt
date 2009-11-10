@@ -142,7 +142,7 @@ public class Bpmn2JiacElementMapping extends MappingStage implements JiacVisitor
 		actModel.setBody(scriptModel);
 
 		//create references (Note: references have to be created _before_ visiting child elements)
-		map(process, jadlFileModel);
+		wrapper.map(process, jadlFileModel);
 		scriptModels.put(process, scriptModel);
 
 		//map graphical elements
@@ -259,7 +259,7 @@ public class Bpmn2JiacElementMapping extends MappingStage implements JiacVisitor
 		}
 		
 		//create mapping
-		map(flowObject,scriptBodyModel);
+		wrapper.map(flowObject,scriptBodyModel);
 		
 		return assistant.addAssignmentMappings(scriptBodyModel, flowObject.getAssignments());
 		
@@ -300,7 +300,7 @@ public class Bpmn2JiacElementMapping extends MappingStage implements JiacVisitor
 		switch (event.getTrigger()) {
 		case RULE:
 			if (event instanceof Start) {
-				JADLFileModel jadlFile= (JADLFileModel) getMapping(event.getProcess());
+				JADLFileModel jadlFile= (JADLFileModel) wrapper.getMapping(event.getProcess());
 				ActModel act= (ActModel) jadlFile.getAct().get(0);
 				if (event.getRuleExpression() != null) {
 					String ruleString= event.getRuleExpression().getExpression();
@@ -311,10 +311,10 @@ public class Bpmn2JiacElementMapping extends MappingStage implements JiacVisitor
 		case MESSAGE:
 			// create send/receive speech-act and plan element call
 			if (event.isThrowing()) {
-				SendSpeechactModel send= assistant.createSendSpeechact(event.getName(), (JADLFileModel) getMapping(event.getProcess()));
+				SendSpeechactModel send= assistant.createSendSpeechact(event.getName(), (JADLFileModel) wrapper.getMapping(event.getProcess()));
 				mapping= assistant.createPlanelementCallModel(send.getName());
 			} else {
-				ReceiveSpeechactModel receive= assistant.createReceiveSpeechact(event.getName(), (JADLFileModel) getMapping(event.getProcess()));
+				ReceiveSpeechactModel receive= assistant.createReceiveSpeechact(event.getName(), (JADLFileModel) wrapper.getMapping(event.getProcess()));
 				mapping= assistant.createPlanelementCallModel(receive.getName());
 			}
 		case CANCEL:
@@ -381,7 +381,7 @@ public class Bpmn2JiacElementMapping extends MappingStage implements JiacVisitor
 			scriptModels.put(activity, scriptModel2);
 			
 			//insert into jadlFile
-			JADLFileModel jadlFile= (JADLFileModel) getMapping(activity.getProcess());
+			JADLFileModel jadlFile= (JADLFileModel) wrapper.getMapping(activity.getProcess());
 			jadlFile.getAct().add(actModel);
 			
 			//create PE call
@@ -403,11 +403,11 @@ public class Bpmn2JiacElementMapping extends MappingStage implements JiacVisitor
 			}
 			break;
 		case RECEIVE:
-			ReceiveSpeechactModel receiveModel= assistant.createReceiveSpeechact(name,(JADLFileModel)getMapping(activity.getProcess()));
+			ReceiveSpeechactModel receiveModel= assistant.createReceiveSpeechact(name,(JADLFileModel)wrapper.getMapping(activity.getProcess()));
 			mapping= assistant.createPlanelementCallModel(receiveModel.getName());
 			break;
 		case SEND:
-			SendSpeechactModel sendModel= assistant.createSendSpeechact(name,(JADLFileModel)getMapping(activity.getProcess()));
+			SendSpeechactModel sendModel= assistant.createSendSpeechact(name,(JADLFileModel)wrapper.getMapping(activity.getProcess()));
 			mapping= assistant.createPlanelementCallModel(sendModel.getName());
 			break;
 		case SCRIPT:

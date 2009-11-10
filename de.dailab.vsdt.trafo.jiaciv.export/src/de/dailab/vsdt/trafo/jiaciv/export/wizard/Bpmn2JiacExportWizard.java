@@ -5,7 +5,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import de.dailab.vsdt.trafo.jiaciv.export.stages.Bpmn2JiacElementMapping;
 import de.dailab.vsdt.trafo.jiaciv.export.stages.Bpmn2JiacValidation;
 import de.dailab.vsdt.trafo.jiaciv.export.stages.JiacResultSaver;
-import de.dailab.vsdt.trafo.strucbpmn.export.stages.Bpmn2StrucBpmnTransformation;
+import de.dailab.vsdt.trafo.strucbpmn.export.Bpmn2StrucBpmnTransformation;
 import de.dailab.vsdt.trafo.wizard.BpmnExportWizard;
 import de.dailab.vsdt.trafo.wizard.BpmnExportWizardOptionsPage;
 import de.dailab.vsdt.trafo.wizard.BpmnTrafoWizardOptionsPage;

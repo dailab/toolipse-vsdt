@@ -334,7 +334,7 @@ public class JiacMappingAssistant implements JiacVisitorConstants {
 		ConditionalModel conditionalModel= jadlFac.createConditionalModel();
 		conditionalModel.setName(name);
 		
-		JADLFileModel jadlFile= (JADLFileModel) visitor.getMapping(flowObject.getProcess());
+		JADLFileModel jadlFile= (JADLFileModel) visitor.getWrapper().getMapping(flowObject.getProcess());
 		jadlFile.getConditional().add(conditionalModel);
 		
 		return conditionalModel;
