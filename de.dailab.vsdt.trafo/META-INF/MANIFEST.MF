@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: BPMN Transformation Base Plugin
+Bundle-Name: VSDT - Transformation Base
 Bundle-SymbolicName: de.dailab.vsdt.trafo;singleton:=true
 Bundle-Version: 1.3.0.20091105
 Bundle-ClassPath: .

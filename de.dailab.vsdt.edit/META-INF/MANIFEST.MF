@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
+Bundle-Name: VSDT - Edit Support
 Bundle-SymbolicName: de.dailab.vsdt.edit;singleton:=true
 Bundle-Version: 1.2.0.20090819
 Bundle-ClassPath: .
 Bundle-Activator: de.dailab.vsdt.provider.VsdtEditPlugin$Implementation
-Bundle-Vendor: %providerName
+Bundle-Vendor: DAI-Labor, TU Berlin
 Bundle-Localization: plugin
 Export-Package: de.dailab.vsdt.provider
 Require-Bundle: org.eclipse.core.runtime,

@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
+Bundle-Name: VSDT - Tree Editor
 Bundle-SymbolicName: de.dailab.vsdt.editor;singleton:=true
 Bundle-Version: 1.2.1.20090828
 Bundle-ClassPath: .
 Bundle-Activator: de.dailab.vsdt.presentation.VsdtEditorPlugin$Implementation
-Bundle-Vendor: %providerName
+Bundle-Vendor: DAI-Labor, TU Berlin
 Bundle-Localization: plugin
 Export-Package: de.dailab.vsdt.presentation
 Require-Bundle: org.eclipse.core.runtime,

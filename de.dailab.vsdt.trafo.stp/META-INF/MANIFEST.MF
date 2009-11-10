@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: BPMN to STP BPMN Transformation
+Bundle-Name: VSDT - STP Transformation
 Bundle-SymbolicName: de.dailab.vsdt.trafo.stp;singleton:=true
 Bundle-Version: 1.3.0.20091109
-Bundle-Vendor: DAI-Labor
+Bundle-Vendor: DAI-Labor, TU Berlin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.ide,
  org.eclipse.core.resources,

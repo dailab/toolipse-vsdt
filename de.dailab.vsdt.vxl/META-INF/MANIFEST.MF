@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: de.dailab.vsdt.vxl
-Bundle-Vendor: My Company
+Bundle-Name: VSDT - VXL Model
+Bundle-Vendor: DAI-Labor, TU Berlin
 Bundle-Version: 1.3.0.20091026
 Bundle-SymbolicName: de.dailab.vsdt.vxl; singleton:=true
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j

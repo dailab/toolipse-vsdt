@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Visual Service Design Tool Structure Viewer
+Bundle-Name: VSDT - Structure Viewer
 Bundle-SymbolicName: de.dailab.vsdt.trafo.strucbpmn.view;singleton:=true
 Bundle-Version: 1.3.0.20091109
 Bundle-Vendor: DAI-Labor, TU Berlin

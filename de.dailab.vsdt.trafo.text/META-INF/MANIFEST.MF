@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: BPMN to Text Transformation
+Bundle-Name: VSDT - Text Transformation
 Bundle-SymbolicName: de.dailab.vsdt.trafo.text;singleton:=true
 Bundle-Version: 1.3.0.20091109
 Bundle-Vendor: DAI-Labor, TU Berlin
