@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+ 	<extension
+		id="de.dailab.vsdt.trafo.export"
+		name="VSDT Export Category"
+		point="org.eclipse.ui.exportWizards">
+        <category
+              id="de.dailab.vsdt.trafo.export"
+              name="VSDT Export">
+        </category>
+   </extension>
+        
+ 	<extension
+		id="de.dailab.vsdt.trafo.import"
+		name="VSDT Import Category"
+		point="org.eclipse.ui.importWizards">
+	    <category
+            id="de.dailab.vsdt.trafo.import"
+            name="VSDT Import">
+    	</category>
+  
+   </extension>
+   
+</plugin>
+

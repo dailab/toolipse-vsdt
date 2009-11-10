@@ -6,7 +6,6 @@ Bundle-Version: 1.1.2.20081125
 Bundle-ClassPath: .,
  lib/log4j-1.2.15.jar
 Bundle-Vendor: TFS and DAI-Labor, TU Berlin
-Bundle-Localization: plugin
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Export-Package: de.dailab.vsdt.trafo.base,

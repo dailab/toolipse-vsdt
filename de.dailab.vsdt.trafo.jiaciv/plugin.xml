@@ -5,19 +5,14 @@
 		id="de.dailab.vsdt.trafo.jiaciv.export.wizard"
 		name="BPMN to JIAC IV"
 		point="org.eclipse.ui.exportWizards">
-         
         <wizard
-              category="Bpmn.export"
+              category="de.dailab.vsdt.trafo.export"
               class="de.dailab.vsdt.trafo.jiaciv.export.wizard.Bpmn2JiacExportWizard"
               icon="icons/exportJiac4.gif"
               id="de.dailab.vsdt.trafo.jiaciv.export.wizard"
               name="BPMN to JIAC IV">
 			<description>A Wizard for Transforming BPMN Diagrams to JIAC IV Agents</description>
 		</wizard>
-        <category
-              id="Bpmn.export"
-              name="BPMN Export"/>
-  
    </extension>
 
 </plugin>

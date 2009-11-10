@@ -15,7 +15,7 @@
                 name="BPMN to JIAC TNG">
 			<description>A Wizard for Transforming BPMN Diagrams to JIAC TNG Agents</description>
 		</wizard>-->  
-        <wizard category="Bpmn.export"
+        <wizard category="de.dailab.vsdt.trafo.export"
                 class="de.dailab.vsdt.trafo.jiacv.export.wizard.Bpmn2JiacVExportWizard"
                 icon="icons/exportJiac5.gif"
                 id="de.dailab.vsdt.trafo.jiacv.export.wizard.jadl"
