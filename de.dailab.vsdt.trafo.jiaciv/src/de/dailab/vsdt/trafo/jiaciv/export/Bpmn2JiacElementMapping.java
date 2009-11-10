@@ -1,4 +1,4 @@
-package de.dailab.vsdt.trafo.jiaciv.export.stages;
+package de.dailab.vsdt.trafo.jiaciv.export;
 
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -39,9 +39,7 @@ import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.trafo.MappingStage;
 import de.dailab.vsdt.trafo.base.logger.TrafoLog;
-import de.dailab.vsdt.trafo.jiaciv.export.JiacMappingAssistant;
-import de.dailab.vsdt.trafo.jiaciv.export.JiacMiniParser;
-import de.dailab.vsdt.trafo.jiaciv.export.JiacVisitorConstants;
+import de.dailab.vsdt.trafo.jiaciv.util.JiacVisitorConstants;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBranch;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnDerivedProcess;

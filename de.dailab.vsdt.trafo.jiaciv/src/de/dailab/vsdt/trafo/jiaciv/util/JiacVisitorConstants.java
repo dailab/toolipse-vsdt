@@ -1,4 +1,4 @@
-package de.dailab.vsdt.trafo.jiaciv.export;
+package de.dailab.vsdt.trafo.jiaciv.util;
 
 import de.dailab.jadltools.model.xmlbind.ObjectFactory;
 

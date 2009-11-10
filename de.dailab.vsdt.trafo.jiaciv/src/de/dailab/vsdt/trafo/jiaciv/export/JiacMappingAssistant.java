@@ -32,7 +32,7 @@ import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Property;
-import de.dailab.vsdt.trafo.jiaciv.export.stages.Bpmn2JiacElementMapping;
+import de.dailab.vsdt.trafo.jiaciv.util.JiacVisitorConstants;
 import de.dailab.vsdt.trafo.strucbpmn.DisjunctiveExpression;
 
 /**

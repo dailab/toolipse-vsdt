@@ -1,4 +1,4 @@
-package de.dailab.vsdt.trafo.jiaciv.export.stages;
+package de.dailab.vsdt.trafo.jiaciv.export;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -20,7 +20,7 @@ import de.dailab.jiaciv.agentrole.DocumentRoot;
 import de.dailab.jiaciv.agentrole.util.AgentRoleResourceFactoryImpl;
 import de.dailab.vsdt.trafo.MappingResultSaver;
 import de.dailab.vsdt.trafo.base.logger.TrafoLog;
-import de.dailab.vsdt.trafo.jiaciv.export.JiacVisitorConstants;
+import de.dailab.vsdt.trafo.jiaciv.util.JiacVisitorConstants;
 
 public class JiacResultSaver extends MappingResultSaver implements JiacVisitorConstants{
 

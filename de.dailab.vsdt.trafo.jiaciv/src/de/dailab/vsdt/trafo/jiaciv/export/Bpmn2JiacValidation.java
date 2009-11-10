@@ -1,4 +1,4 @@
-package de.dailab.vsdt.trafo.jiaciv.export.stages;
+package de.dailab.vsdt.trafo.jiaciv.export;
 
 import de.dailab.vsdt.trafo.impl.DefaultBpmnValidation;
 
