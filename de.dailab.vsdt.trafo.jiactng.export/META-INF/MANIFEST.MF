@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: BPMN to JIAC V Transformation
+Bundle-Name: VSDT - JIAC V Transformation
 Bundle-SymbolicName: de.dailab.vsdt.trafo.jiacv.export;singleton:=true
 Bundle-Version: 1.3.0.20091109
 Bundle-Vendor: DAI-Labor, TU Berlin
