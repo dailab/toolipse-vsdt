@@ -113,7 +113,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject lv_tail_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 2) ) { return current; }
@@ -158,7 +158,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
             switch ( input.LA(1) ) {
                 case 22:
                     {
-                    int LA1_1 = input.LA(2);
+                    input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -167,7 +167,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 23:
                     {
-                    int LA1_2 = input.LA(2);
+                    input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -176,7 +176,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 24:
                     {
-                    int LA1_3 = input.LA(2);
+                    input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -185,7 +185,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 25:
                     {
-                    int LA1_4 = input.LA(2);
+                    input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -194,7 +194,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 26:
                     {
-                    int LA1_5 = input.LA(2);
+                    input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -203,7 +203,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 27:
                     {
-                    int LA1_6 = input.LA(2);
+                    input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -212,7 +212,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 28:
                     {
-                    int LA1_7 = input.LA(2);
+                    input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -221,7 +221,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 21:
                     {
-                    int LA1_8 = input.LA(2);
+                    input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -230,7 +230,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 29:
                     {
-                    int LA1_9 = input.LA(2);
+                    input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -239,7 +239,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 30:
                     {
-                    int LA1_10 = input.LA(2);
+                    input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -248,7 +248,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 31:
                     {
-                    int LA1_11 = input.LA(2);
+                    input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -257,7 +257,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 32:
                     {
-                    int LA1_12 = input.LA(2);
+                    input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -266,7 +266,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 33:
                     {
-                    int LA1_13 = input.LA(2);
+                    input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -275,7 +275,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 34:
                     {
-                    int LA1_14 = input.LA(2);
+                    input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -396,7 +396,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject this_Atom_2 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 4) ) { return current; }
@@ -575,7 +575,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject lv_term_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 6) ) { return current; }
@@ -719,7 +719,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject lv_term_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 8) ) { return current; }
@@ -845,7 +845,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject lv_term_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 10) ) { return current; }
@@ -967,7 +967,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject this_Variable_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 12) ) { return current; }
@@ -1109,7 +1109,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject lv_accessor_2 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 14) ) { return current; }
@@ -1269,7 +1269,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject this_FieldAccessor_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 16) ) { return current; }
@@ -1412,7 +1412,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject lv_accessor_3 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 18) ) { return current; }
@@ -1580,7 +1580,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject lv_accessor_2 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 20) ) { return current; }
@@ -1744,7 +1744,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject this_NullConst_3 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+        setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 22) ) { return current; }
@@ -1942,7 +1942,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         int ruleStringConst_StartIndex = input.index();
         Token lv_const_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 24) ) { return current; }
@@ -2047,7 +2047,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         AntlrDatatypeRuleToken lv_const_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 26) ) { return current; }
@@ -2152,9 +2152,8 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
     public final EObject ruleBooleanConst() throws RecognitionException {
         EObject current = null;
         int ruleBooleanConst_StartIndex = input.index();
-        Token lv_isTrue_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+        setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 28) ) { return current; }
@@ -2185,7 +2184,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:787:2: (lv_isTrue_0= 'true' )
                     // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:789:6: lv_isTrue_0= 'true'
                     {
-                    lv_isTrue_0=(Token)input.LT(1);
+                    input.LT(1);
                     match(input,18,FOLLOW_18_in_ruleBooleanConst1870); if (failed) return current;
                     if ( backtracking==0 ) {
 
@@ -2295,9 +2294,8 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
     public final EObject ruleNullConst() throws RecognitionException {
         EObject current = null;
         int ruleNullConst_StartIndex = input.index();
-        Token lv_const_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+         setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 30) ) { return current; }
@@ -2307,7 +2305,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:834:1: (lv_const_0= 'null' )
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:836:6: lv_const_0= 'null'
             {
-            lv_const_0=(Token)input.LT(1);
+            input.LT(1);
             match(input,20,FOLLOW_20_in_ruleNullConst1986); if (failed) return current;
             if ( backtracking==0 ) {
 

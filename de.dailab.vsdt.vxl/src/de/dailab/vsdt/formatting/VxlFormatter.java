@@ -18,7 +18,7 @@ public class VxlFormatter extends AbstractDeclarativeFormatter {
 	
 	@Override
 	protected void configureFormatting(FormattingConfig c) {
-		de.dailab.vsdt.services.VxlGrammarAccess f = (de.dailab.vsdt.services.VxlGrammarAccess) getGrammarAccess();
+//		de.dailab.vsdt.services.VxlGrammarAccess f = (de.dailab.vsdt.services.VxlGrammarAccess) getGrammarAccess();
 
 		//...
 	}
