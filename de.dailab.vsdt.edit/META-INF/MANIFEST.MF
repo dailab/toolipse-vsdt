@@ -14,6 +14,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.workspace,
  de.dailab.vsdt,
  de.dailab.common.gmf
-Bundle-RequiredExecutionEnvironment: J2SE-1.5,
- JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5, JavaSE-1.6
 Bundle-ActivationPolicy: lazy

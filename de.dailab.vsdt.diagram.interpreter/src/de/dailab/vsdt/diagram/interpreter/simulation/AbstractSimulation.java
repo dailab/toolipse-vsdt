@@ -87,7 +87,6 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * - initialize step counter
 	 * - initialize token and state maps
 	 */
-	@Override
 	public List<FlowObject> start(BusinessProcessDiagramEditPart diagramEditPart) {
 		System.out.println("Starting Simulation");
 		List<FlowObject> result= new ArrayList<FlowObject>();
@@ -122,7 +121,6 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * - reset states of flow objects (being reflected in the diagram)
 	 * - clear token and state maps
 	 */
-	@Override
 	public final void stop() {
 		System.out.println("Stopping Simulation");
 		step= -1;
@@ -134,12 +132,10 @@ public abstract class AbstractSimulation implements ISimulation {
 		clearViewer();
 	}
 	
-	@Override
 	public final boolean isRunning() {
 		return step != -1;
 	}
 	
-	@Override
 	public List<FlowObject> stepOver(FlowObject flowObject) {
 		stepInto(flowObject);
 		return stepOut(flowObject);
@@ -151,7 +147,6 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * - set state to ACTIVE
 	 * - handle start assignments
 	 */
-	@Override
 	public List<FlowObject> stepInto(FlowObject flowObject) {
 		System.out.println("Stepping Into " + flowObject);
 		List<FlowObject> result= new ArrayList<FlowObject>();
@@ -198,7 +193,6 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * - place tokens on outgoing flows
 	 * - update states of succeeding flow objects
 	 */
-	@Override
 	public List<FlowObject> stepOut(FlowObject flowObject) {
 		System.out.println("Stepping out of " + flowObject);
 		List<FlowObject> result= new ArrayList<FlowObject>();
@@ -413,7 +407,6 @@ public abstract class AbstractSimulation implements ISimulation {
 		tokenMap.put(connection, token < 0 ? 0 : token);
 	}
 
-	@Override
 	public final State getState(FlowObject flowObject) {
 		return stateMap.get(flowObject);
 	}

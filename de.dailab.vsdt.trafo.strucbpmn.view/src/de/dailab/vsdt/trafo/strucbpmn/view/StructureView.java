@@ -67,7 +67,6 @@ public class StructureView extends AbstractStructuredViewerView implements ISele
 		super.createPartControl(composite);
 	}
 	
-	@Override
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		updateActionEnablement();
 	}

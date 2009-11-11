@@ -16,3 +16,4 @@ Bundle-ActivationPolicy: lazy
 Export-Package: de.dailab.vsdt.trafo,
  de.dailab.vsdt.trafo.impl,
  de.dailab.vsdt.trafo.wizard
+Bundle-RequiredExecutionEnvironment: J2SE-1.5, JavaSE-1.6

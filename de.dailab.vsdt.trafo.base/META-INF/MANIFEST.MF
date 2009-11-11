@@ -12,3 +12,4 @@ Export-Package: de.dailab.vsdt.trafo.base,
  de.dailab.vsdt.trafo.base.logger,
  de.dailab.vsdt.trafo.base.queries,
  org.apache.log4j
+Bundle-RequiredExecutionEnvironment: J2SE-1.5, JavaSE-1.6

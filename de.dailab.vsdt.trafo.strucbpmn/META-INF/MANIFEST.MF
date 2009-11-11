@@ -14,3 +14,4 @@ Export-Package: de.dailab.vsdt.trafo.strucbpmn,
 Require-Bundle: de.dailab.vsdt;visibility:=reexport,
  de.dailab.vsdt.trafo;visibility:=reexport
 Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5, JavaSE-1.6

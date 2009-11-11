@@ -4,8 +4,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 
-import sun.misc.Compare;
-import sun.misc.Sort;
 import de.dailab.vsdt.Property;
 
 /**
@@ -30,16 +28,6 @@ public class BpmnPropertiesViewSorter extends ViewerSorter {
 		this.criterion= criterion;
 	}
 
-	@Override
-	public void sort(Viewer viewer, Object[] elements) {
-		super.sort(viewer, elements);
-		Sort.quicksort(elements, new Compare(){
-			public int doCompare(Object o1, Object o2) {
-				return compare( null, o1, o2 );
-			}
-		});
-	}
-	
 	@Override
 	public int compare(Viewer viewer, Object e1, Object e2) {
 		if (e1 instanceof Property && e2 instanceof Property) {

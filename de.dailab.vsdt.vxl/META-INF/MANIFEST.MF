@@ -9,7 +9,7 @@ Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: J2SE-1.5, JavaSE-1.6
 Export-Package: de.dailab.vsdt,
  de.dailab.vsdt.parseTreeConstruction,
  de.dailab.vsdt.parser.antlr,
