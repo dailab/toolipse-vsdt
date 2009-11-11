@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.2"?>
+<?eclipse version="3.0"?>
+
 <plugin>
-	<extension
+
+	<extension point="org.eclipse.ui.exportWizards"
 		id="de.dailab.vsdt.trafo.text.export.wizard"
-		name="BPMN to Text"
-		point="org.eclipse.ui.exportWizards">
-         
-        <wizard
-              category="de.dailab.vsdt.trafo.export"
-              class="de.dailab.vsdt.trafo.text.export.wizard.Bpmn2TextExportWizard"
-              icon="icons/exportTxt.gif"
-              id="de.dailab.vsdt.trafo.text.export.wizard"
-              name="BPMN to Text">
-			<description>A Wizard for Transforming BPMN Diagrams to natural language text.</description>
+		name="BPMN to Text" >
+		<wizard
+			id="de.dailab.vsdt.trafo.text.export.wizard"
+			name="BPMN to Text"
+			category="de.dailab.vsdt.trafo.export"
+			class="de.dailab.vsdt.trafo.text.export.wizard.Bpmn2TextExportWizard"
+			icon="icons/exportTxt.gif">
+			<description>
+				A Wizard for Transforming BPMN Diagrams to natural language text.
+			</description>
 		</wizard>
-  
-   </extension>
+	</extension>
 
 </plugin>

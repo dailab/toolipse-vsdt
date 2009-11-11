@@ -3,20 +3,18 @@
 
 <plugin>
 
- 	<extension
+ 	<extension point="org.eclipse.ui.exportWizards"
 		id="de.dailab.vsdt.trafo.export"
-		name="VSDT Export Category"
-		point="org.eclipse.ui.exportWizards">
+		name="VSDT Export Category">
         <category
               id="de.dailab.vsdt.trafo.export"
               name="VSDT Export">
         </category>
    </extension>
         
- 	<extension
+ 	<extension point="org.eclipse.ui.importWizards"
 		id="de.dailab.vsdt.trafo.import"
-		name="VSDT Import Category"
-		point="org.eclipse.ui.importWizards">
+		name="VSDT Import Category">
 	    <category
             id="de.dailab.vsdt.trafo.import"
             name="VSDT Import">

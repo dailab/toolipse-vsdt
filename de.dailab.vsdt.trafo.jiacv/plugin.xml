@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.2"?>
+<?eclipse version="3.0"?>
+
 <plugin>
-   <extension
+
+	<extension point="org.eclipse.ui.exportWizards"
 		id="de.dailab.vsdt.trafo.jiacv.export.wizard"
-		name="BPMN to JIAC V"
-		point="org.eclipse.ui.exportWizards">
-         
-        <!--<wizard category="Bpmn.export"
-                class="de.dailab.vsdt.trafo.jiactng.export.wizard.Bpmn2JiacExportWizard"
-                icon="icons/exportJiac5.gif"
-                id="de.dailab.vsdt.trafo.jiactng.export.wizard"
-                name="BPMN to JIAC TNG">
-			<description>A Wizard for Transforming BPMN Diagrams to JIAC TNG Agents</description>
-		</wizard>-->  
-        <wizard category="de.dailab.vsdt.trafo.export"
-                class="de.dailab.vsdt.trafo.jiacv.wizard.Bpmn2JiacVExportWizard"
-                icon="icons/exportJiac5.gif"
-                id="de.dailab.vsdt.trafo.jiacv.export.wizard.jadl"
-                name="BPMN to JIAC V">
-			<description>A Wizard for Transforming BPMN Diagrams to JIAC V</description>
+		name="BPMN to JIAC V" >
+		<wizard 
+			id="de.dailab.vsdt.trafo.jiacv.export.wizard.jadl"
+			name="BPMN to JIAC V"
+			category="de.dailab.vsdt.trafo.export"
+			class="de.dailab.vsdt.trafo.jiacv.wizard.Bpmn2JiacVExportWizard"
+			icon="icons/exportJiac5.gif">
+			<description>
+				A Wizard for Transforming BPMN Diagrams to JIAC V
+			</description>
 		</wizard>
-  
-   </extension>
+	</extension>
 
 </plugin>

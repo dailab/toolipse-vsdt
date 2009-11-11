@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?eclipse version="3.2"?>
+<?eclipse version="3.0"?>
+
 <plugin>
-   <extension
+
+	<extension point="org.eclipse.ui.exportWizards"
 		id="de.dailab.vsdt.trafo.jiaciv.export.wizard"
-		name="BPMN to JIAC IV"
-		point="org.eclipse.ui.exportWizards">
-        <wizard
-              category="de.dailab.vsdt.trafo.export"
-              class="de.dailab.vsdt.trafo.jiaciv.wizard.Bpmn2JiacExportWizard"
-              icon="icons/exportJiac4.gif"
-              id="de.dailab.vsdt.trafo.jiaciv.export.wizard"
-              name="BPMN to JIAC IV">
-			<description>A Wizard for Transforming BPMN Diagrams to JIAC IV Agents</description>
+		name="BPMN to JIAC IV" >
+		<wizard
+			id="de.dailab.vsdt.trafo.jiaciv.export.wizard"
+			name="BPMN to JIAC IV"
+			category="de.dailab.vsdt.trafo.export"
+			class="de.dailab.vsdt.trafo.jiaciv.wizard.Bpmn2JiacExportWizard"
+			icon="icons/exportJiac4.gif" >
+			<description>
+				A Wizard for Transforming BPMN Diagrams to JIAC IV Agents
+			</description>
 		</wizard>
-   </extension>
+	</extension>
 
 </plugin>
