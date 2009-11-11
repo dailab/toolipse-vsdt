@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 
-<!--
- <copyright>
- </copyright>
-
- $Id$
--->
-
 <plugin>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -35,36 +28,35 @@
   </extension>
 
 
- 	<extension
+	<extension point="org.eclipse.ui.exportWizards"
 		id="de.dailab.vsdt.trafo.bpel.export.wizard"
-		name="BPMN to WS-BPEL"
-		point="org.eclipse.ui.exportWizards">
-         
+		name="BPMN to WS-BPEL">
         <wizard
-              category="de.dailab.vsdt.trafo.export"
-              class="de.dailab.vsdt.trafo.bpel.wizard.Bpmn2BpelExportWizard"
-              icon="icons/exportBpel.gif"
-              id="de.dailab.vsdt.trafo.bpel.export.wizard"
-              name="BPMN to BPEL">
-			<description>A Wizard for Transforming BPMN Diagrams to BPEL Processes</description>
+			id="de.dailab.vsdt.trafo.bpel.export.wizard"
+			name="BPMN to BPEL"
+			category="de.dailab.vsdt.trafo.export"
+			class="de.dailab.vsdt.trafo.bpel.wizard.Bpmn2BpelExportWizard"
+			icon="icons/exportBpel.gif">
+			<description>
+				A Wizard for Transforming BPMN Diagrams to BPEL Processes
+			</description>
 		</wizard>
-   </extension>
+	</extension>
         
- 	<extension
+	<extension point="org.eclipse.ui.importWizards"
 		id="de.dailab.vsdt.trafo.bpel.import.wizard"
-		name="WS-BPEL to BPMN"
-		point="org.eclipse.ui.importWizards">
-      <wizard
-            category="de.dailab.vsdt.trafo.import"
-            class="de.dailab.vsdt.trafo.bpel.wizard.BpelImportWizard"
-            icon="icons/importBpel.gif"
-            id="de.dailab.vsdt.trafo.bpel.import.wizard"
-            name="BPEL to BPMN">
-         <description>
-            A Wizard for Importing BPEL Processes
-         </description>
-      </wizard>
-   </extension>
+		name="WS-BPEL to BPMN" >
+		<wizard
+			id="de.dailab.vsdt.trafo.bpel.import.wizard"
+			name="BPEL to BPMN"
+			category="de.dailab.vsdt.trafo.import"
+			class="de.dailab.vsdt.trafo.bpel.wizard.BpelImportWizard"
+			icon="icons/importBpel.gif">
+			<description>
+				A Wizard for Importing BPEL Processes
+			</description>
+		</wizard>
+	</extension>
    
 </plugin>
 
