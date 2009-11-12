@@ -15,6 +15,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
+import org.eclipse.gmf.runtime.diagram.ui.services.layout.LayoutService;
+import org.eclipse.gmf.runtime.diagram.ui.services.layout.LayoutType;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
 import org.eclipse.gmf.runtime.notation.Diagram;
@@ -82,6 +84,13 @@ public class JiacVResultSaver extends MappingResultSaver {
 		return true;
 	}
 	
+	/**
+	 * Save JADL model to JADL source code using the Parser's serialization method.
+	 * 
+	 * @param file			file where to save the model
+	 * @param model			the model to save
+	 * @throws IOException
+	 */
 	private void saveJadl(File file, Agent model) throws IOException {
 		String source= null;
 		try {
@@ -101,7 +110,12 @@ public class JiacVResultSaver extends MappingResultSaver {
 	}
 	
 	/**
-	 * TODO
+	 * Save Agent World Model to diagram file and automatically do the layout
+	 * 
+	 * @param file			File where to save the diagram
+	 * @param agentWorld	Agent World model to be saved
+	 * @return				saving successful? otherwise the model can still be saved to XML
+	 * @throws IOException
 	 */
 	private boolean saveAgentWorldDiagram(File file, AgentWorld agentWorld) throws IOException {
 		
@@ -130,6 +144,10 @@ public class JiacVResultSaver extends MappingResultSaver {
 				diagramResource.getContents().add(diagram);
 				diagramResource.getContents().add(diagram.getElement());
 				new AgentworldDiagramContentInitializer().initDiagramContent(diagram);
+				
+				// do layout
+				LayoutService.getInstance().layout(diagram, LayoutType.DEFAULT);
+				
 				return CommandResult.newOKCommandResult();
 			}
 		};
