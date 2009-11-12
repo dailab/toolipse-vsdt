@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.stp.bpmn.BpmnDiagram;
@@ -32,18 +31,16 @@ public class StpBpmnResultSaver extends MappingResultSaver {
 		for (Object object : wrapper.getTargetModels()) {
 			if (object instanceof BpmnDiagram) {
 				BpmnDiagram diagram = (BpmnDiagram) object;
-				
 				File file= new File(baseDirectory, diagram.getName() + EXT_BPMN);
-				URI fileURI= URI.createFileURI(file.getAbsolutePath());
 				
 				// from XYZ-editor-creation-wizard
-				ResourceSet resourceSet = new ResourceSetImpl();
-				Resource resource = resourceSet.createResource(fileURI);
-				resource.getContents().add(diagram);
-
 				Map<Object, Object> options = new HashMap<Object, Object>();
 				options.put(XMLResource.OPTION_ENCODING, "UTF-8");
-				resource.save(options);
+//				saveAsXmlResource(file, diagram, options, null); // doesn't work here
+				URI uri= URI.createFileURI(file.getAbsolutePath());
+				Resource res= new ResourceSetImpl().createResource(uri);
+				res.getContents().add(diagram);
+				res.save(options);
 			}
 		}
 		return true;

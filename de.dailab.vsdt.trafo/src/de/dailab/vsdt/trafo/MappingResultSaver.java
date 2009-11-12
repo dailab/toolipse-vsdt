@@ -2,6 +2,13 @@ package de.dailab.vsdt.trafo;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Factory;
+import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 
 import de.dailab.vsdt.trafo.base.logger.TrafoLog;
 
@@ -69,4 +76,23 @@ public abstract class MappingResultSaver {
 	 */
 	protected abstract boolean internalSave(File baseDirectory) throws IOException;
 
+	
+	/**
+	 * Save the given EObject using the default XML Resource.
+	 * 
+	 * @param file				File where to save the EObject
+	 * @param eObject			the EObject to save
+	 * @param options			save options (optional)
+	 * @param resourceFactory	ResourceFactory (optional)
+	 * @throws IOException
+	 */
+	protected void saveAsXmlResource(File file, EObject eObject, Map options, Factory resourceFactory) throws IOException {
+		URI uri= URI.createFileURI(file.getAbsolutePath());
+		Resource res= resourceFactory != null
+				? resourceFactory.createResource(uri)
+				: new XMLResourceImpl(uri);
+		res.getContents().add(eObject);
+		res.save(options);
+	}
+	
 }

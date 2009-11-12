@@ -3,8 +3,6 @@ package de.dailab.vsdt.trafo.bpel.export;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.xmlsoap.schemas.ws._2003._03.business.process.DocumentRoot;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TProcess;
 import org.xmlsoap.schemas.ws._2003._03.business.process.util.ProcessResourceFactoryImpl;
@@ -42,20 +40,14 @@ public class BpelResultSaver extends MappingResultSaver {
 				
 				//save BPEL file to resource
 				DocumentRoot bpelRoot= (DocumentRoot) tProc.eContainer();
-				ProcessResourceFactoryImpl procResFac= new ProcessResourceFactoryImpl();
-				Resource procRes= procResFac.createResource(URI.createFileURI(fileBpel.getAbsolutePath()));
-				procRes.getContents().add(bpelRoot);
-				procRes.save(null);
+				saveAsXmlResource(fileBpel, bpelRoot, null, new ProcessResourceFactoryImpl());
 				
 				//clean up Definition
 				BpelStaticHelper.cleanUpWSDL(tDef);
 				
 				//save WSDL file to resource
 				org.xmlsoap.schemas.wsdl.DocumentRoot wsdlRoot= (org.xmlsoap.schemas.wsdl.DocumentRoot) tDef.eContainer();
-				WsdlResourceFactoryImpl wsdlResFac= new WsdlResourceFactoryImpl();
-				Resource wsdlRes= wsdlResFac.createResource(URI.createFileURI(fileWsdl.getAbsolutePath()));
-				wsdlRes.getContents().add(wsdlRoot);
-				wsdlRes.save(null);
+				saveAsXmlResource(fileWsdl, wsdlRoot, null, new WsdlResourceFactoryImpl());
 			}
 		}
 		return true;

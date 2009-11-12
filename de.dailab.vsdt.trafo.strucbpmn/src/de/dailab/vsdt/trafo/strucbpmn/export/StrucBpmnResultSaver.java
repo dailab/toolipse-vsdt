@@ -3,10 +3,7 @@ package de.dailab.vsdt.trafo.strucbpmn.export;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-
-import de.dailab.vsdt.BusinessProcessDiagram;
+import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.trafo.MappingResultSaver;
 import de.dailab.vsdt.trafo.strucbpmn.util.StrucBpmnResourceFactoryImpl;
 
@@ -24,14 +21,11 @@ public class StrucBpmnResultSaver extends MappingResultSaver {
 	 */
 	@Override
 	protected boolean internalSave(File baseDirectory) throws IOException {
-		BusinessProcessDiagram bpd= (BusinessProcessDiagram) wrapper.getSourceModel();
-		String baseFileName= new File(baseDirectory, bpd.getName()).getAbsolutePath();
+		BusinessProcessSystem bpd= (BusinessProcessSystem) wrapper.getSourceModel();
+		File file= new File(baseDirectory, bpd.getName());
 		
 		//save Model file to resource
-		StrucBpmnResourceFactoryImpl resFac= new StrucBpmnResourceFactoryImpl();
-		Resource procRes= resFac.createResource(URI.createFileURI(baseFileName + EXT_XML));
-		procRes.getContents().add(bpd);
-		procRes.save(null);
+		saveAsXmlResource(file, bpd, null, new StrucBpmnResourceFactoryImpl());
 
 		return true;
 	}

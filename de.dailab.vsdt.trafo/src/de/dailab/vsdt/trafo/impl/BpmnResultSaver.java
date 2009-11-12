@@ -5,10 +5,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 
 import de.dailab.vsdt.BusinessProcessSystem;
@@ -46,22 +42,11 @@ public class BpmnResultSaver extends MappingResultSaver {
 			if (object instanceof BusinessProcessSystem) {
 				BusinessProcessSystem bps= (BusinessProcessSystem) object;
 				File file= new File(baseDirectory, bps.getNameOrId() + suffix + EXT);
-				URI fileURI= URI.createFileURI(file.getAbsolutePath());
-				
-				// XXX save BPMN file to resource (making problems since GMF 2.1)
-//				VsdtResourceFactoryImpl resourceFactory= new VsdtResourceFactoryImpl();
-//				Resource resource= resourceFactory.createResource(fileURI);
-//				resource.getContents().add(bpd);
-//				resource.save(null);
 				
 				// from XYZ-editor-creation-wizard
-				ResourceSet resourceSet = new ResourceSetImpl();
-				Resource resource = resourceSet.createResource(fileURI);
-				resource.getContents().add(bps);
 				Map<Object, Object> options = new HashMap<Object, Object>();
 				options.put(XMLResource.OPTION_ENCODING, "UTF-8");
-				resource.save(options);
-				
+				saveAsXmlResource(file, bps, options, null); // Problem with IDs when using VSDT resource factory
 			}
 		}
 		return true;
