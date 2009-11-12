@@ -73,7 +73,6 @@ public class StpBpmn2BpmnElementMapping extends MappingStage {
 		BpmnDiagram bpmnDiagram= BpmnFactory.eINSTANCE.createBpmnDiagram();
 		bpmnDiagram= (BpmnDiagram) wrapper.getSourceModel();
 		BusinessProcessDiagram bpd= visitBusinessProcessDiagram(bpmnDiagram);
-		_currentDiagram= bpd;
 		if (bpd!= null) {
 			
 			BusinessProcessSystem bps= vsdtFac.createBusinessProcessSystem();
@@ -101,6 +100,7 @@ public class StpBpmn2BpmnElementMapping extends MappingStage {
 		TrafoLog.trace("Visiting Business Process Diagram '" + source.getName() + "'");
 		
 		BusinessProcessDiagram target= vsdtFac.createBusinessProcessDiagram();
+		_currentDiagram= target;
 		mapBasicAttributes(source, target);
 		wrapper.map(source, target);
 //		target.setAuthor(source.getAuthor());
