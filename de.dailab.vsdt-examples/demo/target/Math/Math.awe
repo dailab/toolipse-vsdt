@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:agentworld="agentworld" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation">
-  <notation:Diagram xmi:id="_2Dd0UM-AEd6JI8C1OzaRxQ" type="Agentworld" element="_2Dd0Us-AEd6JI8C1OzaRxQ" measurementUnit="Pixel">
-    <children xmi:type="notation:Node" xmi:id="_2Dd0Vs-AEd6JI8C1OzaRxQ" type="1002" element="_2Dd0U8-AEd6JI8C1OzaRxQ">
-      <children xmi:type="notation:Node" xmi:id="_2DebYM-AEd6JI8C1OzaRxQ" type="4002">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_2DebYc-AEd6JI8C1OzaRxQ" y="5"/>
+  <notation:Diagram xmi:id="_QoiB4M-WEd6s488RVu_vaw" type="Agentworld" element="_QojQAM-WEd6s488RVu_vaw" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_QomTUM-WEd6s488RVu_vaw" type="1002" element="_QojQAc-WEd6s488RVu_vaw">
+      <children xmi:type="notation:Node" xmi:id="_QorL0M-WEd6s488RVu_vaw" type="4002">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_QorL0c-WEd6s488RVu_vaw" y="5"/>
       </children>
-      <styles xmi:type="notation:ShapeStyle" xmi:id="_2Dd0V8-AEd6JI8C1OzaRxQ" fontName="Sans" lineColor="12632256"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2Dd0WM-AEd6JI8C1OzaRxQ" x="108" y="30"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_QomTUc-WEd6s488RVu_vaw" fontName="Sans" lineColor="12632256"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QomTUs-WEd6s488RVu_vaw" x="110" y="30"/>
     </children>
-    <children xmi:type="notation:Node" xmi:id="_2DfCcM-AEd6JI8C1OzaRxQ" type="1004" element="_2Dd0VM-AEd6JI8C1OzaRxQ">
-      <children xmi:type="notation:Node" xmi:id="_2DfCc8-AEd6JI8C1OzaRxQ" type="4004"/>
-      <styles xmi:type="notation:ShapeStyle" xmi:id="_2DfCcc-AEd6JI8C1OzaRxQ" fontName="Sans" lineColor="12632256"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2DfCcs-AEd6JI8C1OzaRxQ" x="30" y="132"/>
+    <children xmi:type="notation:Node" xmi:id="_Qory4M-WEd6s488RVu_vaw" type="1004" element="_QojQAs-WEd6s488RVu_vaw">
+      <children xmi:type="notation:Node" xmi:id="_QotBAM-WEd6s488RVu_vaw" type="4004"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_Qory4c-WEd6s488RVu_vaw" fontName="Sans" lineColor="12632256"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Qory4s-WEd6s488RVu_vaw" x="30" y="130"/>
     </children>
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_2Dd0Uc-AEd6JI8C1OzaRxQ"/>
-    <edges xmi:type="notation:Edge" xmi:id="_2DfpgM-AEd6JI8C1OzaRxQ" type="3002" element="_2Dd0Vc-AEd6JI8C1OzaRxQ" source="_2Dd0Vs-AEd6JI8C1OzaRxQ" target="_2DfCcM-AEd6JI8C1OzaRxQ">
-      <styles xmi:type="notation:ConnectorStyle" xmi:id="_2Dfpgc-AEd6JI8C1OzaRxQ" lineColor="12632256"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_2Dfpgs-AEd6JI8C1OzaRxQ" fontName="Sans"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_2Dfpg8-AEd6JI8C1OzaRxQ" points="[0, 20, 0, -80]$[0, 80, 0, -20]"/>
-      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_3wVl0M-AEd6JI8C1OzaRxQ" id="(0.5,1.0)"/>
-      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_3wVl0c-AEd6JI8C1OzaRxQ" id="(0.5,0.0)"/>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_QoiB4c-WEd6s488RVu_vaw"/>
+    <edges xmi:type="notation:Edge" xmi:id="_QouPIM-WEd6s488RVu_vaw" type="3002" element="_QojQA8-WEd6s488RVu_vaw" source="_QomTUM-WEd6s488RVu_vaw" target="_Qory4M-WEd6s488RVu_vaw">
+      <styles xmi:type="notation:ConnectorStyle" xmi:id="_QouPIc-WEd6s488RVu_vaw" lineColor="12632256"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_QouPIs-WEd6s488RVu_vaw" fontName="Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_QouPI8-WEd6s488RVu_vaw" points="[0, 20, 0, -80]$[0, 80, 0, -20]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_QprRYM-WEd6s488RVu_vaw" id="(0.5,1.0)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Qpr4cM-WEd6s488RVu_vaw" id="(0.5,0.0)"/>
     </edges>
   </notation:Diagram>
-  <agentworld:AgentWorld xmi:id="_2Dd0Us-AEd6JI8C1OzaRxQ" name="Math" namespace="Math" author="Tobias Küster" date="2009-08-27T17:05:44.025+0200" version="0.1">
-    <hosts xmi:type="agentworld:Role" xmi:id="_2Dd0U8-AEd6JI8C1OzaRxQ" name="MathematicanRole" componentLinks="_2Dd0Vc-AEd6JI8C1OzaRxQ"/>
-    <hosts xmi:type="agentworld:Component" xmi:id="_2Dd0VM-AEd6JI8C1OzaRxQ" name="ExtractRoot" users="_2Dd0Vc-AEd6JI8C1OzaRxQ" class="Algorithms.ExtractRoot.jadl"/>
-    <hosts xmi:type="agentworld:ComponentLink" xmi:id="_2Dd0Vc-AEd6JI8C1OzaRxQ" component="_2Dd0VM-AEd6JI8C1OzaRxQ" user="_2Dd0U8-AEd6JI8C1OzaRxQ"/>
+  <agentworld:AgentWorld xmi:id="_QojQAM-WEd6s488RVu_vaw" name="Math" namespace="Math" author="Tobias Küster" date="2009-08-27T17:05:44.025+0200" version="0.1">
+    <hosts xmi:type="agentworld:Role" xmi:id="_QojQAc-WEd6s488RVu_vaw" name="MathematicanRole" componentLinks="_QojQA8-WEd6s488RVu_vaw"/>
+    <hosts xmi:type="agentworld:Component" xmi:id="_QojQAs-WEd6s488RVu_vaw" name="ExtractRoot" users="_QojQA8-WEd6s488RVu_vaw" class="Algorithms.ExtractRoot.jadl"/>
+    <hosts xmi:type="agentworld:ComponentLink" xmi:id="_QojQA8-WEd6s488RVu_vaw" component="_QojQAs-WEd6s488RVu_vaw" user="_QojQAc-WEd6s488RVu_vaw"/>
   </agentworld:AgentWorld>
 </xmi:XMI>
