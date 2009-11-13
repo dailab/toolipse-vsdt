@@ -39,6 +39,8 @@ public class InitialGatewayRule extends AbstractRule {
 	protected FlowObjectContainer _container= null;
 	protected FlowObject _start1= null;
 	protected FlowObject _start2= null;
+
+	public static final String INITIAL_GATEWAY= "INITIAL_GATEWAY";
 	
 	private final int CONTAINER= 0,
 					  START1= 1,
@@ -66,14 +68,10 @@ public class InitialGatewayRule extends AbstractRule {
 	
 	@Override
 	protected void apply() {
-		
-		//this rule only said that there are at least two starting FlowObjects.
-		//find ALL starting FlowObjects in the process
+		// the pattern of this rule requires two starting FlowObjects.
+		// now find ALL starting FlowObjects in the process
 		List<FlowObject> startingFlowObjects= new ArrayList<FlowObject>();
-		for (Iterator<FlowObject> iter = _container.getContainedFlowObjects().iterator(); iter
-				.hasNext();) {
-			FlowObject flowObject = iter.next();
-			
+		for (FlowObject flowObject : _container.getContainedFlowObjects()) {
 			if (flowObject.isStartingNode()) {
 				startingFlowObjects.add(flowObject);
 			}
@@ -81,17 +79,8 @@ public class InitialGatewayRule extends AbstractRule {
 		
 		//create gateway
 		Gateway gateway= VsdtFactory.eINSTANCE.createGateway();
-		gateway.setName("Gateway_SPLITALL");
-		/*
-		 * TODO Here an AND gateway is used for now, although this is not very practicable.
-		 * Using an event-based XOR gateway would be better. However, this requires that the mapping
-		 * is 100% complete and each start event really results in something that can be handled by
-		 * whatever a event-based XOR gateway will be mapped to (e.g. a BPEL pick)
-		 * 
-		 * moreover, it is not yet clear how an XOR gateway can best be split up, which might be
-		 * necessary using this rule
-		 */
-		gateway.setGatewayType(GatewayType.AND);
+		gateway.setName(INITIAL_GATEWAY);
+		gateway.setGatewayType(GatewayType.COMPLEX);
 		_container.getContainedFlowObjects().add(gateway);
 		
 		//create sequence flows

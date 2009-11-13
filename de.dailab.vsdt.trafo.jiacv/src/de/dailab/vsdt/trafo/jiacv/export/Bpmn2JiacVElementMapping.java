@@ -1,12 +1,14 @@
 package de.dailab.vsdt.trafo.jiacv.export;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import de.dailab.agentworld.AgentWorld;
@@ -68,6 +70,7 @@ import de.dailab.vsdt.trafo.strucbpmn.BpmnElementToSkip;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnLoopBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnSequence;
+import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InitialGatewayRule;
 
 /**
  * BPMN to JIAC TNG JADL visitor. This visitor is performing a top-down pass of 
@@ -78,13 +81,6 @@ import de.dailab.vsdt.trafo.strucbpmn.BpmnSequence;
  */
 public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn2JiacConstants {
 
-	/*
-	 * TODO
-	 * - test variable declarations and assignments, esp. arrays and complex types
-	 * - bug: duplicate result parameters when using multiple end events with the same message
-	 * - improve generated file names
-	 */
-	
 	/**
 	 * Enables some MAMS-specific specials, such as parameter names leading the 
 	 * actual parameters in an invoke: invoke foobar("parName" $foo) ( )
@@ -99,12 +95,16 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	
 	/** map holding relation of services to listeners ( @see {@link Listen} ) */
 	private Map<Service, Set<String>> messageListeners;
+	
+	/** map holding a relation of services to services calling this service (e.g. in case of multiple start events) */
+	private Map<Service, List<Service>> callingServices;
 
 	@Override
 	public void initialize() {
 		_currentService= null;
 		_currentAgent= null;
 		messageListeners= new HashMap<Service, Set<String>>();
+		callingServices= new HashMap<Service, List<Service>>();
 		expressionVisitor= new JiacVExpressionVisitor(true, true);
 	}
 	
@@ -207,32 +207,17 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		wrapper.getTargetModels().add(model);
 		wrapper.map(pool, model);
 		
-		// create service model and visit graphical elements
-		Service service= jadlFac.createService();
-		_currentService= service;
-		_currentAgent.getServices().add(_currentService);
-		wrapper.map(process, service);
-		messageListeners.put(service, new HashSet<String>());
-		if (useMAMSspecials) {
-			service.setAccessLevel(AccessLevel.GLOBAL); // TODO global, if not private? or if collaboration?
-		}
-		service.setName(pool.getName());
-		// TODO other process types (collaboration, private, none, abstract, etc.)
-		
-		// visit graphical elements, build sequence, including visiting of properties and assignments
-		Script script= visitFlowObjects(process.getGraphicalElements());
-		Seq seq= buildSequence(script, process.getProperties(), process.getAssignments());
-		service.setBody(seq);
-		
-		// add listeners
-		for (String address : messageListeners.get(_currentService)) {
-			Listen listen= jadlFac.createListen();
-			listen.setAddress(address);
-			seq.getScripts().add(0, listen);
-		}
+		// build service (will automatically be added to the Agent model)
+		buildService(pool.getName(), 
+				process, 
+				process.getGraphicalElements(), 
+				process.getProperties(), 
+				process.getAssignments());
 		
 		return model;
 	}
+	
+	
 	
 	/**
 	 * Map the given flow objects by iterating the list and visiting each single 
@@ -353,9 +338,10 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			Implementation implementation= event.getImplementation();
 			if (message != null) {
 				if (event instanceof Start || event instanceof End) {
-					List<HeaderVariableDeclaration> parameters= event instanceof Start ? 
-							_currentService.getInputs() :
-							_currentService.getOutputs();
+					// start/end: map message properties to service signature
+					List<HeaderVariableDeclaration> parameters= event instanceof Start
+							? _currentService.getInputs()
+							: _currentService.getOutputs();
 					for (HeaderVariableDeclaration declaration : jef.createHeaderVariableDeclarations(message.getProperties())) {
 						boolean alreadyDeclared= false;
 						for (HeaderVariableDeclaration param : parameters) {
@@ -366,7 +352,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 						}
 					}
 				} else {
-					// message intermediate event
+					// message intermediate event: send/receive
 					if (event.isThrowing()) {
 						mapping= buildSend(event.getMessage(), implementation != null ? implementation.getParticipant() : null);
 					} else {
@@ -470,7 +456,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			break;
 		case SCRIPT:
 			// parse the script
-			mapping= jef.parseScript(activity.getScript());
+			mapping= jef.parseScript(activity.getScript(), null);
 			break;
 		case SERVICE:
 			// TODO add import according to service location?
@@ -736,11 +722,131 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			mapping= block;
 			break;
 		case COMPLEX:
-			// TODO Mapping for Complex Gateway
-			TrafoLog.nyi("Mapping for Gateway Type " + fork.getGatewayType().getName());
+			// TODO Mapping for Complex Gateway (in general)
+
+			/*
+			 * For Complex Gateways created from the Initial Gateway Rule,
+			 * a new service will be created for each branch, finally calling
+			 * the original service, starting after the block.
+			 * Also see buildService for further processing of the services. 
+			 */
+			if (fork.getName().contains(InitialGatewayRule.INITIAL_GATEWAY)) {
+				// memorize original service (_currentService will be bound to the new one)
+				final Service parentService= _currentService;
+				List<Service> services= new ArrayList<Service>();
+				int counter= 0;
+				for (BpmnBranch branch : bpmnBlock.getElements()) {
+					// create service for each branch
+					Service service= buildService(parentService.getName() + "_" + counter++, 
+							branch, 
+							Arrays.asList(branch.getElement()), 
+							bpmnBlock.getProcess().getProperties(), 
+							bpmnBlock.getProcess().getAssignments());
+					services.add(service);
+				}
+				// set relation in map and set _currentService back to the parentService
+				callingServices.put(parentService, services);
+				_currentService= parentService;
+			} else {
+				TrafoLog.nyi("Mapping for Gateway Type " + fork.getGatewayType().getName());
+			}
 		}
 		return mapping;
 	}
+	
+
+	/**
+	 * Create a new Service element. The Service is automatically mapped to the 
+	 * original Element and added to the current Agent model.  Following this,
+	 * the FlowObjects are visited and the service's body sequence is composed
+	 * from the properties (variable declarations), process assignments (initial
+	 * variable definition), listener calls, if any, and the mapping of the 
+	 * FlowObjects.  If the service is to be called by other services, this will
+	 * be taken care of here, too.
+	 * 
+	 * {@link #callingServices}
+	 * 
+	 * @param name
+	 * @param source		Source object, mainly for the mapping
+	 * @param body
+	 * @param properties
+	 * @param assignments
+	 * @return
+	 */
+	private Service buildService(String name, EObject source, List<FlowObject> flowObjects, List<Property> properties, List<Assignment> assignments) {
+		// create service model
+		Service service= jadlFac.createService();
+		_currentService= service;
+		_currentAgent.getServices().add(service);
+		wrapper.map(source, service);
+		messageListeners.put(service, new HashSet<String>());
+		
+		service.setName(name);
+		if (useMAMSspecials) {
+			service.setAccessLevel(AccessLevel.GLOBAL);
+		}
+		// TODO use process types and service run types
+		
+		// visit FlowObjects  
+		Script script= visitFlowObjects(flowObjects);
+
+		// build body sequence
+		Seq body= jadlFac.createSeq();
+		service.setBody(body);
+		// 1.: Variable declarations
+		body.getScripts().addAll(visitProperties(properties));
+		// 2.: Initial Assignments
+		if (callingServices.containsKey(service)) {
+			// set services input parameters to all process properties and add assignments
+			for (Property property : properties) {
+				String inputName= "input_" + property.getName();
+				service.getInputs().add(jef.createHeaderVariableDeclaration(inputName, property.getType()));
+				service.getBody().getScripts().add(jef.createAssign("$" + "input_" + property.getName(), property.getName(), null));
+			}
+			// adapt the calling services to this (the called) service
+			List<Service> otherServices= callingServices.get(service);
+			for (Service otherService : otherServices) {
+				// set calling services return value to this services return values
+				otherService.getOutputs().addAll(EcoreUtil.copyAll(service.getOutputs()));
+				// create invoke calling the parent process
+				Invoke invoke= jadlFac.createInvoke();
+				invoke.setAction(service.getName());
+				for (Property property : properties) {
+					invoke.getParameters().add(jef.createVariable(property.getName()));
+				}
+				for (HeaderVariableDeclaration varDecl : service.getOutputs()) {
+					invoke.getReturnVariables().add(varDecl.getVariableName());
+				}
+				// insert the invoke just before the end assignments
+				int offset= 0;
+				for (Assignment assignment : assignments) {
+					if (assignment.getAssignTime() == AssignTimeType.END) {
+						offset++;
+					}
+				}
+				int index= otherService.getBody().getScripts().size() - offset;
+				otherService.getBody().getScripts().add(index, invoke);
+			}
+		} else {
+			body.getScripts().addAll(visitAssignments(assignments, AssignTimeType.START));
+		}
+		// 3.: add listeners
+		for (String address : messageListeners.get(service)) {
+			Listen listen= jadlFac.createListen();
+			listen.setAddress(address);
+			body.getScripts().add(listen);
+		}
+		// 4.: script
+		if (script != null) {
+			body.getScripts().add(script);	
+		}
+		// 5.: end assignments
+		body.getScripts().addAll(visitAssignments(assignments, AssignTimeType.END));
+		
+		return service;
+	}
+	
+	
 	
 	/**
 	 * - compose loop condition from given loopCondition and exitCondition
@@ -973,7 +1079,8 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			if (script instanceof Receive) {
 				return script;
 			}
-			// case 3: receive as an assign value // XXX can be removed later
+			// case 3: receive as an assign value // XXX can be removed
+			// once it is settled that receive is no AssignValue anymore
 			if (script instanceof Assign && ((Assign) script).getValue() instanceof Receive) {
 				return (Receive) ((Assign) script).getValue();
 			}

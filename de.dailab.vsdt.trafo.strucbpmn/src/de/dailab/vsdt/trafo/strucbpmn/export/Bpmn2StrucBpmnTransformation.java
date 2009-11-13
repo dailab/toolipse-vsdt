@@ -10,6 +10,7 @@ import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.Transformation;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.ConnectLinkRule;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.FinalGatewayRule;
+import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InitialGatewayRule;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InsertEmptyRule;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InsertEmptyRule2;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InsertGatewayRule;
@@ -58,12 +59,12 @@ public class Bpmn2StrucBpmnTransformation extends MappingStage {
 			
 			//normalization
 			List<AbstractRule> layer0= new ArrayList<AbstractRule>();
+			layer0.add(new ConnectLinkRule(root));
 			layer0.add(new InsertEmptyRule(root));
 			layer0.add(new InsertEmptyRule2(root));
 			layer0.add(new InsertGatewayRule(root));
 			layer0.add(new SplitGatewayRule(root));
-	//		layer0.add(new InitialGatewayRule(root));
-			layer0.add(new ConnectLinkRule(root)); // must be tested before FinalGatewayRule!
+			layer0.add(new InitialGatewayRule(root));
 			layer0.add(new FinalGatewayRule(root));
 			layers.add(layer0);
 			

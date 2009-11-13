@@ -40,6 +40,8 @@ public class FinalGatewayRule extends AbstractRule {
 	protected FlowObject _end1= null;
 	protected FlowObject _end2= null;
 	
+	public static final String FINAL_GATEWAY= "FINAL_GATEWAY";
+	
 	private final int CONTAINER= 0,
 					  END1= 1,
 					  END2= 2;
@@ -66,13 +68,10 @@ public class FinalGatewayRule extends AbstractRule {
 	
 	@Override
 	protected void apply() {
-		
-		//this rule only said that there are at least two ending FlowObjects.
-		//find ALL ending FlowObjects in the process
+		// the pattern of this rule requires two ending FlowObjects.
+		// now find ALL ending FlowObjects in the process
 		List<FlowObject> endingFlowObjects= new ArrayList<FlowObject>();
-		for (Iterator<FlowObject> iter = _container.getContainedFlowObjects().iterator(); iter
-				.hasNext();) {
-			FlowObject flowObject = (FlowObject) iter.next();
+		for (FlowObject flowObject : _container.getContainedFlowObjects()) {
 			if (flowObject.isEndingNode()) {
 				endingFlowObjects.add(flowObject);
 			}
@@ -80,7 +79,7 @@ public class FinalGatewayRule extends AbstractRule {
 		
 		//create gateway
 		Gateway gateway= VsdtFactory.eINSTANCE.createGateway();
-		gateway.setName("Gateway_MERGEALL");
+		gateway.setName(FINAL_GATEWAY);
 		_container.getContainedFlowObjects().add(gateway);
 		
 		//create sequence flows

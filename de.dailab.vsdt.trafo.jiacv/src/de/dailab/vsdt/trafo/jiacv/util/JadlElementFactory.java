@@ -47,7 +47,7 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 	/*
 	 * /////////////////////////////////////
 	 * //// CREATION METHODS
-	 * /////////////////////////////////////7
+	 * /////////////////////////////////////
 	 */
 
 	/**
@@ -372,7 +372,7 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 	public Expression parseExpression(String string) {
 		String prefix= "while ( ";
 		String suffix= " ) { }";
-		Script script= parseScript(prefix + string + suffix);
+		Script script= parseScript(prefix + string + suffix, string);
 		if (script instanceof While) {
 			return ((While) script).getExpression();
 		}
@@ -411,13 +411,14 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 	
 	/**
 	 * Parse script from given string
-	 * @param string	some string holding a script
-	 * @return			the script object
+	 * @param string			some string holding a script
+	 * @param originalString	Original String, in case the string to be parsed is a wrapper for something else
+	 * @return					the script object
 	 */
-	public Script parseScript(String string) {
+	public Script parseScript(String string, String originalString) {
 		String prefix= "service s (in ) (out ) { ";
 		String suffix= " }";
-		Agent model= parseModel(prefix + string + suffix);
+		Agent model= parseModel(prefix + string + suffix, originalString);
 		if (model != null) {
 			Service service= Util.getFirstService(model);
 			Seq seq= service.getBody();
@@ -432,10 +433,11 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 
 	/**
 	 * Parse Model from given string
-	 * @param string	some string holding a complete model
-	 * @return			the model object
+	 * @param string			some string holding a complete model
+	 * @param originalString	Original String, in case the string to be parsed is a wrapper for something else
+	 * @return					the model object
 	 */
-	public Agent parseModel(String string) {
+	public Agent parseModel(String string, String originalString) {
 //		Agent model= null;
 //		// create parser based on JADL metamodel (XText-/Ecore file)
 //		TrafoLog.debug("Parsing \"" + string + "\"");
@@ -466,7 +468,8 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 			result= parser.parse(string);
 		} catch (JadlParseException e) {
 			if (! parser.getErrors().isEmpty()) {
-				TrafoLog.warn("Parsing error: " + parser.getErrors().get(0).getMessage());
+				TrafoLog.warn("Parsing error '" + parser.getErrors().get(0).getMessage()
+						+ "' when parsing String '" + (originalString == null ? string : originalString) + "'");
 			}
 		}
 		return result;
