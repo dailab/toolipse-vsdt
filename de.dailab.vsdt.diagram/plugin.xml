@@ -1170,6 +1170,19 @@
             <message><![CDATA[Message Flows may not connect to Lanes, Gateways or Artifacts]]></message>
             <target class="vsdt.MessageFlow"/>
          </constraint>
+         
+         <!-- @generated NOT -->
+         <constraint id="expression1"
+            lang="Java" class="de.dailab.vsdt.diagram.providers.VsdtValidationProvider$AdapterX1"
+            name="expression1isValid"
+            mode="Batch"
+            severity="ERROR" statusCode="200">
+            
+            <description><![CDATA[Expressions using VXL Expression Language: Validation failed]]></description>
+            <message><![CDATA[Expressions using VXL Expression Language: Validation failed]]></message>
+            <target class="vsdt.Expression"/>
+         </constraint>
+         
                   </constraints>
       </constraintProvider>
    </extension>
@@ -1230,6 +1243,7 @@
                   <constraint ref="de.dailab.vsdt.diagram.seq6"/>
                   <constraint ref="de.dailab.vsdt.diagram.msg1"/>
                   <constraint ref="de.dailab.vsdt.diagram.msg2"/>
+                  <constraint ref="de.dailab.vsdt.diagram.expression1"/>
                   <constraint ref="de.dailab.vsdt.diagram.expression1validExpression"/>
                </binding>
 

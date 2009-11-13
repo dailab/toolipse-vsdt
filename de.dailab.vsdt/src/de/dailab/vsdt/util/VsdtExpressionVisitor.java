@@ -123,7 +123,7 @@ public class VsdtExpressionVisitor {
 	 * @return
 	 */
 	public final String getTranslation(Expression expression) {
-		if (expression == null) return null;
+		if (expression == null || expression.getExpression() == null) return null;
 		
 		this.buffer= new StringBuffer();
 		this.expression= expression;

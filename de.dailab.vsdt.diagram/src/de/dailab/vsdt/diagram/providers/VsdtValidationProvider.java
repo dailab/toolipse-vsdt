@@ -17,6 +17,7 @@ import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.End;
 import de.dailab.vsdt.Event;
+import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.MessageFlow;
@@ -1066,6 +1067,25 @@ public class VsdtValidationProvider extends AbstractContributionItemProvider {
 		public IStatus validate(IValidationContext ctx) {
 			MessageFlow context = (MessageFlow) ctx.getTarget();
 			if (MyJavaAudits.msg2NotGatewayLaneArtifact(context)) {
+				return ctx.createSuccessStatus();
+			} else {
+				return ctx.createFailureStatus(new Object[] { EMFCoreUtil
+						.getQualifiedName(ctx.getTarget(), true) });
+			}
+		}
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	public static class AdapterX1 extends AbstractModelConstraint {
+
+		/**
+		 * @generated NOT
+		 */
+		public IStatus validate(IValidationContext ctx) {
+			Expression context = (Expression) ctx.getTarget();
+			if (context.validate()) {
 				return ctx.createSuccessStatus();
 			} else {
 				return ctx.createFailureStatus(new Object[] { EMFCoreUtil
