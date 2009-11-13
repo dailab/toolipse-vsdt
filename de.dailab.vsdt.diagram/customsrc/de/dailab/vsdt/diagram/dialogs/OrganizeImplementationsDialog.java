@@ -78,6 +78,11 @@ public class OrganizeImplementationsDialog extends AbstractOrganizeElementsDialo
 		return "Implementation";
 	}
 	
+	@Override
+	public int getHeight() {
+		return 500;
+	}
+	
 	/**
 	 * create a new Organize Assignments Dialog
 	 * 
