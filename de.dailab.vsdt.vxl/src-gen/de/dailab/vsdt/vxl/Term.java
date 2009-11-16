@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  *
- * @see de.dailab.vsdt.vxl.VXLPackage#getTerm()
+ * @see de.dailab.vsdt.vxl.VxlPackage#getTerm()
  * @model
  * @generated
  */
@@ -36,7 +36,7 @@ public interface Term extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Head</em>' containment reference.
    * @see #setHead(Head)
-   * @see de.dailab.vsdt.vxl.VXLPackage#getTerm_Head()
+   * @see de.dailab.vsdt.vxl.VxlPackage#getTerm_Head()
    * @model containment="true"
    * @generated
    */
@@ -62,7 +62,7 @@ public interface Term extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Tail</em>' containment reference.
    * @see #setTail(Tail)
-   * @see de.dailab.vsdt.vxl.VXLPackage#getTerm_Tail()
+   * @see de.dailab.vsdt.vxl.VxlPackage#getTerm_Tail()
    * @model containment="true"
    * @generated
    */

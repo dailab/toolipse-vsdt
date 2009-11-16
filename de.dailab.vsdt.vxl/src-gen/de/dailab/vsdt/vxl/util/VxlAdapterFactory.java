@@ -23,19 +23,19 @@ import de.dailab.vsdt.vxl.NumericConst;
 import de.dailab.vsdt.vxl.StringConst;
 import de.dailab.vsdt.vxl.Tail;
 import de.dailab.vsdt.vxl.Term;
-import de.dailab.vsdt.vxl.VXLPackage;
 import de.dailab.vsdt.vxl.Value;
 import de.dailab.vsdt.vxl.Variable;
+import de.dailab.vsdt.vxl.VxlPackage;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see de.dailab.vsdt.vxl.VXLPackage
+ * @see de.dailab.vsdt.vxl.VxlPackage
  * @generated
  */
-public class VXLAdapterFactory extends AdapterFactoryImpl
+public class VxlAdapterFactory extends AdapterFactoryImpl
 {
   /**
    * The cached model package.
@@ -43,7 +43,7 @@ public class VXLAdapterFactory extends AdapterFactoryImpl
    * <!-- end-user-doc -->
    * @generated
    */
-  protected static VXLPackage modelPackage;
+  protected static VxlPackage modelPackage;
 
   /**
    * Creates an instance of the adapter factory.
@@ -51,11 +51,11 @@ public class VXLAdapterFactory extends AdapterFactoryImpl
    * <!-- end-user-doc -->
    * @generated
    */
-  public VXLAdapterFactory()
+  public VxlAdapterFactory()
   {
     if (modelPackage == null)
     {
-      modelPackage = VXLPackage.eINSTANCE;
+      modelPackage = VxlPackage.eINSTANCE;
     }
   }
 
@@ -87,8 +87,8 @@ public class VXLAdapterFactory extends AdapterFactoryImpl
    * <!-- end-user-doc -->
    * @generated
    */
-  protected VXLSwitch<Adapter> modelSwitch =
-    new VXLSwitch<Adapter>()
+  protected VxlSwitch<Adapter> modelSwitch =
+    new VxlSwitch<Adapter>()
     {
       @Override
       public Adapter caseTerm(Term object)
@@ -425,4 +425,4 @@ public class VXLAdapterFactory extends AdapterFactoryImpl
     return null;
   }
 
-} //VXLAdapterFactory
+} //VxlAdapterFactory

@@ -22,11 +22,11 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see de.dailab.vsdt.vxl.VXLFactory
+ * @see de.dailab.vsdt.vxl.VxlFactory
  * @model kind="package"
  * @generated
  */
-public interface VXLPackage extends EPackage
+public interface VxlPackage extends EPackage
 {
   /**
    * The package name.
@@ -34,7 +34,7 @@ public interface VXLPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNAME = "vXL";
+  String eNAME = "vxl";
 
   /**
    * The package namespace URI.
@@ -50,7 +50,7 @@ public interface VXLPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_PREFIX = "vXL";
+  String eNS_PREFIX = "vxl";
 
   /**
    * The singleton instance of the package.
@@ -58,14 +58,14 @@ public interface VXLPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  VXLPackage eINSTANCE = de.dailab.vsdt.vxl.impl.VXLPackageImpl.init();
+  VxlPackage eINSTANCE = de.dailab.vsdt.vxl.impl.VxlPackageImpl.init();
 
   /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.impl.TermImpl <em>Term</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see de.dailab.vsdt.vxl.impl.TermImpl
-   * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getTerm()
+   * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getTerm()
    * @generated
    */
   int TERM = 0;
@@ -102,7 +102,7 @@ public interface VXLPackage extends EPackage
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see de.dailab.vsdt.vxl.impl.HeadImpl
-   * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getHead()
+   * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getHead()
    * @generated
    */
   int HEAD = 1;
@@ -121,7 +121,7 @@ public interface VXLPackage extends EPackage
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see de.dailab.vsdt.vxl.impl.TailImpl
-   * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getTail()
+   * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getTail()
    * @generated
    */
   int TAIL = 2;
@@ -158,7 +158,7 @@ public interface VXLPackage extends EPackage
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see de.dailab.vsdt.vxl.impl.BracketTermImpl
-   * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getBracketTerm()
+   * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getBracketTerm()
    * @generated
    */
   int BRACKET_TERM = 3;
@@ -186,7 +186,7 @@ public interface VXLPackage extends EPackage
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see de.dailab.vsdt.vxl.impl.NegationImpl
-   * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getNegation()
+   * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getNegation()
    * @generated
    */
   int NEGATION = 4;
@@ -214,7 +214,7 @@ public interface VXLPackage extends EPackage
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see de.dailab.vsdt.vxl.impl.AtomImpl
-   * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getAtom()
+   * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getAtom()
    * @generated
    */
   int ATOM = 5;
@@ -233,7 +233,7 @@ public interface VXLPackage extends EPackage
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see de.dailab.vsdt.vxl.impl.VariableImpl
-   * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getVariable()
+   * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getVariable()
    * @generated
    */
   int VARIABLE = 6;
@@ -270,7 +270,7 @@ public interface VXLPackage extends EPackage
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see de.dailab.vsdt.vxl.impl.AccessorImpl
-   * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getAccessor()
+   * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getAccessor()
    * @generated
    */
   int ACCESSOR = 7;
@@ -298,7 +298,7 @@ public interface VXLPackage extends EPackage
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see de.dailab.vsdt.vxl.impl.ArrayAccessorImpl
-   * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getArrayAccessor()
+   * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getArrayAccessor()
    * @generated
    */
   int ARRAY_ACCESSOR = 8;
@@ -335,7 +335,7 @@ public interface VXLPackage extends EPackage
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see de.dailab.vsdt.vxl.impl.FieldAccessorImpl
-   * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getFieldAccessor()
+   * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getFieldAccessor()
    * @generated
    */
   int FIELD_ACCESSOR = 9;
@@ -372,10 +372,19 @@ public interface VXLPackage extends EPackage
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see de.dailab.vsdt.vxl.impl.ValueImpl
-   * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getValue()
+   * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getValue()
    * @generated
    */
   int VALUE = 10;
+
+  /**
+   * The feature id for the '<em><b>Const</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VALUE__CONST = ATOM_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Value</em>' class.
@@ -384,14 +393,14 @@ public interface VXLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VALUE_FEATURE_COUNT = ATOM_FEATURE_COUNT + 0;
+  int VALUE_FEATURE_COUNT = ATOM_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.impl.StringConstImpl <em>String Const</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see de.dailab.vsdt.vxl.impl.StringConstImpl
-   * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getStringConst()
+   * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getStringConst()
    * @generated
    */
   int STRING_CONST = 11;
@@ -403,7 +412,7 @@ public interface VXLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STRING_CONST__CONST = VALUE_FEATURE_COUNT + 0;
+  int STRING_CONST__CONST = VALUE__CONST;
 
   /**
    * The number of structural features of the '<em>String Const</em>' class.
@@ -412,14 +421,14 @@ public interface VXLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STRING_CONST_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
+  int STRING_CONST_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.impl.NumericConstImpl <em>Numeric Const</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see de.dailab.vsdt.vxl.impl.NumericConstImpl
-   * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getNumericConst()
+   * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getNumericConst()
    * @generated
    */
   int NUMERIC_CONST = 12;
@@ -431,7 +440,7 @@ public interface VXLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NUMERIC_CONST__CONST = VALUE_FEATURE_COUNT + 0;
+  int NUMERIC_CONST__CONST = VALUE__CONST;
 
   /**
    * The number of structural features of the '<em>Numeric Const</em>' class.
@@ -440,26 +449,26 @@ public interface VXLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NUMERIC_CONST_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
+  int NUMERIC_CONST_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.impl.BooleanConstImpl <em>Boolean Const</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see de.dailab.vsdt.vxl.impl.BooleanConstImpl
-   * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getBooleanConst()
+   * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getBooleanConst()
    * @generated
    */
   int BOOLEAN_CONST = 13;
 
   /**
-   * The feature id for the '<em><b>Is True</b></em>' attribute.
+   * The feature id for the '<em><b>Const</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BOOLEAN_CONST__IS_TRUE = VALUE_FEATURE_COUNT + 0;
+  int BOOLEAN_CONST__CONST = VALUE__CONST;
 
   /**
    * The number of structural features of the '<em>Boolean Const</em>' class.
@@ -468,14 +477,14 @@ public interface VXLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BOOLEAN_CONST_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
+  int BOOLEAN_CONST_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.impl.NullConstImpl <em>Null Const</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see de.dailab.vsdt.vxl.impl.NullConstImpl
-   * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getNullConst()
+   * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getNullConst()
    * @generated
    */
   int NULL_CONST = 14;
@@ -487,7 +496,7 @@ public interface VXLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NULL_CONST__CONST = VALUE_FEATURE_COUNT + 0;
+  int NULL_CONST__CONST = VALUE__CONST;
 
   /**
    * The number of structural features of the '<em>Null Const</em>' class.
@@ -496,14 +505,14 @@ public interface VXLPackage extends EPackage
    * @generated
    * @ordered
    */
-  int NULL_CONST_FEATURE_COUNT = VALUE_FEATURE_COUNT + 1;
+  int NULL_CONST_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.Operator <em>Operator</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see de.dailab.vsdt.vxl.Operator
-   * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getOperator()
+   * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getOperator()
    * @generated
    */
   int OPERATOR = 15;
@@ -741,6 +750,17 @@ public interface VXLPackage extends EPackage
   EClass getValue();
 
   /**
+   * Returns the meta object for the attribute '{@link de.dailab.vsdt.vxl.Value#getConst <em>Const</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Const</em>'.
+   * @see de.dailab.vsdt.vxl.Value#getConst()
+   * @see #getValue()
+   * @generated
+   */
+  EAttribute getValue_Const();
+
+  /**
    * Returns the meta object for class '{@link de.dailab.vsdt.vxl.StringConst <em>String Const</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -749,17 +769,6 @@ public interface VXLPackage extends EPackage
    * @generated
    */
   EClass getStringConst();
-
-  /**
-   * Returns the meta object for the attribute '{@link de.dailab.vsdt.vxl.StringConst#getConst <em>Const</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Const</em>'.
-   * @see de.dailab.vsdt.vxl.StringConst#getConst()
-   * @see #getStringConst()
-   * @generated
-   */
-  EAttribute getStringConst_Const();
 
   /**
    * Returns the meta object for class '{@link de.dailab.vsdt.vxl.NumericConst <em>Numeric Const</em>}'.
@@ -772,17 +781,6 @@ public interface VXLPackage extends EPackage
   EClass getNumericConst();
 
   /**
-   * Returns the meta object for the attribute '{@link de.dailab.vsdt.vxl.NumericConst#getConst <em>Const</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Const</em>'.
-   * @see de.dailab.vsdt.vxl.NumericConst#getConst()
-   * @see #getNumericConst()
-   * @generated
-   */
-  EAttribute getNumericConst_Const();
-
-  /**
    * Returns the meta object for class '{@link de.dailab.vsdt.vxl.BooleanConst <em>Boolean Const</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -793,17 +791,6 @@ public interface VXLPackage extends EPackage
   EClass getBooleanConst();
 
   /**
-   * Returns the meta object for the attribute '{@link de.dailab.vsdt.vxl.BooleanConst#isIsTrue <em>Is True</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Is True</em>'.
-   * @see de.dailab.vsdt.vxl.BooleanConst#isIsTrue()
-   * @see #getBooleanConst()
-   * @generated
-   */
-  EAttribute getBooleanConst_IsTrue();
-
-  /**
    * Returns the meta object for class '{@link de.dailab.vsdt.vxl.NullConst <em>Null Const</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -812,17 +799,6 @@ public interface VXLPackage extends EPackage
    * @generated
    */
   EClass getNullConst();
-
-  /**
-   * Returns the meta object for the attribute '{@link de.dailab.vsdt.vxl.NullConst#getConst <em>Const</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Const</em>'.
-   * @see de.dailab.vsdt.vxl.NullConst#getConst()
-   * @see #getNullConst()
-   * @generated
-   */
-  EAttribute getNullConst_Const();
 
   /**
    * Returns the meta object for enum '{@link de.dailab.vsdt.vxl.Operator <em>Operator</em>}'.
@@ -841,7 +817,7 @@ public interface VXLPackage extends EPackage
    * @return the factory that creates the instances of the model.
    * @generated
    */
-  VXLFactory getVXLFactory();
+  VxlFactory getVxlFactory();
 
   /**
    * <!-- begin-user-doc -->
@@ -862,7 +838,7 @@ public interface VXLPackage extends EPackage
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see de.dailab.vsdt.vxl.impl.TermImpl
-     * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getTerm()
+     * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getTerm()
      * @generated
      */
     EClass TERM = eINSTANCE.getTerm();
@@ -888,7 +864,7 @@ public interface VXLPackage extends EPackage
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see de.dailab.vsdt.vxl.impl.HeadImpl
-     * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getHead()
+     * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getHead()
      * @generated
      */
     EClass HEAD = eINSTANCE.getHead();
@@ -898,7 +874,7 @@ public interface VXLPackage extends EPackage
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see de.dailab.vsdt.vxl.impl.TailImpl
-     * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getTail()
+     * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getTail()
      * @generated
      */
     EClass TAIL = eINSTANCE.getTail();
@@ -924,7 +900,7 @@ public interface VXLPackage extends EPackage
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see de.dailab.vsdt.vxl.impl.BracketTermImpl
-     * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getBracketTerm()
+     * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getBracketTerm()
      * @generated
      */
     EClass BRACKET_TERM = eINSTANCE.getBracketTerm();
@@ -942,7 +918,7 @@ public interface VXLPackage extends EPackage
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see de.dailab.vsdt.vxl.impl.NegationImpl
-     * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getNegation()
+     * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getNegation()
      * @generated
      */
     EClass NEGATION = eINSTANCE.getNegation();
@@ -960,7 +936,7 @@ public interface VXLPackage extends EPackage
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see de.dailab.vsdt.vxl.impl.AtomImpl
-     * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getAtom()
+     * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getAtom()
      * @generated
      */
     EClass ATOM = eINSTANCE.getAtom();
@@ -970,7 +946,7 @@ public interface VXLPackage extends EPackage
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see de.dailab.vsdt.vxl.impl.VariableImpl
-     * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getVariable()
+     * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getVariable()
      * @generated
      */
     EClass VARIABLE = eINSTANCE.getVariable();
@@ -996,7 +972,7 @@ public interface VXLPackage extends EPackage
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see de.dailab.vsdt.vxl.impl.AccessorImpl
-     * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getAccessor()
+     * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getAccessor()
      * @generated
      */
     EClass ACCESSOR = eINSTANCE.getAccessor();
@@ -1014,7 +990,7 @@ public interface VXLPackage extends EPackage
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see de.dailab.vsdt.vxl.impl.ArrayAccessorImpl
-     * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getArrayAccessor()
+     * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getArrayAccessor()
      * @generated
      */
     EClass ARRAY_ACCESSOR = eINSTANCE.getArrayAccessor();
@@ -1032,7 +1008,7 @@ public interface VXLPackage extends EPackage
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see de.dailab.vsdt.vxl.impl.FieldAccessorImpl
-     * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getFieldAccessor()
+     * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getFieldAccessor()
      * @generated
      */
     EClass FIELD_ACCESSOR = eINSTANCE.getFieldAccessor();
@@ -1050,93 +1026,69 @@ public interface VXLPackage extends EPackage
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see de.dailab.vsdt.vxl.impl.ValueImpl
-     * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getValue()
+     * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getValue()
      * @generated
      */
     EClass VALUE = eINSTANCE.getValue();
+
+    /**
+     * The meta object literal for the '<em><b>Const</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VALUE__CONST = eINSTANCE.getValue_Const();
 
     /**
      * The meta object literal for the '{@link de.dailab.vsdt.vxl.impl.StringConstImpl <em>String Const</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see de.dailab.vsdt.vxl.impl.StringConstImpl
-     * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getStringConst()
+     * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getStringConst()
      * @generated
      */
     EClass STRING_CONST = eINSTANCE.getStringConst();
-
-    /**
-     * The meta object literal for the '<em><b>Const</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute STRING_CONST__CONST = eINSTANCE.getStringConst_Const();
 
     /**
      * The meta object literal for the '{@link de.dailab.vsdt.vxl.impl.NumericConstImpl <em>Numeric Const</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see de.dailab.vsdt.vxl.impl.NumericConstImpl
-     * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getNumericConst()
+     * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getNumericConst()
      * @generated
      */
     EClass NUMERIC_CONST = eINSTANCE.getNumericConst();
-
-    /**
-     * The meta object literal for the '<em><b>Const</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute NUMERIC_CONST__CONST = eINSTANCE.getNumericConst_Const();
 
     /**
      * The meta object literal for the '{@link de.dailab.vsdt.vxl.impl.BooleanConstImpl <em>Boolean Const</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see de.dailab.vsdt.vxl.impl.BooleanConstImpl
-     * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getBooleanConst()
+     * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getBooleanConst()
      * @generated
      */
     EClass BOOLEAN_CONST = eINSTANCE.getBooleanConst();
-
-    /**
-     * The meta object literal for the '<em><b>Is True</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute BOOLEAN_CONST__IS_TRUE = eINSTANCE.getBooleanConst_IsTrue();
 
     /**
      * The meta object literal for the '{@link de.dailab.vsdt.vxl.impl.NullConstImpl <em>Null Const</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see de.dailab.vsdt.vxl.impl.NullConstImpl
-     * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getNullConst()
+     * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getNullConst()
      * @generated
      */
     EClass NULL_CONST = eINSTANCE.getNullConst();
-
-    /**
-     * The meta object literal for the '<em><b>Const</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute NULL_CONST__CONST = eINSTANCE.getNullConst_Const();
 
     /**
      * The meta object literal for the '{@link de.dailab.vsdt.vxl.Operator <em>Operator</em>}' enum.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see de.dailab.vsdt.vxl.Operator
-     * @see de.dailab.vsdt.vxl.impl.VXLPackageImpl#getOperator()
+     * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getOperator()
      * @generated
      */
     EEnum OPERATOR = eINSTANCE.getOperator();
 
   }
 
-} //VXLPackage
+} //VxlPackage

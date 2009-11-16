@@ -26,10 +26,10 @@ import de.dailab.vsdt.vxl.Operator;
 import de.dailab.vsdt.vxl.StringConst;
 import de.dailab.vsdt.vxl.Tail;
 import de.dailab.vsdt.vxl.Term;
-import de.dailab.vsdt.vxl.VXLFactory;
-import de.dailab.vsdt.vxl.VXLPackage;
 import de.dailab.vsdt.vxl.Value;
 import de.dailab.vsdt.vxl.Variable;
+import de.dailab.vsdt.vxl.VxlFactory;
+import de.dailab.vsdt.vxl.VxlPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,7 +37,7 @@ import de.dailab.vsdt.vxl.Variable;
  * <!-- end-user-doc -->
  * @generated
  */
-public class VXLPackageImpl extends EPackageImpl implements VXLPackage
+public class VxlPackageImpl extends EPackageImpl implements VxlPackage
 {
   /**
    * <!-- begin-user-doc -->
@@ -162,13 +162,13 @@ public class VXLPackageImpl extends EPackageImpl implements VXLPackage
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see org.eclipse.emf.ecore.EPackage.Registry
-   * @see de.dailab.vsdt.vxl.VXLPackage#eNS_URI
+   * @see de.dailab.vsdt.vxl.VxlPackage#eNS_URI
    * @see #init()
    * @generated
    */
-  private VXLPackageImpl()
+  private VxlPackageImpl()
   {
-    super(eNS_URI, VXLFactory.eINSTANCE);
+    super(eNS_URI, VxlFactory.eINSTANCE);
   }
 
   /**
@@ -181,7 +181,7 @@ public class VXLPackageImpl extends EPackageImpl implements VXLPackage
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
    * 
-   * <p>This method is used to initialize {@link VXLPackage#eINSTANCE} when that field is accessed.
+   * <p>This method is used to initialize {@link VxlPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -190,28 +190,28 @@ public class VXLPackageImpl extends EPackageImpl implements VXLPackage
    * @see #initializePackageContents()
    * @generated
    */
-  public static VXLPackage init()
+  public static VxlPackage init()
   {
-    if (isInited) return (VXLPackage)EPackage.Registry.INSTANCE.getEPackage(VXLPackage.eNS_URI);
+    if (isInited) return (VxlPackage)EPackage.Registry.INSTANCE.getEPackage(VxlPackage.eNS_URI);
 
     // Obtain or create and register package
-    VXLPackageImpl theVXLPackage = (VXLPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof VXLPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new VXLPackageImpl());
+    VxlPackageImpl theVxlPackage = (VxlPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof VxlPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new VxlPackageImpl());
 
     isInited = true;
 
     // Create package meta-data objects
-    theVXLPackage.createPackageContents();
+    theVxlPackage.createPackageContents();
 
     // Initialize created meta-data
-    theVXLPackage.initializePackageContents();
+    theVxlPackage.initializePackageContents();
 
     // Mark meta-data to indicate it can't be changed
-    theVXLPackage.freeze();
+    theVxlPackage.freeze();
 
   
     // Update the registry and return the package
-    EPackage.Registry.INSTANCE.put(VXLPackage.eNS_URI, theVXLPackage);
-    return theVXLPackage;
+    EPackage.Registry.INSTANCE.put(VxlPackage.eNS_URI, theVxlPackage);
+    return theVxlPackage;
   }
 
   /**
@@ -439,9 +439,9 @@ public class VXLPackageImpl extends EPackageImpl implements VXLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getStringConst()
+  public EAttribute getValue_Const()
   {
-    return stringConstEClass;
+    return (EAttribute)valueEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -449,9 +449,9 @@ public class VXLPackageImpl extends EPackageImpl implements VXLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getStringConst_Const()
+  public EClass getStringConst()
   {
-    return (EAttribute)stringConstEClass.getEStructuralFeatures().get(0);
+    return stringConstEClass;
   }
 
   /**
@@ -469,29 +469,9 @@ public class VXLPackageImpl extends EPackageImpl implements VXLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getNumericConst_Const()
-  {
-    return (EAttribute)numericConstEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getBooleanConst()
   {
     return booleanConstEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getBooleanConst_IsTrue()
-  {
-    return (EAttribute)booleanConstEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -509,16 +489,6 @@ public class VXLPackageImpl extends EPackageImpl implements VXLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getNullConst_Const()
-  {
-    return (EAttribute)nullConstEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EEnum getOperator()
   {
     return operatorEEnum;
@@ -529,9 +499,9 @@ public class VXLPackageImpl extends EPackageImpl implements VXLPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public VXLFactory getVXLFactory()
+  public VxlFactory getVxlFactory()
   {
-    return (VXLFactory)getEFactoryInstance();
+    return (VxlFactory)getEFactoryInstance();
   }
 
   /**
@@ -586,18 +556,15 @@ public class VXLPackageImpl extends EPackageImpl implements VXLPackage
     createEAttribute(fieldAccessorEClass, FIELD_ACCESSOR__NAME);
 
     valueEClass = createEClass(VALUE);
+    createEAttribute(valueEClass, VALUE__CONST);
 
     stringConstEClass = createEClass(STRING_CONST);
-    createEAttribute(stringConstEClass, STRING_CONST__CONST);
 
     numericConstEClass = createEClass(NUMERIC_CONST);
-    createEAttribute(numericConstEClass, NUMERIC_CONST__CONST);
 
     booleanConstEClass = createEClass(BOOLEAN_CONST);
-    createEAttribute(booleanConstEClass, BOOLEAN_CONST__IS_TRUE);
 
     nullConstEClass = createEClass(NULL_CONST);
-    createEAttribute(nullConstEClass, NULL_CONST__CONST);
 
     // Create enums
     operatorEEnum = createEEnum(OPERATOR);
@@ -677,18 +644,15 @@ public class VXLPackageImpl extends EPackageImpl implements VXLPackage
     initEAttribute(getFieldAccessor_Name(), ecorePackage.getEString(), "name", null, 0, 1, FieldAccessor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(valueEClass, Value.class, "Value", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getValue_Const(), ecorePackage.getEString(), "const", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stringConstEClass, StringConst.class, "StringConst", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getStringConst_Const(), ecorePackage.getEString(), "const", null, 0, 1, StringConst.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(numericConstEClass, NumericConst.class, "NumericConst", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getNumericConst_Const(), ecorePackage.getEString(), "const", null, 0, 1, NumericConst.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(booleanConstEClass, BooleanConst.class, "BooleanConst", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getBooleanConst_IsTrue(), ecorePackage.getEBoolean(), "isTrue", null, 0, 1, BooleanConst.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(nullConstEClass, NullConst.class, "NullConst", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getNullConst_Const(), ecorePackage.getEString(), "const", null, 0, 1, NullConst.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(operatorEEnum, Operator.class, "Operator");
@@ -711,4 +675,4 @@ public class VXLPackageImpl extends EPackageImpl implements VXLPackage
     createResource(eNS_URI);
   }
 
-} //VXLPackageImpl
+} //VxlPackageImpl

@@ -49,7 +49,7 @@ public class BpelExpressionVisitor extends VsdtExpressionVisitor {
 	
 	@Override
 	protected void visit(BooleanConst booleanConst) {
-		buffer.append(booleanConst.isIsTrue() ? "true()" : "false()");
+		buffer.append(booleanConst.getConst() + "()");
 	}
 	
 	@Override

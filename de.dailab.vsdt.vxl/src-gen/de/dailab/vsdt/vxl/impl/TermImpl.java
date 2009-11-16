@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import de.dailab.vsdt.vxl.Head;
 import de.dailab.vsdt.vxl.Tail;
 import de.dailab.vsdt.vxl.Term;
-import de.dailab.vsdt.vxl.VXLPackage;
+import de.dailab.vsdt.vxl.VxlPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -71,7 +71,7 @@ public class TermImpl extends MinimalEObjectImpl.Container implements Term
   @Override
   protected EClass eStaticClass()
   {
-    return VXLPackage.Literals.TERM;
+    return VxlPackage.Literals.TERM;
   }
 
   /**
@@ -95,7 +95,7 @@ public class TermImpl extends MinimalEObjectImpl.Container implements Term
     head = newHead;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VXLPackage.TERM__HEAD, oldHead, newHead);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.TERM__HEAD, oldHead, newHead);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -112,14 +112,14 @@ public class TermImpl extends MinimalEObjectImpl.Container implements Term
     {
       NotificationChain msgs = null;
       if (head != null)
-        msgs = ((InternalEObject)head).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VXLPackage.TERM__HEAD, null, msgs);
+        msgs = ((InternalEObject)head).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.TERM__HEAD, null, msgs);
       if (newHead != null)
-        msgs = ((InternalEObject)newHead).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VXLPackage.TERM__HEAD, null, msgs);
+        msgs = ((InternalEObject)newHead).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.TERM__HEAD, null, msgs);
       msgs = basicSetHead(newHead, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VXLPackage.TERM__HEAD, newHead, newHead));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.TERM__HEAD, newHead, newHead));
   }
 
   /**
@@ -143,7 +143,7 @@ public class TermImpl extends MinimalEObjectImpl.Container implements Term
     tail = newTail;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VXLPackage.TERM__TAIL, oldTail, newTail);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.TERM__TAIL, oldTail, newTail);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -160,14 +160,14 @@ public class TermImpl extends MinimalEObjectImpl.Container implements Term
     {
       NotificationChain msgs = null;
       if (tail != null)
-        msgs = ((InternalEObject)tail).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VXLPackage.TERM__TAIL, null, msgs);
+        msgs = ((InternalEObject)tail).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.TERM__TAIL, null, msgs);
       if (newTail != null)
-        msgs = ((InternalEObject)newTail).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VXLPackage.TERM__TAIL, null, msgs);
+        msgs = ((InternalEObject)newTail).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.TERM__TAIL, null, msgs);
       msgs = basicSetTail(newTail, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VXLPackage.TERM__TAIL, newTail, newTail));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.TERM__TAIL, newTail, newTail));
   }
 
   /**
@@ -180,9 +180,9 @@ public class TermImpl extends MinimalEObjectImpl.Container implements Term
   {
     switch (featureID)
     {
-      case VXLPackage.TERM__HEAD:
+      case VxlPackage.TERM__HEAD:
         return basicSetHead(null, msgs);
-      case VXLPackage.TERM__TAIL:
+      case VxlPackage.TERM__TAIL:
         return basicSetTail(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -198,9 +198,9 @@ public class TermImpl extends MinimalEObjectImpl.Container implements Term
   {
     switch (featureID)
     {
-      case VXLPackage.TERM__HEAD:
+      case VxlPackage.TERM__HEAD:
         return getHead();
-      case VXLPackage.TERM__TAIL:
+      case VxlPackage.TERM__TAIL:
         return getTail();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -216,10 +216,10 @@ public class TermImpl extends MinimalEObjectImpl.Container implements Term
   {
     switch (featureID)
     {
-      case VXLPackage.TERM__HEAD:
+      case VxlPackage.TERM__HEAD:
         setHead((Head)newValue);
         return;
-      case VXLPackage.TERM__TAIL:
+      case VxlPackage.TERM__TAIL:
         setTail((Tail)newValue);
         return;
     }
@@ -236,10 +236,10 @@ public class TermImpl extends MinimalEObjectImpl.Container implements Term
   {
     switch (featureID)
     {
-      case VXLPackage.TERM__HEAD:
+      case VxlPackage.TERM__HEAD:
         setHead((Head)null);
         return;
-      case VXLPackage.TERM__TAIL:
+      case VxlPackage.TERM__TAIL:
         setTail((Tail)null);
         return;
     }
@@ -256,9 +256,9 @@ public class TermImpl extends MinimalEObjectImpl.Container implements Term
   {
     switch (featureID)
     {
-      case VXLPackage.TERM__HEAD:
+      case VxlPackage.TERM__HEAD:
         return head != null;
-      case VXLPackage.TERM__TAIL:
+      case VxlPackage.TERM__TAIL:
         return tail != null;
     }
     return super.eIsSet(featureID);

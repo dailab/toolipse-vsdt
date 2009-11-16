@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import de.dailab.vsdt.vxl.FieldAccessor;
-import de.dailab.vsdt.vxl.VXLPackage;
+import de.dailab.vsdt.vxl.VxlPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -65,7 +65,7 @@ public class FieldAccessorImpl extends AccessorImpl implements FieldAccessor
   @Override
   protected EClass eStaticClass()
   {
-    return VXLPackage.Literals.FIELD_ACCESSOR;
+    return VxlPackage.Literals.FIELD_ACCESSOR;
   }
 
   /**
@@ -88,7 +88,7 @@ public class FieldAccessorImpl extends AccessorImpl implements FieldAccessor
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VXLPackage.FIELD_ACCESSOR__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.FIELD_ACCESSOR__NAME, oldName, name));
   }
 
   /**
@@ -101,7 +101,7 @@ public class FieldAccessorImpl extends AccessorImpl implements FieldAccessor
   {
     switch (featureID)
     {
-      case VXLPackage.FIELD_ACCESSOR__NAME:
+      case VxlPackage.FIELD_ACCESSOR__NAME:
         return getName();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -117,7 +117,7 @@ public class FieldAccessorImpl extends AccessorImpl implements FieldAccessor
   {
     switch (featureID)
     {
-      case VXLPackage.FIELD_ACCESSOR__NAME:
+      case VxlPackage.FIELD_ACCESSOR__NAME:
         setName((String)newValue);
         return;
     }
@@ -134,7 +134,7 @@ public class FieldAccessorImpl extends AccessorImpl implements FieldAccessor
   {
     switch (featureID)
     {
-      case VXLPackage.FIELD_ACCESSOR__NAME:
+      case VxlPackage.FIELD_ACCESSOR__NAME:
         setName(NAME_EDEFAULT);
         return;
     }
@@ -151,7 +151,7 @@ public class FieldAccessorImpl extends AccessorImpl implements FieldAccessor
   {
     switch (featureID)
     {
-      case VXLPackage.FIELD_ACCESSOR__NAME:
+      case VxlPackage.FIELD_ACCESSOR__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);

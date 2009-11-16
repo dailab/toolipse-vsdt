@@ -368,7 +368,9 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		
 		//NumericConst:
 		//  const=NUMERIC; 
-		////NumericConst:	const = INT; // keine kommazahlen
+		////NumericConst:	const = INT; // keine kommazahlen 
+		//	     
+		//// BooleanConst:	isTrue ?= "true" | "false";
 		public ParserRule getRule() { return rule; }
 
 		//const=NUMERIC
@@ -380,26 +382,27 @@ public class VxlGrammarAccess implements IGrammarAccess {
 
 	public class BooleanConstElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BooleanConst");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Assignment cIsTrueAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
-		private final Keyword cIsTrueTrueKeyword_0_0 = (Keyword)cIsTrueAssignment_0.eContents().get(0);
-		private final Keyword cFalseKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Assignment cConstAssignment = (Assignment)rule.eContents().get(1);
+		private final Alternatives cConstAlternatives_0 = (Alternatives)cConstAssignment.eContents().get(0);
+		private final Keyword cConstTrueKeyword_0_0 = (Keyword)cConstAlternatives_0.eContents().get(0);
+		private final Keyword cConstFalseKeyword_0_1 = (Keyword)cConstAlternatives_0.eContents().get(1);
 		
 		//BooleanConst:
-		//  isTrue?="true"|"false";
+		//  const=( "true" | "false" ); 
+		//// BooleanConst:	isTrue ?= "true" | "false";
 		public ParserRule getRule() { return rule; }
 
-		//isTrue?="true"|"false"
-		public Alternatives getAlternatives() { return cAlternatives; }
+		//const=( "true" | "false" )
+		public Assignment getConstAssignment() { return cConstAssignment; }
 
-		//isTrue?="true"
-		public Assignment getIsTrueAssignment_0() { return cIsTrueAssignment_0; }
+		//"true"|"false"
+		public Alternatives getConstAlternatives_0() { return cConstAlternatives_0; }
 
 		//"true"
-		public Keyword getIsTrueTrueKeyword_0_0() { return cIsTrueTrueKeyword_0_0; }
+		public Keyword getConstTrueKeyword_0_0() { return cConstTrueKeyword_0_0; }
 
 		//"false"
-		public Keyword getFalseKeyword_1() { return cFalseKeyword_1; }
+		public Keyword getConstFalseKeyword_0_1() { return cConstFalseKeyword_0_1; }
 	}
 
 	public class NullConstElements implements IParserRuleAccess {
@@ -817,7 +820,9 @@ public class VxlGrammarAccess implements IGrammarAccess {
 
 	//NumericConst:
 	//  const=NUMERIC; 
-	////NumericConst:	const = INT; // keine kommazahlen
+	////NumericConst:	const = INT; // keine kommazahlen 
+	//	     
+	//// BooleanConst:	isTrue ?= "true" | "false";
 	public NumericConstElements getNumericConstAccess() {
 		return (pNumericConst != null) ? pNumericConst : (pNumericConst = new NumericConstElements());
 	}
@@ -827,7 +832,8 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	}
 
 	//BooleanConst:
-	//  isTrue?="true"|"false";
+	//  const=( "true" | "false" ); 
+	//// BooleanConst:	isTrue ?= "true" | "false";
 	public BooleanConstElements getBooleanConstAccess() {
 		return (pBooleanConst != null) ? pBooleanConst : (pBooleanConst = new BooleanConstElements());
 	}

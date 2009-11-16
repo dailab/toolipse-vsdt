@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import de.dailab.vsdt.vxl.Operator;
 import de.dailab.vsdt.vxl.Tail;
 import de.dailab.vsdt.vxl.Term;
-import de.dailab.vsdt.vxl.VXLPackage;
+import de.dailab.vsdt.vxl.VxlPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -81,7 +81,7 @@ public class TailImpl extends MinimalEObjectImpl.Container implements Tail
   @Override
   protected EClass eStaticClass()
   {
-    return VXLPackage.Literals.TAIL;
+    return VxlPackage.Literals.TAIL;
   }
 
   /**
@@ -104,7 +104,7 @@ public class TailImpl extends MinimalEObjectImpl.Container implements Tail
     Operator oldOperator = operator;
     operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VXLPackage.TAIL__OPERATOR, oldOperator, operator));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.TAIL__OPERATOR, oldOperator, operator));
   }
 
   /**
@@ -128,7 +128,7 @@ public class TailImpl extends MinimalEObjectImpl.Container implements Tail
     term = newTerm;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VXLPackage.TAIL__TERM, oldTerm, newTerm);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.TAIL__TERM, oldTerm, newTerm);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -145,14 +145,14 @@ public class TailImpl extends MinimalEObjectImpl.Container implements Tail
     {
       NotificationChain msgs = null;
       if (term != null)
-        msgs = ((InternalEObject)term).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VXLPackage.TAIL__TERM, null, msgs);
+        msgs = ((InternalEObject)term).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.TAIL__TERM, null, msgs);
       if (newTerm != null)
-        msgs = ((InternalEObject)newTerm).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VXLPackage.TAIL__TERM, null, msgs);
+        msgs = ((InternalEObject)newTerm).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.TAIL__TERM, null, msgs);
       msgs = basicSetTerm(newTerm, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VXLPackage.TAIL__TERM, newTerm, newTerm));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.TAIL__TERM, newTerm, newTerm));
   }
 
   /**
@@ -165,7 +165,7 @@ public class TailImpl extends MinimalEObjectImpl.Container implements Tail
   {
     switch (featureID)
     {
-      case VXLPackage.TAIL__TERM:
+      case VxlPackage.TAIL__TERM:
         return basicSetTerm(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -181,9 +181,9 @@ public class TailImpl extends MinimalEObjectImpl.Container implements Tail
   {
     switch (featureID)
     {
-      case VXLPackage.TAIL__OPERATOR:
+      case VxlPackage.TAIL__OPERATOR:
         return getOperator();
-      case VXLPackage.TAIL__TERM:
+      case VxlPackage.TAIL__TERM:
         return getTerm();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -199,10 +199,10 @@ public class TailImpl extends MinimalEObjectImpl.Container implements Tail
   {
     switch (featureID)
     {
-      case VXLPackage.TAIL__OPERATOR:
+      case VxlPackage.TAIL__OPERATOR:
         setOperator((Operator)newValue);
         return;
-      case VXLPackage.TAIL__TERM:
+      case VxlPackage.TAIL__TERM:
         setTerm((Term)newValue);
         return;
     }
@@ -219,10 +219,10 @@ public class TailImpl extends MinimalEObjectImpl.Container implements Tail
   {
     switch (featureID)
     {
-      case VXLPackage.TAIL__OPERATOR:
+      case VxlPackage.TAIL__OPERATOR:
         setOperator(OPERATOR_EDEFAULT);
         return;
-      case VXLPackage.TAIL__TERM:
+      case VxlPackage.TAIL__TERM:
         setTerm((Term)null);
         return;
     }
@@ -239,9 +239,9 @@ public class TailImpl extends MinimalEObjectImpl.Container implements Tail
   {
     switch (featureID)
     {
-      case VXLPackage.TAIL__OPERATOR:
+      case VxlPackage.TAIL__OPERATOR:
         return operator != OPERATOR_EDEFAULT;
-      case VXLPackage.TAIL__TERM:
+      case VxlPackage.TAIL__TERM:
         return term != null;
     }
     return super.eIsSet(featureID);

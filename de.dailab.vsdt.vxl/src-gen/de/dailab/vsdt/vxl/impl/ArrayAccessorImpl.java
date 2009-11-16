@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import de.dailab.vsdt.vxl.ArrayAccessor;
 import de.dailab.vsdt.vxl.Term;
-import de.dailab.vsdt.vxl.VXLPackage;
+import de.dailab.vsdt.vxl.VxlPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -58,7 +58,7 @@ public class ArrayAccessorImpl extends AccessorImpl implements ArrayAccessor
   @Override
   protected EClass eStaticClass()
   {
-    return VXLPackage.Literals.ARRAY_ACCESSOR;
+    return VxlPackage.Literals.ARRAY_ACCESSOR;
   }
 
   /**
@@ -82,7 +82,7 @@ public class ArrayAccessorImpl extends AccessorImpl implements ArrayAccessor
     index = newIndex;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VXLPackage.ARRAY_ACCESSOR__INDEX, oldIndex, newIndex);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.ARRAY_ACCESSOR__INDEX, oldIndex, newIndex);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -99,14 +99,14 @@ public class ArrayAccessorImpl extends AccessorImpl implements ArrayAccessor
     {
       NotificationChain msgs = null;
       if (index != null)
-        msgs = ((InternalEObject)index).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VXLPackage.ARRAY_ACCESSOR__INDEX, null, msgs);
+        msgs = ((InternalEObject)index).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.ARRAY_ACCESSOR__INDEX, null, msgs);
       if (newIndex != null)
-        msgs = ((InternalEObject)newIndex).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VXLPackage.ARRAY_ACCESSOR__INDEX, null, msgs);
+        msgs = ((InternalEObject)newIndex).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.ARRAY_ACCESSOR__INDEX, null, msgs);
       msgs = basicSetIndex(newIndex, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VXLPackage.ARRAY_ACCESSOR__INDEX, newIndex, newIndex));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.ARRAY_ACCESSOR__INDEX, newIndex, newIndex));
   }
 
   /**
@@ -119,7 +119,7 @@ public class ArrayAccessorImpl extends AccessorImpl implements ArrayAccessor
   {
     switch (featureID)
     {
-      case VXLPackage.ARRAY_ACCESSOR__INDEX:
+      case VxlPackage.ARRAY_ACCESSOR__INDEX:
         return basicSetIndex(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -135,7 +135,7 @@ public class ArrayAccessorImpl extends AccessorImpl implements ArrayAccessor
   {
     switch (featureID)
     {
-      case VXLPackage.ARRAY_ACCESSOR__INDEX:
+      case VxlPackage.ARRAY_ACCESSOR__INDEX:
         return getIndex();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -151,7 +151,7 @@ public class ArrayAccessorImpl extends AccessorImpl implements ArrayAccessor
   {
     switch (featureID)
     {
-      case VXLPackage.ARRAY_ACCESSOR__INDEX:
+      case VxlPackage.ARRAY_ACCESSOR__INDEX:
         setIndex((Term)newValue);
         return;
     }
@@ -168,7 +168,7 @@ public class ArrayAccessorImpl extends AccessorImpl implements ArrayAccessor
   {
     switch (featureID)
     {
-      case VXLPackage.ARRAY_ACCESSOR__INDEX:
+      case VxlPackage.ARRAY_ACCESSOR__INDEX:
         setIndex((Term)null);
         return;
     }
@@ -185,7 +185,7 @@ public class ArrayAccessorImpl extends AccessorImpl implements ArrayAccessor
   {
     switch (featureID)
     {
-      case VXLPackage.ARRAY_ACCESSOR__INDEX:
+      case VxlPackage.ARRAY_ACCESSOR__INDEX:
         return index != null;
     }
     return super.eIsSet(featureID);

@@ -12,8 +12,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import de.dailab.vsdt.vxl.Accessor;
-import de.dailab.vsdt.vxl.VXLPackage;
 import de.dailab.vsdt.vxl.Variable;
+import de.dailab.vsdt.vxl.VxlPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -79,7 +79,7 @@ public class VariableImpl extends AtomImpl implements Variable
   @Override
   protected EClass eStaticClass()
   {
-    return VXLPackage.Literals.VARIABLE;
+    return VxlPackage.Literals.VARIABLE;
   }
 
   /**
@@ -102,7 +102,7 @@ public class VariableImpl extends AtomImpl implements Variable
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VXLPackage.VARIABLE__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VARIABLE__NAME, oldName, name));
   }
 
   /**
@@ -126,7 +126,7 @@ public class VariableImpl extends AtomImpl implements Variable
     accessor = newAccessor;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VXLPackage.VARIABLE__ACCESSOR, oldAccessor, newAccessor);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.VARIABLE__ACCESSOR, oldAccessor, newAccessor);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -143,14 +143,14 @@ public class VariableImpl extends AtomImpl implements Variable
     {
       NotificationChain msgs = null;
       if (accessor != null)
-        msgs = ((InternalEObject)accessor).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VXLPackage.VARIABLE__ACCESSOR, null, msgs);
+        msgs = ((InternalEObject)accessor).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VARIABLE__ACCESSOR, null, msgs);
       if (newAccessor != null)
-        msgs = ((InternalEObject)newAccessor).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VXLPackage.VARIABLE__ACCESSOR, null, msgs);
+        msgs = ((InternalEObject)newAccessor).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VARIABLE__ACCESSOR, null, msgs);
       msgs = basicSetAccessor(newAccessor, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VXLPackage.VARIABLE__ACCESSOR, newAccessor, newAccessor));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VARIABLE__ACCESSOR, newAccessor, newAccessor));
   }
 
   /**
@@ -163,7 +163,7 @@ public class VariableImpl extends AtomImpl implements Variable
   {
     switch (featureID)
     {
-      case VXLPackage.VARIABLE__ACCESSOR:
+      case VxlPackage.VARIABLE__ACCESSOR:
         return basicSetAccessor(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -179,9 +179,9 @@ public class VariableImpl extends AtomImpl implements Variable
   {
     switch (featureID)
     {
-      case VXLPackage.VARIABLE__NAME:
+      case VxlPackage.VARIABLE__NAME:
         return getName();
-      case VXLPackage.VARIABLE__ACCESSOR:
+      case VxlPackage.VARIABLE__ACCESSOR:
         return getAccessor();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -197,10 +197,10 @@ public class VariableImpl extends AtomImpl implements Variable
   {
     switch (featureID)
     {
-      case VXLPackage.VARIABLE__NAME:
+      case VxlPackage.VARIABLE__NAME:
         setName((String)newValue);
         return;
-      case VXLPackage.VARIABLE__ACCESSOR:
+      case VxlPackage.VARIABLE__ACCESSOR:
         setAccessor((Accessor)newValue);
         return;
     }
@@ -217,10 +217,10 @@ public class VariableImpl extends AtomImpl implements Variable
   {
     switch (featureID)
     {
-      case VXLPackage.VARIABLE__NAME:
+      case VxlPackage.VARIABLE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case VXLPackage.VARIABLE__ACCESSOR:
+      case VxlPackage.VARIABLE__ACCESSOR:
         setAccessor((Accessor)null);
         return;
     }
@@ -237,9 +237,9 @@ public class VariableImpl extends AtomImpl implements Variable
   {
     switch (featureID)
     {
-      case VXLPackage.VARIABLE__NAME:
+      case VxlPackage.VARIABLE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case VXLPackage.VARIABLE__ACCESSOR:
+      case VxlPackage.VARIABLE__ACCESSOR:
         return accessor != null;
     }
     return super.eIsSet(featureID);

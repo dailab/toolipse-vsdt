@@ -784,13 +784,20 @@ ruleBooleanConst returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-((	
+(	
 	
-	    lv_isTrue_0='true' 
+	    lv_const_0=('true' 
     {
-        createLeafNode(grammarAccess.getBooleanConstAccess().getIsTrueTrueKeyword_0_0(), "isTrue"); 
+        createLeafNode(grammarAccess.getBooleanConstAccess().getConstTrueKeyword_0_0(), "const"); 
     }
 
+
+    |'false' 
+    {
+        createLeafNode(grammarAccess.getBooleanConstAccess().getConstFalseKeyword_0_1(), "const"); 
+    }
+
+)
  
 	    {
 	        if ($current==null) {
@@ -799,17 +806,12 @@ ruleBooleanConst returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "isTrue", true, "true", lastConsumedNode);
+	       		set($current, "const", /* lv_const_0 */ input.LT(-1), null, lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
 	    }
 	
-)
-    |'false' 
-    {
-        createLeafNode(grammarAccess.getBooleanConstAccess().getFalseKeyword_1(), null); 
-    }
 );
 
 

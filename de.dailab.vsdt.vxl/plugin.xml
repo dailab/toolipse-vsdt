@@ -6,8 +6,8 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.dailab.de/vsdt/VXL" 
-       class = "de.dailab.vsdt.vxl.VXLPackage"
-       genModel = "de/dailab/vsdt/VXL.genmodel" /> 
+       class = "de.dailab.vsdt.vxl.VxlPackage"
+       genModel = "de/dailab/vsdt/Vxl.genmodel" /> 
 	
   </extension>
 

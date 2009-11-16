@@ -32,25 +32,25 @@ T32 : '&&' ;
 T33 : '||' ;
 T34 : '++' ;
 
-// $ANTLR src "../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g" 1003
+// $ANTLR src "../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g" 1005
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g" 1005
+// $ANTLR src "../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g" 1007
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g" 1007
+// $ANTLR src "../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g" 1009
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g" 1009
+// $ANTLR src "../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g" 1011
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g" 1011
+// $ANTLR src "../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g" 1013
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g" 1013
+// $ANTLR src "../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g" 1015
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g" 1015
+// $ANTLR src "../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g" 1017
 RULE_ANY_OTHER : .;
 
 

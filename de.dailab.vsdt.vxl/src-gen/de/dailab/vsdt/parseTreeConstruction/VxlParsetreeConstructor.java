@@ -49,7 +49,7 @@ protected class ThisRootNode extends RootToken {
 			case 10: return new Value_Alternatives(this, this, 10, inst);
 			case 11: return new StringConst_ConstAssignment(this, this, 11, inst);
 			case 12: return new NumericConst_ConstAssignment(this, this, 12, inst);
-			case 13: return new BooleanConst_Alternatives(this, this, 13, inst);
+			case 13: return new BooleanConst_ConstAssignment(this, this, 13, inst);
 			case 14: return new NullConst_ConstAssignment(this, this, 14, inst);
 			default: return null;
 		}	
@@ -1331,13 +1331,13 @@ protected class Value_BooleanConstParserRuleCall_1 extends RuleCallToken {
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new BooleanConst_Alternatives(this, this, 0, inst);
+			case 0: return new BooleanConst_ConstAssignment(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(BooleanConst_Alternatives.class, current)) return null;
+		if(checkForRecursion(BooleanConst_ConstAssignment.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getBooleanConstRule().getType().getClassifier())) return null;
 		return current;
 	}
@@ -1465,7 +1465,9 @@ protected class StringConst_ConstAssignment extends AssignmentToken  {
  *
  * NumericConst:
  *   const=NUMERIC; 
- * //NumericConst:	const = INT; // keine kommazahlen
+ * //NumericConst:	const = INT; // keine kommazahlen 
+ * 	     
+ * // BooleanConst:	isTrue ?= "true" | "false";
  *
  **/
 
@@ -1509,26 +1511,25 @@ protected class NumericConst_ConstAssignment extends AssignmentToken  {
 /************ begin Rule BooleanConst ****************
  *
  * BooleanConst:
- *   isTrue?="true"|"false";
+ *   const=( "true" | "false" ); 
+ * // BooleanConst:	isTrue ?= "true" | "false";
  *
  **/
 
-// isTrue?="true"|"false"
-protected class BooleanConst_Alternatives extends AlternativesToken {
-
-	public BooleanConst_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+// const=( "true" | "false" )
+protected class BooleanConst_ConstAssignment extends AssignmentToken  {
+	
+	public BooleanConst_ConstAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
-	public Alternatives getGrammarElement() {
-		return grammarAccess.getBooleanConstAccess().getAlternatives();
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBooleanConstAccess().getConstAssignment();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new BooleanConst_IsTrueAssignment_0(parent, this, 0, inst);
-			case 1: return new BooleanConst_FalseKeyword_1(parent, this, 1, inst);
-			default: return null;
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
@@ -1536,57 +1537,23 @@ protected class BooleanConst_Alternatives extends AlternativesToken {
 		if(!current.isInstanceOf(grammarAccess.getBooleanConstRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
-}
-
-// isTrue?="true"
-protected class BooleanConst_IsTrueAssignment_0 extends AssignmentToken  {
-	
-	public BooleanConst_IsTrueAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Assignment getGrammarElement() {
-		return grammarAccess.getBooleanConstAccess().getIsTrueAssignment_0();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
-		}	
-	}	
-		
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("isTrue",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("isTrue");
-		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if((value = current.getConsumable("const",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("const");
+		if("true".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getBooleanConstAccess().getIsTrueTrueKeyword_0_0();
+			element = grammarAccess.getBooleanConstAccess().getConstTrueKeyword_0_0();
+			return obj;
+		}
+		if("false".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getBooleanConstAccess().getConstFalseKeyword_0_1();
 			return obj;
 		}
 		return null;
 	}
 
 }
-
-// "false"
-protected class BooleanConst_FalseKeyword_1 extends KeywordToken  {
-	
-	public BooleanConst_FalseKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Keyword getGrammarElement() {
-		return grammarAccess.getBooleanConstAccess().getFalseKeyword_1();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
-		}	
-	}	
-		
-}
-
 
 /************ end Rule BooleanConst ****************/
 

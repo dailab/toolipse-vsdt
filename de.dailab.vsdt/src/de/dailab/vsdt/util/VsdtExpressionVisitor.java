@@ -297,7 +297,7 @@ public class VsdtExpressionVisitor {
 	 * BooleanConst:	isTrue ?= "true" | "false";
 	 */
 	protected void visit(BooleanConst booleanConst) {
-		buffer.append(booleanConst.isIsTrue() ? "true" : "false");
+		buffer.append(booleanConst.getConst());
 	}
 	
 	/**

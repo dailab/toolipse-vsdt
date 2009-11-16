@@ -191,7 +191,8 @@ public class OrganizeAssignmentsDialog extends AbstractOrganizeElementsDialog<As
 			Property to= assignment.getTo();
 			Expression from= assignment.getFrom();
 			StringBuffer buffer= new StringBuffer();
-			buffer.append(VsdtHelper.getPropertyString(to, false));
+			buffer.append(assignment.getAssignTime() == AssignTimeType.START ? "S: " : "E: ");
+			buffer.append(VsdtHelper.getPropertyString(to, true));
 			if (assignment.getToQuery() != null) {
 				buffer.append(" / "); //$NON-NLS-1$
 				buffer.append(assignment.getToQuery());

@@ -9,17 +9,8 @@ Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
- org.antlr.runtime,
  org.eclipse.xtext.util,
- org.eclipse.xtext.generator;resolution:=optional,
- de.itemis.xtext.antlr;resolution:=optional,
- org.apache.commons.logging;resolution:=optional,
- org.eclipse.emf.codegen.ecore;resolution:=optional,
- org.eclipse.xtext.log4j;resolution:=optional,
- org.eclipse.emf.mwe.utils;resolution:=optional,
- org.eclipse.emf.mwe.core;resolution:=optional,
- com.ibm.icu;resolution:=optional,
- org.eclipse.xtext.xtend;resolution:=optional
+ org.antlr.runtime 
 Bundle-RequiredExecutionEnvironment: J2SE-1.5, JavaSE-1.6
 Export-Package: de.dailab.vsdt,
  de.dailab.vsdt.parseTreeConstruction,

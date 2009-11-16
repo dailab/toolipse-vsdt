@@ -18,7 +18,7 @@ package de.dailab.vsdt.vxl;
  * </ul>
  * </p>
  *
- * @see de.dailab.vsdt.vxl.VXLPackage#getBracketTerm()
+ * @see de.dailab.vsdt.vxl.VxlPackage#getBracketTerm()
  * @model
  * @generated
  */
@@ -34,7 +34,7 @@ public interface BracketTerm extends Head
    * <!-- end-user-doc -->
    * @return the value of the '<em>Term</em>' containment reference.
    * @see #setTerm(Term)
-   * @see de.dailab.vsdt.vxl.VXLPackage#getBracketTerm_Term()
+   * @see de.dailab.vsdt.vxl.VxlPackage#getBracketTerm_Term()
    * @model containment="true"
    * @generated
    */

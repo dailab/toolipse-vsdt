@@ -19,7 +19,7 @@ package de.dailab.vsdt.vxl;
  * </ul>
  * </p>
  *
- * @see de.dailab.vsdt.vxl.VXLPackage#getVariable()
+ * @see de.dailab.vsdt.vxl.VxlPackage#getVariable()
  * @model
  * @generated
  */
@@ -35,7 +35,7 @@ public interface Variable extends Atom
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see de.dailab.vsdt.vxl.VXLPackage#getVariable_Name()
+   * @see de.dailab.vsdt.vxl.VxlPackage#getVariable_Name()
    * @model
    * @generated
    */
@@ -61,7 +61,7 @@ public interface Variable extends Atom
    * <!-- end-user-doc -->
    * @return the value of the '<em>Accessor</em>' containment reference.
    * @see #setAccessor(Accessor)
-   * @see de.dailab.vsdt.vxl.VXLPackage#getVariable_Accessor()
+   * @see de.dailab.vsdt.vxl.VxlPackage#getVariable_Accessor()
    * @model containment="true"
    * @generated
    */

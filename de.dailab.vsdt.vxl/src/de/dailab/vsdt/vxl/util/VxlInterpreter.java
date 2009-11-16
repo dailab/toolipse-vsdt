@@ -173,7 +173,7 @@ public class VxlInterpreter {
 			return ((StringConst) value).getConst();
 		}
 		if (value instanceof BooleanConst) {
-			return ((BooleanConst) value).isIsTrue();
+			return "true".equals(((BooleanConst) value).getConst());
 		}
 		if (value instanceof NumericConst) {
 			return Double.parseDouble(((NumericConst) value).getConst());

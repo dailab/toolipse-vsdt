@@ -40,7 +40,7 @@ public class VsdtFeatureCombo<T extends Object> extends FeatureCombo<T> {
 			result=  ((Participant)o).getName();
 		}
 		if (o instanceof Property) {
-			result= VsdtHelper.getPropertyString((Property) o,  false);
+			result= VsdtHelper.getPropertyString((Property) o,  true);
 		}
 		if (result == null) {
 			result= super.getLabel(o);

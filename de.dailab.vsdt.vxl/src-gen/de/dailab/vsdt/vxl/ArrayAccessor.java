@@ -18,7 +18,7 @@ package de.dailab.vsdt.vxl;
  * </ul>
  * </p>
  *
- * @see de.dailab.vsdt.vxl.VXLPackage#getArrayAccessor()
+ * @see de.dailab.vsdt.vxl.VxlPackage#getArrayAccessor()
  * @model
  * @generated
  */
@@ -34,7 +34,7 @@ public interface ArrayAccessor extends Accessor
    * <!-- end-user-doc -->
    * @return the value of the '<em>Index</em>' containment reference.
    * @see #setIndex(Term)
-   * @see de.dailab.vsdt.vxl.VXLPackage#getArrayAccessor_Index()
+   * @see de.dailab.vsdt.vxl.VxlPackage#getArrayAccessor_Index()
    * @model containment="true"
    * @generated
    */

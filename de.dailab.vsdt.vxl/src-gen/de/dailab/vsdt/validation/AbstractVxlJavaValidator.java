@@ -13,7 +13,7 @@ public class AbstractVxlJavaValidator extends AbstractDeclarativeValidator {
     @Override
     protected List<? extends EPackage> getEPackages() {
         List<EPackage> result = new ArrayList<EPackage>();
-        result.add(de.dailab.vsdt.vxl.VXLPackage.eINSTANCE);
+        result.add(de.dailab.vsdt.vxl.VxlPackage.eINSTANCE);
         return result;
     }
 

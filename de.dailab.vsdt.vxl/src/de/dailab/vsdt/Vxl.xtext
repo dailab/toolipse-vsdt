@@ -1,6 +1,6 @@
 grammar de.dailab.vsdt.Vxl with org.eclipse.xtext.common.Terminals
 
-generate vXL "http://www.dailab.de/vsdt/Vxl"
+generate vxl "http://www.dailab.de/vsdt/Vxl"
 
 // COMPLEX TERMS
 Term:			head = Head (tail = Tail)?;
@@ -21,7 +21,8 @@ Value:			StringConst | BooleanConst | NumericConst | NullConst;
 StringConst:	const = STRING;
 //NumericConst:	const = INT; // keine kommazahlen 
 NumericConst:	const = NUMERIC;
-BooleanConst:	isTrue ?= "true" | "false";
+// BooleanConst:	isTrue ?= "true" | "false";
+BooleanConst:	const = ('true' | 'false');
 NullConst:		const = "null";
 
 // OPERATIONS

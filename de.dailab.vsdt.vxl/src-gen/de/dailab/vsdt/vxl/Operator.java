@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Operator</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see de.dailab.vsdt.vxl.VXLPackage#getOperator()
+ * @see de.dailab.vsdt.vxl.VxlPackage#getOperator()
  * @model
  * @generated
  */

@@ -12,7 +12,7 @@ package de.dailab.vsdt.vxl;
  * <!-- end-user-doc -->
  *
  *
- * @see de.dailab.vsdt.vxl.VXLPackage#getAtom()
+ * @see de.dailab.vsdt.vxl.VxlPackage#getAtom()
  * @model
  * @generated
  */

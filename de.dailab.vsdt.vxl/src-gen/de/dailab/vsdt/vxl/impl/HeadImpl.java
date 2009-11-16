@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import de.dailab.vsdt.vxl.Head;
-import de.dailab.vsdt.vxl.VXLPackage;
+import de.dailab.vsdt.vxl.VxlPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -40,7 +40,7 @@ public class HeadImpl extends MinimalEObjectImpl.Container implements Head
   @Override
   protected EClass eStaticClass()
   {
-    return VXLPackage.Literals.HEAD;
+    return VxlPackage.Literals.HEAD;
   }
 
 } //HeadImpl

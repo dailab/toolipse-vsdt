@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  *
- * @see de.dailab.vsdt.vxl.VXLPackage#getHead()
+ * @see de.dailab.vsdt.vxl.VxlPackage#getHead()
  * @model
  * @generated
  */

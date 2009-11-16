@@ -203,7 +203,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 27:
                     {
-                    input.LA(2);
+                     input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -212,7 +212,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 28:
                     {
-                    input.LA(2);
+                     input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -221,7 +221,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 21:
                     {
-                    input.LA(2);
+                     input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -248,7 +248,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 31:
                     {
-                    input.LA(2);
+                     input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -257,7 +257,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 32:
                     {
-                    input.LA(2);
+                     input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -266,7 +266,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     break;
                 case 33:
                     {
-                    input.LA(2);
+                     input.LA(2);
 
                     if ( (synpred1()) ) {
                         alt1=1;
@@ -396,7 +396,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject this_Atom_2 = null;
 
 
-         setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 4) ) { return current; }
@@ -845,7 +845,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject lv_term_1 = null;
 
 
-         setCurrentLookahead(); resetLookahead(); 
+        setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 10) ) { return current; }
@@ -966,8 +966,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
 
         EObject this_Variable_1 = null;
 
-
-         setCurrentLookahead(); resetLookahead(); 
+setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 12) ) { return current; }
@@ -1942,7 +1941,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         int ruleStringConst_StartIndex = input.index();
         Token lv_const_0=null;
 
-         setCurrentLookahead(); resetLookahead(); 
+        setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 24) ) { return current; }
@@ -2047,7 +2046,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         AntlrDatatypeRuleToken lv_const_0 = null;
 
 
-         setCurrentLookahead(); resetLookahead(); 
+        setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 26) ) { return current; }
@@ -2148,19 +2147,23 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleBooleanConst
-    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:781:1: ruleBooleanConst returns [EObject current=null] : ( (lv_isTrue_0= 'true' ) | 'false' ) ;
+    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:781:1: ruleBooleanConst returns [EObject current=null] : (lv_const_0= ( 'true' | 'false' ) ) ;
     public final EObject ruleBooleanConst() throws RecognitionException {
         EObject current = null;
         int ruleBooleanConst_StartIndex = input.index();
+       
 
         setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 28) ) { return current; }
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:786:6: ( ( (lv_isTrue_0= 'true' ) | 'false' ) )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:787:1: ( (lv_isTrue_0= 'true' ) | 'false' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:786:6: ( (lv_const_0= ( 'true' | 'false' ) ) )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:787:1: (lv_const_0= ( 'true' | 'false' ) )
             {
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:787:1: ( (lv_isTrue_0= 'true' ) | 'false' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:787:1: (lv_const_0= ( 'true' | 'false' ) )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:789:6: lv_const_0= ( 'true' | 'false' )
+            {
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:789:17: ( 'true' | 'false' )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2173,56 +2176,52 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
             else {
                 if (backtracking>0) {failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("787:1: ( (lv_isTrue_0= 'true' ) | 'false' )", 9, 0, input);
+                    new NoViableAltException("789:17: ( 'true' | 'false' )", 9, 0, input);
 
                 throw nvae;
             }
             switch (alt9) {
                 case 1 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:787:2: (lv_isTrue_0= 'true' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:789:18: 'true'
                     {
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:787:2: (lv_isTrue_0= 'true' )
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:789:6: lv_isTrue_0= 'true'
-                    {
-                    input.LT(1);
                     match(input,18,FOLLOW_18_in_ruleBooleanConst1870); if (failed) return current;
                     if ( backtracking==0 ) {
 
-                              createLeafNode(grammarAccess.getBooleanConstAccess().getIsTrueTrueKeyword_0_0(), "isTrue"); 
+                              createLeafNode(grammarAccess.getBooleanConstAccess().getConstTrueKeyword_0_0(), "const"); 
                           
                     }
-                    if ( backtracking==0 ) {
-
-                      	        if (current==null) {
-                      	            current = factory.create(grammarAccess.getBooleanConstRule().getType().getClassifier());
-                      	            associateNodeWithAstElement(currentNode, current);
-                      	        }
-                      	        
-                      	        try {
-                      	       		set(current, "isTrue", true, "true", lastConsumedNode);
-                      	        } catch (ValueConverterException vce) {
-                      				handleValueConverterException(vce);
-                      	        }
-                      	    
-                    }
-
-                    }
-
 
                     }
                     break;
                 case 2 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:809:6: 'false'
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:795:6: 'false'
                     {
-                    match(input,19,FOLLOW_19_in_ruleBooleanConst1898); if (failed) return current;
+                    match(input,19,FOLLOW_19_in_ruleBooleanConst1886); if (failed) return current;
                     if ( backtracking==0 ) {
 
-                              createLeafNode(grammarAccess.getBooleanConstAccess().getFalseKeyword_1(), null); 
+                              createLeafNode(grammarAccess.getBooleanConstAccess().getConstFalseKeyword_0_1(), "const"); 
                           
                     }
 
                     }
                     break;
+
+            }
+
+            if ( backtracking==0 ) {
+
+              	        if (current==null) {
+              	            current = factory.create(grammarAccess.getBooleanConstRule().getType().getClassifier());
+              	            associateNodeWithAstElement(currentNode, current);
+              	        }
+              	        
+              	        try {
+              	       		set(current, "const", /* lv_const_0 */ input.LT(-1), null, lastConsumedNode);
+              	        } catch (ValueConverterException vce) {
+              				handleValueConverterException(vce);
+              	        }
+              	    
+            }
 
             }
 
@@ -2249,7 +2248,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleNullConst
-    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:820:1: entryRuleNullConst returns [EObject current=null] : iv_ruleNullConst= ruleNullConst EOF ;
+    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:822:1: entryRuleNullConst returns [EObject current=null] : iv_ruleNullConst= ruleNullConst EOF ;
     public final EObject entryRuleNullConst() throws RecognitionException {
         EObject current = null;
         int entryRuleNullConst_StartIndex = input.index();
@@ -2258,20 +2257,20 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
 
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 29) ) { return current; }
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:820:51: (iv_ruleNullConst= ruleNullConst EOF )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:821:2: iv_ruleNullConst= ruleNullConst EOF
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:822:51: (iv_ruleNullConst= ruleNullConst EOF )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:823:2: iv_ruleNullConst= ruleNullConst EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getNullConstRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruleNullConst_in_entryRuleNullConst1931);
+            pushFollow(FOLLOW_ruleNullConst_in_entryRuleNullConst1933);
             iv_ruleNullConst=ruleNullConst();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_ruleNullConst; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNullConst1941); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNullConst1943); if (failed) return current;
 
             }
 
@@ -2290,23 +2289,24 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleNullConst
-    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:828:1: ruleNullConst returns [EObject current=null] : (lv_const_0= 'null' ) ;
+    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:830:1: ruleNullConst returns [EObject current=null] : (lv_const_0= 'null' ) ;
     public final EObject ruleNullConst() throws RecognitionException {
         EObject current = null;
         int ruleNullConst_StartIndex = input.index();
+        
 
          setCurrentLookahead(); resetLookahead(); 
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 30) ) { return current; }
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:833:6: ( (lv_const_0= 'null' ) )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:834:1: (lv_const_0= 'null' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:835:6: ( (lv_const_0= 'null' ) )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:836:1: (lv_const_0= 'null' )
             {
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:834:1: (lv_const_0= 'null' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:836:6: lv_const_0= 'null'
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:836:1: (lv_const_0= 'null' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:838:6: lv_const_0= 'null'
             {
             input.LT(1);
-            match(input,20,FOLLOW_20_in_ruleNullConst1986); if (failed) return current;
+            match(input,20,FOLLOW_20_in_ruleNullConst1988); if (failed) return current;
             if ( backtracking==0 ) {
 
                       createLeafNode(grammarAccess.getNullConstAccess().getConstNullKeyword_0(), "const"); 
@@ -2352,7 +2352,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleNUMERIC
-    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:862:1: entryRuleNUMERIC returns [String current=null] : iv_ruleNUMERIC= ruleNUMERIC EOF ;
+    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:864:1: entryRuleNUMERIC returns [String current=null] : iv_ruleNUMERIC= ruleNUMERIC EOF ;
     public final String entryRuleNUMERIC() throws RecognitionException {
         String current = null;
         int entryRuleNUMERIC_StartIndex = input.index();
@@ -2361,20 +2361,20 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
 
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 31) ) { return current; }
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:862:48: (iv_ruleNUMERIC= ruleNUMERIC EOF )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:863:2: iv_ruleNUMERIC= ruleNUMERIC EOF
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:864:48: (iv_ruleNUMERIC= ruleNUMERIC EOF )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:865:2: iv_ruleNUMERIC= ruleNUMERIC EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getNUMERICRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruleNUMERIC_in_entryRuleNUMERIC2032);
+            pushFollow(FOLLOW_ruleNUMERIC_in_entryRuleNUMERIC2034);
             iv_ruleNUMERIC=ruleNUMERIC();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_ruleNUMERIC.getText(); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNUMERIC2043); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNUMERIC2045); if (failed) return current;
 
             }
 
@@ -2393,7 +2393,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleNUMERIC
-    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:870:1: ruleNUMERIC returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '-' )? this_INT_1= RULE_INT (kw= '.' this_INT_3= RULE_INT )? ) ;
+    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:872:1: ruleNUMERIC returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (kw= '-' )? this_INT_1= RULE_INT (kw= '.' this_INT_3= RULE_INT )? ) ;
     public final AntlrDatatypeRuleToken ruleNUMERIC() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
         int ruleNUMERIC_StartIndex = input.index();
@@ -2405,13 +2405,13 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
             
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 32) ) { return current; }
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:876:6: ( ( (kw= '-' )? this_INT_1= RULE_INT (kw= '.' this_INT_3= RULE_INT )? ) )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:877:1: ( (kw= '-' )? this_INT_1= RULE_INT (kw= '.' this_INT_3= RULE_INT )? )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:878:6: ( ( (kw= '-' )? this_INT_1= RULE_INT (kw= '.' this_INT_3= RULE_INT )? ) )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:879:1: ( (kw= '-' )? this_INT_1= RULE_INT (kw= '.' this_INT_3= RULE_INT )? )
             {
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:877:1: ( (kw= '-' )? this_INT_1= RULE_INT (kw= '.' this_INT_3= RULE_INT )? )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:877:2: (kw= '-' )? this_INT_1= RULE_INT (kw= '.' this_INT_3= RULE_INT )?
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:879:1: ( (kw= '-' )? this_INT_1= RULE_INT (kw= '.' this_INT_3= RULE_INT )? )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:879:2: (kw= '-' )? this_INT_1= RULE_INT (kw= '.' this_INT_3= RULE_INT )?
             {
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:877:2: (kw= '-' )?
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:879:2: (kw= '-' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -2420,10 +2420,10 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
             }
             switch (alt10) {
                 case 1 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:878:2: kw= '-'
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:880:2: kw= '-'
                     {
                     kw=(Token)input.LT(1);
-                    match(input,21,FOLLOW_21_in_ruleNUMERIC2082); if (failed) return current;
+                    match(input,21,FOLLOW_21_in_ruleNUMERIC2084); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current.merge(kw);
@@ -2437,7 +2437,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
             }
 
             this_INT_1=(Token)input.LT(1);
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleNUMERIC2099); if (failed) return current;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleNUMERIC2101); if (failed) return current;
             if ( backtracking==0 ) {
 
               		current.merge(this_INT_1);
@@ -2448,7 +2448,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                   createLeafNode(grammarAccess.getNUMERICAccess().getINTTerminalRuleCall_1(), null); 
                   
             }
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:890:1: (kw= '.' this_INT_3= RULE_INT )?
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:892:1: (kw= '.' this_INT_3= RULE_INT )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -2457,10 +2457,10 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
             }
             switch (alt11) {
                 case 1 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:891:2: kw= '.' this_INT_3= RULE_INT
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:893:2: kw= '.' this_INT_3= RULE_INT
                     {
                     kw=(Token)input.LT(1);
-                    match(input,17,FOLLOW_17_in_ruleNUMERIC2118); if (failed) return current;
+                    match(input,17,FOLLOW_17_in_ruleNUMERIC2120); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current.merge(kw);
@@ -2468,7 +2468,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                           
                     }
                     this_INT_3=(Token)input.LT(1);
-                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleNUMERIC2133); if (failed) return current;
+                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleNUMERIC2135); if (failed) return current;
                     if ( backtracking==0 ) {
 
                       		current.merge(this_INT_3);
@@ -2512,17 +2512,17 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleOperator
-    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:911:1: ruleOperator returns [Enumerator current=null] : ( ( '<' ) | ( '<=' ) | ( '==' ) | ( '!=' ) | ( '>' ) | ( '>=' ) | ( '+' ) | ( '-' ) | ( '*' ) | ( '/' ) | ( '%' ) | ( '&&' ) | ( '||' ) | ( '++' ) ) ;
+    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:913:1: ruleOperator returns [Enumerator current=null] : ( ( '<' ) | ( '<=' ) | ( '==' ) | ( '!=' ) | ( '>' ) | ( '>=' ) | ( '+' ) | ( '-' ) | ( '*' ) | ( '/' ) | ( '%' ) | ( '&&' ) | ( '||' ) | ( '++' ) ) ;
     public final Enumerator ruleOperator() throws RecognitionException {
         Enumerator current = null;
         int ruleOperator_StartIndex = input.index();
          setCurrentLookahead(); resetLookahead(); 
         try {
             if ( backtracking>0 && alreadyParsedRule(input, 33) ) { return current; }
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:915:6: ( ( ( '<' ) | ( '<=' ) | ( '==' ) | ( '!=' ) | ( '>' ) | ( '>=' ) | ( '+' ) | ( '-' ) | ( '*' ) | ( '/' ) | ( '%' ) | ( '&&' ) | ( '||' ) | ( '++' ) ) )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:916:1: ( ( '<' ) | ( '<=' ) | ( '==' ) | ( '!=' ) | ( '>' ) | ( '>=' ) | ( '+' ) | ( '-' ) | ( '*' ) | ( '/' ) | ( '%' ) | ( '&&' ) | ( '||' ) | ( '++' ) )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:917:6: ( ( ( '<' ) | ( '<=' ) | ( '==' ) | ( '!=' ) | ( '>' ) | ( '>=' ) | ( '+' ) | ( '-' ) | ( '*' ) | ( '/' ) | ( '%' ) | ( '&&' ) | ( '||' ) | ( '++' ) ) )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:918:1: ( ( '<' ) | ( '<=' ) | ( '==' ) | ( '!=' ) | ( '>' ) | ( '>=' ) | ( '+' ) | ( '-' ) | ( '*' ) | ( '/' ) | ( '%' ) | ( '&&' ) | ( '||' ) | ( '++' ) )
             {
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:916:1: ( ( '<' ) | ( '<=' ) | ( '==' ) | ( '!=' ) | ( '>' ) | ( '>=' ) | ( '+' ) | ( '-' ) | ( '*' ) | ( '/' ) | ( '%' ) | ( '&&' ) | ( '||' ) | ( '++' ) )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:918:1: ( ( '<' ) | ( '<=' ) | ( '==' ) | ( '!=' ) | ( '>' ) | ( '>=' ) | ( '+' ) | ( '-' ) | ( '*' ) | ( '/' ) | ( '%' ) | ( '&&' ) | ( '||' ) | ( '++' ) )
             int alt12=14;
             switch ( input.LA(1) ) {
             case 22:
@@ -2598,19 +2598,19 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
             default:
                 if (backtracking>0) {failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("916:1: ( ( '<' ) | ( '<=' ) | ( '==' ) | ( '!=' ) | ( '>' ) | ( '>=' ) | ( '+' ) | ( '-' ) | ( '*' ) | ( '/' ) | ( '%' ) | ( '&&' ) | ( '||' ) | ( '++' ) )", 12, 0, input);
+                    new NoViableAltException("918:1: ( ( '<' ) | ( '<=' ) | ( '==' ) | ( '!=' ) | ( '>' ) | ( '>=' ) | ( '+' ) | ( '-' ) | ( '*' ) | ( '/' ) | ( '%' ) | ( '&&' ) | ( '||' ) | ( '++' ) )", 12, 0, input);
 
                 throw nvae;
             }
 
             switch (alt12) {
                 case 1 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:916:2: ( '<' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:918:2: ( '<' )
                     {
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:916:2: ( '<' )
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:916:4: '<'
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:918:2: ( '<' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:918:4: '<'
                     {
-                    match(input,22,FOLLOW_22_in_ruleOperator2192); if (failed) return current;
+                    match(input,22,FOLLOW_22_in_ruleOperator2194); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getOperatorAccess().getLTEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
@@ -2624,12 +2624,12 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:922:6: ( '<=' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:924:6: ( '<=' )
                     {
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:922:6: ( '<=' )
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:922:8: '<='
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:924:6: ( '<=' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:924:8: '<='
                     {
-                    match(input,23,FOLLOW_23_in_ruleOperator2207); if (failed) return current;
+                    match(input,23,FOLLOW_23_in_ruleOperator2209); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getOperatorAccess().getLEEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
@@ -2643,12 +2643,12 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:928:6: ( '==' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:930:6: ( '==' )
                     {
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:928:6: ( '==' )
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:928:8: '=='
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:930:6: ( '==' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:930:8: '=='
                     {
-                    match(input,24,FOLLOW_24_in_ruleOperator2222); if (failed) return current;
+                    match(input,24,FOLLOW_24_in_ruleOperator2224); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getOperatorAccess().getEQEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
@@ -2662,12 +2662,12 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:934:6: ( '!=' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:936:6: ( '!=' )
                     {
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:934:6: ( '!=' )
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:934:8: '!='
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:936:6: ( '!=' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:936:8: '!='
                     {
-                    match(input,25,FOLLOW_25_in_ruleOperator2237); if (failed) return current;
+                    match(input,25,FOLLOW_25_in_ruleOperator2239); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getOperatorAccess().getNEQEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
@@ -2681,12 +2681,12 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:940:6: ( '>' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:942:6: ( '>' )
                     {
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:940:6: ( '>' )
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:940:8: '>'
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:942:6: ( '>' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:942:8: '>'
                     {
-                    match(input,26,FOLLOW_26_in_ruleOperator2252); if (failed) return current;
+                    match(input,26,FOLLOW_26_in_ruleOperator2254); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getOperatorAccess().getGTEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
@@ -2700,12 +2700,12 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:946:6: ( '>=' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:948:6: ( '>=' )
                     {
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:946:6: ( '>=' )
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:946:8: '>='
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:948:6: ( '>=' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:948:8: '>='
                     {
-                    match(input,27,FOLLOW_27_in_ruleOperator2267); if (failed) return current;
+                    match(input,27,FOLLOW_27_in_ruleOperator2269); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getOperatorAccess().getGEEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
@@ -2719,12 +2719,12 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:952:6: ( '+' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:954:6: ( '+' )
                     {
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:952:6: ( '+' )
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:952:8: '+'
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:954:6: ( '+' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:954:8: '+'
                     {
-                    match(input,28,FOLLOW_28_in_ruleOperator2282); if (failed) return current;
+                    match(input,28,FOLLOW_28_in_ruleOperator2284); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getOperatorAccess().getADDEnumLiteralDeclaration_6().getEnumLiteral().getInstance();
@@ -2738,12 +2738,12 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:958:6: ( '-' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:960:6: ( '-' )
                     {
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:958:6: ( '-' )
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:958:8: '-'
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:960:6: ( '-' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:960:8: '-'
                     {
-                    match(input,21,FOLLOW_21_in_ruleOperator2297); if (failed) return current;
+                    match(input,21,FOLLOW_21_in_ruleOperator2299); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getOperatorAccess().getSUBEnumLiteralDeclaration_7().getEnumLiteral().getInstance();
@@ -2757,12 +2757,12 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 9 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:964:6: ( '*' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:966:6: ( '*' )
                     {
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:964:6: ( '*' )
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:964:8: '*'
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:966:6: ( '*' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:966:8: '*'
                     {
-                    match(input,29,FOLLOW_29_in_ruleOperator2312); if (failed) return current;
+                    match(input,29,FOLLOW_29_in_ruleOperator2314); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getOperatorAccess().getMULTEnumLiteralDeclaration_8().getEnumLiteral().getInstance();
@@ -2776,12 +2776,12 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 10 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:970:6: ( '/' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:972:6: ( '/' )
                     {
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:970:6: ( '/' )
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:970:8: '/'
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:972:6: ( '/' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:972:8: '/'
                     {
-                    match(input,30,FOLLOW_30_in_ruleOperator2327); if (failed) return current;
+                    match(input,30,FOLLOW_30_in_ruleOperator2329); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getOperatorAccess().getDIVEnumLiteralDeclaration_9().getEnumLiteral().getInstance();
@@ -2795,12 +2795,12 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 11 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:976:6: ( '%' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:978:6: ( '%' )
                     {
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:976:6: ( '%' )
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:976:8: '%'
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:978:6: ( '%' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:978:8: '%'
                     {
-                    match(input,31,FOLLOW_31_in_ruleOperator2342); if (failed) return current;
+                    match(input,31,FOLLOW_31_in_ruleOperator2344); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getOperatorAccess().getMODEnumLiteralDeclaration_10().getEnumLiteral().getInstance();
@@ -2814,12 +2814,12 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 12 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:982:6: ( '&&' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:984:6: ( '&&' )
                     {
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:982:6: ( '&&' )
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:982:8: '&&'
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:984:6: ( '&&' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:984:8: '&&'
                     {
-                    match(input,32,FOLLOW_32_in_ruleOperator2357); if (failed) return current;
+                    match(input,32,FOLLOW_32_in_ruleOperator2359); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getOperatorAccess().getANDEnumLiteralDeclaration_11().getEnumLiteral().getInstance();
@@ -2833,12 +2833,12 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 13 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:988:6: ( '||' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:990:6: ( '||' )
                     {
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:988:6: ( '||' )
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:988:8: '||'
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:990:6: ( '||' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:990:8: '||'
                     {
-                    match(input,33,FOLLOW_33_in_ruleOperator2372); if (failed) return current;
+                    match(input,33,FOLLOW_33_in_ruleOperator2374); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getOperatorAccess().getOREnumLiteralDeclaration_12().getEnumLiteral().getInstance();
@@ -2852,12 +2852,12 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 14 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:994:6: ( '++' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:996:6: ( '++' )
                     {
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:994:6: ( '++' )
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:994:8: '++'
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:996:6: ( '++' )
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:996:8: '++'
                     {
-                    match(input,34,FOLLOW_34_in_ruleOperator2387); if (failed) return current;
+                    match(input,34,FOLLOW_34_in_ruleOperator2389); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getOperatorAccess().getCONCATEnumLiteralDeclaration_13().getEnumLiteral().getInstance();
@@ -2992,30 +2992,30 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleBooleanConst_in_entryRuleBooleanConst1814 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleBooleanConst1824 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_18_in_ruleBooleanConst1870 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_ruleBooleanConst1898 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNullConst_in_entryRuleNullConst1931 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNullConst1941 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_ruleNullConst1986 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNUMERIC_in_entryRuleNUMERIC2032 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNUMERIC2043 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_ruleNUMERIC2082 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleNUMERIC2099 = new BitSet(new long[]{0x0000000000020002L});
-    public static final BitSet FOLLOW_17_in_ruleNUMERIC2118 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleNUMERIC2133 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_ruleOperator2192 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_ruleOperator2207 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_ruleOperator2222 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_25_in_ruleOperator2237 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_ruleOperator2252 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_ruleOperator2267 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_ruleOperator2282 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_ruleOperator2297 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_ruleOperator2312 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_ruleOperator2327 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_ruleOperator2342 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_32_in_ruleOperator2357 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_ruleOperator2372 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_ruleOperator2387 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_ruleBooleanConst1886 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNullConst_in_entryRuleNullConst1933 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNullConst1943 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_ruleNullConst1988 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNUMERIC_in_entryRuleNUMERIC2034 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNUMERIC2045 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_ruleNUMERIC2084 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleNUMERIC2101 = new BitSet(new long[]{0x0000000000020002L});
+    public static final BitSet FOLLOW_17_in_ruleNUMERIC2120 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleNUMERIC2135 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_ruleOperator2194 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_ruleOperator2209 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_24_in_ruleOperator2224 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_25_in_ruleOperator2239 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_ruleOperator2254 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_ruleOperator2269 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_ruleOperator2284 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_ruleOperator2299 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_ruleOperator2314 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_ruleOperator2329 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_ruleOperator2344 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_32_in_ruleOperator2359 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_ruleOperator2374 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_ruleOperator2389 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleTail_in_synpred1193 = new BitSet(new long[]{0x0000000000000002L});
 
 }

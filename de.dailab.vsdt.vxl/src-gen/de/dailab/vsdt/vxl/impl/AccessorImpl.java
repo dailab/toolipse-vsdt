@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import de.dailab.vsdt.vxl.Accessor;
-import de.dailab.vsdt.vxl.VXLPackage;
+import de.dailab.vsdt.vxl.VxlPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -58,7 +58,7 @@ public class AccessorImpl extends MinimalEObjectImpl.Container implements Access
   @Override
   protected EClass eStaticClass()
   {
-    return VXLPackage.Literals.ACCESSOR;
+    return VxlPackage.Literals.ACCESSOR;
   }
 
   /**
@@ -82,7 +82,7 @@ public class AccessorImpl extends MinimalEObjectImpl.Container implements Access
     accessor = newAccessor;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VXLPackage.ACCESSOR__ACCESSOR, oldAccessor, newAccessor);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.ACCESSOR__ACCESSOR, oldAccessor, newAccessor);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -99,14 +99,14 @@ public class AccessorImpl extends MinimalEObjectImpl.Container implements Access
     {
       NotificationChain msgs = null;
       if (accessor != null)
-        msgs = ((InternalEObject)accessor).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VXLPackage.ACCESSOR__ACCESSOR, null, msgs);
+        msgs = ((InternalEObject)accessor).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.ACCESSOR__ACCESSOR, null, msgs);
       if (newAccessor != null)
-        msgs = ((InternalEObject)newAccessor).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VXLPackage.ACCESSOR__ACCESSOR, null, msgs);
+        msgs = ((InternalEObject)newAccessor).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.ACCESSOR__ACCESSOR, null, msgs);
       msgs = basicSetAccessor(newAccessor, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VXLPackage.ACCESSOR__ACCESSOR, newAccessor, newAccessor));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.ACCESSOR__ACCESSOR, newAccessor, newAccessor));
   }
 
   /**
@@ -119,7 +119,7 @@ public class AccessorImpl extends MinimalEObjectImpl.Container implements Access
   {
     switch (featureID)
     {
-      case VXLPackage.ACCESSOR__ACCESSOR:
+      case VxlPackage.ACCESSOR__ACCESSOR:
         return basicSetAccessor(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -135,7 +135,7 @@ public class AccessorImpl extends MinimalEObjectImpl.Container implements Access
   {
     switch (featureID)
     {
-      case VXLPackage.ACCESSOR__ACCESSOR:
+      case VxlPackage.ACCESSOR__ACCESSOR:
         return getAccessor();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -151,7 +151,7 @@ public class AccessorImpl extends MinimalEObjectImpl.Container implements Access
   {
     switch (featureID)
     {
-      case VXLPackage.ACCESSOR__ACCESSOR:
+      case VxlPackage.ACCESSOR__ACCESSOR:
         setAccessor((Accessor)newValue);
         return;
     }
@@ -168,7 +168,7 @@ public class AccessorImpl extends MinimalEObjectImpl.Container implements Access
   {
     switch (featureID)
     {
-      case VXLPackage.ACCESSOR__ACCESSOR:
+      case VxlPackage.ACCESSOR__ACCESSOR:
         setAccessor((Accessor)null);
         return;
     }
@@ -185,7 +185,7 @@ public class AccessorImpl extends MinimalEObjectImpl.Container implements Access
   {
     switch (featureID)
     {
-      case VXLPackage.ACCESSOR__ACCESSOR:
+      case VxlPackage.ACCESSOR__ACCESSOR:
         return accessor != null;
     }
     return super.eIsSet(featureID);

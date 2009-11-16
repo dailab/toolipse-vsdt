@@ -18,7 +18,7 @@ package de.dailab.vsdt.vxl;
  * </ul>
  * </p>
  *
- * @see de.dailab.vsdt.vxl.VXLPackage#getNegation()
+ * @see de.dailab.vsdt.vxl.VxlPackage#getNegation()
  * @model
  * @generated
  */
@@ -34,7 +34,7 @@ public interface Negation extends Head
    * <!-- end-user-doc -->
    * @return the value of the '<em>Term</em>' containment reference.
    * @see #setTerm(Term)
-   * @see de.dailab.vsdt.vxl.VXLPackage#getNegation_Term()
+   * @see de.dailab.vsdt.vxl.VxlPackage#getNegation_Term()
    * @model containment="true"
    * @generated
    */

@@ -30,7 +30,7 @@ public class VxlStandaloneSetup implements ISetup {
 	
 	public void register(Injector injector) {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://www.dailab.de/vsdt/Vxl")) {
-		EPackage.Registry.INSTANCE.put("http://www.dailab.de/vsdt/Vxl", de.dailab.vsdt.vxl.VXLPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put("http://www.dailab.de/vsdt/Vxl", de.dailab.vsdt.vxl.VxlPackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);

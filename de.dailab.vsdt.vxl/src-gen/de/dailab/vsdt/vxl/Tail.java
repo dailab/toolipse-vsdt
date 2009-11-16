@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  *
- * @see de.dailab.vsdt.vxl.VXLPackage#getTail()
+ * @see de.dailab.vsdt.vxl.VxlPackage#getTail()
  * @model
  * @generated
  */
@@ -38,7 +38,7 @@ public interface Tail extends EObject
    * @return the value of the '<em>Operator</em>' attribute.
    * @see de.dailab.vsdt.vxl.Operator
    * @see #setOperator(Operator)
-   * @see de.dailab.vsdt.vxl.VXLPackage#getTail_Operator()
+   * @see de.dailab.vsdt.vxl.VxlPackage#getTail_Operator()
    * @model
    * @generated
    */
@@ -65,7 +65,7 @@ public interface Tail extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Term</em>' containment reference.
    * @see #setTerm(Term)
-   * @see de.dailab.vsdt.vxl.VXLPackage#getTail_Term()
+   * @see de.dailab.vsdt.vxl.VxlPackage#getTail_Term()
    * @model containment="true"
    * @generated
    */

@@ -6,7 +6,7 @@
     modelPluginID="de.dailab.vsdt.vxl" forceOverwrite="true" modelName="Vxl" updateClasspath="false"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="5.0"
     copyrightFields="false" editPluginID="de.dailab.vsdt.vxl.edit" editorPluginID="de.dailab.vsdt.vxl.editor">
-  <genPackages prefix="VXL" basePackage="de.dailab.vsdt" disposableProviderFactory="true"
+  <genPackages prefix="Vxl" basePackage="de.dailab.vsdt" disposableProviderFactory="true"
       ecorePackage="Vxl.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Vxl.ecore#//Operator">
       <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//Operator/LT"/>
@@ -53,18 +53,12 @@
     <genClasses ecoreClass="Vxl.ecore#//FieldAccessor">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//FieldAccessor/name"/>
     </genClasses>
-    <genClasses ecoreClass="Vxl.ecore#//Value"/>
-    <genClasses ecoreClass="Vxl.ecore#//StringConst">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//StringConst/const"/>
+    <genClasses ecoreClass="Vxl.ecore#//Value">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//Value/const"/>
     </genClasses>
-    <genClasses ecoreClass="Vxl.ecore#//NumericConst">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//NumericConst/const"/>
-    </genClasses>
-    <genClasses ecoreClass="Vxl.ecore#//BooleanConst">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//BooleanConst/isTrue"/>
-    </genClasses>
-    <genClasses ecoreClass="Vxl.ecore#//NullConst">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//NullConst/const"/>
-    </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//StringConst"/>
+    <genClasses ecoreClass="Vxl.ecore#//NumericConst"/>
+    <genClasses ecoreClass="Vxl.ecore#//BooleanConst"/>
+    <genClasses ecoreClass="Vxl.ecore#//NullConst"/>
   </genPackages>
 </genmodel:GenModel>

@@ -12,10 +12,10 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see de.dailab.vsdt.vxl.VXLPackage
+ * @see de.dailab.vsdt.vxl.VxlPackage
  * @generated
  */
-public interface VXLFactory extends EFactory
+public interface VxlFactory extends EFactory
 {
   /**
    * The singleton instance of the factory.
@@ -23,7 +23,7 @@ public interface VXLFactory extends EFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  VXLFactory eINSTANCE = de.dailab.vsdt.vxl.impl.VXLFactoryImpl.init();
+  VxlFactory eINSTANCE = de.dailab.vsdt.vxl.impl.VxlFactoryImpl.init();
 
   /**
    * Returns a new object of class '<em>Term</em>'.
@@ -167,6 +167,6 @@ public interface VXLFactory extends EFactory
    * @return the package supported by this factory.
    * @generated
    */
-  VXLPackage getVXLPackage();
+  VxlPackage getVxlPackage();
 
-} //VXLFactory
+} //VxlFactory

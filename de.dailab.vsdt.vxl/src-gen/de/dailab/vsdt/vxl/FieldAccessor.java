@@ -18,7 +18,7 @@ package de.dailab.vsdt.vxl;
  * </ul>
  * </p>
  *
- * @see de.dailab.vsdt.vxl.VXLPackage#getFieldAccessor()
+ * @see de.dailab.vsdt.vxl.VxlPackage#getFieldAccessor()
  * @model
  * @generated
  */
@@ -34,7 +34,7 @@ public interface FieldAccessor extends Accessor
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see de.dailab.vsdt.vxl.VXLPackage#getFieldAccessor_Name()
+   * @see de.dailab.vsdt.vxl.VxlPackage#getFieldAccessor_Name()
    * @model
    * @generated
    */

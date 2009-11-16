@@ -8,7 +8,7 @@ package de.dailab.vsdt.vxl.impl;
 import org.eclipse.emf.ecore.EClass;
 
 import de.dailab.vsdt.vxl.Atom;
-import de.dailab.vsdt.vxl.VXLPackage;
+import de.dailab.vsdt.vxl.VxlPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,7 +39,7 @@ public class AtomImpl extends HeadImpl implements Atom
   @Override
   protected EClass eStaticClass()
   {
-    return VXLPackage.Literals.ATOM;
+    return VxlPackage.Literals.ATOM;
   }
 
 } //AtomImpl

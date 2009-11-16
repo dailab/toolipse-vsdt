@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import de.dailab.vsdt.vxl.Negation;
 import de.dailab.vsdt.vxl.Term;
-import de.dailab.vsdt.vxl.VXLPackage;
+import de.dailab.vsdt.vxl.VxlPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -58,7 +58,7 @@ public class NegationImpl extends HeadImpl implements Negation
   @Override
   protected EClass eStaticClass()
   {
-    return VXLPackage.Literals.NEGATION;
+    return VxlPackage.Literals.NEGATION;
   }
 
   /**
@@ -82,7 +82,7 @@ public class NegationImpl extends HeadImpl implements Negation
     term = newTerm;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VXLPackage.NEGATION__TERM, oldTerm, newTerm);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.NEGATION__TERM, oldTerm, newTerm);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -99,14 +99,14 @@ public class NegationImpl extends HeadImpl implements Negation
     {
       NotificationChain msgs = null;
       if (term != null)
-        msgs = ((InternalEObject)term).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VXLPackage.NEGATION__TERM, null, msgs);
+        msgs = ((InternalEObject)term).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.NEGATION__TERM, null, msgs);
       if (newTerm != null)
-        msgs = ((InternalEObject)newTerm).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VXLPackage.NEGATION__TERM, null, msgs);
+        msgs = ((InternalEObject)newTerm).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.NEGATION__TERM, null, msgs);
       msgs = basicSetTerm(newTerm, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VXLPackage.NEGATION__TERM, newTerm, newTerm));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.NEGATION__TERM, newTerm, newTerm));
   }
 
   /**
@@ -119,7 +119,7 @@ public class NegationImpl extends HeadImpl implements Negation
   {
     switch (featureID)
     {
-      case VXLPackage.NEGATION__TERM:
+      case VxlPackage.NEGATION__TERM:
         return basicSetTerm(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -135,7 +135,7 @@ public class NegationImpl extends HeadImpl implements Negation
   {
     switch (featureID)
     {
-      case VXLPackage.NEGATION__TERM:
+      case VxlPackage.NEGATION__TERM:
         return getTerm();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -151,7 +151,7 @@ public class NegationImpl extends HeadImpl implements Negation
   {
     switch (featureID)
     {
-      case VXLPackage.NEGATION__TERM:
+      case VxlPackage.NEGATION__TERM:
         setTerm((Term)newValue);
         return;
     }
@@ -168,7 +168,7 @@ public class NegationImpl extends HeadImpl implements Negation
   {
     switch (featureID)
     {
-      case VXLPackage.NEGATION__TERM:
+      case VxlPackage.NEGATION__TERM:
         setTerm((Term)null);
         return;
     }
@@ -185,7 +185,7 @@ public class NegationImpl extends HeadImpl implements Negation
   {
     switch (featureID)
     {
-      case VXLPackage.NEGATION__TERM:
+      case VxlPackage.NEGATION__TERM:
         return term != null;
     }
     return super.eIsSet(featureID);

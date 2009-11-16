@@ -94,7 +94,7 @@ public class JiacVResultSaver extends MappingResultSaver {
 	private void saveJadl(File file, Agent model) throws IOException {
 		String source= null;
 		try {
-			source= new SimpleJadlParser().serializeShort(model);
+			source= SimpleJadlParser.getInstance().serializeShort(model);
 		} catch (JadlParseException e) {
 			TrafoLog.warn(e.getLocalizedMessage());
 		}

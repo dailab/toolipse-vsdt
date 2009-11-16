@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  * </p>
  *
- * @see de.dailab.vsdt.vxl.VXLPackage#getAccessor()
+ * @see de.dailab.vsdt.vxl.VxlPackage#getAccessor()
  * @model
  * @generated
  */
@@ -35,7 +35,7 @@ public interface Accessor extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Accessor</em>' containment reference.
    * @see #setAccessor(Accessor)
-   * @see de.dailab.vsdt.vxl.VXLPackage#getAccessor_Accessor()
+   * @see de.dailab.vsdt.vxl.VxlPackage#getAccessor_Accessor()
    * @model containment="true"
    * @generated
    */

@@ -26,10 +26,10 @@ import de.dailab.vsdt.vxl.Operator;
 import de.dailab.vsdt.vxl.StringConst;
 import de.dailab.vsdt.vxl.Tail;
 import de.dailab.vsdt.vxl.Term;
-import de.dailab.vsdt.vxl.VXLFactory;
-import de.dailab.vsdt.vxl.VXLPackage;
 import de.dailab.vsdt.vxl.Value;
 import de.dailab.vsdt.vxl.Variable;
+import de.dailab.vsdt.vxl.VxlFactory;
+import de.dailab.vsdt.vxl.VxlPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,7 +37,7 @@ import de.dailab.vsdt.vxl.Variable;
  * <!-- end-user-doc -->
  * @generated
  */
-public class VXLFactoryImpl extends EFactoryImpl implements VXLFactory
+public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
 {
   /**
    * Creates the default factory implementation.
@@ -45,21 +45,21 @@ public class VXLFactoryImpl extends EFactoryImpl implements VXLFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public static VXLFactory init()
+  public static VxlFactory init()
   {
     try
     {
-      VXLFactory theVXLFactory = (VXLFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.dailab.de/vsdt/Vxl"); 
-      if (theVXLFactory != null)
+      VxlFactory theVxlFactory = (VxlFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.dailab.de/vsdt/Vxl"); 
+      if (theVxlFactory != null)
       {
-        return theVXLFactory;
+        return theVxlFactory;
       }
     }
     catch (Exception exception)
     {
       EcorePlugin.INSTANCE.log(exception);
     }
-    return new VXLFactoryImpl();
+    return new VxlFactoryImpl();
   }
 
   /**
@@ -68,7 +68,7 @@ public class VXLFactoryImpl extends EFactoryImpl implements VXLFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public VXLFactoryImpl()
+  public VxlFactoryImpl()
   {
     super();
   }
@@ -83,21 +83,21 @@ public class VXLFactoryImpl extends EFactoryImpl implements VXLFactory
   {
     switch (eClass.getClassifierID())
     {
-      case VXLPackage.TERM: return createTerm();
-      case VXLPackage.HEAD: return createHead();
-      case VXLPackage.TAIL: return createTail();
-      case VXLPackage.BRACKET_TERM: return createBracketTerm();
-      case VXLPackage.NEGATION: return createNegation();
-      case VXLPackage.ATOM: return createAtom();
-      case VXLPackage.VARIABLE: return createVariable();
-      case VXLPackage.ACCESSOR: return createAccessor();
-      case VXLPackage.ARRAY_ACCESSOR: return createArrayAccessor();
-      case VXLPackage.FIELD_ACCESSOR: return createFieldAccessor();
-      case VXLPackage.VALUE: return createValue();
-      case VXLPackage.STRING_CONST: return createStringConst();
-      case VXLPackage.NUMERIC_CONST: return createNumericConst();
-      case VXLPackage.BOOLEAN_CONST: return createBooleanConst();
-      case VXLPackage.NULL_CONST: return createNullConst();
+      case VxlPackage.TERM: return createTerm();
+      case VxlPackage.HEAD: return createHead();
+      case VxlPackage.TAIL: return createTail();
+      case VxlPackage.BRACKET_TERM: return createBracketTerm();
+      case VxlPackage.NEGATION: return createNegation();
+      case VxlPackage.ATOM: return createAtom();
+      case VxlPackage.VARIABLE: return createVariable();
+      case VxlPackage.ACCESSOR: return createAccessor();
+      case VxlPackage.ARRAY_ACCESSOR: return createArrayAccessor();
+      case VxlPackage.FIELD_ACCESSOR: return createFieldAccessor();
+      case VxlPackage.VALUE: return createValue();
+      case VxlPackage.STRING_CONST: return createStringConst();
+      case VxlPackage.NUMERIC_CONST: return createNumericConst();
+      case VxlPackage.BOOLEAN_CONST: return createBooleanConst();
+      case VxlPackage.NULL_CONST: return createNullConst();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -113,7 +113,7 @@ public class VXLFactoryImpl extends EFactoryImpl implements VXLFactory
   {
     switch (eDataType.getClassifierID())
     {
-      case VXLPackage.OPERATOR:
+      case VxlPackage.OPERATOR:
         return createOperatorFromString(eDataType, initialValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -130,7 +130,7 @@ public class VXLFactoryImpl extends EFactoryImpl implements VXLFactory
   {
     switch (eDataType.getClassifierID())
     {
-      case VXLPackage.OPERATOR:
+      case VxlPackage.OPERATOR:
         return convertOperatorToString(eDataType, instanceValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -329,9 +329,9 @@ public class VXLFactoryImpl extends EFactoryImpl implements VXLFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public VXLPackage getVXLPackage()
+  public VxlPackage getVxlPackage()
   {
-    return (VXLPackage)getEPackage();
+    return (VxlPackage)getEPackage();
   }
 
   /**
@@ -341,9 +341,9 @@ public class VXLFactoryImpl extends EFactoryImpl implements VXLFactory
    * @generated
    */
   @Deprecated
-  public static VXLPackage getPackage()
+  public static VxlPackage getPackage()
   {
-    return VXLPackage.eINSTANCE;
+    return VxlPackage.eINSTANCE;
   }
 
-} //VXLFactoryImpl
+} //VxlFactoryImpl

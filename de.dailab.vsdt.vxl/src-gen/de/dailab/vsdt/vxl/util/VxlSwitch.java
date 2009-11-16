@@ -23,9 +23,9 @@ import de.dailab.vsdt.vxl.NumericConst;
 import de.dailab.vsdt.vxl.StringConst;
 import de.dailab.vsdt.vxl.Tail;
 import de.dailab.vsdt.vxl.Term;
-import de.dailab.vsdt.vxl.VXLPackage;
 import de.dailab.vsdt.vxl.Value;
 import de.dailab.vsdt.vxl.Variable;
+import de.dailab.vsdt.vxl.VxlPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,10 +37,10 @@ import de.dailab.vsdt.vxl.Variable;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see de.dailab.vsdt.vxl.VXLPackage
+ * @see de.dailab.vsdt.vxl.VxlPackage
  * @generated
  */
-public class VXLSwitch<T>
+public class VxlSwitch<T>
 {
   /**
    * The cached model package
@@ -48,7 +48,7 @@ public class VXLSwitch<T>
    * <!-- end-user-doc -->
    * @generated
    */
-  protected static VXLPackage modelPackage;
+  protected static VxlPackage modelPackage;
 
   /**
    * Creates an instance of the switch.
@@ -56,11 +56,11 @@ public class VXLSwitch<T>
    * <!-- end-user-doc -->
    * @generated
    */
-  public VXLSwitch()
+  public VxlSwitch()
   {
     if (modelPackage == null)
     {
-      modelPackage = VXLPackage.eINSTANCE;
+      modelPackage = VxlPackage.eINSTANCE;
     }
   }
 
@@ -110,28 +110,28 @@ public class VXLSwitch<T>
   {
     switch (classifierID)
     {
-      case VXLPackage.TERM:
+      case VxlPackage.TERM:
       {
         Term term = (Term)theEObject;
         T result = caseTerm(term);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VXLPackage.HEAD:
+      case VxlPackage.HEAD:
       {
         Head head = (Head)theEObject;
         T result = caseHead(head);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VXLPackage.TAIL:
+      case VxlPackage.TAIL:
       {
         Tail tail = (Tail)theEObject;
         T result = caseTail(tail);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VXLPackage.BRACKET_TERM:
+      case VxlPackage.BRACKET_TERM:
       {
         BracketTerm bracketTerm = (BracketTerm)theEObject;
         T result = caseBracketTerm(bracketTerm);
@@ -139,7 +139,7 @@ public class VXLSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VXLPackage.NEGATION:
+      case VxlPackage.NEGATION:
       {
         Negation negation = (Negation)theEObject;
         T result = caseNegation(negation);
@@ -147,7 +147,7 @@ public class VXLSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VXLPackage.ATOM:
+      case VxlPackage.ATOM:
       {
         Atom atom = (Atom)theEObject;
         T result = caseAtom(atom);
@@ -155,7 +155,7 @@ public class VXLSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VXLPackage.VARIABLE:
+      case VxlPackage.VARIABLE:
       {
         Variable variable = (Variable)theEObject;
         T result = caseVariable(variable);
@@ -164,14 +164,14 @@ public class VXLSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VXLPackage.ACCESSOR:
+      case VxlPackage.ACCESSOR:
       {
         Accessor accessor = (Accessor)theEObject;
         T result = caseAccessor(accessor);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VXLPackage.ARRAY_ACCESSOR:
+      case VxlPackage.ARRAY_ACCESSOR:
       {
         ArrayAccessor arrayAccessor = (ArrayAccessor)theEObject;
         T result = caseArrayAccessor(arrayAccessor);
@@ -179,7 +179,7 @@ public class VXLSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VXLPackage.FIELD_ACCESSOR:
+      case VxlPackage.FIELD_ACCESSOR:
       {
         FieldAccessor fieldAccessor = (FieldAccessor)theEObject;
         T result = caseFieldAccessor(fieldAccessor);
@@ -187,7 +187,7 @@ public class VXLSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VXLPackage.VALUE:
+      case VxlPackage.VALUE:
       {
         Value value = (Value)theEObject;
         T result = caseValue(value);
@@ -196,7 +196,7 @@ public class VXLSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VXLPackage.STRING_CONST:
+      case VxlPackage.STRING_CONST:
       {
         StringConst stringConst = (StringConst)theEObject;
         T result = caseStringConst(stringConst);
@@ -206,7 +206,7 @@ public class VXLSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VXLPackage.NUMERIC_CONST:
+      case VxlPackage.NUMERIC_CONST:
       {
         NumericConst numericConst = (NumericConst)theEObject;
         T result = caseNumericConst(numericConst);
@@ -216,7 +216,7 @@ public class VXLSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VXLPackage.BOOLEAN_CONST:
+      case VxlPackage.BOOLEAN_CONST:
       {
         BooleanConst booleanConst = (BooleanConst)theEObject;
         T result = caseBooleanConst(booleanConst);
@@ -226,7 +226,7 @@ public class VXLSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VXLPackage.NULL_CONST:
+      case VxlPackage.NULL_CONST:
       {
         NullConst nullConst = (NullConst)theEObject;
         T result = caseNullConst(nullConst);
@@ -496,4 +496,4 @@ public class VXLSwitch<T>
     return null;
   }
 
-} //VXLSwitch
+} //VxlSwitch
