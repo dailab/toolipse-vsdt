@@ -1,5 +1,11 @@
 package de.dailab.vsdt.trafo.wizard;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
@@ -42,5 +48,20 @@ public abstract class BpmnExportWizard extends BpmnTrafoWizard implements IExpor
 		return super.getModelName(model);
 	}
 
+	/**
+	 * vsdtd files now contain both the model and the diagram. return the model.
+	 */
+	@Override
+	protected Object getSouceObject(URI fileURI) {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		Resource resource = resourceSet.getResource(fileURI, true);
+		for (EObject content : resource.getContents()) {
+			if (content instanceof BusinessProcessSystem) {
+				EcoreUtil.resolveAll(content);
+				return content;
+			}
+		}
+		return null;
+	}
 	
 }

@@ -6,14 +6,14 @@
       <?gmfgen generated="true"?>
       <fileTypes
          type="text"
-         extension="vsdt_diagram">
+         extension="vsdtd">
       </fileTypes>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
       <?gmfgen generated="true"?>
       <parser
-         type="vsdt_diagram"
+         type="vsdtd"
          class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
       </parser>
    </extension>
@@ -24,7 +24,7 @@
          id="de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditorID"
          name="%editorName"
          icon="icons/obj16/VsdtDiagramFile.gif"
-         extensions="vsdt_diagram"
+         extensions="vsdtd"
          default="true"
          class="de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditor"
          matchingStrategy="de.dailab.vsdt.meta.diagram.part.VsdtMatchingStrategy"
@@ -129,51 +129,6 @@
          </ViewId>
       </GlobalActionHandlerProvider>
    </extension>
-
-
-   <!--<extension point="org.eclipse.core.runtime.preferences">
-      <?gmfgen generated="true"?>
-      <initializer class="de.dailab.vsdt.meta.diagram.preferences.DiagramPreferenceInitializer"/>
-   </extension>
-
-   <extension point="org.eclipse.ui.preferencePages">
-      <?gmfgen generated="true"?>
-      <page
-            id="de.dailab.vsdt.meta.diagram.general"
-            name="%preference.page.title.de.dailab.vsdt.diagram.general"
-            class="de.dailab.vsdt.meta.diagram.preferences.DiagramGeneralPreferencePage">
-      </page>
-      <page
-            id="de.dailab.vsdt.meta.diagram.appearance"
-            name="%preference.page.title.de.dailab.vsdt.diagram.appearance"
-            category="de.dailab.vsdt.meta.diagram.general"
-            class="de.dailab.vsdt.meta.diagram.preferences.DiagramAppearancePreferencePage">
-      </page>
-      <page
-            id="de.dailab.vsdt.meta.diagram.connections"
-            name="%preference.page.title.de.dailab.vsdt.diagram.connections"
-            category="de.dailab.vsdt.meta.diagram.general"
-            class="de.dailab.vsdt.meta.diagram.preferences.DiagramConnectionsPreferencePage">
-      </page>
-      <page
-            id="de.dailab.vsdt.meta.diagram.printing"
-            name="%preference.page.title.de.dailab.vsdt.diagram.printing"
-            category="de.dailab.vsdt.meta.diagram.general"
-            class="de.dailab.vsdt.meta.diagram.preferences.DiagramPrintingPreferencePage">
-      </page>
-      <page
-            id="de.dailab.vsdt.meta.diagram.rulersAndGrid"
-            name="%preference.page.title.de.dailab.vsdt.diagram.rulersAndGrid"
-            category="de.dailab.vsdt.meta.diagram.general"
-            class="de.dailab.vsdt.meta.diagram.preferences.DiagramRulersAndGridPreferencePage">
-      </page>
-      <page
-            id="de.dailab.vsdt.meta.diagram.pathmaps"
-            name="%preference.page.title.de.dailab.vsdt.diagram.pathmaps"
-            category="de.dailab.vsdt.meta.diagram.general"
-            class="org.eclipse.gmf.runtime.emf.ui.preferences.PathmapsPreferencePage">
-      </page>
-   </extension>-->
 
    <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
       <?gmfgen generated="true"?>
@@ -321,14 +276,14 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings">
       <?gmfgen generated="true"?>
-      <clientContext id="Vsdt_metaClientContext">
+      <clientContext id="de.dailab.vsdt.diagram.meta.TypeContext">
          <enablement>
             <test
                property="org.eclipse.gmf.runtime.emf.core.editingDomain"
                value="de.dailab.vsdt.diagram.meta.EditingDomain"/>
          </enablement>
       </clientContext> 
-      <binding context="Vsdt_metaClientContext">
+      <binding context="de.dailab.vsdt.diagram.meta.TypeContext">
          <elementType ref="de.dailab.vsdt.diagram.meta.BusinessProcessSystem_79"/>
          <elementType ref="de.dailab.vsdt.diagram.meta.Participant_1001"/>
          <elementType ref="de.dailab.vsdt.diagram.meta.BusinessProcessDiagram_1002"/>
@@ -388,7 +343,7 @@
             <or>
 	           <and>
     	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test property="org.eclipse.core.resources.extension" value="vsdt_diagram"/>
+        	      <test property="org.eclipse.core.resources.extension" value="vsdtd"/>
                </and>
                <instanceof value="de.dailab.vsdt.meta.diagram.navigator.VsdtAbstractNavigatorItem"/>
             </or>
@@ -405,7 +360,7 @@
                <or>
 	              <and>
     	             <instanceof value="org.eclipse.core.resources.IFile"/>
-        	         <test property="org.eclipse.core.resources.extension" value="vsdt_diagram"/>
+        	         <test property="org.eclipse.core.resources.extension" value="vsdtd"/>
                   </and>
                   <instanceof value="de.dailab.vsdt.meta.diagram.navigator.VsdtAbstractNavigatorItem"/>
                </or>
@@ -517,5 +472,5 @@
          <context decoratorTargets="PRIMARY_VIEW"/>
       </decoratorProvider>
    </extension>
-
+   
 </plugin>

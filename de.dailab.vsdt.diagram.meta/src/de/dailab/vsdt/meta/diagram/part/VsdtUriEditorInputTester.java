@@ -17,7 +17,7 @@ public class VsdtUriEditorInputTester extends PropertyTester {
 			return false;
 		}
 		URIEditorInput editorInput = (URIEditorInput) receiver;
-		return "vsdt_diagram".equals(editorInput.getURI().fileExtension()); //$NON-NLS-1$
+		return "vsdtd".equals(editorInput.getURI().fileExtension()); //$NON-NLS-1$
 	}
 
 }

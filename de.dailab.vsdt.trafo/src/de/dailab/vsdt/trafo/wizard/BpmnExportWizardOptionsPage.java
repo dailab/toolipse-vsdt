@@ -26,12 +26,12 @@ public class BpmnExportWizardOptionsPage extends BpmnTrafoWizardOptionsPage {
 	
 	@Override
 	public String getExtension() {
-		return "vsdt";
+		return "vsdtd";
 	}
 	
 	@Override
 	public String getDescription() {
-		return "Select VSDT model file to be exported.";
+		return "Select VSDT Diagram file to be exported.";
 	}
 	
 	@Override

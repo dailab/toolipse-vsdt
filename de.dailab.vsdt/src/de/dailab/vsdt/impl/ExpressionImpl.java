@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
@@ -147,15 +148,18 @@ public class ExpressionImpl extends EObjectImpl implements Expression {
 	public String getGlobalExpressionLanguage() {
 		try {
 			// retrieve the BPD as the first element of the Resource's content
-			BusinessProcessSystem bps= (BusinessProcessSystem) eResource().getContents().get(0);
-			return bps.getExpressionLanguage();
+			for (EObject element : eResource().getContents()) {
+				if (element instanceof BusinessProcessSystem) {
+					return ((BusinessProcessSystem) element).getExpressionLanguage();
+				}
+			}
 		} catch (Exception e) {
 			// Problem: no Resource, no Content, Content not BPD -- all of which should not occur
 			// This can occur, however, if an expression has temporarily been created as a wrapper
 			// for passing a plain String to some method expecting an Expression.
 //			System.err.println("Error: The Expression seems not to be contained in a Resource holding a Business Process Diagram");
-			return null;
 		}
+		return null;
 	}
 
 	/**

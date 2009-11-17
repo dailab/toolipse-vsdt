@@ -38,11 +38,6 @@ public class VsdtCreationWizard extends Wizard implements INewWizard {
 	protected VsdtCreationWizardPage diagramModelFilePage;
 
 	/**
-	 * @generated
-	 */
-	protected VsdtCreationWizardPage domainModelFilePage;
-
-	/**
 	 * @generated NOT
 	 */
 	protected VsdtCreationWizardOptionsPage optionsPage;
@@ -118,26 +113,6 @@ public class VsdtCreationWizard extends Wizard implements INewWizard {
 				.setDescription(Messages.VsdtCreationWizard_DiagramModelFilePageDescription);
 		addPage(diagramModelFilePage);
 
-		domainModelFilePage = new VsdtCreationWizardPage(
-				"DomainModelFile", getSelection(), "vsdt") { //$NON-NLS-1$ //$NON-NLS-2$
-
-			public void setVisible(boolean visible) {
-				if (visible) {
-					String fileName = diagramModelFilePage.getFileName();
-					fileName = fileName.substring(0, fileName.length()
-							- ".vsdt_diagram".length()); //$NON-NLS-1$
-					setFileName(VsdtDiagramEditorUtil.getUniqueFileName(
-							getContainerFullPath(), fileName, "vsdt")); //$NON-NLS-1$
-				}
-				super.setVisible(visible);
-			}
-		};
-		domainModelFilePage
-				.setTitle(Messages.VsdtCreationWizard_DomainModelFilePageTitle);
-		domainModelFilePage
-				.setDescription(Messages.VsdtCreationWizard_DomainModelFilePageDescription);
-		addPage(domainModelFilePage);
-
 		// BEGIN @generated NOT
 		optionsPage = new VsdtCreationWizardOptionsPage() {
 			@Override
@@ -165,14 +140,13 @@ public class VsdtCreationWizard extends Wizard implements INewWizard {
 
 			protected void execute(IProgressMonitor monitor)
 					throws CoreException, InterruptedException {
-				
+
 				// BEGIN @generated NOT
 				URI diagramURI = diagramModelFilePage.getURI();
-				URI modelURI = domainModelFilePage.getURI();
-				diagram = VsdtDiagramEditorUtil.createDiagram(
-						diagramURI, modelURI, monitor, optionsPage);
+				diagram = VsdtDiagramEditorUtil.createDiagram(diagramURI,
+						monitor, optionsPage);
 				// END @generated NOT
-				
+
 				if (isOpenNewlyCreatedDiagramEditor() && diagram != null) {
 					try {
 						VsdtDiagramEditorUtil.openDiagram(diagram);
@@ -201,5 +175,5 @@ public class VsdtCreationWizard extends Wizard implements INewWizard {
 		}
 		return diagram != null;
 	}
-	
+
 }

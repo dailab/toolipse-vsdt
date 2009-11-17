@@ -82,7 +82,7 @@ public class VsdtNewDiagramFileWizard extends Wizard {
 		}
 		myFileCreationPage.setContainerFullPath(filePath);
 		myFileCreationPage.setFileName(VsdtDiagramEditorUtil.getUniqueFileName(
-				filePath, fileName, "vsdt_diagram")); //$NON-NLS-1$
+				filePath, fileName, "vsdtd")); //$NON-NLS-1$
 
 		diagramRootElementSelectionPage = new DiagramRootElementSelectionPage(
 				Messages.VsdtNewDiagramFileWizard_RootSelectionPageName);
@@ -136,6 +136,7 @@ public class VsdtNewDiagramFileWizard extends Wizard {
 						BusinessProcessSystemEditPart.MODEL_ID,
 						VsdtMetaDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
 				diagramResource.getContents().add(diagram);
+				diagramResource.getContents().add(diagram.getElement());
 				return CommandResult.newOKCommandResult();
 			}
 		};

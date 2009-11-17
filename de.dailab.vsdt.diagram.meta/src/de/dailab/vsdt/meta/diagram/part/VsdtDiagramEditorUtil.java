@@ -157,7 +157,7 @@ public class VsdtDiagramEditorUtil {
 	 * + get options from Options Page
 	 * @generated NOT
 	 */
-	public static Resource createDiagram(URI diagramURI, URI modelURI,
+	public static Resource createDiagram(URI diagramURI,
 			IProgressMonitor progressMonitor,
 			final VsdtCreationWizardOptionsPage optionsPage) {
 		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE
@@ -166,8 +166,6 @@ public class VsdtDiagramEditorUtil {
 				Messages.VsdtDiagramEditorUtil_CreateDiagramProgressTask, 3);
 		final Resource diagramResource = editingDomain.getResourceSet()
 				.createResource(diagramURI);
-		final Resource modelResource = editingDomain.getResourceSet()
-				.createResource(modelURI);
 		final String diagramName = diagramURI.lastSegment();
 		AbstractTransactionalCommand command = new AbstractTransactionalCommand(
 				editingDomain,
@@ -177,7 +175,7 @@ public class VsdtDiagramEditorUtil {
 					IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 				BusinessProcessSystem model = createInitialModel();
-				attachModelToResource(model, modelResource);
+				attachModelToResource(model, diagramResource);
 
 				// BEGIN @generated NOT
 				model.setAuthor(optionsPage.getAuthor());
@@ -201,9 +199,7 @@ public class VsdtDiagramEditorUtil {
 				}
 
 				try {
-					modelResource
-							.save(de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditorUtil
-									.getSaveOptions());
+
 					diagramResource
 							.save(de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditorUtil
 									.getSaveOptions());
@@ -222,7 +218,7 @@ public class VsdtDiagramEditorUtil {
 			VsdtMetaDiagramEditorPlugin.getInstance().logError(
 					"Unable to create model and diagram", e); //$NON-NLS-1$
 		}
-		setCharset(WorkspaceSynchronizer.getFile(modelResource));
+
 		setCharset(WorkspaceSynchronizer.getFile(diagramResource));
 		return diagramResource;
 	}

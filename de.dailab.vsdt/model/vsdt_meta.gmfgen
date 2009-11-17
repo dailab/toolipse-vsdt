@@ -4,6 +4,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:gmfgen="http://www.eclipse.org/gmf/2008/GenModel" packageNamePrefix="de.dailab.vsdt.meta.diagram"
     modelID="Vsdt_meta"
+    sameFileForDiagramAndModel="true"
+    diagramFileExtension="vsdtd"
     domainFileExtension="vsdt">
   <diagram
       visualID="79"
