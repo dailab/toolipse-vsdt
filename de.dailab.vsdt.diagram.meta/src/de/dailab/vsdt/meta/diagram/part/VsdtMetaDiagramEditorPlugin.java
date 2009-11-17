@@ -42,7 +42,7 @@ public class VsdtMetaDiagramEditorPlugin extends AbstractUIPlugin {
 	public IPreferenceStore getPreferenceStore() {
 		return VsdtDiagramEditorPlugin.getInstance().getPreferenceStore();
 	}
-	
+
 	/**
 	 * @generated
 	 */
