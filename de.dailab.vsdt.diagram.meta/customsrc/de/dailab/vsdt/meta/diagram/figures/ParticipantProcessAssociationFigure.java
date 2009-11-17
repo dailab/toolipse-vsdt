@@ -53,10 +53,10 @@ public class ParticipantProcessAssociationFigure extends PolylineConnectionEx {
 			if (getTargetDecoration() != null) {
 				setTargetDecoration(null);
 			}
+			if (getSourceDecoration() != deltaDecoration) {
 			// TODO determine whether the participant has multiple instances in this process
-//			if (getSourceDecoration() != deltaDecoration) {
 //				setSourceDecoration(deltaDecoration);
-//			}
+			}
 		}		
 	}
 
