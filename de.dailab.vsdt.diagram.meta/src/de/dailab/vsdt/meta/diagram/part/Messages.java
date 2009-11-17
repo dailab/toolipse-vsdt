@@ -38,16 +38,6 @@ public class Messages extends NLS {
 	/**
 	 * @generated
 	 */
-	public static String VsdtCreationWizard_DomainModelFilePageTitle;
-
-	/**
-	 * @generated
-	 */
-	public static String VsdtCreationWizard_DomainModelFilePageDescription;
-
-	/**
-	 * @generated
-	 */
 	public static String VsdtCreationWizardOpenEditorError;
 
 	/**
