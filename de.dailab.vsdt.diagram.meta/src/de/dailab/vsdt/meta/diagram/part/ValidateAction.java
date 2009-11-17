@@ -56,7 +56,6 @@ public class ValidateAction extends Action {
 	 */
 	private IWorkbenchPartDescriptor workbenchPartDescriptor;
 
-
 	/**
 	 * add icon to validate Action
 	 * 
