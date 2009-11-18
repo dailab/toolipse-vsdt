@@ -14,7 +14,7 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 
-import de.dailab.common.gmf.ui.views.AbstractTreeContentProvider;
+import de.dailab.common.swt.views.AbstractTreeContentProvider;
 import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
 import de.dailab.vsdt.diagram.edit.parts.PoolEditPart;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;

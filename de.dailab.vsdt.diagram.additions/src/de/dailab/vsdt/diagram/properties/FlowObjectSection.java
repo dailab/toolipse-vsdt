@@ -6,7 +6,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbenchPart;
 
-import de.dailab.common.gmf.ui.FormLayoutUtil;
+import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.diagram.actions.OrganizeAssignmentsAction;
 

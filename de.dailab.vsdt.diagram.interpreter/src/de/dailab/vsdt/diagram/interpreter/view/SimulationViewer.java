@@ -16,8 +16,8 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 
-import de.dailab.common.gmf.ui.views.AbstractLabelProvider;
-import de.dailab.common.gmf.ui.views.AbstractTreeContentProvider;
+import de.dailab.common.swt.views.AbstractLabelProvider;
+import de.dailab.common.swt.views.AbstractTreeContentProvider;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Intermediate;
@@ -137,16 +137,16 @@ public class SimulationViewer extends TreeViewer {
 	public class SimulationViewerLabelProvider extends AbstractLabelProvider {
 		
 		protected ImageDescriptor getImageDescriptor(Object element) {
-			EObject actualElement= getActualElement(element);
-			if (actualElement instanceof Pool) {
+			EObject eObject= (EObject) element;
+			if (eObject instanceof Pool) {
 			   return VsdtInterpreterPlugin.getImageDescriptor(VsdtInterpreterPlugin.IMAGE_POOL);
-			} else if (actualElement instanceof FlowObject) {
+			} else if (eObject instanceof FlowObject) {
 				// use another color for intermediate boundary events to prevent accidentally killing the activity
-				if (actualElement instanceof Intermediate && ((Intermediate)actualElement).getAttachedTo() != null) {
+				if (eObject instanceof Intermediate && ((Intermediate)eObject).getAttachedTo() != null) {
 					return VsdtInterpreterPlugin.getImageDescriptor(VsdtInterpreterPlugin.IMAGE_SIM_INTER);
 				}
-				return view.getState((FlowObject) actualElement).getImageDescriptor();
-			} else if (actualElement instanceof Property) {
+				return view.getState((FlowObject) eObject).getImageDescriptor();
+			} else if (eObject instanceof Property) {
 				return VsdtInterpreterPlugin.getImageDescriptor(VsdtInterpreterPlugin.IMAGE_PROPERTY);
 			}
 			return null;
@@ -155,7 +155,7 @@ public class SimulationViewer extends TreeViewer {
 		@Override
 		public String getText(Object element) {
 			if (element instanceof Pool || element instanceof FlowObject) {
-				return VsdtHelper.getDescriptiveName(getActualElement(element));	
+				return VsdtHelper.getDescriptiveName((EObject) element);	
 			}
 			if (element instanceof Property) {
 				Property property= (Property) element;

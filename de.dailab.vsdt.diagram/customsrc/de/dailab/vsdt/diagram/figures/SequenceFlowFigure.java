@@ -6,7 +6,7 @@ import org.eclipse.draw2d.PolylineDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
 import org.eclipse.draw2d.geometry.PointList;
 
-import de.dailab.common.gmf.ui.figures.RoundedPolylineConnection;
+import de.dailab.common.gmf.figures.RoundedPolylineConnection;
 import de.dailab.vsdt.ConditionType;
 
 

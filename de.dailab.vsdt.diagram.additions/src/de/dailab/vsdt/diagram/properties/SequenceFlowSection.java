@@ -11,7 +11,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
-import de.dailab.common.gmf.ui.FormLayoutUtil;
+import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.ConditionType;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtPackage;

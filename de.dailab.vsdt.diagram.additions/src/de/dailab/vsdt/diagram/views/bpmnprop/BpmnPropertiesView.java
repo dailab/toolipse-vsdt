@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
-import de.dailab.common.gmf.ui.views.AbstractStructuredViewerView;
+import de.dailab.common.swt.views.AbstractStructuredViewerView;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.diagram.actions.OrganizePropertiesAction;
 

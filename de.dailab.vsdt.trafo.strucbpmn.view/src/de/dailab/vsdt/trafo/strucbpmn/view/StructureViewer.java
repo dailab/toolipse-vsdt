@@ -9,8 +9,8 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 
-import de.dailab.common.gmf.ui.views.AbstractContentProvider;
-import de.dailab.common.gmf.ui.views.AbstractLabelProvider;
+import de.dailab.common.swt.views.AbstractContentProvider;
+import de.dailab.common.swt.views.AbstractLabelProvider;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.BusinessProcessDiagram;

@@ -19,7 +19,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 
 import de.dailab.common.gmf.Util;
-import de.dailab.common.gmf.ui.views.AbstractStructuredViewerView;
+import de.dailab.common.swt.views.AbstractStructuredViewerView;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Pool;

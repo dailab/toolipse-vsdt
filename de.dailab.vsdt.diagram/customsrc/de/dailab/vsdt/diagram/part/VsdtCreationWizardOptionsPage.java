@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 
 import de.dailab.common.gmf.Util;
-import de.dailab.common.gmf.ui.FormLayoutUtil;
+import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.diagram.preferences.DiagramGeneralPreferencePage;
 
 /**

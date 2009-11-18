@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import de.dailab.common.gmf.Util;
-import de.dailab.common.gmf.ui.FormLayoutUtil;
+import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.diagram.ui.VsdtFeatureCombo;
 import de.dailab.vsdt.vxl.Variable;

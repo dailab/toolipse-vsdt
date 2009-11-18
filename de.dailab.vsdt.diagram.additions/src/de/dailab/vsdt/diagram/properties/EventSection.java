@@ -23,7 +23,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import de.dailab.common.gmf.Util;
-import de.dailab.common.gmf.ui.FormLayoutUtil;
+import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;

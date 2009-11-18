@@ -5,7 +5,7 @@ import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
 import org.eclipse.draw2d.geometry.PointList;
 
-import de.dailab.common.gmf.ui.figures.RoundedPolylineConnection;
+import de.dailab.common.gmf.figures.RoundedPolylineConnection;
 
 /**
  * figure for the bpmn message flow element

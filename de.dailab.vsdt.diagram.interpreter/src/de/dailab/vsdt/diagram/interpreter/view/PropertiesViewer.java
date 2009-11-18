@@ -7,8 +7,8 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.swt.widgets.Composite;
 
-import de.dailab.common.gmf.ui.views.AbstractContentProvider;
-import de.dailab.common.gmf.ui.views.AbstractLabelProvider;
+import de.dailab.common.swt.views.AbstractContentProvider;
+import de.dailab.common.swt.views.AbstractLabelProvider;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;

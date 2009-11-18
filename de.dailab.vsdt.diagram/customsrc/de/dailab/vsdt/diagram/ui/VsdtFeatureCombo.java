@@ -2,7 +2,7 @@ package de.dailab.vsdt.diagram.ui;
 
 import org.eclipse.swt.widgets.Combo;
 
-import de.dailab.common.gmf.ui.FeatureCombo;
+import de.dailab.common.swt.FeatureCombo;
 import de.dailab.vsdt.IdObject;
 import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Message;

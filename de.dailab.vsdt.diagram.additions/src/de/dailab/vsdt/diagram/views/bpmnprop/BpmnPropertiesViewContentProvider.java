@@ -14,7 +14,7 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
-import de.dailab.common.gmf.ui.views.AbstractContentProvider;
+import de.dailab.common.swt.views.AbstractContentProvider;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Lane;
 import de.dailab.vsdt.MessageFlow;

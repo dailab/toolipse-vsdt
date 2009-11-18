@@ -13,7 +13,7 @@ import javax.wsdl.PortType;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 
-import de.dailab.common.gmf.ui.views.AbstractLabelProvider;
+import de.dailab.common.swt.views.AbstractLabelProvider;
 import de.dailab.vsdt.diagram.providers.VsdtAdditionsPlugin;
 
 /**

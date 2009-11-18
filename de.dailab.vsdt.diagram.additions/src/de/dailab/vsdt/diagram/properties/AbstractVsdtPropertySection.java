@@ -7,8 +7,8 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
-import de.dailab.common.gmf.ui.FormLayoutUtil;
-import de.dailab.common.gmf.ui.properties.AbstractGmfPropertySection;
+import de.dailab.common.gmf.properties.AbstractGmfPropertySection;
+import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.VsdtPackage;
 import de.dailab.vsdt.diagram.ui.ExpressionComposite;

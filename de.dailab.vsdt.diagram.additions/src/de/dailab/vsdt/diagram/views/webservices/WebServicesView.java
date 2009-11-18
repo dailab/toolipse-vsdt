@@ -10,7 +10,7 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 
-import de.dailab.common.gmf.ui.views.AbstractStructuredViewerView;
+import de.dailab.common.swt.views.AbstractStructuredViewerView;
 import de.dailab.vsdt.diagram.actions.ImportWebServiceAction;
 import de.dailab.vsdt.diagram.actions.OpenWebServiceAction;
 import de.dailab.vsdt.diagram.actions.RemoveWebServiceAction;

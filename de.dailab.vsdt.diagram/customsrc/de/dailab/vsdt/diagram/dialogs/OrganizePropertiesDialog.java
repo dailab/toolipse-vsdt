@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import de.dailab.common.gmf.Util;
-import de.dailab.common.gmf.ui.dialogs.AbstractOrganizeElementsDialog;
+import de.dailab.common.swt.dialogs.AbstractOrganizeElementsDialog;
 import de.dailab.vsdt.AbstractProcess;
 import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.DataObject;

@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.Text;
 
 import de.dailab.vsdt.Message;
 import de.dailab.vsdt.Property;
+import de.dailab.vsdt.diagram.ui.ExpressionComposite;
 import de.dailab.vsdt.vxl.Term;
 import de.dailab.vsdt.vxl.util.VxlInterpreter;
 import de.dailab.vsdt.vxl.util.VxlParseException;

@@ -13,7 +13,7 @@ import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
-import de.dailab.common.gmf.ui.dialogs.SelectUrlDialog;
+import de.dailab.common.swt.dialogs.SelectUrlDialog;
 import de.dailab.vsdt.diagram.views.webservices.WebSeviceAccessor;
 
 /**

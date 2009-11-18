@@ -24,7 +24,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.PlatformUI;
 
-import de.dailab.common.gmf.ui.ImageLoader;
+import de.dailab.common.swt.ImageLoader;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
 import de.dailab.vsdt.diagram.interpreter.simulation.AbstractSimulation;

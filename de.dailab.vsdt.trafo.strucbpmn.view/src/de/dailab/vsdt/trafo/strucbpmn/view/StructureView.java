@@ -22,7 +22,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 
 import de.dailab.common.gmf.Util;
-import de.dailab.common.gmf.ui.views.AbstractStructuredViewerView;
+import de.dailab.common.swt.views.AbstractStructuredViewerView;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.ConnectingObject;
 import de.dailab.vsdt.FlowObject;

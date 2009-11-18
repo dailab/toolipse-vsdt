@@ -1,10 +1,12 @@
 package de.dailab.vsdt.diagram.views.pools;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.core.util.EMFCoreUtil;
+import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.resource.ImageDescriptor;
 
-import de.dailab.common.gmf.ui.views.AbstractLabelProvider;
+import de.dailab.common.swt.views.AbstractLabelProvider;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.diagram.providers.VsdtAdditionsPlugin;
 
@@ -40,6 +42,13 @@ public class PoolVisibilityViewLabelProvider extends AbstractLabelProvider {
 			}
 		}
 		return buffer.toString();
+	}
+	
+	private EObject getActualElement(Object editPart) {
+		if (editPart instanceof AbstractGraphicalEditPart) {
+			return ((View) ((AbstractGraphicalEditPart) editPart).getModel()).getElement();
+		}
+		return null;
 	}
 	
 }
