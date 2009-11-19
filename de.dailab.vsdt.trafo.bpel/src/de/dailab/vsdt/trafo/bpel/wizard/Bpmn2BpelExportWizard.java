@@ -9,7 +9,7 @@ import de.dailab.vsdt.trafo.bpel.export.Bpmn2BpelValidation;
 import de.dailab.vsdt.trafo.bpel.util.BpelStaticHelper;
 import de.dailab.vsdt.trafo.strucbpmn.export.Bpmn2StrucBpmnTransformation;
 import de.dailab.vsdt.trafo.wizard.BpmnExportWizard;
-import de.dailab.vsdt.trafo.wizard.BpmnTrafoWizardOptionsPage;
+import de.dailab.vsdt.trafo.wizard.BpmnExportWizardOptionsPage;
 
 public class Bpmn2BpelExportWizard extends BpmnExportWizard {
 
@@ -29,7 +29,7 @@ public class Bpmn2BpelExportWizard extends BpmnExportWizard {
 	}
 	
 	@Override
-	protected BpmnTrafoWizardOptionsPage createOptionsPage(String title,
+	protected BpmnExportWizardOptionsPage createOptionsPage(String title,
 			IStructuredSelection selection) {
 		return new Bpmn2BpelExportWizardOptionsPage(title, selection);
 	}

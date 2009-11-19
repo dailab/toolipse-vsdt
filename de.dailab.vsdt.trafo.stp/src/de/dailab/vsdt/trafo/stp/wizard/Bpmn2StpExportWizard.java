@@ -5,7 +5,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import de.dailab.vsdt.trafo.stp.export.Bpmn2StpBpmnElementMapping;
 import de.dailab.vsdt.trafo.stp.export.StpBpmnResultSaver;
 import de.dailab.vsdt.trafo.wizard.BpmnExportWizard;
-import de.dailab.vsdt.trafo.wizard.BpmnTrafoWizardOptionsPage;
+import de.dailab.vsdt.trafo.wizard.BpmnExportWizardOptionsPage;
 
 public class Bpmn2StpExportWizard extends BpmnExportWizard {
 
@@ -22,7 +22,7 @@ public class Bpmn2StpExportWizard extends BpmnExportWizard {
 	}
 	
 	@Override
-	protected BpmnTrafoWizardOptionsPage createOptionsPage(String title,
+	protected BpmnExportWizardOptionsPage createOptionsPage(String title,
 			IStructuredSelection selection) {
 		return new Bpmn2StpExportWizardOptionsPage(title, selection);
 	}

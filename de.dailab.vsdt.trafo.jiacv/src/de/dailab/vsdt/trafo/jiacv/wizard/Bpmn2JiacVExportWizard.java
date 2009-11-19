@@ -11,7 +11,7 @@ import de.dailab.vsdt.trafo.jiacv.export.JiacVExportWrapper;
 import de.dailab.vsdt.trafo.jiacv.export.JiacVResultSaver;
 import de.dailab.vsdt.trafo.strucbpmn.export.Bpmn2StrucBpmnTransformation;
 import de.dailab.vsdt.trafo.wizard.BpmnExportWizard;
-import de.dailab.vsdt.trafo.wizard.BpmnTrafoWizardOptionsPage;
+import de.dailab.vsdt.trafo.wizard.BpmnExportWizardOptionsPage;
 
 public class Bpmn2JiacVExportWizard extends BpmnExportWizard {
 
@@ -40,7 +40,7 @@ public class Bpmn2JiacVExportWizard extends BpmnExportWizard {
 	}
 
 	@Override
-	protected BpmnTrafoWizardOptionsPage createOptionsPage(String title,
+	protected BpmnExportWizardOptionsPage createOptionsPage(String title,
 			IStructuredSelection selection) {
 		return new Bpmn2JiacVExportWizardOptionsPage(title, selection);
 	}

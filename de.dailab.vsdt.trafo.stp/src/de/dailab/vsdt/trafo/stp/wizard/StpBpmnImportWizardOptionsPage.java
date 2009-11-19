@@ -2,9 +2,9 @@ package de.dailab.vsdt.trafo.stp.wizard;
 
 import org.eclipse.jface.viewers.IStructuredSelection;
 
-import de.dailab.vsdt.trafo.wizard.BpmnTrafoWizardOptionsPage;
+import de.dailab.vsdt.trafo.wizard.BpmnImportWizardOptionsPage;
 
-public class StpBpmnImportWizardOptionsPage extends BpmnTrafoWizardOptionsPage {
+public class StpBpmnImportWizardOptionsPage extends BpmnImportWizardOptionsPage {
 	
 	public StpBpmnImportWizardOptionsPage(String pageName, 
 			IStructuredSelection selection) {

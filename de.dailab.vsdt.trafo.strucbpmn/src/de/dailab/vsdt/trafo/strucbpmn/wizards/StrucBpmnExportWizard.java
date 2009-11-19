@@ -7,7 +7,6 @@ import de.dailab.vsdt.trafo.strucbpmn.export.Bpmn2StrucBpmnTransformation;
 import de.dailab.vsdt.trafo.strucbpmn.export.StrucBpmnResultSaver;
 import de.dailab.vsdt.trafo.wizard.BpmnExportWizard;
 import de.dailab.vsdt.trafo.wizard.BpmnExportWizardOptionsPage;
-import de.dailab.vsdt.trafo.wizard.BpmnTrafoWizardOptionsPage;
 
 public class StrucBpmnExportWizard extends BpmnExportWizard {
 
@@ -25,7 +24,7 @@ public class StrucBpmnExportWizard extends BpmnExportWizard {
 	}
 	
 	@Override
-	protected BpmnTrafoWizardOptionsPage createOptionsPage(String title,
+	protected BpmnExportWizardOptionsPage createOptionsPage(String title,
 			IStructuredSelection selection) {
 		return new BpmnExportWizardOptionsPage(title, selection);
 	}

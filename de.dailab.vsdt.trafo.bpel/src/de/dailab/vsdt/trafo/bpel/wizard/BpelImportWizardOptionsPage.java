@@ -8,9 +8,9 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
-import de.dailab.vsdt.trafo.wizard.BpmnTrafoWizardOptionsPage;
+import de.dailab.vsdt.trafo.wizard.BpmnImportWizardOptionsPage;
 
-public class BpelImportWizardOptionsPage extends BpmnTrafoWizardOptionsPage {
+public class BpelImportWizardOptionsPage extends BpmnImportWizardOptionsPage {
 	
 	public BpelImportWizardOptionsPage(String pageName, 
 			IStructuredSelection selection) {

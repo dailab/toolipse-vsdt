@@ -6,7 +6,7 @@ import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.trafo.impl.BpmnResultSaver;
 import de.dailab.vsdt.trafo.strucbpmn.imprt.StrucBpmn2BpmnStructureMapping;
 import de.dailab.vsdt.trafo.wizard.BpmnImportWizard;
-import de.dailab.vsdt.trafo.wizard.BpmnTrafoWizardOptionsPage;
+import de.dailab.vsdt.trafo.wizard.BpmnImportWizardOptionsPage;
 
 public class StrucBpmnImportWizard extends BpmnImportWizard {
 
@@ -23,13 +23,9 @@ public class StrucBpmnImportWizard extends BpmnImportWizard {
 	}
 	
 	@Override
-	protected BpmnTrafoWizardOptionsPage createOptionsPage(String title,
+	protected BpmnImportWizardOptionsPage createOptionsPage(String title,
 			IStructuredSelection selection) {
 		return new StrucBpmnImportWizardOptionsPage(title, selection);
-	}
-	
-	@Override
-	protected void applyOptions() {
 	}
 	
 	@Override

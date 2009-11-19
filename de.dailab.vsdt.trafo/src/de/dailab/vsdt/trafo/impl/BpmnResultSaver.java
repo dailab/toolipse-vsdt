@@ -5,10 +5,29 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.operations.OperationHistoryFactory;
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.gmf.runtime.common.core.command.CommandResult;
+import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
+import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
+import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
+import org.eclipse.gmf.runtime.notation.Diagram;
 
 import de.dailab.vsdt.BusinessProcessSystem;
+import de.dailab.vsdt.diagram.part.Messages;
+import de.dailab.vsdt.diagram.part.VsdtDiagramEditorPlugin;
+import de.dailab.vsdt.meta.diagram.edit.parts.BusinessProcessSystemEditPart;
+import de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditorUtil;
 import de.dailab.vsdt.trafo.MappingResultSaver;
+import de.dailab.vsdt.trafo.base.logger.TrafoLog;
 
 /**
  * Default implementation of MappingResultSaver to be used for BPMN files.
@@ -18,6 +37,10 @@ import de.dailab.vsdt.trafo.MappingResultSaver;
  */
 public class BpmnResultSaver extends MappingResultSaver {
 
+	public static boolean createDiagramFile= true;
+	
+	public static boolean createModelFile= true;
+	
 	/** file extensions */
 	public static final String EXT= ".vsdt";
 	
@@ -41,12 +64,19 @@ public class BpmnResultSaver extends MappingResultSaver {
 		for (Object object : wrapper.getTargetModels()) {
 			if (object instanceof BusinessProcessSystem) {
 				BusinessProcessSystem bps= (BusinessProcessSystem) object;
-				File file= new File(baseDirectory, bps.getNameOrId() + suffix + EXT);
 				
-				// from XYZ-editor-creation-wizard
-				Map<Object, Object> options = new HashMap<Object, Object>();
-				options.put(XMLResource.OPTION_ENCODING, "UTF-8");
-				saveAsXmlResource(file, bps, options, null); // Problem with IDs when using VSDT resource factory
+				if (createModelFile) {
+					// create model file
+					File file= new File(baseDirectory, bps.getNameOrId() + suffix + EXT);
+					Map<Object, Object> options = new HashMap<Object, Object>();
+					options.put(XMLResource.OPTION_ENCODING, "UTF-8");
+					saveAsXmlResource(file, bps, options, null); // Problem with IDs when using VSDT resource factory
+				}
+				if (createDiagramFile) {
+					//create diagram file
+					File file= new File(baseDirectory, bps.getNameOrId() + suffix + ".vsdtd");
+					saveVSDTDiagram(file, bps);
+				}
 			}
 		}
 		return true;
@@ -54,6 +84,55 @@ public class BpmnResultSaver extends MappingResultSaver {
 	
 	public void setSuffix(String suffix) {
 		this.suffix= suffix;
+	}
+	
+	/**
+	 * Save VSDT Model to diagram file.
+	 * 
+	 * @param file			File where to save the diagram
+	 * @param bpd			VSDT model to be saved
+	 * @return				saving successful? otherwise the model can still be saved to XML
+	 * @throws IOException
+	 */
+	private boolean saveVSDTDiagram(File file, BusinessProcessSystem bps) throws IOException {
+		
+		TransactionalEditingDomain editingDomain= GMFEditingDomainFactory.INSTANCE.createEditingDomain();
+		ResourceSet resourceSet = editingDomain.getResourceSet();
+
+		URI diagramModelURI = URI.createFileURI(file.getAbsolutePath());
+		Resource resource= null;
+		if (file.exists()) {
+			resource = resourceSet.getResource(diagramModelURI, true);
+			resource.delete(null);
+		}
+		resource = resourceSet.createResource(diagramModelURI);
+		
+		final Resource diagramResource= resource;
+		final BusinessProcessSystem model= bps;
+
+		AbstractTransactionalCommand command = new AbstractTransactionalCommand(
+				editingDomain,
+				Messages.VsdtNewDiagramFileWizard_InitDiagramCommand,
+				null) {
+			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
+				Diagram diagram = ViewService.createDiagram(
+						model,
+						BusinessProcessSystemEditPart.MODEL_ID,
+						VsdtDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+				diagramResource.getContents().add(diagram);
+				diagramResource.getContents().add(diagram.getElement());
+				return CommandResult.newOKCommandResult();
+			}
+		};
+		try {
+			OperationHistoryFactory.getOperationHistory().execute(command,
+					new NullProgressMonitor(), null);
+			diagramResource.save(VsdtDiagramEditorUtil.getSaveOptions());
+			return true;
+		} catch (ExecutionException e) {
+			TrafoLog.warn("Unable to create Agent World Diagram; creating model file instead");
+			return false;
+		}
 	}
 
 }

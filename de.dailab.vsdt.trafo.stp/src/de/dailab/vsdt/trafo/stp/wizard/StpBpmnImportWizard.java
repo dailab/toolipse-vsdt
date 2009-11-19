@@ -7,7 +7,7 @@ import org.eclipse.stp.bpmn.BpmnDiagram;
 import de.dailab.vsdt.trafo.impl.BpmnResultSaver;
 import de.dailab.vsdt.trafo.stp.imprt.StpBpmn2BpmnElementMapping;
 import de.dailab.vsdt.trafo.wizard.BpmnImportWizard;
-import de.dailab.vsdt.trafo.wizard.BpmnTrafoWizardOptionsPage;
+import de.dailab.vsdt.trafo.wizard.BpmnImportWizardOptionsPage;
 
 public class StpBpmnImportWizard extends BpmnImportWizard {
 
@@ -21,18 +21,12 @@ public class StpBpmnImportWizard extends BpmnImportWizard {
 		mappingStages.add(new StpBpmn2BpmnElementMapping());
 		
 		resultSaver= new BpmnResultSaver();
-		// not needed anymore, as VSDT files now have the extension '.vsdt'
-//		((BpmnResultSaver) resultSaver).setSuffix("_vsdt");
 	}
 	
 	@Override
-	protected BpmnTrafoWizardOptionsPage createOptionsPage(String title,
+	protected BpmnImportWizardOptionsPage createOptionsPage(String title,
 			IStructuredSelection selection) {
 		return new StpBpmnImportWizardOptionsPage(title, selection);
-	}
-	
-	@Override
-	protected void applyOptions() {
 	}
 	
 	@Override

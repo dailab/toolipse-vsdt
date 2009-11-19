@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VSDT - Transformation Base
 Bundle-SymbolicName: de.dailab.vsdt.trafo;singleton:=true
-Bundle-Version: 1.3.0.20091105
+Bundle-Version: 1.3.0.20091119
 Bundle-ClassPath: .
 Bundle-Vendor: DAI-Labor, TU Berlin
 Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
@@ -11,7 +11,9 @@ Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.jface;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport,
  de.dailab.vsdt;visibility:=reexport,
- de.dailab.vsdt.trafo.base;visibility:=reexport
+ de.dailab.vsdt.trafo.base;visibility:=reexport,
+ org.eclipse.gmf.runtime.diagram.ui,
+ de.dailab.vsdt.diagram.meta
 Bundle-ActivationPolicy: lazy
 Export-Package: de.dailab.vsdt.trafo,
  de.dailab.vsdt.trafo.impl,
