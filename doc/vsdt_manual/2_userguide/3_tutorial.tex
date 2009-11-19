@@ -17,11 +17,12 @@ These are the basic steps for creating your first Business Process Diagram:
 	
 	\item Select \emph{ New $\rightarrow$ Project $\rightarrow$ General $\rightarrow$ Project } in the menu bar. Open the Navigator View to see the newly created Project.
 	
-	\item On the project, select \emph{New $\rightarrow$ BPMN Diagram} and enter a name for the File.  On the last page of the wizard some of the global settings for the Business Process Diagram, such as the Title, Description and Author name, can be set.  Two files will be created.  The first file, \verb|$NAME.vsdt_diagram| is holding the layout information for the diagram, while the other one, \verb|$NAME.vsdt|, is for the pure model data.
+	\item On the project, select \emph{New $\rightarrow$ BPMN Diagram} and enter a name for the file.  On the last page of the wizard some of the global settings for the Business Process Diagram, such as the Title, Description and Author name, can be set.  %Two files will be created.  The first file, \verb|$NAME.vsdt_diagram| is holding the layout information for the diagram, while the other one, \verb|$NAME.vsdt|, is for the pure model data.
+	A file with the extension 'vsdtd' is created, holding both the semantic model and the notational model (i.e. the layout information).
 	
-	\emph{Note} that both files are stored in XML format and can be edited with a text editor, too. However, you should do so only to fix a broken file. The diagram file can be recreated from the model file by right clicking it and choosing to initialize the diagram file.
+	\emph{Note} that the files are stored in XML format and can be edited with a text editor, too. However, you should do so only to fix a broken file. %The diagram file can be recreated from the model file by right clicking it and choosing to initialize the diagram file.
 	
-	\item By now, the diagram file should have opened automatically; otherwise open it manually by double-clicking it. It will be opened with the graphical editor. For now, ignore the model file.
+	\item By now, the diagram should have opened automatically; otherwise open it manually by double-clicking it. It will be opened with the graphical editor. %For now, ignore the model file.
 
 \end{enumerate}
 
@@ -128,7 +129,7 @@ Once all three validations are successful, the diagram can be translated to exec
 	
 \begin{enumerate}
 
-	\item Once the diagram shows no more errors, it can be exported to executable code.  Select \emph{Export...} from the file menu or from the model file's context menu.  Select the desired target language from the \emph{BPMN Export} group and proceed through the dialog.  Select the model file(s) to be exported (not the diagram files), adjust the target directory or the other options, if necessary, and hit the \emph{Finish} button.
+	\item Once the diagram shows no more errors, it can be exported to executable code.  Select \emph{Export...} from the file menu or from the model file's context menu.  Select the desired target language from the \emph{BPMN Export} group and proceed through the dialog.  Select the model file(s) to be exported, adjust the target directory or the other options, if necessary, and hit the \emph{Finish} button.
 	
 	\item The export might take some seconds.  If the model is sound, the output files will be created in a new directory in the specified target directory, named after the Business Process Diagram. By default, also a log file will be created along with the model files in the directory \emph{exportLogs} in the specified target directory.
 	

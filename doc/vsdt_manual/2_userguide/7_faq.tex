@@ -29,7 +29,9 @@ The arguments and results of service invocations are being stored in the Propert
 \section{Frequently Asked Questions}
 \label{sec:user_faq_faq}
 
-Not so many questions asked yet.
+\paragraph{My diagram is broken. How can I fix it?}
+
+In case the diagram is broken, it can be recreated from the model.  In case you are using separate files for semantic model and notational model, delete the diagram file \texttt{vsdt_diagram} and create a new one by right-clicking the model file \texttt{vsdt} and selecting the respective menu item.  In case you are using one file for both semantic and notational model, \texttt{vsdtd}, open the file in a text editor and remove the \texttt{notation:Diagram} elements (one for each diagram contained in the file). Now rename the file to \texttt{vsdt} and initialize the diagram file (in this case you can delete the model file afterwards, as the model has been copied to the diagram file).  In both cases, you will have to recreate the diagram's layout.
 
 
 \section{Troubleshooting}
