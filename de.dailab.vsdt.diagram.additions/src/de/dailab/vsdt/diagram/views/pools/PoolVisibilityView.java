@@ -4,12 +4,13 @@ import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTreeViewer;
+import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.ICheckStateListener;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 
 import de.dailab.common.gmf.Util;
@@ -34,15 +35,20 @@ import de.dailab.vsdt.diagram.edit.parts.PoolEditPart;
  */
 public class PoolVisibilityView extends AbstractStructuredViewerView {
 	
+	private CheckboxTreeViewer viewer;
+	
+	public void setFocus() {
+		viewer.getControl().setFocus();
+	};
+	
 	@Override
 	public void createPartControl(Composite composite) {
-		
-		IWorkbenchPage input= getViewSite().getWorkbenchWindow().getActivePage();
 		
 		viewer= new CheckboxTreeViewer(composite);
 		viewer.setContentProvider(new PoolVisibilityViewContentProvider());
 		viewer.setLabelProvider(new PoolVisibilityViewLabelProvider());
-		viewer.setInput(input);
+		viewer.setInput(getViewSite().getWorkbenchWindow().getActivePage());
+
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
 				// TODO synch selection with editor
@@ -57,7 +63,7 @@ public class PoolVisibilityView extends AbstractStructuredViewerView {
 //				}
 			}
 		});
-		((CheckboxTreeViewer)viewer).addCheckStateListener(new ICheckStateListener() {
+		viewer.addCheckStateListener(new ICheckStateListener() {
 			public void checkStateChanged(CheckStateChangedEvent event) {
 				if (event.getElement() instanceof PoolEditPart) {
 					int state= event.getChecked() ? SetPoolVisibilityAction.MODE_SHOW : SetPoolVisibilityAction.MODE_HIDE;
@@ -65,22 +71,16 @@ public class PoolVisibilityView extends AbstractStructuredViewerView {
 				}
 			}
 		});
-		super.createPartControl(composite);
-	}
-	
-	protected void makeActions() {
-	}
-	
-	protected void updateActionEnablement() {
-	}
-	
-	protected void performDoubleClick() {
-		// center on and highlight clicked Pool
-		Object selected= getSelectedElement();
-		IEditorPart editor= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-		if (selected instanceof AbstractGraphicalEditPart && editor instanceof DiagramEditor) {
-			Util.highlight((AbstractGraphicalEditPart) selected, (DiagramEditor) editor);
-		}
+		viewer.addDoubleClickListener(new IDoubleClickListener() {
+			public void doubleClick(DoubleClickEvent event) {
+				// center on and highlight clicked Pool
+				Object selected= getSelectedElement(viewer);
+				IEditorPart editor= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+				if (selected instanceof AbstractGraphicalEditPart && editor instanceof DiagramEditor) {
+					Util.highlight((AbstractGraphicalEditPart) selected, (DiagramEditor) editor);
+				}
+			}
+		});
 	}
 	
 }

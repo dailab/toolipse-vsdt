@@ -7,6 +7,8 @@ import javax.wsdl.Operation;
 import javax.wsdl.Output;
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 
@@ -32,31 +34,38 @@ public class WebServicesView extends AbstractStructuredViewerView {
 	private Action removeAction= null;
 	private Action showDetailsAction= null;
 	
+	private TreeViewer viewer;
+	
+	@Override
+	public void setFocus() {
+		viewer.getControl().setFocus();
+	}
+	
 	public void createPartControl(Composite composite) {
 		// Create the Viewer
 		viewer= new TreeViewer(composite);
 		viewer.setContentProvider(new WebServiceViewContentProvider());
 		viewer.setLabelProvider(new WebServiceViewLabelProvider());
 		viewer.setInput(accessor);
-		super.createPartControl(composite);
-	}
-	
-	@Override
-	protected void performDoubleClick() {
-		updateActionEnablement();
+		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			public void selectionChanged(SelectionChangedEvent event) {
+				updateActionEnablement();
+			}
+		});
+		
+		makeActions();
 	}
 	
 	/**
 	 * creates the Action objects
 	 */
-	@Override
 	protected void makeActions() {
 		openAction= new OpenWebServiceAction(viewer);
 		importAction= new ImportWebServiceAction(viewer);
 		removeAction= new RemoveWebServiceAction(viewer);
 		showDetailsAction= new ShowWebServiceDetailsAction(viewer);
 		contributeToToolBar(openAction, showDetailsAction, importAction, removeAction);
-		hookContextMenu(showDetailsAction, importAction, removeAction);
+		hookContextMenu(viewer, showDetailsAction, importAction, removeAction);
 		updateActionEnablement();
 	}
 
@@ -64,9 +73,8 @@ public class WebServicesView extends AbstractStructuredViewerView {
 	 * Enables or disables the several Actions depending on the currently selected
 	 * item in the viewer.
 	 */
-	@Override
 	protected void updateActionEnablement() {
-		Object selection= getSelectedElement();
+		Object selection= getSelectedElement(viewer);
 		boolean importEnabled= 
 			selection instanceof Message || 
 			selection instanceof Operation ||

@@ -1,5 +1,7 @@
 package de.dailab.vsdt.diagram.views.bpmnprop;
 
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -25,11 +27,17 @@ public class BpmnPropertiesView extends AbstractStructuredViewerView {
 	
 	private Table table;
 	
+	private TableViewer viewer;
+	
 	public static final String NAME_COLUMN	= "Name";
 	public static final String TYPE_COLUMN	= "Type";
 	public static final String OWNER_COLUMN	= "Owner";
 	public static final String[] COLUMN_NAMES = new String[] {NAME_COLUMN, TYPE_COLUMN, OWNER_COLUMN,};
 
+	public void setFocus() {
+		viewer.getControl().setFocus();
+	}
+	
 	public void createPartControl(Composite composite) {
 		
 		// Create a composite to hold the children
@@ -53,27 +61,17 @@ public class BpmnPropertiesView extends AbstractStructuredViewerView {
 		viewer.setLabelProvider(new BpmnPropertiesViewLabelProvider());
 		viewer.setInput(input);
 		viewer.setSorter(new BpmnPropertiesViewSorter(-1));
-		((TableViewer)viewer).setColumnProperties(COLUMN_NAMES);
-		super.createPartControl(composite);
-	}
-	
-	@Override
-	protected void makeActions() {
-		//do nothing
-	}
-	
-	@Override
-	protected void updateActionEnablement() {
-		// no actions to update
-	}
-	
-	@Override
-	protected void performDoubleClick() {
-		Object selected= getSelectedElement();
-		if (selected instanceof Property) {
-			Property property= (Property) selected;
-			new OrganizePropertiesAction().run(property.eContainer());
-		}
+		viewer.setColumnProperties(COLUMN_NAMES);
+		
+		viewer.addDoubleClickListener(new IDoubleClickListener() {
+			public void doubleClick(DoubleClickEvent event) {
+				Object selected= getSelectedElement(viewer);
+				if (selected instanceof Property) {
+					Property property= (Property) selected;
+					new OrganizePropertiesAction().run(property.eContainer());
+				}	
+			}
+		});
 	}
 	
 	/**

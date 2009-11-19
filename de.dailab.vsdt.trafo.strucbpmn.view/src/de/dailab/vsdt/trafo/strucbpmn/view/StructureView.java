@@ -12,7 +12,11 @@ import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
@@ -61,17 +65,34 @@ public class StructureView extends AbstractStructuredViewerView implements ISele
 	private Action expandAllAction;
 	private Action collapseAllAction;
 	
+	private StructureViewer viewer;
+	
+	public void setFocus() {
+		viewer.getControl().setFocus();
+	}
+	
 	@Override
 	public void createPartControl(Composite composite) {
 		viewer= new StructureViewer(composite);
-		super.createPartControl(composite);
+		
+		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			public void selectionChanged(SelectionChangedEvent event) {
+				updateActionEnablement();
+			}
+		});
+		viewer.addDoubleClickListener(new IDoubleClickListener() {
+			public void doubleClick(DoubleClickEvent event) {
+				performDoubleClick();
+			}
+		});
+		
+		makeActions();
 	}
 	
 	public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 		updateActionEnablement();
 	}
 
-	@Override
 	protected void makeActions() {
 		structurizeAction= new Action("Structurize", VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_STRUCTURIZE)) {
 			public void run() {
@@ -106,7 +127,6 @@ public class StructureView extends AbstractStructuredViewerView implements ISele
 		});
 	}
 
-	@Override
 	protected void updateActionEnablement() {
 		structurizeAction.setEnabled(isVsdtDiagram());
 	}
@@ -116,12 +136,11 @@ public class StructureView extends AbstractStructuredViewerView implements ISele
 	 * In case a Structured Element is clicked, all of it's constituting parts
 	 * are highlighted.
 	 */
-	@Override
 	protected void performDoubleClick() {
 		// highlight selected element
 		if (isVsdtDiagram()) {
 			VsdtDiagramEditor editor= (VsdtDiagramEditor) getWorkbenchPage().getActiveEditor();
-			Object selected= getSelectedElement();
+			Object selected= getSelectedElement(viewer);
 			if (selected instanceof EObject) {
 				selectInEditor((EObject) selected, editor);	
 			}	

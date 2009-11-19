@@ -10,6 +10,10 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Tree;
@@ -61,6 +65,8 @@ public class InterpreterView extends AbstractStructuredViewerView {
 	private Action stepOutAction;
 	private List<Action> simulationTypeSelectActions;
 	
+	private SimulationViewer viewer;
+	
 	private AbstractSimulation simulation;
 	
 	
@@ -69,14 +75,28 @@ public class InterpreterView extends AbstractStructuredViewerView {
 	}
 	
 	@Override
+	public void setFocus() {
+		viewer.getControl().setFocus();
+	}
+	
+	@Override
 	public void createPartControl(Composite composite) {
 		IWorkbenchPage input= getViewSite().getWorkbenchWindow().getActivePage();
 		viewer= new SimulationViewer(this, composite);
 		viewer.setInput(input);
-		super.createPartControl(composite);
+		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			public void selectionChanged(SelectionChangedEvent event) {
+				updateActionEnablement();
+			}
+		});
+		viewer.addDoubleClickListener(new IDoubleClickListener() {
+			public void doubleClick(DoubleClickEvent event) {
+				performDoubleClick();
+			}
+		});
+		makeActions();
 	}
 
-	@Override
 	protected void makeActions() {
 		startAction= new Action("Start", VsdtInterpreterPlugin.getImageDescriptor(VsdtInterpreterPlugin.IMAGE_SIM_START)) {
 			public void run() { start(); }
@@ -95,7 +115,7 @@ public class InterpreterView extends AbstractStructuredViewerView {
 		};
 		contributeToToolBar(startAction, stopAction, stepOverAction, 
 				stepIntoAction, stepOutAction);
-		hookContextMenu(stepOverAction, stepIntoAction, stepOutAction);
+		hookContextMenu(viewer, stepOverAction, stepIntoAction, stepOutAction);
 		updateActionEnablement();
 		
 		// select simulator menu
@@ -103,31 +123,30 @@ public class InterpreterView extends AbstractStructuredViewerView {
 		addSimulationTypeSelectAction(SIMULATIONTYPE_MANUAL);
 	}
 
-	@Override
 	protected void updateActionEnablement() {
 		boolean isVsdt= isVsdtDiagram();
+		Object selected= getSelectedElement(viewer);
 		startAction.setEnabled(isVsdt && ! isRunning());
 		stopAction.setEnabled(isVsdt && isRunning());
 		stepOverAction.setEnabled(isVsdt && isRunning() &&
-				getSelectedElement() instanceof FlowObject &&
-				getState((FlowObject) getSelectedElement()).isReadyState() &&
-				! getState((FlowObject) getSelectedElement()).isActiveState());
+				selected instanceof FlowObject &&
+				getState((FlowObject) selected).isReadyState() &&
+				! getState((FlowObject) selected).isActiveState());
 		stepIntoAction.setEnabled(isVsdt && isRunning() &&
-				getSelectedElement() instanceof FlowObject &&
-				getState((FlowObject) getSelectedElement()).isReadyState() &&
-				! getState((FlowObject) getSelectedElement()).isActiveState());
+				selected instanceof FlowObject &&
+				getState((FlowObject) selected).isReadyState() &&
+				! getState((FlowObject) selected).isActiveState());
 		stepOutAction.setEnabled(isVsdt && isRunning() &&
-				getSelectedElement() instanceof FlowObject &&
-				getState((FlowObject) getSelectedElement()).isActiveState() && 
-				getState((FlowObject) getSelectedElement()).isReadyState());
+				selected instanceof FlowObject &&
+				getState((FlowObject) selected).isActiveState() && 
+				getState((FlowObject) selected).isReadyState());
 		for (Action selectAction : simulationTypeSelectActions) {
 			selectAction.setEnabled(! isRunning());
 		}
 	}
 	
-	@Override
 	protected void performDoubleClick() {
-		Object selected= getSelectedElement();
+		Object selected= getSelectedElement(viewer);
 		if (selected instanceof FlowObject) {
 			FlowObject flowObject= (FlowObject) selected;
 
@@ -217,8 +236,8 @@ public class InterpreterView extends AbstractStructuredViewerView {
 	 * @see ISimulation#stepOver(FlowObject)
 	 */
 	public void stepOver() {
-		if (simulation != null && getSelectedElement() instanceof FlowObject) {
-			List<FlowObject> result= simulation.stepOver((FlowObject) getSelectedElement());
+		if (simulation != null && getSelectedElement(viewer) instanceof FlowObject) {
+			List<FlowObject> result= simulation.stepOver((FlowObject) getSelectedElement(viewer));
 			setSelection(result);
 			updateActionEnablement();
 		}
@@ -228,8 +247,8 @@ public class InterpreterView extends AbstractStructuredViewerView {
 	 * @see ISimulation#stepInto(FlowObject)
 	 */
 	public void stepInto() {
-		if (simulation != null && getSelectedElement() instanceof FlowObject) {
-			List<FlowObject> result= simulation.stepInto((FlowObject) getSelectedElement());
+		if (simulation != null && getSelectedElement(viewer) instanceof FlowObject) {
+			List<FlowObject> result= simulation.stepInto((FlowObject) getSelectedElement(viewer));
 			setSelection(result);
 			updateActionEnablement();
 		}
@@ -239,8 +258,8 @@ public class InterpreterView extends AbstractStructuredViewerView {
 	 * @see ISimulation#stepOut(FlowObject)
 	 */
 	public void stepOut() {
-		if (simulation != null && getSelectedElement() instanceof FlowObject) {
-			List<FlowObject> result= simulation.stepOut((FlowObject) getSelectedElement());
+		if (simulation != null && getSelectedElement(viewer) instanceof FlowObject) {
+			List<FlowObject> result= simulation.stepOut((FlowObject) getSelectedElement(viewer));
 			setSelection(result);
 			updateActionEnablement();
 		}
