@@ -6,6 +6,7 @@ Bundle-Version: 0.3.0.20091120
 Bundle-Vendor: DAI-Labor, TU Berlin
 Require-Bundle: de.dailab.vsdt.trafo.strucbpmn
 Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: lib/jaxb-api-1.0.1.jar,
  lib/jaxb-impl-1.0.4.jar,
  lib/jaxb-libs-1.0.4.jar,
