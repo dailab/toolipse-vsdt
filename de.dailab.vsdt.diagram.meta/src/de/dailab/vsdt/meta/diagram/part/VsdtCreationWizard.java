@@ -106,7 +106,7 @@ public class VsdtCreationWizard extends Wizard implements INewWizard {
 	 */
 	public void addPages() {
 		diagramModelFilePage = new VsdtCreationWizardPage(
-				"DiagramModelFile", getSelection(), "vsdt_diagram"); //$NON-NLS-1$ //$NON-NLS-2$
+				"DiagramModelFile", getSelection(), "vsdtd"); //$NON-NLS-1$ //$NON-NLS-2$
 		diagramModelFilePage
 				.setTitle(Messages.VsdtCreationWizard_DiagramModelFilePageTitle);
 		diagramModelFilePage
@@ -121,7 +121,7 @@ public class VsdtCreationWizard extends Wizard implements INewWizard {
 					// guess Diagram Name from file name
 					String fileName = diagramModelFilePage.getFileName();
 					fileName = fileName.substring(0, fileName.length()
-							- ".vsdt_diagram".length()); //$NON-NLS-1$
+							- ".vsdtd".length()); //$NON-NLS-1$
 					setDiagramName(fileName);
 				}
 				super.setVisible(visible);
