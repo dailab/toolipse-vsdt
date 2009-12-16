@@ -737,7 +737,6 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			if (fork.getName().contains(InitialGatewayRule.INITIAL_GATEWAY)) {
 				// memorize original service (_currentService will be bound to the new one)
 				final Service parentService= _currentService;
-				parentService.setName(parentService.getName() + "_common");
 				List<Service> services= new ArrayList<Service>();
 				int counter= 0;
 				for (BpmnBranch branch : bpmnBlock.getElements()) {
