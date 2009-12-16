@@ -33,7 +33,7 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_r8g5selvEd6Uvb7BxkBYxw" id="_r8g5sOlvEd6Uvb7BxkBYxw" source="_pWqRwelvEd6Uvb7BxkBYxw" target="_r8UFYelvEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_s1V_IelvEd6Uvb7BxkBYxw" id="_s1V_IOlvEd6Uvb7BxkBYxw" source="_r8UFYelvEd6Uvb7BxkBYxw" target="_s1H8selvEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_vRAJQelvEd6Uvb7BxkBYxw" name="yes" id="_vRAJQOlvEd6Uvb7BxkBYxw" conditionType="EXPRESSION" source="_s1H8selvEd6Uvb7BxkBYxw" target="_vQzU8elvEd6Uvb7BxkBYxw">
-        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_WHQO0Oo5Ed6FP7KXlO1S-A" expression="'description is acceptable'"/>
+        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_SQWZQOo6Ed6FP7KXlO1S-A" expression="&quot;$offer.isAcceptable == true&quot;"/>
       </connections>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_wX8jMelvEd6Uvb7BxkBYxw" name="no" id="_wX8jMOlvEd6Uvb7BxkBYxw" conditionType="DEFAULT" source="_s1H8selvEd6Uvb7BxkBYxw" target="_wXwV8elvEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_w0_rkelvEd6Uvb7BxkBYxw" id="_w0_rkOlvEd6Uvb7BxkBYxw" source="_wXwV8elvEd6Uvb7BxkBYxw" target="_w0MaUelvEd6Uvb7BxkBYxw"/>
@@ -142,7 +142,7 @@
       <connections xmi:type="vsdt:MessageFlow" xmi:id="_FlW0wOlzEd6Uvb7BxkBYxw" id="_FlWNsOlzEd6Uvb7BxkBYxw" source="_JDCHcelxEd6Uvb7BxkBYxw" target="_38Qh0elyEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_cnhI0elzEd6Uvb7BxkBYxw" id="_cnhI0OlzEd6Uvb7BxkBYxw" source="_cnVioelzEd6Uvb7BxkBYxw" target="_sqGjAelwEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_cnrg4elzEd6Uvb7BxkBYxw" name="yes" id="_sqQ7EOlwEd6Uvb7BxkBYxw" conditionType="EXPRESSION" source="_qmBLYelwEd6Uvb7BxkBYxw" target="_cnVioelzEd6Uvb7BxkBYxw">
-        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_z91MEOowEd6xFKyk2BwCAQ" expression="'auction.bids.size > 0'"/>
+        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_RBNFkOo6Ed6FP7KXlO1S-A" expression="&quot;$auction.bids.size > 0&quot;"/>
       </connections>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_dmrfwelzEd6Uvb7BxkBYxw" id="_OH_2IOlxEd6Uvb7BxkBYxw" source="_sqGjAelwEd6Uvb7BxkBYxw" target="_dmiV0elzEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_ntkQMelzEd6Uvb7BxkBYxw" id="_ntkQMOlzEd6Uvb7BxkBYxw" source="_JDCHcelxEd6Uvb7BxkBYxw" target="_dmiV0elzEd6Uvb7BxkBYxw"/>
@@ -195,17 +195,33 @@
     <participants xmi:type="vsdt:Participant" xmi:id="_FnSrQelvEd6Uvb7BxkBYxw" name="Auctioneer" id="_FnSrQOlvEd6Uvb7BxkBYxw" associatedProcesses="_KCE0gelvEd6Uvb7BxkBYxw _IxgkgelvEd6Uvb7BxkBYxw _JbA0gelvEd6Uvb7BxkBYxw" associatedPools="_SR1rQelvEd6Uvb7BxkBYxw _XsWMIelvEd6Uvb7BxkBYxw _asUkQelvEd6Uvb7BxkBYxw"/>
     <participants xmi:type="vsdt:Participant" xmi:id="_G8oGgelvEd6Uvb7BxkBYxw" name="Seller" id="_G8oGgOlvEd6Uvb7BxkBYxw" associatedProcesses="_IxgkgelvEd6Uvb7BxkBYxw _KCE0gelvEd6Uvb7BxkBYxw" associatedPools="_STyzEelvEd6Uvb7BxkBYxw _asmREelvEd6Uvb7BxkBYxw"/>
     <participants xmi:type="vsdt:Participant" xmi:id="_IIqb0elvEd6Uvb7BxkBYxw" name="Bidder" id="_IIqb0OlvEd6Uvb7BxkBYxw" associatedProcesses="_KCE0gelvEd6Uvb7BxkBYxw _JbA0gelvEd6Uvb7BxkBYxw" associatedPools="_XsNpQelvEd6Uvb7BxkBYxw _aseVQelvEd6Uvb7BxkBYxw"/>
-    <messages xmi:type="vsdt:Message" xmi:id="_sJpI8OouEd6xFKyk2BwCAQ" name="accept"/>
-    <messages xmi:type="vsdt:Message" xmi:id="_sRW6gOouEd6xFKyk2BwCAQ" name="decline"/>
+    <messages xmi:type="vsdt:Message" xmi:id="_sJpI8OouEd6xFKyk2BwCAQ" name="accept">
+      <properties xmi:type="vsdt:Property" xmi:id="_lsIAAOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
+    </messages>
+    <messages xmi:type="vsdt:Message" xmi:id="_sRW6gOouEd6xFKyk2BwCAQ" name="decline">
+      <properties xmi:type="vsdt:Property" xmi:id="_oLRjAOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
+    </messages>
     <messages xmi:type="vsdt:Message" xmi:id="_sHAEoOouEd6xFKyk2BwCAQ" name="descriptionMessage">
       <properties xmi:type="vsdt:Property" xmi:id="_uno1YOouEd6xFKyk2BwCAQ" name="desc" type="Description"/>
     </messages>
-    <messages xmi:type="vsdt:Message" xmi:id="_uyK08OovEd6xFKyk2BwCAQ" name="notifySold"/>
-    <messages xmi:type="vsdt:Message" xmi:id="_u0ZCgOovEd6xFKyk2BwCAQ" name="notifyNotSold"/>
-    <messages xmi:type="vsdt:Message" xmi:id="_u2GSsOovEd6xFKyk2BwCAQ" name="notifyShipped"/>
-    <messages xmi:type="vsdt:Message" xmi:id="_u3bvcOovEd6xFKyk2BwCAQ" name="notifyPayed"/>
-    <messages xmi:type="vsdt:Message" xmi:id="_Fyv0oOowEd6xFKyk2BwCAQ" name="notifyNotPayed"/>
-    <messages xmi:type="vsdt:Message" xmi:id="_G1LiAOowEd6xFKyk2BwCAQ" name="notifyNotShipped"/>
+    <messages xmi:type="vsdt:Message" xmi:id="_uyK08OovEd6xFKyk2BwCAQ" name="notifySold">
+      <properties xmi:type="vsdt:Property" xmi:id="_rJjSAOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
+    </messages>
+    <messages xmi:type="vsdt:Message" xmi:id="_u0ZCgOovEd6xFKyk2BwCAQ" name="notifyNotSold">
+      <properties xmi:type="vsdt:Property" xmi:id="_tdylgOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
+    </messages>
+    <messages xmi:type="vsdt:Message" xmi:id="_u2GSsOovEd6xFKyk2BwCAQ" name="notifyShipped">
+      <properties xmi:type="vsdt:Property" xmi:id="_uRmBAOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
+    </messages>
+    <messages xmi:type="vsdt:Message" xmi:id="_u3bvcOovEd6xFKyk2BwCAQ" name="notifyPayed">
+      <properties xmi:type="vsdt:Property" xmi:id="_u-x3IOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
+    </messages>
+    <messages xmi:type="vsdt:Message" xmi:id="_Fyv0oOowEd6xFKyk2BwCAQ" name="notifyNotPayed">
+      <properties xmi:type="vsdt:Property" xmi:id="_vlvwgOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
+    </messages>
+    <messages xmi:type="vsdt:Message" xmi:id="_G1LiAOowEd6xFKyk2BwCAQ" name="notifyNotShipped">
+      <properties xmi:type="vsdt:Property" xmi:id="_wdcNgOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
+    </messages>
     <implementations xmi:type="vsdt:Implementation" xmi:id="_jCf-QOouEd6xFKyk2BwCAQ" type="JADL" participant="_FnSrQelvEd6Uvb7BxkBYxw" interface="CreateAuction" operation="sendDescription" inputMessage="_sHAEoOouEd6xFKyk2BwCAQ"/>
     <implementations xmi:type="vsdt:Implementation" xmi:id="_0kIpAOouEd6xFKyk2BwCAQ" participant="_G8oGgelvEd6Uvb7BxkBYxw" interface="CreateAuction" operation="sendAccept" inputMessage="_sJpI8OouEd6xFKyk2BwCAQ"/>
     <implementations xmi:type="vsdt:Implementation" xmi:id="_4WSsAOouEd6xFKyk2BwCAQ" participant="_G8oGgelvEd6Uvb7BxkBYxw" interface="CreateAuction" operation="sendDecline" inputMessage="_sRW6gOouEd6xFKyk2BwCAQ"/>
@@ -389,7 +405,7 @@
         <styles xmi:type="notation:FilteringStyle" xmi:id="_SR-OI-lvEd6Uvb7BxkBYxw"/>
       </children>
       <styles xmi:type="notation:ShapeStyle" xmi:id="_SR7x4elvEd6Uvb7BxkBYxw" fontName="Sans"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_SR7x4ulvEd6Uvb7BxkBYxw" x="30" y="362"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_SR7x4ulvEd6Uvb7BxkBYxw" x="30" y="281"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_ST0oQOlvEd6Uvb7BxkBYxw" type="1004" element="_STyzEelvEd6Uvb7BxkBYxw">
       <children xmi:type="notation:Node" xmi:id="_ST12YOlvEd6Uvb7BxkBYxw" type="4009"/>
