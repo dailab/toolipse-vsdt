@@ -330,6 +330,11 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		TriggerType trigger= multiType != null ? multiType : event.getTrigger();
 		
 		List<Property> properties= new ArrayList<Property>();
+
+		// enrich service name with name of current start event
+		if (event instanceof Start && event.getName() != null) {
+			_currentService.setName(_currentService.getName() + "_" + event.getName());
+		}
 		
 		switch (trigger) {
 		case MESSAGE:
@@ -732,6 +737,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			if (fork.getName().contains(InitialGatewayRule.INITIAL_GATEWAY)) {
 				// memorize original service (_currentService will be bound to the new one)
 				final Service parentService= _currentService;
+				parentService.setName(parentService.getName() + "_common");
 				List<Service> services= new ArrayList<Service>();
 				int counter= 0;
 				for (BpmnBranch branch : bpmnBlock.getElements()) {
