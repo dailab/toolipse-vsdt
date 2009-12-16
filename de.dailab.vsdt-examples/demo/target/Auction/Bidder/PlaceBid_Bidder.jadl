@@ -1,4 +1,9 @@
 
 
-service Bidder ( in ) ( out ) {
+service Bidder_dobid ( in ) ( out ) {
+    {
+        {
+            print "Executing dobiddingstuff" ;
+        }
+    }
 }

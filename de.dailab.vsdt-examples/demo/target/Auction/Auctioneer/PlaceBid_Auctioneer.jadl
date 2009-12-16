@@ -1,4 +1,9 @@
 
 
-service Auctioneer ( in ) ( out ) {
+service Auctioneer_receivebid ( in ) ( out ) {
+    {
+        {
+            print "Executing dobiddingstuff" ;
+        }
+    }
 }

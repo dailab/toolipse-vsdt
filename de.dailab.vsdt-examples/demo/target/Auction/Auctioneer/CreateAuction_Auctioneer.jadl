@@ -1,12 +1,24 @@
 
-service Auctioneer_description ( in $desc : string ) ( out ) {
-    print "Executing checkdescription" ;
-    if ( "accept description" ) {
-        var $message : string ;
-        send "Seller_accept" $message ;
-        print "Executing createauction" ;
-    } else {
-        var $message : string ;
-        send "Seller_decline" $message ;
+
+service Auctioneer_createauction ( in $desc : string ) ( out ) {
+    {
+        {
+            print "Executing checkdescription" ;
+        }
+        if ( "accept description" ) {
+            {
+                var $message : string ;
+                send "Seller_accept" $message ;
+            }
+            {
+                print "Executing createauction" ;
+            }
+        }
+        else {
+            {
+                var $message : string ;
+                send "Seller_decline" $message ;
+            }
+        }
     }
 }
