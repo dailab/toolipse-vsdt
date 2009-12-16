@@ -1,0 +1,51 @@
+
+
+service Auctioneer_auctionover ( in ) ( out ) {
+    listen "Auctioneer_notifyShipped" ;
+    listen "Auctioneer_notifyPayed" ;
+    case ( ontimer until "when the auction is over" )
+    if ( "$auction.bids.size > 0" ) {
+        par {
+            {
+                var $message : string ;
+                send "Seller_notifySold" $message ;
+            }
+            {
+                var $message : string ;
+                send "Seller_notifySold" $message ;
+            }
+        }
+        switch {
+            case ( onmessage "Auctioneer_notifyPayed" string ) {
+                var $message : string ;
+                receive timeout 10000 "Auctioneer_notifyPayed" $message ;
+                var $message : string ;
+                send "Seller_notifyPayed" $message ;
+                switch {
+                    case ( onmessage "Auctioneer_notifyShipped" string ) {
+                        var $message : string ;
+                        receive timeout 10000 "Auctioneer_notifyShipped" $message ;
+                        var $message : string ;
+                        send "Bidder_notifyShipped" $message ;
+                        print "Executing transfermoneytoseller" ;
+                    }
+                    case ( ontimer timeout 2 ) {
+                        var $message : string ;
+                        send "Bidder_notifyNotShipped" $message ;
+                        print "Executing transfermoneyback" ;
+                    }
+                }
+                case ( ontimer timeout 3 ) {
+                }
+            }
+            case ( ontimer timeout 1 ) {
+                var $message : string ;
+                send "Seller_notifyNotPayed" $message ;
+            }
+        }
+    } else {
+        var $message : string ;
+        send "Seller_notifyNotSold" $message ;
+    }
+    print "Executing removeauction" ;
+}

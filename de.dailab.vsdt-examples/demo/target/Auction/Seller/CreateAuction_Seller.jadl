@@ -1,0 +1,19 @@
+
+
+service Seller_ ( in ) ( out ) {
+    listen "Seller_decline" ;
+    listen "Seller_accept" ;
+    var $desc : string ;
+    send "Auctioneer_descriptionMessage" $desc ;
+    switch {
+        case ( onmessage "Seller_accept" string ) {
+            var $message : string ;
+            receive timeout 10000 "Seller_accept" $message ;
+            print "Executing dootherpreparations" ;
+        }
+        case ( onmessage "Seller_decline" string ) {
+            var $message : string ;
+            receive timeout 10000 "Seller_decline" $message ;
+        }
+    }
+}

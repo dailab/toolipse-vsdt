@@ -1,0 +1,31 @@
+
+
+service Seller ( in ) ( out ) {
+}
+
+service Seller_0_sold ( in $message : string ) ( out ) {
+    listen "Seller_notifyPayed" ;
+    listen "Seller_notifyNotPayed" ;
+    switch {
+        case ( onmessage "Seller_notifyPayed" string ) {
+            var $message : string ;
+            receive timeout 10000 "Seller_notifyPayed" $message ;
+            print "Executing sendgoods" ;
+            var $message : string ;
+            send "Auctioneer_notifyShipped" $message ;
+            print "Executing ratepositively" ;
+        }
+        case ( onmessage "Seller_notifyNotPayed" string ) {
+            var $message : string ;
+            receive timeout 10000 "Seller_notifyNotPayed" $message ;
+            print "Executing ratenegatively" ;
+            print "Executing dismissauction" ;
+        }
+    }
+    invoke Seller ( ) ( ) ;
+}
+
+service Seller_1_notsold ( in $message : string ) ( out ) {
+    print "Executing dismissauction" ;
+    invoke Seller ( ) ( ) ;
+}
