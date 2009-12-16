@@ -8,8 +8,8 @@
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_pWqRwelvEd6Uvb7BxkBYxw" name="description" id="_pWqRwOlvEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_sHAEoOouEd6xFKyk2BwCAQ" implementation="_jCf-QOouEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_r8UFYelvEd6Uvb7BxkBYxw" name="check description" id="_r8UFYOlvEd6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_s1H8selvEd6Uvb7BxkBYxw" name="acceptable?" id="_s1H8sOlvEd6Uvb7BxkBYxw" markerVisible="true"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_vQzU8elvEd6Uvb7BxkBYxw" name="accept" id="_vQzU8OlvEd6Uvb7BxkBYxw"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_wXwV8elvEd6Uvb7BxkBYxw" name="decline" id="_wXwV8OlvEd6Uvb7BxkBYxw"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_vQzU8elvEd6Uvb7BxkBYxw" name="accept" id="_vQzU8OlvEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_sJpI8OouEd6xFKyk2BwCAQ" implementation="_0kIpAOouEd6xFKyk2BwCAQ"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_wXwV8elvEd6Uvb7BxkBYxw" name="decline" id="_wXwV8OlvEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_sRW6gOouEd6xFKyk2BwCAQ" implementation="_4WSsAOouEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_w0MaUelvEd6Uvb7BxkBYxw" id="_w0MaUOlvEd6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_QF_CQelwEd6Uvb7BxkBYxw" name="create auction" id="_QF_CQOlwEd6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_RP87AelwEd6Uvb7BxkBYxw" id="_RP87AOlwEd6Uvb7BxkBYxw"/>
@@ -19,7 +19,7 @@
         <process xmi:type="vsdt:BpmnProcess" xmi:id="_STzaI-lvEd6Uvb7BxkBYxw" name="Seller_Process" id="_STzaIulvEd6Uvb7BxkBYxw"/>
         <lanes xmi:type="vsdt:Lane" xmi:id="_STzaIelvEd6Uvb7BxkBYxw" id="_STzaIOlvEd6Uvb7BxkBYxw" boundaryVisible="false">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_gVU0IelvEd6Uvb7BxkBYxw" id="_gVU0IOlvEd6Uvb7BxkBYxw"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_hlVDcelvEd6Uvb7BxkBYxw" name="send description" id="_hlVDcOlvEd6Uvb7BxkBYxw"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_hlVDcelvEd6Uvb7BxkBYxw" name="send description" id="_hlVDcOlvEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_sHAEoOouEd6xFKyk2BwCAQ" implementation="_jCf-QOouEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_ncqDMelvEd6Uvb7BxkBYxw" name="accepted?" id="_ncqDMOlvEd6Uvb7BxkBYxw" gatewayType="XOR_EVENT"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_19lWAelvEd6Uvb7BxkBYxw" name="yes" id="_19lWAOlvEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_sJpI8OouEd6xFKyk2BwCAQ" implementation="_0kIpAOouEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_3IUDwelvEd6Uvb7BxkBYxw" name="no" id="_3IUDwOlvEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_sRW6gOouEd6xFKyk2BwCAQ" implementation="_4WSsAOouEd6xFKyk2BwCAQ"/>
@@ -33,7 +33,7 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_r8g5selvEd6Uvb7BxkBYxw" id="_r8g5sOlvEd6Uvb7BxkBYxw" source="_pWqRwelvEd6Uvb7BxkBYxw" target="_r8UFYelvEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_s1V_IelvEd6Uvb7BxkBYxw" id="_s1V_IOlvEd6Uvb7BxkBYxw" source="_r8UFYelvEd6Uvb7BxkBYxw" target="_s1H8selvEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_vRAJQelvEd6Uvb7BxkBYxw" name="yes" id="_vRAJQOlvEd6Uvb7BxkBYxw" conditionType="EXPRESSION" source="_s1H8selvEd6Uvb7BxkBYxw" target="_vQzU8elvEd6Uvb7BxkBYxw">
-        <conditionExpression xmi:type="vsdt:Expression" xmi:id="__DxQoOouEd6xFKyk2BwCAQ" expression="'isAcceptable(description)'"/>
+        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_WHQO0Oo5Ed6FP7KXlO1S-A" expression="'description is acceptable'"/>
       </connections>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_wX8jMelvEd6Uvb7BxkBYxw" name="no" id="_wX8jMOlvEd6Uvb7BxkBYxw" conditionType="DEFAULT" source="_s1H8selvEd6Uvb7BxkBYxw" target="_wXwV8elvEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_w0_rkelvEd6Uvb7BxkBYxw" id="_w0_rkOlvEd6Uvb7BxkBYxw" source="_wXwV8elvEd6Uvb7BxkBYxw" target="_w0MaUelvEd6Uvb7BxkBYxw"/>
@@ -66,21 +66,21 @@
             <timeDate xmi:type="vsdt:Expression" xmi:id="_35WmcOowEd6xFKyk2BwCAQ" expression="'when the auction is over'"/>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_qmBLYelwEd6Uvb7BxkBYxw" name="exists bid?" id="_qmBLYOlwEd6Uvb7BxkBYxw" markerVisible="true"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_sqGjAelwEd6Uvb7BxkBYxw" name="inform seller" id="_sqGjAOlwEd6Uvb7BxkBYxw"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_JDCHcelxEd6Uvb7BxkBYxw" name="inform bidder" id="_JDCHcOlxEd6Uvb7BxkBYxw"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_sqGjAelwEd6Uvb7BxkBYxw" name="inform seller" id="_sqGjAOlwEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_uyK08OovEd6xFKyk2BwCAQ" implementation="_p_yEAOovEd6xFKyk2BwCAQ"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_JDCHcelxEd6Uvb7BxkBYxw" name="inform bidder" id="_JDCHcOlxEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_uyK08OovEd6xFKyk2BwCAQ" implementation="_p_yEAOovEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_OH2sMelxEd6Uvb7BxkBYxw" id="_OH2sMOlxEd6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_OaJ9IelxEd6Uvb7BxkBYxw" name="remove auction" id="_OaJ9IOlxEd6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_RQR1selxEd6Uvb7BxkBYxw" id="_RQR1sOlxEd6Uvb7BxkBYxw"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_qKUb8elyEd6Uvb7BxkBYxw" name="inform seller" id="_qKUb8OlyEd6Uvb7BxkBYxw"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_qKUb8elyEd6Uvb7BxkBYxw" name="inform seller" id="_qKUb8OlyEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_u0ZCgOovEd6xFKyk2BwCAQ" implementation="_r-lTAOovEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_cnVioelzEd6Uvb7BxkBYxw" id="_cnVioOlzEd6Uvb7BxkBYxw" gatewayType="AND"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_dmiV0elzEd6Uvb7BxkBYxw" id="_dmiV0OlzEd6Uvb7BxkBYxw" gatewayType="AND"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_H4tiAel0Ed6Uvb7BxkBYxw" name="wait for payment" id="_H4tiAOl0Ed6Uvb7BxkBYxw" gatewayType="XOR_EVENT"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_J9nZAel0Ed6Uvb7BxkBYxw" name="payed" id="_J9nZAOl0Ed6Uvb7BxkBYxw" trigger="MESSAGE" message="_u3bvcOovEd6xFKyk2BwCAQ" implementation="_1XXnUOovEd6xFKyk2BwCAQ"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_Pr05Ael0Ed6Uvb7BxkBYxw" name="inform seller" id="_Pr05AOl0Ed6Uvb7BxkBYxw"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_Pr05Ael0Ed6Uvb7BxkBYxw" name="inform seller" id="_Pr05AOl0Ed6Uvb7BxkBYxw" activityType="SEND" inMessage="_u3bvcOovEd6xFKyk2BwCAQ" implementation="_5U_6gOovEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_asGIgel0Ed6Uvb7BxkBYxw" name="timeout" id="_asGIgOl0Ed6Uvb7BxkBYxw" trigger="TIMER">
             <timeCycle xmi:type="vsdt:Expression" xmi:id="_8SmeoOowEd6xFKyk2BwCAQ" expression="'after 7 days'"/>
           </containedFlowObjects>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_dUzQIOl0Ed6Uvb7BxkBYxw" name="inform seller" id="_dUypEOl0Ed6Uvb7BxkBYxw"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_dUzQIOl0Ed6Uvb7BxkBYxw" name="inform seller" id="_dUypEOl0Ed6Uvb7BxkBYxw" activityType="SEND" inMessage="_Fyv0oOowEd6xFKyk2BwCAQ" implementation="_IsgQAOowEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_R87jgel1Ed6Uvb7BxkBYxw" name="wait for 14 days" id="_R87jgOl1Ed6Uvb7BxkBYxw" trigger="TIMER">
             <timeCycle xmi:type="vsdt:Expression" xmi:id="_99kLoOowEd6xFKyk2BwCAQ" expression="'wait for 14 days'"/>
           </containedFlowObjects>
@@ -89,11 +89,11 @@
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_4ocVkel2Ed6Uvb7BxkBYxw" name="timeout" id="_4ocVkOl2Ed6Uvb7BxkBYxw" trigger="TIMER">
             <timeCycle xmi:type="vsdt:Expression" xmi:id="_7k9VgOowEd6xFKyk2BwCAQ" expression="'after 7 days'"/>
           </containedFlowObjects>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_8_PWsel2Ed6Uvb7BxkBYxw" name="inform bidder" id="_8_PWsOl2Ed6Uvb7BxkBYxw"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_8_PWsel2Ed6Uvb7BxkBYxw" name="inform bidder" id="_8_PWsOl2Ed6Uvb7BxkBYxw" activityType="SEND" inMessage="_G1LiAOowEd6xFKyk2BwCAQ" implementation="_InFkgOowEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_90064el2Ed6Uvb7BxkBYxw" name="transfer money back" id="_90064Ol2Ed6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_G-TA0Ol3Ed6Uvb7BxkBYxw" name="A" id="_G-SZwOl3Ed6Uvb7BxkBYxw" trigger="LINK" linkedTo="_G-VdEel3Ed6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_G-VdEel3Ed6Uvb7BxkBYxw" name="A" id="_G-VdEOl3Ed6Uvb7BxkBYxw" trigger="LINK" linkedTo="_G-TA0Ol3Ed6Uvb7BxkBYxw"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_9_SB8el3Ed6Uvb7BxkBYxw" name="inform bidder" id="_9_SB8Ol3Ed6Uvb7BxkBYxw"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_9_SB8el3Ed6Uvb7BxkBYxw" name="inform bidder" id="_9_SB8Ol3Ed6Uvb7BxkBYxw" activityType="SEND" inMessage="_u2GSsOovEd6xFKyk2BwCAQ" implementation="_Nv8UsOowEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_AjedAel4Ed6Uvb7BxkBYxw" name="transfer money to seller" id="_AjedAOl4Ed6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_HOVLcel4Ed6Uvb7BxkBYxw" id="_HOVLcOl4Ed6Uvb7BxkBYxw"/>
         </lanes>
@@ -103,7 +103,7 @@
         <lanes xmi:type="vsdt:Lane" xmi:id="_aseVQ-lvEd6Uvb7BxkBYxw" id="_aseVQulvEd6Uvb7BxkBYxw" boundaryVisible="false">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_38Qh0elyEd6Uvb7BxkBYxw" name="award notification" id="_38Qh0OlyEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_uyK08OovEd6xFKyk2BwCAQ" implementation="_8bDsgOovEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_lQzA4el1Ed6Uvb7BxkBYxw" name="transfer money to auctioneer" id="_lQzA4Ol1Ed6Uvb7BxkBYxw"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_mJlDAel1Ed6Uvb7BxkBYxw" name="inform auctioneer" id="_mJlDAOl1Ed6Uvb7BxkBYxw"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_mJlDAel1Ed6Uvb7BxkBYxw" name="inform auctioneer" id="_mJlDAOl1Ed6Uvb7BxkBYxw" activityType="SEND" inMessage="_u3bvcOovEd6xFKyk2BwCAQ" implementation="_1XXnUOovEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_kuyqkel2Ed6Uvb7BxkBYxw" name="success" id="_kuyqkOl2Ed6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_eFwroOl3Ed6Uvb7BxkBYxw" name="goods sent?" id="_eFwEkOl3Ed6Uvb7BxkBYxw" gatewayType="XOR_EVENT"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_hOLOEOl3Ed6Uvb7BxkBYxw" name="yes" id="_hOKnAOl3Ed6Uvb7BxkBYxw" trigger="MESSAGE" message="_u2GSsOovEd6xFKyk2BwCAQ" implementation="_Nv8UsOowEd6xFKyk2BwCAQ"/>
@@ -124,8 +124,8 @@
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_mK2Dwel0Ed6Uvb7BxkBYxw" name="yes" id="_mK2DwOl0Ed6Uvb7BxkBYxw" trigger="MESSAGE" message="_u3bvcOovEd6xFKyk2BwCAQ" implementation="_5U_6gOovEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_mmqdEel0Ed6Uvb7BxkBYxw" name="no" id="_mmqdEOl0Ed6Uvb7BxkBYxw" trigger="MESSAGE" message="_Fyv0oOowEd6xFKyk2BwCAQ" implementation="_IsgQAOowEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_qoeFoel0Ed6Uvb7BxkBYxw" id="_qoeFoOl0Ed6Uvb7BxkBYxw"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_LMSgsel2Ed6Uvb7BxkBYxw" name="send goods" id="_LMSgsOl2Ed6Uvb7BxkBYxw"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_0UVcEel2Ed6Uvb7BxkBYxw" name="inform auctioneer" id="_0UVcEOl2Ed6Uvb7BxkBYxw"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_LMSgsel2Ed6Uvb7BxkBYxw" name="send goods" id="_LMSgsOl2Ed6Uvb7BxkBYxw" activityType="MANUAL"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_0UVcEel2Ed6Uvb7BxkBYxw" name="inform auctioneer" id="_0UVcEOl2Ed6Uvb7BxkBYxw" activityType="SEND" inMessage="_u2GSsOovEd6xFKyk2BwCAQ" implementation="_AcPqAOowEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_l1SGoOl4Ed6Uvb7BxkBYxw" name="success" id="_l1RfkOl4Ed6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_arFCkel5Ed6Uvb7BxkBYxw" name="rate negatively" id="_arFCkOl5Ed6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_cxeVEel-Ed6Uvb7BxkBYxw" name="rate positively" id="_cxeVEOl-Ed6Uvb7BxkBYxw"/>
@@ -342,7 +342,7 @@
                 <styles xmi:type="notation:FilteringStyle" xmi:id="_vQ2_UulvEd6Uvb7BxkBYxw"/>
               </children>
               <styles xmi:type="notation:ShapeStyle" xmi:id="_vQ1KIelvEd6Uvb7BxkBYxw" fontName="Sans"/>
-              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vQ1KIulvEd6Uvb7BxkBYxw" x="356" y="29"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vQ1KIulvEd6Uvb7BxkBYxw" x="356" y="29" width="73"/>
             </children>
             <children xmi:type="notation:Node" xmi:id="_wXyLIOlvEd6Uvb7BxkBYxw" type="2005" element="_wXwV8elvEd6Uvb7BxkBYxw">
               <children xmi:type="notation:Node" xmi:id="_wXzZQOlvEd6Uvb7BxkBYxw" type="4007"/>
@@ -352,7 +352,7 @@
                 <styles xmi:type="notation:FilteringStyle" xmi:id="_wX0AUOlvEd6Uvb7BxkBYxw"/>
               </children>
               <styles xmi:type="notation:ShapeStyle" xmi:id="_wXyLIelvEd6Uvb7BxkBYxw" fontName="Sans"/>
-              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wXyLIulvEd6Uvb7BxkBYxw" x="428" y="100"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wXyLIulvEd6Uvb7BxkBYxw" x="420" y="100" width="71"/>
             </children>
             <children xmi:type="notation:Node" xmi:id="_w0O2kOlvEd6Uvb7BxkBYxw" type="2004" element="_w0MaUelvEd6Uvb7BxkBYxw">
               <children xmi:type="notation:Node" xmi:id="_w0acwOlvEd6Uvb7BxkBYxw" type="4005">
@@ -519,7 +519,7 @@
       </children>
       <styles xmi:type="notation:RoutingStyle" xmi:id="_wX-_celvEd6Uvb7BxkBYxw" routing="Rectilinear"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_wX-_culvEd6Uvb7BxkBYxw" fontName="Sans"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_wX-_c-lvEd6Uvb7BxkBYxw" points="[-1, 20, -171, -51]$[-1, 73, -171, 2]$[142, 73, -28, 2]"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_wX-_c-lvEd6Uvb7BxkBYxw" points="[-1, 20, -170, -51]$[-1, 73, -170, 2]$[134, 73, -35, 2]"/>
     </edges>
     <edges xmi:type="notation:Edge" xmi:id="_w1Cu4OlvEd6Uvb7BxkBYxw" type="3001" element="_w0_rkelvEd6Uvb7BxkBYxw" source="_wXyLIOlvEd6Uvb7BxkBYxw" target="_w0O2kOlvEd6Uvb7BxkBYxw">
       <children xmi:type="notation:Node" xmi:id="_w1DV8OlvEd6Uvb7BxkBYxw" type="4012">
@@ -559,7 +559,7 @@
       </children>
       <styles xmi:type="notation:RoutingStyle" xmi:id="_FYQ7UelwEd6Uvb7BxkBYxw" routing="Rectilinear"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_FYQ7UulwEd6Uvb7BxkBYxw" fontName="Sans"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_FYRiYOlwEd6Uvb7BxkBYxw" points="[-17, 0, 1, 312]$[-17, -292, 1, 20]"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_FYRiYOlwEd6Uvb7BxkBYxw" points="[-11, 0, 0, 312]$[-11, -292, 0, 20]"/>
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_FY5NcOlwEd6Uvb7BxkBYxw" id="(0.6309523809523809,0.0)"/>
     </edges>
     <edges xmi:type="notation:Edge" xmi:id="_GQm4kOlwEd6Uvb7BxkBYxw" type="3002" element="_GQj1QelwEd6Uvb7BxkBYxw" source="_wXyLIOlvEd6Uvb7BxkBYxw" target="_3IVR4OlvEd6Uvb7BxkBYxw">
@@ -568,7 +568,7 @@
       </children>
       <styles xmi:type="notation:RoutingStyle" xmi:id="_GQm4kelwEd6Uvb7BxkBYxw" routing="Rectilinear"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_GQm4kulwEd6Uvb7BxkBYxw" fontName="Sans"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_GQm4k-lwEd6Uvb7BxkBYxw" points="[6, -9, -1, 309]$[6, -298, -1, 20]"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_GQm4k-lwEd6Uvb7BxkBYxw" points="[7, -9, -1, 309]$[7, -298, -1, 20]"/>
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_GQsYIOlwEd6Uvb7BxkBYxw" id="(0.5,0.225)"/>
     </edges>
     <edges xmi:type="notation:Edge" xmi:id="_K35z0OlwEd6Uvb7BxkBYxw" type="3002" element="_K307UelwEd6Uvb7BxkBYxw" source="_hlXfsOlvEd6Uvb7BxkBYxw" target="_pWsG8OlvEd6Uvb7BxkBYxw">
