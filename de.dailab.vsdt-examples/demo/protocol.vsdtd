@@ -13,7 +13,7 @@
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_P2_oseNJEd6Vn9XNhyTLgg" name="Proposed" id="_P2_osONJEd6Vn9XNhyTLgg" trigger="MESSAGE"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_Uwmb8eNJEd6Vn9XNhyTLgg" name="No Result or Failure" id="_Uwmb8ONJEd6Vn9XNhyTLgg"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_aV_XIeNJEd6Vn9XNhyTLgg" name="Evaluate Proposal" id="_aV_XIONJEd6Vn9XNhyTLgg"/>
-          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_yCCVseNJEd6Vn9XNhyTLgg" id="_yCCVsONJEd6Vn9XNhyTLgg"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_yCCVseNJEd6Vn9XNhyTLgg" id="_yCCVsONJEd6Vn9XNhyTLgg" markerVisible="true"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_y4xJYeNJEd6Vn9XNhyTLgg" name="Reject Proposal" id="_y4xJYONJEd6Vn9XNhyTLgg"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_0SLMUeNJEd6Vn9XNhyTLgg" name="Accept Proposal" id="_0SLMUONJEd6Vn9XNhyTLgg"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_CXL_MeNKEd6Vn9XNhyTLgg" name="Await Result" id="_CXL_MONKEd6Vn9XNhyTLgg" gatewayType="XOR_EVENT"/>
