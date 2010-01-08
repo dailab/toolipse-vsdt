@@ -207,7 +207,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		wrapper.map(pool, model);
 		
 		// build service (will automatically be added to the Agent model)
-		buildService(pool.getName(), 
+		buildService(pool.getParentDiagram().getName() + "_" + pool.getName(), 
 				process, 
 				process.getGraphicalElements(), 
 				process.getProperties(), 
