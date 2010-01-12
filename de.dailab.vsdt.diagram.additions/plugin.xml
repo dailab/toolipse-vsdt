@@ -15,6 +15,8 @@
 		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.appendIntermediate" name="Append Intermediate Event" />
 		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.appendEnd" name="Append End Event" />
 		
+		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.connectToSequence" name="Connect to Sequence" />
+		
 		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.initializePools" name="Initialize Pools" />
 	</extension>
 	
@@ -23,6 +25,7 @@
 		<key commandId="de.dailab.vsdt.diagram.commands.appendGateway" contextId="de.dailab.vsdt.diagram.ui.diagramContext" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" sequence="Ctrl+Shift+G"/>
 		<key commandId="de.dailab.vsdt.diagram.commands.appendIntermediate" contextId="de.dailab.vsdt.diagram.ui.diagramContext" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" sequence="Ctrl+Shift+I"/>
 		<key commandId="de.dailab.vsdt.diagram.commands.appendEnd" contextId="de.dailab.vsdt.diagram.ui.diagramContext" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" sequence="Ctrl+Shift+E"/>
+		<key commandId="de.dailab.vsdt.diagram.commands.connectToSequence" contextId="de.dailab.vsdt.diagram.ui.diagramContext" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" sequence="Ctrl+Shift+C"/>
 	</extension>
 	
 	
@@ -95,6 +98,36 @@
 				tooltip="Insert Activity on this Sequence Flow">
 			</action>
 		</objectContribution>
+		
+		<!-- Connect Actions -->
+		
+		<objectContribution adaptable="false"
+			id="de.dailab.vsdt.popupmenuContributor"
+			objectClass="de.dailab.vsdt.diagram.edit.parts.IVsdtEditPart">
+			
+			<menu id="bpmn_connect" label="&amp;Connect..." path="additions" />
+			
+			<action
+	         class="de.dailab.vsdt.diagram.actions.structuring.ConnectToSequenceAction"
+	         definitionId="de.dailab.vsdt.diagram.commands.connectToSequence"
+	         enablesFor="2+"
+	         icon="icons/SequenceFlow.gif"
+	         id="de.dailab.vsdt.actions.ConnectToSequence"
+	         label="&amp;Connect to Sequence"
+	         menubarPath="bpmn_connect/group1"
+	         tooltip="Sequentially connect these FlowObjects.">
+				<enablement>
+					<or>
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractActivityEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractGatewayEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractStartEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractIntermediateEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractEndEditPart" />
+					</or>
+				</enablement>
+			</action>
+		</objectContribution>
+		
 		
 		<!-- Append Actions -->
 		
