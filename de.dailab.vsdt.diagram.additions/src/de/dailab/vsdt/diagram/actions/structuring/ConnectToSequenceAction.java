@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
@@ -40,9 +39,6 @@ public class ConnectToSequenceAction implements IActionDelegate {
 	/** Flow Object Edit Parts to connect */
 	protected List<ShapeNodeEditPart> flowObjectEditParts;
 	
-	/** Adapter for the new node of the Pattern, needed for connecting a Sequence Flow */
-	protected IAdaptable adapterForSequenceFlow;
-
 	/**
 	 * @return		The Name of the CompoundCommand to execute
 	 */
