@@ -68,8 +68,7 @@ public class VsdtCreationWizardOptionsPage extends WizardPage {
 		lastControl= queLangText;
 		
 		// initial values
-		String author = VsdtDiagramEditorPlugin.getInstance().getPreferenceStore()
-				.getString(DiagramGeneralPreferencePage.PREF_AUTHOR);
+		String author = DiagramGeneralPreferencePage.getAuthor();
 		authorText.setText(author);
 		expLangText.setText(de.dailab.vsdt.vxl.util.Util.LANG_NAME);
 		// default name is to be set on setVisible

@@ -37,6 +37,7 @@ import de.dailab.vsdt.diagram.edit.parts.LaneLaneCompartmentEditPart;
 import de.dailab.vsdt.diagram.edit.parts.PoolPoolCompartmentEditPart;
 import de.dailab.vsdt.diagram.part.Messages;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditorPlugin;
+import de.dailab.vsdt.diagram.preferences.DiagramGeneralPreferencePage;
 
 /**
  * @generated
@@ -50,6 +51,12 @@ public class VsdtModelingAssistantProvider extends ModelingAssistantProvider {
 	 */
 	@Override
 	public List getTypesForPopupBar(IAdaptable host) {
+		
+		// provide modeling assistance
+		if (! DiagramGeneralPreferencePage.isAssistanceEnabled()) {
+			return Collections.EMPTY_LIST;
+		}
+		
 		IGraphicalEditPart editPart = (IGraphicalEditPart) host
 				.getAdapter(IGraphicalEditPart.class);
 		List<IElementType> types = new ArrayList<IElementType>();
@@ -209,6 +216,12 @@ public class VsdtModelingAssistantProvider extends ModelingAssistantProvider {
 	 * @generated NOT
 	 */
 	private List<IElementType> getRelTypes(IAdaptable element, boolean isSource) {
+
+		// provide modeling assistance
+		if (! DiagramGeneralPreferencePage.isAssistanceEnabled()) {
+			return Collections.EMPTY_LIST;
+		}
+		
 		List<IElementType> list = new ArrayList<IElementType>();
 		EObject sourceModel = null;
 		if (element instanceof ShapeNodeEditPart) {
