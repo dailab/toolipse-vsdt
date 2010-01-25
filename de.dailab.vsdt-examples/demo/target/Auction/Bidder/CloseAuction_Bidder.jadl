@@ -1,6 +1,6 @@
 
 
-service Bidder_awardnotification ( in $message : string ) ( out ) {
+service CloseAuction_Bidder_awardnotification ( in $message : string ) ( out ) {
     listen "Bidder_notifyShipped" ;
     listen "Bidder_notifyNotShipped" ;
     {

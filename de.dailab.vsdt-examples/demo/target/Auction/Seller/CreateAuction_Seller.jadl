@@ -1,6 +1,6 @@
 
 
-service Seller_createauction ( in ) ( out ) {
+service CreateAuction_Seller_createauction ( in ) ( out ) {
     listen "Seller_decline" ;
     listen "Seller_accept" ;
     {

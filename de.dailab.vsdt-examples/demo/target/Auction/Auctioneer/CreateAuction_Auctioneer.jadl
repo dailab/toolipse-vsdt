@@ -1,6 +1,6 @@
 
 
-service Auctioneer_createauction ( in $desc : string ) ( out ) {
+service CreateAuction_Auctioneer_createauction ( in $desc : string ) ( out ) {
     {
         {
             print "Executing checkdescription" ;

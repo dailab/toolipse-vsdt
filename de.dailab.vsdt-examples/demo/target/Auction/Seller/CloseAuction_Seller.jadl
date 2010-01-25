@@ -1,9 +1,9 @@
 
 
-service Seller_common ( in ) ( out ) {
+service CloseAuction_Seller ( in ) ( out ) {
 }
 
-service Seller_common_0_sold ( in $message : string ) ( out ) {
+service CloseAuction_Seller_0_sold ( in $message : string ) ( out ) {
     listen "Seller_notifyPayed" ;
     listen "Seller_notifyNotPayed" ;
     {
@@ -40,14 +40,14 @@ service Seller_common_0_sold ( in $message : string ) ( out ) {
             }
         }
     }
-    invoke Seller_common ( ) ( ) ;
+    invoke CloseAuction_Seller ( ) ( ) ;
 }
 
-service Seller_common_1_notsold ( in $message : string ) ( out ) {
+service CloseAuction_Seller_1_notsold ( in $message : string ) ( out ) {
     {
         {
             print "Executing dismissauction" ;
         }
     }
-    invoke Seller_common ( ) ( ) ;
+    invoke CloseAuction_Seller ( ) ( ) ;
 }

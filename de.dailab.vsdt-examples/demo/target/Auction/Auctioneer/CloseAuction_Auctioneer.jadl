@@ -1,6 +1,6 @@
 
 
-service Auctioneer_auctionover ( in ) ( out ) {
+service CloseAuction_Auctioneer_auctionover ( in ) ( out ) {
     listen "Auctioneer_notifyShipped" ;
     listen "Auctioneer_notifyPayed" ;
     {

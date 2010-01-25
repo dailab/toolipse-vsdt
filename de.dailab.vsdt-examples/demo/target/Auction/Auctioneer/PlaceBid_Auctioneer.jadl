@@ -1,9 +1,32 @@
 
 
-service Auctioneer_receivebid ( in ) ( out ) {
+service PlaceBid_Auctioneer_receivebid ( in ) ( out ) {
     {
         {
-            print "Executing dobiddingstuff" ;
+            print "Executing checkbid" ;
+        }
+        if ( "not valid" ) {
+            {
+                print "Executing acceptbid" ;
+            }
+            {
+                {
+                    {
+                        print "Executing addbid" ;
+                    }
+                    {
+                        print "Executing notifyall" ;
+                    }
+                    {
+                        print "Executing addbidder" ;
+                    }
+                }
+            }
+        }
+        else {
+            {
+                print "Executing rejectbid" ;
+            }
         }
     }
 }
