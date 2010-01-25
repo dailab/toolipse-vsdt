@@ -2,7 +2,7 @@
 <feature
       id="de.dailab.vsdt.trafo.jiaciv.feature"
       label="VSDT: BPMN - JIAC IV Transformation"
-      version="0.1.2"
+      version="0.1.3"
       provider-name="DAI-Labor, TU Berlin">
 
    <description url="http://www.dai-labor.de">
@@ -25,31 +25,14 @@ Programmers: Tobias Küster and others of Cluster Software Engineering Tools
    </url>
 
    <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="de.dailab.vsdt"/>
-      <import plugin="de.dailab.vsdt.trafo"/>
       <import plugin="de.dailab.vsdt.trafo.strucbpmn"/>
-      <import plugin="de.dailab.vsdt.trafo.strucbpmn.export"/>
-      <import plugin="de.dailab.vsdt.trafo.base"/>
-      <import plugin="de.dailab.vsdt.trafo.jiaciv"/>
    </requires>
 
    <plugin
          id="de.dailab.vsdt.trafo.jiaciv"
          download-size="0"
          install-size="0"
-         version="1.0.0.20071114"
-         unpack="false"/>
-
-   <plugin
-         id="de.dailab.vsdt.trafo.jiaciv.export"
-         download-size="0"
-         install-size="0"
-         version="0.1.2.20081125"
+         version="0.3.0.20091120"
          unpack="false"/>
 
 </feature>
