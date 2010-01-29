@@ -16,25 +16,25 @@ This diagram contains a few pools representing simple algorithms. While algorith
 In this process the square root of the input value is approximated.<br>
 The Pool '<em>Extract Root</em>' belongs to Participant '<em>Mathematican</em>'. The Pool's Process is of type <span style='font-variant:small-caps'>private</span>. In that Process,  a number of elements are carried out in sequence. <div style='border-left:solid thin; margin-left: .5em; padding-left: .5em'>
 	First,  in Event '<em>start</em>' the Message '<em>GetSquareRootRequest</em>' of the Service '<em>TestService.SquareRoot</em>' is received. The input message is received and its payload is bound to the respective process properties. <br>
-	Next,  starting at the Gateway '<em>input valid?</em>',  one out of several branches will be performed: <div style='border-left:solid thin; margin-left: .5em; padding-left: .5em'>
+	Next,  starting at the Gateway '<em>input valid?</em>',  one out of several branches will be conducted: <div style='border-left:solid thin; margin-left: .5em; padding-left: .5em'>
 		If the condition '<span style='font-family:courier'>($number < 0) && ($eps <= 0)</span>' holds true,  in Event '<em>invalid input</em>' the Message '<em>GetSquareRootResponse</em>' of the Service '<em>TestService.SquareRoot</em>' is sent. In case of invalid input, the return value will be zero. Further, an error message is returned. <br>
-		If no condition applies, by default  a number of elements are conducted in sequence. <div style='border-left:solid thin; margin-left: .5em; padding-left: .5em'>
+		If no condition applies, by default  a number of elements are performed in sequence. <div style='border-left:solid thin; margin-left: .5em; padding-left: .5em'>
 			First,  the  Task '<em>initialize
-variables</em>' is performed. This initializes the variables: The upper and lower bounds and the currently tested number. <br>
-			Following that,  starting at the Gateway '<em>(join)_2</em>',  a part of the Process will be performed in a loop.  At first,  a number of elements are carried out in sequence. <div style='border-left:solid thin; margin-left: .5em; padding-left: .5em'>
+variables</em>' is conducted. This initializes the variables: The upper and lower bounds and the currently tested number. <br>
+			Afterwards,  starting at the Gateway '<em>_2</em>',  a part of the Process will be processed in a loop.  At first,  a number of elements are conducted in sequence. <div style='border-left:solid thin; margin-left: .5em; padding-left: .5em'>
 				First,  the <span style='font-variant:small-caps'>script</span> Task '<em>print</em>' is processed, running a script. Here, the currently tested number is printed. The script's body can not be translated to BPEL, thus this works only when translating to JIAC. <br>
-				Thereafter,  the  Task '<em>calculate delta</em>' is processed. Delta is the difference between the input number and the square of the currently tested number. <br>
+				Thereafter,  the  Task '<em>calculate delta</em>' is executed. Delta is the difference between the input number and the square of the currently tested number. <br>
 				
 			</div>
-			Hereafter,  the loop condition will be tested. While the condition <span style='font-family:courier'>(($d < 0) && ((0 - $d) > $eps)) || (($d > 0) && ($d > $eps))</span> holds true, the loop will continue and  starting at the Gateway '<em>too large?</em>',  one out of several branches will be conducted: <div style='border-left:solid thin; margin-left: .5em; padding-left: .5em'>
+			Thereafter,  the loop condition will be tested. While the condition <span style='font-family:courier'>(($d < 0) && ((0 - $d) > $eps)) || (($d > 0) && ($d > $eps))</span> holds true, the loop will continue and  starting at the Gateway '<em>too large?</em>',  one out of several branches will be accomplished: <div style='border-left:solid thin; margin-left: .5em; padding-left: .5em'>
 				If the condition '<span style='font-family:courier'>($current*$current) > $number</span>' holds true,  the  Task '<em>try smaller 
-number</em>' is performed. The currently tested number is used as the new upper bound and is then set to be the average of itself and the lower bound. <br>
+number</em>' is accomplished. The currently tested number is used as the new upper bound and is then set to be the average of itself and the lower bound. <br>
 				If no condition applies, by default  the  Task '<em>try greater 
-number</em>' is executed. The currently tested number is used as the new lower bound and is then set to be the average of itself and the upper bound. <br>
+number</em>' is performed. The currently tested number is used as the new lower bound and is then set to be the average of itself and the upper bound. <br>
 				
 			</div>
 			<br>
-			Afterwards,  in Event '<em>return result</em>' the Message '<em>GetSquareRootResponse</em>' of the Service '<em>TestService.SquareRoot</em>' is sent. Returns the result of the approximation and a success message. <br>
+			Thereafter,  in Event '<em>return result</em>' the Message '<em>GetSquareRootResponse</em>' of the Service '<em>TestService.SquareRoot</em>' is sent. Returns the result of the approximation and a success message. <br>
 			
 		</div>
 		<br>
