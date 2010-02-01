@@ -5,19 +5,17 @@
       <process name="Process Oriented Agent Engineering (complete)_Process" id="_-UuloLKREd6GMtoRM-Kpdw"/>
       <lanes id="_-Ut-kLKREd6GMtoRM-Kpdw" boundaryVisible="false">
         <containedFlowObjects xsi:type="vsdt:Start" id="_Bg1VQLKSEd6GMtoRM-Kpdw"/>
-        <containedFlowObjects xsi:type="vsdt:Activity" name="Usecase Analysis&#xA;(VSDT)" id="_CQG2ELKSEd6GMtoRM-Kpdw"/>
-        <containedFlowObjects xsi:type="vsdt:Activity" name="Business Process &#xA;Design (VSDT)" id="_FrjCMLKSEd6GMtoRM-Kpdw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Usecase Analysis" id="_CQG2ELKSEd6GMtoRM-Kpdw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Business Process &#xA;Design" id="_FrjCMLKSEd6GMtoRM-Kpdw"/>
         <containedFlowObjects xsi:type="vsdt:Gateway" id="_KF_0QLKSEd6GMtoRM-Kpdw" gatewayType="AND"/>
-        <containedFlowObjects xsi:type="vsdt:Activity" name="Service Engineering&#xA;(JADLedit)" id="_L6X78LKSEd6GMtoRM-Kpdw"/>
-        <containedFlowObjects xsi:type="vsdt:Activity" name="Agent Engineering &#xA;(AWE)" id="_M9ZfMLKSEd6GMtoRM-Kpdw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Service Engineering" id="_L6X78LKSEd6GMtoRM-Kpdw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Agent Engineering" id="_M9ZfMLKSEd6GMtoRM-Kpdw"/>
         <containedFlowObjects xsi:type="vsdt:Gateway" id="_UmmFMLKSEd6GMtoRM-Kpdw" gatewayType="AND"/>
-        <containedFlowObjects xsi:type="vsdt:Activity" name="Integration" id="_Wv-MgLKSEd6GMtoRM-Kpdw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Integration, Testing" id="_Wv-MgLKSEd6GMtoRM-Kpdw"/>
         <containedFlowObjects xsi:type="vsdt:End" id="_YaZG8LKSEd6GMtoRM-Kpdw"/>
-        <containedFlowObjects xsi:type="vsdt:Activity" name="Runtime&#xA;Monitoring" id="_Ezq2MLMaEd65ieWbIXbVIQ"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Deployment, Runtime Monitoring" id="_Ezq2MLMaEd65ieWbIXbVIQ"/>
         <containedFlowObjects xsi:type="vsdt:Activity" name="Ontology&#xA;Engineering" id="_OLaosLMaEd65ieWbIXbVIQ"/>
         <containedFlowObjects xsi:type="vsdt:Gateway" id="_e9dCgLMaEd65ieWbIXbVIQ"/>
-        <containedFlowObjects xsi:type="vsdt:Activity" name="Testing" id="_ROeUkLMbEd65ieWbIXbVIQ"/>
-        <containedFlowObjects xsi:type="vsdt:Activity" name="Deployment" id="_c-zvELMbEd65ieWbIXbVIQ"/>
       </lanes>
     </pools>
     <pools name="Process Oriented Agent Engineering (core)" id="_wNIusLMnEd65ieWbIXbVIQ" boundaryVisible="false">
@@ -41,9 +39,6 @@
     <artifacts xsi:type="vsdt:DataObject" name="Service Stubs" id="_jSBX0LKSEd6GMtoRM-Kpdw"/>
     <artifacts xsi:type="vsdt:DataObject" name="Services" id="_kfTqULKSEd6GMtoRM-Kpdw"/>
     <artifacts xsi:type="vsdt:DataObject" name="Ontology" id="_l2hzILMaEd65ieWbIXbVIQ"/>
-    <artifacts xsi:type="vsdt:Group" id="_5_cLsLMmEd65ieWbIXbVIQ"/>
-    <artifacts xsi:type="vsdt:Group" id="__OJsQLMmEd65ieWbIXbVIQ"/>
-    <artifacts xsi:type="vsdt:Group" id="_DIKqwLMnEd65ieWbIXbVIQ"/>
     <artifacts xsi:type="vsdt:DataObject" name="Usecase Diagrams" id="_QZ1fsLMoEd65ieWbIXbVIQ"/>
     <artifacts xsi:type="vsdt:DataObject" name="Process Diagram" id="_R0A-sLMoEd65ieWbIXbVIQ"/>
     <artifacts xsi:type="vsdt:DataObject" name="Role Model" id="_Td5toLMoEd65ieWbIXbVIQ"/>
@@ -65,7 +60,7 @@
     <connections xsi:type="vsdt:Association" id="_1Rw64LKSEd6GMtoRM-Kpdw" source="_FrjCMLKSEd6GMtoRM-Kpdw" target="_hjn8ULKSEd6GMtoRM-Kpdw"/>
     <connections xsi:type="vsdt:Association" id="_1mhC4LKSEd6GMtoRM-Kpdw" source="_FrjCMLKSEd6GMtoRM-Kpdw" target="_jSBX0LKSEd6GMtoRM-Kpdw"/>
     <connections xsi:type="vsdt:Association" id="_2OkhYLKSEd6GMtoRM-Kpdw" source="_jSBX0LKSEd6GMtoRM-Kpdw" target="_L6X78LKSEd6GMtoRM-Kpdw"/>
-    <connections xsi:type="vsdt:Association" id="_2pp64LKSEd6GMtoRM-Kpdw" source="_L6X78LKSEd6GMtoRM-Kpdw" target="_kfTqULKSEd6GMtoRM-Kpdw"/>
+    <connections xsi:type="vsdt:Association" id="_2pp64LKSEd6GMtoRM-Kpdw" direction="BOTH" source="_L6X78LKSEd6GMtoRM-Kpdw" target="_kfTqULKSEd6GMtoRM-Kpdw"/>
     <connections xsi:type="vsdt:Association" id="_3A7ycLKSEd6GMtoRM-Kpdw" source="_kfTqULKSEd6GMtoRM-Kpdw" target="_Wv-MgLKSEd6GMtoRM-Kpdw"/>
     <connections xsi:type="vsdt:Association" id="_3dYd4LKSEd6GMtoRM-Kpdw" source="_ia3GULKSEd6GMtoRM-Kpdw" target="_Wv-MgLKSEd6GMtoRM-Kpdw"/>
     <connections xsi:type="vsdt:Association" id="_35PTcLKSEd6GMtoRM-Kpdw" source="_M9ZfMLKSEd6GMtoRM-Kpdw" target="_ia3GULKSEd6GMtoRM-Kpdw"/>
@@ -74,16 +69,14 @@
     <connections xsi:type="vsdt:SequenceFlow" id="_OLqgULMaEd65ieWbIXbVIQ" source="_OLaosLMaEd65ieWbIXbVIQ" target="_FrjCMLKSEd6GMtoRM-Kpdw"/>
     <connections xsi:type="vsdt:SequenceFlow" id="_FrxrsLKSEd6GMtoRM-Kpdw" source="_CQG2ELKSEd6GMtoRM-Kpdw" target="_OLaosLMaEd65ieWbIXbVIQ"/>
     <connections xsi:type="vsdt:SequenceFlow" name="Roundtripping" id="_WGuSYLMaEd65ieWbIXbVIQ" source="_e9dCgLMaEd65ieWbIXbVIQ" target="_CQG2ELKSEd6GMtoRM-Kpdw"/>
-    <connections xsi:type="vsdt:SequenceFlow" id="_YanJYLKSEd6GMtoRM-Kpdw" source="_Wv-MgLKSEd6GMtoRM-Kpdw" target="_ROeUkLMbEd65ieWbIXbVIQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_YanJYLKSEd6GMtoRM-Kpdw" source="_Wv-MgLKSEd6GMtoRM-Kpdw" target="_e9dCgLMaEd65ieWbIXbVIQ"/>
     <connections xsi:type="vsdt:Association" id="_nfXZMLMaEd65ieWbIXbVIQ" source="_OLaosLMaEd65ieWbIXbVIQ" target="_l2hzILMaEd65ieWbIXbVIQ"/>
     <connections xsi:type="vsdt:Association" id="_n9DawLMaEd65ieWbIXbVIQ" source="_l2hzILMaEd65ieWbIXbVIQ" target="_FrjCMLKSEd6GMtoRM-Kpdw"/>
     <connections xsi:type="vsdt:Association" id="_obQZsLMaEd65ieWbIXbVIQ" source="_l2hzILMaEd65ieWbIXbVIQ" target="_L6X78LKSEd6GMtoRM-Kpdw"/>
     <connections xsi:type="vsdt:Association" id="_o7EiMLMaEd65ieWbIXbVIQ" source="_l2hzILMaEd65ieWbIXbVIQ" target="_M9ZfMLKSEd6GMtoRM-Kpdw"/>
-    <connections xsi:type="vsdt:SequenceFlow" id="_ROsXALMbEd65ieWbIXbVIQ" source="_ROeUkLMbEd65ieWbIXbVIQ" target="_e9dCgLMaEd65ieWbIXbVIQ"/>
     <connections xsi:type="vsdt:SequenceFlow" id="_VXLr0LMaEd65ieWbIXbVIQ" source="_UmmFMLKSEd6GMtoRM-Kpdw" target="_Wv-MgLKSEd6GMtoRM-Kpdw"/>
-    <connections xsi:type="vsdt:SequenceFlow" id="_c_BxgLMbEd65ieWbIXbVIQ" source="_c-zvELMbEd65ieWbIXbVIQ" target="_Ezq2MLMaEd65ieWbIXbVIQ"/>
-    <connections xsi:type="vsdt:SequenceFlow" id="_e9p20LMaEd65ieWbIXbVIQ" source="_e9dCgLMaEd65ieWbIXbVIQ" target="_c-zvELMbEd65ieWbIXbVIQ"/>
-    <connections xsi:type="vsdt:Association" id="_u-fAsLMbEd65ieWbIXbVIQ" source="_gTiNcLKSEd6GMtoRM-Kpdw" target="_ROeUkLMbEd65ieWbIXbVIQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_e9p20LMaEd65ieWbIXbVIQ" source="_e9dCgLMaEd65ieWbIXbVIQ" target="_Ezq2MLMaEd65ieWbIXbVIQ"/>
+    <connections xsi:type="vsdt:Association" id="_u-fAsLMbEd65ieWbIXbVIQ" source="_gTiNcLKSEd6GMtoRM-Kpdw" target="_Wv-MgLKSEd6GMtoRM-Kpdw"/>
     <connections xsi:type="vsdt:SequenceFlow" id="_4NtS4LMnEd65ieWbIXbVIQ" source="_36WSALMnEd65ieWbIXbVIQ" target="_4NfQcLMnEd65ieWbIXbVIQ"/>
     <connections xsi:type="vsdt:SequenceFlow" id="_4hvCILMnEd65ieWbIXbVIQ" source="_4NfQcLMnEd65ieWbIXbVIQ" target="_4hkqELMnEd65ieWbIXbVIQ"/>
     <connections xsi:type="vsdt:SequenceFlow" id="_4sGfELMnEd65ieWbIXbVIQ" source="_4hkqELMnEd65ieWbIXbVIQ" target="_4r2AYLMnEd65ieWbIXbVIQ"/>
