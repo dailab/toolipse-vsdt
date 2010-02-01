@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vsdt:BusinessProcessSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vsdt="http://de.dailab.vsdt" name="Mitfahr-Assistent" id="__xdRQHz6Ed6pGOp9FzmQww" version="0.1" author="Tobias Küster" expressionLanguage="VSDT Expression Language" creationDate="2009-07-30T13:20:33.108+0200" modificationDate="2009-07-30T13:20:33.108+0200">
+<vsdt:BusinessProcessSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vsdt="http://de.dailab.vsdt" name="Mitfahr-Assistent" id="__xdRQHz6Ed6pGOp9FzmQww" version="0.1" author="Tobias Küster" expressionLanguage="VXL" creationDate="2009-07-30T13:20:33.108+0200" modificationDate="2009-07-30T13:20:33.108+0200">
   <businessProcesses name="Fahrt buchen" id="_kk-cdHz7Ed6pGOp9FzmQww" participants="_kS8x0FHFEd609IXB1hu9KQ _jqV5sFHFEd609IXB1hu9KQ">
     <pools xmi:id="_KOIxcUB0Ed63DsPGRkhQVg" name="Nutzer" id="_KOIxcEB0Ed63DsPGRkhQVg" participant="_jqV5sFHFEd609IXB1hu9KQ">
       <process xmi:id="_KOSicUB0Ed63DsPGRkhQVg" name="Nutzer_Process" id="_KOSicEB0Ed63DsPGRkhQVg">
@@ -219,6 +219,15 @@
         <properties name="username" type="string"/>
         <properties name="password" type="string"/>
         <properties name="phone" type="string"/>
+        <assignments to="//@businessProcesses.1/@pools.0/@process/@properties.0">
+          <from expression="&quot;someuser&quot;"/>
+        </assignments>
+        <assignments to="//@businessProcesses.1/@pools.0/@process/@properties.1">
+          <from expression="&quot;test1234&quot;"/>
+        </assignments>
+        <assignments to="//@businessProcesses.1/@pools.0/@process/@properties.2">
+          <from expression="12345"/>
+        </assignments>
       </process>
       <lanes id="_PHClEX0EEd6Q8p6QFc9KKA" boundaryVisible="false">
         <containedFlowObjects xsi:type="vsdt:Start" id="_P5eHkH0EEd6Q8p6QFc9KKA"/>
@@ -256,6 +265,9 @@
         <properties name="phone" type="string"/>
         <properties name="code" type="string"/>
         <properties name="codeResponse" type="string"/>
+        <assignments to="//@businessProcesses.1/@pools.1/@process/@properties.3">
+          <from expression="54321"/>
+        </assignments>
       </process>
       <lanes name="Web-Interface" id="_PHLvEH0EEd6Q8p6QFc9KKA">
         <containedFlowObjects xsi:type="vsdt:Start" id="_fLW9QH0EEd6Q8p6QFc9KKA" trigger="MESSAGE" message="_NVl94FHIEd609IXB1hu9KQ" implementation="_tDeE4FHIEd609IXB1hu9KQ">
