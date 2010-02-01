@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vsdt:BusinessProcessSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vsdt="http://de.dailab.vsdt" name="Service Centric Car" id="_UWGI0IJzEd63ZaPq64d9EA" version="0.1" author="Tobias Küster" expressionLanguage="VSDT Expression Language" creationDate="2009-08-06T12:24:26.589+0200" modificationDate="2009-08-06T12:24:26.589+0200">
+  <businessProcesses name="Fahrassistenz" id="_lIPQUIJzEd63ZaPq64d9EA" participants="_b3-l4IJzEd63ZaPq64d9EA _Z18csIJzEd63ZaPq64d9EA">
+    <pools name="Fahrzeugagent" id="_2oqaIIJzEd63ZaPq64d9EA" participant="_b3-l4IJzEd63ZaPq64d9EA">
+      <process name="Fahrzeugagent_Process" id="_2o0LIYJzEd63ZaPq64d9EA"/>
+      <lanes id="_2o0LIIJzEd63ZaPq64d9EA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" id="_4QqSsIJzEd63ZaPq64d9EA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Nutzer-&#xD;&#xA;anmeldung" id="_45ud0IJzEd63ZaPq64d9EA" activityType="USER"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_7d98MIJzEd63ZaPq64d9EA" markerVisible="true"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Einstellungen &#xD;&#xA;vornehmen" id="_7rgo8IJzEd63ZaPq64d9EA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Fahrassistenz" id="_9F90wIJzEd63ZaPq64d9EA" adHoc="true" activityType="EMBEDDED">
+          <containedFlowObjects xsi:type="vsdt:Activity" name="Fahrverhalten&#xD;&#xA;analysieren" id="_ynQkwIJ0Ed63ZaPq64d9EA"/>
+          <containedFlowObjects xsi:type="vsdt:Activity" name="Fahrzeugzustand &#xD;&#xA;überwachen" id="_z1qRkIJ0Ed63ZaPq64d9EA">
+            <boundaryEvents id="_1zOKcIJ0Ed63ZaPq64d9EA" trigger="RULE"/>
+          </containedFlowObjects>
+          <containedFlowObjects xsi:type="vsdt:Activity" name="Wartung &#xD;&#xA;durchführen" id="_25vtoIJ0Ed63ZaPq64d9EA" activityType="INDEPENDENT" diagramRef="_moDdQIJzEd63ZaPq64d9EA" processRef="_NadFAoJ2Ed63ZaPq64d9EA"/>
+          <loopAttributes xsi:type="vsdt:StandardLoopAttSet"/>
+          <boundaryEvents id="_JAJSUIJ1Ed63ZaPq64d9EA" trigger="MESSAGE"/>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:End" id="_9uIoAIJzEd63ZaPq64d9EA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Betrieb &#xD;&#xA;verweigern" id="_-XV9EIJzEd63ZaPq64d9EA"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_AWi0sIJ0Ed63ZaPq64d9EA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Präferenzen &#xD;&#xA;abfragen" id="_UgWbkIJ0Ed63ZaPq64d9EA"/>
+      </lanes>
+    </pools>
+    <pools name="Pers. Assistent" id="_LaylQIJ0Ed63ZaPq64d9EA" participant="_Z18csIJzEd63ZaPq64d9EA">
+      <process name="Pers. Assistent_Process" id="_LaylQoJ0Ed63ZaPq64d9EA"/>
+    </pools>
+    <connections xsi:type="vsdt:SequenceFlow" id="_453nwIJzEd63ZaPq64d9EA" source="_4QqSsIJzEd63ZaPq64d9EA" target="_45ud0IJzEd63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_7eHtMoJzEd63ZaPq64d9EA" source="_45ud0IJzEd63ZaPq64d9EA" target="_7d98MIJzEd63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_9GG-sIJzEd63ZaPq64d9EA" source="_7rgo8IJzEd63ZaPq64d9EA" target="_9F90wIJzEd63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_9ubi8IJzEd63ZaPq64d9EA" source="_9F90wIJzEd63ZaPq64d9EA" target="_9uIoAIJzEd63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_-XV9GYJzEd63ZaPq64d9EA" conditionType="DEFAULT" source="_7d98MIJzEd63ZaPq64d9EA" target="_-XV9EIJzEd63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_AWslsIJ0Ed63ZaPq64d9EA" source="_-XV9EIJzEd63ZaPq64d9EA" target="_AWi0sIJ0Ed63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_UgzHgIJ0Ed63ZaPq64d9EA" source="_UgWbkIJ0Ed63ZaPq64d9EA" target="_7rgo8IJzEd63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" name="Login erfolgt" id="_7rgo-YJzEd63ZaPq64d9EA" source="_7d98MIJzEd63ZaPq64d9EA" target="_UgWbkIJ0Ed63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_unhYwIJ0Ed63ZaPq64d9EA" source="_UgWbkIJ0Ed63ZaPq64d9EA" target="_LaylQIJ0Ed63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_vmKLQIJ0Ed63ZaPq64d9EA" source="_LaylQIJ0Ed63ZaPq64d9EA" target="_UgWbkIJ0Ed63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_25vtqYJ0Ed63ZaPq64d9EA" source="_1zOKcIJ0Ed63ZaPq64d9EA" target="_25vtoIJ0Ed63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_MH8JsIJ1Ed63ZaPq64d9EA" source="_JAJSUIJ1Ed63ZaPq64d9EA" target="_9uIoAIJzEd63ZaPq64d9EA"/>
+  </businessProcesses>
+  <businessProcesses name="Wartung durchführen" id="_moDdQIJzEd63ZaPq64d9EA" participants="_b3-l4IJzEd63ZaPq64d9EA">
+    <pools name="Fahrzeugagent" id="_NadFAIJ2Ed63ZaPq64d9EA" participant="_b3-l4IJzEd63ZaPq64d9EA">
+      <process name="Fahrzeugagent_Process" id="_NadFAoJ2Ed63ZaPq64d9EA"/>
+      <lanes id="_NadFAYJ2Ed63ZaPq64d9EA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" id="_O8WVkIJ2Ed63ZaPq64d9EA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Wartungstermin &#xD;&#xA;vereinbaren" id="_PgfkcIJ2Ed63ZaPq64d9EA" activityType="INDEPENDENT"/>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" name="Auf Termin Warten" id="_QvMzQIJ2Ed63ZaPq64d9EA" trigger="TIMER"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="In Ersatzfahrzeug &#xD;&#xA;migrieren" id="_Q7ZcMIJ2Ed63ZaPq64d9EA">
+          <boundaryEvents name="Migration nicht möglich" id="_CRGs0IKIEd6Kxoy6lFcXJw" trigger="ERROR"/>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Fahrassistenz für Leihwagen" id="_loZPsIJ2Ed63ZaPq64d9EA" activityType="INDEPENDENT" diagramRef="_lIPQUIJzEd63ZaPq64d9EA" processRef="_2o0LIYJzEd63ZaPq64d9EA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="zurück &#xD;&#xA;migrieren" id="_m9gBcIJ2Ed63ZaPq64d9EA" activityType="TASKREFERENCE" activityRef="_Q7ZcMIJ2Ed63ZaPq64d9EA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Systemcheck" id="_qRgI0IJ2Ed63ZaPq64d9EA"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" name="Schaden behoben?" id="_rZ9lsIJ2Ed63ZaPq64d9EA" markerVisible="true"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_sR5TQIJ2Ed63ZaPq64d9EA"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_s7QZUIJ2Ed63ZaPq64d9EA" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" name="Wartung abwarten" id="_6yNSUIKHEd6Kxoy6lFcXJw" trigger="TIMER"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="__W17IIKHEd6Kxoy6lFcXJw"/>
+      </lanes>
+    </pools>
+    <connections xsi:type="vsdt:SequenceFlow" id="_QvWkQIJ2Ed63ZaPq64d9EA" source="_PgfkcIJ2Ed63ZaPq64d9EA" target="_QvMzQIJ2Ed63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_Q7jNOIJ2Ed63ZaPq64d9EA" source="_QvMzQIJ2Ed63ZaPq64d9EA" target="_Q7ZcMIJ2Ed63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_loZPuYJ2Ed63ZaPq64d9EA" source="_Q7ZcMIJ2Ed63ZaPq64d9EA" target="_loZPsIJ2Ed63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_m9gBeYJ2Ed63ZaPq64d9EA" source="_loZPsIJ2Ed63ZaPq64d9EA" target="_m9gBcIJ2Ed63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_rZ9ltoJ2Ed63ZaPq64d9EA" source="_qRgI0IJ2Ed63ZaPq64d9EA" target="_rZ9lsIJ2Ed63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_sR5TRoJ2Ed63ZaPq64d9EA" conditionType="DEFAULT" source="_rZ9lsIJ2Ed63ZaPq64d9EA" target="_sR5TQIJ2Ed63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" name="nein" id="_s7QZVoJ2Ed63ZaPq64d9EA" source="_rZ9lsIJ2Ed63ZaPq64d9EA" target="_s7QZUIJ2Ed63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_1tmI8IKHEd6Kxoy6lFcXJw" source="_O8WVkIJ2Ed63ZaPq64d9EA" target="_PgfkcIJ2Ed63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="__W_sIoKHEd6Kxoy6lFcXJw" source="__W17IIKHEd6Kxoy6lFcXJw" target="_qRgI0IJ2Ed63ZaPq64d9EA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_qRzDwIJ2Ed63ZaPq64d9EA" source="_m9gBcIJ2Ed63ZaPq64d9EA" target="__W17IIKHEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="__-aRcIKHEd6Kxoy6lFcXJw" source="_6yNSUIKHEd6Kxoy6lFcXJw" target="__W17IIKHEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_J7vdQIKIEd6Kxoy6lFcXJw" source="_CRGs0IKIEd6Kxoy6lFcXJw" target="_6yNSUIKHEd6Kxoy6lFcXJw"/>
+  </businessProcesses>
+  <businessProcesses name="Wartungstermin  vereinbaren" id="_oMedYIJzEd63ZaPq64d9EA" participants="_Z18csIJzEd63ZaPq64d9EA _b3-l4IJzEd63ZaPq64d9EA _eIIqoIJzEd63ZaPq64d9EA _evtoAIJzEd63ZaPq64d9EA">
+    <pools name="Persönlicher Assistent" id="_h74OwIKDEd6oHNyobrvohw" participant="_Z18csIJzEd63ZaPq64d9EA">
+      <process name="Persönlicher Assistent_Process" id="_h74OwoKDEd6oHNyobrvohw"/>
+      <lanes id="_h74OwYKDEd6oHNyobrvohw" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" id="_dtoTYIKIEd6Kxoy6lFcXJw" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_eYLFMIKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Termin&#xD;&#xA;wählen" id="_eillcIKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Vorschlag&#xD;&#xA;senden" id="_fQaUwIKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_gDcUMIKIEd6Kxoy6lFcXJw" gatewayType="XOR_EVENT"/>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" name="geht nicht" id="_gUQXYIKIEd6Kxoy6lFcXJw" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" name="geht" id="_hEAZUIKIEd6Kxoy6lFcXJw" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Termin&#xD;&#xA;eintragen" id="_hSln4IKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_iwKZIIKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" name="to A" id="_TeG5cIKKEd6mUOEQ-kNzTQ" trigger="LINK" linkedTo="_TeQDYIKKEd6mUOEQ-kNzTQ"/>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" name="A" id="_TeQDYIKKEd6mUOEQ-kNzTQ" trigger="LINK" linkedTo="_TeG5cIKKEd6mUOEQ-kNzTQ"/>
+      </lanes>
+    </pools>
+    <pools name="Fahrzeugagent" id="_h8eEoIKDEd6oHNyobrvohw" participant="_b3-l4IJzEd63ZaPq64d9EA">
+      <process name="Fahrzeugagent_Process" id="_h8eEooKDEd6oHNyobrvohw"/>
+      <lanes id="_h8eEoYKDEd6oHNyobrvohw" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" id="_kbujEIKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Termin &#xD;&#xA;anfragen" id="_lEo9MIKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_l14z8IKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Termin &#xD;&#xA;empfangen" id="_l_Z8UIKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Bei Werkstätten anfragen" id="_nJV_4IKIEd6Kxoy6lFcXJw" activityType="EMBEDDED">
+          <containedFlowObjects xsi:type="vsdt:Activity" name="Termin &#xD;&#xA;anfragen" id="_mwHLEIKJEd6mUOEQ-kNzTQ"/>
+          <containedFlowObjects xsi:type="vsdt:Gateway" id="_piM4MIKJEd6mUOEQ-kNzTQ" gatewayType="XOR_EVENT"/>
+          <containedFlowObjects xsi:type="vsdt:Intermediate" name="qweqw" id="_qBSn8IKJEd6mUOEQ-kNzTQ" trigger="MESSAGE"/>
+          <containedFlowObjects xsi:type="vsdt:Intermediate" name="werew" id="_rJTY4IKJEd6mUOEQ-kNzTQ" trigger="MESSAGE"/>
+          <containedFlowObjects xsi:type="vsdt:Gateway" id="_xlG-sIKJEd6mUOEQ-kNzTQ"/>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_oQ6E4IKIEd6Kxoy6lFcXJw" markerVisible="true"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Termin&#xD;&#xA;bestätigen" id="_oX5dsIKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="nach anderem &#xD;&#xA;Termin fragen" id="_qEW_gIKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Termin &#xD;&#xA;eintragen" id="_tcFJQIKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_uM3tAIKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" name="to B" id="_DsrBAIKKEd6mUOEQ-kNzTQ" trigger="LINK" linkedTo="_DsrBBoKKEd6mUOEQ-kNzTQ"/>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" name="B" id="_DsrBBoKKEd6mUOEQ-kNzTQ" trigger="LINK" linkedTo="_DsrBAIKKEd6mUOEQ-kNzTQ"/>
+      </lanes>
+    </pools>
+    <pools name="Werkstatt" id="_h8n1oIKDEd6oHNyobrvohw" participant="_eIIqoIJzEd63ZaPq64d9EA">
+      <process name="Werkstatt_Process" id="_h8n1ooKDEd6oHNyobrvohw"/>
+      <lanes id="_h8n1oYKDEd6oHNyobrvohw" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" id="_vpHBgIKIEd6Kxoy6lFcXJw" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Termin &#xD;&#xA;prüfen" id="_wFrowIKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" name="Kapazitäten frei?" id="_w7FmwIKIEd6Kxoy6lFcXJw" markerVisible="true"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Termin &#xD;&#xA;bestätigen" id="_yBwT4IKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Termin &#xD;&#xA;abehnen" id="_zGfHUIKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Transport &#xD;&#xA;organisieren" id="_1hz6QIKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_6KTvYIKIEd6Kxoy6lFcXJw"/>
+        <containedFlowObjects xsi:type="vsdt:End" name="e" id="_9P4HQIKKEd6mUOEQ-kNzTQ"/>
+      </lanes>
+    </pools>
+    <pools name="Fahrdienst" id="_h8w_kIKDEd6oHNyobrvohw" participant="_evtoAIJzEd63ZaPq64d9EA">
+      <process name="Fahrdienst_Process" id="_h8w_koKDEd6oHNyobrvohw" processType="ABSTRACT"/>
+    </pools>
+    <connections xsi:type="vsdt:SequenceFlow" id="_eYU2NYKIEd6Kxoy6lFcXJw" source="_dtoTYIKIEd6Kxoy6lFcXJw" target="_eYLFMIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_ejCRZIKIEd6Kxoy6lFcXJw" source="_eYLFMIKIEd6Kxoy6lFcXJw" target="_eillcIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_fQtPsIKIEd6Kxoy6lFcXJw" source="_eillcIKIEd6Kxoy6lFcXJw" target="_fQaUwIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_gDcUNoKIEd6Kxoy6lFcXJw" source="_fQaUwIKIEd6Kxoy6lFcXJw" target="_gDcUMIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_gUZhVYKIEd6Kxoy6lFcXJw" source="_gDcUMIKIEd6Kxoy6lFcXJw" target="_gUQXYIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_hEKKUIKIEd6Kxoy6lFcXJw" source="_gDcUMIKIEd6Kxoy6lFcXJw" target="_hEAZUIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_hSvY5YKIEd6Kxoy6lFcXJw" source="_hEAZUIKIEd6Kxoy6lFcXJw" target="_hSln4IKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_iwd7IIKIEd6Kxoy6lFcXJw" source="_hSln4IKIEd6Kxoy6lFcXJw" target="_iwKZIIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_lEyuNIKIEd6Kxoy6lFcXJw" source="_kbujEIKIEd6Kxoy6lFcXJw" target="_lEo9MIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_l2B94IKIEd6Kxoy6lFcXJw" source="_lEo9MIKIEd6Kxoy6lFcXJw" target="_l14z8IKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_l_jtVYKIEd6Kxoy6lFcXJw" source="_l14z8IKIEd6Kxoy6lFcXJw" target="_l_Z8UIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_nJfw4IKIEd6Kxoy6lFcXJw" source="_l_Z8UIKIEd6Kxoy6lFcXJw" target="_nJV_4IKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_oQ6E5oKIEd6Kxoy6lFcXJw" source="_nJV_4IKIEd6Kxoy6lFcXJw" target="_oQ6E4IKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_oYDOsIKIEd6Kxoy6lFcXJw" source="_oQ6E4IKIEd6Kxoy6lFcXJw" target="_oX5dsIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_qEgJcIKIEd6Kxoy6lFcXJw" source="_oQ6E4IKIEd6Kxoy6lFcXJw" target="_qEW_gIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_tcOTMIKIEd6Kxoy6lFcXJw" source="_oX5dsIKIEd6Kxoy6lFcXJw" target="_tcFJQIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_uM3tBoKIEd6Kxoy6lFcXJw" source="_tcFJQIKIEd6Kxoy6lFcXJw" target="_uM3tAIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_wF0ysIKIEd6Kxoy6lFcXJw" source="_vpHBgIKIEd6Kxoy6lFcXJw" target="_wFrowIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_w7PXwIKIEd6Kxoy6lFcXJw" source="_wFrowIKIEd6Kxoy6lFcXJw" target="_w7FmwIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_yB6E4IKIEd6Kxoy6lFcXJw" source="_w7FmwIKIEd6Kxoy6lFcXJw" target="_yBwT4IKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_zGyCQIKIEd6Kxoy6lFcXJw" source="_w7FmwIKIEd6Kxoy6lFcXJw" target="_zGfHUIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_3e7HMIKIEd6Kxoy6lFcXJw" source="_yBwT4IKIEd6Kxoy6lFcXJw" target="_1hz6QIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_6KTvZoKIEd6Kxoy6lFcXJw" source="_1hz6QIKIEd6Kxoy6lFcXJw" target="_6KTvYIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_pmN1gIKJEd6mUOEQ-kNzTQ" source="_mwHLEIKJEd6mUOEQ-kNzTQ" target="_piM4MIKJEd6mUOEQ-kNzTQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_qBSn9oKJEd6mUOEQ-kNzTQ" source="_piM4MIKJEd6mUOEQ-kNzTQ" target="_qBSn8IKJEd6mUOEQ-kNzTQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_rJTY5oKJEd6mUOEQ-kNzTQ" source="_piM4MIKJEd6mUOEQ-kNzTQ" target="_rJTY4IKJEd6mUOEQ-kNzTQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_xlQvsoKJEd6mUOEQ-kNzTQ" source="_qBSn8IKJEd6mUOEQ-kNzTQ" target="_xlG-sIKJEd6mUOEQ-kNzTQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_yUkswIKJEd6mUOEQ-kNzTQ" source="_rJTY4IKJEd6mUOEQ-kNzTQ" target="_xlG-sIKJEd6mUOEQ-kNzTQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_DsrBDIKKEd6mUOEQ-kNzTQ" source="_DsrBBoKKEd6mUOEQ-kNzTQ" target="_l14z8IKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_A488MIKKEd6mUOEQ-kNzTQ" source="_qEW_gIKIEd6Kxoy6lFcXJw" target="_DsrBAIKKEd6mUOEQ-kNzTQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_TeZ0YIKKEd6mUOEQ-kNzTQ" source="_TeQDYIKKEd6mUOEQ-kNzTQ" target="_eYLFMIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_Ff8x8IKJEd6Kxoy6lFcXJw" source="_gUQXYIKIEd6Kxoy6lFcXJw" target="_TeG5cIKKEd6mUOEQ-kNzTQ"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_srkAYIKKEd6mUOEQ-kNzTQ" source="_lEo9MIKIEd6Kxoy6lFcXJw" target="_dtoTYIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_tUoLgIKKEd6mUOEQ-kNzTQ" source="_fQaUwIKIEd6Kxoy6lFcXJw" target="_l_Z8UIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_u9p-0IKKEd6mUOEQ-kNzTQ" source="_oX5dsIKIEd6Kxoy6lFcXJw" target="_hEAZUIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_wgS2QIKKEd6mUOEQ-kNzTQ" source="_qEW_gIKIEd6Kxoy6lFcXJw" target="_gUQXYIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_9QUzMIKKEd6mUOEQ-kNzTQ" source="_zGfHUIKIEd6Kxoy6lFcXJw" target="_9P4HQIKKEd6mUOEQ-kNzTQ"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_BiOGMIKLEd6mUOEQ-kNzTQ" source="_mwHLEIKJEd6mUOEQ-kNzTQ" target="_vpHBgIKIEd6Kxoy6lFcXJw"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_CVjAkIKLEd6mUOEQ-kNzTQ" source="_yBwT4IKIEd6Kxoy6lFcXJw" target="_qBSn8IKJEd6mUOEQ-kNzTQ"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_Cx920IKLEd6mUOEQ-kNzTQ" source="_zGfHUIKIEd6Kxoy6lFcXJw" target="_rJTY4IKJEd6mUOEQ-kNzTQ"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_Dtec0IKLEd6mUOEQ-kNzTQ" source="_1hz6QIKIEd6Kxoy6lFcXJw" target="_h8w_kIKDEd6oHNyobrvohw"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_D_n8wIKLEd6mUOEQ-kNzTQ" source="_h8w_kIKDEd6oHNyobrvohw" target="_1hz6QIKIEd6Kxoy6lFcXJw"/>
+  </businessProcesses>
+  <participants name="Persönlicher Assistent" id="_Z18csIJzEd63ZaPq64d9EA" associatedProcesses="_oMedYIJzEd63ZaPq64d9EA _lIPQUIJzEd63ZaPq64d9EA" associatedPools="_LaylQIJ0Ed63ZaPq64d9EA _h74OwIKDEd6oHNyobrvohw"/>
+  <participants name="Fahrzeugagent" id="_b3-l4IJzEd63ZaPq64d9EA" associatedProcesses="_lIPQUIJzEd63ZaPq64d9EA _moDdQIJzEd63ZaPq64d9EA _oMedYIJzEd63ZaPq64d9EA" associatedPools="_2oqaIIJzEd63ZaPq64d9EA _NadFAIJ2Ed63ZaPq64d9EA _h8eEoIKDEd6oHNyobrvohw"/>
+  <participants name="Werkstatt" id="_eIIqoIJzEd63ZaPq64d9EA" associatedProcesses="_oMedYIJzEd63ZaPq64d9EA" associatedPools="_h8n1oIKDEd6oHNyobrvohw"/>
+  <participants name="Fahrdienst" id="_evtoAIJzEd63ZaPq64d9EA" associatedProcesses="_oMedYIJzEd63ZaPq64d9EA" associatedPools="_h8w_kIKDEd6oHNyobrvohw"/>
+</vsdt:BusinessProcessSystem>
