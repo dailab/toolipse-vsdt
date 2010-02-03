@@ -46,7 +46,7 @@
               <from xmi:type="vsdt:Expression" xmi:id="_j6nmOtN-Ed6IL7PHwv22lw" expression="'input ' ++ $number ++',' ++ $eps++ ' is invalid'"/>
             </assignments>
           </containedFlowObjects>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_j6nmO9N-Ed6IL7PHwv22lw" name="initializevariables" documentation="This initializes the variables: The upper and lower bounds and the currently tested number." id="_CCIJ4JIkEd6PkL1AU2eJuA">
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_j6nmO9N-Ed6IL7PHwv22lw" name="initialize variables" documentation="This initializes the variables: The upper and lower bounds and the currently tested number." id="_CCIJ4JIkEd6PkL1AU2eJuA">
             <assignments xmi:type="vsdt:Assignment" xmi:id="_j6nmPNN-Ed6IL7PHwv22lw" to="_j6m_JdN-Ed6IL7PHwv22lw" assignTime="END">
               <from xmi:type="vsdt:Expression" xmi:id="_j6nmPdN-Ed6IL7PHwv22lw" expression="0"/>
             </assignments>
