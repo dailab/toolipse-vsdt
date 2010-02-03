@@ -84,12 +84,17 @@ public class HtmlBuilder extends TextBuilder {
 	}
 
 	@Override
-	public String getHighlighted(String s) {
+	public String name(String s) {
 		return "<em>" + s + "</em>";
 	}
 	
 	@Override
-	public String getEnumLiteral(Enum e) {
+	public String doc(String s) {
+		return "<span style='color:gray'>" + s + "</span>";
+	}
+	
+	@Override
+	public String type(Enum e) {
 		StringBuffer b= new StringBuffer();
 		b.append("<span style='font-variant:small-caps'>");
 		b.append(e.name().toLowerCase());
@@ -98,7 +103,7 @@ public class HtmlBuilder extends TextBuilder {
 	}
 	
 	@Override
-	public String getCode(String s) {
+	public String code(String s) {
 		StringBuffer b= new StringBuffer();
 		b.append("<span style='font-family:courier'>");
 		b.append(s);

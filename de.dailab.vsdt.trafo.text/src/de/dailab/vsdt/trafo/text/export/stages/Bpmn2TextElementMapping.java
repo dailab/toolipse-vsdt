@@ -154,7 +154,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		builder.appendTitle(bpd.getName(), 1);
 		
 		if (bpd.getDocumentation() != null) {
-			builder.append(bpd.getDocumentation());
+			builder.append( doc(bpd.getDocumentation()) );
 			builder.newLine();
 		}
 
@@ -177,20 +177,20 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		builder.appendTitle(pool.getName(), 2);
 		
 		if (pool.getDocumentation() != null) {
-			builder.append(pool.getDocumentation());
+			builder.append( doc(pool.getDocumentation()) );
 			builder.newLine();
 		}
 		if (pool.getParticipant() != null) {
-			builder.append("The Pool '" + highlight(pool.getName()) + "' belongs to " +
-					"Participant '" + highlight(pool.getParticipant().getName()) + "'. ");
+			builder.append("The Pool '" + name(pool.getName()) + "' belongs to " +
+					"Participant '" + name(pool.getParticipant().getName()) + "'. ");
 		}
 		if (pool.getLanes().size() > 1) {
 			builder.append("This Pool is made up of " + pool.getLanes().size() + 
 					" Lanes:");
 			builder.beginItemize();
 			for (Lane lane : pool.getLanes()) {
-				builder.appendItem(highlight(lane.getName()) + 
-						(lane.getDocumentation() != null? ": " + lane.getDocumentation() : ""));
+				builder.appendItem(name(lane.getName()) + 
+						(lane.getDocumentation() != null? ": " + doc(lane.getDocumentation()) : ""));
 			}
 			builder.endItemize();
 		}
@@ -198,7 +198,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		if (pool.getProcess() != null) {
 			BpmnProcess proc= pool.getProcess();
 			builder.append("The Pool's Process is" + (proc.isAdHoc() ? 
-					" ad-hoc and is" : "") + " of type " + enumLtrl(proc.getProcessType()) + ".");
+					" ad-hoc and is" : "") + " of type " + type(proc.getProcessType()) + ".");
 			/*
 			 * process properties and assignments
 			 */
@@ -288,7 +288,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		final boolean throwing= event.isThrowing();
 		if (multiType == null && event.getName() != null) {
 			// print this only the first time for a multi event
-			builder.append(" in Event '").appendName(event.getName()).append("' ");
+			builder.append(" in Event '" + name(event.getName()) + "' ");
 		}
 		
 		TriggerType trigger= multiType != null ? multiType : event.getTrigger();
@@ -327,7 +327,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			if (throwing && event.getLinkedTo() != null) {
 				builder.append(" the Process will continue at " + 
 						(event.getLinkedTo().getName() != null?"Event " + 
-						highlight(event.getLinkedTo().getName()) + 
+						name(event.getLinkedTo().getName()) + 
 						"." : " the other end of the link"));
 			}
 			break;
@@ -352,12 +352,12 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			} else {
 				builder.append(" the Process will start when ");
 			}
-			builder.append((ruleName != null ? " the Rule " + ruleName : " a Rule") + " applies");
+			builder.append((ruleName != null ? " the Rule " + name(ruleName) : " a Rule") + " applies");
 			// append rule expression for more details?
 			break;
 		case SIGNAL:
 			String s= event.getSignal();
-			builder.append((s != null ? " a Signal" : "the Signal '" + s + "'") + 
+			builder.append((s != null ? " a Signal" : "the Signal '" + name(s) + "'") + 
 					" is " + (throwing ? "sent" : "received"));
 			break;
 		case CANCEL:
@@ -365,7 +365,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			break;
 		case COMPENSATION:
 			builder.append( (event.getActivity() != null ? " the Activity " + 
-					highlight(event.getActivity().getName()) : "an Activity ") +  
+					name(event.getActivity().getName()) : "an Activity ") +  
 					(throwing ? "is" : "will be") + " compensated");
 		case MULTIPLE:
 			boolean isNotFirst= false;
@@ -410,7 +410,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			builder.append(".");
 			// documentation
 			if (event.getDocumentation() != null) {
-				builder.append(" " + event.getDocumentation() + " ");
+				builder.append(" " + doc(event.getDocumentation()) + " ");
 			}
 		}
 	}
@@ -431,15 +431,15 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 */
 	private void visitActivity(Activity activity) {
 		final ActivityType type= activity.getActivityType();
-		String actType= (type!=ActivityType.NONE? enumLtrl(type) : "") + " Task";
+		String actType= (type!=ActivityType.NONE? type(type) : "") + " Task";
 		if (type == ActivityType.EMBEDDED || type == ActivityType.SUBPROCESSREFERENCE || type == ActivityType.INDEPENDENT) {
-			actType= enumLtrl(type) + " Subprocess";
+			actType= type(type) + " Subprocess";
 			if (activity.getTransaction() != null) {
 				actType= "Transaction";
 			}
 		}
 		builder.append(" the " + (activity.isAdHoc()?"ad-hoc ":"")+ actType + 
-				" '" + highlight(activity.getName()) + "' is " + getRandomExecutedTerm());
+				" '" + name(activity.getName()) + "' is " + getRandomExecutedTerm());
 		switch (type) {
 		case NONE:
 			// handle place-holder tasks
@@ -456,11 +456,11 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			if (activity.getInMessage() != null || activity.getOutMessage() != null) {
 				builder.append(" with ");
 				if (activity.getInMessage() != null) {
-					builder.append("the input Message " + highlight(activity.getInMessage().getName()));
+					builder.append("the input Message " + name(activity.getInMessage().getName()));
 					builder.append(activity.getOutMessage() != null ? " and " : ".");
 				}
 				if (activity.getOutMessage() != null) {
-					builder.append("the output Message " + highlight(activity.getOutMessage().getName()) + ".");
+					builder.append("the output Message " + name(activity.getOutMessage().getName()) + ".");
 				}
 			} else {
 				builder.append(".");
@@ -481,7 +481,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		case TASKREFERENCE:
 		case SUBPROCESSREFERENCE:
 			builder.append(", which references to " + (activity.getActivityRef() != null ? 
-					highlight(activity.getActivityRef().getName()) : "another Activity") + ".");
+					name(activity.getActivityRef().getName()) : "another Activity") + ".");
 			break;
 		case EMBEDDED:
 			builder.append(". In this course, ");
@@ -493,10 +493,10 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			}
 		case INDEPENDENT:
 			String process= activity.getProcessRef() != null 
-					? "Process '" + highlight(activity.getProcessRef().getName()) + "'" 
+					? "Process '" + name(activity.getProcessRef().getName()) + "'" 
 					: "another Process";
 			String diagram= activity.getDiagramRef() != null 
-					? "Diagram '" + highlight(activity.getDiagramRef().getName()) + "'" 
+					? "Diagram '" + name(activity.getDiagramRef().getName()) + "'" 
 					: "another Business Process Diagram";
 			builder.append(", which references to " + process + (activity.getDiagramRef() == 
 					activity.getPool().getParentDiagram() ? "." : " in " + diagram + "."));
@@ -508,7 +508,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			if (! activity.getPerformers().isEmpty()) {
 				builder.append(" This Task is performed by ");
 				for (Iterator<String> iter= activity.getPerformers().iterator(); iter.hasNext();) {
-					builder.append(highlight(iter.next()) + (iter.hasNext() ? " and " : "."));
+					builder.append(name(iter.next()) + (iter.hasNext() ? " and " : "."));
 				}
 			}
 		}
@@ -517,7 +517,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		 */
 		// looping
 		if (activity.getLoopAttributes() != null) {
-			builder.append(" The " + actType + " '" + highlight(activity.getName()) + 
+			builder.append(" The " + actType + " '" + name(activity.getName()) + 
 					"' is " + getRandomExecutedTerm() + " in a loop");
 			if (activity.getLoopAttributes() instanceof StandardLoopAttSet) {
 				StandardLoopAttSet attSet = (StandardLoopAttSet) activity.getLoopAttributes();
@@ -546,7 +546,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		
 		// documentation
 		if (activity.getDocumentation() != null) {
-			builder.append(" " + activity.getDocumentation() + " ");
+			builder.append(" " + doc(activity.getDocumentation()) + " ");
 		}
 	}
 	
@@ -560,7 +560,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	private void visitGateway(Gateway gateway) {
 		builder.append(" the normal flow and the exceptional flow are merged");
 		if (gateway.getName() != null) {
-			builder.append(" in the Gateway '" + highlight(gateway.getName()) + "'");
+			builder.append(" in the Gateway '" + name(gateway.getName()) + "'");
 		}
 		builder.append(".");
 	}
@@ -611,7 +611,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	private void visitBpmnBlock(BpmnBlock bpmnBlock) {
 		Gateway fork= bpmnBlock.getFirstGateway();
 		if (fork.getName() != null) {
-			builder.append(" starting at the Gateway '" + highlight(fork.getName()) + "', ");
+			builder.append(" starting at the Gateway '" + name(fork.getName()) + "', ");
 		}
 		switch (fork.getGatewayType()) {
 		case AND:
@@ -711,7 +711,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 				: bpmnLoopBlock.getSecondBranch().getCondition().getExpression();
 		
 		if (bpmnLoopBlock.getFirstGateway().getName() != null) {
-			builder.append(" starting at the Gateway '" + highlight(bpmnLoopBlock.getFirstGateway().getName()) + "', ");	
+			builder.append(" starting at the Gateway '" + name(bpmnLoopBlock.getFirstGateway().getName()) + "', ");	
 		}
 		builder.append(" a part of the Process will be " + getRandomExecutedTerm() + " in a loop. ");
 		
@@ -766,8 +766,8 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		Intermediate intm= element.getEventHandlerCase().getIntermediate();
 		visitFlowObject(element.getElement());
 		builder.append(" This part will only be " + getRandomExecutedTerm() + 
-				" if the " + enumLtrl(intm.getTrigger()) + " Event "+
-				(intm.getName() != null? "'" + highlight(intm.getName())+ 
+				" if the " + type(intm.getTrigger()) + " Event "+
+				(intm.getName() != null? "'" + name(intm.getName())+ 
 				"' " : "") + "has not been triggered");
 	}
 	
@@ -786,7 +786,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		if (impl == null) {
 			return "a Service";
 		} else {
-			return "the Service '" + highlight(impl.getInterface() + "." + 
+			return "the Service '" + name(impl.getInterface() + "." + 
 					impl.getOperation()) + "'";
 		}
 	}
@@ -799,7 +799,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		if (msg == null) {
 			return "a Message";
 		} else {
-			return "the Message '" + highlight(msg.getName()) + "'";
+			return "the Message '" + name(msg.getName()) + "'";
 		}
 	}
 
@@ -851,23 +851,30 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	}
 	
 	/**
-	 * @see TextBuilder#getHighlighted(String)
+	 * @see TextBuilder#name(String)
 	 */
-	private String highlight(String s) {
-		return builder.getHighlighted(s);
+	private String name(String s) {
+		return builder.name(s);
 	}
 	
 	/**
-	 * @see TextBuilder#getEnumLiteral(Enum)
+	 * @see TextBuilder#doc(String)
 	 */
-	private String enumLtrl(Enum e) {
-		return builder.getEnumLiteral(e);
+	private String doc(String s) {
+		return builder.doc(s);
+	}
+	
+	/**
+	 * @see TextBuilder#type(Enum)
+	 */
+	private String type(Enum e) {
+		return builder.type(e);
 	}
 
 	/**
-	 * @see TextBuilder#getCode(String)
+	 * @see TextBuilder#code(String)
 	 */
 	private String code(String s) {
-		return builder.getCode(s);
+		return builder.code(s);
 	}
 }

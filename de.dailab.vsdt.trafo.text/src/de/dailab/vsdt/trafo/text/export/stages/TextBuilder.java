@@ -92,7 +92,7 @@ public class TextBuilder {
 	 * @see StringBuilder#append(String)
 	 */
 	public final TextBuilder append(String s) {
-		buffer.append(getEscaped(s));
+		buffer.append(escape(s));
 		return this;
 	}
 	
@@ -183,47 +183,30 @@ public class TextBuilder {
 	}
 
 	/**
-	 * Append element with special mark-up distinguishing it as a name 
-	 */
-	public final TextBuilder appendName(String s) {
-		append(getHighlighted(s));
-		return this;
-	}
-	
-	/**
-	 * Append element with special mark-up distinguishing it as some code 
-	 */
-	public final TextBuilder appendCode(String s) {
-		append(getCode(s));
-		return this;
-	}
-	
-	/**
-	 * Append element with special mark-up distinguishing it as an enum literal 
-	 */
-	public final TextBuilder appendEnumLiteral(Enum e) {
-		append(getEnumLiteral(e));
-		return this;
-	}
-	
-	/**
 	 * Return the string wrapped in some code-mark-up
 	 */
-	public String getCode(String s) {
+	public String code(String s) {
 		return s;
 	}
 	
 	/**
 	 * Return the string wrapped in some enum-literal-mark-up
 	 */
-	public String getEnumLiteral(Enum e) {
+	public String type(Enum e) {
 		return e.name();
 	}
 	
 	/**
-	 * Return the string wrapped in some highlighting mark-up
+	 * Return the string wrapped in some mark-up for names
 	 */
-	public String getHighlighted(String s) {
+	public String name(String s) {
+		return s;
+	}
+	
+	/**
+	 * Return the string wrapped in some mark-up for documentation tags
+	 */
+	public String doc(String s) {
 		return s;
 	}
 	
@@ -238,7 +221,7 @@ public class TextBuilder {
 	/**
 	 * Escape special characters, if necessary
 	 */
-	protected String getEscaped(String s) {
+	protected String escape(String s) {
 		return s;
 	}
 	

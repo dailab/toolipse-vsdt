@@ -83,25 +83,30 @@ public class LatexBuilder extends TextBuilder {
 	}
 	
 	@Override
-	public String getHighlighted(String s) {
+	public String name(String s) {
 		return "\\emph{" + s + "}";
 	}
 	
 	@Override
-	public String getEnumLiteral(Enum e) {
+	public String doc(String s) {
+		return "\\emph{" + s + "}";
+	}
+	
+	@Override
+	public String type(Enum e) {
 		return "\\textsc{" + e.name().toLowerCase() + "}";
 	}
 	
 	@Override
-	public String getCode(String s) {
+	public String code(String s) {
 		return "\\texttt{" + s + "}";
 	}
 	
 	@Override
-	protected String getEscaped(String s) {
-		return s.replace("ä", "\\\"a").replace("ö", "\\\"o")
-				.replace("ü", "\\\"u").replace("Ä", "\\\"A")
-				.replace("Ö", "\\\"O").replace("Ü", "\\\"U")
+	protected String escape(String s) {
+		return s.replace("ï¿½", "\\\"a").replace("ï¿½", "\\\"o")
+				.replace("ï¿½", "\\\"u").replace("ï¿½", "\\\"A")
+				.replace("ï¿½", "\\\"O").replace("ï¿½", "\\\"U")
 				.replace("#", "\\#").replace("%", "\\%")
 				.replace("&", "\\&").replace("_", "\\_");
 	}
