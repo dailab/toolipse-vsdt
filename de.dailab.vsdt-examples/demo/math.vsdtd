@@ -46,7 +46,7 @@
               <from xmi:type="vsdt:Expression" xmi:id="_j6nmOtN-Ed6IL7PHwv22lw" expression="'input ' ++ $number ++',' ++ $eps++ ' is invalid'"/>
             </assignments>
           </containedFlowObjects>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_j6nmO9N-Ed6IL7PHwv22lw" name="initialize&#xD;&#xA;variables" documentation="This initializes the variables: The upper and lower bounds and the currently tested number." id="_CCIJ4JIkEd6PkL1AU2eJuA">
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_j6nmO9N-Ed6IL7PHwv22lw" name="initializevariables" documentation="This initializes the variables: The upper and lower bounds and the currently tested number." id="_CCIJ4JIkEd6PkL1AU2eJuA">
             <assignments xmi:type="vsdt:Assignment" xmi:id="_j6nmPNN-Ed6IL7PHwv22lw" to="_j6m_JdN-Ed6IL7PHwv22lw" assignTime="END">
               <from xmi:type="vsdt:Expression" xmi:id="_j6nmPdN-Ed6IL7PHwv22lw" expression="0"/>
             </assignments>
@@ -72,7 +72,7 @@
             </assignments>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_j6nmS9N-Ed6IL7PHwv22lw" name="too large?" documentation="Checks whether the currently tested number is too large or too small." id="_fkLSgJIkEd6PkL1AU2eJuA" markerVisible="true"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_j6nmTNN-Ed6IL7PHwv22lw" name="try smaller &#xD;&#xA;number" documentation="The currently tested number is used as the new upper bound and is then set to be the average of itself and the lower bound." id="_NDizcJIlEd6PkL1AU2eJuA">
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_j6nmTNN-Ed6IL7PHwv22lw" name="try smaller number" documentation="The currently tested number is used as the new upper bound and is then set to be the average of itself and the lower bound." id="_NDizcJIlEd6PkL1AU2eJuA">
             <assignments xmi:type="vsdt:Assignment" xmi:id="_j6nmTdN-Ed6IL7PHwv22lw" to="_j6m_KNN-Ed6IL7PHwv22lw" assignTime="END">
               <from xmi:type="vsdt:Expression" xmi:id="_j6nmTtN-Ed6IL7PHwv22lw" expression="$current"/>
             </assignments>
@@ -80,7 +80,7 @@
               <from xmi:type="vsdt:Expression" xmi:id="_j6nmUNN-Ed6IL7PHwv22lw" expression="($current+$lastLesser)/2"/>
             </assignments>
           </containedFlowObjects>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_j6nmUdN-Ed6IL7PHwv22lw" name="try greater &#xD;&#xA;number" documentation="The currently tested number is used as the new lower bound and is then set to be the average of itself and the upper bound." id="_oAW_MJIlEd6PkL1AU2eJuA">
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_j6nmUdN-Ed6IL7PHwv22lw" name="try greater number" documentation="The currently tested number is used as the new lower bound and is then set to be the average of itself and the upper bound." id="_oAW_MJIlEd6PkL1AU2eJuA">
             <assignments xmi:type="vsdt:Assignment" xmi:id="_j6nmUtN-Ed6IL7PHwv22lw" to="_j6m_J9N-Ed6IL7PHwv22lw" assignTime="END">
               <from xmi:type="vsdt:Expression" xmi:id="_j6nmU9N-Ed6IL7PHwv22lw" expression="$current"/>
             </assignments>
