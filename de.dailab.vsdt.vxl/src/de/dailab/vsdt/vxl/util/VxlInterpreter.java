@@ -3,8 +3,6 @@ package de.dailab.vsdt.vxl.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EObject;
-
 import de.dailab.vsdt.vxl.Atom;
 import de.dailab.vsdt.vxl.BooleanConst;
 import de.dailab.vsdt.vxl.BracketTerm;
@@ -17,46 +15,75 @@ import de.dailab.vsdt.vxl.StringConst;
 import de.dailab.vsdt.vxl.Term;
 import de.dailab.vsdt.vxl.Value;
 import de.dailab.vsdt.vxl.Variable;
+import de.dailab.vsdt.vxl.util.TermOrdering.TermLeaf;
+import de.dailab.vsdt.vxl.util.TermOrdering.TermNode;
+import de.dailab.vsdt.vxl.util.TermOrdering.TermTree;
 
+/**
+ * A very simple Interpreter for the VSDT Expression Language.
+ * 
+ * @author kuester
+ */
 public class VxlInterpreter {
 	
-	protected Map<EObject, String> errors= null;
+	/** errors that occurred during the evaluation, e.g. non-matching operations */
+	protected Map<Object, String> errors= null;
 	
+	/** the context, e.g. the association of variables to actual values */
 	protected Map<String, Object> context= null;
 	
-	public Map<EObject, String> getErrors() {
+	public Map<Object, String> getErrors() {
 		return errors;
 	}
 
 	/**
-	 * Visit the given Term and return its String representation.
+	 * Evaluate the given Term and return the result.
 	 * 
 	 * @param term		Some Term
-	 * @return			Its String representation
+	 * @return			Result, e.g. a String, Number, or Boolean, or whatever else
 	 */
 	public Object evaluateTerm(Term term, Map<String, Object> context) {
-		this.errors= new HashMap<EObject, String>();
+		this.errors= new HashMap<Object, String>();
 		this.context= context;
 		return eval(term);
 	}
-
+	
 	/**
 	 * Term:			head = Head (tail = Tail)?;
+	 * The term is transcribed to an ordered TermTree and evaluated.
 	 */
 	protected Object eval(Term term) {
-		Object head= eval(term.getHead());
-		if (term.getTail() != null) {
-			Object tail= eval(term.getTail().getTerm());
-			Operator op= term.getTail().getOperator();
+		TermTree orderedTermTree= TermOrdering.createOrderedTermTree(term);
+		return eval(orderedTermTree);
+	}
+	
+	/**
+	 * Evaluate the TermTree. In case of a Leaf, evaluate the encapsulated term;
+	 * otherwise evaluate the left and right terms and try to apply the operation.
+	 * 
+	 * @param term	Some ordered TermTree
+	 * @return		Evaluation result (e.g. a Sting, Number, or Boolean)
+	 */
+	protected Object eval(TermTree term) {
+		if (term instanceof TermLeaf) {
+			TermLeaf leaf= (TermLeaf) term;
+			return eval(leaf.term);
+		}
+		if (term instanceof TermNode) {
+			TermNode node= (TermNode) term;
+			
+			Object head= eval(node.left);
+			Object tail= eval(node.right);
+			Operator op= node.operator;
+			
 			if (checkType(op, head, tail)) {
-				return evaluateOperation(term.getTail().getOperator(), head, tail);
+				return evaluateOperation(op, head, tail);
 			} else {
 				errors.put(term, "Types do not match operator");
 				return null;
 			}
-		} else {
-			return head;
 		}
+		return null;
 	}
 	
 	/**
@@ -79,7 +106,7 @@ public class VxlInterpreter {
 	 * Negation:		"!" term = Term;
 	 */
 	protected Object eval(Negation negation) {
-		Object result= eval(negation.getTerm());
+		Object result= eval(negation.getHead());
 		if (result instanceof Boolean) {
 			return ! (Boolean) result;
 		} else {
@@ -184,7 +211,14 @@ public class VxlInterpreter {
 		return null;
 	}
 	
-	
+	/**
+	 * Evaluate the operation with the given terms.
+	 * 
+	 * @param operator	the operation
+	 * @param head		the head term (to the left)
+	 * @param tail		the tail term (to the right)
+	 * @return			result of the operation, applied to the given terms
+	 */
 	private Object evaluateOperation(Operator operator, Object head, Object tail) {
 		switch (operator) {
 		case CONCAT:
@@ -219,13 +253,20 @@ public class VxlInterpreter {
 			return null;
 		}
 	}
-	
+
+	/**
+	 * Check whether the given terms match the operator.
+	 *  
+	 * @param operator	the operator
+	 * @param head		the head term (to the left)
+	 * @param tail		the tail term (to the right)
+	 * @return			terms match operator?
+	 */
 	private boolean checkType(Operator operator, Object head, Object tail) {
 		try {
 			switch (operator) {
 			case CONCAT:
-//				return head instanceof String && tail instanceof String;
-				return true; // everything can be concatenated
+				return true; // everything can be concatenated somehow
 			case ADD:
 			case SUB:
 			case MULT:

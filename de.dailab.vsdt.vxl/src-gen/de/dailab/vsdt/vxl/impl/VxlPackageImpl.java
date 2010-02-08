@@ -319,7 +319,7 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getNegation_Term()
+  public EReference getNegation_Head()
   {
     return (EReference)negationEClass.getEStructuralFeatures().get(0);
   }
@@ -538,7 +538,7 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
     createEReference(bracketTermEClass, BRACKET_TERM__TERM);
 
     negationEClass = createEClass(NEGATION);
-    createEReference(negationEClass, NEGATION__TERM);
+    createEReference(negationEClass, NEGATION__HEAD);
 
     atomEClass = createEClass(ATOM);
 
@@ -626,7 +626,7 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
     initEReference(getBracketTerm_Term(), this.getTerm(), null, "term", null, 0, 1, BracketTerm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(negationEClass, Negation.class, "Negation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getNegation_Term(), this.getTerm(), null, "term", null, 0, 1, Negation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getNegation_Head(), this.getHead(), null, "head", null, 0, 1, Negation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(atomEClass, Atom.class, "Atom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

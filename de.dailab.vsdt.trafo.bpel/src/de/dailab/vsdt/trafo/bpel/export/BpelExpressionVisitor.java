@@ -34,7 +34,7 @@ public class BpelExpressionVisitor extends VsdtExpressionVisitor {
 	@Override
 	protected void visit(Negation negation) {
 		buffer.append("not(");
-		visit(negation.getTerm());
+		visit(negation.getHead());
 		buffer.append(")");
 	}
 

@@ -11,8 +11,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import de.dailab.vsdt.vxl.Head;
 import de.dailab.vsdt.vxl.Negation;
-import de.dailab.vsdt.vxl.Term;
 import de.dailab.vsdt.vxl.VxlPackage;
 
 /**
@@ -22,7 +22,7 @@ import de.dailab.vsdt.vxl.VxlPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.dailab.vsdt.vxl.impl.NegationImpl#getTerm <em>Term</em>}</li>
+ *   <li>{@link de.dailab.vsdt.vxl.impl.NegationImpl#getHead <em>Head</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,14 +31,14 @@ import de.dailab.vsdt.vxl.VxlPackage;
 public class NegationImpl extends HeadImpl implements Negation
 {
   /**
-   * The cached value of the '{@link #getTerm() <em>Term</em>}' containment reference.
+   * The cached value of the '{@link #getHead() <em>Head</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTerm()
+   * @see #getHead()
    * @generated
    * @ordered
    */
-  protected Term term;
+  protected Head head;
 
   /**
    * <!-- begin-user-doc -->
@@ -66,9 +66,9 @@ public class NegationImpl extends HeadImpl implements Negation
    * <!-- end-user-doc -->
    * @generated
    */
-  public Term getTerm()
+  public Head getHead()
   {
-    return term;
+    return head;
   }
 
   /**
@@ -76,13 +76,13 @@ public class NegationImpl extends HeadImpl implements Negation
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTerm(Term newTerm, NotificationChain msgs)
+  public NotificationChain basicSetHead(Head newHead, NotificationChain msgs)
   {
-    Term oldTerm = term;
-    term = newTerm;
+    Head oldHead = head;
+    head = newHead;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.NEGATION__TERM, oldTerm, newTerm);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.NEGATION__HEAD, oldHead, newHead);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -93,20 +93,20 @@ public class NegationImpl extends HeadImpl implements Negation
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTerm(Term newTerm)
+  public void setHead(Head newHead)
   {
-    if (newTerm != term)
+    if (newHead != head)
     {
       NotificationChain msgs = null;
-      if (term != null)
-        msgs = ((InternalEObject)term).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.NEGATION__TERM, null, msgs);
-      if (newTerm != null)
-        msgs = ((InternalEObject)newTerm).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.NEGATION__TERM, null, msgs);
-      msgs = basicSetTerm(newTerm, msgs);
+      if (head != null)
+        msgs = ((InternalEObject)head).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.NEGATION__HEAD, null, msgs);
+      if (newHead != null)
+        msgs = ((InternalEObject)newHead).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.NEGATION__HEAD, null, msgs);
+      msgs = basicSetHead(newHead, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.NEGATION__TERM, newTerm, newTerm));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.NEGATION__HEAD, newHead, newHead));
   }
 
   /**
@@ -119,8 +119,8 @@ public class NegationImpl extends HeadImpl implements Negation
   {
     switch (featureID)
     {
-      case VxlPackage.NEGATION__TERM:
-        return basicSetTerm(null, msgs);
+      case VxlPackage.NEGATION__HEAD:
+        return basicSetHead(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -135,8 +135,8 @@ public class NegationImpl extends HeadImpl implements Negation
   {
     switch (featureID)
     {
-      case VxlPackage.NEGATION__TERM:
-        return getTerm();
+      case VxlPackage.NEGATION__HEAD:
+        return getHead();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -151,8 +151,8 @@ public class NegationImpl extends HeadImpl implements Negation
   {
     switch (featureID)
     {
-      case VxlPackage.NEGATION__TERM:
-        setTerm((Term)newValue);
+      case VxlPackage.NEGATION__HEAD:
+        setHead((Head)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -168,8 +168,8 @@ public class NegationImpl extends HeadImpl implements Negation
   {
     switch (featureID)
     {
-      case VxlPackage.NEGATION__TERM:
-        setTerm((Term)null);
+      case VxlPackage.NEGATION__HEAD:
+        setHead((Head)null);
         return;
     }
     super.eUnset(featureID);
@@ -185,8 +185,8 @@ public class NegationImpl extends HeadImpl implements Negation
   {
     switch (featureID)
     {
-      case VxlPackage.NEGATION__TERM:
-        return term != null;
+      case VxlPackage.NEGATION__HEAD:
+        return head != null;
     }
     return super.eIsSet(featureID);
   }

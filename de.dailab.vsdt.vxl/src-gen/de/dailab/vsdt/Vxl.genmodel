@@ -37,7 +37,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//BracketTerm/term"/>
     </genClasses>
     <genClasses ecoreClass="Vxl.ecore#//Negation">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//Negation/term"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//Negation/head"/>
     </genClasses>
     <genClasses ecoreClass="Vxl.ecore#//Atom"/>
     <genClasses ecoreClass="Vxl.ecore#//Variable">

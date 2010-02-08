@@ -205,7 +205,7 @@ public class VsdtExpressionVisitor {
 	 */
 	protected void visit(Negation negation) {
 		buffer.append("! ");
-		visit(negation.getTerm());
+		visit(negation.getHead());
 	}
 
 	/**

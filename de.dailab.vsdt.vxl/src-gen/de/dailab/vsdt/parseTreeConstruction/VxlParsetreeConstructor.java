@@ -534,11 +534,11 @@ protected class BracketTerm_RightParenthesisKeyword_2 extends KeywordToken  {
 /************ begin Rule Negation ****************
  *
  * Negation:
- *   "!" term=Term;
+ *   "!" head=Head;
  *
  **/
 
-// "!" term=Term
+// "!" head=Head
 protected class Negation_Group extends GroupToken {
 	
 	public Negation_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -551,7 +551,7 @@ protected class Negation_Group extends GroupToken {
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Negation_TermAssignment_1(parent, this, 0, inst);
+			case 0: return new Negation_HeadAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -581,32 +581,32 @@ protected class Negation_ExclamationMarkKeyword_0 extends KeywordToken  {
 		
 }
 
-// term=Term
-protected class Negation_TermAssignment_1 extends AssignmentToken  {
+// head=Head
+protected class Negation_HeadAssignment_1 extends AssignmentToken  {
 	
-	public Negation_TermAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Negation_HeadAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getNegationAccess().getTermAssignment_1();
+		return grammarAccess.getNegationAccess().getHeadAssignment_1();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Term_Group(this, this, 0, inst);
+			case 0: return new Head_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("term",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("term");
+		if((value = current.getConsumable("head",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("head");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getHeadRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getNegationAccess().getTermTermParserRuleCall_1_0(); 
+				element = grammarAccess.getNegationAccess().getHeadHeadParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}

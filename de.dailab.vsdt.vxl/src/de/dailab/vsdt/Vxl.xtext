@@ -7,7 +7,7 @@ Term:			head = Head (tail = Tail)?;
 Head:			BracketTerm | Negation | Atom;
 Tail:			operator = Operator term = Term;
 BracketTerm:	"(" term = Term ")";
-Negation:		"!" term = Term;
+Negation:		"!" head = Head;
 Atom:			Value | Variable;
 
 // VARIABLES & ACCESSORS

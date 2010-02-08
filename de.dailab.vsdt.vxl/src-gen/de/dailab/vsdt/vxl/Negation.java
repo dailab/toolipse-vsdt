@@ -14,7 +14,7 @@ package de.dailab.vsdt.vxl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.dailab.vsdt.vxl.Negation#getTerm <em>Term</em>}</li>
+ *   <li>{@link de.dailab.vsdt.vxl.Negation#getHead <em>Head</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,29 +25,29 @@ package de.dailab.vsdt.vxl;
 public interface Negation extends Head
 {
   /**
-   * Returns the value of the '<em><b>Term</b></em>' containment reference.
+   * Returns the value of the '<em><b>Head</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Term</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Head</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Term</em>' containment reference.
-   * @see #setTerm(Term)
-   * @see de.dailab.vsdt.vxl.VxlPackage#getNegation_Term()
+   * @return the value of the '<em>Head</em>' containment reference.
+   * @see #setHead(Head)
+   * @see de.dailab.vsdt.vxl.VxlPackage#getNegation_Head()
    * @model containment="true"
    * @generated
    */
-  Term getTerm();
+  Head getHead();
 
   /**
-   * Sets the value of the '{@link de.dailab.vsdt.vxl.Negation#getTerm <em>Term</em>}' containment reference.
+   * Sets the value of the '{@link de.dailab.vsdt.vxl.Negation#getHead <em>Head</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Term</em>' containment reference.
-   * @see #getTerm()
+   * @param value the new value of the '<em>Head</em>' containment reference.
+   * @see #getHead()
    * @generated
    */
-  void setTerm(Term value);
+  void setHead(Head value);
 
 } // Negation

@@ -320,9 +320,9 @@ ruleNegation returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.getNegationAccess().getTermTermParserRuleCall_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getNegationAccess().getHeadHeadParserRuleCall_1_0(), currentNode); 
 	    }
-	    lv_term_1=ruleTerm 
+	    lv_head_1=ruleHead 
 	    {
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getNegationRule().getType().getClassifier());
@@ -330,7 +330,7 @@ ruleNegation returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "term", lv_term_1, "Term", currentNode);
+	       		set($current, "head", lv_head_1, "Head", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }

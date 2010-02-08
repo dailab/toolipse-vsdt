@@ -58,8 +58,8 @@
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="!"/>
-        <tokens xsi:type="xtext:Assignment" feature="term" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+        <tokens xsi:type="xtext:Assignment" feature="head" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
         </tokens>
       </alternatives>
     </rules>

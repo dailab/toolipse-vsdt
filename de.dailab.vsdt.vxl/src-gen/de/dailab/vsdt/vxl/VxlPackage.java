@@ -192,13 +192,13 @@ public interface VxlPackage extends EPackage
   int NEGATION = 4;
 
   /**
-   * The feature id for the '<em><b>Term</b></em>' containment reference.
+   * The feature id for the '<em><b>Head</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int NEGATION__TERM = HEAD_FEATURE_COUNT + 0;
+  int NEGATION__HEAD = HEAD_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Negation</em>' class.
@@ -624,15 +624,15 @@ public interface VxlPackage extends EPackage
   EClass getNegation();
 
   /**
-   * Returns the meta object for the containment reference '{@link de.dailab.vsdt.vxl.Negation#getTerm <em>Term</em>}'.
+   * Returns the meta object for the containment reference '{@link de.dailab.vsdt.vxl.Negation#getHead <em>Head</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Term</em>'.
-   * @see de.dailab.vsdt.vxl.Negation#getTerm()
+   * @return the meta object for the containment reference '<em>Head</em>'.
+   * @see de.dailab.vsdt.vxl.Negation#getHead()
    * @see #getNegation()
    * @generated
    */
-  EReference getNegation_Term();
+  EReference getNegation_Head();
 
   /**
    * Returns the meta object for class '{@link de.dailab.vsdt.vxl.Atom <em>Atom</em>}'.
@@ -924,12 +924,12 @@ public interface VxlPackage extends EPackage
     EClass NEGATION = eINSTANCE.getNegation();
 
     /**
-     * The meta object literal for the '<em><b>Term</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Head</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference NEGATION__TERM = eINSTANCE.getNegation_Term();
+    EReference NEGATION__HEAD = eINSTANCE.getNegation_Head();
 
     /**
      * The meta object literal for the '{@link de.dailab.vsdt.vxl.impl.AtomImpl <em>Atom</em>}' class.

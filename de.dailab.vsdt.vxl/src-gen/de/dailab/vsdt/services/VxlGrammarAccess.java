@@ -140,24 +140,24 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Negation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cExclamationMarkKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cTermAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cTermTermParserRuleCall_1_0 = (RuleCall)cTermAssignment_1.eContents().get(0);
+		private final Assignment cHeadAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cHeadHeadParserRuleCall_1_0 = (RuleCall)cHeadAssignment_1.eContents().get(0);
 		
 		//Negation:
-		//  "!" term=Term;
+		//  "!" head=Head;
 		public ParserRule getRule() { return rule; }
 
-		//"!" term=Term
+		//"!" head=Head
 		public Group getGroup() { return cGroup; }
 
 		//"!"
 		public Keyword getExclamationMarkKeyword_0() { return cExclamationMarkKeyword_0; }
 
-		//term=Term
-		public Assignment getTermAssignment_1() { return cTermAssignment_1; }
+		//head=Head
+		public Assignment getHeadAssignment_1() { return cHeadAssignment_1; }
 
-		//Term
-		public RuleCall getTermTermParserRuleCall_1_0() { return cTermTermParserRuleCall_1_0; }
+		//Head
+		public RuleCall getHeadHeadParserRuleCall_1_0() { return cHeadHeadParserRuleCall_1_0; }
 	}
 
 	public class AtomElements implements IParserRuleAccess {
@@ -727,7 +727,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	}
 
 	//Negation:
-	//  "!" term=Term;
+	//  "!" head=Head;
 	public NegationElements getNegationAccess() {
 		return (pNegation != null) ? pNegation : (pNegation = new NegationElements());
 	}

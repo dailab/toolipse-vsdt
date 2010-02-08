@@ -351,7 +351,7 @@ public class InterpretingSimulation extends ManualSimulation implements ISimulat
 			// evaluate term
 			VxlInterpreter interpreter= new VxlInterpreter();
 			Object result= interpreter.evaluateTerm(term, context);
-			Map<EObject, String> errors= interpreter.getErrors();
+			Map<Object, String> errors= interpreter.getErrors();
 			if (! errors.isEmpty()) {
 				String title= "Evaluation failed";
 				StringBuffer message= new StringBuffer();

@@ -3,7 +3,6 @@ package de.dailab.vsdt.diagram.interpreter.dialogs;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -162,7 +161,7 @@ public class MessageParameterDialog extends TitleAreaDialog {
 					// evaluate term
 					VxlInterpreter interpreter= new VxlInterpreter();
 					Object result= interpreter.evaluateTerm(term, null);
-					Map<EObject, String> errors= interpreter.getErrors();
+					Map<Object, String> errors= interpreter.getErrors();
 					if (! errors.isEmpty()) {
 						StringBuffer message= new StringBuffer();
 						message.append("The expression ").append(expression).append(" could not be evaluated.");
