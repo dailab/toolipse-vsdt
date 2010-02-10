@@ -19,6 +19,7 @@ import de.dailab.vsdt.vxl.BooleanConst;
 import de.dailab.vsdt.vxl.BracketTerm;
 import de.dailab.vsdt.vxl.FieldAccessor;
 import de.dailab.vsdt.vxl.Head;
+import de.dailab.vsdt.vxl.Minus;
 import de.dailab.vsdt.vxl.Negation;
 import de.dailab.vsdt.vxl.NullConst;
 import de.dailab.vsdt.vxl.NumericConst;
@@ -88,6 +89,7 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
       case VxlPackage.TAIL: return createTail();
       case VxlPackage.BRACKET_TERM: return createBracketTerm();
       case VxlPackage.NEGATION: return createNegation();
+      case VxlPackage.MINUS: return createMinus();
       case VxlPackage.ATOM: return createAtom();
       case VxlPackage.VARIABLE: return createVariable();
       case VxlPackage.ACCESSOR: return createAccessor();
@@ -190,6 +192,17 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
   {
     NegationImpl negation = new NegationImpl();
     return negation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Minus createMinus()
+  {
+    MinusImpl minus = new MinusImpl();
+    return minus;
   }
 
   /**

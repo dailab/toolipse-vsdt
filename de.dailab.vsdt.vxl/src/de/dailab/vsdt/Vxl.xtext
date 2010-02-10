@@ -4,10 +4,11 @@ generate vxl "http://www.dailab.de/vsdt/Vxl"
 
 // COMPLEX TERMS
 Term:			head = Head (tail = Tail)?;
-Head:			BracketTerm | Negation | Atom;
+Head:			BracketTerm | Negation | Minus | Atom;
 Tail:			operator = Operator term = Term;
 BracketTerm:	"(" term = Term ")";
 Negation:		"!" head = Head;
+Minus:			"-" head = Head;
 Atom:			Value | Variable;
 
 // VARIABLES & ACCESSORS
@@ -33,5 +34,5 @@ enum Operator:
 	CONCAT = "++"; 															// String ** String -> String
 
 // NATIVES
-//terminal Numeric: "('-')?('0'..'9')+('.' ('0'..'9')+)?";
-NUMERIC : '-'? INT ('.' INT)? ;
+//terminal Numeric: "('0'..'9')+('.' ('0'..'9')+)?";
+NUMERIC : INT ('.' INT)? ;

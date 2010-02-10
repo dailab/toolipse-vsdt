@@ -39,6 +39,9 @@
     <genClasses ecoreClass="Vxl.ecore#//Negation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//Negation/head"/>
     </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//Minus">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//Minus/head"/>
+    </genClasses>
     <genClasses ecoreClass="Vxl.ecore#//Atom"/>
     <genClasses ecoreClass="Vxl.ecore#//Variable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//Variable/name"/>

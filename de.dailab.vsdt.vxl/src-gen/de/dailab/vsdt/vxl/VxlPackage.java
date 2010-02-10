@@ -210,6 +210,34 @@ public interface VxlPackage extends EPackage
   int NEGATION_FEATURE_COUNT = HEAD_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link de.dailab.vsdt.vxl.impl.MinusImpl <em>Minus</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.dailab.vsdt.vxl.impl.MinusImpl
+   * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getMinus()
+   * @generated
+   */
+  int MINUS = 5;
+
+  /**
+   * The feature id for the '<em><b>Head</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MINUS__HEAD = HEAD_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Minus</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MINUS_FEATURE_COUNT = HEAD_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.impl.AtomImpl <em>Atom</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -217,7 +245,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getAtom()
    * @generated
    */
-  int ATOM = 5;
+  int ATOM = 6;
 
   /**
    * The number of structural features of the '<em>Atom</em>' class.
@@ -236,7 +264,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getVariable()
    * @generated
    */
-  int VARIABLE = 6;
+  int VARIABLE = 7;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -273,7 +301,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getAccessor()
    * @generated
    */
-  int ACCESSOR = 7;
+  int ACCESSOR = 8;
 
   /**
    * The feature id for the '<em><b>Accessor</b></em>' containment reference.
@@ -301,7 +329,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getArrayAccessor()
    * @generated
    */
-  int ARRAY_ACCESSOR = 8;
+  int ARRAY_ACCESSOR = 9;
 
   /**
    * The feature id for the '<em><b>Accessor</b></em>' containment reference.
@@ -338,7 +366,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getFieldAccessor()
    * @generated
    */
-  int FIELD_ACCESSOR = 9;
+  int FIELD_ACCESSOR = 10;
 
   /**
    * The feature id for the '<em><b>Accessor</b></em>' containment reference.
@@ -375,7 +403,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getValue()
    * @generated
    */
-  int VALUE = 10;
+  int VALUE = 11;
 
   /**
    * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -403,7 +431,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getStringConst()
    * @generated
    */
-  int STRING_CONST = 11;
+  int STRING_CONST = 12;
 
   /**
    * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -431,7 +459,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getNumericConst()
    * @generated
    */
-  int NUMERIC_CONST = 12;
+  int NUMERIC_CONST = 13;
 
   /**
    * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -459,7 +487,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getBooleanConst()
    * @generated
    */
-  int BOOLEAN_CONST = 13;
+  int BOOLEAN_CONST = 14;
 
   /**
    * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -487,7 +515,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getNullConst()
    * @generated
    */
-  int NULL_CONST = 14;
+  int NULL_CONST = 15;
 
   /**
    * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -515,7 +543,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getOperator()
    * @generated
    */
-  int OPERATOR = 15;
+  int OPERATOR = 16;
 
 
   /**
@@ -633,6 +661,27 @@ public interface VxlPackage extends EPackage
    * @generated
    */
   EReference getNegation_Head();
+
+  /**
+   * Returns the meta object for class '{@link de.dailab.vsdt.vxl.Minus <em>Minus</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Minus</em>'.
+   * @see de.dailab.vsdt.vxl.Minus
+   * @generated
+   */
+  EClass getMinus();
+
+  /**
+   * Returns the meta object for the containment reference '{@link de.dailab.vsdt.vxl.Minus#getHead <em>Head</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Head</em>'.
+   * @see de.dailab.vsdt.vxl.Minus#getHead()
+   * @see #getMinus()
+   * @generated
+   */
+  EReference getMinus_Head();
 
   /**
    * Returns the meta object for class '{@link de.dailab.vsdt.vxl.Atom <em>Atom</em>}'.
@@ -930,6 +979,24 @@ public interface VxlPackage extends EPackage
      * @generated
      */
     EReference NEGATION__HEAD = eINSTANCE.getNegation_Head();
+
+    /**
+     * The meta object literal for the '{@link de.dailab.vsdt.vxl.impl.MinusImpl <em>Minus</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.dailab.vsdt.vxl.impl.MinusImpl
+     * @see de.dailab.vsdt.vxl.impl.VxlPackageImpl#getMinus()
+     * @generated
+     */
+    EClass MINUS = eINSTANCE.getMinus();
+
+    /**
+     * The meta object literal for the '<em><b>Head</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MINUS__HEAD = eINSTANCE.getMinus_Head();
 
     /**
      * The meta object literal for the '{@link de.dailab.vsdt.vxl.impl.AtomImpl <em>Atom</em>}' class.

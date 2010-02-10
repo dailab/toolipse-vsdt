@@ -41,16 +41,17 @@ protected class ThisRootNode extends RootToken {
 			case 2: return new Tail_Group(this, this, 2, inst);
 			case 3: return new BracketTerm_Group(this, this, 3, inst);
 			case 4: return new Negation_Group(this, this, 4, inst);
-			case 5: return new Atom_Alternatives(this, this, 5, inst);
-			case 6: return new Variable_Group(this, this, 6, inst);
-			case 7: return new Accessor_Alternatives(this, this, 7, inst);
-			case 8: return new ArrayAccessor_Group(this, this, 8, inst);
-			case 9: return new FieldAccessor_Group(this, this, 9, inst);
-			case 10: return new Value_Alternatives(this, this, 10, inst);
-			case 11: return new StringConst_ConstAssignment(this, this, 11, inst);
-			case 12: return new NumericConst_ConstAssignment(this, this, 12, inst);
-			case 13: return new BooleanConst_ConstAssignment(this, this, 13, inst);
-			case 14: return new NullConst_ConstAssignment(this, this, 14, inst);
+			case 5: return new Minus_Group(this, this, 5, inst);
+			case 6: return new Atom_Alternatives(this, this, 6, inst);
+			case 7: return new Variable_Group(this, this, 7, inst);
+			case 8: return new Accessor_Alternatives(this, this, 8, inst);
+			case 9: return new ArrayAccessor_Group(this, this, 9, inst);
+			case 10: return new FieldAccessor_Group(this, this, 10, inst);
+			case 11: return new Value_Alternatives(this, this, 11, inst);
+			case 12: return new StringConst_ConstAssignment(this, this, 12, inst);
+			case 13: return new NumericConst_ConstAssignment(this, this, 13, inst);
+			case 14: return new BooleanConst_ConstAssignment(this, this, 14, inst);
+			case 15: return new NullConst_ConstAssignment(this, this, 15, inst);
 			default: return null;
 		}	
 	}	
@@ -181,11 +182,11 @@ protected class Term_TailAssignment_1 extends AssignmentToken  {
 /************ begin Rule Head ****************
  *
  * Head:
- *   BracketTerm|Negation|Atom;
+ *   BracketTerm|Negation|Minus|Atom;
  *
  **/
 
-// BracketTerm|Negation|Atom
+// BracketTerm|Negation|Minus|Atom
 protected class Head_Alternatives extends AlternativesToken {
 
 	public Head_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -200,7 +201,8 @@ protected class Head_Alternatives extends AlternativesToken {
 		switch(index) {
 			case 0: return new Head_BracketTermParserRuleCall_0(parent, this, 0, inst);
 			case 1: return new Head_NegationParserRuleCall_1(parent, this, 1, inst);
-			case 2: return new Head_AtomParserRuleCall_2(parent, this, 2, inst);
+			case 2: return new Head_MinusParserRuleCall_2(parent, this, 2, inst);
+			case 3: return new Head_AtomParserRuleCall_3(parent, this, 3, inst);
 			default: return null;
 		}	
 	}	
@@ -273,15 +275,46 @@ protected class Head_NegationParserRuleCall_1 extends RuleCallToken {
 	}	
 }
 
-// Atom
-protected class Head_AtomParserRuleCall_2 extends RuleCallToken {
+// Minus
+protected class Head_MinusParserRuleCall_2 extends RuleCallToken {
 	
-	public Head_AtomParserRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Head_MinusParserRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getHeadAccess().getAtomParserRuleCall_2();
+		return grammarAccess.getHeadAccess().getMinusParserRuleCall_2();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Minus_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Minus_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getMinusRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// Atom
+protected class Head_AtomParserRuleCall_3 extends RuleCallToken {
+	
+	public Head_AtomParserRuleCall_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getHeadAccess().getAtomParserRuleCall_3();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -625,6 +658,102 @@ protected class Negation_HeadAssignment_1 extends AssignmentToken  {
 
 
 /************ end Rule Negation ****************/
+
+
+/************ begin Rule Minus ****************
+ *
+ * Minus:
+ *   "-" head=Head;
+ *
+ **/
+
+// "-" head=Head
+protected class Minus_Group extends GroupToken {
+	
+	public Minus_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getMinusAccess().getGroup();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Minus_HeadAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getMinusRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "-"
+protected class Minus_HyphenMinusKeyword_0 extends KeywordToken  {
+	
+	public Minus_HyphenMinusKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getMinusAccess().getHyphenMinusKeyword_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// head=Head
+protected class Minus_HeadAssignment_1 extends AssignmentToken  {
+	
+	public Minus_HeadAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getMinusAccess().getHeadAssignment_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Head_Alternatives(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("head",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("head");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getHeadRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getMinusAccess().getHeadHeadParserRuleCall_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Minus_HyphenMinusKeyword_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+/************ end Rule Minus ****************/
 
 
 /************ begin Rule Atom ****************

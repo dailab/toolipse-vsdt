@@ -17,6 +17,7 @@ import de.dailab.vsdt.vxl.BooleanConst;
 import de.dailab.vsdt.vxl.BracketTerm;
 import de.dailab.vsdt.vxl.FieldAccessor;
 import de.dailab.vsdt.vxl.Head;
+import de.dailab.vsdt.vxl.Minus;
 import de.dailab.vsdt.vxl.Negation;
 import de.dailab.vsdt.vxl.NullConst;
 import de.dailab.vsdt.vxl.NumericConst;
@@ -144,6 +145,14 @@ public class VxlSwitch<T>
         Negation negation = (Negation)theEObject;
         T result = caseNegation(negation);
         if (result == null) result = caseHead(negation);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VxlPackage.MINUS:
+      {
+        Minus minus = (Minus)theEObject;
+        T result = caseMinus(minus);
+        if (result == null) result = caseHead(minus);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -316,6 +325,22 @@ public class VxlSwitch<T>
    * @generated
    */
   public T caseNegation(Negation object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Minus</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Minus</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMinus(Minus object)
   {
     return null;
   }

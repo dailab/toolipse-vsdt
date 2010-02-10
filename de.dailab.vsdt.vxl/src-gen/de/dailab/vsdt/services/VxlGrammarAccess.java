@@ -61,13 +61,14 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cBracketTermParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cNegationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cAtomParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cMinusParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cAtomParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//Head:
-		//  BracketTerm|Negation|Atom;
+		//  BracketTerm|Negation|Minus|Atom;
 		public ParserRule getRule() { return rule; }
 
-		//BracketTerm|Negation|Atom
+		//BracketTerm|Negation|Minus|Atom
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//BracketTerm
@@ -76,8 +77,11 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		//Negation
 		public RuleCall getNegationParserRuleCall_1() { return cNegationParserRuleCall_1; }
 
+		//Minus
+		public RuleCall getMinusParserRuleCall_2() { return cMinusParserRuleCall_2; }
+
 		//Atom
-		public RuleCall getAtomParserRuleCall_2() { return cAtomParserRuleCall_2; }
+		public RuleCall getAtomParserRuleCall_3() { return cAtomParserRuleCall_3; }
 	}
 
 	public class TailElements implements IParserRuleAccess {
@@ -152,6 +156,30 @@ public class VxlGrammarAccess implements IGrammarAccess {
 
 		//"!"
 		public Keyword getExclamationMarkKeyword_0() { return cExclamationMarkKeyword_0; }
+
+		//head=Head
+		public Assignment getHeadAssignment_1() { return cHeadAssignment_1; }
+
+		//Head
+		public RuleCall getHeadHeadParserRuleCall_1_0() { return cHeadHeadParserRuleCall_1_0; }
+	}
+
+	public class MinusElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Minus");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cHeadAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cHeadHeadParserRuleCall_1_0 = (RuleCall)cHeadAssignment_1.eContents().get(0);
+		
+		//Minus:
+		//  "-" head=Head;
+		public ParserRule getRule() { return rule; }
+
+		//"-" head=Head
+		public Group getGroup() { return cGroup; }
+
+		//"-"
+		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
 
 		//head=Head
 		public Assignment getHeadAssignment_1() { return cHeadAssignment_1; }
@@ -427,36 +455,32 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	public class NUMERICElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NUMERIC");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cFullStopKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final RuleCall cINTTerminalRuleCall_2_1 = (RuleCall)cGroup_2.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//NUMERIC returns ecore::EString:
-		//  "-"? INT ("." INT)?;  															 // String ** String -> String
+		//  INT ("." INT)?;  															 // String ** String -> String
 		//
 		//// NATIVES
-		////terminal Numeric: "('-')?('0'..'9')+('.' ('0'..'9')+)?";
+		////terminal Numeric: "('0'..'9')+('.' ('0'..'9')+)?";
 		public ParserRule getRule() { return rule; }
 
-		//"-"? INT ("." INT)?
+		//INT ("." INT)?
 		public Group getGroup() { return cGroup; }
 
-		//"-"?
-		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
-
 		//INT
-		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
+		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
 
 		//("." INT)?
-		public Group getGroup_2() { return cGroup_2; }
+		public Group getGroup_1() { return cGroup_1; }
 
 		//"."
-		public Keyword getFullStopKeyword_2_0() { return cFullStopKeyword_2_0; }
+		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 
 		//INT
-		public RuleCall getINTTerminalRuleCall_2_1() { return cINTTerminalRuleCall_2_1; }
+		public RuleCall getINTTerminalRuleCall_1_1() { return cINTTerminalRuleCall_1_1; }
 	}
 	
 	
@@ -504,7 +528,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		//	      															 // String ** String -> String
 		//
 		//// NATIVES
-		////terminal Numeric: "('-')?('0'..'9')+('.' ('0'..'9')+)?";
+		////terminal Numeric: "('0'..'9')+('.' ('0'..'9')+)?";
 		public EnumRule getRule() { return rule; }
 
 		//LT="<" | LE="<=" | EQ="==" | NEQ="!=" | GT=">" | GE=">=" | ADD="+" | SUB="-" | MULT="*" | DIV="/" |
@@ -518,7 +542,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		//	      															 // String ** String -> String
 		//
 		//// NATIVES
-		////terminal Numeric: "('-')?('0'..'9')+('.' ('0'..'9')+)?";
+		////terminal Numeric: "('0'..'9')+('.' ('0'..'9')+)?";
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//LT="<"
@@ -650,6 +674,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	private TailElements pTail;
 	private BracketTermElements pBracketTerm;
 	private NegationElements pNegation;
+	private MinusElements pMinus;
 	private AtomElements pAtom;
 	private VariableElements pVariable;
 	private AccessorElements pAccessor;
@@ -697,7 +722,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	}
 
 	//Head:
-	//  BracketTerm|Negation|Atom;
+	//  BracketTerm|Negation|Minus|Atom;
 	public HeadElements getHeadAccess() {
 		return (pHead != null) ? pHead : (pHead = new HeadElements());
 	}
@@ -734,6 +759,16 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	
 	public ParserRule getNegationRule() {
 		return getNegationAccess().getRule();
+	}
+
+	//Minus:
+	//  "-" head=Head;
+	public MinusElements getMinusAccess() {
+		return (pMinus != null) ? pMinus : (pMinus = new MinusElements());
+	}
+	
+	public ParserRule getMinusRule() {
+		return getMinusAccess().getRule();
 	}
 
 	//Atom:
@@ -867,7 +902,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	//	      															 // String ** String -> String
 	//
 	//// NATIVES
-	////terminal Numeric: "('-')?('0'..'9')+('.' ('0'..'9')+)?";
+	////terminal Numeric: "('0'..'9')+('.' ('0'..'9')+)?";
 	public OperatorElements getOperatorAccess() {
 		return (unknownRuleOperator != null) ? unknownRuleOperator : (unknownRuleOperator = new OperatorElements());
 	}
@@ -877,10 +912,10 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	}
 
 	//NUMERIC returns ecore::EString:
-	//  "-"? INT ("." INT)?;  															 // String ** String -> String
+	//  INT ("." INT)?;  															 // String ** String -> String
 	//
 	//// NATIVES
-	////terminal Numeric: "('-')?('0'..'9')+('.' ('0'..'9')+)?";
+	////terminal Numeric: "('0'..'9')+('.' ('0'..'9')+)?";
 	public NUMERICElements getNUMERICAccess() {
 		return (pNUMERIC != null) ? pNUMERIC : (pNUMERIC = new NUMERICElements());
 	}

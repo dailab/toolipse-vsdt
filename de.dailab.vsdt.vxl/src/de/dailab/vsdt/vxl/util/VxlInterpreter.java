@@ -7,6 +7,7 @@ import de.dailab.vsdt.vxl.Atom;
 import de.dailab.vsdt.vxl.BooleanConst;
 import de.dailab.vsdt.vxl.BracketTerm;
 import de.dailab.vsdt.vxl.Head;
+import de.dailab.vsdt.vxl.Minus;
 import de.dailab.vsdt.vxl.Negation;
 import de.dailab.vsdt.vxl.NullConst;
 import de.dailab.vsdt.vxl.NumericConst;
@@ -54,6 +55,7 @@ public class VxlInterpreter {
 	 */
 	protected Object eval(Term term) {
 		TermTree orderedTermTree= TermOrdering.createOrderedTermTree(term);
+		TermOrdering.print(orderedTermTree, 0);
 		return eval(orderedTermTree);
 	}
 	
@@ -96,6 +98,10 @@ public class VxlInterpreter {
 		if (head instanceof Negation) {
 			return eval((Negation) head);
 		}
+		if (head instanceof Minus) {
+			return eval((Minus) head);
+			
+		}
 		if (head instanceof Atom) {
 			return eval((Atom) head);
 		}
@@ -103,7 +109,7 @@ public class VxlInterpreter {
 	}
 
 	/**
-	 * Negation:		"!" term = Term;
+	 * Negation:		"!" head = Head;
 	 */
 	protected Object eval(Negation negation) {
 		Object result= eval(negation.getHead());
@@ -115,6 +121,19 @@ public class VxlInterpreter {
 		}
 	}
 
+	/**
+	 * Minus:		"-" head = Head;
+	 */
+	protected Object eval(Minus minus) {
+		Object result= eval(minus.getHead());
+		if (result instanceof Number) {
+			return - ((Number) result).doubleValue();
+		} else {
+			errors.put(minus, "Minus only applicable to Numeric");
+			return null;
+		}
+	}
+	
 	/**
 	 * Atom:			Variable | Value;
 	 */

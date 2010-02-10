@@ -17,6 +17,7 @@ import de.dailab.vsdt.vxl.BooleanConst;
 import de.dailab.vsdt.vxl.BracketTerm;
 import de.dailab.vsdt.vxl.FieldAccessor;
 import de.dailab.vsdt.vxl.Head;
+import de.dailab.vsdt.vxl.Minus;
 import de.dailab.vsdt.vxl.Negation;
 import de.dailab.vsdt.vxl.NullConst;
 import de.dailab.vsdt.vxl.NumericConst;
@@ -114,6 +115,11 @@ public class VxlAdapterFactory extends AdapterFactoryImpl
       public Adapter caseNegation(Negation object)
       {
         return createNegationAdapter();
+      }
+      @Override
+      public Adapter caseMinus(Minus object)
+      {
+        return createMinusAdapter();
       }
       @Override
       public Adapter caseAtom(Atom object)
@@ -258,6 +264,21 @@ public class VxlAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createNegationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.Minus <em>Minus</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.dailab.vsdt.vxl.Minus
+   * @generated
+   */
+  public Adapter createMinusAdapter()
   {
     return null;
   }

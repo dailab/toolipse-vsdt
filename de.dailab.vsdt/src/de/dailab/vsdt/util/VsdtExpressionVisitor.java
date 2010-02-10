@@ -14,6 +14,7 @@ import de.dailab.vsdt.vxl.BooleanConst;
 import de.dailab.vsdt.vxl.BracketTerm;
 import de.dailab.vsdt.vxl.FieldAccessor;
 import de.dailab.vsdt.vxl.Head;
+import de.dailab.vsdt.vxl.Minus;
 import de.dailab.vsdt.vxl.Negation;
 import de.dailab.vsdt.vxl.NullConst;
 import de.dailab.vsdt.vxl.NumericConst;
@@ -201,13 +202,22 @@ public class VsdtExpressionVisitor {
 	}
 	
 	/**
-	 * Negation:		"!" term = Term;
+	 * Negation:		"!" head = Head;
 	 */
 	protected void visit(Negation negation) {
 		buffer.append("! ");
 		visit(negation.getHead());
 	}
 
+	/**
+	 * Minus:		"-" head= Head;
+	 */
+	protected void visit(Minus minus) {
+		buffer.append("- ");
+		visit(minus.getHead());
+	}
+
+	
 	/**
 	 * Atom:			Variable | Value;
 	 */

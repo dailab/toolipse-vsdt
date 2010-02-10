@@ -19,6 +19,7 @@ import de.dailab.vsdt.vxl.BooleanConst;
 import de.dailab.vsdt.vxl.BracketTerm;
 import de.dailab.vsdt.vxl.FieldAccessor;
 import de.dailab.vsdt.vxl.Head;
+import de.dailab.vsdt.vxl.Minus;
 import de.dailab.vsdt.vxl.Negation;
 import de.dailab.vsdt.vxl.NullConst;
 import de.dailab.vsdt.vxl.NumericConst;
@@ -73,6 +74,13 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * @generated
    */
   private EClass negationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass minusEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -329,6 +337,26 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getMinus()
+  {
+    return minusEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getMinus_Head()
+  {
+    return (EReference)minusEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getAtom()
   {
     return atomEClass;
@@ -540,6 +568,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
     negationEClass = createEClass(NEGATION);
     createEReference(negationEClass, NEGATION__HEAD);
 
+    minusEClass = createEClass(MINUS);
+    createEReference(minusEClass, MINUS__HEAD);
+
     atomEClass = createEClass(ATOM);
 
     variableEClass = createEClass(VARIABLE);
@@ -601,6 +632,7 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
     // Add supertypes to classes
     bracketTermEClass.getESuperTypes().add(this.getHead());
     negationEClass.getESuperTypes().add(this.getHead());
+    minusEClass.getESuperTypes().add(this.getHead());
     atomEClass.getESuperTypes().add(this.getHead());
     variableEClass.getESuperTypes().add(this.getAtom());
     arrayAccessorEClass.getESuperTypes().add(this.getAccessor());
@@ -627,6 +659,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
 
     initEClass(negationEClass, Negation.class, "Negation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getNegation_Head(), this.getHead(), null, "head", null, 0, 1, Negation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(minusEClass, Minus.class, "Minus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getMinus_Head(), this.getHead(), null, "head", null, 0, 1, Minus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(atomEClass, Atom.class, "Atom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

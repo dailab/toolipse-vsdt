@@ -18,6 +18,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="Negation" eSuperTypes="#//Head">
     <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="#//Head" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="#//Head">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="#//Head" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Atom" eSuperTypes="#//Head"/>
   <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//Atom">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

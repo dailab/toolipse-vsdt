@@ -171,11 +171,21 @@ ruleHead returns [EObject current=null]
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getHeadAccess().getAtomParserRuleCall_2(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getHeadAccess().getMinusParserRuleCall_2(), currentNode); 
     }
-    this_Atom_2=ruleAtom
+    this_Minus_2=ruleMinus
     { 
-        $current = $this_Atom_2.current; 
+        $current = $this_Minus_2.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getHeadAccess().getAtomParserRuleCall_3(), currentNode); 
+    }
+    this_Atom_3=ruleAtom
+    { 
+        $current = $this_Atom_3.current; 
         currentNode = currentNode.getParent();
     }
 );
@@ -326,6 +336,52 @@ ruleNegation returns [EObject current=null]
 	    {
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getNegationRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		set($current, "head", lv_head_1, "Head", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+));
+
+
+
+
+
+// Entry rule entryRuleMinus
+entryRuleMinus returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getMinusRule(), currentNode); }
+	 iv_ruleMinus=ruleMinus 
+	 { $current=$iv_ruleMinus.current; } 
+	 EOF 
+;
+
+// Rule Minus
+ruleMinus returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+('-' 
+    {
+        createLeafNode(grammarAccess.getMinusAccess().getHyphenMinusKeyword_0(), null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getMinusAccess().getHeadHeadParserRuleCall_1_0(), currentNode); 
+	    }
+	    lv_head_1=ruleHead 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getMinusRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -876,31 +932,25 @@ ruleNUMERIC returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
 	    lastConsumedNode = currentNode;
 	    lastConsumedDatatypeToken = $current;
     }:
-((
-	kw='-' 
-    {
-        $current.merge(kw);
-        createLeafNode(grammarAccess.getNUMERICAccess().getHyphenMinusKeyword_0(), null); 
-    }
-)?    this_INT_1=RULE_INT    {
-		$current.merge(this_INT_1);
+(    this_INT_0=RULE_INT    {
+		$current.merge(this_INT_0);
     }
 
     { 
-    createLeafNode(grammarAccess.getNUMERICAccess().getINTTerminalRuleCall_1(), null); 
+    createLeafNode(grammarAccess.getNUMERICAccess().getINTTerminalRuleCall_0(), null); 
     }
 (
 	kw='.' 
     {
         $current.merge(kw);
-        createLeafNode(grammarAccess.getNUMERICAccess().getFullStopKeyword_2_0(), null); 
+        createLeafNode(grammarAccess.getNUMERICAccess().getFullStopKeyword_1_0(), null); 
     }
-    this_INT_3=RULE_INT    {
-		$current.merge(this_INT_3);
+    this_INT_2=RULE_INT    {
+		$current.merge(this_INT_2);
     }
 
     { 
-    createLeafNode(grammarAccess.getNUMERICAccess().getINTTerminalRuleCall_2_1(), null); 
+    createLeafNode(grammarAccess.getNUMERICAccess().getINTTerminalRuleCall_1_1(), null); 
     }
 )?)
     ;

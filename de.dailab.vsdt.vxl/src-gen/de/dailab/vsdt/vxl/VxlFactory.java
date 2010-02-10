@@ -71,6 +71,15 @@ public interface VxlFactory extends EFactory
   Negation createNegation();
 
   /**
+   * Returns a new object of class '<em>Minus</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Minus</em>'.
+   * @generated
+   */
+  Minus createMinus();
+
+  /**
    * Returns a new object of class '<em>Atom</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
