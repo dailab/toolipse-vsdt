@@ -97,6 +97,11 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	
 	/** map holding a relation of services to services calling this service (e.g. in case of multiple start events) */
 	private Map<Service, List<Service>> callingServices;
+	
+	@Override
+	public JiacVExportWrapper getWrapper() {
+		return (JiacVExportWrapper) super.wrapper;
+	}
 
 	@Override
 	public void initialize() {
@@ -122,13 +127,12 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		
 		// create AgentWorldDiagram
 		AgentWorld agentWorld= aweFac.createAgentWorld();
-		wrapper.map(bps, agentWorld);
-		wrapper.getTargetModels().add(agentWorld);
 		agentWorld.setAuthor(bps.getAuthor());
 		agentWorld.setDate(bps.getModificationDate());
 		agentWorld.setVersion(bps.getVersion());
 		agentWorld.setName(bps.getName());
 		agentWorld.setNamespace(bps.getName());
+		getWrapper().setAgentWorld(agentWorld);
 		
 		// create one AgentRole per Participant
 		for (Participant participant : bps.getParticipants()) {
@@ -138,25 +142,23 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			role.setNamespace(agentWorld.getDefaultNamespace());
 			for (Pool pool : participant.getAssociatedPools()) {
 
-				// create components referring to created services
+				// create components referring to created jadl files
 				if (wrapper.getMapping(pool) instanceof Agent) {
 					Agent model= (Agent) wrapper.getMapping(pool);
+					String fileName= getWrapper().getJadlFileName(model);
 					
-					for (Service service: model.getServices()) {
-						String name= service.getName();
-						
-						Component component= aweFac.createComponent();
-						agentWorld.getHosts().add(component);
-						component.setName(name);
-						component.setClass(pool.getParentDiagram().getName() 
-								+ "." + name + JiacVResultSaver.EXT_JADL);
-						
-						// link Components to Roles
-						ComponentLink link= aweFac.createComponentLink();
-						agentWorld.getHosts().add(link);
-						link.setUser(role);
-						link.setComponent(component);
-					}
+					Component component= aweFac.createComponent();
+					agentWorld.getHosts().add(component);
+					// TODO name nur name, class relativ zum Project
+					component.setName(fileName.substring(fileName.lastIndexOf('/')+1, fileName.lastIndexOf('.')));
+					component.setURI(fileName);
+					component.setType("_serviceType");
+					
+					// link Components to Roles
+					ComponentLink link= aweFac.createComponentLink();
+					agentWorld.getHosts().add(link);
+					link.setUser(role);
+					link.setComponent(component);
 				}
 			}
 		}
@@ -203,8 +205,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		// create JADL file model and map it to the Pool
 		Agent model= jadlFac.createAgent();
 		_currentAgent= model;
-		wrapper.getTargetModels().add(model);
-		wrapper.map(pool, model);
+		getWrapper().addJadlFile(model, pool);
 		
 		// build service (will automatically be added to the Agent model)
 		buildService(pool.getParentDiagram().getName() + "_" + pool.getName(), 
@@ -215,7 +216,6 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		
 		return model;
 	}
-	
 	
 	
 	/**
@@ -335,6 +335,8 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		if (event instanceof Start && event.getName() != null) {
 			_currentService.setName(_currentService.getName() + "_" + event.getName());
 		}
+		
+		// create Start Rule
 		
 		switch (trigger) {
 		case MESSAGE:

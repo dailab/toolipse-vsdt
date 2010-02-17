@@ -10,6 +10,12 @@ import de.dailab.jiactng.jadl.Service;
  */
 public class Util {
 
+	public static final String EXT_JADL=		".jadl";
+//	public static final String EXT_XML=			".xml";
+	public static final String EXT_AWE_MODEL=	".agentworld";
+	public static final String EXT_AWE_DIAGRAM=	".awe";
+	public static final String FILE_SEP= System.getProperty("file.separator");
+	
 	/**
 	 * @param model		some JADL file model
 	 * @return			first service in the file, if any, or null
