@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:agentworld="agentworld" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation">
-  <notation:Diagram xmi:id="_uoDMAAzTEd-m4vcdM2m0_Q" type="Agentworld" element="_uoFBMAzTEd-m4vcdM2m0_Q" measurementUnit="Pixel">
-    <children xmi:type="notation:Node" xmi:id="_uoWG8AzTEd-m4vcdM2m0_Q" type="1002" element="_uoFBMQzTEd-m4vcdM2m0_Q">
-      <children xmi:type="notation:Node" xmi:id="_uoi7QAzTEd-m4vcdM2m0_Q" type="4002">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_uoi7QQzTEd-m4vcdM2m0_Q" y="5"/>
+  <notation:Diagram xmi:id="__E8e0BvSEd-oV-My8xhyNQ" type="Agentworld" element="__E8e0hvSEd-oV-My8xhyNQ" measurementUnit="Pixel">
+    <children xmi:type="notation:Shape" xmi:id="__E8e1hvSEd-oV-My8xhyNQ" type="2002" element="__E8e0xvSEd-oV-My8xhyNQ" fontName="Sans" lineColor="12632256">
+      <children xmi:type="notation:DecorationNode" xmi:id="__E9F4BvSEd-oV-My8xhyNQ" type="5002">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__E9F4RvSEd-oV-My8xhyNQ" y="5"/>
       </children>
-      <styles xmi:type="notation:ShapeStyle" xmi:id="_uoWG8QzTEd-m4vcdM2m0_Q" fontName="Sans" lineColor="12632256"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uoWG8gzTEd-m4vcdM2m0_Q" x="110" y="30"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="__E8e1xvSEd-oV-My8xhyNQ" x="110" y="30"/>
     </children>
-    <children xmi:type="notation:Node" xmi:id="_uo5gkAzTEd-m4vcdM2m0_Q" type="1004" element="_uoFBMgzTEd-m4vcdM2m0_Q">
-      <children xmi:type="notation:Node" xmi:id="_uo-ZEAzTEd-m4vcdM2m0_Q" type="4004"/>
-      <styles xmi:type="notation:ShapeStyle" xmi:id="_uo5gkQzTEd-m4vcdM2m0_Q" fontName="Sans" lineColor="12632256"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uo5gkgzTEd-m4vcdM2m0_Q" x="30" y="130"/>
+    <children xmi:type="notation:Shape" xmi:id="__E9F4hvSEd-oV-My8xhyNQ" type="2004" element="__E8e1BvSEd-oV-My8xhyNQ" fontName="Sans" lineColor="12632256">
+      <children xmi:type="notation:DecorationNode" xmi:id="__E9s8BvSEd-oV-My8xhyNQ" type="5004"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="__E9F4xvSEd-oV-My8xhyNQ" x="30" y="130"/>
     </children>
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_uoDMAQzTEd-m4vcdM2m0_Q"/>
-    <edges xmi:type="notation:Edge" xmi:id="_upFGwAzTEd-m4vcdM2m0_Q" type="3002" element="_uoFBMwzTEd-m4vcdM2m0_Q" source="_uoWG8AzTEd-m4vcdM2m0_Q" target="_uo5gkAzTEd-m4vcdM2m0_Q">
-      <styles xmi:type="notation:ConnectorStyle" xmi:id="_upFGwQzTEd-m4vcdM2m0_Q" lineColor="12632256"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_upFGwgzTEd-m4vcdM2m0_Q" fontName="Sans"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_upFGwwzTEd-m4vcdM2m0_Q" points="[0, 20, 0, -80]$[0, 80, 0, -20]"/>
-      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uqKE0AzTEd-m4vcdM2m0_Q" id="(0.5,1.0)"/>
-      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uqKr4AzTEd-m4vcdM2m0_Q" id="(0.5,0.0)"/>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="__E8e0RvSEd-oV-My8xhyNQ"/>
+    <edges xmi:type="notation:Connector" xmi:id="__E9s8RvSEd-oV-My8xhyNQ" type="4002" element="__E8e1RvSEd-oV-My8xhyNQ" source="__E8e1hvSEd-oV-My8xhyNQ" target="__E9F4hvSEd-oV-My8xhyNQ" lineColor="12632256">
+      <styles xmi:type="notation:FontStyle" xmi:id="__E9s8hvSEd-oV-My8xhyNQ" fontName="Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__E9s8xvSEd-oV-My8xhyNQ" points="[0, 0, 0, -80]$[0, 60, 0, -20]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__FLIUBvSEd-oV-My8xhyNQ" id="(0.5,1.0)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__FLvYBvSEd-oV-My8xhyNQ" id="(0.5,0.0)"/>
     </edges>
   </notation:Diagram>
-  <agentworld:AgentWorld xmi:id="_uoFBMAzTEd-m4vcdM2m0_Q" name="Math" namespace="Math" author="Tobias Küster" date="2009-08-27T17:05:44.025+0200" version="0.1">
-    <hosts xmi:type="agentworld:Role" xmi:id="_uoFBMQzTEd-m4vcdM2m0_Q" name="MathematicanRole" componentLinks="_uoFBMwzTEd-m4vcdM2m0_Q"/>
-    <hosts xmi:type="agentworld:Component" xmi:id="_uoFBMgzTEd-m4vcdM2m0_Q" name="Algorithms_ExtractRoot_start" users="_uoFBMwzTEd-m4vcdM2m0_Q" class="Algorithms.Algorithms_ExtractRoot_start.jadl"/>
-    <hosts xmi:type="agentworld:ComponentLink" xmi:id="_uoFBMwzTEd-m4vcdM2m0_Q" component="_uoFBMgzTEd-m4vcdM2m0_Q" user="_uoFBMQzTEd-m4vcdM2m0_Q"/>
+  <agentworld:AgentWorld xmi:id="__E8e0hvSEd-oV-My8xhyNQ" name="Math" namespace="Math" author="Tobias Küster" date="2009-08-27T17:05:44.025+0200" version="0.1">
+    <hosts xmi:type="agentworld:Role" xmi:id="__E8e0xvSEd-oV-My8xhyNQ" name="MathematicanRole" componentLinks="__E8e1RvSEd-oV-My8xhyNQ"/>
+    <hosts xmi:type="agentworld:Component" xmi:id="__E8e1BvSEd-oV-My8xhyNQ" name="Algorithms_ExtractRoot" type="_serviceType" users="__E8e1RvSEd-oV-My8xhyNQ" URI="Mathematican/Algorithms_ExtractRoot.jadl"/>
+    <hosts xmi:type="agentworld:ComponentLink" xmi:id="__E8e1RvSEd-oV-My8xhyNQ" component="__E8e1BvSEd-oV-My8xhyNQ" user="__E8e0xvSEd-oV-My8xhyNQ"/>
   </agentworld:AgentWorld>
 </xmi:XMI>

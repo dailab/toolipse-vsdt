@@ -51,8 +51,6 @@ service CloseAuction_Auctioneer_auctionover ( in ) ( out ) {
                             }
                         }
                     }
-                    case ( ontimer timeout 3 ) {
-                    }
                 }
                 case ( ontimer timeout 1 ) {
                     {
