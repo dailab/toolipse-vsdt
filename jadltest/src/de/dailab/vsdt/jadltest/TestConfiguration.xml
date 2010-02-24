@@ -8,11 +8,17 @@
 	<import resource="classpath:de/dailab/jiactng/agentcore/conf/JMSMessaging.xml" />
 	<import resource="classpath:de/dailab/jiactng/agentcore/conf/Agent.xml" />
 
-	<bean name="InterpreterPlatformWithDirectory" parent="Platform" abstract="true">
+	<bean name="InterpreterNode" parent="Platform" singleton="false">
 		<property name="agentNodeBeans">
 			<list>
 				<ref bean="StandardJMSBroker"/>
 				<ref bean="InterpreterDirectoryAgentNodeBean"/>
+			</list>
+		</property>
+		<property name="agents">
+			<list>
+				<ref bean="InterpreterAgentA" />
+				<ref bean="InterpreterAgentB" />
 			</list>
 		</property>
 	</bean>
@@ -26,7 +32,7 @@
 
 
 	<!-- Node holding some Interpreter Agents -->
-	<bean name="InterpreterNode" parent="InterpreterPlatformWithDirectory">
+	<!--<bean name="InterpreterNode" parent="InterpreterPlatformWithDirectory">
 		<property name="agentNodeBeans">
 			<list>
 				<ref bean="StandardJMSBroker" />
@@ -39,7 +45,7 @@
 				<ref bean="InterpreterAgentB" />
 			</list>
 		</property>
-	</bean>
+	</bean>-->
 
 	<bean name="InterpreterAgentA" parent="InterpreterAgent" singleton="false" />
 	
@@ -47,6 +53,7 @@
 
 	<!-- Interpreter Agent -->
 	<bean name="InterpreterAgent" parent="SimpleAgent" singleton="false">
+		<property name="logLevel" value="INFO"/>
 		<property name="agentBeans">
 			<list>
 				<ref bean="JadlInterpreterAgentBean" />
@@ -64,7 +71,9 @@
 	</bean>
 
 	<!-- Service Deployment -->
-	<bean name="ServiceDeployAgentBean" class="de.dailab.jiactng.jadl.ServiceDeployAgentBean" singleton="false"/>
+	<bean name="ServiceDeployAgentBean" class="de.dailab.jiactng.jadl.ServiceDeployAgentBean" singleton="false">
+		<property name="logLevel" value="INFO"/>
+	</bean>
 
 </beans>
 
