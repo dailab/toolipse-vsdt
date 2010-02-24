@@ -1,0 +1,117 @@
+
+
+service MultiStartTest ( in $input_n : int $input_s : string $input_b : bool ) ( out $resultS : string $resultB : bool $resultN : int ) {
+    var $n : int ;
+    var $s : string ;
+    var $b : bool ;
+    $n = $input_n ;
+    $s = $input_s ;
+    $b = $input_b ;
+    {
+        {
+            $n = $n * $n ;
+            $s = $s + $s ;
+            $b = ! $b ;
+            {
+                print "Running Service 0" ;
+                print "Variables:" ;
+                print $b ;
+                print $n ;
+                print $s ;
+            }
+        }
+        {
+            $resultS = $s ;
+            $resultB = $b ;
+            $resultN = $n ;
+        }
+    }
+    $n = 0 ;
+    $s = "" ;
+    $b = true ;
+}
+
+service MultiStartTest_0 ( in $paramS : string $paramN : int $paramB : bool ) ( out $resultS : string $resultB : bool $resultN : int ) {
+    var $n : int ;
+    var $s : string ;
+    var $b : bool ;
+    $n = 42 ;
+    $s = "Test" ;
+    $b = true ;
+    {
+        {
+            $s = $paramS ;
+            $n = $paramN ;
+            $b = $paramB ;
+        }
+        {
+            $s = "Hallo Welt" ;
+            print "Running Service 1" ;
+        }
+    }
+    invoke MultiStartTest ( $n $s $b ) ( $resultS $resultB $resultN ) ;
+    $n = 0 ;
+    $s = "" ;
+    $b = true ;
+}
+
+service MultiStartTest_1 ( in $input_n : int $input_s : string $input_b : bool ) ( out $resultS : string $resultB : bool $resultN : int ) {
+    var $n : int ;
+    var $s : string ;
+    var $b : bool ;
+    $n = $input_n ;
+    $s = $input_s ;
+    $b = $input_b ;
+    {
+    }
+    invoke MultiStartTest ( $n $s $b ) ( $resultS $resultB $resultN ) ;
+    $n = 0 ;
+    $s = "" ;
+    $b = true ;
+}
+
+service MultiStartTest_1_0 ( in $paramB : bool $paramS : string ) ( out ) {
+    var $n : int ;
+    var $s : string ;
+    var $b : bool ;
+    $n = 42 ;
+    $s = "Test" ;
+    $b = true ;
+    {
+        {
+            $b = $paramB ;
+            $s = $paramS ;
+        }
+        {
+            $n = 100 ;
+            print "Running Service 2" ;
+        }
+    }
+    invoke MultiStartTest_1 ( $n $s $b ) ( ) ;
+    $n = 0 ;
+    $s = "" ;
+    $b = true ;
+}
+
+service MultiStartTest_1_1 ( in $paramN : int $paramB : bool ) ( out ) {
+    var $n : int ;
+    var $s : string ;
+    var $b : bool ;
+    $n = 42 ;
+    $s = "Test" ;
+    $b = true ;
+    {
+        {
+            $n = $paramN ;
+            $b = $paramB ;
+        }
+        {
+            $s = "Service 3 ausgeführt" ;
+            print "Running Service 3" ;
+        }
+    }
+    invoke MultiStartTest_1 ( $n $s $b ) ( ) ;
+    $n = 0 ;
+    $s = "" ;
+    $b = true ;
+}

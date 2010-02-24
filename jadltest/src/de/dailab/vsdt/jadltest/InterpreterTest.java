@@ -25,7 +25,7 @@ import de.dailab.jiactng.jadl.ServiceDeployAgentBean.DeployState;
  */
 public class InterpreterTest {
 	
-	public static final String CONFIG= "de/dailab/vsdt/jadltest/TestConfiguration.xml";
+	public static final String CONFIG= "TestConfiguration.xml";
 	public static final String NODE= "InterpreterNode";
 	public static final String AGENT_A= "InterpreterAgentA";
 	public static final String AGENT_B= "InterpreterAgentB";
