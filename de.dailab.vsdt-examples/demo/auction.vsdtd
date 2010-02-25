@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:vsdt="http://de.dailab.vsdt">
   <vsdt:BusinessProcessSystem xmi:id="_Dy25MOlvEd6Uvb7BxkBYxw" name="Auction" id="_Dy2SIOlvEd6Uvb7BxkBYxw" version="0.1" author="Tobias Küster" expressionLanguage="VSDT Expression Language" creationDate="2009-12-15T12:43:27.298+0100" modificationDate="2009-12-15T12:43:27.298+0100">
-    <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_IxgkgelvEd6Uvb7BxkBYxw" name="Create Auction" id="_IxgkgOlvEd6Uvb7BxkBYxw" participants="_FnSrQelvEd6Uvb7BxkBYxw _G8oGgelvEd6Uvb7BxkBYxw">
+    <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_IxgkgelvEd6Uvb7BxkBYxw" name="Create Auction" documentation="The Seller sends a Proposal for a new Auction to the Auctioneer, who checks the proposal and sends back an 'accept' or a 'decline' response." id="_IxgkgOlvEd6Uvb7BxkBYxw" participants="_FnSrQelvEd6Uvb7BxkBYxw _G8oGgelvEd6Uvb7BxkBYxw">
       <pools xmi:type="vsdt:Pool" xmi:id="_SR1rQelvEd6Uvb7BxkBYxw" name="Auctioneer" id="_SR1rQOlvEd6Uvb7BxkBYxw" participant="_FnSrQelvEd6Uvb7BxkBYxw">
         <process xmi:type="vsdt:BpmnProcess" xmi:id="_SR3gculvEd6Uvb7BxkBYxw" name="Auctioneer_Process" id="_SR3gcelvEd6Uvb7BxkBYxw"/>
         <lanes xmi:type="vsdt:Lane" xmi:id="_SR3gcOlvEd6Uvb7BxkBYxw" id="_SR25YOlvEd6Uvb7BxkBYxw" boundaryVisible="false">
@@ -19,11 +19,11 @@
         <process xmi:type="vsdt:BpmnProcess" xmi:id="_STzaI-lvEd6Uvb7BxkBYxw" name="Seller_Process" id="_STzaIulvEd6Uvb7BxkBYxw"/>
         <lanes xmi:type="vsdt:Lane" xmi:id="_STzaIelvEd6Uvb7BxkBYxw" id="_STzaIOlvEd6Uvb7BxkBYxw" boundaryVisible="false">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_gVU0IelvEd6Uvb7BxkBYxw" name="create auction" id="_gVU0IOlvEd6Uvb7BxkBYxw"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_hlVDcelvEd6Uvb7BxkBYxw" name="send description" id="_hlVDcOlvEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_sHAEoOouEd6xFKyk2BwCAQ" implementation="_jCf-QOouEd6xFKyk2BwCAQ"/>
-          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_ncqDMelvEd6Uvb7BxkBYxw" name="accepted?" id="_ncqDMOlvEd6Uvb7BxkBYxw" gatewayType="XOR_EVENT"/>
-          <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_19lWAelvEd6Uvb7BxkBYxw" name="yes" id="_19lWAOlvEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_sJpI8OouEd6xFKyk2BwCAQ" implementation="_0kIpAOouEd6xFKyk2BwCAQ"/>
-          <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_3IUDwelvEd6Uvb7BxkBYxw" name="no" id="_3IUDwOlvEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_sRW6gOouEd6xFKyk2BwCAQ" implementation="_4WSsAOouEd6xFKyk2BwCAQ"/>
-          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_ABMwAelwEd6Uvb7BxkBYxw" id="_ABMwAOlwEd6Uvb7BxkBYxw"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_hlVDcelvEd6Uvb7BxkBYxw" name="send description" documentation="The Seller sends the Auction description to the Auctioneer." id="_hlVDcOlvEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_sHAEoOouEd6xFKyk2BwCAQ" implementation="_jCf-QOouEd6xFKyk2BwCAQ"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_ncqDMelvEd6Uvb7BxkBYxw" name="accepted?" documentation="wait which response will come first..." id="_ncqDMOlvEd6Uvb7BxkBYxw" gatewayType="XOR_EVENT"/>
+          <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_19lWAelvEd6Uvb7BxkBYxw" name="yes" documentation="Acceptance Notification received!" id="_19lWAOlvEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_sJpI8OouEd6xFKyk2BwCAQ" implementation="_0kIpAOouEd6xFKyk2BwCAQ"/>
+          <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_3IUDwelvEd6Uvb7BxkBYxw" name="no" documentation="Auction was not acceted" id="_3IUDwOlvEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_sRW6gOouEd6xFKyk2BwCAQ" implementation="_4WSsAOouEd6xFKyk2BwCAQ"/>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_ABMwAelwEd6Uvb7BxkBYxw" documentation="End the service" id="_ABMwAOlwEd6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_VyWIIelwEd6Uvb7BxkBYxw" id="_VyWIIOlwEd6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_f--UMelwEd6Uvb7BxkBYxw" name="do other preparations" id="_f--UMOlwEd6Uvb7BxkBYxw"/>
         </lanes>
@@ -33,7 +33,7 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_r8g5selvEd6Uvb7BxkBYxw" id="_r8g5sOlvEd6Uvb7BxkBYxw" source="_pWqRwelvEd6Uvb7BxkBYxw" target="_r8UFYelvEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_s1V_IelvEd6Uvb7BxkBYxw" id="_s1V_IOlvEd6Uvb7BxkBYxw" source="_r8UFYelvEd6Uvb7BxkBYxw" target="_s1H8selvEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_vRAJQelvEd6Uvb7BxkBYxw" name="yes" id="_vRAJQOlvEd6Uvb7BxkBYxw" conditionType="EXPRESSION" source="_s1H8selvEd6Uvb7BxkBYxw" target="_vQzU8elvEd6Uvb7BxkBYxw">
-        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_qPtjIOo_Ed6FP7KXlO1S-A" expression="&quot;accept description&quot;"/>
+        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_JsWBMCH7Ed-JbZfg5MwSoA" expression="true"/>
       </connections>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_wX8jMelvEd6Uvb7BxkBYxw" name="no" id="_wX8jMOlvEd6Uvb7BxkBYxw" conditionType="DEFAULT" source="_s1H8selvEd6Uvb7BxkBYxw" target="_wXwV8elvEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_w0_rkelvEd6Uvb7BxkBYxw" id="_w0_rkOlvEd6Uvb7BxkBYxw" source="_wXwV8elvEd6Uvb7BxkBYxw" target="_w0MaUelvEd6Uvb7BxkBYxw"/>
@@ -48,7 +48,7 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_f_MWoelwEd6Uvb7BxkBYxw" id="_f_MWoOlwEd6Uvb7BxkBYxw" source="_f--UMelwEd6Uvb7BxkBYxw" target="_VyWIIelwEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_f_SdQelwEd6Uvb7BxkBYxw" id="_Vyi8cOlwEd6Uvb7BxkBYxw" source="_19lWAelvEd6Uvb7BxkBYxw" target="_f--UMelwEd6Uvb7BxkBYxw"/>
     </businessProcesses>
-    <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_JbA0gelvEd6Uvb7BxkBYxw" name="Place Bid" id="_JbA0gOlvEd6Uvb7BxkBYxw" participants="_IIqb0elvEd6Uvb7BxkBYxw _FnSrQelvEd6Uvb7BxkBYxw">
+    <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_JbA0gelvEd6Uvb7BxkBYxw" name="Place Bid" documentation="The Bidder places a bid an a certain auction. The Auctioneer checks whether the Bid is valid and high enough and notifies the Bidder accordingly." id="_JbA0gOlvEd6Uvb7BxkBYxw" participants="_IIqb0elvEd6Uvb7BxkBYxw _FnSrQelvEd6Uvb7BxkBYxw">
       <pools xmi:type="vsdt:Pool" xmi:id="_XsNpQelvEd6Uvb7BxkBYxw" name="Bidder" id="_XsNpQOlvEd6Uvb7BxkBYxw" participant="_IIqb0elvEd6Uvb7BxkBYxw">
         <process xmi:type="vsdt:BpmnProcess" xmi:id="_XsOQUulvEd6Uvb7BxkBYxw" name="Bidder_Process" id="_XsOQUelvEd6Uvb7BxkBYxw"/>
         <lanes xmi:type="vsdt:Lane" xmi:id="_XsOQUOlvEd6Uvb7BxkBYxw" id="_XsNpQulvEd6Uvb7BxkBYxw" boundaryVisible="false">
@@ -87,7 +87,7 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_XZRpwQEWEd-J148KloFDDQ" id="_U3m-QAEWEd-J148KloFDDQ" source="_U3Y70QEWEd-J148KloFDDQ" target="_XYhb0QEWEd-J148KloFDDQ"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_a7JOAQEWEd-J148KloFDDQ" id="_a7JOAAEWEd-J148KloFDDQ" source="_U3Y70QEWEd-J148KloFDDQ" target="_a67yoQEWEd-J148KloFDDQ"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_keksEQEWEd-J148KloFDDQ" name="yes" id="_Re1roAEWEd-J148KloFDDQ" conditionType="EXPRESSION" source="_ReXKgQEWEd-J148KloFDDQ" target="_keJOQQEWEd-J148KloFDDQ">
-        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_bsBb4AEXEd-J148KloFDDQ" expression="'not valid'"/>
+        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_MrlZgCH7Ed-JbZfg5MwSoA" expression="true"/>
       </connections>
       <connections xmi:type="vsdt:MessageFlow" xmi:id="_mJ6MgQEWEd-J148KloFDDQ" id="_mJ6MgAEWEd-J148KloFDDQ" source="_keJOQQEWEd-J148KloFDDQ" target="_XYhb0QEWEd-J148KloFDDQ"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_nEIZEQEWEd-J148KloFDDQ" id="_nEIZEAEWEd-J148KloFDDQ" source="_nD5IgQEWEd-J148KloFDDQ" target="_toFwAepGEd6FP7KXlO1S-A"/>
@@ -179,7 +179,7 @@
       <connections xmi:type="vsdt:MessageFlow" xmi:id="_FlW0wOlzEd6Uvb7BxkBYxw" id="_FlWNsOlzEd6Uvb7BxkBYxw" source="_JDCHcelxEd6Uvb7BxkBYxw" target="_38Qh0elyEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_cnhI0elzEd6Uvb7BxkBYxw" id="_cnhI0OlzEd6Uvb7BxkBYxw" source="_cnVioelzEd6Uvb7BxkBYxw" target="_sqGjAelwEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_cnrg4elzEd6Uvb7BxkBYxw" name="yes" id="_sqQ7EOlwEd6Uvb7BxkBYxw" conditionType="EXPRESSION" source="_qmBLYelwEd6Uvb7BxkBYxw" target="_cnVioelzEd6Uvb7BxkBYxw">
-        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_RBNFkOo6Ed6FP7KXlO1S-A" expression="&quot;$auction.bids.size > 0&quot;"/>
+        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_OAYCMCH7Ed-JbZfg5MwSoA" expression="true"/>
       </connections>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_dmrfwelzEd6Uvb7BxkBYxw" id="_OH_2IOlxEd6Uvb7BxkBYxw" source="_sqGjAelwEd6Uvb7BxkBYxw" target="_dmiV0elzEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_ntkQMelzEd6Uvb7BxkBYxw" id="_ntkQMOlzEd6Uvb7BxkBYxw" source="_JDCHcelxEd6Uvb7BxkBYxw" target="_dmiV0elzEd6Uvb7BxkBYxw"/>
@@ -227,9 +227,9 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_y4YFUel_Ed6Uvb7BxkBYxw" id="_y4YFUOl_Ed6Uvb7BxkBYxw" source="_y4LRAel_Ed6Uvb7BxkBYxw" target="_kuyqkel2Ed6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_y4goMel_Ed6Uvb7BxkBYxw" id="_28WxwOl3Ed6Uvb7BxkBYxw" source="_hOLOEOl3Ed6Uvb7BxkBYxw" target="_y4LRAel_Ed6Uvb7BxkBYxw"/>
     </businessProcesses>
-    <participants xmi:type="vsdt:Participant" xmi:id="_FnSrQelvEd6Uvb7BxkBYxw" name="Auctioneer" id="_FnSrQOlvEd6Uvb7BxkBYxw" associatedProcesses="_KCE0gelvEd6Uvb7BxkBYxw _IxgkgelvEd6Uvb7BxkBYxw _JbA0gelvEd6Uvb7BxkBYxw" associatedPools="_SR1rQelvEd6Uvb7BxkBYxw _XsWMIelvEd6Uvb7BxkBYxw _asUkQelvEd6Uvb7BxkBYxw"/>
-    <participants xmi:type="vsdt:Participant" xmi:id="_G8oGgelvEd6Uvb7BxkBYxw" name="Seller" id="_G8oGgOlvEd6Uvb7BxkBYxw" associatedProcesses="_IxgkgelvEd6Uvb7BxkBYxw _KCE0gelvEd6Uvb7BxkBYxw" associatedPools="_STyzEelvEd6Uvb7BxkBYxw _asmREelvEd6Uvb7BxkBYxw"/>
-    <participants xmi:type="vsdt:Participant" xmi:id="_IIqb0elvEd6Uvb7BxkBYxw" name="Bidder" id="_IIqb0OlvEd6Uvb7BxkBYxw" associatedProcesses="_KCE0gelvEd6Uvb7BxkBYxw _JbA0gelvEd6Uvb7BxkBYxw" associatedPools="_XsNpQelvEd6Uvb7BxkBYxw _aseVQelvEd6Uvb7BxkBYxw"/>
+    <participants xmi:type="vsdt:Participant" xmi:id="_FnSrQelvEd6Uvb7BxkBYxw" name="Auctioneer" documentation="This is the Auctioneer, acting as a trustee between Seller and Bidder." id="_FnSrQOlvEd6Uvb7BxkBYxw" associatedProcesses="_KCE0gelvEd6Uvb7BxkBYxw _IxgkgelvEd6Uvb7BxkBYxw _JbA0gelvEd6Uvb7BxkBYxw" associatedPools="_SR1rQelvEd6Uvb7BxkBYxw _XsWMIelvEd6Uvb7BxkBYxw _asUkQelvEd6Uvb7BxkBYxw"/>
+    <participants xmi:type="vsdt:Participant" xmi:id="_G8oGgelvEd6Uvb7BxkBYxw" name="Seller" documentation="This is the Seller, intending to sell something at the auction." id="_G8oGgOlvEd6Uvb7BxkBYxw" associatedProcesses="_IxgkgelvEd6Uvb7BxkBYxw _KCE0gelvEd6Uvb7BxkBYxw" associatedPools="_STyzEelvEd6Uvb7BxkBYxw _asmREelvEd6Uvb7BxkBYxw"/>
+    <participants xmi:type="vsdt:Participant" xmi:id="_IIqb0elvEd6Uvb7BxkBYxw" name="Bidder" documentation="This is the Bidder, intending to buy something at the auction." id="_IIqb0OlvEd6Uvb7BxkBYxw" associatedProcesses="_KCE0gelvEd6Uvb7BxkBYxw _JbA0gelvEd6Uvb7BxkBYxw" associatedPools="_XsNpQelvEd6Uvb7BxkBYxw _aseVQelvEd6Uvb7BxkBYxw"/>
     <messages xmi:type="vsdt:Message" xmi:id="_sJpI8OouEd6xFKyk2BwCAQ" name="accept">
       <properties xmi:type="vsdt:Property" xmi:id="_lsIAAOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
     </messages>
