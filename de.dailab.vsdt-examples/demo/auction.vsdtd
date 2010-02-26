@@ -116,7 +116,7 @@
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_cnVioelzEd6Uvb7BxkBYxw" id="_cnVioOlzEd6Uvb7BxkBYxw" gatewayType="AND"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_dmiV0elzEd6Uvb7BxkBYxw" id="_dmiV0OlzEd6Uvb7BxkBYxw" gatewayType="AND"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_H4tiAel0Ed6Uvb7BxkBYxw" name="wait for payment" id="_H4tiAOl0Ed6Uvb7BxkBYxw" gatewayType="XOR_EVENT"/>
-          <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_J9nZAel0Ed6Uvb7BxkBYxw" name="payed" id="_J9nZAOl0Ed6Uvb7BxkBYxw" trigger="MESSAGE" message="_u3bvcOovEd6xFKyk2BwCAQ" implementation="_1XXnUOovEd6xFKyk2BwCAQ"/>
+          <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_J9nZAel0Ed6Uvb7BxkBYxw" name="paid" id="_J9nZAOl0Ed6Uvb7BxkBYxw" trigger="MESSAGE" message="_u3bvcOovEd6xFKyk2BwCAQ" implementation="_1XXnUOovEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_Pr05Ael0Ed6Uvb7BxkBYxw" name="inform seller" id="_Pr05AOl0Ed6Uvb7BxkBYxw" activityType="SEND" inMessage="_u3bvcOovEd6xFKyk2BwCAQ" implementation="_5U_6gOovEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_asGIgel0Ed6Uvb7BxkBYxw" name="timeout" id="_asGIgOl0Ed6Uvb7BxkBYxw" trigger="TIMER">
             <timeCycle xmi:type="vsdt:Expression" xmi:id="_Gj5m8Oo_Ed6FP7KXlO1S-A" expression="1"/>
@@ -157,7 +157,7 @@
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_4qSsgelyEd6Uvb7BxkBYxw" name="not sold" id="_4qSsgOlyEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_u0ZCgOovEd6xFKyk2BwCAQ" implementation="_r-lTAOovEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_8iH5selyEd6Uvb7BxkBYxw" name="dismiss auction" id="_8iH5sOlyEd6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="__3oc8elyEd6Uvb7BxkBYxw" name="failure" id="__3oc8OlyEd6Uvb7BxkBYxw"/>
-          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_hDfIYel0Ed6Uvb7BxkBYxw" name="goods payed?" id="_hDfIYOl0Ed6Uvb7BxkBYxw" gatewayType="XOR_EVENT"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_hDfIYel0Ed6Uvb7BxkBYxw" name="goods paid?" id="_hDfIYOl0Ed6Uvb7BxkBYxw" gatewayType="XOR_EVENT"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_mK2Dwel0Ed6Uvb7BxkBYxw" name="yes" id="_mK2DwOl0Ed6Uvb7BxkBYxw" trigger="MESSAGE" message="_u3bvcOovEd6xFKyk2BwCAQ" implementation="_5U_6gOovEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_mmqdEel0Ed6Uvb7BxkBYxw" name="no" id="_mmqdEOl0Ed6Uvb7BxkBYxw" trigger="MESSAGE" message="_Fyv0oOowEd6xFKyk2BwCAQ" implementation="_IsgQAOowEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_qoeFoel0Ed6Uvb7BxkBYxw" id="_qoeFoOl0Ed6Uvb7BxkBYxw"/>
@@ -248,10 +248,10 @@
     <messages xmi:type="vsdt:Message" xmi:id="_u2GSsOovEd6xFKyk2BwCAQ" name="notifyShipped">
       <properties xmi:type="vsdt:Property" xmi:id="_uRmBAOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
     </messages>
-    <messages xmi:type="vsdt:Message" xmi:id="_u3bvcOovEd6xFKyk2BwCAQ" name="notifyPayed">
+    <messages xmi:type="vsdt:Message" xmi:id="_u3bvcOovEd6xFKyk2BwCAQ" name="notifyPaid">
       <properties xmi:type="vsdt:Property" xmi:id="_u-x3IOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
     </messages>
-    <messages xmi:type="vsdt:Message" xmi:id="_Fyv0oOowEd6xFKyk2BwCAQ" name="notifyNotPayed">
+    <messages xmi:type="vsdt:Message" xmi:id="_Fyv0oOowEd6xFKyk2BwCAQ" name="notifyNotPaid">
       <properties xmi:type="vsdt:Property" xmi:id="_vlvwgOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
     </messages>
     <messages xmi:type="vsdt:Message" xmi:id="_G1LiAOowEd6xFKyk2BwCAQ" name="notifyNotShipped">
@@ -263,9 +263,9 @@
     <implementations xmi:type="vsdt:Implementation" xmi:id="_4WSsAOouEd6xFKyk2BwCAQ" participant="_G8oGgelvEd6Uvb7BxkBYxw" interface="CreateAuction" operation="sendDecline" inputMessage="_sRW6gOouEd6xFKyk2BwCAQ"/>
     <implementations xmi:type="vsdt:Implementation" xmi:id="_p_yEAOovEd6xFKyk2BwCAQ" participant="_G8oGgelvEd6Uvb7BxkBYxw" interface="CloseAuction" operation="notifySold" inputMessage="_uyK08OovEd6xFKyk2BwCAQ"/>
     <implementations xmi:type="vsdt:Implementation" xmi:id="_r-lTAOovEd6xFKyk2BwCAQ" participant="_G8oGgelvEd6Uvb7BxkBYxw" interface="CloseAuction" operation="notifyNotSold" inputMessage="_u0ZCgOovEd6xFKyk2BwCAQ"/>
-    <implementations xmi:type="vsdt:Implementation" xmi:id="_1XXnUOovEd6xFKyk2BwCAQ" participant="_FnSrQelvEd6Uvb7BxkBYxw" interface="CloseAuction" operation="notifyPayed" inputMessage="_u3bvcOovEd6xFKyk2BwCAQ"/>
-    <implementations xmi:type="vsdt:Implementation" xmi:id="_5U_6gOovEd6xFKyk2BwCAQ" participant="_G8oGgelvEd6Uvb7BxkBYxw" interface="CloseAuction" operation="notifyPayed" inputMessage="_u3bvcOovEd6xFKyk2BwCAQ"/>
-    <implementations xmi:type="vsdt:Implementation" xmi:id="_IsgQAOowEd6xFKyk2BwCAQ" participant="_G8oGgelvEd6Uvb7BxkBYxw" interface="CloseAuction" operation="notifyNotPayed" inputMessage="_Fyv0oOowEd6xFKyk2BwCAQ"/>
+    <implementations xmi:type="vsdt:Implementation" xmi:id="_1XXnUOovEd6xFKyk2BwCAQ" participant="_FnSrQelvEd6Uvb7BxkBYxw" interface="CloseAuction" operation="notifyPaid" inputMessage="_u3bvcOovEd6xFKyk2BwCAQ"/>
+    <implementations xmi:type="vsdt:Implementation" xmi:id="_5U_6gOovEd6xFKyk2BwCAQ" participant="_G8oGgelvEd6Uvb7BxkBYxw" interface="CloseAuction" operation="notifyPaid" inputMessage="_u3bvcOovEd6xFKyk2BwCAQ"/>
+    <implementations xmi:type="vsdt:Implementation" xmi:id="_IsgQAOowEd6xFKyk2BwCAQ" participant="_G8oGgelvEd6Uvb7BxkBYxw" interface="CloseAuction" operation="notifyNotPaid" inputMessage="_Fyv0oOowEd6xFKyk2BwCAQ"/>
     <implementations xmi:type="vsdt:Implementation" xmi:id="_8bDsgOovEd6xFKyk2BwCAQ" participant="_IIqb0elvEd6Uvb7BxkBYxw" interface="CloseAuction" operation="notifyAward" inputMessage="_uyK08OovEd6xFKyk2BwCAQ"/>
     <implementations xmi:type="vsdt:Implementation" xmi:id="_AcPqAOowEd6xFKyk2BwCAQ" participant="_FnSrQelvEd6Uvb7BxkBYxw" interface="CloseAuction" operation="notifyShipped" inputMessage="_u2GSsOovEd6xFKyk2BwCAQ"/>
     <implementations xmi:type="vsdt:Implementation" xmi:id="_Nv8UsOowEd6xFKyk2BwCAQ" participant="_IIqb0elvEd6Uvb7BxkBYxw" interface="CloseAuction" operation="notifyShipped" inputMessage="_u2GSsOovEd6xFKyk2BwCAQ"/>

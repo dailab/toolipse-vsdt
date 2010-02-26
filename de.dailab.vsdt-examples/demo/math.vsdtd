@@ -156,7 +156,7 @@
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_2rMWYSH4Ed-JbZfg5MwSoA" name="greater than one?" id="_2rMWYCH4Ed-JbZfg5MwSoA" markerVisible="true"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="__5FCQSH4Ed-JbZfg5MwSoA" id="__5FCQCH4Ed-JbZfg5MwSoA" trigger="MESSAGE" message="_J1ZhcCH5Ed-JbZfg5MwSoA" implementation="_R6XdcCH5Ed-JbZfg5MwSoA">
             <assignments xmi:type="vsdt:Assignment" xmi:id="_af1ecCH5Ed-JbZfg5MwSoA" to="_NubBcCH5Ed-JbZfg5MwSoA">
-              <from xmi:type="vsdt:Expression" xmi:id="_af1ecSH5Ed-JbZfg5MwSoA" expression="-1"/>
+              <from xmi:type="vsdt:Expression" xmi:id="_-5IHoCLpEd-aMP7zthsB5A" expression="0-1"/>
             </assignments>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_CoGNQSH5Ed-JbZfg5MwSoA" id="_CoGNQCH5Ed-JbZfg5MwSoA" trigger="MESSAGE" message="_J1ZhcCH5Ed-JbZfg5MwSoA" implementation="_R6XdcCH5Ed-JbZfg5MwSoA">
