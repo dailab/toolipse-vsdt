@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VSDT - Interpreter
 Bundle-SymbolicName: de.dailab.vsdt.diagram.interpreter;singleton:=true
-Bundle-Version: 1.3.1.20100208
+Bundle-Version: 1.3.1.20100301
 Bundle-Vendor: DAI-Labor, TU Berlin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5, JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,

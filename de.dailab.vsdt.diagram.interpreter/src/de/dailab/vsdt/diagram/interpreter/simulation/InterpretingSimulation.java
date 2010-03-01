@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.jface.dialogs.Dialog;
@@ -16,6 +17,7 @@ import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.BpmnProcess;
+import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.ConditionType;
 import de.dailab.vsdt.Event;
 import de.dailab.vsdt.Expression;
@@ -28,6 +30,7 @@ import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.diagram.dialogs.EditExpressionDialog;
+import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
 import de.dailab.vsdt.diagram.interpreter.dialogs.MessageParameterDialog;
 import de.dailab.vsdt.util.VsdtHelper;
 import de.dailab.vsdt.vxl.Term;
@@ -63,6 +66,25 @@ public class InterpretingSimulation extends ManualSimulation implements ISimulat
 	protected Map<Activity, Integer> loopCounterMap= new HashMap<Activity, Integer>();
 	
 	/**
+	 * - Before starting the Interpreting Simulation, assert that all expressions
+	 *   can be parsed. Nothing more annoying than running the interpreter and 
+	 *   then finding an error in the next to last assignment. 
+	 */
+	@Override
+	public List<FlowObject> start(BusinessProcessDiagramEditPart diagramEditPart) {
+		BusinessProcessDiagram bpd= diagramEditPart.getCastedModel();
+		for (TreeIterator<EObject> iter= bpd.eAllContents(); iter.hasNext(); ) {
+			EObject next= iter.next();
+			if (next instanceof Expression) {
+				// test-parse the expression, result goes to /dev/null
+				Expression expression = (Expression) next;
+				parseExpression(getExpression(expression));
+			}
+		}
+		return super.start(diagramEditPart);
+	}
+	
+	/**
 	 * Returns the currently stored Value for the given Property
 	 * 
 	 * @param property		Some Property
@@ -92,7 +114,8 @@ public class InterpretingSimulation extends ManualSimulation implements ISimulat
 		dialog.setProperties(properties);
 		if (dialog.open() == EditExpressionDialog.OK) {
 			String newExpression= dialog.getExpression();
-			Object newValue= parseAndEvaluate(newExpression, createContext(property.eContainer()));
+			Map<String, Object> context= createContext(property.eContainer());
+			Object newValue= evaluateTerm(parseExpression(newExpression), context);
 			propertyValueMap.put(property, newValue);
 		}
 	}
@@ -315,55 +338,48 @@ public class InterpretingSimulation extends ManualSimulation implements ISimulat
 	 * is returned; otherwise return null.
 	 * 
 	 * @see #createContext(FlowObject)
-	 * @param expression	Some VXL Expression (as Expression)
+	 * @param expression	Some VXL Expression (as VSDT Expression object)
 	 * @param context		Map of Property names and values
 	 * @return				Result of the evaluation, or null in case of error
 	 */
 	public static Object parseAndEvaluate(Expression expression, Map<String, Object> context) {
+		return evaluateTerm(parseExpression(getExpression(expression)), context);
+	}
+	
+	/**
+	 * If the Expression is a non-null VSDT Expression with Expression Language
+	 * set to VXL, return the Expression string, otherwise return null.
+	 * 
+	 * @param expression	Some VXL Expression (as VSDT Expression object)
+	 * @return				Expression string if non-null VXL Expression, or null
+	 */
+	public static String getExpression(Expression expression) {
 		if (expression == null) return null;
 		// check expression language
 		String lang= expression.getExpressionLanguageToBeUsed();
-		if (! Util.languageIsVxl(lang)) {
+		if (Util.languageIsVxl(lang)) {
+			return expression.getExpression();
+		} else {
 			Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 			String message= "Expressions must be given using the VSDT Expression Language (VXL).";
 			MessageDialog.openWarning(shell, "Unsupported Expression Language", message);
 			return null;
 		}
-		// parse expression
-		return parseAndEvaluate(expression.getExpression(), context);
 	}
 	
 	/**
-	 * Parse and Evaluate the Expression using the VXL parser and interpreter.
-	 * If there are any errors, they are shown in some dialogs, and the result 
-	 * is returned; otherwise return null.
+	 * Parse the Expression using the VXL parser and return the resulting Term. 
+	 * If there are any errors, this is shown in some dialogs, and null is returned.
 	 * 
-	 * @see #createContext(FlowObject)
-	 * @param expression	Some VXL Expression (as String)
-	 * @param context		Map of Property names and values
-	 * @return				Result of the evaluation, or null in case of error
+	 * @param expression	Some VXL Expression (as string)
+	 * @return				Result of the parsing, or null in case of error
 	 */
-	public static Object parseAndEvaluate(String expression, Map<String, Object> context) {
+	public static Term parseExpression(String expression) {
+		if (expression == null) return null;
 		VxlParser parser= VxlParser.getInstance();
 		try {
 			Term term= parser.parse(expression);
-
-			// evaluate term
-			VxlInterpreter interpreter= new VxlInterpreter();
-			Object result= interpreter.evaluateTerm(term, context);
-			Map<Object, String> errors= interpreter.getErrors();
-			if (! errors.isEmpty()) {
-				String title= "Evaluation failed";
-				StringBuffer message= new StringBuffer();
-				message.append("The expression ").append(expression).append(" could not be evaluated.");
-				message.append("\r\nErrors:");
-				for (String error : errors.values()) {
-					message.append("\r\n- ").append(error);
-				}
-				Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				MessageDialog.openError(shell, title, message.toString());
-			}
-			return result;
+			return term;
 		} catch (VxlParseException e) {
 			String title= "Parsing failed";
 			StringBuffer message= new StringBuffer();
@@ -378,6 +394,35 @@ public class InterpretingSimulation extends ManualSimulation implements ISimulat
 			MessageDialog.openError(shell, title, message.toString());
 			return null;
 		}
+	}
+	
+	/**
+	 * Parse and Evaluate the Expression using the VXL parser and interpreter.
+	 * If there are any errors, they are shown in some dialogs, and the result 
+	 * is returned; otherwise return null.
+	 * 
+	 * @see #createContext(FlowObject)
+	 * @param expression	Some VXL Term
+	 * @param context		Map of Property names and values
+	 * @return				Result of the evaluation, or null in case of error
+	 */
+	public static Object evaluateTerm(Term term, Map<String, Object> context) {
+		if (term == null) return null;
+		VxlInterpreter interpreter= new VxlInterpreter();
+		Object result= interpreter.evaluateTerm(term, context);
+		Map<Object, String> errors= interpreter.getErrors();
+		if (! errors.isEmpty()) {
+			String title= "Evaluation failed";
+			StringBuffer message= new StringBuffer();
+			message.append("Expression could not be evaluated.");
+			message.append("\r\nErrors:");
+			for (String error : errors.values()) {
+				message.append("\r\n- ").append(error);
+			}
+			Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+			MessageDialog.openError(shell, title, message.toString());
+		}
+		return result;
 	}
 	
 }
