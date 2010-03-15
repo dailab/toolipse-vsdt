@@ -20,7 +20,7 @@ import de.dailab.jiactng.jadl.Agent;
 import de.dailab.jiactng.jadl.Assign;
 import de.dailab.jiactng.jadl.Case;
 import de.dailab.jiactng.jadl.Expression;
-import de.dailab.jiactng.jadl.HeaderVariableDeclaration;
+import de.dailab.jiactng.jadl.HeaderDeclaration;
 import de.dailab.jiactng.jadl.IfThenElse;
 import de.dailab.jiactng.jadl.Invoke;
 import de.dailab.jiactng.jadl.Listen;
@@ -93,7 +93,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	private Agent _currentAgent;
 	
 	/** map holding relation of services to listeners ( @see {@link Listen} ) */
-	private Map<Service, Set<String>> messageListeners;
+	private Map<Service, Set<Expression>> messageListeners;
 	
 	/** map holding a relation of services to services calling this service (e.g. in case of multiple start events) */
 	private Map<Service, List<Service>> callingServices;
@@ -107,7 +107,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	public void initialize() {
 		_currentService= null;
 		_currentAgent= null;
-		messageListeners= new HashMap<Service, Set<String>>();
+		messageListeners= new HashMap<Service, Set<Expression>>();
 		callingServices= new HashMap<Service, List<Service>>();
 		expressionVisitor= new JiacVExpressionVisitor(true, true);
 	}
@@ -345,13 +345,13 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			if (message != null) {
 				if (event instanceof Start || event instanceof End) {
 					// start/end: map message properties to service signature
-					List<HeaderVariableDeclaration> parameters= event instanceof Start
+					List<HeaderDeclaration> parameters= event instanceof Start
 							? _currentService.getInputs()
 							: _currentService.getOutputs();
-					for (HeaderVariableDeclaration declaration : jef.createHeaderVariableDeclarations(message.getProperties())) {
+					for (HeaderDeclaration declaration : jef.createHeaderDeclarations(message.getProperties())) {
 						boolean alreadyDeclared= false;
-						for (HeaderVariableDeclaration param : parameters) {
-							alreadyDeclared |= declaration.getVariableName().equals(param.getVariableName());
+						for (HeaderDeclaration param : parameters) {
+							alreadyDeclared |= declaration.getName().equals(param.getName());
 						}
 						if (! alreadyDeclared) {
 							parameters.add(declaration);
@@ -785,7 +785,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		_currentService= service;
 		_currentAgent.getServices().add(service);
 		wrapper.map(source, service);
-		messageListeners.put(service, new HashSet<String>());
+		messageListeners.put(service, new HashSet<Expression>());
 		
 		service.setName(name);
 		if (useMAMSspecials) {
@@ -820,8 +820,8 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 				for (Property property : properties) {
 					invoke.getParameters().add(jef.createVariable(property.getName()));
 				}
-				for (HeaderVariableDeclaration varDecl : service.getOutputs()) {
-					invoke.getReturnVariables().add(varDecl.getVariableName());
+				for (HeaderDeclaration varDecl : service.getOutputs()) {
+					invoke.getReturnVariables().add(varDecl.getName());
 				}
 				// insert the invoke just before the end assignments
 				int offset= 0;
@@ -837,7 +837,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			body.getScripts().addAll(visitAssignments(assignments, AssignTimeType.START));
 		}
 		// 3.: add listeners
-		for (String address : messageListeners.get(service)) {
+		for (Expression address : messageListeners.get(service)) {
 			Listen listen= jadlFac.createListen();
 			listen.setAddress(address);
 			body.getScripts().add(listen);

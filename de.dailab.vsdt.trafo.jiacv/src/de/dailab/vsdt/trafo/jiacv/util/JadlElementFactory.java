@@ -12,9 +12,8 @@ import de.dailab.jiactng.jadl.ComplexType;
 import de.dailab.jiactng.jadl.DataType;
 import de.dailab.jiactng.jadl.Expression;
 import de.dailab.jiactng.jadl.FloatConst;
-import de.dailab.jiactng.jadl.HeaderVariableDeclaration;
+import de.dailab.jiactng.jadl.HeaderDeclaration;
 import de.dailab.jiactng.jadl.IntegerConst;
-import de.dailab.jiactng.jadl.OntologyName;
 import de.dailab.jiactng.jadl.Print;
 import de.dailab.jiactng.jadl.Receive;
 import de.dailab.jiactng.jadl.Script;
@@ -73,24 +72,7 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 	 */
 	public VariableDeclaration createVariableDeclaration(String varName, String typeString) {
 		VariableDeclaration declaration= jadlFac.createVariableDeclaration();
-		declaration.setVariable(createVariableName(varName));
-		String actualType= typeString;
-
-		// test whether this is an array declaration
-		final String regex= "\\w+\\[\\d*\\]";
-		Matcher matcher= Pattern.compile(regex).matcher(typeString);
-		if (matcher.matches()) {
-			// array declaration
-			declaration.setArray(true);
-			int i= typeString.indexOf("[");
-			int j= typeString.indexOf("]");
-			String num= typeString.substring(i+1,j);
-			if (! num.isEmpty()) {
-				declaration.setArraySize(createExpression(num));
-			}
-			actualType= typeString.substring(0,i);
-		}
-		declaration.setVariableType(createType(actualType));
+		declaration.setDeclaration(createHeaderVariableDeclaration(varName, typeString));
 		return declaration;
 	}
 	
@@ -100,11 +82,11 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 	 * @param properties	List of Properties, e.g. from a Message
 	 * @return				List of HeaderVariableDeclarations 
 	 */
-	public List<HeaderVariableDeclaration> createHeaderVariableDeclarations(List<Property> properties) {
-		List<HeaderVariableDeclaration> declarations= new ArrayList<HeaderVariableDeclaration>();
+	public List<HeaderDeclaration> createHeaderDeclarations(List<Property> properties) {
+		List<HeaderDeclaration> declarations= new ArrayList<HeaderDeclaration>();
 		if (properties != null) {
 			for (Property property : properties) {
-				HeaderVariableDeclaration declaration= createHeaderVariableDeclaration(property.getName(), property.getType());
+				HeaderDeclaration declaration= createHeaderVariableDeclaration(property.getName(), property.getType());
 				if (declaration != null) {
 					declarations.add(declaration);
 				}
@@ -120,11 +102,10 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 	 * @param typeString	the type of the variable to be created
 	 * @return				new header variable declaration object
 	 */
-	public HeaderVariableDeclaration createHeaderVariableDeclaration(String varName, String typeString) {
-		HeaderVariableDeclaration declaration= jadlFac.createHeaderVariableDeclaration();
-		declaration.setVariableName(createVariable(varName).getName());
+	public HeaderDeclaration createHeaderVariableDeclaration(String varName, String typeString) {
+		HeaderDeclaration declaration= jadlFac.createHeaderDeclaration();
+		declaration.setName(createVariableName(varName));
 		String actualType= typeString;
-
 		// test whether this is an array declaration
 		final String regex= "\\w+\\[\\d*\\]";
 		Matcher matcher= Pattern.compile(regex).matcher(typeString);
@@ -134,7 +115,7 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 			int i= typeString.indexOf("[");
 			actualType= typeString.substring(0,i);
 		}
-		declaration.setVariableType(createType(actualType));
+		declaration.setType(createType(actualType));
 		return declaration;
 	}
 	
@@ -150,23 +131,11 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 		if (TYPE_BOOL.equals(typeString)) {
 			simpleType= DataType.BOOL_TYPE;
 		}
-		if (TYPE_BYTE.equals(typeString)) {
-			simpleType= DataType.BYTE_TYPE;
-		}
 		if (TYPE_DOUBLE.equals(typeString)) {
 			simpleType= DataType.DOUBLE_TYPE;
 		}
-		if (TYPE_FLOAT.equals(typeString)) {
-			simpleType= DataType.FLOAT_TYPE;
-		}
 		if (TYPE_INT.equals(typeString)) {
 			simpleType= DataType.INT_TYPE;
-		}
-		if (TYPE_LONG.equals(typeString)) {
-			simpleType= DataType.LONG_TYPE;
-		}
-		if (TYPE_SHORT.equals(typeString)) {
-			simpleType= DataType.SHORT_TYPE;
 		}
 		if (TYPE_STRING.equals(typeString)) {
 			simpleType= DataType.STRING_TYPE;
@@ -177,10 +146,10 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 		if (simpleType != null) {
 			type.setSimpleType(simpleType);
 		} else {
-			OntologyName ontoName= jadlFac.createOntologyName();
-			ontoName.setName(typeString);
+//			OntologyName ontoName= jadlFac.createOntologyName();
+//			ontoName.setName(typeString);
 			ComplexType complexType= jadlFac.createComplexType();
-			complexType.setOntology(ontoName);
+			complexType.setClazz(typeString);
 			type.setComplexType(complexType);
 		}
 		return type;
@@ -225,8 +194,8 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 	 */
 	public Send createSend(String address, Property message) {
 		Send send= jadlFac.createSend();
-		send.setAddress(address);
-		send.setMessage(createVariable(message.getName()));
+		send.setAddress(createExpression(address));
+		send.setMessage(createVariableName(message.getName()));
 		return send;
 	}
 	
@@ -242,7 +211,7 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 	public Receive createReceive(int timeout, String address, String type, String variable) {
 		Receive receive= jadlFac.createReceive();
 		receive.setTimeout(createExpression(timeout));
-		receive.setAddress(address);
+		receive.setAddress(createExpression(address));
 //		receive.setType(createType(type));
 		receive.setVariable(createVariableName(variable));
 		return receive;
