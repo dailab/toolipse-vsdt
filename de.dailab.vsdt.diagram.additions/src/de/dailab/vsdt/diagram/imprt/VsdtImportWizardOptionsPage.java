@@ -83,11 +83,9 @@ public class VsdtImportWizardOptionsPage extends WizardExportResourcesPage {
 		Composite composite= new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout());
 
-		Button b= createCheckbox(composite, LABEL_BACKUP, DEFAULT_BACKUP, listener);
-		b= createCheckbox(composite, LABEL_LAYOUT, DEFAULT_LAYOUT, listener);
-		b.setEnabled(false);
-		b= createCheckbox(composite, LABEL_MERGE, DEFAULT_MERGE, listener);
-		b.setEnabled(false);
+		createCheckbox(composite, LABEL_BACKUP, DEFAULT_BACKUP, listener);
+		createCheckbox(composite, LABEL_LAYOUT, DEFAULT_LAYOUT, listener).setEnabled(false);
+		createCheckbox(composite, LABEL_MERGE, DEFAULT_MERGE, listener).setEnabled(false);
 	}
 	
 	private Button createCheckbox(Composite parent, String text, boolean selection, SelectionListener listener) {

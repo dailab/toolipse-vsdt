@@ -472,5 +472,22 @@
 			</view>
 		</perspectiveExtension>
 	</extension>
+	
+	<!-- Import from other VSDT Diagrams -->
+
+	<extension point="org.eclipse.ui.importWizards"
+		id="de.dailab.vsdt.import"
+		name="Import Wizards" >
+		<wizard 
+			id="de.dailab.vsdt.import.wizard"
+			name="Import other VSDT Diagrams"
+			category="de.dailab.vsdt.trafo.import"
+			class="de.dailab.vsdt.diagram.imprt.VsdtImportWizard"
+			icon="icons/importVsdt.gif">
+			<description>
+				Import other VSDT Diagrams and merge them to one.
+			</description>
+		</wizard>
+	</extension>
 
 </plugin>

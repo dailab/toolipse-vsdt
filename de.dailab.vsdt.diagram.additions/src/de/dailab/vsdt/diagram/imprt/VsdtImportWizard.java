@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -78,6 +80,14 @@ public class VsdtImportWizard extends Wizard implements IImportWizard {
 		} else {
 			MessageDialog.openInformation(this.getShell(), SUCCESS_TITLE, SUCCESS_MESSAGE);
 		}
+
+		// refresh directory 
+		try {
+			WorkspaceSynchronizer.getFile(to).getParent().refreshLocal(1, null);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+
 		return true;
 	}
 	
