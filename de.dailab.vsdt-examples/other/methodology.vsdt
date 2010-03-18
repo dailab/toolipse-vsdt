@@ -60,7 +60,7 @@
     <connections xsi:type="vsdt:Association" id="_1Rw64LKSEd6GMtoRM-Kpdw" source="_FrjCMLKSEd6GMtoRM-Kpdw" target="_hjn8ULKSEd6GMtoRM-Kpdw"/>
     <connections xsi:type="vsdt:Association" id="_1mhC4LKSEd6GMtoRM-Kpdw" source="_FrjCMLKSEd6GMtoRM-Kpdw" target="_jSBX0LKSEd6GMtoRM-Kpdw"/>
     <connections xsi:type="vsdt:Association" id="_2OkhYLKSEd6GMtoRM-Kpdw" source="_jSBX0LKSEd6GMtoRM-Kpdw" target="_L6X78LKSEd6GMtoRM-Kpdw"/>
-    <connections xsi:type="vsdt:Association" id="_2pp64LKSEd6GMtoRM-Kpdw" direction="BOTH" source="_L6X78LKSEd6GMtoRM-Kpdw" target="_kfTqULKSEd6GMtoRM-Kpdw"/>
+    <connections xsi:type="vsdt:Association" id="_2pp64LKSEd6GMtoRM-Kpdw" source="_L6X78LKSEd6GMtoRM-Kpdw" target="_kfTqULKSEd6GMtoRM-Kpdw"/>
     <connections xsi:type="vsdt:Association" id="_3A7ycLKSEd6GMtoRM-Kpdw" source="_kfTqULKSEd6GMtoRM-Kpdw" target="_Wv-MgLKSEd6GMtoRM-Kpdw"/>
     <connections xsi:type="vsdt:Association" id="_3dYd4LKSEd6GMtoRM-Kpdw" source="_ia3GULKSEd6GMtoRM-Kpdw" target="_Wv-MgLKSEd6GMtoRM-Kpdw"/>
     <connections xsi:type="vsdt:Association" id="_35PTcLKSEd6GMtoRM-Kpdw" source="_M9ZfMLKSEd6GMtoRM-Kpdw" target="_ia3GULKSEd6GMtoRM-Kpdw"/>
@@ -72,7 +72,7 @@
     <connections xsi:type="vsdt:SequenceFlow" id="_YanJYLKSEd6GMtoRM-Kpdw" source="_Wv-MgLKSEd6GMtoRM-Kpdw" target="_e9dCgLMaEd65ieWbIXbVIQ"/>
     <connections xsi:type="vsdt:Association" id="_nfXZMLMaEd65ieWbIXbVIQ" source="_OLaosLMaEd65ieWbIXbVIQ" target="_l2hzILMaEd65ieWbIXbVIQ"/>
     <connections xsi:type="vsdt:Association" id="_n9DawLMaEd65ieWbIXbVIQ" source="_l2hzILMaEd65ieWbIXbVIQ" target="_FrjCMLKSEd6GMtoRM-Kpdw"/>
-    <connections xsi:type="vsdt:Association" id="_obQZsLMaEd65ieWbIXbVIQ" source="_l2hzILMaEd65ieWbIXbVIQ" target="_L6X78LKSEd6GMtoRM-Kpdw"/>
+    <connections xsi:type="vsdt:Association" id="_obQZsLMaEd65ieWbIXbVIQ" source="_KF_0QLKSEd6GMtoRM-Kpdw" target="_L6X78LKSEd6GMtoRM-Kpdw"/>
     <connections xsi:type="vsdt:Association" id="_o7EiMLMaEd65ieWbIXbVIQ" source="_l2hzILMaEd65ieWbIXbVIQ" target="_M9ZfMLKSEd6GMtoRM-Kpdw"/>
     <connections xsi:type="vsdt:SequenceFlow" id="_VXLr0LMaEd65ieWbIXbVIQ" source="_UmmFMLKSEd6GMtoRM-Kpdw" target="_Wv-MgLKSEd6GMtoRM-Kpdw"/>
     <connections xsi:type="vsdt:SequenceFlow" id="_e9p20LMaEd65ieWbIXbVIQ" source="_e9dCgLMaEd65ieWbIXbVIQ" target="_Ezq2MLMaEd65ieWbIXbVIQ"/>
@@ -97,6 +97,7 @@
     <connections xsi:type="vsdt:Association" id="_mShDMLMoEd65ieWbIXbVIQ" source="_6iO6QLMnEd65ieWbIXbVIQ" target="_UOvUsLMoEd65ieWbIXbVIQ"/>
     <connections xsi:type="vsdt:Association" id="_mxzAMLMoEd65ieWbIXbVIQ" source="_Td5toLMoEd65ieWbIXbVIQ" target="_6iO6QLMnEd65ieWbIXbVIQ"/>
     <connections xsi:type="vsdt:Association" id="_nXa1wLMoEd65ieWbIXbVIQ" source="_4hkqELMnEd65ieWbIXbVIQ" target="_Td5toLMoEd65ieWbIXbVIQ"/>
+    <connections xsi:type="vsdt:Association" id="_2rByEDHBEd-av6bPoGu3rw" direction="NONE" source="_l2hzILMaEd65ieWbIXbVIQ" target="_KF_0QLKSEd6GMtoRM-Kpdw"/>
   </businessProcesses>
   <participants name="Business Architect" id="_0NaXYLKREd6GMtoRM-Kpdw" associatedProcesses="_4KFoULKREd6GMtoRM-Kpdw"/>
   <participants name="Agent Engineer" id="_1jic0LKREd6GMtoRM-Kpdw" associatedProcesses="_4KFoULKREd6GMtoRM-Kpdw"/>

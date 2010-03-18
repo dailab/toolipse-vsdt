@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vsdt:BusinessProcessDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:vsdt="http://de.dailab.vsdt" xmi:id="_Kw1G4Ti1Ed6fPrDa2snimQ" name="New Business Process Diagram" id="_Kw1G4Di1Ed6fPrDa2snimQ" version="0.1" creationDate="2009-05-04T16:09:23.022+0200" modificationDate="2009-05-04T16:09:23.022+0200">
+<vsdt:BusinessProcessDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:vsdt="http://de.dailab.vsdt" xmi:id="_Kw1G4Ti1Ed6fPrDa2snimQ" name="New Business Process Diagram" id="_Kw1G4Di1Ed6fPrDa2snimQ">
   <pools xmi:type="vsdt:Pool" xmi:id="_vZH5cTi1Ed6fPrDa2snimQ" name="Pizzeria" id="_vZH5cDi1Ed6fPrDa2snimQ">
     <process xmi:type="vsdt:BpmnProcess" xmi:id="_vZH5dTi1Ed6fPrDa2snimQ" name="Pizzeria_Process" id="_vZH5dDi1Ed6fPrDa2snimQ"/>
     <lanes xmi:type="vsdt:Lane" xmi:id="_vZH5czi1Ed6fPrDa2snimQ" name="Service" id="_vZH5cji1Ed6fPrDa2snimQ">
