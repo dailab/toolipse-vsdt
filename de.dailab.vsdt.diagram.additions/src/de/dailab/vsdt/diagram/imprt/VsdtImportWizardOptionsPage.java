@@ -1,6 +1,7 @@
 package de.dailab.vsdt.diagram.imprt;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -24,7 +25,7 @@ import org.eclipse.ui.dialogs.WizardExportResourcesPage;
 
 public class VsdtImportWizardOptionsPage extends WizardExportResourcesPage {
 	
-	public static final String EXTENSION = "vsdtd";
+	public static final String[] EXTENSIONS = new String[] { "vsdtd", "vsdt" };
 	
 	private static final String LABEL_TITLE= "From VSDT diagrams:";
 	private static final String LABEL_SELECT_FOLDER= "Into VSDT diagram:";
@@ -34,7 +35,7 @@ public class VsdtImportWizardOptionsPage extends WizardExportResourcesPage {
 	private static final String LABEL_MERGE= "Merge identical";
 	
 	public static final boolean DEFAULT_BACKUP= true;
-	public static final boolean DEFAULT_LAYOUT= false;
+	public static final boolean DEFAULT_LAYOUT= true;
 	public static final boolean DEFAULT_MERGE= false;
 	
 	private boolean doBackup= DEFAULT_BACKUP;
@@ -84,7 +85,7 @@ public class VsdtImportWizardOptionsPage extends WizardExportResourcesPage {
 		composite.setLayout(new GridLayout());
 
 		createCheckbox(composite, LABEL_BACKUP, DEFAULT_BACKUP, listener);
-		createCheckbox(composite, LABEL_LAYOUT, DEFAULT_LAYOUT, listener).setEnabled(false);
+		createCheckbox(composite, LABEL_LAYOUT, DEFAULT_LAYOUT, listener);//.setEnabled(false);
 		createCheckbox(composite, LABEL_MERGE, DEFAULT_MERGE, listener).setEnabled(false);
 	}
 	
@@ -107,8 +108,8 @@ public class VsdtImportWizardOptionsPage extends WizardExportResourcesPage {
 		List<IFile> selected = this.getSelectedResources();
 		if (uri != null && selected.size() > 0) {
 			for (IFile file : selected) {
-				if (! EXTENSION.equals(file.getFileExtension()) ) {
-					setErrorMessage("Only files of type '" + EXTENSION + "' can be imported!");
+				if (! Arrays.asList(EXTENSIONS).contains(file.getFileExtension())) {
+					setErrorMessage("Only files of type 'vsdtd' or 'vsdt' can be imported!");
 					return false;
 				}
 			}
@@ -116,8 +117,8 @@ public class VsdtImportWizardOptionsPage extends WizardExportResourcesPage {
 				setErrorMessage("Target file does not exist.");
 				return false;
 			}
-			if (! EXTENSION.equals(uri.fileExtension())) {
-				setErrorMessage("Target file must be of type '" + EXTENSION + "'.");
+			if (! EXTENSIONS[0].equals(uri.fileExtension())) {
+				setErrorMessage("Target file must be of type '" + EXTENSIONS[0] + "'.");
 				return false;
 			}
 			return true;

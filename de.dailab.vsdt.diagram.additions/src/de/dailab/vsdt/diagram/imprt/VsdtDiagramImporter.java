@@ -59,16 +59,13 @@ public class VsdtDiagramImporter {
 			createBackup(target);
 		}
 
-		// get target BPS
+		// get target BPS and 
 		BusinessProcessSystem targetBps= null;
+		Diagram targetDiagramRoot= null;
 		for (EObject content : target.getContents()) {
 			if (content instanceof BusinessProcessSystem) {
 				targetBps= (BusinessProcessSystem) content;
 			}
-		}
-		// get target root diagram
-		Diagram targetDiagramRoot= null;
-		for (EObject content : target.getContents()) {
 			if (content instanceof Diagram 
 					&& "Vsdt_meta".equals(((Diagram) content).getType())) {
 				targetDiagramRoot= (Diagram) content;
@@ -101,10 +98,10 @@ public class VsdtDiagramImporter {
 							target.getContents().add(diagram);
 						}
 						// merge Meta diagrams
-//						if ("Vsdt_meta".equals(diagram.getType())) {
-//							targetDiagramRoot.getChildren().addAll(diagram.getChildren());
-//							targetDiagramRoot.getEdges().addAll(diagram.getEdges());
-//						}
+						if ("Vsdt_meta".equals(diagram.getType())) {
+							targetDiagramRoot.getPersistedChildren().addAll(diagram.getPersistedChildren());
+							targetDiagramRoot.getPersistedEdges().addAll(diagram.getPersistedEdges());
+						}
 					}
 				}
 			}
