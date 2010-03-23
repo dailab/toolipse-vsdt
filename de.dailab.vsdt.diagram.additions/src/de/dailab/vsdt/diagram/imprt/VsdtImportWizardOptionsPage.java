@@ -25,7 +25,7 @@ import org.eclipse.ui.dialogs.WizardExportResourcesPage;
 
 public class VsdtImportWizardOptionsPage extends WizardExportResourcesPage {
 	
-	public static final String[] EXTENSIONS = new String[] { "vsdtd", "vsdt" };
+	public static final String[] EXTENSIONS = new String[] { "vsdtd", "vsdt"/*, "vsdt_diagram"*/ };
 	
 	private static final String LABEL_TITLE= "From VSDT diagrams:";
 	private static final String LABEL_SELECT_FOLDER= "Into VSDT diagram:";
@@ -86,7 +86,7 @@ public class VsdtImportWizardOptionsPage extends WizardExportResourcesPage {
 
 		createCheckbox(composite, LABEL_BACKUP, DEFAULT_BACKUP, listener);
 		createCheckbox(composite, LABEL_LAYOUT, DEFAULT_LAYOUT, listener);//.setEnabled(false);
-		createCheckbox(composite, LABEL_MERGE, DEFAULT_MERGE, listener).setEnabled(false);
+		createCheckbox(composite, LABEL_MERGE, DEFAULT_MERGE, listener);//.setEnabled(false);
 	}
 	
 	private Button createCheckbox(Composite parent, String text, boolean selection, SelectionListener listener) {
