@@ -132,11 +132,11 @@ public class DiagramImporter {
 	 */
 	public void doImport() {
 
-		// get target BPS and diagram root 
+		// get target model and diagram root 
 		EObject targetModel= null;
 		Diagram targetDiagramRoot= null;
 		for (EObject content : target.getContents()) {
-			if (content instanceof EObject) {
+			if (content instanceof EObject && ! (content instanceof Diagram)) {
 				targetModel= (EObject) content;
 			}
 			if (content instanceof Diagram && isDiagramRoot((Diagram) content)) {
@@ -156,7 +156,7 @@ public class DiagramImporter {
 			for (EObject content : new ArrayList<EObject>(resource.getContents()) ) {
 				
 				// import model data
-				if (content instanceof EObject) {
+				if (content instanceof EObject && ! (content instanceof Diagram)) {
 					EObject other= (EObject) content;
 					if (merge) {
 						merge(targetModel, other);
@@ -181,14 +181,29 @@ public class DiagramImporter {
 				// import layout data
 				if (layout) {
 					if (content instanceof Diagram) {
-						Diagram diagram = (Diagram) content;
-						if (isDiagramRoot(diagram)) {
-							// merge root diagram
-							targetDiagramRoot.getPersistedChildren().addAll(diagram.getPersistedChildren());
-							targetDiagramRoot.getPersistedEdges().addAll(diagram.getPersistedEdges());
+						if (merge) {
+							/*
+							 * How to merge layout data?
+							 * create map model element -> view element
+							 * recursively for all children...
+							 *     if children's model element in mergedMap
+							 *         ...
+							 *     else 
+							 *         
+							 * 
+							 * 
+							 * 
+							 */
 						} else {
-							// put other non-root diagrams in root diagram
-							target.getContents().add(diagram);
+							Diagram diagram = (Diagram) content;
+							if (isDiagramRoot(diagram)) {
+								// merge root diagram
+								targetDiagramRoot.getPersistedChildren().addAll(diagram.getPersistedChildren());
+								targetDiagramRoot.getPersistedEdges().addAll(diagram.getPersistedEdges());
+							} else {
+								// put other non-root diagrams in root diagram
+								target.getContents().add(diagram);
+							}
 						}
 					}
 				} // end import layout data
