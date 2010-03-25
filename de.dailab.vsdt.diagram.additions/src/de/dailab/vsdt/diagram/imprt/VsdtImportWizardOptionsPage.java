@@ -160,15 +160,6 @@ public class VsdtImportWizardOptionsPage extends WizardExportResourcesPage {
 		        		uri= URI.createFileURI(filename);
 					}
 					
-//					ResourceSelectionDialog dialog= new ResourceSelectionDialog(
-//							getShell(), selection, null); 
-//					if (ResourceSelectionDialog.OK == dialog.open()) {
-//						Object[] res = dialog.getResult();
-//						for (Object r : res) {
-//							System.out.println(r.getClass().getSimpleName());
-//							System.out.println(r.toString());
-//						}
-//					}
 				}
 			}
 		}

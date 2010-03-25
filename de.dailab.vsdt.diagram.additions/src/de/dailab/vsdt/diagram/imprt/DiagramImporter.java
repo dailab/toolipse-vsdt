@@ -21,8 +21,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gmf.runtime.notation.Diagram;
 
-import de.dailab.vsdt.BusinessProcessSystem;
-
 /**
  * Used for importing one or more VSDT files into another. This is not to be
  * confused with import features such as 'BPEL to BPMN', as both source and 
@@ -36,18 +34,17 @@ import de.dailab.vsdt.BusinessProcessSystem;
  * clashes. Finally, it should also be possible to smartly merge two versions of
  * a VSDT diagram.
  * 
+ * TODO adapt javadoc to generic nature
+ * 
  * @author kuester
  */
-public class VsdtDiagramImporter {
+public class DiagramImporter {
 
 	/*
 	 * TODO
 	 * make merging work
 	 * make import of layout and merging work together
 	 */
-	
-	private static final String DIAGRAM_VSDT= "Vsdt";
-	private static final String DIAGRAM_META= "Vsdt_meta";
 
 	/** the list of files that are imported */ 
 	private final List<Resource> sources;
@@ -69,18 +66,27 @@ public class VsdtDiagramImporter {
 
 	/** merge identical objects? */
 	private final boolean merge;
+	
+	/** ID of diagram root, or null */
+	private final String diagramRoot;
 
 	/**
-	 * Create new VsdtDiagramImporter.
+	 * Create new VsdtDiagramImporter. The 'to' Resource will be saved if the
+	 * import is complete. If the respective parameter is set, a backup of the
+	 * 'to' Resource will be created first, with suffix '.bak'.
+	 * Warning: The 'from' Resources will most likely be altered in the process
+	 * of importing (i.e. parts of their contents will be moved, not copied, to
+	 * the 'to' Resource), so _do not_ save these Resources after importing! 
 	 * 
-	 * @param from		List of Resources to import from
-	 * @param to		Resource to import into
-	 * @param backup	create backup?
-	 * @param layout	import layout?
-	 * @param merge		merge identical objects?
+	 * @param from			List of Resources to import from
+	 * @param to			Resource to import into
+	 * @param backup		create backup?
+	 * @param layout		import layout? (for GMF resources only!)
+	 * @param merge			merge identical objects?
+	 * @param diagramRoot	identifier of diagram root, if there are sub-diagrams
 	 */
-	public VsdtDiagramImporter(List<Resource> from, Resource to,
-			boolean backup, boolean layout, boolean merge) {
+	public DiagramImporter(List<Resource> from, Resource to, boolean backup, 
+			boolean layout, boolean merge, String diagramRoot) {
 		this.sources = from;
 		this.target = to;
 		this.backup = backup;
@@ -88,6 +94,7 @@ public class VsdtDiagramImporter {
 		this.merge = merge;
 		this.warnings = new ArrayList<String>();
 		this.errors = new ArrayList<String>();
+		this.diagramRoot= diagramRoot;
 	}
 
 	/**
@@ -103,6 +110,22 @@ public class VsdtDiagramImporter {
 	public List<String> getErrors() {
 		return errors;
 	}
+	
+	/**
+	 * test whether the diagram is the diagram root
+	 * 
+	 * @param diagram	some diagram
+	 * @return			diagram is root diagram?
+	 */
+	private boolean isDiagramRoot(Diagram diagram) {
+		if (diagramRoot == null) {
+			// no diagram root identifier defined -> there is only one diagram
+			return true;
+		} else {
+			// diagram's type must be equal to diagramRoot
+			return diagramRoot.equals(diagram.getType());
+		}
+	}
 
 	/**
 	 * Do actual import work.
@@ -110,14 +133,13 @@ public class VsdtDiagramImporter {
 	public void doImport() {
 
 		// get target BPS and diagram root 
-		BusinessProcessSystem targetBps= null;
+		EObject targetModel= null;
 		Diagram targetDiagramRoot= null;
 		for (EObject content : target.getContents()) {
-			if (content instanceof BusinessProcessSystem) {
-				targetBps= (BusinessProcessSystem) content;
+			if (content instanceof EObject) {
+				targetModel= (EObject) content;
 			}
-			if (content instanceof Diagram 
-					&& DIAGRAM_META.equals(((Diagram) content).getType())) {
+			if (content instanceof Diagram && isDiagramRoot((Diagram) content)) {
 				targetDiagramRoot= (Diagram) content;
 			}
 		}
@@ -134,37 +156,46 @@ public class VsdtDiagramImporter {
 			for (EObject content : new ArrayList<EObject>(resource.getContents()) ) {
 				
 				// import model data
-				if (content instanceof BusinessProcessSystem) {
-					BusinessProcessSystem otherBps= (BusinessProcessSystem) content;
+				if (content instanceof EObject) {
+					EObject other= (EObject) content;
 					if (merge) {
-						merge(targetBps, otherBps);
-						updateReferences(targetBps);
+						merge(targetModel, other);
+						updateReferences(targetModel);
 					} else {
 						// just throw stuff together
-						targetBps.getBusinessProcesses().addAll(otherBps.getBusinessProcesses());
-						targetBps.getParticipants().addAll(otherBps.getParticipants());
-						targetBps.getImplementations().addAll(otherBps.getImplementations());
-						targetBps.getMessages().addAll(otherBps.getMessages());
+						for (EReference reference : other.eClass().getEAllContainments()) {
+							if (reference.isMany()) {
+								// lists are throws together
+								List<EObject> selfElements = (List<EObject>) targetModel.eGet(reference);
+								List<EObject> otherElements = (List<EObject>) other.eGet(reference);
+								selfElements.addAll(otherElements);
+							} else {
+								// contained objects are simply overwritten
+								EObject val= (EObject) other.eGet(reference);
+								targetModel.eSet(reference, val);
+							}
+						}
 					}
-				}
+				} // end import model data
 				
 				// import layout data
 				if (layout) {
 					if (content instanceof Diagram) {
 						Diagram diagram = (Diagram) content;
-						// import BPMN diagrams
-						if (DIAGRAM_VSDT.equals(diagram.getType())) {
-							target.getContents().add(diagram);
-						}
-						// merge Meta diagrams
-						if (DIAGRAM_META.equals(diagram.getType())) {
+						if (isDiagramRoot(diagram)) {
+							// merge root diagram
 							targetDiagramRoot.getPersistedChildren().addAll(diagram.getPersistedChildren());
 							targetDiagramRoot.getPersistedEdges().addAll(diagram.getPersistedEdges());
+						} else {
+							// put other non-root diagrams in root diagram
+							target.getContents().add(diagram);
 						}
 					}
-				}
-			}
-		}
+				} // end import layout data
+				
+			} // end iterate over file contents
+			
+		} // end iterate over source files
 
 		// save target file
 		try {
