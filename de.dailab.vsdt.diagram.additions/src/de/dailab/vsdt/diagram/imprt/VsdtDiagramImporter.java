@@ -44,29 +44,29 @@ public class VsdtDiagramImporter extends DiagramImporter {
 		// VSDT specific tests
 		if (first instanceof IdObject) {
 			IdObject idObject1= (IdObject) first;
-			IdObject idObject2= (IdObject) first;
+			IdObject idObject2= (IdObject) second;
 			return testEquals(idObject1.getId(), idObject2.getId());
 		}
 		if (first instanceof Message) {
 			Message msg1 = (Message) first;
-			Message msg2 = (Message) first;
+			Message msg2 = (Message) second;
 			return testEquals(msg1.getName(), msg2.getName());
 		}
 		if (first instanceof Implementation) {
 			Implementation impl1 = (Implementation) first;
-			Implementation impl2 = (Implementation) first;
+			Implementation impl2 = (Implementation) second;
 			return testEquals(impl1.getInterface(), impl2.getInterface()) &&
 			       testEquals(impl1.getOperation(), impl2.getOperation());
 		}
 		if (first instanceof Assignment) {
 			Assignment assign1 = (Assignment) first;
-			Assignment assign2 = (Assignment) first;
+			Assignment assign2 = (Assignment) second;
 			return testEquals(assign1.getTo(), assign2.getTo()) &&
 			       testEqualsOrNull(assign1.getToQuery(), assign2.getToQuery());
 		}
 		if (first instanceof Property) {
 			Property prop1 = (Property) first;
-			Property prop2 = (Property) first;
+			Property prop2 = (Property) second;
 			return testEquals(prop1.getName(), prop2.getName());
 		}
 		if (first instanceof Expression) {
