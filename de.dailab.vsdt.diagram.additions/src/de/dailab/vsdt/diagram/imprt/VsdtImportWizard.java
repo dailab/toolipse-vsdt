@@ -63,7 +63,7 @@ public class VsdtImportWizard extends Wizard implements IImportWizard {
 		boolean backup= optionsPage.isDoBackup();
 		boolean layout= optionsPage.isDoLayout();
 		boolean merge= optionsPage.isDoMerge();
-		DiagramImporter importer= new DiagramImporter(from, to, backup, layout, merge, "Vsdt_meta");
+		DiagramImporter importer= new VsdtDiagramImporter(from, to, backup, layout, merge);
 		
 		try {
 			importer.doImport();

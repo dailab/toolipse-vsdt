@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.gmf.runtime.notation.View;
 
 /**
  * Used for importing one or more VSDT files into another. This is not to be
@@ -53,10 +54,10 @@ public class DiagramImporter {
 	private final Resource target;
 
 	/** list of warnings that occurred during import */
-	private final List<String> warnings;
+	protected final List<String> warnings;
 
 	/** list of errors that occurred during import */
-	private final List<String> errors;
+	protected final List<String> errors;
 
 	/** create backup of target file */
 	private final boolean backup;
@@ -70,6 +71,17 @@ public class DiagramImporter {
 	/** ID of diagram root, or null */
 	private final String diagramRoot;
 
+	/** map holding association from model elements to diagrams */
+	private final Map<EObject, Diagram> diagramMap;
+
+	/**
+	 * Map of elements being merged, with key-value pairs like
+	 *   element_from_source -> element_from_target,
+	 * where element_from_target can be contained once for each source resource.
+	 */
+	private Map<EObject, EObject> mergedMap;
+
+	
 	/**
 	 * Create new VsdtDiagramImporter. The 'to' Resource will be saved if the
 	 * import is complete. If the respective parameter is set, a backup of the
@@ -94,7 +106,9 @@ public class DiagramImporter {
 		this.merge = merge;
 		this.warnings = new ArrayList<String>();
 		this.errors = new ArrayList<String>();
-		this.diagramRoot= diagramRoot;
+		this.diagramRoot = diagramRoot;
+		this.diagramMap = new HashMap<EObject, Diagram>();
+		this.mergedMap = new HashMap<EObject, EObject>();
 	}
 
 	/**
@@ -117,7 +131,7 @@ public class DiagramImporter {
 	 * @param diagram	some diagram
 	 * @return			diagram is root diagram?
 	 */
-	private boolean isDiagramRoot(Diagram diagram) {
+	private final boolean isDiagramRoot(Diagram diagram) {
 		if (diagramRoot == null) {
 			// no diagram root identifier defined -> there is only one diagram
 			return true;
@@ -130,7 +144,7 @@ public class DiagramImporter {
 	/**
 	 * Do actual import work.
 	 */
-	public void doImport() {
+	public final void doImport() {
 
 		// get target model and diagram root 
 		EObject targetModel= null;
@@ -139,8 +153,12 @@ public class DiagramImporter {
 			if (content instanceof EObject && ! (content instanceof Diagram)) {
 				targetModel= (EObject) content;
 			}
-			if (content instanceof Diagram && isDiagramRoot((Diagram) content)) {
-				targetDiagramRoot= (Diagram) content;
+			if (content instanceof Diagram) {
+				Diagram diagram = (Diagram) content;
+				diagramMap.put(diagram.getElement(), diagram);
+				if (isDiagramRoot(diagram)) {
+					targetDiagramRoot= diagram;
+				}
 			}
 		}
 
@@ -159,7 +177,8 @@ public class DiagramImporter {
 				if (content instanceof EObject && ! (content instanceof Diagram)) {
 					EObject other= (EObject) content;
 					if (merge) {
-						merge(targetModel, other);
+						// merge data models
+						mergeModels(targetModel, other);
 						updateReferences(targetModel);
 					} else {
 						// just throw stuff together
@@ -179,31 +198,35 @@ public class DiagramImporter {
 				} // end import model data
 				
 				// import layout data
-				if (layout) {
-					if (content instanceof Diagram) {
-						if (merge) {
-							/*
-							 * How to merge layout data?
-							 * create map model element -> view element
-							 * recursively for all children...
-							 *     if children's model element in mergedMap
-							 *         ...
-							 *     else 
-							 *         
-							 * 
-							 * 
-							 * 
-							 */
+				if (layout && (content instanceof Diagram) ) {
+					Diagram diagram = (Diagram) content;
+					if (merge) {
+						// merge view models
+						if (isDiagramRoot(diagram)) {
+							// merge root diagrams
+//							mergeViews(targetDiagramRoot, diagram);
+							mergeModels(targetDiagramRoot, diagram);
+							updateReferences(targetDiagramRoot);
 						} else {
-							Diagram diagram = (Diagram) content;
-							if (isDiagramRoot(diagram)) {
-								// merge root diagram
-								targetDiagramRoot.getPersistedChildren().addAll(diagram.getPersistedChildren());
-								targetDiagramRoot.getPersistedEdges().addAll(diagram.getPersistedEdges());
+							if (mergedMap.containsKey(diagram.getElement())) {
+								Diagram selfDiagram = diagramMap.get(mergedMap.get(diagram.getElement()));
+//								mergeViews(selfDiagram, diagram);
+								mergeModels(selfDiagram, diagram);
+								updateReferences(selfDiagram);
 							} else {
-								// put other non-root diagrams in root diagram
+								// put other non-root diagram in resource
 								target.getContents().add(diagram);
 							}
+						}
+					} else {
+						// just throw stuff together
+						if (isDiagramRoot(diagram)) {
+							// throw root diagrams together
+							targetDiagramRoot.getPersistedChildren().addAll(diagram.getPersistedChildren());
+							targetDiagramRoot.getPersistedEdges().addAll(diagram.getPersistedEdges());
+						} else {
+							// put other non-root diagrams in resource
+							target.getContents().add(diagram);
 						}
 					}
 				} // end import layout data
@@ -220,6 +243,20 @@ public class DiagramImporter {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Recursively pass through the given view and put the relation from model
+	 * element to view in a map.
+	 * 
+	 * @param diagram	some diagram
+	 */
+	protected Map<EObject, View> createViewMap(Diagram diagram) {
+		Map<EObject, View> map= new HashMap<EObject, View>();
+
+		// TODO
+		
+		return map;
+	}
 
 	/**
 	 * Create backup of given Resource. The resource is opened as an ordinary
@@ -229,7 +266,7 @@ public class DiagramImporter {
 	 * @param resource	Resource to create a backup for.
 	 * @param appendix	Appendix for backup file, e.g. ".bak" or "~"
 	 */
-	protected void createBackup(Resource resource, String appendix) {
+	protected final void createBackup(Resource resource, String appendix) {
 		String path = resource.getURI().path();
 		try {
 			File f1 = new File(path);
@@ -255,13 +292,6 @@ public class DiagramImporter {
 	}
 	
 	/**
-	 * Map of elements being merged, with key-value pairs like
-	 *   element_from_source -> element_from_target,
-	 * where element_from_target can be contained once for each source resource.
-	 */
-	private Map<EObject, EObject> mergedMap= new HashMap<EObject, EObject>();
-	
-	/**
 	 * If two EObjects are considered identical (e.g. using their name or ID 
 	 * attribute, if any), they are 'merged', recursively repeating the process
 	 * for their children. If an attribute or 1-reference is set in both objects
@@ -271,12 +301,15 @@ public class DiagramImporter {
 	 * @param second	second EObject
 	 * @return			merged?
 	 */
-	protected boolean merge(EObject first, EObject second) {
+	protected boolean mergeModels(EObject first, EObject second) {
 		if (first == null || second == null)
 			throw new IllegalArgumentException("Arguments must not be null");
 		if (first.eClass() != second.eClass())
 			throw new IllegalArgumentException("Arguments must be of the same EClass");
 		mergedMap.put(second, first);
+
+		System.out.println("Merging:\r\n\t" + first + "\r\n\t" + second);
+
 		/*
 		 * - three cases:
 		 *   - attribute: take value from second
@@ -303,8 +336,8 @@ public class DiagramImporter {
 						for (EObject other : otherList) {
 							boolean merged= false;
 							for (EObject self : selfList) {
-								if (canMerge(self, other)) {
-									merge(self, other);
+								if (canMergeModel(self, other)) {
+									mergeModels(self, other);
 									merged= true;
 									continue;
 								}
@@ -321,7 +354,7 @@ public class DiagramImporter {
 						EObject self = (EObject) first.eGet(reference);
 						EObject other = (EObject) second.eGet(reference);
 						if (self != null && other != null) {
-							merge(self, other);
+							mergeModels(self, other);
 						} else {
 							first.eSet(reference, other);
 						}
@@ -337,7 +370,7 @@ public class DiagramImporter {
 	 * objects from the source model that are contained in the mergedMap are
 	 * updated to the respective merged objects.
 	 * 
-	 * @param merged	merged EObjects whichs references are to be updated 
+	 * @param merged	merged EObjects which's references are to be updated 
 	 */
 	protected void updateReferences(EObject merged) {
 		// update non-containment references
@@ -379,42 +412,107 @@ public class DiagramImporter {
 	 * @param second	Second Object
 	 * @return			can be merged?
 	 */
-	private boolean canMerge(EObject first, EObject second) {
+	protected boolean canMergeModel(EObject first, EObject second) {
 		if (first == null || second == null) return false;
 		if (first.eClass() != second.eClass()) return false;
-
 		EClass clazz= first.eClass();
-		if (clazz.getEIDAttribute() != null) {
-			// class has explicit ID attribute
-			return testAttributeEqualNotNull(clazz.getEIDAttribute(), first, second);
+		
+		if (first instanceof View) {
+			// compare view elements
+			View firstView = (View) first;
+			View secondView = (View) second;
+			/*
+			 * TODO problems:
+			 * - views with no model elements attached are not merged
+			 * - especially container nodes and some edges
+			 * maybe a dedicated mergeViews method has to be written after all...
+			 */
+			// other views can be merged, if the underlying model elements have been merged
+			if (mergedMap.containsKey(secondView.getElement())) {
+				EObject element = mergedMap.get(secondView.getElement());
+				return element == firstView.getElement();
+			}
+			return false;
+			
 		} else {
-			// look for other appropriate attributes, like 'id' or 'name'
-			for (EAttribute att : clazz.getEAllAttributes()) {
-				if ("id".equalsIgnoreCase(att.getName())) {
-					return testAttributeEqualNotNull(att, first, second);
+			// compare model elements
+			if (clazz.getEIDAttribute() != null) {
+				// class has explicit ID attribute
+				return testAttributeEqualNotNull(clazz.getEIDAttribute(), first, second);
+			} else {
+				// look for other appropriate attributes, like 'id' or 'name'
+				for (EAttribute att : clazz.getEAllAttributes()) {
+					if ("id".equalsIgnoreCase(att.getName())) {
+						return testAttributeEqualNotNull(att, first, second);
+					}
+				}
+				for (EAttribute att : clazz.getEAllAttributes()) {
+					if ("name".equalsIgnoreCase(att.getName())) {
+						return testAttributeEqualNotNull(att, first, second);
+					}
 				}
 			}
-			for (EAttribute att : clazz.getEAllAttributes()) {
-				if ("name".equalsIgnoreCase(att.getName())) {
-					return testAttributeEqualNotNull(att, first, second);
-				}
-			}
+			
 		}
 		return false;
 	}
 
 	/**
-	 * Test whether the given EAttribute is equal on both given EObjects
+	 * Test whether the given EAttribute is non-null and equal on both given EObjects
 	 * 
 	 * @param att		some EAttribute which should be an attribute of both EObjects
 	 * @param obj1		first of two EObjects, should have same class
 	 * @param obj2		second of two EObjects, should have same class
 	 * @return			attribute values are both non null and equal
 	 */
-	private boolean testAttributeEqualNotNull(EAttribute att, EObject obj1, EObject obj2) {
+	protected boolean testAttributeEqualNotNull(EAttribute att, EObject obj1, EObject obj2) {
 		Object v1 = obj1.eGet(att);
 		Object v2 = obj2.eGet(att);
-		return v1 != null && v2 != null && v1.equals(v2);
+		return testEquals(v1, v2);
 	}
+	
+	/**
+	 * Test whether the two object values are equal and not null.
+	 * 
+	 * @param value1	some object
+	 * @param value2	some other object
+	 * @return			objects equal and not null?
+	 */
+	protected boolean testEquals(Object value1, Object value2) {
+		return value1 != null && value2 != null && value1.equals(value2);
+	}
+	
+	/**
+	 * Test whether the two object values are equal or null.
+	 * 
+	 * @param value1	some object
+	 * @param value2	some other object
+	 * @return			objects equal or null?
+	 */
+	protected boolean testEqualsOrNull(Object value1, Object value2) {
+		return value1 == null ? value2 == null : value1.equals(value2); 
+	}
+	
+//	/**
+//	 * TODO
+//	 * 
+//	 * @param view
+//	 */
+//	protected boolean mergeViews(View first, View second) {
+//		if (first == null || second == null)
+//			throw new IllegalArgumentException("Arguments must not be null");
+//		if (first.eClass() != second.eClass())
+//			throw new IllegalArgumentException("Arguments must be of the same EClass");
+//		
+//		/*
+//		 * View
+//		 *  \- Diagram
+//		 *  \- Edge
+//		 *  \- Node
+//		 */
+//		
+//		
+//		return true;
+//	}
 
 }
