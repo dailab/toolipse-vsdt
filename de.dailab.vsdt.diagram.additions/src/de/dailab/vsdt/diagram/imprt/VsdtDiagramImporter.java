@@ -37,7 +37,7 @@ public class VsdtDiagramImporter extends DiagramImporter {
 	 * @return			can be merged?
 	 */
 	@Override
-	protected boolean canMergeModel(EObject first, EObject second) {
+	protected boolean canMerge(EObject first, EObject second) {
 		if (first == null || second == null) return false;
 		if (first.eClass() != second.eClass()) return false;
 	
@@ -74,7 +74,7 @@ public class VsdtDiagramImporter extends DiagramImporter {
 			return true;
 		}
 		
-		return super.canMergeModel(first, second);
+		return super.canMerge(first, second);
 	}
 	
 }
