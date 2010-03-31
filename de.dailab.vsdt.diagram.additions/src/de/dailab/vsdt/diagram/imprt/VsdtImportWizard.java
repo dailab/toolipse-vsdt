@@ -19,6 +19,8 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.IWorkbench;
 
+import de.dailab.common.gmf.imprt.DiagramImporter;
+
 
 public class VsdtImportWizard extends Wizard implements IImportWizard {
 	
@@ -63,7 +65,7 @@ public class VsdtImportWizard extends Wizard implements IImportWizard {
 		boolean backup= optionsPage.isDoBackup();
 		boolean layout= optionsPage.isDoLayout();
 		boolean merge= optionsPage.isDoMerge();
-		DiagramImporter importer= new VsdtDiagramImporter(from, to, backup, layout, merge);
+		DiagramImporter importer= new VsdtDiagramImporter(from, to, backup, layout, merge, true);
 		
 		try {
 			importer.doImport();

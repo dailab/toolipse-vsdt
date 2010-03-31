@@ -3,8 +3,10 @@ package de.dailab.vsdt.diagram.imprt;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 
+import de.dailab.common.gmf.imprt.DiagramImporter;
 import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.IdObject;
@@ -24,8 +26,8 @@ public class VsdtDiagramImporter extends DiagramImporter {
 	 * See super constructor. diagramRoot is set to "Vsdt_meta".
 	 */
 	public VsdtDiagramImporter(List<Resource> from, Resource to, boolean backup, 
-			boolean layout, boolean merge) {
-		super(from, to, backup, layout, merge, "Vsdt_meta");
+			boolean layout, boolean merge, boolean strict) {
+		super(from, to, backup, layout, merge, strict, "Vsdt_meta");
 	}
 	
 	/**
@@ -34,10 +36,11 @@ public class VsdtDiagramImporter extends DiagramImporter {
 	 * 
 	 * @param first		First Object
 	 * @param second	Second Object
+	 * @param reference the Reference
 	 * @return			can be merged?
 	 */
 	@Override
-	protected boolean canMerge(EObject first, EObject second) {
+	protected boolean canMerge(EObject first, EObject second, EReference reference) {
 		if (first == null || second == null) return false;
 		if (first.eClass() != second.eClass()) return false;
 	
@@ -45,7 +48,11 @@ public class VsdtDiagramImporter extends DiagramImporter {
 		if (first instanceof IdObject) {
 			IdObject idObject1= (IdObject) first;
 			IdObject idObject2= (IdObject) second;
-			return testEquals(idObject1.getId(), idObject2.getId());
+			if (strict) {
+				return testEquals(idObject1.getId(), idObject2.getId());
+			} else {
+				return testEquals(idObject1.getName(), idObject2.getName());
+			}
 		}
 		if (first instanceof Message) {
 			Message msg1 = (Message) first;
@@ -74,7 +81,7 @@ public class VsdtDiagramImporter extends DiagramImporter {
 			return true;
 		}
 		
-		return super.canMerge(first, second);
+		return super.canMerge(first, second, reference);
 	}
 	
 }

@@ -18,6 +18,8 @@ import de.dailab.agentworld.Role;
 import de.dailab.jiactng.jadl.AccessLevel;
 import de.dailab.jiactng.jadl.Agent;
 import de.dailab.jiactng.jadl.Assign;
+import de.dailab.jiactng.jadl.Atom;
+import de.dailab.jiactng.jadl.AtomList;
 import de.dailab.jiactng.jadl.Case;
 import de.dailab.jiactng.jadl.Expression;
 import de.dailab.jiactng.jadl.HeaderDeclaration;
@@ -1222,13 +1224,20 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		Par par= jadlFac.createPar();
 		if (scripts != null) {
 			for (Script script : scripts) {
+				AtomList list = jadlFac.createAtomList();
 				//FIXME handle non-atomic scripts
-//				if (script instanceof Atom) {
-//					Atom atom = (Atom) script;
-					par.getScripts().add(script);
-//				} else {
-//					TrafoLog.warn("A Par can only hold atomic elements. failed to insert " + script.eClass().getName());
-//				}
+				if (script instanceof Atom) {
+					list.getAtoms().add((Atom) script);
+				} else if (script instanceof Seq) {
+					for (Script script2 : ((Seq) script).getScripts()) {
+						if (script2 instanceof Atom) {
+							list.getAtoms().add((Atom) script2);
+						}
+					}
+				} else {
+					TrafoLog.warn("A Par can only hold atomic elements. failed to insert " + script.eClass().getName());
+				}
+				par.getAtoms().add(list);
 			}
 		}
 		return par;
