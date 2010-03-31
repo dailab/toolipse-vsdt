@@ -1,0 +1,35 @@
+
+
+service Faculty_Mathematican_start ( in $param : int ) ( out $result : int ) {
+    var $n : int ;
+    var $p : int ;
+    {
+        {
+            $p = 1 ;
+            $n = $param ;
+        }
+        if ( $n >= 0 ) {
+            {
+                {
+                    print "Executing _DO_NOTHING_" ;
+                }
+                while ( $n > 1 ) {
+                    {
+                        $p = $p * $n ;
+                        $n = $n - 1 ;
+                        print "Executing Multiply" ;
+                    }
+                    {
+                        print "Executing _DO_NOTHING_" ;
+                    }
+                }
+            }
+            {
+                $result = $p ;
+            }
+        }
+        else {
+            $result = 0 - 1 ;
+        }
+    }
+}
