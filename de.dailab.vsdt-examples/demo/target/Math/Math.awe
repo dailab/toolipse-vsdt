@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:agentworld="agentworld" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation">
+  <notation:Diagram xmi:id="_VH0tMDyuEd-mKpG_NOOMaw" type="Agentworld" element="_VH0tMjyuEd-mKpG_NOOMaw" measurementUnit="Pixel">
+    <children xmi:type="notation:Shape" xmi:id="_VH0tODyuEd-mKpG_NOOMaw" type="2002" element="_VH0tMzyuEd-mKpG_NOOMaw" fontName="Sans" lineColor="12632256">
+      <children xmi:type="notation:DecorationNode" xmi:id="_VH1UQDyuEd-mKpG_NOOMaw" type="5002">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VH1UQTyuEd-mKpG_NOOMaw" y="5"/>
+      </children>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VH0tOTyuEd-mKpG_NOOMaw" x="240" y="30"/>
+    </children>
+    <children xmi:type="notation:Shape" xmi:id="_VH1UQjyuEd-mKpG_NOOMaw" type="2004" element="_VH0tNDyuEd-mKpG_NOOMaw" fontName="Sans" lineColor="12632256">
+      <children xmi:type="notation:DecorationNode" xmi:id="_VH1URDyuEd-mKpG_NOOMaw" type="5004"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VH1UQzyuEd-mKpG_NOOMaw" x="30" y="130"/>
+    </children>
+    <children xmi:type="notation:Shape" xmi:id="_VH17UDyuEd-mKpG_NOOMaw" type="2004" element="_VH0tNjyuEd-mKpG_NOOMaw" fontName="Sans" lineColor="12632256">
+      <children xmi:type="notation:DecorationNode" xmi:id="_VH17UjyuEd-mKpG_NOOMaw" type="5004"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VH17UTyuEd-mKpG_NOOMaw" x="290" y="130"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_VH0tMTyuEd-mKpG_NOOMaw"/>
+    <edges xmi:type="notation:Connector" xmi:id="_VH17UzyuEd-mKpG_NOOMaw" type="4002" element="_VH0tNTyuEd-mKpG_NOOMaw" source="_VH0tODyuEd-mKpG_NOOMaw" target="_VH1UQjyuEd-mKpG_NOOMaw" lineColor="12632256">
+      <styles xmi:type="notation:FontStyle" xmi:id="_VH17VDyuEd-mKpG_NOOMaw" fontName="Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_VH17VTyuEd-mKpG_NOOMaw" points="[0, 0, 123, -80]$[-123, 60, 0, -20]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_VIOV0DyuEd-mKpG_NOOMaw" id="(0.325,1.0)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_VIO84DyuEd-mKpG_NOOMaw" id="(0.5,0.0)"/>
+    </edges>
+    <edges xmi:type="notation:Connector" xmi:id="_VH2iYDyuEd-mKpG_NOOMaw" type="4002" element="_VH0tNzyuEd-mKpG_NOOMaw" source="_VH0tODyuEd-mKpG_NOOMaw" target="_VH17UDyuEd-mKpG_NOOMaw" lineColor="12632256">
+      <styles xmi:type="notation:FontStyle" xmi:id="_VH2iYTyuEd-mKpG_NOOMaw" fontName="Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_VH2iYjyuEd-mKpG_NOOMaw" points="[0, 0, -124, -80]$[124, 60, 0, -20]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_VINuwDyuEd-mKpG_NOOMaw" id="(0.65,1.0)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_VINuwTyuEd-mKpG_NOOMaw" id="(0.5,0.0)"/>
+    </edges>
+  </notation:Diagram>
+  <agentworld:AgentWorld xmi:id="_VH0tMjyuEd-mKpG_NOOMaw" name="Math" namespace="Math" author="Tobias Küster" date="2009-08-27T17:05:44.025+0200" version="0.1">
+    <hosts xmi:type="agentworld:Role" xmi:id="_VH0tMzyuEd-mKpG_NOOMaw" name="MathematicanRole" componentLinks="_VH0tNTyuEd-mKpG_NOOMaw _VH0tNzyuEd-mKpG_NOOMaw"/>
+    <hosts xmi:type="agentworld:Component" xmi:id="_VH0tNDyuEd-mKpG_NOOMaw" name="ExtractRoot_Mathematican" type="_serviceType" users="_VH0tNTyuEd-mKpG_NOOMaw" URI="Mathematican/ExtractRoot_Mathematican.jadl"/>
+    <hosts xmi:type="agentworld:ComponentLink" xmi:id="_VH0tNTyuEd-mKpG_NOOMaw" component="_VH0tNDyuEd-mKpG_NOOMaw" user="_VH0tMzyuEd-mKpG_NOOMaw"/>
+    <hosts xmi:type="agentworld:Component" xmi:id="_VH0tNjyuEd-mKpG_NOOMaw" name="Faculty_Mathematican" type="_serviceType" users="_VH0tNzyuEd-mKpG_NOOMaw" URI="Mathematican/Faculty_Mathematican.jadl"/>
+    <hosts xmi:type="agentworld:ComponentLink" xmi:id="_VH0tNzyuEd-mKpG_NOOMaw" component="_VH0tNjyuEd-mKpG_NOOMaw" user="_VH0tMzyuEd-mKpG_NOOMaw"/>
+  </agentworld:AgentWorld>
+</xmi:XMI>
