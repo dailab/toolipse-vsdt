@@ -1,78 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:agentworld="agentworld" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation">
-  <notation:Diagram xmi:id="_VH0tMDyuEd-mKpG_NOOMaw" type="Agentworld" element="_VH0tMjyuEd-mKpG_NOOMaw" measurementUnit="Pixel">
-    <children xmi:type="notation:Shape" xmi:id="_VH0tODyuEd-mKpG_NOOMaw" type="2002" element="_VH0tMzyuEd-mKpG_NOOMaw" fontName="Sans" lineColor="12632256">
-      <children xmi:type="notation:DecorationNode" xmi:id="_VH1UQDyuEd-mKpG_NOOMaw" type="5002">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_VH1UQTyuEd-mKpG_NOOMaw" y="5"/>
+  <notation:Diagram xmi:id="_hNK48DyvEd-mKpG_NOOMaw" type="Agentworld" element="_hNK48jyvEd-mKpG_NOOMaw" measurementUnit="Pixel">
+    <children xmi:type="notation:Shape" xmi:id="_hNK4-DyvEd-mKpG_NOOMaw" type="2002" element="_hNK48zyvEd-mKpG_NOOMaw" fontName="Sans" lineColor="12632256">
+      <children xmi:type="notation:DecorationNode" xmi:id="_hNLgADyvEd-mKpG_NOOMaw" type="5002">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_hNLgATyvEd-mKpG_NOOMaw" y="5"/>
       </children>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VH0tOTyuEd-mKpG_NOOMaw" x="324" y="180"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hNK4-TyvEd-mKpG_NOOMaw" x="240" y="30"/>
     </children>
-    <children xmi:type="notation:Shape" xmi:id="_VH1UQjyuEd-mKpG_NOOMaw" type="2004" element="_VH0tNDyuEd-mKpG_NOOMaw" fontName="Sans" lineColor="12632256">
-      <children xmi:type="notation:DecorationNode" xmi:id="_VH1URDyuEd-mKpG_NOOMaw" type="5004"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VH1UQzyuEd-mKpG_NOOMaw" x="294" y="348"/>
+    <children xmi:type="notation:Shape" xmi:id="_hNLgAjyvEd-mKpG_NOOMaw" type="2004" element="_hNK49DyvEd-mKpG_NOOMaw" fontName="Sans" lineColor="12632256">
+      <children xmi:type="notation:DecorationNode" xmi:id="_hNMHEDyvEd-mKpG_NOOMaw" type="5004"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hNLgAzyvEd-mKpG_NOOMaw" x="30" y="130"/>
     </children>
-    <children xmi:type="notation:Shape" xmi:id="_VH17UDyuEd-mKpG_NOOMaw" type="2004" element="_VH0tNjyuEd-mKpG_NOOMaw" fontName="Sans" lineColor="12632256">
-      <children xmi:type="notation:DecorationNode" xmi:id="_VH17UjyuEd-mKpG_NOOMaw" type="5004"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VH17UTyuEd-mKpG_NOOMaw" x="456" y="270"/>
+    <children xmi:type="notation:Shape" xmi:id="_hNMHETyvEd-mKpG_NOOMaw" type="2004" element="_hNK49jyvEd-mKpG_NOOMaw" fontName="Sans" lineColor="12632256">
+      <children xmi:type="notation:DecorationNode" xmi:id="_hNMHEzyvEd-mKpG_NOOMaw" type="5004"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hNMHEjyvEd-mKpG_NOOMaw" x="290" y="130"/>
     </children>
-    <children xmi:type="notation:Shape" xmi:id="_fOWRQDyuEd-mKpG_NOOMaw" type="2001" element="_fOQxsDyuEd-mKpG_NOOMaw" fontName="Sans" lineColor="12632256">
-      <children xmi:type="notation:DecorationNode" xmi:id="_fOXfYDyuEd-mKpG_NOOMaw" type="5001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_fOXfYTyuEd-mKpG_NOOMaw" y="5"/>
-      </children>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fOWRQTyuEd-mKpG_NOOMaw" x="405" y="45"/>
-    </children>
-    <children xmi:type="notation:Shape" xmi:id="_fyrGUDyuEd-mKpG_NOOMaw" type="2003" element="_fyk_sDyuEd-mKpG_NOOMaw" fontName="Sans" lineColor="12632256">
-      <children xmi:type="notation:DecorationNode" xmi:id="_fysUcDyuEd-mKpG_NOOMaw" type="5003">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_fys7gDyuEd-mKpG_NOOMaw" y="5"/>
-      </children>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fyrtYDyuEd-mKpG_NOOMaw" x="168" y="114"/>
-    </children>
-    <children xmi:type="notation:Shape" xmi:id="_gr50YDyuEd-mKpG_NOOMaw" type="2002" element="_gr3_MDyuEd-mKpG_NOOMaw" fontName="Sans" lineColor="12632256">
-      <children xmi:type="notation:DecorationNode" xmi:id="_gr7CgDyuEd-mKpG_NOOMaw" type="5002">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_gr7CgTyuEd-mKpG_NOOMaw" y="5"/>
-      </children>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gr50YTyuEd-mKpG_NOOMaw" x="117" y="245"/>
-    </children>
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_VH0tMTyuEd-mKpG_NOOMaw"/>
-    <edges xmi:type="notation:Connector" xmi:id="_VH17UzyuEd-mKpG_NOOMaw" type="4002" element="_VH0tNTyuEd-mKpG_NOOMaw" source="_VH0tODyuEd-mKpG_NOOMaw" target="_VH1UQjyuEd-mKpG_NOOMaw" lineColor="12632256">
-      <styles xmi:type="notation:FontStyle" xmi:id="_VH17VDyuEd-mKpG_NOOMaw" fontName="Sans"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_VH17VTyuEd-mKpG_NOOMaw" points="[0, 0, 123, -80]$[-123, 60, 0, -20]"/>
-      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_VIOV0DyuEd-mKpG_NOOMaw" id="(0.325,1.0)"/>
-      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_VIO84DyuEd-mKpG_NOOMaw" id="(0.5,0.0)"/>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_hNK48TyvEd-mKpG_NOOMaw"/>
+    <edges xmi:type="notation:Connector" xmi:id="_hNMuIDyvEd-mKpG_NOOMaw" type="4002" element="_hNK49TyvEd-mKpG_NOOMaw" source="_hNK4-DyvEd-mKpG_NOOMaw" target="_hNLgAjyvEd-mKpG_NOOMaw" lineColor="12632256">
+      <styles xmi:type="notation:FontStyle" xmi:id="_hNMuITyvEd-mKpG_NOOMaw" fontName="Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_hNMuIjyvEd-mKpG_NOOMaw" points="[0, 0, 123, -80]$[-123, 60, 0, -20]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hNgQIDyvEd-mKpG_NOOMaw" id="(0.325,1.0)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hNg3MDyvEd-mKpG_NOOMaw" id="(0.5,0.0)"/>
     </edges>
-    <edges xmi:type="notation:Connector" xmi:id="_VH2iYDyuEd-mKpG_NOOMaw" type="4002" element="_VH0tNzyuEd-mKpG_NOOMaw" source="_VH0tODyuEd-mKpG_NOOMaw" target="_VH17UDyuEd-mKpG_NOOMaw" lineColor="12632256">
-      <styles xmi:type="notation:FontStyle" xmi:id="_VH2iYTyuEd-mKpG_NOOMaw" fontName="Sans"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_VH2iYjyuEd-mKpG_NOOMaw" points="[0, 0, -124, -80]$[124, 60, 0, -20]"/>
-      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_VINuwDyuEd-mKpG_NOOMaw" id="(0.65,1.0)"/>
-      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_VINuwTyuEd-mKpG_NOOMaw" id="(0.5,0.0)"/>
-    </edges>
-    <edges xmi:type="notation:Connector" xmi:id="_jmwb8DyuEd-mKpG_NOOMaw" type="4003" element="_iYFpYDyuEd-mKpG_NOOMaw" source="_fOWRQDyuEd-mKpG_NOOMaw" target="_fyrGUDyuEd-mKpG_NOOMaw" lineColor="12632256">
-      <children xmi:type="notation:DecorationNode" xmi:id="_jmxDADyuEd-mKpG_NOOMaw" type="6001">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_jmxDATyuEd-mKpG_NOOMaw" y="40"/>
-      </children>
-      <styles xmi:type="notation:FontStyle" xmi:id="_jmwb8TyuEd-mKpG_NOOMaw" fontName="Sans"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_jmwb8jyuEd-mKpG_NOOMaw" points="[-50, 14, 196, -48]$[-245, 82, 1, 20]"/>
-    </edges>
-    <edges xmi:type="notation:Connector" xmi:id="_ly48UDyuEd-mKpG_NOOMaw" type="4001" element="_ly0D0DyuEd-mKpG_NOOMaw" source="_fyrGUDyuEd-mKpG_NOOMaw" target="_VH0tODyuEd-mKpG_NOOMaw" lineColor="12632256">
-      <styles xmi:type="notation:FontStyle" xmi:id="_ly48UTyuEd-mKpG_NOOMaw" fontName="Sans"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ly48UjyuEd-mKpG_NOOMaw" points="[20, 9, -136, -57]$[169, 86, 13, 20]"/>
-    </edges>
-    <edges xmi:type="notation:Connector" xmi:id="_mP3MMDyuEd-mKpG_NOOMaw" type="4001" element="_mPzh0DyuEd-mKpG_NOOMaw" source="_fyrGUDyuEd-mKpG_NOOMaw" target="_gr50YDyuEd-mKpG_NOOMaw" lineColor="12632256">
-      <styles xmi:type="notation:FontStyle" xmi:id="_mP3MMTyuEd-mKpG_NOOMaw" fontName="Sans"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_mP3MMjyuEd-mKpG_NOOMaw" points="[-7, 20, 44, -111]$[-31, 143, 20, 12]"/>
+    <edges xmi:type="notation:Connector" xmi:id="_hNMuIzyvEd-mKpG_NOOMaw" type="4002" element="_hNK49zyvEd-mKpG_NOOMaw" source="_hNK4-DyvEd-mKpG_NOOMaw" target="_hNMHETyvEd-mKpG_NOOMaw" lineColor="12632256">
+      <styles xmi:type="notation:FontStyle" xmi:id="_hNMuJDyvEd-mKpG_NOOMaw" fontName="Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_hNMuJTyvEd-mKpG_NOOMaw" points="[0, 0, -124, -80]$[124, 60, 0, -20]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hNg3MTyvEd-mKpG_NOOMaw" id="(0.65,1.0)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_hNheQDyvEd-mKpG_NOOMaw" id="(0.5,0.0)"/>
     </edges>
   </notation:Diagram>
-  <agentworld:AgentWorld xmi:id="_VH0tMjyuEd-mKpG_NOOMaw" name="Math" namespace="Math" description="" author="Tobias Küster" date="2009-08-27T17:05:44.025+0200" version="0.1" defaultNamespace="" defaultStarterPackage="">
-    <hosts xmi:type="agentworld:Role" xmi:id="_VH0tMzyuEd-mKpG_NOOMaw" name="MathematicanRole" componentLinks="_VH0tNTyuEd-mKpG_NOOMaw _VH0tNzyuEd-mKpG_NOOMaw" subAgents="_ly0D0DyuEd-mKpG_NOOMaw"/>
-    <hosts xmi:type="agentworld:Component" xmi:id="_VH0tNDyuEd-mKpG_NOOMaw" name="ExtractRoot_Mathematican" type="_serviceType" users="_VH0tNTyuEd-mKpG_NOOMaw" URI="Mathematican/ExtractRoot_Mathematican.jadl"/>
-    <hosts xmi:type="agentworld:ComponentLink" xmi:id="_VH0tNTyuEd-mKpG_NOOMaw" component="_VH0tNDyuEd-mKpG_NOOMaw" user="_VH0tMzyuEd-mKpG_NOOMaw"/>
-    <hosts xmi:type="agentworld:Component" xmi:id="_VH0tNjyuEd-mKpG_NOOMaw" name="Faculty_Mathematican" type="_serviceType" users="_VH0tNzyuEd-mKpG_NOOMaw" URI="Mathematican/Faculty_Mathematican.jadl"/>
-    <hosts xmi:type="agentworld:ComponentLink" xmi:id="_VH0tNzyuEd-mKpG_NOOMaw" component="_VH0tNjyuEd-mKpG_NOOMaw" user="_VH0tMzyuEd-mKpG_NOOMaw"/>
-    <hosts xmi:type="agentworld:Node" xmi:id="_fOQxsDyuEd-mKpG_NOOMaw" name="N" description="" residingAgents="_iYFpYDyuEd-mKpG_NOOMaw"/>
-    <hosts xmi:type="agentworld:Agent" xmi:id="_fyk_sDyuEd-mKpG_NOOMaw" name="A" superAgents="_ly0D0DyuEd-mKpG_NOOMaw _mPzh0DyuEd-mKpG_NOOMaw" hostingNodes="_iYFpYDyuEd-mKpG_NOOMaw"/>
-    <hosts xmi:type="agentworld:Role" xmi:id="_gr3_MDyuEd-mKpG_NOOMaw" name="Comm" subAgents="_mPzh0DyuEd-mKpG_NOOMaw"/>
-    <hosts xmi:type="agentworld:AgentNodeLink" xmi:id="_iYFpYDyuEd-mKpG_NOOMaw" agent="_fyk_sDyuEd-mKpG_NOOMaw" node="_fOQxsDyuEd-mKpG_NOOMaw" multiplicity="1" instances="A;"/>
-    <hosts xmi:type="agentworld:InheritanceLink" xmi:id="_ly0D0DyuEd-mKpG_NOOMaw" parent="_VH0tMzyuEd-mKpG_NOOMaw" child="_fyk_sDyuEd-mKpG_NOOMaw"/>
-    <hosts xmi:type="agentworld:InheritanceLink" xmi:id="_mPzh0DyuEd-mKpG_NOOMaw" parent="_gr3_MDyuEd-mKpG_NOOMaw" child="_fyk_sDyuEd-mKpG_NOOMaw"/>
+  <agentworld:AgentWorld xmi:id="_hNK48jyvEd-mKpG_NOOMaw" name="Math" namespace="Math" author="Tobias Küster" date="2009-08-27T17:05:44.025+0200" version="0.1">
+    <hosts xmi:type="agentworld:Role" xmi:id="_hNK48zyvEd-mKpG_NOOMaw" name="MathematicanRole" componentLinks="_hNK49TyvEd-mKpG_NOOMaw _hNK49zyvEd-mKpG_NOOMaw"/>
+    <hosts xmi:type="agentworld:Component" xmi:id="_hNK49DyvEd-mKpG_NOOMaw" name="ExtractRoot_Mathematican" type="_serviceType" users="_hNK49TyvEd-mKpG_NOOMaw" URI="Mathematican/ExtractRoot_Mathematican.jadl"/>
+    <hosts xmi:type="agentworld:ComponentLink" xmi:id="_hNK49TyvEd-mKpG_NOOMaw" component="_hNK49DyvEd-mKpG_NOOMaw" user="_hNK48zyvEd-mKpG_NOOMaw"/>
+    <hosts xmi:type="agentworld:Component" xmi:id="_hNK49jyvEd-mKpG_NOOMaw" name="Faculty_Mathematican" type="_serviceType" users="_hNK49zyvEd-mKpG_NOOMaw" URI="Mathematican/Faculty_Mathematican.jadl"/>
+    <hosts xmi:type="agentworld:ComponentLink" xmi:id="_hNK49zyvEd-mKpG_NOOMaw" component="_hNK49jyvEd-mKpG_NOOMaw" user="_hNK48zyvEd-mKpG_NOOMaw"/>
   </agentworld:AgentWorld>
 </xmi:XMI>
