@@ -21,7 +21,17 @@ import org.eclipse.ui.IWorkbench;
 
 import de.dailab.common.gmf.imprt.DiagramImporter;
 
-
+/**
+ * Wizard for Importing the model and layout from a number of VSDT resources
+ * into another VSDT resource. This is mainly to compensate for missing copy-
+ * paste, but on top of this also provides capabilities for merging diagrams.
+ * 
+ * Merging is primarily done by descending the object tree and comparing the
+ * objects' IDs, but could also be extended to comparing e.g. the objects names,
+ * although in this case there might be many mismatches.
+ * 
+ * @author kuester
+ */
 public class VsdtImportWizard extends Wizard implements IImportWizard {
 	
 	private static final String NL = System.getProperty("line.separator");

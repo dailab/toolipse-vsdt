@@ -23,6 +23,14 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.WizardExportResourcesPage;
 
+/**
+ * This class describes the page shown in the VSDT Import Wizard. It contains
+ * - a list of resources to import from
+ * - a resource to import into
+ * - a number of switches on how to import
+ * 
+ * @author kuester
+ */
 public class VsdtImportWizardOptionsPage extends WizardExportResourcesPage {
 	
 	public static final String[] EXTENSIONS = new String[] { "vsdtd", "vsdt"/*, "vsdt_diagram"*/ };
@@ -36,7 +44,7 @@ public class VsdtImportWizardOptionsPage extends WizardExportResourcesPage {
 	
 	public static final boolean DEFAULT_BACKUP= true;
 	public static final boolean DEFAULT_LAYOUT= true;
-	public static final boolean DEFAULT_MERGE= false;
+	public static final boolean DEFAULT_MERGE= true;
 	
 	private boolean doBackup= DEFAULT_BACKUP;
 	private boolean doLayout= DEFAULT_LAYOUT;
@@ -85,8 +93,8 @@ public class VsdtImportWizardOptionsPage extends WizardExportResourcesPage {
 		composite.setLayout(new GridLayout());
 
 		createCheckbox(composite, LABEL_BACKUP, DEFAULT_BACKUP, listener);
-		createCheckbox(composite, LABEL_LAYOUT, DEFAULT_LAYOUT, listener);//.setEnabled(false);
-		createCheckbox(composite, LABEL_MERGE, DEFAULT_MERGE, listener);//.setEnabled(false);
+		createCheckbox(composite, LABEL_LAYOUT, DEFAULT_LAYOUT, listener);
+		createCheckbox(composite, LABEL_MERGE, DEFAULT_MERGE, listener);
 	}
 	
 	private Button createCheckbox(Composite parent, String text, boolean selection, SelectionListener listener) {

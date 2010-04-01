@@ -21,7 +21,7 @@ import de.dailab.vsdt.Property;
  * @author kuester
  */
 public class VsdtDiagramImporter extends DiagramImporter {
-
+	
 	/**
 	 * See super constructor. diagramRoot is set to "Vsdt_meta".
 	 */
