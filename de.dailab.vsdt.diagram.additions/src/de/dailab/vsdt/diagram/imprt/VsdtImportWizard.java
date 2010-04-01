@@ -79,6 +79,7 @@ public class VsdtImportWizard extends Wizard implements IImportWizard {
 		
 		try {
 			importer.doImport();
+			to.save(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			String message= e.getStackTrace().length > 0 ? message= e.getStackTrace()[0].toString() : e.getMessage();

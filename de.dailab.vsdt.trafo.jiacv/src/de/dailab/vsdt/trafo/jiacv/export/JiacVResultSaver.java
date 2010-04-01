@@ -26,7 +26,6 @@ import de.dailab.agentworld.AgentWorld;
 import de.dailab.agentworld.diagram.edit.parts.AgentWorldEditPart;
 import de.dailab.agentworld.diagram.part.AgentworldDiagramContentInitializer;
 import de.dailab.agentworld.diagram.part.AgentworldDiagramEditorPlugin;
-import de.dailab.agentworld.diagram.part.AgentworldDiagramEditorUtil;
 import de.dailab.agentworld.diagram.part.Messages;
 import de.dailab.agentworldeditor.util.imprt.AweDiagramImporter;
 import de.dailab.common.gmf.imprt.DiagramImporter;
@@ -49,11 +48,8 @@ public class JiacVResultSaver extends MappingResultSaver {
 	protected boolean internalSave(File baseDirectory) throws IOException {
 		JiacVExportWrapper wrapper= (JiacVExportWrapper) this.wrapper;
 		for (Agent model : wrapper.getJadlFiles()) {
-			String fileName= wrapper.getJadlFileName(model);
-				
-			// save JADL model as XML
-//				saveAsXmlResource(new File(baseDirectory, fileName + EXT_XML), model, null, null);
 			// save JADL source code
+			String fileName= wrapper.getJadlFileName(model);
 			saveJadl(new File(baseDirectory, fileName), model);
 		}
 		// TODO
@@ -61,9 +57,8 @@ public class JiacVResultSaver extends MappingResultSaver {
 //		}
 		AgentWorld agentWorld= wrapper.getAgentWorld();
 		if (agentWorld != null) {
-			String fileName= wrapper.getAweFileName(agentWorld, true);
-			
 			// save AWE diagram
+			String fileName= wrapper.getAweFileName(agentWorld, true);
 			saveAgentWorldDiagram(new File(baseDirectory, fileName), agentWorld);
 		}
 		return true;
@@ -112,84 +107,64 @@ public class JiacVResultSaver extends MappingResultSaver {
 		
 		// create file resource: use temporary file, is resource exists
 		boolean merge = file.exists();
-		Resource resource = resourceSet.createResource( merge ? tempDiagramModelURI : diagramModelURI );
+		Resource createdResource  = resourceSet.createResource( merge ? tempDiagramModelURI : diagramModelURI );
+		Resource existingResource = merge ? resourceSet.getResource(diagramModelURI, true) : null;
 		
 		try {
 			// write and save resource
-			AbstractTransactionalCommand command = new CreateAgentworldDiagramCommand(editingDomain, resource, agentWorld);
+			AbstractTransactionalCommand command = new CreateAgentworldDiagramCommand(editingDomain, agentWorld, createdResource, existingResource);
 			OperationHistoryFactory.getOperationHistory().execute(command,
 					new NullProgressMonitor(), null);
-			resource.save(AgentworldDiagramEditorUtil.getSaveOptions());
-
-			// if resource existed, merge resources and delete temporary file
-			if (merge) {
-				Resource existingResource = resourceSet.getResource(diagramModelURI, true);
-				command = new MergeDiagramsCommand(editingDomain, resource, existingResource);
-				OperationHistoryFactory.getOperationHistory().execute(command,
-						new NullProgressMonitor(), null);
-			}
 		} catch (ExecutionException e) {
-			TrafoLog.warn("Unable to create Agent World Diagram.");
-			return false;
+			/*
+			 * XXX For no apparent reason, an exception is thrown, saying that
+			 * the transaction is already closing. However, this seems not to be
+			 * doing any harm, so we'll just continue... 
+			 */
+		}
+		
+		if (existingResource != null) {
+			existingResource.save(null);
+		} else {
+			createdResource.save(null);
 		}
 		return true;
 	}
 	
 	/**
-	 * Command for creating Agent World Diagram from Model
+	 * Command for creating Agent World Diagram from Model and merging it with 
+	 * existing AWE file
 	 * 
 	 * @author kuester
 	 */
 	class CreateAgentworldDiagramCommand extends AbstractTransactionalCommand {
 		private final AgentWorld model;
-		private final Resource diagramResource;
+		private final Resource created;
+		private final Resource existing;
 		
-		protected CreateAgentworldDiagramCommand(TransactionalEditingDomain editingDomain, Resource resource, AgentWorld model) {
+		protected CreateAgentworldDiagramCommand(TransactionalEditingDomain editingDomain, AgentWorld model, Resource created, Resource existing) {
 			super(editingDomain, Messages.AgentworldNewDiagramFileWizard_InitDiagramCommand, null);
 			this.model = model;
-			this.diagramResource = resource;
-		}
-		
-		protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-			Diagram diagram = ViewService.createDiagram(
-					model,
-					AgentWorldEditPart.MODEL_ID,
-					AgentworldDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
-			diagramResource.getContents().add(diagram);
-			diagramResource.getContents().add(diagram.getElement());
-			new AgentworldDiagramContentInitializer().initDiagramContent(diagram);
-			
-			// do layout
-			LayoutService.getInstance().layout(diagram, LayoutType.DEFAULT);
-			
-			return CommandResult.newOKCommandResult();
-		}
-	
-	}
-	
-	/**
-	 * Command for merging new with old Agent World Diagram
-	 * 
-	 * @author kuester
-	 */
-	class MergeDiagramsCommand extends AbstractTransactionalCommand {
-		protected final Resource created;
-		protected final Resource existing;
-		
-		protected MergeDiagramsCommand(TransactionalEditingDomain editingDomain, Resource created, Resource existing) {
-			super(editingDomain, Messages.AgentworldNewDiagramFileWizard_InitDiagramCommand, null);
 			this.created = created;
 			this.existing = existing;
 		}
 		
 		protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-			try {
+			// create diagram and do layout
+			Diagram diagram = ViewService.createDiagram(
+					model,
+					AgentWorldEditPart.MODEL_ID,
+					AgentworldDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT);
+			created.getContents().add(diagram);
+			created.getContents().add(diagram.getElement());
+			new AgentworldDiagramContentInitializer().initDiagramContent(diagram);
+			LayoutService.getInstance().layout(diagram, LayoutType.DEFAULT);
+			
+			if (existing != null) {
+				// merge with existing
 				DiagramImporter importer = new AweDiagramImporter(
 						Collections.singletonList(created), existing, true, true, true);
 				importer.doImport();
-				created.delete(null);
-			} catch (IOException e) {
-				return CommandResult.newErrorCommandResult(e);
 			}
 			return CommandResult.newOKCommandResult();
 		}
