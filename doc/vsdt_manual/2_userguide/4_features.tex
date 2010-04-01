@@ -264,3 +264,22 @@ the layouting algorithm provided by GMF, this proves especially useful for diagr
 upstream loops. Still, since the structure-based layout is still in an early stage, the default
 layouting algorithm still is the one provided by GMF. The structure-based layout can be reached via
 the Structure View (see Section~\ref{sec:user_perspective_strucView}).
+
+\section{Import and Merging of Process Diagrams}
+\label{sec:user_features_merging}
+
+VSDT diagrams can be imported into and merged with each other. While basically this feature can be
+used for merging any two or more diagrams, it is most useful for merging diverging versions of the
+same process diagram, having a common ancestor.
+
+After selecting \emph{Import other VSDT diagrams} from the Import menu, select one or more diagrams
+to import \emph{from} and one diagram to import \emph{into}. You can also check whether to create a
+backup of the original target file (recommended), and whether the layout should be imported, too, or
+only the model data, and whether the algorithm should try to merge identical elements. The latter,
+of course, only makes sense if the source and target files are different revisions of the same file.
+
+The merging algorithm works by recursively comparing the IDs of the objects to be merged, so these
+should not be changed in different revisions. Also there are still some issues with conflicting
+changes, so one should always be sure to create a backup and possibly use a \texttt{diff} tool to
+check whether the changes to the file's XML source look plausible.
+
