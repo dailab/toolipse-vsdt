@@ -15,7 +15,7 @@
             <boundaryEvents xmi:type="vsdt:Intermediate" xmi:id="_pwo7gD2DEd-HP4AtM3m1HQ" id="_pwoUcD2DEd-HP4AtM3m1HQ" trigger="ERROR"/>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_Rz0o8T12Ed-HP4AtM3m1HQ" id="_Rz0o8D12Ed-HP4AtM3m1HQ" gatewayType="AND"/>
-          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_8Sd38T2DEd-HP4AtM3m1HQ" name="Error" id="_8Sd38D2DEd-HP4AtM3m1HQ"/>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_8Sd38T2DEd-HP4AtM3m1HQ" name="Error" id="_8Sd38D2DEd-HP4AtM3m1HQ" trigger="ERROR"/>
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_DPIQcT12Ed-HP4AtM3m1HQ" name="Actor 2" id="_DPIQcD12Ed-HP4AtM3m1HQ" participant="__Yxp8T11Ed-HP4AtM3m1HQ">
@@ -106,6 +106,7 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_XY36AT2DEd-HP4AtM3m1HQ" id="_XY36AD2DEd-HP4AtM3m1HQ" source="_WvtoQD2DEd-HP4AtM3m1HQ" target="_XYsT0T2DEd-HP4AtM3m1HQ"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_XtSq0T2DEd-HP4AtM3m1HQ" id="_XtSq0D2DEd-HP4AtM3m1HQ" source="_XYsT0T2DEd-HP4AtM3m1HQ" target="_XtGdkT2DEd-HP4AtM3m1HQ"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_YRPscT2DEd-HP4AtM3m1HQ" id="_YRPscD2DEd-HP4AtM3m1HQ" source="_XtGdkT2DEd-HP4AtM3m1HQ" target="_YQ_NwT2DEd-HP4AtM3m1HQ"/>
+      <connections xmi:type="vsdt:Association" xmi:id="_oXwLET2FEd-HP4AtM3m1HQ" id="_oXwLED2FEd-HP4AtM3m1HQ" source="_REhAAD2DEd-HP4AtM3m1HQ" target="_QW3P0T2DEd-HP4AtM3m1HQ"/>
     </businessProcesses>
     <participants xmi:type="vsdt:Participant" xmi:id="_-EuoIT11Ed-HP4AtM3m1HQ" name="Actor 1" id="_-EuoID11Ed-HP4AtM3m1HQ" associatedProcesses="_ASKJAD12Ed-HP4AtM3m1HQ" associatedPools="_DOPfoT12Ed-HP4AtM3m1HQ"/>
     <participants xmi:type="vsdt:Participant" xmi:id="__Yxp8T11Ed-HP4AtM3m1HQ" name="Actor 2" id="__Yxp8D11Ed-HP4AtM3m1HQ" associatedProcesses="_ASKJAD12Ed-HP4AtM3m1HQ" associatedPools="_DPIQcT12Ed-HP4AtM3m1HQ"/>
@@ -762,6 +763,16 @@
       <styles xmi:type="notation:RoutingStyle" xmi:id="_YRSvwT2DEd-HP4AtM3m1HQ" routing="Rectilinear"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_YRSvwj2DEd-HP4AtM3m1HQ" fontName="Sans"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_YRSvwz2DEd-HP4AtM3m1HQ" points="[-22, -5, 332, 68]$[-354, -73, 0, 0]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_oX1qoD2FEd-HP4AtM3m1HQ" type="3003" element="_oXwLET2FEd-HP4AtM3m1HQ" source="_REi1MD2DEd-HP4AtM3m1HQ" target="_QW5FAD2DEd-HP4AtM3m1HQ">
+      <children xmi:type="notation:Node" xmi:id="_oX24wD2FEd-HP4AtM3m1HQ" type="4014">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_oX24wT2FEd-HP4AtM3m1HQ" y="40"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_oX1qoT2FEd-HP4AtM3m1HQ"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_oX1qoj2FEd-HP4AtM3m1HQ" fontName="Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_oX1qoz2FEd-HP4AtM3m1HQ" points="[-5, -8, 82, 149]$[-99, -157, -12, 0]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_oX6jID2FEd-HP4AtM3m1HQ" id="(0.39080459770114945,0.2)"/>
+      <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_oX6jIT2FEd-HP4AtM3m1HQ" id="(0.012,0.58)"/>
     </edges>
   </notation:Diagram>
 </xmi:XMI>
