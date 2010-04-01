@@ -35,8 +35,10 @@ public class VsdtImportWizardOptionsPage extends WizardExportResourcesPage {
 	
 	public static final String[] EXTENSIONS = new String[] { "vsdtd", "vsdt"/*, "vsdt_diagram"*/ };
 	
-	private static final String LABEL_TITLE= "From VSDT diagrams:";
-	private static final String LABEL_SELECT_FOLDER= "Into VSDT diagram:";
+	private static final String LABEL_TITLE= "Import and Merge VSDT Diagrams";
+	private static final String LABEL_DESCRIPTION= "Please select a number of VSDT file to " +
+			"import from, and a VSDT file to import these files into.";
+	private static final String LABEL_SELECT_TARGET= "Into VSDT diagram:";
 	private static final String LABEL_BROWSE= "Browse...";
 	private static final String LABEL_BACKUP= "Backup original file";
 	private static final String LABEL_LAYOUT= "Preserve layout";
@@ -60,6 +62,7 @@ public class VsdtImportWizardOptionsPage extends WizardExportResourcesPage {
 		super(pageName, selection);
 		this.setDescription(getDescription());
 		this.setTitle(LABEL_TITLE);
+		this.setDescription(LABEL_DESCRIPTION);
 		this.listener = new ButtonListener();
 	}
 
@@ -70,7 +73,7 @@ public class VsdtImportWizardOptionsPage extends WizardExportResourcesPage {
 		composite.setLayout(gridLayout);
 		
         Label destinationLabel = new Label(composite, SWT.NONE);
-        destinationLabel.setText(LABEL_SELECT_FOLDER);
+        destinationLabel.setText(LABEL_SELECT_TARGET);
 
         destinationText= new Text(composite,SWT.BORDER);
         destinationText.setLayoutData(new GridData(350,-1));
