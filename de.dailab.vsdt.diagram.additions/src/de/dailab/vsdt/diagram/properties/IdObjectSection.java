@@ -7,7 +7,6 @@ import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FormData;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPart;
@@ -16,7 +15,6 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.IdObject;
 import de.dailab.vsdt.VsdtPackage;
-import de.dailab.vsdt.diagram.actions.InitIDAction;
 
 
 public class IdObjectSection extends AbstractVsdtPropertySection {
@@ -64,10 +62,11 @@ public class IdObjectSection extends AbstractVsdtPropertySection {
         nameText.addFocusListener(this); 
 
         // id
-        Button generateButton= FormLayoutUtil.addButton(composite, DISPLAY_GENERATE_ID, SWT.NONE, 0, null, 100);
-        generateButton.addSelectionListener(this);
+//        Button generateButton= FormLayoutUtil.addButton(composite, DISPLAY_GENERATE_ID, SWT.NONE, 0, null, 100);
+//        generateButton.addSelectionListener(this);
         label = FormLayoutUtil.addLabel(composite, "Identifier", 0, 50);
-        idText= FormLayoutUtil.addText(composite, 0, label, generateButton, SWT.NONE);
+        idText= FormLayoutUtil.addText(composite, 0, label, 100, SWT.NONE);
+        idText.setEditable(false);
         idText.addFocusListener(this);
         
         // documentation
@@ -80,10 +79,10 @@ public class IdObjectSection extends AbstractVsdtPropertySection {
     }
     
     public void widgetSelected(SelectionEvent e) {
-    	if (e.getSource() instanceof Button) {
-			new InitIDAction().run(idObject);
-    	}
-    	refresh();
+//    	if (e.getSource() instanceof Button) {
+//			new InitIDAction().run(idObject);
+//    	}
+//    	refresh();
     }
     
     public void focusLost(FocusEvent e) {
