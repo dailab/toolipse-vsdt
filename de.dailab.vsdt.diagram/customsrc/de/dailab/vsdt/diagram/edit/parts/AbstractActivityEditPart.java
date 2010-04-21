@@ -7,7 +7,7 @@ import org.eclipse.gmf.runtime.notation.View;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.VsdtPackage;
-import de.dailab.vsdt.diagram.edit.policies.DoubleClickOrgAssignEditPolicy;
+import de.dailab.vsdt.diagram.edit.policies.OpenDiagramEditPolicy;
 import de.dailab.vsdt.diagram.figures.ActivityFigure;
 import de.dailab.vsdt.util.VsdtHelper;
 
@@ -123,8 +123,8 @@ public abstract class AbstractActivityEditPart extends AbstractVsdtBorderedShape
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.OPEN_ROLE,new DoubleClickOrgAssignEditPolicy());
-//		installEditPolicy(EditPolicyRoles.OPEN_ROLE,new OpenDiagramEditPolicy());
+//		installEditPolicy(EditPolicyRoles.OPEN_ROLE,new DoubleClickOrgAssignEditPolicy());
+		installEditPolicy(EditPolicyRoles.OPEN_ROLE,new OpenDiagramEditPolicy());
 	}
 	
 }
