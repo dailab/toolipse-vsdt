@@ -9,34 +9,20 @@
         <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_3FuqoTl3Ed6zu7Q_EgQEOw" name="Prüfe Plausibilität" id="_3FuqoDl3Ed6zu7Q_EgQEOw"/>
         <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_5T-D0Tl3Ed6zu7Q_EgQEOw" name="Prüfe Entfernung" id="_5T-D0Dl3Ed6zu7Q_EgQEOw"/>
       </containedFlowObjects>
-      <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_weSVQTi2Ed6fPrDa2snimQ" name="Durchführbar?" id="_weSVQDi2Ed6fPrDa2snimQ" markerVisible="true">
-        <gates xmi:type="vsdt:Gate" xmi:id="_0e_xoji2Ed6fPrDa2snimQ" name="_0e_xoDi2Ed6fPrDa2snimQ" outgoingSequenceFlow="_0e_xoTi2Ed6fPrDa2snimQ"/>
-        <gates xmi:type="vsdt:Gate" xmi:id="__9DwYDi2Ed6fPrDa2snimQ" name="ja" outgoingSequenceFlow="__8w1eji2Ed6fPrDa2snimQ"/>
-      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_weSVQTi2Ed6fPrDa2snimQ" name="Durchführbar?" id="_weSVQDi2Ed6fPrDa2snimQ" markerVisible="true"/>
       <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_iQqY8Ti2Ed6fPrDa2snimQ" name="Liefern &#xD;&#xA;lassen" id="_iQqY8Di2Ed6fPrDa2snimQ"/>
       <containedFlowObjects xmi:type="vsdt:End" xmi:id="_0e2AoTi2Ed6fPrDa2snimQ" name="Ablehnen" id="_0e2AoDi2Ed6fPrDa2snimQ" trigger="MESSAGE"/>
-      <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="__8nEcTi2Ed6fPrDa2snimQ" id="__8nEcDi2Ed6fPrDa2snimQ" gatewayType="AND">
-        <gates xmi:type="vsdt:Gate" xmi:id="_HRUBIji3Ed6fPrDa2snimQ" name="_HRUBIDi3Ed6fPrDa2snimQ" outgoingSequenceFlow="_HRUBITi3Ed6fPrDa2snimQ"/>
-        <gates xmi:type="vsdt:Gate" xmi:id="_cntW8ji3Ed6fPrDa2snimQ" name="_cntW8Di3Ed6fPrDa2snimQ" outgoingSequenceFlow="_cntW8Ti3Ed6fPrDa2snimQ"/>
-      </containedFlowObjects>
-      <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_KA_TcTi3Ed6fPrDa2snimQ" id="_KA_TcDi3Ed6fPrDa2snimQ" gatewayType="AND">
-        <gates xmi:type="vsdt:Gate" xmi:id="_NUqDoji3Ed6fPrDa2snimQ" name="_NUqDoDi3Ed6fPrDa2snimQ" outgoingSequenceFlow="_NUqDoTi3Ed6fPrDa2snimQ"/>
-      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="__8nEcTi2Ed6fPrDa2snimQ" id="__8nEcDi2Ed6fPrDa2snimQ" gatewayType="AND"/>
+      <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_KA_TcTi3Ed6fPrDa2snimQ" id="_KA_TcDi3Ed6fPrDa2snimQ" gatewayType="AND"/>
       <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_IzooITi6Ed6fPrDa2snimQ" name="Kunde &#xD;&#xA;bewerten" id="_IzooIDi6Ed6fPrDa2snimQ"/>
       <containedFlowObjects xmi:type="vsdt:End" xmi:id="_LHzDITi6Ed6fPrDa2snimQ" id="_LHzDIDi6Ed6fPrDa2snimQ"/>
     </lanes>
     <lanes xmi:type="vsdt:Lane" xmi:id="_yb_0kTi1Ed6fPrDa2snimQ" name="Bäckerei" id="_yb_0kDi1Ed6fPrDa2snimQ">
       <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_AvKYMTi2Ed6fPrDa2snimQ" name="Pizza backen" id="_AvKYMDi2Ed6fPrDa2snimQ"/>
-      <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_0lzu0Ti3Ed6fPrDa2snimQ" name="Zutat knapp?" id="_0lzu0Di3Ed6fPrDa2snimQ" gatewayType="OR">
-        <gates xmi:type="vsdt:Gate" xmi:id="_0l84xDi3Ed6fPrDa2snimQ" name="_0l84wji3Ed6fPrDa2snimQ" outgoingSequenceFlow="_0l84wzi3Ed6fPrDa2snimQ"/>
-        <gates xmi:type="vsdt:Gate" xmi:id="_IIiHkji4Ed6fPrDa2snimQ" name="_IIiHkDi4Ed6fPrDa2snimQ" outgoingSequenceFlow="_IIiHkTi4Ed6fPrDa2snimQ"/>
-      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_0lzu0Ti3Ed6fPrDa2snimQ" name="Zutat knapp?" id="_0lzu0Di3Ed6fPrDa2snimQ" gatewayType="OR"/>
     </lanes>
     <lanes xmi:type="vsdt:Lane" xmi:id="_v9e40Ti3Ed6fPrDa2snimQ" name="Lager" id="_v9e40Di3Ed6fPrDa2snimQ">
-      <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_TY9S8Ti4Ed6fPrDa2snimQ" name="Wurde schon bestellt?" id="_TY9S8Di4Ed6fPrDa2snimQ" markerVisible="true">
-        <gates xmi:type="vsdt:Gate" xmi:id="_W-77JDi4Ed6fPrDa2snimQ" name="_W-77Iji4Ed6fPrDa2snimQ" outgoingSequenceFlow="_W-77Izi4Ed6fPrDa2snimQ"/>
-        <gates xmi:type="vsdt:Gate" xmi:id="_ZTjCFji4Ed6fPrDa2snimQ" name="_ZTjCFDi4Ed6fPrDa2snimQ" outgoingSequenceFlow="_ZTjCFTi4Ed6fPrDa2snimQ"/>
-      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_TY9S8Ti4Ed6fPrDa2snimQ" name="Wurde schon bestellt?" id="_TY9S8Di4Ed6fPrDa2snimQ" markerVisible="true"/>
       <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_ZTZ4ITi4Ed6fPrDa2snimQ" name="Angebote einholen" id="_ZTZ4IDi4Ed6fPrDa2snimQ">
         <loopAttributes xmi:type="vsdt:MultiLoopAttSet" xmi:id="_72OzADi4Ed6fPrDa2snimQ"/>
       </containedFlowObjects>
