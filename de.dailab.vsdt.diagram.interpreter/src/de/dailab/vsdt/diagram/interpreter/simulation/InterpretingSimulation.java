@@ -73,15 +73,16 @@ public class InterpretingSimulation extends ManualSimulation implements ISimulat
 	@Override
 	public List<FlowObject> start(BusinessProcessDiagramEditPart diagramEditPart) {
 		BusinessProcessDiagram bpd= diagramEditPart.getCastedModel();
+		boolean hasParseError = false;
 		for (TreeIterator<EObject> iter= bpd.eAllContents(); iter.hasNext(); ) {
 			EObject next= iter.next();
 			if (next instanceof Expression) {
-				// test-parse the expression, result goes to /dev/null
-				Expression expression = (Expression) next;
-				parseExpression(getExpression(expression));
+				// test-parse the expression, exit if result is null
+				Term result = parseExpression(getExpression((Expression) next));
+				hasParseError |= result == null;
 			}
 		}
-		return super.start(diagramEditPart);
+		return hasParseError ? null : super.start(diagramEditPart);
 	}
 	
 	/**

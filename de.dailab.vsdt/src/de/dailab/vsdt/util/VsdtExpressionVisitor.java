@@ -205,7 +205,7 @@ public class VsdtExpressionVisitor {
 	 * Negation:		"!" head = Head;
 	 */
 	protected void visit(Negation negation) {
-		buffer.append("! ");
+		buffer.append("not ");
 		visit(negation.getHead());
 	}
 
@@ -234,7 +234,7 @@ public class VsdtExpressionVisitor {
 	 * Variable:		"$" name = ID (accessor = Accessor)?;
 	 */
 	protected void visit(Variable variable) {
-		buffer.append("$");
+//		buffer.append("$");
 		buffer.append(variable.getName());
 		if (variable.getAccessor() != null) {
 			visit(variable.getAccessor());
@@ -367,10 +367,10 @@ public class VsdtExpressionVisitor {
 			buffer.append("%");
 			break;
 		case AND:
-			buffer.append("&&");
+			buffer.append("and");
 			break;
 		case OR:
-			buffer.append("||");
+			buffer.append("or");
 			break;
 		case CONCAT:
 			buffer.append("++");

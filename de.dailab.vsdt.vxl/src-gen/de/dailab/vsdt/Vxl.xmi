@@ -58,7 +58,7 @@
         <classifier xsi:type="ecore:EClass" href="http://www.dailab.de/vsdt/Vxl#//Negation"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="!"/>
+        <tokens xsi:type="xtext:Keyword" value="not"/>
         <tokens xsi:type="xtext:Assignment" feature="head" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
         </tokens>
@@ -89,7 +89,6 @@
         <classifier xsi:type="ecore:EClass" href="http://www.dailab.de/vsdt/Vxl#//Variable"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="$"/>
         <tokens xsi:type="xtext:Assignment" feature="name" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </tokens>
@@ -233,11 +232,11 @@
         </groups>
         <groups xsi:type="xtext:EnumLiteralDeclaration">
           <enumLiteral href="http://www.dailab.de/vsdt/Vxl#//Operator/AND"/>
-          <literal value="&amp;&amp;"/>
+          <literal value="and"/>
         </groups>
         <groups xsi:type="xtext:EnumLiteralDeclaration">
           <enumLiteral href="http://www.dailab.de/vsdt/Vxl#//Operator/OR"/>
-          <literal value="||"/>
+          <literal value="or"/>
         </groups>
         <groups xsi:type="xtext:EnumLiteralDeclaration">
           <enumLiteral href="http://www.dailab.de/vsdt/Vxl#//Operator/CONCAT"/>

@@ -1,12 +1,26 @@
 package de.dailab.vsdt.trafo.jiacv.export;
 
 import de.dailab.vsdt.util.VsdtExpressionVisitor;
+import de.dailab.vsdt.vxl.Negation;
 import de.dailab.vsdt.vxl.Operator;
+import de.dailab.vsdt.vxl.Variable;
 
 public class JiacVExpressionVisitor extends VsdtExpressionVisitor {
 
 	public JiacVExpressionVisitor(boolean translateExpression, boolean replaceVariableNames) {
 		super(translateExpression, replaceVariableNames);
+	}
+
+	@Override
+	protected void visit(Variable variable) {
+		buffer.append("$");
+		super.visit(variable);
+	}
+	
+	@Override
+	protected void visit(Negation negation) {
+		buffer.append("! ");
+		visit(negation.getHead());
 	}
 	
 	@Override
@@ -14,6 +28,12 @@ public class JiacVExpressionVisitor extends VsdtExpressionVisitor {
 		switch (operator) {
 		case CONCAT:
 			buffer.append("+");
+			break;
+		case AND:
+			buffer.append("&&");
+			break;
+		case OR:
+			buffer.append("||");
 			break;
 		default:
 			super.visit(operator);

@@ -140,7 +140,7 @@ public enum Operator implements Enumerator
    * @generated
    * @ordered
    */
-  AND(11, "AND", "&&"),
+  AND(11, "AND", "and"),
 
   /**
    * The '<em><b>OR</b></em>' literal object.
@@ -150,7 +150,7 @@ public enum Operator implements Enumerator
    * @generated
    * @ordered
    */
-  OR(12, "OR", "||"),
+  OR(12, "OR", "or"),
 
   /**
    * The '<em><b>CONCAT</b></em>' literal object.
@@ -336,7 +336,7 @@ public enum Operator implements Enumerator
    * </p>
    * <!-- end-user-doc -->
    * @see #AND
-   * @model literal="&&"
+   * @model literal="and"
    * @generated
    * @ordered
    */
@@ -351,7 +351,7 @@ public enum Operator implements Enumerator
    * </p>
    * <!-- end-user-doc -->
    * @see #OR
-   * @model literal="||"
+   * @model literal="or"
    * @generated
    * @ordered
    */

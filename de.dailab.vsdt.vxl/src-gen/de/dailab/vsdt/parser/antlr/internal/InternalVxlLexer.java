@@ -17,7 +17,7 @@ public class InternalVxlLexer extends Lexer {
     public static final int T27=27;
     public static final int T26=26;
     public static final int T25=25;
-    public static final int Tokens=35;
+    public static final int Tokens=34;
     public static final int T24=24;
     public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=8;
@@ -32,7 +32,6 @@ public class InternalVxlLexer extends Lexer {
     public static final int T12=12;
     public static final int T13=13;
     public static final int T14=14;
-    public static final int T34=34;
     public static final int RULE_WS=9;
     public static final int T15=15;
     public static final int T33=33;
@@ -89,10 +88,11 @@ public class InternalVxlLexer extends Lexer {
     public final void mT13() throws RecognitionException {
         try {
             int _type = T13;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:12:5: ( '!' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:12:7: '!'
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:12:5: ( 'not' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:12:7: 'not'
             {
-            match('!'); 
+            match("not"); 
+
 
             }
 
@@ -125,10 +125,10 @@ public class InternalVxlLexer extends Lexer {
     public final void mT15() throws RecognitionException {
         try {
             int _type = T15;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:14:5: ( '$' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:14:7: '$'
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:14:5: ( '[' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:14:7: '['
             {
-            match('$'); 
+            match('['); 
 
             }
 
@@ -143,10 +143,10 @@ public class InternalVxlLexer extends Lexer {
     public final void mT16() throws RecognitionException {
         try {
             int _type = T16;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:15:5: ( '[' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:15:7: '['
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:15:5: ( ']' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:15:7: ']'
             {
-            match('['); 
+            match(']'); 
 
             }
 
@@ -161,10 +161,10 @@ public class InternalVxlLexer extends Lexer {
     public final void mT17() throws RecognitionException {
         try {
             int _type = T17;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:16:5: ( ']' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:16:7: ']'
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:16:5: ( '.' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:16:7: '.'
             {
-            match(']'); 
+            match('.'); 
 
             }
 
@@ -179,10 +179,11 @@ public class InternalVxlLexer extends Lexer {
     public final void mT18() throws RecognitionException {
         try {
             int _type = T18;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:17:5: ( '.' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:17:7: '.'
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:17:5: ( 'true' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:17:7: 'true'
             {
-            match('.'); 
+            match("true"); 
+
 
             }
 
@@ -197,10 +198,10 @@ public class InternalVxlLexer extends Lexer {
     public final void mT19() throws RecognitionException {
         try {
             int _type = T19;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:18:5: ( 'true' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:18:7: 'true'
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:18:5: ( 'false' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:18:7: 'false'
             {
-            match("true"); 
+            match("false"); 
 
 
             }
@@ -216,10 +217,10 @@ public class InternalVxlLexer extends Lexer {
     public final void mT20() throws RecognitionException {
         try {
             int _type = T20;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:19:5: ( 'false' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:19:7: 'false'
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:19:5: ( 'null' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:19:7: 'null'
             {
-            match("false"); 
+            match("null"); 
 
 
             }
@@ -235,11 +236,10 @@ public class InternalVxlLexer extends Lexer {
     public final void mT21() throws RecognitionException {
         try {
             int _type = T21;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:20:5: ( 'null' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:20:7: 'null'
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:20:5: ( '<' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:20:7: '<'
             {
-            match("null"); 
-
+            match('<'); 
 
             }
 
@@ -254,10 +254,11 @@ public class InternalVxlLexer extends Lexer {
     public final void mT22() throws RecognitionException {
         try {
             int _type = T22;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:21:5: ( '<' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:21:7: '<'
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:21:5: ( '<=' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:21:7: '<='
             {
-            match('<'); 
+            match("<="); 
+
 
             }
 
@@ -272,10 +273,10 @@ public class InternalVxlLexer extends Lexer {
     public final void mT23() throws RecognitionException {
         try {
             int _type = T23;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:22:5: ( '<=' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:22:7: '<='
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:22:5: ( '==' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:22:7: '=='
             {
-            match("<="); 
+            match("=="); 
 
 
             }
@@ -291,10 +292,10 @@ public class InternalVxlLexer extends Lexer {
     public final void mT24() throws RecognitionException {
         try {
             int _type = T24;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:23:5: ( '==' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:23:7: '=='
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:23:5: ( '!=' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:23:7: '!='
             {
-            match("=="); 
+            match("!="); 
 
 
             }
@@ -310,11 +311,10 @@ public class InternalVxlLexer extends Lexer {
     public final void mT25() throws RecognitionException {
         try {
             int _type = T25;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:24:5: ( '!=' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:24:7: '!='
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:24:5: ( '>' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:24:7: '>'
             {
-            match("!="); 
-
+            match('>'); 
 
             }
 
@@ -329,10 +329,11 @@ public class InternalVxlLexer extends Lexer {
     public final void mT26() throws RecognitionException {
         try {
             int _type = T26;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:25:5: ( '>' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:25:7: '>'
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:25:5: ( '>=' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:25:7: '>='
             {
-            match('>'); 
+            match(">="); 
+
 
             }
 
@@ -347,11 +348,10 @@ public class InternalVxlLexer extends Lexer {
     public final void mT27() throws RecognitionException {
         try {
             int _type = T27;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:26:5: ( '>=' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:26:7: '>='
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:26:5: ( '+' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:26:7: '+'
             {
-            match(">="); 
-
+            match('+'); 
 
             }
 
@@ -366,10 +366,10 @@ public class InternalVxlLexer extends Lexer {
     public final void mT28() throws RecognitionException {
         try {
             int _type = T28;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:27:5: ( '+' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:27:7: '+'
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:27:5: ( '*' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:27:7: '*'
             {
-            match('+'); 
+            match('*'); 
 
             }
 
@@ -384,10 +384,10 @@ public class InternalVxlLexer extends Lexer {
     public final void mT29() throws RecognitionException {
         try {
             int _type = T29;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:28:5: ( '*' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:28:7: '*'
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:28:5: ( '/' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:28:7: '/'
             {
-            match('*'); 
+            match('/'); 
 
             }
 
@@ -402,10 +402,10 @@ public class InternalVxlLexer extends Lexer {
     public final void mT30() throws RecognitionException {
         try {
             int _type = T30;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:29:5: ( '/' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:29:7: '/'
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:29:5: ( '%' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:29:7: '%'
             {
-            match('/'); 
+            match('%'); 
 
             }
 
@@ -420,10 +420,11 @@ public class InternalVxlLexer extends Lexer {
     public final void mT31() throws RecognitionException {
         try {
             int _type = T31;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:30:5: ( '%' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:30:7: '%'
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:30:5: ( 'and' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:30:7: 'and'
             {
-            match('%'); 
+            match("and"); 
+
 
             }
 
@@ -438,10 +439,10 @@ public class InternalVxlLexer extends Lexer {
     public final void mT32() throws RecognitionException {
         try {
             int _type = T32;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:31:5: ( '&&' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:31:7: '&&'
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:31:5: ( 'or' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:31:7: 'or'
             {
-            match("&&"); 
+            match("or"); 
 
 
             }
@@ -457,27 +458,8 @@ public class InternalVxlLexer extends Lexer {
     public final void mT33() throws RecognitionException {
         try {
             int _type = T33;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:32:5: ( '||' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:32:7: '||'
-            {
-            match("||"); 
-
-
-            }
-
-            this.type = _type;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end T33
-
-    // $ANTLR start T34
-    public final void mT34() throws RecognitionException {
-        try {
-            int _type = T34;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:33:5: ( '++' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:33:7: '++'
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:32:5: ( '++' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:32:7: '++'
             {
             match("++"); 
 
@@ -489,16 +471,16 @@ public class InternalVxlLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end T34
+    // $ANTLR end T33
 
     // $ANTLR start RULE_ID
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1055:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1055:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1051:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1051:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1055:11: ( '^' )?
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1051:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -507,7 +489,7 @@ public class InternalVxlLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1055:11: '^'
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1051:11: '^'
                     {
                     match('^'); 
 
@@ -526,7 +508,7 @@ public class InternalVxlLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1055:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1051:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -574,10 +556,10 @@ public class InternalVxlLexer extends Lexer {
     public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1057:10: ( ( '0' .. '9' )+ )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1057:12: ( '0' .. '9' )+
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1053:10: ( ( '0' .. '9' )+ )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1053:12: ( '0' .. '9' )+
             {
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1057:12: ( '0' .. '9' )+
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1053:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -591,7 +573,7 @@ public class InternalVxlLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1057:13: '0' .. '9'
+            	    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1053:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -621,10 +603,10 @@ public class InternalVxlLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1055:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1055:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1055:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -636,16 +618,16 @@ public class InternalVxlLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("1059:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
+                    new NoViableAltException("1055:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1055:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1055:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -661,7 +643,7 @@ public class InternalVxlLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1055:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -678,7 +660,7 @@ public class InternalVxlLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:62: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1055:62: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -704,10 +686,10 @@ public class InternalVxlLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1055:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1055:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -723,7 +705,7 @@ public class InternalVxlLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1055:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -740,7 +722,7 @@ public class InternalVxlLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:129: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1055:129: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -782,12 +764,12 @@ public class InternalVxlLexer extends Lexer {
     public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1061:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1061:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1057:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1057:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1061:24: ( options {greedy=false; } : . )*
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1057:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -812,7 +794,7 @@ public class InternalVxlLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1061:52: .
+            	    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1057:52: .
             	    {
             	    matchAny(); 
 
@@ -840,12 +822,12 @@ public class InternalVxlLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1063:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1063:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1063:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -858,7 +840,7 @@ public class InternalVxlLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1063:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -879,7 +861,7 @@ public class InternalVxlLexer extends Lexer {
                 }
             } while (true);
 
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1063:40: ( ( '\\r' )? '\\n' )?
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -888,9 +870,9 @@ public class InternalVxlLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1063:41: ( '\\r' )? '\\n'
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:41: ( '\\r' )? '\\n'
                     {
-                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1063:41: ( '\\r' )?
+                    // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -899,7 +881,7 @@ public class InternalVxlLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1063:41: '\\r'
+                            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1059:41: '\\r'
                             {
                             match('\r'); 
 
@@ -929,10 +911,10 @@ public class InternalVxlLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1065:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1065:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1061:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1061:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1065:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1061:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -985,8 +967,8 @@ public class InternalVxlLexer extends Lexer {
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1067:16: ( . )
-            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1067:18: .
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1063:16: ( . )
+            // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1063:18: .
             {
             matchAny(); 
 
@@ -1000,8 +982,8 @@ public class InternalVxlLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt12=31;
+        // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt12=30;
         int LA12_0 = input.LA(1);
 
         if ( (LA12_0=='(') ) {
@@ -1010,235 +992,269 @@ public class InternalVxlLexer extends Lexer {
         else if ( (LA12_0==')') ) {
             alt12=2;
         }
-        else if ( (LA12_0=='!') ) {
-            int LA12_3 = input.LA(2);
+        else if ( (LA12_0=='n') ) {
+            switch ( input.LA(2) ) {
+            case 'o':
+                {
+                int LA12_29 = input.LA(3);
 
-            if ( (LA12_3=='=') ) {
-                alt12=15;
-            }
-            else {
-                alt12=3;}
+                if ( (LA12_29=='t') ) {
+                    int LA12_56 = input.LA(4);
+
+                    if ( ((LA12_56>='0' && LA12_56<='9')||(LA12_56>='A' && LA12_56<='Z')||LA12_56=='_'||(LA12_56>='a' && LA12_56<='z')) ) {
+                        alt12=24;
+                    }
+                    else {
+                        alt12=3;}
+                }
+                else {
+                    alt12=24;}
+                }
+                break;
+            case 'u':
+                {
+                int LA12_30 = input.LA(3);
+
+                if ( (LA12_30=='l') ) {
+                    int LA12_57 = input.LA(4);
+
+                    if ( (LA12_57=='l') ) {
+                        int LA12_63 = input.LA(5);
+
+                        if ( ((LA12_63>='0' && LA12_63<='9')||(LA12_63>='A' && LA12_63<='Z')||LA12_63=='_'||(LA12_63>='a' && LA12_63<='z')) ) {
+                            alt12=24;
+                        }
+                        else {
+                            alt12=10;}
+                    }
+                    else {
+                        alt12=24;}
+                }
+                else {
+                    alt12=24;}
+                }
+                break;
+            default:
+                alt12=24;}
+
         }
         else if ( (LA12_0=='-') ) {
             alt12=4;
         }
-        else if ( (LA12_0=='$') ) {
+        else if ( (LA12_0=='[') ) {
             alt12=5;
         }
-        else if ( (LA12_0=='[') ) {
+        else if ( (LA12_0==']') ) {
             alt12=6;
         }
-        else if ( (LA12_0==']') ) {
+        else if ( (LA12_0=='.') ) {
             alt12=7;
         }
-        else if ( (LA12_0=='.') ) {
-            alt12=8;
-        }
         else if ( (LA12_0=='t') ) {
-            int LA12_9 = input.LA(2);
+            int LA12_8 = input.LA(2);
 
-            if ( (LA12_9=='r') ) {
-                int LA12_37 = input.LA(3);
+            if ( (LA12_8=='r') ) {
+                int LA12_36 = input.LA(3);
 
-                if ( (LA12_37=='u') ) {
+                if ( (LA12_36=='u') ) {
                     int LA12_58 = input.LA(4);
 
                     if ( (LA12_58=='e') ) {
-                        int LA12_61 = input.LA(5);
+                        int LA12_64 = input.LA(5);
 
-                        if ( ((LA12_61>='0' && LA12_61<='9')||(LA12_61>='A' && LA12_61<='Z')||LA12_61=='_'||(LA12_61>='a' && LA12_61<='z')) ) {
-                            alt12=25;
+                        if ( ((LA12_64>='0' && LA12_64<='9')||(LA12_64>='A' && LA12_64<='Z')||LA12_64=='_'||(LA12_64>='a' && LA12_64<='z')) ) {
+                            alt12=24;
                         }
                         else {
-                            alt12=9;}
+                            alt12=8;}
                     }
                     else {
-                        alt12=25;}
+                        alt12=24;}
                 }
                 else {
-                    alt12=25;}
+                    alt12=24;}
             }
             else {
-                alt12=25;}
+                alt12=24;}
         }
         else if ( (LA12_0=='f') ) {
-            int LA12_10 = input.LA(2);
+            int LA12_9 = input.LA(2);
 
-            if ( (LA12_10=='a') ) {
-                int LA12_39 = input.LA(3);
+            if ( (LA12_9=='a') ) {
+                int LA12_37 = input.LA(3);
 
-                if ( (LA12_39=='l') ) {
+                if ( (LA12_37=='l') ) {
                     int LA12_59 = input.LA(4);
 
                     if ( (LA12_59=='s') ) {
-                        int LA12_62 = input.LA(5);
+                        int LA12_65 = input.LA(5);
 
-                        if ( (LA12_62=='e') ) {
-                            int LA12_65 = input.LA(6);
+                        if ( (LA12_65=='e') ) {
+                            int LA12_69 = input.LA(6);
 
-                            if ( ((LA12_65>='0' && LA12_65<='9')||(LA12_65>='A' && LA12_65<='Z')||LA12_65=='_'||(LA12_65>='a' && LA12_65<='z')) ) {
-                                alt12=25;
+                            if ( ((LA12_69>='0' && LA12_69<='9')||(LA12_69>='A' && LA12_69<='Z')||LA12_69=='_'||(LA12_69>='a' && LA12_69<='z')) ) {
+                                alt12=24;
                             }
                             else {
-                                alt12=10;}
+                                alt12=9;}
                         }
                         else {
-                            alt12=25;}
+                            alt12=24;}
                     }
                     else {
-                        alt12=25;}
+                        alt12=24;}
                 }
                 else {
-                    alt12=25;}
+                    alt12=24;}
             }
             else {
-                alt12=25;}
-        }
-        else if ( (LA12_0=='n') ) {
-            int LA12_11 = input.LA(2);
-
-            if ( (LA12_11=='u') ) {
-                int LA12_40 = input.LA(3);
-
-                if ( (LA12_40=='l') ) {
-                    int LA12_60 = input.LA(4);
-
-                    if ( (LA12_60=='l') ) {
-                        int LA12_63 = input.LA(5);
-
-                        if ( ((LA12_63>='0' && LA12_63<='9')||(LA12_63>='A' && LA12_63<='Z')||LA12_63=='_'||(LA12_63>='a' && LA12_63<='z')) ) {
-                            alt12=25;
-                        }
-                        else {
-                            alt12=11;}
-                    }
-                    else {
-                        alt12=25;}
-                }
-                else {
-                    alt12=25;}
-            }
-            else {
-                alt12=25;}
+                alt12=24;}
         }
         else if ( (LA12_0=='<') ) {
-            int LA12_12 = input.LA(2);
+            int LA12_10 = input.LA(2);
 
-            if ( (LA12_12=='=') ) {
+            if ( (LA12_10=='=') ) {
+                alt12=12;
+            }
+            else {
+                alt12=11;}
+        }
+        else if ( (LA12_0=='=') ) {
+            int LA12_11 = input.LA(2);
+
+            if ( (LA12_11=='=') ) {
                 alt12=13;
             }
             else {
-                alt12=12;}
+                alt12=30;}
         }
-        else if ( (LA12_0=='=') ) {
-            int LA12_13 = input.LA(2);
+        else if ( (LA12_0=='!') ) {
+            int LA12_12 = input.LA(2);
 
-            if ( (LA12_13=='=') ) {
+            if ( (LA12_12=='=') ) {
                 alt12=14;
             }
             else {
-                alt12=31;}
+                alt12=30;}
         }
         else if ( (LA12_0=='>') ) {
-            int LA12_14 = input.LA(2);
+            int LA12_13 = input.LA(2);
 
-            if ( (LA12_14=='=') ) {
-                alt12=17;
+            if ( (LA12_13=='=') ) {
+                alt12=16;
             }
             else {
-                alt12=16;}
+                alt12=15;}
         }
         else if ( (LA12_0=='+') ) {
-            int LA12_15 = input.LA(2);
+            int LA12_14 = input.LA(2);
 
-            if ( (LA12_15=='+') ) {
-                alt12=24;
+            if ( (LA12_14=='+') ) {
+                alt12=23;
             }
             else {
-                alt12=18;}
+                alt12=17;}
         }
         else if ( (LA12_0=='*') ) {
-            alt12=19;
+            alt12=18;
         }
         else if ( (LA12_0=='/') ) {
             switch ( input.LA(2) ) {
             case '*':
                 {
-                alt12=28;
+                alt12=27;
                 }
                 break;
             case '/':
                 {
-                alt12=29;
+                alt12=28;
                 }
                 break;
             default:
-                alt12=20;}
+                alt12=19;}
 
         }
         else if ( (LA12_0=='%') ) {
-            alt12=21;
+            alt12=20;
         }
-        else if ( (LA12_0=='&') ) {
+        else if ( (LA12_0=='a') ) {
+            int LA12_18 = input.LA(2);
+
+            if ( (LA12_18=='n') ) {
+                int LA12_51 = input.LA(3);
+
+                if ( (LA12_51=='d') ) {
+                    int LA12_60 = input.LA(4);
+
+                    if ( ((LA12_60>='0' && LA12_60<='9')||(LA12_60>='A' && LA12_60<='Z')||LA12_60=='_'||(LA12_60>='a' && LA12_60<='z')) ) {
+                        alt12=24;
+                    }
+                    else {
+                        alt12=21;}
+                }
+                else {
+                    alt12=24;}
+            }
+            else {
+                alt12=24;}
+        }
+        else if ( (LA12_0=='o') ) {
             int LA12_19 = input.LA(2);
 
-            if ( (LA12_19=='&') ) {
-                alt12=22;
-            }
-            else {
-                alt12=31;}
-        }
-        else if ( (LA12_0=='|') ) {
-            int LA12_20 = input.LA(2);
+            if ( (LA12_19=='r') ) {
+                int LA12_52 = input.LA(3);
 
-            if ( (LA12_20=='|') ) {
-                alt12=23;
+                if ( ((LA12_52>='0' && LA12_52<='9')||(LA12_52>='A' && LA12_52<='Z')||LA12_52=='_'||(LA12_52>='a' && LA12_52<='z')) ) {
+                    alt12=24;
+                }
+                else {
+                    alt12=22;}
             }
             else {
-                alt12=31;}
+                alt12=24;}
         }
         else if ( (LA12_0=='^') ) {
-            int LA12_21 = input.LA(2);
+            int LA12_20 = input.LA(2);
 
-            if ( ((LA12_21>='A' && LA12_21<='Z')||LA12_21=='_'||(LA12_21>='a' && LA12_21<='z')) ) {
-                alt12=25;
+            if ( ((LA12_20>='A' && LA12_20<='Z')||LA12_20=='_'||(LA12_20>='a' && LA12_20<='z')) ) {
+                alt12=24;
             }
             else {
-                alt12=31;}
+                alt12=30;}
         }
-        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='e')||(LA12_0>='g' && LA12_0<='m')||(LA12_0>='o' && LA12_0<='s')||(LA12_0>='u' && LA12_0<='z')) ) {
-            alt12=25;
+        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='b' && LA12_0<='e')||(LA12_0>='g' && LA12_0<='m')||(LA12_0>='p' && LA12_0<='s')||(LA12_0>='u' && LA12_0<='z')) ) {
+            alt12=24;
         }
         else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
-            alt12=26;
+            alt12=25;
         }
         else if ( (LA12_0=='\"') ) {
+            int LA12_23 = input.LA(2);
+
+            if ( ((LA12_23>='\u0000' && LA12_23<='\uFFFE')) ) {
+                alt12=26;
+            }
+            else {
+                alt12=30;}
+        }
+        else if ( (LA12_0=='\'') ) {
             int LA12_24 = input.LA(2);
 
             if ( ((LA12_24>='\u0000' && LA12_24<='\uFFFE')) ) {
-                alt12=27;
+                alt12=26;
             }
             else {
-                alt12=31;}
-        }
-        else if ( (LA12_0=='\'') ) {
-            int LA12_25 = input.LA(2);
-
-            if ( ((LA12_25>='\u0000' && LA12_25<='\uFFFE')) ) {
-                alt12=27;
-            }
-            else {
-                alt12=31;}
+                alt12=30;}
         }
         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
-            alt12=30;
+            alt12=29;
         }
-        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='#'||LA12_0==','||(LA12_0>=':' && LA12_0<=';')||(LA12_0>='?' && LA12_0<='@')||LA12_0=='\\'||LA12_0=='`'||LA12_0=='{'||(LA12_0>='}' && LA12_0<='\uFFFE')) ) {
-            alt12=31;
+        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||(LA12_0>='#' && LA12_0<='$')||LA12_0=='&'||LA12_0==','||(LA12_0>=':' && LA12_0<=';')||(LA12_0>='?' && LA12_0<='@')||LA12_0=='\\'||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFE')) ) {
+            alt12=30;
         }
         else {
             NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
+                new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
 
             throw nvae;
         }
@@ -1405,56 +1421,49 @@ public class InternalVxlLexer extends Lexer {
                 }
                 break;
             case 24 :
-                // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1:102: T34
-                {
-                mT34(); 
-
-                }
-                break;
-            case 25 :
-                // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1:106: RULE_ID
+                // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1:102: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 26 :
-                // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1:114: RULE_INT
+            case 25 :
+                // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1:110: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 27 :
-                // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1:123: RULE_STRING
+            case 26 :
+                // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1:119: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 28 :
-                // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1:135: RULE_ML_COMMENT
+            case 27 :
+                // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1:131: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 29 :
-                // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1:151: RULE_SL_COMMENT
+            case 28 :
+                // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1:147: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 30 :
-                // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1:167: RULE_WS
+            case 29 :
+                // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1:163: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 31 :
-                // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1:175: RULE_ANY_OTHER
+            case 30 :
+                // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/parser/antlr/internal/InternalVxl.g:1:171: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

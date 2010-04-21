@@ -143,19 +143,19 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	public class NegationElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Negation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cExclamationMarkKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cNotKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cHeadAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cHeadHeadParserRuleCall_1_0 = (RuleCall)cHeadAssignment_1.eContents().get(0);
 		
 		//Negation:
-		//  "!" head=Head;
+		//  "not" head=Head;
 		public ParserRule getRule() { return rule; }
 
-		//"!" head=Head
+		//"not" head=Head
 		public Group getGroup() { return cGroup; }
 
-		//"!"
-		public Keyword getExclamationMarkKeyword_0() { return cExclamationMarkKeyword_0; }
+		//"not"
+		public Keyword getNotKeyword_0() { return cNotKeyword_0; }
 
 		//head=Head
 		public Assignment getHeadAssignment_1() { return cHeadAssignment_1; }
@@ -217,35 +217,31 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	public class VariableElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Variable");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cDollarSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Assignment cAccessorAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cAccessorAccessorParserRuleCall_2_0 = (RuleCall)cAccessorAssignment_2.eContents().get(0);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final Assignment cAccessorAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cAccessorAccessorParserRuleCall_1_0 = (RuleCall)cAccessorAssignment_1.eContents().get(0);
 		
 		//Variable:
-		//  "$" name=ID accessor=Accessor?; 
+		//  name=ID accessor=Accessor?; 
 		//
 		//// VARIABLES & ACCESSORS
 		public ParserRule getRule() { return rule; }
 
-		//"$" name=ID accessor=Accessor?
+		//name=ID accessor=Accessor?
 		public Group getGroup() { return cGroup; }
 
-		//"$"
-		public Keyword getDollarSignKeyword_0() { return cDollarSignKeyword_0; }
-
 		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
 		//accessor=Accessor?
-		public Assignment getAccessorAssignment_2() { return cAccessorAssignment_2; }
+		public Assignment getAccessorAssignment_1() { return cAccessorAssignment_1; }
 
 		//Accessor
-		public RuleCall getAccessorAccessorParserRuleCall_2_0() { return cAccessorAccessorParserRuleCall_2_0; }
+		public RuleCall getAccessorAccessorParserRuleCall_1_0() { return cAccessorAccessorParserRuleCall_1_0; }
 	}
 
 	public class AccessorElements implements IParserRuleAccess {
@@ -510,15 +506,15 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		private final EnumLiteralDeclaration cMODEnumLiteralDeclaration_10 = (EnumLiteralDeclaration)cAlternatives.eContents().get(10);
 		private final Keyword cMODPercentSignKeyword_10_0 = (Keyword)cMODEnumLiteralDeclaration_10.eContents().get(0);
 		private final EnumLiteralDeclaration cANDEnumLiteralDeclaration_11 = (EnumLiteralDeclaration)cAlternatives.eContents().get(11);
-		private final Keyword cANDAmpersandAmpersandKeyword_11_0 = (Keyword)cANDEnumLiteralDeclaration_11.eContents().get(0);
+		private final Keyword cANDAndKeyword_11_0 = (Keyword)cANDEnumLiteralDeclaration_11.eContents().get(0);
 		private final EnumLiteralDeclaration cOREnumLiteralDeclaration_12 = (EnumLiteralDeclaration)cAlternatives.eContents().get(12);
-		private final Keyword cORVerticalLineVerticalLineKeyword_12_0 = (Keyword)cOREnumLiteralDeclaration_12.eContents().get(0);
+		private final Keyword cOROrKeyword_12_0 = (Keyword)cOREnumLiteralDeclaration_12.eContents().get(0);
 		private final EnumLiteralDeclaration cCONCATEnumLiteralDeclaration_13 = (EnumLiteralDeclaration)cAlternatives.eContents().get(13);
 		private final Keyword cCONCATPlusSignPlusSignKeyword_13_0 = (Keyword)cCONCATEnumLiteralDeclaration_13.eContents().get(0);
 		
 		//enum Operator:
 		//  LT="<" | LE="<=" | EQ="==" | NEQ="!=" | GT=">" | GE=">=" | ADD="+" | SUB="-" | MULT="*" | DIV="/" |
-		//  MOD="%" | AND="&&" | OR="||" | CONCAT="++"; 
+		//  MOD="%" | AND="and" | OR="or" | CONCAT="++"; 
 		//
 		//// OPERATIONS
 		//   
@@ -532,7 +528,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		public EnumRule getRule() { return rule; }
 
 		//LT="<" | LE="<=" | EQ="==" | NEQ="!=" | GT=">" | GE=">=" | ADD="+" | SUB="-" | MULT="*" | DIV="/" |
-		//MOD="%" | AND="&&" | OR="||" | CONCAT="++" 
+		//MOD="%" | AND="and" | OR="or" | CONCAT="++" 
 		//
 		//// OPERATIONS
 		//   
@@ -641,23 +637,23 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		//"%"
 		public Keyword getMODPercentSignKeyword_10_0() { return cMODPercentSignKeyword_10_0; }
 
-		//AND="&&"  
+		//AND="and"  
 		//	                                              	 // Term ** Term -> Bool
 		//	                                       			 // Num ** Num -> Num
 		//	               												 // Bool ** Bool -> Bool
 		public EnumLiteralDeclaration getANDEnumLiteralDeclaration_11() { return cANDEnumLiteralDeclaration_11; }
 
-		//"&&" 			 // Num ** Num -> Num
-		public Keyword getANDAmpersandAmpersandKeyword_11_0() { return cANDAmpersandAmpersandKeyword_11_0; }
+		//"and" 			 // Num ** Num -> Num
+		public Keyword getANDAndKeyword_11_0() { return cANDAndKeyword_11_0; }
 
-		//OR="||"  
+		//OR="or"  
 		//	                                              	 // Term ** Term -> Bool
 		//	                                       			 // Num ** Num -> Num
 		//	               												 // Bool ** Bool -> Bool
 		public EnumLiteralDeclaration getOREnumLiteralDeclaration_12() { return cOREnumLiteralDeclaration_12; }
 
-		//"||"
-		public Keyword getORVerticalLineVerticalLineKeyword_12_0() { return cORVerticalLineVerticalLineKeyword_12_0; }
+		//"or"
+		public Keyword getOROrKeyword_12_0() { return cOROrKeyword_12_0; }
 
 		//CONCAT="++"  
 		//	                                              	 // Term ** Term -> Bool
@@ -752,7 +748,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	}
 
 	//Negation:
-	//  "!" head=Head;
+	//  "not" head=Head;
 	public NegationElements getNegationAccess() {
 		return (pNegation != null) ? pNegation : (pNegation = new NegationElements());
 	}
@@ -785,7 +781,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	}
 
 	//Variable:
-	//  "$" name=ID accessor=Accessor?; 
+	//  name=ID accessor=Accessor?; 
 	//
 	//// VARIABLES & ACCESSORS
 	public VariableElements getVariableAccess() {
@@ -892,7 +888,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 
 	//enum Operator:
 	//  LT="<" | LE="<=" | EQ="==" | NEQ="!=" | GT=">" | GE=">=" | ADD="+" | SUB="-" | MULT="*" | DIV="/" |
-	//  MOD="%" | AND="&&" | OR="||" | CONCAT="++"; 
+	//  MOD="%" | AND="and" | OR="or" | CONCAT="++"; 
 	//
 	//// OPERATIONS
 	//   

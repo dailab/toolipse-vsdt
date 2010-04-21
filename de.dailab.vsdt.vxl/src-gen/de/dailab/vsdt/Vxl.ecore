@@ -57,8 +57,8 @@
     <eLiterals name="MULT" value="8" literal="*"/>
     <eLiterals name="DIV" value="9" literal="/"/>
     <eLiterals name="MOD" value="10" literal="%"/>
-    <eLiterals name="AND" value="11" literal="&amp;&amp;"/>
-    <eLiterals name="OR" value="12" literal="||"/>
+    <eLiterals name="AND" value="11" literal="and"/>
+    <eLiterals name="OR" value="12" literal="or"/>
     <eLiterals name="CONCAT" value="13" literal="++"/>
   </eClassifiers>
 </ecore:EPackage>

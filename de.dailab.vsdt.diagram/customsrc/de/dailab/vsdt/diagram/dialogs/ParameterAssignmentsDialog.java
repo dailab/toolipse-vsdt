@@ -344,13 +344,13 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 	/**
 	 * Little helper method for uniform string representation of properties. 
 	 * This also has to comply to the VSDT Expression Language syntax.
-	 * A Property with name "foo" is represented as "$foo"
+	 * A Property with name "foo" is represented as "foo"
 	 * 
 	 * @param p		some property
 	 * @return		uniformly formatted string representation
 	 */
 	private String getString(Property p) {
-		return p != null? "$"+p.getName() : null;
+		return p != null? p.getName() : null;
 	}
 		
 }

@@ -567,11 +567,11 @@ protected class BracketTerm_RightParenthesisKeyword_2 extends KeywordToken  {
 /************ begin Rule Negation ****************
  *
  * Negation:
- *   "!" head=Head;
+ *   "not" head=Head;
  *
  **/
 
-// "!" head=Head
+// "not" head=Head
 protected class Negation_Group extends GroupToken {
 	
 	public Negation_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -595,15 +595,15 @@ protected class Negation_Group extends GroupToken {
 	}
 }
 
-// "!"
-protected class Negation_ExclamationMarkKeyword_0 extends KeywordToken  {
+// "not"
+protected class Negation_NotKeyword_0 extends KeywordToken  {
 	
-	public Negation_ExclamationMarkKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Negation_NotKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getNegationAccess().getExclamationMarkKeyword_0();
+		return grammarAccess.getNegationAccess().getNotKeyword_0();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -650,7 +650,7 @@ protected class Negation_HeadAssignment_1 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Negation_ExclamationMarkKeyword_0(parent, next, actIndex, consumed);
+			case 0: return new Negation_NotKeyword_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -863,13 +863,13 @@ protected class Atom_VariableParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Variable ****************
  *
  * Variable:
- *   "$" name=ID accessor=Accessor?; 
+ *   name=ID accessor=Accessor?; 
  * 
  * // VARIABLES & ACCESSORS
  *
  **/
 
-// "$" name=ID accessor=Accessor?
+// name=ID accessor=Accessor?
 protected class Variable_Group extends GroupToken {
 	
 	public Variable_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -882,8 +882,8 @@ protected class Variable_Group extends GroupToken {
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Variable_AccessorAssignment_2(parent, this, 0, inst);
-			case 1: return new Variable_NameAssignment_1(parent, this, 1, inst);
+			case 0: return new Variable_AccessorAssignment_1(parent, this, 0, inst);
+			case 1: return new Variable_NameAssignment_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -894,15 +894,15 @@ protected class Variable_Group extends GroupToken {
 	}
 }
 
-// "$"
-protected class Variable_DollarSignKeyword_0 extends KeywordToken  {
+// name=ID
+protected class Variable_NameAssignment_0 extends AssignmentToken  {
 	
-	public Variable_DollarSignKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Variable_NameAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
-	public Keyword getGrammarElement() {
-		return grammarAccess.getVariableAccess().getDollarSignKeyword_0();
+	public Assignment getGrammarElement() {
+		return grammarAccess.getVariableAccess().getNameAssignment_0();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -911,32 +911,12 @@ protected class Variable_DollarSignKeyword_0 extends KeywordToken  {
 		}	
 	}	
 		
-}
-
-// name=ID
-protected class Variable_NameAssignment_1 extends AssignmentToken  {
-	
-	public Variable_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Assignment getGrammarElement() {
-		return grammarAccess.getVariableAccess().getNameAssignment_1();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Variable_DollarSignKeyword_0(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.getVariableAccess().getNameIDTerminalRuleCall_1_0();
+			element = grammarAccess.getVariableAccess().getNameIDTerminalRuleCall_0_0();
 			return obj;
 		}
 		return null;
@@ -945,14 +925,14 @@ protected class Variable_NameAssignment_1 extends AssignmentToken  {
 }
 
 // accessor=Accessor?
-protected class Variable_AccessorAssignment_2 extends AssignmentToken  {
+protected class Variable_AccessorAssignment_1 extends AssignmentToken  {
 	
-	public Variable_AccessorAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Variable_AccessorAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getVariableAccess().getAccessorAssignment_2();
+		return grammarAccess.getVariableAccess().getAccessorAssignment_1();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -969,7 +949,7 @@ protected class Variable_AccessorAssignment_2 extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAccessorRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getVariableAccess().getAccessorAccessorParserRuleCall_2_0(); 
+				element = grammarAccess.getVariableAccess().getAccessorAccessorParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -980,7 +960,7 @@ protected class Variable_AccessorAssignment_2 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Variable_NameAssignment_1(parent, next, actIndex, consumed);
+			case 0: return new Variable_NameAssignment_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	

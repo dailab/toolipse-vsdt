@@ -322,9 +322,9 @@ ruleNegation returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('!' 
+('not' 
     {
-        createLeafNode(grammarAccess.getNegationAccess().getExclamationMarkKeyword_0(), null); 
+        createLeafNode(grammarAccess.getNegationAccess().getNotKeyword_0(), null); 
     }
 (	
 	
@@ -454,15 +454,11 @@ ruleVariable returns [EObject current=null]
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
-('$' 
-    {
-        createLeafNode(grammarAccess.getVariableAccess().getDollarSignKeyword_0(), null); 
-    }
-(	
+((	
 	
-	    lv_name_1=	RULE_ID
+	    lv_name_0=	RULE_ID
 	{
-		createLeafNode(grammarAccess.getVariableAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+		createLeafNode(grammarAccess.getVariableAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 	}
  
 	    {
@@ -472,7 +468,7 @@ ruleVariable returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "name", lv_name_1, "ID", lastConsumedNode);
+	       		set($current, "name", lv_name_0, "ID", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -482,9 +478,9 @@ ruleVariable returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.getVariableAccess().getAccessorAccessorParserRuleCall_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getVariableAccess().getAccessorAccessorParserRuleCall_1_0(), currentNode); 
 	    }
-	    lv_accessor_2=ruleAccessor 
+	    lv_accessor_1=ruleAccessor 
 	    {
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getVariableRule().getType().getClassifier());
@@ -492,7 +488,7 @@ ruleVariable returns [EObject current=null]
 	        }
 	        
 	        try {
-	       		set($current, "accessor", lv_accessor_2, "Accessor", currentNode);
+	       		set($current, "accessor", lv_accessor_1, "Accessor", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -1031,13 +1027,13 @@ ruleOperator returns [Enumerator current=null]
         createLeafNode(grammarAccess.getOperatorAccess().getMODEnumLiteralDeclaration_10(), null); 
     }
 )
-    |(	'&&' 
+    |(	'and' 
 	{
         $current = grammarAccess.getOperatorAccess().getANDEnumLiteralDeclaration_11().getEnumLiteral().getInstance();
         createLeafNode(grammarAccess.getOperatorAccess().getANDEnumLiteralDeclaration_11(), null); 
     }
 )
-    |(	'||' 
+    |(	'or' 
 	{
         $current = grammarAccess.getOperatorAccess().getOREnumLiteralDeclaration_12().getEnumLiteral().getInstance();
         createLeafNode(grammarAccess.getOperatorAccess().getOREnumLiteralDeclaration_12(), null); 
