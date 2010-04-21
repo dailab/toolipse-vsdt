@@ -55,7 +55,7 @@ public class VxlInterpreter {
 	 */
 	protected Object eval(Term term) {
 		TermTree orderedTermTree= TermOrdering.createOrderedTermTree(term);
-		TermOrdering.print(orderedTermTree, 0);
+//		TermOrdering.print(orderedTermTree, 0);
 		return eval(orderedTermTree);
 	}
 	
