@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vsdt:BusinessProcessDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:vsdt="http://de.dailab.vsdt" xmi:id="_y83UMf9VEd2WMK6zIp0ZxQ" name="MAMS Mother of Scripts" id="_y83UMP9VEd2WMK6zIp0ZxQ" version="0.1" creationDate="2009-02-20T14:53:04.755+0100" modificationDate="2009-02-20T14:53:04.755+0100">
+  <pools xmi:type="vsdt:Pool" xmi:id="_z2lxgf9VEd2WMK6zIp0ZxQ" name="Mother Of Scripts" documentation="global service id_13acaaad_55f3_4526_9317_2f13697bbda3Service" id="_z2lxgP9VEd2WMK6zIp0ZxQ" participant="_gIeSAP9eEd2HOumRS97HdQ">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_z2lxhf9VEd2WMK6zIp0ZxQ" name="Mother Of Scripts_Process" id="_z2lxhP9VEd2WMK6zIp0ZxQ">
+      <properties xmi:type="vsdt:Property" xmi:id="_lXpFkP9eEd2HOumRS97HdQ" name="tmpUserID" type="string[]"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_xzilkP9eEd2HOumRS97HdQ" name="tmpUserName" type="string[]"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_z38tUP9eEd2HOumRS97HdQ" name="tmpUserPhone" type="string[]"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_z6ec4P9eEd2HOumRS97HdQ" name="tmpUserSIP" type="string[]"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_z79qoP9eEd2HOumRS97HdQ" name="tmpUserMail" type="string[]"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_z-pLMP9eEd2HOumRS97HdQ" name="tmpGroupID" type="string[]"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_z_-n8P9eEd2HOumRS97HdQ" name="tmpGroupName" type="string[]"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_i3HpkP9eEd2HOumRS97HdQ" name="tmpGroupMemberIDs" type="string[]"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_9EUWQP9eEd2HOumRS97HdQ" name="tmpGroupMemberNames" type="string[]"/>
+    </process>
+    <lanes xmi:type="vsdt:Lane" xmi:id="_z2lxg_9VEd2WMK6zIp0ZxQ" id="_z2lxgv9VEd2WMK6zIp0ZxQ" boundaryVisible="false">
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_AvuAEf9WEd2WMK6zIp0ZxQ" name="Get User ID" id="_AvuAEP9WEd2WMK6zIp0ZxQ" activityType="SERVICE" inMessage="_cQWxsAJjEd6kEvVQwL646A" outMessage="_cQWxsQJjEd6kEvVQwL646A" implementation="_cQD2wAJjEd6kEvVQwL646A">
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_A1GAUAJsEd6kEvVQwL646A" to="_lXpFkP9eEd2HOumRS97HdQ" assignTime="END">
+          <from xmi:type="vsdt:Expression" xmi:id="_CqVDoAJsEd6kEvVQwL646A" expression="$userID"/>
+        </assignments>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_UKBcof9WEd2WMK6zIp0ZxQ" name="Display Form" id="_UKBcoP9WEd2WMK6zIp0ZxQ" activityType="SERVICE" inMessage="_gE1I4QJjEd6kEvVQwL646A" outMessage="_gE1I-wJjEd6kEvVQwL646A" implementation="_gE1I4AJjEd6kEvVQwL646A">
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_HDPIIAJtEd6kEvVQwL646A" to="_gE1I8AJjEd6kEvVQwL646A" toQuery="0">
+          <from xmi:type="vsdt:Expression" xmi:id="_gNrysAP_Ed6Uucivkkmr1w" expression="&quot;17label|__?__:&quot;"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_HHGUcAJtEd6kEvVQwL646A" to="_gE1I8QJjEd6kEvVQwL646A" toQuery="0">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jsAP_Ed6Uucivkkmr1w" expression="&quot;textfield||false|true&quot;"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_HLRCwAJtEd6kEvVQwL646A" to="_gE1I8gJjEd6kEvVQwL646A" toQuery="0">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jsQP_Ed6Uucivkkmr1w" expression="&quot;label|__?__:&quot;"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_HT5aUAJtEd6kEvVQwL646A" to="_gE1I9AJjEd6kEvVQwL646A" toQuery="0">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jsgP_Ed6Uucivkkmr1w" expression="&quot;textfield||false|true&quot;"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_Gk4YMAJtEd6kEvVQwL646A" to="_gE1I5wJjEd6kEvVQwL646A" toQuery="0">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jswP_Ed6Uucivkkmr1w" expression="&quot;label|__?__:&quot;"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_Gnau0AJtEd6kEvVQwL646A" to="_gE1I6AJjEd6kEvVQwL646A" toQuery="0">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jtAP_Ed6Uucivkkmr1w" expression="&quot;textfield||false|true&quot;"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_GpytYAJtEd6kEvVQwL646A" to="_gE1I6QJjEd6kEvVQwL646A" toQuery="0">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jtQP_Ed6Uucivkkmr1w" expression="&quot;label|__?__:&quot;"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_GseN8AJtEd6kEvVQwL646A" to="_gE1I6gJjEd6kEvVQwL646A" toQuery="0">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jtgP_Ed6Uucivkkmr1w" expression="&quot;textfield||false|true&quot;"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_GvJugAJtEd6kEvVQwL646A" to="_gE1I6wJjEd6kEvVQwL646A" toQuery="0">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jtwP_Ed6Uucivkkmr1w" expression="&quot;label|__?__:&quot;"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_G1jRcAJtEd6kEvVQwL646A" to="_gE1I7AJjEd6kEvVQwL646A" toQuery="0">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1juAP_Ed6Uucivkkmr1w" expression="&quot;textfield||false|true&quot;"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_GUhA8AJtEd6kEvVQwL646A" to="_gE1I4gJjEd6kEvVQwL646A" toQuery="0">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1juQP_Ed6Uucivkkmr1w" expression="&quot;label|__?__:&quot;"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_GiWooAJtEd6kEvVQwL646A" to="_gE1I5gJjEd6kEvVQwL646A" toQuery="0">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jugP_Ed6Uucivkkmr1w" expression="&quot;textfield||false|true&quot;"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_Gf05EAJtEd6kEvVQwL646A" to="_gE1I5QJjEd6kEvVQwL646A" toQuery="0">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1juwP_Ed6Uucivkkmr1w" expression="&quot;label|__?__:&quot;"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_GdAOkAJtEd6kEvVQwL646A" to="_gE1I5AJjEd6kEvVQwL646A" toQuery="0">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jvAP_Ed6Uucivkkmr1w" expression="&quot;textfield||false|true&quot;"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_GZuREAJtEd6kEvVQwL646A" to="_gE1I4wJjEd6kEvVQwL646A" toQuery="0">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jvQP_Ed6Uucivkkmr1w" expression="&quot;label|__?__:&quot;"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_HedEgAJtEd6kEvVQwL646A" to="_gE1I9wJjEd6kEvVQwL646A" toQuery="0">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jvgP_Ed6Uucivkkmr1w" expression="&quot;textfield||false|true&quot;"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_HhvCAAJtEd6kEvVQwL646A" to="_gE1I-AJjEd6kEvVQwL646A" toQuery="0">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jvwP_Ed6Uucivkkmr1w" expression="&quot;button|Ok&quot;"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_HldEYAJtEd6kEvVQwL646A" to="_gE1I-QJjEd6kEvVQwL646A">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jwAP_Ed6Uucivkkmr1w" expression="$tmpUserID"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_HpLGwAJtEd6kEvVQwL646A" to="_gE1I-gJjEd6kEvVQwL646A">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jwQP_Ed6Uucivkkmr1w" expression="$tmpUserName"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_Ha4zIAJtEd6kEvVQwL646A" to="_gE1I9gJjEd6kEvVQwL646A">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jwgP_Ed6Uucivkkmr1w" expression="$tmpUserPhone"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_HXUhwAJtEd6kEvVQwL646A" to="_gE1I9QJjEd6kEvVQwL646A">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jwwP_Ed6Uucivkkmr1w" expression="$tmpUserSIP"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_HO1UIAJtEd6kEvVQwL646A" to="_gE1I8wJjEd6kEvVQwL646A">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jxAP_Ed6Uucivkkmr1w" expression="$tmpUserMail"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_G8iqQAJtEd6kEvVQwL646A" to="_gE1I7gJjEd6kEvVQwL646A">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jxQP_Ed6Uucivkkmr1w" expression="$tmpGroupID"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_G5Hi0AJtEd6kEvVQwL646A" to="_gE1I7QJjEd6kEvVQwL646A">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jxgP_Ed6Uucivkkmr1w" expression="$tmpGroupName"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_G_0AsAJtEd6kEvVQwL646A" to="_gE1I7wJjEd6kEvVQwL646A">
+          <from xmi:type="vsdt:Expression" xmi:id="_gN1jxwP_Ed6Uucivkkmr1w" expression="$tmpGroupMemberNames"/>
+        </assignments>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:End" xmi:id="_VAd8cf9WEd2WMK6zIp0ZxQ" name="Stop Process" id="_VAd8cP9WEd2WMK6zIp0ZxQ"/>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_L2uwwf9WEd2WMK6zIp0ZxQ" name="Get User's Name" id="_L2uwwP9WEd2WMK6zIp0ZxQ" activityType="SERVICE" inMessage="_eCalMQJjEd6kEvVQwL646A" outMessage="_eCalMwJjEd6kEvVQwL646A" implementation="_eCalMAJjEd6kEvVQwL646A">
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_DmkpcAJsEd6kEvVQwL646A" to="_eCalMgJjEd6kEvVQwL646A">
+          <from xmi:type="vsdt:Expression" xmi:id="_FbXA0AJsEd6kEvVQwL646A" expression="$tmpUserID"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_DsYWgAJsEd6kEvVQwL646A" to="_xzilkP9eEd2HOumRS97HdQ" assignTime="END">
+          <from xmi:type="vsdt:Expression" xmi:id="_IaOlsAJsEd6kEvVQwL646A" expression="$userName"/>
+        </assignments>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_QddrUf9WEd2WMK6zIp0ZxQ" name="Get User's SIP" id="_QddrUP9WEd2WMK6zIp0ZxQ" activityType="SERVICE" inMessage="_fAk2kQJjEd6kEvVQwL646A" outMessage="_fAk2kwJjEd6kEvVQwL646A" implementation="_fAk2kAJjEd6kEvVQwL646A">
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_oWS5sAJsEd6kEvVQwL646A" to="_fAk2kgJjEd6kEvVQwL646A">
+          <from xmi:type="vsdt:Expression" xmi:id="_pbK3EAJsEd6kEvVQwL646A" expression="$tmpUserID"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_oYFCYAJsEd6kEvVQwL646A" to="_z6ec4P9eEd2HOumRS97HdQ" assignTime="END">
+          <from xmi:type="vsdt:Expression" xmi:id="_rQGYYAJsEd6kEvVQwL646A" expression="$sipAddr"/>
+        </assignments>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_NxLEMf9WEd2WMK6zIp0ZxQ" name="Get User's Phone" id="_NxLEMP9WEd2WMK6zIp0ZxQ" activityType="SERVICE" inMessage="_ekLOcQJjEd6kEvVQwL646A" outMessage="_ekLOcwJjEd6kEvVQwL646A" implementation="_ekLOcAJjEd6kEvVQwL646A">
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_sXEAcAJsEd6kEvVQwL646A" to="_ekLOcgJjEd6kEvVQwL646A">
+          <from xmi:type="vsdt:Expression" xmi:id="_tbf48AJsEd6kEvVQwL646A" expression="$tmpUserID"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_sYs_MAJsEd6kEvVQwL646A" to="_z38tUP9eEd2HOumRS97HdQ" assignTime="END">
+          <from xmi:type="vsdt:Expression" xmi:id="_vmctkAJsEd6kEvVQwL646A" expression="$mobile"/>
+        </assignments>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_RzAh8f9WEd2WMK6zIp0ZxQ" name="Get User's E-Mail" id="_RzAh8P9WEd2WMK6zIp0ZxQ" activityType="SERVICE" inMessage="_fdSAsQJjEd6kEvVQwL646A" outMessage="_fdSAswJjEd6kEvVQwL646A" implementation="_fdSAsAJjEd6kEvVQwL646A">
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_iXXdIAJsEd6kEvVQwL646A" to="_fdSAsgJjEd6kEvVQwL646A">
+          <from xmi:type="vsdt:Expression" xmi:id="_jtgJoAJsEd6kEvVQwL646A" expression="$tmpUserID"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_iZmRwAJsEd6kEvVQwL646A" to="_z79qoP9eEd2HOumRS97HdQ" assignTime="END">
+          <from xmi:type="vsdt:Expression" xmi:id="_nqHJIAJsEd6kEvVQwL646A" expression="$emailAddr"/>
+        </assignments>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_EMgQAf9WEd2WMK6zIp0ZxQ" name="Get Name of Group" id="_EMgQAP9WEd2WMK6zIp0ZxQ" activityType="SERVICE" inMessage="_dIbCIQJjEd6kEvVQwL646A" outMessage="_dIbCIwJjEd6kEvVQwL646A" implementation="_dIbCIAJjEd6kEvVQwL646A">
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_Lcc04AP-Ed6nH4gOiUAUjw" to="_dIbCIgJjEd6kEvVQwL646A">
+          <from xmi:type="vsdt:Expression" xmi:id="_Lcc04QP-Ed6nH4gOiUAUjw" expression="$tmpGroupID"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_Lcc04gP-Ed6nH4gOiUAUjw" to="_z_-n8P9eEd2HOumRS97HdQ" assignTime="END">
+          <from xmi:type="vsdt:Expression" xmi:id="_Lcc04wP-Ed6nH4gOiUAUjw" expression="$groupName"/>
+        </assignments>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_F78NUf9WEd2WMK6zIp0ZxQ" name="Get Group Members" id="_F78NUP9WEd2WMK6zIp0ZxQ" activityType="SERVICE" inMessage="_djVcgQJjEd6kEvVQwL646A" outMessage="_djVcgwJjEd6kEvVQwL646A" implementation="_djVcgAJjEd6kEvVQwL646A">
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_IH-JMAP6Ed6nH4gOiUAUjw" to="_djVcggJjEd6kEvVQwL646A">
+          <from xmi:type="vsdt:Expression" xmi:id="_IH-JMQP6Ed6nH4gOiUAUjw" expression="$tmpGroupName"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_IIH6MAP6Ed6nH4gOiUAUjw" to="_i3HpkP9eEd2HOumRS97HdQ" assignTime="END">
+          <from xmi:type="vsdt:Expression" xmi:id="_IIH6MQP6Ed6nH4gOiUAUjw" expression="$userID"/>
+        </assignments>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_IGmuEf9WEd2WMK6zIp0ZxQ" name="Get Group Members' Names" id="_IGmuEP9WEd2WMK6zIp0ZxQ" activityType="SERVICE" inMessage="_eCalMQJjEd6kEvVQwL646A" outMessage="_eCalMwJjEd6kEvVQwL646A" implementation="_eCalMAJjEd6kEvVQwL646A">
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_TbMw8AP6Ed6nH4gOiUAUjw" to="_eCalMgJjEd6kEvVQwL646A">
+          <from xmi:type="vsdt:Expression" xmi:id="_TbMw8QP6Ed6nH4gOiUAUjw" expression="$tmpGroupMemberIDs"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_TbWh8AP6Ed6nH4gOiUAUjw" to="_9EUWQP9eEd2HOumRS97HdQ" assignTime="END">
+          <from xmi:type="vsdt:Expression" xmi:id="_TbWh8QP6Ed6nH4gOiUAUjw" expression="$userName"/>
+        </assignments>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_B3368f9WEd2WMK6zIp0ZxQ" name="Get User's Group" id="_B3368P9WEd2WMK6zIp0ZxQ" activityType="SERVICE" inMessage="_cuGdoQJjEd6kEvVQwL646A" outMessage="_cuGdowJjEd6kEvVQwL646A" implementation="_cuGdoAJjEd6kEvVQwL646A">
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_LNMckAJsEd6kEvVQwL646A" to="_cuGdogJjEd6kEvVQwL646A">
+          <from xmi:type="vsdt:Expression" xmi:id="_MtJzcAJsEd6kEvVQwL646A" expression="$tmpUserID"/>
+        </assignments>
+        <assignments xmi:type="vsdt:Assignment" xmi:id="_LOh5UAJsEd6kEvVQwL646A" to="_z-pLMP9eEd2HOumRS97HdQ" assignTime="END">
+          <from xmi:type="vsdt:Expression" xmi:id="_PKjC8AJsEd6kEvVQwL646A" expression="$groupID"/>
+        </assignments>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_LrvogQJmEd6kEvVQwL646A" name="Start Process" id="_LrvogAJmEd6kEvVQwL646A"/>
+    </lanes>
+  </pools>
+  <pools xmi:type="vsdt:Pool" xmi:id="_up9s4f9bEd2WMK6zIp0ZxQ" name="User Management" id="_up9s4P9bEd2WMK6zIp0ZxQ" participant="_fG9dUAJhEd6F_YpzZR--mw">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_up9s5f9bEd2WMK6zIp0ZxQ" name="User Management_Process" id="_up9s5P9bEd2WMK6zIp0ZxQ" processType="NONE"/>
+  </pools>
+  <pools xmi:type="vsdt:Pool" xmi:id="_zItwIf9bEd2WMK6zIp0ZxQ" name="Communication" id="_zItwIP9bEd2WMK6zIp0ZxQ" participant="_fJMR8AJhEd6F_YpzZR--mw">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_zItwJf9bEd2WMK6zIp0ZxQ" name="Communication_Process" id="_zItwJP9bEd2WMK6zIp0ZxQ" processType="NONE"/>
+  </pools>
+  <pools xmi:type="vsdt:Pool" xmi:id="_z8GU4f9bEd2WMK6zIp0ZxQ" name="User Interface" id="_z8GU4P9bEd2WMK6zIp0ZxQ" participant="_fDPa8AJhEd6F_YpzZR--mw">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_z8GU5f9bEd2WMK6zIp0ZxQ" name="User Interface_Process" id="_z8GU5P9bEd2WMK6zIp0ZxQ" processType="NONE"/>
+  </pools>
+  <artifacts xmi:type="vsdt:DataObject" xmi:id="_Qg644f9fEd2HOumRS97HdQ" name="Form" id="_Qg644P9fEd2HOumRS97HdQ"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_A36dUf9XEd2WMK6zIp0ZxQ" id="_A36dUP9XEd2WMK6zIp0ZxQ" source="_EMgQAf9WEd2WMK6zIp0ZxQ" target="_F78NUf9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_BhuPUf9XEd2WMK6zIp0ZxQ" id="_BhuPUP9XEd2WMK6zIp0ZxQ" source="_F78NUf9WEd2WMK6zIp0ZxQ" target="_IGmuEf9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_Qez5sf9XEd2WMK6zIp0ZxQ" id="_Qez5sP9XEd2WMK6zIp0ZxQ" source="_UKBcof9WEd2WMK6zIp0ZxQ" target="_VAd8cf9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_FRtSof9YEd2WMK6zIp0ZxQ" id="_FRtSoP9YEd2WMK6zIp0ZxQ" source="_B3368f9WEd2WMK6zIp0ZxQ" target="_EMgQAf9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_wrwJAf9cEd2WMK6zIp0ZxQ" id="_wrwJAP9cEd2WMK6zIp0ZxQ" source="_UKBcof9WEd2WMK6zIp0ZxQ" target="_z8GU4f9bEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_zSHuUf9cEd2WMK6zIp0ZxQ" id="_zSHuUP9cEd2WMK6zIp0ZxQ" source="_B3368f9WEd2WMK6zIp0ZxQ" target="_up9s4f9bEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_zvtpQf9cEd2WMK6zIp0ZxQ" id="_zvtpQP9cEd2WMK6zIp0ZxQ" source="_EMgQAf9WEd2WMK6zIp0ZxQ" target="_up9s4f9bEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_0Ze_Af9cEd2WMK6zIp0ZxQ" id="_0Ze_AP9cEd2WMK6zIp0ZxQ" source="_F78NUf9WEd2WMK6zIp0ZxQ" target="_up9s4f9bEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_0rn34f9cEd2WMK6zIp0ZxQ" id="_0rn34P9cEd2WMK6zIp0ZxQ" source="_IGmuEf9WEd2WMK6zIp0ZxQ" target="_up9s4f9bEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_2re20f9cEd2WMK6zIp0ZxQ" id="_2re20P9cEd2WMK6zIp0ZxQ" source="_up9s4f9bEd2WMK6zIp0ZxQ" target="_B3368f9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_3VZ9kf9cEd2WMK6zIp0ZxQ" id="_3VZ9kP9cEd2WMK6zIp0ZxQ" source="_up9s4f9bEd2WMK6zIp0ZxQ" target="_EMgQAf9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_36lHMf9cEd2WMK6zIp0ZxQ" id="_36lHMP9cEd2WMK6zIp0ZxQ" source="_up9s4f9bEd2WMK6zIp0ZxQ" target="_F78NUf9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_4fTk4f9cEd2WMK6zIp0ZxQ" id="_4fTk4P9cEd2WMK6zIp0ZxQ" source="_up9s4f9bEd2WMK6zIp0ZxQ" target="_IGmuEf9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_-DniAf9cEd2WMK6zIp0ZxQ" id="_-DniAP9cEd2WMK6zIp0ZxQ" source="_L2uwwf9WEd2WMK6zIp0ZxQ" target="_up9s4f9bEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_-kVpcf9cEd2WMK6zIp0ZxQ" id="_-kVpcP9cEd2WMK6zIp0ZxQ" source="_up9s4f9bEd2WMK6zIp0ZxQ" target="_L2uwwf9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_AXKR8f9dEd2WMK6zIp0ZxQ" id="_AXKR8P9dEd2WMK6zIp0ZxQ" source="_RzAh8f9WEd2WMK6zIp0ZxQ" target="_zItwIf9bEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_Ay06Qf9dEd2WMK6zIp0ZxQ" id="_Ay06QP9dEd2WMK6zIp0ZxQ" source="_zItwIf9bEd2WMK6zIp0ZxQ" target="_RzAh8f9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_DCzY0f9dEd2WMK6zIp0ZxQ" id="_DCzY0P9dEd2WMK6zIp0ZxQ" source="_NxLEMf9WEd2WMK6zIp0ZxQ" target="_zItwIf9bEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_DxXH8f9dEd2WMK6zIp0ZxQ" id="_DxXH8P9dEd2WMK6zIp0ZxQ" source="_zItwIf9bEd2WMK6zIp0ZxQ" target="_NxLEMf9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_EXSfgf9dEd2WMK6zIp0ZxQ" id="_EXSfgP9dEd2WMK6zIp0ZxQ" source="_QddrUf9WEd2WMK6zIp0ZxQ" target="_zItwIf9bEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_E0Skkf9dEd2WMK6zIp0ZxQ" id="_E0SkkP9dEd2WMK6zIp0ZxQ" source="_zItwIf9bEd2WMK6zIp0ZxQ" target="_QddrUf9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:Association" xmi:id="_RXqTof9fEd2HOumRS97HdQ" id="_RXqToP9fEd2HOumRS97HdQ" direction="ONE" source="_UKBcof9WEd2WMK6zIp0ZxQ" target="_Qg644f9fEd2HOumRS97HdQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_JWiWkQJkEd6kEvVQwL646A" id="_JWiWkAJkEd6kEvVQwL646A" source="_AvuAEf9WEd2WMK6zIp0ZxQ" target="_up9s4f9bEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_KNksQQJkEd6kEvVQwL646A" id="_KNksQAJkEd6kEvVQwL646A" source="_up9s4f9bEd2WMK6zIp0ZxQ" target="_AvuAEf9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_ca3GoQJlEd6kEvVQwL646A" id="_ca3GoAJlEd6kEvVQwL646A" source="_AvuAEf9WEd2WMK6zIp0ZxQ" target="_L2uwwf9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_c-afoQJlEd6kEvVQwL646A" id="_c-afoAJlEd6kEvVQwL646A" source="_L2uwwf9WEd2WMK6zIp0ZxQ" target="_B3368f9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_enIw8QJlEd6kEvVQwL646A" id="_enIw8AJlEd6kEvVQwL646A" source="_IGmuEf9WEd2WMK6zIp0ZxQ" target="_RzAh8f9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_folm4QJlEd6kEvVQwL646A" id="_folm4AJlEd6kEvVQwL646A" source="_RzAh8f9WEd2WMK6zIp0ZxQ" target="_QddrUf9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_gFAdIQJlEd6kEvVQwL646A" id="_gFAdIAJlEd6kEvVQwL646A" source="_QddrUf9WEd2WMK6zIp0ZxQ" target="_NxLEMf9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_gc9DEQJlEd6kEvVQwL646A" id="_gc9DEAJlEd6kEvVQwL646A" source="_NxLEMf9WEd2WMK6zIp0ZxQ" target="_UKBcof9WEd2WMK6zIp0ZxQ"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_NN7M8QJmEd6kEvVQwL646A" id="_NN7M8AJmEd6kEvVQwL646A" source="_LrvogQJmEd6kEvVQwL646A" target="_AvuAEf9WEd2WMK6zIp0ZxQ"/>
+  <messages xmi:type="vsdt:Message" xmi:id="_cQWxsAJjEd6kEvVQwL646A" name="GetCurrentUserRequest" from="_gIeSAP9eEd2HOumRS97HdQ" to="_fG9dUAJhEd6F_YpzZR--mw"/>
+  <messages xmi:type="vsdt:Message" xmi:id="_cQWxsQJjEd6kEvVQwL646A" name="GetCurrentUserResponse" from="_fG9dUAJhEd6F_YpzZR--mw" to="_gIeSAP9eEd2HOumRS97HdQ">
+    <properties xmi:type="vsdt:Property" xmi:id="_cQWxsgJjEd6kEvVQwL646A" name="userID" type="string[]"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_cuGdoQJjEd6kEvVQwL646A" name="GetGroupsFromUserRequest" from="_gIeSAP9eEd2HOumRS97HdQ" to="_fG9dUAJhEd6F_YpzZR--mw">
+    <properties xmi:type="vsdt:Property" xmi:id="_cuGdogJjEd6kEvVQwL646A" name="userID" type="string[]"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_cuGdowJjEd6kEvVQwL646A" name="GetGroupsFromUserResponse" from="_fG9dUAJhEd6F_YpzZR--mw" to="_gIeSAP9eEd2HOumRS97HdQ">
+    <properties xmi:type="vsdt:Property" xmi:id="_cuGdpAJjEd6kEvVQwL646A" name="groupID" type="string[]"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_dIbCIQJjEd6kEvVQwL646A" name="GetGroupNameByIdRequest" from="_gIeSAP9eEd2HOumRS97HdQ" to="_fG9dUAJhEd6F_YpzZR--mw">
+    <properties xmi:type="vsdt:Property" xmi:id="_dIbCIgJjEd6kEvVQwL646A" name="groupID" type="string[]"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_dIbCIwJjEd6kEvVQwL646A" name="GetGroupNameByIdResponse" from="_fG9dUAJhEd6F_YpzZR--mw" to="_gIeSAP9eEd2HOumRS97HdQ">
+    <properties xmi:type="vsdt:Property" xmi:id="_dIbCJAJjEd6kEvVQwL646A" name="groupName" type="string[]"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_djVcgQJjEd6kEvVQwL646A" name="GetGroupMembersRequest" from="_gIeSAP9eEd2HOumRS97HdQ" to="_fG9dUAJhEd6F_YpzZR--mw">
+    <properties xmi:type="vsdt:Property" xmi:id="_djVcggJjEd6kEvVQwL646A" name="groupname" type="string[]"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_djVcgwJjEd6kEvVQwL646A" name="GetGroupMembersResponse" from="_fG9dUAJhEd6F_YpzZR--mw" to="_gIeSAP9eEd2HOumRS97HdQ">
+    <properties xmi:type="vsdt:Property" xmi:id="_djVchAJjEd6kEvVQwL646A" name="userID" type="string[]"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_eCalMQJjEd6kEvVQwL646A" name="GetUserNameByIdRequest" from="_gIeSAP9eEd2HOumRS97HdQ" to="_fG9dUAJhEd6F_YpzZR--mw">
+    <properties xmi:type="vsdt:Property" xmi:id="_eCalMgJjEd6kEvVQwL646A" name="userID" type="string[]"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_eCalMwJjEd6kEvVQwL646A" name="GetUserNameByIdResponse" from="_fG9dUAJhEd6F_YpzZR--mw" to="_gIeSAP9eEd2HOumRS97HdQ">
+    <properties xmi:type="vsdt:Property" xmi:id="_eCalNAJjEd6kEvVQwL646A" name="userName" type="string[]"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_ekLOcQJjEd6kEvVQwL646A" name="GetPhoneNumberOfUserRequest" from="_gIeSAP9eEd2HOumRS97HdQ" to="_fJMR8AJhEd6F_YpzZR--mw">
+    <properties xmi:type="vsdt:Property" xmi:id="_ekLOcgJjEd6kEvVQwL646A" name="userID" type="string[]"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_ekLOcwJjEd6kEvVQwL646A" name="GetPhoneNumberOfUserResponse" from="_fJMR8AJhEd6F_YpzZR--mw" to="_gIeSAP9eEd2HOumRS97HdQ">
+    <properties xmi:type="vsdt:Property" xmi:id="_ekLOdAJjEd6kEvVQwL646A" name="mobile" type="string[]"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_fAk2kQJjEd6kEvVQwL646A" name="GetSIPOfUserRequest" from="_gIeSAP9eEd2HOumRS97HdQ" to="_fJMR8AJhEd6F_YpzZR--mw">
+    <properties xmi:type="vsdt:Property" xmi:id="_fAk2kgJjEd6kEvVQwL646A" name="userID" type="string[]"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_fAk2kwJjEd6kEvVQwL646A" name="GetSIPOfUserResponse" from="_fJMR8AJhEd6F_YpzZR--mw" to="_gIeSAP9eEd2HOumRS97HdQ">
+    <properties xmi:type="vsdt:Property" xmi:id="_fAk2lAJjEd6kEvVQwL646A" name="sipAddr" type="string[]"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_fdSAsQJjEd6kEvVQwL646A" name="GetEmailOfUserRequest" from="_gIeSAP9eEd2HOumRS97HdQ" to="_fJMR8AJhEd6F_YpzZR--mw">
+    <properties xmi:type="vsdt:Property" xmi:id="_fdSAsgJjEd6kEvVQwL646A" name="userID" type="string[]"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_fdSAswJjEd6kEvVQwL646A" name="GetEmailOfUserResponse" from="_fJMR8AJhEd6F_YpzZR--mw" to="_gIeSAP9eEd2HOumRS97HdQ">
+    <properties xmi:type="vsdt:Property" xmi:id="_fdSAtAJjEd6kEvVQwL646A" name="emailAddr" type="string[]"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_gE1I4QJjEd6kEvVQwL646A" name="FormDialogRequest" from="_gIeSAP9eEd2HOumRS97HdQ" to="_fDPa8AJhEd6F_YpzZR--mw">
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I8AJjEd6kEvVQwL646A" name="inPartForm0" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I8QJjEd6kEvVQwL646A" name="inPartForm1" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I8gJjEd6kEvVQwL646A" name="inPartForm2" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I9AJjEd6kEvVQwL646A" name="inPartForm3" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I5wJjEd6kEvVQwL646A" name="inPartForm4" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I6AJjEd6kEvVQwL646A" name="inPartForm5" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I6QJjEd6kEvVQwL646A" name="inPartForm6" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I6gJjEd6kEvVQwL646A" name="inPartForm7" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I6wJjEd6kEvVQwL646A" name="inPartForm8" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I7AJjEd6kEvVQwL646A" name="inPartForm9" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I4gJjEd6kEvVQwL646A" name="inPartForm10" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I5gJjEd6kEvVQwL646A" name="inPartForm11" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I5QJjEd6kEvVQwL646A" name="inPartForm12" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I5AJjEd6kEvVQwL646A" name="inPartForm13" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I4wJjEd6kEvVQwL646A" name="inPartForm14" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I9wJjEd6kEvVQwL646A" name="inPartForm15" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I-AJjEd6kEvVQwL646A" name="inPartForm16" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I-QJjEd6kEvVQwL646A" name="inPartForm17" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I-gJjEd6kEvVQwL646A" name="inPartForm18" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I9gJjEd6kEvVQwL646A" name="inPartForm19" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I9QJjEd6kEvVQwL646A" name="inPartForm20" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I8wJjEd6kEvVQwL646A" name="inPartForm21" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I7gJjEd6kEvVQwL646A" name="inPartForm22" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I7QJjEd6kEvVQwL646A" name="inPartForm23" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I7wJjEd6kEvVQwL646A" name="inPartForm24" type="string[]"/>
+  </messages>
+  <messages xmi:type="vsdt:Message" xmi:id="_gE1I-wJjEd6kEvVQwL646A" name="FormDialogResponse" from="_fDPa8AJhEd6F_YpzZR--mw" to="_gIeSAP9eEd2HOumRS97HdQ">
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I_AJjEd6kEvVQwL646A" name="outPartForm0" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1JAAJjEd6kEvVQwL646A" name="outPartForm1" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I_wJjEd6kEvVQwL646A" name="outPartForm2" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I_gJjEd6kEvVQwL646A" name="outPartForm3" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1I_QJjEd6kEvVQwL646A" name="outPartForm4" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1JAgJjEd6kEvVQwL646A" name="outPartForm5" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1JAwJjEd6kEvVQwL646A" name="outPartForm6" type="string[]"/>
+    <properties xmi:type="vsdt:Property" xmi:id="_gE1JAQJjEd6kEvVQwL646A" name="outPartForm7" type="string[]"/>
+  </messages>
+  <participants xmi:type="vsdt:Participant" xmi:id="_gIeSAP9eEd2HOumRS97HdQ" name="Mother Of Scripts_Participant"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_fDPa8AJhEd6F_YpzZR--mw" name="UserInterface"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_fG9dUAJhEd6F_YpzZR--mw" name="UserManagement"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_fJMR8AJhEd6F_YpzZR--mw" name="Communication"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_cQD2wAJjEd6kEvVQwL646A" participant="_fG9dUAJhEd6F_YpzZR--mw" interface="UserManagement" operation="GetCurrentUser-ddb67308-f1ac-4824-9e74-a1ad74f5b2bb" location="file:/C:/Users/kuester/workspace/runtime-VSDT/de.dailab.vsdt-examples/mams/Basisdienste.wsdl" inputMessage="_cQWxsAJjEd6kEvVQwL646A" outputMessage="_cQWxsQJjEd6kEvVQwL646A"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_cuGdoAJjEd6kEvVQwL646A" participant="_fG9dUAJhEd6F_YpzZR--mw" interface="UserManagement" operation="GetGroupsFromUser-ae151e95-a916-4e1a-ab40-80a832728ee5" location="file:/C:/Users/kuester/workspace/runtime-VSDT/de.dailab.vsdt-examples/mams/Basisdienste.wsdl" inputMessage="_cuGdoQJjEd6kEvVQwL646A" outputMessage="_cuGdowJjEd6kEvVQwL646A"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_dIbCIAJjEd6kEvVQwL646A" participant="_fG9dUAJhEd6F_YpzZR--mw" interface="UserManagement" operation="GetGroupNameById" location="file:/C:/Users/kuester/workspace/runtime-VSDT/de.dailab.vsdt-examples/mams/Basisdienste.wsdl" inputMessage="_dIbCIQJjEd6kEvVQwL646A" outputMessage="_dIbCIwJjEd6kEvVQwL646A"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_djVcgAJjEd6kEvVQwL646A" participant="_fG9dUAJhEd6F_YpzZR--mw" interface="UserManagement" operation="GetGroupMembers" location="file:/C:/Users/kuester/workspace/runtime-VSDT/de.dailab.vsdt-examples/mams/Basisdienste.wsdl" inputMessage="_djVcgQJjEd6kEvVQwL646A" outputMessage="_djVcgwJjEd6kEvVQwL646A"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_eCalMAJjEd6kEvVQwL646A" participant="_fG9dUAJhEd6F_YpzZR--mw" interface="UserManagement" operation="GetUserNameById" location="file:/C:/Users/kuester/workspace/runtime-VSDT/de.dailab.vsdt-examples/mams/Basisdienste.wsdl" inputMessage="_eCalMQJjEd6kEvVQwL646A" outputMessage="_eCalMwJjEd6kEvVQwL646A"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_ekLOcAJjEd6kEvVQwL646A" participant="_fJMR8AJhEd6F_YpzZR--mw" interface="Communication" operation="GetPhoneNumberOfUser-5a27720e-1f86-48e0-a492-300bc89fcfd2" location="file:/C:/Users/kuester/workspace/runtime-VSDT/de.dailab.vsdt-examples/mams/Basisdienste.wsdl" inputMessage="_ekLOcQJjEd6kEvVQwL646A" outputMessage="_ekLOcwJjEd6kEvVQwL646A"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_fAk2kAJjEd6kEvVQwL646A" participant="_fJMR8AJhEd6F_YpzZR--mw" interface="Communication" operation="GetSIPOfUser" location="file:/C:/Users/kuester/workspace/runtime-VSDT/de.dailab.vsdt-examples/mams/Basisdienste.wsdl" inputMessage="_fAk2kQJjEd6kEvVQwL646A" outputMessage="_fAk2kwJjEd6kEvVQwL646A"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_fdSAsAJjEd6kEvVQwL646A" participant="_fJMR8AJhEd6F_YpzZR--mw" interface="Communication" operation="GetEmailOfUser" location="file:/C:/Users/kuester/workspace/runtime-VSDT/de.dailab.vsdt-examples/mams/Basisdienste.wsdl" inputMessage="_fdSAsQJjEd6kEvVQwL646A" outputMessage="_fdSAswJjEd6kEvVQwL646A"/>
+  <implementations xmi:type="vsdt:Implementation" xmi:id="_gE1I4AJjEd6kEvVQwL646A" participant="_fDPa8AJhEd6F_YpzZR--mw" interface="UserInterface" operation="FormDialog-e7a8a799-692a-4d5e-9d97-3a67b39aff10" location="file:/C:/Users/kuester/workspace/runtime-VSDT/de.dailab.vsdt-examples/mams/Basisdienste.wsdl" inputMessage="_gE1I4QJjEd6kEvVQwL646A" outputMessage="_gE1I-wJjEd6kEvVQwL646A"/>
+</vsdt:BusinessProcessDiagram>

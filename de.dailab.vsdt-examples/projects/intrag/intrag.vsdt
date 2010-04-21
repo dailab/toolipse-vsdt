@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vsdt:BusinessProcessSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vsdt="http://de.dailab.vsdt" name="INTRAG" documentation="Binnenschifffahrts-Szenario" id="_3Wu4IHq_Ed6SzvTpMUICGg" creationDate="2009-07-29T14:34:14.347+0200" modificationDate="2009-07-29T14:34:14.347+0200">
+  <businessProcesses name="Auftrag annehmen" id="_8SJCMHq_Ed6SzvTpMUICGg" participants="_zQDWlHuDEd6eVZxYmHq6_g _zQDWlnuDEd6eVZxYmHq6_g _zQDWlXuDEd6eVZxYmHq6_g">
+    <pools name="Reederei" id="_P3Ir0HrAEd6SzvTpMUICGg" participant="_zQDWlHuDEd6eVZxYmHq6_g">
+      <process name="Reederei_Process" id="_P3Ir0nrAEd6SzvTpMUICGg"/>
+      <lanes id="_P3Ir0XrAEd6SzvTpMUICGg" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" id="_fkt_AHrAEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Containerdaten &#xD;&#xA;versenden" id="_g3vGEHrAEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_jwXgEHrAEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_mvZdAHrAEd6SzvTpMUICGg" gatewayType="XOR_EVENT"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Transportdaten &#xD;&#xA;sichern" id="_pyTNUHrAEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_rDiLsHrAEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Containerdaten &#xD;&#xA;aktualisieren" id="_s4BoIHrAEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="fehldende &#xD;&#xA;Daten senden" id="_uPzTYHrAEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" name="fehlende Daten" id="_Fa6fwLNDEd6qZd5Gm03opA" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" name="T.daten empfangen" id="_NGay4LNDEd6qZd5Gm03opA" trigger="MESSAGE"/>
+      </lanes>
+    </pools>
+    <pools name="Kunde" id="_RMFskHrAEd6SzvTpMUICGg" participant="_zQDWlnuDEd6eVZxYmHq6_g">
+      <process name="Kunde_Process" id="_RMFsknrAEd6SzvTpMUICGg"/>
+      <lanes id="_RMFskXrAEd6SzvTpMUICGg" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" id="_0oMY0HrAEd6SzvTpMUICGg" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Datensatz&#xD;&#xA;prüfen" id="_2_DigHrAEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="fehlende &#xD;&#xA;Daten anfragen" id="_4CJ-QHrAEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Datensatz &#xD;&#xA;vervollständigen" id="_6IWOsHrAEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" name="vollständig?" id="_7zUiwHrAEd6SzvTpMUICGg" markerVisible="true"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Container zu Binnen-&#xD;&#xA;schiff zuordnen" id="_9cNMIHrAEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Manifest &#xD;&#xA;erstellen" id="_AvUisHrBEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_CV1NgHrBEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_ExKAcHrBEd6SzvTpMUICGg" gatewayType="AND"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_ExKAdnrBEd6SzvTpMUICGg" gatewayType="AND"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Transportdaten an&#xD;&#xA;Kunden senden" id="_FV5sQHrBEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Manifest an Binnen-&#xD;&#xA;schiff schicken / BICS" id="_G7qwMHrBEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Manifest &#xD;&#xA;ändern" id="_b7-FoHw_Ed6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="geändertes Manifest &#xD;&#xA;verschicken" id="_dIJk4Hw_Ed6EObWcVHlOJA"/>
+      </lanes>
+    </pools>
+    <pools name="Schiff" id="_TBc2QHrBEd6SzvTpMUICGg" participant="_zQDWlXuDEd6eVZxYmHq6_g">
+      <process name="Schiff_Process" id="_TBc2QnrBEd6SzvTpMUICGg"/>
+      <lanes id="_TBc2QXrBEd6SzvTpMUICGg" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" id="_VUTCoHrBEd6SzvTpMUICGg" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_WF10UHrBEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Manifest empfangen &#xD;&#xA;&amp; speichern" id="_Xck9wHrBEd6SzvTpMUICGg"/>
+      </lanes>
+    </pools>
+    <artifacts xsi:type="vsdt:DataObject" name="Manifest (Reederei)" id="_g2rgsHrBEd6SzvTpMUICGg"/>
+    <artifacts xsi:type="vsdt:DataObject" name="Manifest (Schiff)" id="_xB3V4HrBEd6SzvTpMUICGg"/>
+    <artifacts xsi:type="vsdt:DataObject" name="Transportdaten" id="_VjQ3IHw_Ed6EObWcVHlOJA"/>
+    <artifacts xsi:type="vsdt:TextAnnotation" documentation="gehört möglicherweise&#xD;&#xA;in einen eigenen Prozess" id="_ggn8kHw_Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_g343EHrAEd6SzvTpMUICGg" source="_fkt_AHrAEd6SzvTpMUICGg" target="_g3vGEHrAEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_ovMxkHrAEd6SzvTpMUICGg" source="_g3vGEHrAEd6SzvTpMUICGg" target="_jwXgEHrAEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_pEeeAHrAEd6SzvTpMUICGg" source="_jwXgEHrAEd6SzvTpMUICGg" target="_mvZdAHrAEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_uPzTaXrAEd6SzvTpMUICGg" source="_s4BoIHrAEd6SzvTpMUICGg" target="_uPzTYHrAEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_wd4UgHrAEd6SzvTpMUICGg" source="_pyTNUHrAEd6SzvTpMUICGg" target="_rDiLsHrAEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_y4dgkHrAEd6SzvTpMUICGg" source="_uPzTYHrAEd6SzvTpMUICGg" target="_jwXgEHrAEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_13CxkHrAEd6SzvTpMUICGg" source="_g3vGEHrAEd6SzvTpMUICGg" target="_0oMY0HrAEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_2_DiiXrAEd6SzvTpMUICGg" source="_0oMY0HrAEd6SzvTpMUICGg" target="_2_DigHrAEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_6IWOuXrAEd6SzvTpMUICGg" source="_4CJ-QHrAEd6SzvTpMUICGg" target="_6IWOsHrAEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" name="nein" id="_7zeTwHrAEd6SzvTpMUICGg" source="_7zUiwHrAEd6SzvTpMUICGg" target="_4CJ-QHrAEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_4CJ-SXrAEd6SzvTpMUICGg" source="_2_DigHrAEd6SzvTpMUICGg" target="_7zUiwHrAEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_9cNMKXrAEd6SzvTpMUICGg" conditionType="DEFAULT" source="_7zUiwHrAEd6SzvTpMUICGg" target="_9cNMIHrAEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_AvUiuXrBEd6SzvTpMUICGg" source="_9cNMIHrAEd6SzvTpMUICGg" target="_AvUisHrBEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_ExTKYHrBEd6SzvTpMUICGg" source="_ExKAdnrBEd6SzvTpMUICGg" target="_CV1NgHrBEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_CV--hXrBEd6SzvTpMUICGg" source="_AvUisHrBEd6SzvTpMUICGg" target="_ExKAcHrBEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_FWDdQHrBEd6SzvTpMUICGg" source="_FV5sQHrBEd6SzvTpMUICGg" target="_ExKAdnrBEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_ExKAfHrBEd6SzvTpMUICGg" source="_ExKAcHrBEd6SzvTpMUICGg" target="_FV5sQHrBEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_G7qwOXrBEd6SzvTpMUICGg" source="_G7qwMHrBEd6SzvTpMUICGg" target="_ExKAdnrBEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_ExKAg3rBEd6SzvTpMUICGg" source="_ExKAcHrBEd6SzvTpMUICGg" target="_G7qwMHrBEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_XcuuwHrBEd6SzvTpMUICGg" source="_Xck9wHrBEd6SzvTpMUICGg" target="_WF10UHrBEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_WF_lUHrBEd6SzvTpMUICGg" source="_VUTCoHrBEd6SzvTpMUICGg" target="_Xck9wHrBEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_bMQUgHrBEd6SzvTpMUICGg" source="_6IWOsHrAEd6SzvTpMUICGg" target="_2_DigHrAEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_dZmV0HrBEd6SzvTpMUICGg" source="_4CJ-QHrAEd6SzvTpMUICGg" target="_Fa6fwLNDEd6qZd5Gm03opA"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_d8Q-AHrBEd6SzvTpMUICGg" source="_uPzTYHrAEd6SzvTpMUICGg" target="_6IWOsHrAEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:Association" id="_g3RWkHrBEd6SzvTpMUICGg" source="_AvUisHrBEd6SzvTpMUICGg" target="_g2rgsHrBEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_p_-AcHrBEd6SzvTpMUICGg" source="_FV5sQHrBEd6SzvTpMUICGg" target="_NGay4LNDEd6qZd5Gm03opA"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_rjWewHrBEd6SzvTpMUICGg" source="_G7qwMHrBEd6SzvTpMUICGg" target="_VUTCoHrBEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:Association" id="_xCBG5XrBEd6SzvTpMUICGg" source="_Xck9wHrBEd6SzvTpMUICGg" target="_xB3V4HrBEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:Association" id="_VjaoIHw_Ed6EObWcVHlOJA" source="_pyTNUHrAEd6SzvTpMUICGg" target="_VjQ3IHw_Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_dISu0Hw_Ed6EObWcVHlOJA" source="_b7-FoHw_Ed6EObWcVHlOJA" target="_dIJk4Hw_Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:Association" id="_ghEogXw_Ed6EObWcVHlOJA" source="_dIJk4Hw_Ed6EObWcVHlOJA" target="_ggn8kHw_Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_FfrrALNDEd6qZd5Gm03opA" source="_Fa6fwLNDEd6qZd5Gm03opA" target="_s4BoIHrAEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_ry2IwHrAEd6SzvTpMUICGg" source="_mvZdAHrAEd6SzvTpMUICGg" target="_Fa6fwLNDEd6qZd5Gm03opA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_NGmZELNDEd6qZd5Gm03opA" source="_NGay4LNDEd6qZd5Gm03opA" target="_pyTNUHrAEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_pyc-UHrAEd6SzvTpMUICGg" source="_mvZdAHrAEd6SzvTpMUICGg" target="_NGay4LNDEd6qZd5Gm03opA"/>
+  </businessProcesses>
+  <businessProcesses name="Anlaufplan erstellen" id="_BgSiEHrAEd6SzvTpMUICGg" participants="_zQDWl3uDEd6eVZxYmHq6_g _zQDWlXuDEd6eVZxYmHq6_g _zQDWlHuDEd6eVZxYmHq6_g">
+    <pools name="Terminal" id="_3luh0Hw9Ed6EObWcVHlOJA" participant="_zQDWl3uDEd6eVZxYmHq6_g">
+      <process name="Terminal_Process" id="_3l4S0Xw9Ed6EObWcVHlOJA"/>
+      <lanes id="_3l4S0Hw9Ed6EObWcVHlOJA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" id="_slAw8Hw-Ed6EObWcVHlOJA" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="möglichen &#xD;&#xA;Liegeplatz &#xD;&#xA;ermitteln" id="_tmxv8Hw-Ed6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Korrektur des &#xD;&#xA;Liegeplatzes versenden" id="_wDKS0Hw-Ed6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Anlauftermin &#xD;&#xA;stornieren" id="_x1SXwHw-Ed6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Anderen &#xD;&#xA;Liegeplatz vorgeben" id="_zqipMHw-Ed6EObWcVHlOJA"/>
+      </lanes>
+    </pools>
+    <pools name="Schiff" id="_3mn5sHw9Ed6EObWcVHlOJA" participant="_zQDWlXuDEd6eVZxYmHq6_g">
+      <process name="Schiff_Process" id="_3mxqsXw9Ed6EObWcVHlOJA"/>
+      <lanes id="_3mxqsHw9Ed6EObWcVHlOJA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" name="Empfange Anlaufplan" id="_C_UQQHw-Ed6EObWcVHlOJA" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Anlaufplan &#xD;&#xA;speichern" id="_EtjTsHw-Ed6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_GSkwwHw-Ed6EObWcVHlOJA"/>
+      </lanes>
+    </pools>
+    <pools name="Reederei" id="_3mxqwXw9Ed6EObWcVHlOJA" participant="_zQDWlHuDEd6eVZxYmHq6_g">
+      <process name="Reederei_Process" id="_3mxqw3w9Ed6EObWcVHlOJA"/>
+      <lanes id="_3mxqwnw9Ed6EObWcVHlOJA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" id="_IEO7oHw-Ed6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="anzulaufende &#xD;&#xA;Terminals ermitteln" id="_IeICUHw-Ed6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Liegeplatz anfragen" id="_J-FZMHw-Ed6EObWcVHlOJA" activityType="EMBEDDED">
+          <containedFlowObjects xsi:type="vsdt:Start" id="_NuWl0Hw-Ed6EObWcVHlOJA"/>
+          <containedFlowObjects xsi:type="vsdt:Activity" name="Liegeplatz &#xD;&#xA;anfragen" id="_OPYPQHw-Ed6EObWcVHlOJA"/>
+          <containedFlowObjects xsi:type="vsdt:Activity" name="empfange &#xD;&#xA;Liegeplatz" id="_PWC8YHw-Ed6EObWcVHlOJA"/>
+          <containedFlowObjects xsi:type="vsdt:Gateway" name="passt?" id="_QdTfYHw-Ed6EObWcVHlOJA" markerVisible="true"/>
+          <containedFlowObjects xsi:type="vsdt:Activity" name="Anlaufplan &#xD;&#xA;anpassen" id="_RG0WcHw-Ed6EObWcVHlOJA"/>
+          <containedFlowObjects xsi:type="vsdt:End" id="_SPt4MHw-Ed6EObWcVHlOJA"/>
+          <containedFlowObjects xsi:type="vsdt:Activity" name="neuen Anlauftermin &#xD;&#xA;anfragen" id="_SxfIgHw-Ed6EObWcVHlOJA"/>
+          <loopAttributes xsi:type="vsdt:MultiLoopAttSet"/>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Anlaufplan &#xD;&#xA;verschicken" id="_UkohIHw-Ed6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_V-f3EHw-Ed6EObWcVHlOJA"/>
+      </lanes>
+    </pools>
+    <artifacts xsi:type="vsdt:DataObject" name="Manifest" id="_fcjF4Hw-Ed6EObWcVHlOJA"/>
+    <artifacts xsi:type="vsdt:DataObject" name="Anlaufplan" id="_Jq_ooHw_Ed6EObWcVHlOJA"/>
+    <artifacts xsi:type="vsdt:TextAnnotation" documentation="für jedes &#xD;&#xA;anzulaufende &#xD;&#xA;Terminal..." id="_RfnCMHxEEd6FUIgTv8nr9w"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_EynZ4Hw-Ed6EObWcVHlOJA" source="_C_UQQHw-Ed6EObWcVHlOJA" target="_EtjTsHw-Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_GSt6tXw-Ed6EObWcVHlOJA" source="_EtjTsHw-Ed6EObWcVHlOJA" target="_GSkwwHw-Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_IeRMQHw-Ed6EObWcVHlOJA" source="_IEO7oHw-Ed6EObWcVHlOJA" target="_IeICUHw-Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_J-OjIHw-Ed6EObWcVHlOJA" source="_IeICUHw-Ed6EObWcVHlOJA" target="_J-FZMHw-Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_OP07NHw-Ed6EObWcVHlOJA" source="_NuWl0Hw-Ed6EObWcVHlOJA" target="_OPYPQHw-Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_PWMGUHw-Ed6EObWcVHlOJA" source="_OPYPQHw-Ed6EObWcVHlOJA" target="_PWC8YHw-Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_QddQYHw-Ed6EObWcVHlOJA" source="_PWC8YHw-Ed6EObWcVHlOJA" target="_QdTfYHw-Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_RG9gYHw-Ed6EObWcVHlOJA" conditionType="DEFAULT" source="_QdTfYHw-Ed6EObWcVHlOJA" target="_RG0WcHw-Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_SP3CIHw-Ed6EObWcVHlOJA" source="_RG0WcHw-Ed6EObWcVHlOJA" target="_SPt4MHw-Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" name="nein" id="_SxoScHw-Ed6EObWcVHlOJA" source="_QdTfYHw-Ed6EObWcVHlOJA" target="_SxfIgHw-Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_UkohKXw-Ed6EObWcVHlOJA" source="_J-FZMHw-Ed6EObWcVHlOJA" target="_UkohIHw-Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_V-poEHw-Ed6EObWcVHlOJA" source="_UkohIHw-Ed6EObWcVHlOJA" target="_V-f3EHw-Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:Association" id="_gPSKYHw-Ed6EObWcVHlOJA" source="_fcjF4Hw-Ed6EObWcVHlOJA" target="_IeICUHw-Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_lYVu4Hw-Ed6EObWcVHlOJA" source="_SxfIgHw-Ed6EObWcVHlOJA" target="_OPYPQHw-Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_tm7g8Hw-Ed6EObWcVHlOJA" source="_slAw8Hw-Ed6EObWcVHlOJA" target="_tmxv8Hw-Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_F2PkoHw_Ed6EObWcVHlOJA" source="_OPYPQHw-Ed6EObWcVHlOJA" target="_slAw8Hw-Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_HKmvgHw_Ed6EObWcVHlOJA" source="_UkohIHw-Ed6EObWcVHlOJA" target="_C_UQQHw-Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:Association" id="_Jq_opnw_Ed6EObWcVHlOJA" source="_J-FZMHw-Ed6EObWcVHlOJA" target="_Jq_ooHw_Ed6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:Association" id="_LHO9IHw_Ed6EObWcVHlOJA" source="_Jq_ooHw_Ed6EObWcVHlOJA" target="_UkohIHw-Ed6EObWcVHlOJA"/>
+  </businessProcesses>
+  <businessProcesses name="Hafeneinfahrt" id="_E_6DkHrAEd6SzvTpMUICGg" participants="_zQDWl3uDEd6eVZxYmHq6_g _zQDWlXuDEd6eVZxYmHq6_g">
+    <pools name="Schiff" id="_Zs3v8HrCEd6SzvTpMUICGg" participant="_zQDWlXuDEd6eVZxYmHq6_g">
+      <process name="Schiff_Process" id="_Zs3v8nrCEd6SzvTpMUICGg"/>
+      <lanes id="_Zs3v8XrCEd6SzvTpMUICGg" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" id="_ivr0QHrCEd6SzvTpMUICGg" trigger="RULE"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" name="Verspätung?" id="_klEokHrCEd6SzvTpMUICGg" markerVisible="true"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Liegeplatz-&#xD;&#xA;bestätigung&#xD;&#xA;anfordern" id="_mMxmMHrCEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_oVMrQHrCEd6SzvTpMUICGg" gatewayType="XOR_EVENT"/>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" name="nok" id="_pFs7IHrCEd6SzvTpMUICGg" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="neuen Anlauftermin&#xD;&#xA;vereinbaren" id="_qC2f4HrCEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Empfange neuen&#xD;&#xA;Anlauftermin" id="_sPmEQHrCEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_uEFgsHrCEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Liegeplatz&#xD;&#xA;ansteuern" id="_uv0lUHrCEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_wWfBIHrCEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" name="ok" id="_6v9WYHrCEd6SzvTpMUICGg" trigger="MESSAGE"/>
+      </lanes>
+    </pools>
+    <pools name="Terminal" id="_au7p4HrCEd6SzvTpMUICGg" participant="_zQDWl3uDEd6eVZxYmHq6_g">
+      <process name="Terminal_Process" id="_au7p4nrCEd6SzvTpMUICGg"/>
+      <lanes id="_au7p4XrCEd6SzvTpMUICGg" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" id="_BW7qYHrDEd6SzvTpMUICGg" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="überprüfe &#xD;&#xA;Liegeplatz" id="_CaeyEHrDEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" name="noch gültig?" id="_ECxlkHrDEd6SzvTpMUICGg" markerVisible="true"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Liegeplatz&#xD;&#xA;bestätigen" id="_FwazIHrDEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_HO48QHrDEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_HuSOAHrDEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="sende&#xD;&#xA;Absage" id="_JCyi0HrDEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="empfange&#xD;&#xA;neue Anfrage" id="_KG7gYHrDEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="ermittle&#xD;&#xA;Anlauftermin" id="_LaGYcHrDEd6SzvTpMUICGg"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="sende neuen&#xD;&#xA;Termin" id="_OmqbEHrDEd6SzvTpMUICGg"/>
+      </lanes>
+    </pools>
+    <artifacts xsi:type="vsdt:TextAnnotation" documentation="sollte in eigenen, &#xD;&#xA;wiederverwendbaren &#xD;&#xA;Prozess ausgelagert werden" id="_uAasMHrDEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_klOZlXrCEd6SzvTpMUICGg" source="_ivr0QHrCEd6SzvTpMUICGg" target="_klEokHrCEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_mMxmOXrCEd6SzvTpMUICGg" conditionType="DEFAULT" source="_klEokHrCEd6SzvTpMUICGg" target="_mMxmMHrCEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_oVMrRnrCEd6SzvTpMUICGg" source="_mMxmMHrCEd6SzvTpMUICGg" target="_oVMrQHrCEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_pGlr8HrCEd6SzvTpMUICGg" source="_oVMrQHrCEd6SzvTpMUICGg" target="_pFs7IHrCEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_qC2f6XrCEd6SzvTpMUICGg" source="_pFs7IHrCEd6SzvTpMUICGg" target="_qC2f4HrCEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_sPmESXrCEd6SzvTpMUICGg" source="_qC2f4HrCEd6SzvTpMUICGg" target="_sPmEQHrCEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_uEFgtnrCEd6SzvTpMUICGg" source="_sPmEQHrCEd6SzvTpMUICGg" target="_uEFgsHrCEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_uv-WUHrCEd6SzvTpMUICGg" source="_uEFgsHrCEd6SzvTpMUICGg" target="_uv0lUHrCEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_wWfBJnrCEd6SzvTpMUICGg" source="_uv0lUHrCEd6SzvTpMUICGg" target="_wWfBIHrCEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" name="ja" id="_13rY0HrCEd6SzvTpMUICGg" source="_klEokHrCEd6SzvTpMUICGg" target="_qC2f4HrCEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_6v9WZnrCEd6SzvTpMUICGg" source="_oVMrQHrCEd6SzvTpMUICGg" target="_6v9WYHrCEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_-ug2oHrCEd6SzvTpMUICGg" source="_6v9WYHrCEd6SzvTpMUICGg" target="_uEFgsHrCEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_CaeyGXrDEd6SzvTpMUICGg" source="_BW7qYHrDEd6SzvTpMUICGg" target="_CaeyEHrDEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_ECxllnrDEd6SzvTpMUICGg" source="_CaeyEHrDEd6SzvTpMUICGg" target="_ECxlkHrDEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_FwazKXrDEd6SzvTpMUICGg" source="_ECxlkHrDEd6SzvTpMUICGg" target="_FwazIHrDEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_HO48RnrDEd6SzvTpMUICGg" source="_FwazIHrDEd6SzvTpMUICGg" target="_HO48QHrDEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_HuSOBnrDEd6SzvTpMUICGg" source="_HO48QHrDEd6SzvTpMUICGg" target="_HuSOAHrDEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_JCyi2XrDEd6SzvTpMUICGg" source="_ECxlkHrDEd6SzvTpMUICGg" target="_JCyi0HrDEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_KHFRYHrDEd6SzvTpMUICGg" source="_JCyi0HrDEd6SzvTpMUICGg" target="_KG7gYHrDEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_LaGYeXrDEd6SzvTpMUICGg" source="_KG7gYHrDEd6SzvTpMUICGg" target="_LaGYcHrDEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_OmqbGXrDEd6SzvTpMUICGg" source="_LaGYcHrDEd6SzvTpMUICGg" target="_OmqbEHrDEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_Ps5DUHrDEd6SzvTpMUICGg" source="_OmqbEHrDEd6SzvTpMUICGg" target="_HO48QHrDEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_l3jHoHrDEd6SzvTpMUICGg" source="_mMxmMHrCEd6SzvTpMUICGg" target="_BW7qYHrDEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:Association" id="_uAtnIHrDEd6SzvTpMUICGg" source="_qC2f4HrCEd6SzvTpMUICGg" target="_uAasMHrDEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_1k1f4HrDEd6SzvTpMUICGg" source="_FwazIHrDEd6SzvTpMUICGg" target="_6v9WYHrCEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_2A9bMHrDEd6SzvTpMUICGg" source="_JCyi0HrDEd6SzvTpMUICGg" target="_pFs7IHrCEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_3Kmj0HrDEd6SzvTpMUICGg" source="_qC2f4HrCEd6SzvTpMUICGg" target="_KG7gYHrDEd6SzvTpMUICGg"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_3s9qAHrDEd6SzvTpMUICGg" source="_OmqbEHrDEd6SzvTpMUICGg" target="_sPmEQHrCEd6SzvTpMUICGg"/>
+  </businessProcesses>
+  <businessProcesses name="MIB-Meldung erstellen" id="_B3nLAHrCEd6SzvTpMUICGg" participants="_zQDWmHuDEd6eVZxYmHq6_g _zQDWlXuDEd6eVZxYmHq6_g">
+    <pools name="WSA / RvZ" id="_ylZJkHw_Ed6EObWcVHlOJA" participant="_zQDWmHuDEd6eVZxYmHq6_g">
+      <process name="WSA / RvZ_Process" id="_ylZJknw_Ed6EObWcVHlOJA"/>
+      <lanes id="_ylZJkXw_Ed6EObWcVHlOJA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" id="_eGxo8HxCEd6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_fjdpYHxCEd6EObWcVHlOJA" gatewayType="XOR_EVENT"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="MIB-Meldung &#xD;&#xA;empfangen (sonst.)" id="_fziFsHxCEd6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_iXLuMHxCEd6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Daten &#xD;&#xA;kontrollieren" id="_if9PsHxCEd6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="MIB-Meldung &#xD;&#xA;empfangen (BICS)" id="_jzIHwHxCEd6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" name="Daten vollständig?" id="_lYb4sHxCEd6EObWcVHlOJA" markerVisible="true"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="fehldende &#xD;&#xA;Daten anfordern" id="_mknX8HxCEd6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Daten empfangen" id="_n_XesHxCEd6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Stammdaten des &#xD;&#xA;Schiffs aktualisieren" id="_ouq0sHxCEd6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="MIB-Meldung via &#xD;&#xA;EDI an folgende &#xD;&#xA;WSA/RvZ weiterleiten" id="_qI-2kHxCEd6EObWcVHlOJA">
+          <loopAttributes xsi:type="vsdt:MultiLoopAttSet"/>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:End" id="_FGK1wHxDEd6EObWcVHlOJA"/>
+      </lanes>
+    </pools>
+    <pools name="Schiff" id="_yli6n3w_Ed6EObWcVHlOJA" participant="_zQDWlXuDEd6eVZxYmHq6_g">
+      <process name="Schiff_Process" id="_yli6oXw_Ed6EObWcVHlOJA"/>
+      <lanes id="_yli6oHw_Ed6EObWcVHlOJA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" id="_3l49EHxBEd6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="MIB-Meldung&#xD;&#xA;erstellen" id="_5hg8QHxBEd6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" name="BICS verfügbar?" id="_6d66IHxBEd6EObWcVHlOJA" markerVisible="true"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="MIB-Meldung &#xD;&#xA;in BICS erstellen" id="_9iv9EHxBEd6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="MIB-Meldung &#xD;&#xA;verschicken &#xD;&#xA;(via BICS)" id="__ZBiMHxBEd6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_B0CzIHxCEd6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_CHiW4HxCEd6EObWcVHlOJA" gatewayType="XOR_EVENT"/>
+        <containedFlowObjects xsi:type="vsdt:Intermediate" id="_Da_i0HxCEd6EObWcVHlOJA" trigger="TIMER"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_Dp3sUHxCEd6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="fehlende &#xD;&#xA;Daten" id="_Ee_WcHxCEd6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="fehlende Daten &#xD;&#xA;versenden" id="_FRtz4HxCEd6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="MIB-Meldung verschicken&#xD;&#xA;(via Fax, Mail, EID, Telefon)" id="_GujlUHxCEd6EObWcVHlOJA"/>
+      </lanes>
+    </pools>
+    <pools name="nachfolgende WSA / RvZ" id="_Q8KzYHxDEd6EObWcVHlOJA" participant="_zQDWmHuDEd6eVZxYmHq6_g">
+      <process name="nachfolgende WSA / RvZ_Process" id="_Q8KzYnxDEd6EObWcVHlOJA"/>
+      <lanes id="_Q8KzYXxDEd6EObWcVHlOJA" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" name="Meldung empfangen" id="_Uqp3UHxDEd6EObWcVHlOJA" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="MIB-Meldung speichern" id="_WryooHxDEd6EObWcVHlOJA"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_XaDc0HxDEd6EObWcVHlOJA"/>
+      </lanes>
+    </pools>
+    <artifacts xsi:type="vsdt:DataObject" name="ADNR" id="_yBzXgHxDEd6FUIgTv8nr9w"/>
+    <artifacts xsi:type="vsdt:DataObject" name="Manifest" id="_y7O54HxDEd6FUIgTv8nr9w"/>
+    <artifacts xsi:type="vsdt:DataObject" name="Schiffsdaten" id="_zsU_oHxDEd6FUIgTv8nr9w"/>
+    <artifacts xsi:type="vsdt:DataObject" name="MIB-Meldung (Schiff)" id="_0_78kHxDEd6FUIgTv8nr9w"/>
+    <artifacts xsi:type="vsdt:DataObject" name="MIB-Meldung (WSA/RvZ)" id="_8FGocHxDEd6FUIgTv8nr9w"/>
+    <artifacts xsi:type="vsdt:DataObject" name="MIB-Meldung (andere)" id="_AJdOsHxEEd6FUIgTv8nr9w"/>
+    <artifacts xsi:type="vsdt:DataObject" name="Schiffsdaten (WSA/RvZ)" id="_Hhz8UHxEEd6FUIgTv8nr9w"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_5hqtQHxBEd6EObWcVHlOJA" source="_3l49EHxBEd6EObWcVHlOJA" target="_5hg8QHxBEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_6d66JnxBEd6EObWcVHlOJA" source="_5hg8QHxBEd6EObWcVHlOJA" target="_6d66IHxBEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_9jC4AHxBEd6EObWcVHlOJA" conditionType="DEFAULT" source="_6d66IHxBEd6EObWcVHlOJA" target="_9iv9EHxBEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="__ZLTMHxBEd6EObWcVHlOJA" source="_9iv9EHxBEd6EObWcVHlOJA" target="__ZBiMHxBEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_B0CzJnxCEd6EObWcVHlOJA" source="__ZBiMHxBEd6EObWcVHlOJA" target="_B0CzIHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_CHrg0HxCEd6EObWcVHlOJA" source="_B0CzIHxCEd6EObWcVHlOJA" target="_CHiW4HxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_DbJT0HxCEd6EObWcVHlOJA" source="_CHiW4HxCEd6EObWcVHlOJA" target="_Da_i0HxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_Dp3sVnxCEd6EObWcVHlOJA" source="_Da_i0HxCEd6EObWcVHlOJA" target="_Dp3sUHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_EfIgYHxCEd6EObWcVHlOJA" source="_CHiW4HxCEd6EObWcVHlOJA" target="_Ee_WcHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_FRtz6XxCEd6EObWcVHlOJA" source="_Ee_WcHxCEd6EObWcVHlOJA" target="_FRtz4HxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" name="nein" id="_GujlWXxCEd6EObWcVHlOJA" source="_6d66IHxBEd6EObWcVHlOJA" target="_GujlUHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_N1gZ4HxCEd6EObWcVHlOJA" source="_GujlUHxCEd6EObWcVHlOJA" target="_B0CzIHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_U9M1UHxCEd6EObWcVHlOJA" source="_FRtz4HxCEd6EObWcVHlOJA" target="_B0CzIHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_fjdpZnxCEd6EObWcVHlOJA" source="_eGxo8HxCEd6EObWcVHlOJA" target="_fjdpYHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_fziFuXxCEd6EObWcVHlOJA" source="_fjdpYHxCEd6EObWcVHlOJA" target="_fziFsHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_iX7VEHxCEd6EObWcVHlOJA" source="_fziFsHxCEd6EObWcVHlOJA" target="_iXLuMHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_igHAsHxCEd6EObWcVHlOJA" source="_iXLuMHxCEd6EObWcVHlOJA" target="_if9PsHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_jzRRsHxCEd6EObWcVHlOJA" source="_fjdpYHxCEd6EObWcVHlOJA" target="_jzIHwHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_lYlpsHxCEd6EObWcVHlOJA" source="_if9PsHxCEd6EObWcVHlOJA" target="_lYb4sHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" name="nein" id="_mkwh4HxCEd6EObWcVHlOJA" source="_lYb4sHxCEd6EObWcVHlOJA" target="_mknX8HxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_n_goqHxCEd6EObWcVHlOJA" source="_mknX8HxCEd6EObWcVHlOJA" target="_n_XesHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_ou0lsHxCEd6EObWcVHlOJA" conditionType="DEFAULT" source="_lYb4sHxCEd6EObWcVHlOJA" target="_ouq0sHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_qJIAgHxCEd6EObWcVHlOJA" source="_ouq0sHxCEd6EObWcVHlOJA" target="_qI-2kHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_1mI2YHxCEd6EObWcVHlOJA" source="_jzIHwHxCEd6EObWcVHlOJA" target="_iXLuMHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_6p32AHxCEd6EObWcVHlOJA" source="__ZBiMHxBEd6EObWcVHlOJA" target="_jzIHwHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_7Z7Z8HxCEd6EObWcVHlOJA" source="_GujlUHxCEd6EObWcVHlOJA" target="_fziFsHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_DAtlIHxDEd6EObWcVHlOJA" source="_n_XesHxCEd6EObWcVHlOJA" target="_if9PsHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_FGK1xnxDEd6EObWcVHlOJA" source="_qI-2kHxCEd6EObWcVHlOJA" target="_FGK1wHxDEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_WryoqXxDEd6EObWcVHlOJA" source="_Uqp3UHxDEd6EObWcVHlOJA" target="_WryooHxDEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_XaDc1nxDEd6EObWcVHlOJA" source="_WryooHxDEd6EObWcVHlOJA" target="_XaDc0HxDEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_YHcHQHxDEd6EObWcVHlOJA" source="_qI-2kHxCEd6EObWcVHlOJA" target="_Uqp3UHxDEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_e1GSEHxDEd6EObWcVHlOJA" source="_FRtz4HxCEd6EObWcVHlOJA" target="_n_XesHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_fVhekHxDEd6EObWcVHlOJA" source="_mknX8HxCEd6EObWcVHlOJA" target="_Ee_WcHxCEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:Association" id="_3gdYkHxDEd6FUIgTv8nr9w" source="_5hg8QHxBEd6EObWcVHlOJA" target="_0_78kHxDEd6FUIgTv8nr9w"/>
+    <connections xsi:type="vsdt:Association" id="_38SY8HxDEd6FUIgTv8nr9w" source="_zsU_oHxDEd6FUIgTv8nr9w" target="_5hg8QHxBEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:Association" id="_4KkFgHxDEd6FUIgTv8nr9w" source="_y7O54HxDEd6FUIgTv8nr9w" target="_5hg8QHxBEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:Association" id="_4YP8MHxDEd6FUIgTv8nr9w" source="_yBzXgHxDEd6FUIgTv8nr9w" target="_5hg8QHxBEd6EObWcVHlOJA"/>
+    <connections xsi:type="vsdt:Association" id="_-seTUHxDEd6FUIgTv8nr9w" source="_if9PsHxCEd6EObWcVHlOJA" target="_8FGocHxDEd6FUIgTv8nr9w"/>
+    <connections xsi:type="vsdt:Association" id="_BdELoHxEEd6FUIgTv8nr9w" source="_WryooHxDEd6EObWcVHlOJA" target="_AJdOsHxEEd6FUIgTv8nr9w"/>
+    <connections xsi:type="vsdt:Association" id="_JQpcsHxEEd6FUIgTv8nr9w" source="_ouq0sHxCEd6EObWcVHlOJA" target="_Hhz8UHxEEd6FUIgTv8nr9w"/>
+  </businessProcesses>
+  <participants name="Reederei" id="_zQDWlHuDEd6eVZxYmHq6_g" associatedProcesses="_8SJCMHq_Ed6SzvTpMUICGg _BgSiEHrAEd6SzvTpMUICGg" associatedPools="_P3Ir0HrAEd6SzvTpMUICGg _3mxqwXw9Ed6EObWcVHlOJA"/>
+  <participants name="Schiff" id="_zQDWlXuDEd6eVZxYmHq6_g" associatedProcesses="_BgSiEHrAEd6SzvTpMUICGg _E_6DkHrAEd6SzvTpMUICGg _8SJCMHq_Ed6SzvTpMUICGg _B3nLAHrCEd6SzvTpMUICGg" associatedPools="_TBc2QHrBEd6SzvTpMUICGg _Zs3v8HrCEd6SzvTpMUICGg _3mn5sHw9Ed6EObWcVHlOJA _yli6n3w_Ed6EObWcVHlOJA"/>
+  <participants name="Kunde" id="_zQDWlnuDEd6eVZxYmHq6_g" associatedProcesses="_8SJCMHq_Ed6SzvTpMUICGg" associatedPools="_RMFskHrAEd6SzvTpMUICGg"/>
+  <participants name="Terminal" id="_zQDWl3uDEd6eVZxYmHq6_g" associatedProcesses="_BgSiEHrAEd6SzvTpMUICGg _E_6DkHrAEd6SzvTpMUICGg" associatedPools="_au7p4HrCEd6SzvTpMUICGg _3luh0Hw9Ed6EObWcVHlOJA"/>
+  <participants name="WSA / RvZ" id="_zQDWmHuDEd6eVZxYmHq6_g" associatedProcesses="_B3nLAHrCEd6SzvTpMUICGg" associatedPools="_ylZJkHw_Ed6EObWcVHlOJA _Q8KzYHxDEd6EObWcVHlOJA"/>
+</vsdt:BusinessProcessSystem>

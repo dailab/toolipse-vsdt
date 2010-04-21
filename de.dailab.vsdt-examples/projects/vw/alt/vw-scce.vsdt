@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vsdt:BusinessProcessSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vsdt="http://de.dailab.vsdt" name="Service Centric Car Energy" documentation="VSDT-Version: 1.2.2" id="_QQ_iIPq4Ed6w4IDUnuDpGQ" version="0.1" author="Tobias Küster" expressionLanguage="VSDT Expression Language" creationDate="2010-01-06T12:40:14.018+0100" modificationDate="2010-01-06T12:40:14.018+0100">
+  <businessProcesses name="UC2: Abbildung Fahrerpräferenzverwaltung auf Fahrtplan" documentation="Umfang: Intelligente Abbildung von Fahrerpräferenzen&#xA;&#xA;Kontext: Der persönliche Präferenzkalender des Fahrers, welcher vom FahrerPräferenzVerwalter verwaltet wird, enthält die aktuellen Präferenzen des Fahrers bezüglich Fahrdynamik, Komfort, Klimatisierung, Infotainment und Energieeffizienz. Des Weiteren enthält der FahrerPräferenzVerwalter Bewertungsoptionen für den Umsetzungsgrad des Quality-of-Service (z.B. Termintreue). Der Fahrer kann seine persönlichen Präferenzen im FahrerPräferenzVerwalter jederzeit verändern. Der FahrerPräferenzVerwalter ist an den Fahrer und nicht an das Fahrzeug gebunden. Wechselt der Fahrer das Fahrzeug, so werden seine Präferenzen automatisch vom neuen Fahrzeug erkannt und übernommen. Intelligente e-Fahrzeuge versuchen die Tagesfahraufgabe zu realisieren und gleichzeitig den Umsetzungsgrad der Fahrerpräferenzen zu maximieren. Sollte die vollständige Umsetzung der Fahrerpräferenzen dazu führen, dass das Fahrziel nicht mehr erreicht werden kann, so wird eine Adaption notwendig. Die Präferenzen werden bewertet und je nach Priorität nur teilweise umgesetzt, sodass das Fahrziel immer sicher erreicht wird." id="_WvGOAPq4Ed6w4IDUnuDpGQ" participants="_pad2EPq6Ed6w4IDUnuDpGQ _olze8Pq6Ed6w4IDUnuDpGQ _Z0r0APq6Ed6w4IDUnuDpGQ">
+    <pools name="FahrerPräferenzVerwalter" id="_xl23cAmSEd-GPvlylC5MJw" participant="_pad2EPq6Ed6w4IDUnuDpGQ">
+      <process name="FahrerPräferenzVerwalter_Process" id="_xl56wAmSEd-GPvlylC5MJw"/>
+      <lanes id="_xl5TsAmSEd-GPvlylC5MJw" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" name="Änderung" id="_au21EAmTEd-GPvlylC5MJw" trigger="RULE"/>
+        <containedFlowObjects xsi:type="vsdt:Start" name="Einsteigen in Auto" id="_gI1xgAmTEd-GPvlylC5MJw" trigger="RULE"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Präferenzen auslesen, ggf. Standardwerte" id="_u6FYQAmTEd-GPvlylC5MJw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="sende Präferenzen" id="_2pykAAmVEd-GPvlylC5MJw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="empfange Ist-Werte" id="_Rk1OIAmWEd-GPvlylC5MJw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Abweichung vom Soll-Wert feststellen" id="_AkRasAmXEd-GPvlylC5MJw"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" name="innerhalb Threshold?" id="_FZxpsAmaEd-GPvlylC5MJw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Soll-Werte neu berechnen" id="_dylyMAmbEd-GPvlylC5MJw"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_gtBjAAmbEd-GPvlylC5MJw"/>
+      </lanes>
+    </pools>
+    <pools name="Fahrer" id="_xmiz8AmSEd-GPvlylC5MJw" participant="_olze8Pq6Ed6w4IDUnuDpGQ">
+      <process name="Fahrer_Process" id="_xmjbAAmSEd-GPvlylC5MJw"/>
+    </pools>
+    <pools name="FahrtKoord." id="_xm2V8AmSEd-GPvlylC5MJw" participant="_Z0r0APq6Ed6w4IDUnuDpGQ">
+      <process name="FahrtKoord._Process" id="_xm29AAmSEd-GPvlylC5MJw"/>
+      <lanes id="_xm2V8QmSEd-GPvlylC5MJw" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Start" name="empf. Übertr.fktn." id="_M0U-cAmUEd-GPvlylC5MJw" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Präferenzen in Zustandsraummodell des Planers laden" id="_e1_-sAmVEd-GPvlylC5MJw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Umsetzung im aktuellen Fahrtplan quantifizieren" id="_mn0VMAmVEd-GPvlylC5MJw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="sende Ist-Wert" id="_yaNlMAmVEd-GPvlylC5MJw"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" name="innerhalb Threshold?" id="_uf7usAmaEd-GPvlylC5MJw"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Neuplanung der Fahrt" id="_1Ym2sAmaEd-GPvlylC5MJw"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_wb1lQAmbEd-GPvlylC5MJw"/>
+      </lanes>
+    </pools>
+    <artifacts xsi:type="vsdt:TextAnnotation" documentation="es macht Sinn, die Defaultwerte nicht in den Fahrerpräferenzen zu speichern, da diese vom jeweiligen Auto abhängen könnten" id="_-c7JIAmVEd-GPvlylC5MJw"/>
+    <artifacts xsi:type="vsdt:TextAnnotation" documentation="Änderung der Präferenzen während der Fahrt?" id="_g5HQgAmWEd-GPvlylC5MJw"/>
+    <artifacts xsi:type="vsdt:TextAnnotation" documentation="hier mögliche Endlosschleife" id="_ItKQkAmbEd-GPvlylC5MJw"/>
+    <artifacts xsi:type="vsdt:TextAnnotation" documentation="Ist das der gleiche Threshold? Wenn ja, dann sollte eines davon unnötig sein" id="_oZWVgAmbEd-GPvlylC5MJw"/>
+    <artifacts xsi:type="vsdt:TextAnnotation" documentation="der Fahrer (als Mensch) hat hier nichts zu tun" id="_0ZqFsAmbEd-GPvlylC5MJw"/>
+    <artifacts xsi:type="vsdt:TextAnnotation" documentation="Wozu soll das gut sein?" id="_6gz0sAmcEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_fdoxAAmWEd-GPvlylC5MJw" source="_gI1xgAmTEd-GPvlylC5MJw" target="_u6FYQAmTEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_gAat8AmWEd-GPvlylC5MJw" source="_au21EAmTEd-GPvlylC5MJw" target="_u6FYQAmTEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:Association" id="_k8JBEAmWEd-GPvlylC5MJw" source="_g5HQgAmWEd-GPvlylC5MJw" target="_au21EAmTEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" name="nein" id="_6WP1YAmaEd-GPvlylC5MJw" source="_uf7usAmaEd-GPvlylC5MJw" target="_1Ym2sAmaEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_7F_QQAmaEd-GPvlylC5MJw" source="_1Ym2sAmaEd-GPvlylC5MJw" target="_mn0VMAmVEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_8Jc4YAmaEd-GPvlylC5MJw" source="_M0U-cAmUEd-GPvlylC5MJw" target="_e1_-sAmVEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_8k6sYAmaEd-GPvlylC5MJw" source="_e1_-sAmVEd-GPvlylC5MJw" target="_mn0VMAmVEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_99zx8AmaEd-GPvlylC5MJw" source="_mn0VMAmVEd-GPvlylC5MJw" target="_uf7usAmaEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" name="ja" id="_-WNq4AmaEd-GPvlylC5MJw" source="_uf7usAmaEd-GPvlylC5MJw" target="_yaNlMAmVEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_DBIh4AmbEd-GPvlylC5MJw" source="_u6FYQAmTEd-GPvlylC5MJw" target="_2pykAAmVEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_DbxPcAmbEd-GPvlylC5MJw" source="_2pykAAmVEd-GPvlylC5MJw" target="_Rk1OIAmWEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_D0kJ8AmbEd-GPvlylC5MJw" source="_Rk1OIAmWEd-GPvlylC5MJw" target="_AkRasAmXEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_EQjiYAmbEd-GPvlylC5MJw" source="_AkRasAmXEd-GPvlylC5MJw" target="_FZxpsAmaEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:Association" id="_LRhqwAmbEd-GPvlylC5MJw" source="_ItKQkAmbEd-GPvlylC5MJw" target="_6WP1YAmaEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_gb1sYAmbEd-GPvlylC5MJw" source="_FZxpsAmaEd-GPvlylC5MJw" target="_dylyMAmbEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_gtL7EAmbEd-GPvlylC5MJw" source="_FZxpsAmaEd-GPvlylC5MJw" target="_gtBjAAmbEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_iewmYAmbEd-GPvlylC5MJw" source="_dylyMAmbEd-GPvlylC5MJw" target="_2pykAAmVEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_kCPyYAmbEd-GPvlylC5MJw" source="_2pykAAmVEd-GPvlylC5MJw" target="_M0U-cAmUEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_mhPkYAmbEd-GPvlylC5MJw" source="_yaNlMAmVEd-GPvlylC5MJw" target="_Rk1OIAmWEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:Association" id="_ujhYwAmbEd-GPvlylC5MJw" source="_oZWVgAmbEd-GPvlylC5MJw" target="_FZxpsAmaEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:Association" id="_vEGWQAmbEd-GPvlylC5MJw" source="_oZWVgAmbEd-GPvlylC5MJw" target="_uf7usAmaEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_wcDnsAmbEd-GPvlylC5MJw" source="_yaNlMAmVEd-GPvlylC5MJw" target="_wb1lQAmbEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:Association" id="_3sPQwAmbEd-GPvlylC5MJw" source="_0ZqFsAmbEd-GPvlylC5MJw" target="_xmiz8AmSEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:Association" id="_6mjFwAmbEd-GPvlylC5MJw" source="_-c7JIAmVEd-GPvlylC5MJw" target="_u6FYQAmTEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:Association" id="_-NaCQAmcEd-GPvlylC5MJw" source="_6gz0sAmcEd-GPvlylC5MJw" target="_dylyMAmbEd-GPvlylC5MJw"/>
+  </businessProcesses>
+  <businessProcesses name="UC5: Verhandelt Parkplätze" documentation="Umfang: Intelligente Verhandlung von Parkplätzen – von der anfänglichen Mehrfachanfrage bis zur Buchung&#xA;&#xA;Kontext: Intelligente konventionelle Fahrzeuge sowie intelligente e-Fahrzeuge setzen den Terminkalender ihres Fahrers autonom um. Sie tun dies, indem sie die zur Termineinhaltung notwendigen Schritte selbständig identifizieren, bewerten, verhandeln und planen. Die Planung der Parkplätze hat einen direkten Einfluss auf die Termintreue. Verhandelt werden Parkplätze in einer vordefinierten Umgebung des Zielortes, zum Zeitpunkt der geplanten Ankunft und für die geplante Dauer des Aufenthaltes. Der Zielort hat eine Unschärfe und wird daher als Zielgebiet bezeichnet. Die Ankunftszeit sowie die Verweildauer sind mit Unschärfen bzw. Unsicherheiten belegt. Parkplätze werden unter Berücksichtigung der Unsicherheiten sowie terminspezifischer Attribute (z.B. Verfügbarkeitssicherheit, Priorität, …) geplant und angefragt. Die resultierenden Parkplatzalternativen werden bewertet und abschließend gebucht." id="_jErDkPq4Ed6w4IDUnuDpGQ" participants="_jQGlkPq6Ed6w4IDUnuDpGQ _eYhyoPq6Ed6w4IDUnuDpGQ _Z0r0APq6Ed6w4IDUnuDpGQ _bH_2APq6Ed6w4IDUnuDpGQ"/>
+  <businessProcesses name="UC6: Verhandelt Ladeslots" documentation="Umfang: Intelligente Verhandlung von Ladeslots– von der anfänglichen Mehrfachanfrage bis zur Buchung&#xA;&#xA;Kontext: Intelligente konventionelle Fahrzeuge sowie intelligente e-Fahrzeuge setzen den Terminkalender ihres Fahrers autonom um. Sie tun dies, indem sie die zur Termineinhaltung notwendigen Schritte selbständig identifizieren, bewerten, verhandeln und planen. Die Reichweite pro Tankladung ist bei allen Fahrzeugen begrenzt. Bei e-Fahrzeugen liegt die Begrenzung unterhalb bzw. in der Nähe der durchschnittlichen Tageskilometerleistung.  Die Ladezeiten bei e-Fahrzeugen haben die Größenordnung von Tagesteilzielen. Aufgrund der langen Ladezeiten gewinnt die Problematik der Ladesäulenverfügbarkeit an Bedeutung. Das Ziel ist es, eine hohe Verlässlichkeit von e-Fahrzeugen bezüglich der persönlichen Tagesplanerfüllung zu gewährleisten und dies mit hoher Termintreue. Ladeslot-Management hat hierauf einen direkten Einfluss. Verhandelt werden Ladeslots in einer vordefinierten Umgebung des Zielortes, zum Zeitpunkt der geplanten Ankunft und für die geplante Dauer des Ladevorgangs oder die Dauer des Fahrertermins. Ersteres verlangt ein umparken (manuell oder autonom) und eine zusätzliche Parkplatzverhandlung, letzteres verlangt eine gekoppelte Ladesäulen-Parkplatz-Verhandlung. Der Zielort hat eine Unschärfe und wird daher als Zielgebiet bezeichnet. Die Ankunftszeit sowie die Verweildauer sind mit Unschärfen bzw. Unsicherheiten belegt. Ladeslots oder Park-Ladeslots werden unter Berücksichtigung der Unsicherheiten sowie terminspezifischer Attribute (z.B. Verfügbarkeitssicherheit, Priorität, …) geplant und angefragt. Die resultierenden Alternativen werden bewertet und abschließend gebucht. Energieversorgerseitige Planungs- und Geschäftsmodelle interfacen mit diesem UseCase." id="_kx7PkPq4Ed6w4IDUnuDpGQ" participants="_eYhyoPq6Ed6w4IDUnuDpGQ _bH_2APq6Ed6w4IDUnuDpGQ _Z0r0APq6Ed6w4IDUnuDpGQ"/>
+  <businessProcesses name="UC1: Abbildung Fahrerterminkalender auf Fahrtplan" documentation="Umfang: Intelligenter Terminkalenderabgleich - Terminkalendertransformation&#xA;Kontext:   Der persönliche Terminkalender des Fahrers (Fahrerterminkalender) enthält die&#xA;         Tagesterminplanung des Fahrers auf konventionelle Art und Weise. Intelligente e-Fahrzeuge&#xA;         assistieren dem Fahrer, indem sie intelligent ihre Ressourcen (Energie, Verkehr, Parkplätze,&#xA;         Aufladung an Ladesäulen ...etc.) planen und somit die exakte Erfüllung aller Tagestermine des&#xA;         Fahrers gewährleisten. Die notwendigen Planungsschritte des Fahrzeuges und deren zeitliche&#xA;         Koordination werden im Terminkalender des Fahrzeuges (Fahrtplan) festgehalten. Die&#xA;         Abbildung des Fahrerterminkalenders auf den Fahrtplan ist somit eine Transformation der&#xA;         Tagesterminplanung von der Fahrerebene auf die Fahrzeugebene. Die inverse Abbildung ist&#xA;         eine Transformation des Fahrtplans zurück auf den Fahrerterminkalender. Änderungen des&#xA;         Fahrtplans werden im FahrerTerminKalenderVerwalter (DOA) bewertet und es wird&#xA;         entschieden, ob sich daraus Terminverschiebungen für den Fahrerterminkalender ergeben. Im&#xA;         Falle von Terminverschiebungen wird der Fahrer über die Änderungen in seinem&#xA;         Terminkalender benachrichtigt." id="_rf15EPq4Ed6w4IDUnuDpGQ" participants="_t-vSgPq6Ed6w4IDUnuDpGQ _olze8Pq6Ed6w4IDUnuDpGQ _Z0r0APq6Ed6w4IDUnuDpGQ">
+    <pools name="FahrerKalenderVerwalter" id="_DL-FQPq7Ed6w4IDUnuDpGQ" participant="_t-vSgPq6Ed6w4IDUnuDpGQ">
+      <process name="FahrerKalenderVerwalter_Process" id="_DL_TYfq7Ed6w4IDUnuDpGQ"/>
+      <lanes id="_DL_TYPq7Ed6w4IDUnuDpGQ" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Activity" name="identifiziere Fahrer-Zieldaten" id="_RtM6EPq7Ed6w4IDUnuDpGQ"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="sende Fahrer-Zieldaten" id="_albfAPq7Ed6w4IDUnuDpGQ"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" name="Änderungen?" id="_54_BgPq7Ed6w4IDUnuDpGQ"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Fahrer-Zieldaten anpassen und in Terminkalender übernehmen" id="_A-P0APq8Ed6w4IDUnuDpGQ"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Fahrer informieren" id="_ESkrgPq8Ed6w4IDUnuDpGQ"/>
+        <containedFlowObjects xsi:type="vsdt:Start" name="neuer Termin" documentation="neuer Termin oder Terminänderung bei dem das Auto als Ressource verwendet wird" id="_6pQLYPq8Ed6w4IDUnuDpGQ" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="empfange neue Daten" id="_OkOFAPq9Ed6w4IDUnuDpGQ"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_kDNWIPq9Ed6w4IDUnuDpGQ"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" name="Zieldaten?" id="_lSeEwP-CEd6bmd_mtABu2A"/>
+        <containedFlowObjects xsi:type="vsdt:Start" name="Einsteigen in Auto" documentation="telefon erkennen (oder irgendein anderes id-merkmal) und ggf. die termine und präferenzen des ungeplanten fahrer übernehmen" id="_Db9A0P-DEd6bmd_mtABu2A" trigger="RULE"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Ziel abfragen oder Termin wählen" id="_XIgOgP-EEd6bmd_mtABu2A"/>
+      </lanes>
+    </pools>
+    <pools name="Fahrer" documentation="Fahrer oder sein Terminkalender (Blackberry, Outlook, etc.)" id="_DMj7IPq7Ed6w4IDUnuDpGQ" participant="_olze8Pq6Ed6w4IDUnuDpGQ">
+      <process name="Fahrer_Process" id="_DMj7Ivq7Ed6w4IDUnuDpGQ"/>
+    </pools>
+    <pools name="FahrtKoord." id="_DMrP4Pq7Ed6w4IDUnuDpGQ" participant="_Z0r0APq6Ed6w4IDUnuDpGQ">
+      <process name="FahrtKoord._Process" id="_DMrP4vq7Ed6w4IDUnuDpGQ"/>
+      <lanes id="_DMrP4fq7Ed6w4IDUnuDpGQ" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Activity" name="rücktransformiere Fahrtplan-Ziele auf Fahrer-Zieldaten" id="_ptTdEPq7Ed6w4IDUnuDpGQ"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="sende aktuelle Fahrer-Zieldaten" id="_t5tMEPq7Ed6w4IDUnuDpGQ"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Zieldaten auf Fahrtplan-Ziele abbilden" id="_goZHAPq7Ed6w4IDUnuDpGQ"/>
+        <containedFlowObjects xsi:type="vsdt:Start" name="neues Ziel" id="_pH-3kPq9Ed6w4IDUnuDpGQ" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_v8KhIPq9Ed6w4IDUnuDpGQ"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" name="Änderungen?" id="_yr5BUPq-Ed6w4IDUnuDpGQ"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" id="_9QnkUPq-Ed6w4IDUnuDpGQ"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Route berechnen" id="_DasN0P-JEd6bmd_mtABu2A" activityType="INDEPENDENT" diagramRef="_i3i9oP-GEd6bmd_mtABu2A"/>
+      </lanes>
+    </pools>
+    <artifacts xsi:type="vsdt:TextAnnotation" documentation="Wie wird der Optimierer in &quot;Route berechnen&quot; eingebunden?" id="_VrIG8ABHEd-DFdWjPlnH5A"/>
+    <artifacts xsi:type="vsdt:TextAnnotation" documentation="Wie wird mit strategischer, taktischer, feiner und grober Planung umgegangen?" id="_Yt9l0ABHEd-DFdWjPlnH5A"/>
+    <artifacts xsi:type="vsdt:TextAnnotation" documentation="Falscher Fahrer: Nachricht anzeigen, aber weitermachen" id="_WzWeQAmSEd-GPvlylC5MJw"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_WjMtwPq9Ed6w4IDUnuDpGQ" source="_6pQLYPq8Ed6w4IDUnuDpGQ" target="_RtM6EPq7Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_Xfn5wPq9Ed6w4IDUnuDpGQ" source="_albfAPq7Ed6w4IDUnuDpGQ" target="_OkOFAPq9Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_X8YuQPq9Ed6w4IDUnuDpGQ" source="_OkOFAPq9Ed6w4IDUnuDpGQ" target="_54_BgPq7Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_YZfhAPq9Ed6w4IDUnuDpGQ" source="_54_BgPq7Ed6w4IDUnuDpGQ" target="_A-P0APq8Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_Y1XksPq9Ed6w4IDUnuDpGQ" source="_A-P0APq8Ed6w4IDUnuDpGQ" target="_ESkrgPq8Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_kDXHIPq9Ed6w4IDUnuDpGQ" source="_ESkrgPq8Ed6w4IDUnuDpGQ" target="_kDNWIPq9Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_l9_AwPq9Ed6w4IDUnuDpGQ" source="_54_BgPq7Ed6w4IDUnuDpGQ" target="_kDNWIPq9Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_pIJPoPq9Ed6w4IDUnuDpGQ" source="_pH-3kPq9Ed6w4IDUnuDpGQ" target="_goZHAPq7Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_v8TrEPq9Ed6w4IDUnuDpGQ" source="_t5tMEPq7Ed6w4IDUnuDpGQ" target="_v8KhIPq9Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_29UPsPq9Ed6w4IDUnuDpGQ" source="_DMj7IPq7Ed6w4IDUnuDpGQ" target="_6pQLYPq8Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_4EWJMPq9Ed6w4IDUnuDpGQ" source="_albfAPq7Ed6w4IDUnuDpGQ" target="_pH-3kPq9Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_8Z50MPq9Ed6w4IDUnuDpGQ" source="_t5tMEPq7Ed6w4IDUnuDpGQ" target="_OkOFAPq9Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_9XNJ8Pq9Ed6w4IDUnuDpGQ" source="_ESkrgPq8Ed6w4IDUnuDpGQ" target="_DMj7IPq7Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_ysF1oPq-Ed6w4IDUnuDpGQ" source="_yr5BUPq-Ed6w4IDUnuDpGQ" target="_ptTdEPq7Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_9QzxkPq-Ed6w4IDUnuDpGQ" source="_9QnkUPq-Ed6w4IDUnuDpGQ" target="_t5tMEPq7Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_vyyisPq9Ed6w4IDUnuDpGQ" source="_ptTdEPq7Ed6w4IDUnuDpGQ" target="_9QnkUPq-Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_-l-NsPq-Ed6w4IDUnuDpGQ" source="_yr5BUPq-Ed6w4IDUnuDpGQ" target="_9QnkUPq-Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_lYfNMP-CEd6bmd_mtABu2A" source="_lSeEwP-CEd6bmd_mtABu2A" target="_albfAPq7Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_XApewPq9Ed6w4IDUnuDpGQ" source="_RtM6EPq7Ed6w4IDUnuDpGQ" target="_lSeEwP-CEd6bmd_mtABu2A"/>
+    <connections xsi:type="vsdt:SequenceFlow" name="keine Relevanz für Auto" id="_mN7ncP-CEd6bmd_mtABu2A" source="_lSeEwP-CEd6bmd_mtABu2A" target="_kDNWIPq9Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_XIxUQP-EEd6bmd_mtABu2A" source="_XIgOgP-EEd6bmd_mtABu2A" target="_RtM6EPq7Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_Da6QQP-JEd6bmd_mtABu2A" source="_DasN0P-JEd6bmd_mtABu2A" target="_yr5BUPq-Ed6w4IDUnuDpGQ"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_vTD5wPq9Ed6w4IDUnuDpGQ" source="_goZHAPq7Ed6w4IDUnuDpGQ" target="_DasN0P-JEd6bmd_mtABu2A"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_IwFz8P-DEd6bmd_mtABu2A" source="_Db9A0P-DEd6bmd_mtABu2A" target="_XIgOgP-EEd6bmd_mtABu2A"/>
+    <connections xsi:type="vsdt:Association" id="_h5tHoAmSEd-GPvlylC5MJw" direction="NONE" source="_XIgOgP-EEd6bmd_mtABu2A" target="_WzWeQAmSEd-GPvlylC5MJw"/>
+  </businessProcesses>
+  <businessProcesses name="Routenplanung" id="_i3i9oP-GEd6bmd_mtABu2A" participants="_Z0r0APq6Ed6w4IDUnuDpGQ _pad2EPq6Ed6w4IDUnuDpGQ _jQGlkPq6Ed6w4IDUnuDpGQ _T5FuIAAyEd-DFdWjPlnH5A">
+    <pools name="FahrtKoord." id="_g2KMEAAzEd-DFdWjPlnH5A" participant="_Z0r0APq6Ed6w4IDUnuDpGQ">
+      <process name="FahrtKoord._Process" id="_g2LaMAAzEd-DFdWjPlnH5A"/>
+      <lanes id="_g2KzIAAzEd-DFdWjPlnH5A" boundaryVisible="false">
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Routen berechnen lassen" id="_nDvIoAAzEd-DFdWjPlnH5A">
+          <loopAttributes xsi:type="vsdt:MultiLoopAttSet"/>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="bewerten, beste Route auswählen" id="_uD5_wAAzEd-DFdWjPlnH5A"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Nutzer-Präferenzen abfragen" id="_8q-W0AAzEd-DFdWjPlnH5A"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" name="" id="_g0lCQAA0Ed-DFdWjPlnH5A"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Nutzer informieren" id="_i-nQ4AA0Ed-DFdWjPlnH5A"/>
+        <containedFlowObjects xsi:type="vsdt:End" id="_OpyQUAA1Ed-DFdWjPlnH5A"/>
+        <containedFlowObjects xsi:type="vsdt:Gateway" name="ok?" id="_UcUPoAA1Ed-DFdWjPlnH5A"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Termin eintragen" id="_WEXLgAA1Ed-DFdWjPlnH5A"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Nutzer informieren" id="_blTEgAA1Ed-DFdWjPlnH5A"/>
+        <containedFlowObjects xsi:type="vsdt:Start" id="_HlLTMAA3Ed-DFdWjPlnH5A" trigger="MESSAGE"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Preprocessing" documentation="startort berechnen (aus terminen ableiten, lokalisierung, im zweifelsfall nachfragen), nächster parkplatz finden + parkplatzverhandlung (referenz auf anderen usecase), präferenzen routenplanerservice-kompatibel machen&#xA;condtraints: früheste startzeit / späteste wiederankunfstszeit" id="_N99cYABGEd-DFdWjPlnH5A"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Postprocessing" id="_n1gCIABGEd-DFdWjPlnH5A" activityType="EMBEDDED">
+          <containedFlowObjects xsi:type="vsdt:Activity" name="Ladezustand / Verbrauch berechnen" id="_CV3X4ABGEd-DFdWjPlnH5A"/>
+          <containedFlowObjects xsi:type="vsdt:Activity" name="Startzeit berechnen" id="_2GSh0AAzEd-DFdWjPlnH5A"/>
+        </containedFlowObjects>
+      </lanes>
+    </pools>
+    <pools name="PräferenzVerw." id="_g2ZcoAAzEd-DFdWjPlnH5A" participant="_pad2EPq6Ed6w4IDUnuDpGQ">
+      <process name="PräferenzVerw._Process" id="_g2ZcogAzEd-DFdWjPlnH5A"/>
+      <lanes id="_g2ZcoQAzEd-DFdWjPlnH5A" boundaryVisible="false"/>
+    </pools>
+    <pools name="FahrtenVermittler" id="_g2hYcAAzEd-DFdWjPlnH5A" participant="_jQGlkPq6Ed6w4IDUnuDpGQ">
+      <process name="FahrtenVermittler_Process" id="_g2hYcgAzEd-DFdWjPlnH5A"/>
+      <lanes id="_g2hYcQAzEd-DFdWjPlnH5A" boundaryVisible="false"/>
+    </pools>
+    <pools name="Routenplaner" id="_g2otMAAzEd-DFdWjPlnH5A" participant="_T5FuIAAyEd-DFdWjPlnH5A">
+      <process name="Routenplaner_Process" id="_g2pUQAAzEd-DFdWjPlnH5A"/>
+      <lanes id="_g2otMQAzEd-DFdWjPlnH5A" boundaryVisible="false"/>
+    </pools>
+    <artifacts xsi:type="vsdt:TextAnnotation" documentation="alle möglichen Präferenzen werden abgefragt und nach möglichkeit in den Routenplanerdiensten verständliche Prameter umgerechnet" id="_1JkgQABGEd-DFdWjPlnH5A"/>
+    <artifacts xsi:type="vsdt:TextAnnotation" documentation="bewertungsvektor: ausgewählte Präferenz, gewichtet" id="__9LMwABGEd-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_uEJ3YAAzEd-DFdWjPlnH5A" source="_nDvIoAAzEd-DFdWjPlnH5A" target="_n1gCIABGEd-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_EzAN4AA0Ed-DFdWjPlnH5A" source="_8q-W0AAzEd-DFdWjPlnH5A" target="_g2ZcoAAzEd-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_GKlE0AA0Ed-DFdWjPlnH5A" source="_g2ZcoAAzEd-DFdWjPlnH5A" target="_8q-W0AAzEd-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_JZl-gAA0Ed-DFdWjPlnH5A" source="_nDvIoAAzEd-DFdWjPlnH5A" target="_g2otMAAzEd-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:MessageFlow" id="_KQdVEAA0Ed-DFdWjPlnH5A" source="_g2otMAAzEd-DFdWjPlnH5A" target="_nDvIoAAzEd-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:SequenceFlow" name="subopt. Termin" id="_m5Uy8AA0Ed-DFdWjPlnH5A" source="_g0lCQAA0Ed-DFdWjPlnH5A" target="_i-nQ4AA0Ed-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_K_skMAA1Ed-DFdWjPlnH5A" source="_uD5_wAAzEd-DFdWjPlnH5A" target="_g0lCQAA0Ed-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_UceAoAA1Ed-DFdWjPlnH5A" source="_i-nQ4AA0Ed-DFdWjPlnH5A" target="_UcUPoAA1Ed-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_WElN8AA1Ed-DFdWjPlnH5A" source="_WEXLgAA1Ed-DFdWjPlnH5A" target="_OpyQUAA1Ed-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:SequenceFlow" name="optimaler Termin" id="_Pby8EAA1Ed-DFdWjPlnH5A" source="_g0lCQAA0Ed-DFdWjPlnH5A" target="_WEXLgAA1Ed-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:SequenceFlow" name="ja" id="_aF9YsAA1Ed-DFdWjPlnH5A" source="_UcUPoAA1Ed-DFdWjPlnH5A" target="_WEXLgAA1Ed-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:SequenceFlow" name="nichts gefunden" id="_bleqsAA1Ed-DFdWjPlnH5A" source="_g0lCQAA0Ed-DFdWjPlnH5A" target="_blTEgAA1Ed-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_iZnQ8AA1Ed-DFdWjPlnH5A" source="_blTEgAA1Ed-DFdWjPlnH5A" target="_OpyQUAA1Ed-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_m_0AAAA1Ed-DFdWjPlnH5A" source="_UcUPoAA1Ed-DFdWjPlnH5A" target="_nDvIoAAzEd-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_GbV9UAA3Ed-DFdWjPlnH5A" source="_8q-W0AAzEd-DFdWjPlnH5A" target="_N99cYABGEd-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_HlajwAA3Ed-DFdWjPlnH5A" source="_HlLTMAA3Ed-DFdWjPlnH5A" target="_8q-W0AAzEd-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_IPfdsABGEd-DFdWjPlnH5A" source="_n1gCIABGEd-DFdWjPlnH5A" target="_uD5_wAAzEd-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:SequenceFlow" id="_QlF2sABGEd-DFdWjPlnH5A" source="_N99cYABGEd-DFdWjPlnH5A" target="_nDvIoAAzEd-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:Association" id="_1J6egABGEd-DFdWjPlnH5A" source="_8q-W0AAzEd-DFdWjPlnH5A" target="_1JkgQABGEd-DFdWjPlnH5A"/>
+    <connections xsi:type="vsdt:Association" id="__9UWsABGEd-DFdWjPlnH5A" source="_uD5_wAAzEd-DFdWjPlnH5A" target="__9LMwABGEd-DFdWjPlnH5A"/>
+  </businessProcesses>
+  <businessProcesses name="Settings" id="_0i5OYAtVEd-lcfSSUBphGA" participants="_olze8Pq6Ed6w4IDUnuDpGQ _pad2EPq6Ed6w4IDUnuDpGQ"/>
+  <participants name="FahrtKoord." id="_Z0r0APq6Ed6w4IDUnuDpGQ" associatedProcesses="_kx7PkPq4Ed6w4IDUnuDpGQ _jErDkPq4Ed6w4IDUnuDpGQ _WvGOAPq4Ed6w4IDUnuDpGQ _rf15EPq4Ed6w4IDUnuDpGQ _i3i9oP-GEd6bmd_mtABu2A" associatedPools="_DMrP4Pq7Ed6w4IDUnuDpGQ _g2KMEAAzEd-DFdWjPlnH5A _xm2V8AmSEd-GPvlylC5MJw"/>
+  <participants name="LadesäulenKoord." id="_bH_2APq6Ed6w4IDUnuDpGQ" associatedProcesses="_kx7PkPq4Ed6w4IDUnuDpGQ _jErDkPq4Ed6w4IDUnuDpGQ"/>
+  <participants name="ParkplatzKoord." id="_eYhyoPq6Ed6w4IDUnuDpGQ" associatedProcesses="_kx7PkPq4Ed6w4IDUnuDpGQ _jErDkPq4Ed6w4IDUnuDpGQ"/>
+  <participants name="FahrtenVermittler" documentation="vermittelt Mitfahrgelegenheiten" id="_jQGlkPq6Ed6w4IDUnuDpGQ" associatedProcesses="_jErDkPq4Ed6w4IDUnuDpGQ _i3i9oP-GEd6bmd_mtABu2A" associatedPools="_g2hYcAAzEd-DFdWjPlnH5A"/>
+  <participants name="Fahrer" id="_olze8Pq6Ed6w4IDUnuDpGQ" associatedProcesses="_WvGOAPq4Ed6w4IDUnuDpGQ _rf15EPq4Ed6w4IDUnuDpGQ _0i5OYAtVEd-lcfSSUBphGA" associatedPools="_DMj7IPq7Ed6w4IDUnuDpGQ _xmiz8AmSEd-GPvlylC5MJw"/>
+  <participants name="FahrerPräferenzVerwalter" id="_pad2EPq6Ed6w4IDUnuDpGQ" associatedProcesses="_WvGOAPq4Ed6w4IDUnuDpGQ _i3i9oP-GEd6bmd_mtABu2A _0i5OYAtVEd-lcfSSUBphGA" associatedPools="_g2ZcoAAzEd-DFdWjPlnH5A _xl23cAmSEd-GPvlylC5MJw"/>
+  <participants name="FahrerKalenderVerwalter" id="_t-vSgPq6Ed6w4IDUnuDpGQ" associatedProcesses="_rf15EPq4Ed6w4IDUnuDpGQ" associatedPools="_DL-FQPq7Ed6w4IDUnuDpGQ"/>
+  <participants name="Routenplaner" id="_T5FuIAAyEd-DFdWjPlnH5A" associatedProcesses="_i3i9oP-GEd6bmd_mtABu2A" associatedPools="_g2otMAAzEd-DFdWjPlnH5A"/>
+</vsdt:BusinessProcessSystem>

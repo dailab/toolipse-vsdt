@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vsdt:BusinessProcessDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vsdt="http://de.dailab.vsdt" name="eGrains Demonstrator" documentation="This business process will connect to the eGrains base station (via serial port) and &#xD;&#xA;monitor the temperature of a given eGrains node. When the temperature of the node &#xD;&#xA;exceeds a given level the ventilation system is activated (and later, deacticated again)." id="BusinessProcessDiagram_1203420066362" version="0.1" author="Tobias Küster" language="en" expressionLanguage="" queryLanguage="" creationDate="2008-01-09T11:48:49.806+0100" modificationDate="2008-01-09T12:28:49.336+0100">
+  <pools name="User Interface" documentation="This Pool stands for the user interface, which can be e.g. a JSP or other Java application" id="Pool_1203420066362" participant="//@participants.0">
+    <process name="User Interface_Process" id="BpmnProcess_1203420066362" processType="NONE"/>
+  </pools>
+  <pools name="eGrainsProcess" documentation="This pool represents the actual process. The process will connect to the eGrains base station (via serial port)&#xD;&#xA;and monitor the temperature of a given eGrains node. When the temperature of the node exceeds a given level&#xD;&#xA;the ventilation system is activated (and later, deacticated again)." id="Pool_1203420066362" participant="//@participants.1">
+    <process name="eGrainsProcess_Process" id="BpmnProcess_1203420066362">
+      <properties name="port" type="xsd:string"/>
+      <properties name="id" type="xsd:integer"/>
+      <properties name="temp" type="xsd:float"/>
+      <properties name="lastTemp" type="xsd:float"/>
+      <properties name="threshold" type="xsd:float"/>
+    </process>
+    <lanes name="Default Lane" id="Lane_1203420066362" boundaryVisible="false">
+      <containedFlowObjects xsi:type="vsdt:Start" documentation="Start the process by receiving the start message, passing the parameters.&#xD;&#xA;Store parameters in global variables" id="Start_1203420066362" message="//@messages.0" implementation="//@implementations.0" trigger="MESSAGE">
+        <assignments to="//@pools.1/@process/@properties.0" assignTime="END">
+          <from expression="paramPort"/>
+        </assignments>
+        <assignments to="//@pools.1/@process/@properties.1" assignTime="END">
+          <from expression="paramId"/>
+        </assignments>
+        <assignments to="//@pools.1/@process/@properties.2" assignTime="END">
+          <from expression="0.0"/>
+        </assignments>
+        <assignments to="//@pools.1/@process/@properties.3" assignTime="END">
+          <from expression="0.0"/>
+        </assignments>
+        <assignments to="//@pools.1/@process/@properties.4" assignTime="END">
+          <from expression="paramThreshold"/>
+        </assignments>
+      </containedFlowObjects>
+      <containedFlowObjects xsi:type="vsdt:Activity" name="Connect" documentation="send message to the base station to connect to the com port given as a parameter." id="Activity_1203420066362" activityType="SEND" inMessage="//@messages.2" implementation="//@implementations.2">
+        <assignments to="//@messages.2/@properties.0">
+          <from expression="port"/>
+        </assignments>
+      </containedFlowObjects>
+      <containedFlowObjects xsi:type="vsdt:Activity" name="Monitor Temperature" documentation="monitor the temperature in an infinite loop, which only is exited if an error occurs or when the stop signal is sent." id="Activity_1203420066362" loopType="STANDARD" activityType="EMBEDDED">
+        <containedFlowObjects xsi:type="vsdt:Intermediate" name="wait  3 sec" documentation="here the process waits some time, so the base station can submit new data to the internal CommLink.&#xD;&#xA;also copies the last iteration's temperature value in the lastTemp variable" id="Intermediate_1203420066362" timeCycle="'PT3S'" trigger="TIMER">
+          <assignments to="//@pools.1/@process/@properties.3">
+            <from expression="temp"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Get Temp" documentation="Get Temperature of given node from the eGrainsWS, store value in variable 'temp'" id="Activity_1203420066362" activityType="SERVICE" inMessage="//@messages.3" outMessage="//@messages.4" implementation="//@implementations.3">
+          <assignments to="//@messages.3/@properties.0">
+            <from expression="id"/>
+          </assignments>
+          <assignments to="//@pools.1/@process/@properties.2" assignTime="END">
+            <from expression="paramTemp"/>
+          </assignments>
+        </containedFlowObjects>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="No Op" documentation="Do nothing (needed for this (still partial) block being recognized as a block)" id="Activity_1203420066362"/>
+        <containedFlowObjects xsi:type="vsdt:Activity" name="Trigger Ventilation" documentation="Trigger the ventilation system on or off, depending on the temperature" id="Activity_1203420066362" activityType="SEND" inMessage="//@messages.5" implementation="//@implementations.4">
+          <assignments to="//@messages.5/@properties.0">
+            <from expression="'tinilamp'"/>
+          </assignments>
+          <assignments to="//@messages.5/@properties.1">
+            <from expression="number( temp - lastTemp)"/>
+          </assignments>
+        </containedFlowObjects>
+        <loopAttributes xsi:type="vsdt:StandardLoopAttSet" testTime="BEFORE">
+          <loopCondition expression="true()"/>
+        </loopAttributes>
+        <boundaryEvents documentation="exit the process on incoming stop message" id="Intermediate_1203420066362" message="//@messages.1" implementation="//@implementations.1" trigger="MESSAGE"/>
+        <boundaryEvents documentation="controlled exit from the process in case of an error" id="Intermediate_1203420066362" trigger="ERROR"/>
+      </containedFlowObjects>
+      <containedFlowObjects xsi:type="vsdt:End" documentation="Terminate the process" id="End_1203420066362"/>
+      <containedFlowObjects xsi:type="vsdt:Activity" name="Disconnect" documentation="Disconnect from the eGrains base station, close streams, etc." id="Activity_1203420066362" activityType="SEND" inMessage="//@messages.6" implementation="//@implementations.5"/>
+    </lanes>
+  </pools>
+  <pools name="eGrainsWS" documentation="This pool is representing the webservice connected to the eGrains base station." id="Pool_1203420066362" participant="//@participants.2">
+    <process name="eGrainsWS_Process" id="BpmnProcess_1203420066362" processType="NONE"/>
+  </pools>
+  <pools name="ventilation" documentation="This pool stands for some ventilation system or clima system." id="Pool_1203420066362" participant="//@participants.3">
+    <process name="ventilation_Process" id="BpmnProcess_1203420066362" processType="NONE"/>
+  </pools>
+  <connections xsi:type="vsdt:SequenceFlow" id="SequenceFlow_1203420066377" source="//@pools.1/@lanes.0/@containedFlowObjects.0" target="//@pools.1/@lanes.0/@containedFlowObjects.1"/>
+  <connections xsi:type="vsdt:SequenceFlow" id="SequenceFlow_1203420066377" source="//@pools.1/@lanes.0/@containedFlowObjects.1" target="//@pools.1/@lanes.0/@containedFlowObjects.2"/>
+  <connections xsi:type="vsdt:SequenceFlow" id="SequenceFlow_1203420066377" source="//@pools.1/@lanes.0/@containedFlowObjects.2/@containedFlowObjects.0" target="//@pools.1/@lanes.0/@containedFlowObjects.2/@containedFlowObjects.1"/>
+  <connections xsi:type="vsdt:SequenceFlow" documentation="If the current temperature is over the threshold and the last temperature is not, or the other way around,&#xD;&#xA;trigger the vent" id="SequenceFlow_1203420066377" conditionType="EXPRESSION" source="//@pools.1/@lanes.0/@containedFlowObjects.2/@containedFlowObjects.1" target="//@pools.1/@lanes.0/@containedFlowObjects.2/@containedFlowObjects.3">
+    <conditionExpression expression="((lastTemp &lt; threshold) and (temp > threshold)) or ((lastTemp > threshold) and (temp &lt; threshold))"/>
+  </connections>
+  <connections xsi:type="vsdt:SequenceFlow" documentation="default: do nothing" id="SequenceFlow_1203420066377" conditionType="DEFAULT" source="//@pools.1/@lanes.0/@containedFlowObjects.2/@containedFlowObjects.1" target="//@pools.1/@lanes.0/@containedFlowObjects.2/@containedFlowObjects.2"/>
+  <connections xsi:type="vsdt:SequenceFlow" id="SequenceFlow_1203420066377" source="//@pools.1/@lanes.0/@containedFlowObjects.2/@boundaryEvents.0" target="//@pools.1/@lanes.0/@containedFlowObjects.4"/>
+  <connections xsi:type="vsdt:SequenceFlow" id="SequenceFlow_1203420066377" source="//@pools.1/@lanes.0/@containedFlowObjects.2/@boundaryEvents.1" target="//@pools.1/@lanes.0/@containedFlowObjects.4"/>
+  <connections xsi:type="vsdt:SequenceFlow" id="SequenceFlow_1203420066377" source="//@pools.1/@lanes.0/@containedFlowObjects.4" target="//@pools.1/@lanes.0/@containedFlowObjects.3"/>
+  <connections xsi:type="vsdt:SequenceFlow" id="SequenceFlow_1203420066377" source="//@pools.1/@lanes.0/@containedFlowObjects.2" target="//@pools.1/@lanes.0/@containedFlowObjects.4"/>
+  <connections xsi:type="vsdt:MessageFlow" name="start" documentation="This message triggers the process and passes the necessary parameters,&#xD;&#xA;i.e. the com port to use, the threshold-temperature and the id of the node to monitor." id="MessageFlow_1203420066377" message="//@messages.0" source="//@pools.0" target="//@pools.1/@lanes.0/@containedFlowObjects.0"/>
+  <connections xsi:type="vsdt:MessageFlow" name="stop" documentation="This message stops the process" id="MessageFlow_1203420066377" message="//@messages.1" source="//@pools.0" target="//@pools.1/@lanes.0/@containedFlowObjects.2/@boundaryEvents.0"/>
+  <connections xsi:type="vsdt:MessageFlow" name="connect" documentation="this message connects the eGrainsWS to the base station" id="MessageFlow_1203420066377" message="//@messages.2" source="//@pools.1/@lanes.0/@containedFlowObjects.1" target="//@pools.2"/>
+  <connections xsi:type="vsdt:MessageFlow" name="getTempRequest" documentation="request temperature for given node" id="MessageFlow_1203420066377" message="//@messages.3" source="//@pools.1/@lanes.0/@containedFlowObjects.2/@containedFlowObjects.1" target="//@pools.2"/>
+  <connections xsi:type="vsdt:MessageFlow" name="getTempResponse" documentation="return temperature for given node" id="MessageFlow_1203420066377" message="//@messages.4" source="//@pools.2" target="//@pools.1/@lanes.0/@containedFlowObjects.2/@containedFlowObjects.1"/>
+  <connections xsi:type="vsdt:MessageFlow" name="triggerVent" documentation="trigger ventilation on/off" id="MessageFlow_1203420066377" message="//@messages.5" source="//@pools.1/@lanes.0/@containedFlowObjects.2/@containedFlowObjects.3" target="//@pools.3"/>
+  <connections xsi:type="vsdt:MessageFlow" name="disconnect" documentation="this message disconnects the eGrainsWS from the base station" id="MessageFlow_1203420066377" message="//@messages.6" source="//@pools.1/@lanes.0/@containedFlowObjects.4" target="//@pools.2"/>
+  <messages name="startMsg" from="//@participants.0" to="//@participants.1">
+    <properties name="paramPort" type="xsd:string"/>
+    <properties name="paramId" type="xsd:integer"/>
+    <properties name="paramThreshold" type="xsd:float"/>
+  </messages>
+  <messages name="stopMsg" from="//@participants.0" to="//@participants.1"/>
+  <messages name="connectMsg" from="//@participants.1" to="//@participants.2">
+    <properties name="paramPort" type="xsd:string"/>
+  </messages>
+  <messages name="getTempReqMsg" from="//@participants.1" to="//@participants.2">
+    <properties name="paramId" type="xsd:integer"/>
+  </messages>
+  <messages name="getTempRespMsg" from="//@participants.2" to="//@participants.1">
+    <properties name="paramTemp" type="xsd:float"/>
+  </messages>
+  <messages name="triggerVentMsg" from="//@participants.1" to="//@participants.3">
+    <properties name="paramDeviceName" type="xsd:string"/>
+    <properties name="paramOnOff" type="xsd:integer"/>
+  </messages>
+  <messages name="disconnectMsg" from="//@participants.1" to="//@participants.2"/>
+  <participants name="User Interface_Participant"/>
+  <participants name="eGrainsProcess_Participant"/>
+  <participants name="eGrainsWS_Participant"/>
+  <participants name="ventilation_Participant"/>
+  <implementations participant="//@participants.1" interface="eGrainsProcessPT" operation="startProcess"/>
+  <implementations participant="//@participants.1" interface="eGrainsProcessPT" operation="stopProcess"/>
+  <implementations participant="//@participants.2" interface="eGrainsPT" operation="connect"/>
+  <implementations participant="//@participants.2" interface="eGrainsPT" operation="getTemperature"/>
+  <implementations participant="//@participants.3" interface="PowerControlPT" operation="switchOnOff"/>
+  <implementations participant="//@participants.2" interface="eGrainsPT" operation="disconnect"/>
+</vsdt:BusinessProcessDiagram>
