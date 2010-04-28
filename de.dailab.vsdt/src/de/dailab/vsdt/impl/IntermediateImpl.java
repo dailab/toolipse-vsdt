@@ -58,7 +58,7 @@ public class IntermediateImpl extends EventImpl implements Intermediate {
 	 * @generated
 	 */
 	public Activity getAttachedTo() {
-		if (eContainerFeatureID != VsdtPackage.INTERMEDIATE__ATTACHED_TO) return null;
+		if (eContainerFeatureID() != VsdtPackage.INTERMEDIATE__ATTACHED_TO) return null;
 		return (Activity)eContainer();
 	}
 
@@ -78,7 +78,7 @@ public class IntermediateImpl extends EventImpl implements Intermediate {
 	 * @generated
 	 */
 	public void setAttachedTo(Activity newAttachedTo) {
-		if (newAttachedTo != eInternalContainer() || (eContainerFeatureID != VsdtPackage.INTERMEDIATE__ATTACHED_TO && newAttachedTo != null)) {
+		if (newAttachedTo != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.INTERMEDIATE__ATTACHED_TO && newAttachedTo != null)) {
 			if (EcoreUtil.isAncestor(this, newAttachedTo))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -130,7 +130,7 @@ public class IntermediateImpl extends EventImpl implements Intermediate {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case VsdtPackage.INTERMEDIATE__ATTACHED_TO:
 				return eInternalContainer().eInverseRemove(this, VsdtPackage.ACTIVITY__BOUNDARY_EVENTS, Activity.class, msgs);
 		}

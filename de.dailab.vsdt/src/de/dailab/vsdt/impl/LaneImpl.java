@@ -288,7 +288,7 @@ public class LaneImpl extends FlowObjectContainerImpl implements Lane {
 	 * @generated
 	 */
 	public Pool getParentPool() {
-		if (eContainerFeatureID != VsdtPackage.LANE__PARENT_POOL) return null;
+		if (eContainerFeatureID() != VsdtPackage.LANE__PARENT_POOL) return null;
 		return (Pool)eContainer();
 	}
 
@@ -308,7 +308,7 @@ public class LaneImpl extends FlowObjectContainerImpl implements Lane {
 	 * @generated
 	 */
 	public void setParentPool(Pool newParentPool) {
-		if (newParentPool != eInternalContainer() || (eContainerFeatureID != VsdtPackage.LANE__PARENT_POOL && newParentPool != null)) {
+		if (newParentPool != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.LANE__PARENT_POOL && newParentPool != null)) {
 			if (EcoreUtil.isAncestor(this, newParentPool))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -405,7 +405,7 @@ public class LaneImpl extends FlowObjectContainerImpl implements Lane {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case VsdtPackage.LANE__PARENT_POOL:
 				return eInternalContainer().eInverseRemove(this, VsdtPackage.POOL__LANES, Pool.class, msgs);
 		}
@@ -435,7 +435,7 @@ public class LaneImpl extends FlowObjectContainerImpl implements Lane {
 			case VsdtPackage.LANE__PARENT_POOL:
 				return getParentPool();
 			case VsdtPackage.LANE__BOUNDARY_VISIBLE:
-				return isBoundaryVisible() ? Boolean.TRUE : Boolean.FALSE;
+				return isBoundaryVisible();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -474,7 +474,7 @@ public class LaneImpl extends FlowObjectContainerImpl implements Lane {
 				setParentPool((Pool)newValue);
 				return;
 			case VsdtPackage.LANE__BOUNDARY_VISIBLE:
-				setBoundaryVisible(((Boolean)newValue).booleanValue());
+				setBoundaryVisible((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

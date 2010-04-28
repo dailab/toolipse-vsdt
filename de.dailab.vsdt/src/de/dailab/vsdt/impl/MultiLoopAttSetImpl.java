@@ -273,7 +273,7 @@ public class MultiLoopAttSetImpl extends LoopAttributeSetImpl implements MultiLo
 			case VsdtPackage.MULTI_LOOP_ATT_SET__COMPLEX_MI_FLOW_CONDITION:
 				return getComplexMI_FlowCondition();
 			case VsdtPackage.MULTI_LOOP_ATT_SET__SEQUENTIAL:
-				return isSequential() ? Boolean.TRUE : Boolean.FALSE;
+				return isSequential();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -296,7 +296,7 @@ public class MultiLoopAttSetImpl extends LoopAttributeSetImpl implements MultiLo
 				setComplexMI_FlowCondition((Expression)newValue);
 				return;
 			case VsdtPackage.MULTI_LOOP_ATT_SET__SEQUENTIAL:
-				setSequential(((Boolean)newValue).booleanValue());
+				setSequential((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

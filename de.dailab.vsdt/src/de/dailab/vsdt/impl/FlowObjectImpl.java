@@ -107,7 +107,7 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	 * @generated
 	 */
 	public FlowObjectContainer getFlowObjectContainer() {
-		if (eContainerFeatureID != VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER) return null;
+		if (eContainerFeatureID() != VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER) return null;
 		return (FlowObjectContainer)eContainer();
 	}
 
@@ -127,7 +127,7 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	 * @generated
 	 */
 	public void setFlowObjectContainer(FlowObjectContainer newFlowObjectContainer) {
-		if (newFlowObjectContainer != eInternalContainer() || (eContainerFeatureID != VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER && newFlowObjectContainer != null)) {
+		if (newFlowObjectContainer != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER && newFlowObjectContainer != null)) {
 			if (EcoreUtil.isAncestor(this, newFlowObjectContainer))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -352,7 +352,7 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER:
 				return eInternalContainer().eInverseRemove(this, VsdtPackage.FLOW_OBJECT_CONTAINER__CONTAINED_FLOW_OBJECTS, FlowObjectContainer.class, msgs);
 		}

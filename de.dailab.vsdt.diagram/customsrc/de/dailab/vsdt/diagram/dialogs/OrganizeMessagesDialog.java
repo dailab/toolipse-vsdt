@@ -31,7 +31,7 @@ public class OrganizeMessagesDialog extends AbstractOrganizeElementsDialog<Messa
 //	public static final String LABEL_FROM= "From";
 	public static final String LABEL_NAME= "Name";
 
-	public static final String BUTTON_PROP= "Properties";
+	public static final String BUTTON_PROP= "Properties...";
 	
 //	/**message.to input field*/
 //	private Combo toPartCombo;

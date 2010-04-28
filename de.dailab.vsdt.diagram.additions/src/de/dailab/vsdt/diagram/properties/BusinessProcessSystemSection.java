@@ -19,6 +19,7 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.VsdtPackage;
+import de.dailab.vsdt.diagram.actions.OrganizeDataTypesAction;
 import de.dailab.vsdt.diagram.actions.OrganizeImplementationsAction;
 import de.dailab.vsdt.diagram.actions.OrganizeMessagesAction;
 
@@ -33,8 +34,9 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
 							   DISPLAY_CREATE_DATE= "Creation Date",
 							   DISPLAY_MOD_DATE= "Modification Date",
 							   DISPLAY_MODIFIED_NOW= "Now",
-							   DISPLAY_ORG_WS= "Implementations...",
-							   DISPLAY_ORG_MSG= "Messages...";
+							   DISPLAY_ORG_IMPL= "Implementations...",
+							   DISPLAY_ORG_MSG= "Messages...",
+							   DISPLAY_ORG_DATA= "Data Types...";
 	
     protected BusinessProcessSystem bps;
 
@@ -44,8 +46,9 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
     private Text expLangText;
     private Text queryLangText;
     private Button setModifiedTimeButton;
-    private Button orgWSButton;
+    private Button orgImplButton;
     private Button orgMsgButton;
+    private Button orgDataButton;
     
     private DateTime creationDate;
     private DateTime creationTime;
@@ -141,11 +144,14 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
         setModifiedTimeButton.addSelectionListener(this);
         
         // organize buttons
-        orgWSButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_WS, 0, queryLangText, null, 100);
-        orgWSButton.addSelectionListener(this);
+        orgImplButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_IMPL, 0, queryLangText, null, 100);
+        orgImplButton.addSelectionListener(this);
         
-        orgMsgButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_MSG, 0, queryLangText, null, orgWSButton);
+        orgMsgButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_MSG, 0, queryLangText, null, orgImplButton);
         orgMsgButton.addSelectionListener(this);
+        
+        orgDataButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_DATA, 0, queryLangText, null, orgMsgButton);
+        orgDataButton.addSelectionListener(this);
     }
     
     public void focusLost(FocusEvent e) {
@@ -195,11 +201,14 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
     		setPropertyValue(bps, pack.getBusinessProcessSystem_ModificationDate(), date);
     		refresh();
     	}
-    	if (src.equals(orgWSButton)) {
+    	if (src.equals(orgImplButton)) {
     		new OrganizeImplementationsAction().run(bps);
     	}
     	if (src.equals(orgMsgButton)) {
 			new OrganizeMessagesAction().run(bps);
+    	}
+    	if (src.equals(orgDataButton)) {
+			new OrganizeDataTypesAction().run(bps);
     	}
     }
 

@@ -29,6 +29,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getParticipants <em>Participants</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getMessages <em>Messages</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getImplementations <em>Implementations</em>}</li>
+ *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getDataTypes <em>Data Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -284,5 +285,21 @@ public interface BusinessProcessSystem extends IdObject {
 	 * @generated
 	 */
 	EList<Implementation> getImplementations();
+
+	/**
+	 * Returns the value of the '<em><b>Data Types</b></em>' containment reference list.
+	 * The list contents are of type {@link de.dailab.vsdt.DataType}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Data Types</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Data Types</em>' containment reference list.
+	 * @see de.dailab.vsdt.VsdtPackage#getBusinessProcessSystem_DataTypes()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<DataType> getDataTypes();
 
 } // BusinessProcessSystem

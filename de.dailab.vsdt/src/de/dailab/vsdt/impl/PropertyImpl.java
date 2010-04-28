@@ -245,7 +245,7 @@ public class PropertyImpl extends EObjectImpl implements Property {
 			case VsdtPackage.PROPERTY__TYPE:
 				return getType();
 			case VsdtPackage.PROPERTY__CORRELATION:
-				return isCorrelation() ? Boolean.TRUE : Boolean.FALSE;
+				return isCorrelation();
 			case VsdtPackage.PROPERTY__ASSIGNMENTS:
 				return getAssignments();
 		}
@@ -268,7 +268,7 @@ public class PropertyImpl extends EObjectImpl implements Property {
 				setType((String)newValue);
 				return;
 			case VsdtPackage.PROPERTY__CORRELATION:
-				setCorrelation(((Boolean)newValue).booleanValue());
+				setCorrelation((Boolean)newValue);
 				return;
 			case VsdtPackage.PROPERTY__ASSIGNMENTS:
 				getAssignments().clear();

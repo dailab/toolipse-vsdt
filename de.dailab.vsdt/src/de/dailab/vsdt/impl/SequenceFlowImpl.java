@@ -375,7 +375,7 @@ public class SequenceFlowImpl extends ConnectingObjectImpl implements SequenceFl
 			case VsdtPackage.SEQUENCE_FLOW__CONDITION_EXPRESSION:
 				return getConditionExpression();
 			case VsdtPackage.SEQUENCE_FLOW__QUANTITY:
-				return new Integer(getQuantity());
+				return getQuantity();
 			case VsdtPackage.SEQUENCE_FLOW__SOURCE:
 				return getSource();
 			case VsdtPackage.SEQUENCE_FLOW__TARGET:
@@ -399,7 +399,7 @@ public class SequenceFlowImpl extends ConnectingObjectImpl implements SequenceFl
 				setConditionExpression((Expression)newValue);
 				return;
 			case VsdtPackage.SEQUENCE_FLOW__QUANTITY:
-				setQuantity(((Integer)newValue).intValue());
+				setQuantity((Integer)newValue);
 				return;
 			case VsdtPackage.SEQUENCE_FLOW__SOURCE:
 				setSource((FlowObject)newValue);

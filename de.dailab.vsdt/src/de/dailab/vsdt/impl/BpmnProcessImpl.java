@@ -297,7 +297,7 @@ public class BpmnProcessImpl extends AbstractProcessImpl implements BpmnProcess 
 	 * @generated
 	 */
 	public Pool getParentPool() {
-		if (eContainerFeatureID != VsdtPackage.BPMN_PROCESS__PARENT_POOL) return null;
+		if (eContainerFeatureID() != VsdtPackage.BPMN_PROCESS__PARENT_POOL) return null;
 		return (Pool)eContainer();
 	}
 
@@ -317,7 +317,7 @@ public class BpmnProcessImpl extends AbstractProcessImpl implements BpmnProcess 
 	 * @generated
 	 */
 	public void setParentPool(Pool newParentPool) {
-		if (newParentPool != eInternalContainer() || (eContainerFeatureID != VsdtPackage.BPMN_PROCESS__PARENT_POOL && newParentPool != null)) {
+		if (newParentPool != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.BPMN_PROCESS__PARENT_POOL && newParentPool != null)) {
 			if (EcoreUtil.isAncestor(this, newParentPool))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -514,7 +514,7 @@ public class BpmnProcessImpl extends AbstractProcessImpl implements BpmnProcess 
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case VsdtPackage.BPMN_PROCESS__PARENT_POOL:
 				return eInternalContainer().eInverseRemove(this, VsdtPackage.POOL__PROCESS, Pool.class, msgs);
 		}
@@ -546,9 +546,9 @@ public class BpmnProcessImpl extends AbstractProcessImpl implements BpmnProcess 
 			case VsdtPackage.BPMN_PROCESS__ASSIGNMENTS:
 				return getAssignments();
 			case VsdtPackage.BPMN_PROCESS__SUPPRESS_JOIN_FAILURE:
-				return isSuppressJoinFailure() ? Boolean.TRUE : Boolean.FALSE;
+				return isSuppressJoinFailure();
 			case VsdtPackage.BPMN_PROCESS__ENABLE_INSTANCE_COMPENSATION:
-				return isEnableInstanceCompensation() ? Boolean.TRUE : Boolean.FALSE;
+				return isEnableInstanceCompensation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -589,10 +589,10 @@ public class BpmnProcessImpl extends AbstractProcessImpl implements BpmnProcess 
 				getAssignments().addAll((Collection<? extends Assignment>)newValue);
 				return;
 			case VsdtPackage.BPMN_PROCESS__SUPPRESS_JOIN_FAILURE:
-				setSuppressJoinFailure(((Boolean)newValue).booleanValue());
+				setSuppressJoinFailure((Boolean)newValue);
 				return;
 			case VsdtPackage.BPMN_PROCESS__ENABLE_INSTANCE_COMPENSATION:
-				setEnableInstanceCompensation(((Boolean)newValue).booleanValue());
+				setEnableInstanceCompensation((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

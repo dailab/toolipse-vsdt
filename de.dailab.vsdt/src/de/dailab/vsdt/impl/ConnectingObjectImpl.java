@@ -56,7 +56,7 @@ public abstract class ConnectingObjectImpl extends GraphicalObjectImpl implement
 	 * @generated
 	 */
 	public BusinessProcessDiagram getParentDiagram() {
-		if (eContainerFeatureID != VsdtPackage.CONNECTING_OBJECT__PARENT_DIAGRAM) return null;
+		if (eContainerFeatureID() != VsdtPackage.CONNECTING_OBJECT__PARENT_DIAGRAM) return null;
 		return (BusinessProcessDiagram)eContainer();
 	}
 
@@ -76,7 +76,7 @@ public abstract class ConnectingObjectImpl extends GraphicalObjectImpl implement
 	 * @generated
 	 */
 	public void setParentDiagram(BusinessProcessDiagram newParentDiagram) {
-		if (newParentDiagram != eInternalContainer() || (eContainerFeatureID != VsdtPackage.CONNECTING_OBJECT__PARENT_DIAGRAM && newParentDiagram != null)) {
+		if (newParentDiagram != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.CONNECTING_OBJECT__PARENT_DIAGRAM && newParentDiagram != null)) {
 			if (EcoreUtil.isAncestor(this, newParentDiagram))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -128,7 +128,7 @@ public abstract class ConnectingObjectImpl extends GraphicalObjectImpl implement
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case VsdtPackage.CONNECTING_OBJECT__PARENT_DIAGRAM:
 				return eInternalContainer().eInverseRemove(this, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__CONNECTIONS, BusinessProcessDiagram.class, msgs);
 		}

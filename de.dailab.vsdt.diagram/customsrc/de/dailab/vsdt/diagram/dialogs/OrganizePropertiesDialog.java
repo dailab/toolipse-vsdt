@@ -5,8 +5,11 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -17,12 +20,15 @@ import de.dailab.common.gmf.Util;
 import de.dailab.common.swt.dialogs.AbstractOrganizeElementsDialog;
 import de.dailab.vsdt.AbstractProcess;
 import de.dailab.vsdt.BpmnProcess;
+import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.DataObject;
+import de.dailab.vsdt.DataType;
 import de.dailab.vsdt.Message;
 import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.VsdtFactory;
+import de.dailab.vsdt.diagram.actions.OrganizeDataTypesAction;
 import de.dailab.vsdt.util.VsdtHelper;
 
 /**
@@ -38,10 +44,11 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 	public static final String LABEL_TYPE= "Type";
 	public static final String ERROR__NO_MESSAGE= "Message Flow does not have a Message object";
 	public static final String ERROR__NO_PROCESS= "Pool does not have a Process object";
+	public static final String BUTTON_DATATYPES = "DataTypes...";
 
-	public static final int NAME_OK= 0;
-	public static final int NAME_WARNING= 1;
-	public static final int NAME_ERROR= 2;
+	public static final int CHECK_OK= 0;
+	public static final int CHECK_WARNING= 1;
+	public static final int CHECK_ERROR= 2;
 	
 	/**property name input field*/
 	private Text propNameText;
@@ -108,9 +115,7 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 		new Label(editGroup,SWT.NONE).setText(LABEL_TYPE);
 		propTypeCombo= new Combo(editGroup, SWT.BORDER | SWT.DROP_DOWN);
 		propTypeCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-		for (String type : de.dailab.vsdt.vxl.util.Util.datatypes) {
-			propTypeCombo.add(type);
-		}
+		updateDataTypes();
 		propTypeCombo.addModifyListener(this);
 	}
 
@@ -161,10 +166,35 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 	}
 	
 	@Override
+	protected void contributeToButtonsGroup(Composite buttonsGroup) {
+		Button button= new Button(buttonsGroup,SWT.NONE);
+		button.setText(BUTTON_DATATYPES);
+		button.addSelectionListener(this);
+	}
+	
+	@Override
+	public void widgetSelected(SelectionEvent e) {
+		super.widgetSelected(e);
+		if (e.getSource() instanceof Button	) {
+			if (BUTTON_DATATYPES.equals(((Button) e.getSource()).getText())) {
+				new OrganizeDataTypesAction().run(VsdtHelper.getRootElement(parentElement));
+				// update data types combo
+				updateDataTypes();
+			}
+		}
+	}
+	
+	@Override
 	protected void okPressed() {
 		for (Property property : elements) {
-			int state= checkPropertyName(property);
-			if (state == NAME_ERROR) {
+			if (checkPropertyName(property) == CHECK_ERROR) {
+				selectElement(property);
+				propNameText.setFocus();
+				return;
+			}
+			if (checkPropertyType(property) == CHECK_ERROR) {
+				selectElement(property);
+				propTypeCombo.setFocus();
 				return;
 			}
 		}
@@ -172,8 +202,8 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 	}
 	
 	/**
-	 * Check the given Property Name
-	 * @param name	some property name typed into the text fields
+	 * Check the given Property's name
+	 * @param name	some property
 	 * @return		name ok (0), same name in parent scope (1), 
 	 * 				duplicate name in same scope (2), other (-1)
 	 */
@@ -183,14 +213,14 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 		setErrorMessage(null);
 		if (name == null || name.isEmpty()) {
 			setErrorMessage("Property name must not be empty!");
-			return NAME_ERROR;
+			return CHECK_ERROR;
 		}
 		for (Property property : elements) {
 			if (prop == property) continue;
 			if (name.equals(property.getName())) {
 				setErrorMessage("A Property with the name '" + name + 
 						"' already exists in this element's scope.");
-				return NAME_ERROR;
+				return CHECK_ERROR;
 			}
 		}
 		for (Property property : visibleProperties) {
@@ -198,9 +228,50 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 			if (name.equals(property.getName())) {
 				setMessage("A Property with name '" + name + 
 						"' already exists in a parent scope.", IMessageProvider.WARNING);
-				return NAME_WARNING;
+				return CHECK_WARNING;
 			}
 		}
-		return NAME_OK;
+		return CHECK_OK;
+	}
+	
+	/**
+	 * Check the given Property's type
+	 * @param name	some property
+	 * @return		type ok (0), type unknown or not set (2), other (-1)
+	 */
+	private int checkPropertyType(Property prop) {
+		if (prop == null) return -1;
+		String type= prop.getType();
+		setErrorMessage(null);
+		if (type == null || type.isEmpty()) {
+			setErrorMessage("Property must have a type!");
+			return CHECK_ERROR;
+		}
+		for (String t : propTypeCombo.getItems()) {
+			if (type.equals(t)) {
+				return CHECK_OK;
+			}
+		}
+		setErrorMessage("Unknown type: " + type);
+		return CHECK_ERROR;
+	}
+	
+	/**
+	 * Update the data types in the combo box
+	 */
+	private void updateDataTypes() {
+		String selected = propTypeCombo.getText();
+		propTypeCombo.removeAll();
+		// basic data types
+		for (String type : de.dailab.vsdt.vxl.util.Util.datatypes) {
+			propTypeCombo.add(type);
+		}
+		// complex data types
+		BusinessProcessSystem bps = (BusinessProcessSystem) VsdtHelper.getRootElement(parentElement); 
+		for (DataType datatype: bps.getDataTypes()) {
+			String type = datatype.getPackage() + "." + datatype.getName();
+			propTypeCombo.add(type);
+		}
+		propTypeCombo.setText(selected);
 	}
 }

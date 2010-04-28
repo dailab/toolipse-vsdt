@@ -6,6 +6,7 @@
  */
 package de.dailab.vsdt.impl;
 
+import de.dailab.vsdt.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -126,6 +127,7 @@ public class VsdtFactoryImpl extends EFactoryImpl implements VsdtFactory {
 			case VsdtPackage.ASSIGNMENT: return createAssignment();
 			case VsdtPackage.PROPERTY: return createProperty();
 			case VsdtPackage.EXPRESSION: return createExpression();
+			case VsdtPackage.DATA_TYPE: return createDataType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -473,6 +475,16 @@ public class VsdtFactoryImpl extends EFactoryImpl implements VsdtFactory {
 	public Expression createExpression() {
 		ExpressionImpl expression = new ExpressionImpl();
 		return expression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DataType createDataType() {
+		DataTypeImpl dataType = new DataTypeImpl();
+		return dataType;
 	}
 
 	/**

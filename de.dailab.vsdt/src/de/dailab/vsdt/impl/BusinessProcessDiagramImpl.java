@@ -158,7 +158,7 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 	 * @generated
 	 */
 	public BusinessProcessSystem getBusinessProcessSystem() {
-		if (eContainerFeatureID != VsdtPackage.BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM) return null;
+		if (eContainerFeatureID() != VsdtPackage.BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM) return null;
 		return (BusinessProcessSystem)eContainer();
 	}
 
@@ -178,7 +178,7 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 	 * @generated
 	 */
 	public void setBusinessProcessSystem(BusinessProcessSystem newBusinessProcessSystem) {
-		if (newBusinessProcessSystem != eInternalContainer() || (eContainerFeatureID != VsdtPackage.BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM && newBusinessProcessSystem != null)) {
+		if (newBusinessProcessSystem != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM && newBusinessProcessSystem != null)) {
 			if (EcoreUtil.isAncestor(this, newBusinessProcessSystem))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -247,7 +247,7 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM:
 				return eInternalContainer().eInverseRemove(this, VsdtPackage.BUSINESS_PROCESS_SYSTEM__BUSINESS_PROCESSES, BusinessProcessSystem.class, msgs);
 		}

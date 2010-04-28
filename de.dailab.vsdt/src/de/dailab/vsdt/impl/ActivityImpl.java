@@ -1213,7 +1213,7 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case VsdtPackage.ACTIVITY__AD_HOC:
-				return isAdHoc() ? Boolean.TRUE : Boolean.FALSE;
+				return isAdHoc();
 			case VsdtPackage.ACTIVITY__AD_HOC_COMPLETION_CONDITION:
 				return getAdHocCompletionCondition();
 			case VsdtPackage.ACTIVITY__PROPERTIES:
@@ -1229,11 +1229,11 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 			case VsdtPackage.ACTIVITY__IO_RULES:
 				return getIORules();
 			case VsdtPackage.ACTIVITY__START_QUANTITY:
-				return new Integer(getStartQuantity());
+				return getStartQuantity();
 			case VsdtPackage.ACTIVITY__LOOP_ATTRIBUTES:
 				return getLoopAttributes();
 			case VsdtPackage.ACTIVITY__IS_COMPENSATION:
-				return isIsCompensation() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsCompensation();
 			case VsdtPackage.ACTIVITY__BOUNDARY_EVENTS:
 				return getBoundaryEvents();
 			case VsdtPackage.ACTIVITY__ACTIVITY_TYPE:
@@ -1248,7 +1248,7 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				if (resolve) return getImplementation();
 				return basicGetImplementation();
 			case VsdtPackage.ACTIVITY__INSTANTIATE:
-				return isInstantiate() ? Boolean.TRUE : Boolean.FALSE;
+				return isInstantiate();
 			case VsdtPackage.ACTIVITY__PERFORMERS:
 				return getPerformers();
 			case VsdtPackage.ACTIVITY__SCRIPT:
@@ -1282,7 +1282,7 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case VsdtPackage.ACTIVITY__AD_HOC:
-				setAdHoc(((Boolean)newValue).booleanValue());
+				setAdHoc((Boolean)newValue);
 				return;
 			case VsdtPackage.ACTIVITY__AD_HOC_COMPLETION_CONDITION:
 				setAdHocCompletionCondition((Expression)newValue);
@@ -1311,13 +1311,13 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				getIORules().addAll((Collection<? extends Expression>)newValue);
 				return;
 			case VsdtPackage.ACTIVITY__START_QUANTITY:
-				setStartQuantity(((Integer)newValue).intValue());
+				setStartQuantity((Integer)newValue);
 				return;
 			case VsdtPackage.ACTIVITY__LOOP_ATTRIBUTES:
 				setLoopAttributes((LoopAttributeSet)newValue);
 				return;
 			case VsdtPackage.ACTIVITY__IS_COMPENSATION:
-				setIsCompensation(((Boolean)newValue).booleanValue());
+				setIsCompensation((Boolean)newValue);
 				return;
 			case VsdtPackage.ACTIVITY__BOUNDARY_EVENTS:
 				getBoundaryEvents().clear();
@@ -1336,7 +1336,7 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				setImplementation((Implementation)newValue);
 				return;
 			case VsdtPackage.ACTIVITY__INSTANTIATE:
-				setInstantiate(((Boolean)newValue).booleanValue());
+				setInstantiate((Boolean)newValue);
 				return;
 			case VsdtPackage.ACTIVITY__PERFORMERS:
 				getPerformers().clear();

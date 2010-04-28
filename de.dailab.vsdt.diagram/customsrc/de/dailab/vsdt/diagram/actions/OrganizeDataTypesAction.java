@@ -7,24 +7,24 @@ import org.eclipse.swt.widgets.Shell;
 
 import de.dailab.common.gmf.action.AbstractGmfAction;
 import de.dailab.common.gmf.command.AbstractDialogWrapperCommand;
-import de.dailab.vsdt.diagram.dialogs.OrganizeImplementationsDialog;
+import de.dailab.vsdt.diagram.dialogs.OrganizeDataTypesDialog;
 
-public class OrganizeImplementationsAction extends AbstractGmfAction {
+public class OrganizeDataTypesAction extends AbstractGmfAction {
 	
 	@Override
 	protected AbstractTransactionalCommand getCommand() {
-		return new OrganizeImplementationsCommand(eObject);
+		return new OrganizeDataTypesCommand(eObject);
 	}
 
-	public class OrganizeImplementationsCommand extends AbstractDialogWrapperCommand {
+	public class OrganizeDataTypesCommand extends AbstractDialogWrapperCommand {
 		
-		public OrganizeImplementationsCommand(EObject modelElement) {
-		    super(modelElement, "Organize Implementations");
+		public OrganizeDataTypesCommand(EObject modelElement) {
+		    super(modelElement, "Organize Data Types");
 		}
 		
 		@Override
 		protected Dialog getDialog(Shell shell) {
-			return new OrganizeImplementationsDialog(shell, modelElement);
+			return new OrganizeDataTypesDialog(shell, modelElement);
 		}
 		
 	}

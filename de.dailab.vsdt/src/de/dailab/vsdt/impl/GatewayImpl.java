@@ -348,9 +348,9 @@ public class GatewayImpl extends FlowObjectImpl implements Gateway {
 			case VsdtPackage.GATEWAY__GATEWAY_TYPE:
 				return getGatewayType();
 			case VsdtPackage.GATEWAY__MARKER_VISIBLE:
-				return isMarkerVisible() ? Boolean.TRUE : Boolean.FALSE;
+				return isMarkerVisible();
 			case VsdtPackage.GATEWAY__INSTANTIATE:
-				return isInstantiate() ? Boolean.TRUE : Boolean.FALSE;
+				return isInstantiate();
 			case VsdtPackage.GATEWAY__INCOMING_CONDITION:
 				return getIncomingCondition();
 			case VsdtPackage.GATEWAY__OUTGOING_CONDITION:
@@ -371,10 +371,10 @@ public class GatewayImpl extends FlowObjectImpl implements Gateway {
 				setGatewayType((GatewayType)newValue);
 				return;
 			case VsdtPackage.GATEWAY__MARKER_VISIBLE:
-				setMarkerVisible(((Boolean)newValue).booleanValue());
+				setMarkerVisible((Boolean)newValue);
 				return;
 			case VsdtPackage.GATEWAY__INSTANTIATE:
-				setInstantiate(((Boolean)newValue).booleanValue());
+				setInstantiate((Boolean)newValue);
 				return;
 			case VsdtPackage.GATEWAY__INCOMING_CONDITION:
 				setIncomingCondition((Expression)newValue);

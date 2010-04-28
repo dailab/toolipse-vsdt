@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
+import de.dailab.vsdt.DataType;
 import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Message;
 import de.dailab.vsdt.Participant;
@@ -44,6 +45,7 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getParticipants <em>Participants</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getMessages <em>Messages</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getImplementations <em>Implementations</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getDataTypes <em>Data Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -229,6 +231,16 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 	 * @ordered
 	 */
 	protected EList<Implementation> implementations;
+
+	/**
+	 * The cached value of the '{@link #getDataTypes() <em>Data Types</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDataTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DataType> dataTypes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -453,6 +465,18 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<DataType> getDataTypes() {
+		if (dataTypes == null) {
+			dataTypes = new EObjectContainmentEList<DataType>(DataType.class, this, VsdtPackage.BUSINESS_PROCESS_SYSTEM__DATA_TYPES);
+		}
+		return dataTypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -479,6 +503,8 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 				return ((InternalEList<?>)getMessages()).basicRemove(otherEnd, msgs);
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS:
 				return ((InternalEList<?>)getImplementations()).basicRemove(otherEnd, msgs);
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__DATA_TYPES:
+				return ((InternalEList<?>)getDataTypes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -513,6 +539,8 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 				return getMessages();
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS:
 				return getImplementations();
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__DATA_TYPES:
+				return getDataTypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -563,6 +591,10 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 				getImplementations().clear();
 				getImplementations().addAll((Collection<? extends Implementation>)newValue);
 				return;
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__DATA_TYPES:
+				getDataTypes().clear();
+				getDataTypes().addAll((Collection<? extends DataType>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -608,6 +640,9 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS:
 				getImplementations().clear();
 				return;
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__DATA_TYPES:
+				getDataTypes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -642,6 +677,8 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 				return messages != null && !messages.isEmpty();
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS:
 				return implementations != null && !implementations.isEmpty();
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__DATA_TYPES:
+				return dataTypes != null && !dataTypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

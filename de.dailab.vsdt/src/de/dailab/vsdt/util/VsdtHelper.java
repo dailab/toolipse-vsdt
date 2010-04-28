@@ -416,4 +416,21 @@ public class VsdtHelper {
 		return false;
 	}
 	
+
+	/**
+	 * Get Root Element for any EObject.
+	 * 
+	 * @param child		some EObject
+	 * @return			the EObject being (grand) parent of the EObject just beneath the Resource 
+	 */
+	public static EObject getRootElement(EObject object) {
+		if (object != null) {
+			if (object.eContainer() == null || object.eContainer() == object.eResource()) {
+				return object;
+			} else {
+				return getRootElement(object.eContainer());
+			}
+		}
+		return null;
+	}
 }

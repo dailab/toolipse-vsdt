@@ -227,9 +227,9 @@ public class DataObjectImpl extends ArtifactImpl implements DataObject {
 			case VsdtPackage.DATA_OBJECT__PROPERTIES:
 				return getProperties();
 			case VsdtPackage.DATA_OBJECT__REQUIRED_FOR_START:
-				return isRequiredForStart() ? Boolean.TRUE : Boolean.FALSE;
+				return isRequiredForStart();
 			case VsdtPackage.DATA_OBJECT__PRODUCED_AT_COMPLETION:
-				return isProducedAtCompletion() ? Boolean.TRUE : Boolean.FALSE;
+				return isProducedAtCompletion();
 			case VsdtPackage.DATA_OBJECT__STATE:
 				return getState();
 		}
@@ -250,10 +250,10 @@ public class DataObjectImpl extends ArtifactImpl implements DataObject {
 				getProperties().addAll((Collection<? extends Property>)newValue);
 				return;
 			case VsdtPackage.DATA_OBJECT__REQUIRED_FOR_START:
-				setRequiredForStart(((Boolean)newValue).booleanValue());
+				setRequiredForStart((Boolean)newValue);
 				return;
 			case VsdtPackage.DATA_OBJECT__PRODUCED_AT_COMPLETION:
-				setProducedAtCompletion(((Boolean)newValue).booleanValue());
+				setProducedAtCompletion((Boolean)newValue);
 				return;
 			case VsdtPackage.DATA_OBJECT__STATE:
 				setState((String)newValue);

@@ -243,6 +243,7 @@ public class BusinessProcessSystemItemProvider
 			childrenFeatures.add(VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__PARTICIPANTS);
 			childrenFeatures.add(VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__MESSAGES);
 			childrenFeatures.add(VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS);
+			childrenFeatures.add(VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__DATA_TYPES);
 		}
 		return childrenFeatures;
 	}
@@ -310,6 +311,7 @@ public class BusinessProcessSystemItemProvider
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__PARTICIPANTS:
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MESSAGES:
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS:
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__DATA_TYPES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -346,6 +348,11 @@ public class BusinessProcessSystemItemProvider
 			(createChildParameter
 				(VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS,
 				 VsdtFactory.eINSTANCE.createImplementation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__DATA_TYPES,
+				 VsdtFactory.eINSTANCE.createDataType()));
 	}
 
 }

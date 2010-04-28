@@ -696,6 +696,29 @@ public class VsdtItemProviderAdapterFactory extends VsdtAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.dailab.vsdt.DataType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DataTypeItemProvider dataTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.dailab.vsdt.DataType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDataTypeAdapter() {
+		if (dataTypeItemProvider == null) {
+			dataTypeItemProvider = new DataTypeItemProvider(this);
+		}
+
+		return dataTypeItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -821,6 +844,7 @@ public class VsdtItemProviderAdapterFactory extends VsdtAdapterFactory implement
 		if (assignmentItemProvider != null) assignmentItemProvider.dispose();
 		if (propertyItemProvider != null) propertyItemProvider.dispose();
 		if (expressionItemProvider != null) expressionItemProvider.dispose();
+		if (dataTypeItemProvider != null) dataTypeItemProvider.dispose();
 	}
 
 }

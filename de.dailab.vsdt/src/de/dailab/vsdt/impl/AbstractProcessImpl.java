@@ -228,7 +228,7 @@ public abstract class AbstractProcessImpl extends EObjectImpl implements Abstrac
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case VsdtPackage.ABSTRACT_PROCESS__AD_HOC:
-				return isAdHoc() ? Boolean.TRUE : Boolean.FALSE;
+				return isAdHoc();
 			case VsdtPackage.ABSTRACT_PROCESS__AD_HOC_COMPLETION_CONDITION:
 				return getAdHocCompletionCondition();
 			case VsdtPackage.ABSTRACT_PROCESS__PROPERTIES:
@@ -247,7 +247,7 @@ public abstract class AbstractProcessImpl extends EObjectImpl implements Abstrac
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case VsdtPackage.ABSTRACT_PROCESS__AD_HOC:
-				setAdHoc(((Boolean)newValue).booleanValue());
+				setAdHoc((Boolean)newValue);
 				return;
 			case VsdtPackage.ABSTRACT_PROCESS__AD_HOC_COMPLETION_CONDITION:
 				setAdHocCompletionCondition((Expression)newValue);

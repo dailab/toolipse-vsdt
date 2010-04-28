@@ -212,9 +212,9 @@ public class StandardLoopAttSetImpl extends LoopAttributeSetImpl implements Stan
 			case VsdtPackage.STANDARD_LOOP_ATT_SET__LOOP_CONDITION:
 				return getLoopCondition();
 			case VsdtPackage.STANDARD_LOOP_ATT_SET__LOOP_MAXIMUM:
-				return new Integer(getLoopMaximum());
+				return getLoopMaximum();
 			case VsdtPackage.STANDARD_LOOP_ATT_SET__TEST_BEFORE:
-				return isTestBefore() ? Boolean.TRUE : Boolean.FALSE;
+				return isTestBefore();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -231,10 +231,10 @@ public class StandardLoopAttSetImpl extends LoopAttributeSetImpl implements Stan
 				setLoopCondition((Expression)newValue);
 				return;
 			case VsdtPackage.STANDARD_LOOP_ATT_SET__LOOP_MAXIMUM:
-				setLoopMaximum(((Integer)newValue).intValue());
+				setLoopMaximum((Integer)newValue);
 				return;
 			case VsdtPackage.STANDARD_LOOP_ATT_SET__TEST_BEFORE:
-				setTestBefore(((Boolean)newValue).booleanValue());
+				setTestBefore((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

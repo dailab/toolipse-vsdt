@@ -69,7 +69,7 @@ public abstract class ArtifactImpl extends GraphicalObjectImpl implements Artifa
 	 * @generated
 	 */
 	public BusinessProcessDiagram getParentDiagram() {
-		if (eContainerFeatureID != VsdtPackage.ARTIFACT__PARENT_DIAGRAM) return null;
+		if (eContainerFeatureID() != VsdtPackage.ARTIFACT__PARENT_DIAGRAM) return null;
 		return (BusinessProcessDiagram)eContainer();
 	}
 
@@ -89,7 +89,7 @@ public abstract class ArtifactImpl extends GraphicalObjectImpl implements Artifa
 	 * @generated
 	 */
 	public void setParentDiagram(BusinessProcessDiagram newParentDiagram) {
-		if (newParentDiagram != eInternalContainer() || (eContainerFeatureID != VsdtPackage.ARTIFACT__PARENT_DIAGRAM && newParentDiagram != null)) {
+		if (newParentDiagram != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.ARTIFACT__PARENT_DIAGRAM && newParentDiagram != null)) {
 			if (EcoreUtil.isAncestor(this, newParentDiagram))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -179,7 +179,7 @@ public abstract class ArtifactImpl extends GraphicalObjectImpl implements Artifa
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case VsdtPackage.ARTIFACT__PARENT_DIAGRAM:
 				return eInternalContainer().eInverseRemove(this, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__ARTIFACTS, BusinessProcessDiagram.class, msgs);
 		}

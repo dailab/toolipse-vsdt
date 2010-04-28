@@ -261,13 +261,22 @@ public interface VsdtPackage extends EPackage {
 	int BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS = ID_OBJECT_FEATURE_COUNT + 10;
 
 	/**
+	 * The feature id for the '<em><b>Data Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUSINESS_PROCESS_SYSTEM__DATA_TYPES = ID_OBJECT_FEATURE_COUNT + 11;
+
+	/**
 	 * The number of structural features of the '<em>Business Process System</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUSINESS_PROCESS_SYSTEM_FEATURE_COUNT = ID_OBJECT_FEATURE_COUNT + 11;
+	int BUSINESS_PROCESS_SYSTEM_FEATURE_COUNT = ID_OBJECT_FEATURE_COUNT + 12;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.BusinessProcessDiagramImpl <em>Business Process Diagram</em>}' class.
@@ -4004,6 +4013,79 @@ public interface VsdtPackage extends EPackage {
 	int EXPRESSION_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.DataTypeImpl <em>Data Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.DataTypeImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getDataType()
+	 * @generated
+	 */
+	int DATA_TYPE = 37;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Package</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE__PACKAGE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE__LANGUAGE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Url</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE__URL = 3;
+
+	/**
+	 * The feature id for the '<em><b>Inherits</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE__INHERITS = 4;
+
+	/**
+	 * The feature id for the '<em><b>Members</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE__MEMBERS = 5;
+
+	/**
+	 * The number of structural features of the '<em>Data Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_FEATURE_COUNT = 6;
+
+	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.StatusType <em>Status Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4011,7 +4093,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getStatusType()
 	 * @generated
 	 */
-	int STATUS_TYPE = 38;
+	int STATUS_TYPE = 39;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.ProcessType <em>Process Type</em>}' enum.
@@ -4021,7 +4103,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getProcessType()
 	 * @generated
 	 */
-	int PROCESS_TYPE = 37;
+	int PROCESS_TYPE = 38;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.TriggerType <em>Trigger Type</em>}' enum.
@@ -4031,7 +4113,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getTriggerType()
 	 * @generated
 	 */
-	int TRIGGER_TYPE = 39;
+	int TRIGGER_TYPE = 40;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.FlowConditionTypes <em>Flow Condition Types</em>}' enum.
@@ -4041,7 +4123,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getFlowConditionTypes()
 	 * @generated
 	 */
-	int FLOW_CONDITION_TYPES = 42;
+	int FLOW_CONDITION_TYPES = 43;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.ActivityType <em>Activity Type</em>}' enum.
@@ -4051,7 +4133,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getActivityType()
 	 * @generated
 	 */
-	int ACTIVITY_TYPE = 40;
+	int ACTIVITY_TYPE = 41;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.LoopType <em>Loop Type</em>}' enum.
@@ -4061,7 +4143,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getLoopType()
 	 * @generated
 	 */
-	int LOOP_TYPE = 41;
+	int LOOP_TYPE = 42;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.TransactionMethodType <em>Transaction Method Type</em>}' enum.
@@ -4071,7 +4153,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getTransactionMethodType()
 	 * @generated
 	 */
-	int TRANSACTION_METHOD_TYPE = 43;
+	int TRANSACTION_METHOD_TYPE = 44;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.GatewayType <em>Gateway Type</em>}' enum.
@@ -4081,7 +4163,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getGatewayType()
 	 * @generated
 	 */
-	int GATEWAY_TYPE = 44;
+	int GATEWAY_TYPE = 45;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.ConditionType <em>Condition Type</em>}' enum.
@@ -4091,7 +4173,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getConditionType()
 	 * @generated
 	 */
-	int CONDITION_TYPE = 45;
+	int CONDITION_TYPE = 46;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.DirectionType <em>Direction Type</em>}' enum.
@@ -4101,7 +4183,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getDirectionType()
 	 * @generated
 	 */
-	int DIRECTION_TYPE = 46;
+	int DIRECTION_TYPE = 47;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.ParticipantType <em>Participant Type</em>}' enum.
@@ -4111,7 +4193,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getParticipantType()
 	 * @generated
 	 */
-	int PARTICIPANT_TYPE = 47;
+	int PARTICIPANT_TYPE = 48;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.AssignTimeType <em>Assign Time Type</em>}' enum.
@@ -4121,7 +4203,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getAssignTimeType()
 	 * @generated
 	 */
-	int ASSIGN_TIME_TYPE = 48;
+	int ASSIGN_TIME_TYPE = 49;
 
 	/**
 	 * Returns the meta object for class '{@link de.dailab.vsdt.BusinessProcessDiagram <em>Business Process Diagram</em>}'.
@@ -5827,6 +5909,82 @@ public interface VsdtPackage extends EPackage {
 	EAttribute getExpression_Language();
 
 	/**
+	 * Returns the meta object for class '{@link de.dailab.vsdt.DataType <em>Data Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Data Type</em>'.
+	 * @see de.dailab.vsdt.DataType
+	 * @generated
+	 */
+	EClass getDataType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.DataType#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see de.dailab.vsdt.DataType#getName()
+	 * @see #getDataType()
+	 * @generated
+	 */
+	EAttribute getDataType_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.DataType#getPackage <em>Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Package</em>'.
+	 * @see de.dailab.vsdt.DataType#getPackage()
+	 * @see #getDataType()
+	 * @generated
+	 */
+	EAttribute getDataType_Package();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.DataType#getLanguage <em>Language</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Language</em>'.
+	 * @see de.dailab.vsdt.DataType#getLanguage()
+	 * @see #getDataType()
+	 * @generated
+	 */
+	EAttribute getDataType_Language();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.DataType#getUrl <em>Url</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Url</em>'.
+	 * @see de.dailab.vsdt.DataType#getUrl()
+	 * @see #getDataType()
+	 * @generated
+	 */
+	EAttribute getDataType_Url();
+
+	/**
+	 * Returns the meta object for the reference list '{@link de.dailab.vsdt.DataType#getInherits <em>Inherits</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Inherits</em>'.
+	 * @see de.dailab.vsdt.DataType#getInherits()
+	 * @see #getDataType()
+	 * @generated
+	 */
+	EReference getDataType_Inherits();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link de.dailab.vsdt.DataType#getMembers <em>Members</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Members</em>'.
+	 * @see de.dailab.vsdt.DataType#getMembers()
+	 * @see #getDataType()
+	 * @generated
+	 */
+	EAttribute getDataType_Members();
+
+	/**
 	 * Returns the meta object for class '{@link de.dailab.vsdt.IdObject <em>Id Object</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6010,6 +6168,17 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBusinessProcessSystem_Implementations();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.BusinessProcessSystem#getDataTypes <em>Data Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Data Types</em>'.
+	 * @see de.dailab.vsdt.BusinessProcessSystem#getDataTypes()
+	 * @see #getBusinessProcessSystem()
+	 * @generated
+	 */
+	EReference getBusinessProcessSystem_DataTypes();
 
 	/**
 	 * Returns the meta object for enum '{@link de.dailab.vsdt.StatusType <em>Status Type</em>}'.
@@ -7488,6 +7657,64 @@ public interface VsdtPackage extends EPackage {
 		EAttribute EXPRESSION__LANGUAGE = eINSTANCE.getExpression_Language();
 
 		/**
+		 * The meta object literal for the '{@link de.dailab.vsdt.impl.DataTypeImpl <em>Data Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.dailab.vsdt.impl.DataTypeImpl
+		 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getDataType()
+		 * @generated
+		 */
+		EClass DATA_TYPE = eINSTANCE.getDataType();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DATA_TYPE__NAME = eINSTANCE.getDataType_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Package</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DATA_TYPE__PACKAGE = eINSTANCE.getDataType_Package();
+
+		/**
+		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DATA_TYPE__LANGUAGE = eINSTANCE.getDataType_Language();
+
+		/**
+		 * The meta object literal for the '<em><b>Url</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DATA_TYPE__URL = eINSTANCE.getDataType_Url();
+
+		/**
+		 * The meta object literal for the '<em><b>Inherits</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_TYPE__INHERITS = eINSTANCE.getDataType_Inherits();
+
+		/**
+		 * The meta object literal for the '<em><b>Members</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DATA_TYPE__MEMBERS = eINSTANCE.getDataType_Members();
+
+		/**
 		 * The meta object literal for the '{@link de.dailab.vsdt.impl.IdObjectImpl <em>Id Object</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7626,6 +7853,14 @@ public interface VsdtPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS = eINSTANCE.getBusinessProcessSystem_Implementations();
+
+		/**
+		 * The meta object literal for the '<em><b>Data Types</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BUSINESS_PROCESS_SYSTEM__DATA_TYPES = eINSTANCE.getBusinessProcessSystem_DataTypes();
 
 		/**
 		 * The meta object literal for the '{@link de.dailab.vsdt.StatusType <em>Status Type</em>}' enum.

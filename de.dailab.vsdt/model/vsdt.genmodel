@@ -110,6 +110,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessSystem/participants"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessSystem/messages"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessSystem/implementations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessSystem/dataTypes"/>
     </genClasses>
     <genClasses ecoreClass="vsdt.ecore#//BusinessProcessDiagram">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessDiagram/pools"/>
@@ -367,6 +368,14 @@
       <genOperations ecoreOperation="vsdt.ecore#//Expression/getGlobalExpressionLanguage"/>
       <genOperations ecoreOperation="vsdt.ecore#//Expression/getExpressionLanguageToBeUsed"/>
       <genOperations ecoreOperation="vsdt.ecore#//Expression/validate"/>
+    </genClasses>
+    <genClasses ecoreClass="vsdt.ecore#//DataType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//DataType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//DataType/package"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//DataType/language"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//DataType/url"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//DataType/inherits"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//DataType/members"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

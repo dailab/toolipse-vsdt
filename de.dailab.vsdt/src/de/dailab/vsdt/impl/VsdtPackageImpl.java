@@ -29,6 +29,7 @@ import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.ConditionType;
 import de.dailab.vsdt.ConnectingObject;
 import de.dailab.vsdt.DataObject;
+import de.dailab.vsdt.DataType;
 import de.dailab.vsdt.DirectionType;
 import de.dailab.vsdt.End;
 import de.dailab.vsdt.Event;
@@ -325,6 +326,13 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass dataTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass idObjectEClass = null;
 
 	/**
@@ -445,20 +453,10 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this
-	 * model, and for any others upon which it depends.  Simple
-	 * dependencies are satisfied by calling this method on all
-	 * dependent packages before doing anything else.  This method drives
-	 * initialization for interdependent packages directly, in parallel
-	 * with this package, itself.
-	 * <p>Of this package and its interdependencies, all packages which
-	 * have not yet been registered by their URI values are first created
-	 * and registered.  The packages are then initialized in two steps:
-	 * meta-model objects for all of the packages are created before any
-	 * are initialized, since one package's meta-model objects may refer to
-	 * those of another.
-	 * <p>Invocation of this method will not affect any packages that have
-	 * already been initialized.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 * 
+	 * <p>This method is used to initialize {@link VsdtPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
@@ -470,7 +468,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		if (isInited) return (VsdtPackage)EPackage.Registry.INSTANCE.getEPackage(VsdtPackage.eNS_URI);
 
 		// Obtain or create and register package
-		VsdtPackageImpl theVsdtPackage = (VsdtPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof VsdtPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new VsdtPackageImpl());
+		VsdtPackageImpl theVsdtPackage = (VsdtPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof VsdtPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new VsdtPackageImpl());
 
 		isInited = true;
 
@@ -486,6 +484,9 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		// Mark meta-data to indicate it can't be changed
 		theVsdtPackage.freeze();
 
+  
+		// Update the registry and return the package
+		EPackage.Registry.INSTANCE.put(VsdtPackage.eNS_URI, theVsdtPackage);
 		return theVsdtPackage;
 	}
 
@@ -1916,6 +1917,69 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDataType() {
+		return dataTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDataType_Name() {
+		return (EAttribute)dataTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDataType_Package() {
+		return (EAttribute)dataTypeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDataType_Language() {
+		return (EAttribute)dataTypeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDataType_Url() {
+		return (EAttribute)dataTypeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDataType_Inherits() {
+		return (EReference)dataTypeEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDataType_Members() {
+		return (EAttribute)dataTypeEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getIdObject() {
 		return idObjectEClass;
 	}
@@ -2062,6 +2126,15 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 */
 	public EReference getBusinessProcessSystem_Implementations() {
 		return (EReference)businessProcessSystemEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBusinessProcessSystem_DataTypes() {
+		return (EReference)businessProcessSystemEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -2218,6 +2291,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		createEReference(businessProcessSystemEClass, BUSINESS_PROCESS_SYSTEM__PARTICIPANTS);
 		createEReference(businessProcessSystemEClass, BUSINESS_PROCESS_SYSTEM__MESSAGES);
 		createEReference(businessProcessSystemEClass, BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS);
+		createEReference(businessProcessSystemEClass, BUSINESS_PROCESS_SYSTEM__DATA_TYPES);
 
 		businessProcessDiagramEClass = createEClass(BUSINESS_PROCESS_DIAGRAM);
 		createEReference(businessProcessDiagramEClass, BUSINESS_PROCESS_DIAGRAM__POOLS);
@@ -2412,6 +2486,14 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		createEAttribute(expressionEClass, EXPRESSION__EXPRESSION);
 		createEAttribute(expressionEClass, EXPRESSION__LANGUAGE);
 
+		dataTypeEClass = createEClass(DATA_TYPE);
+		createEAttribute(dataTypeEClass, DATA_TYPE__NAME);
+		createEAttribute(dataTypeEClass, DATA_TYPE__PACKAGE);
+		createEAttribute(dataTypeEClass, DATA_TYPE__LANGUAGE);
+		createEAttribute(dataTypeEClass, DATA_TYPE__URL);
+		createEReference(dataTypeEClass, DATA_TYPE__INHERITS);
+		createEAttribute(dataTypeEClass, DATA_TYPE__MEMBERS);
+
 		// Create enums
 		processTypeEEnum = createEEnum(PROCESS_TYPE);
 		statusTypeEEnum = createEEnum(STATUS_TYPE);
@@ -2509,6 +2591,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		initEReference(getBusinessProcessSystem_Participants(), this.getParticipant(), null, "participants", null, 0, -1, BusinessProcessSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBusinessProcessSystem_Messages(), this.getMessage(), null, "messages", null, 0, -1, BusinessProcessSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBusinessProcessSystem_Implementations(), this.getImplementation(), null, "implementations", null, 0, -1, BusinessProcessSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBusinessProcessSystem_DataTypes(), this.getDataType(), null, "dataTypes", null, 0, -1, BusinessProcessSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(businessProcessDiagramEClass, BusinessProcessDiagram.class, "BusinessProcessDiagram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBusinessProcessDiagram_Pools(), this.getPool(), this.getPool_ParentDiagram(), "pools", null, 1, -1, BusinessProcessDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2762,6 +2845,14 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		addEOperation(expressionEClass, ecorePackage.getEString(), "getExpressionLanguageToBeUsed", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(expressionEClass, ecorePackage.getEBoolean(), "validate", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDataType_Name(), ecorePackage.getEString(), "name", null, 1, 1, DataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDataType_Package(), ecorePackage.getEString(), "package", null, 0, 1, DataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDataType_Language(), ecorePackage.getEString(), "language", null, 0, 1, DataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDataType_Url(), ecorePackage.getEString(), "url", null, 0, 1, DataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDataType_Inherits(), this.getDataType(), null, "inherits", null, 0, -1, DataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDataType_Members(), ecorePackage.getEString(), "members", null, 0, -1, DataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(processTypeEEnum, ProcessType.class, "ProcessType");

@@ -41,7 +41,7 @@ public class OrganizeImplementationsDialog extends AbstractOrganizeElementsDialo
 	public static final String LABEL_INPUT= "Input Message";
 	public static final String LABEL_OUTPUT= "Output Message";
 	
-	public static final String BUTTON_MSG= "Messages";
+	public static final String BUTTON_MSG= "Messages...";
 	
 	/**implementation.interface input field*/
 	private Text interfaceText;

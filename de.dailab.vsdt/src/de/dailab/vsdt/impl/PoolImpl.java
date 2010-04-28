@@ -157,7 +157,7 @@ public class PoolImpl extends NodeImpl implements Pool {
 	 * @generated
 	 */
 	public BusinessProcessDiagram getParentDiagram() {
-		if (eContainerFeatureID != VsdtPackage.POOL__PARENT_DIAGRAM) return null;
+		if (eContainerFeatureID() != VsdtPackage.POOL__PARENT_DIAGRAM) return null;
 		return (BusinessProcessDiagram)eContainer();
 	}
 
@@ -177,7 +177,7 @@ public class PoolImpl extends NodeImpl implements Pool {
 	 * @generated
 	 */
 	public void setParentDiagram(BusinessProcessDiagram newParentDiagram) {
-		if (newParentDiagram != eInternalContainer() || (eContainerFeatureID != VsdtPackage.POOL__PARENT_DIAGRAM && newParentDiagram != null)) {
+		if (newParentDiagram != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.POOL__PARENT_DIAGRAM && newParentDiagram != null)) {
 			if (EcoreUtil.isAncestor(this, newParentDiagram))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -413,7 +413,7 @@ public class PoolImpl extends NodeImpl implements Pool {
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case VsdtPackage.POOL__PARENT_DIAGRAM:
 				return eInternalContainer().eInverseRemove(this, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__POOLS, BusinessProcessDiagram.class, msgs);
 		}
@@ -438,7 +438,7 @@ public class PoolImpl extends NodeImpl implements Pool {
 			case VsdtPackage.POOL__LANES:
 				return getLanes();
 			case VsdtPackage.POOL__BOUNDARY_VISIBLE:
-				return isBoundaryVisible() ? Boolean.TRUE : Boolean.FALSE;
+				return isBoundaryVisible();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -466,7 +466,7 @@ public class PoolImpl extends NodeImpl implements Pool {
 				getLanes().addAll((Collection<? extends Lane>)newValue);
 				return;
 			case VsdtPackage.POOL__BOUNDARY_VISIBLE:
-				setBoundaryVisible(((Boolean)newValue).booleanValue());
+				setBoundaryVisible((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

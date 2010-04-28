@@ -77,7 +77,7 @@ public abstract class LoopAttributeSetImpl extends EObjectImpl implements LoopAt
 	 * @generated
 	 */
 	public Activity getParentActivity() {
-		if (eContainerFeatureID != VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY) return null;
+		if (eContainerFeatureID() != VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY) return null;
 		return (Activity)eContainer();
 	}
 
@@ -97,7 +97,7 @@ public abstract class LoopAttributeSetImpl extends EObjectImpl implements LoopAt
 	 * @generated
 	 */
 	public void setParentActivity(Activity newParentActivity) {
-		if (newParentActivity != eInternalContainer() || (eContainerFeatureID != VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY && newParentActivity != null)) {
+		if (newParentActivity != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY && newParentActivity != null)) {
 			if (EcoreUtil.isAncestor(this, newParentActivity))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -170,7 +170,7 @@ public abstract class LoopAttributeSetImpl extends EObjectImpl implements LoopAt
 	 */
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID) {
+		switch (eContainerFeatureID()) {
 			case VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY:
 				return eInternalContainer().eInverseRemove(this, VsdtPackage.ACTIVITY__LOOP_ATTRIBUTES, Activity.class, msgs);
 		}
@@ -188,7 +188,7 @@ public abstract class LoopAttributeSetImpl extends EObjectImpl implements LoopAt
 			case VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY:
 				return getParentActivity();
 			case VsdtPackage.LOOP_ATTRIBUTE_SET__LOOP_COUNTER:
-				return new Integer(getLoopCounter());
+				return getLoopCounter();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -205,7 +205,7 @@ public abstract class LoopAttributeSetImpl extends EObjectImpl implements LoopAt
 				setParentActivity((Activity)newValue);
 				return;
 			case VsdtPackage.LOOP_ATTRIBUTE_SET__LOOP_COUNTER:
-				setLoopCounter(((Integer)newValue).intValue());
+				setLoopCounter((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
