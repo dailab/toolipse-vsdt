@@ -15,7 +15,9 @@ public class HtmlBuilder extends TextBuilder {
 	
 	@Override
 	public TextBuilder appendHeader(String title) {
-		buffer.append("<html><head><title>").append(title).append("</head><body>");
+		buffer.append("<html><head>");
+		buffer.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
+		buffer.append("<title>").append(title).append("</head><body>");
 		return this;
 	}
 	

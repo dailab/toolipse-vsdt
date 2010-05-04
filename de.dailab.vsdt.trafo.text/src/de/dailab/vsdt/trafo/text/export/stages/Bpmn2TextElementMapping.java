@@ -161,7 +161,6 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		for (Pool pool : bpd.getPools()) {
 			visitPool(pool);
 		}
-		builder.appendFooter();
 	}
 	
 	/**

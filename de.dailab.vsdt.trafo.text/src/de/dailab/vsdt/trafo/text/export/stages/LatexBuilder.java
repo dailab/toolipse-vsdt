@@ -19,6 +19,7 @@ public class LatexBuilder extends TextBuilder {
 	@Override
 	public TextBuilder appendHeader(String title) {
 		buffer.append("\\documentclass{article}").append(NL);
+		buffer.append("\\usepackage[utf8]{inputenc}");
 		buffer.append("\\begin{document}");
 		return this;
 	}
