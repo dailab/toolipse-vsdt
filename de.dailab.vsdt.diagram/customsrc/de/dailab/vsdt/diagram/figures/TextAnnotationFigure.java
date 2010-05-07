@@ -36,6 +36,7 @@ public class TextAnnotationFigure extends RectangleFigure {
 	@Override
 	public void paintFigure(Graphics g) {
 		super.paintFigure(g);
+		g.setLineWidth(1);
 		g.drawLine(getBounds().getTopLeft(),getBounds().getBottomLeft());
 		g.drawLine(getBounds().getTopLeft(),getBounds().getTopLeft().getCopy().translate(20,0));
 		g.drawLine(getBounds().getBottomLeft().getCopy().translate(0, -1),getBounds().getBottomLeft().getCopy().translate(20,-1));
