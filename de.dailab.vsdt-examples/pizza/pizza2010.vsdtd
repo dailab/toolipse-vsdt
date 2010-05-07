@@ -45,10 +45,11 @@
         </lanes>
       </pools>
       <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_Ea0zEVhHEd-HuN2dVk55Ew" documentation="zur Zeit liefert die Pizzeria noch selbst aus, aber in Hinblick auf eine zukünftige Umstellung auf einen externen Lieferdienst wird der Inhaus-Lieferdienst gleich wie ein externer modelliert." id="_Ea0zEFhHEd-HuN2dVk55Ew"/>
-      <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_sH3wEVhHEd-HuN2dVk55Ew" documentation="das hier ist ein Ad-Hoc-Prozess; es werden einfach nach Bedarf Pizzen gebacken und sonstige Artikel, wie Getränke, aus dem Lager geholt" id="_sH3wEFhHEd-HuN2dVk55Ew"/>
+      <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_sH3wEVhHEd-HuN2dVk55Ew" documentation="das hier ist ein Ad-Hoc-Prozess; es werden einfach nach Bedarf Pizzen gebacken und sonstige Artikel, wie Getränke, aus dem Lager geholt, ohne genau festzulegen, wie oft und in welcher Reihenfolge." id="_sH3wEFhHEd-HuN2dVk55Ew"/>
       <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_IGHhkVkiEd-82d303e0H7A" documentation="An dieser Stelle werden zwei unterschiedliche Nachrichten erwartet, und je nachdem, welche eintrifft, wird ein anderer Pfad eingeschlagen." id="_IGHhkFkiEd-82d303e0H7A"/>
-      <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_QFAqwFkiEd-82d303e0H7A" documentation="Alternativ kann man aber auch eine einzige Antwortnachricht erwarten, anhand deren Inhalts man entscheidet, wie es weitergeht." id="_QFADsFkiEd-82d303e0H7A"/>
+      <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_QFAqwFkiEd-82d303e0H7A" documentation="Alternativ könnte man auch eine einzige Antwortnachricht erwarten, anhand deren Inhalts man entscheidet, wie es weitergeht." id="_QFADsFkiEd-82d303e0H7A"/>
       <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_qY2yAVkiEd-82d303e0H7A" documentation="Später könnte die Pizzeria hier auch überprüfen, ob bald wieder neue Zutaten bestellt werden müssen..." id="_qY2yAFkiEd-82d303e0H7A"/>
+      <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_qObmQVnIEd-HNouoS1jfEQ" documentation="Das heißt natürlich nicht, dass ihr hier einen Zufallszahlengenerator einsetzen sollt, sondern einfach, dass es euch überlassen ist, wie ihr es macht." id="_qObmQFnIEd-HNouoS1jfEQ"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_64CqsVhFEd-HuN2dVk55Ew" id="_64CqsFhFEd-HuN2dVk55Ew" source="_5PTyUVhFEd-HuN2dVk55Ew" target="_630oQFhFEd-HuN2dVk55Ew"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_AG8_kVhGEd-HuN2dVk55Ew" id="_AG8_kFhGEd-HuN2dVk55Ew" source="_630oQFhFEd-HuN2dVk55Ew" target="_AGyAcVhGEd-HuN2dVk55Ew"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_EwHjEVhGEd-HuN2dVk55Ew" id="_EwHjEFhGEd-HuN2dVk55Ew" source="_EYqsYFhGEd-HuN2dVk55Ew" target="_Ev45kVhGEd-HuN2dVk55Ew"/>
@@ -80,6 +81,7 @@
       <connections xmi:type="vsdt:Association" xmi:id="_Pl2pkVkiEd-82d303e0H7A" id="_Pl2pkFkiEd-82d303e0H7A" source="_IGHhkVkiEd-82d303e0H7A" target="_GS_EAVhGEd-HuN2dVk55Ew"/>
       <connections xmi:type="vsdt:Association" xmi:id="_XPhJoVkiEd-82d303e0H7A" id="_XPhJoFkiEd-82d303e0H7A" source="_QFAqwFkiEd-82d303e0H7A" target="_IGHhkVkiEd-82d303e0H7A"/>
       <connections xmi:type="vsdt:Association" xmi:id="_v6ufIFkiEd-82d303e0H7A" id="_v6t4EFkiEd-82d303e0H7A" source="_qY2yAVkiEd-82d303e0H7A" target="_630oQFhFEd-HuN2dVk55Ew"/>
+      <connections xmi:type="vsdt:Association" xmi:id="_1_UaYVnIEd-HNouoS1jfEQ" id="_1_UaYFnIEd-HNouoS1jfEQ" source="_qObmQVnIEd-HNouoS1jfEQ" target="_sH3wEVhHEd-HuN2dVk55Ew"/>
     </businessProcesses>
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_dETKkVhEEd-HuN2dVk55Ew" name="Zutaten bestellen" documentation="Die Bestellung von Zutaten ist ein weiterer Ablauf. Wenn die Vorratsmenge einer (oder mehrerer) Zutaten unter einen bestimmten Wert fällt, wird eine Nachbestellung initiiert. Es gibt verschiedene Zulieferer die sich durch Preis und Zeit bis Lieferung unterteilen." id="_dETKkFhEEd-HuN2dVk55Ew" participants="_WJy2kVhEEd-HuN2dVk55Ew _Uv_LAVhEEd-HuN2dVk55Ew">
       <pools xmi:type="vsdt:Pool" xmi:id="_lcwqUVhEEd-HuN2dVk55Ew" name="Zulieferer" id="_lcwqUFhEEd-HuN2dVk55Ew" participant="_WJy2kVhEEd-HuN2dVk55Ew">
@@ -117,8 +119,10 @@
         </lanes>
       </pools>
       <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_Mw5EEFkhEd-82d303e0H7A" documentation="Wenn auch das beste Angebot nicht akzeptabel ist (oder überhaupt kein Angebot gemacht wurde) können keine Zutaten bestellt werden." id="_Mw4dAFkhEd-82d303e0H7A"/>
-      <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_ZYnZkVkhEd-82d303e0H7A" documentation="Diese Aktivität wird für alle der Pizzeria bekannten Zulieferer ausgeführt." id="_ZYnZkFkhEd-82d303e0H7A"/>
-      <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_882HEVkhEd-82d303e0H7A" documentation="Hier muss man sich nochmal überlegen, ob es Sinn macht, dass hier eine Absage erwartet wird..." id="_882HEFkhEd-82d303e0H7A"/>
+      <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_ZYnZkVkhEd-82d303e0H7A" documentation="Diese Aktivität wird für alle der Pizzeria bekannten Zulieferer ausgeführt!" id="_ZYnZkFkhEd-82d303e0H7A"/>
+      <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_882HEVkhEd-82d303e0H7A" documentation="Der Prozess ist so modelliert, dass keine explizite Absage erwartet wird. Je nachdem, wie der Prozess implementiert wird, kann es aber dennoch Sinn machen, eine explizite Absage zu verschicken. Wir überlassen diese Designentscheidung Euch." id="_882HEFkhEd-82d303e0H7A"/>
+      <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_aQ_csVnJEd-HNouoS1jfEQ" documentation="Dieser Prozess wird ausgeführt, wenn die angegebene BEdingung erfüllt ist." id="_aQ_csFnJEd-HNouoS1jfEQ"/>
+      <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_ju1QIVnJEd-HNouoS1jfEQ" documentation="Im Unterschied zum Pizza-Bestell-Prozess handelt es sich hier um zwei separate Dienste. Zuerst werden alle Zulieferer nach ihrem Preis gefragt. Danach wird beim günstigsten Zulieferer der eigentliche Bestell-Dienst aufgerufen." id="_ju1QIFnJEd-HNouoS1jfEQ"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_wKSkAVhEEd-HuN2dVk55Ew" id="_wKSkAFhEEd-HuN2dVk55Ew" source="_rvyHkVhEEd-HuN2dVk55Ew" target="_wDlfEVhEEd-HuN2dVk55Ew"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_854cEVhEEd-HuN2dVk55Ew" id="_854cEFhEEd-HuN2dVk55Ew" source="_5crVYFhEEd-HuN2dVk55Ew" target="_85qZoVhEEd-HuN2dVk55Ew"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="__qydcVhEEd-HuN2dVk55Ew" id="__qydcFhEEd-HuN2dVk55Ew" source="_85qZoVhEEd-HuN2dVk55Ew" target="__qkbAVhEEd-HuN2dVk55Ew"/>
@@ -143,6 +147,9 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_0CXfYVkhEd-82d303e0H7A" id="_0CXfYFkhEd-82d303e0H7A" source="_0COVcVkhEd-82d303e0H7A" target="_06PE8VhEEd-HuN2dVk55Ew"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_0Ch3cVkhEd-82d303e0H7A" id="_06gKsFhEEd-HuN2dVk55Ew" source="_wDlfEVhEEd-HuN2dVk55Ew" target="_0COVcVkhEd-82d303e0H7A"/>
       <connections xmi:type="vsdt:Association" xmi:id="_DMVIIVkiEd-82d303e0H7A" id="_DMVIIFkiEd-82d303e0H7A" source="_882HEVkhEd-82d303e0H7A" target="_L9I_4VhFEd-HuN2dVk55Ew"/>
+      <connections xmi:type="vsdt:Association" xmi:id="_dUY8QVnJEd-HNouoS1jfEQ" id="_dUY8QFnJEd-HNouoS1jfEQ" source="_aQ_csVnJEd-HNouoS1jfEQ" target="_rvyHkVhEEd-HuN2dVk55Ew"/>
+      <connections xmi:type="vsdt:Association" xmi:id="_8wpHwVnJEd-HNouoS1jfEQ" id="_8wpHwFnJEd-HNouoS1jfEQ" source="_ju1QIVnJEd-HNouoS1jfEQ" target="_bny64FhFEd-HuN2dVk55Ew"/>
+      <connections xmi:type="vsdt:Association" xmi:id="_9SvvQVnJEd-HNouoS1jfEQ" id="_9SvvQFnJEd-HNouoS1jfEQ" source="_ju1QIVnJEd-HNouoS1jfEQ" target="_5crVYFhEEd-HuN2dVk55Ew"/>
     </businessProcesses>
     <participants xmi:type="vsdt:Participant" xmi:id="_Uv_LAVhEEd-HuN2dVk55Ew" name="Pizzaria" id="_Uv_LAFhEEd-HuN2dVk55Ew" associatedProcesses="_awXZEVhEEd-HuN2dVk55Ew _dETKkVhEEd-HuN2dVk55Ew" associatedPools="_ldBJAVhEEd-HuN2dVk55Ew _zG1YMVhFEd-HuN2dVk55Ew"/>
     <participants xmi:type="vsdt:Participant" xmi:id="_WJy2kVhEEd-HuN2dVk55Ew" name="Zulieferer" id="_WJy2kFhEEd-HuN2dVk55Ew" associatedProcesses="_dETKkVhEEd-HuN2dVk55Ew" associatedPools="_lcwqUVhEEd-HuN2dVk55Ew"/>
@@ -437,17 +444,27 @@
     <children xmi:type="notation:Node" xmi:id="_Mw-joFkhEd-82d303e0H7A" type="1002" element="_Mw5EEFkhEd-82d303e0H7A">
       <children xmi:type="notation:Node" xmi:id="_MxAY0FkhEd-82d303e0H7A" type="4001"/>
       <styles xmi:type="notation:ShapeStyle" xmi:id="_Mw-joVkhEd-82d303e0H7A" fontName="Sans"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Mw-jolkhEd-82d303e0H7A" x="1070" y="240" width="241" height="77"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Mw-jolkhEd-82d303e0H7A" x="1024" y="148" width="241" height="77"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_ZYonsFkhEd-82d303e0H7A" type="1002" element="_ZYnZkVkhEd-82d303e0H7A">
       <children xmi:type="notation:Node" xmi:id="_ZYp10FkhEd-82d303e0H7A" type="4001"/>
       <styles xmi:type="notation:ShapeStyle" xmi:id="_ZYonsVkhEd-82d303e0H7A" fontName="Sans"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZYonslkhEd-82d303e0H7A" x="250" y="35" width="180" height="63"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZYonslkhEd-82d303e0H7A" x="400" y="32" width="180" height="63"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_885xcFkhEd-82d303e0H7A" type="1002" element="_882HEVkhEd-82d303e0H7A">
       <children xmi:type="notation:Node" xmi:id="_886YgFkhEd-82d303e0H7A" type="4001"/>
       <styles xmi:type="notation:ShapeStyle" xmi:id="_885xcVkhEd-82d303e0H7A" fontName="Sans"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_885xclkhEd-82d303e0H7A" x="1055" y="553" width="207" height="75"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_885xclkhEd-82d303e0H7A" x="888" y="329" width="280" height="112"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_aRBR4FnJEd-HNouoS1jfEQ" type="1002" element="_aQ_csVnJEd-HNouoS1jfEQ">
+      <children xmi:type="notation:Node" xmi:id="_aRDHEFnJEd-HNouoS1jfEQ" type="4001"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_aRBR4VnJEd-HNouoS1jfEQ" fontName="Sans"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_aRBR4lnJEd-HNouoS1jfEQ" x="51" y="29" width="244"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_ju5hkFnJEd-HNouoS1jfEQ" type="1002" element="_ju1QIVnJEd-HNouoS1jfEQ">
+      <children xmi:type="notation:Node" xmi:id="_ju6IoFnJEd-HNouoS1jfEQ" type="4001"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_ju5hkVnJEd-HNouoS1jfEQ" fontName="Sans"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ju5hklnJEd-HNouoS1jfEQ" x="87" y="676" width="235" height="116"/>
     </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_ktd7YVhEEd-HuN2dVk55Ew"/>
     <edges xmi:type="notation:Edge" xmi:id="_wKVnUFhEEd-HuN2dVk55Ew" type="3001" element="_wKSkAVhEEd-HuN2dVk55Ew" source="_rv1K4FhEEd-HuN2dVk55Ew" target="_wDn7UFhEEd-HuN2dVk55Ew">
@@ -528,7 +545,7 @@
       </children>
       <styles xmi:type="notation:RoutingStyle" xmi:id="_j2mIUVhFEd-HuN2dVk55Ew" routing="Rectilinear"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_j2mIUlhFEd-HuN2dVk55Ew" fontName="Sans"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_j2mIU1hFEd-HuN2dVk55Ew" points="[-19, 24, 76, -254]$[-19, 133, 76, -145]$[-92, 133, 3, -145]$[-92, 269, 3, -9]"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_j2mIU1hFEd-HuN2dVk55Ew" points="[-12, 32, 61, -306]$[-12, 173, 61, -165]$[-67, 173, 6, -165]$[-67, 329, 6, -9]"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_kzkG4FhFEd-HuN2dVk55Ew" id="(0.4,0.225)"/>
     </edges>
     <edges xmi:type="notation:Edge" xmi:id="_maOisFhFEd-HuN2dVk55Ew" type="3002" element="_maLfYVhFEd-HuN2dVk55Ew" source="_DMUqgFhFEd-HuN2dVk55Ew" target="_wDn7UFhEEd-HuN2dVk55Ew">
@@ -537,7 +554,7 @@
       </children>
       <styles xmi:type="notation:RoutingStyle" xmi:id="_maOisVhFEd-HuN2dVk55Ew" routing="Rectilinear"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_maPJwFhFEd-HuN2dVk55Ew" fontName="Sans"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_maPJwVhFEd-HuN2dVk55Ew" points="[-5, -22, 457, 314]$[-5, -177, 457, 159]$[-463, -177, -1, 159]$[-463, -326, -1, 10]"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_maPJwVhFEd-HuN2dVk55Ew" points="[-11, -22, 469, 308]$[-11, -175, 469, 155]$[-479, -175, 1, 155]$[-479, -317, 1, 13]"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_maWegFhFEd-HuN2dVk55Ew" id="(0.7086614173228346,0.8)"/>
     </edges>
     <edges xmi:type="notation:Edge" xmi:id="_m_oV0FhFEd-HuN2dVk55Ew" type="3002" element="_m_jdUVhFEd-HuN2dVk55Ew" source="_22t_wFhEEd-HuN2dVk55Ew" target="_bn0wEFhFEd-HuN2dVk55Ew">
@@ -642,7 +659,31 @@
       </children>
       <styles xmi:type="notation:RoutingStyle" xmi:id="_DMW9UVkiEd-82d303e0H7A"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_DMW9UlkiEd-82d303e0H7A" fontName="Sans"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_DMW9U1kiEd-82d303e0H7A" points="[-103, 12, 453, -50]$[-554, 82, 2, 20]"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_DMW9U1kiEd-82d303e0H7A" points="[-27, 56, 367, -154]$[-101, 210, 293, 0]$[-374, 210, 20, 0]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_dUb_kFnJEd-HNouoS1jfEQ" type="3003" element="_dUY8QVnJEd-HNouoS1jfEQ" source="_aRBR4FnJEd-HNouoS1jfEQ" target="_rv1K4FhEEd-HuN2dVk55Ew">
+      <children xmi:type="notation:Node" xmi:id="_dUdNsFnJEd-HNouoS1jfEQ" type="4014">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_dUdNsVnJEd-HNouoS1jfEQ" y="40"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_dUb_kVnJEd-HNouoS1jfEQ"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_dUb_klnJEd-HNouoS1jfEQ" fontName="Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_dUb_k1nJEd-HNouoS1jfEQ" points="[-13, 20, 60, -105]$[-72, 105, 1, -20]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_8wrkAFnJEd-HNouoS1jfEQ" type="3003" element="_8wpHwVnJEd-HNouoS1jfEQ" source="_ju5hkFnJEd-HNouoS1jfEQ" target="_bn0wEFhFEd-HuN2dVk55Ew">
+      <children xmi:type="notation:Node" xmi:id="_8wsLEFnJEd-HNouoS1jfEQ" type="4014">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_8wsLEVnJEd-HNouoS1jfEQ" y="40"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_8wrkAVnJEd-HNouoS1jfEQ"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_8wrkAlnJEd-HNouoS1jfEQ" fontName="Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_8wrkA1nJEd-HNouoS1jfEQ" points="[-117, 23, 705, -139]$[-823, 182, -1, 20]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_9SyLgFnJEd-HNouoS1jfEQ" type="3003" element="_9SvvQVnJEd-HNouoS1jfEQ" source="_ju5hkFnJEd-HNouoS1jfEQ" target="_5csjgFhEEd-HuN2dVk55Ew">
+      <children xmi:type="notation:Node" xmi:id="_9SyykFnJEd-HNouoS1jfEQ" type="4014">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_9SyykVnJEd-HNouoS1jfEQ" y="40"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_9SyLgVnJEd-HNouoS1jfEQ"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_9SyLglnJEd-HNouoS1jfEQ" fontName="Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_9SyLg1nJEd-HNouoS1jfEQ" points="[-117, -5, 934, 35]$[-1053, -20, -2, 20]"/>
     </edges>
   </notation:Diagram>
   <notation:Diagram xmi:id="_uZLWQFhFEd-HuN2dVk55Ew" type="Vsdt" element="_awXZEVhEEd-HuN2dVk55Ew" measurementUnit="Pixel">
@@ -927,12 +968,12 @@
     <children xmi:type="notation:Node" xmi:id="_Ea5EgFhHEd-HuN2dVk55Ew" type="1002" element="_Ea0zEVhHEd-HuN2dVk55Ew">
       <children xmi:type="notation:Node" xmi:id="_Ea65sFhHEd-HuN2dVk55Ew" type="4001"/>
       <styles xmi:type="notation:ShapeStyle" xmi:id="_Ea5EgVhHEd-HuN2dVk55Ew" fontName="Sans"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Ea5EglhHEd-HuN2dVk55Ew" x="1224" y="644" width="257" height="96"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Ea5EglhHEd-HuN2dVk55Ew" x="1224" y="644" width="229" height="106"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_sH4-MFhHEd-HuN2dVk55Ew" type="1002" element="_sH3wEVhHEd-HuN2dVk55Ew">
       <children xmi:type="notation:Node" xmi:id="_sH6MUFhHEd-HuN2dVk55Ew" type="4001"/>
       <styles xmi:type="notation:ShapeStyle" xmi:id="_sH4-MVhHEd-HuN2dVk55Ew" fontName="Sans"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sH5lQFhHEd-HuN2dVk55Ew" x="1218" y="320" width="243" height="85"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sH5lQFhHEd-HuN2dVk55Ew" x="1218" y="320" width="229" height="101"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_IGIvsFkiEd-82d303e0H7A" type="1002" element="_IGHhkVkiEd-82d303e0H7A">
       <children xmi:type="notation:Node" xmi:id="_IGJ90FkiEd-82d303e0H7A" type="4001"/>
@@ -948,6 +989,11 @@
       <children xmi:type="notation:Node" xmi:id="_qY7DcFkiEd-82d303e0H7A" type="4001"/>
       <styles xmi:type="notation:ShapeStyle" xmi:id="_qY6cYVkiEd-82d303e0H7A" fontName="Sans"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_qY6cYlkiEd-82d303e0H7A" x="98" y="582" width="179" height="70"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_qOlXQFnIEd-HNouoS1jfEQ" type="1002" element="_qObmQVnIEd-HNouoS1jfEQ">
+      <children xmi:type="notation:Node" xmi:id="_qOposFnIEd-HNouoS1jfEQ" type="4001"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_qOlXQVnIEd-HNouoS1jfEQ" fontName="Sans"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_qOlXQlnIEd-HNouoS1jfEQ" x="1257" y="480" width="165" height="117"/>
     </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_uZLWQVhFEd-HuN2dVk55Ew"/>
     <edges xmi:type="notation:Edge" xmi:id="_64FG8FhFEd-HuN2dVk55Ew" type="3001" element="_64CqsVhFEd-HuN2dVk55Ew" source="_5PVngFhFEd-HuN2dVk55Ew" target="_6312YFhFEd-HuN2dVk55Ew">
@@ -1199,6 +1245,14 @@
       <styles xmi:type="notation:RoutingStyle" xmi:id="_v69IoVkiEd-82d303e0H7A"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_v69IolkiEd-82d303e0H7A" fontName="Sans"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_v69Io1kiEd-82d303e0H7A" points="[-33, 35, 82, -88]$[-117, 153, -2, 30]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_1_ahAFnIEd-HNouoS1jfEQ" type="3003" element="_1_UaYVnIEd-HNouoS1jfEQ" source="_qOlXQFnIEd-HNouoS1jfEQ" target="_sH4-MFhHEd-HuN2dVk55Ew">
+      <children xmi:type="notation:Node" xmi:id="_1_dkUFnIEd-HNouoS1jfEQ" type="4014">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_1_dkUVnIEd-HNouoS1jfEQ" y="40"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_1_ahAVnIEd-HNouoS1jfEQ"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_1_ahAlnIEd-HNouoS1jfEQ" fontName="Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1_ahA1nIEd-HNouoS1jfEQ" points="[-6, -58, -1, 96]$[-61, -103, -56, 51]"/>
     </edges>
   </notation:Diagram>
 </xmi:XMI>
