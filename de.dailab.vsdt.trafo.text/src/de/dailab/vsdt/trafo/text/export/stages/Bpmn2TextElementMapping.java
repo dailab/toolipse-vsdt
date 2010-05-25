@@ -79,7 +79,9 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	
 	@Override
 	public void initialize() {
-		random= new Random();
+		// initialize random number generator with fixed seed, so the numbers are random but the 
+		// same each time the transformation is performed, so the results are easier to compare.
+		random= new Random(0);
 		if (FORMAT_PLAIN.equals(textFormat)) {
 			builder= new TextBuilder();
 		}
