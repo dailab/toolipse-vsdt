@@ -1,11 +1,12 @@
-<?xml version="1.0"?><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link href="bpmn2text.css" rel="stylesheet" type="text/css" />
 		<title>Text-Gen Diagram</title>
 	</head>
 	<body>
-
+		
 		<h1>Text-Gen Diagram</h1>
 		
 		<ul>
@@ -13,6 +14,7 @@
 			<li>Version: 0.1</li>
 			<li>Created: Mon Mar 09 16:47:43 CET 2009</li>
 			<li>Modified: Tue Mar 10 16:38:09 CET 2009</li>
+			
 		</ul>
 		This Diagram is used for testing the Text Generation Capabilities of the VSDT. Here the focus is not so much on executability but on good documentation.
 		
@@ -25,59 +27,60 @@
 		<ul>
 			<li><em>Help Desk</em>: <span class='gen_doc'>This Lane represents the Help Desk, which receives all incoming trouble tickets and will look up the answers for known problems or escalate the ticket to the technical support.</span></li>
 			<li><em>Technical Support</em>: <span class='gen_doc'>The Technical Support receives tickets that can not be handled by the help desk, e.g. new problems.</span></li>
+			
 		</ul>
-		The Pool's Process is of type <span class='gen_type'>private</span>. In that Process,  a number of elements are conducted in sequence. 
+		The Pool's Process is of type <span class='gen_type'>private</span>. In that Process,  a number of elements are executed in sequence. 
 		<div class='gen_block'>
 			First,  in Event '<em>Receive Ticket</em>' the Message '<em>HelpDeskQuestion</em>' of the Service '<em>CS.askHelpdesk</em>' is received.  
-			Following that,  starting at the Gateway '<em>Known Problem?</em>',  one out of several branches will be carried out: 
+			After that,  starting at the Gateway '<em>Known Problem?</em>',  one out of several branches will be accomplished: 
 			<div class='gen_block'>
 				If the condition '<span class='gen_code'>'unknown problem'</span>' holds true,  a number of elements are performed in sequence. 
 				<div class='gen_block'>
 					First,  an interruptable region begins.
 					<div class='gen_block'>
-						 Here,  the <span class='gen_type'>manual</span> Task '<em>Try to reproduce Problem</em>' is processed.   This section can be interrupted if  in Event '<em>Timeout</em>'  the Activity is interrupted after <span class='gen_code'>'30 minutes'</span>.  
+						 Here,  the <span class='gen_type'>manual</span> Task '<em>Try to reproduce Problem</em>' is performed.   This section can be interrupted if  in Event '<em>Timeout</em>'  the Activity is interrupted after <span class='gen_code'>'30 minutes'</span>.  
 					</div>
 					
-					Following that,  a number of elements are carried out in sequence. 
+					Afterwards,  a number of elements are performed in sequence. 
 					<div class='gen_block'>
-						First,  starting at the Gateway '<em>Kind of Problem?</em>',  one or more out of several branches will be carried out: 
+						First,  starting at the Gateway '<em>Kind of Problem?</em>',  one or more out of several branches will be processed: 
 						<div class='gen_block'>
-							If the condition '<span class='gen_code'>'is bug'</span>' holds true,  the <span class='gen_type'>send</span> Task '<em>Inform Developer</em>' is accomplished, sending the Message '<em>BugTrackerTicket</em>' which belongs to the Service '<em>Dev.fileBug</em>'.  
-							If the condition '<span class='gen_code'>'is stupid user'</span>' holds true,  the <span class='gen_type'>user</span> Task '<em>Describe Solution</em>' is executed, invoking a Service.  
+							If the condition '<span class='gen_code'>'is bug'</span>' holds true,  the <span class='gen_type'>send</span> Task '<em>Inform Developer</em>' is processed, sending the Message '<em>BugTrackerTicket</em>' which belongs to the Service '<em>Dev.fileBug</em>'.  
+							If the condition '<span class='gen_code'>'is stupid user'</span>' holds true,  the <span class='gen_type'>user</span> Task '<em>Describe Solution</em>' is carried out, invoking a Service.  
 							
 						</div>
 						
-						Next,  the <span class='gen_type'>send</span> Task '<em>Add to Database</em>' is performed, sending a Message.  
+						Thereafter,  the <span class='gen_type'>send</span> Task '<em>Add to Database</em>' is performed, sending a Message.  
 						
 					</div>
-					 This part will only be processed if the <span class='gen_type'>timer</span> Event '<em>Timeout</em>' has not been triggered
+					 This part will only be performed if the <span class='gen_type'>timer</span> Event '<em>Timeout</em>' has not been triggered
 					
 				</div>
 				
-				If no condition applies, by default  the <span class='gen_type'>user</span> Task '<em>Look up answer in Database</em>' is carried out, invoking the Service '<em>Database.getEntry</em>' with the input Message <em>getEntryRequest</em> and the output Message <em>getEntryResponse</em>.  
+				If no condition applies, by default  the <span class='gen_type'>user</span> Task '<em>Look up answer in Database</em>' is conducted, invoking the Service '<em>Database.getEntry</em>' with the input Message <em>getEntryRequest</em> and the output Message <em>getEntryResponse</em>.  
 				
 			</div>
 			
-			Next,  the <span class='gen_type'>send</span> Task '<em>Send Answer</em>' is processed, sending the Message '<em>HelpDeskResponse</em>' which belongs to the Service '<em>CS.askHelpdesk</em>'.  
-			After that,  the <span class='gen_type'>user</span> Task '<em>File Ticket</em>' is accomplished, invoking a Service.  
-			Hereafter,  in Event '<em>End Process</em>'  nothing special happens.  
+			Hereafter,  the <span class='gen_type'>send</span> Task '<em>Send Answer</em>' is carried out, sending the Message '<em>HelpDeskResponse</em>' which belongs to the Service '<em>CS.askHelpdesk</em>'.  
+			Hereupon,  the <span class='gen_type'>user</span> Task '<em>File Ticket</em>' is processed, invoking a Service.  
+			Next,  in Event '<em>End Process</em>'  nothing special happens.  
 			
 		</div>
 		
 		
 		<h3>Development</h3>
 		<span class='gen_doc'>This Pool stands for the Development department, being further distinguished into bugfixing and others.</span>
-		The Pool '<em>Development</em>' belongs to Participant '<em>Development</em>'. The Pool's Process is of type <span class='gen_type'>collaboration</span>. In that Process,  a number of elements are processed in sequence. 
+		The Pool '<em>Development</em>' belongs to Participant '<em>Development</em>'. The Pool's Process is of type <span class='gen_type'>collaboration</span>. In that Process,  a number of elements are carried out in sequence. 
 		<div class='gen_block'>
 			First,  in Event '<em>Receive Bug</em>' the Message '<em>BugTrackerTicket</em>' of the Service '<em>Dev.fileBug</em>' is received.  
-			Following that,  an interruptable region begins.
+			Thereafter,  an interruptable region begins.
 			<div class='gen_block'>
-				 Here,  the ad-hoc <span class='gen_type'>embedded</span> Subprocess '<em>Work day and night to fix the bug</em>' is conducted. In this course,  the <span class='gen_type'>manual</span> Task '<em>Code</em>' is accomplished.  Besides,  the <span class='gen_type'>manual</span> Task '<em>Get Coffee</em>' is processed.  Alongside,  the normal flow and the exceptional flow are merged in the Gateway '<em>INITIAL_GATEWAY</em>'., which references to another Process in another Business Process Diagram.   This section can be interrupted if  in Event '<em>Go insane</em>'  an error with error code '<span class='gen_code'>nuts</span>' is caught. <span class='gen_doc'>The poor developer went insane.</span>  In this case,  the <span class='gen_type'>send</span> Task '<em>Inform HR</em>' is processed, sending a Message.  
+				 Here,  the ad-hoc <span class='gen_type'>embedded</span> Subprocess '<em>Work day and night to fix the bug</em>' is executed. In this course,  the <span class='gen_type'>manual</span> Task '<em>Code</em>' is carried out.  Alongside,  the <span class='gen_type'>manual</span> Task '<em>Get Coffee</em>' is carried out.  Aside from that,  the normal flow and the exceptional flow are merged in the Gateway '<em>INITIAL_GATEWAY</em>'., which references to another Process in another Business Process Diagram.   This section can be interrupted if  in Event '<em>Go insane</em>'  an error with error code '<span class='gen_code'>nuts</span>' is caught. <span class='gen_doc'>The poor developer went insane.</span>  In this case,  the <span class='gen_type'>send</span> Task '<em>Inform HR</em>' is processed, sending a Message.  
 			</div>
 			
-			After that,  the <span class='gen_type'>user</span> Task '<em>Mark bug as being resolved</em>' is accomplished, invoking a Service.   This part will only be processed if the <span class='gen_type'>error</span> Event '<em>Go insane</em>' has not been triggered
+			Following that,  the <span class='gen_type'>user</span> Task '<em>Mark bug as being resolved</em>' is executed, invoking a Service.   This part will only be performed if the <span class='gen_type'>error</span> Event '<em>Go insane</em>' has not been triggered
 			Afterwards,  the normal flow and the exceptional flow are merged.
-			Following that,  nothing special happens.  
+			Hereupon,  nothing special happens.  
 			
 		</div>
 		
@@ -85,5 +88,6 @@
 		<h3>Customer</h3>
 		<span class='gen_doc'>This is a blackbox Pool which represents the customer making the call at the help desk. No internal process is shown for this Pool.</span>
 		The Pool '<em>Customer</em>' belongs to Participant '<em>Customer</em>'. The Pool's Process is of type <span class='gen_type'>abstract</span>.
-		</body>
+		
+	</body>
 </html>
