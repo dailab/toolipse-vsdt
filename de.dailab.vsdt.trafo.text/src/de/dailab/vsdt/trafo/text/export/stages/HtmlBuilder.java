@@ -33,19 +33,30 @@ public class HtmlBuilder extends TextBuilder {
 	@Override
 	public TextBuilder appendHeader(String title) {
 		buffer.append("<?xml version=\"1.0\"?>");
-		buffer.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\">").append(NL).append("\t<head>").append(NL);
-		buffer.append("\t\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />").append(NL);
-		buffer.append("\t\t<link href=\"" + CSS_FILENAME + "\" rel=\"stylesheet\" type=\"text/css\" />").append(NL);
-		buffer.append("\t\t<title>").append(title).append("</title>").append(NL);
-		buffer.append("\t</head>").append(NL).append("\t<body>").append(NL);
-		indentationLevel+= 2;
+		newLine();
+		buffer.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\">");
+		newLine(+1);
+		buffer.append("<head>");
+		newLine(+1);
+		buffer.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
+		newLine();
+		buffer.append("<link href=\"" + CSS_FILENAME + "\" rel=\"stylesheet\" type=\"text/css\" />");
+		newLine();
+		buffer.append("<title>").append(title).append("</title>");
+		newLine(-1);
+		buffer.append("</head>");
+		newLine();
+		buffer.append("<body>");
+		newLine(+1);
 		return this;
 	}
 	
 	@Override
 	public TextBuilder appendFooter() {
-		buffer.append("</body>").append(NL).append("</html>");
-		indentationLevel-= 2;
+		newLine(-1);
+		buffer.append("</body>");
+		newLine(-1);
+		append("</html>");
 		return this;
 	}
 	
@@ -61,9 +72,9 @@ public class HtmlBuilder extends TextBuilder {
 	
 	@Override
 	public TextBuilder beginItemize() {
-		buffer.append("<ul>");
-		indentationLevel++;
 		newLine();
+		buffer.append("<ul>");
+		newLine(+1);
 		return this;
 	}
 
@@ -76,8 +87,7 @@ public class HtmlBuilder extends TextBuilder {
 	
 	@Override
 	public TextBuilder endItemize() {
-		indentationLevel--;
-		newLine();
+		newLine(-1);
 		buffer.append("</ul>");
 		newLine();
 		return this;
@@ -85,16 +95,15 @@ public class HtmlBuilder extends TextBuilder {
 	
 	@Override
 	public TextBuilder beginBlock() {
-		buffer.append("<div class='gen_block'>");
-		indentationLevel++;
 		newLine();
+		buffer.append("<div class='gen_block'>");
+		newLine(+1);
 		return this;
 	}
 	
 	@Override
 	public TextBuilder endBlock() {
-		indentationLevel--;
-		newLine();
+		newLine(-1);
 		buffer.append("</div>");
 		newLine();
 		return this;

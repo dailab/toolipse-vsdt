@@ -18,9 +18,12 @@ public class LatexBuilder extends TextBuilder {
 	
 	@Override
 	public TextBuilder appendHeader(String title) {
-		buffer.append("\\documentclass{article}").append(NL);
+		buffer.append("\\documentclass{article}");
+		newLine();
 		buffer.append("\\usepackage[utf8]{inputenc}");
+		newLine();
 		buffer.append("\\begin{document}");
+		newLine();
 		return this;
 	}
 	
@@ -32,7 +35,7 @@ public class LatexBuilder extends TextBuilder {
 	
 	@Override
 	public TextBuilder appendTitle(String title, int level) {
-		buffer.append(NL).append(getIndentationSpace());
+		newLine();
 		switch (level) {
 		case 0:
 			buffer.append("\\title{" + title + "}");
@@ -49,37 +52,29 @@ public class LatexBuilder extends TextBuilder {
 		default:
 			buffer.append("\\paragraph*{" + title + "}");
 		}
-		buffer.append(NL).append(getIndentationSpace());
-		return this;
-	}
-	
-	@Override
-	public TextBuilder newLine() {
-		buffer.append(NL).append(NL).append(getIndentationSpace());
+		newLine();
 		return this;
 	}
 	
 	@Override
 	public TextBuilder beginItemize() {
 		buffer.append("\\begin{itemize}");
-		indentationLevel++;
-		buffer.append(NL).append(getIndentationSpace());
+		newLine(+1);
 		return this;
 	}
 
 	@Override
 	public TextBuilder appendItem(String s) {
 		buffer.append("\\item ").append(s);
-		buffer.append(NL).append(getIndentationSpace());
+		newLine();
 		return this;
 	}
 	
 	@Override
 	public TextBuilder endItemize() {
-		indentationLevel--;
-		buffer.append(NL).append(getIndentationSpace());
+		newLine(-1);
 		buffer.append("\\end{itemize}");
-		buffer.append(NL).append(getIndentationSpace());
+		newLine();
 		return this;
 	}
 	

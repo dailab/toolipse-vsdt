@@ -97,11 +97,19 @@ public class TextBuilder {
 	}
 	
 	/**
-	 * Insert a Line Break, e.g. a \r\n, or a HTML "br" tag, or whatever
+	 * Insert a Line Break and restore indentation. Change indentation by delta_indent.
 	 */
-	public TextBuilder newLine() {
+	public final TextBuilder newLine(int delta_indent) {
+		indentationLevel+= delta_indent;
 		append(NL).append(getIndentationSpace());
 		return this;
+	}
+	
+	/**
+	 * Insert a Line Break and restore indentation.
+	 */
+	public final TextBuilder newLine() {
+		return newLine(0);
 	}
 	
 	/**
@@ -109,13 +117,13 @@ public class TextBuilder {
 	 * 1 is a sub title, and so on.
 	 */
 	public TextBuilder appendTitle(String title, int level) {
-		append(NL).append(getIndentationSpace());
+		newLine();
 		String s= "=";
 		for (int i=0; i<level; i++) {
 			s+= "=";
 		}
 		append(s).append(title).append(s);
-		append(NL).append(getIndentationSpace());
+		newLine();
 		return this;
 	}
 	
@@ -141,8 +149,7 @@ public class TextBuilder {
 	 * Start a new Block (if supported), e.g. by adding indentation.
 	 */
 	public TextBuilder beginBlock() {
-		indentationLevel++;
-		append(NL).append(getIndentationSpace());
+		newLine(+1);
 		return this;
 	}
 	
@@ -150,8 +157,7 @@ public class TextBuilder {
 	 * End a block
 	 */
 	public TextBuilder endBlock() {
-		indentationLevel--;
-		append(NL).append(getIndentationSpace());
+		newLine(-1);
 		return this;
 	}
 
@@ -159,8 +165,7 @@ public class TextBuilder {
 	 * Start an itemization
 	 */
 	public TextBuilder beginItemize() {
-		indentationLevel++;
-		append(NL).append(getIndentationSpace());
+		newLine(+1);
 		return this;
 	}
 	
@@ -168,8 +173,7 @@ public class TextBuilder {
 	 * End an itemization
 	 */
 	public TextBuilder endItemize() {
-		indentationLevel--;
-		append(NL).append(getIndentationSpace());
+		newLine(-1);
 		return this;
 	}
 
@@ -177,8 +181,8 @@ public class TextBuilder {
 	 * Add an item (should be called only when in an itemization)
 	 */
 	public TextBuilder appendItem(String s) {
-		append("- ").append(s);
-		append(NL).append(getIndentationSpace());
+		append("* ").append(s);
+		newLine();
 		return this;
 	}
 

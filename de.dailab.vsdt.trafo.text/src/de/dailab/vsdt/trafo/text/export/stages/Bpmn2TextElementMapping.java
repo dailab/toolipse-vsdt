@@ -853,27 +853,27 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 * @see TextBuilder#name(String)
 	 */
 	private String name(String s) {
-		return builder.name(s);
+		return s != null && ! s.isEmpty() ? builder.name(s) : "";
 	}
 	
 	/**
 	 * @see TextBuilder#doc(String)
 	 */
 	private String doc(String s) {
-		return builder.doc(s);
+		return s != null && ! s.isEmpty() ? builder.doc(s) : "";
 	}
 	
 	/**
 	 * @see TextBuilder#type(Enum)
 	 */
 	private String type(Enum e) {
-		return builder.type(e);
+		return e != null ? builder.type(e) : "";
 	}
 
 	/**
 	 * @see TextBuilder#code(String)
 	 */
 	private String code(String s) {
-		return builder.code(s);
+		return s != null && ! s.isEmpty() ? builder.code(s) : "";
 	}
 }
