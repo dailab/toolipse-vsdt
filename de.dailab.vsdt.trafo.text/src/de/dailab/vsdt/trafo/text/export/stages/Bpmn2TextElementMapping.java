@@ -3,6 +3,8 @@ package de.dailab.vsdt.trafo.text.export.stages;
 import java.util.Iterator;
 import java.util.Random;
 
+import org.eclipse.emf.ecore.EObject;
+
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.BpmnProcess;
@@ -70,6 +72,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	
 	/** text format to use, determining the {@link #builder} */
 	public static String textFormat= FORMAT_HTML;
+	public static boolean longDocumentation= true;
 	
 	/** random number generator for random selection of synonymous terms */
 	private Random random;
@@ -116,7 +119,8 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	protected void visitBusinessProcessSystem(BusinessProcessSystem bps) {
 		builder.appendHeader(bps.getName());
 
-		builder.appendTitle(bps.getName(), 0);
+		// Business Process Meta Information
+		builder.appendTitle(bps.getName(), 0, null);
 		builder.beginItemize();
 		builder.appendItem("Author: " + bps.getAuthor());
 		builder.appendItem("Version: " + bps.getVersion());
@@ -129,20 +133,48 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			builder.newLine();
 		}
 
-		/*
-		 * TODO print top level summary of processes and participants
-		 */
+		// TODO screen shot
+
+		// TODO short summary of Meta diagram: relation of participants and processes
 		
+		// Structured Text for individual BPMN Diagrams
 		for (BusinessProcessDiagram bpd : bps.getBusinessProcesses()) {
 			visitBusinessProcessDiagram(bpd);
 		}
 		
-		/*
-		 *  TODO handle supporting types
-		 *  - participants
-		 *  - services
-		 *  - messages
-		 */
+		// Paragraphs for Individual Activities
+		if (longDocumentation) {
+			builder.appendTitle("Activity Descriptions", 1, null);
+			
+			for (Iterator<EObject> iter= bps.eAllContents(); iter.hasNext(); ) {
+				EObject next= iter.next();
+				if (next instanceof Activity) {
+					Activity activity = (Activity) next;
+					
+					// activity name and documentation
+					builder.appendTitle(activity.getName(), 2, activity.getId());
+					if (activity.getDocumentation() != null) {
+						builder.append(" " + doc(activity.getDocumentation()) + " ");
+					}
+
+					// details table
+					builder.beginTable();
+					if (activity.getPool().getParticipant() != null) {
+						builder.appendTableLine("Participant:", activity.getPool().getParticipant().getName());
+					}
+					if (activity.getInMessage() != null) {
+						builder.appendTableLine("Sending Message:", activity.getInMessage().getName());
+					}
+					if (activity.getOutMessage() != null) {
+						builder.appendTableLine("Receiving Message:", activity.getOutMessage().getName());
+					}
+					// TODO input, output
+					builder.endTable();
+				}
+			}
+		}
+		
+		// TODO Paragraphs for Supporting Types, e.g. Messages, Services
 		
 		builder.appendFooter();
 	}
@@ -153,7 +185,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 * @param bpd	The {@link BusinessProcessDiagram} to be mapped 	
 	 */
 	private void visitBusinessProcessDiagram(BusinessProcessDiagram bpd) {
-		builder.appendTitle(bpd.getName(), 1);
+		builder.appendTitle(bpd.getName(), 1, bpd.getId());
 		
 		if (bpd.getDocumentation() != null) {
 			builder.append( doc(bpd.getDocumentation()) );
@@ -175,7 +207,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 * @param pool		Some {@link Pool}
 	 */
 	public void visitPool(Pool pool) {
-		builder.appendTitle(pool.getName(), 2);
+		builder.appendTitle(pool.getName(), 2, pool.getId());
 		
 		if (pool.getDocumentation() != null) {
 			builder.append( doc(pool.getDocumentation()) );
@@ -439,8 +471,10 @@ public class Bpmn2TextElementMapping extends MappingStage {
 				actType= "Transaction";
 			}
 		}
+		String actName = longDocumentation ? ref(name(activity.getName()), activity.getId())
+		                                   :     name(activity.getName()); 
 		builder.append(" the " + (activity.isAdHoc()?"ad-hoc ":"")+ actType + 
-				" '" + name(activity.getName()) + "' is " + getRandomExecutedTerm());
+				" '" + actName + "' is " + getRandomExecutedTerm());
 		switch (type) {
 		case NONE:
 			// handle place-holder tasks
@@ -546,7 +580,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		}
 		
 		// documentation
-		if (activity.getDocumentation() != null) {
+		if ((! longDocumentation) && activity.getDocumentation() != null) {
 			builder.append(" " + doc(activity.getDocumentation()) + " ");
 		}
 	}
@@ -856,6 +890,13 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 */
 	private String name(String s) {
 		return s != null && ! s.isEmpty() ? builder.name(s) : "";
+	}
+	
+	/**
+	 * @see TextBuilder#ref(String, String)
+	 */
+	private String ref(String s, String a) {
+		return s != null && ! s.isEmpty() ? builder.ref(s, a) : ""; 
 	}
 	
 	/**

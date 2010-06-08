@@ -34,7 +34,7 @@ public class LatexBuilder extends TextBuilder {
 	}
 	
 	@Override
-	public TextBuilder appendTitle(String title, int level) {
+	public TextBuilder appendTitle(String title, int level, String anchor) {
 		newLine();
 		switch (level) {
 		case 0:
@@ -51,6 +51,9 @@ public class LatexBuilder extends TextBuilder {
 			buffer.append("\\subsubsection*{" + title + "}");
 		default:
 			buffer.append("\\paragraph*{" + title + "}");
+		}
+		if (anchor != null) {
+			buffer.append("\\label{" + anchor+ "}");
 		}
 		newLine();
 		return this;
@@ -96,6 +99,12 @@ public class LatexBuilder extends TextBuilder {
 	@Override
 	public String code(String s) {
 		return "\\texttt{" + s + "}";
+	}
+	
+	@Override
+	public String ref(String s, String anchor) {
+		// TODO Auto-generated method stub
+		return super.ref(s, anchor);
 	}
 	
 	@Override

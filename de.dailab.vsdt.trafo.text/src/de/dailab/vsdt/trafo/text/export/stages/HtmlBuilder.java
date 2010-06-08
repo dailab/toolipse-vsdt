@@ -61,9 +61,10 @@ public class HtmlBuilder extends TextBuilder {
 	}
 	
 	@Override
-	public TextBuilder appendTitle(String title, int level) {
+	public TextBuilder appendTitle(String title, int level, String anchor) {
 		newLine();
-		buffer.append("<h" + (level+1) + ">");
+		String id = anchor != null ? " id=\"" + anchor + "\"" : "";
+		buffer.append("<h" + (level+1) + id + ">");
 		buffer.append(title);
 		buffer.append("</h" + (level+1) + ">");
 		newLine();
@@ -89,6 +90,36 @@ public class HtmlBuilder extends TextBuilder {
 	public TextBuilder endItemize() {
 		newLine(-1);
 		buffer.append("</ul>");
+		newLine();
+		return this;
+	}
+	
+	@Override
+	public TextBuilder beginTable() {
+		newLine();
+		buffer.append("<table class=\"gen_details\">");
+		newLine(+1);
+		return this;
+	}
+
+	@Override
+	public TextBuilder appendTableLine(String... cells) {
+		buffer.append("<tr>");
+		newLine(+1);
+		for (String cell : cells) {
+			buffer.append("<td>").append(cell).append("</td>");
+			newLine();
+		}
+		newLine(-1);
+		buffer.append("</tr>");
+		newLine();
+		return this;
+	}
+	
+	@Override
+	public TextBuilder endTable() {
+		newLine(-1);
+		buffer.append("</table>");
 		newLine();
 		return this;
 	}
@@ -128,6 +159,11 @@ public class HtmlBuilder extends TextBuilder {
 	public String code(String s) {
 		return createSpan(s, "gen_code");
 	}
+	
+	@Override
+	public String ref(String s, String anchor) {
+		return "<a href=\"#" + anchor + "\">" + s + "</a>";
+	}
 
 	/**
 	 * @param s				Some String
@@ -153,6 +189,11 @@ public class HtmlBuilder extends TextBuilder {
 		b.append(".gen_doc { color: gray }").append(NL);
 		b.append(".gen_code { font-family: monospace }").append(NL);
 		b.append(".gen_type { font-variant:small-caps }").append(NL);
+		
+		b.append(".gen_details { width: 100% }").append(NL);
+		b.append(".gen_details tr td { background: #ddd; padding: 2pt; }").append(NL);
+		b.append(".gen_details tr td:first-child { background: #fff; font-weight: bold; width: 200pt }").append(NL);
+		
 		return b.toString();
 	}
 

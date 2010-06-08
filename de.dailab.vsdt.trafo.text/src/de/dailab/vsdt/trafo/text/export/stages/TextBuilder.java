@@ -114,9 +114,10 @@ public class TextBuilder {
 	
 	/**
 	 * Insert some title of a given level. Level 0 is the top level title, level
-	 * 1 is a sub title, and so on.
+	 * 1 is a sub title, and so on. If anchor is not null, it is used as a label
+	 * or ID for the header, so it can be used as a target for hyperlinks.
 	 */
-	public TextBuilder appendTitle(String title, int level) {
+	public TextBuilder appendTitle(String title, int level, String anchor) {
 		newLine();
 		String s= "=";
 		for (int i=0; i<level; i++) {
@@ -185,6 +186,33 @@ public class TextBuilder {
 		newLine();
 		return this;
 	}
+	
+	/**
+	 * Start a Table
+	 */
+	public TextBuilder beginTable() {
+		newLine(+1);
+		return this;
+	}
+	
+	/**
+	 * End a Table
+	 */
+	public TextBuilder endTable() {
+		newLine(-1);
+		return this;
+	}
+
+	/**
+	 * Add a table line (should be called only when in a table)
+	 */
+	public TextBuilder appendTableLine(String... cells) {
+		for (String cell : cells) {
+			append(cell + "\t");
+		}
+		newLine();
+		return this;
+	}
 
 	/**
 	 * Return the string wrapped in some code-mark-up
@@ -211,6 +239,13 @@ public class TextBuilder {
 	 * Return the string wrapped in some mark-up for documentation tags
 	 */
 	public String doc(String s) {
+		return s;
+	}
+	
+	/**
+	 * Return the string wrapped in a reference to the given anchor
+	 */
+	public String ref(String s, String anchor) {
 		return s;
 	}
 	
