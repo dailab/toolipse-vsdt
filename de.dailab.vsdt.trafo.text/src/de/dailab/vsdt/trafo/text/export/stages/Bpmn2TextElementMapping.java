@@ -1,9 +1,34 @@
 package de.dailab.vsdt.trafo.text.export.stages;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
+import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gef.RootEditPart;
+import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IDiagramPreferenceSupport;
+import org.eclipse.gmf.runtime.diagram.ui.image.ImageFileFormat;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditDomain;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
+import org.eclipse.gmf.runtime.diagram.ui.render.clipboard.DiagramGenerator;
+import org.eclipse.gmf.runtime.diagram.ui.render.clipboard.DiagramImageGenerator;
+import org.eclipse.gmf.runtime.diagram.ui.render.util.CopyToImageUtil;
+import org.eclipse.gmf.runtime.diagram.ui.services.editpart.EditPartService;
+import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.ImageLoader;
+import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Shell;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
@@ -70,9 +95,10 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	public static final String FORMAT_HTML= "HTML";
 	public static final String FORMAT_LATEX= "Latex";
 	
-	/** text format to use, determining the {@link #builder} */
+	/** text format to use, determining the {@link #builder}, and other options */
 	public static String textFormat= FORMAT_HTML;
 	public static boolean longDocumentation= true;
+	public static boolean integrateScreenshot= true;
 	
 	/** random number generator for random selection of synonymous terms */
 	private Random random;
@@ -133,7 +159,27 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			builder.newLine();
 		}
 
-		// TODO screen shot
+		// screen shot
+		if (integrateScreenshot) {
+
+//			CopyToImageUtil imageUtil= new CopyToImageUtil();
+//			// get resource from EObject
+//			Resource resource= bps.eResource();
+//			// create diagrams from resource
+//			for (Object o : resource.getContents()) {
+//				if (o instanceof Diagram) {
+//					// create screenshots for diagrams
+//					Diagram diagram = (Diagram) o;
+//					String path= "/home/kuester/test.gif";
+//					createDiagramImage(diagram, path);
+//					
+////					PreferencesHint preferencesHint= new PreferencesHint("de.dailab.vsdt.diagram");
+////					DiagramEditPart dep= imageUtil.createDiagramEditPart(diagram, new Shell(), preferencesHint);
+////					System.out.println(dep);
+//					
+//				}
+//			}
+		}
 
 		// TODO short summary of Meta diagram: relation of participants and processes
 		
@@ -209,13 +255,13 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	public void visitPool(Pool pool) {
 		builder.appendTitle(pool.getName(), 2, pool.getId());
 		
-		if (pool.getDocumentation() != null) {
-			builder.append( doc(pool.getDocumentation()) );
-			builder.newLine();
-		}
 		if (pool.getParticipant() != null) {
 			builder.append("The Pool '" + name(pool.getName()) + "' belongs to " +
 					"Participant '" + name(pool.getParticipant().getName()) + "'. ");
+		}
+		if (pool.getDocumentation() != null) {
+			builder.append( doc(pool.getDocumentation()) );
+			builder.newLine();
 		}
 		if (pool.getLanes().size() > 1) {
 			builder.append("This Pool is made up of " + pool.getLanes().size() + 
@@ -477,8 +523,10 @@ public class Bpmn2TextElementMapping extends MappingStage {
 				" '" + actName + "' is " + getRandomExecutedTerm());
 		switch (type) {
 		case NONE:
-			// handle place-holder tasks
 		case MANUAL:
+		case EMBEDDED:
+			// NONE and MANUAL require no special handling;
+			// child elements of EMBEDDED subprocess are listed after the documentation
 			builder.append(".");
 			break;
 		case SCRIPT:
@@ -518,14 +566,6 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			builder.append(", which references to " + (activity.getActivityRef() != null ? 
 					name(activity.getActivityRef().getName()) : "another Activity") + ".");
 			break;
-		case EMBEDDED:
-			builder.append(". In this course, ");
-			for (Iterator<FlowObject> iter= activity.getGraphicalElements().iterator(); iter.hasNext();) {
-				visitFlowObject(iter.next());
-				if (iter.hasNext()) {
-					builder.append(getRandomParallelTerm());
-				}
-			}
 		case INDEPENDENT:
 			String process= activity.getProcessRef() != null 
 					? "Process '" + name(activity.getProcessRef().getName()) + "'" 
@@ -547,9 +587,25 @@ public class Bpmn2TextElementMapping extends MappingStage {
 				}
 			}
 		}
-		/*
-		 * properties
-		 */
+		
+		// documentation
+		if ((! longDocumentation) && activity.getDocumentation() != null) {
+			builder.append(" " + doc(activity.getDocumentation()) + " ");
+		}
+		
+		if (activity.getActivityType() == ActivityType.EMBEDDED) {
+			// child elements of the subprocess are listed after the documentation
+			builder.append("In its course, ");
+			for (Iterator<FlowObject> iter= activity.getGraphicalElements().iterator(); iter.hasNext();) {
+				visitFlowObject(iter.next());
+				if (iter.hasNext()) {
+					builder.append(getRandomParallelTerm());
+				}
+			}
+		}
+		
+		// TODO activity properties
+
 		// looping
 		if (activity.getLoopAttributes() != null) {
 			builder.append(" The " + actType + " '" + name(activity.getName()) + 
@@ -577,11 +633,6 @@ public class Bpmn2TextElementMapping extends MappingStage {
 						code(attSet.getMI_Condition().getExpression()));
 				// when having more levels of detail: flow condition, complex flow condition
 			}
-		}
-		
-		// documentation
-		if ((! longDocumentation) && activity.getDocumentation() != null) {
-			builder.append(" " + doc(activity.getDocumentation()) + " ");
 		}
 	}
 	
@@ -918,5 +969,90 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 */
 	private String code(String s) {
 		return s != null && ! s.isEmpty() ? builder.code(s) : "";
+	}
+	
+	
+	/**
+	 * This method reproduces the functionality of CopyToImageUtil, which runs in
+	 * a NullPointerException when trying to create Edit Parts for the diagram.
+	 * The image will be created in GIF format.
+	 *  
+	 * @param diagram		the Diagram for which to create an image.
+	 * @param path			absolute path where to create the image
+	 * @see CopyToImageUtil
+	 */
+	private void createDiagramImage(Diagram diagram, String path) {
+		
+		IPath destination= Path.fromOSString(path);
+		PreferencesHint preferencesHint= new PreferencesHint("de.dailab.vsdt.diagram");
+		ImageFileFormat format= ImageFileFormat.GIF;
+//		IProgressMonitor monitor= new NullProgressMonitor();
+		
+        Shell shell = new Shell();
+        try {
+        	
+        	// 1.: CREATE DIAGRAM EDIT PART
+        	//
+            DiagramGraphicalViewer customViewer = new DiagramGraphicalViewer();
+            customViewer.createControl(shell);
+
+            DiagramEditDomain editDomain = new DiagramEditDomain(null);
+            editDomain.setCommandStack(new DiagramCommandStack(editDomain));
+
+            customViewer.setEditDomain(editDomain);
+
+            // hook in preferences
+            RootEditPart rootEP = EditPartService.getInstance().createRootEditPart(diagram);
+            ((IDiagramPreferenceSupport) rootEP).setPreferencesHint(preferencesHint);
+            customViewer.hookWorkspacePreferenceStore((IPreferenceStore) preferencesHint.getPreferenceStore());
+            
+            customViewer.setRootEditPart(rootEP);
+            customViewer.setEditPartFactory(EditPartService.getInstance());
+
+//            DiagramEventBroker.startListening(TransactionUtil.getEditingDomain(diagram));
+            
+            customViewer.setContents(diagram);
+            customViewer.flush();
+            
+            Assert.isTrue(customViewer.getContents() instanceof DiagramEditPart);
+            
+			// We need to flush all the deferred updates. 
+       		while (shell.getDisplay().readAndDispatch());
+            
+       		DiagramEditPart diagramEditPart = (DiagramEditPart) customViewer.getContents();
+
+       		
+            // 2.: CREATE IMAGE
+       		//
+            DiagramGenerator gen = new DiagramImageGenerator(diagramEditPart);
+            List editParts = diagramEditPart.getPrimaryEditParts();
+            Rectangle imageRect= gen.calculateImageRectangle(editParts);
+			Image image = gen.createSWTImageDescriptorForParts(editParts, imageRect).createImage();
+
+	        try {
+	        	// create file
+	            File osFile = new File(destination.toOSString());
+	            if (! osFile.exists()) {
+	            	osFile.createNewFile();
+	            }
+	            // write to file
+	        	FileOutputStream stream = new FileOutputStream(destination.toOSString());
+	            ImageData imageData = image.getImageData();
+                imageData = image.getImageData(); 
+	            ImageLoader imageLoader = new ImageLoader();
+	            imageLoader.data = new ImageData[] {imageData};
+	            imageLoader.logicalScreenHeight = image.getBounds().width;
+	            imageLoader.logicalScreenHeight = image.getBounds().height;
+	            imageLoader.save(stream, format.getOrdinal());
+	            stream.close();
+	        } catch (Exception e) {
+	        	e.printStackTrace();
+	        }
+			image.dispose();
+            
+        } finally {
+            shell.dispose();
+        }
+		
 	}
 }

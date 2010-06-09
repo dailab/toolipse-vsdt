@@ -19,8 +19,12 @@ public class Bpmn2TextExportWizardOptionsPage extends BpmnExportWizardOptionsPag
 	private String selectedFormat= DEFAULT_FORMAT;
 	
 	public static final String LABEL_LONG_DOC= "Create separate paragraphs for activity documentation";
-	public static final boolean DEFAULT_LONG_DOC= true;
+	public static final boolean DEFAULT_LONG_DOC= false;
 	private boolean createLongDocumentation= DEFAULT_LONG_DOC;
+	
+	public static final String LABEL_SCREENSHOT= "Integrate screen shots of the diagrams";
+	public static final boolean DEFAULT_SCREENSHOT= false;
+	private boolean integrateScreenshot= DEFAULT_SCREENSHOT;
 	
 	public Bpmn2TextExportWizardOptionsPage(String title, IStructuredSelection selection) {
 		super(title,selection);
@@ -39,13 +43,23 @@ public class Bpmn2TextExportWizardOptionsPage extends BpmnExportWizardOptionsPag
 		createFormatButton(composite, Bpmn2TextElementMapping.FORMAT_HTML);
 		createFormatButton(composite, Bpmn2TextElementMapping.FORMAT_LATEX);
 		
-		final Button button= new Button(parent, SWT.CHECK);
-		button.setText(LABEL_LONG_DOC);
-		button.setSelection(DEFAULT_LONG_DOC);
-		button.addSelectionListener(new SelectionAdapter() {
+		final Button longDescButton= new Button(parent, SWT.CHECK);
+		longDescButton.setText(LABEL_LONG_DOC);
+		longDescButton.setSelection(DEFAULT_LONG_DOC);
+		longDescButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				createLongDocumentation= button.getSelection();
+				createLongDocumentation= longDescButton.getSelection();
+			}
+		});
+		
+		final Button screenshotButton= new Button(parent, SWT.CHECK);
+		screenshotButton.setText(LABEL_SCREENSHOT);
+		screenshotButton.setSelection(DEFAULT_SCREENSHOT);
+		screenshotButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				integrateScreenshot= screenshotButton.getSelection();
 			}
 		});
 	}
@@ -68,6 +82,10 @@ public class Bpmn2TextExportWizardOptionsPage extends BpmnExportWizardOptionsPag
 	
 	public boolean isCreateLongDocumentation() {
 		return createLongDocumentation;
+	}
+
+	public boolean isIntegrateScreenshot() {
+		return integrateScreenshot;
 	}
 	
 }

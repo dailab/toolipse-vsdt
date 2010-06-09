@@ -35,6 +35,7 @@ public class Bpmn2TextExportWizard extends BpmnExportWizard {
 		if (optionsPage instanceof Bpmn2TextExportWizardOptionsPage) {
 			Bpmn2TextElementMapping.textFormat= ((Bpmn2TextExportWizardOptionsPage) optionsPage).getSelectedFormat();
 			Bpmn2TextElementMapping.longDocumentation= ((Bpmn2TextExportWizardOptionsPage) optionsPage).isCreateLongDocumentation();
+			Bpmn2TextElementMapping.integrateScreenshot= ((Bpmn2TextExportWizardOptionsPage) optionsPage).isIntegrateScreenshot();
 		}
 	}
 }

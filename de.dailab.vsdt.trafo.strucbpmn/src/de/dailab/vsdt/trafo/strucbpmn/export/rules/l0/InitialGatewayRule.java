@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 
+import de.dailab.vsdt.AbstractProcess;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.FlowObjectContainer;
@@ -119,6 +120,12 @@ public class InitialGatewayRule extends AbstractRule {
 			addTargetQuery(lhsVariables, CONTAINER, START2, bpmn.getFlowObjectContainer_ContainedFlowObjects());
 			
 			//reduce domains
+			for (Iterator<EObject> iter = lhsVariables.get(CONTAINER).getDomain().iterator(); iter.hasNext();) {
+				FlowObjectContainer foc= (FlowObjectContainer) iter.next();
+				if ((foc instanceof AbstractProcess) && ((AbstractProcess) foc).isAdHoc()) {
+					iter.remove();
+				}
+			}
 			for (Iterator<EObject> iter = lhsVariables.get(START1).getDomain().iterator(); iter.hasNext();) {
 				FlowObject flowObject= (FlowObject) iter.next();
 				if (! flowObject.isStartingNode()) {
