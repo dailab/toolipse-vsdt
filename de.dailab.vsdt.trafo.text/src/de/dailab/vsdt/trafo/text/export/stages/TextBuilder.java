@@ -101,7 +101,7 @@ public class TextBuilder {
 	 */
 	public final TextBuilder newLine(int delta_indent) {
 		indentationLevel+= delta_indent;
-		append(NL).append(getIndentationSpace());
+		buffer.append(NL).append(getIndentationSpace());
 		return this;
 	}
 	
@@ -123,7 +123,7 @@ public class TextBuilder {
 		for (int i=0; i<level; i++) {
 			s+= "=";
 		}
-		append(s).append(title).append(s);
+		buffer.append(s).append(title).append(s);
 		newLine();
 		return this;
 	}
@@ -182,7 +182,7 @@ public class TextBuilder {
 	 * Add an item (should be called only when in an itemization)
 	 */
 	public TextBuilder appendItem(String s) {
-		append("* ").append(s);
+		buffer.append("* ").append(s);
 		newLine();
 		return this;
 	}
@@ -208,8 +208,17 @@ public class TextBuilder {
 	 */
 	public TextBuilder appendTableLine(String... cells) {
 		for (String cell : cells) {
-			append(cell + "\t");
+			buffer.append(cell + "\t");
 		}
+		newLine();
+		return this;
+	}
+	
+	/**
+	 * Add a reference to an image.
+	 */
+	public TextBuilder appendImage(String path, String label) {
+		buffer.append("[ ").append(path).append(" | ").append(label).append(" ]");
 		newLine();
 		return this;
 	}

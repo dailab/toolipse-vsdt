@@ -141,6 +141,17 @@ public class HtmlBuilder extends TextBuilder {
 	}
 
 	@Override
+	public TextBuilder appendImage(String path, String label) {
+		buffer.append("<img class=\"gen_diagram\" src=\"").append(path).append("\">");
+		newLine();
+		if (label != null) {
+			buffer.append("<em>" + label + "</em>");
+			newLine();
+		}
+		return this;
+	}
+	
+	@Override
 	public String name(String s) {
 		return "<em>" + s + "</em>";
 	}
@@ -184,12 +195,12 @@ public class HtmlBuilder extends TextBuilder {
 	protected String getCss() {
 		StringBuffer b= new StringBuffer();
 		b.append("h1, h2, h3, h4 { font-family: sans-serif }").append(NL);
-		b.append("#diagram { width: 100% }").append(NL);
 		b.append(".gen_block { border-left: solid thin gray; margin: 0 0 .5em .5em; padding-left: .5em; }").append(NL);
 		b.append(".gen_doc { color: gray }").append(NL);
 		b.append(".gen_code { font-family: monospace }").append(NL);
 		b.append(".gen_type { font-variant:small-caps }").append(NL);
 		
+		b.append(".gen_diagram { width: 100% }").append(NL);
 		b.append(".gen_details { width: 100% }").append(NL);
 		b.append(".gen_details tr td { background: #ddd; padding: 2pt; }").append(NL);
 		b.append(".gen_details tr td:first-child { background: #fff; font-weight: bold; width: 200pt }").append(NL);

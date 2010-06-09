@@ -10,6 +10,7 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.RootEditPart;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
@@ -153,71 +154,21 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		builder.appendItem("Created: " + bps.getCreationDate());
 		builder.appendItem("Modified: " + bps.getModificationDate());
 		builder.endItemize();
-		
 		if (bps.getDocumentation() != null) {
 			builder.append(bps.getDocumentation());
 			builder.newLine();
 		}
 
-		// screen shot
+		// screen shot of meta diagram
 		if (integrateScreenshot) {
-
-//			CopyToImageUtil imageUtil= new CopyToImageUtil();
-//			// get resource from EObject
-//			Resource resource= bps.eResource();
-//			// create diagrams from resource
-//			for (Object o : resource.getContents()) {
-//				if (o instanceof Diagram) {
-//					// create screenshots for diagrams
-//					Diagram diagram = (Diagram) o;
-//					String path= "/home/kuester/test.gif";
-//					createDiagramImage(diagram, path);
-//					
-////					PreferencesHint preferencesHint= new PreferencesHint("de.dailab.vsdt.diagram");
-////					DiagramEditPart dep= imageUtil.createDiagramEditPart(diagram, new Shell(), preferencesHint);
-////					System.out.println(dep);
-//					
-//				}
-//			}
+			integrateScreenshot(bps);
 		}
-
+		
 		// TODO short summary of Meta diagram: relation of participants and processes
 		
 		// Structured Text for individual BPMN Diagrams
 		for (BusinessProcessDiagram bpd : bps.getBusinessProcesses()) {
 			visitBusinessProcessDiagram(bpd);
-		}
-		
-		// Paragraphs for Individual Activities
-		if (longDocumentation) {
-			builder.appendTitle("Activity Descriptions", 1, null);
-			
-			for (Iterator<EObject> iter= bps.eAllContents(); iter.hasNext(); ) {
-				EObject next= iter.next();
-				if (next instanceof Activity) {
-					Activity activity = (Activity) next;
-					
-					// activity name and documentation
-					builder.appendTitle(activity.getName(), 2, activity.getId());
-					if (activity.getDocumentation() != null) {
-						builder.append(" " + doc(activity.getDocumentation()) + " ");
-					}
-
-					// details table
-					builder.beginTable();
-					if (activity.getPool().getParticipant() != null) {
-						builder.appendTableLine("Participant:", activity.getPool().getParticipant().getName());
-					}
-					if (activity.getInMessage() != null) {
-						builder.appendTableLine("Sending Message:", activity.getInMessage().getName());
-					}
-					if (activity.getOutMessage() != null) {
-						builder.appendTableLine("Receiving Message:", activity.getOutMessage().getName());
-					}
-					// TODO input, output
-					builder.endTable();
-				}
-			}
 		}
 		
 		// TODO Paragraphs for Supporting Types, e.g. Messages, Services
@@ -238,8 +189,46 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			builder.newLine();
 		}
 
+		// screen shot of BPMN diagram
+		if (integrateScreenshot) {
+			integrateScreenshot(bpd);
+		}
+
+		// create Structured Text for each Pool
 		for (Pool pool : bpd.getPools()) {
 			visitPool(pool);
+		}
+
+		// Paragraphs for Individual Activities
+		if (longDocumentation) {
+			builder.appendTitle("Activity Descriptions", 2, null);
+			
+			for (Iterator<EObject> iter= bpd.eAllContents(); iter.hasNext(); ) {
+				EObject next= iter.next();
+				if (next instanceof Activity) {
+					Activity activity = (Activity) next;
+					
+					// activity name and documentation
+					builder.appendTitle(activity.getName(), 3, activity.getId());
+					if (activity.getDocumentation() != null) {
+						builder.append(activity.getDocumentation());
+					}
+
+					// details table
+					builder.beginTable();
+					if (activity.getPool().getParticipant() != null) {
+						builder.appendTableLine("Participant:", activity.getPool().getParticipant().getName());
+					}
+					if (activity.getInMessage() != null) {
+						builder.appendTableLine("Sending Message:", activity.getInMessage().getName());
+					}
+					if (activity.getOutMessage() != null) {
+						builder.appendTableLine("Receiving Message:", activity.getOutMessage().getName());
+					}
+					// TODO input, output
+					builder.endTable();
+				}
+			}
 		}
 	}
 	
@@ -367,13 +356,13 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		final boolean throwing= event.isThrowing();
 		if (multiType == null && event.getName() != null) {
 			// print this only the first time for a multi event
-			builder.append(" in Event '" + name(event.getName()) + "' ");
+			builder.append("in Event '" + name(event.getName()) + "', ");
 		}
 		
 		TriggerType trigger= multiType != null ? multiType : event.getTrigger();
 		switch (trigger) {
 		case NONE:
-			builder.append(" nothing special happens");
+			builder.append("nothing special happens");
 			break;
 		case MESSAGE:
 			Message msg= event.getMessage();
@@ -394,24 +383,23 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			String time= timeExpression != null? code(timeExpression.getExpression()) : " an unspecified time"; 
 			if (event instanceof Intermediate) {
 				if (boundary) {
-					builder.append(" the Activity is interrupted " + (cyclic?"after ":"at ")+time);
+					builder.append("the Activity is interrupted " + (cyclic?"after ":"at ")+time);
 				} else {
-					builder.append(" the Process will wait " + (cyclic?"for ":"until ")+time);
+					builder.append("the Process will wait " + (cyclic?"for ":"until ")+time);
 				}
 			} else {
-				builder.append(" the Process will start " + (cyclic?"regularly after ":"at ")+time);
+				builder.append("the Process will start " + (cyclic?"regularly after ":"at ")+time);
 			}
 			break;
 		case LINK:
 			if (throwing && event.getLinkedTo() != null) {
-				builder.append(" the Process will continue at " + 
-						(event.getLinkedTo().getName() != null?"Event " + 
-						name(event.getLinkedTo().getName()) + 
-						"." : " the other end of the link"));
+				String linkEnd = event.getLinkedTo().getName() != null ? "Event " + name(event.getLinkedTo().getName())
+						                                               : "the other end of the link";
+				builder.append("the Process will continue at " + linkEnd);
 			}
 			break;
 		case ERROR:
-			builder.append(" an error ");
+			builder.append("an error ");
 			if (event.getErrorCode() != null) {
 				builder.append("with error code '" + code(event.getErrorCode()) + "' ");
 			}
@@ -424,26 +412,26 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			String ruleName= event.getRuleName();
 			if (event instanceof Intermediate) {
 				if (boundary) {
-					builder.append(" the Activity is interrupted when ");
+					builder.append("the Activity is interrupted when ");
 				} else {
-					builder.append(" the Process will wait until ");
+					builder.append("the Process will wait until ");
 				}
 			} else {
-				builder.append(" the Process will start when ");
+				builder.append("the Process will start when ");
 			}
-			builder.append((ruleName != null ? " the Rule " + name(ruleName) : " a Rule") + " applies");
+			builder.append((ruleName != null ? "the Rule " + name(ruleName) : "a Rule") + " applies");
 			// append rule expression for more details?
 			break;
 		case SIGNAL:
 			String s= event.getSignal();
-			builder.append((s != null ? " a Signal" : "the Signal '" + name(s) + "'") + 
+			builder.append((s != null ? "a Signal" : "the Signal '" + name(s) + "'") + 
 					" is " + (throwing ? "sent" : "received"));
 			break;
 		case CANCEL:
-			builder.append(" the Transaction is cancelled");
+			builder.append("the Transaction is cancelled");
 			break;
 		case COMPENSATION:
-			builder.append( (event.getActivity() != null ? " the Activity " + 
+			builder.append( (event.getActivity() != null ? "the Activity " + 
 					name(event.getActivity().getName()) : "an Activity ") +  
 					(throwing ? "is" : "will be") + " compensated");
 		case MULTIPLE:
@@ -486,10 +474,10 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			break;
 		}
 		if (multiType == null) {
-			builder.append(".");
+			builder.append(". ");
 			// documentation
 			if (event.getDocumentation() != null) {
-				builder.append(" " + doc(event.getDocumentation()) + " ");
+				builder.append(doc(event.getDocumentation()) + " ");
 			}
 		}
 	}
@@ -510,7 +498,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 */
 	private void visitActivity(Activity activity) {
 		final ActivityType type= activity.getActivityType();
-		String actType= (type!=ActivityType.NONE? type(type) : "") + " Task";
+		String actType= (type != ActivityType.NONE ? type(type) : "") + " Task";
 		if (type == ActivityType.EMBEDDED || type == ActivityType.SUBPROCESSREFERENCE || type == ActivityType.INDEPENDENT) {
 			actType= type(type) + " Subprocess";
 			if (activity.getTransaction() != null) {
@@ -519,7 +507,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		}
 		String actName = longDocumentation ? ref(name(activity.getName()), activity.getId())
 		                                   :     name(activity.getName()); 
-		builder.append(" the " + (activity.isAdHoc()?"ad-hoc ":"")+ actType + 
+		builder.append("the " + (activity.isAdHoc()?"ad-hoc ":"")+ actType + 
 				" '" + actName + "' is " + getRandomExecutedTerm());
 		switch (type) {
 		case NONE:
@@ -527,10 +515,10 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		case EMBEDDED:
 			// NONE and MANUAL require no special handling;
 			// child elements of EMBEDDED subprocess are listed after the documentation
-			builder.append(".");
+			builder.append(". ");
 			break;
 		case SCRIPT:
-			builder.append(", running a script.");
+			builder.append(", running a script. ");
 			// print script?
 			break;
 		case SERVICE:
@@ -540,14 +528,13 @@ public class Bpmn2TextElementMapping extends MappingStage {
 				builder.append(" with ");
 				if (activity.getInMessage() != null) {
 					builder.append("the input Message " + name(activity.getInMessage().getName()));
-					builder.append(activity.getOutMessage() != null ? " and " : ".");
+					builder.append(activity.getOutMessage() != null ? " and " : "");
 				}
 				if (activity.getOutMessage() != null) {
-					builder.append("the output Message " + name(activity.getOutMessage().getName()) + ".");
+					builder.append("the output Message " + name(activity.getOutMessage().getName()));
 				}
-			} else {
-				builder.append(".");
 			}
+			builder.append(". ");
 			break;
 		case SEND:
 		case RECEIVE:
@@ -559,7 +546,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			if (activity.getImplementation() != null) {
 				builder.append(" which belongs to " + getString(activity.getImplementation()));
 			}
-			builder.append(".");
+			builder.append(". ");
 			break;
 		case TASKREFERENCE:
 		case SUBPROCESSREFERENCE:
@@ -567,30 +554,32 @@ public class Bpmn2TextElementMapping extends MappingStage {
 					name(activity.getActivityRef().getName()) : "another Activity") + ".");
 			break;
 		case INDEPENDENT:
-			String process= activity.getProcessRef() != null 
+			String processRef= activity.getProcessRef() != null 
 					? "Process '" + name(activity.getProcessRef().getName()) + "'" 
 					: "another Process";
-			String diagram= activity.getDiagramRef() != null 
-					? "Diagram '" + name(activity.getDiagramRef().getName()) + "'" 
-					: "another Business Process Diagram";
-			builder.append(", which references to " + process + (activity.getDiagramRef() == 
-					activity.getPool().getParentDiagram() ? "." : " in " + diagram + "."));
+			if (activity.getDiagramRef() == activity.getPool().getParentDiagram()) {
+				processRef += activity.getDiagramRef() != null 
+						? " in Diagram '" + name(activity.getDiagramRef().getName()) + "'" 
+						: " in another Business Process Diagram";
+			}
+			builder.append(", which references to " + processRef + ". ");
 			// for more details: Input- and OutputPropertyMaps
 			break;
 		}
 		
-		if (type == ActivityType.USER || type == ActivityType.MANUAL) {
+		// performers (not participants)
+		if (! longDocumentation && (type == ActivityType.USER || type == ActivityType.MANUAL)) {
 			if (! activity.getPerformers().isEmpty()) {
 				builder.append(" This Task is performed by ");
 				for (Iterator<String> iter= activity.getPerformers().iterator(); iter.hasNext();) {
-					builder.append(name(iter.next()) + (iter.hasNext() ? " and " : "."));
+					builder.append(name(iter.next()) + (iter.hasNext() ? " and " : ". "));
 				}
 			}
 		}
 		
 		// documentation
 		if ((! longDocumentation) && activity.getDocumentation() != null) {
-			builder.append(" " + doc(activity.getDocumentation()) + " ");
+			builder.append(doc(activity.getDocumentation()) + " ");
 		}
 		
 		if (activity.getActivityType() == ActivityType.EMBEDDED) {
@@ -628,9 +617,9 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			if (activity.getLoopAttributes() instanceof MultiLoopAttSet) {
 				MultiLoopAttSet attSet = (MultiLoopAttSet) activity.getLoopAttributes();
 				builder.append(" for multiple instances " + (attSet.isSequential()? 
-						"sequentially" : "in parallel") + ".");
+						"sequentially" : "in parallel") + ". ");
 				builder.append(" The number of instances is determined by the expression" + 
-						code(attSet.getMI_Condition().getExpression()));
+						code(attSet.getMI_Condition().getExpression()) + ". ");
 				// when having more levels of detail: flow condition, complex flow condition
 			}
 		}
@@ -644,11 +633,11 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 * @param gateway	Some {@link Gateway}, most likely for merging exceptional flow
 	 */
 	private void visitGateway(Gateway gateway) {
-		builder.append(" the normal flow and the exceptional flow are merged");
+		builder.append("the normal flow and the exceptional flow are merged");
 		if (gateway.getName() != null) {
 			builder.append(" in the Gateway '" + name(gateway.getName()) + "'");
 		}
-		builder.append(".");
+		builder.append(". ");
 	}
 	
 	/*
@@ -668,7 +657,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	private void visitBpmnSequence(BpmnSequence bpmnSequence) {
 		if (! bpmnSequence.getElements().isEmpty()) {
 			if (bpmnSequence.getElements().size() > 1) {
-				builder.append(" a number of elements are " +  getRandomExecutedTerm() + " in sequence. ");
+				builder.append("a number of elements are " +  getRandomExecutedTerm() + " in sequence. ");
 				builder.beginBlock();
 				builder.append("First, ");
 				for (Iterator<FlowObject> iter = bpmnSequence.getElements().iterator(); iter.hasNext();) {
@@ -697,11 +686,11 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	private void visitBpmnBlock(BpmnBlock bpmnBlock) {
 		Gateway fork= bpmnBlock.getFirstGateway();
 		if (fork.getName() != null) {
-			builder.append(" starting at the Gateway '" + name(fork.getName()) + "', ");
+			builder.append("starting at the Gateway '" + name(fork.getName()) + "', ");
 		}
 		switch (fork.getGatewayType()) {
 		case AND:
-			builder.append(" a number of branches will be " + getRandomParallelTerm() + " in parallel: ");
+			builder.append("a number of branches will be " + getRandomParallelTerm() + " in parallel: ");
 			builder.beginBlock();
 			builder.append("First, ");
 			for (Iterator<BpmnBranch> iter = bpmnBlock.getElements().iterator(); iter.hasNext();) {
@@ -715,7 +704,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			break;
 		case OR:
 		case XOR_DATA:
-			builder.append(" one " + (fork.getGatewayType() == GatewayType.OR ?
+			builder.append("one " + (fork.getGatewayType() == GatewayType.OR ?
 					"or more " : "" ) + "out of several branches will be " + 
 					getRandomExecutedTerm()+ ": ");
 			builder.beginBlock();
@@ -736,7 +725,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			builder.endBlock();
 			break;
 		case XOR_EVENT:
-			builder.append(" the course of the Process will depend on which of " +
+			builder.append("the course of the Process will depend on which of " +
 					"the alternative paths can be started first (a \"race condition\").");
 			builder.beginBlock();
 			builder.append("Firstly, ");
@@ -762,7 +751,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			break;
 		case COMPLEX:
 			boolean b= fork.getIncomingCondition() != null;
-			builder.append(" one " + (fork.getGatewayType() == GatewayType.OR ?
+			builder.append("one " + (fork.getGatewayType() == GatewayType.OR ?
 					"or more " : "" ) + "out of several branches will be " + 
 					getRandomExecutedTerm() + " depending on the evaluation of " +
 					(b ? "the" : "a") + " complex condition " + 
@@ -797,13 +786,13 @@ public class Bpmn2TextElementMapping extends MappingStage {
 				: bpmnLoopBlock.getSecondBranch().getCondition().getExpression();
 		
 		if (bpmnLoopBlock.getFirstGateway().getName() != null) {
-			builder.append(" starting at the Gateway '" + name(bpmnLoopBlock.getFirstGateway().getName()) + "', ");	
+			builder.append("starting at the Gateway '" + name(bpmnLoopBlock.getFirstGateway().getName()) + "', ");	
 		}
-		builder.append(" a part of the Process will be " + getRandomExecutedTerm() + " in a loop. ");
+		builder.append("a part of the Process will be " + getRandomExecutedTerm() + " in a loop. ");
 		
-		builder.append(" At first, ");
+		builder.append("At first, ");
 		visitFlowObject(bpmnLoopBlock.getFirstBranch().getElement());
-		builder.append(getRandomSequentialTerm() + " the loop condition will be tested.");
+		builder.append(getRandomSequentialTerm() + "the loop condition will be tested.");
 		builder.append((isUntil ? " Until" : " While" ) + " the condition " + 
 				code(condition) + " holds true, the loop will continue and ");
 		visitFlowObject(bpmnLoopBlock.getSecondBranch().getElement());
@@ -819,21 +808,21 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 * @param block		Some {@link BpmnEventHandlerBlock}
 	 */
 	private void visitBpmnEventHandlerBlock (BpmnEventHandlerBlock block) {
-		builder.append(" an interruptable region begins.");
+		builder.append("an interruptable region begins. ");
 		builder.beginBlock();
-		builder.append(" Here, ");
+		builder.append("Here, ");
 		visitFlowObject(block.getActivity());
-		builder.append(" This section can be interrupted if ");
+		builder.append("This section can be interrupted if ");
 		
 		for (Iterator<BpmnEventHandlerCase> iter = block.getEventHandlerCases().iterator(); iter.hasNext();) {
 			BpmnEventHandlerCase eventHandlerCase= iter.next();
 			visitEvent(eventHandlerCase.getIntermediate(), null, true);
 			if (eventHandlerCase.getCompensationElement() != null) {
-				builder.append(" In this case, ");
+				builder.append("In this case, ");
 				visitFlowObject(eventHandlerCase.getCompensationElement());
 			}
 			if (iter.hasNext()) {
-				builder.append(getRandomParallelTerm() + " it can be interrupted if ");
+				builder.append(getRandomParallelTerm() + "it can be interrupted if ");
 			}
 		}
 		builder.endBlock();
@@ -851,7 +840,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	private void visitBpmnElementToSkip(BpmnElementToSkip element) {
 		Intermediate intm= element.getEventHandlerCase().getIntermediate();
 		visitFlowObject(element.getElement());
-		builder.append(" This part will only be " + getRandomExecutedTerm() + 
+		builder.append("This part will only be " + getRandomExecutedTerm() + 
 				" if the " + type(intm.getTrigger()) + " Event "+
 				(intm.getName() != null? "'" + name(intm.getName())+ 
 				"' " : "") + "has not been triggered");
@@ -971,6 +960,39 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		return s != null && ! s.isEmpty() ? builder.code(s) : "";
 	}
 	
+	/**
+	 * Look up the Diagram for the given EObject, if any, create an image file for it and integrate
+	 * the image file in the text output.
+	 * 
+	 * @param diagramElement
+	 * @return
+	 */
+	private boolean integrateScreenshot(EObject diagramElement) {
+		// get resource from EObject
+		Resource resource= diagramElement.eResource();
+		if (resource != null) {
+			// create diagrams from resource
+			for (Object o : resource.getContents()) {
+				if (o instanceof Diagram && ((Diagram) o).getElement() == diagramElement) {
+					// create screenshot for diagrams
+					Diagram diagram = (Diagram) o;
+					String path= "/home/kuester/test.gif";
+					String label= "";
+					
+					// TODO create diagram image file
+//					createDiagramImage(diagram, path);
+//					PreferencesHint preferencesHint= new PreferencesHint("de.dailab.vsdt.diagram");
+//					CopyToImageUtil imageUtil= new CopyToImageUtil();
+//					DiagramEditPart dep= imageUtil.createDiagramEditPart(diagram, new Shell(), preferencesHint);
+					
+					builder.appendImage(path, label);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	
 	/**
 	 * This method reproduces the functionality of CopyToImageUtil, which runs in
@@ -986,7 +1008,6 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		IPath destination= Path.fromOSString(path);
 		PreferencesHint preferencesHint= new PreferencesHint("de.dailab.vsdt.diagram");
 		ImageFileFormat format= ImageFileFormat.GIF;
-//		IProgressMonitor monitor= new NullProgressMonitor();
 		
         Shell shell = new Shell();
         try {
