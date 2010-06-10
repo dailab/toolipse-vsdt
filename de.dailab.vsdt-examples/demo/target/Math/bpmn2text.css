@@ -1,9 +1,9 @@
 h1, h2, h3, h4 { font-family: sans-serif }
-#diagram { width: 100% }
 .gen_block { border-left: solid thin gray; margin: 0 0 .5em .5em; padding-left: .5em; }
 .gen_doc { color: gray }
 .gen_code { font-family: monospace }
 .gen_type { font-variant:small-caps }
+.gen_diagram { max-width: 100%; display: block }
 .gen_details { width: 100% }
 .gen_details tr td { background: #ddd; padding: 2pt; }
 .gen_details tr td:first-child { background: #fff; font-weight: bold; width: 200pt }
