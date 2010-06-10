@@ -22,7 +22,7 @@ public class Bpmn2TextExportWizardOptionsPage extends BpmnExportWizardOptionsPag
 	public static final boolean DEFAULT_LONG_DOC= false;
 	private boolean createLongDocumentation= DEFAULT_LONG_DOC;
 	
-	public static final String LABEL_SCREENSHOT= "Integrate screen shots of the diagrams";
+	public static final String LABEL_SCREENSHOT= "Integrate pictures of the diagrams (generation of pictures can take a few seconds)";
 	public static final boolean DEFAULT_SCREENSHOT= false;
 	private boolean integrateScreenshot= DEFAULT_SCREENSHOT;
 	

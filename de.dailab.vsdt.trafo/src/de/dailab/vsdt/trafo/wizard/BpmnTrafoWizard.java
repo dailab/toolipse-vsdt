@@ -1,11 +1,14 @@
 package de.dailab.vsdt.trafo.wizard;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -13,10 +16,14 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
 
 import de.dailab.vsdt.trafo.MappingResultSaver;
@@ -32,6 +39,7 @@ public abstract class BpmnTrafoWizard extends Wizard {
 	public static final String ERROR_TRAFO_TITLE= "Transformation Error";
 	public static final String ERROR_TRAFO_MESSAGE= "An error occured during transformation.";
 	public static final String SEE_LOG_MESSAGE= System.getProperty("line.separator") + "Please see the log file for details.";
+	private static final String FS= File.separator;
 	
 	/** the options page */
 	protected BpmnTrafoWizardOptionsPage optionsPage= null;
@@ -91,81 +99,108 @@ public abstract class BpmnTrafoWizard extends Wizard {
 	 */
 	protected abstract void applyOptions();
 
+	/**
+	 * When finishing the dialog, the transformation is performed for each of the selected resources.
+	 * The transformation is performed inside of a Progress Dialog, so the user has some kind of
+	 * feedback that something happens when he clicks the Finish-button (although the dialog does
+	 * not indicate any progress in the transformation as such). Finally, a dialog is shown with
+	 * the result of the transformation.
+	 */
 	@Override
 	public boolean performFinish() {
 		initializeMappingStages();
 		applyOptions();
-		String path= optionsPage.getPath();
-		boolean log= optionsPage.getCreateLog();
-		
-		for (IFile file : optionsPage.getSelectedResources()) {
+
+		for (final IFile file : optionsPage.getSelectedResources()) {
+			final URI fileURI = URI.createFileURI(
+					new File(file.getLocationURI()).getAbsolutePath());
+			
+			// start progress monitor
+			final Shell shell= Display.getCurrent().getActiveShell();
 			try {
-				URI fileURI = URI.createFileURI(
-						new File(file.getLocationURI()).getAbsolutePath());
-				Object source= getSouceObject(fileURI);
-				
-				StringBuffer buff= new StringBuffer();
-				buff.append(path);
-				buff.append(File.separator);
-				buff.append("target");
-				buff.append(File.separator);
-				buff.append(getModelName(source));
-				buff.append(File.separator);
-				File baseDir= new File(buff.toString());
+				ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(shell);
+				progressMonitorDialog.run(false, true, new IRunnableWithProgress() {
+					@Override
+					public void run(IProgressMonitor monitor) {
 
-				if (optionsPage.getCreateLog()) {
-					String logFile= getModelName(source) + ".log";
-					TrafoLog.addFileAppender(new File(baseDir,logFile).getAbsolutePath());
-				}
-				TrafoLog.setLogLevel(optionsPage.getLogLevel());
-				TrafoLog.info("<<<<< Starting Transformation");
-				
-				boolean ok= true;
-				
-				// create model wrapper
-				MappingWrapper wrapper= createMappingWrapper(source);
-				// iterate over mapping stages
-				for (MappingStage stage : mappingStages) {
-					stage.initialize();
-					stage.setWrapper(wrapper);
-					ok= stage.apply();
-					if (!ok) {
-						break;
-					}
-				}
-				// save result
-				if (ok && resultSaver != null) {
-					resultSaver.setDirectory(baseDir);
-					resultSaver.setWrapper(wrapper);
-					ok= resultSaver.save();
-				}
-				// show dialog
-				if (ok) {
-					if (TrafoLog.hasWarnings()) {
-						MessageDialog.openWarning(this.getShell(), SUCCESS_TITLE, SUCCESS_WARN_MESSAGE + (log ? SEE_LOG_MESSAGE : ""));
-					} else {
-						MessageDialog.openInformation(this.getShell(), SUCCESS_TITLE, SUCCESS_MESSAGE + (log ? SEE_LOG_MESSAGE : ""));
-					}
-				} else {
-					MessageDialog.openError(this.getShell(), ERROR_TRAFO_TITLE, ERROR_TRAFO_MESSAGE + (log ? SEE_LOG_MESSAGE : ""));
-				}
-				
-				//refresh projects
-				TrafoLog.info(">>>>> Finished Transformation");
-				TrafoLog.reset();
-				file.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
+						// Transform!
+						boolean trafoOk= performTransformation(getSouceObject(fileURI));
 
-			} catch (Exception e) {
+						// show dialog
+						String logMsg = optionsPage.getCreateLog() ? SEE_LOG_MESSAGE : "";
+						if (trafoOk) {
+							if (TrafoLog.hasWarnings()) {
+								MessageDialog.openWarning(shell, SUCCESS_TITLE, SUCCESS_WARN_MESSAGE + logMsg);
+							} else {
+								MessageDialog.openInformation(shell, SUCCESS_TITLE, SUCCESS_MESSAGE + logMsg);
+							}
+						} else {
+							MessageDialog.openError(shell, ERROR_TRAFO_TITLE, ERROR_TRAFO_MESSAGE + logMsg);
+						}
+						
+						//refresh projects
+						try {
+							file.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
+						} catch (CoreException e) {
+							e.printStackTrace();
+						}
+					
+					}
+				});
+				return true;
+				
+			} catch (InvocationTargetException e) {
 				e.printStackTrace();
-				String message= e.getStackTrace().length > 0 ? message= e.getStackTrace()[0].toString() : e.getMessage();
-				TrafoLog.error("Saving files failed");
-				TrafoLog.fatal(message,e);
-				MessageDialog.openError(this.getShell(), ERROR_TRAFO_TITLE, ERROR_TRAFO_MESSAGE + (log ? SEE_LOG_MESSAGE : ""));
-				TrafoLog.reset();
-				return false;
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
-		return true;
+		return false;
+	}
+
+	/**
+	 * Do the actual transformation. After doing some preparations, the given source object is put
+	 * in a {@link MappingWrapper} and passed from one {@link MappingStage} to the next. Finally,
+	 * the results are saved using a {@link MappingResultSaver}.
+	 * 
+	 * @param source	source object for which to perform the transformation
+	 * @return			transformation successful?
+	 */
+	protected boolean performTransformation(Object source) {
+		
+		// preparing transformation
+		TrafoLog.reset();
+		TrafoLog.setLogLevel(optionsPage.getLogLevel());
+		File baseDir= new File(optionsPage.getPath() + FS + "target" + FS + getModelName(source) + FS);
+		if (optionsPage.getCreateLog()) {
+			String logFile= getModelName(source) + ".log";
+			TrafoLog.addFileAppender(new File(baseDir,logFile).getAbsolutePath());
+		}
+		MappingWrapper wrapper= createMappingWrapper(source);
+
+		// starting transformation
+		boolean ok= true;
+		TrafoLog.info("<<<<< Starting Transformation");
+		
+		// iterate over mapping stages
+		for (MappingStage stage : mappingStages) {
+			stage.initialize();
+			stage.setWrapper(wrapper);
+			ok= stage.apply();
+			if (! ok) {
+				break;
+			}
+		}
+		
+		// save result
+		if (ok && resultSaver != null) {
+			resultSaver.setDirectory(baseDir);
+			resultSaver.setWrapper(wrapper);
+			ok= resultSaver.save();
+		}
+		
+		TrafoLog.info(">>>>> Finished Transformation");
+		return ok;
 	}
 	
 	/**

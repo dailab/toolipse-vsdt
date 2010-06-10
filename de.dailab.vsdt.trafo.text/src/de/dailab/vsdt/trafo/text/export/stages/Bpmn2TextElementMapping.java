@@ -1,35 +1,16 @@
 package de.dailab.vsdt.trafo.text.export.stages;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
-import org.eclipse.core.runtime.Assert;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.gef.RootEditPart;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.IDiagramPreferenceSupport;
 import org.eclipse.gmf.runtime.diagram.ui.image.ImageFileFormat;
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramCommandStack;
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditDomain;
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramGraphicalViewer;
-import org.eclipse.gmf.runtime.diagram.ui.render.clipboard.DiagramGenerator;
-import org.eclipse.gmf.runtime.diagram.ui.render.clipboard.DiagramImageGenerator;
 import org.eclipse.gmf.runtime.diagram.ui.render.util.CopyToImageUtil;
-import org.eclipse.gmf.runtime.diagram.ui.services.editpart.EditPartService;
 import org.eclipse.gmf.runtime.notation.Diagram;
-import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.swt.graphics.ImageLoader;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Shell;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
@@ -41,6 +22,7 @@ import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.GatewayType;
+import de.dailab.vsdt.IdObject;
 import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.Lane;
@@ -50,6 +32,7 @@ import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.trafo.MappingStage;
+import de.dailab.vsdt.trafo.base.logger.TrafoLog;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBranch;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnDerivedProcess;
@@ -71,26 +54,6 @@ import de.dailab.vsdt.trafo.strucbpmn.BpmnSequence;
  * @author tkuester
  */
 public class Bpmn2TextElementMapping extends MappingStage {
-
-	/*
-	 * TODO Ideas for "BPMN to Text"
-	 * 
-	 * Should have:
-	 * - less technical jargon: instead of "XYZ is executed" "XYZ is done",
-	 *   no "Event Handler Section" and stuff
-	 * - glossary for supporting types and their attributes, e.g. messages
-	 * - place-holder tasks inserted in normalization stage should not be handled 
-	 * 
-	 * Nice to have:
-	 * - multiple levels of detail?
-	 * - link sending of a message with its recipient
-	 * - automatically capture and attach screen shot?
-	 * 
-	 * For highly detailed textual representation only:
-	 * - properties and assignments of process, flow objects, messages
-	 * - print out scripts 
-	 * - more details for loops
-	 */
 
 	public static final String FORMAT_PLAIN= "Plain Text";
 	public static final String FORMAT_HTML= "HTML";
@@ -592,8 +555,6 @@ public class Bpmn2TextElementMapping extends MappingStage {
 				}
 			}
 		}
-		
-		// TODO activity properties
 
 		// looping
 		if (activity.getLoopAttributes() != null) {
@@ -961,30 +922,39 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	}
 	
 	/**
-	 * Look up the Diagram for the given EObject, if any, create an image file for it and integrate
-	 * the image file in the text output.
+	 * Look up the Diagram for the given EObject, if any, create an image
+	 * file for it and integrate the image file in the text output.
+	 * This method will actually not create the image file, but only the
+	 * image data, and pass it to the ExportWrapper, so the ResultSaver
+	 * can then save the image to the appropriate path.
 	 * 
-	 * @param diagramElement
-	 * @return
+	 * @param diagramElement	BusinessProcessDiagram or BusinessProcessSystem to make a picture from
+	 * @return					creation of image successful?
 	 */
-	private boolean integrateScreenshot(EObject diagramElement) {
+	private boolean integrateScreenshot(IdObject diagramElement) {
 		// get resource from EObject
-		Resource resource= diagramElement.eResource();
+		final Resource resource= diagramElement.eResource();
 		if (resource != null) {
 			// create diagrams from resource
 			for (Object o : resource.getContents()) {
 				if (o instanceof Diagram && ((Diagram) o).getElement() == diagramElement) {
-					// create screenshot for diagrams
-					Diagram diagram = (Diagram) o;
-					String path= "/home/kuester/test.gif";
-					String label= "";
+					// generating the pictures can take some time, so we print a log info...
+					TrafoLog.info("Generating picture for diagram " + diagramElement.getName());
 					
-					// TODO create diagram image file
-//					createDiagramImage(diagram, path);
-//					PreferencesHint preferencesHint= new PreferencesHint("de.dailab.vsdt.diagram");
-//					CopyToImageUtil imageUtil= new CopyToImageUtil();
-//					DiagramEditPart dep= imageUtil.createDiagramEditPart(diagram, new Shell(), preferencesHint);
+					// create image from diagram
+					ImageFileFormat format= ImageFileFormat.PNG;
+					String path= diagramElement.getName() + "." + format.getName().toLowerCase();
 					
+					TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(resource.getResourceSet());
+					try {
+						byte[] imageData= new CopyToImageUtil().copyToImageByteArray(
+								(Diagram) o, -1, -1, format, new NullProgressMonitor(), 
+								new PreferencesHint("de.dailab.vsdt.diagram"), true);
+						((TextExportWrapper) Bpmn2TextElementMapping.this.wrapper).addImage(path, imageData);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					String label= diagramElement.eClass().getName() + " '" + diagramElement.getName() + "'";
 					builder.appendImage(path, label);
 					return true;
 				}
@@ -993,87 +963,4 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		return false;
 	}
 	
-	
-	/**
-	 * This method reproduces the functionality of CopyToImageUtil, which runs in
-	 * a NullPointerException when trying to create Edit Parts for the diagram.
-	 * The image will be created in GIF format.
-	 *  
-	 * @param diagram		the Diagram for which to create an image.
-	 * @param path			absolute path where to create the image
-	 * @see CopyToImageUtil
-	 */
-	private void createDiagramImage(Diagram diagram, String path) {
-		
-		IPath destination= Path.fromOSString(path);
-		PreferencesHint preferencesHint= new PreferencesHint("de.dailab.vsdt.diagram");
-		ImageFileFormat format= ImageFileFormat.GIF;
-		
-        Shell shell = new Shell();
-        try {
-        	
-        	// 1.: CREATE DIAGRAM EDIT PART
-        	//
-            DiagramGraphicalViewer customViewer = new DiagramGraphicalViewer();
-            customViewer.createControl(shell);
-
-            DiagramEditDomain editDomain = new DiagramEditDomain(null);
-            editDomain.setCommandStack(new DiagramCommandStack(editDomain));
-
-            customViewer.setEditDomain(editDomain);
-
-            // hook in preferences
-            RootEditPart rootEP = EditPartService.getInstance().createRootEditPart(diagram);
-            ((IDiagramPreferenceSupport) rootEP).setPreferencesHint(preferencesHint);
-            customViewer.hookWorkspacePreferenceStore((IPreferenceStore) preferencesHint.getPreferenceStore());
-            
-            customViewer.setRootEditPart(rootEP);
-            customViewer.setEditPartFactory(EditPartService.getInstance());
-
-//            DiagramEventBroker.startListening(TransactionUtil.getEditingDomain(diagram));
-            
-            customViewer.setContents(diagram);
-            customViewer.flush();
-            
-            Assert.isTrue(customViewer.getContents() instanceof DiagramEditPart);
-            
-			// We need to flush all the deferred updates. 
-       		while (shell.getDisplay().readAndDispatch());
-            
-       		DiagramEditPart diagramEditPart = (DiagramEditPart) customViewer.getContents();
-
-       		
-            // 2.: CREATE IMAGE
-       		//
-            DiagramGenerator gen = new DiagramImageGenerator(diagramEditPart);
-            List editParts = diagramEditPart.getPrimaryEditParts();
-            Rectangle imageRect= gen.calculateImageRectangle(editParts);
-			Image image = gen.createSWTImageDescriptorForParts(editParts, imageRect).createImage();
-
-	        try {
-	        	// create file
-	            File osFile = new File(destination.toOSString());
-	            if (! osFile.exists()) {
-	            	osFile.createNewFile();
-	            }
-	            // write to file
-	        	FileOutputStream stream = new FileOutputStream(destination.toOSString());
-	            ImageData imageData = image.getImageData();
-                imageData = image.getImageData(); 
-	            ImageLoader imageLoader = new ImageLoader();
-	            imageLoader.data = new ImageData[] {imageData};
-	            imageLoader.logicalScreenHeight = image.getBounds().width;
-	            imageLoader.logicalScreenHeight = image.getBounds().height;
-	            imageLoader.save(stream, format.getOrdinal());
-	            stream.close();
-	        } catch (Exception e) {
-	        	e.printStackTrace();
-	        }
-			image.dispose();
-            
-        } finally {
-            shell.dispose();
-        }
-		
-	}
 }

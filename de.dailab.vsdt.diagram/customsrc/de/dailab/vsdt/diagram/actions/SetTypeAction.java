@@ -43,7 +43,7 @@ public class SetTypeAction extends AbstractGmfAction {
 		protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 				IAdaptable info) throws ExecutionException {
 
-			//diplay simple dialog, ask for new type, set new type
+			//display simple dialog, ask for new type, set new type
 			Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 			SetTypeDialog dialog= new SetTypeDialog( shell, flowObject);
 			if (dialog.open() == SetTypeDialog.OK) {

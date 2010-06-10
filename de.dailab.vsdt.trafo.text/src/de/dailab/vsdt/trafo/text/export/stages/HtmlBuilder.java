@@ -200,7 +200,7 @@ public class HtmlBuilder extends TextBuilder {
 		b.append(".gen_code { font-family: monospace }").append(NL);
 		b.append(".gen_type { font-variant:small-caps }").append(NL);
 		
-		b.append(".gen_diagram { width: 100% }").append(NL);
+		b.append(".gen_diagram { max-width: 100%; display: block }").append(NL);
 		b.append(".gen_details { width: 100% }").append(NL);
 		b.append(".gen_details tr td { background: #ddd; padding: 2pt; }").append(NL);
 		b.append(".gen_details tr td:first-child { background: #fff; font-weight: bold; width: 200pt }").append(NL);
