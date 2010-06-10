@@ -41,7 +41,7 @@ public class InitialGatewayRule extends AbstractRule {
 	protected FlowObject _start1= null;
 	protected FlowObject _start2= null;
 
-	public static final String INITIAL_GATEWAY= "INITIAL_GATEWAY";
+	public static final String INITIAL_GATEWAY= "__INITIAL_GATEWAY__";
 	
 	private final int CONTAINER= 0,
 					  START1= 1,

@@ -42,7 +42,7 @@ public class InsertEmptyRule extends AbstractRule {
 	/**
 	 * the name for the empty activity. later these activities can be removed.
 	 */
-	public final static String EMPTY_NAME= "_DO_NOTHING_";
+	public final static String EMPTY_NAME= "__DO_NOTHING__";
 	
 	/**
 	 * Default constructor.

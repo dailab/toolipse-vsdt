@@ -41,6 +41,10 @@ import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerCase;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnLoopBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnSequence;
+import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.FinalGatewayRule;
+import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InitialGatewayRule;
+import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InsertEmptyRule;
+import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InsertGatewayRule;
 
 /**
  * BPMN to Text visitor. This visitor is performing a top-down pass of the BPMN 
@@ -168,7 +172,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			
 			for (Iterator<EObject> iter= bpd.eAllContents(); iter.hasNext(); ) {
 				EObject next= iter.next();
-				if (next instanceof Activity) {
+				if (next instanceof Activity && shallBeVisited((Activity) next)) {
 					Activity activity = (Activity) next;
 					
 					// activity name and documentation
@@ -234,11 +238,10 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			 * process properties and assignments
 			 */
 			if (! proc.getGraphicalElements().isEmpty()) {
-				builder.append(" In that Process, ");
-				for (Iterator<FlowObject> iter= proc.getGraphicalElements().iterator(); iter.hasNext();) {
-					visitFlowObject(iter.next());
-					if (iter.hasNext()) {
-						builder.append(getRandomParallelTerm());
+				String beginning= " In this Process, ";
+				for (FlowObject flowObject : proc.getGraphicalElements()) {
+					if (visitFlowObject(flowObject, beginning, false)) {
+						beginning= getRandomParallelTerm();
 					}
 				}
 			}
@@ -253,55 +256,77 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 * or "The Process will be interrupted, if ".  Thus the sentences should 
 	 * generally fit to this condition and start with a lower case letter.
 	 * 
+	 * Before delegating to the specialized methods, this method will determine
+	 * whether the FlowObject should be visited at all. For example, generated
+	 * Gateways and No-Op-Activities are not visited. In this case, the beginning
+	 * of the sentence is dismissed.
+	 * 
 	 * Currently, the FlowObjects Assignments are not described, but this may 
 	 * be an option for the future.
 	 * 
-	 * @param flowObject	Some {@link FlowObject}
+	 * @param flowObject		Some {@link FlowObject}
+	 * @param beginning			the beginning of the sentence
+	 * @param partialSentence	whether the description of the flow object is part 
+	 *                          of a longer sentence or a sentence on its own
 	 */
-	private void visitFlowObject(FlowObject flowObject) {
-		if (flowObject == null) return;
+	private boolean visitFlowObject(FlowObject flowObject, String beginning, boolean partialSentence) {
+		if (flowObject == null) return false;
 		
-		//delegate to specialized methods
-		if (flowObject instanceof Event) {
-			Event event= (Event) flowObject;
-			visitEvent(event,null, false);
+		// check whether FlowObject shall be visited
+		if (shallBeVisited(flowObject)) {
+			if (beginning != null) {
+				builder.append(beginning);
+			}
+
+			//delegate to specialized methods
+			if (flowObject instanceof Event) {
+				Event event= (Event) flowObject;
+				visitEvent(event,null, false);
+			}
+			if (flowObject instanceof Activity) {
+				Activity activity=(Activity) flowObject;
+				visitActivity(activity);
+			}
+			if (flowObject instanceof Gateway) {
+				Gateway gateway= (Gateway) flowObject;
+				visitGateway(gateway);
+			}
+			//special structured BPMN elements
+			if (flowObject instanceof BpmnSequence) {
+				BpmnSequence bpmnSequence = (BpmnSequence) flowObject;
+				visitBpmnSequence(bpmnSequence);
+			}
+			if (flowObject instanceof BpmnBlock) {
+				BpmnBlock bpmnBlock = (BpmnBlock) flowObject;
+				visitBpmnBlock(bpmnBlock);
+			}
+			if (flowObject instanceof BpmnLoopBlock) {
+				BpmnLoopBlock bpmnLoopBlock = (BpmnLoopBlock) flowObject;
+				visitBpmnLoopBlock(bpmnLoopBlock);
+			}
+			if (flowObject instanceof BpmnDerivedProcess) {
+//				BpmnDerivedProcess bpmnDerivedProcess = (BpmnDerivedProcess) flowObject;
+//				script= visitBpmnDerivedProcess(bpmnDerivedProcess);
+			}
+			if (flowObject instanceof BpmnEventHandlerBlock) {
+				BpmnEventHandlerBlock eventHandlerBlock = (BpmnEventHandlerBlock) flowObject;
+				visitBpmnEventHandlerBlock(eventHandlerBlock);
+			}
+			if (flowObject instanceof BpmnElementToSkip) {
+				BpmnElementToSkip bpmnElementToSkip = (BpmnElementToSkip) flowObject;
+				visitBpmnElementToSkip(bpmnElementToSkip);
+			}
+			/*
+			 * assignments
+			 */
+			return true;
+		} else {
+			// dismiss / close sentence
+			if (partialSentence) {
+				builder.append(". ");
+			}
+			return false;
 		}
-		if (flowObject instanceof Activity) {
-			Activity activity=(Activity) flowObject;
-			visitActivity(activity);
-		}
-		if (flowObject instanceof Gateway) {
-			Gateway gateway= (Gateway) flowObject;
-			visitGateway(gateway);
-		}
-		//special structured BPMN elements
-		if (flowObject instanceof BpmnSequence) {
-			BpmnSequence bpmnSequence = (BpmnSequence) flowObject;
-			visitBpmnSequence(bpmnSequence);
-		}
-		if (flowObject instanceof BpmnBlock) {
-			BpmnBlock bpmnBlock = (BpmnBlock) flowObject;
-			visitBpmnBlock(bpmnBlock);
-		}
-		if (flowObject instanceof BpmnLoopBlock) {
-			BpmnLoopBlock bpmnLoopBlock = (BpmnLoopBlock) flowObject;
-			visitBpmnLoopBlock(bpmnLoopBlock);
-		}
-		if (flowObject instanceof BpmnDerivedProcess) {
-//			BpmnDerivedProcess bpmnDerivedProcess = (BpmnDerivedProcess) flowObject;
-//			script= visitBpmnDerivedProcess(bpmnDerivedProcess);
-		}
-		if (flowObject instanceof BpmnEventHandlerBlock) {
-			BpmnEventHandlerBlock eventHandlerBlock = (BpmnEventHandlerBlock) flowObject;
-			visitBpmnEventHandlerBlock(eventHandlerBlock);
-		}
-		if (flowObject instanceof BpmnElementToSkip) {
-			BpmnElementToSkip bpmnElementToSkip = (BpmnElementToSkip) flowObject;
-			visitBpmnElementToSkip(bpmnElementToSkip);
-		}
-		/*
-		 * assignments
-		 */
 	}
 	
 	/**
@@ -319,7 +344,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		final boolean throwing= event.isThrowing();
 		if (multiType == null && event.getName() != null) {
 			// print this only the first time for a multi event
-			builder.append("in Event '" + name(event.getName()) + "', ");
+			builder.append("in Event '" + name(event.getName()) + "' ");
 		}
 		
 		TriggerType trigger= multiType != null ? multiType : event.getTrigger();
@@ -343,22 +368,16 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		case TIMER:
 			boolean cyclic= event.getTimeCycle() != null;
 			Expression timeExpression= (cyclic ? event.getTimeCycle() : event.getTimeDate());
-			String time= timeExpression != null? code(timeExpression.getExpression()) : " an unspecified time"; 
-			if (event instanceof Intermediate) {
-				if (boundary) {
-					builder.append("the Activity is interrupted " + (cyclic?"after ":"at ")+time);
-				} else {
-					builder.append("the Process will wait " + (cyclic?"for ":"until ")+time);
-				}
-			} else {
-				builder.append("the Process will start " + (cyclic?"regularly after ":"at ")+time);
+			String time= timeExpression != null? ("the time" + code(timeExpression.getExpression())) : "an unspecified time"; 
+			if (! boundary) {
+				builder.append("the Process waits " + (cyclic?"for ":"until ")+time);
 			}
 			break;
 		case LINK:
 			if (throwing && event.getLinkedTo() != null) {
 				String linkEnd = event.getLinkedTo().getName() != null ? "Event " + name(event.getLinkedTo().getName())
 						                                               : "the other end of the link";
-				builder.append("the Process will continue at " + linkEnd);
+				builder.append("the Process continues at " + linkEnd);
 			}
 			break;
 		case ERROR:
@@ -369,18 +388,12 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			builder.append("is " + (event.isThrowing() ? "thrown" : "caught"));
 			break;
 		case TERMINATE:
-			builder.append("the Process will terminate");
+			builder.append("the Process terminates");
 			break;
 		case RULE:
 			String ruleName= event.getRuleName();
-			if (event instanceof Intermediate) {
-				if (boundary) {
-					builder.append("the Activity is interrupted when ");
-				} else {
-					builder.append("the Process will wait until ");
-				}
-			} else {
-				builder.append("the Process will start when ");
+			if (! boundary) {
+				builder.append("the Process waits until ");
 			}
 			builder.append((ruleName != null ? "the Rule " + name(ruleName) : "a Rule") + " applies");
 			// append rule expression for more details?
@@ -472,6 +485,10 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		                                   :     name(activity.getName()); 
 		builder.append("the " + (activity.isAdHoc()?"ad-hoc ":"")+ actType + 
 				" '" + actName + "' is " + getRandomExecutedTerm());
+		if (activity.getAdHocCompletionCondition() != null) {
+			builder.append(" until the completion condition '" + 
+					code(activity.getAdHocCompletionCondition().getExpression()) + "' applies");
+		}
 		switch (type) {
 		case NONE:
 		case MANUAL:
@@ -547,11 +564,10 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		
 		if (activity.getActivityType() == ActivityType.EMBEDDED) {
 			// child elements of the subprocess are listed after the documentation
-			builder.append("In its course, ");
-			for (Iterator<FlowObject> iter= activity.getGraphicalElements().iterator(); iter.hasNext();) {
-				visitFlowObject(iter.next());
-				if (iter.hasNext()) {
-					builder.append(getRandomParallelTerm());
+			String beginning= "In its course, ";
+			for (FlowObject flowObject : activity.getGraphicalElements()) {
+				if (visitFlowObject(flowObject, beginning, false)) {
+					beginning= getRandomParallelTerm();
 				}
 			}
 		}
@@ -620,17 +636,16 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			if (bpmnSequence.getElements().size() > 1) {
 				builder.append("a number of elements are " +  getRandomExecutedTerm() + " in sequence. ");
 				builder.beginBlock();
-				builder.append("First, ");
-				for (Iterator<FlowObject> iter = bpmnSequence.getElements().iterator(); iter.hasNext();) {
-					visitFlowObject(iter.next());
-					builder.newLine();
-					if (iter.hasNext()) {
-						builder.append(getRandomSequentialTerm());
+				String beginning= "First, ";
+				for (FlowObject flowObject : bpmnSequence.getElements()) {
+					if (visitFlowObject(flowObject, beginning, false)) {
+						beginning= getRandomSequentialTerm();
 					}
+					builder.newLine();
 				}
 				builder.endBlock();
 			} else {
-				visitFlowObject(bpmnSequence.getElements().get(0));
+				visitFlowObject(bpmnSequence.getElements().get(0), null, false);
 			}
 		}
 	}
@@ -646,20 +661,20 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 */
 	private void visitBpmnBlock(BpmnBlock bpmnBlock) {
 		Gateway fork= bpmnBlock.getFirstGateway();
-		if (fork.getName() != null) {
+		if (fork.getName() != null && shallBeVisited(fork)) {
 			builder.append("starting at the Gateway '" + name(fork.getName()) + "', ");
 		}
+		String beginning;
 		switch (fork.getGatewayType()) {
 		case AND:
 			builder.append("a number of branches will be " + getRandomParallelTerm() + " in parallel: ");
 			builder.beginBlock();
-			builder.append("First, ");
-			for (Iterator<BpmnBranch> iter = bpmnBlock.getElements().iterator(); iter.hasNext();) {
-				visitFlowObject(iter.next().getElement());
-				builder.newLine();
-				if (iter.hasNext()) {
-					builder.append(getRandomParallelTerm());
+			beginning= "First, ";
+			for (BpmnBranch branch : bpmnBlock.getElements()) {
+				if (visitFlowObject(branch.getElement(), beginning, false)) {
+					beginning= getRandomParallelTerm();
 				}
+				builder.newLine();
 			}
 			builder.endBlock();
 			break;
@@ -675,12 +690,16 @@ public class Bpmn2TextElementMapping extends MappingStage {
 				}
 				builder.append("If the condition '" + code(branch.getCondition().getExpression()) + 
 						"' holds true, ");
-				visitFlowObject(branch.getElement());
+				if (! visitFlowObject(branch.getElement(), null, false)) {
+					builder.append("nothing happens. ");
+				}
 				builder.newLine();
 			}
 			if (bpmnBlock.getDefaultElement() != null) {
 				builder.append("If no condition applies, by default ");
-				visitFlowObject(bpmnBlock.getDefaultElement());
+				if (! visitFlowObject(bpmnBlock.getDefaultElement(), null, false)) {
+					builder.append("nothing happens. ");
+				}
 				builder.newLine();
 			}
 			builder.endBlock();
@@ -698,10 +717,9 @@ public class Bpmn2TextElementMapping extends MappingStage {
 					first= rest.getElements().get(0);
 					rest.getElements().remove(first);
 				}
-				visitFlowObject(first);
+				visitFlowObject(first, null, false);
 				if (rest != null) {
-					builder.append("In this case, ");
-					visitFlowObject(rest);
+					visitFlowObject(rest, "In this case, ", false);
 				}
 				builder.newLine();
 				if (iter.hasNext()) {
@@ -718,13 +736,12 @@ public class Bpmn2TextElementMapping extends MappingStage {
 					(b ? "the" : "a") + " complex condition " + 
 					(b ? code(fork.getIncomingCondition().getExpression()) : "") + ".");
 			builder.beginBlock();
-			builder.append("First, ");
-			for (Iterator<BpmnBranch> iter = bpmnBlock.getElements().iterator(); iter.hasNext();) {
-				visitFlowObject(iter.next().getElement());
-				builder.newLine();
-				if (iter.hasNext()) {
-					builder.append(getRandomParallelTerm());
+			beginning= "First, ";
+			for (BpmnBranch branch : bpmnBlock.getElements()) {
+				if (visitFlowObject(branch.getElement(), beginning, false)) {
+					beginning= getRandomParallelTerm();
 				}
+				builder.newLine();
 			}
 			builder.endBlock();
 			break;
@@ -746,17 +763,20 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		String condition= isUntil ? bpmnLoopBlock.getExitBranch().getCondition().getExpression()
 				: bpmnLoopBlock.getSecondBranch().getCondition().getExpression();
 		
-		if (bpmnLoopBlock.getFirstGateway().getName() != null) {
+		if (bpmnLoopBlock.getFirstGateway().getName() != null && shallBeVisited(bpmnLoopBlock.getFirstGateway())) {
 			builder.append("starting at the Gateway '" + name(bpmnLoopBlock.getFirstGateway().getName()) + "', ");	
 		}
 		builder.append("a part of the Process will be " + getRandomExecutedTerm() + " in a loop. ");
-		
-		builder.append("At first, ");
-		visitFlowObject(bpmnLoopBlock.getFirstBranch().getElement());
-		builder.append(getRandomSequentialTerm() + "the loop condition will be tested.");
+		builder.beginBlock();
+		String beginning= "At first, ";
+		if (visitFlowObject(bpmnLoopBlock.getFirstBranch().getElement(), beginning, false)) {
+			beginning= getRandomSequentialTerm() + "the loop condition will be tested.";
+		}
+		builder.append(beginning);
 		builder.append((isUntil ? " Until" : " While" ) + " the condition " + 
-				code(condition) + " holds true, the loop will continue and ");
-		visitFlowObject(bpmnLoopBlock.getSecondBranch().getElement());
+				code(condition) + " holds true, the loop will continue");
+		visitFlowObject(bpmnLoopBlock.getSecondBranch().getElement(), " and ", true);
+		builder.endBlock();
 	}
 	
 	/**
@@ -771,16 +791,14 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	private void visitBpmnEventHandlerBlock (BpmnEventHandlerBlock block) {
 		builder.append("an interruptable region begins. ");
 		builder.beginBlock();
-		builder.append("Here, ");
-		visitFlowObject(block.getActivity());
-		builder.append("This section can be interrupted if ");
+		visitFlowObject(block.getActivity(), "Here, ", false);
 		
+		builder.append("This section can be interrupted if ");
 		for (Iterator<BpmnEventHandlerCase> iter = block.getEventHandlerCases().iterator(); iter.hasNext();) {
 			BpmnEventHandlerCase eventHandlerCase= iter.next();
 			visitEvent(eventHandlerCase.getIntermediate(), null, true);
 			if (eventHandlerCase.getCompensationElement() != null) {
-				builder.append("In this case, ");
-				visitFlowObject(eventHandlerCase.getCompensationElement());
+				visitFlowObject(eventHandlerCase.getCompensationElement(), "In this case, ", false);
 			}
 			if (iter.hasNext()) {
 				builder.append(getRandomParallelTerm() + "it can be interrupted if ");
@@ -800,11 +818,11 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 */
 	private void visitBpmnElementToSkip(BpmnElementToSkip element) {
 		Intermediate intm= element.getEventHandlerCase().getIntermediate();
-		visitFlowObject(element.getElement());
+		visitFlowObject(element.getElement(), null, false);
 		builder.append("This part will only be " + getRandomExecutedTerm() + 
 				" if the " + type(intm.getTrigger()) + " Event "+
 				(intm.getName() != null? "'" + name(intm.getName())+ 
-				"' " : "") + "has not been triggered");
+				"' " : "") + "has not been triggered. ");
 	}
 	
 
@@ -963,4 +981,55 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		return false;
 	}
 	
+	/**
+	 * Determine whether the given FlowObject shall be visited. Examples for FlowObjects,
+	 * which shall not be visited, are:
+	 * - No-Op Activity inserted during Structure Mapping
+	 * - additional Gateways inserted during Structure Mapping
+	 * - Events w/o name and documentation and with trigger type None
+	 * - container types (e.g. ElementToSkip) if the contained element is not to be visited
+	 * 
+	 * @param flowObject	some flow object
+	 * @return				whether the flow object shall be visited
+	 */
+	private boolean shallBeVisited(FlowObject flowObject) {
+		if (flowObject == null) return false;
+		
+		// Activity: No-Op Activities inserted in Structure Mapping shall not be visited 
+		if (flowObject instanceof Activity) {
+			Activity activity = (Activity) flowObject;
+			return activity.getName() != InsertEmptyRule.EMPTY_NAME;
+		}
+
+		// Events: do not visit completely unlabeled Events with trigger type None 
+		if (flowObject instanceof Event) {
+			Event event = (Event) flowObject;
+			return ! (event.getName() == null && event.getDocumentation() == null &&
+					event.getTrigger() == TriggerType.NONE);
+		}
+		
+		// Gateways: Additional Gateways inserted in Structure Mapping shall not be visited
+		if (flowObject instanceof Gateway) {
+			String name= ((Gateway) flowObject).getName();
+			return name != FinalGatewayRule.FINAL_GATEWAY &&
+			       name != InitialGatewayRule.INITIAL_GATEWAY &&
+			       ! (name != null && (name.endsWith(InsertGatewayRule.FORK) || 
+			                           name.endsWith(InsertGatewayRule.MERGE)));
+		}
+		
+		// Sequence: if the sequence has only one element, check this element
+		if (flowObject instanceof BpmnSequence) {
+			BpmnSequence sequence = (BpmnSequence) flowObject;
+			if (sequence.getElements().size() == 1) {
+				return shallBeVisited(sequence.getElements().get(0));
+			}
+		}
+
+		// Element-To-Skip-Container: check whether the contained FloObject shall be visited
+		if (flowObject instanceof BpmnElementToSkip) {
+			return shallBeVisited(((BpmnElementToSkip) flowObject).getElement());
+		}
+		
+		return true;
+	}
 }

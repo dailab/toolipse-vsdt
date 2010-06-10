@@ -62,8 +62,8 @@ public class SplitGatewayRule extends AbstractRule {
 		
 		//change names
 		String name= _gateway.getName();
-		_gateway.setName(name + "_FORK");
-		gateway2.setName(name + "_MERGE");
+		_gateway.setName(name + InsertGatewayRule.FORK);
+		gateway2.setName(name + InsertGatewayRule.MERGE);
 		
 		//redirect incoming sequences
 		gateway2.getIncomingSeq().addAll(_gateway.getIncomingSeq());

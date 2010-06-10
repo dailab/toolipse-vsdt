@@ -37,6 +37,9 @@ public class InsertGatewayRule extends AbstractRule {
 	
 	private final int FLOWOBJECT= 0;
 	
+	public static final String FORK= "__FORK__";
+	public static final String MERGE= "__MERGE__";
+	
 	/**
 	 * Default constructor.
 	 */
@@ -69,7 +72,7 @@ public class InsertGatewayRule extends AbstractRule {
 			//create gateway
 			Gateway gateway= VsdtFactory.eINSTANCE.createGateway();
 			gateway.setFlowObjectContainer(container);
-			gateway.setName(name + "_MERGE");
+			gateway.setName(name + MERGE);
 			
 			//redirect incoming sequence flows
 			gateway.getIncomingSeq().addAll(_flowObject.getIncomingSeq());
@@ -90,7 +93,7 @@ public class InsertGatewayRule extends AbstractRule {
 			//create gateway
 			Gateway gateway= VsdtFactory.eINSTANCE.createGateway();
 			gateway.setFlowObjectContainer(container);
-			gateway.setName(name + "_FORK");
+			gateway.setName(name + FORK);
 			
 			//redirect outgoing sequence flows
 			gateway.getOutgoingSeq().addAll(_flowObject.getOutgoingSeq());
