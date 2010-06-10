@@ -17,9 +17,13 @@
 			
 		</ul>
 		This Diagram is used for testing the Text Generation Capabilities of the VSDT. Here the focus is not so much on executability but on good documentation.
+		<img class="gen_diagram" src="Text-Gen Diagram.png">
+		<em>BusinessProcessSystem 'Text-Gen Diagram'</em>
 		
 		<h2 id="_fvliInz4Ed6pGOp9FzmQww">Answering Support Call</h2>
 		<span class='gen_doc'>This Business Process is about handling incoming support calls.</span>
+		<img class="gen_diagram" src="Answering Support Call.png">
+		<em>BusinessProcessDiagram 'Answering Support Call'</em>
 		
 		<h3 id="_yxZuwAzBEd6Oi9RfBDu6Tw">Customer Support</h3>
 		The Pool '<em>Customer Support</em>' belongs to Participant '<em>Customer Support</em>'. <span class='gen_doc'>This Pool illustrates the process of Customer Support.</span>
@@ -31,14 +35,14 @@
 		</ul>
 		The Pool's Process is of type <span class='gen_type'>private</span>. In this Process, a number of elements are executed in sequence. 
 		<div class='gen_block'>
-			First, in Event '<em>Receive Ticket</em>', the Message '<em>HelpDeskQuestion</em>' of the Service '<em>CS.askHelpdesk</em>' is received. <span class='gen_doc'>In the ticket the customer describes his poblem.</span> 
+			First, in Event '<em>Receive Ticket</em>' the Message '<em>HelpDeskQuestion</em>' of the Service '<em>CS.askHelpdesk</em>' is received. <span class='gen_doc'>In the ticket the customer describes his poblem.</span> 
 			After that, starting at the Gateway '<em>Known Problem?</em>', one out of several branches will be accomplished: 
 			<div class='gen_block'>
 				If the condition '<span class='gen_code'>'unknown problem'</span>' holds true, a number of elements are performed in sequence. 
 				<div class='gen_block'>
 					First, an interruptable region begins. 
 					<div class='gen_block'>
-						Here, the <span class='gen_type'>manual</span> Task '<em>Try to reproduce Problem</em>' is performed. <span class='gen_doc'>The support crew will try to reproduce the problem as described in the problem ticket. Depending on the outcome, further steps are taken.</span> This section can be interrupted if in Event '<em>Timeout</em>', the Activity is interrupted after <span class='gen_code'>'30 minutes'</span>. <span class='gen_doc'>The problem could not be reproduced after a reasonable time of trying to do so.</span> 
+						Here, the <span class='gen_type'>manual</span> Task '<em>Try to reproduce Problem</em>' is performed. <span class='gen_doc'>The support crew will try to reproduce the problem as described in the problem ticket. Depending on the outcome, further steps are taken.</span> This section can be interrupted if in Event '<em>Timeout</em>' . <span class='gen_doc'>The problem could not be reproduced after a reasonable time of trying to do so.</span> 
 					</div>
 					
 					Afterwards, a number of elements are performed in sequence. 
@@ -63,7 +67,7 @@
 			
 			Hereupon, the <span class='gen_type'>send</span> Task '<em>Send Answer</em>' is processed, sending the Message '<em>HelpDeskResponse</em>' which belongs to the Service '<em>CS.askHelpdesk</em>'. <span class='gen_doc'>The solution to the problem is sent back to the customer.</span> 
 			Next, the <span class='gen_type'>user</span> Task '<em>File Ticket</em>' is carried out, invoking a Service. <span class='gen_doc'>The ticked is filed, so it can be used for statistical purposes, such as which problems occured how often and from what kinds of users.</span> 
-			Thereafter, in Event '<em>End Process</em>', nothing special happens. <span class='gen_doc'>The process terminates.</span> 
+			Thereafter, in Event '<em>End Process</em>' nothing special happens. <span class='gen_doc'>The process terminates.</span> 
 			
 		</div>
 		
@@ -72,30 +76,30 @@
 		The Pool '<em>Development</em>' belongs to Participant '<em>Development</em>'. <span class='gen_doc'>This Pool stands for the Development department, being further distinguished into bugfixing and others.</span>
 		The Pool's Process is of type <span class='gen_type'>collaboration</span>. In this Process, a number of elements are performed in sequence. 
 		<div class='gen_block'>
-			First, in Event '<em>Receive Bug</em>', the Message '<em>BugTrackerTicket</em>' of the Service '<em>Dev.fileBug</em>' is received. <span class='gen_doc'>The decelopment team receives a bug report and immediately drops everything else to fix the bug.</span> 
-			After that, starting at the Gateway '<em>Work day and night to fix the bug__MERGE__</em>', a part of the Process will be conducted in a loop. 
+			First, in Event '<em>Receive Bug</em>' the Message '<em>BugTrackerTicket</em>' of the Service '<em>Dev.fileBug</em>' is received. <span class='gen_doc'>The development team receives a bug report and immediately drops everything else to fix the bug.</span> 
+			After that, a part of the Process will be conducted in a loop. 
 			<div class='gen_block'>
 				At first, an interruptable region begins. 
 				<div class='gen_block'>
-					Here, the ad-hoc <span class='gen_type'>embedded</span> Subprocess '<em>Work day and night to fix the bug</em>' is processed. <span class='gen_doc'>The heroic programmer works day and night looking for a treatment to the bug, resting only for an occasional travel to the coffee machine...</span> In its course, the <span class='gen_type'>manual</span> Task '<em>Code</em>' is conducted. <span class='gen_doc'>The programmer hacks away, trying to fix the problem.</span> Aside from that, the <span class='gen_type'>manual</span> Task '<em>Get Coffee</em>' is performed. <span class='gen_doc'>All work and not coffee makes programmer go insane.</span> This section can be interrupted if in Event '<em>Nuts</em>', an error with error code '<span class='gen_code'>nuts</span>' is caught. <span class='gen_doc'>Finally the poor developer went insane.</span> In this case, a number of elements are performed in sequence. 
+					Here, the ad-hoc <span class='gen_type'>embedded</span> Subprocess '<em>Work day and night to fix the bug</em>' is processed until the completion condition '<span class='gen_code'>'bug has been fixed'</span>' applies. <span class='gen_doc'>The heroic programmer works day and night looking for a treatment to the bug, resting only for an occasional travel to the coffee machine...</span> In its course, the <span class='gen_type'>manual</span> Task '<em>Code</em>' is conducted. <span class='gen_doc'>The programmer hacks away, trying to fix the problem.</span> Aside from that, the <span class='gen_type'>manual</span> Task '<em>Get Coffee</em>' is performed. <span class='gen_doc'>All work and no coffee makes programmer go insane.</span> This section can be interrupted if in Event '<em>Go Insane</em>' an error with error code '<span class='gen_code'>nuts</span>' is caught. <span class='gen_doc'>Finally the poor developer went insane.</span> In this case, a number of elements are performed in sequence. 
 					<div class='gen_block'>
 						First, the <span class='gen_type'>send</span> Task '<em>Inform HR</em>' is performed, sending a Message. <span class='gen_doc'>Inform human resources about the new job opening.</span> 
-						Afterwards, in Event '<em>Bug not fixed</em>', nothing special happens. <span class='gen_doc'>The process ends, but the bug could not be fixed.</span> 
+						Afterwards, in Event '<em>Bug not fixed</em>' nothing special happens. <span class='gen_doc'>The process ends, but the bug could not be fixed.</span> 
 						
 					</div>
-					More over, it can be interrupted if in Event '<em>Hungry</em>', the Activity is interrupted when a Rule applies. <span class='gen_doc'>The programmer notices an urge for pizza.</span> In this case, the <span class='gen_type'>manual</span> Task '<em>Get Pizza</em>' is processed. <span class='gen_doc'>Apart from coffee, pizza is the only thing the programmer needs to live.</span> 
+					More over, it can be interrupted if in Event '<em>Hungry</em>' a Rule applies. <span class='gen_doc'>The programmer notices an urge for pizza.</span> In this case, the <span class='gen_type'>manual</span> Task '<em>Get Pizza</em>' is processed. <span class='gen_doc'>Apart from coffee, pizza is the only thing the programmer needs to live.</span> 
 				</div>
-				Afterwards, the loop condition will be tested. While the condition <span class='gen_code'>! Work day and night to fix the bug_Hungry_normalCompletion</span> holds true, the loop will continue and the  Task '<em>__DO_NOTHING__</em>' is conducted.  
+				Afterwards, the loop condition will be tested. While the condition <span class='gen_code'>! Work day and night to fix the bug_Hungry_normalCompletion</span> holds true, the loop will continue. 
 			</div>
 			
-			Thereafter, a number of elements are carried out in sequence. 
+			Hereupon, a number of elements are processed in sequence. 
 			<div class='gen_block'>
-				First, the <span class='gen_type'>user</span> Task '<em>Mark bug as being resolved</em>' is accomplished, invoking a Service. <span class='gen_doc'>Finally, the bug has been fixed and can be marked as resolved in the bug report.</span> 
-				Hereupon, in Event '<em>Bug fixed</em>', nothing special happens. <span class='gen_doc'>The process ends with the bug being fixed.</span> 
+				First, the <span class='gen_type'>user</span> Task '<em>Mark bug as being resolved</em>' is carried out, invoking a Service. <span class='gen_doc'>Finally, the bug has been fixed and can be marked as resolved in the bug report.</span> 
+				Following that, in Event '<em>Bug fixed</em>' nothing special happens. <span class='gen_doc'>The process ends with the bug being fixed.</span> 
 				
 			</div>
-			This part will only be conducted if the <span class='gen_type'>error</span> Event '<em>Nuts</em>' has not been triggered. 
-			Thereafter, the normal flow and the exceptional flow are merged in the Gateway '<em>__FINAL_GATEWAY__</em>'. 
+			This part will only be carried out if the <span class='gen_type'>error</span> Event '<em>Go Insane</em>' has not been triggered. 
+			
 			
 		</div>
 		
