@@ -11,7 +11,7 @@ service Faculty_Mathematican_start ( in $param : int ) ( out $result : int ) {
         if ( $n >= 0 ) {
             {
                 {
-                    print "Executing _DO_NOTHING_" ;
+                    print "Executing __DO_NOTHING__" ;
                 }
                 while ( $n > 1 ) {
                     {
@@ -20,7 +20,7 @@ service Faculty_Mathematican_start ( in $param : int ) ( out $result : int ) {
                         print "Executing Multiply" ;
                     }
                     {
-                        print "Executing _DO_NOTHING_" ;
+                        print "Executing __DO_NOTHING__" ;
                     }
                 }
             }
