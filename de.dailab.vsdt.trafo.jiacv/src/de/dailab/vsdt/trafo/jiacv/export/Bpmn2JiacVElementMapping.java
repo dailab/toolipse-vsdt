@@ -339,6 +339,8 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		}
 		
 		// create Start Rule
+		JiacVStarterRule startRule= new JiacVStarterRule(event, _currentService);
+		((JiacVExportWrapper) wrapper).addStarterRule(event.getPool().getParticipant(), startRule);
 		
 		switch (trigger) {
 		case MESSAGE:

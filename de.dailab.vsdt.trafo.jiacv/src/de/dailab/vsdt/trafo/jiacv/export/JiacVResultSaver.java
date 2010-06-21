@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
@@ -32,6 +34,7 @@ import de.dailab.common.gmf.imprt.DiagramImporter;
 import de.dailab.jiactng.jadl.Agent;
 import de.dailab.jiactng.jadl.ontology.JadlParseException;
 import de.dailab.jiactng.jadl.util.SimpleJadlParser;
+import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.trafo.MappingResultSaver;
 import de.dailab.vsdt.trafo.base.logger.TrafoLog;
 
@@ -47,17 +50,21 @@ public class JiacVResultSaver extends MappingResultSaver {
 	@Override
 	protected boolean internalSave(File baseDirectory) throws IOException {
 		JiacVExportWrapper wrapper= (JiacVExportWrapper) this.wrapper;
+		// save JADL source code
 		for (Agent model : wrapper.getJadlFiles()) {
-			// save JADL source code
 			String fileName= wrapper.getJadlFileName(model);
 			saveJadl(new File(baseDirectory, fileName), model);
 		}
-		// TODO
-//		for (JiacVStarterRule starterRule : wrapper.getStarterRules()) {
-//		}
+		// save starter rules
+		Map<Participant, List<JiacVStarterRule>> rulesMap= wrapper.getStarterRules();
+		for (Participant participant : rulesMap.keySet()) {
+			List<JiacVStarterRule> rules= rulesMap.get(participant);
+			String fileName= wrapper.getRulesFileName(participant);
+			saveRules(new File(baseDirectory, fileName), rules);
+		}
+		// save AWE diagram
 		AgentWorld agentWorld= wrapper.getAgentWorld();
 		if (agentWorld != null) {
-			// save AWE diagram
 			String fileName= wrapper.getAweFileName(agentWorld, true);
 			saveAgentWorldDiagram(new File(baseDirectory, fileName), agentWorld);
 		}
@@ -87,6 +94,27 @@ public class JiacVResultSaver extends MappingResultSaver {
 			writer.write(source);
 			writer.close();
 		}
+	}
+	
+	/**
+	 * Save Starter Rules derived from BPMN Start Events to text file.
+	 * 
+	 * @param file			file where to save the rules
+	 * @param rules			the rules to save
+	 */
+	private void saveRules(File file, List<JiacVStarterRule> rules) throws IOException {
+		// create file
+		if (! file.exists()) {
+			file.createNewFile();
+		}
+		// TODO write file header
+		FileWriter writer= new FileWriter(file);
+		// write rules
+		for (JiacVStarterRule rule : rules) {
+			writer.write(rule.toDroolsRule());
+		}
+		// close file
+		writer.close();
 	}
 	
 	/**

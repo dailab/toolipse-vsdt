@@ -11,6 +11,7 @@ import de.dailab.jiactng.jadl.Service;
 public class Util {
 
 	public static final String EXT_JADL=		".jadl";
+	public static final String EXT_DROOLS=		".drl";
 //	public static final String EXT_XML=			".xml";
 	public static final String EXT_AWE_MODEL=	".agentworld";
 	public static final String EXT_AWE_DIAGRAM=	".awe";

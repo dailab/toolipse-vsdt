@@ -9,11 +9,11 @@ import de.dailab.jiactng.jadl.Agent;
 import de.dailab.jiactng.jadl.Assign;
 import de.dailab.jiactng.jadl.BoolConst;
 import de.dailab.jiactng.jadl.ComplexType;
-import de.dailab.jiactng.jadl.DataType;
 import de.dailab.jiactng.jadl.Expression;
 import de.dailab.jiactng.jadl.FloatConst;
 import de.dailab.jiactng.jadl.HeaderDeclaration;
 import de.dailab.jiactng.jadl.IntegerConst;
+import de.dailab.jiactng.jadl.PrimitveType;
 import de.dailab.jiactng.jadl.Print;
 import de.dailab.jiactng.jadl.Receive;
 import de.dailab.jiactng.jadl.Script;
@@ -126,31 +126,16 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 	 */
 	public Type createType(String typeString) {
 		Type type= jadlFac.createType();
-		DataType simpleType= null;
 		// test for simple types
-		if (TYPE_BOOL.equals(typeString)) {
-			simpleType= DataType.BOOL_TYPE;
-		}
-		if (TYPE_DOUBLE.equals(typeString)) {
-			simpleType= DataType.DOUBLE_TYPE;
-		}
-		if (TYPE_INT.equals(typeString)) {
-			simpleType= DataType.INT_TYPE;
-		}
-		if (TYPE_STRING.equals(typeString)) {
-			simpleType= DataType.STRING_TYPE;
-		}
-		if (TYPE_URL.equals(typeString)) {
-			simpleType= DataType.URL_TYPE;
-		}
-		if (simpleType != null) {
-			type.setSimpleType(simpleType);
+		PrimitveType primitive= PrimitveType.get(typeString);
+		if (primitive != null) {
+			type.setPrimitive(primitive);
 		} else {
 //			OntologyName ontoName= jadlFac.createOntologyName();
 //			ontoName.setName(typeString);
 			ComplexType complexType= jadlFac.createComplexType();
 			complexType.setClazz(typeString);
-			type.setComplexType(complexType);
+			type.setComplex(complexType);
 		}
 		return type;
 	}

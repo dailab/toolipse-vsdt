@@ -8,6 +8,7 @@ import java.util.Map;
 import de.dailab.agentworld.AgentWorld;
 import de.dailab.jiactng.jadl.Agent;
 import de.dailab.vsdt.BusinessProcessSystem;
+import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.trafo.impl.BpmnExportWrapper;
 import de.dailab.vsdt.trafo.jiacv.util.Util;
@@ -21,7 +22,7 @@ public class JiacVExportWrapper extends BpmnExportWrapper {
 
 	private final Map<Agent, Pool> modelPoolMap;
 	
-	private final List<JiacVStarterRule> starterRules;
+	private final Map<Participant, List<JiacVStarterRule>> starterRules;
 	
 	private final List<Agent> jadlFiles;
 	
@@ -30,7 +31,7 @@ public class JiacVExportWrapper extends BpmnExportWrapper {
 	public JiacVExportWrapper(BusinessProcessSystem bps) {
 		super(bps);
 		modelPoolMap= new HashMap<Agent, Pool>();
-		starterRules= new ArrayList<JiacVStarterRule>();
+		starterRules= new HashMap<Participant, List<JiacVStarterRule>>();
 		jadlFiles= new ArrayList<Agent>();
 	}
 
@@ -67,8 +68,19 @@ public class JiacVExportWrapper extends BpmnExportWrapper {
 		return agentWorld;
 	}
 	
-	public List<JiacVStarterRule> getStarterRules() {
+	public Map<Participant, List<JiacVStarterRule>> getStarterRules() {
 		return starterRules;
+	}
+	
+	public void addStarterRule(Participant participant, JiacVStarterRule starterRule) {
+		if (participant != null && starterRule != null) {
+			List<JiacVStarterRule> rules= starterRules.get(participant);
+			if (rules == null) {
+				rules= new ArrayList<JiacVStarterRule>();
+				starterRules.put(participant, rules);
+			}
+			rules.add(starterRule);
+		}
 	}
 
 	public String getJadlFileName(Agent agent) {
@@ -80,7 +92,6 @@ public class JiacVExportWrapper extends BpmnExportWrapper {
 				String roleName= pool.getParticipant().getName();
 	
 				StringBuffer buffer= new StringBuffer();
-				
 				buffer.append(JiacVResultSaver.groupByUsecase
 						? ( bpdName + Util.FILE_SEP + roleName)
 						: ( roleName + Util.FILE_SEP + bpdName));
@@ -88,6 +99,21 @@ public class JiacVExportWrapper extends BpmnExportWrapper {
 				buffer.append(Util.EXT_JADL);
 				return buffer.toString();
 			}
+		}
+		return null;
+	}
+	
+	public String getRulesFileName(Participant participant) {
+		if (participant != null) {
+			String roleName= participant.getName();
+			
+			StringBuffer buffer= new StringBuffer();
+			buffer.append(JiacVResultSaver.groupByUsecase
+					? ( roleName )
+					: ( roleName + Util.FILE_SEP + roleName));
+			buffer.append("_starterRules");
+			buffer.append(Util.EXT_DROOLS);
+			return buffer.toString();
 		}
 		return null;
 	}

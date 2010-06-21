@@ -37,7 +37,13 @@ public class JiacVStarterRule {
 	 */
 	public String toDroolsRule() {
 		StringBuffer buffer= new StringBuffer();
-		// TODO 
+		// TODO
+		
+		buffer.append("when");
+		buffer.append("\t" + startEvent.toString());
+		buffer.append("then");
+		buffer.append("\t" + serviceToStart.toString());
+		
 		return buffer.toString();
 	}
 	
