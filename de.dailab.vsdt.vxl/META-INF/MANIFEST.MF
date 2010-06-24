@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VSDT - VXL Model
 Bundle-Vendor: DAI-Labor, TU Berlin
-Bundle-Version: 1.3.1.20100421
+Bundle-Version: 1.3.1.20100624
 Bundle-SymbolicName: de.dailab.vsdt.vxl; singleton:=true
 Eclipse-RegisterBuddy: org.eclipse.xtext.log4j
 Bundle-ActivationPolicy: lazy
@@ -20,7 +20,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.mwe.core;resolution:=optional,
  com.ibm.icu;resolution:=optional,
  org.eclipse.xtext.xtend;resolution:=optional
-Bundle-RequiredExecutionEnvironment: J2SE-1.5, JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: de.dailab.vsdt,
  de.dailab.vsdt.parseTreeConstruction,
  de.dailab.vsdt.parser.antlr,

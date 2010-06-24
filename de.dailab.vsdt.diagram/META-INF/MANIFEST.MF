@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VSDT - Diagram Editor
 Bundle-SymbolicName: de.dailab.vsdt.diagram; singleton:=true
-Bundle-Version: 1.3.1.20100610
+Bundle-Version: 1.3.1.20100624
 Bundle-ClassPath: .
 Bundle-Activator: de.dailab.vsdt.diagram.part.VsdtDiagramEditorPlugin
 Bundle-Vendor: DAI-Labor, TU Berlin
@@ -45,6 +45,6 @@ Require-Bundle: org.eclipse.core.runtime,
  de.dailab.common.gmf;visibility:=reexport,
  de.dailab.vsdt;visibility:=reexport,
  de.dailab.vsdt.edit
-Bundle-RequiredExecutionEnvironment: J2SE-1.5, JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true

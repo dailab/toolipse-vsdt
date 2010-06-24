@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VSDT - BPMN Model
 Bundle-SymbolicName: de.dailab.vsdt;singleton:=true
-Bundle-Version: 1.3.1.20100428
+Bundle-Version: 1.3.1.20100624
 Bundle-ClassPath: .
 Bundle-Vendor: DAI-Labor, TU Berlin
 Export-Package: de.dailab.vsdt,
@@ -12,5 +12,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  de.dailab.vsdt.vxl;visibility:=reexport
-Bundle-RequiredExecutionEnvironment: J2SE-1.5, JavaSE-1.6
 Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
