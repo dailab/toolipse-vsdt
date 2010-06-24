@@ -2,7 +2,7 @@
 <feature
       id="de.dailab.vsdt.trafo.stp.feature"
       label="VSDT: BPMN - STP-BPMN Transformation"
-      version="1.3.0"
+      version="1.3.1"
       provider-name="DAI-Labor, TU Berlin">
 
    <description url="http://www.dai-labor.de">
@@ -119,7 +119,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
          id="de.dailab.vsdt.trafo.stp"
          download-size="0"
          install-size="0"
-         version="1.3.0.20091119"
+         version="1.3.1.20100624"
          unpack="false"/>
 
 </feature>
