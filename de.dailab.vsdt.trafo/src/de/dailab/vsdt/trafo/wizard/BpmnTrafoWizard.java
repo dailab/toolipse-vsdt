@@ -1,6 +1,8 @@
 package de.dailab.vsdt.trafo.wizard;
 
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.gmf.runtime.common.ui.util.ConsoleUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -33,6 +36,7 @@ import de.dailab.vsdt.trafo.base.logger.TrafoLog;
 
 public abstract class BpmnTrafoWizard extends Wizard {
 	
+	public static final String VSDT_TRAFO_CONSOLE= "de.dailab.vsdt.console";
 	public static final String SUCCESS_TITLE= "Transformation Complete";
 	public static final String SUCCESS_MESSAGE= "Transformation completed.";
 	public static final String SUCCESS_WARN_MESSAGE= "Transformation completed with warnings.";
@@ -111,6 +115,8 @@ public abstract class BpmnTrafoWizard extends Wizard {
 		initializeMappingStages();
 		applyOptions();
 
+		ConsoleUtil.registerConsole(VSDT_TRAFO_CONSOLE);
+		
 		for (final IFile file : optionsPage.getSelectedResources()) {
 			final URI fileURI = URI.createFileURI(
 					new File(file.getLocationURI()).getAbsolutePath());
@@ -142,22 +148,35 @@ public abstract class BpmnTrafoWizard extends Wizard {
 						try {
 							file.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
 						} catch (CoreException e) {
-							e.printStackTrace();
+							printError(e);
 						}
-					
 					}
 				});
 				return true;
 				
 			} catch (InvocationTargetException e) {
-				e.printStackTrace();
+				printError(e);
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				printError(e);
 			}
 		}
 		return false;
 	}
 
+	/**
+	 * Convert Exception Stacktrace to String and print it to Eclipse console.
+	 * 
+	 * @param exception		some exception
+	 * @return				exception stacktrace as string
+	 */
+	private String printError(Exception exception) {
+		StringWriter sw = new StringWriter();
+		exception.printStackTrace(new PrintWriter(sw));
+		String errMsg= sw.toString();
+		ConsoleUtil.printError(VSDT_TRAFO_CONSOLE, errMsg);
+		return errMsg;
+	}
+	
 	/**
 	 * Do the actual transformation. After doing some preparations, the given source object is put
 	 * in a {@link MappingWrapper} and passed from one {@link MappingStage} to the next. Finally,
