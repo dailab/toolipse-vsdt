@@ -19,8 +19,8 @@ public class ESRunner<T> extends ESEngine<T> implements Runnable {
 	/** thread to run the optimization */
 	private Thread thread = null;
 	
-	/** frame where to visualize the currently best individual (optional) */
-	private final AbstractESFrame<T> frame;
+	/** where to visualize the currently best individual (optional) */
+	private final ESObserver<T> observer;
 	
 	/** maximum number of generations, or null */
 	private int max_generations= -1;
@@ -29,11 +29,11 @@ public class ESRunner<T> extends ESEngine<T> implements Runnable {
 	 * Create new ESRunner
 	 * 
 	 * @param model			domain model to optimize
-	 * @param frame			frame for visualization (optional)
+	 * @param observer		observer for visualization (optional)
 	 */
-	public ESRunner(ESModel<T> model, AbstractESFrame<T> frame, Integer generations) {
+	public ESRunner(ESModel<T> model, ESObserver<T> observer, Integer generations) {
 		super(model);
-		this.frame= frame;
+		this.observer= observer;
 	}
 	
 	/**
@@ -90,12 +90,8 @@ public class ESRunner<T> extends ESEngine<T> implements Runnable {
 			boolean didImprove = generateNext();
 
 			// update GUI?
-			if (frame != null) {
-				frame.setGeneration(generation);
-				if (didImprove) {
-					frame.setBest(getBest());
-					frame.setStatus("Last improvement in generation " + generation);
-				}
+			if (observer != null) {
+				observer.setBest(getBest(), generation, didImprove);
 			}
 			// repeat
 			generation++;

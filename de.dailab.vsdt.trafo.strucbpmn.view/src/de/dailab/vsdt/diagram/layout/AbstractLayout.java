@@ -2,7 +2,6 @@ package de.dailab.vsdt.diagram.layout;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,6 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
@@ -27,25 +25,12 @@ import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.ConnectingObject;
 import de.dailab.vsdt.End;
-import de.dailab.vsdt.Event;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.Intermediate;
-import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
-import de.dailab.vsdt.trafo.MappingStage;
-import de.dailab.vsdt.trafo.MappingWrapper;
-import de.dailab.vsdt.trafo.strucbpmn.BpmnBlock;
-import de.dailab.vsdt.trafo.strucbpmn.BpmnBranch;
-import de.dailab.vsdt.trafo.strucbpmn.BpmnDerivedProcess;
-import de.dailab.vsdt.trafo.strucbpmn.BpmnElementToSkip;
-import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerBlock;
-import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerCase;
-import de.dailab.vsdt.trafo.strucbpmn.BpmnLoopBlock;
-import de.dailab.vsdt.trafo.strucbpmn.BpmnSequence;
-import de.dailab.vsdt.trafo.strucbpmn.export.Bpmn2StrucBpmnTransformation;
 import de.dailab.vsdt.util.VsdtHelper;
 
 /**
@@ -56,7 +41,7 @@ import de.dailab.vsdt.util.VsdtHelper;
  * @author kuester
  */
 public abstract class AbstractLayout {
-
+	
 	/** Offset from top-left corner in parent container, both for x and y */
 	public static final int OFFSET= 30;
 	
@@ -65,14 +50,35 @@ public abstract class AbstractLayout {
 	
 	/** Vertical margin between nodes */
 	public static final int MARGIN_V= 30;
-	
+
+	/** default sizes for various nodes */
+	public static final Point SIZE_DEFAULT= new Point(40, 40);
+	public static final Point SIZE_EVENT= SIZE_DEFAULT;
+	public static final Point SIZE_GATEWAY= SIZE_DEFAULT;
+	public static final Point SIZE_ACTIVITY= new Point(60, 40);
+
+	/** name of the command to issue */
 	public final String commandName;
 	
+	/**
+	 * Create new Instance of Layout Algorithm
+	 * 
+	 * @param commandName	name of the command to issue
+	 */
 	public AbstractLayout(String commandName) {
 		this.commandName= commandName;
 	}
 	
-	
+
+	/**
+	 * Create and return a Command that applies the calculated Layout to the
+	 * given List of Edit Parts.
+	 * 
+	 * @param editPartList		List of Edit Parts to layout
+	 * @param layoutChildren	apply layout recursively, e.g. to subprocesses?
+	 * @param layoutMap			List holding the layout information for the nodes
+	 * @return
+	 */
 	public Command getLayoutCommand(List<AbstractGraphicalEditPart> editPartList, boolean layoutChildren, Map<FlowObject, Rectangle> layoutMap) {
 		Queue<AbstractGraphicalEditPart> editParts= new LinkedList<AbstractGraphicalEditPart>();
 		editParts.addAll(editPartList);
@@ -164,11 +170,23 @@ public abstract class AbstractLayout {
 	 * @param editor	Current Editor holding the Business Process Diagram
 	 * @return			Map holding the association of FlowObjects to Positions.
 	 */
-	public Map<FlowObject, Rectangle> createLayoutMap(VsdtDiagramEditor editor) {
+	public final Map<FlowObject, Rectangle> createLayoutMap(VsdtDiagramEditor editor) {
 		BusinessProcessDiagramEditPart diagramEditPart= (BusinessProcessDiagramEditPart) editor.getDiagramEditPart();
 		BusinessProcessDiagram bpd= diagramEditPart.getCastedModel();
 		return createLayoutMap(bpd);
 	}
+	
+	/**
+	 * @param p1	some point
+	 * @param p2	some other point
+	 * @return		distance between points
+	 */
+	protected final double getDistance(Point p1, Point p2) {
+		int dx = p2.x - p1.x;
+		int dy = p2.y - p1.y;
+		return Math.sqrt(dx*dx + dy*dy);
+	}
+	
 	
 	/**
 	 * Calculate the Bounding Box for each Element in the Business Process
@@ -179,6 +197,6 @@ public abstract class AbstractLayout {
 	 * @param strucBpd		Copy of Business Process Diagram
 	 * @return				Map holding association of FlowObjects to Rectangles
 	 */
-	protected abstract Map<FlowObject, Rectangle> createLayoutMap(BusinessProcessDiagram strucBpd);
+	protected abstract Map<FlowObject, Rectangle> createLayoutMap(BusinessProcessDiagram bpd);
 	
 }

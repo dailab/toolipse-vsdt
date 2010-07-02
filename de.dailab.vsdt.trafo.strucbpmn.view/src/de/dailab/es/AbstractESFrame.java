@@ -35,7 +35,7 @@ import javax.swing.JTextField;
  *
  * @param <T>	Class describing the individuals
  */
-public abstract class AbstractESFrame<T> extends JFrame implements ActionListener {
+public abstract class AbstractESFrame<T> extends JFrame implements ActionListener, ESObserver<T> {
 
 	private static final long serialVersionUID = -1923884258513802062L;
 
@@ -267,30 +267,23 @@ public abstract class AbstractESFrame<T> extends JFrame implements ActionListene
 	public void setStatus(String message) {
 		this.statusLabel.setText(message);
 	}
-	
-	/**
-	 * Set generation to be displayed on generation label
-	 * 
-	 * @param generation	current generation
-	 */
-	public void setGeneration(int generation) {
-		this.generationLabel.setText(String.valueOf(generation));
-	}
-	
+		
 	/**
 	 * Pass the currently best individual to be displayed in the central view.
 	 * Further, by default the individual's quality is displayed on the quality
 	 * label. You can overwrite this method to display something else on the
 	 * quality label, in case the quality itself is not very meaningful to the
 	 * user.  
-	 * 
-	 * @param best		currently best individual found by the optimization
 	 */
-	public void setBest(T best) {
-		this.esComp.setIndividual(best);
-		this.qualityLabel.setText(String.valueOf(model.getQuality(best)));
-	}
-	
+	@Override
+	public void setBest(T best, int generation, boolean didImprove) {
+		this.generationLabel.setText(String.valueOf(generation));
+		if (didImprove) {
+			this.esComp.setIndividual(best);
+			this.qualityLabel.setText(String.valueOf(model.getQuality(best)));
+			this.setStatus("Last improvement in generation " + generation);
+		}
+	};
 
 	/**
 	 * The Component visualizing the Domain model and the currently best
