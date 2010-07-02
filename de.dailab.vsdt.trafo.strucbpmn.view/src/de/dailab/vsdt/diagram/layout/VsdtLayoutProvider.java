@@ -1,4 +1,4 @@
-package de.dailab.vsdt.trafo.strucbpmn.layout;
+package de.dailab.vsdt.diagram.layout;
 
 import java.util.List;
 import java.util.Map;

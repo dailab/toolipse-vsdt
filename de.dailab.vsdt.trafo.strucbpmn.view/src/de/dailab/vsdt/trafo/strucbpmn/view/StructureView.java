@@ -33,6 +33,8 @@ import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
+import de.dailab.vsdt.diagram.layout.EvolutionaryLayout;
+import de.dailab.vsdt.diagram.layout.StructureLayout;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
 import de.dailab.vsdt.trafo.MappingStage;
 import de.dailab.vsdt.trafo.MappingWrapper;
@@ -46,7 +48,6 @@ import de.dailab.vsdt.trafo.strucbpmn.BpmnLoopBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnSequence;
 import de.dailab.vsdt.trafo.strucbpmn.VsdtStructureViewPlugin;
 import de.dailab.vsdt.trafo.strucbpmn.export.Bpmn2StrucBpmnTransformation;
-import de.dailab.vsdt.trafo.strucbpmn.layout.StructureLayout;
 import de.dailab.vsdt.util.VsdtHelper;
 
 /**
@@ -119,6 +120,19 @@ public class StructureView extends AbstractStructuredViewerView implements ISele
 					IWorkbenchPage workbenchPage= getViewSite().getWorkbenchWindow().getActivePage();
 					VsdtDiagramEditor editor= (VsdtDiagramEditor) workbenchPage.getActiveEditor();
 					StructureLayout layout= new StructureLayout();
+					Map<FlowObject, Rectangle> layoutMap= layout.createLayoutMap(editor);
+					Command cmd= layout.getLayoutCommand(editor.getDiagramEditPart().getChildren(), true, layoutMap);
+					editor.getDiagramEditDomain().getDiagramCommandStack().execute(cmd);
+				}
+			}
+		}, new Action("Evolutionary Layout (Experimental)", null) {
+			@Override
+			public void run() {
+				// TODO just for testing; move this somewhere else
+				if (isVsdtDiagram()) {
+					IWorkbenchPage workbenchPage= getViewSite().getWorkbenchWindow().getActivePage();
+					VsdtDiagramEditor editor= (VsdtDiagramEditor) workbenchPage.getActiveEditor();
+					EvolutionaryLayout layout= new EvolutionaryLayout();
 					Map<FlowObject, Rectangle> layoutMap= layout.createLayoutMap(editor);
 					Command cmd= layout.getLayoutCommand(editor.getDiagramEditPart().getChildren(), true, layoutMap);
 					editor.getDiagramEditDomain().getDiagramCommandStack().execute(cmd);
@@ -228,10 +242,10 @@ public class StructureView extends AbstractStructuredViewerView implements ISele
 		if (eObject instanceof BpmnBlock) {
 			BpmnBlock block = (BpmnBlock) eObject;
 			selectInEditor(block.getFirstGateway(), editor);
-			selectInEditor(block.getSecondGateway(), editor);
 			for (FlowObject flowObject : block.getElements()) {
 				selectInEditor(flowObject, editor);
 			}
+			selectInEditor(block.getSecondGateway(), editor);
 		}
 		if (eObject instanceof BpmnBranch) {
 			BpmnBranch branch = (BpmnBranch) eObject;

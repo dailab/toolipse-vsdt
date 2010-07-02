@@ -13,5 +13,6 @@ Require-Bundle: org.eclipse.gmf.runtime.diagram.ui,
  de.dailab.vsdt.trafo.strucbpmn
 Bundle-Activator: de.dailab.vsdt.trafo.strucbpmn.VsdtStructureViewPlugin
 Bundle-ActivationPolicy: lazy
-Export-Package: de.dailab.vsdt.trafo.strucbpmn.layout,
+Export-Package: de.dailab.vsdt.diagram.layout,
+ de.dailab.vsdt.trafo.strucbpmn.layout,
  de.dailab.vsdt.trafo.strucbpmn.view
