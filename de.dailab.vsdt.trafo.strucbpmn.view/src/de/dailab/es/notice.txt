@@ -1,0 +1,4 @@
+Note: These classes have been copied here only temporarily! On the long term,
+they should be moved to some separate module. Then these classes have to be
+removed again. Make sure, that any changes and extensions mode to these files
+are synchronized with the 'official' module then!
