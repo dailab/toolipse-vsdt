@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PrecisionPoint;
@@ -28,6 +28,7 @@ import de.dailab.vsdt.End;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.Intermediate;
+import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
@@ -129,42 +130,6 @@ public abstract class AbstractLayout {
 	}
 	
 	/**
-	 * Display a JFrame showing a mock-up of the calculated Layout
-	 *  
-	 * @param layoutMap		Map holding association of FlowObjects to Positions
-	 */
-	public void displayMockupFrame(final Map<FlowObject, Rectangle> layoutMap) {
-		JFrame frame= new JFrame("Layout Test");
-		JPanel canvas= new JPanel() {
-			private static final long serialVersionUID = 1L;
-			@Override
-			public void paint(Graphics g) {
-				super.paint(g);
-				for (FlowObject flowObject : layoutMap.keySet()) {
-					g.setColor(Color.GRAY);
-					if (flowObject instanceof Activity) g.setColor(Color.WHITE);
-					if (flowObject instanceof Start) g.setColor(Color.GREEN);
-					if (flowObject instanceof Intermediate) g.setColor(Color.YELLOW);
-					if (flowObject instanceof End) g.setColor(Color.RED);
-					if (flowObject instanceof Gateway) g.setColor(Color.ORANGE);
-					Rectangle r= layoutMap.get(flowObject);
-					if (g.getColor() == Color.GRAY) {
-						g.drawRect(r.x, r.y, r.width, r.height);	
-					} else {
-						g.fillRect(r.x, r.y, r.width, r.height);
-						g.setColor(Color.BLACK);
-						g.drawString(flowObject.getName() == null ? "" : flowObject.getName(), r.x, r.y+15);
-					}
-				}
-			}
-		};
-		frame.getContentPane().add(canvas);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setSize(1000, 800);
-		frame.setVisible(true);
-	}
-	
-	/**
 	 * Calculate and return Layout Map for given VSDT Diagram Editor.
 	 * 
 	 * @param editor	Current Editor holding the Business Process Diagram
@@ -198,5 +163,66 @@ public abstract class AbstractLayout {
 	 * @return				Map holding association of FlowObjects to Rectangles
 	 */
 	protected abstract Map<FlowObject, Rectangle> createLayoutMap(BusinessProcessDiagram bpd);
+	
+
+	/**
+	 * A simple frame that can be used for previewing the layout prior to
+	 * applying it to the diagram.
+	 *  
+	 * @author kuester
+	 */
+	@SuppressWarnings("serial")
+	protected class MockupFrame extends JFrame {
+		
+		Map<FlowObject, Rectangle> layoutMap;
+		
+		public MockupFrame(Map<FlowObject, Rectangle> layoutMap) {
+			super("Layout Preview");
+			this.layoutMap = layoutMap;
+			JComponent component= new JComponent() {
+
+				public void paint(Graphics g) {
+					super.paint(g);
+					if (MockupFrame.this.layoutMap != null) {
+						for (FlowObject flowObject : MockupFrame.this.layoutMap.keySet()) {
+							g.setColor(Color.GRAY);
+							if (flowObject instanceof Activity) g.setColor(Color.WHITE);
+							if (flowObject instanceof Start) g.setColor(Color.GREEN);
+							if (flowObject instanceof Intermediate) g.setColor(Color.YELLOW);
+							if (flowObject instanceof End) g.setColor(Color.RED);
+							if (flowObject instanceof Gateway) g.setColor(Color.ORANGE);
+							Rectangle r= MockupFrame.this.layoutMap.get(flowObject);
+							if (g.getColor() == Color.GRAY) {
+								g.drawRect(r.x, r.y, r.width, r.height);	
+							} else {
+								g.fillRect(r.x, r.y, r.width, r.height);
+								g.setColor(Color.BLACK);
+								g.drawString(flowObject.getName() == null ? "" : flowObject.getName(), r.x, r.y+15);
+							}
+							g.setColor(Color.black);
+							for (SequenceFlow seqFlow : flowObject.getOutgoingSeq()) {
+								FlowObject other= seqFlow.getTarget();
+								Point p1= r.getCenter();
+								Point p2= MockupFrame.this.layoutMap.get(other).getCenter();
+								g.drawLine(p1.x, p1.y, p2.x, p2.y);
+							}
+							
+						}
+					}
+				}
+				
+			};
+			this.getContentPane().add(component);
+			this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+			this.setSize(1000, 800);
+			this.setVisible(true);
+		}
+		
+		public void update(Map<FlowObject, Rectangle> layoutMap) {
+			this.layoutMap = layoutMap;
+			repaint();
+		}
+		
+	}
 	
 }
