@@ -85,6 +85,12 @@ public class ESRunner<T> extends ESEngine<T> implements Runnable {
 	@Override
 	public void run() {
 		int generation= 0;
+
+		// update GUI?
+		if (observer != null) {
+			observer.setBest(getBest(), generation, true);
+		}
+		
 		do {
 			// generate new generation
 			boolean didImprove = generateNext();

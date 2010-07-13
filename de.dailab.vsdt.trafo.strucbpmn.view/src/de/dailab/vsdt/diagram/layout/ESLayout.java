@@ -37,16 +37,16 @@ public class ESLayout extends AbstractLayout implements ESModel<ESLayout.ESLayou
 	public static int RHO=      1;
 	public static int LAMBDA=  25;
 	
-	public static int MOVE_BY= 40;
+	public static int MOVE_BY= 1000;
 
-	public static int PENALTY_OVERLAP             = 1000;
-	public static int PENALTY_TOO_NARROW          =  500;
-	public static int PENALTY_PER_DISTANCE        =    1;
-	public static int PENALTY_VERTICAL_DIVERGENCE =    2;
-	public static int PENALTY_WRONG_DIRECTION     =    2;
+	public static int PENALTY_OVERLAP             = 1000000;
+	public static int PENALTY_TOO_NARROW          = 100000;
+	public static int PENALTY_PER_DISTANCE        = 1;
+	public static int PENALTY_VERTICAL_DIVERGENCE = 2;
+	public static int PENALTY_WRONG_DIRECTION     = 2;
 	
 	public static boolean START_RANDOMLY = true;
-	public static boolean MOVE_ALL_NODES = true;
+	public static boolean MOVE_ALL_NODES = false;
 	
 	/** the thread running the layout algorithm */
 	private final ESRunner<ESLayoutData> esRunner;
@@ -129,15 +129,30 @@ public class ESLayout extends AbstractLayout implements ESModel<ESLayout.ESLayou
 	public ESLayoutData mutate(ESLayoutData parent, double delta) {
 		Map<FlowObject, Rectangle> positions= new HashMap<FlowObject, Rectangle>(parent.positions);
 
+		// select FlowObject(s) to be moved
 		Collection<FlowObject> flowObjects= null;
 		if (MOVE_ALL_NODES) {
 			// move all flow objects
 			flowObjects= positions.keySet();
 		} else {
-			// move random flow object
-			Object[] objects= positions.keySet().toArray();
-			FlowObject flowObject= (FlowObject) objects[random.nextInt(objects.length)]; 
-			flowObjects = Collections.singleton(flowObject);
+			// move flow object with lowest quality
+			FlowObject worst = null;
+			double worstQ = Double.MAX_VALUE;
+			for (FlowObject flowObject : parent.positions.keySet()) {
+				Double q = parent.qualities.get(flowObject);
+				if (q != null && q < worstQ) {
+					worst = flowObject;
+					worstQ = q;
+				}
+			}
+			if (worst != null) {
+				flowObjects = Collections.singleton(worst);
+			} else {
+				// move random flow object
+				Object[] objects= positions.keySet().toArray();
+				FlowObject flowObject= (FlowObject) objects[random.nextInt(objects.length)]; 
+				flowObjects = Collections.singleton(flowObject);
+			}
 		}
 		
 		for (FlowObject flowObject : flowObjects) {
@@ -188,6 +203,8 @@ public class ESLayout extends AbstractLayout implements ESModel<ESLayout.ESLayou
 			for (FlowObject flowObject : positions.keySet()) {
 				Rectangle p1 = positions.get(flowObject);
 			
+				double this_penalty = 1;
+				
 				// for all other flow objects
 				for (FlowObject other : flowObject.getFlowObjectContainer().getContainedFlowObjects()) {
 					if (other != flowObject) {
@@ -195,17 +212,17 @@ public class ESLayout extends AbstractLayout implements ESModel<ESLayout.ESLayou
 						
 						// no overlapping nodes
 						if (p1.intersects(p2)) {
-							penalty += PENALTY_OVERLAP;
+							this_penalty += PENALTY_OVERLAP;
 						}
 						
 						// minimal distance between nodes, etc.
 						int dx= Math.abs(p2.x - p1.x);
 						int dy= Math.abs(p2.y - p1.y);
 						if (dx < MARGIN_H + SIZE_DEFAULT.x) {
-							penalty += PENALTY_TOO_NARROW;
+							this_penalty += PENALTY_TOO_NARROW;
 						}
 						if (dy < MARGIN_V + SIZE_DEFAULT.y) {
-							penalty += PENALTY_TOO_NARROW;
+							this_penalty += PENALTY_TOO_NARROW;
 						}
 					}
 				}
@@ -218,22 +235,25 @@ public class ESLayout extends AbstractLayout implements ESModel<ESLayout.ESLayou
 					double distance= getDistance(p1.getCenter(), p2.getCenter()) - SIZE_DEFAULT.x - MARGIN_H;
 					distance = distance * distance;
 					if (distance > 0) {
-						penalty += distance * PENALTY_PER_DISTANCE;
+						this_penalty += distance * PENALTY_PER_DISTANCE;
 					}
 					
 					// connected nodes should be lines up, if possible
 					int dy= Math.abs(p2.y - p1.y);
 					dy = dy * dy;
-					penalty += dy * PENALTY_VERTICAL_DIVERGENCE;
+					this_penalty += dy * PENALTY_VERTICAL_DIVERGENCE;
 					
 					// the general direction should be from left to right
 					if (p2.x < p1.x) {
 						int dx = p1.x - p2.y;
 						dx = dx * dx;
-						penalty += dx * PENALTY_WRONG_DIRECTION;
+						this_penalty += dx * PENALTY_WRONG_DIRECTION;
 					}
 				}
 				// TODO no position should be smaller than (0,0), but not too big either
+				
+				individual.qualities.put(flowObject, 1 / this_penalty);
+				penalty += this_penalty;
 			}
 			// TODO no overlapping edges (this might be quite hard to calculate)
 			// TODO advanced: symmetry, angles between edges, etc.
@@ -282,6 +302,9 @@ public class ESLayout extends AbstractLayout implements ESModel<ESLayout.ESLayou
 		/** the quality calculated for this map */
 		public double quality= -1;
 
+		/** Map holding the qualities for each individual Flow Object */
+		public final Map<FlowObject, Double> qualities;
+		
 		/**
 		 * Create LayoutData instance with given positions
 		 * 
@@ -289,6 +312,7 @@ public class ESLayout extends AbstractLayout implements ESModel<ESLayout.ESLayou
 		 */
 		public ESLayoutData(Map<FlowObject, Rectangle> positions) {
 			this.positions = positions;
+			this.qualities = new HashMap<FlowObject, Double>();
 		}
 		
 	}

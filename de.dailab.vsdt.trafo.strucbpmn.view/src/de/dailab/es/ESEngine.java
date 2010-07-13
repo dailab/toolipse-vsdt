@@ -54,6 +54,15 @@ public class ESEngine<T> implements Comparator<T> {
 	/** current generation of MY individuals */
 	protected List<T> current= null;
 	
+	/** the current generation */
+	protected int generation= 0;
+	
+	/** adapt delta after X generations */
+	protected int adaptDeltaAfterGenerations = 100;
+	
+	/** number of improvements over the last X generations */
+	protected int improvedInLastGenerations = 0;
+	
 
 	/**
 	 * Create ES Engine for given environment
@@ -85,6 +94,8 @@ public class ESEngine<T> implements Comparator<T> {
 		this.delta = 1.0;
 		this.improvement = 1.0;
 		this.current = model.initialize(my);
+		this.generation = 0;
+		this.improvedInLastGenerations = 0;
 	}
 	
 	/**
@@ -96,6 +107,7 @@ public class ESEngine<T> implements Comparator<T> {
 	 * @return	whether the new generation is an improvement above the old
 	 */
 	public final boolean generateNext() {
+		generation++;
 		// create LAMBDA recombined and/or mutated offsprings
 		List<T> next= new ArrayList<T>(lambda);
 		for (int i=0; i < lambda; i++) {
@@ -121,11 +133,25 @@ public class ESEngine<T> implements Comparator<T> {
 		// sort candidates and determine improvement over last generation 
 		sortByQuality(candidates);
 		improvement= model.getQuality(candidates.get(0)) / model.getQuality(current.get(0));
+		boolean hasImproved = improvement > 1;
 		if (useDelta) {
-			// TODO determine new delta
+			if (hasImproved) {
+				improvedInLastGenerations++;
+			}
+			if (generation % adaptDeltaAfterGenerations == 0) {
+				// TODO determine new delta
+				double d = 0.01;
+				if (improvedInLastGenerations > adaptDeltaAfterGenerations / 5) {
+					delta *= 1-d;
+				} else {
+					delta *= 1+d;
+				}
+//				System.out.println("Delta: " + improvedInLastGenerations + "\t" + delta);;
+				improvedInLastGenerations= 0;
+			}
 		}
 		current= candidates.subList(0, my);
-		return improvement > 1;
+		return hasImproved;
 	}
 	
 	/**
@@ -179,7 +205,7 @@ public class ESEngine<T> implements Comparator<T> {
 	}
 
 	/**
-	 * @return	best individual of current generation
+	 * @return		best individual of current generation
 	 */
 	public T getBest() {
 		if (current != null && ! current.isEmpty()) {
@@ -187,5 +213,21 @@ public class ESEngine<T> implements Comparator<T> {
 		} else {
 			return null;
 		}
+	}
+	
+	/**
+	 * @return		the current generation
+	 */
+	public int getGeneration() {
+		return generation;
+	}
+	
+	/**
+	 * Set after how many generations to adapt delta. 
+	 * 
+	 * @param adaptDeltaAfterGenerations	adapt delta every how many generations?
+	 */
+	public void setAdaptDeltaAfterGenerations(int adaptDeltaAfterGenerations) {
+		this.adaptDeltaAfterGenerations = adaptDeltaAfterGenerations;
 	}
 }

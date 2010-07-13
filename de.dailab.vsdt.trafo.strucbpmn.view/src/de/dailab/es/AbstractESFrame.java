@@ -65,12 +65,31 @@ public abstract class AbstractESFrame<T> extends JFrame implements ActionListene
 	private final JCheckBoxMenuItem keepParentsCB;
 	private final JCheckBoxMenuItem useDeltaCB;
 
+	protected static int DEFAULT_MY = 3;
+	protected static int DEFAULT_RHO = 1;
+	protected static int DEFAULT_LAMBDA = 8;
+	
+	protected static boolean DEFAULT_MULTI_MUTATE = true;
+	protected static boolean DEFAULT_KEEP_PARENTS = true;
+	protected static boolean DEFAULT_USE_DELTA = true;
+	
 	/**
 	 * Create AbstractESFrame with given title
 	 * 
 	 * @param title		to be displayed in frame's title bar
 	 */
 	public AbstractESFrame(String title) {
+		this(title, DEFAULT_MY, DEFAULT_RHO, DEFAULT_LAMBDA, 
+				DEFAULT_MULTI_MUTATE, DEFAULT_KEEP_PARENTS, DEFAULT_USE_DELTA);
+	}
+	
+	/**
+	 * Create AbstractESFrame with given title
+	 * 
+	 * @param title		to be displayed in frame's title bar
+	 */
+	public AbstractESFrame(String title, int my, int rho, int lambda, 
+			boolean multiMutate, boolean keepParents, boolean useDelta) {
 		super(title);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
@@ -78,7 +97,7 @@ public abstract class AbstractESFrame<T> extends JFrame implements ActionListene
 		this.model= createESModel();
 		this.esRunner= new ESRunner<T>(model, this, null);
 		this.esComp= createESComponent();
-		
+
 		// CREATE MENU BAR
 		
 		// file menu: new, load, save, quit
@@ -96,13 +115,13 @@ public abstract class AbstractESFrame<T> extends JFrame implements ActionListene
 		
 		// options menu: multi-mutate, keep parents, use delta
 		JMenu optionsMenu= new JMenu("Options");
-		multiMutateCB= new JCheckBoxMenuItem("Multi-Mutate", true);
+		multiMutateCB= new JCheckBoxMenuItem("Multi-Mutate", multiMutate);
 		multiMutateCB.addActionListener(this);
 		optionsMenu.add(multiMutateCB);
-		keepParentsCB= new JCheckBoxMenuItem("Keep Parents", true);
+		keepParentsCB= new JCheckBoxMenuItem("Keep Parents", keepParents);
 		keepParentsCB.addActionListener(this);
 		optionsMenu.add(keepParentsCB);
-		useDeltaCB= new JCheckBoxMenuItem("Use Delta", true);
+		useDeltaCB= new JCheckBoxMenuItem("Use Delta", useDelta);
 		useDeltaCB.addActionListener(this);
 		optionsMenu.add(useDeltaCB);
 		
@@ -130,9 +149,9 @@ public abstract class AbstractESFrame<T> extends JFrame implements ActionListene
 		startButton.addActionListener(this);
 		
 		// panel with strategy parameters
-		myTF= new JTextField("3", 3);
-		rhoTF= new JTextField("1", 3);
-		lambdaTF= new JTextField("8", 3);
+		myTF= new JTextField(String.valueOf(my), 3);
+		rhoTF= new JTextField(String.valueOf(rho), 3);
+		lambdaTF= new JTextField(String.valueOf(lambda), 3);
 		JPanel esPanel= new JPanel();
 		esPanel.add(new JLabel("Using ("));
 		esPanel.add(myTF);
@@ -155,6 +174,7 @@ public abstract class AbstractESFrame<T> extends JFrame implements ActionListene
 		getContentPane().add(outputPanel, 	makeGBC(1, 1, 1, 2, h, w));
 		getContentPane().add(statusLabel, 	makeGBC(0, 3, 2, 1, h, c));
 		pack();
+		setVisible(true);
 	}
 	
 	/**
