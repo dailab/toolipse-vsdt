@@ -213,38 +213,10 @@ public class SequenceFlowImpl extends ConnectingObjectImpl implements SequenceFl
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * update Gates
 	 * <!-- end-user-doc -->
-	 * @generated NOT
 	 */
 	public void setSource(FlowObject newSource) {
 		if (newSource != source) {
-			
-			//update gates
-//			if (getGate() != null) {
-//				Gateway gateway= getGate().getParentGateway();
-//				if (gateway.getGatewayAttributes() instanceof XORDataGatewayAttSet) {
-//					XORDataGatewayAttSet attSet = (XORDataGatewayAttSet) gateway.getGatewayAttributes();
-//					if (attSet.getDefaultGate() == getGate()) {
-//						attSet.setDefaultGate(null);
-//					}
-//				}
-//				if (gateway.getGatewayAttributes() instanceof ORGatewayAttSet) {
-//					ORGatewayAttSet attSet = (ORGatewayAttSet) gateway.getGatewayAttributes();
-//					if (attSet.getDefaultGate() == getGate()) {
-//						attSet.setDefaultGate(null);
-//					}
-//				}
-//				getGate().setParentGateway(null);
-//				getGate().setOutgoingSequenceFlow(null);
-//			}
-//			if (newSource instanceof Gateway) {
-//				Gate gate= VsdtFactory.eINSTANCE.createGate();
-//				gate.setOutgoingSequenceFlow(this);
-//				gate.setName(this.getName()+ "_" + this.getId() + "_Gate");
-//				gate.setParentGateway( (Gateway) newSource);
-//			}
-			
 			NotificationChain msgs = null;
 			if (source != null)
 				msgs = ((InternalEObject)source).eInverseRemove(this, VsdtPackage.FLOW_OBJECT__OUTGOING_SEQ, FlowObject.class, msgs);

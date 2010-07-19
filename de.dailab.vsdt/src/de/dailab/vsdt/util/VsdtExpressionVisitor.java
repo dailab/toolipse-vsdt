@@ -7,26 +7,26 @@ import java.util.regex.Pattern;
 
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.Property;
-import de.dailab.vsdt.vxl.Accessor;
-import de.dailab.vsdt.vxl.ArrayAccessor;
-import de.dailab.vsdt.vxl.Atom;
-import de.dailab.vsdt.vxl.BooleanConst;
-import de.dailab.vsdt.vxl.BracketTerm;
-import de.dailab.vsdt.vxl.FieldAccessor;
-import de.dailab.vsdt.vxl.Head;
-import de.dailab.vsdt.vxl.Minus;
-import de.dailab.vsdt.vxl.Negation;
-import de.dailab.vsdt.vxl.NullConst;
-import de.dailab.vsdt.vxl.NumericConst;
-import de.dailab.vsdt.vxl.Operator;
-import de.dailab.vsdt.vxl.StringConst;
-import de.dailab.vsdt.vxl.Tail;
-import de.dailab.vsdt.vxl.Term;
-import de.dailab.vsdt.vxl.Value;
-import de.dailab.vsdt.vxl.Variable;
 import de.dailab.vsdt.vxl.util.Util;
 import de.dailab.vsdt.vxl.util.VxlParseException;
 import de.dailab.vsdt.vxl.util.VxlParser;
+import de.dailab.vsdt.vxl.vxl.Accessor;
+import de.dailab.vsdt.vxl.vxl.ArrayAccessor;
+import de.dailab.vsdt.vxl.vxl.Atom;
+import de.dailab.vsdt.vxl.vxl.BooleanConst;
+import de.dailab.vsdt.vxl.vxl.BracketTerm;
+import de.dailab.vsdt.vxl.vxl.FieldAccessor;
+import de.dailab.vsdt.vxl.vxl.Head;
+import de.dailab.vsdt.vxl.vxl.Minus;
+import de.dailab.vsdt.vxl.vxl.Negation;
+import de.dailab.vsdt.vxl.vxl.NullConst;
+import de.dailab.vsdt.vxl.vxl.NumericConst;
+import de.dailab.vsdt.vxl.vxl.Operator;
+import de.dailab.vsdt.vxl.vxl.StringConst;
+import de.dailab.vsdt.vxl.vxl.Tail;
+import de.dailab.vsdt.vxl.vxl.Term;
+import de.dailab.vsdt.vxl.vxl.Value;
+import de.dailab.vsdt.vxl.vxl.Variable;
 
 /**
  * This class is used for printing out Terms in the "VSDT Expression Language".

@@ -48,9 +48,6 @@ public class VsdtHelper {
 	 * @param idObject	some ID object, needing a new ID
 	 */
 	public static void generateNewID(IdObject idObject) {
-//		long timestamp= System.currentTimeMillis();
-//		String clazz= idObject.eClass().getName();
-//		String id= clazz + "_" + lastID++ + "_" + timestamp;
 		String id= EcoreUtil.generateUUID();
 		idObject.setId(id);
 	}
@@ -81,9 +78,6 @@ public class VsdtHelper {
 		if (eObject instanceof IdObject) {
 			return ((IdObject) eObject).getNameOrId();
 		}
-//		if (eObject instanceof Gate) {
-//			return ((Gate) eObject).getName();
-//		}
 		if (eObject instanceof Participant) {
 			return ((Participant) eObject).getName();
 		}
@@ -147,42 +141,6 @@ public class VsdtHelper {
 	}
 	
 	/**
-	 * @param event		some event of type Start, End, or Intermediate
-	 * @return 			List of trigger types allowed for that event
-	 */
-//	public static List<TriggerType> getValidTriggerTypes(Event event) {
-//		List<TriggerType> triggers= new ArrayList<TriggerType>();
-//		triggers.add(TriggerType.NONE);
-//		triggers.add(TriggerType.MESSAGE);
-//		triggers.add(TriggerType.MULTIPLE);
-//		triggers.add(TriggerType.SIGNAL);
-//		if (event instanceof Start) {
-//			triggers.add(TriggerType.TIMER);
-//			triggers.add(TriggerType.RULE);
-//		}
-//		if (event instanceof Intermediate) {
-//			if (! isThrowing(event)) {
-//				triggers.add(TriggerType.TIMER);
-//				triggers.add(TriggerType.RULE);
-//			}
-//			if (((Intermediate) event).getAttachedTo() != null) {
-//				triggers.add(TriggerType.CANCEL);
-//				triggers.add(TriggerType.ERROR);
-//				triggers.add(TriggerType.COMPENSATION);
-//			} else {
-//				triggers.add(TriggerType.LINK);
-//			}
-//		}
-//		if (event instanceof End) {
-//			triggers.add(TriggerType.ERROR);
-//			triggers.add(TriggerType.CANCEL);
-//			triggers.add(TriggerType.COMPENSATION);
-//			triggers.add(TriggerType.TERMINATE);
-//		}
-//		return triggers;
-//	}
-	
-	/**
 	 * Provides a type-independent variant of getVisibleProperties
 	 * 
 	 * @param object	some BPMN object that might have or inherit properties
@@ -219,59 +177,6 @@ public class VsdtHelper {
 		}
 		return null;
 	}
-	
-	/**
-	 * Get the Expression language to be used for a given Expression. If the 
-	 * expression has an expression language defined, that language will be 
-	 * returned; Otherwise the diagram default will be returned.
-	 * 
-	 * @param expression	Some Expression
-	 * @return				Expression Language to be used in that Expression.
-	 */
-//	public static String getActualExpressionLanguage(Expression expression) {
-//		String lang= null;
-//		if (expression != null) {
-//			if (expression.getLanguage() != null && ! expression.getLanguage().trim().isEmpty()) {
-//				lang= expression.getLanguage();
-//			} else {
-//				lang= expression.getGlobalExpressionLanguage();
-//			}
-//		}
-//		if (lang != null) {
-//			lang= lang.trim().isEmpty() ? null : lang.trim(); 
-//		}
-//		return lang;
-//	}
-	
-	/**
-	 * Determine whether a given event is a "throwing" or a "catching" event.
-	 * This is determined by evaluating the event type, the context, and the 
-	 * incoming and outgoing sequence flows.
-	 * 
-	 * @param event			Some event which might be catching or throwing
-	 * @return				Whether the event is catching or throwing
-	 */
-//	public static boolean isThrowing(Event event) {
-//		if (event instanceof Start) {
-//			return false;
-//		}
-//		if (event instanceof End) {
-//			return true;			
-//		}
-//		if (event instanceof Intermediate) {
-//			Intermediate intermediate = (Intermediate) event;
-//			if (intermediate.getAttachedTo() != null) {
-//				return false;
-//			}
-//			if (event.getTrigger()==TriggerType.MESSAGE) {
-//				if (event.getMessage() != null && event.getMessage().getFrom() != null && event.getPool() != null) {
-//					return event.getMessage().getFrom() == event.getPool().getParticipant();
-//				}
-//			}
-//			return ! event.isStartingNode() && event.isEndingNode(); //defaults to false, if event has no sequence flows at all
-//		}
-//		return false;
-//	}
 	
 	/**
 	 * Print a uniformly formatted string representation of the given property 

@@ -286,41 +286,6 @@ public class GatewayImpl extends FlowObjectImpl implements Gateway {
 	}
 
 	
-//	/**
-//	 * create or refresh gates contained in the gateway
-//	 * @generated NOT
-//	 */
-//	public void refreshGates() {
-//		//list of existing sequences going out of this gateway that already have a gate
-//		List<SequenceFlow> seqs= new ArrayList<SequenceFlow>();
-//		//delete obsolete gates
-//		List<Gate> gates= new ArrayList<Gate>();
-//		gates.addAll(getGates());
-//		for (Iterator<Gate> iter=gates.iterator(); iter.hasNext();){
-//			Gate gate= iter.next();
-//			if (! getOutgoingSeq().contains(gate.getOutgoingSequenceFlow())) {
-//				//gate.outgoing not contained in gateway.outgoing anymore
-//				gate.getAssignments().clear();
-//				gate.setOutgoingSequenceFlow(null);
-//				getGates().remove(gate);
-//			} else {
-//				seqs.add(gate.getOutgoingSequenceFlow());
-//			}
-//		}
-//		//create new gates
-//		for (Iterator<SequenceFlow> iter=getOutgoingSeq().iterator(); iter.hasNext();){
-//			SequenceFlow seq= iter.next();
-//			if (! seqs.contains(seq)) {
-//				//sequence not outgoing of one of this gateways gates: create new gate
-//				Gate gate= VsdtFactory.eINSTANCE.createGate();
-//				gate.setOutgoingSequenceFlow(seq);
-//				String name= seq.getName() != null ? seq.getName() : seq.getId();
-//				gate.setName(name);
-//				gate.setParentGateway(this);
-//			}
-//		}
-//	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
