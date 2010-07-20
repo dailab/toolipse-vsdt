@@ -6,6 +6,7 @@ import org.eclipse.draw2d.XYLayout;
 import org.eclipse.draw2d.geometry.Rectangle;
 
 import de.dailab.vsdt.GatewayType;
+import de.dailab.vsdt.diagram.preferences.DiagramAppearancePreferencePage;
 
 
 /**
@@ -31,11 +32,9 @@ public class GatewayFigure extends RectangleFigure implements IDecoratableFigure
 	
 	/**
 	 * @param gatewayType	the gateway's type
-	 * @param markerVisible	whether the marker shall be visible
 	 */
-	public GatewayFigure(GatewayType gatewayType, boolean markerVisible) {
-		this.gatewayType= gatewayType;
-		this.markerVisible= markerVisible;
+	public GatewayFigure(GatewayType gatewayType) {
+		setGatewayType(gatewayType);
 		init();
 	}
 	
@@ -137,9 +136,9 @@ public class GatewayFigure extends RectangleFigure implements IDecoratableFigure
 		myUseLocalCoordinates = useLocalCoordinates;
 	}
 	
-	public void setGatewayType(GatewayType gatewayType, boolean markerVisible) {
+	public void setGatewayType(GatewayType gatewayType) {
 		this.gatewayType = gatewayType;
-		this.markerVisible= markerVisible;
+		this.markerVisible= DiagramAppearancePreferencePage.isShowXorMarkerByDefault();
 		this.repaint();
 	}
 }

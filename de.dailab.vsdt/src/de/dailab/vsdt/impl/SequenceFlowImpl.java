@@ -27,7 +27,6 @@ import de.dailab.vsdt.VsdtPackage;
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.SequenceFlowImpl#getConditionType <em>Condition Type</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.SequenceFlowImpl#getConditionExpression <em>Condition Expression</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.SequenceFlowImpl#getQuantity <em>Quantity</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.SequenceFlowImpl#getSource <em>Source</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.SequenceFlowImpl#getTarget <em>Target</em>}</li>
  * </ul>
@@ -65,26 +64,6 @@ public class SequenceFlowImpl extends ConnectingObjectImpl implements SequenceFl
 	 * @ordered
 	 */
 	protected Expression conditionExpression;
-
-	/**
-	 * The default value of the '{@link #getQuantity() <em>Quantity</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getQuantity()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int QUANTITY_EDEFAULT = 1;
-
-	/**
-	 * The cached value of the '{@link #getQuantity() <em>Quantity</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getQuantity()
-	 * @generated
-	 * @ordered
-	 */
-	protected int quantity = QUANTITY_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
@@ -188,27 +167,6 @@ public class SequenceFlowImpl extends ConnectingObjectImpl implements SequenceFl
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.SEQUENCE_FLOW__CONDITION_EXPRESSION, newConditionExpression, newConditionExpression));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public int getQuantity() {
-		return quantity;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setQuantity(int newQuantity) {
-		int oldQuantity = quantity;
-		quantity = newQuantity;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.SEQUENCE_FLOW__QUANTITY, oldQuantity, quantity));
 	}
 
 	/**
@@ -346,8 +304,6 @@ public class SequenceFlowImpl extends ConnectingObjectImpl implements SequenceFl
 				return getConditionType();
 			case VsdtPackage.SEQUENCE_FLOW__CONDITION_EXPRESSION:
 				return getConditionExpression();
-			case VsdtPackage.SEQUENCE_FLOW__QUANTITY:
-				return getQuantity();
 			case VsdtPackage.SEQUENCE_FLOW__SOURCE:
 				return getSource();
 			case VsdtPackage.SEQUENCE_FLOW__TARGET:
@@ -369,9 +325,6 @@ public class SequenceFlowImpl extends ConnectingObjectImpl implements SequenceFl
 				return;
 			case VsdtPackage.SEQUENCE_FLOW__CONDITION_EXPRESSION:
 				setConditionExpression((Expression)newValue);
-				return;
-			case VsdtPackage.SEQUENCE_FLOW__QUANTITY:
-				setQuantity((Integer)newValue);
 				return;
 			case VsdtPackage.SEQUENCE_FLOW__SOURCE:
 				setSource((FlowObject)newValue);
@@ -397,9 +350,6 @@ public class SequenceFlowImpl extends ConnectingObjectImpl implements SequenceFl
 			case VsdtPackage.SEQUENCE_FLOW__CONDITION_EXPRESSION:
 				setConditionExpression((Expression)null);
 				return;
-			case VsdtPackage.SEQUENCE_FLOW__QUANTITY:
-				setQuantity(QUANTITY_EDEFAULT);
-				return;
 			case VsdtPackage.SEQUENCE_FLOW__SOURCE:
 				setSource((FlowObject)null);
 				return;
@@ -422,8 +372,6 @@ public class SequenceFlowImpl extends ConnectingObjectImpl implements SequenceFl
 				return conditionType != CONDITION_TYPE_EDEFAULT;
 			case VsdtPackage.SEQUENCE_FLOW__CONDITION_EXPRESSION:
 				return conditionExpression != null;
-			case VsdtPackage.SEQUENCE_FLOW__QUANTITY:
-				return quantity != QUANTITY_EDEFAULT;
 			case VsdtPackage.SEQUENCE_FLOW__SOURCE:
 				return source != null;
 			case VsdtPackage.SEQUENCE_FLOW__TARGET:
@@ -444,8 +392,6 @@ public class SequenceFlowImpl extends ConnectingObjectImpl implements SequenceFl
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (conditionType: ");
 		result.append(conditionType);
-		result.append(", quantity: ");
-		result.append(quantity);
 		result.append(')');
 		return result.toString();
 	}

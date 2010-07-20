@@ -24,7 +24,7 @@ import de.dailab.vsdt.VsdtPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.dailab.vsdt.impl.ConnectingObjectImpl#getParentDiagram <em>Parent Diagram</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.ConnectingObjectImpl#getParent <em>Parent</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,8 +55,8 @@ public abstract class ConnectingObjectImpl extends GraphicalObjectImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BusinessProcessDiagram getParentDiagram() {
-		if (eContainerFeatureID() != VsdtPackage.CONNECTING_OBJECT__PARENT_DIAGRAM) return null;
+	public BusinessProcessDiagram getParent() {
+		if (eContainerFeatureID() != VsdtPackage.CONNECTING_OBJECT__PARENT) return null;
 		return (BusinessProcessDiagram)eContainer();
 	}
 
@@ -65,8 +65,8 @@ public abstract class ConnectingObjectImpl extends GraphicalObjectImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetParentDiagram(BusinessProcessDiagram newParentDiagram, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParentDiagram, VsdtPackage.CONNECTING_OBJECT__PARENT_DIAGRAM, msgs);
+	public NotificationChain basicSetParent(BusinessProcessDiagram newParent, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newParent, VsdtPackage.CONNECTING_OBJECT__PARENT, msgs);
 		return msgs;
 	}
 
@@ -75,20 +75,20 @@ public abstract class ConnectingObjectImpl extends GraphicalObjectImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setParentDiagram(BusinessProcessDiagram newParentDiagram) {
-		if (newParentDiagram != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.CONNECTING_OBJECT__PARENT_DIAGRAM && newParentDiagram != null)) {
-			if (EcoreUtil.isAncestor(this, newParentDiagram))
+	public void setParent(BusinessProcessDiagram newParent) {
+		if (newParent != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.CONNECTING_OBJECT__PARENT && newParent != null)) {
+			if (EcoreUtil.isAncestor(this, newParent))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newParentDiagram != null)
-				msgs = ((InternalEObject)newParentDiagram).eInverseAdd(this, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__CONNECTIONS, BusinessProcessDiagram.class, msgs);
-			msgs = basicSetParentDiagram(newParentDiagram, msgs);
+			if (newParent != null)
+				msgs = ((InternalEObject)newParent).eInverseAdd(this, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__CONNECTIONS, BusinessProcessDiagram.class, msgs);
+			msgs = basicSetParent(newParent, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.CONNECTING_OBJECT__PARENT_DIAGRAM, newParentDiagram, newParentDiagram));
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.CONNECTING_OBJECT__PARENT, newParent, newParent));
 	}
 
 	/**
@@ -99,10 +99,10 @@ public abstract class ConnectingObjectImpl extends GraphicalObjectImpl implement
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case VsdtPackage.CONNECTING_OBJECT__PARENT_DIAGRAM:
+			case VsdtPackage.CONNECTING_OBJECT__PARENT:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetParentDiagram((BusinessProcessDiagram)otherEnd, msgs);
+				return basicSetParent((BusinessProcessDiagram)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -115,8 +115,8 @@ public abstract class ConnectingObjectImpl extends GraphicalObjectImpl implement
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case VsdtPackage.CONNECTING_OBJECT__PARENT_DIAGRAM:
-				return basicSetParentDiagram(null, msgs);
+			case VsdtPackage.CONNECTING_OBJECT__PARENT:
+				return basicSetParent(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -129,7 +129,7 @@ public abstract class ConnectingObjectImpl extends GraphicalObjectImpl implement
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case VsdtPackage.CONNECTING_OBJECT__PARENT_DIAGRAM:
+			case VsdtPackage.CONNECTING_OBJECT__PARENT:
 				return eInternalContainer().eInverseRemove(this, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__CONNECTIONS, BusinessProcessDiagram.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -143,8 +143,8 @@ public abstract class ConnectingObjectImpl extends GraphicalObjectImpl implement
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case VsdtPackage.CONNECTING_OBJECT__PARENT_DIAGRAM:
-				return getParentDiagram();
+			case VsdtPackage.CONNECTING_OBJECT__PARENT:
+				return getParent();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -157,8 +157,8 @@ public abstract class ConnectingObjectImpl extends GraphicalObjectImpl implement
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case VsdtPackage.CONNECTING_OBJECT__PARENT_DIAGRAM:
-				setParentDiagram((BusinessProcessDiagram)newValue);
+			case VsdtPackage.CONNECTING_OBJECT__PARENT:
+				setParent((BusinessProcessDiagram)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -172,8 +172,8 @@ public abstract class ConnectingObjectImpl extends GraphicalObjectImpl implement
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case VsdtPackage.CONNECTING_OBJECT__PARENT_DIAGRAM:
-				setParentDiagram((BusinessProcessDiagram)null);
+			case VsdtPackage.CONNECTING_OBJECT__PARENT:
+				setParent((BusinessProcessDiagram)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -187,8 +187,8 @@ public abstract class ConnectingObjectImpl extends GraphicalObjectImpl implement
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case VsdtPackage.CONNECTING_OBJECT__PARENT_DIAGRAM:
-				return getParentDiagram() != null;
+			case VsdtPackage.CONNECTING_OBJECT__PARENT:
+				return getParent() != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -63,7 +63,6 @@ public class GatewayItemProvider
 			super.getPropertyDescriptors(object);
 
 			addGatewayTypePropertyDescriptor(object);
-			addMarkerVisiblePropertyDescriptor(object);
 			addInstantiatePropertyDescriptor(object);
 			addIncomingConditionPropertyDescriptor(object);
 			addOutgoingConditionPropertyDescriptor(object);
@@ -90,28 +89,6 @@ public class GatewayItemProvider
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 getString("_UI_GeneralPropertyCategory"),
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Marker Visible feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addMarkerVisiblePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Gateway_markerVisible_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Gateway_markerVisible_feature", "_UI_Gateway_type"),
-				 VsdtPackage.Literals.GATEWAY__MARKER_VISIBLE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 getString("_UI_GatewayTypeAtributesPropertyCategory"),
 				 null));
 	}
 
@@ -250,7 +227,6 @@ public class GatewayItemProvider
 
 		switch (notification.getFeatureID(Gateway.class)) {
 			case VsdtPackage.GATEWAY__GATEWAY_TYPE:
-			case VsdtPackage.GATEWAY__MARKER_VISIBLE:
 			case VsdtPackage.GATEWAY__INSTANTIATE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

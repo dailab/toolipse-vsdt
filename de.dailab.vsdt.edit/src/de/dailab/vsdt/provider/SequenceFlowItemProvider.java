@@ -64,7 +64,6 @@ public class SequenceFlowItemProvider
 
 			addConditionTypePropertyDescriptor(object);
 			addConditionExpressionPropertyDescriptor(object);
-			addQuantityPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -109,28 +108,6 @@ public class SequenceFlowItemProvider
 				 false,
 				 false,
 				 null,
-				 getString("_UI_ConnectionPropertyCategory"),
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Quantity feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addQuantityPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SequenceFlow_quantity_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SequenceFlow_quantity_feature", "_UI_SequenceFlow_type"),
-				 VsdtPackage.Literals.SEQUENCE_FLOW__QUANTITY,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 getString("_UI_ConnectionPropertyCategory"),
 				 null));
 	}
@@ -203,7 +180,6 @@ public class SequenceFlowItemProvider
 
 		switch (notification.getFeatureID(SequenceFlow.class)) {
 			case VsdtPackage.SEQUENCE_FLOW__CONDITION_TYPE:
-			case VsdtPackage.SEQUENCE_FLOW__QUANTITY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case VsdtPackage.SEQUENCE_FLOW__CONDITION_EXPRESSION:

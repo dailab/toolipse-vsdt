@@ -16,7 +16,6 @@ package de.dailab.vsdt;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.dailab.vsdt.Gateway#getGatewayType <em>Gateway Type</em>}</li>
- *   <li>{@link de.dailab.vsdt.Gateway#isMarkerVisible <em>Marker Visible</em>}</li>
  *   <li>{@link de.dailab.vsdt.Gateway#isInstantiate <em>Instantiate</em>}</li>
  *   <li>{@link de.dailab.vsdt.Gateway#getIncomingCondition <em>Incoming Condition</em>}</li>
  *   <li>{@link de.dailab.vsdt.Gateway#getOutgoingCondition <em>Outgoing Condition</em>}</li>
@@ -56,33 +55,6 @@ public interface Gateway extends FlowObject {
 	 * @generated
 	 */
 	void setGatewayType(GatewayType value);
-
-	/**
-	 * Returns the value of the '<em><b>Marker Visible</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Marker Visible</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Marker Visible</em>' attribute.
-	 * @see #setMarkerVisible(boolean)
-	 * @see de.dailab.vsdt.VsdtPackage#getGateway_MarkerVisible()
-	 * @model default="false"
-	 * @generated
-	 */
-	boolean isMarkerVisible();
-
-	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Gateway#isMarkerVisible <em>Marker Visible</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Marker Visible</em>' attribute.
-	 * @see #isMarkerVisible()
-	 * @generated
-	 */
-	void setMarkerVisible(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Instantiate</b></em>' attribute.

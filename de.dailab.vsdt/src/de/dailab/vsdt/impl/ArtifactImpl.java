@@ -26,7 +26,7 @@ import de.dailab.vsdt.VsdtPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.dailab.vsdt.impl.ArtifactImpl#getParentDiagram <em>Parent Diagram</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.ArtifactImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ArtifactImpl#getPool <em>Pool</em>}</li>
  * </ul>
  * </p>
@@ -68,8 +68,8 @@ public abstract class ArtifactImpl extends GraphicalObjectImpl implements Artifa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BusinessProcessDiagram getParentDiagram() {
-		if (eContainerFeatureID() != VsdtPackage.ARTIFACT__PARENT_DIAGRAM) return null;
+	public BusinessProcessDiagram getParent() {
+		if (eContainerFeatureID() != VsdtPackage.ARTIFACT__PARENT) return null;
 		return (BusinessProcessDiagram)eContainer();
 	}
 
@@ -78,8 +78,8 @@ public abstract class ArtifactImpl extends GraphicalObjectImpl implements Artifa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetParentDiagram(BusinessProcessDiagram newParentDiagram, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParentDiagram, VsdtPackage.ARTIFACT__PARENT_DIAGRAM, msgs);
+	public NotificationChain basicSetParent(BusinessProcessDiagram newParent, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newParent, VsdtPackage.ARTIFACT__PARENT, msgs);
 		return msgs;
 	}
 
@@ -88,20 +88,20 @@ public abstract class ArtifactImpl extends GraphicalObjectImpl implements Artifa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setParentDiagram(BusinessProcessDiagram newParentDiagram) {
-		if (newParentDiagram != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.ARTIFACT__PARENT_DIAGRAM && newParentDiagram != null)) {
-			if (EcoreUtil.isAncestor(this, newParentDiagram))
+	public void setParent(BusinessProcessDiagram newParent) {
+		if (newParent != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.ARTIFACT__PARENT && newParent != null)) {
+			if (EcoreUtil.isAncestor(this, newParent))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newParentDiagram != null)
-				msgs = ((InternalEObject)newParentDiagram).eInverseAdd(this, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__ARTIFACTS, BusinessProcessDiagram.class, msgs);
-			msgs = basicSetParentDiagram(newParentDiagram, msgs);
+			if (newParent != null)
+				msgs = ((InternalEObject)newParent).eInverseAdd(this, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__ARTIFACTS, BusinessProcessDiagram.class, msgs);
+			msgs = basicSetParent(newParent, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ARTIFACT__PARENT_DIAGRAM, newParentDiagram, newParentDiagram));
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ARTIFACT__PARENT, newParent, newParent));
 	}
 
 	/**
@@ -150,10 +150,10 @@ public abstract class ArtifactImpl extends GraphicalObjectImpl implements Artifa
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case VsdtPackage.ARTIFACT__PARENT_DIAGRAM:
+			case VsdtPackage.ARTIFACT__PARENT:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetParentDiagram((BusinessProcessDiagram)otherEnd, msgs);
+				return basicSetParent((BusinessProcessDiagram)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -166,8 +166,8 @@ public abstract class ArtifactImpl extends GraphicalObjectImpl implements Artifa
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case VsdtPackage.ARTIFACT__PARENT_DIAGRAM:
-				return basicSetParentDiagram(null, msgs);
+			case VsdtPackage.ARTIFACT__PARENT:
+				return basicSetParent(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -180,7 +180,7 @@ public abstract class ArtifactImpl extends GraphicalObjectImpl implements Artifa
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case VsdtPackage.ARTIFACT__PARENT_DIAGRAM:
+			case VsdtPackage.ARTIFACT__PARENT:
 				return eInternalContainer().eInverseRemove(this, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__ARTIFACTS, BusinessProcessDiagram.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -194,8 +194,8 @@ public abstract class ArtifactImpl extends GraphicalObjectImpl implements Artifa
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case VsdtPackage.ARTIFACT__PARENT_DIAGRAM:
-				return getParentDiagram();
+			case VsdtPackage.ARTIFACT__PARENT:
+				return getParent();
 			case VsdtPackage.ARTIFACT__POOL:
 				if (resolve) return getPool();
 				return basicGetPool();
@@ -211,8 +211,8 @@ public abstract class ArtifactImpl extends GraphicalObjectImpl implements Artifa
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case VsdtPackage.ARTIFACT__PARENT_DIAGRAM:
-				setParentDiagram((BusinessProcessDiagram)newValue);
+			case VsdtPackage.ARTIFACT__PARENT:
+				setParent((BusinessProcessDiagram)newValue);
 				return;
 			case VsdtPackage.ARTIFACT__POOL:
 				setPool((Pool)newValue);
@@ -229,8 +229,8 @@ public abstract class ArtifactImpl extends GraphicalObjectImpl implements Artifa
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case VsdtPackage.ARTIFACT__PARENT_DIAGRAM:
-				setParentDiagram((BusinessProcessDiagram)null);
+			case VsdtPackage.ARTIFACT__PARENT:
+				setParent((BusinessProcessDiagram)null);
 				return;
 			case VsdtPackage.ARTIFACT__POOL:
 				setPool((Pool)null);
@@ -247,8 +247,8 @@ public abstract class ArtifactImpl extends GraphicalObjectImpl implements Artifa
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case VsdtPackage.ARTIFACT__PARENT_DIAGRAM:
-				return getParentDiagram() != null;
+			case VsdtPackage.ARTIFACT__PARENT:
+				return getParent() != null;
 			case VsdtPackage.ARTIFACT__POOL:
 				return pool != null;
 		}

@@ -13,19 +13,14 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import de.dailab.common.gmf.ExpandableItemProviderAdapter;
-import de.dailab.vsdt.LoopAttributeSet;
-import de.dailab.vsdt.VsdtPackage;
 
 /**
  * This is the item provider adapter for a {@link de.dailab.vsdt.LoopAttributeSet} object.
@@ -62,44 +57,44 @@ public class LoopAttributeSetItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addLoopCounterPropertyDescriptor(object);
+//			addLoopCounterPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
-	/**
-	 * This adds a property descriptor for the Loop Counter feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addLoopCounterPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_LoopAttributeSet_loopCounter_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_LoopAttributeSet_loopCounter_feature", "_UI_LoopAttributeSet_type"),
-				 VsdtPackage.Literals.LOOP_ATTRIBUTE_SET__LOOP_COUNTER,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
-				 null));
-	}
+//	/**
+//	 * This adds a property descriptor for the Loop Counter feature.
+//	 * <!-- begin-user-doc -->
+//	 * <!-- end-user-doc -->
+//	 * @generated
+//	 */
+//	protected void addLoopCounterPropertyDescriptor(Object object) {
+//		itemPropertyDescriptors.add
+//			(createItemPropertyDescriptor
+//				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+//				 getResourceLocator(),
+//				 getString("_UI_LoopAttributeSet_loopCounter_feature"),
+//				 getString("_UI_PropertyDescriptor_description", "_UI_LoopAttributeSet_loopCounter_feature", "_UI_LoopAttributeSet_type"),
+//				 VsdtPackage.Literals.LOOP_ATTRIBUTE_SET__LOOP_COUNTER,
+//				 true,
+//				 false,
+//				 false,
+//				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+//				 null,
+//				 null));
+//	}
 
-	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getText(Object object) {
-		LoopAttributeSet loopAttributeSet = (LoopAttributeSet)object;
-		return getString("_UI_LoopAttributeSet_type") + " " + loopAttributeSet.getLoopCounter();
-	}
+//	/**
+//	 * This returns the label text for the adapted class.
+//	 * <!-- begin-user-doc -->
+//	 * <!-- end-user-doc -->
+//	 * @generated
+//	 */
+//	@Override
+//	public String getText(Object object) {
+//		LoopAttributeSet loopAttributeSet = (LoopAttributeSet)object;
+//		return getString("_UI_LoopAttributeSet_type") + " " + loopAttributeSet.getLoopCounter();
+//	}
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -112,11 +107,11 @@ public class LoopAttributeSetItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(LoopAttributeSet.class)) {
-			case VsdtPackage.LOOP_ATTRIBUTE_SET__LOOP_COUNTER:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-		}
+//		switch (notification.getFeatureID(LoopAttributeSet.class)) {
+//			case VsdtPackage.LOOP_ATTRIBUTE_SET__LOOP_COUNTER:
+//				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+//				return;
+//		}
 		super.notifyChanged(notification);
 	}
 

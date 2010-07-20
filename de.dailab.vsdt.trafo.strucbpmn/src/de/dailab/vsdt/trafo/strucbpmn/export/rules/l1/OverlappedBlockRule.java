@@ -108,7 +108,7 @@ public class OverlappedBlockRule extends AbstractRule {
 		
 		//create sf between copy and g4
 		SequenceFlow seqFlow= VsdtFactory.eINSTANCE.createSequenceFlow();
-		seqFlow.setParentDiagram(_seqFlowA1.getParentDiagram());
+		seqFlow.setParent(_seqFlowA1.getParent());
 		seqFlow.setSource(copy);
 		seqFlow.setTarget(_gateway4);
 	}

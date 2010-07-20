@@ -25,33 +25,13 @@ import de.dailab.vsdt.VsdtPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.dailab.vsdt.impl.LoopAttributeSetImpl#getParentActivity <em>Parent Activity</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.LoopAttributeSetImpl#getLoopCounter <em>Loop Counter</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.LoopAttributeSetImpl#getParent <em>Parent</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public abstract class LoopAttributeSetImpl extends EObjectImpl implements LoopAttributeSet {
-	/**
-	 * The default value of the '{@link #getLoopCounter() <em>Loop Counter</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLoopCounter()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int LOOP_COUNTER_EDEFAULT = 0;
-	/**
-	 * The cached value of the '{@link #getLoopCounter() <em>Loop Counter</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLoopCounter()
-	 * @generated
-	 * @ordered
-	 */
-	protected int loopCounter = LOOP_COUNTER_EDEFAULT;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -76,8 +56,8 @@ public abstract class LoopAttributeSetImpl extends EObjectImpl implements LoopAt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Activity getParentActivity() {
-		if (eContainerFeatureID() != VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY) return null;
+	public Activity getParent() {
+		if (eContainerFeatureID() != VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT) return null;
 		return (Activity)eContainer();
 	}
 
@@ -86,8 +66,8 @@ public abstract class LoopAttributeSetImpl extends EObjectImpl implements LoopAt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetParentActivity(Activity newParentActivity, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParentActivity, VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY, msgs);
+	public NotificationChain basicSetParent(Activity newParent, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newParent, VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT, msgs);
 		return msgs;
 	}
 
@@ -96,41 +76,20 @@ public abstract class LoopAttributeSetImpl extends EObjectImpl implements LoopAt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setParentActivity(Activity newParentActivity) {
-		if (newParentActivity != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY && newParentActivity != null)) {
-			if (EcoreUtil.isAncestor(this, newParentActivity))
+	public void setParent(Activity newParent) {
+		if (newParent != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT && newParent != null)) {
+			if (EcoreUtil.isAncestor(this, newParent))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newParentActivity != null)
-				msgs = ((InternalEObject)newParentActivity).eInverseAdd(this, VsdtPackage.ACTIVITY__LOOP_ATTRIBUTES, Activity.class, msgs);
-			msgs = basicSetParentActivity(newParentActivity, msgs);
+			if (newParent != null)
+				msgs = ((InternalEObject)newParent).eInverseAdd(this, VsdtPackage.ACTIVITY__LOOP_ATTRIBUTES, Activity.class, msgs);
+			msgs = basicSetParent(newParent, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY, newParentActivity, newParentActivity));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public int getLoopCounter() {
-		return loopCounter;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setLoopCounter(int newLoopCounter) {
-		int oldLoopCounter = loopCounter;
-		loopCounter = newLoopCounter;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.LOOP_ATTRIBUTE_SET__LOOP_COUNTER, oldLoopCounter, loopCounter));
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT, newParent, newParent));
 	}
 
 	/**
@@ -141,10 +100,10 @@ public abstract class LoopAttributeSetImpl extends EObjectImpl implements LoopAt
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY:
+			case VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetParentActivity((Activity)otherEnd, msgs);
+				return basicSetParent((Activity)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -157,8 +116,8 @@ public abstract class LoopAttributeSetImpl extends EObjectImpl implements LoopAt
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY:
-				return basicSetParentActivity(null, msgs);
+			case VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT:
+				return basicSetParent(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -171,7 +130,7 @@ public abstract class LoopAttributeSetImpl extends EObjectImpl implements LoopAt
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY:
+			case VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT:
 				return eInternalContainer().eInverseRemove(this, VsdtPackage.ACTIVITY__LOOP_ATTRIBUTES, Activity.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -185,10 +144,8 @@ public abstract class LoopAttributeSetImpl extends EObjectImpl implements LoopAt
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY:
-				return getParentActivity();
-			case VsdtPackage.LOOP_ATTRIBUTE_SET__LOOP_COUNTER:
-				return getLoopCounter();
+			case VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT:
+				return getParent();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -201,11 +158,8 @@ public abstract class LoopAttributeSetImpl extends EObjectImpl implements LoopAt
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY:
-				setParentActivity((Activity)newValue);
-				return;
-			case VsdtPackage.LOOP_ATTRIBUTE_SET__LOOP_COUNTER:
-				setLoopCounter((Integer)newValue);
+			case VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT:
+				setParent((Activity)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -219,11 +173,8 @@ public abstract class LoopAttributeSetImpl extends EObjectImpl implements LoopAt
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY:
-				setParentActivity((Activity)null);
-				return;
-			case VsdtPackage.LOOP_ATTRIBUTE_SET__LOOP_COUNTER:
-				setLoopCounter(LOOP_COUNTER_EDEFAULT);
+			case VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT:
+				setParent((Activity)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -237,28 +188,10 @@ public abstract class LoopAttributeSetImpl extends EObjectImpl implements LoopAt
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY:
-				return getParentActivity() != null;
-			case VsdtPackage.LOOP_ATTRIBUTE_SET__LOOP_COUNTER:
-				return loopCounter != LOOP_COUNTER_EDEFAULT;
+			case VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT:
+				return getParent() != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (loopCounter: ");
-		result.append(loopCounter);
-		result.append(')');
-		return result.toString();
 	}
 
 } //LoopAttributeSetImpl

@@ -58,7 +58,6 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getInputSets <em>Input Sets</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getOutputSets <em>Output Sets</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getIORules <em>IO Rules</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getStartQuantity <em>Start Quantity</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getLoopAttributes <em>Loop Attributes</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getBoundaryEvents <em>Boundary Events</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getActivityType <em>Activity Type</em>}</li>
@@ -159,26 +158,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 * @ordered
 	 */
 	protected EList<Expression> ioRules;
-
-	/**
-	 * The default value of the '{@link #getStartQuantity() <em>Start Quantity</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStartQuantity()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int START_QUANTITY_EDEFAULT = 1;
-
-	/**
-	 * The cached value of the '{@link #getStartQuantity() <em>Start Quantity</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStartQuantity()
-	 * @generated
-	 * @ordered
-	 */
-	protected int startQuantity = START_QUANTITY_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getLoopAttributes() <em>Loop Attributes</em>}' containment reference.
@@ -509,27 +488,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getStartQuantity() {
-		return startQuantity;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setStartQuantity(int newStartQuantity) {
-		int oldStartQuantity = startQuantity;
-		startQuantity = newStartQuantity;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ACTIVITY__START_QUANTITY, oldStartQuantity, startQuantity));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public LoopAttributeSet getLoopAttributes() {
 		return loopAttributes;
 	}
@@ -558,9 +516,9 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 		if (newLoopAttributes != loopAttributes) {
 			NotificationChain msgs = null;
 			if (loopAttributes != null)
-				msgs = ((InternalEObject)loopAttributes).eInverseRemove(this, VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY, LoopAttributeSet.class, msgs);
+				msgs = ((InternalEObject)loopAttributes).eInverseRemove(this, VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT, LoopAttributeSet.class, msgs);
 			if (newLoopAttributes != null)
-				msgs = ((InternalEObject)newLoopAttributes).eInverseAdd(this, VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY, LoopAttributeSet.class, msgs);
+				msgs = ((InternalEObject)newLoopAttributes).eInverseAdd(this, VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT, LoopAttributeSet.class, msgs);
 			msgs = basicSetLoopAttributes(newLoopAttributes, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -1114,8 +1072,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				return getOutputSets();
 			case VsdtPackage.ACTIVITY__IO_RULES:
 				return getIORules();
-			case VsdtPackage.ACTIVITY__START_QUANTITY:
-				return getStartQuantity();
 			case VsdtPackage.ACTIVITY__LOOP_ATTRIBUTES:
 				return getLoopAttributes();
 			case VsdtPackage.ACTIVITY__BOUNDARY_EVENTS:
@@ -1190,9 +1146,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 			case VsdtPackage.ACTIVITY__IO_RULES:
 				getIORules().clear();
 				getIORules().addAll((Collection<? extends Expression>)newValue);
-				return;
-			case VsdtPackage.ACTIVITY__START_QUANTITY:
-				setStartQuantity((Integer)newValue);
 				return;
 			case VsdtPackage.ACTIVITY__LOOP_ATTRIBUTES:
 				setLoopAttributes((LoopAttributeSet)newValue);
@@ -1276,9 +1229,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 			case VsdtPackage.ACTIVITY__IO_RULES:
 				getIORules().clear();
 				return;
-			case VsdtPackage.ACTIVITY__START_QUANTITY:
-				setStartQuantity(START_QUANTITY_EDEFAULT);
-				return;
 			case VsdtPackage.ACTIVITY__LOOP_ATTRIBUTES:
 				setLoopAttributes((LoopAttributeSet)null);
 				return;
@@ -1350,8 +1300,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				return outputSets != null && !outputSets.isEmpty();
 			case VsdtPackage.ACTIVITY__IO_RULES:
 				return ioRules != null && !ioRules.isEmpty();
-			case VsdtPackage.ACTIVITY__START_QUANTITY:
-				return startQuantity != START_QUANTITY_EDEFAULT;
 			case VsdtPackage.ACTIVITY__LOOP_ATTRIBUTES:
 				return loopAttributes != null;
 			case VsdtPackage.ACTIVITY__BOUNDARY_EVENTS:
@@ -1446,8 +1394,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (adHoc: ");
 		result.append(adHoc);
-		result.append(", startQuantity: ");
-		result.append(startQuantity);
 		result.append(", activityType: ");
 		result.append(activityType);
 		result.append(", instantiate: ");

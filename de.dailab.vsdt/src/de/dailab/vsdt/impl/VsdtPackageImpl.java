@@ -866,17 +866,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getActivity_StartQuantity() {
-		return (EAttribute)activityEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getActivity_LoopAttributes() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(4);
+		return (EReference)activityEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -885,7 +876,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_BoundaryEvents() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(5);
+		return (EReference)activityEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -894,7 +885,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EAttribute getActivity_ActivityType() {
-		return (EAttribute)activityEClass.getEStructuralFeatures().get(6);
+		return (EAttribute)activityEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -903,7 +894,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_InMessage() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(7);
+		return (EReference)activityEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -912,7 +903,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_OutMessage() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(8);
+		return (EReference)activityEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -921,7 +912,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_Implementation() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(9);
+		return (EReference)activityEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -930,7 +921,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EAttribute getActivity_Instantiate() {
-		return (EAttribute)activityEClass.getEStructuralFeatures().get(10);
+		return (EAttribute)activityEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -939,7 +930,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EAttribute getActivity_Performers() {
-		return (EAttribute)activityEClass.getEStructuralFeatures().get(11);
+		return (EAttribute)activityEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -948,7 +939,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EAttribute getActivity_Script() {
-		return (EAttribute)activityEClass.getEStructuralFeatures().get(12);
+		return (EAttribute)activityEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -957,7 +948,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_ActivityRef() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(13);
+		return (EReference)activityEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -966,7 +957,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_Transaction() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(14);
+		return (EReference)activityEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -975,7 +966,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_DiagramRef() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(15);
+		return (EReference)activityEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -984,7 +975,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_ProcessRef() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(16);
+		return (EReference)activityEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -993,7 +984,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_InputPropertyMaps() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(17);
+		return (EReference)activityEClass.getEStructuralFeatures().get(16);
 	}
 
 	/**
@@ -1002,7 +993,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_OutputPropertyMaps() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(18);
+		return (EReference)activityEClass.getEStructuralFeatures().get(17);
 	}
 
 	/**
@@ -1055,17 +1046,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLoopAttributeSet_ParentActivity() {
+	public EReference getLoopAttributeSet_Parent() {
 		return (EReference)loopAttributeSetEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getLoopAttributeSet_LoopCounter() {
-		return (EAttribute)loopAttributeSetEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1208,7 +1190,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getGateway_MarkerVisible() {
+	public EAttribute getGateway_Instantiate() {
 		return (EAttribute)gatewayEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1217,17 +1199,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getGateway_Instantiate() {
-		return (EAttribute)gatewayEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getGateway_IncomingCondition() {
-		return (EReference)gatewayEClass.getEStructuralFeatures().get(3);
+		return (EReference)gatewayEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1236,7 +1209,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getGateway_OutgoingCondition() {
-		return (EReference)gatewayEClass.getEStructuralFeatures().get(4);
+		return (EReference)gatewayEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1325,7 +1298,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getArtifact_ParentDiagram() {
+	public EReference getArtifact_Parent() {
 		return (EReference)artifactEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1415,7 +1388,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getConnectingObject_ParentDiagram() {
+	public EReference getConnectingObject_Parent() {
 		return (EReference)connectingObjectEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1451,17 +1424,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSequenceFlow_Quantity() {
-		return (EAttribute)sequenceFlowEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getSequenceFlow_Source() {
-		return (EReference)sequenceFlowEClass.getEStructuralFeatures().get(3);
+		return (EReference)sequenceFlowEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1470,7 +1434,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getSequenceFlow_Target() {
-		return (EReference)sequenceFlowEClass.getEStructuralFeatures().get(4);
+		return (EReference)sequenceFlowEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -2241,7 +2205,6 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		createEReference(activityEClass, ACTIVITY__INPUT_SETS);
 		createEReference(activityEClass, ACTIVITY__OUTPUT_SETS);
 		createEReference(activityEClass, ACTIVITY__IO_RULES);
-		createEAttribute(activityEClass, ACTIVITY__START_QUANTITY);
 		createEReference(activityEClass, ACTIVITY__LOOP_ATTRIBUTES);
 		createEReference(activityEClass, ACTIVITY__BOUNDARY_EVENTS);
 		createEAttribute(activityEClass, ACTIVITY__ACTIVITY_TYPE);
@@ -2259,8 +2222,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		createEReference(activityEClass, ACTIVITY__OUTPUT_PROPERTY_MAPS);
 
 		loopAttributeSetEClass = createEClass(LOOP_ATTRIBUTE_SET);
-		createEReference(loopAttributeSetEClass, LOOP_ATTRIBUTE_SET__PARENT_ACTIVITY);
-		createEAttribute(loopAttributeSetEClass, LOOP_ATTRIBUTE_SET__LOOP_COUNTER);
+		createEReference(loopAttributeSetEClass, LOOP_ATTRIBUTE_SET__PARENT);
 
 		standardLoopAttSetEClass = createEClass(STANDARD_LOOP_ATT_SET);
 		createEReference(standardLoopAttSetEClass, STANDARD_LOOP_ATT_SET__LOOP_CONDITION);
@@ -2286,13 +2248,12 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 
 		gatewayEClass = createEClass(GATEWAY);
 		createEAttribute(gatewayEClass, GATEWAY__GATEWAY_TYPE);
-		createEAttribute(gatewayEClass, GATEWAY__MARKER_VISIBLE);
 		createEAttribute(gatewayEClass, GATEWAY__INSTANTIATE);
 		createEReference(gatewayEClass, GATEWAY__INCOMING_CONDITION);
 		createEReference(gatewayEClass, GATEWAY__OUTGOING_CONDITION);
 
 		artifactEClass = createEClass(ARTIFACT);
-		createEReference(artifactEClass, ARTIFACT__PARENT_DIAGRAM);
+		createEReference(artifactEClass, ARTIFACT__PARENT);
 		createEReference(artifactEClass, ARTIFACT__POOL);
 
 		dataObjectEClass = createEClass(DATA_OBJECT);
@@ -2306,12 +2267,11 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		groupEClass = createEClass(GROUP);
 
 		connectingObjectEClass = createEClass(CONNECTING_OBJECT);
-		createEReference(connectingObjectEClass, CONNECTING_OBJECT__PARENT_DIAGRAM);
+		createEReference(connectingObjectEClass, CONNECTING_OBJECT__PARENT);
 
 		sequenceFlowEClass = createEClass(SEQUENCE_FLOW);
 		createEAttribute(sequenceFlowEClass, SEQUENCE_FLOW__CONDITION_TYPE);
 		createEReference(sequenceFlowEClass, SEQUENCE_FLOW__CONDITION_EXPRESSION);
-		createEAttribute(sequenceFlowEClass, SEQUENCE_FLOW__QUANTITY);
 		createEReference(sequenceFlowEClass, SEQUENCE_FLOW__SOURCE);
 		createEReference(sequenceFlowEClass, SEQUENCE_FLOW__TARGET);
 
@@ -2468,8 +2428,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		initEClass(businessProcessDiagramEClass, BusinessProcessDiagram.class, "BusinessProcessDiagram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBusinessProcessDiagram_Parent(), this.getBusinessProcessSystem(), this.getBusinessProcessSystem_BusinessProcesses(), "parent", null, 0, 1, BusinessProcessDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBusinessProcessDiagram_Pools(), this.getPool(), this.getPool_Parent(), "pools", null, 1, -1, BusinessProcessDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBusinessProcessDiagram_Artifacts(), this.getArtifact(), this.getArtifact_ParentDiagram(), "artifacts", null, 0, -1, BusinessProcessDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBusinessProcessDiagram_Connections(), this.getConnectingObject(), this.getConnectingObject_ParentDiagram(), "connections", null, 0, -1, BusinessProcessDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBusinessProcessDiagram_Artifacts(), this.getArtifact(), this.getArtifact_Parent(), "artifacts", null, 0, -1, BusinessProcessDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBusinessProcessDiagram_Connections(), this.getConnectingObject(), this.getConnectingObject_Parent(), "connections", null, 0, -1, BusinessProcessDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBusinessProcessDiagram_Participants(), this.getParticipant(), this.getParticipant_AssociatedProcesses(), "participants", null, 1, -1, BusinessProcessDiagram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractProcessEClass, AbstractProcess.class, "AbstractProcess", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2550,8 +2510,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		initEReference(getActivity_InputSets(), this.getInputSet(), null, "inputSets", null, 0, -1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActivity_OutputSets(), this.getOutputSet(), null, "outputSets", null, 0, -1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActivity_IORules(), this.getExpression(), null, "IORules", null, 0, -1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getActivity_StartQuantity(), ecorePackage.getEInt(), "startQuantity", "1", 1, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getActivity_LoopAttributes(), this.getLoopAttributeSet(), this.getLoopAttributeSet_ParentActivity(), "loopAttributes", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getActivity_LoopAttributes(), this.getLoopAttributeSet(), this.getLoopAttributeSet_Parent(), "loopAttributes", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActivity_BoundaryEvents(), this.getIntermediate(), this.getIntermediate_AttachedTo(), "boundaryEvents", null, 0, -1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActivity_ActivityType(), this.getActivityType(), "activityType", null, 1, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActivity_InMessage(), this.getMessage(), null, "inMessage", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2574,8 +2533,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		addEOperation(activityEClass, ecorePackage.getEBoolean(), "isCompensation", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(loopAttributeSetEClass, LoopAttributeSet.class, "LoopAttributeSet", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLoopAttributeSet_ParentActivity(), this.getActivity(), this.getActivity_LoopAttributes(), "parentActivity", null, 1, 1, LoopAttributeSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLoopAttributeSet_LoopCounter(), ecorePackage.getEInt(), "loopCounter", null, 1, 1, LoopAttributeSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLoopAttributeSet_Parent(), this.getActivity(), this.getActivity_LoopAttributes(), "parent", null, 1, 1, LoopAttributeSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(standardLoopAttSetEClass, StandardLoopAttSet.class, "StandardLoopAttSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStandardLoopAttSet_LoopCondition(), this.getExpression(), null, "loopCondition", null, 0, 1, StandardLoopAttSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2601,13 +2559,12 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 
 		initEClass(gatewayEClass, Gateway.class, "Gateway", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGateway_GatewayType(), this.getGatewayType(), "gatewayType", null, 0, 1, Gateway.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getGateway_MarkerVisible(), ecorePackage.getEBoolean(), "markerVisible", "false", 0, 1, Gateway.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGateway_Instantiate(), ecorePackage.getEBoolean(), "instantiate", null, 0, 1, Gateway.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGateway_IncomingCondition(), this.getExpression(), null, "incomingCondition", null, 0, 1, Gateway.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGateway_OutgoingCondition(), this.getExpression(), null, "outgoingCondition", null, 0, 1, Gateway.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(artifactEClass, Artifact.class, "Artifact", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getArtifact_ParentDiagram(), this.getBusinessProcessDiagram(), this.getBusinessProcessDiagram_Artifacts(), "parentDiagram", null, 1, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArtifact_Parent(), this.getBusinessProcessDiagram(), this.getBusinessProcessDiagram_Artifacts(), "parent", null, 1, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArtifact_Pool(), this.getPool(), null, "pool", null, 0, 1, Artifact.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dataObjectEClass, DataObject.class, "DataObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2621,12 +2578,11 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		initEClass(groupEClass, Group.class, "Group", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(connectingObjectEClass, ConnectingObject.class, "ConnectingObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConnectingObject_ParentDiagram(), this.getBusinessProcessDiagram(), this.getBusinessProcessDiagram_Connections(), "parentDiagram", null, 1, 1, ConnectingObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConnectingObject_Parent(), this.getBusinessProcessDiagram(), this.getBusinessProcessDiagram_Connections(), "parent", null, 1, 1, ConnectingObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sequenceFlowEClass, SequenceFlow.class, "SequenceFlow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSequenceFlow_ConditionType(), this.getConditionType(), "conditionType", null, 1, 1, SequenceFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSequenceFlow_ConditionExpression(), this.getExpression(), null, "conditionExpression", null, 0, 1, SequenceFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSequenceFlow_Quantity(), ecorePackage.getEInt(), "quantity", "1", 1, 1, SequenceFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSequenceFlow_Source(), this.getFlowObject(), this.getFlowObject_OutgoingSeq(), "source", null, 1, 1, SequenceFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSequenceFlow_Target(), this.getFlowObject(), this.getFlowObject_IncomingSeq(), "target", null, 1, 1, SequenceFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

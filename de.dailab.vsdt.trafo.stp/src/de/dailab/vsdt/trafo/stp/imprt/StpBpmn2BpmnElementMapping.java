@@ -252,7 +252,7 @@ public class StpBpmn2BpmnElementMapping extends MappingStage {
 		SequenceFlow target= vsdtFac.createSequenceFlow();
 		wrapper.map(source, target);
 		mapBasicAttributes(source, target);
-		target.setParentDiagram(_currentDiagram);
+		target.setParent(_currentDiagram);
 		target.setSource((FlowObject) wrapper.getMapping(source.getSource()));
 		target.setTarget((FlowObject) wrapper.getMapping(source.getTarget()));
 		switch (source.getConditionType()) {
@@ -278,7 +278,7 @@ public class StpBpmn2BpmnElementMapping extends MappingStage {
 		MessageFlow target= vsdtFac.createMessageFlow();
 		wrapper.map(source, target);
 		mapBasicAttributes(source, target);
-		target.setParentDiagram(_currentDiagram);
+		target.setParent(_currentDiagram);
 		target.setSource((Node) wrapper.getMapping(source.getSource()));
 		target.setTarget((Node) wrapper.getMapping(source.getTarget()));
 		if (target.getSource() == null || target.getTarget() == null) {
@@ -294,7 +294,7 @@ public class StpBpmn2BpmnElementMapping extends MappingStage {
 		wrapper.map(source, target);
 		target.setSource((GraphicalObject) wrapper.getMapping(source.getSource()));
 		target.setTarget((GraphicalObject) wrapper.getMapping(source.getTarget()));
-		target.setParentDiagram(_currentDiagram);
+		target.setParent(_currentDiagram);
 		switch (source.getDirection()) {
 		case NONE_LITERAL:
 			target.setDirection(de.dailab.vsdt.DirectionType.NONE);
@@ -328,7 +328,7 @@ public class StpBpmn2BpmnElementMapping extends MappingStage {
 		}
 		wrapper.map(source, target);
 		mapBasicAttributes(source, target);
-		target.setParentDiagram(_currentDiagram);
+		target.setParent(_currentDiagram);
 		// associations are mapped later, after all the nodes have been mapped
 		associations.addAll(source.getAssociations());
 		return target;

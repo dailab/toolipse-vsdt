@@ -185,7 +185,7 @@ public class StandardLoopAttSetItemProvider
 	@Override
 	public String getText(Object object) {
 		StandardLoopAttSet standardLoopAttSet = (StandardLoopAttSet)object;
-		return getString("_UI_StandardLoopAttSet_type") + " " + standardLoopAttSet.getLoopCounter();
+		return getString("_UI_StandardLoopAttSet_type") + " " + standardLoopAttSet.getLoopMaximum();
 	}
 
 	/**

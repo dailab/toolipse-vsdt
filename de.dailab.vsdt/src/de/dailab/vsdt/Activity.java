@@ -19,7 +19,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.Activity#getInputSets <em>Input Sets</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getOutputSets <em>Output Sets</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getIORules <em>IO Rules</em>}</li>
- *   <li>{@link de.dailab.vsdt.Activity#getStartQuantity <em>Start Quantity</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getLoopAttributes <em>Loop Attributes</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getBoundaryEvents <em>Boundary Events</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getActivityType <em>Activity Type</em>}</li>
@@ -92,35 +91,8 @@ public interface Activity extends FlowObject, AbstractProcess, FlowObjectContain
 	EList<Expression> getIORules();
 
 	/**
-	 * Returns the value of the '<em><b>Start Quantity</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Start Quantity</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Start Quantity</em>' attribute.
-	 * @see #setStartQuantity(int)
-	 * @see de.dailab.vsdt.VsdtPackage#getActivity_StartQuantity()
-	 * @model default="1" required="true"
-	 * @generated
-	 */
-	int getStartQuantity();
-
-	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Activity#getStartQuantity <em>Start Quantity</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Start Quantity</em>' attribute.
-	 * @see #getStartQuantity()
-	 * @generated
-	 */
-	void setStartQuantity(int value);
-
-	/**
 	 * Returns the value of the '<em><b>Loop Attributes</b></em>' containment reference.
-	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.LoopAttributeSet#getParentActivity <em>Parent Activity</em>}'.
+	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.LoopAttributeSet#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Loop Attributes</em>' containment reference isn't clear,
@@ -130,8 +102,8 @@ public interface Activity extends FlowObject, AbstractProcess, FlowObjectContain
 	 * @return the value of the '<em>Loop Attributes</em>' containment reference.
 	 * @see #setLoopAttributes(LoopAttributeSet)
 	 * @see de.dailab.vsdt.VsdtPackage#getActivity_LoopAttributes()
-	 * @see de.dailab.vsdt.LoopAttributeSet#getParentActivity
-	 * @model opposite="parentActivity" containment="true"
+	 * @see de.dailab.vsdt.LoopAttributeSet#getParent
+	 * @model opposite="parent" containment="true"
 	 * @generated
 	 */
 	LoopAttributeSet getLoopAttributes();

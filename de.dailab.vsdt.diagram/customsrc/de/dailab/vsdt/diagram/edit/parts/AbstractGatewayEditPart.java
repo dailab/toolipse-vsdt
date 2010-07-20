@@ -34,9 +34,8 @@ public abstract class AbstractGatewayEditPart extends AbstractVsdtBorderedShapeE
 		super.notifyChanged(notification);
 		int feature = notification.getFeatureID(VsdtPackage.class);
 		switch (feature) {
-		case VsdtPackage.GATEWAY__MARKER_VISIBLE:
 		case VsdtPackage.GATEWAY__GATEWAY_TYPE:
-			getPrimaryShape().setGatewayType(getCastedModel().getGatewayType(),getCastedModel().isMarkerVisible());
+			getPrimaryShape().setGatewayType(getCastedModel().getGatewayType());
 			refreshVisuals();
 			break;
 //		case VsdtPackage.FLOW_OBJECT__OUTGOING_SEQ:
@@ -61,8 +60,7 @@ public abstract class AbstractGatewayEditPart extends AbstractVsdtBorderedShapeE
 	 * sets all fields depending on the underlying model
 	 */
 	protected IFigure initNodeShape() {
-		GatewayFigure figure= new GatewayFigure(getCastedModel()
-				.getGatewayType(), getCastedModel().isMarkerVisible());
+		GatewayFigure figure= new GatewayFigure(getCastedModel().getGatewayType());
 		return figure;
 	}
 

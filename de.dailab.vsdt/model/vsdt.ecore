@@ -38,9 +38,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="pools" lowerBound="1" upperBound="-1"
         eType="#//Pool" containment="true" eOpposite="#//Pool/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="artifacts" upperBound="-1"
-        eType="#//Artifact" containment="true" eOpposite="#//Artifact/parentDiagram"/>
+        eType="#//Artifact" containment="true" eOpposite="#//Artifact/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="connections" upperBound="-1"
-        eType="#//ConnectingObject" containment="true" eOpposite="#//ConnectingObject/parentDiagram"/>
+        eType="#//ConnectingObject" containment="true" eOpposite="#//ConnectingObject/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="participants" lowerBound="1"
         upperBound="-1" eType="#//Participant" eOpposite="#//Participant/associatedProcesses"/>
   </eClassifiers>
@@ -161,10 +161,8 @@
         eType="#//OutputSet" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="IORules" upperBound="-1"
         eType="#//Expression" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startQuantity" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="loopAttributes" eType="#//LoopAttributeSet"
-        containment="true" eOpposite="#//LoopAttributeSet/parentActivity"/>
+        containment="true" eOpposite="#//LoopAttributeSet/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundaryEvents" upperBound="-1"
         eType="#//Intermediate" containment="true" eOpposite="#//Intermediate/attachedTo"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="activityType" lowerBound="1"
@@ -205,10 +203,8 @@
     <eLiterals name="MULTIINSTANCE" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LoopAttributeSet" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentActivity" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
         eType="#//Activity" eOpposite="#//Activity/loopAttributes"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="loopCounter" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StandardLoopAttSet" eSuperTypes="#//LoopAttributeSet">
     <eStructuralFeatures xsi:type="ecore:EReference" name="loopCondition" eType="#//Expression"
@@ -254,8 +250,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Gateway" eSuperTypes="#//FlowObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="gatewayType" eType="#//GatewayType"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="markerVisible" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="instantiate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incomingCondition" eType="#//Expression"
         containment="true"/>
@@ -270,7 +264,7 @@
     <eLiterals name="AND" value="4"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Artifact" abstract="true" eSuperTypes="#//GraphicalObject">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentDiagram" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
         eType="#//BusinessProcessDiagram" eOpposite="#//BusinessProcessDiagram/artifacts"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="pool" eType="#//Pool"/>
   </eClassifiers>
@@ -286,7 +280,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="TextAnnotation" eSuperTypes="#//Artifact"/>
   <eClassifiers xsi:type="ecore:EClass" name="Group" eSuperTypes="#//Artifact"/>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectingObject" abstract="true" eSuperTypes="#//GraphicalObject">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parentDiagram" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
         eType="#//BusinessProcessDiagram" eOpposite="#//BusinessProcessDiagram/connections"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SequenceFlow" eSuperTypes="#//ConnectingObject">
@@ -294,8 +288,6 @@
         eType="#//ConditionType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="conditionExpression" eType="#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="quantity" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
         eType="#//FlowObject" resolveProxies="false" eOpposite="#//FlowObject/outgoingSeq"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"

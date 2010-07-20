@@ -78,7 +78,7 @@ public interface BusinessProcessDiagram extends IdObject {
 	/**
 	 * Returns the value of the '<em><b>Artifacts</b></em>' containment reference list.
 	 * The list contents are of type {@link de.dailab.vsdt.Artifact}.
-	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.Artifact#getParentDiagram <em>Parent Diagram</em>}'.
+	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.Artifact#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Artifacts</em>' containment reference list isn't clear,
@@ -87,8 +87,8 @@ public interface BusinessProcessDiagram extends IdObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Artifacts</em>' containment reference list.
 	 * @see de.dailab.vsdt.VsdtPackage#getBusinessProcessDiagram_Artifacts()
-	 * @see de.dailab.vsdt.Artifact#getParentDiagram
-	 * @model opposite="parentDiagram" containment="true"
+	 * @see de.dailab.vsdt.Artifact#getParent
+	 * @model opposite="parent" containment="true"
 	 * @generated
 	 */
 	EList<Artifact> getArtifacts();
@@ -96,7 +96,7 @@ public interface BusinessProcessDiagram extends IdObject {
 	/**
 	 * Returns the value of the '<em><b>Connections</b></em>' containment reference list.
 	 * The list contents are of type {@link de.dailab.vsdt.ConnectingObject}.
-	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.ConnectingObject#getParentDiagram <em>Parent Diagram</em>}'.
+	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.ConnectingObject#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Connections</em>' containment reference list isn't clear,
@@ -105,8 +105,8 @@ public interface BusinessProcessDiagram extends IdObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Connections</em>' containment reference list.
 	 * @see de.dailab.vsdt.VsdtPackage#getBusinessProcessDiagram_Connections()
-	 * @see de.dailab.vsdt.ConnectingObject#getParentDiagram
-	 * @model opposite="parentDiagram" containment="true"
+	 * @see de.dailab.vsdt.ConnectingObject#getParent
+	 * @model opposite="parent" containment="true"
 	 * @generated
 	 */
 	EList<ConnectingObject> getConnections();

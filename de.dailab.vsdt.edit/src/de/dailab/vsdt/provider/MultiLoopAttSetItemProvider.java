@@ -7,6 +7,7 @@
 package de.dailab.vsdt.provider;
 
 
+import de.dailab.vsdt.FlowConditionTypes;
 import java.util.Collection;
 import java.util.List;
 
@@ -208,8 +209,11 @@ public class MultiLoopAttSetItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		MultiLoopAttSet multiLoopAttSet = (MultiLoopAttSet)object;
-		return getString("_UI_MultiLoopAttSet_type") + " " + multiLoopAttSet.getLoopCounter();
+		FlowConditionTypes labelValue = ((MultiLoopAttSet)object).getMI_FlowCondition();
+		String label = labelValue == null ? null : labelValue.toString();
+		return label == null || label.length() == 0 ?
+			getString("_UI_MultiLoopAttSet_type") :
+			getString("_UI_MultiLoopAttSet_type") + " " + label;
 	}
 
 	/**

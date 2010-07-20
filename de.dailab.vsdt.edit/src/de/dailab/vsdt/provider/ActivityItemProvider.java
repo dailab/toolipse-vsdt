@@ -67,7 +67,6 @@ public class ActivityItemProvider
 
 			addAdHocPropertyDescriptor(object);
 			addAdHocCompletionConditionPropertyDescriptor(object);
-			addStartQuantityPropertyDescriptor(object);
 			addActivityTypePropertyDescriptor(object);
 			addInMessagePropertyDescriptor(object);
 			addOutMessagePropertyDescriptor(object);
@@ -123,28 +122,6 @@ public class ActivityItemProvider
 				 false,
 				 null,
 				 getString("_UI_ProcessPropertyCategory"),
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Start Quantity feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addStartQuantityPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Activity_startQuantity_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_startQuantity_feature", "_UI_Activity_type"),
-				 VsdtPackage.Literals.ACTIVITY__START_QUANTITY,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 null,
 				 null));
 	}
 
@@ -495,7 +472,6 @@ public class ActivityItemProvider
 
 		switch (notification.getFeatureID(Activity.class)) {
 			case VsdtPackage.ACTIVITY__AD_HOC:
-			case VsdtPackage.ACTIVITY__START_QUANTITY:
 			case VsdtPackage.ACTIVITY__ACTIVITY_TYPE:
 			case VsdtPackage.ACTIVITY__INSTANTIATE:
 			case VsdtPackage.ACTIVITY__PERFORMERS:

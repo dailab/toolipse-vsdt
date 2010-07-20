@@ -332,50 +332,7 @@ public class VsdtExpressionVisitor {
 	 * 	CONCAT = "++"; 	
 	 */
 	protected void visit(Operator operator) {
-		switch (operator) {
-		case LT:
-			buffer.append("<");
-			break;
-		case LE:
-			buffer.append("<=");
-			break;
-		case EQ:
-			buffer.append("==");
-			break;
-		case NEQ:
-			buffer.append("!=");
-			break;
-		case GT:
-			buffer.append(">");
-			break;
-		case GE:
-			buffer.append(">=");
-			break;
-		case ADD:
-			buffer.append("+");
-			break;
-		case SUB:
-			buffer.append("-");
-			break;
-		case MULT:
-			buffer.append("*");
-			break;
-		case DIV:
-			buffer.append("/");
-			break;
-		case MOD:
-			buffer.append("%");
-			break;
-		case AND:
-			buffer.append("and");
-			break;
-		case OR:
-			buffer.append("or");
-			break;
-		case CONCAT:
-			buffer.append("++");
-			break;
-		}
+		buffer.append(operator.getLiteral());
 	}
 
 	// VARIABLE NAME SUBSTITUTION

@@ -164,7 +164,7 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 	 */
 	public EList<Artifact> getArtifacts() {
 		if (artifacts == null) {
-			artifacts = new EObjectContainmentWithInverseEList<Artifact>(Artifact.class, this, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__ARTIFACTS, VsdtPackage.ARTIFACT__PARENT_DIAGRAM);
+			artifacts = new EObjectContainmentWithInverseEList<Artifact>(Artifact.class, this, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__ARTIFACTS, VsdtPackage.ARTIFACT__PARENT);
 		}
 		return artifacts;
 	}
@@ -176,7 +176,7 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 	 */
 	public EList<ConnectingObject> getConnections() {
 		if (connections == null) {
-			connections = new EObjectContainmentWithInverseEList<ConnectingObject>(ConnectingObject.class, this, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__CONNECTIONS, VsdtPackage.CONNECTING_OBJECT__PARENT_DIAGRAM);
+			connections = new EObjectContainmentWithInverseEList<ConnectingObject>(ConnectingObject.class, this, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__CONNECTIONS, VsdtPackage.CONNECTING_OBJECT__PARENT);
 		}
 		return connections;
 	}

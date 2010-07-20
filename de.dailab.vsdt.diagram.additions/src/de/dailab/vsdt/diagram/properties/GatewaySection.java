@@ -27,7 +27,7 @@ implements SelectionListener {
 	public static final String DISPLAY_TYPE= "Gateway Type",
 							   DISPLAY_TYPE_GROUP= "Gateway Type Attributes",
 							   
-							   DISPLAY_XOR_DATA_MARKERVIS= "Marker Visible",
+//							   DISPLAY_XOR_DATA_MARKERVIS= "Marker Visible",
 							   DISPLAY_XOR_EVENT_INSTANTIATE= "Instantiate",
 							   DISPLAY_COMPLEX_INCOMINGCOND= "Incoming Condition",
 							   DISPLAY_COMPLEX_OUTGOINGCOND= "Outgoing Condition";
@@ -42,7 +42,7 @@ implements SelectionListener {
 
     private Combo typeCombo;
     
-    private Button xorMarkerButton;
+//    private Button xorMarkerButton;
     
     private Button xorEventInstantiateButton;
     
@@ -75,12 +75,12 @@ implements SelectionListener {
  	protected void internalRefresh() {
     	typeCombo.select(gateway.getGatewayType().getValue());
     	
-    	xorMarkerButton.setEnabled(gateway.getGatewayType() == GatewayType.XOR_DATA);
+//    	xorMarkerButton.setEnabled(gateway.getGatewayType() == GatewayType.XOR_DATA);
     	xorEventInstantiateButton.setEnabled(gateway.getGatewayType() == GatewayType.XOR_EVENT);
     	complexIncomingCondText.setEnabled(gateway.getGatewayType() == GatewayType.COMPLEX);
     	complexOutgoingCondText.setEnabled(gateway.getGatewayType() == GatewayType.COMPLEX);
     	
-		xorMarkerButton.setSelection(gateway.isMarkerVisible());
+//		xorMarkerButton.setSelection(gateway.isMarkerVisible());
 		xorEventInstantiateButton.setSelection(gateway.isInstantiate());
 		complexIncomingCondText.setText(getExpression(gateway.getIncomingCondition()));
 		complexOutgoingCondText.setText(getExpression(gateway.getOutgoingCondition()));
@@ -111,10 +111,10 @@ implements SelectionListener {
         // gateway type attributes
         Group attributesGroup= FormLayoutUtil.addGroup(composite, DISPLAY_TYPE_GROUP, typeCombo, 0, 50);
         
-    	xorMarkerButton= FormLayoutUtil.addButton(attributesGroup, DISPLAY_XOR_DATA_MARKERVIS, SWT.CHECK, 0, 0, null);
-    	xorMarkerButton.addSelectionListener(this);
+//    	xorMarkerButton= FormLayoutUtil.addButton(attributesGroup, DISPLAY_XOR_DATA_MARKERVIS, SWT.CHECK, 0, 0, null);
+//    	xorMarkerButton.addSelectionListener(this);
 
-    	xorEventInstantiateButton= FormLayoutUtil.addButton(attributesGroup, DISPLAY_XOR_EVENT_INSTANTIATE, SWT.CHECK, xorMarkerButton, 0, null);
+    	xorEventInstantiateButton= FormLayoutUtil.addButton(attributesGroup, DISPLAY_XOR_EVENT_INSTANTIATE, SWT.CHECK, 0, 0, null);
     	xorEventInstantiateButton.addSelectionListener(this);
     	
     	label= FormLayoutUtil.addLabel(attributesGroup, DISPLAY_COMPLEX_INCOMINGCOND, xorEventInstantiateButton, 0);
@@ -170,9 +170,9 @@ implements SelectionListener {
     	if (src.equals(typeCombo)) {
     		setPropertyValue(gateway, pack.getGateway_GatewayType(), GatewayType.get(typeCombo.getSelectionIndex()));
     	}
-		if (src.equals(xorMarkerButton)) {
-			setPropertyValue(gateway, pack.getGateway_MarkerVisible(), xorMarkerButton.getSelection());
-		}
+//		if (src.equals(xorMarkerButton)) {
+//			setPropertyValue(gateway, pack.getGateway_MarkerVisible(), xorMarkerButton.getSelection());
+//		}
 		if (src.equals(xorEventInstantiateButton)) {
 			setPropertyValue(gateway, pack.getGateway_Instantiate(), xorEventInstantiateButton.getSelection());
 		}

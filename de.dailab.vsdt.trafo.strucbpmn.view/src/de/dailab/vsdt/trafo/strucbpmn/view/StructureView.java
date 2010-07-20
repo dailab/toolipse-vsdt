@@ -33,7 +33,6 @@ import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
-import de.dailab.vsdt.diagram.layout.ESLayout;
 import de.dailab.vsdt.diagram.layout.StructureLayout;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
 import de.dailab.vsdt.trafo.MappingStage;
@@ -125,20 +124,20 @@ public class StructureView extends AbstractStructuredViewerView implements ISele
 					editor.getDiagramEditDomain().getDiagramCommandStack().execute(cmd);
 				}
 			}
-		}, new Action("Evolutionary Layout (Experimental)", null) {
-			@Override
-			public void run() {
-				// TODO just for testing; move this somewhere else
-				if (isVsdtDiagram()) {
-					IWorkbenchPage workbenchPage= getViewSite().getWorkbenchWindow().getActivePage();
-					VsdtDiagramEditor editor= (VsdtDiagramEditor) workbenchPage.getActiveEditor();
-					ESLayout layout= new ESLayout();
-					Map<FlowObject, Rectangle> layoutMap= layout.createLayoutMap(editor);
-					Command cmd= layout.getLayoutCommand(editor.getDiagramEditPart().getChildren(), true, layoutMap);
-					editor.getDiagramEditDomain().getDiagramCommandStack().execute(cmd);
-				}
-			}
-		});
+		});//, new Action("Evolutionary Layout (Experimental)", null) {
+//			@Override
+//			public void run() {
+//				// TODO just for testing; move this somewhere else
+//				if (isVsdtDiagram()) {
+//					IWorkbenchPage workbenchPage= getViewSite().getWorkbenchWindow().getActivePage();
+//					VsdtDiagramEditor editor= (VsdtDiagramEditor) workbenchPage.getActiveEditor();
+//					ESLayout layout= new ESLayout();
+//					Map<FlowObject, Rectangle> layoutMap= layout.createLayoutMap(editor);
+//					Command cmd= layout.getLayoutCommand(editor.getDiagramEditPart().getChildren(), true, layoutMap);
+//					editor.getDiagramEditDomain().getDiagramCommandStack().execute(cmd);
+//				}
+//			}
+//		});
 	}
 
 	protected void updateActionEnablement() {

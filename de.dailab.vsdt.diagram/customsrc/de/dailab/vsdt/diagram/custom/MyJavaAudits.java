@@ -728,14 +728,14 @@ public class MyJavaAudits {
 	 * A Sequence Flow's Quantity may not be less than 1
 	 */
 	public static Boolean seq6quantityAtLeastOne(SequenceFlow self) {
-		return self.getQuantity()>0;
+		return true; //self.getQuantity()>0;
 	}
 
 	/**
 	 * An Activity' StartQuantity must be at least 1
 	 */
 	public static Boolean act4startQuantityNotLowerThanOne(Activity self) {
-		return self.getStartQuantity()>0;
+		return true; //self.getStartQuantity()>0;
 	}
 
 	/**

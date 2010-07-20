@@ -32,7 +32,6 @@ import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
-import de.dailab.vsdt.util.VsdtHelper;
 
 /**
  * Abstract superclass for BPMN Layout Algorithms. Provides some constants, e.g.
@@ -92,7 +91,7 @@ public abstract class AbstractLayout {
 
 				// FIXME workaround
 				for (FlowObject flowObject2 : layoutMap.keySet()) {
-					if (VsdtHelper.equals(flowObject, flowObject2)) {
+					if (flowObject.getId().equals(flowObject2.getId())) {
 						flowObject= flowObject2;
 						break;
 					}

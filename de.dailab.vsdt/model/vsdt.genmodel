@@ -186,7 +186,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/inputSets"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/outputSets"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/IORules"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/startQuantity"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/loopAttributes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/boundaryEvents"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/activityType"/>
@@ -207,8 +206,7 @@
       <genOperations ecoreOperation="vsdt.ecore#//Activity/isCompensation"/>
     </genClasses>
     <genClasses image="false" ecoreClass="vsdt.ecore#//LoopAttributeSet">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference vsdt.ecore#//LoopAttributeSet/parentActivity"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//LoopAttributeSet/loopCounter"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference vsdt.ecore#//LoopAttributeSet/parent"/>
     </genClasses>
     <genClasses ecoreClass="vsdt.ecore#//StandardLoopAttSet">
       <genFeatures property="Readonly" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//StandardLoopAttSet/loopCondition"/>
@@ -234,7 +232,6 @@
     </genClasses>
     <genClasses ecoreClass="vsdt.ecore#//Gateway">
       <genFeatures createChild="false" propertyCategory="General" ecoreFeature="ecore:EAttribute vsdt.ecore#//Gateway/gatewayType"/>
-      <genFeatures createChild="false" propertyCategory="Gateway Type Atributes" ecoreFeature="ecore:EAttribute vsdt.ecore#//Gateway/markerVisible"/>
       <genFeatures createChild="false" propertyCategory="Gateway Type Atributes" ecoreFeature="ecore:EAttribute vsdt.ecore#//Gateway/instantiate"/>
       <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Gateway Type Atributes"
           ecoreFeature="ecore:EReference vsdt.ecore#//Gateway/incomingCondition"/>
@@ -242,7 +239,7 @@
           ecoreFeature="ecore:EReference vsdt.ecore#//Gateway/outgoingCondition"/>
     </genClasses>
     <genClasses image="false" ecoreClass="vsdt.ecore#//Artifact">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference vsdt.ecore#//Artifact/parentDiagram"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference vsdt.ecore#//Artifact/parent"/>
       <genFeatures notify="false" createChild="false" propertyCategory="Artifact"
           propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Artifact/pool"/>
     </genClasses>
@@ -255,13 +252,12 @@
     <genClasses ecoreClass="vsdt.ecore#//TextAnnotation"/>
     <genClasses ecoreClass="vsdt.ecore#//Group"/>
     <genClasses image="false" ecoreClass="vsdt.ecore#//ConnectingObject">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference vsdt.ecore#//ConnectingObject/parentDiagram"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference vsdt.ecore#//ConnectingObject/parent"/>
     </genClasses>
     <genClasses ecoreClass="vsdt.ecore#//SequenceFlow">
       <genFeatures createChild="false" propertyCategory="Connection" ecoreFeature="ecore:EAttribute vsdt.ecore#//SequenceFlow/conditionType"/>
       <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Connection"
           ecoreFeature="ecore:EReference vsdt.ecore#//SequenceFlow/conditionExpression"/>
-      <genFeatures createChild="false" propertyCategory="Connection" ecoreFeature="ecore:EAttribute vsdt.ecore#//SequenceFlow/quantity"/>
       <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
           ecoreFeature="ecore:EReference vsdt.ecore#//SequenceFlow/source"/>
       <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"

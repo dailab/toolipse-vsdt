@@ -26,7 +26,6 @@ import de.dailab.vsdt.VsdtPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.GatewayImpl#getGatewayType <em>Gateway Type</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.GatewayImpl#isMarkerVisible <em>Marker Visible</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.GatewayImpl#isInstantiate <em>Instantiate</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.GatewayImpl#getIncomingCondition <em>Incoming Condition</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.GatewayImpl#getOutgoingCondition <em>Outgoing Condition</em>}</li>
@@ -55,26 +54,6 @@ public class GatewayImpl extends FlowObjectImpl implements Gateway {
 	 * @ordered
 	 */
 	protected GatewayType gatewayType = GATEWAY_TYPE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isMarkerVisible() <em>Marker Visible</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isMarkerVisible()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean MARKER_VISIBLE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isMarkerVisible() <em>Marker Visible</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isMarkerVisible()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean markerVisible = MARKER_VISIBLE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isInstantiate() <em>Instantiate</em>}' attribute.
@@ -157,27 +136,6 @@ public class GatewayImpl extends FlowObjectImpl implements Gateway {
 			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.GATEWAY__GATEWAY_TYPE, oldGatewayType, gatewayType));
 	}
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isMarkerVisible() {
-		return markerVisible;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setMarkerVisible(boolean newMarkerVisible) {
-		boolean oldMarkerVisible = markerVisible;
-		markerVisible = newMarkerVisible;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.GATEWAY__MARKER_VISIBLE, oldMarkerVisible, markerVisible));
-	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -312,8 +270,6 @@ public class GatewayImpl extends FlowObjectImpl implements Gateway {
 		switch (featureID) {
 			case VsdtPackage.GATEWAY__GATEWAY_TYPE:
 				return getGatewayType();
-			case VsdtPackage.GATEWAY__MARKER_VISIBLE:
-				return isMarkerVisible();
 			case VsdtPackage.GATEWAY__INSTANTIATE:
 				return isInstantiate();
 			case VsdtPackage.GATEWAY__INCOMING_CONDITION:
@@ -334,9 +290,6 @@ public class GatewayImpl extends FlowObjectImpl implements Gateway {
 		switch (featureID) {
 			case VsdtPackage.GATEWAY__GATEWAY_TYPE:
 				setGatewayType((GatewayType)newValue);
-				return;
-			case VsdtPackage.GATEWAY__MARKER_VISIBLE:
-				setMarkerVisible((Boolean)newValue);
 				return;
 			case VsdtPackage.GATEWAY__INSTANTIATE:
 				setInstantiate((Boolean)newValue);
@@ -362,9 +315,6 @@ public class GatewayImpl extends FlowObjectImpl implements Gateway {
 			case VsdtPackage.GATEWAY__GATEWAY_TYPE:
 				setGatewayType(GATEWAY_TYPE_EDEFAULT);
 				return;
-			case VsdtPackage.GATEWAY__MARKER_VISIBLE:
-				setMarkerVisible(MARKER_VISIBLE_EDEFAULT);
-				return;
 			case VsdtPackage.GATEWAY__INSTANTIATE:
 				setInstantiate(INSTANTIATE_EDEFAULT);
 				return;
@@ -388,8 +338,6 @@ public class GatewayImpl extends FlowObjectImpl implements Gateway {
 		switch (featureID) {
 			case VsdtPackage.GATEWAY__GATEWAY_TYPE:
 				return gatewayType != GATEWAY_TYPE_EDEFAULT;
-			case VsdtPackage.GATEWAY__MARKER_VISIBLE:
-				return markerVisible != MARKER_VISIBLE_EDEFAULT;
 			case VsdtPackage.GATEWAY__INSTANTIATE:
 				return instantiate != INSTANTIATE_EDEFAULT;
 			case VsdtPackage.GATEWAY__INCOMING_CONDITION:
@@ -412,8 +360,6 @@ public class GatewayImpl extends FlowObjectImpl implements Gateway {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (gatewayType: ");
 		result.append(gatewayType);
-		result.append(", markerVisible: ");
-		result.append(markerVisible);
 		result.append(", instantiate: ");
 		result.append(instantiate);
 		result.append(')');

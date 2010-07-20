@@ -260,7 +260,7 @@ public class StrucBpmn2BpmnStructureMapping extends MappingStage {
 			intermediate.setAttachedTo(activity);
 			if (intermediate.getTrigger() == TriggerType.COMPENSATION) {
 				Association association= VsdtFactory.eINSTANCE.createAssociation();
-				association.setParentDiagram(currentBPD);
+				association.setParent(currentBPD);
 				association.setSource(intermediate);
 				association.setTarget(ehCase.getCompensationElement());
 			} else {
@@ -363,7 +363,7 @@ public class StrucBpmn2BpmnStructureMapping extends MappingStage {
 	 */
 	private SequenceFlow addSequenceFlow(FlowObject source, FlowObject target) {
 		SequenceFlow seqFlow= VsdtFactory.eINSTANCE.createSequenceFlow();
-		seqFlow.setParentDiagram(currentBPD);
+		seqFlow.setParent(currentBPD);
 		seqFlow.setSource(source);
 		seqFlow.setTarget(target);
 		return seqFlow;

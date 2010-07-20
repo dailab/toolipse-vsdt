@@ -309,21 +309,20 @@ public class VsdtHelper {
 		return buffer.toString();
 	}
 	
-	/**
-	 * Helper method for comparing two (non-identical) IdObjects based on their
-	 * (hopefully unique) ID feature. Both IDs have to be non-null.
-	 * 
-	 * @param object1	First Object
-	 * @param object2	Second Object
-	 * @return			object1.id equals object2.id ?
-	 */
-	public static boolean equals(IdObject object1, IdObject object2) {
-		if (object1.getId() != null && object2.getId() != null) {
-			return object1.getId().equals(object2.getId());
-		}
-		return false;
-	}
-	
+//	/**
+//	 * Helper method for comparing two (non-identical) IdObjects based on their
+//	 * (hopefully unique) ID feature. Both IDs have to be non-null.
+//	 * 
+//	 * @param object1	First Object
+//	 * @param object2	Second Object
+//	 * @return			object1.id equals object2.id ?
+//	 */
+//	public static boolean equals(IdObject object1, IdObject object2) {
+//		if (object1.getId() != null && object2.getId() != null) {
+//			return object1.getId().equals(object2.getId());
+//		}
+//		return false;
+//	}
 
 	/**
 	 * Get Root Element for any EObject.

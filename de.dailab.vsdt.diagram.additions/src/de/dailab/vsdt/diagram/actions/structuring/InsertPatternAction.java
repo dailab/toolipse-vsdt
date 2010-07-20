@@ -209,7 +209,6 @@ public abstract class InsertPatternAction implements IObjectActionDelegate {
 					newSeqFlow.setDocumentation(oldSeqFlow.getDocumentation());
 					newSeqFlow.setId(oldSeqFlow.getId());
 					newSeqFlow.setName(oldSeqFlow.getName());
-					newSeqFlow.setQuantity(oldSeqFlow.getQuantity());
 					newSeqFlow.getCategories().addAll(oldSeqFlow.getCategories());
 					return CommandResult.newOKCommandResult();
 				}

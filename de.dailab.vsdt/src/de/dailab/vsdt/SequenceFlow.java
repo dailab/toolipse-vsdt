@@ -17,7 +17,6 @@ package de.dailab.vsdt;
  * <ul>
  *   <li>{@link de.dailab.vsdt.SequenceFlow#getConditionType <em>Condition Type</em>}</li>
  *   <li>{@link de.dailab.vsdt.SequenceFlow#getConditionExpression <em>Condition Expression</em>}</li>
- *   <li>{@link de.dailab.vsdt.SequenceFlow#getQuantity <em>Quantity</em>}</li>
  *   <li>{@link de.dailab.vsdt.SequenceFlow#getSource <em>Source</em>}</li>
  *   <li>{@link de.dailab.vsdt.SequenceFlow#getTarget <em>Target</em>}</li>
  * </ul>
@@ -82,33 +81,6 @@ public interface SequenceFlow extends ConnectingObject {
 	 * @generated
 	 */
 	void setConditionExpression(Expression value);
-
-	/**
-	 * Returns the value of the '<em><b>Quantity</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Quantity</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Quantity</em>' attribute.
-	 * @see #setQuantity(int)
-	 * @see de.dailab.vsdt.VsdtPackage#getSequenceFlow_Quantity()
-	 * @model default="1" required="true"
-	 * @generated
-	 */
-	int getQuantity();
-
-	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.SequenceFlow#getQuantity <em>Quantity</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Quantity</em>' attribute.
-	 * @see #getQuantity()
-	 * @generated
-	 */
-	void setQuantity(int value);
 
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' reference.
