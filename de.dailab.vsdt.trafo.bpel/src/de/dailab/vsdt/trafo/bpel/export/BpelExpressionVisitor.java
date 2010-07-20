@@ -3,14 +3,14 @@ package de.dailab.vsdt.trafo.bpel.export;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.trafo.bpel.util.BpelStaticHelper;
 import de.dailab.vsdt.util.VsdtExpressionVisitor;
-import de.dailab.vsdt.vxl.BooleanConst;
-import de.dailab.vsdt.vxl.FieldAccessor;
-import de.dailab.vsdt.vxl.Negation;
-import de.dailab.vsdt.vxl.NullConst;
-import de.dailab.vsdt.vxl.Operator;
-import de.dailab.vsdt.vxl.StringConst;
-import de.dailab.vsdt.vxl.Term;
-import de.dailab.vsdt.vxl.Variable;
+import de.dailab.vsdt.vxl.vxl.BooleanConst;
+import de.dailab.vsdt.vxl.vxl.FieldAccessor;
+import de.dailab.vsdt.vxl.vxl.Negation;
+import de.dailab.vsdt.vxl.vxl.NullConst;
+import de.dailab.vsdt.vxl.vxl.Operator;
+import de.dailab.vsdt.vxl.vxl.StringConst;
+import de.dailab.vsdt.vxl.vxl.Term;
+import de.dailab.vsdt.vxl.vxl.Variable;
 
 public class BpelExpressionVisitor extends VsdtExpressionVisitor {
 

@@ -3,22 +3,22 @@ package de.dailab.vsdt.vxl.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.dailab.vsdt.vxl.Atom;
-import de.dailab.vsdt.vxl.BooleanConst;
-import de.dailab.vsdt.vxl.BracketTerm;
-import de.dailab.vsdt.vxl.Head;
-import de.dailab.vsdt.vxl.Minus;
-import de.dailab.vsdt.vxl.Negation;
-import de.dailab.vsdt.vxl.NullConst;
-import de.dailab.vsdt.vxl.NumericConst;
-import de.dailab.vsdt.vxl.Operator;
-import de.dailab.vsdt.vxl.StringConst;
-import de.dailab.vsdt.vxl.Term;
-import de.dailab.vsdt.vxl.Value;
-import de.dailab.vsdt.vxl.Variable;
 import de.dailab.vsdt.vxl.util.TermOrdering.TermLeaf;
 import de.dailab.vsdt.vxl.util.TermOrdering.TermNode;
 import de.dailab.vsdt.vxl.util.TermOrdering.TermTree;
+import de.dailab.vsdt.vxl.vxl.Atom;
+import de.dailab.vsdt.vxl.vxl.BooleanConst;
+import de.dailab.vsdt.vxl.vxl.BracketTerm;
+import de.dailab.vsdt.vxl.vxl.Head;
+import de.dailab.vsdt.vxl.vxl.Minus;
+import de.dailab.vsdt.vxl.vxl.Negation;
+import de.dailab.vsdt.vxl.vxl.NullConst;
+import de.dailab.vsdt.vxl.vxl.NumericConst;
+import de.dailab.vsdt.vxl.vxl.Operator;
+import de.dailab.vsdt.vxl.vxl.StringConst;
+import de.dailab.vsdt.vxl.vxl.Term;
+import de.dailab.vsdt.vxl.vxl.Value;
+import de.dailab.vsdt.vxl.vxl.Variable;
 
 /**
  * A very simple Interpreter for the VSDT Expression Language.

@@ -1,9 +1,9 @@
 package de.dailab.vsdt.trafo.jiacv.export;
 
 import de.dailab.vsdt.util.VsdtExpressionVisitor;
-import de.dailab.vsdt.vxl.Negation;
-import de.dailab.vsdt.vxl.Operator;
-import de.dailab.vsdt.vxl.Variable;
+import de.dailab.vsdt.vxl.vxl.Negation;
+import de.dailab.vsdt.vxl.vxl.Operator;
+import de.dailab.vsdt.vxl.vxl.Variable;
 
 public class JiacVExpressionVisitor extends VsdtExpressionVisitor {
 

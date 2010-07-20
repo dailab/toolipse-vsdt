@@ -22,9 +22,9 @@ import de.dailab.common.gmf.Util;
 import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.diagram.ui.VsdtFeatureCombo;
-import de.dailab.vsdt.vxl.Variable;
 import de.dailab.vsdt.vxl.util.VxlParseException;
 import de.dailab.vsdt.vxl.util.VxlParser;
+import de.dailab.vsdt.vxl.vxl.Variable;
 
 /**
  * This dialog an be used for editing a given expression. The expression is assumed to follow the
@@ -177,7 +177,7 @@ public class EditExpressionDialog extends TitleAreaDialog {
 				}
 				List<Variable> unknownVars= parser.getUnknownVariables(varNames);
 				if (! unknownVars.isEmpty()) {
-					setErrorMessage("Variable '$" + unknownVars.get(0).getName() + "' cannot be resolved");
+					setErrorMessage("Variable '" + unknownVars.get(0).getName() + "' cannot be resolved");
 					return false;
 				}
 			}

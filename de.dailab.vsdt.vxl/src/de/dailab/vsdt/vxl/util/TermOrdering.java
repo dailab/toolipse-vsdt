@@ -3,9 +3,9 @@ package de.dailab.vsdt.vxl.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.dailab.vsdt.vxl.Head;
-import de.dailab.vsdt.vxl.Operator;
-import de.dailab.vsdt.vxl.Term;
+import de.dailab.vsdt.vxl.vxl.Head;
+import de.dailab.vsdt.vxl.vxl.Operator;
+import de.dailab.vsdt.vxl.vxl.Term;
 
 /**
  * This helper class is for ordering Terms w.r.t. the operators. Right after

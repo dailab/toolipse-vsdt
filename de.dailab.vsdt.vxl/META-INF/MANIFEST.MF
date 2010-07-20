@@ -21,11 +21,12 @@ Require-Bundle: org.eclipse.xtext,
  com.ibm.icu;resolution:=optional,
  org.eclipse.xtext.xtend;resolution:=optional
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: de.dailab.vsdt,
- de.dailab.vsdt.parseTreeConstruction,
- de.dailab.vsdt.parser.antlr,
- de.dailab.vsdt.services,
- de.dailab.vsdt.validation,
- de.dailab.vsdt.vxl,
- de.dailab.vsdt.vxl.impl,
- de.dailab.vsdt.vxl.util
+Export-Package: de.dailab.vsdt.vxl,
+ de.dailab.vsdt.vxl.parseTreeConstruction,
+ de.dailab.vsdt.vxl.parser.antlr,
+ de.dailab.vsdt.vxl.services,
+ de.dailab.vsdt.vxl.util,
+ de.dailab.vsdt.vxl.validation,
+ de.dailab.vsdt.vxl.vxl,
+ de.dailab.vsdt.vxl.vxl.impl,
+ de.dailab.vsdt.vxl.vxl.util

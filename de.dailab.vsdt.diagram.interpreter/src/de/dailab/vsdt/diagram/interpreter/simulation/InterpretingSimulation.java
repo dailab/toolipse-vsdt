@@ -33,11 +33,11 @@ import de.dailab.vsdt.diagram.dialogs.EditExpressionDialog;
 import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
 import de.dailab.vsdt.diagram.interpreter.dialogs.MessageParameterDialog;
 import de.dailab.vsdt.util.VsdtHelper;
-import de.dailab.vsdt.vxl.Term;
 import de.dailab.vsdt.vxl.util.Util;
 import de.dailab.vsdt.vxl.util.VxlInterpreter;
 import de.dailab.vsdt.vxl.util.VxlParseException;
 import de.dailab.vsdt.vxl.util.VxlParser;
+import de.dailab.vsdt.vxl.vxl.Term;
 
 /**
  * This Simulation requires fewer interaction with the user than the Manual

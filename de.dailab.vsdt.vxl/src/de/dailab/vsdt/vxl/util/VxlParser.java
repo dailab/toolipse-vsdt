@@ -16,9 +16,9 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Injector;
 
-import de.dailab.vsdt.VxlStandaloneSetup;
-import de.dailab.vsdt.vxl.Term;
-import de.dailab.vsdt.vxl.Variable;
+import de.dailab.vsdt.vxl.VxlStandaloneSetup;
+import de.dailab.vsdt.vxl.vxl.Term;
+import de.dailab.vsdt.vxl.vxl.Variable;
 
 /**
  * This is a simple implementation for parsing JADL++ code. This parser is using EMF Resource and 

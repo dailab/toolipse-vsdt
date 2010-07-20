@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.dailab.vsdt.vxl4/src-gen"
+    editDirectory="/de.dailab.vsdt.vxl4.edit/src" editorDirectory="/de.dailab.vsdt.vxl4.editor/src"
+    modelPluginID="de.dailab.vsdt.vxl4" forceOverwrite="true" modelName="Vxl" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="5.0"
+    copyrightFields="false" editPluginID="de.dailab.vsdt.vxl4.edit" editorPluginID="de.dailab.vsdt.vxl4.editor">
+  <genPackages prefix="Vxl" basePackage="de.dailab.vsdt.vxl" disposableProviderFactory="true"
+      ecorePackage="Vxl.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Vxl.ecore#//Operator">
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//Operator/LT"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//Operator/LE"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//Operator/EQ"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//Operator/NEQ"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//Operator/GT"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//Operator/GE"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//Operator/ADD"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//Operator/SUB"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//Operator/MULT"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//Operator/DIV"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//Operator/MOD"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//Operator/AND"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//Operator/OR"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//Operator/CONCAT"/>
+    </genEnums>
+    <genClasses ecoreClass="Vxl.ecore#//Term">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//Term/head"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//Term/tail"/>
+    </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//Head"/>
+    <genClasses ecoreClass="Vxl.ecore#//Tail">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//Tail/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//Tail/term"/>
+    </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//BracketTerm">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//BracketTerm/term"/>
+    </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//Negation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//Negation/head"/>
+    </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//Minus">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//Minus/head"/>
+    </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//Atom"/>
+    <genClasses ecoreClass="Vxl.ecore#//Variable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//Variable/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//Variable/accessor"/>
+    </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//Accessor">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//Accessor/accessor"/>
+    </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//ArrayAccessor">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//ArrayAccessor/index"/>
+    </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//FieldAccessor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//FieldAccessor/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//Value">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//Value/const"/>
+    </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//StringConst"/>
+    <genClasses ecoreClass="Vxl.ecore#//NumericConst"/>
+    <genClasses ecoreClass="Vxl.ecore#//BooleanConst"/>
+    <genClasses ecoreClass="Vxl.ecore#//NullConst"/>
+  </genPackages>
+</genmodel:GenModel>
