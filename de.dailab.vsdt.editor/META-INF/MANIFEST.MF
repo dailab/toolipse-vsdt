@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VSDT - Tree Editor
 Bundle-SymbolicName: de.dailab.vsdt.editor;singleton:=true
-Bundle-Version: 1.3.1.20100624
+Bundle-Version: 1.4.0.20100720
 Bundle-ClassPath: .
 Bundle-Activator: de.dailab.vsdt.presentation.VsdtEditorPlugin$Implementation
 Bundle-Vendor: DAI-Labor, TU Berlin
