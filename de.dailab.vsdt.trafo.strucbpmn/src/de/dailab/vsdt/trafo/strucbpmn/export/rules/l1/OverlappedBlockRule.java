@@ -101,7 +101,7 @@ public class OverlappedBlockRule extends AbstractRule {
 		
 		// create copy
 		FlowObject copy= (FlowObject) EcoreUtil.copy(_flowobjectD);
-		copy.setFlowObjectContainer(_flowobjectD.getFlowObjectContainer());
+		copy.setParent(_flowobjectD.getParent());
 		
 		//reroute sfA2 to copy
 		_seqFlowA2.setTarget(copy);

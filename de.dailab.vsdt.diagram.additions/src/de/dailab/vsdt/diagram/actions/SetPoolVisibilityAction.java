@@ -69,7 +69,7 @@ public class SetPoolVisibilityAction extends Action {
 			Util.setVisible(poolEditPart, newState);
 	
 			// set Connections' visibility
-			for (ConnectingObject connection : pool.getParentDiagram().getConnections()) {
+			for (ConnectingObject connection : pool.getParent().getConnections()) {
 				boolean relevant= false;
 				EObject source= VsdtHelper.getSource(connection);
 				if (source instanceof Node) {

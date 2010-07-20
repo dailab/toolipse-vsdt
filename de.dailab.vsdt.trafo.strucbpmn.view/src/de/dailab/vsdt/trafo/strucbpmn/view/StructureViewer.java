@@ -78,9 +78,7 @@ public class StructureViewer extends TreeViewer {
 			List<Object> children= new ArrayList<Object>();
 			if (parentElement instanceof Pool) {
 				Pool pool= (Pool) parentElement;
-				if (pool.getProcess() != null) {
-					children.addAll(pool.getProcess().getGraphicalElements());
-				}
+				children.addAll(pool.getGraphicalElements());
 			}
 			if (parentElement instanceof Activity) {
 				Activity activity = (Activity) parentElement;

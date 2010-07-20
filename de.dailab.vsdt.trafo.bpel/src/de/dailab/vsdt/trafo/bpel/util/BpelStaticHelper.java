@@ -17,10 +17,10 @@ import org.xmlsoap.schemas.wsdl.TDefinitions;
 import org.xmlsoap.schemas.wsdl.TPortType;
 
 import de.dailab.vsdt.Activity;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.Message;
 import de.dailab.vsdt.Participant;
+import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.trafo.strucbpmn.DisjunctiveExpression;
 
@@ -189,8 +189,8 @@ public class BpelStaticHelper implements BpelVisitorConstants {
 			Activity activity = (Activity) object;
 			return activity.getName() + ( useSuffixes ? "_ActivityData" : "" );
 		}
-		if (object instanceof BpmnProcess) {
-			BpmnProcess process = (BpmnProcess) object;
+		if (object instanceof Pool) {
+			Pool process = (Pool) object;
 			return process.getName() + ( useSuffixes ? "_ProcessData" : "" );
 		}
 		return null;

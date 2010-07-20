@@ -72,7 +72,7 @@ public class SplitForkRule extends AbstractRule {
 		//create new gateway
 		Gateway fork2= VsdtFactory.eINSTANCE.createGateway();
 		fork2.setName(_fork.getName() + "_2");
-		_block.getFlowObjectContainer().getContainedFlowObjects().add(fork2);
+		_block.getParent().getContainedFlowObjects().add(fork2);
 		
 		fork2.setGatewayType(_fork.getGatewayType());
 		
@@ -84,7 +84,7 @@ public class SplitForkRule extends AbstractRule {
 		SequenceFlow seqFlow2= VsdtFactory.eINSTANCE.createSequenceFlow();
 		seqFlow2.setSource(fork2);
 		seqFlow2.setTarget(_block);
-		_fork.getPool().getParentDiagram().getConnections().add(seqFlow2);
+		_fork.getPool().getParent().getConnections().add(seqFlow2);
 		
 		DisjunctiveExpression disjunctive= StrucBpmnFactory.eINSTANCE.createDisjunctiveExpression();
 		for (SequenceFlow sf : _fork.getOutgoingSeq()) {

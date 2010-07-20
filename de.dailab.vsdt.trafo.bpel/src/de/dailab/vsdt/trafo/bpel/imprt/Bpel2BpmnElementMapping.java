@@ -37,7 +37,6 @@ import org.xmlsoap.schemas.ws._2003._03.business.process.util.BpelUtil;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.Assignment;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.ConditionType;
@@ -98,7 +97,7 @@ public class Bpel2BpmnElementMapping extends MappingStage {
 	private BusinessProcessDiagram bpd;
 	
 	/** the process (each BPEL model will map to only one process)*/
-	private BpmnProcess _process;
+	private Pool _process;
 	
 	public void setIgnoreEmpty(boolean ignoreEmpty) {
 		this.ignoreEmpty = ignoreEmpty;
@@ -150,19 +149,17 @@ public class Bpel2BpmnElementMapping extends MappingStage {
 		// create pool
 		Pool pool= vsdtFac.createPool();
 		pool.setName(tProcess.getName());
-		pool.setParentDiagram(bpd);
+		pool.setParent(bpd);
 		
 		// create process
-		_process= vsdtFac.createBpmnProcess();
-		_process.setParentPool(pool);
-		_process.setName(tProcess.getName());
+		_process = pool;
 		_process.setProcessType( tProcess.isSetAbstractProcess() ? ProcessType.ABSTRACT : ProcessType.PRIVATE);
-		_process.setEnableInstanceCompensation(tProcess.isSetEnableInstanceCompensation());
-		_process.setSuppressJoinFailure(tProcess.isSetSuppressJoinFailure());
+//		_process.setEnableInstanceCompensation(tProcess.isSetEnableInstanceCompensation());
+//		_process.setSuppressJoinFailure(tProcess.isSetSuppressJoinFailure());
 		
 		// create Lane
 		Lane lane= vsdtFac.createLane();
-		lane.setParentPool(pool);
+		lane.setParent(pool);
 		
 		// map process contents
 		FlowObject flowObject= visitActivity(BpelUtil.getActivity(tProcess));
@@ -663,7 +660,7 @@ public class Bpel2BpmnElementMapping extends MappingStage {
 //			 TODO properties
 			message= VsdtElementFactory.createMessage(varName, /* null, null, */ null);
 			TrafoLog.debug("Creating Message " + message.toString());
-			bpd.getBusinessProcessSystem().getMessages().add(message);
+			bpd.getParent().getMessages().add(message);
 			_messageMap.put(varName, message);
 		}
 		return message;
@@ -676,7 +673,7 @@ public class Bpel2BpmnElementMapping extends MappingStage {
 			// TODO partner link
 			implementation= VsdtElementFactory.createImplementation("WebService", portType, operation, null);
 			TrafoLog.debug("Creating Implementation " + implementation.toString());
-			bpd.getBusinessProcessSystem().getImplementations().add(implementation);
+			bpd.getParent().getImplementations().add(implementation);
 			_implementationMap.put(key, implementation);
 		}
 		return implementation;

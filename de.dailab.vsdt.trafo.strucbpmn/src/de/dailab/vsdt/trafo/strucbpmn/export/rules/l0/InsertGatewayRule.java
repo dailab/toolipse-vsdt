@@ -62,8 +62,8 @@ public class InsertGatewayRule extends AbstractRule {
 	protected void apply() {
 		
 		//get container
-		FlowObjectContainer container= _flowObject.getFlowObjectContainer();
-		BusinessProcessDiagram bpd= _flowObject.getPool().getParentDiagram();
+		FlowObjectContainer container= _flowObject.getParent();
+		BusinessProcessDiagram bpd= _flowObject.getPool().getParent();
 		String name= _flowObject.getName();
 		
 		// case1: multiple incoming sequences flows
@@ -71,7 +71,7 @@ public class InsertGatewayRule extends AbstractRule {
 			
 			//create gateway
 			Gateway gateway= VsdtFactory.eINSTANCE.createGateway();
-			gateway.setFlowObjectContainer(container);
+			gateway.setParent(container);
 			gateway.setName(name + MERGE);
 			
 			//redirect incoming sequence flows
@@ -92,7 +92,7 @@ public class InsertGatewayRule extends AbstractRule {
 			
 			//create gateway
 			Gateway gateway= VsdtFactory.eINSTANCE.createGateway();
-			gateway.setFlowObjectContainer(container);
+			gateway.setParent(container);
 			gateway.setName(name + FORK);
 			
 			//redirect outgoing sequence flows

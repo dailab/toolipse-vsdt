@@ -220,7 +220,7 @@ public class MessageFlowImpl extends ConnectingObjectImpl implements MessageFlow
 	public void initializeMessage() {
 		//CREATE MESSAGE
 		Message message= VsdtFactory.eINSTANCE.createMessage();
-		this.getParentDiagram().getBusinessProcessSystem().getMessages().add(message);
+		this.getParentDiagram().getParent().getMessages().add(message);
 		
 		String sourceName= null;
 		String targetName= null;

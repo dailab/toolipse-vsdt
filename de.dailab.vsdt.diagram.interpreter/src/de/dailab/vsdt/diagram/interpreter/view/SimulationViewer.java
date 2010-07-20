@@ -102,7 +102,7 @@ public class SimulationViewer extends TreeViewer {
 			// collect actual children
 			List<FlowObject> children= new ArrayList<FlowObject>();
 			if (parentElement instanceof Pool) {
-				children.addAll(((Pool) parentElement).getProcess().getGraphicalElements());
+				children.addAll(((Pool) parentElement).getGraphicalElements());
 			}
 			if (parentElement instanceof Activity) {
 				children.addAll(((Activity) parentElement).getGraphicalElements());
@@ -117,8 +117,8 @@ public class SimulationViewer extends TreeViewer {
 			}
 			// collect property values
 			if (view.getSimulation() instanceof InterpretingSimulation) {
-				if (parentElement instanceof Pool && ((Pool)parentElement).getProcess() != null) {
-					displayedChildren.addAll(((Pool)parentElement).getProcess().getProperties());
+				if (parentElement instanceof Pool) {
+					displayedChildren.addAll(((Pool)parentElement).getProperties());
 				}
 				if (parentElement instanceof Activity) {
 					displayedChildren.addAll(((Activity)parentElement).getProperties());

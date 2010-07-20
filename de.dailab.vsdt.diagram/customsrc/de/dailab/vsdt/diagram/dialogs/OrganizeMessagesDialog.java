@@ -71,7 +71,7 @@ public class OrganizeMessagesDialog extends AbstractOrganizeElementsDialog<Messa
 		if (parentElement instanceof BusinessProcessSystem) {
 			bps= (BusinessProcessSystem) parentElement;
 		} else if (parentElement instanceof BusinessProcessDiagram) {
-			bps= (BusinessProcessSystem) ((BusinessProcessDiagram) parentElement).getBusinessProcessSystem();
+			bps= (BusinessProcessSystem) ((BusinessProcessDiagram) parentElement).getParent();
 		}
 		if (bps != null) {
 			elements= ((BusinessProcessSystem) parentElement).getMessages();

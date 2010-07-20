@@ -229,7 +229,7 @@ public class BpmnBranchImpl extends FlowObjectImpl implements BpmnBranch {
 			case StrucBpmnPackage.BPMN_BRANCH__CONDITION:
 				return getCondition();
 			case StrucBpmnPackage.BPMN_BRANCH__DEFAULT:
-				return isDefault() ? Boolean.TRUE : Boolean.FALSE;
+				return isDefault();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -249,7 +249,7 @@ public class BpmnBranchImpl extends FlowObjectImpl implements BpmnBranch {
 				setCondition((Expression)newValue);
 				return;
 			case StrucBpmnPackage.BPMN_BRANCH__DEFAULT:
-				setDefault(((Boolean)newValue).booleanValue());
+				setDefault((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

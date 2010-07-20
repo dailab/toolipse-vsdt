@@ -25,7 +25,6 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import de.dailab.vsdt.Activity;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.VsdtFactory;
@@ -68,12 +67,7 @@ public class ActivityItemProvider
 
 			addAdHocPropertyDescriptor(object);
 			addAdHocCompletionConditionPropertyDescriptor(object);
-			addStatusPropertyDescriptor(object);
-			addInputSetsPropertyDescriptor(object);
-			addOutputSetsPropertyDescriptor(object);
-			addIORulesPropertyDescriptor(object);
 			addStartQuantityPropertyDescriptor(object);
-			addLoopAttributesPropertyDescriptor(object);
 			addActivityTypePropertyDescriptor(object);
 			addInMessagePropertyDescriptor(object);
 			addOutMessagePropertyDescriptor(object);
@@ -82,11 +76,8 @@ public class ActivityItemProvider
 			addPerformersPropertyDescriptor(object);
 			addScriptPropertyDescriptor(object);
 			addActivityRefPropertyDescriptor(object);
-			addTransactionPropertyDescriptor(object);
 			addDiagramRefPropertyDescriptor(object);
 			addProcessRefPropertyDescriptor(object);
-			addInputPropertyMapsPropertyDescriptor(object);
-			addOutputPropertyMapsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -136,94 +127,6 @@ public class ActivityItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Status feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addStatusPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Activity_status_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_status_feature", "_UI_Activity_type"),
-				 VsdtPackage.Literals.ACTIVITY__STATUS,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 getString("_UI_ActivityPropertyCategory"),
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Input Sets feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addInputSetsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Activity_inputSets_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_inputSets_feature", "_UI_Activity_type"),
-				 VsdtPackage.Literals.ACTIVITY__INPUT_SETS,
-				 false,
-				 false,
-				 false,
-				 null,
-				 getString("_UI_ActivityPropertyCategory"),
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Output Sets feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOutputSetsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Activity_outputSets_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_outputSets_feature", "_UI_Activity_type"),
-				 VsdtPackage.Literals.ACTIVITY__OUTPUT_SETS,
-				 false,
-				 false,
-				 false,
-				 null,
-				 getString("_UI_ActivityPropertyCategory"),
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the IO Rules feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addIORulesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Activity_IORules_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_IORules_feature", "_UI_Activity_type"),
-				 VsdtPackage.Literals.ACTIVITY__IO_RULES,
-				 false,
-				 false,
-				 false,
-				 null,
-				 getString("_UI_ActivityPropertyCategory"),
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Start Quantity feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -241,29 +144,7 @@ public class ActivityItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
-				 getString("_UI_ActivityPropertyCategory"),
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Loop Attributes feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addLoopAttributesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Activity_loopAttributes_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_loopAttributes_feature", "_UI_Activity_type"),
-				 VsdtPackage.Literals.ACTIVITY__LOOP_ATTRIBUTES,
-				 false,
-				 false,
-				 false,
 				 null,
-				 getString("_UI_ActivityPropertyCategory"),
 				 null));
 	}
 
@@ -285,7 +166,7 @@ public class ActivityItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 getString("_UI_GeneralPropertyCategory"),
+				 null,
 				 null));
 	}
 
@@ -307,7 +188,7 @@ public class ActivityItemProvider
 				 false,
 				 true,
 				 null,
-				 getString("_UI_ActivityTypeAttributesPropertyCategory"),
+				 null,
 				 null));
 	}
 
@@ -329,7 +210,7 @@ public class ActivityItemProvider
 				 false,
 				 true,
 				 null,
-				 getString("_UI_ActivityTypeAttributesPropertyCategory"),
+				 null,
 				 null));
 	}
 
@@ -351,7 +232,7 @@ public class ActivityItemProvider
 				 false,
 				 true,
 				 null,
-				 getString("_UI_ActivityTypeAttributesPropertyCategory"),
+				 null,
 				 null));
 	}
 
@@ -373,7 +254,7 @@ public class ActivityItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 getString("_UI_ActivityTypeAttributesPropertyCategory"),
+				 null,
 				 null));
 	}
 
@@ -395,7 +276,7 @@ public class ActivityItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 getString("_UI_ActivityTypeAttributesPropertyCategory"),
+				 null,
 				 null));
 	}
 
@@ -417,7 +298,7 @@ public class ActivityItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 getString("_UI_ActivityTypeAttributesPropertyCategory"),
+				 null,
 				 null));
 	}
 
@@ -453,28 +334,6 @@ public class ActivityItemProvider
 		itemPropertyDescriptors.add(propertyDescriptor);
 	}
 	
-	/**
-	 * This adds a property descriptor for the Transaction feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTransactionPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Activity_transaction_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_transaction_feature", "_UI_Activity_type"),
-				 VsdtPackage.Literals.ACTIVITY__TRANSACTION,
-				 false,
-				 false,
-				 false,
-				 null,
-				 getString("_UI_SubprocessAttributesPropertyCategory"),
-				 null));
-	}
-
 	/**
 	 * This adds a property descriptor for the Diagram Ref feature.
 	 * <!-- begin-user-doc -->
@@ -541,15 +400,15 @@ public class ActivityItemProvider
 			@Override
 			protected Collection<?> getComboBoxObjects(Object object) {
 				Activity activity= (Activity) object;
-				Collection<BpmnProcess> collection= new ArrayList<BpmnProcess>();
+				Collection<Pool> collection= new ArrayList<Pool>();
 				//null-value for de-selecting the process
 				collection.add(null);
 				//if a diagram reference is set, add the diagram's processes to the list 
 				if (activity.getDiagramRef() != null) {
 					BusinessProcessDiagram bpd= activity.getDiagramRef();
 					for (Pool pool : bpd.getPools()) {
-						if (pool.getProcess() != null && pool.getParticipant() == activity.getPool().getParticipant()) {
-							collection.add(pool.getProcess());
+						if (pool.getParticipant() == activity.getPool().getParticipant()) {
+							collection.add(pool);
 						}
 					}
 				}
@@ -558,50 +417,6 @@ public class ActivityItemProvider
 		};
 		itemPropertyDescriptors.add(propertyDescriptor);
 	}
-	/**
-	 * This adds a property descriptor for the Input Property Maps feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addInputPropertyMapsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Activity_inputPropertyMaps_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_inputPropertyMaps_feature", "_UI_Activity_type"),
-				 VsdtPackage.Literals.ACTIVITY__INPUT_PROPERTY_MAPS,
-				 false,
-				 false,
-				 false,
-				 null,
-				 getString("_UI_SubprocessAttributesPropertyCategory"),
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Output Property Maps feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOutputPropertyMapsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Activity_outputPropertyMaps_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_outputPropertyMaps_feature", "_UI_Activity_type"),
-				 VsdtPackage.Literals.ACTIVITY__OUTPUT_PROPERTY_MAPS,
-				 false,
-				 false,
-				 false,
-				 null,
-				 getString("_UI_SubprocessAttributesPropertyCategory"),
-				 null));
-	}
-
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
@@ -680,9 +495,7 @@ public class ActivityItemProvider
 
 		switch (notification.getFeatureID(Activity.class)) {
 			case VsdtPackage.ACTIVITY__AD_HOC:
-			case VsdtPackage.ACTIVITY__STATUS:
 			case VsdtPackage.ACTIVITY__START_QUANTITY:
-			case VsdtPackage.ACTIVITY__IS_COMPENSATION:
 			case VsdtPackage.ACTIVITY__ACTIVITY_TYPE:
 			case VsdtPackage.ACTIVITY__INSTANTIATE:
 			case VsdtPackage.ACTIVITY__PERFORMERS:

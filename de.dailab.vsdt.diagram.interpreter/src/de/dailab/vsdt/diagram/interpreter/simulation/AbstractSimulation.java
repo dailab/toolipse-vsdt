@@ -102,15 +102,15 @@ public abstract class AbstractSimulation implements ISimulation {
 		}
 		stateMap.clear();
 		for (Pool pool : bpd.getPools()) {
-			for (FlowObject flowObject : pool.getProcess().getTransitiveGraphicalElements()) {
+			for (FlowObject flowObject : pool.getTransitiveGraphicalElements()) {
 				stateMap.put(flowObject, State.IDLE);
 				if (updateState(flowObject)) {
 					result.add(flowObject);
 				}
 			}
-			if (pool.getProcess() != null) {
-				handleAssignments(pool.getProcess(), AssignTimeType.START);
-			}
+//			if (pool.getProcess() != null) {
+//				handleAssignments(pool.getProcess(), AssignTimeType.START);
+//			}
 		}
 		refreshViewer();
 		return result;
@@ -226,9 +226,9 @@ public abstract class AbstractSimulation implements ISimulation {
 				}
 			}
 			// set containing subprocess to ACTIVE_READY
-			if (flowObject.getFlowObjectContainer() instanceof Activity) {
-				if (updateState((Activity) flowObject.eContainer())) {
-					result.add((Activity) flowObject.eContainer());
+			if (flowObject.getParent() instanceof Activity) {
+				if (updateState((Activity) flowObject.getParent())) {
+					result.add((Activity) flowObject.getParent());
 				}
 			}
 		}

@@ -44,15 +44,6 @@ public interface VsdtFactory extends EFactory {
 	BusinessProcessDiagram createBusinessProcessDiagram();
 
 	/**
-	 * Returns a new object of class '<em>Bpmn Process</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Bpmn Process</em>'.
-	 * @generated
-	 */
-	BpmnProcess createBpmnProcess();
-
-	/**
 	 * Returns a new object of class '<em>Start</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

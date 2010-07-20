@@ -279,13 +279,13 @@ public class EventItemProvider
 				protected Collection<?> getComboBoxObjects(Object object) {
 					Collection<?> collection= super.getComboBoxObjects(object);
 					Event event= (Event) object;
-					if (event.getFlowObjectContainer() != null) {
-						collection.retainAll(event.getFlowObjectContainer().getContainedFlowObjects());
+					if (event.getParent() != null) {
+						collection.retainAll(event.getParent().getContainedFlowObjects());
 					}
 					if (event instanceof Intermediate && ((Intermediate)event).getAttachedTo() != null){
 						Intermediate intermediate= (Intermediate) event;
 						if (intermediate.getAttachedTo() != null) {
-							collection.retainAll(intermediate.getAttachedTo().getFlowObjectContainer().getContainedFlowObjects());
+							collection.retainAll(intermediate.getAttachedTo().getParent().getContainedFlowObjects());
 							collection.remove(intermediate.getAttachedTo());
 						}
 					}

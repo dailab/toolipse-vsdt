@@ -317,7 +317,7 @@ public class StrucBpmn2BpmnStructureMapping extends MappingStage {
 	 * @param children		The old block's children, which are put into its former container
 	 */
 	private void substituteBlock(FlowObject oldBlock, FlowObject newFirst, FlowObject newLast, List<FlowObject> children) {
-		List<FlowObject> contained= oldBlock.getFlowObjectContainer().getContainedFlowObjects();
+		List<FlowObject> contained= oldBlock.getParent().getContainedFlowObjects();
 		contained.remove(oldBlock);
 		for (FlowObject child : children) {
 			if (child != null) {

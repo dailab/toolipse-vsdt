@@ -67,7 +67,7 @@ public class ConnectLinkRule extends AbstractVsdtRule {
 		SequenceFlow sequenceFlow= VsdtFactory.eINSTANCE.createSequenceFlow();
 		sequenceFlow.setSource(link1);
 		sequenceFlow.setTarget(link2);
-		link1.getPool().getParentDiagram().getConnections().add(sequenceFlow);
+		link1.getPool().getParent().getConnections().add(sequenceFlow);
 		// remove link references
 		link1.setLinkedTo(null);
 		link2.setLinkedTo(null);

@@ -26,7 +26,6 @@ import de.dailab.jadltools.model.xmlbind.StepModel;
 import de.dailab.jadltools.model.xmlbind.TruthModel;
 import de.dailab.jadltools.model.xmlbind.VarModel;
 import de.dailab.vsdt.Activity;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.ConnectingObject;
 import de.dailab.vsdt.Event;
@@ -127,8 +126,8 @@ public class Bpmn2JiacElementMapping extends MappingStage implements JiacVisitor
 	 * @return			the JADL file model for the process
 	 */
 	private JADLFileModel visitPool(Pool pool) throws JAXBException {
-		BpmnProcess process= pool.getProcess();
-		String name= process.getParentPool().getName();
+		Pool process= pool;
+		String name= process.getName();
 		
 		JADLFileModel jadlFileModel= jadlFac.createJADLFileModel();
 		jadlFileModel.setFile(name);
@@ -147,7 +146,7 @@ public class Bpmn2JiacElementMapping extends MappingStage implements JiacVisitor
 		ScriptbodyModel scriptBody= visitFlowObjects(process.getGraphicalElements());
 
 		//map process assignments
-		scriptBody= assistant.addAssignmentMappings(scriptBody, process.getAssignments());
+//		scriptBody= assistant.addAssignmentMappings(scriptBody, process.getAssignments());
 		
 		//map properties
 		assistant.visitProperties(process.getProperties(),scriptModel);
@@ -298,7 +297,7 @@ public class Bpmn2JiacElementMapping extends MappingStage implements JiacVisitor
 		switch (event.getTrigger()) {
 		case RULE:
 			if (event instanceof Start) {
-				JADLFileModel jadlFile= (JADLFileModel) wrapper.getMapping(event.getProcess());
+				JADLFileModel jadlFile= (JADLFileModel) wrapper.getMapping(event.getPool());
 				ActModel act= (ActModel) jadlFile.getAct().get(0);
 				if (event.getRuleExpression() != null) {
 					String ruleString= event.getRuleExpression().getExpression();
@@ -309,10 +308,10 @@ public class Bpmn2JiacElementMapping extends MappingStage implements JiacVisitor
 		case MESSAGE:
 			// create send/receive speech-act and plan element call
 			if (event.isThrowing()) {
-				SendSpeechactModel send= assistant.createSendSpeechact(event.getName(), (JADLFileModel) wrapper.getMapping(event.getProcess()));
+				SendSpeechactModel send= assistant.createSendSpeechact(event.getName(), (JADLFileModel) wrapper.getMapping(event.getPool()));
 				mapping= assistant.createPlanelementCallModel(send.getName());
 			} else {
-				ReceiveSpeechactModel receive= assistant.createReceiveSpeechact(event.getName(), (JADLFileModel) wrapper.getMapping(event.getProcess()));
+				ReceiveSpeechactModel receive= assistant.createReceiveSpeechact(event.getName(), (JADLFileModel) wrapper.getMapping(event.getPool()));
 				mapping= assistant.createPlanelementCallModel(receive.getName());
 			}
 		case CANCEL:
@@ -379,7 +378,7 @@ public class Bpmn2JiacElementMapping extends MappingStage implements JiacVisitor
 			scriptModels.put(activity, scriptModel2);
 			
 			//insert into jadlFile
-			JADLFileModel jadlFile= (JADLFileModel) wrapper.getMapping(activity.getProcess());
+			JADLFileModel jadlFile= (JADLFileModel) wrapper.getMapping(activity.getPool());
 			jadlFile.getAct().add(actModel);
 			
 			//create PE call
@@ -393,7 +392,7 @@ public class Bpmn2JiacElementMapping extends MappingStage implements JiacVisitor
 			break;
 		case INDEPENDENT:
 			if (activity.getProcessRef() != null) {
-				String procName= activity.getProcessRef().getParentPool() + "_act";
+				String procName= activity.getProcessRef() + "_act";
 				PlanelementCallModel peCall= jadlFac.createPlanelementCallModel();
 				peCall.setPlanelement(procName);
 				mapping= peCall;
@@ -401,11 +400,11 @@ public class Bpmn2JiacElementMapping extends MappingStage implements JiacVisitor
 			}
 			break;
 		case RECEIVE:
-			ReceiveSpeechactModel receiveModel= assistant.createReceiveSpeechact(name,(JADLFileModel)wrapper.getMapping(activity.getProcess()));
+			ReceiveSpeechactModel receiveModel= assistant.createReceiveSpeechact(name,(JADLFileModel)wrapper.getMapping(activity.getPool()));
 			mapping= assistant.createPlanelementCallModel(receiveModel.getName());
 			break;
 		case SEND:
-			SendSpeechactModel sendModel= assistant.createSendSpeechact(name,(JADLFileModel)wrapper.getMapping(activity.getProcess()));
+			SendSpeechactModel sendModel= assistant.createSendSpeechact(name,(JADLFileModel)wrapper.getMapping(activity.getPool()));
 			mapping= assistant.createPlanelementCallModel(sendModel.getName());
 			break;
 		case SCRIPT:

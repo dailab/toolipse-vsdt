@@ -57,7 +57,7 @@ public class BoundaryEventBlockRule extends AbstractRule {
 	protected void apply() {
 		BpmnEventHandlerBlock ehBlock= StrucBpmnFactory.eINSTANCE.createBpmnEventHandlerBlock();
 		
-		FlowObjectContainer container= _activity.getFlowObjectContainer();
+		FlowObjectContainer container= _activity.getParent();
 		container.getContainedFlowObjects().add(ehBlock);
 		
 		ehBlock.setActivity(_activity);

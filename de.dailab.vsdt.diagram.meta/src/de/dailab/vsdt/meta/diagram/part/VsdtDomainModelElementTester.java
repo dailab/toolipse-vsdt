@@ -33,9 +33,6 @@ public class VsdtDomainModelElementTester extends PropertyTester {
 		if (eClass == VsdtPackage.eINSTANCE.getAbstractProcess()) {
 			return true;
 		}
-		if (eClass == VsdtPackage.eINSTANCE.getBpmnProcess()) {
-			return true;
-		}
 		if (eClass == VsdtPackage.eINSTANCE.getFlowObjectContainer()) {
 			return true;
 		}

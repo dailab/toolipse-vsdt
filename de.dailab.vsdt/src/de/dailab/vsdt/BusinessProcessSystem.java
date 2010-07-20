@@ -223,7 +223,7 @@ public interface BusinessProcessSystem extends IdObject {
 	/**
 	 * Returns the value of the '<em><b>Business Processes</b></em>' containment reference list.
 	 * The list contents are of type {@link de.dailab.vsdt.BusinessProcessDiagram}.
-	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.BusinessProcessDiagram#getBusinessProcessSystem <em>Business Process System</em>}'.
+	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.BusinessProcessDiagram#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Business Processes</em>' containment reference list isn't clear,
@@ -232,8 +232,8 @@ public interface BusinessProcessSystem extends IdObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Business Processes</em>' containment reference list.
 	 * @see de.dailab.vsdt.VsdtPackage#getBusinessProcessSystem_BusinessProcesses()
-	 * @see de.dailab.vsdt.BusinessProcessDiagram#getBusinessProcessSystem
-	 * @model opposite="businessProcessSystem" containment="true"
+	 * @see de.dailab.vsdt.BusinessProcessDiagram#getParent
+	 * @model opposite="parent" containment="true"
 	 * @generated
 	 */
 	EList<BusinessProcessDiagram> getBusinessProcesses();

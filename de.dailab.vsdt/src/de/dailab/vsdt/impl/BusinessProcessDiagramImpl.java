@@ -34,11 +34,11 @@ import de.dailab.vsdt.VsdtPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.dailab.vsdt.impl.BusinessProcessDiagramImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessDiagramImpl#getPools <em>Pools</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessDiagramImpl#getArtifacts <em>Artifacts</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessDiagramImpl#getConnections <em>Connections</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessDiagramImpl#getParticipants <em>Participants</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.BusinessProcessDiagramImpl#getBusinessProcessSystem <em>Business Process System</em>}</li>
  * </ul>
  * </p>
  *
@@ -109,9 +109,50 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public BusinessProcessSystem getParent() {
+		if (eContainerFeatureID() != VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARENT) return null;
+		return (BusinessProcessSystem)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetParent(BusinessProcessSystem newParent, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newParent, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARENT, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setParent(BusinessProcessSystem newParent) {
+		if (newParent != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARENT && newParent != null)) {
+			if (EcoreUtil.isAncestor(this, newParent))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newParent != null)
+				msgs = ((InternalEObject)newParent).eInverseAdd(this, VsdtPackage.BUSINESS_PROCESS_SYSTEM__BUSINESS_PROCESSES, BusinessProcessSystem.class, msgs);
+			msgs = basicSetParent(newParent, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARENT, newParent, newParent));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Pool> getPools() {
 		if (pools == null) {
-			pools = new EObjectContainmentWithInverseEList<Pool>(Pool.class, this, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__POOLS, VsdtPackage.POOL__PARENT_DIAGRAM);
+			pools = new EObjectContainmentWithInverseEList<Pool>(Pool.class, this, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__POOLS, VsdtPackage.POOL__PARENT);
 		}
 		return pools;
 	}
@@ -157,51 +198,14 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BusinessProcessSystem getBusinessProcessSystem() {
-		if (eContainerFeatureID() != VsdtPackage.BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM) return null;
-		return (BusinessProcessSystem)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetBusinessProcessSystem(BusinessProcessSystem newBusinessProcessSystem, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newBusinessProcessSystem, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setBusinessProcessSystem(BusinessProcessSystem newBusinessProcessSystem) {
-		if (newBusinessProcessSystem != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM && newBusinessProcessSystem != null)) {
-			if (EcoreUtil.isAncestor(this, newBusinessProcessSystem))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newBusinessProcessSystem != null)
-				msgs = ((InternalEObject)newBusinessProcessSystem).eInverseAdd(this, VsdtPackage.BUSINESS_PROCESS_SYSTEM__BUSINESS_PROCESSES, BusinessProcessSystem.class, msgs);
-			msgs = basicSetBusinessProcessSystem(newBusinessProcessSystem, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM, newBusinessProcessSystem, newBusinessProcessSystem));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARENT:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetParent((BusinessProcessSystem)otherEnd, msgs);
 			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__POOLS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPools()).basicAdd(otherEnd, msgs);
 			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__ARTIFACTS:
@@ -210,10 +214,6 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConnections()).basicAdd(otherEnd, msgs);
 			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARTICIPANTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getParticipants()).basicAdd(otherEnd, msgs);
-			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetBusinessProcessSystem((BusinessProcessSystem)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -226,6 +226,8 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARENT:
+				return basicSetParent(null, msgs);
 			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__POOLS:
 				return ((InternalEList<?>)getPools()).basicRemove(otherEnd, msgs);
 			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__ARTIFACTS:
@@ -234,8 +236,6 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 				return ((InternalEList<?>)getConnections()).basicRemove(otherEnd, msgs);
 			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARTICIPANTS:
 				return ((InternalEList<?>)getParticipants()).basicRemove(otherEnd, msgs);
-			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM:
-				return basicSetBusinessProcessSystem(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -248,7 +248,7 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM:
+			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARENT:
 				return eInternalContainer().eInverseRemove(this, VsdtPackage.BUSINESS_PROCESS_SYSTEM__BUSINESS_PROCESSES, BusinessProcessSystem.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -262,6 +262,8 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARENT:
+				return getParent();
 			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__POOLS:
 				return getPools();
 			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__ARTIFACTS:
@@ -270,8 +272,6 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 				return getConnections();
 			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARTICIPANTS:
 				return getParticipants();
-			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM:
-				return getBusinessProcessSystem();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -285,6 +285,9 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARENT:
+				setParent((BusinessProcessSystem)newValue);
+				return;
 			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__POOLS:
 				getPools().clear();
 				getPools().addAll((Collection<? extends Pool>)newValue);
@@ -301,9 +304,6 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 				getParticipants().clear();
 				getParticipants().addAll((Collection<? extends Participant>)newValue);
 				return;
-			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM:
-				setBusinessProcessSystem((BusinessProcessSystem)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -316,6 +316,9 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARENT:
+				setParent((BusinessProcessSystem)null);
+				return;
 			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__POOLS:
 				getPools().clear();
 				return;
@@ -327,9 +330,6 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 				return;
 			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARTICIPANTS:
 				getParticipants().clear();
-				return;
-			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM:
-				setBusinessProcessSystem((BusinessProcessSystem)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -343,6 +343,8 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARENT:
+				return getParent() != null;
 			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__POOLS:
 				return pools != null && !pools.isEmpty();
 			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__ARTIFACTS:
@@ -351,8 +353,6 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 				return connections != null && !connections.isEmpty();
 			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARTICIPANTS:
 				return participants != null && !participants.isEmpty();
-			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM:
-				return getBusinessProcessSystem() != null;
 		}
 		return super.eIsSet(featureID);
 	}

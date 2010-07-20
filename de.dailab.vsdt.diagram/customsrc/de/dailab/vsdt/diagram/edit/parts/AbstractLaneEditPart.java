@@ -23,21 +23,21 @@ public abstract class AbstractLaneEditPart extends AbstractVsdtNodeEditPart impl
 		super(view);
 	}
 
-	/**
-	 * notify the edit part when there are changes to the model
-	 * 
-	 */
-	@Override
-	public void notifyChanged(Notification notification) {
-		super.notifyChanged(notification);
-		int feature = notification.getFeatureID(VsdtPackage.class);
-		switch (feature) {
-		case VsdtPackage.LANE__BOUNDARY_VISIBLE:
-			getPrimaryShape().setBoundaryVisible(getCastedModel().isBoundaryVisible());;
-			refreshVisuals();
-			break;
-		}
-	}
+//	/**
+//	 * notify the edit part when there are changes to the model
+//	 * 
+//	 */
+//	@Override
+//	public void notifyChanged(Notification notification) {
+//		super.notifyChanged(notification);
+//		int feature = notification.getFeatureID(VsdtPackage.class);
+//		switch (feature) {
+//		case VsdtPackage.LANE__BOUNDARY_VISIBLE:
+//			getPrimaryShape().setBoundaryVisible(getCastedModel().isBoundaryVisible());;
+//			refreshVisuals();
+//			break;
+//		}
+//	}
 	
 	/**
 	 * @return the model, casted to its actual Type
@@ -53,8 +53,7 @@ public abstract class AbstractLaneEditPart extends AbstractVsdtNodeEditPart impl
 	 * sets all fields depending on the underlying model
 	 */
 	protected IFigure initNodeShape() {
-		SwimlaneFigure figure= new SwimlaneFigure(false,
-				getCastedModel().isBoundaryVisible());
+		SwimlaneFigure figure= new SwimlaneFigure(false, false);
 		return figure;
 	}
 }

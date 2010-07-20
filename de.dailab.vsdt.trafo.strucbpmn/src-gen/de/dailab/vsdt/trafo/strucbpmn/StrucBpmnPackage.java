@@ -144,13 +144,13 @@ public interface StrucBpmnPackage extends EPackage {
 	int BPMN_SEQUENCE__INCOMING_MSG = VsdtPackage.FLOW_OBJECT__INCOMING_MSG;
 
 	/**
-	 * The feature id for the '<em><b>Flow Object Container</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BPMN_SEQUENCE__FLOW_OBJECT_CONTAINER = VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER;
+	int BPMN_SEQUENCE__PARENT = VsdtPackage.FLOW_OBJECT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
@@ -289,13 +289,13 @@ public interface StrucBpmnPackage extends EPackage {
 	int BPMN_BLOCK__INCOMING_MSG = VsdtPackage.FLOW_OBJECT__INCOMING_MSG;
 
 	/**
-	 * The feature id for the '<em><b>Flow Object Container</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BPMN_BLOCK__FLOW_OBJECT_CONTAINER = VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER;
+	int BPMN_BLOCK__PARENT = VsdtPackage.FLOW_OBJECT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
@@ -443,13 +443,13 @@ public interface StrucBpmnPackage extends EPackage {
 	int BPMN_BRANCH__INCOMING_MSG = VsdtPackage.FLOW_OBJECT__INCOMING_MSG;
 
 	/**
-	 * The feature id for the '<em><b>Flow Object Container</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BPMN_BRANCH__FLOW_OBJECT_CONTAINER = VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER;
+	int BPMN_BRANCH__PARENT = VsdtPackage.FLOW_OBJECT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
@@ -597,13 +597,13 @@ public interface StrucBpmnPackage extends EPackage {
 	int BPMN_LOOP_BLOCK__INCOMING_MSG = VsdtPackage.FLOW_OBJECT__INCOMING_MSG;
 
 	/**
-	 * The feature id for the '<em><b>Flow Object Container</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BPMN_LOOP_BLOCK__FLOW_OBJECT_CONTAINER = VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER;
+	int BPMN_LOOP_BLOCK__PARENT = VsdtPackage.FLOW_OBJECT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
@@ -769,13 +769,13 @@ public interface StrucBpmnPackage extends EPackage {
 	int BPMN_DERIVED_PROCESS__INCOMING_MSG = VsdtPackage.FLOW_OBJECT__INCOMING_MSG;
 
 	/**
-	 * The feature id for the '<em><b>Flow Object Container</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BPMN_DERIVED_PROCESS__FLOW_OBJECT_CONTAINER = VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER;
+	int BPMN_DERIVED_PROCESS__PARENT = VsdtPackage.FLOW_OBJECT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
@@ -924,13 +924,13 @@ public interface StrucBpmnPackage extends EPackage {
 	int BPMN_EVENT_HANDLER_BLOCK__INCOMING_MSG = VsdtPackage.FLOW_OBJECT__INCOMING_MSG;
 
 	/**
-	 * The feature id for the '<em><b>Flow Object Container</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BPMN_EVENT_HANDLER_BLOCK__FLOW_OBJECT_CONTAINER = VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER;
+	int BPMN_EVENT_HANDLER_BLOCK__PARENT = VsdtPackage.FLOW_OBJECT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
@@ -1069,13 +1069,13 @@ public interface StrucBpmnPackage extends EPackage {
 	int BPMN_EVENT_HANDLER_CASE__INCOMING_MSG = VsdtPackage.FLOW_OBJECT__INCOMING_MSG;
 
 	/**
-	 * The feature id for the '<em><b>Flow Object Container</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BPMN_EVENT_HANDLER_CASE__FLOW_OBJECT_CONTAINER = VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER;
+	int BPMN_EVENT_HANDLER_CASE__PARENT = VsdtPackage.FLOW_OBJECT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
@@ -1233,13 +1233,13 @@ public interface StrucBpmnPackage extends EPackage {
 	int BPMN_ELEMENT_TO_SKIP__INCOMING_MSG = VsdtPackage.FLOW_OBJECT__INCOMING_MSG;
 
 	/**
-	 * The feature id for the '<em><b>Flow Object Container</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BPMN_ELEMENT_TO_SKIP__FLOW_OBJECT_CONTAINER = VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER;
+	int BPMN_ELEMENT_TO_SKIP__PARENT = VsdtPackage.FLOW_OBJECT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.

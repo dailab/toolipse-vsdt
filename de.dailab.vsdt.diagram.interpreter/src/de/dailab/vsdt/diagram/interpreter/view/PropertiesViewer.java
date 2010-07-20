@@ -47,8 +47,8 @@ public class PropertiesViewer extends ListViewer {
 
 		public Object[] getElements(Object parent) {
 			List<Object> elements= new ArrayList<Object>();
-			if (parent instanceof Pool && ((Pool) parent).getProcess() != null) {
-				elements.addAll(((Pool) parent).getProcess().getProperties());
+			if (parent instanceof Pool) {
+				elements.addAll(((Pool) parent).getProperties());
 			}
 			if (parent instanceof FlowObject) {
 				elements.addAll(((FlowObject) parent).getVisibleProperties());

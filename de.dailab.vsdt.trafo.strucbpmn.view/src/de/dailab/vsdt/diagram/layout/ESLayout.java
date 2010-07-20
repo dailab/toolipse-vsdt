@@ -206,7 +206,7 @@ public class ESLayout extends AbstractLayout implements ESModel<ESLayout.ESLayou
 				double this_penalty = 1;
 				
 				// for all other flow objects
-				for (FlowObject other : flowObject.getFlowObjectContainer().getContainedFlowObjects()) {
+				for (FlowObject other : flowObject.getParent().getContainedFlowObjects()) {
 					if (other != flowObject) {
 						Rectangle p2 = positions.get(other);
 						

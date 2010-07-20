@@ -58,10 +58,10 @@ public class BpmnPropertiesViewContentProvider extends AbstractContentProvider i
 					IGraphicalEditPart editPart = (IGraphicalEditPart) selected;
 					EObject eObject= ((View)editPart.getModel()).getElement();
 					if (eObject instanceof Pool) {
-						return ((Pool) eObject).getProcess().getVisibleProperties();
+						return ((Pool) eObject).getProperties();
 					}
 					if (eObject instanceof Lane) {
-						return ((Lane) eObject).getParentPool().getProcess().getVisibleProperties();
+						return ((Lane) eObject).getParent().getProperties();
 					}
 					if (eObject instanceof FlowObject) {
 						return ((FlowObject) eObject).getVisibleProperties();

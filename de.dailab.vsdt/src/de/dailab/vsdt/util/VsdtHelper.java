@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.Association;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.ConnectingObject;
 import de.dailab.vsdt.DataObject;
 import de.dailab.vsdt.Event;
@@ -24,7 +23,6 @@ import de.dailab.vsdt.LoopType;
 import de.dailab.vsdt.Message;
 import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.MultiLoopAttSet;
-import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
@@ -77,12 +75,6 @@ public class VsdtHelper {
 	public static String getName(EObject eObject) {
 		if (eObject instanceof IdObject) {
 			return ((IdObject) eObject).getNameOrId();
-		}
-		if (eObject instanceof Participant) {
-			return ((Participant) eObject).getName();
-		}
-		if (eObject instanceof BpmnProcess) {
-			return ((BpmnProcess) eObject).getName();			
 		}
 		return null;
 	}
@@ -148,9 +140,9 @@ public class VsdtHelper {
 	 */
 	public static List<Property> getVisibleProperties(EObject object) {
 		if (object != null) {
-			if (object instanceof BpmnProcess) {
-				BpmnProcess process = (BpmnProcess) object;
-				return new ArrayList<Property>(process.getVisibleProperties());
+			if (object instanceof Pool) {
+				Pool pool= (Pool) object;
+				return new ArrayList<Property>(pool.getProperties());
 			}
 			if (object instanceof DataObject) {
 				return new ArrayList<Property>(((DataObject) object).getProperties());
@@ -163,9 +155,6 @@ public class VsdtHelper {
 			}
 			if (object instanceof MessageFlow) {
 				return getVisibleProperties(((MessageFlow) object).getMessage());
-			}
-			if (object instanceof Pool) {
-				return getVisibleProperties(((Pool) object).getProcess());
 			}
 			if (object instanceof SequenceFlow) {
 				return getVisibleProperties(((SequenceFlow) object).getSource());
@@ -219,12 +208,11 @@ public class VsdtHelper {
 	 * @return				depth (0 for top level elements, or -1 if error
 	 */
 	public static int getDepth(FlowObject flowObject) {
-		if (flowObject.getFlowObjectContainer() instanceof Lane) {
+		if (flowObject.getParent() instanceof Lane) {
 			return 0;
-		} else {
-			if (flowObject.getFlowObjectContainer() instanceof FlowObject) {
-				return getDepth((FlowObject) flowObject.getFlowObjectContainer()) + 1;
-			}
+		}
+		if (flowObject.getParent() instanceof FlowObject) {
+			return getDepth((FlowObject) flowObject.getParent()) + 1;
 		}
 		return -1;
 	}

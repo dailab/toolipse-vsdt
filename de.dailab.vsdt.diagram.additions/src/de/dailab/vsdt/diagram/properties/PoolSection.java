@@ -9,12 +9,10 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import de.dailab.common.swt.FormLayoutUtil;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.ProcessType;
@@ -36,8 +34,8 @@ public class PoolSection extends AbstractVsdtPropertySection {
 							   DISPLAY_PROC_PRIV= "Private",
 							   DISPLAY_PROC_ABST= "Abstract",
 							   DISPLAY_PROC_COLL= "Collaboration",
-							   DISPLAY_PROC_INSTCOMP= "Enable Instance Compensation",
-							   DISPLAY_PROC_SUPPJF= "Suppress Join Failure",
+//							   DISPLAY_PROC_INSTCOMP= "Enable Instance Compensation",
+//							   DISPLAY_PROC_SUPPJF= "Suppress Join Failure",
 							   DISPLAY_SUB_ADHOC= "Ad Hoc",
 							   DISPLAY_SUB_ADHOC_ORDERING= "Ad Hoc Ordering",
 							   DISPLAY_SUB_ADHOC_PAR= "Parallel",
@@ -64,13 +62,13 @@ public class PoolSection extends AbstractVsdtPropertySection {
 //    private Button initPartButton;
     
     private Group processGroup;
-    private Text procNameText;
+//    private Text procNameText;
     private Button procTypeNoneButton;
     private Button procTypePrivButton;
     private Button procTypeAbstButton;
     private Button procTypeCollButton;
-    private Button suppJFButton;
-    private Button enabICButton;
+//    private Button suppJFButton;
+//    private Button enabICButton;
     
 //    private Group adHocGroup;
     private Button adHocButton;
@@ -99,7 +97,7 @@ public class PoolSection extends AbstractVsdtPropertySection {
  	protected void internalRefresh() {
         boundaryvisButton.setSelection(pool.isBoundaryVisible());
 
-        participantCombo.fillCombo(pool.getParentDiagram().getParticipants());
+        participantCombo.fillCombo(pool.getParent().getParticipants());
         participantCombo.setSelected(pool.getParticipant());
 //        participantGroup.setVisible(pool.getParticipant() != null);
 //        if (pool.getParticipant() != null) {
@@ -108,25 +106,23 @@ public class PoolSection extends AbstractVsdtPropertySection {
 //            partEntityText.setText(nonNull(pool.getParticipant().getEntity()));
 //        }
 
-    	processGroup.setVisible(pool.getProcess() != null);
-        if (pool.getProcess() != null) {
-        	BpmnProcess process= pool.getProcess();
-            procNameText.setText(nonNull(process.getName()));
-            procTypeNoneButton.setSelection(process.getProcessType() == ProcessType.NONE);
-            procTypePrivButton.setSelection(process.getProcessType() == ProcessType.PRIVATE);
-            procTypeAbstButton.setSelection(process.getProcessType() == ProcessType.ABSTRACT);
-            procTypeCollButton.setSelection(process.getProcessType() == ProcessType.COLLABORATION);
+    	processGroup.setVisible(true);
+    	Pool process = pool;
+//        procNameText.setText(nonNull(process.getName()));
+        procTypeNoneButton.setSelection(process.getProcessType() == ProcessType.NONE);
+        procTypePrivButton.setSelection(process.getProcessType() == ProcessType.PRIVATE);
+        procTypeAbstButton.setSelection(process.getProcessType() == ProcessType.ABSTRACT);
+        procTypeCollButton.setSelection(process.getProcessType() == ProcessType.COLLABORATION);
 
-            enabICButton.setSelection(process.isEnableInstanceCompensation());
-            suppJFButton.setSelection(process.isSuppressJoinFailure());
-            
-        	adHocButton.setSelection(process.isAdHoc());
-        	adHocConditionText.setEnabled(adHocButton.getSelection());
+//        enabICButton.setSelection(process.isEnableInstanceCompensation());
+//        suppJFButton.setSelection(process.isSuppressJoinFailure());
+        
+    	adHocButton.setSelection(process.isAdHoc());
+    	adHocConditionText.setEnabled(adHocButton.getSelection());
 //        	adHocSeqButton.setSelection(process.getAdHocOrdering() == OrderingType.SEQUENTIAL);
 //        	adHocParButton.setSelection(process.getAdHocOrdering() == OrderingType.PARALLEL);
-        	adHocConditionText.setText(getExpression(process.getAdHocCompletionCondition()));
-        	adHocConditionText.setOwnerAndFeature(process, pack.getAbstractProcess_AdHocCompletionCondition());
-        }
+    	adHocConditionText.setText(getExpression(process.getAdHocCompletionCondition()));
+    	adHocConditionText.setOwnerAndFeature(process, pack.getAbstractProcess_AdHocCompletionCondition());
     }
  
     @Override
@@ -166,22 +162,22 @@ public class PoolSection extends AbstractVsdtPropertySection {
         // process group
         processGroup= FormLayoutUtil.addGroup(composite, DISPLAY_PROCESS_GROUP, orgPropButton, participantCombo.getCombo(), 100);
         label= FormLayoutUtil.addLabel(processGroup, DISPLAY_NAME, 0, 0);
-        procNameText= FormLayoutUtil.addText(processGroup, 0, label, 100, 0);
-        procNameText.addFocusListener(this);
-        label= FormLayoutUtil.addLabel(processGroup, DISPLAY_PROC_TYPE, procNameText, 0);
-        procTypeNoneButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_NONE, SWT.RADIO, procNameText, label, null);
-        procTypePrivButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_PRIV, SWT.RADIO, procNameText, procTypeNoneButton, null);
+//        procNameText= FormLayoutUtil.addText(processGroup, 0, label, 100, 0);
+//        procNameText.addFocusListener(this);
+        label= FormLayoutUtil.addLabel(processGroup, DISPLAY_PROC_TYPE, 0, 0);
+        procTypeNoneButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_NONE, SWT.RADIO, 0, label, null);
+        procTypePrivButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_PRIV, SWT.RADIO, 0, procTypeNoneButton, null);
         procTypeAbstButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_ABST, SWT.RADIO, label, label, null);
         procTypeCollButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_COLL, SWT.RADIO, label, procTypeAbstButton, null);
         procTypeNoneButton.addSelectionListener(this);
         procTypePrivButton.addSelectionListener(this);
         procTypeAbstButton.addSelectionListener(this);
         procTypeCollButton.addSelectionListener(this);
-        enabICButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_INSTCOMP, SWT.CHECK, procTypeCollButton, 0, null);
-        enabICButton.addSelectionListener(this);
-        suppJFButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_SUPPJF, SWT.CHECK, procTypeCollButton, enabICButton, null);
-        suppJFButton.addSelectionListener(this);
-        adHocButton= FormLayoutUtil.addButton(processGroup, DISPLAY_SUB_ADHOC, SWT.CHECK, suppJFButton, 0, null);
+//        enabICButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_INSTCOMP, SWT.CHECK, procTypeCollButton, 0, null);
+//        enabICButton.addSelectionListener(this);
+//        suppJFButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_SUPPJF, SWT.CHECK, procTypeCollButton, enabICButton, null);
+//        suppJFButton.addSelectionListener(this);
+        adHocButton= FormLayoutUtil.addButton(processGroup, DISPLAY_SUB_ADHOC, SWT.CHECK, procTypeCollButton, 0, null);
     	adHocButton.addSelectionListener(this);
 //    	adHocGroup= FormLayoutUtil.addGroup(processGroup, DISPLAY_SUB_ADHOC, adHocButton, 0, 100);
         label= FormLayoutUtil.addLabel(processGroup, DISPLAY_SUB_ADHOCCONDITION, adHocButton, 0);
@@ -204,9 +200,9 @@ public class PoolSection extends AbstractVsdtPropertySection {
 //    	if (e.getSource().equals(partEntityText)) {
 //    		setPropertyValue(pool.getParticipant(), pack.getParticipant_Entity(), nullIfEmpty(partEntityText.getText()));
 //    	}
-    	if (e.getSource().equals(procNameText)) {
-    		setPropertyValue(pool.getProcess(), pack.getProperty_Name(), nullIfEmpty(procNameText.getText()));
-    	}
+//    	if (e.getSource().equals(procNameText)) {
+//    		setPropertyValue(pool, pack.getProperty_Name(), nullIfEmpty(procNameText.getText()));
+//    	}
 //    	if (e.getSource().equals(adHocConditionText.getTextfield())) {
 //    		setPropertyValue(pool.getProcess(), pack.getAbstractProcess_AdHocCompletionCondition(), createExpression(adHocConditionText.getText()));
 //    	}
@@ -233,19 +229,19 @@ public class PoolSection extends AbstractVsdtPropertySection {
     	if (src.equals(boundaryvisButton)) {
     		setPropertyValue(pool, pack.getPool_BoundaryVisible(), boundaryvisButton.getSelection());
     	}
-    	if (pool.getProcess() != null) {
-			BpmnProcess process= pool.getProcess();
+//    	if (pool.getProcess() != null) {
+			Pool process= pool;
 	    	if (src.equals(procTypeNoneButton)) {
-	    		setPropertyValue(process, pack.getBpmnProcess_ProcessType(), ProcessType.NONE);
+	    		setPropertyValue(process, pack.getPool_ProcessType(), ProcessType.NONE);
 	    	}
 	    	if (src.equals(procTypeAbstButton)) {
-	    		setPropertyValue(process, pack.getBpmnProcess_ProcessType(), ProcessType.ABSTRACT);
+	    		setPropertyValue(process, pack.getPool_ProcessType(), ProcessType.ABSTRACT);
 	    	}
 	    	if (src.equals(procTypePrivButton)) {
-	    		setPropertyValue(process, pack.getBpmnProcess_ProcessType(), ProcessType.PRIVATE);
+	    		setPropertyValue(process, pack.getPool_ProcessType(), ProcessType.PRIVATE);
 	    	}
 	    	if (src.equals(procTypeCollButton)) {
-	    		setPropertyValue(process, pack.getBpmnProcess_ProcessType(), ProcessType.COLLABORATION);
+	    		setPropertyValue(process, pack.getPool_ProcessType(), ProcessType.COLLABORATION);
 	    	}
 	    	if (src.equals(adHocButton)) {
 	    		setPropertyValue(process, pack.getAbstractProcess_AdHoc(),adHocButton.getSelection());
@@ -253,13 +249,13 @@ public class PoolSection extends AbstractVsdtPropertySection {
 //	    	if (src.equals(adHocSeqButton) || src.equals(adHocParButton)) {
 //	    		setPropertyValue(process, pack.getAbstractProcess_AdHocOrdering(), adHocSeqButton.getSelection() ? OrderingType.SEQUENTIAL : OrderingType.PARALLEL);
 //	    	}
-	    	if (src.equals(enabICButton)) {
-	    		setPropertyValue(process, pack.getBpmnProcess_EnableInstanceCompensation(), enabICButton.getSelection());
-	    	}
-	    	if (src.equals(suppJFButton)) {
-	    		setPropertyValue(process, pack.getBpmnProcess_SuppressJoinFailure(), suppJFButton.getSelection());
-	    	}
-    	}
+//	    	if (src.equals(enabICButton)) {
+//	    		setPropertyValue(process, pack.getBpmnProcess_EnableInstanceCompensation(), enabICButton.getSelection());
+//	    	}
+//	    	if (src.equals(suppJFButton)) {
+//	    		setPropertyValue(process, pack.getBpmnProcess_SuppressJoinFailure(), suppJFButton.getSelection());
+//	    	}
+//    	}
 //    	if (pool.getParticipant() != null) {
 //	    	if (src.equals(partTypeRoleButton)) {
 //	    		setPropertyValue(pool.getParticipant(), pack.getParticipant_ParticipantType(), ParticipantType.ROLE);

@@ -56,9 +56,9 @@ public class SplitGatewayRule extends AbstractRule {
 	protected void apply() {
 		
 		//create gateway2
-		FlowObjectContainer container= _gateway.getFlowObjectContainer();
+		FlowObjectContainer container= _gateway.getParent();
 		Gateway gateway2= VsdtFactory.eINSTANCE.createGateway();
-		gateway2.setFlowObjectContainer(container);
+		gateway2.setParent(container);
 		
 		//change names
 		String name= _gateway.getName();
@@ -69,7 +69,7 @@ public class SplitGatewayRule extends AbstractRule {
 		gateway2.getIncomingSeq().addAll(_gateway.getIncomingSeq());
 
 		//create sequence flow
-		BusinessProcessDiagram bpd= _gateway.getPool().getParentDiagram();
+		BusinessProcessDiagram bpd= _gateway.getPool().getParent();
 		SequenceFlow seqFlow= VsdtFactory.eINSTANCE.createSequenceFlow();
 		bpd.getConnections().add(seqFlow);
 		

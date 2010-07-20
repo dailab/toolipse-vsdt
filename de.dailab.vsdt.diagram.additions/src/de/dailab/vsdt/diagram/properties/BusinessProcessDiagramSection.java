@@ -69,13 +69,13 @@ public class BusinessProcessDiagramSection extends AbstractVsdtPropertySection {
     public void widgetSelected(SelectionEvent e) {
     	Object src= e.getSource();
     	if (src.equals(orgImplButton)) {
-			new OrganizeImplementationsAction().run(bpd.getBusinessProcessSystem());
+			new OrganizeImplementationsAction().run(bpd.getParent());
     	}
     	if (src.equals(orgMsgButton)) {
-			new OrganizeMessagesAction().run(bpd.getBusinessProcessSystem());
+			new OrganizeMessagesAction().run(bpd.getParent());
     	}
     	if (src.equals(orgDataButton)) {
-			new OrganizeDataTypesAction().run(bpd.getBusinessProcessSystem());
+			new OrganizeDataTypesAction().run(bpd.getParent());
     	}
     }
 

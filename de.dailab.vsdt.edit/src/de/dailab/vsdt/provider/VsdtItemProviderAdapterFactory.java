@@ -121,29 +121,6 @@ public class VsdtItemProviderAdapterFactory extends VsdtAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.dailab.vsdt.BpmnProcess} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BpmnProcessItemProvider bpmnProcessItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link de.dailab.vsdt.BpmnProcess}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBpmnProcessAdapter() {
-		if (bpmnProcessItemProvider == null) {
-			bpmnProcessItemProvider = new BpmnProcessItemProvider(this);
-		}
-
-		return bpmnProcessItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link de.dailab.vsdt.Start} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -819,7 +796,8 @@ public class VsdtItemProviderAdapterFactory extends VsdtAdapterFactory implement
 	public void dispose() {
 		if (businessProcessSystemItemProvider != null) businessProcessSystemItemProvider.dispose();
 		if (businessProcessDiagramItemProvider != null) businessProcessDiagramItemProvider.dispose();
-		if (bpmnProcessItemProvider != null) bpmnProcessItemProvider.dispose();
+		if (poolItemProvider != null) poolItemProvider.dispose();
+		if (laneItemProvider != null) laneItemProvider.dispose();
 		if (startItemProvider != null) startItemProvider.dispose();
 		if (intermediateItemProvider != null) intermediateItemProvider.dispose();
 		if (endItemProvider != null) endItemProvider.dispose();
@@ -830,8 +808,6 @@ public class VsdtItemProviderAdapterFactory extends VsdtAdapterFactory implement
 		if (outputSetItemProvider != null) outputSetItemProvider.dispose();
 		if (transactionItemProvider != null) transactionItemProvider.dispose();
 		if (gatewayItemProvider != null) gatewayItemProvider.dispose();
-		if (poolItemProvider != null) poolItemProvider.dispose();
-		if (laneItemProvider != null) laneItemProvider.dispose();
 		if (dataObjectItemProvider != null) dataObjectItemProvider.dispose();
 		if (textAnnotationItemProvider != null) textAnnotationItemProvider.dispose();
 		if (groupItemProvider != null) groupItemProvider.dispose();

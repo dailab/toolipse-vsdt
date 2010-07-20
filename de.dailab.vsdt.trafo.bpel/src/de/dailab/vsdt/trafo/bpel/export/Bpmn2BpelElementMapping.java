@@ -56,7 +56,6 @@ import org.xmlsoap.schemas.wsdl.TPortType;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.Assignment;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.Event;
@@ -185,7 +184,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 	 */
 	private TProcess visitPool(Pool pool) {
 		TrafoLog.trace("Visiting Pool '" + pool.getName() + "'");
-		BpmnProcess process= pool.getProcess();
+		Pool process= pool;
 		
 		//check process type
 		ProcessType type= process.getProcessType();
@@ -212,44 +211,44 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 		visitProperties(process.getProperties(),process);
 		
 		//visit assignments: the start-time-assigns have to be inserted after the initializing receive/pick!
-		if (! process.getAssignments().isEmpty()) {
-			//assignments: create wrapping sequence for the activity and its assignments
-			TSequence tSequence= bpelFac.createTSequence();
-
-			//create assignments
-			TAssign startAssignments= createAssignFromList(process.getAssignments(), AssignTimeType.START);
-			if (startAssignments != null) {
-				startAssignments.setName(_current.process.getName() + "_startAssignments");
-			}
-			TAssign endAssignments= createAssignFromList(process.getAssignments(), AssignTimeType.END);
-			if (endAssignments != null) {
-				endAssignments.setName(_current.process.getName() + "_endAssignments");
-			}
-			
-			//insert startAssignments after the first receive or pick
-			if (startAssignments != null) {
-				TActivity firstRoP= null;
-				if (tActivity instanceof TReceive || tActivity instanceof TPick) {
-					firstRoP= tActivity;
-					tActivity= null;
-				}
-				if (tActivity instanceof TSequence) {
-					//firstRoP, if any, will be removed from the sequence and inserted prior to the assignment
-					firstRoP= BpelStaticHelper.extractFirstReceiveOrPick((TSequence) tActivity);
-				}
-				if (firstRoP != null) {
-					tSequence.addActivity(firstRoP);
-				}
-				tSequence.getAssign().add(startAssignments);
-			}
-			if (tActivity != null) {
-				tSequence.addActivity(tActivity);
-			}
-			if (endAssignments != null) {
-				tSequence.getAssign().add(endAssignments);
-			}
-			tActivity= tSequence;
-		}
+//		if (! process.getAssignments().isEmpty()) {
+//			//assignments: create wrapping sequence for the activity and its assignments
+//			TSequence tSequence= bpelFac.createTSequence();
+//
+//			//create assignments
+//			TAssign startAssignments= createAssignFromList(process.getAssignments(), AssignTimeType.START);
+//			if (startAssignments != null) {
+//				startAssignments.setName(_current.process.getName() + "_startAssignments");
+//			}
+//			TAssign endAssignments= createAssignFromList(process.getAssignments(), AssignTimeType.END);
+//			if (endAssignments != null) {
+//				endAssignments.setName(_current.process.getName() + "_endAssignments");
+//			}
+//			
+//			//insert startAssignments after the first receive or pick
+//			if (startAssignments != null) {
+//				TActivity firstRoP= null;
+//				if (tActivity instanceof TReceive || tActivity instanceof TPick) {
+//					firstRoP= tActivity;
+//					tActivity= null;
+//				}
+//				if (tActivity instanceof TSequence) {
+//					//firstRoP, if any, will be removed from the sequence and inserted prior to the assignment
+//					firstRoP= BpelStaticHelper.extractFirstReceiveOrPick((TSequence) tActivity);
+//				}
+//				if (firstRoP != null) {
+//					tSequence.addActivity(firstRoP);
+//				}
+//				tSequence.getAssign().add(startAssignments);
+//			}
+//			if (tActivity != null) {
+//				tSequence.addActivity(tActivity);
+//			}
+//			if (endAssignments != null) {
+//				tSequence.getAssign().add(endAssignments);
+//			}
+//			tActivity= tSequence;
+//		}
    
 		//if the process has a scope, insert the result in this scope, otherwise insert it directly into the process
 		if (_current.process.getScope() != null) {
@@ -420,7 +419,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 				//create onMessage on the processes scope
 				//XXX But: won't this END the process instead of starting it?!
 //				if (event.getMessage().getTo() == event.getPool().getParticipant()) {
-					TProcess process= (TProcess) wrapper.getMapping(event.getProcess());
+					TProcess process= (TProcess) wrapper.getMapping(event.getPool());
 					TScope scope= BpelStaticHelper.getScope(process);
 					TOnMessage onMessage= createOnMessage(event.getMessage(), event.getImplementation());
 					BpelStaticHelper.getEventHandlers(scope).getOnMessage().add(onMessage);
@@ -450,7 +449,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 				if (StrucBpmnMappingAssistant.isStartingOrEndingNode(event, false)) {
 					//no incoming sequence flow: create onMessage on the processes scope
 					//XXX But: won't this END the process instead of starting it?!
-					TProcess process= (TProcess) wrapper.getMapping(event.getProcess());
+					TProcess process= (TProcess) wrapper.getMapping(event.getPool());
 					TScope scope= BpelStaticHelper.getScope(process);
 					TOnAlarm onAlarm= bpelFac.createTOnAlarm();
 					onAlarm.setFor(BpelStaticHelper.getCondition(event.getTimeCycle()));
@@ -1175,16 +1174,16 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 	 * create a tProcess with all primitive attributes. note that this method does not create the processes children.
 	 * NOTE: using pool's name instead of process' name
 	 * 
-	 * @param process	a BPMN process
+	 * @param process	a BPMN process (Pool)
 	 * @return			a BPEL process (basic attributes only)
 	 */
-	protected static TProcess createProcess(BpmnProcess process) {
-		BusinessProcessSystem bps= process.getParentPool().getParentDiagram().getBusinessProcessSystem();
+	protected static TProcess createProcess(Pool process) {
+		BusinessProcessSystem bps= process.getParent().getParent();
 		TProcess tProcess= bpelFac.createTProcess();
-		tProcess.setName(process.getParentPool().getName());
+		tProcess.setName(process.getName() + "_" + process.getParent().getName());
 		tProcess.setAbstractProcess(TBoolean.get(process.getProcessType()==ProcessType.ABSTRACT));
-		tProcess.setSuppressJoinFailure(TBoolean.get(process.isSuppressJoinFailure()));
-		tProcess.setEnableInstanceCompensation(TBoolean.get(process.isEnableInstanceCompensation()));
+		tProcess.setSuppressJoinFailure(TBoolean.get(false));
+		tProcess.setEnableInstanceCompensation(TBoolean.get(false));
 		tProcess.setQueryLanguage(bps.getQueryLanguage() != null ? bps.getQueryLanguage() : NS_XPATH_URI);
 //		tProcess.setExpressionLanguage(diagram.getExpressionLanguage() != null ? diagram.getExpressionLanguage() : NS_XPATH_URI);
 		// always use xPath, as the expressions e.g. in a loop with max set are in xPath
@@ -1697,7 +1696,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 	private TActivity createMultiInstanceLoop(Activity activity, TActivity tActivity) {
 		MultiLoopAttSet attSet= (MultiLoopAttSet) activity.getLoopAttributes();
 		String actName= activity.getName();
-		BpmnProcess process= activity.getProcess();
+		Pool process= activity.getPool();
 		String procVarName= process.getProperties().isEmpty() ? null : BpelStaticHelper.getVarNameFor(process);
 		String plInternal= BpelStaticHelper.getPartnerLinkName(activity.getPool().getParticipant());
 		String ptSpawnedProcess= NS_THIS + ":" + actName + "_SpawnedProcessPT";

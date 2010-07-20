@@ -6,7 +6,6 @@
  */
 package de.dailab.vsdt.util;
 
-import de.dailab.vsdt.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -17,11 +16,11 @@ import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.Artifact;
 import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.Association;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.ConnectingObject;
 import de.dailab.vsdt.DataObject;
+import de.dailab.vsdt.DataType;
 import de.dailab.vsdt.End;
 import de.dailab.vsdt.Event;
 import de.dailab.vsdt.Expression;
@@ -124,8 +123,12 @@ public class VsdtAdapterFactory extends AdapterFactoryImpl {
 				return createAbstractProcessAdapter();
 			}
 			@Override
-			public Adapter caseBpmnProcess(BpmnProcess object) {
-				return createBpmnProcessAdapter();
+			public Adapter casePool(Pool object) {
+				return createPoolAdapter();
+			}
+			@Override
+			public Adapter caseLane(Lane object) {
+				return createLaneAdapter();
 			}
 			@Override
 			public Adapter caseFlowObjectContainer(FlowObjectContainer object) {
@@ -190,14 +193,6 @@ public class VsdtAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseGateway(Gateway object) {
 				return createGatewayAdapter();
-			}
-			@Override
-			public Adapter casePool(Pool object) {
-				return createPoolAdapter();
-			}
-			@Override
-			public Adapter caseLane(Lane object) {
-				return createLaneAdapter();
 			}
 			@Override
 			public Adapter caseArtifact(Artifact object) {
@@ -290,20 +285,6 @@ public class VsdtAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBusinessProcessDiagramAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link de.dailab.vsdt.BpmnProcess <em>Bpmn Process</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.dailab.vsdt.BpmnProcess
-	 * @generated
-	 */
-	public Adapter createBpmnProcessAdapter() {
 		return null;
 	}
 

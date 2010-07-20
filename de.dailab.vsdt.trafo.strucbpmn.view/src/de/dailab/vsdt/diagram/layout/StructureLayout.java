@@ -72,7 +72,7 @@ public class StructureLayout extends AbstractLayout {
 		Map<FlowObject, Rectangle> layoutMap= new HashMap<FlowObject, Rectangle>();
 		for (Pool pool : strucBpd.getPools()) {
 			Point hint= new Point(OFFSET, OFFSET);
-			for (FlowObject flowObject : pool.getProcess().getGraphicalElements()) {
+			for (FlowObject flowObject : pool.getGraphicalElements()) {
 				Rectangle r= calculatePosition(flowObject, hint, false, layoutMap);
 				hint.x= r.x;
 				hint.y= r.bottom();

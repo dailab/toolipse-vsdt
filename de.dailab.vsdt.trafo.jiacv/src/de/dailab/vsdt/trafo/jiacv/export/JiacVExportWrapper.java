@@ -88,7 +88,7 @@ public class JiacVExportWrapper extends BpmnExportWrapper {
 			Pool pool= getPool(agent);
 			if (pool != null) {
 				String poolName= pool.getName();
-				String bpdName= pool.getParentDiagram().getName();
+				String bpdName= pool.getParent().getName();
 				String roleName= pool.getParticipant().getName();
 	
 				StringBuffer buffer= new StringBuffer();

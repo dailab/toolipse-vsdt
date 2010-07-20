@@ -325,13 +325,22 @@ public interface VsdtPackage extends EPackage {
 	int BUSINESS_PROCESS_DIAGRAM__CATEGORIES = ID_OBJECT__CATEGORIES;
 
 	/**
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUSINESS_PROCESS_DIAGRAM__PARENT = ID_OBJECT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Pools</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUSINESS_PROCESS_DIAGRAM__POOLS = ID_OBJECT_FEATURE_COUNT + 0;
+	int BUSINESS_PROCESS_DIAGRAM__POOLS = ID_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Artifacts</b></em>' containment reference list.
@@ -340,7 +349,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUSINESS_PROCESS_DIAGRAM__ARTIFACTS = ID_OBJECT_FEATURE_COUNT + 1;
+	int BUSINESS_PROCESS_DIAGRAM__ARTIFACTS = ID_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Connections</b></em>' containment reference list.
@@ -349,7 +358,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUSINESS_PROCESS_DIAGRAM__CONNECTIONS = ID_OBJECT_FEATURE_COUNT + 2;
+	int BUSINESS_PROCESS_DIAGRAM__CONNECTIONS = ID_OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Participants</b></em>' reference list.
@@ -358,16 +367,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUSINESS_PROCESS_DIAGRAM__PARTICIPANTS = ID_OBJECT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Business Process System</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM = ID_OBJECT_FEATURE_COUNT + 4;
+	int BUSINESS_PROCESS_DIAGRAM__PARTICIPANTS = ID_OBJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Business Process Diagram</em>' class.
@@ -425,142 +425,6 @@ public interface VsdtPackage extends EPackage {
 	int ABSTRACT_PROCESS_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link de.dailab.vsdt.impl.BpmnProcessImpl <em>Bpmn Process</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.dailab.vsdt.impl.BpmnProcessImpl
-	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getBpmnProcess()
-	 * @generated
-	 */
-	int BPMN_PROCESS = 4;
-
-	/**
-	 * The feature id for the '<em><b>Ad Hoc</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_PROCESS__AD_HOC = ABSTRACT_PROCESS__AD_HOC;
-
-	/**
-	 * The feature id for the '<em><b>Ad Hoc Completion Condition</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_PROCESS__AD_HOC_COMPLETION_CONDITION = ABSTRACT_PROCESS__AD_HOC_COMPLETION_CONDITION;
-
-	/**
-	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_PROCESS__PROPERTIES = ABSTRACT_PROCESS__PROPERTIES;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_PROCESS__NAME = ABSTRACT_PROCESS_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_PROCESS__DOCUMENTATION = ABSTRACT_PROCESS_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_PROCESS__ID = ABSTRACT_PROCESS_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_PROCESS__CATEGORIES = ABSTRACT_PROCESS_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Parent Pool</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_PROCESS__PARENT_POOL = ABSTRACT_PROCESS_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Process Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_PROCESS__PROCESS_TYPE = ABSTRACT_PROCESS_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_PROCESS__STATUS = ABSTRACT_PROCESS_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_PROCESS__ASSIGNMENTS = ABSTRACT_PROCESS_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>Suppress Join Failure</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_PROCESS__SUPPRESS_JOIN_FAILURE = ABSTRACT_PROCESS_FEATURE_COUNT + 8;
-
-	/**
-	 * The feature id for the '<em><b>Enable Instance Compensation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_PROCESS__ENABLE_INSTANCE_COMPENSATION = ABSTRACT_PROCESS_FEATURE_COUNT + 9;
-
-	/**
-	 * The number of structural features of the '<em>Bpmn Process</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_PROCESS_FEATURE_COUNT = ABSTRACT_PROCESS_FEATURE_COUNT + 10;
-
-	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.FlowObjectContainerImpl <em>Flow Object Container</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -568,25 +432,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getFlowObjectContainer()
 	 * @generated
 	 */
-	int FLOW_OBJECT_CONTAINER = 5;
-
-	/**
-	 * The feature id for the '<em><b>Contained Flow Objects</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOW_OBJECT_CONTAINER__CONTAINED_FLOW_OBJECTS = 0;
-
-	/**
-	 * The number of structural features of the '<em>Flow Object Container</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOW_OBJECT_CONTAINER_FEATURE_COUNT = 1;
+	int FLOW_OBJECT_CONTAINER = 6;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.GraphicalObjectImpl <em>Graphical Object</em>}' class.
@@ -596,7 +442,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getGraphicalObject()
 	 * @generated
 	 */
-	int GRAPHICAL_OBJECT = 6;
+	int GRAPHICAL_OBJECT = 7;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -669,7 +515,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getNode()
 	 * @generated
 	 */
-	int NODE = 7;
+	int NODE = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -760,7 +606,399 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getFlowObject()
 	 * @generated
 	 */
-	int FLOW_OBJECT = 8;
+	int FLOW_OBJECT = 9;
+
+	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.EventImpl <em>Event</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.EventImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getEvent()
+	 * @generated
+	 */
+	int EVENT = 10;
+
+	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.StartImpl <em>Start</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.StartImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getStart()
+	 * @generated
+	 */
+	int START = 11;
+
+	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.IntermediateImpl <em>Intermediate</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.IntermediateImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getIntermediate()
+	 * @generated
+	 */
+	int INTERMEDIATE = 12;
+
+	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.EndImpl <em>End</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.EndImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getEnd()
+	 * @generated
+	 */
+	int END = 13;
+
+	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.ActivityImpl <em>Activity</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.ActivityImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getActivity()
+	 * @generated
+	 */
+	int ACTIVITY = 14;
+
+	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.InputSetImpl <em>Input Set</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.InputSetImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getInputSet()
+	 * @generated
+	 */
+	int INPUT_SET = 18;
+
+	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.OutputSetImpl <em>Output Set</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.OutputSetImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getOutputSet()
+	 * @generated
+	 */
+	int OUTPUT_SET = 19;
+
+	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.LoopAttributeSetImpl <em>Loop Attribute Set</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.LoopAttributeSetImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getLoopAttributeSet()
+	 * @generated
+	 */
+	int LOOP_ATTRIBUTE_SET = 15;
+
+	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.StandardLoopAttSetImpl <em>Standard Loop Att Set</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.StandardLoopAttSetImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getStandardLoopAttSet()
+	 * @generated
+	 */
+	int STANDARD_LOOP_ATT_SET = 16;
+
+	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.MultiLoopAttSetImpl <em>Multi Loop Att Set</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.MultiLoopAttSetImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getMultiLoopAttSet()
+	 * @generated
+	 */
+	int MULTI_LOOP_ATT_SET = 17;
+
+	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.TransactionImpl <em>Transaction</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.TransactionImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getTransaction()
+	 * @generated
+	 */
+	int TRANSACTION = 20;
+
+	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.GatewayImpl <em>Gateway</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.GatewayImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getGateway()
+	 * @generated
+	 */
+	int GATEWAY = 21;
+
+	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.PoolImpl <em>Pool</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.PoolImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getPool()
+	 * @generated
+	 */
+	int POOL = 4;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POOL__NAME = NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POOL__DOCUMENTATION = NODE__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POOL__ID = NODE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POOL__CATEGORIES = NODE__CATEGORIES;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POOL__OUTGOING_ASS = NODE__OUTGOING_ASS;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Ass</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POOL__INCOMING_ASS = NODE__INCOMING_ASS;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Msg</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POOL__OUTGOING_MSG = NODE__OUTGOING_MSG;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Msg</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POOL__INCOMING_MSG = NODE__INCOMING_MSG;
+
+	/**
+	 * The feature id for the '<em><b>Ad Hoc</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POOL__AD_HOC = NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Ad Hoc Completion Condition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POOL__AD_HOC_COMPLETION_CONDITION = NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POOL__PROPERTIES = NODE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POOL__PARENT = NODE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Participant</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POOL__PARTICIPANT = NODE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Lanes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POOL__LANES = NODE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Boundary Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POOL__BOUNDARY_VISIBLE = NODE_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Process Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POOL__PROCESS_TYPE = NODE_FEATURE_COUNT + 7;
+
+	/**
+	 * The number of structural features of the '<em>Pool</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POOL_FEATURE_COUNT = NODE_FEATURE_COUNT + 8;
+
+	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.LaneImpl <em>Lane</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.LaneImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getLane()
+	 * @generated
+	 */
+	int LANE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE__NAME = GRAPHICAL_OBJECT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE__DOCUMENTATION = GRAPHICAL_OBJECT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE__ID = GRAPHICAL_OBJECT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE__CATEGORIES = GRAPHICAL_OBJECT__CATEGORIES;
+
+	/**
+	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE__OUTGOING_ASS = GRAPHICAL_OBJECT__OUTGOING_ASS;
+
+	/**
+	 * The feature id for the '<em><b>Incoming Ass</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE__INCOMING_ASS = GRAPHICAL_OBJECT__INCOMING_ASS;
+
+	/**
+	 * The feature id for the '<em><b>Contained Flow Objects</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE__CONTAINED_FLOW_OBJECTS = GRAPHICAL_OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE__PARENT = GRAPHICAL_OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Lane</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LANE_FEATURE_COUNT = GRAPHICAL_OBJECT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Contained Flow Objects</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOW_OBJECT_CONTAINER__CONTAINED_FLOW_OBJECTS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Flow Object Container</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOW_OBJECT_CONTAINER_FEATURE_COUNT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -835,13 +1073,13 @@ public interface VsdtPackage extends EPackage {
 	int FLOW_OBJECT__INCOMING_MSG = NODE__INCOMING_MSG;
 
 	/**
-	 * The feature id for the '<em><b>Flow Object Container</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FLOW_OBJECT__FLOW_OBJECT_CONTAINER = NODE_FEATURE_COUNT + 0;
+	int FLOW_OBJECT__PARENT = NODE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
@@ -878,16 +1116,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int FLOW_OBJECT_FEATURE_COUNT = NODE_FEATURE_COUNT + 4;
-
-	/**
-	 * The meta object id for the '{@link de.dailab.vsdt.impl.EventImpl <em>Event</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.dailab.vsdt.impl.EventImpl
-	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getEvent()
-	 * @generated
-	 */
-	int EVENT = 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -962,13 +1190,13 @@ public interface VsdtPackage extends EPackage {
 	int EVENT__INCOMING_MSG = FLOW_OBJECT__INCOMING_MSG;
 
 	/**
-	 * The feature id for the '<em><b>Flow Object Container</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__FLOW_OBJECT_CONTAINER = FLOW_OBJECT__FLOW_OBJECT_CONTAINER;
+	int EVENT__PARENT = FLOW_OBJECT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
@@ -1106,16 +1334,6 @@ public interface VsdtPackage extends EPackage {
 	int EVENT_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 11;
 
 	/**
-	 * The meta object id for the '{@link de.dailab.vsdt.impl.StartImpl <em>Start</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.dailab.vsdt.impl.StartImpl
-	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getStart()
-	 * @generated
-	 */
-	int START = 10;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1188,13 +1406,13 @@ public interface VsdtPackage extends EPackage {
 	int START__INCOMING_MSG = EVENT__INCOMING_MSG;
 
 	/**
-	 * The feature id for the '<em><b>Flow Object Container</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int START__FLOW_OBJECT_CONTAINER = EVENT__FLOW_OBJECT_CONTAINER;
+	int START__PARENT = EVENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
@@ -1332,16 +1550,6 @@ public interface VsdtPackage extends EPackage {
 	int START_FEATURE_COUNT = EVENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.dailab.vsdt.impl.IntermediateImpl <em>Intermediate</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.dailab.vsdt.impl.IntermediateImpl
-	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getIntermediate()
-	 * @generated
-	 */
-	int INTERMEDIATE = 11;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1414,13 +1622,13 @@ public interface VsdtPackage extends EPackage {
 	int INTERMEDIATE__INCOMING_MSG = EVENT__INCOMING_MSG;
 
 	/**
-	 * The feature id for the '<em><b>Flow Object Container</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERMEDIATE__FLOW_OBJECT_CONTAINER = EVENT__FLOW_OBJECT_CONTAINER;
+	int INTERMEDIATE__PARENT = EVENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
@@ -1567,16 +1775,6 @@ public interface VsdtPackage extends EPackage {
 	int INTERMEDIATE_FEATURE_COUNT = EVENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link de.dailab.vsdt.impl.EndImpl <em>End</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.dailab.vsdt.impl.EndImpl
-	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getEnd()
-	 * @generated
-	 */
-	int END = 12;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1649,13 +1847,13 @@ public interface VsdtPackage extends EPackage {
 	int END__INCOMING_MSG = EVENT__INCOMING_MSG;
 
 	/**
-	 * The feature id for the '<em><b>Flow Object Container</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int END__FLOW_OBJECT_CONTAINER = EVENT__FLOW_OBJECT_CONTAINER;
+	int END__PARENT = EVENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
@@ -1793,16 +1991,6 @@ public interface VsdtPackage extends EPackage {
 	int END_FEATURE_COUNT = EVENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link de.dailab.vsdt.impl.ActivityImpl <em>Activity</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.dailab.vsdt.impl.ActivityImpl
-	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getActivity()
-	 * @generated
-	 */
-	int ACTIVITY = 13;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1875,13 +2063,13 @@ public interface VsdtPackage extends EPackage {
 	int ACTIVITY__INCOMING_MSG = FLOW_OBJECT__INCOMING_MSG;
 
 	/**
-	 * The feature id for the '<em><b>Flow Object Container</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__FLOW_OBJECT_CONTAINER = FLOW_OBJECT__FLOW_OBJECT_CONTAINER;
+	int ACTIVITY__PARENT = FLOW_OBJECT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
@@ -1947,22 +2135,13 @@ public interface VsdtPackage extends EPackage {
 	int ACTIVITY__CONTAINED_FLOW_OBJECTS = FLOW_OBJECT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Status</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTIVITY__STATUS = FLOW_OBJECT_FEATURE_COUNT + 4;
-
-	/**
 	 * The feature id for the '<em><b>Input Sets</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__INPUT_SETS = FLOW_OBJECT_FEATURE_COUNT + 5;
+	int ACTIVITY__INPUT_SETS = FLOW_OBJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Output Sets</b></em>' containment reference list.
@@ -1971,7 +2150,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__OUTPUT_SETS = FLOW_OBJECT_FEATURE_COUNT + 6;
+	int ACTIVITY__OUTPUT_SETS = FLOW_OBJECT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>IO Rules</b></em>' containment reference list.
@@ -1980,7 +2159,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__IO_RULES = FLOW_OBJECT_FEATURE_COUNT + 7;
+	int ACTIVITY__IO_RULES = FLOW_OBJECT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Start Quantity</b></em>' attribute.
@@ -1989,7 +2168,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__START_QUANTITY = FLOW_OBJECT_FEATURE_COUNT + 8;
+	int ACTIVITY__START_QUANTITY = FLOW_OBJECT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Loop Attributes</b></em>' containment reference.
@@ -1998,16 +2177,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__LOOP_ATTRIBUTES = FLOW_OBJECT_FEATURE_COUNT + 9;
-
-	/**
-	 * The feature id for the '<em><b>Is Compensation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTIVITY__IS_COMPENSATION = FLOW_OBJECT_FEATURE_COUNT + 10;
+	int ACTIVITY__LOOP_ATTRIBUTES = FLOW_OBJECT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Boundary Events</b></em>' containment reference list.
@@ -2016,7 +2186,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__BOUNDARY_EVENTS = FLOW_OBJECT_FEATURE_COUNT + 11;
+	int ACTIVITY__BOUNDARY_EVENTS = FLOW_OBJECT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Activity Type</b></em>' attribute.
@@ -2025,7 +2195,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__ACTIVITY_TYPE = FLOW_OBJECT_FEATURE_COUNT + 12;
+	int ACTIVITY__ACTIVITY_TYPE = FLOW_OBJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>In Message</b></em>' reference.
@@ -2034,7 +2204,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__IN_MESSAGE = FLOW_OBJECT_FEATURE_COUNT + 13;
+	int ACTIVITY__IN_MESSAGE = FLOW_OBJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Out Message</b></em>' reference.
@@ -2043,7 +2213,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__OUT_MESSAGE = FLOW_OBJECT_FEATURE_COUNT + 14;
+	int ACTIVITY__OUT_MESSAGE = FLOW_OBJECT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Implementation</b></em>' reference.
@@ -2052,7 +2222,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__IMPLEMENTATION = FLOW_OBJECT_FEATURE_COUNT + 15;
+	int ACTIVITY__IMPLEMENTATION = FLOW_OBJECT_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Instantiate</b></em>' attribute.
@@ -2061,7 +2231,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__INSTANTIATE = FLOW_OBJECT_FEATURE_COUNT + 16;
+	int ACTIVITY__INSTANTIATE = FLOW_OBJECT_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Performers</b></em>' attribute list.
@@ -2070,7 +2240,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__PERFORMERS = FLOW_OBJECT_FEATURE_COUNT + 17;
+	int ACTIVITY__PERFORMERS = FLOW_OBJECT_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Script</b></em>' attribute.
@@ -2079,7 +2249,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__SCRIPT = FLOW_OBJECT_FEATURE_COUNT + 18;
+	int ACTIVITY__SCRIPT = FLOW_OBJECT_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Activity Ref</b></em>' reference.
@@ -2088,7 +2258,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__ACTIVITY_REF = FLOW_OBJECT_FEATURE_COUNT + 19;
+	int ACTIVITY__ACTIVITY_REF = FLOW_OBJECT_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Transaction</b></em>' containment reference.
@@ -2097,7 +2267,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__TRANSACTION = FLOW_OBJECT_FEATURE_COUNT + 20;
+	int ACTIVITY__TRANSACTION = FLOW_OBJECT_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Diagram Ref</b></em>' reference.
@@ -2106,7 +2276,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__DIAGRAM_REF = FLOW_OBJECT_FEATURE_COUNT + 21;
+	int ACTIVITY__DIAGRAM_REF = FLOW_OBJECT_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Process Ref</b></em>' reference.
@@ -2115,7 +2285,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__PROCESS_REF = FLOW_OBJECT_FEATURE_COUNT + 22;
+	int ACTIVITY__PROCESS_REF = FLOW_OBJECT_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>Input Property Maps</b></em>' containment reference list.
@@ -2124,7 +2294,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__INPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 23;
+	int ACTIVITY__INPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 21;
 
 	/**
 	 * The feature id for the '<em><b>Output Property Maps</b></em>' containment reference list.
@@ -2133,7 +2303,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__OUTPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 24;
+	int ACTIVITY__OUTPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 22;
 
 	/**
 	 * The number of structural features of the '<em>Activity</em>' class.
@@ -2142,37 +2312,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 25;
-
-	/**
-	 * The meta object id for the '{@link de.dailab.vsdt.impl.InputSetImpl <em>Input Set</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.dailab.vsdt.impl.InputSetImpl
-	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getInputSet()
-	 * @generated
-	 */
-	int INPUT_SET = 17;
-
-	/**
-	 * The meta object id for the '{@link de.dailab.vsdt.impl.OutputSetImpl <em>Output Set</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.dailab.vsdt.impl.OutputSetImpl
-	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getOutputSet()
-	 * @generated
-	 */
-	int OUTPUT_SET = 18;
-
-	/**
-	 * The meta object id for the '{@link de.dailab.vsdt.impl.LoopAttributeSetImpl <em>Loop Attribute Set</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.dailab.vsdt.impl.LoopAttributeSetImpl
-	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getLoopAttributeSet()
-	 * @generated
-	 */
-	int LOOP_ATTRIBUTE_SET = 14;
+	int ACTIVITY_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 23;
 
 	/**
 	 * The feature id for the '<em><b>Parent Activity</b></em>' container reference.
@@ -2200,16 +2340,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int LOOP_ATTRIBUTE_SET_FEATURE_COUNT = 2;
-
-	/**
-	 * The meta object id for the '{@link de.dailab.vsdt.impl.StandardLoopAttSetImpl <em>Standard Loop Att Set</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.dailab.vsdt.impl.StandardLoopAttSetImpl
-	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getStandardLoopAttSet()
-	 * @generated
-	 */
-	int STANDARD_LOOP_ATT_SET = 15;
 
 	/**
 	 * The feature id for the '<em><b>Parent Activity</b></em>' container reference.
@@ -2264,16 +2394,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int STANDARD_LOOP_ATT_SET_FEATURE_COUNT = LOOP_ATTRIBUTE_SET_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link de.dailab.vsdt.impl.MultiLoopAttSetImpl <em>Multi Loop Att Set</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.dailab.vsdt.impl.MultiLoopAttSetImpl
-	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getMultiLoopAttSet()
-	 * @generated
-	 */
-	int MULTI_LOOP_ATT_SET = 16;
 
 	/**
 	 * The feature id for the '<em><b>Parent Activity</b></em>' container reference.
@@ -2375,16 +2495,6 @@ public interface VsdtPackage extends EPackage {
 	int OUTPUT_SET_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link de.dailab.vsdt.impl.TransactionImpl <em>Transaction</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.dailab.vsdt.impl.TransactionImpl
-	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getTransaction()
-	 * @generated
-	 */
-	int TRANSACTION = 19;
-
-	/**
 	 * The feature id for the '<em><b>Transaction Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2419,16 +2529,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int TRANSACTION_FEATURE_COUNT = 3;
-
-	/**
-	 * The meta object id for the '{@link de.dailab.vsdt.impl.GatewayImpl <em>Gateway</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.dailab.vsdt.impl.GatewayImpl
-	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getGateway()
-	 * @generated
-	 */
-	int GATEWAY = 20;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2503,13 +2603,13 @@ public interface VsdtPackage extends EPackage {
 	int GATEWAY__INCOMING_MSG = FLOW_OBJECT__INCOMING_MSG;
 
 	/**
-	 * The feature id for the '<em><b>Flow Object Container</b></em>' container reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GATEWAY__FLOW_OBJECT_CONTAINER = FLOW_OBJECT__FLOW_OBJECT_CONTAINER;
+	int GATEWAY__PARENT = FLOW_OBJECT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
@@ -2593,242 +2693,6 @@ public interface VsdtPackage extends EPackage {
 	int GATEWAY_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link de.dailab.vsdt.impl.PoolImpl <em>Pool</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.dailab.vsdt.impl.PoolImpl
-	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getPool()
-	 * @generated
-	 */
-	int POOL = 21;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POOL__NAME = NODE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POOL__DOCUMENTATION = NODE__DOCUMENTATION;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POOL__ID = NODE__ID;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POOL__CATEGORIES = NODE__CATEGORIES;
-
-	/**
-	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POOL__OUTGOING_ASS = NODE__OUTGOING_ASS;
-
-	/**
-	 * The feature id for the '<em><b>Incoming Ass</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POOL__INCOMING_ASS = NODE__INCOMING_ASS;
-
-	/**
-	 * The feature id for the '<em><b>Outgoing Msg</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POOL__OUTGOING_MSG = NODE__OUTGOING_MSG;
-
-	/**
-	 * The feature id for the '<em><b>Incoming Msg</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POOL__INCOMING_MSG = NODE__INCOMING_MSG;
-
-	/**
-	 * The feature id for the '<em><b>Parent Diagram</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POOL__PARENT_DIAGRAM = NODE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Process</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POOL__PROCESS = NODE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Participant</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POOL__PARTICIPANT = NODE_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Lanes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POOL__LANES = NODE_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Boundary Visible</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POOL__BOUNDARY_VISIBLE = NODE_FEATURE_COUNT + 4;
-
-	/**
-	 * The number of structural features of the '<em>Pool</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POOL_FEATURE_COUNT = NODE_FEATURE_COUNT + 5;
-
-	/**
-	 * The meta object id for the '{@link de.dailab.vsdt.impl.LaneImpl <em>Lane</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.dailab.vsdt.impl.LaneImpl
-	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getLane()
-	 * @generated
-	 */
-	int LANE = 22;
-
-	/**
-	 * The feature id for the '<em><b>Contained Flow Objects</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE__CONTAINED_FLOW_OBJECTS = FLOW_OBJECT_CONTAINER__CONTAINED_FLOW_OBJECTS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE__NAME = FLOW_OBJECT_CONTAINER_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE__DOCUMENTATION = FLOW_OBJECT_CONTAINER_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE__ID = FLOW_OBJECT_CONTAINER_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE__CATEGORIES = FLOW_OBJECT_CONTAINER_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE__OUTGOING_ASS = FLOW_OBJECT_CONTAINER_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Incoming Ass</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE__INCOMING_ASS = FLOW_OBJECT_CONTAINER_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Parent Pool</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE__PARENT_POOL = FLOW_OBJECT_CONTAINER_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Boundary Visible</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE__BOUNDARY_VISIBLE = FLOW_OBJECT_CONTAINER_FEATURE_COUNT + 7;
-
-	/**
-	 * The number of structural features of the '<em>Lane</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE_FEATURE_COUNT = FLOW_OBJECT_CONTAINER_FEATURE_COUNT + 8;
-
-	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.ArtifactImpl <em>Artifact</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2836,7 +2700,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getArtifact()
 	 * @generated
 	 */
-	int ARTIFACT = 23;
+	int ARTIFACT = 22;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2927,7 +2791,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getDataObject()
 	 * @generated
 	 */
-	int DATA_OBJECT = 24;
+	int DATA_OBJECT = 23;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3054,7 +2918,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getTextAnnotation()
 	 * @generated
 	 */
-	int TEXT_ANNOTATION = 25;
+	int TEXT_ANNOTATION = 24;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3145,7 +3009,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getGroup()
 	 * @generated
 	 */
-	int GROUP = 26;
+	int GROUP = 25;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3236,7 +3100,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getConnectingObject()
 	 * @generated
 	 */
-	int CONNECTING_OBJECT = 27;
+	int CONNECTING_OBJECT = 26;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3318,7 +3182,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getSequenceFlow()
 	 * @generated
 	 */
-	int SEQUENCE_FLOW = 28;
+	int SEQUENCE_FLOW = 27;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3445,7 +3309,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getMessageFlow()
 	 * @generated
 	 */
-	int MESSAGE_FLOW = 29;
+	int MESSAGE_FLOW = 28;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3554,7 +3418,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getAssociation()
 	 * @generated
 	 */
-	int ASSOCIATION = 30;
+	int ASSOCIATION = 29;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3663,7 +3527,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getParticipant()
 	 * @generated
 	 */
-	int PARTICIPANT = 31;
+	int PARTICIPANT = 30;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3745,7 +3609,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getMessage()
 	 * @generated
 	 */
-	int MESSAGE = 32;
+	int MESSAGE = 31;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3782,7 +3646,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getImplementation()
 	 * @generated
 	 */
-	int IMPLEMENTATION = 33;
+	int IMPLEMENTATION = 32;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -3873,7 +3737,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getAssignment()
 	 * @generated
 	 */
-	int ASSIGNMENT = 34;
+	int ASSIGNMENT = 33;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' reference.
@@ -3928,7 +3792,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getProperty()
 	 * @generated
 	 */
-	int PROPERTY = 35;
+	int PROPERTY = 34;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3983,7 +3847,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getExpression()
 	 * @generated
 	 */
-	int EXPRESSION = 36;
+	int EXPRESSION = 35;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' attribute.
@@ -4020,7 +3884,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 37;
+	int DATA_TYPE = 36;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4086,16 +3950,6 @@ public interface VsdtPackage extends EPackage {
 	int DATA_TYPE_FEATURE_COUNT = 6;
 
 	/**
-	 * The meta object id for the '{@link de.dailab.vsdt.StatusType <em>Status Type</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.dailab.vsdt.StatusType
-	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getStatusType()
-	 * @generated
-	 */
-	int STATUS_TYPE = 39;
-
-	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.ProcessType <em>Process Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4103,7 +3957,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getProcessType()
 	 * @generated
 	 */
-	int PROCESS_TYPE = 38;
+	int PROCESS_TYPE = 37;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.TriggerType <em>Trigger Type</em>}' enum.
@@ -4113,7 +3967,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getTriggerType()
 	 * @generated
 	 */
-	int TRIGGER_TYPE = 40;
+	int TRIGGER_TYPE = 38;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.FlowConditionTypes <em>Flow Condition Types</em>}' enum.
@@ -4123,7 +3977,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getFlowConditionTypes()
 	 * @generated
 	 */
-	int FLOW_CONDITION_TYPES = 43;
+	int FLOW_CONDITION_TYPES = 41;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.ActivityType <em>Activity Type</em>}' enum.
@@ -4133,7 +3987,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getActivityType()
 	 * @generated
 	 */
-	int ACTIVITY_TYPE = 41;
+	int ACTIVITY_TYPE = 39;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.LoopType <em>Loop Type</em>}' enum.
@@ -4143,7 +3997,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getLoopType()
 	 * @generated
 	 */
-	int LOOP_TYPE = 42;
+	int LOOP_TYPE = 40;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.TransactionMethodType <em>Transaction Method Type</em>}' enum.
@@ -4153,7 +4007,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getTransactionMethodType()
 	 * @generated
 	 */
-	int TRANSACTION_METHOD_TYPE = 44;
+	int TRANSACTION_METHOD_TYPE = 42;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.GatewayType <em>Gateway Type</em>}' enum.
@@ -4163,7 +4017,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getGatewayType()
 	 * @generated
 	 */
-	int GATEWAY_TYPE = 45;
+	int GATEWAY_TYPE = 43;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.ConditionType <em>Condition Type</em>}' enum.
@@ -4173,7 +4027,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getConditionType()
 	 * @generated
 	 */
-	int CONDITION_TYPE = 46;
+	int CONDITION_TYPE = 44;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.DirectionType <em>Direction Type</em>}' enum.
@@ -4183,7 +4037,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getDirectionType()
 	 * @generated
 	 */
-	int DIRECTION_TYPE = 47;
+	int DIRECTION_TYPE = 45;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.ParticipantType <em>Participant Type</em>}' enum.
@@ -4193,7 +4047,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getParticipantType()
 	 * @generated
 	 */
-	int PARTICIPANT_TYPE = 48;
+	int PARTICIPANT_TYPE = 46;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.AssignTimeType <em>Assign Time Type</em>}' enum.
@@ -4203,7 +4057,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getAssignTimeType()
 	 * @generated
 	 */
-	int ASSIGN_TIME_TYPE = 49;
+	int ASSIGN_TIME_TYPE = 47;
 
 	/**
 	 * Returns the meta object for class '{@link de.dailab.vsdt.BusinessProcessDiagram <em>Business Process Diagram</em>}'.
@@ -4214,6 +4068,17 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getBusinessProcessDiagram();
+
+	/**
+	 * Returns the meta object for the container reference '{@link de.dailab.vsdt.BusinessProcessDiagram#getParent <em>Parent</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Parent</em>'.
+	 * @see de.dailab.vsdt.BusinessProcessDiagram#getParent()
+	 * @see #getBusinessProcessDiagram()
+	 * @generated
+	 */
+	EReference getBusinessProcessDiagram_Parent();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.BusinessProcessDiagram#getPools <em>Pools</em>}'.
@@ -4258,93 +4123,6 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBusinessProcessDiagram_Participants();
-
-	/**
-	 * Returns the meta object for the container reference '{@link de.dailab.vsdt.BusinessProcessDiagram#getBusinessProcessSystem <em>Business Process System</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Business Process System</em>'.
-	 * @see de.dailab.vsdt.BusinessProcessDiagram#getBusinessProcessSystem()
-	 * @see #getBusinessProcessDiagram()
-	 * @generated
-	 */
-	EReference getBusinessProcessDiagram_BusinessProcessSystem();
-
-	/**
-	 * Returns the meta object for class '{@link de.dailab.vsdt.BpmnProcess <em>Bpmn Process</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Bpmn Process</em>'.
-	 * @see de.dailab.vsdt.BpmnProcess
-	 * @generated
-	 */
-	EClass getBpmnProcess();
-
-	/**
-	 * Returns the meta object for the container reference '{@link de.dailab.vsdt.BpmnProcess#getParentPool <em>Parent Pool</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Parent Pool</em>'.
-	 * @see de.dailab.vsdt.BpmnProcess#getParentPool()
-	 * @see #getBpmnProcess()
-	 * @generated
-	 */
-	EReference getBpmnProcess_ParentPool();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.BpmnProcess#getProcessType <em>Process Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Process Type</em>'.
-	 * @see de.dailab.vsdt.BpmnProcess#getProcessType()
-	 * @see #getBpmnProcess()
-	 * @generated
-	 */
-	EAttribute getBpmnProcess_ProcessType();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.BpmnProcess#getStatus <em>Status</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Status</em>'.
-	 * @see de.dailab.vsdt.BpmnProcess#getStatus()
-	 * @see #getBpmnProcess()
-	 * @generated
-	 */
-	EAttribute getBpmnProcess_Status();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.BpmnProcess#getAssignments <em>Assignments</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Assignments</em>'.
-	 * @see de.dailab.vsdt.BpmnProcess#getAssignments()
-	 * @see #getBpmnProcess()
-	 * @generated
-	 */
-	EReference getBpmnProcess_Assignments();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.BpmnProcess#isSuppressJoinFailure <em>Suppress Join Failure</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Suppress Join Failure</em>'.
-	 * @see de.dailab.vsdt.BpmnProcess#isSuppressJoinFailure()
-	 * @see #getBpmnProcess()
-	 * @generated
-	 */
-	EAttribute getBpmnProcess_SuppressJoinFailure();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.BpmnProcess#isEnableInstanceCompensation <em>Enable Instance Compensation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Enable Instance Compensation</em>'.
-	 * @see de.dailab.vsdt.BpmnProcess#isEnableInstanceCompensation()
-	 * @see #getBpmnProcess()
-	 * @generated
-	 */
-	EAttribute getBpmnProcess_EnableInstanceCompensation();
 
 	/**
 	 * Returns the meta object for class '{@link de.dailab.vsdt.FlowObjectContainer <em>Flow Object Container</em>}'.
@@ -4485,15 +4263,15 @@ public interface VsdtPackage extends EPackage {
 	EClass getFlowObject();
 
 	/**
-	 * Returns the meta object for the container reference '{@link de.dailab.vsdt.FlowObject#getFlowObjectContainer <em>Flow Object Container</em>}'.
+	 * Returns the meta object for the container reference '{@link de.dailab.vsdt.FlowObject#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Flow Object Container</em>'.
-	 * @see de.dailab.vsdt.FlowObject#getFlowObjectContainer()
+	 * @return the meta object for the container reference '<em>Parent</em>'.
+	 * @see de.dailab.vsdt.FlowObject#getParent()
 	 * @see #getFlowObject()
 	 * @generated
 	 */
-	EReference getFlowObject_FlowObjectContainer();
+	EReference getFlowObject_Parent();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.FlowObject#getAssignments <em>Assignments</em>}'.
@@ -4711,17 +4489,6 @@ public interface VsdtPackage extends EPackage {
 	EClass getActivity();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Activity#getStatus <em>Status</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Status</em>'.
-	 * @see de.dailab.vsdt.Activity#getStatus()
-	 * @see #getActivity()
-	 * @generated
-	 */
-	EAttribute getActivity_Status();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.Activity#getInputSets <em>Input Sets</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4775,17 +4542,6 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getActivity_LoopAttributes();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Activity#isIsCompensation <em>Is Compensation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Compensation</em>'.
-	 * @see de.dailab.vsdt.Activity#isIsCompensation()
-	 * @see #getActivity()
-	 * @generated
-	 */
-	EAttribute getActivity_IsCompensation();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.Activity#getBoundaryEvents <em>Boundary Events</em>}'.
@@ -5231,26 +4987,15 @@ public interface VsdtPackage extends EPackage {
 	EClass getPool();
 
 	/**
-	 * Returns the meta object for the container reference '{@link de.dailab.vsdt.Pool#getParentDiagram <em>Parent Diagram</em>}'.
+	 * Returns the meta object for the container reference '{@link de.dailab.vsdt.Pool#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Parent Diagram</em>'.
-	 * @see de.dailab.vsdt.Pool#getParentDiagram()
+	 * @return the meta object for the container reference '<em>Parent</em>'.
+	 * @see de.dailab.vsdt.Pool#getParent()
 	 * @see #getPool()
 	 * @generated
 	 */
-	EReference getPool_ParentDiagram();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link de.dailab.vsdt.Pool#getProcess <em>Process</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Process</em>'.
-	 * @see de.dailab.vsdt.Pool#getProcess()
-	 * @see #getPool()
-	 * @generated
-	 */
-	EReference getPool_Process();
+	EReference getPool_Parent();
 
 	/**
 	 * Returns the meta object for the reference '{@link de.dailab.vsdt.Pool#getParticipant <em>Participant</em>}'.
@@ -5286,6 +5031,17 @@ public interface VsdtPackage extends EPackage {
 	EAttribute getPool_BoundaryVisible();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Pool#getProcessType <em>Process Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Process Type</em>'.
+	 * @see de.dailab.vsdt.Pool#getProcessType()
+	 * @see #getPool()
+	 * @generated
+	 */
+	EAttribute getPool_ProcessType();
+
+	/**
 	 * Returns the meta object for class '{@link de.dailab.vsdt.Lane <em>Lane</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5296,26 +5052,15 @@ public interface VsdtPackage extends EPackage {
 	EClass getLane();
 
 	/**
-	 * Returns the meta object for the container reference '{@link de.dailab.vsdt.Lane#getParentPool <em>Parent Pool</em>}'.
+	 * Returns the meta object for the container reference '{@link de.dailab.vsdt.Lane#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Parent Pool</em>'.
-	 * @see de.dailab.vsdt.Lane#getParentPool()
+	 * @return the meta object for the container reference '<em>Parent</em>'.
+	 * @see de.dailab.vsdt.Lane#getParent()
 	 * @see #getLane()
 	 * @generated
 	 */
-	EReference getLane_ParentPool();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Lane#isBoundaryVisible <em>Boundary Visible</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Boundary Visible</em>'.
-	 * @see de.dailab.vsdt.Lane#isBoundaryVisible()
-	 * @see #getLane()
-	 * @generated
-	 */
-	EAttribute getLane_BoundaryVisible();
+	EReference getLane_Parent();
 
 	/**
 	 * Returns the meta object for class '{@link de.dailab.vsdt.Artifact <em>Artifact</em>}'.
@@ -6181,16 +5926,6 @@ public interface VsdtPackage extends EPackage {
 	EReference getBusinessProcessSystem_DataTypes();
 
 	/**
-	 * Returns the meta object for enum '{@link de.dailab.vsdt.StatusType <em>Status Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Status Type</em>'.
-	 * @see de.dailab.vsdt.StatusType
-	 * @generated
-	 */
-	EEnum getStatusType();
-
-	/**
 	 * Returns the meta object for enum '{@link de.dailab.vsdt.ProcessType <em>Process Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6333,6 +6068,14 @@ public interface VsdtPackage extends EPackage {
 		EClass BUSINESS_PROCESS_DIAGRAM = eINSTANCE.getBusinessProcessDiagram();
 
 		/**
+		 * The meta object literal for the '<em><b>Parent</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BUSINESS_PROCESS_DIAGRAM__PARENT = eINSTANCE.getBusinessProcessDiagram_Parent();
+
+		/**
 		 * The meta object literal for the '<em><b>Pools</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6363,72 +6106,6 @@ public interface VsdtPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BUSINESS_PROCESS_DIAGRAM__PARTICIPANTS = eINSTANCE.getBusinessProcessDiagram_Participants();
-
-		/**
-		 * The meta object literal for the '<em><b>Business Process System</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM = eINSTANCE.getBusinessProcessDiagram_BusinessProcessSystem();
-
-		/**
-		 * The meta object literal for the '{@link de.dailab.vsdt.impl.BpmnProcessImpl <em>Bpmn Process</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.dailab.vsdt.impl.BpmnProcessImpl
-		 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getBpmnProcess()
-		 * @generated
-		 */
-		EClass BPMN_PROCESS = eINSTANCE.getBpmnProcess();
-
-		/**
-		 * The meta object literal for the '<em><b>Parent Pool</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BPMN_PROCESS__PARENT_POOL = eINSTANCE.getBpmnProcess_ParentPool();
-
-		/**
-		 * The meta object literal for the '<em><b>Process Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BPMN_PROCESS__PROCESS_TYPE = eINSTANCE.getBpmnProcess_ProcessType();
-
-		/**
-		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BPMN_PROCESS__STATUS = eINSTANCE.getBpmnProcess_Status();
-
-		/**
-		 * The meta object literal for the '<em><b>Assignments</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BPMN_PROCESS__ASSIGNMENTS = eINSTANCE.getBpmnProcess_Assignments();
-
-		/**
-		 * The meta object literal for the '<em><b>Suppress Join Failure</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BPMN_PROCESS__SUPPRESS_JOIN_FAILURE = eINSTANCE.getBpmnProcess_SuppressJoinFailure();
-
-		/**
-		 * The meta object literal for the '<em><b>Enable Instance Compensation</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BPMN_PROCESS__ENABLE_INSTANCE_COMPENSATION = eINSTANCE.getBpmnProcess_EnableInstanceCompensation();
 
 		/**
 		 * The meta object literal for the '{@link de.dailab.vsdt.impl.FlowObjectContainerImpl <em>Flow Object Container</em>}' class.
@@ -6545,12 +6222,12 @@ public interface VsdtPackage extends EPackage {
 		EClass FLOW_OBJECT = eINSTANCE.getFlowObject();
 
 		/**
-		 * The meta object literal for the '<em><b>Flow Object Container</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Parent</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FLOW_OBJECT__FLOW_OBJECT_CONTAINER = eINSTANCE.getFlowObject_FlowObjectContainer();
+		EReference FLOW_OBJECT__PARENT = eINSTANCE.getFlowObject_Parent();
 
 		/**
 		 * The meta object literal for the '<em><b>Assignments</b></em>' containment reference list feature.
@@ -6723,14 +6400,6 @@ public interface VsdtPackage extends EPackage {
 		EClass ACTIVITY = eINSTANCE.getActivity();
 
 		/**
-		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACTIVITY__STATUS = eINSTANCE.getActivity_Status();
-
-		/**
 		 * The meta object literal for the '<em><b>Input Sets</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6769,14 +6438,6 @@ public interface VsdtPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ACTIVITY__LOOP_ATTRIBUTES = eINSTANCE.getActivity_LoopAttributes();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Compensation</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACTIVITY__IS_COMPENSATION = eINSTANCE.getActivity_IsCompensation();
 
 		/**
 		 * The meta object literal for the '<em><b>Boundary Events</b></em>' containment reference list feature.
@@ -7123,20 +6784,12 @@ public interface VsdtPackage extends EPackage {
 		EClass POOL = eINSTANCE.getPool();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent Diagram</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Parent</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference POOL__PARENT_DIAGRAM = eINSTANCE.getPool_ParentDiagram();
-
-		/**
-		 * The meta object literal for the '<em><b>Process</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference POOL__PROCESS = eINSTANCE.getPool_Process();
+		EReference POOL__PARENT = eINSTANCE.getPool_Parent();
 
 		/**
 		 * The meta object literal for the '<em><b>Participant</b></em>' reference feature.
@@ -7163,6 +6816,14 @@ public interface VsdtPackage extends EPackage {
 		EAttribute POOL__BOUNDARY_VISIBLE = eINSTANCE.getPool_BoundaryVisible();
 
 		/**
+		 * The meta object literal for the '<em><b>Process Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POOL__PROCESS_TYPE = eINSTANCE.getPool_ProcessType();
+
+		/**
 		 * The meta object literal for the '{@link de.dailab.vsdt.impl.LaneImpl <em>Lane</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7173,20 +6834,12 @@ public interface VsdtPackage extends EPackage {
 		EClass LANE = eINSTANCE.getLane();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent Pool</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Parent</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LANE__PARENT_POOL = eINSTANCE.getLane_ParentPool();
-
-		/**
-		 * The meta object literal for the '<em><b>Boundary Visible</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LANE__BOUNDARY_VISIBLE = eINSTANCE.getLane_BoundaryVisible();
+		EReference LANE__PARENT = eINSTANCE.getLane_Parent();
 
 		/**
 		 * The meta object literal for the '{@link de.dailab.vsdt.impl.ArtifactImpl <em>Artifact</em>}' class.
@@ -7861,16 +7514,6 @@ public interface VsdtPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BUSINESS_PROCESS_SYSTEM__DATA_TYPES = eINSTANCE.getBusinessProcessSystem_DataTypes();
-
-		/**
-		 * The meta object literal for the '{@link de.dailab.vsdt.StatusType <em>Status Type</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.dailab.vsdt.StatusType
-		 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getStatusType()
-		 * @generated
-		 */
-		EEnum STATUS_TYPE = eINSTANCE.getStatusType();
 
 		/**
 		 * The meta object literal for the '{@link de.dailab.vsdt.ProcessType <em>Process Type</em>}' enum.

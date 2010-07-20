@@ -25,7 +25,6 @@ import de.dailab.vsdt.AbstractProcess;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.Association;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.DataObject;
 import de.dailab.vsdt.DirectionType;
@@ -38,8 +37,8 @@ import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.LoopAttributeSet;
 import de.dailab.vsdt.Message;
 import de.dailab.vsdt.OutputSet;
+import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
-import de.dailab.vsdt.StatusType;
 import de.dailab.vsdt.Transaction;
 import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.VsdtFactory;
@@ -57,13 +56,11 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getAdHocCompletionCondition <em>Ad Hoc Completion Condition</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getContainedFlowObjects <em>Contained Flow Objects</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getInputSets <em>Input Sets</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getOutputSets <em>Output Sets</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getIORules <em>IO Rules</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getStartQuantity <em>Start Quantity</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getLoopAttributes <em>Loop Attributes</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#isIsCompensation <em>Is Compensation</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getBoundaryEvents <em>Boundary Events</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getActivityType <em>Activity Type</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getInMessage <em>In Message</em>}</li>
@@ -135,26 +132,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	protected EList<FlowObject> containedFlowObjects;
 
 	/**
-	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStatus()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final StatusType STATUS_EDEFAULT = StatusType.NONE;
-
-	/**
-	 * The cached value of the '{@link #getStatus() <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getStatus()
-	 * @generated
-	 * @ordered
-	 */
-	protected StatusType status = STATUS_EDEFAULT;
-
-	/**
 	 * The cached value of the '{@link #getInputSets() <em>Input Sets</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -213,26 +190,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 * @ordered
 	 */
 	protected LoopAttributeSet loopAttributes;
-
-	/**
-	 * The default value of the '{@link #isIsCompensation() <em>Is Compensation</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsCompensation()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_COMPENSATION_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIsCompensation() <em>Is Compensation</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsCompensation()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isCompensation = IS_COMPENSATION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getBoundaryEvents() <em>Boundary Events</em>}' containment reference list.
@@ -382,7 +339,7 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 * @generated
 	 * @ordered
 	 */
-	protected BpmnProcess processRef;
+	protected Pool processRef;
 
 	/**
 	 * The cached value of the '{@link #getInputPropertyMaps() <em>Input Property Maps</em>}' containment reference list.
@@ -507,30 +464,9 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 */
 	public EList<FlowObject> getContainedFlowObjects() {
 		if (containedFlowObjects == null) {
-			containedFlowObjects = new EObjectContainmentWithInverseEList<FlowObject>(FlowObject.class, this, VsdtPackage.ACTIVITY__CONTAINED_FLOW_OBJECTS, VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER);
+			containedFlowObjects = new EObjectContainmentWithInverseEList<FlowObject>(FlowObject.class, this, VsdtPackage.ACTIVITY__CONTAINED_FLOW_OBJECTS, VsdtPackage.FLOW_OBJECT__PARENT);
 		}
 		return containedFlowObjects;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StatusType getStatus() {
-		return status;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setStatus(StatusType newStatus) {
-		StatusType oldStatus = status;
-		status = newStatus == null ? STATUS_EDEFAULT : newStatus;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ACTIVITY__STATUS, oldStatus, status));
 	}
 
 	/**
@@ -631,27 +567,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ACTIVITY__LOOP_ATTRIBUTES, newLoopAttributes, newLoopAttributes));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isIsCompensation() {
-		return isCompensation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsCompensation(boolean newIsCompensation) {
-		boolean oldIsCompensation = isCompensation;
-		isCompensation = newIsCompensation;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ACTIVITY__IS_COMPENSATION, oldIsCompensation, isCompensation));
 	}
 
 	/**
@@ -979,10 +894,10 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BpmnProcess getProcessRef() {
+	public Pool getProcessRef() {
 		if (processRef != null && processRef.eIsProxy()) {
 			InternalEObject oldProcessRef = (InternalEObject)processRef;
-			processRef = (BpmnProcess)eResolveProxy(oldProcessRef);
+			processRef = (Pool)eResolveProxy(oldProcessRef);
 			if (processRef != oldProcessRef) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VsdtPackage.ACTIVITY__PROCESS_REF, oldProcessRef, processRef));
@@ -996,7 +911,7 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BpmnProcess basicGetProcessRef() {
+	public Pool basicGetProcessRef() {
 		return processRef;
 	}
 
@@ -1005,8 +920,8 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setProcessRef(BpmnProcess newProcessRef) {
-		BpmnProcess oldProcessRef = processRef;
+	public void setProcessRef(Pool newProcessRef) {
+		Pool oldProcessRef = processRef;
 		processRef = newProcessRef;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ACTIVITY__PROCESS_REF, oldProcessRef, processRef));
@@ -1098,7 +1013,7 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public boolean calculateIsCompensation() {
+	public boolean isCompensation() {
 		boolean isComp= false;
 		//iterate over associations
 		for (Iterator<Association> iterator = this.getIncomingAss().iterator(); iterator.hasNext();) {
@@ -1118,7 +1033,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 //				isComp|= intermediate.getTrigger() == IntermediateEventTriggerType.COMPENSATION_LITERAL;
 //			}
 //		}
-		this.setIsCompensation(isComp);
 		return isComp;
 	}
 
@@ -1220,8 +1134,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				return getProperties();
 			case VsdtPackage.ACTIVITY__CONTAINED_FLOW_OBJECTS:
 				return getContainedFlowObjects();
-			case VsdtPackage.ACTIVITY__STATUS:
-				return getStatus();
 			case VsdtPackage.ACTIVITY__INPUT_SETS:
 				return getInputSets();
 			case VsdtPackage.ACTIVITY__OUTPUT_SETS:
@@ -1232,8 +1144,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				return getStartQuantity();
 			case VsdtPackage.ACTIVITY__LOOP_ATTRIBUTES:
 				return getLoopAttributes();
-			case VsdtPackage.ACTIVITY__IS_COMPENSATION:
-				return isIsCompensation();
 			case VsdtPackage.ACTIVITY__BOUNDARY_EVENTS:
 				return getBoundaryEvents();
 			case VsdtPackage.ACTIVITY__ACTIVITY_TYPE:
@@ -1295,9 +1205,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				getContainedFlowObjects().clear();
 				getContainedFlowObjects().addAll((Collection<? extends FlowObject>)newValue);
 				return;
-			case VsdtPackage.ACTIVITY__STATUS:
-				setStatus((StatusType)newValue);
-				return;
 			case VsdtPackage.ACTIVITY__INPUT_SETS:
 				getInputSets().clear();
 				getInputSets().addAll((Collection<? extends InputSet>)newValue);
@@ -1315,9 +1222,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				return;
 			case VsdtPackage.ACTIVITY__LOOP_ATTRIBUTES:
 				setLoopAttributes((LoopAttributeSet)newValue);
-				return;
-			case VsdtPackage.ACTIVITY__IS_COMPENSATION:
-				setIsCompensation((Boolean)newValue);
 				return;
 			case VsdtPackage.ACTIVITY__BOUNDARY_EVENTS:
 				getBoundaryEvents().clear();
@@ -1355,7 +1259,7 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				setDiagramRef((BusinessProcessDiagram)newValue);
 				return;
 			case VsdtPackage.ACTIVITY__PROCESS_REF:
-				setProcessRef((BpmnProcess)newValue);
+				setProcessRef((Pool)newValue);
 				return;
 			case VsdtPackage.ACTIVITY__INPUT_PROPERTY_MAPS:
 				getInputPropertyMaps().clear();
@@ -1389,9 +1293,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 			case VsdtPackage.ACTIVITY__CONTAINED_FLOW_OBJECTS:
 				getContainedFlowObjects().clear();
 				return;
-			case VsdtPackage.ACTIVITY__STATUS:
-				setStatus(STATUS_EDEFAULT);
-				return;
 			case VsdtPackage.ACTIVITY__INPUT_SETS:
 				getInputSets().clear();
 				return;
@@ -1406,9 +1307,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				return;
 			case VsdtPackage.ACTIVITY__LOOP_ATTRIBUTES:
 				setLoopAttributes((LoopAttributeSet)null);
-				return;
-			case VsdtPackage.ACTIVITY__IS_COMPENSATION:
-				setIsCompensation(IS_COMPENSATION_EDEFAULT);
 				return;
 			case VsdtPackage.ACTIVITY__BOUNDARY_EVENTS:
 				getBoundaryEvents().clear();
@@ -1444,7 +1342,7 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				setDiagramRef((BusinessProcessDiagram)null);
 				return;
 			case VsdtPackage.ACTIVITY__PROCESS_REF:
-				setProcessRef((BpmnProcess)null);
+				setProcessRef((Pool)null);
 				return;
 			case VsdtPackage.ACTIVITY__INPUT_PROPERTY_MAPS:
 				getInputPropertyMaps().clear();
@@ -1472,8 +1370,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				return properties != null && !properties.isEmpty();
 			case VsdtPackage.ACTIVITY__CONTAINED_FLOW_OBJECTS:
 				return containedFlowObjects != null && !containedFlowObjects.isEmpty();
-			case VsdtPackage.ACTIVITY__STATUS:
-				return status != STATUS_EDEFAULT;
 			case VsdtPackage.ACTIVITY__INPUT_SETS:
 				return inputSets != null && !inputSets.isEmpty();
 			case VsdtPackage.ACTIVITY__OUTPUT_SETS:
@@ -1484,8 +1380,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				return startQuantity != START_QUANTITY_EDEFAULT;
 			case VsdtPackage.ACTIVITY__LOOP_ATTRIBUTES:
 				return loopAttributes != null;
-			case VsdtPackage.ACTIVITY__IS_COMPENSATION:
-				return isCompensation != IS_COMPENSATION_EDEFAULT;
 			case VsdtPackage.ACTIVITY__BOUNDARY_EVENTS:
 				return boundaryEvents != null && !boundaryEvents.isEmpty();
 			case VsdtPackage.ACTIVITY__ACTIVITY_TYPE:
@@ -1578,12 +1472,8 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (adHoc: ");
 		result.append(adHoc);
-		result.append(", status: ");
-		result.append(status);
 		result.append(", startQuantity: ");
 		result.append(startQuantity);
-		result.append(", isCompensation: ");
-		result.append(isCompensation);
 		result.append(", activityType: ");
 		result.append(activityType);
 		result.append(", instantiate: ");

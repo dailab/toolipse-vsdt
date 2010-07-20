@@ -84,7 +84,7 @@ public class FinalGatewayRule extends AbstractRule {
 		_container.getContainedFlowObjects().add(gateway);
 		
 		//create sequence flows
-		BusinessProcessDiagram bpd= gateway.getPool().getParentDiagram();
+		BusinessProcessDiagram bpd= gateway.getPool().getParent();
 		for(FlowObject flowObject : endingFlowObjects) {
 			SequenceFlow sequenceFlow= VsdtFactory.eINSTANCE.createSequenceFlow();
 			sequenceFlow.setSource(flowObject);

@@ -24,7 +24,6 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.FlowConditionTypes;
@@ -121,7 +120,7 @@ implements FocusListener, SelectionListener {
 //    private Button adHocSeqButton;
 //    private Button adHocParButton;
     private VsdtFeatureCombo<BusinessProcessDiagram> diagramRefCombo;
-    private VsdtFeatureCombo<BpmnProcess> processRefCombo;
+    private VsdtFeatureCombo<Pool> processRefCombo;
     private VsdtFeatureCombo<Activity> subprocessRefCombo;
     
     private Button orgPropButton;
@@ -144,8 +143,8 @@ implements FocusListener, SelectionListener {
     @Override
  	protected void internalRefresh() {
     	if (firstRun) {
-    		BusinessProcessDiagram bpd= activity.getPool().getParentDiagram();
-    		BusinessProcessSystem bps= bpd.getBusinessProcessSystem();
+    		BusinessProcessDiagram bpd= activity.getPool().getParent();
+    		BusinessProcessSystem bps= bpd.getParent();
     		implCombo.fillCombo(bps.getImplementations());
     		inMessageCombo.fillCombo(bps.getMessages());
     		outMessageCombo.fillCombo(bps.getMessages());
@@ -153,7 +152,7 @@ implements FocusListener, SelectionListener {
     		List<FlowObject> fos;
     		List<Activity> acts= new ArrayList<Activity>();
     		for (Pool p : bpd.getPools()) {
-    			fos= p.getProcess().getTransitiveGraphicalElements();
+    			fos= p.getTransitiveGraphicalElements();
     			for (FlowObject fo : fos) {
     				if (fo instanceof Activity && fo != activity) {
     					acts.add((Activity) fo);
@@ -161,7 +160,7 @@ implements FocusListener, SelectionListener {
     			}
     		}
     		taskRefCombo.fillCombo(acts);
-    		diagramRefCombo.fillCombo(activity.getPool().getParentDiagram().getBusinessProcessSystem().getBusinessProcesses());
+    		diagramRefCombo.fillCombo(activity.getPool().getParent().getParent().getBusinessProcesses());
     		subprocessRefCombo.fillCombo(acts);
     		firstRun= false;
     	}
@@ -387,7 +386,7 @@ implements FocusListener, SelectionListener {
     		BusinessProcessDiagram selected= diagramRefCombo.getSelected();
     		setPropertyValue(activity, pack.getActivity_DiagramRef(), selected);
     		if (selected != null) {
-    			List<BpmnProcess> processes= getValidProcesses(selected);
+    			List<Pool> processes= getValidProcesses(selected);
     			if (processes.size() == 1) {
     				setPropertyValue(activity, pack.getActivity_ProcessRef(), processes.get(0));
     			}
@@ -513,7 +512,7 @@ implements FocusListener, SelectionListener {
     	diagramRefCombo.getCombo().addSelectionListener(this);
 
     	label= FormLayoutUtil.addLabel(group, DISPLAY_SUB_PROCESSREF, diagramRefCombo.getCombo(), 0);
-    	processRefCombo= new VsdtFeatureCombo<BpmnProcess>(FormLayoutUtil.addCombo(group, SWT.READ_ONLY, diagramRefCombo.getCombo(), label, 100));
+    	processRefCombo= new VsdtFeatureCombo<Pool>(FormLayoutUtil.addCombo(group, SWT.READ_ONLY, diagramRefCombo.getCombo(), label, 100));
     	processRefCombo.getCombo().addSelectionListener(this);
 
     	label= FormLayoutUtil.addLabel(group, DISPLAY_TASK_ACTIVITYREF, processRefCombo.getCombo(), 0);
@@ -521,14 +520,14 @@ implements FocusListener, SelectionListener {
     	subprocessRefCombo.getCombo().addSelectionListener(this);
     }
     
-    private List<BpmnProcess> getValidProcesses(BusinessProcessDiagram diagramRef) {
-    	List<BpmnProcess> processes= new ArrayList<BpmnProcess>();
+    private List<Pool> getValidProcesses(BusinessProcessDiagram diagramRef) {
+    	List<Pool> processes= new ArrayList<Pool>();
 		//if a diagram reference is set, add the diagram's processes to the list 
 		if (activity.getDiagramRef() != null) {
 			BusinessProcessDiagram bpd= activity.getDiagramRef();
 			for (Pool pool : bpd.getPools()) {
-				if (pool.getProcess() != null && pool.getParticipant() == activity.getPool().getParticipant()) {
-					processes.add(pool.getProcess());
+				if (pool.getParticipant() == activity.getPool().getParticipant()) {
+					processes.add(pool);
 				}
 			}
 		}

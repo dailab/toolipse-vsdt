@@ -62,32 +62,56 @@ public class PoolItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addProcessPropertyDescriptor(object);
+			addAdHocPropertyDescriptor(object);
+			addAdHocCompletionConditionPropertyDescriptor(object);
 			addParticipantPropertyDescriptor(object);
 			addBoundaryVisiblePropertyDescriptor(object);
+			addProcessTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Process feature.
+	 * This adds a property descriptor for the Ad Hoc feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addProcessPropertyDescriptor(Object object) {
+	protected void addAdHocPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Pool_process_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Pool_process_feature", "_UI_Pool_type"),
-				 VsdtPackage.Literals.POOL__PROCESS,
+				 getString("_UI_AbstractProcess_adHoc_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractProcess_adHoc_feature", "_UI_AbstractProcess_type"),
+				 VsdtPackage.Literals.ABSTRACT_PROCESS__AD_HOC,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 getString("_UI_ProcessPropertyCategory"),
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Ad Hoc Completion Condition feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAdHocCompletionConditionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AbstractProcess_adHocCompletionCondition_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AbstractProcess_adHocCompletionCondition_feature", "_UI_AbstractProcess_type"),
+				 VsdtPackage.Literals.ABSTRACT_PROCESS__AD_HOC_COMPLETION_CONDITION,
 				 false,
 				 false,
 				 false,
 				 null,
-				 getString("_UI_PoolPropertyCategory"),
+				 getString("_UI_ProcessPropertyCategory"),
 				 null));
 	}
 
@@ -136,6 +160,28 @@ public class PoolItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Process Type feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addProcessTypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Pool_processType_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Pool_processType_feature", "_UI_Pool_type"),
+				 VsdtPackage.Literals.POOL__PROCESS_TYPE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -147,7 +193,8 @@ public class PoolItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(VsdtPackage.Literals.POOL__PROCESS);
+			childrenFeatures.add(VsdtPackage.Literals.ABSTRACT_PROCESS__AD_HOC_COMPLETION_CONDITION);
+			childrenFeatures.add(VsdtPackage.Literals.ABSTRACT_PROCESS__PROPERTIES);
 			childrenFeatures.add(VsdtPackage.Literals.POOL__LANES);
 		}
 		return childrenFeatures;
@@ -203,10 +250,13 @@ public class PoolItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Pool.class)) {
+			case VsdtPackage.POOL__AD_HOC:
 			case VsdtPackage.POOL__BOUNDARY_VISIBLE:
+			case VsdtPackage.POOL__PROCESS_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case VsdtPackage.POOL__PROCESS:
+			case VsdtPackage.POOL__AD_HOC_COMPLETION_CONDITION:
+			case VsdtPackage.POOL__PROPERTIES:
 			case VsdtPackage.POOL__LANES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -227,8 +277,13 @@ public class PoolItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(VsdtPackage.Literals.POOL__PROCESS,
-				 VsdtFactory.eINSTANCE.createBpmnProcess()));
+				(VsdtPackage.Literals.ABSTRACT_PROCESS__AD_HOC_COMPLETION_CONDITION,
+				 VsdtFactory.eINSTANCE.createExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(VsdtPackage.Literals.ABSTRACT_PROCESS__PROPERTIES,
+				 VsdtFactory.eINSTANCE.createProperty()));
 
 		newChildDescriptors.add
 			(createChildParameter

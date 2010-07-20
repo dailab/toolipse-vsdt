@@ -16,13 +16,11 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.dailab.vsdt.Activity#getStatus <em>Status</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getInputSets <em>Input Sets</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getOutputSets <em>Output Sets</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getIORules <em>IO Rules</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getStartQuantity <em>Start Quantity</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getLoopAttributes <em>Loop Attributes</em>}</li>
- *   <li>{@link de.dailab.vsdt.Activity#isIsCompensation <em>Is Compensation</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getBoundaryEvents <em>Boundary Events</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getActivityType <em>Activity Type</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getInMessage <em>In Message</em>}</li>
@@ -45,35 +43,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Activity extends FlowObject, AbstractProcess, FlowObjectContainer {
-	/**
-	 * Returns the value of the '<em><b>Status</b></em>' attribute.
-	 * The literals are from the enumeration {@link de.dailab.vsdt.StatusType}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Status</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Status</em>' attribute.
-	 * @see de.dailab.vsdt.StatusType
-	 * @see #setStatus(StatusType)
-	 * @see de.dailab.vsdt.VsdtPackage#getActivity_Status()
-	 * @model required="true"
-	 * @generated
-	 */
-	StatusType getStatus();
-
-	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Activity#getStatus <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Status</em>' attribute.
-	 * @see de.dailab.vsdt.StatusType
-	 * @see #getStatus()
-	 * @generated
-	 */
-	void setStatus(StatusType value);
-
 	/**
 	 * Returns the value of the '<em><b>Input Sets</b></em>' containment reference list.
 	 * The list contents are of type {@link de.dailab.vsdt.InputSet}.
@@ -176,32 +145,6 @@ public interface Activity extends FlowObject, AbstractProcess, FlowObjectContain
 	 * @generated
 	 */
 	void setLoopAttributes(LoopAttributeSet value);
-
-	/**
-	 * Returns the value of the '<em><b>Is Compensation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Is Compensation</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Compensation</em>' attribute.
-	 * @see #setIsCompensation(boolean)
-	 * @see de.dailab.vsdt.VsdtPackage#getActivity_IsCompensation()
-	 * @model
-	 * @generated
-	 */
-	boolean isIsCompensation();
-
-	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Activity#isIsCompensation <em>Is Compensation</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Compensation</em>' attribute.
-	 * @see #isIsCompensation()
-	 * @generated
-	 */
-	void setIsCompensation(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Boundary Events</b></em>' containment reference list.
@@ -483,12 +426,12 @@ public interface Activity extends FlowObject, AbstractProcess, FlowObjectContain
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Process Ref</em>' reference.
-	 * @see #setProcessRef(BpmnProcess)
+	 * @see #setProcessRef(Pool)
 	 * @see de.dailab.vsdt.VsdtPackage#getActivity_ProcessRef()
 	 * @model
 	 * @generated
 	 */
-	BpmnProcess getProcessRef();
+	Pool getProcessRef();
 
 	/**
 	 * Sets the value of the '{@link de.dailab.vsdt.Activity#getProcessRef <em>Process Ref</em>}' reference.
@@ -498,7 +441,7 @@ public interface Activity extends FlowObject, AbstractProcess, FlowObjectContain
 	 * @see #getProcessRef()
 	 * @generated
 	 */
-	void setProcessRef(BpmnProcess value);
+	void setProcessRef(Pool value);
 
 	/**
 	 * Returns the value of the '<em><b>Input Property Maps</b></em>' containment reference list.
@@ -551,9 +494,9 @@ public interface Activity extends FlowObject, AbstractProcess, FlowObjectContain
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @model kind="operation"
 	 * @generated
 	 */
-	boolean calculateIsCompensation();
+	boolean isCompensation();
 
 } // Activity

@@ -59,14 +59,14 @@ public class InsertEmptyRule2 extends AbstractRule {
 	protected void apply() {
 		
 		//create none activity
-		FlowObjectContainer container= _gateway.getFlowObjectContainer();
+		FlowObjectContainer container= _gateway.getParent();
 		Activity activity= VsdtFactory.eINSTANCE.createActivity();
-		activity.setFlowObjectContainer(container);
+		activity.setParent(container);
 		
 		activity.setName(InsertEmptyRule.EMPTY_NAME);
 		
 		//create sequence flow
-		BusinessProcessDiagram bpd= _gateway.getPool().getParentDiagram();
+		BusinessProcessDiagram bpd= _gateway.getPool().getParent();
 		SequenceFlow seqFlow2= VsdtFactory.eINSTANCE.createSequenceFlow();
 		bpd.getConnections().add(seqFlow2);
 		_seqFlow.setName(_seqFlow.getName() != null ? _seqFlow.getName() + "_2" : null);

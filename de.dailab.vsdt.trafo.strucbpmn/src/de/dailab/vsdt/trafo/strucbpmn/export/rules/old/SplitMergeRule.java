@@ -69,7 +69,7 @@ public class SplitMergeRule extends AbstractRule {
 		Gateway merge2= VsdtFactory.eINSTANCE.createGateway();
 		merge2.setName(_merge.getName() + "_2");
 		merge2.setGatewayType(_merge.getGatewayType());
-		_block.getFlowObjectContainer().getContainedFlowObjects().add(merge2);
+		_block.getParent().getContainedFlowObjects().add(merge2);
 		
 		//redirect SeqFlows
 		merge2.getOutgoingSeq().addAll(_block.getOutgoingSeq());
@@ -79,7 +79,7 @@ public class SplitMergeRule extends AbstractRule {
 		SequenceFlow seqFlow2= VsdtFactory.eINSTANCE.createSequenceFlow();
 		seqFlow2.setSource(_block);
 		seqFlow2.setTarget(merge2);
-		_merge.getPool().getParentDiagram().getConnections().add(seqFlow2);
+		_merge.getPool().getParent().getConnections().add(seqFlow2);
 	}
 	
 	@Override

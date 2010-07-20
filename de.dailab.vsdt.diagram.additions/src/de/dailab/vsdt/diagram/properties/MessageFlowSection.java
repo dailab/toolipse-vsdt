@@ -62,7 +62,7 @@ public class MessageFlowSection extends AbstractVsdtPropertySection {
 
     @Override
  	protected void internalRefresh() {
-    	messageCombo.fillCombo(messageFlow.getParentDiagram().getBusinessProcessSystem().getMessages());
+    	messageCombo.fillCombo(messageFlow.getParentDiagram().getParent().getMessages());
 //    	msgFromCombo.fillCombo(messageFlow.getParentDiagram().getParticipants());
 //    	msgToCombo.fillCombo(messageFlow.getParentDiagram().getParticipants());
     	
@@ -140,7 +140,7 @@ public class MessageFlowSection extends AbstractVsdtPropertySection {
     		}
     	}
     	if (src.equals(orgMsgButton)) {
-			new OrganizeMessagesAction().run(messageFlow.getParentDiagram().getBusinessProcessSystem());
+			new OrganizeMessagesAction().run(messageFlow.getParentDiagram().getParent());
     	}
     	if (src.equals(messageCombo.getCombo())) {
     		Message message= messageCombo.getSelected();

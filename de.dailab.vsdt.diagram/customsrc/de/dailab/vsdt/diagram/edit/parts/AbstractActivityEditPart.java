@@ -48,10 +48,7 @@ public abstract class AbstractActivityEditPart extends AbstractVsdtBorderedShape
 			getPrimaryShape().setTransaction(getCastedModel().getTransaction() != null);
 			break;
 		case VsdtPackage.NODE__INCOMING_ASS:
-			getCastedModel().calculateIsCompensation();
-			break;
-		case VsdtPackage.ACTIVITY__IS_COMPENSATION:
-			getPrimaryShape().setCompensation(getCastedModel().isIsCompensation());
+			getPrimaryShape().setCompensation(getCastedModel().isCompensation());
 			break;
 		case VsdtPackage.FLOW_OBJECT__ASSIGNMENTS:
 			getPrimaryShape().setHasAssignments(! getCastedModel().getAssignments().isEmpty());
@@ -59,7 +56,7 @@ public abstract class AbstractActivityEditPart extends AbstractVsdtBorderedShape
 		case VsdtPackage.ACTIVITY__PROPERTIES:
 			getPrimaryShape().setHasProperties(! getCastedModel().getProperties().isEmpty());
 			break;
-		case VsdtPackage.ACTIVITY__FLOW_OBJECT_CONTAINER:
+		case VsdtPackage.ACTIVITY__PARENT:
 			getPrimaryShape().setDepth(VsdtHelper.getDepth(getCastedModel()));
 			break;
 		}
@@ -113,7 +110,7 @@ public abstract class AbstractActivityEditPart extends AbstractVsdtBorderedShape
 				activity.getActivityType(),
 				activity.isAdHoc(),
 				activity.getTransaction() != null,
-				activity.isIsCompensation(),
+				activity.isCompensation(),
 				! activity.getAssignments().isEmpty(),
 				! activity.getProperties().isEmpty(),
 				VsdtHelper.getDepth(activity));

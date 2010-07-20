@@ -94,7 +94,7 @@ public class LoopRule extends AbstractVsdtRule {
 		
 		//create loop block
 		BpmnLoopBlock loop= StrucBpmnFactory.eINSTANCE.createBpmnLoopBlock();
-		FlowObjectContainer container= _gateway1.getFlowObjectContainer();
+		FlowObjectContainer container= _gateway1.getParent();
 		container.getContainedFlowObjects().add(loop);
 		loop.setFirstGateway(_gateway1);
 		loop.setSecondGateway(_gateway2);

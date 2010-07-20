@@ -14,7 +14,6 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.Event;
@@ -230,19 +229,16 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			builder.endItemize();
 		}
 		
-		if (pool.getProcess() != null) {
-			BpmnProcess proc= pool.getProcess();
-			builder.append("The Pool's Process is" + (proc.isAdHoc() ? 
-					" ad-hoc and is" : "") + " of type " + type(proc.getProcessType()) + ".");
-			/*
-			 * process properties and assignments
-			 */
-			if (! proc.getGraphicalElements().isEmpty()) {
-				String beginning= " In this Process, ";
-				for (FlowObject flowObject : proc.getGraphicalElements()) {
-					if (visitFlowObject(flowObject, beginning, false)) {
-						beginning= getRandomParallelTerm();
-					}
+		builder.append("The Process is" + (pool.isAdHoc() ? 
+				" ad-hoc and is" : "") + " of type " + type(pool.getProcessType()) + ".");
+		/*
+		 * process properties and assignments
+		 */
+		if (! pool.getGraphicalElements().isEmpty()) {
+			String beginning= " In this Process, ";
+			for (FlowObject flowObject : pool.getGraphicalElements()) {
+				if (visitFlowObject(flowObject, beginning, false)) {
+					beginning= getRandomParallelTerm();
 				}
 			}
 		}
@@ -537,7 +533,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			String processRef= activity.getProcessRef() != null 
 					? "Process '" + name(activity.getProcessRef().getName()) + "'" 
 					: "another Process";
-			if (activity.getDiagramRef() == activity.getPool().getParentDiagram()) {
+			if (activity.getDiagramRef() == activity.getPool().getParent()) {
 				processRef += activity.getDiagramRef() != null 
 						? " in Diagram '" + name(activity.getDiagramRef().getName()) + "'" 
 						: " in another Business Process Diagram";

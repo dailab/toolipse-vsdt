@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.dailab.vsdt.FlowObject#getFlowObjectContainer <em>Flow Object Container</em>}</li>
+ *   <li>{@link de.dailab.vsdt.FlowObject#getParent <em>Parent</em>}</li>
  *   <li>{@link de.dailab.vsdt.FlowObject#getAssignments <em>Assignments</em>}</li>
  *   <li>{@link de.dailab.vsdt.FlowObject#getOutgoingSeq <em>Outgoing Seq</em>}</li>
  *   <li>{@link de.dailab.vsdt.FlowObject#getIncomingSeq <em>Incoming Seq</em>}</li>
@@ -29,32 +29,32 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface FlowObject extends Node {
 	/**
-	 * Returns the value of the '<em><b>Flow Object Container</b></em>' container reference.
+	 * Returns the value of the '<em><b>Parent</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.FlowObjectContainer#getContainedFlowObjects <em>Contained Flow Objects</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Flow Object Container</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Parent</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Flow Object Container</em>' container reference.
-	 * @see #setFlowObjectContainer(FlowObjectContainer)
-	 * @see de.dailab.vsdt.VsdtPackage#getFlowObject_FlowObjectContainer()
+	 * @return the value of the '<em>Parent</em>' container reference.
+	 * @see #setParent(FlowObjectContainer)
+	 * @see de.dailab.vsdt.VsdtPackage#getFlowObject_Parent()
 	 * @see de.dailab.vsdt.FlowObjectContainer#getContainedFlowObjects
 	 * @model opposite="containedFlowObjects" transient="false"
 	 * @generated
 	 */
-	FlowObjectContainer getFlowObjectContainer();
+	FlowObjectContainer getParent();
 
 	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.FlowObject#getFlowObjectContainer <em>Flow Object Container</em>}' container reference.
+	 * Sets the value of the '{@link de.dailab.vsdt.FlowObject#getParent <em>Parent</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Flow Object Container</em>' container reference.
-	 * @see #getFlowObjectContainer()
+	 * @param value the new value of the '<em>Parent</em>' container reference.
+	 * @see #getParent()
 	 * @generated
 	 */
-	void setFlowObjectContainer(FlowObjectContainer value);
+	void setParent(FlowObjectContainer value);
 
 	/**
 	 * Returns the value of the '<em><b>Assignments</b></em>' containment reference list.
@@ -107,14 +107,6 @@ public interface FlowObject extends Node {
 	 * @generated
 	 */
 	EList<SequenceFlow> getIncomingSeq();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	BpmnProcess getProcess();
 
 	/**
 	 * <!-- begin-user-doc -->

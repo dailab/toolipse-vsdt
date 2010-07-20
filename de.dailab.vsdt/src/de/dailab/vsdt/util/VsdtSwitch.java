@@ -6,7 +6,6 @@
  */
 package de.dailab.vsdt.util;
 
-import de.dailab.vsdt.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
@@ -17,11 +16,11 @@ import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.Artifact;
 import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.Association;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.ConnectingObject;
 import de.dailab.vsdt.DataObject;
+import de.dailab.vsdt.DataType;
 import de.dailab.vsdt.End;
 import de.dailab.vsdt.Event;
 import de.dailab.vsdt.Expression;
@@ -151,11 +150,22 @@ public class VsdtSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case VsdtPackage.BPMN_PROCESS: {
-				BpmnProcess bpmnProcess = (BpmnProcess)theEObject;
-				T result = caseBpmnProcess(bpmnProcess);
-				if (result == null) result = caseAbstractProcess(bpmnProcess);
-				if (result == null) result = caseIdObject(bpmnProcess);
+			case VsdtPackage.POOL: {
+				Pool pool = (Pool)theEObject;
+				T result = casePool(pool);
+				if (result == null) result = caseNode(pool);
+				if (result == null) result = caseAbstractProcess(pool);
+				if (result == null) result = caseGraphicalObject(pool);
+				if (result == null) result = caseIdObject(pool);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case VsdtPackage.LANE: {
+				Lane lane = (Lane)theEObject;
+				T result = caseLane(lane);
+				if (result == null) result = caseGraphicalObject(lane);
+				if (result == null) result = caseFlowObjectContainer(lane);
+				if (result == null) result = caseIdObject(lane);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -292,24 +302,6 @@ public class VsdtSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case VsdtPackage.POOL: {
-				Pool pool = (Pool)theEObject;
-				T result = casePool(pool);
-				if (result == null) result = caseNode(pool);
-				if (result == null) result = caseGraphicalObject(pool);
-				if (result == null) result = caseIdObject(pool);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case VsdtPackage.LANE: {
-				Lane lane = (Lane)theEObject;
-				T result = caseLane(lane);
-				if (result == null) result = caseFlowObjectContainer(lane);
-				if (result == null) result = caseGraphicalObject(lane);
-				if (result == null) result = caseIdObject(lane);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case VsdtPackage.ARTIFACT: {
 				Artifact artifact = (Artifact)theEObject;
 				T result = caseArtifact(artifact);
@@ -439,21 +431,6 @@ public class VsdtSwitch<T> {
 	 * @generated
 	 */
 	public T caseBusinessProcessDiagram(BusinessProcessDiagram object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Bpmn Process</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Bpmn Process</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBpmnProcess(BpmnProcess object) {
 		return null;
 	}
 

@@ -16,11 +16,11 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link de.dailab.vsdt.BusinessProcessDiagram#getParent <em>Parent</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessDiagram#getPools <em>Pools</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessDiagram#getArtifacts <em>Artifacts</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessDiagram#getConnections <em>Connections</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessDiagram#getParticipants <em>Participants</em>}</li>
- *   <li>{@link de.dailab.vsdt.BusinessProcessDiagram#getBusinessProcessSystem <em>Business Process System</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,9 +30,37 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface BusinessProcessDiagram extends IdObject {
 	/**
+	 * Returns the value of the '<em><b>Parent</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.BusinessProcessSystem#getBusinessProcesses <em>Business Processes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parent</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parent</em>' container reference.
+	 * @see #setParent(BusinessProcessSystem)
+	 * @see de.dailab.vsdt.VsdtPackage#getBusinessProcessDiagram_Parent()
+	 * @see de.dailab.vsdt.BusinessProcessSystem#getBusinessProcesses
+	 * @model opposite="businessProcesses" transient="false"
+	 * @generated
+	 */
+	BusinessProcessSystem getParent();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.BusinessProcessDiagram#getParent <em>Parent</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Parent</em>' container reference.
+	 * @see #getParent()
+	 * @generated
+	 */
+	void setParent(BusinessProcessSystem value);
+
+	/**
 	 * Returns the value of the '<em><b>Pools</b></em>' containment reference list.
 	 * The list contents are of type {@link de.dailab.vsdt.Pool}.
-	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.Pool#getParentDiagram <em>Parent Diagram</em>}'.
+	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.Pool#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Pools</em>' containment reference list isn't clear,
@@ -41,8 +69,8 @@ public interface BusinessProcessDiagram extends IdObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Pools</em>' containment reference list.
 	 * @see de.dailab.vsdt.VsdtPackage#getBusinessProcessDiagram_Pools()
-	 * @see de.dailab.vsdt.Pool#getParentDiagram
-	 * @model opposite="parentDiagram" containment="true" required="true"
+	 * @see de.dailab.vsdt.Pool#getParent
+	 * @model opposite="parent" containment="true" required="true"
 	 * @generated
 	 */
 	EList<Pool> getPools();
@@ -100,33 +128,5 @@ public interface BusinessProcessDiagram extends IdObject {
 	 * @generated
 	 */
 	EList<Participant> getParticipants();
-
-	/**
-	 * Returns the value of the '<em><b>Business Process System</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.BusinessProcessSystem#getBusinessProcesses <em>Business Processes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Business Process System</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Business Process System</em>' container reference.
-	 * @see #setBusinessProcessSystem(BusinessProcessSystem)
-	 * @see de.dailab.vsdt.VsdtPackage#getBusinessProcessDiagram_BusinessProcessSystem()
-	 * @see de.dailab.vsdt.BusinessProcessSystem#getBusinessProcesses
-	 * @model opposite="businessProcesses" required="true" transient="false"
-	 * @generated
-	 */
-	BusinessProcessSystem getBusinessProcessSystem();
-
-	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.BusinessProcessDiagram#getBusinessProcessSystem <em>Business Process System</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Business Process System</em>' container reference.
-	 * @see #getBusinessProcessSystem()
-	 * @generated
-	 */
-	void setBusinessProcessSystem(BusinessProcessSystem value);
 
 } // BusinessProcessDiagram

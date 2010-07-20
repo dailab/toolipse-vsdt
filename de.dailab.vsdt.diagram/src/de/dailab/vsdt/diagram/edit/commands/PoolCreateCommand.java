@@ -6,7 +6,6 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.CreateElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.notation.View;
 
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.Lane;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.VsdtFactory;
@@ -53,11 +52,7 @@ public class PoolCreateCommand extends CreateElementCommand {
 		if (newElement != null) {
 
 			Lane lane = VsdtFactory.eINSTANCE.createLane();
-			lane.setBoundaryVisible(false);
 			newElement.getLanes().add(lane);
-
-			BpmnProcess process = VsdtFactory.eINSTANCE.createBpmnProcess();
-			newElement.setProcess(process);
 
 			newElement.setName("Pool");
 		}

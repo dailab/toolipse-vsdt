@@ -11,7 +11,6 @@ import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.Artifact;
 import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.Association;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.ConditionType;
@@ -272,7 +271,10 @@ public class DefaultBpmnValidation extends MappingStage {
 		for (Lane lane : pool.getLanes()) {
 			isOK&= testChild(visitLane(lane),pool,vsdt.getPool_Lanes());
 		}
-		isOK&= testChild(visitProcess(pool.getProcess()),pool,vsdt.getPool_Process());
+		for (Property property : pool.getProperties()) {
+			isOK&= testChild(visitProperty(property),pool,vsdt.getAbstractProcess_Properties());
+		}
+		
 		//tested in visitSuportingTypes
 		isOK&= test(pool.getParticipant() != null, "Participant must not be null");
 		
@@ -297,26 +299,6 @@ public class DefaultBpmnValidation extends MappingStage {
 		return isOK;
 	}
 	
-	/**
-	 * trim name, visit assignments, properties
-	 */
-	protected boolean visitProcess(BpmnProcess process) {
-		if (testIsNull(process)) return false;
-		boolean isOK= true;
-		
-		//normalize name
-		process.setName(norm(process.getName(), NORM_NAME_ELEMENT));
-		
-		//visit children
-		for (Assignment assignment : process.getAssignments()) {
-			isOK&= testChild(visitAssignment(assignment),process,vsdt.getBpmnProcess_Assignments());
-		}
-		for (Property property : process.getProperties()) {
-			isOK&= testChild(visitProperty(property),process,vsdt.getAbstractProcess_Properties());
-		}
-		
-		return isOK;
-	}
 	
 	/**
 	 * trim name, visit assignments, delegate to specializations
@@ -428,11 +410,10 @@ public class DefaultBpmnValidation extends MappingStage {
 			break;
 		case ActivityType.INDEPENDENT_VALUE:
 			BusinessProcessDiagram diagram= activity.getDiagramRef();
-			BpmnProcess process= activity.getProcessRef();
+			Pool process= activity.getProcessRef();
 			isOK&= test(diagram != null,"Diagram Reference must not be null");
 			isOK&= test(process != null,"Process Reference must not be null");
-			isOK&= test(process.getParentPool() != null && process.getParentPool().getParentDiagram() == diagram,
-					"Referenced Process must be part of Referenced Diagram");
+			isOK&= test(process.getParent() == diagram, "Referenced Process must be part of Referenced Diagram");
 			break;
 		}
 		return isOK;

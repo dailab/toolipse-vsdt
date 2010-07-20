@@ -143,7 +143,7 @@ public class BpmnSequenceImpl extends FlowObjectImpl implements BpmnSequence {
 			case StrucBpmnPackage.BPMN_SEQUENCE__ELEMENTS:
 				return getElements();
 			case StrucBpmnPackage.BPMN_SEQUENCE__NEEDS_TO_PERSIST:
-				return isNeedsToPersist() ? Boolean.TRUE : Boolean.FALSE;
+				return isNeedsToPersist();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -162,7 +162,7 @@ public class BpmnSequenceImpl extends FlowObjectImpl implements BpmnSequence {
 				getElements().addAll((Collection<? extends FlowObject>)newValue);
 				return;
 			case StrucBpmnPackage.BPMN_SEQUENCE__NEEDS_TO_PERSIST:
-				setNeedsToPersist(((Boolean)newValue).booleanValue());
+				setNeedsToPersist((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

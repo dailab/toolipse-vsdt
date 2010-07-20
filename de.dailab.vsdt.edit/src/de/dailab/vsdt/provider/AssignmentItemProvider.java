@@ -26,7 +26,6 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import de.dailab.common.gmf.ExpandableItemProviderAdapter;
 import de.dailab.vsdt.Assignment;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Property;
@@ -105,14 +104,6 @@ public class AssignmentItemProvider
 					FlowObject flowObject = (FlowObject) model.eContainer();
 					collection.retainAll(flowObject.getVisibleProperties());
 				}
-				if (model.eContainer() instanceof BpmnProcess) {
-					BpmnProcess process = (BpmnProcess) model.eContainer();
-					collection.retainAll(process.getVisibleProperties());
-				}
-//				if (model.eContainer() instanceof Gate) {
-//					Gate gate = (Gate) model.eContainer();
-//					collection.retainAll(gate.getVisibleProperties());
-//				}
 				return collection;
 			}
 		};

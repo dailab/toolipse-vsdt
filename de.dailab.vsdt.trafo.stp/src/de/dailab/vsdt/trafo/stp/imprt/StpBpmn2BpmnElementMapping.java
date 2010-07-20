@@ -133,13 +133,12 @@ public class StpBpmn2BpmnElementMapping extends MappingStage {
 		Pool target= vsdtFac.createPool();
 		wrapper.map(source, target);
 		mapBasicAttributes(source, target);
-		target.setParentDiagram(_currentDiagram);
+		target.setParent(_currentDiagram);
 		for (org.eclipse.stp.bpmn.Lane lane : source.getLanes()) {
 			visitLane(lane);
 		}
 		Lane lane= vsdtFac.createLane();
 		target.getLanes().add(lane);
-		target.setProcess(vsdtFac.createBpmnProcess());
 		for (Vertex vertex : source.getVertices()) {
 			lane.getContainedFlowObjects().add(visitActivity((org.eclipse.stp.bpmn.Activity) vertex));
 		}

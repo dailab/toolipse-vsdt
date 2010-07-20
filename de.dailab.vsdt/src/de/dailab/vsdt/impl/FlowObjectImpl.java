@@ -13,6 +13,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -23,7 +24,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import de.dailab.vsdt.AbstractProcess;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.Assignment;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.Event;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.FlowObjectContainer;
@@ -42,7 +42,7 @@ import de.dailab.vsdt.VsdtPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.dailab.vsdt.impl.FlowObjectImpl#getFlowObjectContainer <em>Flow Object Container</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.FlowObjectImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.FlowObjectImpl#getAssignments <em>Assignments</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.FlowObjectImpl#getOutgoingSeq <em>Outgoing Seq</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.FlowObjectImpl#getIncomingSeq <em>Incoming Seq</em>}</li>
@@ -106,8 +106,8 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FlowObjectContainer getFlowObjectContainer() {
-		if (eContainerFeatureID() != VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER) return null;
+	public FlowObjectContainer getParent() {
+		if (eContainerFeatureID() != VsdtPackage.FLOW_OBJECT__PARENT) return null;
 		return (FlowObjectContainer)eContainer();
 	}
 
@@ -116,8 +116,8 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetFlowObjectContainer(FlowObjectContainer newFlowObjectContainer, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newFlowObjectContainer, VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER, msgs);
+	public NotificationChain basicSetParent(FlowObjectContainer newParent, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newParent, VsdtPackage.FLOW_OBJECT__PARENT, msgs);
 		return msgs;
 	}
 
@@ -126,23 +126,23 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFlowObjectContainer(FlowObjectContainer newFlowObjectContainer) {
-		if (newFlowObjectContainer != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER && newFlowObjectContainer != null)) {
-			if (EcoreUtil.isAncestor(this, newFlowObjectContainer))
+	public void setParent(FlowObjectContainer newParent) {
+		if (newParent != eInternalContainer() || (eContainerFeatureID() != VsdtPackage.FLOW_OBJECT__PARENT && newParent != null)) {
+			if (EcoreUtil.isAncestor(this, newParent))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newFlowObjectContainer != null)
-				msgs = ((InternalEObject)newFlowObjectContainer).eInverseAdd(this, VsdtPackage.FLOW_OBJECT_CONTAINER__CONTAINED_FLOW_OBJECTS, FlowObjectContainer.class, msgs);
-			msgs = basicSetFlowObjectContainer(newFlowObjectContainer, msgs);
+			if (newParent != null)
+				msgs = ((InternalEObject)newParent).eInverseAdd(this, VsdtPackage.FLOW_OBJECT_CONTAINER__CONTAINED_FLOW_OBJECTS, FlowObjectContainer.class, msgs);
+			msgs = basicSetParent(newParent, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER, newFlowObjectContainer, newFlowObjectContainer));
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.FLOW_OBJECT__PARENT, newParent, newParent));
 	}
 
-//	/**
+	//	/**
 //	 * <!-- begin-user-doc -->
 //	 * set default name according to the eClass's name
 //	 * <!-- end-user-doc -->
@@ -193,24 +193,6 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * returns the pool's process
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public BpmnProcess getProcess() {
-		Pool pool= getPool();
-		if (pool != null) {
-			return pool.getProcess();
-		} else {
-			if (eContainer instanceof FlowObject) {
-				return ((FlowObject)eContainer).getProcess();
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
 	 * this method returns whether this node is a starting node, e.g. if the node
 	 * has no incoming sequence flows while not being a compensation activity
 	 * <!-- end-user-doc -->
@@ -218,7 +200,7 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	 */
 	public boolean isStartingNode() {
 		if (this instanceof Activity &&
-				((Activity)this).isIsCompensation()) { 
+				((Activity)this).isCompensation()) { 
 			return false;
 		}
 		return getIncomingSeq().isEmpty();
@@ -233,7 +215,7 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	 */
 	public boolean isEndingNode() {
 		if (this instanceof Activity &&
-				((Activity)this).isIsCompensation()) { 
+				((Activity)this).isCompensation()) { 
 			return false;
 		}
 		return getOutgoingSeq().isEmpty();
@@ -251,14 +233,16 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 		if (this instanceof Intermediate && ((Intermediate) this).getAttachedTo()!=null) {
 			return ((Intermediate)this).getAttachedTo().getAbstractProcess();
 		} else {
-			if (eContainer instanceof Activity) {
-				return (Activity) eContainer;
+			EObject container= eContainer();
+			if (container instanceof Activity) {
+				return (Activity) container;
 			} 
-			if (eContainer instanceof Lane) {
-				return ((Lane) eContainer).getParentPool().getProcess();
+			if (container instanceof Lane) {
+				return (Pool) ((Lane) container).eContainer();
 			}
-			if (eContainer instanceof FlowObject) {
-				return ((FlowObject) eContainer).getAbstractProcess();
+			// for structuring elements
+			if (container instanceof FlowObject) {
+				return ((FlowObject) container).getAbstractProcess();
 			}
 			return null;
 		}
@@ -292,9 +276,9 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 				propList.addAll(thisAsEvent.getMessage().getProperties());
 			}
 		}
-		if (this.getAbstractProcess() instanceof BpmnProcess) {
-			BpmnProcess process = (BpmnProcess) this.getAbstractProcess();
-			propList.addAll(process.getVisibleProperties());
+		if (this.getAbstractProcess() instanceof Pool) {
+			Pool pool= (Pool) this.getAbstractProcess();
+			propList.addAll(pool.getProperties());
 		} 
 		if (this.getAbstractProcess() instanceof Activity) {
 			Activity activity = (Activity) this.getAbstractProcess();
@@ -313,10 +297,10 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER:
+			case VsdtPackage.FLOW_OBJECT__PARENT:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetFlowObjectContainer((FlowObjectContainer)otherEnd, msgs);
+				return basicSetParent((FlowObjectContainer)otherEnd, msgs);
 			case VsdtPackage.FLOW_OBJECT__OUTGOING_SEQ:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoingSeq()).basicAdd(otherEnd, msgs);
 			case VsdtPackage.FLOW_OBJECT__INCOMING_SEQ:
@@ -333,8 +317,8 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER:
-				return basicSetFlowObjectContainer(null, msgs);
+			case VsdtPackage.FLOW_OBJECT__PARENT:
+				return basicSetParent(null, msgs);
 			case VsdtPackage.FLOW_OBJECT__ASSIGNMENTS:
 				return ((InternalEList<?>)getAssignments()).basicRemove(otherEnd, msgs);
 			case VsdtPackage.FLOW_OBJECT__OUTGOING_SEQ:
@@ -353,7 +337,7 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER:
+			case VsdtPackage.FLOW_OBJECT__PARENT:
 				return eInternalContainer().eInverseRemove(this, VsdtPackage.FLOW_OBJECT_CONTAINER__CONTAINED_FLOW_OBJECTS, FlowObjectContainer.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -367,8 +351,8 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER:
-				return getFlowObjectContainer();
+			case VsdtPackage.FLOW_OBJECT__PARENT:
+				return getParent();
 			case VsdtPackage.FLOW_OBJECT__ASSIGNMENTS:
 				return getAssignments();
 			case VsdtPackage.FLOW_OBJECT__OUTGOING_SEQ:
@@ -388,8 +372,8 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER:
-				setFlowObjectContainer((FlowObjectContainer)newValue);
+			case VsdtPackage.FLOW_OBJECT__PARENT:
+				setParent((FlowObjectContainer)newValue);
 				return;
 			case VsdtPackage.FLOW_OBJECT__ASSIGNMENTS:
 				getAssignments().clear();
@@ -415,8 +399,8 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER:
-				setFlowObjectContainer((FlowObjectContainer)null);
+			case VsdtPackage.FLOW_OBJECT__PARENT:
+				setParent((FlowObjectContainer)null);
 				return;
 			case VsdtPackage.FLOW_OBJECT__ASSIGNMENTS:
 				getAssignments().clear();
@@ -439,8 +423,8 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER:
-				return getFlowObjectContainer() != null;
+			case VsdtPackage.FLOW_OBJECT__PARENT:
+				return getParent() != null;
 			case VsdtPackage.FLOW_OBJECT__ASSIGNMENTS:
 				return assignments != null && !assignments.isEmpty();
 			case VsdtPackage.FLOW_OBJECT__OUTGOING_SEQ:
@@ -461,13 +445,16 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	 */
 	@Override
 	public Pool getPool() {
-		if (eContainer instanceof Lane) {
-			Lane lane = (Lane) eContainer;
-			return lane.getParentPool();
+		EObject container= eContainer();
+		if (container instanceof Lane) {
+			return (Pool) ((Lane) container).eContainer();
 		}
-		if (eContainer instanceof FlowObject) {
-			FlowObject flowObject = (FlowObject) eContainer;
-			return flowObject.getPool();
+		if (container instanceof Activity) {
+			return ((Activity) container).getPool();
+		}
+		// for structuring elements
+		if (container instanceof FlowObject) {
+			return ((FlowObject) container).getPool();
 		}
 		return null;
 	}

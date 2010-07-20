@@ -19,7 +19,6 @@ import org.eclipse.swt.widgets.Text;
 import de.dailab.common.gmf.Util;
 import de.dailab.common.swt.dialogs.AbstractOrganizeElementsDialog;
 import de.dailab.vsdt.AbstractProcess;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.DataObject;
 import de.dailab.vsdt.DataType;
@@ -43,7 +42,6 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 	public static final String LABEL_NAME= "Name";
 	public static final String LABEL_TYPE= "Type";
 	public static final String ERROR__NO_MESSAGE= "Message Flow does not have a Message object";
-	public static final String ERROR__NO_PROCESS= "Pool does not have a Process object";
 	public static final String BUTTON_DATATYPES = "DataTypes...";
 
 	public static final int CHECK_OK= 0;
@@ -93,13 +91,7 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 			}
 		}
 		if (parentElement instanceof Pool) {
-			BpmnProcess process= ((Pool) parentElement).getProcess();
-			if (process != null) {
-				elements= process.getProperties();
-			} else {
-				errorMessage= ERROR__NO_PROCESS;
-				disable= true;
-			}
+			elements= ((Pool) parentElement).getProperties();
 		}
 		visibleProperties= VsdtHelper.getVisibleProperties(parentElement);
 	}

@@ -35,12 +35,12 @@ public abstract class AbstractPoolEditPart extends AbstractVsdtNodeEditPart impl
 		switch (feature) {
 		case VsdtPackage.POOL__BOUNDARY_VISIBLE:
 			getPrimaryShape().setBoundaryVisible(getCastedModel().isBoundaryVisible());;
-			getCastedModel().setBoundaryVisibility();
+//			getCastedModel().setBoundaryVisibility();
 			refreshChildren();
 			break;
-		case VsdtPackage.POOL__LANES:
-			getCastedModel().setBoundaryVisibility();
-			break;
+//		case VsdtPackage.POOL__LANES:
+//			getCastedModel().setBoundaryVisibility();
+//			break;
 		}
 		refreshVisuals();
 	}

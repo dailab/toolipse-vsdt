@@ -76,7 +76,7 @@ public class SequenceRule extends AbstractVsdtRule {
 			sequence= StrucBpmnFactory.eINSTANCE.createBpmnSequence();
 		
 			// put sequence in container
-			FlowObjectContainer container= _flowObject2.getFlowObjectContainer();
+			FlowObjectContainer container= _flowObject2.getParent();
 			container.getContainedFlowObjects().add(sequence);
 			
 			sequence.getElements().add(_flowObject1);

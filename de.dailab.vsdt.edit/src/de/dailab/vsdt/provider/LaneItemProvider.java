@@ -12,17 +12,17 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import de.dailab.vsdt.Lane;
+import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.VsdtPackage;
 
 
@@ -33,7 +33,7 @@ import de.dailab.vsdt.VsdtPackage;
  * @generated
  */
 public class LaneItemProvider
-	extends FlowObjectContainerItemProvider
+	extends GraphicalObjectItemProvider
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -61,102 +61,40 @@ public class LaneItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addNamePropertyDescriptor(object);
-			addDocumentationPropertyDescriptor(object);
-			addIdPropertyDescriptor(object);
-			addCategoriesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Id feature.
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addIdPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_IdObject_id_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IdObject_id_feature", "_UI_IdObject_type"),
-				 VsdtPackage.Literals.ID_OBJECT__ID,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 getString("_UI_GeneralPropertyCategory"),
-				 null));
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(VsdtPackage.Literals.FLOW_OBJECT_CONTAINER__CONTAINED_FLOW_OBJECTS);
+		}
+		return childrenFeatures;
 	}
 
 	/**
-	 * This adds a property descriptor for the Categories feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addCategoriesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_IdObject_categories_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IdObject_categories_feature", "_UI_IdObject_type"),
-				 VsdtPackage.Literals.ID_OBJECT__CATEGORIES,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 getString("_UI_GeneralPropertyCategory"),
-				 null));
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
 	}
 
-	/**
-	 * This adds a property descriptor for the Documentation feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDocumentationPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_IdObject_documentation_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IdObject_documentation_feature", "_UI_IdObject_type"),
-				 VsdtPackage.Literals.ID_OBJECT__DOCUMENTATION,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 getString("_UI_GeneralPropertyCategory"),
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_IdObject_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IdObject_name_feature", "_UI_IdObject_type"),
-				 VsdtPackage.Literals.ID_OBJECT__NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 getString("_UI_GeneralPropertyCategory"),
-				 null));
-	}
-	
 	/**
 	 * This returns Lane.gif.
 	 * <!-- begin-user-doc -->
@@ -194,12 +132,8 @@ public class LaneItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Lane.class)) {
-			case VsdtPackage.LANE__NAME:
-			case VsdtPackage.LANE__DOCUMENTATION:
-			case VsdtPackage.LANE__ID:
-			case VsdtPackage.LANE__CATEGORIES:
-			case VsdtPackage.LANE__BOUNDARY_VISIBLE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+			case VsdtPackage.LANE__CONTAINED_FLOW_OBJECTS:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -215,6 +149,31 @@ public class LaneItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(VsdtPackage.Literals.FLOW_OBJECT_CONTAINER__CONTAINED_FLOW_OBJECTS,
+				 VsdtFactory.eINSTANCE.createStart()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(VsdtPackage.Literals.FLOW_OBJECT_CONTAINER__CONTAINED_FLOW_OBJECTS,
+				 VsdtFactory.eINSTANCE.createIntermediate()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(VsdtPackage.Literals.FLOW_OBJECT_CONTAINER__CONTAINED_FLOW_OBJECTS,
+				 VsdtFactory.eINSTANCE.createEnd()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(VsdtPackage.Literals.FLOW_OBJECT_CONTAINER__CONTAINED_FLOW_OBJECTS,
+				 VsdtFactory.eINSTANCE.createActivity()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(VsdtPackage.Literals.FLOW_OBJECT_CONTAINER__CONTAINED_FLOW_OBJECTS,
+				 VsdtFactory.eINSTANCE.createGateway()));
 	}
 
 }

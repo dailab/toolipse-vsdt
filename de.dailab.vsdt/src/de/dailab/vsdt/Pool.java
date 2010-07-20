@@ -16,11 +16,11 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.dailab.vsdt.Pool#getParentDiagram <em>Parent Diagram</em>}</li>
- *   <li>{@link de.dailab.vsdt.Pool#getProcess <em>Process</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Pool#getParent <em>Parent</em>}</li>
  *   <li>{@link de.dailab.vsdt.Pool#getParticipant <em>Participant</em>}</li>
  *   <li>{@link de.dailab.vsdt.Pool#getLanes <em>Lanes</em>}</li>
  *   <li>{@link de.dailab.vsdt.Pool#isBoundaryVisible <em>Boundary Visible</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Pool#getProcessType <em>Process Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,62 +28,34 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Pool extends Node {
+public interface Pool extends Node, AbstractProcess {
 	/**
-	 * Returns the value of the '<em><b>Parent Diagram</b></em>' container reference.
+	 * Returns the value of the '<em><b>Parent</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.BusinessProcessDiagram#getPools <em>Pools</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Parent Diagram</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Parent</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent Diagram</em>' container reference.
-	 * @see #setParentDiagram(BusinessProcessDiagram)
-	 * @see de.dailab.vsdt.VsdtPackage#getPool_ParentDiagram()
+	 * @return the value of the '<em>Parent</em>' container reference.
+	 * @see #setParent(BusinessProcessDiagram)
+	 * @see de.dailab.vsdt.VsdtPackage#getPool_Parent()
 	 * @see de.dailab.vsdt.BusinessProcessDiagram#getPools
-	 * @model opposite="pools" required="true" transient="false"
+	 * @model opposite="pools" transient="false"
 	 * @generated
 	 */
-	BusinessProcessDiagram getParentDiagram();
+	BusinessProcessDiagram getParent();
 
 	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Pool#getParentDiagram <em>Parent Diagram</em>}' container reference.
+	 * Sets the value of the '{@link de.dailab.vsdt.Pool#getParent <em>Parent</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent Diagram</em>' container reference.
-	 * @see #getParentDiagram()
+	 * @param value the new value of the '<em>Parent</em>' container reference.
+	 * @see #getParent()
 	 * @generated
 	 */
-	void setParentDiagram(BusinessProcessDiagram value);
-
-	/**
-	 * Returns the value of the '<em><b>Process</b></em>' containment reference.
-	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.BpmnProcess#getParentPool <em>Parent Pool</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Process</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Process</em>' containment reference.
-	 * @see #setProcess(BpmnProcess)
-	 * @see de.dailab.vsdt.VsdtPackage#getPool_Process()
-	 * @see de.dailab.vsdt.BpmnProcess#getParentPool
-	 * @model opposite="parentPool" containment="true"
-	 * @generated
-	 */
-	BpmnProcess getProcess();
-
-	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Pool#getProcess <em>Process</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Process</em>' containment reference.
-	 * @see #getProcess()
-	 * @generated
-	 */
-	void setProcess(BpmnProcess value);
+	void setParent(BusinessProcessDiagram value);
 
 	/**
 	 * Returns the value of the '<em><b>Participant</b></em>' reference.
@@ -116,7 +88,7 @@ public interface Pool extends Node {
 	/**
 	 * Returns the value of the '<em><b>Lanes</b></em>' containment reference list.
 	 * The list contents are of type {@link de.dailab.vsdt.Lane}.
-	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.Lane#getParentPool <em>Parent Pool</em>}'.
+	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.Lane#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Lanes</em>' containment reference list isn't clear,
@@ -125,8 +97,8 @@ public interface Pool extends Node {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Lanes</em>' containment reference list.
 	 * @see de.dailab.vsdt.VsdtPackage#getPool_Lanes()
-	 * @see de.dailab.vsdt.Lane#getParentPool
-	 * @model opposite="parentPool" containment="true"
+	 * @see de.dailab.vsdt.Lane#getParent
+	 * @model opposite="parent" containment="true"
 	 * @generated
 	 */
 	EList<Lane> getLanes();
@@ -159,19 +131,33 @@ public interface Pool extends Node {
 	void setBoundaryVisible(boolean value);
 
 	/**
+	 * Returns the value of the '<em><b>Process Type</b></em>' attribute.
+	 * The default value is <code>"PRIVATE"</code>.
+	 * The literals are from the enumeration {@link de.dailab.vsdt.ProcessType}.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Process Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @return the value of the '<em>Process Type</em>' attribute.
+	 * @see de.dailab.vsdt.ProcessType
+	 * @see #setProcessType(ProcessType)
+	 * @see de.dailab.vsdt.VsdtPackage#getPool_ProcessType()
+	 * @model default="PRIVATE" required="true"
 	 * @generated
 	 */
-	void initializeParticipant();
+	ProcessType getProcessType();
 
 	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.Pool#getProcessType <em>Process Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @param value the new value of the '<em>Process Type</em>' attribute.
+	 * @see de.dailab.vsdt.ProcessType
+	 * @see #getProcessType()
 	 * @generated
 	 */
-	void setBoundaryVisibility();
+	void setProcessType(ProcessType value);
 
 } // Pool

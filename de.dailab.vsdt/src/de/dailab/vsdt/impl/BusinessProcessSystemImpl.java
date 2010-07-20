@@ -419,7 +419,7 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 	 */
 	public EList<BusinessProcessDiagram> getBusinessProcesses() {
 		if (businessProcesses == null) {
-			businessProcesses = new EObjectContainmentWithInverseEList<BusinessProcessDiagram>(BusinessProcessDiagram.class, this, VsdtPackage.BUSINESS_PROCESS_SYSTEM__BUSINESS_PROCESSES, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__BUSINESS_PROCESS_SYSTEM);
+			businessProcesses = new EObjectContainmentWithInverseEList<BusinessProcessDiagram>(BusinessProcessDiagram.class, this, VsdtPackage.BUSINESS_PROCESS_SYSTEM__BUSINESS_PROCESSES, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARENT);
 		}
 		return businessProcesses;
 	}

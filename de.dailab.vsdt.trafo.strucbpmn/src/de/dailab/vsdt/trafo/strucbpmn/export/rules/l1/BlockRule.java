@@ -95,7 +95,7 @@ public class BlockRule extends AbstractVsdtRule {
 
 		//create block structure
 		BpmnBlock block= StrucBpmnFactory.eINSTANCE.createBpmnBlock();
-		FlowObjectContainer container= _fork.getFlowObjectContainer();
+		FlowObjectContainer container= _fork.getParent();
 		container.getContainedFlowObjects().add(block);
 
 		for (SequenceFlow seqFlow : branches) {
@@ -154,7 +154,7 @@ public class BlockRule extends AbstractVsdtRule {
 			Gateway fork2= VsdtFactory.eINSTANCE.createGateway();
 			fork2.setName(_fork.getName() + "_2");
 			fork2.setGatewayType(_fork.getGatewayType());
-			_fork.getFlowObjectContainer().getContainedFlowObjects().add(fork2);
+			_fork.getParent().getContainedFlowObjects().add(fork2);
 			
 			//redirect SeqFlows
 			fork2.getIncomingSeq().addAll(_fork.getIncomingSeq());
@@ -164,7 +164,7 @@ public class BlockRule extends AbstractVsdtRule {
 			SequenceFlow seqFlow2= VsdtFactory.eINSTANCE.createSequenceFlow();
 			seqFlow2.setSource(fork2);
 			seqFlow2.setTarget(_fork);
-			_fork.getPool().getParentDiagram().getConnections().add(seqFlow2);
+			_fork.getPool().getParent().getConnections().add(seqFlow2);
 			
 			// create complex condition for new seqFow (disjunctive: a or b or c...)
 			DisjunctiveExpression disjunctive= StrucBpmnFactory.eINSTANCE.createDisjunctiveExpression();
@@ -198,7 +198,7 @@ public class BlockRule extends AbstractVsdtRule {
 			Gateway merge2= VsdtFactory.eINSTANCE.createGateway();
 			merge2.setName(_merge.getName() + "_2");
 			merge2.setGatewayType(_merge.getGatewayType());
-			_merge.getFlowObjectContainer().getContainedFlowObjects().add(merge2);
+			_merge.getParent().getContainedFlowObjects().add(merge2);
 			
 			//redirect SeqFlows
 			merge2.getOutgoingSeq().addAll(_merge.getOutgoingSeq());
@@ -208,7 +208,7 @@ public class BlockRule extends AbstractVsdtRule {
 			SequenceFlow seqFlow2= VsdtFactory.eINSTANCE.createSequenceFlow();
 			seqFlow2.setSource(_merge);
 			seqFlow2.setTarget(merge2);
-			_merge.getPool().getParentDiagram().getConnections().add(seqFlow2);
+			_merge.getPool().getParent().getConnections().add(seqFlow2);
 		}
 	}
 

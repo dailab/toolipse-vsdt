@@ -88,7 +88,7 @@ public class Bpmn2StpBpmnElementMapping extends BpmnElementMapping {
 		BpmnDiagram target= stpFac.createBpmnDiagram();
 		_currentDiagram= target;
 		mapBasicAttributes(source, target);
-		target.setAuthor(source.getBusinessProcessSystem().getAuthor());
+		target.setAuthor(source.getParent().getAuthor());
 		target.setTitle(source.getName());
 		wrapper.map(source, target);
 		

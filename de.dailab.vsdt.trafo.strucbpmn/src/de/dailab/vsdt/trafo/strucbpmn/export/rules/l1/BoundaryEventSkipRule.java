@@ -83,7 +83,7 @@ public class BoundaryEventSkipRule extends AbstractVsdtRule {
 		if (! (_foSkip.getName() == InsertEmptyRule.EMPTY_NAME)) {
 			BpmnElementToSkip elementToSkip= StrucBpmnFactory.eINSTANCE.createBpmnElementToSkip();
 			//assertion: foSkip can not be integrated into a StrucBpmn object yet (although it might be one itself)
-			FlowObjectContainer container= _foSkip.getFlowObjectContainer();
+			FlowObjectContainer container= _foSkip.getParent();
 			container.getContainedFlowObjects().add(elementToSkip);
 			elementToSkip.setElement(_foSkip);
 			//redirect sequence flows

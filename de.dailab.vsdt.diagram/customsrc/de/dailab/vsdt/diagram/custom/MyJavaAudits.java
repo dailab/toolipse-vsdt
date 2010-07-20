@@ -511,7 +511,7 @@ public class MyJavaAudits {
 	 * Compensation Activities must not have outgoing Sequence Flows
 	 */
 	public static Boolean act3CompensationNoOutgoingSeq(Activity self) {
-		if (self.isIsCompensation()) {
+		if (self.isCompensation()) {
 			return self.getOutgoingSeq().isEmpty();
 		}
 		return true;
@@ -543,7 +543,7 @@ public class MyJavaAudits {
 						}
 					}
 					if (flowObject instanceof Activity) {
-						if (((Activity)flowObject).isIsCompensation()) {
+						if (((Activity)flowObject).isCompensation()) {
 							continue;
 						}
 					}
@@ -569,7 +569,7 @@ public class MyJavaAudits {
 				if (!(flowObject instanceof End) && flowObject.getOutgoingSeq().isEmpty()) {
 					// exceptions...
 					if (flowObject instanceof Activity) {
-						if (((Activity)flowObject).isIsCompensation()) {
+						if (((Activity)flowObject).isCompensation()) {
 							continue;
 						}
 					}
@@ -792,7 +792,7 @@ public class MyJavaAudits {
 			break;
 		case ERROR:
 			//code (must in normal flow, may as event handler)
-			ok&= self.getFlowObjectContainer() != null ? self.getErrorCode() != null : true;
+			ok&= self.getParent() != null ? self.getErrorCode() != null : true;
 			break;
 		case LINK:
 			//link reference
@@ -800,7 +800,7 @@ public class MyJavaAudits {
 			break;
 		case COMPENSATION:
 			//activity (in normal flow)
-			ok&= self.getFlowObjectContainer() != null ? self.getActivity() != null : true;
+			ok&= self.getParent() != null ? self.getActivity() != null : true;
 			break;
 		case RULE:
 			// rule name and expression

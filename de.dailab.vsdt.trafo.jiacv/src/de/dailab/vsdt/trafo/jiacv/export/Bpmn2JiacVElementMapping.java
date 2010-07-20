@@ -42,7 +42,6 @@ import de.dailab.jiactng.jadl.While;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.Assignment;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.End;
@@ -190,16 +189,15 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	 */
 	public Agent visitPool(Pool pool) {
 		TrafoLog.trace("Visiting Pool '" + pool.getName() + "'");
-		BpmnProcess process= pool.getProcess();
 		
 		//check process type
-		ProcessType type= process.getProcessType();
+		ProcessType type= pool.getProcessType();
 		if (type != ProcessType.ABSTRACT && type != ProcessType.PRIVATE) {
 			TrafoLog.info(pool.getName() + ": Process with Process Type " + type.getName() + " will not be mapped. Skipping.");
 			return null;
 		}
 		//check adHoc
-		if (process.isAdHoc()) {
+		if (pool.isAdHoc()) {
 			TrafoLog.warn(pool.getName() + ": A mapping for AdHoc Processes is not defined. Skipping.");
 			return null;
 		}
@@ -210,11 +208,10 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		getWrapper().addJadlFile(model, pool);
 		
 		// build service (will automatically be added to the Agent model)
-		buildService(pool.getParentDiagram().getName() + "_" + pool.getName(), 
-				process, 
-				process.getGraphicalElements(), 
-				process.getProperties(), 
-				process.getAssignments());
+		buildService(pool.getParent().getName() + "_" + pool.getName(), 
+				pool, 
+				pool.getGraphicalElements(), 
+				pool.getProperties());
 		
 		return model;
 	}
@@ -750,8 +747,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 					Service service= buildService(parentService.getName() + "_" + counter++, 
 							branch, 
 							Arrays.asList(branch.getElement()), 
-							bpmnBlock.getProcess().getProperties(), 
-							bpmnBlock.getProcess().getAssignments());
+							bpmnBlock.getPool().getProperties());
 					services.add(service);
 				}
 				// set relation in map and set _currentService back to the parentService
@@ -783,7 +779,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	 * @param assignments
 	 * @return
 	 */
-	private Service buildService(String name, EObject source, List<FlowObject> flowObjects, List<Property> properties, List<Assignment> assignments) {
+	private Service buildService(String name, EObject source, List<FlowObject> flowObjects, List<Property> properties) {//, List<Assignment> assignments) {
 		// create service model
 		Service service= jadlFac.createService();
 		_currentService= service;
@@ -827,18 +823,18 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 				for (HeaderDeclaration varDecl : service.getOutputs()) {
 					invoke.getReturnVariables().add(varDecl.getName());
 				}
-				// insert the invoke just before the end assignments
-				int offset= 0;
-				for (Assignment assignment : assignments) {
-					if (assignment.getAssignTime() == AssignTimeType.END) {
-						offset++;
-					}
-				}
-				int index= otherService.getBody().getScripts().size() - offset;
-				otherService.getBody().getScripts().add(index, invoke);
+				// insert the invoke at the end
+//				int offset= 0;
+//				for (Assignment assignment : assignments) {
+//					if (assignment.getAssignTime() == AssignTimeType.END) {
+//						offset++;
+//					}
+//				}
+//				int index= otherService.getBody().getScripts().size() - offset;
+				otherService.getBody().getScripts().add(invoke); //index, invoke);
 			}
-		} else {
-			body.getScripts().addAll(visitAssignments(assignments, AssignTimeType.START));
+//		} else {
+//			body.getScripts().addAll(visitAssignments(assignments, AssignTimeType.START));
 		}
 		// 3.: add listeners
 		for (Expression address : messageListeners.get(service)) {
@@ -851,7 +847,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			body.getScripts().add(script);	
 		}
 		// 5.: end assignments
-		body.getScripts().addAll(visitAssignments(assignments, AssignTimeType.END));
+//		body.getScripts().addAll(visitAssignments(assignments, AssignTimeType.END));
 		
 		return service;
 	}

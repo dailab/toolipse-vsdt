@@ -152,7 +152,7 @@ public class ImportWebServiceAction extends Action {
 				
 				EObject modelElement= (EObject) ((View)diagramEditPart.getModel()).getElement(); 
 				if (modelElement instanceof BusinessProcessDiagram) {
-					bps = ((BusinessProcessDiagram) modelElement).getBusinessProcessSystem();
+					bps = ((BusinessProcessDiagram) modelElement).getParent();
 				} else {
 					bps= (BusinessProcessSystem) modelElement;
 				}

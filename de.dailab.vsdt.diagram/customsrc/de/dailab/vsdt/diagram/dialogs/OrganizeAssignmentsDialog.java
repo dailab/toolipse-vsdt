@@ -16,10 +16,8 @@ import de.dailab.common.gmf.Util;
 import de.dailab.common.swt.dialogs.AbstractOrganizeElementsDialog;
 import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.Assignment;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowObject;
-import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.VsdtPackage;
@@ -70,10 +68,10 @@ public class OrganizeAssignmentsDialog extends AbstractOrganizeElementsDialog<As
 		super(parentShell, parentElement, true, 4);
 
 		//get assignments list from model element
-		if (parentElement instanceof BpmnProcess) {
-			elements= ((BpmnProcess) parentElement).getAssignments();
-			toProperties= ((BpmnProcess) parentElement).getVisibleProperties();
-		}
+//		if (parentElement instanceof BpmnProcess) {
+//			elements= ((BpmnProcess) parentElement).getAssignments();
+//			toProperties= ((BpmnProcess) parentElement).getVisibleProperties();
+//		}
 		if (parentElement instanceof FlowObject) {
 			elements= ((FlowObject) parentElement).getAssignments();
 			toProperties= ((FlowObject) parentElement).getVisibleProperties();
@@ -92,16 +90,16 @@ public class OrganizeAssignmentsDialog extends AbstractOrganizeElementsDialog<As
 //				disable= true;
 //			}
 //		}
-		if (parentElement instanceof Pool) {
-			BpmnProcess process= ((Pool) parentElement).getProcess();
-			if (process != null) {
-				elements= process.getAssignments();
-				toProperties= process.getVisibleProperties();
-			} else {
-				errorMessage= ERROR__NO_PROCESS;
-				disable= true;
-			}
-		}
+//		if (parentElement instanceof Pool) {
+//			BpmnProcess process= ((Pool) parentElement).getProcess();
+//			if (process != null) {
+//				elements= process.getAssignments();
+//				toProperties= process.getVisibleProperties();
+//			} else {
+//				errorMessage= ERROR__NO_PROCESS;
+//				disable= true;
+//			}
+//		}
 	}
 
 	@Override

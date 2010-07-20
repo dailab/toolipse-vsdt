@@ -70,7 +70,7 @@ public abstract class FlowObjectContainerImpl extends EObjectImpl implements Flo
 	 */
 	public EList<FlowObject> getContainedFlowObjects() {
 		if (containedFlowObjects == null) {
-			containedFlowObjects = new EObjectContainmentWithInverseEList<FlowObject>(FlowObject.class, this, VsdtPackage.FLOW_OBJECT_CONTAINER__CONTAINED_FLOW_OBJECTS, VsdtPackage.FLOW_OBJECT__FLOW_OBJECT_CONTAINER);
+			containedFlowObjects = new EObjectContainmentWithInverseEList<FlowObject>(FlowObject.class, this, VsdtPackage.FLOW_OBJECT_CONTAINER__CONTAINED_FLOW_OBJECTS, VsdtPackage.FLOW_OBJECT__PARENT);
 		}
 		return containedFlowObjects;
 	}

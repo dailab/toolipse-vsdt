@@ -16,7 +16,6 @@ import org.eclipse.ui.PlatformUI;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.Assignment;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.ConditionType;
 import de.dailab.vsdt.Event;
@@ -190,9 +189,9 @@ public class InterpretingSimulation extends ManualSimulation implements ISimulat
 		if (eObject instanceof FlowObject) {
 			assignments= ((FlowObject) eObject).getAssignments();
 		}
-		if (eObject instanceof BpmnProcess) {
-			assignments= ((BpmnProcess) eObject).getAssignments();
-		}
+//		if (eObject instanceof BpmnProcess) {
+//			assignments= ((BpmnProcess) eObject).getAssignments();
+//		}
 		// evaluate assignment expression
 		if (assignments != null) {
 			for (Assignment assignment : assignments) {

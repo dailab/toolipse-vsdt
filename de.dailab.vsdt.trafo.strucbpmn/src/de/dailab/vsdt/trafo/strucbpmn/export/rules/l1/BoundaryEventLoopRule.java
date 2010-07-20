@@ -87,7 +87,7 @@ public class BoundaryEventLoopRule extends AbstractVsdtRule {
 	 */
 	@Override
 	protected void apply() {
-		final BusinessProcessDiagram bpd= _gateway.getPool().getParentDiagram();
+		final BusinessProcessDiagram bpd= _gateway.getPool().getParent();
 		
 		// create Event Handler Case
 		BpmnEventHandlerCase ehCase= StrucBpmnFactory.eINSTANCE.createBpmnEventHandlerCase();
@@ -118,12 +118,12 @@ public class BoundaryEventLoopRule extends AbstractVsdtRule {
 		// insert gateway: branch to loop back to original gateway
 		Gateway branch= VsdtFactory.eINSTANCE.createGateway();
 		branch.setName(_intermediate.getName() + "_BRANCH");
-		_gateway.getFlowObjectContainer().getContainedFlowObjects().add(branch);
+		_gateway.getParent().getContainedFlowObjects().add(branch);
 		
 		// insert empty activity
 		Activity empty= VsdtFactory.eINSTANCE.createActivity();
 		empty.setName(InsertEmptyRule.EMPTY_NAME);
-		_gateway.getFlowObjectContainer().getContainedFlowObjects().add(empty);
+		_gateway.getParent().getContainedFlowObjects().add(empty);
 		
 		// sequence flow from ehBlock to branch
 		FlowObject foAfterActivity= null;

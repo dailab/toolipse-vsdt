@@ -195,7 +195,7 @@ public class BpmnDerivedProcessImpl extends FlowObjectImpl implements BpmnDerive
 			case StrucBpmnPackage.BPMN_DERIVED_PROCESS__PROCESS_NAME:
 				return getProcessName();
 			case StrucBpmnPackage.BPMN_DERIVED_PROCESS__WAIT_FOR_COMPLETION:
-				return isWaitForCompletion() ? Boolean.TRUE : Boolean.FALSE;
+				return isWaitForCompletion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -215,7 +215,7 @@ public class BpmnDerivedProcessImpl extends FlowObjectImpl implements BpmnDerive
 				setProcessName((String)newValue);
 				return;
 			case StrucBpmnPackage.BPMN_DERIVED_PROCESS__WAIT_FOR_COMPLETION:
-				setWaitForCompletion(((Boolean)newValue).booleanValue());
+				setWaitForCompletion((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

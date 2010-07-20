@@ -184,7 +184,7 @@ public class CreateBlockRule extends AbstractRule {
 			for (Iterator<EObject> iter = lhsVariables.get(FORK).getDomain().iterator(); iter.hasNext();) {
 				Gateway gateway = (Gateway) iter.next();
 				// not yet added to a block
-				if (gateway.getFlowObjectContainer() == null) {
+				if (gateway.getParent() == null) {
 					iter.remove();
 				}
 			}	
@@ -192,7 +192,7 @@ public class CreateBlockRule extends AbstractRule {
 			for (Iterator<EObject> iter = lhsVariables.get(MERGE).getDomain().iterator(); iter.hasNext();) {
 				Gateway gateway = (Gateway) iter.next();
 				// not yet added to a block
-				if (gateway.getFlowObjectContainer() == null) {
+				if (gateway.getParent() == null) {
 					iter.remove();
 				}
 			}

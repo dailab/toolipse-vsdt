@@ -97,8 +97,8 @@ public class EventSection extends FlowObjectSection {
     @Override
  	protected void internalRefresh() {
     	if (firstrun) {
-    		BusinessProcessDiagram bpd= event.getPool().getParentDiagram();
-    		BusinessProcessSystem bps= bpd.getBusinessProcessSystem();
+    		BusinessProcessDiagram bpd= event.getPool().getParent();
+    		BusinessProcessSystem bps= bpd.getParent();
     		messageCombo.fillCombo(bps.getMessages());
     		implementationCombo.fillCombo(bps.getImplementations());
     		List<Event> events= new ArrayList<Event>();
@@ -113,7 +113,7 @@ public class EventSection extends FlowObjectSection {
     		linkedToCombo.fillCombo(events);
 
     		List<Activity> acts= new ArrayList<Activity>();
-			List<FlowObject> fos= event.getPool().getProcess().getTransitiveGraphicalElements();
+			List<FlowObject> fos= event.getPool().getTransitiveGraphicalElements();
 			for (FlowObject fo : fos) {
 				if (fo instanceof Activity) {
 					acts.add((Activity) fo);

@@ -6,7 +6,6 @@
  */
 package de.dailab.vsdt.impl;
 
-import de.dailab.vsdt.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -19,11 +18,11 @@ import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.Association;
-import de.dailab.vsdt.BpmnProcess;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.ConditionType;
 import de.dailab.vsdt.DataObject;
+import de.dailab.vsdt.DataType;
 import de.dailab.vsdt.DirectionType;
 import de.dailab.vsdt.End;
 import de.dailab.vsdt.Expression;
@@ -48,7 +47,6 @@ import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.Start;
-import de.dailab.vsdt.StatusType;
 import de.dailab.vsdt.TextAnnotation;
 import de.dailab.vsdt.Transaction;
 import de.dailab.vsdt.TransactionMethodType;
@@ -102,7 +100,8 @@ public class VsdtFactoryImpl extends EFactoryImpl implements VsdtFactory {
 		switch (eClass.getClassifierID()) {
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM: return createBusinessProcessSystem();
 			case VsdtPackage.BUSINESS_PROCESS_DIAGRAM: return createBusinessProcessDiagram();
-			case VsdtPackage.BPMN_PROCESS: return createBpmnProcess();
+			case VsdtPackage.POOL: return createPool();
+			case VsdtPackage.LANE: return createLane();
 			case VsdtPackage.START: return createStart();
 			case VsdtPackage.INTERMEDIATE: return createIntermediate();
 			case VsdtPackage.END: return createEnd();
@@ -113,8 +112,6 @@ public class VsdtFactoryImpl extends EFactoryImpl implements VsdtFactory {
 			case VsdtPackage.OUTPUT_SET: return createOutputSet();
 			case VsdtPackage.TRANSACTION: return createTransaction();
 			case VsdtPackage.GATEWAY: return createGateway();
-			case VsdtPackage.POOL: return createPool();
-			case VsdtPackage.LANE: return createLane();
 			case VsdtPackage.DATA_OBJECT: return createDataObject();
 			case VsdtPackage.TEXT_ANNOTATION: return createTextAnnotation();
 			case VsdtPackage.GROUP: return createGroup();
@@ -143,8 +140,6 @@ public class VsdtFactoryImpl extends EFactoryImpl implements VsdtFactory {
 		switch (eDataType.getClassifierID()) {
 			case VsdtPackage.PROCESS_TYPE:
 				return createProcessTypeFromString(eDataType, initialValue);
-			case VsdtPackage.STATUS_TYPE:
-				return createStatusTypeFromString(eDataType, initialValue);
 			case VsdtPackage.TRIGGER_TYPE:
 				return createTriggerTypeFromString(eDataType, initialValue);
 			case VsdtPackage.ACTIVITY_TYPE:
@@ -180,8 +175,6 @@ public class VsdtFactoryImpl extends EFactoryImpl implements VsdtFactory {
 		switch (eDataType.getClassifierID()) {
 			case VsdtPackage.PROCESS_TYPE:
 				return convertProcessTypeToString(eDataType, instanceValue);
-			case VsdtPackage.STATUS_TYPE:
-				return convertStatusTypeToString(eDataType, instanceValue);
 			case VsdtPackage.TRIGGER_TYPE:
 				return convertTriggerTypeToString(eDataType, instanceValue);
 			case VsdtPackage.ACTIVITY_TYPE:
@@ -225,16 +218,6 @@ public class VsdtFactoryImpl extends EFactoryImpl implements VsdtFactory {
 	public BusinessProcessDiagram createBusinessProcessDiagram() {
 		BusinessProcessDiagramImpl businessProcessDiagram = new BusinessProcessDiagramImpl();
 		return businessProcessDiagram;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BpmnProcess createBpmnProcess() {
-		BpmnProcessImpl bpmnProcess = new BpmnProcessImpl();
-		return bpmnProcess;
 	}
 
 	/**
@@ -485,26 +468,6 @@ public class VsdtFactoryImpl extends EFactoryImpl implements VsdtFactory {
 	public DataType createDataType() {
 		DataTypeImpl dataType = new DataTypeImpl();
 		return dataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StatusType createStatusTypeFromString(EDataType eDataType, String initialValue) {
-		StatusType result = StatusType.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertStatusTypeToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
