@@ -645,8 +645,8 @@ public class Bpel2BpmnElementMapping extends MappingStage {
 	private Property getProperty(String name) {
 		Property property= _propertyMap.get(name);
 		if (property == null) {
-			// TODO type and correlation
-			property= VsdtElementFactory.createProperty(name, "xsd:integer", false);
+			// TODO type 
+			property= VsdtElementFactory.createProperty(name, "xsd:integer");
 			TrafoLog.debug("Creating Property " + property.toString());
 			_process.getProperties().add(property);
 			_propertyMap.put(name, property);

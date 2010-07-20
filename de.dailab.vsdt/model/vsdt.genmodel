@@ -308,7 +308,6 @@
     <genClasses ecoreClass="vsdt.ecore#//Property">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Property/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Property/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Property/correlation"/>
       <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
           ecoreFeature="ecore:EReference vsdt.ecore#//Property/assignments"/>
     </genClasses>

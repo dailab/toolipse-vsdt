@@ -17,7 +17,6 @@ import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.ProcessType;
 import de.dailab.vsdt.VsdtPackage;
-import de.dailab.vsdt.diagram.actions.OrganizeAssignmentsAction;
 import de.dailab.vsdt.diagram.actions.OrganizePropertiesAction;
 import de.dailab.vsdt.diagram.ui.ExpressionComposite;
 import de.dailab.vsdt.diagram.ui.VsdtFeatureCombo;
@@ -46,9 +45,9 @@ public class PoolSection extends AbstractVsdtPropertySection {
 //							   DISPLAY_PART_ROLE= "Role",
 //							   DISPLAY_PART_ENTITY= "Entity",
 
-							   DISPLAY_ORG_PROP= "Process Properties...",
-							   DISPLAY_ORG_ASS= "Process Assignments...",
-							   DISPLAY_INIT_PART= "new Participant";
+							   DISPLAY_ORG_PROP= "Process Properties...";
+//							   DISPLAY_ORG_ASS= "Process Assignments...",
+//							   DISPLAY_INIT_PART= "new Participant";
 							   
     protected Pool pool;
     
@@ -61,7 +60,7 @@ public class PoolSection extends AbstractVsdtPropertySection {
 //    private Text partEntityText;
 //    private Button initPartButton;
     
-    private Group processGroup;
+//    private Group processGroup;
 //    private Text procNameText;
     private Button procTypeNoneButton;
     private Button procTypePrivButton;
@@ -77,7 +76,7 @@ public class PoolSection extends AbstractVsdtPropertySection {
 //    private Button adHocParButton;
     
     private Button orgPropButton;
-    private Button orgAssButton;
+//    private Button orgAssButton;
     
 
     @Override
@@ -106,7 +105,7 @@ public class PoolSection extends AbstractVsdtPropertySection {
 //            partEntityText.setText(nonNull(pool.getParticipant().getEntity()));
 //        }
 
-    	processGroup.setVisible(true);
+//    	processGroup.setVisible(true);
     	Pool process = pool;
 //        procNameText.setText(nonNull(process.getName()));
         procTypeNoneButton.setSelection(process.getProcessType() == ProcessType.NONE);
@@ -131,23 +130,23 @@ public class PoolSection extends AbstractVsdtPropertySection {
         Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
 
-        // pool's own attributes
-        boundaryvisButton= FormLayoutUtil.addButton(composite, DISPLAY_BOUNDARY_VISIBLE, SWT.CHECK, 0, 0, null);
-        boundaryvisButton.addSelectionListener(this);
-
-        // organize buttons
-        orgPropButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_PROP, SWT.NONE, boundaryvisButton, null, 100);
+        // buttons
+        orgPropButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_PROP, SWT.NONE, 0, null, 100);
         orgPropButton.addSelectionListener(this);
-        orgAssButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_ASS, SWT.NONE, boundaryvisButton, null, orgPropButton);
-        orgAssButton.addSelectionListener(this);
+
+//        orgAssButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_ASS, SWT.NONE, boundaryvisButton, null, orgPropButton);
+//        orgAssButton.addSelectionListener(this);
 
 //        // participant group
 //        initPartButton= FormLayoutUtil.addButton(composite, DISPLAY_INIT_PART, SWT.NONE, boundaryvisButton, null, 50);
 //        initPartButton.addSelectionListener(this);
-        label= FormLayoutUtil.addLabel(composite, DISPLAY_PARTICIPANT, boundaryvisButton, 0);
-        participantCombo= new VsdtFeatureCombo<Participant>(FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, boundaryvisButton, label, 50));
+        label= FormLayoutUtil.addLabel(composite, DISPLAY_PARTICIPANT, 0, 0);
+        participantCombo= new VsdtFeatureCombo<Participant>(FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, 0, label, 50));
         participantCombo.getCombo().addSelectionListener(this);
-//        
+
+        boundaryvisButton= FormLayoutUtil.addButton(composite, DISPLAY_BOUNDARY_VISIBLE, SWT.CHECK, 0, participantCombo.getCombo(), null);
+        boundaryvisButton.addSelectionListener(this);
+
 //        participantGroup= FormLayoutUtil.addGroup(composite, DISPLAY_PARTICIPANT_GROUP, participantCombo.getCombo(), 0, 50);
 //        label= FormLayoutUtil.addLabel(participantGroup, DISPLAY_NAME, 0, 0);
 //        partNameText= FormLayoutUtil.addText(participantGroup, 0, label, 100, 0);
@@ -160,15 +159,15 @@ public class PoolSection extends AbstractVsdtPropertySection {
 //        partEntityText.addFocusListener(this);
         
         // process group
-        processGroup= FormLayoutUtil.addGroup(composite, DISPLAY_PROCESS_GROUP, orgPropButton, participantCombo.getCombo(), 100);
-        label= FormLayoutUtil.addLabel(processGroup, DISPLAY_NAME, 0, 0);
+        Group processGroup= FormLayoutUtil.addGroup(composite, DISPLAY_PROCESS_GROUP, participantCombo.getCombo(), 0, 50);
+//        label= FormLayoutUtil.addLabel(processGroup, DISPLAY_NAME, 0, 0);
 //        procNameText= FormLayoutUtil.addText(processGroup, 0, label, 100, 0);
 //        procNameText.addFocusListener(this);
         label= FormLayoutUtil.addLabel(processGroup, DISPLAY_PROC_TYPE, 0, 0);
-        procTypeNoneButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_NONE, SWT.RADIO, 0, label, null);
-        procTypePrivButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_PRIV, SWT.RADIO, 0, procTypeNoneButton, null);
-        procTypeAbstButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_ABST, SWT.RADIO, label, label, null);
-        procTypeCollButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_COLL, SWT.RADIO, label, procTypeAbstButton, null);
+        procTypeNoneButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_NONE, SWT.RADIO, 0, label, 50);
+        procTypePrivButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_PRIV, SWT.RADIO, 0, procTypeNoneButton, 100);
+        procTypeAbstButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_ABST, SWT.RADIO, label, label, 50);
+        procTypeCollButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_COLL, SWT.RADIO, label, procTypeAbstButton, 100);
         procTypeNoneButton.addSelectionListener(this);
         procTypePrivButton.addSelectionListener(this);
         procTypeAbstButton.addSelectionListener(this);
@@ -177,11 +176,13 @@ public class PoolSection extends AbstractVsdtPropertySection {
 //        enabICButton.addSelectionListener(this);
 //        suppJFButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_SUPPJF, SWT.CHECK, procTypeCollButton, enabICButton, null);
 //        suppJFButton.addSelectionListener(this);
-        adHocButton= FormLayoutUtil.addButton(processGroup, DISPLAY_SUB_ADHOC, SWT.CHECK, procTypeCollButton, 0, null);
+        
+        Group adHocGroup= FormLayoutUtil.addGroup(composite, DISPLAY_SUB_ADHOC, participantCombo.getCombo(), processGroup, 100);
+        adHocButton= FormLayoutUtil.addButton(adHocGroup, DISPLAY_SUB_ADHOC, SWT.CHECK, procTypeCollButton, 0, null);
     	adHocButton.addSelectionListener(this);
 //    	adHocGroup= FormLayoutUtil.addGroup(processGroup, DISPLAY_SUB_ADHOC, adHocButton, 0, 100);
-        label= FormLayoutUtil.addLabel(processGroup, DISPLAY_SUB_ADHOCCONDITION, adHocButton, 0);
-    	adHocConditionText= addExpressionComposite(processGroup, adHocButton, label, 100);
+        label= FormLayoutUtil.addLabel(adHocGroup, DISPLAY_SUB_ADHOCCONDITION, adHocButton, 0);
+    	adHocConditionText= addExpressionComposite(adHocGroup, adHocButton, label, 100);
 //    	adHocConditionText.addFocusListener(this);
 //    	label= FormLayoutUtil.addLabel(adHocGroup, DISPLAY_SUB_ADHOC_ORDERING, adHocConditionText, 0);
 //    	adHocSeqButton= FormLayoutUtil.addButton(adHocGroup, DISPLAY_SUB_ADHOC_SEQ, SWT.RADIO, adHocConditionText, label, null);
@@ -213,9 +214,9 @@ public class PoolSection extends AbstractVsdtPropertySection {
     	if (src.equals(orgPropButton)) {
 			new OrganizePropertiesAction().run(pool);
     	}
-    	if (src.equals(orgAssButton)) {
-			new OrganizeAssignmentsAction().run(pool);
-    	}
+//    	if (src.equals(orgAssButton)) {
+//			new OrganizeAssignmentsAction().run(pool);
+//    	}
 //    	if (src.equals(initPartButton)) {
 //    		try {
 //				OperationHistoryFactory.getOperationHistory().execute(new InitParticipantCommand(pool),new NullProgressMonitor(), null);

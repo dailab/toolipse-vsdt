@@ -1428,14 +1428,14 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 				tPart.setName(property.getName());
 				tPart.setType(new QName(property.getType()));
 				
-				if (property.isCorrelation()) {
-					/*
-					 * TODO correlation sets?
-					 * property with type==Set -> correlationSet
-					 * child-property(?) of set -> entry in 'properties' QName-list
-					 */
-					TrafoLog.nyi("Mapping for Correlation Sets attribute");	
-				}
+//				if (property.isCorrelation()) {
+//					/*
+//					 * TODO correlation sets?
+//					 * property with type==Set -> correlationSet
+//					 * child-property(?) of set -> entry in 'properties' QName-list
+//					 */
+//					TrafoLog.nyi("Mapping for Correlation Sets attribute");	
+//				}
 				tMsg.getPart().add(tPart);
 			}
 			_current.definitions.getMessage().add(tMsg);

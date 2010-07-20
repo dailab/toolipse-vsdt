@@ -6,6 +6,7 @@
  */
 package de.dailab.vsdt.util;
 
+import de.dailab.vsdt.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;

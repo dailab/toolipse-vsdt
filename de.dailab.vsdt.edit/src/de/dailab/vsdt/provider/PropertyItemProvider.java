@@ -64,7 +64,6 @@ public class PropertyItemProvider
 
 			addNamePropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
-			addCorrelationPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -114,28 +113,6 @@ public class PropertyItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Correlation feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addCorrelationPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Property_correlation_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Property_correlation_feature", "_UI_Property_type"),
-				 VsdtPackage.Literals.PROPERTY__CORRELATION,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This returns Property.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -179,7 +156,6 @@ public class PropertyItemProvider
 		switch (notification.getFeatureID(Property.class)) {
 			case VsdtPackage.PROPERTY__NAME:
 			case VsdtPackage.PROPERTY__TYPE:
-			case VsdtPackage.PROPERTY__CORRELATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

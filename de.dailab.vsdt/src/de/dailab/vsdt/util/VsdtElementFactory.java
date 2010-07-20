@@ -95,11 +95,10 @@ public class VsdtElementFactory {
 		return message;
 	}
 	
-	public static Property createProperty(String name, String type, boolean correlation) {
+	public static Property createProperty(String name, String type) {
 		Property property= fac.createProperty();
 		property.setName(name);
 		property.setType(type);
-		property.setCorrelation(correlation);
 		return property;
 	}
 }

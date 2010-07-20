@@ -3759,22 +3759,13 @@ public interface VsdtPackage extends EPackage {
 	int PROPERTY__TYPE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Correlation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__CORRELATION = 2;
-
-	/**
 	 * The feature id for the '<em><b>Assignments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__ASSIGNMENTS = 3;
+	int PROPERTY__ASSIGNMENTS = 2;
 
 	/**
 	 * The number of structural features of the '<em>Property</em>' class.
@@ -3783,7 +3774,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_FEATURE_COUNT = 4;
+	int PROPERTY_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.ExpressionImpl <em>Expression</em>}' class.
@@ -5502,17 +5493,6 @@ public interface VsdtPackage extends EPackage {
 	EAttribute getProperty_Type();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Property#isCorrelation <em>Correlation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Correlation</em>'.
-	 * @see de.dailab.vsdt.Property#isCorrelation()
-	 * @see #getProperty()
-	 * @generated
-	 */
-	EAttribute getProperty_Correlation();
-
-	/**
 	 * Returns the meta object for the reference list '{@link de.dailab.vsdt.Property#getAssignments <em>Assignments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7136,14 +7116,6 @@ public interface VsdtPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PROPERTY__TYPE = eINSTANCE.getProperty_Type();
-
-		/**
-		 * The meta object literal for the '<em><b>Correlation</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute PROPERTY__CORRELATION = eINSTANCE.getProperty_Correlation();
 
 		/**
 		 * The meta object literal for the '<em><b>Assignments</b></em>' reference list feature.

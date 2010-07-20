@@ -6,6 +6,7 @@
  */
 package de.dailab.vsdt.impl;
 
+import de.dailab.vsdt.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;

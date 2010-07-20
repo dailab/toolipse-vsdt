@@ -31,7 +31,6 @@ import de.dailab.vsdt.VsdtPackage;
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.PropertyImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.PropertyImpl#getType <em>Type</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.PropertyImpl#isCorrelation <em>Correlation</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.PropertyImpl#getAssignments <em>Assignments</em>}</li>
  * </ul>
  * </p>
@@ -78,26 +77,6 @@ public class PropertyImpl extends EObjectImpl implements Property {
 	 * @ordered
 	 */
 	protected String type = TYPE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isCorrelation() <em>Correlation</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isCorrelation()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean CORRELATION_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isCorrelation() <em>Correlation</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isCorrelation()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean correlation = CORRELATION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getAssignments() <em>Assignments</em>}' reference list.
@@ -175,27 +154,6 @@ public class PropertyImpl extends EObjectImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isCorrelation() {
-		return correlation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCorrelation(boolean newCorrelation) {
-		boolean oldCorrelation = correlation;
-		correlation = newCorrelation;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.PROPERTY__CORRELATION, oldCorrelation, correlation));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Assignment> getAssignments() {
 		if (assignments == null) {
 			assignments = new EObjectWithInverseEList<Assignment>(Assignment.class, this, VsdtPackage.PROPERTY__ASSIGNMENTS, VsdtPackage.ASSIGNMENT__TO);
@@ -244,8 +202,6 @@ public class PropertyImpl extends EObjectImpl implements Property {
 				return getName();
 			case VsdtPackage.PROPERTY__TYPE:
 				return getType();
-			case VsdtPackage.PROPERTY__CORRELATION:
-				return isCorrelation();
 			case VsdtPackage.PROPERTY__ASSIGNMENTS:
 				return getAssignments();
 		}
@@ -266,9 +222,6 @@ public class PropertyImpl extends EObjectImpl implements Property {
 				return;
 			case VsdtPackage.PROPERTY__TYPE:
 				setType((String)newValue);
-				return;
-			case VsdtPackage.PROPERTY__CORRELATION:
-				setCorrelation((Boolean)newValue);
 				return;
 			case VsdtPackage.PROPERTY__ASSIGNMENTS:
 				getAssignments().clear();
@@ -292,9 +245,6 @@ public class PropertyImpl extends EObjectImpl implements Property {
 			case VsdtPackage.PROPERTY__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
-			case VsdtPackage.PROPERTY__CORRELATION:
-				setCorrelation(CORRELATION_EDEFAULT);
-				return;
 			case VsdtPackage.PROPERTY__ASSIGNMENTS:
 				getAssignments().clear();
 				return;
@@ -314,8 +264,6 @@ public class PropertyImpl extends EObjectImpl implements Property {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case VsdtPackage.PROPERTY__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
-			case VsdtPackage.PROPERTY__CORRELATION:
-				return correlation != CORRELATION_EDEFAULT;
 			case VsdtPackage.PROPERTY__ASSIGNMENTS:
 				return assignments != null && !assignments.isEmpty();
 		}
@@ -336,8 +284,6 @@ public class PropertyImpl extends EObjectImpl implements Property {
 		result.append(name);
 		result.append(", type: ");
 		result.append(type);
-		result.append(", correlation: ");
-		result.append(correlation);
 		result.append(')');
 		return result.toString();
 	}

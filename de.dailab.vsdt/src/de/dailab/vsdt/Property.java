@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link de.dailab.vsdt.Property#getName <em>Name</em>}</li>
  *   <li>{@link de.dailab.vsdt.Property#getType <em>Type</em>}</li>
- *   <li>{@link de.dailab.vsdt.Property#isCorrelation <em>Correlation</em>}</li>
  *   <li>{@link de.dailab.vsdt.Property#getAssignments <em>Assignments</em>}</li>
  * </ul>
  * </p>
@@ -80,32 +79,6 @@ public interface Property extends EObject {
 	 * @generated
 	 */
 	void setType(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Correlation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Correlation</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Correlation</em>' attribute.
-	 * @see #setCorrelation(boolean)
-	 * @see de.dailab.vsdt.VsdtPackage#getProperty_Correlation()
-	 * @model
-	 * @generated
-	 */
-	boolean isCorrelation();
-
-	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Property#isCorrelation <em>Correlation</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Correlation</em>' attribute.
-	 * @see #isCorrelation()
-	 * @generated
-	 */
-	void setCorrelation(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Assignments</b></em>' reference list.
