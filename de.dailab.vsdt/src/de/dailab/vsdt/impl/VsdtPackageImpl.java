@@ -2483,12 +2483,6 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
-		op = addEOperation(abstractProcessEClass, null, "getTransitiveGraphicalElements", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(ecorePackage.getEEList());
-		g2 = createEGenericType(this.getFlowObject());
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
-
 		initEClass(poolEClass, Pool.class, "Pool", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPool_Parent(), this.getBusinessProcessDiagram(), this.getBusinessProcessDiagram_Pools(), "parent", null, 0, 1, Pool.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPool_Participant(), this.getParticipant(), this.getParticipant_AssociatedPools(), "participant", null, 1, 1, Pool.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2527,12 +2521,6 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		addEOperation(flowObjectEClass, ecorePackage.getEBoolean(), "isEndingNode", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(flowObjectEClass, this.getAbstractProcess(), "getAbstractProcess", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		op = addEOperation(flowObjectEClass, null, "getVisibleProperties", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(ecorePackage.getEEList());
-		g2 = createEGenericType(this.getProperty());
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
 
 		initEClass(eventEClass, Event.class, "Event", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEvent_Trigger(), this.getTriggerType(), "trigger", null, 1, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

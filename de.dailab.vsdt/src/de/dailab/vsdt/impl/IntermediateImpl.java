@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.Intermediate;
-import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.VsdtPackage;
 
 
@@ -193,40 +192,6 @@ public class IntermediateImpl extends EventImpl implements Intermediate {
 				return getAttachedTo() != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	//FIXME check if this code really is not necessary anymore (commented out 080825)
-//	/**
-//	 * if the intermediate event is placed on an activities border,
-//	 * the standard-implementation won't work
-//	 * @generated NOT
-//	 */
-//	@Override
-//	public BpmnProcess getProcess() {
-////		if (getTarget() != null) {
-////			return getTarget().getProcess();
-////		}
-////		return super.getProcess();
-//		if (eContainer instanceof Lane) {
-//			return ((Lane) eContainer).getParentPool().getProcess();
-//		}
-//		if (eContainer instanceof FlowObject) {
-//			return ((FlowObject) eContainer).getProcess();
-//		}
-//		return super.getProcess();
-//	}
-	
-	/**
-	 * if the intermediate event is placed on an activities border,
-	 * the standard-implementation won't work
-	 * @generated NOT
-	 */
-	@Override
-	public Pool getPool() {
-		if (getAttachedTo() != null) {
-			return getAttachedTo().getPool();
-		}
-		return super.getPool();
 	}
 
 } //IntermediateImpl

@@ -138,6 +138,6 @@ public interface FlowObject extends Node {
 	 * @model kind="operation" many="false"
 	 * @generated
 	 */
-	EList<Property> getVisibleProperties();
+//	EList<Property> getVisibleProperties();
 
 } // FlowObject

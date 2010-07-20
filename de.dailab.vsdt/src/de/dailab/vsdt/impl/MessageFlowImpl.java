@@ -209,42 +209,32 @@ public class MessageFlowImpl extends ConnectingObjectImpl implements MessageFlow
 	}
 
 	/**
-	 * initialize message attribute of the message flow.
-	 * a message object for the message flow is created and associated to the message flow
-	 * if the message flow is connected to appropriate flow objects, e.g. activities or events, and the type is not set yet,
-	 * the type is set to send/receive/message and the message is associated to the attribute set.
-	 * if for activities the type already is set to send/receive, the type is updated to service
+	 * initialize message attribute of the message flow. a message object for
+	 * the message flow is created and associated to the message flow if the
+	 * message flow is connected to appropriate flow objects, e.g. activities or
+	 * events, and the type is not set yet, the type is set to send / receive /
+	 * message and the message is associated to the attribute set. if for 
+	 * activities the type already is set to send/receive, the type is updated
+	 * to service.
 	 * 
 	 * @generated NOT
 	 */
 	public void initializeMessage() {
-		//CREATE MESSAGE
+		// CREATE MESSAGE
 		Message message= VsdtFactory.eINSTANCE.createMessage();
 		this.getParentDiagram().getParent().getMessages().add(message);
 		
-		String sourceName= null;
-		String targetName= null;
-		
-		//GET PARTICIPANTS
-//		Pool pool= ((Node) getSource()).getPool();
-//		message.setFrom(pool.getParticipant());
-		sourceName= getSource().getName();
-		
-//		Pool pool= ((Node) getTarget()).getPool();
-//		message.setTo(pool.getParticipant());
-		targetName= getTarget().getName();
-		
-		//SET MESSAGE SOURCE
+		// ADAPT SOURCE AND TARGET NODES
 		getSource().adaptToMessage(message, false);
-		
-		//SET MESSAGE TARGET
 		getTarget().adaptToMessage(message, true);
 		
-		//COMPOSE MESSAGE FEATURES
+		// COMPOSE MESSAGE FEATURES
+		String sourceName= getSource().getName();
+		String targetName= getTarget().getName();
 		String name= (sourceName!=null?"from "+sourceName : "")
 				+ (targetName!=null ? " to "+ targetName : "");
 		message.setName(name);
-		//SET OWN NAME ACCORDING TO THE MESSAGES NAME
+		// SET OWN NAME ACCORDING TO THE MESSAGES NAME
 		this.setName(name);
 
 		this.setMessage(message);

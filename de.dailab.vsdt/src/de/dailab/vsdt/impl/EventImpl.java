@@ -580,10 +580,10 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * This method returns the trigger types that may be used for this event in the
-	 * context it is used in. The trigger type depends on the event's type (Start, End,
-	 * Intermediate), and in case of Intermediate whether it is attached to an activity
-	 * and whether it is throwing or catching.
+	 * This method returns the trigger types that may be used for this event in
+	 * the context it is used in. The trigger type depends on the event's type
+	 * (Start, End, Intermediate), and in case of Intermediate whether it is 
+	 * attached to an activity and whether it is throwing or catching.
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -646,14 +646,8 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 				if (! getIncomingMsg().isEmpty()) {
 					return false;
 				}
-//				if (getImplementation() != null && getPool() != null) { // could be a reply
-//					return getImplementation().getParticipant() != getPool().getParticipant();
-//				}
-//				if (getMessage() != null && getMessage().getFrom() != null && getPool() != null) {
-//					return getMessage().getFrom() == getPool().getParticipant();
-//				}
 			}
-			boolean b=! isStartingNode() && isEndingNode(); //defaults to false, if event has no sequence flows at all
+			boolean b= ! isStartingNode() && isEndingNode(); //defaults to false, if event has no sequence flows at all
 			return b;
 		}
 		return false;

@@ -23,7 +23,6 @@ import de.dailab.vsdt.FlowObjectContainer;
 import de.dailab.vsdt.Lane;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.VsdtPackage;
-import de.dailab.vsdt.util.VsdtHelper;
 
 
 /**
@@ -54,11 +53,10 @@ public class LaneImpl extends GraphicalObjectImpl implements Lane {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	protected LaneImpl() {
 		super();
-		VsdtHelper.generateNewID(this);
 	}
 
 	/**
@@ -122,34 +120,6 @@ public class LaneImpl extends GraphicalObjectImpl implements Lane {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.LANE__PARENT, newParent, newParent));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * default: name of the class, e.g. "Pool", "Lane"
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String getName() {
-//		if (name==null) {
-//			return this.eClass().getName();
-//		}
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public String getNameOrId() {
-		String name= getName();
-		String id= getId();
-		if (name != null && name.length() > 0) {
-			return name;
-		} else {
-			return id;
-		}
 	}
 
 	/**

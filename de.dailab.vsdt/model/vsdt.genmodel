@@ -115,7 +115,6 @@
           ecoreFeature="ecore:EReference vsdt.ecore#//AbstractProcess/adHocCompletionCondition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//AbstractProcess/properties"/>
       <genOperations ecoreOperation="vsdt.ecore#//AbstractProcess/getGraphicalElements"/>
-      <genOperations ecoreOperation="vsdt.ecore#//AbstractProcess/getTransitiveGraphicalElements"/>
     </genClasses>
     <genClasses ecoreClass="vsdt.ecore#//Pool">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference vsdt.ecore#//Pool/parent"/>
@@ -158,7 +157,6 @@
       <genOperations ecoreOperation="vsdt.ecore#//FlowObject/isStartingNode"/>
       <genOperations ecoreOperation="vsdt.ecore#//FlowObject/isEndingNode"/>
       <genOperations ecoreOperation="vsdt.ecore#//FlowObject/getAbstractProcess"/>
-      <genOperations ecoreOperation="vsdt.ecore#//FlowObject/getVisibleProperties"/>
     </genClasses>
     <genClasses image="false" ecoreClass="vsdt.ecore#//Event">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Event/trigger"/>

@@ -102,15 +102,12 @@ public abstract class AbstractSimulation implements ISimulation {
 		}
 		stateMap.clear();
 		for (Pool pool : bpd.getPools()) {
-			for (FlowObject flowObject : pool.getTransitiveGraphicalElements()) {
+			for (FlowObject flowObject : VsdtHelper.getAllGraphicalElements(pool)) {
 				stateMap.put(flowObject, State.IDLE);
 				if (updateState(flowObject)) {
 					result.add(flowObject);
 				}
 			}
-//			if (pool.getProcess() != null) {
-//				handleAssignments(pool.getProcess(), AssignTimeType.START);
-//			}
 		}
 		refreshViewer();
 		return result;

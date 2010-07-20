@@ -31,6 +31,7 @@ import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.VsdtPackage;
+import de.dailab.vsdt.util.VsdtHelper;
 
 
 /**
@@ -101,8 +102,10 @@ public class AssignmentItemProvider
 				Collection<?> collection= super.getComboBoxObjects(object);
 				Assignment model= (Assignment) object;
 				if (model.eContainer() instanceof FlowObject) {
+					// show only the visible properties
 					FlowObject flowObject = (FlowObject) model.eContainer();
-					collection.retainAll(flowObject.getVisibleProperties());
+					List<Property> visible= VsdtHelper.getVisibleProperties(flowObject);
+					collection.retainAll(visible);
 				}
 				return collection;
 			}

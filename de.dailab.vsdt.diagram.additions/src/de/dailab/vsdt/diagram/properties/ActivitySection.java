@@ -152,7 +152,7 @@ implements FocusListener, SelectionListener {
     		List<FlowObject> fos;
     		List<Activity> acts= new ArrayList<Activity>();
     		for (Pool p : bpd.getPools()) {
-    			fos= p.getTransitiveGraphicalElements();
+    			fos= VsdtHelper.getAllGraphicalElements(p); 
     			for (FlowObject fo : fos) {
     				if (fo instanceof Activity && fo != activity) {
     					acts.add((Activity) fo);

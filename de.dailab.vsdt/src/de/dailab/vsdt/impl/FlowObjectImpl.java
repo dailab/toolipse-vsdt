@@ -10,7 +10,6 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -24,13 +23,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import de.dailab.vsdt.AbstractProcess;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.Assignment;
-import de.dailab.vsdt.Event;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.FlowObjectContainer;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.Lane;
 import de.dailab.vsdt.Pool;
-import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtPackage;
 
@@ -142,19 +139,6 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.FLOW_OBJECT__PARENT, newParent, newParent));
 	}
 
-	//	/**
-//	 * <!-- begin-user-doc -->
-//	 * set default name according to the eClass's name
-//	 * <!-- end-user-doc -->
-//	 * @generated NOT
-//	 */
-//	public String getName() {
-////		if (name==null) {
-////			return this.eClass().getName();
-////		}
-//		return name;
-//	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -199,8 +183,7 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	 * @generated NOT
 	 */
 	public boolean isStartingNode() {
-		if (this instanceof Activity &&
-				((Activity)this).isCompensation()) { 
+		if (this instanceof Activity && ((Activity)this).isCompensation()) { 
 			return false;
 		}
 		return getIncomingSeq().isEmpty();
@@ -214,8 +197,7 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	 * @generated NOT
 	 */
 	public boolean isEndingNode() {
-		if (this instanceof Activity &&
-				((Activity)this).isCompensation()) { 
+		if (this instanceof Activity && ((Activity)this).isCompensation()) { 
 			return false;
 		}
 		return getOutgoingSeq().isEmpty();
@@ -223,71 +205,33 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * returns the process, if the flow object is directly contained in the process
-	 * or returns the subprocess the flow object is contained in
-	 * or returns the abstract process of the target activity if the flow object is a boundary event  
+	 * returns the process, if the flow object is directly contained in the 
+	 * process or returns the subprocess the flow object is contained in or 
+	 * returns the abstract process of the target activity if the flow object
+	 * is a boundary event  
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public AbstractProcess getAbstractProcess() {
 		if (this instanceof Intermediate && ((Intermediate) this).getAttachedTo()!=null) {
 			return ((Intermediate)this).getAttachedTo().getAbstractProcess();
-		} else {
-			EObject container= eContainer();
-			if (container instanceof Activity) {
-				return (Activity) container;
-			} 
-			if (container instanceof Lane) {
-				return (Pool) ((Lane) container).eContainer();
-			}
-			// for structuring elements
-			if (container instanceof FlowObject) {
-				return ((FlowObject) container).getAbstractProcess();
-			}
-			return null;
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * Returns a list of Properties with this element in it's scope.
-	 * For the FlowObject element, these will be
-	 * - if the FO is an Activity, the Activities Properties, plus
-	 * - if the FO has some type of Message Attribute Set, the message's properties, plus
-	 * - the FO's abstract process's visible properties
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public EList<Property> getVisibleProperties() {
-		EList<Property> propList= new BasicEList<Property>();
-		if (this instanceof Activity) {
-			Activity thisAsActivity= (Activity) this;
-			propList.addAll(thisAsActivity.getProperties());
-			if (thisAsActivity.getInMessage() != null) {
-				propList.addAll(thisAsActivity.getInMessage().getProperties());
-			}
-			if (thisAsActivity.getOutMessage() != null) {
-				propList.addAll(thisAsActivity.getOutMessage().getProperties());
-			}
-		}
-		if (this instanceof Event) {
-			Event thisAsEvent = (Event) this;
-			if (thisAsEvent.getMessage() != null) {
-				propList.addAll(thisAsEvent.getMessage().getProperties());
-			}
-		}
-		if (this.getAbstractProcess() instanceof Pool) {
-			Pool pool= (Pool) this.getAbstractProcess();
-			propList.addAll(pool.getProperties());
+		EObject container= eContainer();
+		// contained in Subprocess
+		if (container instanceof Activity) {
+			return (Activity) container;
 		} 
-		if (this.getAbstractProcess() instanceof Activity) {
-			Activity activity = (Activity) this.getAbstractProcess();
-			propList.addAll(activity.getVisibleProperties());
+		// contained in Lane
+		if (container instanceof Lane) {
+			return ((Lane) container).getParent();
 		}
-		return propList;
+		// contained in structuring element
+		if (container instanceof FlowObject) {
+			return ((FlowObject) container).getAbstractProcess();
+		}
+		return null;
 	}
 
-	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -445,6 +389,9 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	 */
 	@Override
 	public Pool getPool() {
+		if (this instanceof Intermediate && ((Intermediate) this).getAttachedTo()!=null) {
+			return ((Intermediate)this).getAttachedTo().getPool();
+		}
 		EObject container= eContainer();
 		if (container instanceof Lane) {
 			return (Pool) ((Lane) container).eContainer();

@@ -50,11 +50,6 @@
         <eTypeArguments eClassifier="#//FlowObject"/>
       </eGenericType>
     </eOperations>
-    <eOperations name="getTransitiveGraphicalElements">
-      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
-        <eTypeArguments eClassifier="#//FlowObject"/>
-      </eGenericType>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="adHoc" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="adHocCompletionCondition"
@@ -109,11 +104,6 @@
     <eOperations name="isStartingNode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="isEndingNode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eOperations name="getAbstractProcess" eType="#//AbstractProcess"/>
-    <eOperations name="getVisibleProperties">
-      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
-        <eTypeArguments eClassifier="#//Property"/>
-      </eGenericType>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//FlowObjectContainer"
         eOpposite="#//FlowObjectContainer/containedFlowObjects"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="assignments" upperBound="-1"

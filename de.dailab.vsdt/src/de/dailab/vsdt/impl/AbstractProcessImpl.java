@@ -10,7 +10,6 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -20,7 +19,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import de.dailab.vsdt.AbstractProcess;
-import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Property;
@@ -185,23 +183,6 @@ public abstract class AbstractProcessImpl extends EObjectImpl implements Abstrac
 	 * @generated NOT
 	 */
 	public abstract EList<FlowObject> getGraphicalElements();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public EList<FlowObject> getTransitiveGraphicalElements() {
-		EList<FlowObject> list= new BasicEList<FlowObject>();
-		list.addAll(getGraphicalElements());
-		for (FlowObject o : getGraphicalElements()) {
-			if (o instanceof Activity) {
-				Activity a = (Activity) o;
-				list.addAll(a.getGraphicalElements());
-			}
-		}
-		return list;
-	}
 
 	/**
 	 * <!-- begin-user-doc -->

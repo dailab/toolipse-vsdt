@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import de.dailab.vsdt.AbstractProcess;
-import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowObject;
@@ -289,42 +288,7 @@ public class PoolImpl extends NodeImpl implements Pool {
 			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.POOL__PARENT, newParent, newParent));
 	}
 
-	//	/**
-//	 * <!-- begin-user-doc -->
-//	 * default: name of the class, e.g. "Pool", "Lane"
-//	 * <!-- end-user-doc -->
-//	 * @generated NOT
-//	 */
-//	public String getName() {
-////		if (name==null) {
-////			return this.eClass().getName();
-////		}
-//		return name;
-//	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * Set name of process and participant accordingly. The names will only be 
-	 * adapted to the pool's name if they were in that format before, too.  Thus an 
-	 * already customized participant name will not be reset when renaming the pool. 
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.POOL__NAME, oldName, name));
-//		
-//		final String PROC= "_Process";
-//		final String PART= "_Participant";
-//		if (getProcess() != null && ( getProcess().getName() == null || getProcess().getName().equals(oldName + PROC))) {
-//			getProcess().setName(newName + PROC);
-//		}
-//		if (getParticipant() != null && ( getParticipant().getName() == null || getParticipant().getName().equals(oldName + PART))) {
-//			getParticipant().setName(newName + PART);
-//		}
-	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -410,7 +374,7 @@ public class PoolImpl extends NodeImpl implements Pool {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated 
+	 * @generated
 	 */
 	public void setBoundaryVisible(boolean newBoundaryVisible) {
 		boolean oldBoundaryVisible = boundaryVisible;
@@ -442,6 +406,7 @@ public class PoolImpl extends NodeImpl implements Pool {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * return the lanes' graphical elements
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -455,49 +420,15 @@ public class PoolImpl extends NodeImpl implements Pool {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * this Pool's Pool is the Pool itself
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public EList<FlowObject> getTransitiveGraphicalElements() {
-		EList<FlowObject> all= new BasicEList<FlowObject>();
-		all.addAll(getGraphicalElements());
-		for (FlowObject flowObject : getGraphicalElements()) {
-			if (flowObject instanceof Activity) {
-				Activity activity = (Activity) flowObject;
-				all.addAll(activity.getTransitiveGraphicalElements());
-			}
-		}
-		return all;
+	@Override
+	public Pool getPool() {
+		return this;
 	}
-//
-//	/**
-//	 * initialize a new participant for this pool and store it in the parent BPD
-//	 * @generated NOT
-//	 */
-//	public void initializeParticipant() {
-//		Participant participant= VsdtFactory.eINSTANCE.createParticipant();
-//		this.getParentDiagram().getParticipants().add(participant);
-//		participant.setName(this.getName() + "_Participant");
-//		this.setParticipant(participant);
-//	}
-
-//	/**
-//	 * <!-- begin-user-doc -->
-//	 * if only one lane, set lane's boundary invisible, else
-//	 * set boundaries of lanes accordingly to the pool's boundary
-//	 * <!-- end-user-doc -->
-//	 * @generated NOT
-//	 */
-//	public void setBoundaryVisibility() {
-//		if (getLanes().size()==1) {
-//			((Lane)getLanes().get(0)).setBoundaryVisible(false);
-//		} else
-//		for (Iterator<Lane> iter = getLanes().iterator(); iter.hasNext();) {
-//			Lane lane = iter.next();
-//			lane.setBoundaryVisible(boundaryVisible);
-//		}
-//	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

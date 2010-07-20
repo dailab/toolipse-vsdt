@@ -111,6 +111,6 @@ public interface AbstractProcess extends EObject {
 	 * @model kind="operation" many="false"
 	 * @generated
 	 */
-	EList<FlowObject> getTransitiveGraphicalElements();
+//	EList<FlowObject> getTransitiveGraphicalElements();
 
 } // AbstractProcess

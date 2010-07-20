@@ -38,6 +38,7 @@ import de.dailab.vsdt.VsdtPackage;
 import de.dailab.vsdt.diagram.actions.ParameterAssignmentsAction;
 import de.dailab.vsdt.diagram.ui.ExpressionComposite;
 import de.dailab.vsdt.diagram.ui.VsdtFeatureCombo;
+import de.dailab.vsdt.util.VsdtHelper;
 
 public class EventSection extends FlowObjectSection {
 	
@@ -113,7 +114,7 @@ public class EventSection extends FlowObjectSection {
     		linkedToCombo.fillCombo(events);
 
     		List<Activity> acts= new ArrayList<Activity>();
-			List<FlowObject> fos= event.getPool().getTransitiveGraphicalElements();
+			List<FlowObject> fos= VsdtHelper.getAllGraphicalElements(event.getPool());
 			for (FlowObject fo : fos) {
 				if (fo instanceof Activity) {
 					acts.add((Activity) fo);

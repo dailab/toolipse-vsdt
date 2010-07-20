@@ -15,13 +15,9 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
 import de.dailab.common.swt.views.AbstractContentProvider;
-import de.dailab.vsdt.FlowObject;
-import de.dailab.vsdt.Lane;
-import de.dailab.vsdt.MessageFlow;
-import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
-import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
+import de.dailab.vsdt.util.VsdtHelper;
 
 /**
  * Simple content provider class to be used with this view. This class is taken 
@@ -57,27 +53,7 @@ public class BpmnPropertiesViewContentProvider extends AbstractContentProvider i
 				if (selected instanceof IGraphicalEditPart) {
 					IGraphicalEditPart editPart = (IGraphicalEditPart) selected;
 					EObject eObject= ((View)editPart.getModel()).getElement();
-					if (eObject instanceof Pool) {
-						return ((Pool) eObject).getProperties();
-					}
-					if (eObject instanceof Lane) {
-						return ((Lane) eObject).getParent().getProperties();
-					}
-					if (eObject instanceof FlowObject) {
-						return ((FlowObject) eObject).getVisibleProperties();
-					}
-					if (eObject instanceof MessageFlow) {
-						MessageFlow messageFlow = (MessageFlow) eObject;
-						if (messageFlow.getMessage() != null) {
-							return messageFlow.getMessage().getProperties();
-						}
-					}
-					if (eObject instanceof SequenceFlow) {
-						SequenceFlow sequenceFlow = (SequenceFlow) eObject;
-						if (sequenceFlow.getSource() != null) {
-							return sequenceFlow.getSource().getVisibleProperties();
-						}
-					}
+					return VsdtHelper.getVisibleProperties(eObject);
 				}
 			}
 		}

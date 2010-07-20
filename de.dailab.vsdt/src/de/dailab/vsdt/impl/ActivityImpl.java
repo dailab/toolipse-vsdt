@@ -11,7 +11,6 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -1016,8 +1015,7 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	public boolean isCompensation() {
 		boolean isComp= false;
 		//iterate over associations
-		for (Iterator<Association> iterator = this.getIncomingAss().iterator(); iterator.hasNext();) {
-			Association association = iterator.next();
+		for (Association association : getIncomingAss()) {
 			if (association.getSource() instanceof Intermediate) {
 				Intermediate intermediate = (Intermediate) association.getSource();
 				if (intermediate.getTrigger() == TriggerType.COMPENSATION) {
@@ -1026,13 +1024,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				}
 			}
 		}
-//		for (Iterator iterator = this.getOutgoingAss().iterator(); iterator.hasNext();) {
-//			Association association = (Association) iterator.next();
-//			if (association.getTarget() instanceof Intermediate) {
-//				Intermediate intermediate = (Intermediate) association.getTarget();
-//				isComp|= intermediate.getTrigger() == IntermediateEventTriggerType.COMPENSATION_LITERAL;
-//			}
-//		}
 		return isComp;
 	}
 
@@ -1044,23 +1035,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 */
 	public EList<FlowObject> getGraphicalElements() {
 		return getContainedFlowObjects();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public EList<FlowObject> getTransitiveGraphicalElements() {
-		EList<FlowObject> list= new BasicEList<FlowObject>();
-		list.addAll(getGraphicalElements());
-		for (FlowObject o : getGraphicalElements()) {
-			if (o instanceof Activity) {
-				Activity a = (Activity) o;
-				list.addAll(a.getGraphicalElements());
-			}
-		}
-		return list;
 	}
 
 	/**

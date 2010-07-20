@@ -1,11 +1,14 @@
 package de.dailab.vsdt.util;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import de.dailab.vsdt.AbstractProcess;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.Association;
@@ -139,32 +142,44 @@ public class VsdtHelper {
 	 * @return			visible properties of that element
 	 */
 	public static List<Property> getVisibleProperties(EObject object) {
-		if (object != null) {
-			if (object instanceof Pool) {
-				Pool pool= (Pool) object;
-				return new ArrayList<Property>(pool.getProperties());
-			}
-			if (object instanceof DataObject) {
-				return new ArrayList<Property>(((DataObject) object).getProperties());
-			}
-			if (object instanceof Message) {
-				return new ArrayList<Property>(((Message) object).getProperties());
-			}
-			if (object instanceof FlowObject) {
-				return new ArrayList<Property>(((FlowObject) object).getVisibleProperties());
-			}
-			if (object instanceof MessageFlow) {
-				return getVisibleProperties(((MessageFlow) object).getMessage());
-			}
-			if (object instanceof SequenceFlow) {
-				return getVisibleProperties(((SequenceFlow) object).getSource());
-			}
-			EObject container= object.eContainer();
-			if (container != null) {
-				return getVisibleProperties(container);
-			}
+		if (object instanceof Pool) {
+			return ((Pool) object).getProperties();
 		}
-		return null;
+		if (object instanceof DataObject) {
+			return ((DataObject) object).getProperties();
+		}
+		if (object instanceof Message) {
+			return ((Message) object).getProperties();
+		}
+		if (object instanceof MessageFlow) {
+			return getVisibleProperties(((MessageFlow) object).getMessage());
+		}
+		if (object instanceof SequenceFlow) {
+			return getVisibleProperties(((SequenceFlow) object).getSource());
+		}
+		if (object instanceof FlowObject) {
+			List<Property> properties = new ArrayList<Property>();
+			FlowObject flowObject = (FlowObject) object;
+			if (object instanceof Activity) {
+				Activity activity= (Activity) object;
+				properties.addAll(activity.getProperties());
+				if (activity.getInMessage() != null) {
+					properties.addAll(activity.getInMessage().getProperties());
+				}
+				if (activity.getOutMessage() != null) {
+					properties.addAll(activity.getOutMessage().getProperties());
+				}
+			}
+			if (object instanceof Event) {
+				Event event= (Event) object;
+				if (event.getMessage() != null) {
+					properties.addAll(event.getMessage().getProperties());
+				}
+			}
+			properties.addAll(getVisibleProperties(flowObject.getAbstractProcess()));
+			return properties;
+		}
+		return new ArrayList<Property>();
 	}
 	
 	/**
@@ -325,5 +340,35 @@ public class VsdtHelper {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * Get all the FlowObjects transitively contained in the given Process, i.e.
+	 * including Flow Objects contained in Subprocesses, as Boundary Events, or
+	 * in Structuring Elements.
+	 * 
+	 * @param process	Some Process
+	 * @return			All Flow Objects contained in the Process
+	 */
+	public static List<FlowObject> getAllGraphicalElements(AbstractProcess process) {
+		List<FlowObject> list= new ArrayList<FlowObject>();
+		list.addAll(process.getGraphicalElements());
+		if (process instanceof Activity) {
+			list.addAll(((Activity) process).getBoundaryEvents());
+		}
+		
+		Queue<FlowObject> queue = new LinkedList<FlowObject>();
+		queue.addAll(list);
+		while (! queue.isEmpty()) {
+			FlowObject flowObject = queue.remove();
+			for (EObject content : flowObject.eContents()) {
+				if (content instanceof FlowObject) {
+					FlowObject fo = (FlowObject) content;
+					list.add(fo);
+					queue.add(fo);
+				}
+			}
+		}
+		return list;
 	}
 }

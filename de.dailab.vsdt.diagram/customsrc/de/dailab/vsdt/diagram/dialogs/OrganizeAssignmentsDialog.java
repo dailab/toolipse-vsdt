@@ -74,7 +74,7 @@ public class OrganizeAssignmentsDialog extends AbstractOrganizeElementsDialog<As
 //		}
 		if (parentElement instanceof FlowObject) {
 			elements= ((FlowObject) parentElement).getAssignments();
-			toProperties= ((FlowObject) parentElement).getVisibleProperties();
+			toProperties= VsdtHelper.getVisibleProperties(parentElement); 
 		}
 //		if (parentElement instanceof Gate) {
 //			elements= ((Gate) parentElement).getAssignments();

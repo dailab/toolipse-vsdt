@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.End;
-import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.Message;
 import de.dailab.vsdt.MessageFlow;
@@ -109,20 +108,17 @@ public abstract class NodeImpl extends GraphicalObjectImpl implements Node {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public Pool getPool() {
-		if (this instanceof Pool) {
-			return (Pool) this;
-		}
-		if (this instanceof FlowObject) {
-			return ((FlowObject) this).getPool();
-		}
-		return null;
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * used in import web service action
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
@@ -178,82 +174,6 @@ public abstract class NodeImpl extends GraphicalObjectImpl implements Node {
 		}
 	
 	}
-
-	// TODO remove obsolete code after some time of testing (commented out 080908)
-//	/**
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 * @generated NOT
-//	 */
-//	public void adaptToIncomingMessageFlow() {
-//		if (this.getIncomingMsg().isEmpty()) {
-//			return;
-//		}
-//		MessageFlow theMessageFlow= this.getIncomingMsg().get(0);
-//		Message theMessage= theMessageFlow.getMessage();
-//		
-//		if (this instanceof Start) {
-//			Start start = (Start) this;
-//			if (start.getTrigger() == StartEventTriggerType.NONE || start.getTrigger() == StartEventTriggerType.MESSAGE) {
-//				start.setTrigger(StartEventTriggerType.MESSAGE);
-//			} else {
-//				start.setTrigger(StartEventTriggerType.MULTIPLE);
-//			}
-//			start.setMessage(theMessage);
-//		} else
-//		if (this instanceof Intermediate) {
-//			Intermediate intermediate = (Intermediate) this;
-//			if (intermediate.getTrigger() == IntermediateEventTriggerType.NONE || intermediate.getTrigger() == IntermediateEventTriggerType.MESSAGE) {
-//				intermediate.setTrigger(IntermediateEventTriggerType.MESSAGE);
-//			} else {
-//				intermediate.setTrigger(IntermediateEventTriggerType.MULTIPLE);
-//			}
-//			intermediate.setMessage(theMessage);
-//		} else
-//		if (this instanceof Activity) {
-//			Activity activity = (Activity) this;
-//			if (activity.getActivityType() == ActivityType.NONE || activity.getActivityType() == ActivityType.RECEIVE) {
-//				activity.setActivityType(ActivityType.RECEIVE);
-//				activity.setOutMessage(theMessage);
-//			}
-//			if (activity.getActivityType() == ActivityType.SEND) {
-//				activity.setActivityType(ActivityType.SERVICE);
-//				activity.setOutMessage(theMessage);
-//			}
-//		}
-//	}
-//
-//	/**
-//	 * <!-- begin-user-doc -->
-//	 * <!-- end-user-doc -->
-//	 * @generated NOT
-//	 */
-//	public void adaptToOutgoingMessageFlow() {
-//		if (this.getOutgoingMsg().isEmpty()) {
-//			return;
-//		}
-//		MessageFlow theMessageFlow= this.getOutgoingMsg().get(0);
-//		Message theMessage= theMessageFlow.getMessage();
-//		
-//		if (this instanceof End) {
-//			End end = (End) this;
-//			if (end.getTrigger() == EndEventTriggerType.NONE || end.getTrigger() == EndEventTriggerType.MESSAGE) {
-//				end.setTrigger(EndEventTriggerType.MESSAGE);
-//				end.setMessage(theMessage);
-//			}
-//		} else
-//		if (this instanceof Activity) {
-//			Activity activity = (Activity) this;
-//			if (activity.getActivityType() == ActivityType.NONE || activity.getActivityType() == ActivityType.SEND) {
-//				activity.setActivityType(ActivityType.SEND);
-//				activity.setInMessage(theMessage);
-//			}
-//			if (activity.getActivityType() == ActivityType.RECEIVE) {
-//				activity.setActivityType(ActivityType.SERVICE);
-//				activity.setInMessage(theMessage);
-//			}
-//		}
-//	}
 
 	/**
 	 * <!-- begin-user-doc -->
