@@ -57,7 +57,6 @@ public class EventSection extends FlowObjectSection {
 
 							   DISPLAY_HIGHLIGH_LINK= "Highlight Opposite",
 							   DISPLAY_PAR_ASSIGN= "Parameter Assignments...";
-		
 	
     protected Event event;
     private boolean firstrun= true;
@@ -128,25 +127,8 @@ public class EventSection extends FlowObjectSection {
         	eventTypeCombo.add(triggerType.getLiteral());
         }
 		eventTypeCombo.select(eventTypeCombo.indexOf(event.getTrigger().getLiteral()));
-//    	if (event instanceof Start) {
-//	        for (StartEventTriggerType triggerType : StartEventTriggerType.values()) {
-//	        	eventTypeCombo.add(triggerType.getLiteral());
-//	        }
-//			eventTypeCombo.select(eventTypeCombo.indexOf(((Start)event).getTrigger().getLiteral()));
-//        }
-//        if (event instanceof Intermediate) {
-//	        for (IntermediateEventTriggerType triggerType : IntermediateEventTriggerType.values()) {
-//	        	eventTypeCombo.add(triggerType.getLiteral());
-//	        }
-//			eventTypeCombo.select(eventTypeCombo.indexOf(((Intermediate)event).getTrigger().getLiteral()));
-//		}
-//        if (event instanceof End) {
-//	        for (EndEventTriggerType triggerType : EndEventTriggerType.values()) {
-//	        	eventTypeCombo.add(triggerType.getLiteral());
-//	        }
-//	        eventTypeCombo.select(eventTypeCombo.indexOf(((End)event).getTrigger().getLiteral()));
-//		}
-    	messageCombo.setSelected(event.getMessage());
+
+		messageCombo.setSelected(event.getMessage());
     	implementationCombo.setSelected(event.getImplementation());
     	timeDateText.setText(getExpression(event.getTimeDate()));
     	timeCycleText.setText(getExpression(event.getTimeCycle()));
@@ -207,12 +189,8 @@ public class EventSection extends FlowObjectSection {
 		//timer trigger
 		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_TIME_DATE, messageCombo.getCombo(), 0);
 		timeDateText= addExpressionComposite(triggerGroup, messageCombo.getCombo(), label, 50);
-//		timeDateText= FormLayoutUtil.addText(triggerGroup, implementationCombo.getCombo(), label, 50, SWT.NONE);
-//		timeDateText.addFocusListener(this);
 		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_TIME_CYCLE, timeDateText, 0);
 		timeCycleText= addExpressionComposite(triggerGroup, timeDateText, label, 50);
-//		timeCycleText= FormLayoutUtil.addText(triggerGroup, timeDateText, label, 50, SWT.NONE);
-//		timeCycleText.addFocusListener(this);
 		
 		//error trigger
 		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_ERROR, timeCycleText, 0);
@@ -230,8 +208,6 @@ public class EventSection extends FlowObjectSection {
 		ruleNameText.addFocusListener(this);
 		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_RULE_EXP, ruleNameText, 50);
 		ruleExpText= addExpressionComposite(triggerGroup, ruleNameText, label, 100);
-//        ((FormData) ruleExpText.getLayoutData()).height= 30;
-//		ruleExpText.addFocusListener(this);
 		
 		//link trigger
 		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_LINK, ruleExpText, 50);
@@ -248,18 +224,10 @@ public class EventSection extends FlowObjectSection {
     
     public void focusLost(FocusEvent e) {
     	Object src= e.getSource();
-//    	if (src.equals(timeCycleText)) {
-//    		setPropertyValue(event, pack.getEvent_TimeCycle(), nullIfEmpty(timeCycleText.getText()));
-//    	}
-//    	if (src.equals(timeDateText)) {
-//    		setPropertyValue(event, pack.getEvent_TimeDate(), nullIfEmpty(timeDateText.getText()));
-//    	}
+    	// expressions are handled by the ExpressionComposites (see setInput)
     	if (src.equals(ruleNameText)) {
     		setPropertyValue(event, pack.getEvent_RuleName(), nullIfEmpty(ruleNameText.getText()));
     	}
-//    	if (src.equals(ruleExpText.getTextfield())) {
-//    		setPropertyValue(event, pack.getEvent_RuleExpression(), createExpression(ruleExpText.getText()));
-//    	}
     	if (src.equals(errorCodeText)) {
     		setPropertyValue(event, pack.getEvent_ErrorCode(), nullIfEmpty(errorCodeText.getText()));
     	}

@@ -41,8 +41,6 @@ public class MessageFlowSection extends AbstractVsdtPropertySection {
     
     private VsdtFeatureCombo<Message> messageCombo;
     private Text msgNameText;
-//    private VsdtFeatureCombo<Participant> msgFromCombo;
-//    private VsdtFeatureCombo<Participant> msgToCombo;
     private Button orgPropButton;
     private Button orgMsgButton;
     private Button initMsgButton;
@@ -63,20 +61,14 @@ public class MessageFlowSection extends AbstractVsdtPropertySection {
     @Override
  	protected void internalRefresh() {
     	messageCombo.fillCombo(messageFlow.getParent().getParent().getMessages());
-//    	msgFromCombo.fillCombo(messageFlow.getParentDiagram().getParticipants());
-//    	msgToCombo.fillCombo(messageFlow.getParentDiagram().getParticipants());
     	
     	messageCombo.setSelected(messageFlow.getMessage());
     	boolean hasMessage= messageFlow.getMessage() != null;
     	if (hasMessage) {
     		Message msg= messageFlow.getMessage();
     		msgNameText.setText(nonNull(msg.getName()));
-//    		msgFromCombo.setSelected(msg.getFrom());
-//    		msgToCombo.setSelected(msg.getTo());
     	}
         msgNameText.setEnabled(hasMessage);
-//        msgFromCombo.getCombo().setEnabled(hasMessage);
-//        msgToCombo.getCombo().setEnabled(hasMessage);
         orgPropButton.setEnabled(hasMessage);
     }
     
@@ -98,23 +90,14 @@ public class MessageFlowSection extends AbstractVsdtPropertySection {
         //message group
         Group msgGroup= FormLayoutUtil.addGroup(composite, DISPLAY_MSG_ATTRIBUTES, label, 0, 100);
 
-        // name label
-        label= FormLayoutUtil.addLabel(msgGroup, DISPLAY_NAME, 0, 0);
-        msgNameText= FormLayoutUtil.addText(msgGroup, 0, label, 100, 0);
-        msgNameText.addFocusListener(this);
-        
-//        // to/from comboBoxes
-//        label= FormLayoutUtil.addLabel(msgGroup, DISPLAY_FROM, msgNameText, 0);
-//        msgFromCombo= new VsdtFeatureCombo<Participant>(FormLayoutUtil.addCombo(msgGroup, SWT.READ_ONLY, msgNameText, label, 50));
-//        msgFromCombo.getCombo().addSelectionListener(this);
-//        label= FormLayoutUtil.addLabel(msgGroup, DISPLAY_TO, msgFromCombo.getCombo(), 0);
-//        msgToCombo= new VsdtFeatureCombo<Participant>(FormLayoutUtil.addCombo(msgGroup, SWT.READ_ONLY, msgFromCombo.getCombo(), label, 50));
-//        msgToCombo.getCombo().addSelectionListener(this);
-
         // organize properties button
-        orgPropButton= FormLayoutUtil.addButton(msgGroup, DISPLAY_ORG_PROP, 0, msgNameText, null, 100);
+        orgPropButton= FormLayoutUtil.addButton(msgGroup, DISPLAY_ORG_PROP, 0, 0, null, 100);
         orgPropButton.addSelectionListener(this);
         
+        // name label
+        label= FormLayoutUtil.addLabel(msgGroup, DISPLAY_NAME, 0, 0);
+        msgNameText= FormLayoutUtil.addText(msgGroup, 0, label, orgPropButton, 0);
+        msgNameText.addFocusListener(this);
     }
 
     public void focusLost(FocusEvent e) {
@@ -146,17 +129,6 @@ public class MessageFlowSection extends AbstractVsdtPropertySection {
     		Message message= messageCombo.getSelected();
     		setPropertyValue(messageFlow, pack.getMessageFlow_Message(), message);
     	}
-//    	if (messageFlow.getMessage() != null) {
-//    		Message message= messageFlow.getMessage();
-//        	if (src.equals(msgToCombo.getCombo())) {
-//        		Participant participant= msgToCombo.getSelected();
-//        		setPropertyValue(message, pack.getMessage_To(), participant);
-//        	}
-//        	if (src.equals(msgFromCombo.getCombo())) {
-//        		Participant participant= msgFromCombo.getSelected();
-//        		setPropertyValue(message, pack.getMessage_From(), participant);
-//        	}
-//    	}
     	refresh();
     }
 }

@@ -79,7 +79,7 @@ implements FocusListener, SelectionListener {
 							   DISPLAY_SUB_ADHOC_ORDERING= "Ad Hoc Ordering",
 //							   DISPLAY_SUB_ADHOC_PAR= "Parallel",
 //							   DISPLAY_SUB_ADHOC_SEQ= "Sequential",
-							   DISPLAY_SUB_ADHOCCONDITION= "Completion Cond.",
+							   DISPLAY_SUB_ADHOCCONDITION= "Compltn. Cond.",
 							   DISPLAY_SUB_DIAGRAMREF= "Diagram Ref",
 							   DISPLAY_SUB_PROCESSREF= "Process Ref",
 							   
@@ -288,24 +288,7 @@ implements FocusListener, SelectionListener {
 		if (src.equals(scriptText)) {
 			setPropertyValue(activity, pack.getActivity_Script(), nullIfEmpty(scriptText.getText()));
 		}
-//		if (src.equals(adHocConditionText.getTextfield())) {
-//			setPropertyValue(activity, pack.getAbstractProcess_AdHocCompletionCondition(), createExpression(adHocConditionText.getText()));
-//		}
-//    	if (activity.getLoopAttributes() instanceof MultiLoopAttSet) {
-//			MultiLoopAttSet attSet = (MultiLoopAttSet) activity.getLoopAttributes();
-//			if (src.equals(multiMIConditionText.getTextfield())) {
-//				setPropertyValue(attSet, pack.getMultiLoopAttSet_MI_Condition(), createExpression(multiMIConditionText.getText()));
-//				}
-//			if (src.equals(multiComplexMICondText.getTextfield())) {
-//				setPropertyValue(attSet, pack.getMultiLoopAttSet_ComplexMI_FlowCondition(), createExpression(multiComplexMICondText.getText()));
-//			}
-//		}
-//    	if (activity.getLoopAttributes() instanceof StandardLoopAttSet) {
-//			StandardLoopAttSet attSet = (StandardLoopAttSet) activity.getLoopAttributes();
-//			if (src.equals(stdCondText.getTextfield())) {
-//				setPropertyValue(attSet, pack.getStandardLoopAttSet_LoopCondition(), createExpression(stdCondText.getText()));
-//			}
-//		}
+		// Expressions are handled by the Expression Composites
     }
     
     @Override
@@ -425,8 +408,6 @@ implements FocusListener, SelectionListener {
         
     	label= FormLayoutUtil.addLabel(group, DISPLAY_STD_COND, 0, 0);
 		stdCondText= addExpressionComposite(group, 0, label, 100);
-//		((FormData) stdCondText.getLayoutData()).height= 50;
-//		stdCondText.addFocusListener(this);
 		
 		label= FormLayoutUtil.addLabel(group, DISPLAY_STD_MAX, stdCondText, 0);
 		stdMaxSpinner= FormLayoutUtil.addSpinner(group, stdCondText, label, null);
@@ -441,8 +422,6 @@ implements FocusListener, SelectionListener {
 
     	label= FormLayoutUtil.addLabel(group, DISPLAY_MULTI_COND, 0, 0);
 		multiMIConditionText= addExpressionComposite(group, 0, label, 100);
-//		((FormData) multiMIConditionText.getLayoutData()).height= 35;
-//		multiMIConditionText.addFocusListener(this);
 		
 		multiOrderingSeqButton= FormLayoutUtil.addButton(group, DISPLAY_MULTI_ORD_SEQ, SWT.CHECK, multiMIConditionText, 0, null);
 		multiOrderingSeqButton.addSelectionListener(this);
@@ -456,8 +435,6 @@ implements FocusListener, SelectionListener {
 
 		label= FormLayoutUtil.addLabel(group, DISPLAY_MULTI_COMPLEX, multiFlowCombo, 0);
 		multiComplexMICondText= addExpressionComposite(group, multiFlowCombo, label, 100);
-//		((FormData) multiComplexMICondText.getLayoutData()).height= 35;
-//		multiComplexMICondText.addFocusListener(this);
     }
     
     private void fillTaskAttributesGroup(Group group) {

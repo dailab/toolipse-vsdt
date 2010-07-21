@@ -75,17 +75,10 @@ public class SequenceFlowSection extends AbstractVsdtPropertySection {
         typeCondButton.addSelectionListener(this);
 
         label= FormLayoutUtil.addLabel(composite, DISPLAY_CONDITION, typeNoneButton, 0);
-//        conditionText= FormLayoutUtil.addText(composite, typeNoneButton, label, 100, 1);
-//        ((FormData) conditionText.getLayoutData()).height= 50;
         conditionText= addExpressionComposite(composite, typeNoneButton, label, 100);
-//        conditionText= addExpressionText(composite, sequenceFlow, pack.getSequenceFlow_ConditionExpression());
-//        conditionText.addFocusListener(this);
     }
 
     public void focusLost(FocusEvent e) {
-//    	if (e.getSource().equals(conditionText.getTextfield())) {
-//			setPropertyValue(sequenceFlow, pack.getSequenceFlow_ConditionExpression(), createExpression(conditionText.getText()));
-//		}
     }
 
     public void widgetSelected(SelectionEvent e) {

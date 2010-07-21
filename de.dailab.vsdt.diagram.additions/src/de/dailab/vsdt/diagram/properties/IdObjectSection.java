@@ -62,8 +62,6 @@ public class IdObjectSection extends AbstractVsdtPropertySection {
         nameText.addFocusListener(this); 
 
         // id
-//        Button generateButton= FormLayoutUtil.addButton(composite, DISPLAY_GENERATE_ID, SWT.NONE, 0, null, 100);
-//        generateButton.addSelectionListener(this);
         label = FormLayoutUtil.addLabel(composite, "Identifier", 0, 50);
         idText= FormLayoutUtil.addText(composite, 0, label, 100, SWT.NONE);
         idText.setEditable(false);
@@ -79,10 +77,6 @@ public class IdObjectSection extends AbstractVsdtPropertySection {
     }
     
     public void widgetSelected(SelectionEvent e) {
-//    	if (e.getSource() instanceof Button) {
-//			new InitIDAction().run(idObject);
-//    	}
-//    	refresh();
     }
     
     public void focusLost(FocusEvent e) {
