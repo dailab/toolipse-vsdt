@@ -20,14 +20,17 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 /**
  * Block Rule
  * 
- * PATTERN: two gateways with at least two forked/merged sequence flows, two sequences of (complex) flow objects
- * spanning from the first to the second gateway and no other sequences staring at the first gateway 
- * and not ending at the second (the inverse is allowed) 
+ * PATTERN: two gateways with at least two forked/merged sequence flows, two 
+ * sequences of (complex) flow objects spanning from the first to the second 
+ * gateway and no other sequences staring at the first gateway and not ending at 
+ * the second (the inverse is allowed) 
  * 
- * EFFECT: all sequences going from the first to the second gateway are identified. If the second gateway merges any other 
- * sequences it is split up. The sequences, their conditions and the gateways are put into a BpmnBlock. The inner sequence
- * flows are deleted, the outer sequence flows redirected. 
+ * EFFECT: all sequences going from the first to the second gateway are 
+ * identified. If the second gateway merges any other sequences it is split up. 
+ * The sequences, their conditions and the gateways are put into a BpmnBlock. 
+ * The inner sequence flows are deleted, the outer sequence flows redirected. 
  */
+@Deprecated
 public class BlockRule extends AbstractVsdtRule {
 	
 	/*

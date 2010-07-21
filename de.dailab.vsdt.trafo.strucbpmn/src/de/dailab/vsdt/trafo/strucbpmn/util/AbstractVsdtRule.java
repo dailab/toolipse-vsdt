@@ -13,6 +13,22 @@ import de.dailab.vsdt.trafo.base.AbstractRule;
  */
 public abstract class AbstractVsdtRule extends AbstractRule {
 	
+	public static final String SUFFIX_SPLIT = "__SPLIT__";
+	
+	public static final String SUFFIX_FORK= "__FORK__";
+	public static final String SUFFIX_MERGE= "__MERGE__";
+
+	public static final String SUFFIX_BRANCH = "__BRANCH__";
+	
+	public static final String INITIAL_GATEWAY= "__INITIAL_GATEWAY__";
+
+	public static final String FINAL_GATEWAY= "__FINAL_GATEWAY__";
+	/**
+	 * the name for the empty activity. later these activities can be removed.
+	 */
+	public final static String EMPTY_NAME= "__DO_NOTHING__";
+	
+	
 	/**
 	 * Remove a SequenceFlow from the model. Also unsets its references.
 	 * 

@@ -20,6 +20,7 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  * 
  * EFFECT: ... 
  */
+@Deprecated
 public class SplitMergeRule extends AbstractVsdtRule {
 	
 	protected SequenceFlow	_seqFlow11= null;
@@ -60,7 +61,7 @@ public class SplitMergeRule extends AbstractVsdtRule {
 
 		//create new gateway
 		Gateway merge2= VsdtFactory.eINSTANCE.createGateway();
-		merge2.setName(_merge.getName() + "_2");
+		merge2.setName(_merge.getName() + SUFFIX_SPLIT);
 		merge2.setGatewayType(_merge.getGatewayType());
 		_block.getParent().getContainedFlowObjects().add(merge2);
 		

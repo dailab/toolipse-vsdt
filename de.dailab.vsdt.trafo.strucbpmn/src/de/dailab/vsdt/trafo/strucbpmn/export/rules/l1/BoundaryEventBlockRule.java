@@ -18,11 +18,14 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 /**
  * Boundary Event Block Rule
  * 
- * This rule is intended to identify activities with boundary events and to wrap these activities in Boundary Event Blocks.
+ * This rule is intended to identify activities with boundary events and to wrap
+ * these activities in Boundary Event Blocks.
  *  
- * PATTERN: An activity with boundary event not being contained in a BpmnEventHandlerBlock yet.
+ * PATTERN: An activity with boundary event not being contained in a 
+ * BpmnEventHandlerBlock yet.
  * 
- * EFFECT: the activity is put in a BpmnEventHandlerBlock, incoming and outgoing sequence flows are redirected
+ * EFFECT: the activity is put in a BpmnEventHandlerBlock, incoming and outgoing
+ * sequence flows are redirected
  */
 public class BoundaryEventBlockRule extends AbstractVsdtRule {
 	

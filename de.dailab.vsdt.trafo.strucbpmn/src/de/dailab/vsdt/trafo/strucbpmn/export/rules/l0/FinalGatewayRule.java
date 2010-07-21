@@ -20,28 +20,29 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 /**
  * Final Gateway Rule
  * 
- * This rule is intended to add a final gateway merging all concurrent/alternative flows
- * in the case of business process diagrams with multiple end events. The Gateway will be connected
- * with sequence flows to the end events. This will not alter the semantics of the diagram, although
- * the resulting diagram used for the transformation will be illegal according to the BPMN specification.
+ * This rule is intended to add a final gateway merging all concurrent / 
+ * alternative flows in the case of business process diagrams with multiple end
+ * events. The Gateway will be connected with sequence flows to the end events.
+ * This will not alter the semantics of the diagram, although the resulting
+ * diagram used for the transformation will be illegal according to the BPMN
+ * specification.
  * 
- * The benefit of this rule is that there will be no need anymore for a dedicated OpenEndBlockRule and
- * BoundaryEventOpenRule.
+ * The benefit of this rule is that there will be no need anymore for a 
+ * dedicated OpenEndBlockRule and BoundaryEventOpenRule.
  * 
- * NOTE: actually, not only end events are taken into account, but also other FlowObjects with no outgoing
- * Sequence Flows
+ * NOTE: actually, not only end events are taken into account, but also other 
+ * FlowObjects with no outgoing Sequence Flows
  * 
  * PATTERN: multiple ending flow objects in the same container
  * 
- * EFFECT: a gateway is created and inserted after the flow objects, merging all flows
+ * EFFECT: a gateway is created and inserted after the flow objects, merging all
+ * flows
  */
 public class FinalGatewayRule extends AbstractVsdtRule {
 	
 	protected FlowObjectContainer _container= null;
 	protected FlowObject _end1= null;
 	protected FlowObject _end2= null;
-	
-	public static final String FINAL_GATEWAY= "__FINAL_GATEWAY__";
 	
 	private final int CONTAINER= 0,
 					  END1= 1,

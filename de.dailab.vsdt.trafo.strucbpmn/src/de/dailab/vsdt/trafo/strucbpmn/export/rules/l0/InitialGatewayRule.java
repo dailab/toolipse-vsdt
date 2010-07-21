@@ -21,19 +21,23 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 /**
  * Initial Gateway Rule
  * 
- * This rule is intended to add an initial gateway splitting all concurrent/alternative flows
- * in the case of business process diagrams with multiple start events. The Gateway will be connected
- * with sequence flows to the start events. This will not alter the semantics of the diagram, although
- * the resulting diagram used for the transformation will be illegal according to the BPMN specification.
+ * This rule is intended to add an initial gateway splitting all concurrent /
+ * alternative flows in the case of business process diagrams with multiple 
+ * start events. The Gateway will be connected with sequence flows to the start 
+ * events. This will not alter the semantics of the diagram, although the 
+ * resulting diagram used for the transformation will be illegal according to 
+ * the BPMN specification.
  * 
- * The benefit of this rule is that there will be no need anymore for a dedicated OpenStartBlockRule.
+ * The benefit of this rule is that there will be no need anymore for a 
+ * dedicated OpenStartBlockRule.
  * 
- * NOTE: actually, not only start events are taken into account, but also other FlowObjects with no outgoing
- * Sequence Flows
+ * NOTE: actually, not only start events are taken into account, but also other 
+ * FlowObjects with no outgoing Sequence Flows
  * 
  * PATTERN: multiple ending flow objects in the same container
  * 
- * EFFECT: a gateway is created and inserted before the flow objects, forking all flows
+ * EFFECT: a gateway is created and inserted before the flow objects, forking 
+ * all flows
  */
 public class InitialGatewayRule extends AbstractVsdtRule {
 	
@@ -41,8 +45,6 @@ public class InitialGatewayRule extends AbstractVsdtRule {
 	protected FlowObject _start1= null;
 	protected FlowObject _start2= null;
 
-	public static final String INITIAL_GATEWAY= "__INITIAL_GATEWAY__";
-	
 	private final int CONTAINER= 0,
 					  START1= 1,
 					  START2= 2;

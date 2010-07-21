@@ -20,26 +20,23 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 /**
  * Insert Gateway Rule
  * 
- * With this rule a flow object with multiple incoming and/or outgoing sequence flows 
- * is split up in the flow object alongside with one or two gateways. 
+ * With this rule a flow object with multiple incoming and/or outgoing sequence
+ * flows is split up in the flow object alongside with one or two gateways. 
  * This rule is necessary to facilitate the Sequence Rule and the Block Rule. 
- * After the application of this rule each activity will have at most one incoming
- * and outgoing sequence flow.
+ * After the application of this rule each activity will have at most one 
+ * incoming and outgoing sequence flow.
  * 
  * PATTERN: a flow object with multiple incoming and/or outgoing sequence flows
  * 
- * EFFECT: a gateway is inserted before and/or after the flow object and connected with the flow object via a sequence flow.
- * the incoming and/or outgoing sequence flows are redirected to the gateways.
+ * EFFECT: a gateway is inserted before and/or after the flow object and
+ * connected with the flow object via a sequence flow. the incoming and/or 
+ * outgoing sequence flows are redirected to the gateways.
  */
 public class InsertGatewayRule extends AbstractVsdtRule {
 	
 	protected FlowObject _flowObject= null;
 	
 	private final int FLOWOBJECT= 0;
-	
-	public static final String FORK= "__FORK__";
-	public static final String MERGE= "__MERGE__";
-	
 	
 	@Override
 	protected void resetVars() {
@@ -66,7 +63,7 @@ public class InsertGatewayRule extends AbstractVsdtRule {
 			//create gateway
 			Gateway gateway= VsdtFactory.eINSTANCE.createGateway();
 			gateway.setParent(container);
-			gateway.setName(name + MERGE);
+			gateway.setName(name + SUFFIX_MERGE);
 			
 			//redirect incoming sequence flows
 			gateway.getIncomingSeq().addAll(_flowObject.getIncomingSeq());
@@ -87,7 +84,7 @@ public class InsertGatewayRule extends AbstractVsdtRule {
 			//create gateway
 			Gateway gateway= VsdtFactory.eINSTANCE.createGateway();
 			gateway.setParent(container);
-			gateway.setName(name + FORK);
+			gateway.setName(name + SUFFIX_FORK);
 			
 			//redirect outgoing sequence flows
 			gateway.getOutgoingSeq().addAll(_flowObject.getOutgoingSeq());

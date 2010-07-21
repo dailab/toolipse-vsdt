@@ -24,13 +24,15 @@ import de.dailab.vsdt.trafo.strucbpmn.util.StrucBpmnElementFactory;
 /**
  * Block Rule
  * 
- * PATTERN: two gateways with at least two forked/merged sequence flows, two sequences of (complex) flow objects
- * spanning from the first to the second gateway and no other sequences staring at the first gateway 
- * and not ending at the second (the inverse is allowed) 
+ * PATTERN: two gateways with at least two forked/merged sequence flows, two 
+ * sequences of (complex) flow objects spanning from the first to the second 
+ * gateway and no other sequences staring at the first gateway and not ending at 
+ * the second (the inverse is allowed) 
  * 
- * EFFECT: all sequences going from the first to the second gateway are identified. If the second gateway merges any other 
- * sequences it is split up. The sequences, their conditions and the gateways are put into a BpmnBlock. The inner sequence
- * flows are deleted, the outer sequence flows redirected. 
+ * EFFECT: all sequences going from the first to the second gateway are 
+ * identified. If the second gateway merges any other sequences it is split up. 
+ * The sequences, their conditions and the gateways are put into a BpmnBlock. 
+ * The inner sequence flows are deleted, the outer sequence flows redirected. 
  */
 public class BlockRule extends AbstractVsdtRule {
 	
@@ -144,7 +146,7 @@ public class BlockRule extends AbstractVsdtRule {
 		if (! falseFork.isEmpty()) {
 			//create new gateway
 			Gateway fork2= VsdtFactory.eINSTANCE.createGateway();
-			fork2.setName(_fork.getName() + "_2");
+			fork2.setName(_fork.getName() + SUFFIX_SPLIT);
 			fork2.setGatewayType(_fork.getGatewayType());
 			_fork.getParent().getContainedFlowObjects().add(fork2);
 			
@@ -188,7 +190,7 @@ public class BlockRule extends AbstractVsdtRule {
 		if (! falseMerge.isEmpty()) {
 			//create new gateway
 			Gateway merge2= VsdtFactory.eINSTANCE.createGateway();
-			merge2.setName(_merge.getName() + "_2");
+			merge2.setName(_merge.getName() + SUFFIX_SPLIT);
 			merge2.setGatewayType(_merge.getGatewayType());
 			_merge.getParent().getContainedFlowObjects().add(merge2);
 			

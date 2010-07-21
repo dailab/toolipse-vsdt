@@ -18,10 +18,12 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 /**
  * Boundary Event Compensation Rule
  *  
- * PATTERN: an activity with intermediate event in a BpmnEventHandlerBlock, where the intermediate is of type Compensate
- * and connected to it's compensation activity via an association.
+ * PATTERN: an activity with intermediate event in a BpmnEventHandlerBlock,
+ * where the intermediate is of type Compensate and connected to it's 
+ * compensation activity via an association.
  * 
- * EFFECT: the intermediate and the compensation activity are put in a BpmnEventHandlerCase. The association is removed.
+ * EFFECT: the intermediate and the compensation activity are put in a 
+ * BpmnEventHandlerCase. The association is removed.
  */
 public class BoundaryEventCompRule extends AbstractVsdtRule {
 	

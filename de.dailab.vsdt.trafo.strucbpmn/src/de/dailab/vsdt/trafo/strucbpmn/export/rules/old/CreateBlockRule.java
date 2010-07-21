@@ -26,6 +26,7 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  * sequences it is split up. The sequences, their conditions and the gateways are put into a BpmnBlock. The inner sequence
  * flows are deleted, the outer sequence flows redirected. 
  */
+@Deprecated
 public class CreateBlockRule extends AbstractVsdtRule {
 	
 	protected SequenceFlow	_seqFlow11= null;

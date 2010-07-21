@@ -19,6 +19,7 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  * 
  * EFFECT: ... 
  */
+@Deprecated
 public class AddToBlockRule extends AbstractVsdtRule {
 	
 	protected SequenceFlow	_seqFlow1= null;

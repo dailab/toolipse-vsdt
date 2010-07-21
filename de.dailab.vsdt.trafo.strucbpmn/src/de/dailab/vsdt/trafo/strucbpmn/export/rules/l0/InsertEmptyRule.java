@@ -20,29 +20,26 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 /**
  * Insert Empty Rule
  * 
+ * With this rule two gateways OR an activity with boundary event and a gateway
+ * OR an intermediate event on a boundary and a gateway that are directly 
+ * connected by a sequence flow are separated by an activity with task type 
+ * None. The activity will be mapped to an empty activity in the target language
+ * which can be removed in the Clean Up layer. This rule is necessary to
+ * facilitate the Block Rule and Loop Rule. After the application of this rule
+ * there will be no directly connected gateways anymore.
  * 
- * With this rule two gateways OR an activity with boundary event and a gateway OR
- * an intermediate event on a boundary and a gateway that are directly connected by a sequence flow 
- * are separated by an activity with task type None. The activity will be mapped 
- * to an empty activity in the target language which can be removed in the Clean Up 
- * layer. This rule is necessary to facilitate the Block Rule and Loop Rule. 
- * After the application of this rule there will be no directly connected gateways anymore.
+ * PATTERN: a gateway directly after another gateway / an activity with boundary
+ * event / a boundary event
  * 
- * PATTERN: a gateway directly after another gateway / an activity with boundary event / a boundary event
- * 
- * EFFECT: a placeholder-activity is inserted between the two flow objects. the activity is given a special name
- * that can be used in later rules to remove the activity again when it is no longer needed.
+ * EFFECT: a placeholder-activity is inserted between the two flow objects. the 
+ * activity is given a special name that can be used in later rules to remove 
+ * the activity again when it is no longer needed.
  */
 public class InsertEmptyRule extends AbstractVsdtRule {
 	
 	protected SequenceFlow _seqFlow= null;
 	protected FlowObject _flowObject= null;
 	protected Gateway _gateway= null;
-	
-	/**
-	 * the name for the empty activity. later these activities can be removed.
-	 */
-	public final static String EMPTY_NAME= "__DO_NOTHING__";
 	
 	@Override
 	protected void resetVars() {

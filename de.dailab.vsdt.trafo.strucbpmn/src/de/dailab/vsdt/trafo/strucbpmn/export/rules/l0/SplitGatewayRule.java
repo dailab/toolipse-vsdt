@@ -17,16 +17,17 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 /**
  * Split Gateway Rule
  * 
- * With this rule gateways with both multiple incoming and outgoing sequence flows 
- * are split in two gateways, one with multiple incoming, the other with multiple 
- * outgoing sequence flows. This rule is necessary for facilitating the Block Rule. 
- * After the application of this rule each gateway is either a forking gateway 
- * or a merging gateway.
+ * With this rule gateways with both multiple incoming and outgoing sequence
+ * flows are split in two gateways, one with multiple incoming, the other with 
+ * multiple outgoing sequence flows. This rule is necessary for facilitating the
+ * Block Rule. After the application of this rule each gateway is either a 
+ * forking gateway or a merging gateway.
  * 
  * PATTERN: a gateway with both multiple incoming and outgoing sequence flows
  * 
- * EFFECT: a second gateway is created and inserted before the exiting gateway. the incoming sequence flows
- * are redirected to the first gateway. the gateways are connected with a plain sequence flow.
+ * EFFECT: a second gateway is created and inserted before the exiting gateway. 
+ * the incoming sequence flows are redirected to the first gateway. the gateways 
+ * are connected with a plain sequence flow.
  */
 public class SplitGatewayRule extends AbstractVsdtRule {
 	
@@ -56,8 +57,8 @@ public class SplitGatewayRule extends AbstractVsdtRule {
 		
 		//change names
 		String name= _gateway.getName();
-		_gateway.setName(name + InsertGatewayRule.FORK);
-		gateway2.setName(name + InsertGatewayRule.MERGE);
+		_gateway.setName(name + SUFFIX_FORK);
+		gateway2.setName(name + SUFFIX_MERGE);
 		
 		//redirect incoming sequences
 		gateway2.getIncomingSeq().addAll(_gateway.getIncomingSeq());

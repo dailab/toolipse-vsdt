@@ -22,13 +22,18 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 /**
  * Boundary Event Skip Rule
  * 
- * this rule is intended for boundary events that skip a number of activities before merging back into normal flow.
+ * this rule is intended for boundary events that skip a number of activities 
+ * before merging back into normal flow.
  * 
- * PATTERN: an activity with boundary event being contained in a BpmnEventHandlerBlock with a sequence ("skip sequence")
- * going from the activity to a gateway and one ("compensation sequence") from the intermediate to the same gateway.
+ * PATTERN: an activity with boundary event being contained in a 
+ * BpmnEventHandlerBlock with a sequence ("skip sequence") going from the 
+ * activity to a gateway and one ("compensation sequence") from the intermediate
+ * to the same gateway.
  * 
- * EFFECT: the intermediate and the compensation sequence are put in a BpmnEventHandlerCase, also referencing the 
- * skip sequence, if not empty. the sequence flows involved in the compensation sequence are deleted, the others are not.  
+ * EFFECT: the intermediate and the compensation sequence are put in a 
+ * BpmnEventHandlerCase, also referencing the skip sequence, if not empty. the 
+ * sequence flows involved in the compensation sequence are deleted, the others 
+ * are not.  
  */
 public class BoundaryEventSkipRule extends AbstractVsdtRule {
 

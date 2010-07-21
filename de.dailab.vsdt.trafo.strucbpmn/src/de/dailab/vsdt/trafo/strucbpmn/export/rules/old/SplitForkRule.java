@@ -23,6 +23,7 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  * 
  * EFFECT: ... 
  */
+@Deprecated
 public class SplitForkRule extends AbstractVsdtRule {
 	
 	protected SequenceFlow	_seqFlow11= null;
@@ -64,7 +65,7 @@ public class SplitForkRule extends AbstractVsdtRule {
 
 		//create new gateway
 		Gateway fork2= VsdtFactory.eINSTANCE.createGateway();
-		fork2.setName(_fork.getName() + "_2");
+		fork2.setName(_fork.getName() + SUFFIX_SPLIT);
 		_block.getParent().getContainedFlowObjects().add(fork2);
 		
 		fork2.setGatewayType(_fork.getGatewayType());

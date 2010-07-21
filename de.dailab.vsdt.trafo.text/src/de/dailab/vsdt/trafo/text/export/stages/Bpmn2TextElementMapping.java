@@ -43,7 +43,7 @@ import de.dailab.vsdt.trafo.strucbpmn.BpmnSequence;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.FinalGatewayRule;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InitialGatewayRule;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InsertEmptyRule;
-import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InsertGatewayRule;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
  * BPMN to Text visitor. This visitor is performing a top-down pass of the BPMN 
@@ -1009,8 +1009,8 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			String name= ((Gateway) flowObject).getName();
 			return name != FinalGatewayRule.FINAL_GATEWAY &&
 			       name != InitialGatewayRule.INITIAL_GATEWAY &&
-			       ! (name != null && (name.endsWith(InsertGatewayRule.FORK) || 
-			                           name.endsWith(InsertGatewayRule.MERGE)));
+			       ! (name != null && (name.endsWith(AbstractVsdtRule.SUFFIX_FORK) || 
+			                           name.endsWith(AbstractVsdtRule.SUFFIX_MERGE)));
 		}
 		
 		// Sequence: if the sequence has only one element, check this element

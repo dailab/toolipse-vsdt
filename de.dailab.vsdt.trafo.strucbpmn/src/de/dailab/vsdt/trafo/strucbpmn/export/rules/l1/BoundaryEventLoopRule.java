@@ -38,13 +38,6 @@ import de.dailab.vsdt.util.VsdtElementFactory;
  * BpmnEventHandlerCase, also referencing the skip sequence, if not empty. the 
  * sequence flows involved in the compensation sequence are deleted, the others are not.
  * 
- * ehblock
- * gateway unmittelbar danach
- * intermediate abtrennen in ehcase
- * variable setzen
- * variable vorher initialisieren
- * im scope des prozesses deklarieren
- * 
  */
 public class BoundaryEventLoopRule extends AbstractVsdtRule {
 
@@ -110,7 +103,7 @@ public class BoundaryEventLoopRule extends AbstractVsdtRule {
 		
 		// insert gateway: branch to loop back to original gateway
 		Gateway branch= VsdtFactory.eINSTANCE.createGateway();
-		branch.setName(_intermediate.getName() + "_BRANCH");
+		branch.setName(_intermediate.getName() + SUFFIX_BRANCH);
 		_gateway.getParent().getContainedFlowObjects().add(branch);
 		
 		// insert empty activity
