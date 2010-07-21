@@ -25,8 +25,7 @@ public class Bpmn2BpelCleanUp extends MappingStage {
 		for (Object o : wrapper.getTargetModels()) {
 			if (o instanceof EObject) {
 				EObject eObject = (EObject) o;
-				transformation.initialize(eObject);
-				transformation.transform();
+				transformation.transform(eObject);
 			}
 		}
 		return true;
@@ -40,11 +39,11 @@ public class Bpmn2BpelCleanUp extends MappingStage {
 			
 			//clean up
 			List<AbstractRule> layer0= new ArrayList<AbstractRule>();
-			layer0.add(new FlattenSequenceRule(root));
-			layer0.add(new MergeConsecutiveAssignsRule(root));
-			layer0.add(new SingletonSequenceRule(root));
+			layer0.add(new FlattenSequenceRule());
+			layer0.add(new MergeConsecutiveAssignsRule());
+			layer0.add(new SingletonSequenceRule());
 //			layer0.add(new RemoveEmptyRule(root));
-			layer0.add(new RemoveEmptyOtherwiseRule(root));
+			layer0.add(new RemoveEmptyOtherwiseRule());
 	
 			layers.add(layer0);
 			return layers;

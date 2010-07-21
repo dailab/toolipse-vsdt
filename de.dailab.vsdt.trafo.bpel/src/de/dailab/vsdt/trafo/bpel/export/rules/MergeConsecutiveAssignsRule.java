@@ -8,8 +8,8 @@ import org.xmlsoap.schemas.ws._2003._03.business.process.ProcessPackage;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TAssign;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TSequence;
 
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
  * Merge Consecutive Assigns Rule
@@ -19,18 +19,12 @@ import de.dailab.vsdt.trafo.base.AbstractWrapper;
  * EFFECT: The copy-statements of the second assign are copied to the first assign
  *         and the second assign is removed.
  */
-public class MergeConsecutiveAssignsRule extends AbstractRule {
+public class MergeConsecutiveAssignsRule extends AbstractVsdtRule {
 	
 	protected TAssign _assign= null;
 
 	public static final int ASSIGN= 0;
 	
-	/**
-	 * Default constructor.
-	 */
-	public MergeConsecutiveAssignsRule(EObject root) {
-		super(root,"Merge Consecutive Assigns Rule");
-	}
 	
 	@Override
 	protected void resetVars() {

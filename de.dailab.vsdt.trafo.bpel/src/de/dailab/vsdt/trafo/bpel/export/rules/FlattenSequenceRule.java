@@ -7,8 +7,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.xmlsoap.schemas.ws._2003._03.business.process.ProcessPackage;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TSequence;
 
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
  * Flatten Sequence Rule
@@ -17,18 +17,12 @@ import de.dailab.vsdt.trafo.base.AbstractWrapper;
  * 
  * EFFECT: The sequences will be flattened
  */
-public class FlattenSequenceRule extends AbstractRule {
+public class FlattenSequenceRule extends AbstractVsdtRule {
 	
 	protected TSequence _sequence= null;
 
 	public static final int SEQUENCE= 0;
 	
-	/**
-	 * Default constructor.
-	 */
-	public FlattenSequenceRule(EObject root) {
-		super(root,"Flatten Sequence Rule");
-	}
 	
 	@Override
 	protected void resetVars() {

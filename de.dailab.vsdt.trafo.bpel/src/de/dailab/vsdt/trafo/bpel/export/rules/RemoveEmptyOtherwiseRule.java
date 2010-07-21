@@ -8,8 +8,8 @@ import org.xmlsoap.schemas.ws._2003._03.business.process.ProcessPackage;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TActivityContainer;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TSwitch;
 
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
  * Remove Empty Otherwise Rule
@@ -18,18 +18,12 @@ import de.dailab.vsdt.trafo.base.AbstractWrapper;
  * 
  * EFFECT: The empty Otherwise Block will be removed
  */
-public class RemoveEmptyOtherwiseRule extends AbstractRule {
+public class RemoveEmptyOtherwiseRule extends AbstractVsdtRule {
 	
 	protected TActivityContainer otherwise= null;
 
 	public static final int OTHERWISE= 0;
 	
-	/**
-	 * Default constructor.
-	 */
-	public RemoveEmptyOtherwiseRule(EObject root) {
-		super(root,"Remove Empty Otherwise Rule");
-	}
 	
 	@Override
 	protected void resetVars() {

@@ -7,8 +7,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.xmlsoap.schemas.ws._2003._03.business.process.ProcessPackage;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TEmpty;
 
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
  * Remove Empty Rule
@@ -17,18 +17,12 @@ import de.dailab.vsdt.trafo.base.AbstractWrapper;
  * 
  * EFFECT: The empty Activity will be removed
  */
-public class RemoveEmptyRule extends AbstractRule {
+public class RemoveEmptyRule extends AbstractVsdtRule {
 	
 	protected TEmpty empty= null;
 
 	public static final int EMPTY= 0;
 	
-	/**
-	 * Default constructor.
-	 */
-	public RemoveEmptyRule(EObject root) {
-		super(root,"Remove Empty Rule");
-	}
 	
 	@Override
 	protected void resetVars() {

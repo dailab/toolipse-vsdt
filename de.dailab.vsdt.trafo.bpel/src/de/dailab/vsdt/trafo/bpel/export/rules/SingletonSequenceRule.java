@@ -15,8 +15,8 @@ import org.xmlsoap.schemas.ws._2003._03.business.process.TScope;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TSequence;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TWhile;
 
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
  * Singleton Sequence Rule
@@ -25,18 +25,11 @@ import de.dailab.vsdt.trafo.base.AbstractWrapper;
  * 
  * EFFECT: The sequences will be replaced with its singleton child
  */
-public class SingletonSequenceRule extends AbstractRule {
+public class SingletonSequenceRule extends AbstractVsdtRule {
 	
 	protected TSequence _sequence= null;
 
 	public static final int SEQUENCE= 0;
-	
-	/**
-	 * Default constructor.
-	 */
-	public SingletonSequenceRule(EObject root) {
-		super(root,"Singleton Sequence Rule");
-	}
 	
 	@Override
 	protected void resetVars() {
