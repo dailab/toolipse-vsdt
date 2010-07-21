@@ -7,8 +7,8 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.dailab.jiactng.jadl.JadlPackage;
 import de.dailab.jiactng.jadl.Seq;
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
  * Flatten Sequence Rule
@@ -17,20 +17,13 @@ import de.dailab.vsdt.trafo.base.AbstractWrapper;
  * 
  * EFFECT: The sequences will be flattened
  */
-public class FlattenSequenceRule extends AbstractRule {
+public class FlattenSequenceRule extends AbstractVsdtRule {
 
 	protected JadlPackage jadl= JadlPackage.eINSTANCE;
 	
 	protected Seq _sequence= null;
 
 	public static final int SEQUENCE= 0;
-	
-	/**
-	 * Default constructor.
-	 */
-	public FlattenSequenceRule(EObject root) {
-		super(root,"Flatten Sequence Rule");
-	}
 	
 	@Override
 	protected void resetVars() {

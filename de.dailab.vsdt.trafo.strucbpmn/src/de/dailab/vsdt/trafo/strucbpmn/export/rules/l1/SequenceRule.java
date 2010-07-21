@@ -32,13 +32,6 @@ public class SequenceRule extends AbstractVsdtRule {
 	protected FlowObject	_flowObject1= null;
 	protected FlowObject	_flowObject2= null;
 	
-	/**
-	 * Default constructor.
-	 */
-	public SequenceRule(EObject root) {
-		super(root,"Sequence Rule");
-	}
-	
 	@Override
 	protected void resetVars() {
 		_seqFlow= null;

@@ -14,8 +14,8 @@ import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.GatewayType;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
@@ -35,7 +35,7 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  * 
  * EFFECT: a gateway is created and inserted before the flow objects, forking all flows
  */
-public class InitialGatewayRule extends AbstractRule {
+public class InitialGatewayRule extends AbstractVsdtRule {
 	
 	protected FlowObjectContainer _container= null;
 	protected FlowObject _start1= null;
@@ -46,13 +46,6 @@ public class InitialGatewayRule extends AbstractRule {
 	private final int CONTAINER= 0,
 					  START1= 1,
 					  START2= 2;
-	
-	/**
-	 * Default constructor.
-	 */
-	public InitialGatewayRule(EObject root) {
-		super(root,"Initial Gateway Rule");
-	}
 	
 	@Override
 	protected void resetVars() {

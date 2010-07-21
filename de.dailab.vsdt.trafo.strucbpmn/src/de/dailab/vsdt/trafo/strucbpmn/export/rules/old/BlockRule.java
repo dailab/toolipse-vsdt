@@ -12,9 +12,9 @@ import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.base.Variable;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
@@ -28,7 +28,7 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  * sequences it is split up. The sequences, their conditions and the gateways are put into a BpmnBlock. The inner sequence
  * flows are deleted, the outer sequence flows redirected. 
  */
-public class BlockRule extends AbstractRule {
+public class BlockRule extends AbstractVsdtRule {
 	
 	/*
 	 * the two branches identified by this rule are not used in the apply() method,
@@ -42,14 +42,6 @@ public class BlockRule extends AbstractRule {
 	protected FlowObject	_flowobject2= null;
 	protected Gateway		_fork= null;
 	protected Gateway		_merge= null;
-	
-	/**
-	 * Default constructor.
-	 */
-	public BlockRule(EObject root) {
-		super(root,"Block Rule");
-	}
-	
 	
 	@Override
 	protected void resetVars() {

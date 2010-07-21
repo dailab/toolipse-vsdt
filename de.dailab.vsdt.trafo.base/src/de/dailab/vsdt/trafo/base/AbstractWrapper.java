@@ -1,9 +1,8 @@
 package de.dailab.vsdt.trafo.base;
 
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 import java.util.Vector;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -14,7 +13,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import de.dailab.vsdt.trafo.base.queries.InjectivityQuery;
 import de.dailab.vsdt.trafo.base.queries.SourceQuery;
 import de.dailab.vsdt.trafo.base.queries.TargetQuery;
-
 
 /**
  * A wrapper class of the rule <em>SimpleRuleRule</em>'
@@ -35,13 +33,6 @@ public abstract class AbstractWrapper {
 	
 	
 	/**
-	 * Constructor.
-	 * 
-	 */
-	public AbstractWrapper() {
-	}
-	
-	/**
 	 * Calls all required methods:
 	 */
 	public void init(EObject root) {
@@ -56,9 +47,10 @@ public abstract class AbstractWrapper {
 	
 	/**
 	 * Associate objects inside the instance with their types.
-	 * This method traverses the containment structure beginning with the root element.
-	 * For each element's class and it's superclasses a new entry in the typeToDomain map is created and
-	 * the element is inserted in the list. Finally the method is called for the element's children.
+	 * This method traverses the containment structure beginning with the root
+	 * element. For each element's class and it's super classes a new entry in 
+	 * the typeToDomain map is created and the element is inserted in the list.
+	 * Finally the method is called for the element's children.
 	 * 
 	 * @param root topmost element of the instance (sub-)tree
 	 */
@@ -67,34 +59,32 @@ public abstract class AbstractWrapper {
 		List<EObject> vec = null;
 		
 		// fill types vector with element's class and all super types
-		List types = new Vector();
+		List<EClass> types = new Vector<EClass>();
 		types.add(root.eClass());
 		types.addAll(root.eClass().getEAllSuperTypes());
 		
-		for(Iterator it = types.iterator(); it.hasNext(); ){
-			EClass currentType = (EClass) it.next();
-			if (typeToDomain.get(currentType) == null) {
+		for (EClass type : types) {
+			if (typeToDomain.get(type) == null) {
 				//initialize with empty vector
 				vec = new Vector<EObject>();
-				typeToDomain.put(currentType, vec);
+				typeToDomain.put(type, vec);
 			} else {
-				vec = typeToDomain.get(currentType);
+				vec = typeToDomain.get(type);
 			}
 			//put element in domain vector
 			vec.add(root);
 		}
-		if(root instanceof EAttribute){
+		if (root instanceof EAttribute) {
 			fillTypeMap(((EAttribute)root).getEAttributeType());
 		}
 		//recursive call for child elements
-		for (Iterator it = root.eContents().iterator(); it.hasNext();) {
-			EObject currentObject = (EObject) it.next();
-			fillTypeMap(currentObject);
+		for (EObject child : root.eContents()) { 
+			fillTypeMap(child);
 		}
 	}
 	
 	/**
-	 * Initialisation of LHS variables. Domain are all elements of the 
+	 * Initialization of LHS variables. Domain are all elements of the 
 	 * instance with correct type or a child type.
 	 * 1.: Add Variable Types
 	 * 2.: Add Queries
@@ -111,7 +101,7 @@ public abstract class AbstractWrapper {
 	protected abstract void initLHSVariables();
 	
 	/**
-	 * Initialisation of NAC variables. Domain are all elements of the 
+	 * Initialization of NAC variables. Domain are all elements of the 
 	 * instance with correct type or a child type. Type queries are also
 	 * created.
 	 * 
@@ -133,13 +123,14 @@ public abstract class AbstractWrapper {
 	protected void addVariableType(EClass type, List<Variable> vars) {
 		List<EObject> domain = getDomainForType(type);
 		if (random) {
-			domain = shuffleDomain(domain);
+			domain = new Vector<EObject>(domain);
+			Collections.shuffle(domain);
 		}
 		vars.add(new Variable(type,domain));
 	}
 	
 	protected void addVariableType(EClass type, List<Variable> vars, int multiplicity) {
-		for (int i=0; i<multiplicity; i++) {
+		for (int i = 0; i < multiplicity; i++) {
 			addVariableType(type, vars);
 		}
 	}
@@ -154,12 +145,12 @@ public abstract class AbstractWrapper {
 	 * @param vars	list of variables
 	 */ 
 	protected void createInjectivityQueries(List<Variable> vars) {
-		for(int i=0; i<vars.size();i++){
+		for(int i = 0; i < vars.size(); i++) {
 			Variable var1= vars.get(i);
-			for (int j=i+1; j<vars.size();j++){
+			for (int j = i + 1; j < vars.size(); j++) {
 				Variable var2= vars.get(j);
-				if(typesLinked(var1.getType(),var2.getType())) {
-					InjectivityQuery iq = new InjectivityQuery(var1,var2);
+				if(typesLinked(var1.getType(), var2.getType())) {
+					InjectivityQuery iq = new InjectivityQuery(var1, var2);
 					vars.get(i).addQuery(iq);
 				}
 			}
@@ -235,25 +226,17 @@ public abstract class AbstractWrapper {
 	}
 	
 	
-	/**
-	 * shuffle the vector of EObjects (the domain set) and return it
-	 * 
-	 * @param domain	domain
-	 * @return			randomized domain
-	 */
-	protected List<EObject> shuffleDomain(List<EObject> domain){
-		List<EObject> domainCopy = new Vector<EObject>();
-		domainCopy.addAll(domain); 
-		List<EObject> result = new Vector<EObject>();
-		Random rand = new Random();
-		while(domainCopy.size()>0){
-		    int domainIndex = rand.nextInt(domainCopy.size());
-			EObject value = domainCopy.get(domainIndex);
-			domainCopy.remove(domainIndex);
-			result.add(value);
-		}
-		return result;
-	}
+//	/**
+//	 * shuffle the vector of EObjects (the domain set) and return it
+//	 * 
+//	 * @param domain	domain
+//	 * @return			randomized domain
+//	 */
+//	protected List<EObject> shuffleDomain(List<EObject> domain){
+//		List<EObject> domainCopy = new Vector<EObject>(domain);
+//		Collections.shuffle(domainCopy);
+//		return domainCopy;
+//	}
 	
 	/**
 	 * returns the list of all instances for a give eClass

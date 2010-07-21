@@ -59,13 +59,6 @@ public class BoundaryEventLoopRule extends AbstractVsdtRule {
 	protected FlowObject 			_foLoop= null;
 	protected FlowObject 			_foComp= null;
 	
-	/**
-	 * Default constructor.
-	 */
-	public BoundaryEventLoopRule(EObject root) {
-		super(root,"Boundary Event Loop Rule");
-	}
-	
 	@Override
 	protected void resetVars() {
 		_seqFlowGL= null;

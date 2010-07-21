@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.dailab.vsdt.trafo.base.Variable;
 
-
 /**
  * Class : Query <br/>
  * Package : rules <br/>
@@ -40,7 +39,7 @@ public abstract class Query {
 	 * @param creator	instantiated variable
 	 * @param target	other variable
 	 */
-	public Query(Variable creator, Variable target){
+	public Query(Variable creator, Variable target) {
 		this.creator = creator;
 		this.target = target;
 	}
@@ -50,22 +49,15 @@ public abstract class Query {
 	 * 
 	 * @return	new domain of target variable
 	 */
-	public List<EObject> getValues(){
+	public final List<EObject> getValues() {
 		return this.values;
 	}
 	
-	
 	/**
-	 * evaluate this query
+	 * Query initialization. Current domain of target variables is saved.
 	 */
-	public abstract boolean eval();
-	
-	
-	/**
-	 * Query initialisation. Current domain of target variables is saved.
-	 */
-	public void init(){
-		if (this.preDynamic==null) {
+	public final void init(){
+		if (this.preDynamic == null) {
 			this.preDynamic = target.getDynamicDomain();
 		}
 		this.values.clear();
@@ -75,10 +67,16 @@ public abstract class Query {
 	 * Undo eval method - if evaluated variable gets other value or is 
 	 * de-instantiated. Old domain of target variable is restored.
 	 */
-	public void reEval(){
-		if(preDynamic!=null){
+	public final void reEval() {
+		if (preDynamic != null) {
 			this.target.setDynamicDomain(preDynamic);
 		}
 		this.preDynamic = null;
 	}
+	
+	/**
+	 * evaluate this query
+	 */
+	public abstract boolean eval();
+	
 }

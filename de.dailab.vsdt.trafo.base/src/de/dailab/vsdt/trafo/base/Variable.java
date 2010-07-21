@@ -8,8 +8,6 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.dailab.vsdt.trafo.base.queries.Query;
 
-
-
 /**
  * Class : Variable <br/>
  * Package : rules <br/>
@@ -51,7 +49,7 @@ public class Variable {
 	 */
 	public Variable(EClass type, List<EObject> domain) {
 		this.type= type;
-		if(domain!=null){
+		if (domain!=null) {
 			this.domain.addAll(domain);
 		}
 	}
@@ -59,7 +57,7 @@ public class Variable {
 	/**
      * @return	all possible values for this variable
      */	
-	public List<EObject> getDomain(){
+	public List<EObject> getDomain() {
 		return this.domain;
 	}
 	
@@ -69,7 +67,7 @@ public class Variable {
 	 * 
 	 * @param dom	value for this variable
 	 */
-	public void setDomain(EObject dom){
+	public void setDomain(EObject dom) {
 		this.domain.clear();
 		this.domain.add(dom);
 	}
@@ -79,7 +77,7 @@ public class Variable {
 	 * 
 	 * @return	domain reduced by queries
 	 */
-	public List<EObject> getDynamicDomain(){
+	public List<EObject> getDynamicDomain() {
 		if (this.dynamicDomain == null) {
 			dynamicDomain = new Vector<EObject>();
 			dynamicDomain.addAll(domain);
@@ -92,7 +90,7 @@ public class Variable {
 	 * 
 	 * @param dynamicDomain	new possible values
 	 */ 
-	public void setDynamicDomain(List<EObject> dynamicDomain){
+	public void setDynamicDomain(List<EObject> dynamicDomain) {
 		this.dynamicDomain = dynamicDomain;
 	}
 	
@@ -124,7 +122,7 @@ public class Variable {
 			
 			//Check Queries for Inconsistencies
 			boolean queryOK = true;
-			for (int i=0; i<queries.size(); i++) {
+			for (int i = 0; i < queries.size(); i++) {
 				Query query= queries.get(i);
 				if (! query.eval()){
 					queryOK=false;
@@ -150,7 +148,7 @@ public class Variable {
 	 * 
 	 * @return	instantiation successful?
 	 */
-	public boolean nextInstance(){
+	public boolean nextInstance() {
 		if (instanciated) {
 			instanceIndex++;			
 		}
@@ -164,7 +162,7 @@ public class Variable {
 		instanceIndex= 0;
 		instanceValue= null;
 		instanciated= false;
-		for (int i=queries.size()-1; i>=0; i--) {
+		for (int i = queries.size() - 1; i >= 0; i--) {
 			queries.get(i).reEval();
 		}
 	}

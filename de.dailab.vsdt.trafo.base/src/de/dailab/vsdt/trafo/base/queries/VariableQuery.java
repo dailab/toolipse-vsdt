@@ -1,12 +1,9 @@
 package de.dailab.vsdt.trafo.base.queries;
 
-import java.util.Iterator;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 
 import de.dailab.vsdt.trafo.base.Variable;
-
 
 /**
  * Class : VariableQuery <br/>
@@ -19,13 +16,13 @@ import de.dailab.vsdt.trafo.base.Variable;
  * @author Enrico Biermann <br>
  * @author Guenter Kuhns <br>
  */
-public class VariableQuery extends Query{
+public class VariableQuery extends Query {
 	
 	/**names of compared attributes: source*/
-	private String sourceAttribute = null;
+	private final String sourceAttribute;
 	
 	/**names of compared attributes: target*/
-	private String targetAttribute = null;
+	private final String targetAttribute;
 	
 	/**
 	 * Default constructor.
@@ -35,8 +32,8 @@ public class VariableQuery extends Query{
 	 * @param sourceAttribute	compared attribute at creator
 	 * @param targetAttribute	compared attribute at target
 	 */
-	public VariableQuery(Variable creator,Variable target, String sourceAttribute, String targetAttribute){
-		super(creator,target);
+	public VariableQuery(Variable creator, Variable target, String sourceAttribute, String targetAttribute) {
+		super(creator, target);
 		this.sourceAttribute = sourceAttribute;
 		this.targetAttribute = targetAttribute;
 	}
@@ -53,40 +50,37 @@ public class VariableQuery extends Query{
 			Object sourceValue = sourceObject.eGet(sourceAtt);
 			EAttribute targetAtt = (EAttribute)target.getDomain().get(0).eClass().getEStructuralFeature(targetAttribute);
 			
-			if (target.isInstanciated()){
-				//target instantiated: return true if the values are the same
-				EObject targetObject = target.getInstanceValue();
-				Object targetValue= targetObject.eGet(targetAtt);
-				if (sourceValue == null) {
-					if (targetValue == null) {
-						return true;
-					}
-				} else { 
-					if (sourceValue.equals(targetValue)) {
-						return true;
-					}
-				}
+			if (target.isInstanciated()) {
+				//target instantiated: return true if the values match
+				Object targetValue= target.getInstanceValue().eGet(targetAtt);
+				return matches(sourceValue, targetValue);
 			} else {
-				//target not instantiated: retain possible targets in the values list
-				for (Iterator<EObject> it = preDynamic.iterator();it.hasNext();) {
-					EObject targetObject = it.next();
+				//target not instantiated: retain matching targets
+				for (EObject targetObject : preDynamic) {
 					Object targetValue= targetObject.eGet(targetAtt);
-					if(sourceValue == null){
-						if (targetValue == null) {
-							values.add(targetObject);
-						}
-					} else { 
-						if (sourceValue.equals(targetValue)) {
-							values.add(targetObject);
-						}
+					if (matches(sourceValue, targetValue)) {
+						values.add(targetObject);
 					}
 				}
-				if (values.size() > 0) {
+				if (! values.isEmpty()) {
 					target.setDynamicDomain(values);
 					return true;
 				}
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * @param source	some object
+	 * @param target	some other object
+	 * @return			true, if both are null or equal
+	 */
+	private boolean matches(Object source, Object target) {
+		if (source == null) {
+			return target == null;
+		} else {
+			return source.equals(target);
+		}
 	}
 }

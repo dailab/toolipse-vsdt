@@ -8,11 +8,11 @@ import org.eclipse.emf.ecore.EObject;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.FlowObjectContainer;
 import de.dailab.vsdt.Intermediate;
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.base.Variable;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerBlock;
 import de.dailab.vsdt.trafo.strucbpmn.StrucBpmnFactory;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
@@ -24,17 +24,10 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  * 
  * EFFECT: the activity is put in a BpmnEventHandlerBlock, incoming and outgoing sequence flows are redirected
  */
-public class BoundaryEventBlockRule extends AbstractRule {
+public class BoundaryEventBlockRule extends AbstractVsdtRule {
 	
 	protected Activity 		_activity= null;
 	protected Intermediate	_intermediate= null;
-	
-	/**
-	 * Default constructor.
-	 */
-	public BoundaryEventBlockRule(EObject root) {
-		super(root,"Boundary Event Block Rule");
-	}
 	
 	@Override
 	protected void resetVars() {

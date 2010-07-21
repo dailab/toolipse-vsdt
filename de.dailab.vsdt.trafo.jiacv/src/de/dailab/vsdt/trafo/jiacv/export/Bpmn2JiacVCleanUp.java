@@ -21,8 +21,7 @@ public class Bpmn2JiacVCleanUp extends MappingStage {
 		for (Object o : wrapper.getTargetModels()) {
 			if (o instanceof EObject) {
 				EObject eObject = (EObject) o;
-				transformation.initialize(eObject);
-				transformation.transform();
+				transformation.transform(eObject);
 			}
 		}
 		return true;

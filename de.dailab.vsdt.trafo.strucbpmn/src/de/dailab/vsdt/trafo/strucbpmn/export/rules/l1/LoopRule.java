@@ -39,14 +39,6 @@ public class LoopRule extends AbstractVsdtRule {
 	protected Gateway 		_gateway1= null;
 	protected Gateway 		_gateway2= null;
 	
-	
-	/**
-	 * Default constructor.
-	 */
-	public LoopRule(EObject root) {
-		super(root,"Loop Rule");
-	}
-	
 	@Override
 	protected void resetVars() {
 		_seqFlow11= null;

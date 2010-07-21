@@ -1,14 +1,11 @@
 package de.dailab.vsdt.trafo.base.queries;
 
-import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.dailab.vsdt.trafo.base.Variable;
-
 
 /**
  * Class : SourceQuery <br/>
@@ -21,10 +18,10 @@ import de.dailab.vsdt.trafo.base.Variable;
  * @author Enrico Biermann <br>
  * @author Guenter Kuhns <br>
  */
-public class SourceQuery extends Query{
+public class SourceQuery extends Query {
 	
 	/**reference name*/
-	private EStructuralFeature ref= null;
+	private final EStructuralFeature ref;
 	
 	/**
 	 * Default constructor.
@@ -33,7 +30,7 @@ public class SourceQuery extends Query{
 	 * @param source	other variable, source of a link to target
 	 * @param ref		reference feature
 	 */
-	public SourceQuery(Variable source,Variable target, EStructuralFeature ref){
+	public SourceQuery(Variable source, Variable target, EStructuralFeature ref) {
 		super(target,source);
 		this.ref= ref;
 	}
@@ -42,22 +39,21 @@ public class SourceQuery extends Query{
 	 * Checks for all elements in the domain of the source variable if there
 	 * exists a reference with the given name to the target value.
 	 */
-	public boolean eval(){
+	public boolean eval() {
 		if (creator.isInstanciated()) {
 			init();
 			EObject targetValue = creator.getInstanceValue();
 
 			//get possible source values
 			List<EObject> sourceValues = this.preDynamic;
-			if (sourceValues.size() < 1) {
+			if (sourceValues.isEmpty()) {
 				return false;
 			}
 
 			//iterate over source values, keep those that have the requested reference on the target
-			for (Iterator<EObject> it = sourceValues.iterator(); it.hasNext();) {
-				EObject source= it.next();
+			for (EObject source : sourceValues) {
 				if (ref.isMany()) {
-					EList<EObject> targets = (EList) source.eGet(ref);
+					List<EObject> targets = (List) source.eGet(ref);
 					if (targets.contains(targetValue)) {
 						values.add(source);
 					}
@@ -69,7 +65,7 @@ public class SourceQuery extends Query{
 					}
 				}
 			}
-			if (values.size() > 0) {
+			if (! values.isEmpty()) {
 				target.setDynamicDomain(values);
 				return true;
 			}

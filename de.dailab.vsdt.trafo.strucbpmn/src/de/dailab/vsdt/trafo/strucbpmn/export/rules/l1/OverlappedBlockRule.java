@@ -10,8 +10,8 @@ import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.VsdtPackage;
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
@@ -33,7 +33,7 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  *             ------FE------
  * 
  */
-public class OverlappedBlockRule extends AbstractRule {
+public class OverlappedBlockRule extends AbstractVsdtRule {
 	
 	protected SequenceFlow	_seqFlowA1= null;
 	protected SequenceFlow	_seqFlowA2= null;
@@ -54,13 +54,6 @@ public class OverlappedBlockRule extends AbstractRule {
 	protected Gateway		_gateway2= null;
 	protected Gateway		_gateway3= null;
 	protected Gateway		_gateway4= null;
-	
-	/**
-	 * Default constructor.
-	 */
-	public OverlappedBlockRule(EObject root) {
-		super(root,"Overlapped Block Rule");
-	}
 	
 	@Override
 	protected void resetVars() {

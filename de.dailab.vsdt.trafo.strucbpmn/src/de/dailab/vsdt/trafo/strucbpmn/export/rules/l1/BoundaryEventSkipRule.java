@@ -43,13 +43,6 @@ public class BoundaryEventSkipRule extends AbstractVsdtRule {
 	protected FlowObject 			_foSkip= null;
 	protected FlowObject 			_foComp= null;
 	
-	/**
-	 * Default constructor.
-	 */
-	public BoundaryEventSkipRule(EObject root) {
-		super(root,"Boundary Event Skip Rule");
-	}
-	
 	@Override
 	protected void resetVars() {
 		_seqFlowAS= null;

@@ -31,13 +31,6 @@ public class BoundaryEventCompRule extends AbstractVsdtRule {
 	protected Intermediate 			_intermediate= null;
 	protected Activity 				_compAct= null;
 	
-	/**
-	 * Default constructor.
-	 */
-	public BoundaryEventCompRule(EObject root) {
-		super(root,"Boundary Event Compensation Rule");
-	}
-	
 	@Override
 	protected void resetVars() {
 		_ehBlock= null;

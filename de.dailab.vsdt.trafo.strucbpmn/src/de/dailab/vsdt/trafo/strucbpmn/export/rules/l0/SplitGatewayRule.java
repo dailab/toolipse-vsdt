@@ -11,8 +11,8 @@ import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.VsdtPackage;
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
  * Split Gateway Rule
@@ -28,18 +28,12 @@ import de.dailab.vsdt.trafo.base.AbstractWrapper;
  * EFFECT: a second gateway is created and inserted before the exiting gateway. the incoming sequence flows
  * are redirected to the first gateway. the gateways are connected with a plain sequence flow.
  */
-public class SplitGatewayRule extends AbstractRule {
+public class SplitGatewayRule extends AbstractVsdtRule {
 	
 	protected Gateway _gateway= null;
 	
 	private final int GATEWAY= 0;
 	
-	/**
-	 * Default constructor.
-	 */
-	public SplitGatewayRule(EObject root) {
-		super(root,"Split Gateway Rule");
-	}
 	
 	@Override
 	protected void resetVars() {

@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="vsdt"
+    nsURI="http://de.dailab.vsdt" nsPrefix="vsdt">
+  <eClassifiers xsi:type="ecore:EClass" name="IdObject" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="documentation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associatedArtifacts" upperBound="-1"
+        eType="#//artifacts/Artifact" eOpposite="#//artifacts/Artifact/attachedTo"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Diagram" abstract="true" eSuperTypes="#//IdObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="artifacts" upperBound="-1"
+        eType="#//artifacts/Artifact" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BusinessProcessSystem" eSuperTypes="#//Diagram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="businessProcesses" upperBound="-1"
+        eType="#//BusinessProcessDiagram" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="participants" upperBound="-1"
+        eType="#//Participant" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="messages" upperBound="-1"
+        eType="#//data/Message" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="implementations" upperBound="-1"
+        eType="#//data/Implementation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataTypes" upperBound="-1"
+        eType="#//data/DataType" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Participant" eSuperTypes="#//IdObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ParticipantType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associatedProcesses" upperBound="-1"
+        eType="#//BusinessProcessDiagram" eOpposite="#//BusinessProcessDiagram/participants"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associatedPools" upperBound="-1"
+        eType="#//process/Pool" eOpposite="#//process/Pool/participant"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ParticipantType">
+    <eLiterals name="ROLE"/>
+    <eLiterals name="ENTITY" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BusinessProcessDiagram" eSuperTypes="#//Diagram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="participants" lowerBound="1"
+        upperBound="-1" eType="#//Participant" eOpposite="#//Participant/associatedProcesses"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pools" lowerBound="1" upperBound="-1"
+        eType="#//process/Pool" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="messageFlows" upperBound="-1"
+        eType="#//process/MessageFlow" containment="true"/>
+  </eClassifiers>
+  <eSubpackages name="process" nsURI="http://de.dailab.vsdt/process" nsPrefix="vsdt.process">
+    <eClassifiers xsi:type="ecore:EClass" name="MessageNode" abstract="true">
+      <eOperations name="getPool" eType="#//process/Pool"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingMsg" upperBound="-1"
+          eType="#//process/MessageFlow" transient="true" resolveProxies="false" eOpposite="#//process/MessageFlow/source"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="incomingMsg" upperBound="-1"
+          eType="#//process/MessageFlow" transient="true" resolveProxies="false" eOpposite="#//process/MessageFlow/target"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MessageFlow" eSuperTypes="#//IdObject">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="message" eType="#//data/Message"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+          eType="#//process/MessageNode" resolveProxies="false" eOpposite="#//process/MessageNode/outgoingMsg"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+          eType="#//process/MessageNode" resolveProxies="false" eOpposite="#//process/MessageNode/incomingMsg"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FlowNode" abstract="true" eSuperTypes="#//IdObject">
+      <eOperations name="isStartingNode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eOperations name="isEndingNode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="assignments" upperBound="-1"
+          eType="#//data/Assignment" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingSeq" upperBound="-1"
+          eType="#//process/SequenceFlow" transient="true" resolveProxies="false"
+          eOpposite="#//process/SequenceFlow/source"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="incomingSeq" upperBound="-1"
+          eType="#//process/SequenceFlow" transient="true" resolveProxies="false"
+          eOpposite="#//process/SequenceFlow/target"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SequenceFlow" eSuperTypes="#//IdObject">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="conditionExpression"
+          eType="#//data/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+          eType="#//process/FlowNode" resolveProxies="false" eOpposite="#//process/FlowNode/outgoingSeq"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+          eType="#//process/FlowNode" resolveProxies="false" eOpposite="#//process/FlowNode/incomingSeq"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Process" abstract="true" eSuperTypes="#//Diagram">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="adHocCompletionCondition"
+          eType="#//data/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="flowNodes" upperBound="-1"
+          eType="#//process/FlowNode" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sequenceFlows" upperBound="-1"
+          eType="#//process/SequenceFlow" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+          eType="#//data/Property" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Pool" eSuperTypes="#//process/Process #//process/MessageNode">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="participant" lowerBound="1"
+          eType="#//Participant" eOpposite="#//Participant/associatedPools"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="boundaryVisible" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="lanes" upperBound="-1"
+          eType="#//process/Lane" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Lane" eSuperTypes="#//IdObject">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="flowNodes" upperBound="-1"
+          eType="#//process/FlowNode"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true" eSuperTypes="#//process/FlowNode #//process/MessageNode">
+      <eOperations name="getValidTriggerTypes" upperBound="-1" eType="#//process/events/TriggerType"/>
+      <eOperations name="isThrowing" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eOperations name="getTriggerType" eType="#//process/events/TriggerType"/>
+      <eOperations name="setTriggerType">
+        <eParameters name="type" eType="#//process/events/TriggerType"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="eventDetails" eType="#//process/events/EventDetails"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="interrupting" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Activity" abstract="true" eSuperTypes="#//process/FlowNode #//process/MessageNode">
+      <eOperations name="isCompensation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Task" eSuperTypes="#//process/Activity">
+      <eOperations name="getTaskType" eType="#//process/activitites/TaskType"/>
+      <eOperations name="setTaskType">
+        <eParameters name="type" eType="#//process/activitites/TaskType"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="taskDetails" eType="#//process/activitites/TaskDetails"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Subprocess" eSuperTypes="#//process/Activity #//process/Process">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="loopDetails" eType="#//process/activitites/LoopDetails"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="boundaryEvents" upperBound="-1"
+          eType="#//process/events/BoundaryEvent" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Gateway" eSuperTypes="#//process/FlowNode">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="gatewayType" lowerBound="1"
+          eType="#//process/GatewayType"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="GatewayType">
+      <eLiterals name="XOR_DATA"/>
+      <eLiterals name="XOR_EVENT" value="1"/>
+      <eLiterals name="OR" value="2"/>
+      <eLiterals name="AND" value="3"/>
+    </eClassifiers>
+    <eSubpackages name="activitites" nsURI="http://de.dailab.vsdt/process/activitites"
+        nsPrefix="vsdt.process.activities">
+      <eClassifiers xsi:type="ecore:EClass" name="TaskDetails" abstract="true"/>
+      <eClassifiers xsi:type="ecore:EEnum" name="TaskType">
+        <eLiterals name="NONE"/>
+        <eLiterals name="SEND" value="1"/>
+        <eLiterals name="RECEIVE" value="2"/>
+        <eLiterals name="SERVICE" value="3"/>
+        <eLiterals name="SCRIPT" value="4"/>
+        <eLiterals name="USER" value="5"/>
+        <eLiterals name="MANUAL" value="6"/>
+        <eLiterals name="CALL" value="7"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SendTaskDetails" eSuperTypes="#//process/activitites/TaskDetails">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="inMessage" lowerBound="1"
+            eType="#//data/Message"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="implementation" lowerBound="1"
+            eType="#//data/Implementation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ReceiveTaskDetails" eSuperTypes="#//process/activitites/TaskDetails">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="outMessage" lowerBound="1"
+            eType="#//data/Message"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="implementation" lowerBound="1"
+            eType="#//data/Implementation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ServiceTaskDetails" eSuperTypes="#//process/activitites/TaskDetails">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="inMessage" lowerBound="1"
+            eType="#//data/Message"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="outMessage" lowerBound="1"
+            eType="#//data/Message"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="implementation" lowerBound="1"
+            eType="#//data/Implementation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ScriptTaskDetails" eSuperTypes="#//process/activitites/TaskDetails">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="script" lowerBound="1"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="UserTaskDetails" eSuperTypes="#//process/activitites/TaskDetails">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="inMessage" lowerBound="1"
+            eType="#//data/Message"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="outMessage" lowerBound="1"
+            eType="#//data/Message"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="implementation" lowerBound="1"
+            eType="#//data/Implementation"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="performers" lowerBound="1"
+            upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ManualTaskDetails" eSuperTypes="#//process/activitites/TaskDetails">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="performers" lowerBound="1"
+            upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CallTaskDetails" eSuperTypes="#//process/activitites/TaskDetails">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="diagramRef" lowerBound="1"
+            eType="#//BusinessProcessDiagram"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="processRef" lowerBound="1"
+            eType="#//process/Process"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="inputPropertyMaps"
+            upperBound="-1" eType="#//data/Expression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="outputPropertyMaps"
+            upperBound="-1" eType="#//data/Expression" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="LoopDetails" abstract="true"/>
+      <eClassifiers xsi:type="ecore:EClass" name="StandardLoopDetails" eSuperTypes="#//process/activitites/LoopDetails">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="loopCondition" eType="#//data/Expression"
+            containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="loopMaximum" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="testBefore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="MultiLoopDetails" eSuperTypes="#//process/activitites/LoopDetails">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="MI_Condition" lowerBound="1"
+            eType="#//data/Expression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="MI_FlowCondition" lowerBound="1"
+            eType="#//process/activitites/FlowConditionTypes"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="complexMI_FlowCondition"
+            eType="#//data/Expression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="sequential" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="FlowConditionTypes">
+        <eLiterals name="NONE"/>
+        <eLiterals name="ONE" value="1"/>
+        <eLiterals name="ALL" value="2"/>
+        <eLiterals name="COMPLEX" value="3"/>
+      </eClassifiers>
+    </eSubpackages>
+    <eSubpackages name="events" nsURI="http://de.dailab.vsdt/process/events" nsPrefix="vsdt.process.events">
+      <eClassifiers xsi:type="ecore:EClass" name="StartEvent" eSuperTypes="#//process/Event"/>
+      <eClassifiers xsi:type="ecore:EClass" name="IntermediateEvent" eSuperTypes="#//process/Event"/>
+      <eClassifiers xsi:type="ecore:EClass" name="EndEvent" eSuperTypes="#//process/Event"/>
+      <eClassifiers xsi:type="ecore:EClass" name="BoundaryEvent" eSuperTypes="#//process/events/IntermediateEvent"/>
+      <eClassifiers xsi:type="ecore:EEnum" name="TriggerType">
+        <eLiterals name="NONE"/>
+        <eLiterals name="MESSAGE" value="1"/>
+        <eLiterals name="TIMER" value="2"/>
+        <eLiterals name="CONDITION" value="3"/>
+        <eLiterals name="LINK" value="4"/>
+        <eLiterals name="ERROR" value="5"/>
+        <eLiterals name="COMPENSATION" value="6"/>
+        <eLiterals name="CANCEL" value="7"/>
+        <eLiterals name="MULTIPLE" value="8"/>
+        <eLiterals name="TERMINATE" value="9"/>
+        <eLiterals name="SIGNAL" value="10"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="EventDetails" abstract="true"/>
+      <eClassifiers xsi:type="ecore:EClass" name="MessageEventDetails" eSuperTypes="#//process/events/EventDetails">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="message" lowerBound="1"
+            eType="#//data/Message"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="implementation" lowerBound="1"
+            eType="#//data/Implementation"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="TimerEventDetails" eSuperTypes="#//process/events/EventDetails">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="timeDate" eType="#//data/Expression"
+            containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="timeCycle" eType="#//data/Expression"
+            containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ConditionEventDetails" eSuperTypes="#//process/events/EventDetails">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
+            eType="#//data/Expression" containment="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="SignalEventDetails" eSuperTypes="#//process/events/EventDetails">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="signal" lowerBound="1"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ErrorEventDetails" eSuperTypes="#//process/events/EventDetails">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="errorCode" lowerBound="1"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="LinkEventDetails" eSuperTypes="#//process/events/EventDetails">
+        <eOperations name="getLinkedTo" upperBound="-1" eType="#//process/Event"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="linkName" lowerBound="1"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CompensationEventDetails" eSuperTypes="#//process/events/EventDetails">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="activity" lowerBound="1"
+            eType="#//process/Activity"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="CancelEventDetails" eSuperTypes="#//process/events/EventDetails"/>
+      <eClassifiers xsi:type="ecore:EClass" name="TerminateEventDetails" eSuperTypes="#//process/events/EventDetails"/>
+      <eClassifiers xsi:type="ecore:EClass" name="EscalationEventDetails" eSuperTypes="#//process/events/EventDetails">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="escalationCode" lowerBound="1"
+            eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="MultipleEventDetails" eSuperTypes="#//process/events/EventDetails">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="parallel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="eventDetails" lowerBound="2"
+            upperBound="-1" eType="#//process/events/EventDetails"/>
+      </eClassifiers>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="data" nsURI="http://de.dailab.vsdt/data" nsPrefix="vsdt.data">
+    <eClassifiers xsi:type="ecore:EClass" name="Message">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+          eType="#//data/Property" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Implementation">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral="WebService"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="participant" lowerBound="1"
+          eType="#//Participant"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="interface" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="operation" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inputMessage" eType="#//data/Message"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outputMessage" eType="#//data/Message"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Assignment">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//data/Property"
+          resolveProxies="false" eOpposite="#//data/Property/assignments"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1"
+          eType="#//data/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="assignTimeAfter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="toQuery" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Property">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="assignments" upperBound="-1"
+          eType="#//data/Assignment" transient="true" resolveProxies="false" eOpposite="#//data/Assignment/to"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Expression">
+      <eOperations name="validate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DataType">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inherits" upperBound="-1"
+          eType="#//data/DataType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="members" upperBound="-1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="artifacts" nsURI="http://de.dailab.vsdt/artifacts" nsPrefix="vsdt.artifacts">
+    <eClassifiers xsi:type="ecore:EClass" name="Artifact" abstract="true" eSuperTypes="#//IdObject">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attachedTo" eType="#//IdObject"
+          eOpposite="#//IdObject/associatedArtifacts"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DataObject" eSuperTypes="#//artifacts/Artifact">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+          eType="#//data/Property" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="requiredForStart" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="producedAtCompletion"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TextAnnotation" eSuperTypes="#//artifacts/Artifact"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Group" eSuperTypes="#//artifacts/Artifact"/>
+  </eSubpackages>
+</ecore:EPackage>

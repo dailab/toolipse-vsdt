@@ -13,8 +13,8 @@ import de.dailab.vsdt.FlowObjectContainer;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
@@ -35,7 +35,7 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  * 
  * EFFECT: a gateway is created and inserted after the flow objects, merging all flows
  */
-public class FinalGatewayRule extends AbstractRule {
+public class FinalGatewayRule extends AbstractVsdtRule {
 	
 	protected FlowObjectContainer _container= null;
 	protected FlowObject _end1= null;
@@ -46,13 +46,6 @@ public class FinalGatewayRule extends AbstractRule {
 	private final int CONTAINER= 0,
 					  END1= 1,
 					  END2= 2;
-	
-	/**
-	 * Default constructor.
-	 */
-	public FinalGatewayRule(EObject root) {
-		super(root,"Final Gateway Rule");
-	}
 	
 	@Override
 	protected void resetVars() {

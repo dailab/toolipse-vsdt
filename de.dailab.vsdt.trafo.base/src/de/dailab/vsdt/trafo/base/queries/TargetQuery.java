@@ -1,13 +1,11 @@
 package de.dailab.vsdt.trafo.base.queries;
 
-import java.util.Iterator;
+import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import de.dailab.vsdt.trafo.base.Variable;
-
 
 /**
  * Class : TargetQuery <br/>
@@ -23,7 +21,7 @@ import de.dailab.vsdt.trafo.base.Variable;
 public class TargetQuery extends Query {
 	
 	/**the reference*/
-	private EStructuralFeature ref= null;
+	private final EStructuralFeature ref;
 	
 	/**
 	 * Default constructor.
@@ -38,31 +36,29 @@ public class TargetQuery extends Query {
 	}
 	
 	/**
-	 * Domain of the target variable is reduced to the elements which are referenced from
-	 * the source value.
+	 * Domain of the target variable is reduced to the elements which are
+	 * referenced from the source value.
 	 */
 	public boolean eval() {
 		if (creator.isInstanciated()) {
 			init();
 			EObject sourceValue= creator.getInstanceValue();
 			
-			//add values referenced by creator in values list, if in predynamic
-			if (! ref.isMany()) {
-				EObject targetValue= (EObject)sourceValue.eGet(ref); 
-				if (preDynamic.contains(targetValue)) {
-					values.add(targetValue);
-				}
-			} else {
-				EList<EObject> targetValues = (EList) sourceValue.eGet(ref);
-				for (Iterator<EObject> it = targetValues.iterator();it.hasNext();) {  
-					EObject targetValue= it.next();	
+			//add values referenced by creator in values list, if in preDynamic
+			if (ref.isMany()) {
+				List<EObject> targetValues = (List) sourceValue.eGet(ref);
+				for (EObject targetValue : targetValues) {
 					if (preDynamic.contains(targetValue)) {
 						values.add(targetValue);
 					}
 				}
+			} else {
+				EObject targetValue= (EObject) sourceValue.eGet(ref); 
+				if (preDynamic.contains(targetValue)) {
+					values.add(targetValue);
+				}
 			}
-			if (values.size() > 0) {
-				//some values found for this query
+			if (! values.isEmpty()) {
 				target.setDynamicDomain(values);
 				return true;
 			}

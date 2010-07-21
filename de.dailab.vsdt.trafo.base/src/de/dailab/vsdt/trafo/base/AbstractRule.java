@@ -12,60 +12,13 @@ import org.eclipse.emf.ecore.EReference;
  * This class contains common functionality 
  * and is a parent class for all generated rule classes. <br/>
  * 
- * edited by holger endert and tobias küster
- * 
  * @author Enrico Biermann <br>
  * @author Guenter Kuhns <br>
  */
 public abstract class AbstractRule {
 		
-	/**the root object*/
-	private EObject root = null;
-
 	/**the rule's wrapper*/
 	private AbstractWrapper wrapper = null;
-	
-	/**the rules name (for debugging)*/
-	private String name= "Unnamed Rule";
-	
-	/**
-	 * default constructor
-	 * 
-	 * @param root	the root object
-	 * @param name	the rule's name
-	 */
-	public AbstractRule(EObject root, String name) {
-		this.root= root;
-		this.name= name==null ? getClass().getSimpleName() : name;
-	}
-	
-	/**
-	 * @return	the rule's name
-	 */
-	protected String getName() {
-		return name;
-	}
-	
-	protected void setName(String name) {
-		this.name = name;
-	}
-	
-	protected EObject getRoot() {
-		return root;
-	}
-	
-	protected void setRoot(EObject root) {
-		this.root = root;
-	}
-
-	/**
-	 * Sets a reference to an EObject inside the instance which shall be changed by the rule application.
-	 * @param instanceNode arbitrary node inside the instance
-	 */
-	public void setInstanceSymbol(EObject instanceNode){
-		this.root = getRoot(instanceNode);
-	}
-	
 	
 	/**
 	 * Executes this rule. First a wrapper is instantiated and initialized.
@@ -74,17 +27,20 @@ public abstract class AbstractRule {
 	 * 
 	 * @return	rule applied?
 	 */
-	public boolean execute() {
+	public boolean execute(EObject object) {
 		
+		EObject root = getRoot(object);
 		wrapper = getWrapper();
 		wrapper.init(root);
 		List<EObject> match = wrapper.getSolution();
 		
 		if (match == null){
+			reset();
 			return false;
 		} else {
 			internalSetWeightedLHS(match);
 			apply();
+			reset();
  			return true;
 		}
 	}
@@ -113,7 +69,7 @@ public abstract class AbstractRule {
 	protected abstract void setWeightedLHS(List<EObject> matches) throws Exception;
 	
 	private void internalSetWeightedLHS(List<EObject> matches) {
-		if( matches==null ) {
+		if ( matches==null ) {
 			resetVars();
 		} else {
 			try {
@@ -124,12 +80,11 @@ public abstract class AbstractRule {
 		}
 	}
 	
-	
 	/**
 	 * reset the rule after execution by assigning the variables with it's default values
 	 * call's subclass's resetVars method to reset the rule-dependent variables
 	 */
-	public void reset() {
+	private void reset() {
 		this.wrapper= null;
 		resetVars();
 	}
@@ -146,7 +101,7 @@ public abstract class AbstractRule {
 	 * @param currentObject	object inside the EMF tree 
 	 * @return				topmost element in EMF tree
 	 */
-	protected EObject getRoot(EObject currentObject) {
+	private EObject getRoot(EObject currentObject) {
 		EObject parent = currentObject.eContainer();
 		if (parent != null) {
 			return getRoot(parent);

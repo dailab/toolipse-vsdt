@@ -13,8 +13,8 @@ import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
@@ -33,7 +33,7 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  * EFFECT: a placeholder-activity is inserted between the two flow objects. the activity is given a special name
  * that can be used in later rules to remove the activity again when it is no longer needed.
  */
-public class InsertEmptyRule extends AbstractRule {
+public class InsertEmptyRule extends AbstractVsdtRule {
 	
 	protected SequenceFlow _seqFlow= null;
 	protected FlowObject _flowObject= null;
@@ -43,13 +43,6 @@ public class InsertEmptyRule extends AbstractRule {
 	 * the name for the empty activity. later these activities can be removed.
 	 */
 	public final static String EMPTY_NAME= "__DO_NOTHING__";
-	
-	/**
-	 * Default constructor.
-	 */
-	public InsertEmptyRule(EObject root) {
-		super(root,"Insert Empty Rule");
-	}
 	
 	@Override
 	protected void resetVars() {

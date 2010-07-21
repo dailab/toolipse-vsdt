@@ -47,14 +47,6 @@ public class BlockRule extends AbstractVsdtRule {
 	protected Gateway		_fork= null;
 	protected Gateway		_merge= null;
 	
-	/**
-	 * Default constructor.
-	 */
-	public BlockRule(EObject root) {
-		super(root,"Block Rule");
-	}
-	
-	
 	@Override
 	protected void resetVars() {
 		_seqFlow11= null;

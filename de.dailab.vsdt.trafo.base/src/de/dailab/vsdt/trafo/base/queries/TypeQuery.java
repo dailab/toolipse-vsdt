@@ -13,21 +13,21 @@ import de.dailab.vsdt.trafo.base.Variable;
  * Created On : 15.01.2006 <br/>
  * Description : Query class for the Matchfinder.
  *  
- * Ensures that NAC objects have the correct subtype of their LHS type.
+ * Ensures that NAC objects have the correct sub-type of their LHS type.
  * 
  * @author Enrico Biermann <br>
  * @author Guenter Kuhns <br>
  */
 public class TypeQuery extends Query{
 	
-	/**NAC subtype*/
-	private EClass type;
+	/**NAC sub-type*/
+	private final EClass type;
 	
 	/**
 	 * Default constructor.
 	 *  
 	 * @param target	instantiated and evaluated variable
-	 * @param type		NAC subtype
+	 * @param type		NAC sub-type
 	 */
 	public TypeQuery(Variable target, EClass type){
 		super(target,target);
@@ -35,15 +35,11 @@ public class TypeQuery extends Query{
 	}
 	
 	/**
-	 * Checks if current instance value of variable has the correct subtype.
+	 * Checks if current instance value of variable has the correct sub-type.
 	 */
 	public boolean eval(){
-		EObject sourceValue = creator.getInstanceValue();	
-		if (sourceValue.eClass() == type) {	
-			return true;
-		} else {
-			return false;	
-		}
+		EObject sourceValue = creator.getInstanceValue();
+		return sourceValue.eClass() == type;
 	}
 	
 }

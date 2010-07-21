@@ -7,9 +7,9 @@ import org.eclipse.emf.ecore.EObject;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.SequenceFlow;
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBlock;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
@@ -19,7 +19,7 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  * 
  * EFFECT: ... 
  */
-public class AddToBlockRule extends AbstractRule {
+public class AddToBlockRule extends AbstractVsdtRule {
 	
 	protected SequenceFlow	_seqFlow1= null;
 	protected SequenceFlow	_seqFlow2= null;
@@ -27,13 +27,6 @@ public class AddToBlockRule extends AbstractRule {
 	protected BpmnBlock		_block= null;
 	protected Gateway		_fork= null;
 	protected Gateway		_merge= null;
-	
-	/**
-	 * Default constructor.
-	 */
-	public AddToBlockRule(EObject root) {
-		super(root,"Add To Block Rule");
-	}
 	
 	@Override
 	protected void resetVars() {

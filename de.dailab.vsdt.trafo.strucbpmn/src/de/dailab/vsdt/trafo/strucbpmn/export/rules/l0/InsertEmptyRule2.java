@@ -11,8 +11,8 @@ import de.dailab.vsdt.FlowObjectContainer;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
@@ -29,18 +29,11 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  * activity is given a special name that can be used in later rules to remove 
  * the activity again when it is no longer needed.
  */
-public class InsertEmptyRule2 extends AbstractRule {
+public class InsertEmptyRule2 extends AbstractVsdtRule {
 	
 	protected SequenceFlow _seqFlow= null;
 	protected Gateway _gateway= null;
 	protected Activity _activity= null;
-	
-	/**
-	 * Default constructor.
-	 */
-	public InsertEmptyRule2(EObject root) {
-		super(root,"Insert Empty Rule 2");
-	}
 	
 	@Override
 	protected void resetVars() {

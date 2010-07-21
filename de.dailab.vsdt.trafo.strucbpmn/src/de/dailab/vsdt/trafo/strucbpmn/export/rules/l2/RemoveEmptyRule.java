@@ -7,9 +7,9 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.FlowObject;
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InsertEmptyRule;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
@@ -19,16 +19,9 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  * 
  * EFFECT: The activity will be removed
  */
-public class RemoveEmptyRule extends AbstractRule {
+public class RemoveEmptyRule extends AbstractVsdtRule {
 	
 	protected Activity _emptyAct= null;
-	
-	/**
-	 * Default constructor.
-	 */
-	public RemoveEmptyRule(EObject root) {
-		super(root,"Remove Empty Rule");
-	}
 	
 	@Override
 	protected void resetVars() {

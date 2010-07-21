@@ -13,8 +13,6 @@ import org.eclipse.emf.ecore.EObject;
  * Created On : 10.01.2006 <br/>
  * Description : Main class of CSP algorithm for match finding.
  * 
- * modified by tobias küster
- * 
  * @author Enrico Biermann <br>
  * @author Guenter Kuhns <br>
  */
@@ -28,7 +26,6 @@ public class Matchfinder {
 	
 	/**current match*/
 	private List<EObject> match= null;
-	
 	
 	/**
 	 * Default constructor.
@@ -61,8 +58,8 @@ public class Matchfinder {
 		if (index >= lhsVars.size()) {
 			//all LHS vars instantiated: copy instance values to matches-list
 			match = new ArrayList<EObject>();
-			for (Iterator<Variable> iter = lhsVars.iterator(); iter.hasNext();) {
-				match.add(iter.next().getInstanceValue());
+			for (Variable variable : lhsVars) {
+				match.add(variable.getInstanceValue());
 			}
 			
 			//check NACs for this match, return if match is OK
@@ -74,7 +71,7 @@ public class Matchfinder {
 		boolean result = var.nextInstance();
 		while (result) {
 			//try next value			
-			if (findMatches(index+1)) {
+			if (findMatches(index + 1)) {
 				//match for current variable found, try next variable
 				return true;
 			}
@@ -123,10 +120,10 @@ public class Matchfinder {
 		
 		if (index >= nac.size()) {
 			//NAC match found
-			for (int i=0; i<nac.size(); i++) {
+			for (int i = 0; i < nac.size(); i++) {
 				//deinstantiate variables
 				Variable current = nac.get(i);
-				if (current!=null) {
+				if (current != null) {
 					current.deinstanciate();
 					current.setDynamicDomain(null);
 				}
@@ -137,18 +134,18 @@ public class Matchfinder {
 		Variable var = nac.get(index);
 		if (var == null) {
 			//var not relevant for the NAC; continue with next variable
-			return findNacMatch(nac,index+1);
+			return findNacMatch(nac, index + 1);
 		}
 		
 		boolean result = var.nextInstance();
 		while (result) {
 			//try next value			
-			if (findNacMatch(nac,index+1)) {
+			if (findNacMatch(nac, index + 1)) {
 				//match for current variable found, try next variable
 				return true;
 			}
 			result= var.nextInstance();
-		};
+		}
 		
 		return false;
 	}

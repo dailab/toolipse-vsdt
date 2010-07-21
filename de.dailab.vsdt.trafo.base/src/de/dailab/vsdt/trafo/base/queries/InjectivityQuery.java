@@ -13,15 +13,15 @@ import de.dailab.vsdt.trafo.base.Variable;
  * @author Enrico Biermann <br>
  * @author Guenter Kuhns <br>
  */
-public class InjectivityQuery extends Query{
+public class InjectivityQuery extends Query {
 	
 	/**
 	 * Default constructor. 
 	 * @param creator instantiated variable
 	 * @param target other variable of same type
 	 */
-	public InjectivityQuery(Variable creator,Variable target){
-		super(creator,target);
+	public InjectivityQuery(Variable creator, Variable target) {
+		super(creator, target);
 	}
 	
 	/**
@@ -33,7 +33,7 @@ public class InjectivityQuery extends Query{
 			init();
 			values.addAll(this.preDynamic);
 			values.remove(creator.getInstanceValue());
-			if (values.size()>0) {
+			if (values.size() > 0) {
 				target.setDynamicDomain(values);
 				return true;
 			} else {

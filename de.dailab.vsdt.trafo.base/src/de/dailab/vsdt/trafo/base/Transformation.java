@@ -1,9 +1,8 @@
 package de.dailab.vsdt.trafo.base;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
+import java.util.Queue;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -23,21 +22,6 @@ public abstract class Transformation {
 	/**this list is containing one List for each layer, holding this layer's rules*/
 	protected List<List<AbstractRule>> rules= null;
 	
-	/**the instance root*/
-	protected EObject root = null;
-	
-	/**apply rules in random order?*/
-	protected boolean random= false;
-	
-	/**
-	 * initialize the Rules with the given root object
-	 * @param root	the root object, transitively containing all other elements
-	 */
-	public void initialize(EObject root) {
-		this.root= root;
-		this.rules= initRules();
-	}
-	
 	/**
 	 * fill rules list with one list for each layer, holding that layer's rules.
 	 * 
@@ -54,68 +38,53 @@ public abstract class Transformation {
 	
 
 	/**
-	 * Transform functionality. Iterate over the layers and call transform(layer) for each
+	 * Transform functionality. Iterate over the layers. Rules inside the given
+	 * layer are applied with match. Continues with next layer once no more rule
+	 * in the current layer is applicable.
 	 */
-	public void transform(){
-		for (Iterator<List<AbstractRule>> iter = rules.iterator(); iter.hasNext();) {
-			List<AbstractRule> layer = iter.next();
-			transform(layer);
+	public final void transform(EObject root) {
+		if (rules == null) {
+			rules = initRules();
 		}
-	}
-	
+		for (List<AbstractRule> layer : rules) {
+			
+			Queue<AbstractRule> applicableRules= new LinkedList<AbstractRule>();
+			applicableRules.addAll(layer);
+			
+			long oldTime;
+			long newTime= System.currentTimeMillis();
+			
+			try {
+				//as long as there are applicable rules...
+				while (! applicableRules.isEmpty()) {
+					
+					AbstractRule rule = applicableRules.remove();
+					
+					boolean executed= rule.execute(root);
+					
+					oldTime= newTime;
+					newTime= System.currentTimeMillis();
 
-	/**
-	 * Transform functionality. Arbitrary rule inside the given layer is applied with 
-	 * arbitrary match. Continues until no more rule in this layer is applicable.
-	 * 
-	 * @param layer		list holding all the rules of the current layer
-	 */
-	private void transform(List<AbstractRule> layer){
-		
-		List<AbstractRule> applicableRules= new ArrayList<AbstractRule>();
-		applicableRules.addAll(layer);
-		
-		Random rand = new Random();
-		
-		Long oldTime;
-		Long newTime= System.currentTimeMillis();
-		
-		try {
-			//as long as there are applicable rules...
-			while(applicableRules.size() > 0){
-				
-				AbstractRule rule= null;
-				if (random) {
-					rule= applicableRules.get(rand.nextInt(applicableRules.size()));
-				} else {
-					rule= applicableRules.get(0);
-				} 
-				rule.setInstanceSymbol(root);
-				boolean executed= rule.execute();
-				rule.reset();
-				
-				oldTime= newTime;
-				newTime= System.currentTimeMillis();
-				StringBuffer buff= new StringBuffer();
-				buff.append(executed ? "executing " : "skipping ");
-				buff.append(rule.getName());
-				buff.append(" (").append(newTime-oldTime).append(" ms)");
-				if (executed) {
-					TrafoLog.debug(buff.toString());
-				} else {
-					TrafoLog.trace(buff.toString());
+					// logging
+					StringBuffer buff= new StringBuffer();
+					buff.append(executed ? "executing " : "skipping ");
+					buff.append(rule.getClass().getSimpleName());
+					buff.append(" (").append(newTime-oldTime).append(" ms)");
+					if (executed) {
+						TrafoLog.debug(buff.toString());
+					} else {
+						TrafoLog.trace(buff.toString());
+					}
+					
+					//application successful: re-insert all rules in the list and try again; else: continue with next rule, if any
+					if (executed) {
+						applicableRules.clear();
+						applicableRules.addAll(layer);
+					}
 				}
-				
-				//application successful: re-insert all rules in the list and try again; else: continue with next rule, if any
-				if(executed){
-					applicableRules.clear();
-					applicableRules.addAll(layer);
-				} else{
-					applicableRules.remove(rule);
-				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 	

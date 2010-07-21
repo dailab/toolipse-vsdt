@@ -1,7 +1,5 @@
 package de.dailab.vsdt.trafo.strucbpmn.util;
 
-import org.eclipse.emf.ecore.EObject;
-
 import de.dailab.vsdt.Association;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.trafo.base.AbstractRule;
@@ -15,10 +13,6 @@ import de.dailab.vsdt.trafo.base.AbstractRule;
  */
 public abstract class AbstractVsdtRule extends AbstractRule {
 	
-	public AbstractVsdtRule(EObject root, String title) {
-		super(root, title);
-	}
-	
 	/**
 	 * Remove a SequenceFlow from the model. Also unsets its references.
 	 * 
@@ -28,10 +22,6 @@ public abstract class AbstractVsdtRule extends AbstractRule {
 		if (seqFlow != null) {
 			seqFlow.setSource(null);
 			seqFlow.setTarget(null);
-			// FIXME maybe the gate reference could still be of use in the mapping.
-			//       in that case, unset the source/target references
-			//       but do not remove the sequence flow from its container 
-//			seqFlow.setGate(null);
 			deleteFromOwner(seqFlow);
 		}
 	}

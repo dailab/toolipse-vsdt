@@ -8,9 +8,9 @@ import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBlock;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
@@ -20,7 +20,7 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  * 
  * EFFECT: ... 
  */
-public class SplitMergeRule extends AbstractRule {
+public class SplitMergeRule extends AbstractVsdtRule {
 	
 	protected SequenceFlow	_seqFlow11= null;
 	protected SequenceFlow	_seqFlow12= null;
@@ -31,13 +31,6 @@ public class SplitMergeRule extends AbstractRule {
 	protected BpmnBlock		_block= null;
 	protected Gateway		_fork= null;
 	protected Gateway		_merge= null;
-	
-	/**
-	 * Default constructor.
-	 */
-	public SplitMergeRule(EObject root) {
-		super(root,"Split Merge Rule");
-	}
 	
 	@Override
 	protected void resetVars() {

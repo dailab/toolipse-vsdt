@@ -14,8 +14,8 @@ import de.dailab.vsdt.GatewayType;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.VsdtPackage;
-import de.dailab.vsdt.trafo.base.AbstractRule;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
  * Insert Gateway Rule
@@ -31,7 +31,7 @@ import de.dailab.vsdt.trafo.base.AbstractWrapper;
  * EFFECT: a gateway is inserted before and/or after the flow object and connected with the flow object via a sequence flow.
  * the incoming and/or outgoing sequence flows are redirected to the gateways.
  */
-public class InsertGatewayRule extends AbstractRule {
+public class InsertGatewayRule extends AbstractVsdtRule {
 	
 	protected FlowObject _flowObject= null;
 	
@@ -40,12 +40,6 @@ public class InsertGatewayRule extends AbstractRule {
 	public static final String FORK= "__FORK__";
 	public static final String MERGE= "__MERGE__";
 	
-	/**
-	 * Default constructor.
-	 */
-	public InsertGatewayRule(EObject root) {
-		super(root,"Insert Gateway Rule");
-	}
 	
 	@Override
 	protected void resetVars() {

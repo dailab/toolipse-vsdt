@@ -30,13 +30,6 @@ public class ConnectLinkRule extends AbstractVsdtRule {
 	protected Event link1= null;
 	protected Event link2= null;
 	
-	/**
-	 * Default constructor.
-	 */
-	public ConnectLinkRule(EObject root) {
-		super(root,"Connect Link Rule");
-	}
-	
 	@Override
 	protected void resetVars() {
 		link1= null;
