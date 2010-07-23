@@ -2,11 +2,14 @@ package de.dailab.vsdt.trafo.base;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 import de.dailab.vsdt.trafo.base.util.TrafoLog;
+import de.dailab.vsdt.trafo.base.util.Util;
 
 /**
  * The Transformation class encapsulates a number of Rule Layers, that is a List
@@ -39,10 +42,13 @@ public abstract class Transformation {
 	 * layer are applied with match. Continues with next layer once no more rule
 	 * in the current layer is applicable.
 	 */
-	public final void transform(EObject root) {
+	public final void transform(EObject eObject) {
 		if (rules == null) {
 			rules = initRules();
 		}
+
+		Map<EClass,List<EObject>> typeToDomain = Util.createTypeMap(eObject); 
+
 		for (List<AbstractRule> layer : rules) {
 			
 			Queue<AbstractRule> applicableRules= new LinkedList<AbstractRule>();
@@ -57,7 +63,7 @@ public abstract class Transformation {
 					
 					AbstractRule rule = applicableRules.remove();
 					
-					boolean executed= rule.execute(root);
+					boolean executed= rule.execute(eObject, typeToDomain);
 					
 					oldTime= newTime;
 					newTime= System.currentTimeMillis();

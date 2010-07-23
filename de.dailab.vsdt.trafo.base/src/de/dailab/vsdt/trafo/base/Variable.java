@@ -49,7 +49,7 @@ public class Variable {
 	 */
 	public Variable(EClass type, List<EObject> domain) {
 		this.type= type;
-		if (domain!=null) {
+		if (domain != null) {
 			this.domain.addAll(domain);
 		}
 	}
@@ -78,11 +78,11 @@ public class Variable {
 	 * @return	domain reduced by queries
 	 */
 	public List<EObject> getDynamicDomain() {
-		if (this.dynamicDomain == null) {
+		if (dynamicDomain == null) {
 			dynamicDomain = new Vector<EObject>();
 			dynamicDomain.addAll(domain);
 		}
-		return this.dynamicDomain;
+		return dynamicDomain;
 	}
 	
 	/**
@@ -121,21 +121,15 @@ public class Variable {
 			}
 			
 			//Check Queries for Inconsistencies
-			boolean queryOK = true;
-			for (int i = 0; i < queries.size(); i++) {
-				Query query= queries.get(i);
+			for (Query query : queries) {
 				if (! query.eval()){
-					queryOK=false;
-					break;
+					//try next possible value
+					return nextInstance();
 				}
 			}
-			if (queryOK) {
-				//instantiation successful
-				return true;
-			} else {
-				//try next possible value
-				return nextInstance();	
-			}
+			//instantiation successful
+			return true;
+
 		} else {
 			// no possible value found
 			deinstanciate();

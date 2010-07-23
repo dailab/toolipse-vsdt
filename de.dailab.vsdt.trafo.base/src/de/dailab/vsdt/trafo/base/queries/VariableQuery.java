@@ -18,11 +18,11 @@ import de.dailab.vsdt.trafo.base.Variable;
  */
 public class VariableQuery extends Query {
 	
-	/**names of compared attributes: source*/
-	private final String sourceAttribute;
+	/** compared attributes: source */
+	private final EAttribute sourceAttribute;
 	
-	/**names of compared attributes: target*/
-	private final String targetAttribute;
+	/** compared attributes: target */
+	private final EAttribute targetAttribute;
 	
 	/**
 	 * Default constructor.
@@ -32,7 +32,7 @@ public class VariableQuery extends Query {
 	 * @param sourceAttribute	compared attribute at creator
 	 * @param targetAttribute	compared attribute at target
 	 */
-	public VariableQuery(Variable creator, Variable target, String sourceAttribute, String targetAttribute) {
+	public VariableQuery(Variable creator, Variable target, EAttribute sourceAttribute, EAttribute targetAttribute) {
 		super(creator, target);
 		this.sourceAttribute = sourceAttribute;
 		this.targetAttribute = targetAttribute;
@@ -45,19 +45,16 @@ public class VariableQuery extends Query {
 		if(creator.isInstanciated()) {
 			init();
 			//get attribute values
-			EObject sourceObject = creator.getInstanceValue();
-			EAttribute sourceAtt = (EAttribute)sourceObject.eClass().getEStructuralFeature(sourceAttribute);
-			Object sourceValue = sourceObject.eGet(sourceAtt);
-			EAttribute targetAtt = (EAttribute)target.getDomain().get(0).eClass().getEStructuralFeature(targetAttribute);
+			Object sourceValue = creator.getInstanceValue().eGet(sourceAttribute);
 			
 			if (target.isInstanciated()) {
 				//target instantiated: return true if the values match
-				Object targetValue= target.getInstanceValue().eGet(targetAtt);
+				Object targetValue= target.getInstanceValue().eGet(targetAttribute);
 				return matches(sourceValue, targetValue);
 			} else {
 				//target not instantiated: retain matching targets
 				for (EObject targetObject : preDynamic) {
-					Object targetValue= targetObject.eGet(targetAtt);
+					Object targetValue= targetObject.eGet(targetAttribute);
 					if (matches(sourceValue, targetValue)) {
 						values.add(targetObject);
 					}

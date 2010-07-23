@@ -1,5 +1,10 @@
 package de.dailab.vsdt.trafo.base.util;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -69,5 +74,50 @@ public class Util {
 		}
 		return false;
 	}
+	
+	
+
+	/**
+	 * Associate objects inside the instance with their types. This method
+	 * traverses the containment structure beginning with the root element.
+	 * For each element's class and it's super classes a new entry in the
+	 * typeToDomain map is created and the element is inserted in the list.
+	 * Finally the method is called for the element's children.
+	 * 
+	 * @param root	topmost element of the instance (sub-)tree
+	 * @return		map associating EClasses with Lists of EObjects
+	 */
+	public static Map<EClass,List<EObject>> createTypeMap(EObject eObject) {
+		Map<EClass,List<EObject>> typeToDomain = new HashMap<EClass,List<EObject>>();
+		EObject root = Util.getRoot(eObject);
+		fillTypeMap(typeToDomain, root);
+		return typeToDomain;
+	}
+		
+	private static void fillTypeMap(Map<EClass,List<EObject>> typeToDomain, EObject root) {
+		List<EObject> vec = null;
+		
+		// fill types vector with element's class and all super types
+		List<EClass> types = new Vector<EClass>();
+		types.add(root.eClass());
+		types.addAll(root.eClass().getEAllSuperTypes());
+		
+		for (EClass type : types) {
+			if (typeToDomain.get(type) == null) {
+				//initialize with empty vector
+				vec = new Vector<EObject>();
+				typeToDomain.put(type, vec);
+			} else {
+				vec = typeToDomain.get(type);
+			}
+			//put element in domain vector
+			vec.add(root);
+		}
+		//recursive call for child elements
+		for (EObject child : root.eContents()) { 
+			fillTypeMap(typeToDomain, child);
+		}
+	}
+	
 	
 }

@@ -1,10 +1,10 @@
 package de.dailab.vsdt.trafo.base;
 
 import java.util.List;
+import java.util.Map;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
-import de.dailab.vsdt.trafo.base.util.Util;
 
 /**
  * AbstractRule
@@ -16,39 +16,27 @@ import de.dailab.vsdt.trafo.base.util.Util;
  * @author Guenter Kuhns <br>
  */
 public abstract class AbstractRule {
-		
-//	/**the rule's wrapper*/
-//	private AbstractWrapper wrapper = null;
 	
 	/**
 	 * Executes this rule. First a wrapper is instantiated and initialized.
-	 * then a match has to be found. if there is a match, the variables are instantiated
-	 * according to the match and the rule is applied.
+	 * Then a match has to be found. If there is a match, the rule is applied
+	 * according to the match.
 	 * 
 	 * @return	rule applied?
 	 */
-	public final boolean execute(EObject object) {
-		
-		EObject root = Util.getRoot(object);
-		AbstractWrapper wrapper = getWrapper();
-		wrapper.init(root);
-		List<EObject> match = wrapper.getSolution();
-		
-		if (match == null){
-//			reset();
-//			resetVars();
-			return false;
-		} else {
+	public final boolean execute(EObject object, Map<EClass, List<EObject>> typeToDomain) {
 
-//			try {
-//				setWeightedLHS(match);
-				apply(match);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-			
-//			resetVars();
+		// find match for LHS and NACs
+		AbstractWrapper wrapper = getWrapper();
+		wrapper.init(object, typeToDomain);
+		List<EObject> match = wrapper.getSolution();
+
+		// if match found, apply rule's RHS
+		if (match != null) {
+			apply(match);
 			return true;
+		} else {
+			return false;
 		}
 	}
 	
@@ -66,21 +54,5 @@ public abstract class AbstractRule {
 	 * @return	the wrapper
 	 */
 	protected abstract AbstractWrapper getWrapper();
-	
-	
-//	/**
-//	 * instantiates the rule variables according to the match found by the wrapper
-//	 * 
-//	 * @param matches	the match
-//	 */
-//	protected abstract void setWeightedLHS(List<EObject> matches);// throws Exception;
-//	
-	
-//	/**
-//	 * set all vars to null
-//	 */
-//	@Deprecated
-//	protected abstract void resetVars();
-	
 	
 }
