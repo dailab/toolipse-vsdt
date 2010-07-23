@@ -51,7 +51,6 @@
   <vsdt:BusinessProcessSystem xmi:id="_WH2r0NN8Ed6IL7PHwv22lw" name="Text-Gen Diagram" documentation="This Diagram is used for testing the Text Generation Capabilities of the VSDT. Here the focus is not so much on executability but on good documentation." id="_oO29EAzBEd6Oi9RfBDu6Tw" version="0.1" author="Tobias Küster" language="Englisch" expressionLanguage="VXL" creationDate="2009-03-09T16:47:43.585+0100" modificationDate="2009-03-10T16:38:09.686+0100">
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_WH2r0dN8Ed6IL7PHwv22lw" name="Answering Support Call" documentation="This Business Process is about handling incoming support calls." id="_fvliInz4Ed6pGOp9FzmQww" participants="_WH2sENN8Ed6IL7PHwv22lw _WH2sEtN8Ed6IL7PHwv22lw _WH2sEdN8Ed6IL7PHwv22lw">
       <pools xmi:type="vsdt:Pool" xmi:id="_WH2r0tN8Ed6IL7PHwv22lw" name="Customer Support" documentation="This Pool illustrates the process of Customer Support." id="_yxZuwAzBEd6Oi9RfBDu6Tw" participant="_WH2sENN8Ed6IL7PHwv22lw">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_WH2r09N8Ed6IL7PHwv22lw" name="Customer Support_Process" id="_yxZuxAzBEd6Oi9RfBDu6Tw"/>
         <lanes xmi:type="vsdt:Lane" xmi:id="_WH2r1NN8Ed6IL7PHwv22lw" name="Help Desk" documentation="This Lane represents the Help Desk, which receives all incoming trouble tickets and will look up the answers for known problems or escalate the ticket to the technical support." id="_yxZuwgzBEd6Oi9RfBDu6Tw">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_WH2r1dN8Ed6IL7PHwv22lw" name="Receive Ticket" documentation="In the ticket the customer describes his poblem." id="_BR48sAzCEd6Oi9RfBDu6Tw" trigger="MESSAGE" message="_WH2sFdN8Ed6IL7PHwv22lw" implementation="_WH3S4tN8Ed6IL7PHwv22lw">
             <timeCycle xmi:type="vsdt:Expression" xmi:id="_WH2r1tN8Ed6IL7PHwv22lw" expression="123"/>
@@ -59,7 +58,7 @@
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_WH2r19N8Ed6IL7PHwv22lw" name="File Ticket" documentation="The ticked is filed, so it can be used for statistical purposes, such as which problems occured how often and from what kinds of users." id="_F6_OwAzCEd6Oi9RfBDu6Tw" activityType="USER"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_WH2r2NN8Ed6IL7PHwv22lw" name="End Process" documentation="The process terminates." id="_LgpPsAzCEd6Oi9RfBDu6Tw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_WH2r2dN8Ed6IL7PHwv22lw" name="Look up answer in Database" documentation="The problem turned out to be a known problem and the answer can be looked up in some sort of problem-solution-database." id="_N_-Y4AzCEd6Oi9RfBDu6Tw" activityType="USER" inMessage="_WH2sGNN8Ed6IL7PHwv22lw" outMessage="_WH2sGtN8Ed6IL7PHwv22lw" implementation="_WH3S5dN8Ed6IL7PHwv22lw"/>
-          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_WH2r2tN8Ed6IL7PHwv22lw" name="Known Problem?" documentation="It has to be decided, whether the problem is a known problem, in which case the anser can simply be looked up." id="_TJNjkAzCEd6Oi9RfBDu6Tw" markerVisible="true"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_WH2r2tN8Ed6IL7PHwv22lw" name="Known Problem?" documentation="It has to be decided, whether the problem is a known problem, in which case the anser can simply be looked up." id="_TJNjkAzCEd6Oi9RfBDu6Tw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_WH2r29N8Ed6IL7PHwv22lw" name="Send Answer" documentation="The solution to the problem is sent back to the customer." id="_aj8PwAzCEd6Oi9RfBDu6Tw" activityType="SEND" inMessage="_WH2sFtN8Ed6IL7PHwv22lw" implementation="_WH3S4tN8Ed6IL7PHwv22lw"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_WH2r3NN8Ed6IL7PHwv22lw" id="_cSVEMAzCEd6Oi9RfBDu6Tw"/>
         </lanes>
@@ -69,7 +68,7 @@
               <timeCycle xmi:type="vsdt:Expression" xmi:id="_WH2r4NN8Ed6IL7PHwv22lw" expression="'30 minutes'"/>
             </boundaryEvents>
           </containedFlowObjects>
-          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_WH2r4dN8Ed6IL7PHwv22lw" name="Kind of Problem?" documentation="Determine whether the problem is a simple usage problem, or a bug in the system, or both." id="__5qwEAzCEd6Oi9RfBDu6Tw" gatewayType="OR" markerVisible="true"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_WH2r4dN8Ed6IL7PHwv22lw" name="Kind of Problem?" documentation="Determine whether the problem is a simple usage problem, or a bug in the system, or both." id="__5qwEAzCEd6Oi9RfBDu6Tw" gatewayType="OR"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_WH2r4tN8Ed6IL7PHwv22lw" name="Inform Developer" documentation="The problem turned out to be a bug in the system. In this case the technical support crew will create a bug report and send it to the development team." id="_i3gL8AzDEd6Oi9RfBDu6Tw" activityType="SEND" inMessage="_WH2sF9N8Ed6IL7PHwv22lw" implementation="_WH3S49N8Ed6IL7PHwv22lw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_WH2r49N8Ed6IL7PHwv22lw" name="Describe Solution" documentation="The problem turned out to be a usage problem. Describe a detailled solution what the user did wrong and how to do it better." id="_waP_QAzDEd6Oi9RfBDu6Tw" activityType="USER"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_WH2r5NN8Ed6IL7PHwv22lw" name="Add to Database" documentation="The solution to the problem is added to the data base of known problems and solutions, so it can be simply looked up in case the problem occures again." id="_4ujXwAzDEd6Oi9RfBDu6Tw" activityType="SEND"/>
@@ -77,8 +76,7 @@
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_WH2r5tN8Ed6IL7PHwv22lw" name="Development" documentation="This Pool stands for the Development department, being further distinguished into bugfixing and others." id="_hK98MAzEEd6Oi9RfBDu6Tw" participant="_WH2sEtN8Ed6IL7PHwv22lw">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_WH2r59N8Ed6IL7PHwv22lw" name="Development_Process" id="_hLHtMgzEEd6Oi9RfBDu6Tw" processType="COLLABORATION"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_WH2r6NN8Ed6IL7PHwv22lw" name="Bugfixing Dep." id="_hLHtMAzEEd6Oi9RfBDu6Tw" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_WH2r6NN8Ed6IL7PHwv22lw" name="Bugfixing Dep." id="_hLHtMAzEEd6Oi9RfBDu6Tw">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_WH2r6dN8Ed6IL7PHwv22lw" name="Receive Bug" documentation="The development team receives a bug report and immediately drops everything else to fix the bug." id="_lU-egAzEEd6Oi9RfBDu6Tw" trigger="MESSAGE" message="_WH2sF9N8Ed6IL7PHwv22lw" implementation="_WH3S49N8Ed6IL7PHwv22lw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_WH2r6tN8Ed6IL7PHwv22lw" name="Work day and night to fix the bug" documentation="The heroic programmer works day and night looking for a treatment to the bug, resting only for an occasional travel to the coffee machine..." id="_miL4gAzEEd6Oi9RfBDu6Tw" adHoc="true" activityType="EMBEDDED">
             <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_WH2r69N8Ed6IL7PHwv22lw" expression="'bug has been fixed'"/>
@@ -95,7 +93,6 @@
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_WH2r89N8Ed6IL7PHwv22lw" name="Customer" documentation="This is a blackbox Pool which represents the customer making the call at the help desk. No internal process is shown for this Pool." id="_4-HEcAzIEd6UAPS6PsSOjQ" participant="_WH2sEdN8Ed6IL7PHwv22lw">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_WH2r9NN8Ed6IL7PHwv22lw" name="Customer_Process" id="_4-Z_YgzIEd6UAPS6PsSOjQ" processType="ABSTRACT"/>
       </pools>
       <artifacts xmi:type="vsdt:DataObject" xmi:id="_KTRcoHOwEd-5uaez8HAwUg" name="Trouble Ticket" id="_KTQ1kHOwEd-5uaez8HAwUg"/>
       <artifacts xmi:type="vsdt:DataObject" xmi:id="_RIV3AXOwEd-5uaez8HAwUg" name="Bug Report" id="_RIV3AHOwEd-5uaez8HAwUg"/>

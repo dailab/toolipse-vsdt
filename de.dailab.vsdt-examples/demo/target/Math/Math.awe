@@ -64,7 +64,7 @@
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_l6QnQjy8Ed-pAo9aPn5Xfw" points="[-39, 23, 103, -56]$[-144, 99, -2, 20]"/>
     </edges>
   </notation:Diagram>
-  <agentworld:AgentWorld xmi:id="_hNK48jyvEd-mKpG_NOOMaw" name="Math" namespace="Math" description="" author="Tobias Küster" date="2009-08-27T17:05:44.025+0200" version="0.1" defaultNamespace="" defaultStarterPackage="">
+  <agentworld:AgentWorld xmi:id="_hNK48jyvEd-mKpG_NOOMaw" name="Math" namespace="Math" author="Tobias Küster" date="2009-08-27T17:05:44.025+0200" version="0.1">
     <hosts xmi:type="agentworld:Role" xmi:id="_hNK48zyvEd-mKpG_NOOMaw" name="MathematicanRole" componentLinks="_hNK49TyvEd-mKpG_NOOMaw _hNK49zyvEd-mKpG_NOOMaw" subAgents="_hX_V8Dy8Ed-pAo9aPn5Xfw"/>
     <hosts xmi:type="agentworld:Component" xmi:id="_hNK49DyvEd-mKpG_NOOMaw" name="ExtractRoot_Mathematican" type="_serviceType" users="_hNK49TyvEd-mKpG_NOOMaw" URI="Mathematican/ExtractRoot_Mathematican.jadl"/>
     <hosts xmi:type="agentworld:ComponentLink" xmi:id="_hNK49TyvEd-mKpG_NOOMaw" component="_hNK49DyvEd-mKpG_NOOMaw" user="_hNK48zyvEd-mKpG_NOOMaw"/>

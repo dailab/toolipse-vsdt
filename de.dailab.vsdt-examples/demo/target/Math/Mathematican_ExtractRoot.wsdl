@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<wsdl:definitions xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ExtractRoot/WSDL/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ExtractRoot/WSDL/">
+<wsdl:definitions xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://Mathematican_ExtractRoot/WSDL/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://Mathematican_ExtractRoot/WSDL/">
   <plnk:partnerLinkType name="Mathematican_PLT">
     <plnk:role name="Mathematican_myRole" portType="tns:TestService"/>
   
@@ -13,7 +13,7 @@
     <wsdl:part name="result" type="xsd:double"/>
     <wsdl:part name="message" type="xsd:string"/>
   </wsdl:message>
-  <wsdl:message name="ExtractRoot_Process_ProcessDataMessage">
+  <wsdl:message name="Mathematican_ProcessDataMessage">
     <wsdl:part name="number" type="xsd:double"/>
     <wsdl:part name="current" type="xsd:double"/>
     <wsdl:part name="eps" type="xsd:double"/>

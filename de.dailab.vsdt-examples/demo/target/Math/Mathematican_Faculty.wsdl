@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ASCII"?>
+<wsdl:definitions xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://Mathematican_Faculty/WSDL/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://Mathematican_Faculty/WSDL/">
+  <plnk:partnerLinkType name="Mathematican_PLT">
+    <plnk:role name="Mathematican_myRole" portType="tns:TestService"/>
+  
+    <plnk:role name="Mathematican_partnerRole" portType="tns:TestService"/>
+  </plnk:partnerLinkType>
+  <wsdl:message name="GetFacultyRequest_MessageDataMessage">
+    <wsdl:part name="param" type="int"/>
+  </wsdl:message>
+  <wsdl:message name="GetFacultyResponse_MessageDataMessage">
+    <wsdl:part name="result" type="int"/>
+  </wsdl:message>
+  <wsdl:message name="Mathematican_ProcessDataMessage">
+    <wsdl:part name="n" type="int"/>
+    <wsdl:part name="p" type="int"/>
+  </wsdl:message>
+  <wsdl:portType name="TestService">
+    <wsdl:operation name="Faculty">
+      <wsdl:input message="tns:GetFacultyRequest_MessageDataMessage"/>
+      <wsdl:output message="tns:GetFacultyResponse_MessageDataMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -37,15 +37,13 @@
   <vsdt:BusinessProcessSystem xmi:id="_j6m_INN-Ed6IL7PHwv22lw" name="Math" documentation="Process Diagrams to be transformed to both BPEL and JIAC" id="_APPFIIaNEd6vMcmgfX7H1A" version="0.1" author="Tobias Küster" expressionLanguage="VSDT Expression Language" creationDate="2009-08-11T17:38:23.218+0200" modificationDate="2009-08-27T17:05:44.025+0200">
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_j6m_IdN-Ed6IL7PHwv22lw" name="Extract Root" documentation="This diagram contains a few pools representing simple algorithms. While algorithms surely are not a typical usecase for BPMN, they do well for presenting the capabilities of the VSDT. The algorithms can equally well be translated to BPEL and JIAC, they can be interpreted by the VSDT's built-in interpreter and a textual representation can be generated." id="_fkHEAIaSEd6vMcmgfX7H1A" participants="_j6oNR9N-Ed6IL7PHwv22lw">
       <pools xmi:type="vsdt:Pool" xmi:id="_j6m_ItN-Ed6IL7PHwv22lw" name="Mathematican" documentation="In this process the square root of the input value is approximated." id="_mkhLsIaSEd6vMcmgfX7H1A" participant="_j6oNR9N-Ed6IL7PHwv22lw" boundaryVisible="false">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_j6m_I9N-Ed6IL7PHwv22lw" name="Mathematican_Process" id="_mkhLsoaSEd6vMcmgfX7H1A">
-          <properties xmi:type="vsdt:Property" xmi:id="_j6m_JNN-Ed6IL7PHwv22lw" name="number" type="double"/>
-          <properties xmi:type="vsdt:Property" xmi:id="_j6m_JdN-Ed6IL7PHwv22lw" name="current" type="double"/>
-          <properties xmi:type="vsdt:Property" xmi:id="_j6m_JtN-Ed6IL7PHwv22lw" name="eps" type="double"/>
-          <properties xmi:type="vsdt:Property" xmi:id="_j6m_J9N-Ed6IL7PHwv22lw" name="lastLesser" type="double"/>
-          <properties xmi:type="vsdt:Property" xmi:id="_j6m_KNN-Ed6IL7PHwv22lw" name="lastGreater" type="double"/>
-          <properties xmi:type="vsdt:Property" xmi:id="_j6m_KdN-Ed6IL7PHwv22lw" name="d" type="double"/>
-        </process>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_j6m_KtN-Ed6IL7PHwv22lw" id="_mkhLsYaSEd6vMcmgfX7H1A" boundaryVisible="false">
+        <properties xmi:type="vsdt:Property" xmi:id="_j6m_JNN-Ed6IL7PHwv22lw" name="number" type="double"/>
+        <properties xmi:type="vsdt:Property" xmi:id="_j6m_JdN-Ed6IL7PHwv22lw" name="current" type="double"/>
+        <properties xmi:type="vsdt:Property" xmi:id="_j6m_JtN-Ed6IL7PHwv22lw" name="eps" type="double"/>
+        <properties xmi:type="vsdt:Property" xmi:id="_j6m_J9N-Ed6IL7PHwv22lw" name="lastLesser" type="double"/>
+        <properties xmi:type="vsdt:Property" xmi:id="_j6m_KNN-Ed6IL7PHwv22lw" name="lastGreater" type="double"/>
+        <properties xmi:type="vsdt:Property" xmi:id="_j6m_KdN-Ed6IL7PHwv22lw" name="d" type="double"/>
+        <lanes xmi:type="vsdt:Lane" xmi:id="_j6m_KtN-Ed6IL7PHwv22lw" id="_mkhLsYaSEd6vMcmgfX7H1A">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_j6m_K9N-Ed6IL7PHwv22lw" name="start" documentation="The input message is received and its payload is bound to the respective process properties." id="_qJMMUIaSEd6vMcmgfX7H1A" trigger="MESSAGE" message="_j6oNSNN-Ed6IL7PHwv22lw" implementation="_j6oNTtN-Ed6IL7PHwv22lw">
             <assignments xmi:type="vsdt:Assignment" xmi:id="_j6nmMNN-Ed6IL7PHwv22lw" to="_j6m_JNN-Ed6IL7PHwv22lw" assignTime="END">
               <from xmi:type="vsdt:Expression" xmi:id="_MAaRsEyREd-Ilfmw5Rk-Mw" expression="input"/>
@@ -55,7 +53,7 @@
             </assignments>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_j6nmNNN-Ed6IL7PHwv22lw" name="" documentation="This is the merge for the loop." id="_EOXfUJIhEd6PkL1AU2eJuA"/>
-          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_j6nmNdN-Ed6IL7PHwv22lw" name="input valid?" documentation="Here it is checked whether the input is valid. Epsilon must be greater than zero and the number must not be negative." id="_VzrwMJIhEd6PkL1AU2eJuA" markerVisible="true"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_j6nmNdN-Ed6IL7PHwv22lw" name="input valid?" documentation="Here it is checked whether the input is valid. Epsilon must be greater than zero and the number must not be negative." id="_VzrwMJIhEd6PkL1AU2eJuA"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_j6nmNtN-Ed6IL7PHwv22lw" name="invalid input" documentation="In case of invalid input, the return value will be zero. Further, an error message is returned." id="_aH9BwJIhEd6PkL1AU2eJuA" trigger="MESSAGE" message="_j6oNS9N-Ed6IL7PHwv22lw" implementation="_j6oNTtN-Ed6IL7PHwv22lw">
             <assignments xmi:type="vsdt:Assignment" xmi:id="_j6nmN9N-Ed6IL7PHwv22lw" to="_j6oNTNN-Ed6IL7PHwv22lw">
               <from xmi:type="vsdt:Expression" xmi:id="_j6nmONN-Ed6IL7PHwv22lw" expression="0"/>
@@ -80,7 +78,7 @@
               <from xmi:type="vsdt:Expression" xmi:id="_WXs1oEyREd-Ilfmw5Rk-Mw" expression="number - (current * current)"/>
             </assignments>
           </containedFlowObjects>
-          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_j6nmRdN-Ed6IL7PHwv22lw" name="eps greater than d?" documentation="Test whether the delta is greater than epilon. In this case the approximation continues." id="_H45I8JIkEd6PkL1AU2eJuA" markerVisible="true"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_j6nmRdN-Ed6IL7PHwv22lw" name="eps greater than d?" documentation="Test whether the delta is greater than epilon. In this case the approximation continues." id="_H45I8JIkEd6PkL1AU2eJuA" />
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_j6nmRtN-Ed6IL7PHwv22lw" name="return result" documentation="Returns the result of the approximation and a success message." id="_Ki8UYJIkEd6PkL1AU2eJuA" trigger="MESSAGE" message="_j6oNS9N-Ed6IL7PHwv22lw" implementation="_j6oNTtN-Ed6IL7PHwv22lw">
             <assignments xmi:type="vsdt:Assignment" xmi:id="_j6nmR9N-Ed6IL7PHwv22lw" to="_j6oNTNN-Ed6IL7PHwv22lw">
               <from xmi:type="vsdt:Expression" xmi:id="_X-P8sEyREd-Ilfmw5Rk-Mw" expression="current"/>
@@ -89,7 +87,7 @@
               <from xmi:type="vsdt:Expression" xmi:id="_j6nmStN-Ed6IL7PHwv22lw" expression="'square root found'"/>
             </assignments>
           </containedFlowObjects>
-          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_j6nmS9N-Ed6IL7PHwv22lw" name="too large?" documentation="Checks whether the currently tested number is too large or too small." id="_fkLSgJIkEd6PkL1AU2eJuA" markerVisible="true"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_j6nmS9N-Ed6IL7PHwv22lw" name="too large?" documentation="Checks whether the currently tested number is too large or too small." id="_fkLSgJIkEd6PkL1AU2eJuA" />
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_j6nmTNN-Ed6IL7PHwv22lw" name="try smaller number" documentation="The currently tested number is used as the new upper bound and is then set to be the average of itself and the lower bound." id="_NDizcJIlEd6PkL1AU2eJuA">
             <assignments xmi:type="vsdt:Assignment" xmi:id="_j6nmTdN-Ed6IL7PHwv22lw" to="_j6m_KNN-Ed6IL7PHwv22lw" assignTime="END">
               <from xmi:type="vsdt:Expression" xmi:id="_hnKXsEyREd-Ilfmw5Rk-Mw" expression="current"/>
@@ -131,11 +129,9 @@
     </businessProcesses>
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_WF0msSH4Ed-JbZfg5MwSoA" name="Faculty" id="_WF0msCH4Ed-JbZfg5MwSoA" participants="_j6oNR9N-Ed6IL7PHwv22lw">
       <pools xmi:type="vsdt:Pool" xmi:id="_cTHPYCH4Ed-JbZfg5MwSoA" name="Mathematican" id="_cTGoUCH4Ed-JbZfg5MwSoA" participant="_j6oNR9N-Ed6IL7PHwv22lw" boundaryVisible="false">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_cTJroCH4Ed-JbZfg5MwSoA" name="Mathematican_Process" id="_cTJEkiH4Ed-JbZfg5MwSoA">
-          <properties xmi:type="vsdt:Property" xmi:id="_wRu58CH4Ed-JbZfg5MwSoA" name="n" type="int"/>
-          <properties xmi:type="vsdt:Property" xmi:id="_y0tNACH4Ed-JbZfg5MwSoA" name="p" type="int"/>
-        </process>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_cTJEkSH4Ed-JbZfg5MwSoA" id="_cTJEkCH4Ed-JbZfg5MwSoA" boundaryVisible="false">
+        <properties xmi:type="vsdt:Property" xmi:id="_wRu58CH4Ed-JbZfg5MwSoA" name="n" type="int"/>
+        <properties xmi:type="vsdt:Property" xmi:id="_y0tNACH4Ed-JbZfg5MwSoA" name="p" type="int"/>
+        <lanes xmi:type="vsdt:Lane" xmi:id="_cTJEkSH4Ed-JbZfg5MwSoA" id="_cTJEkCH4Ed-JbZfg5MwSoA">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_c2FZkSH4Ed-JbZfg5MwSoA" name="start" id="_c2FZkCH4Ed-JbZfg5MwSoA" trigger="MESSAGE" message="_Jzfc8CH5Ed-JbZfg5MwSoA" implementation="_R6XdcCH5Ed-JbZfg5MwSoA">
             <assignments xmi:type="vsdt:Assignment" xmi:id="_Y_xZ4CH5Ed-JbZfg5MwSoA" to="_wRu58CH4Ed-JbZfg5MwSoA" assignTime="END">
               <from xmi:type="vsdt:Expression" xmi:id="_lrAdEEyQEd-Ilfmw5Rk-Mw" expression="param"/>
@@ -144,7 +140,7 @@
               <from xmi:type="vsdt:Expression" xmi:id="_hjj_4CH5Ed-JbZfg5MwSoA" expression="1"/>
             </assignments>
           </containedFlowObjects>
-          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_hUDZsSH4Ed-JbZfg5MwSoA" name="check input" id="_hUDZsCH4Ed-JbZfg5MwSoA" markerVisible="true"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_hUDZsSH4Ed-JbZfg5MwSoA" name="check input" id="_hUDZsCH4Ed-JbZfg5MwSoA" />
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_oGrkESH4Ed-JbZfg5MwSoA" name="Multiply" id="_oGrkECH4Ed-JbZfg5MwSoA">
             <assignments xmi:type="vsdt:Assignment" xmi:id="_bynU8CH5Ed-JbZfg5MwSoA" to="_y0tNACH4Ed-JbZfg5MwSoA">
               <from xmi:type="vsdt:Expression" xmi:id="_ovycsEyQEd-Ilfmw5Rk-Mw" expression="p * n"/>
@@ -153,7 +149,7 @@
               <from xmi:type="vsdt:Expression" xmi:id="_pUCZQEyQEd-Ilfmw5Rk-Mw" expression="n - 1"/>
             </assignments>
           </containedFlowObjects>
-          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_2rMWYSH4Ed-JbZfg5MwSoA" name="greater than one?" id="_2rMWYCH4Ed-JbZfg5MwSoA" markerVisible="true"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_2rMWYSH4Ed-JbZfg5MwSoA" name="greater than one?" id="_2rMWYCH4Ed-JbZfg5MwSoA" />
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="__5FCQSH4Ed-JbZfg5MwSoA" id="__5FCQCH4Ed-JbZfg5MwSoA" trigger="MESSAGE" message="_J1ZhcCH5Ed-JbZfg5MwSoA" implementation="_R6XdcCH5Ed-JbZfg5MwSoA">
             <assignments xmi:type="vsdt:Assignment" xmi:id="_af1ecCH5Ed-JbZfg5MwSoA" to="_NubBcCH5Ed-JbZfg5MwSoA">
               <from xmi:type="vsdt:Expression" xmi:id="_1srZYE0eEd-eKeV_XTaOaA" expression="0-1"/>
