@@ -11,10 +11,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import de.dailab.vsdt.AbstractProcess;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
+import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.Association;
 import de.dailab.vsdt.ConnectingObject;
 import de.dailab.vsdt.DataObject;
 import de.dailab.vsdt.Event;
+import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.GatewayType;
@@ -156,6 +158,12 @@ public class VsdtHelper {
 		}
 		if (object instanceof SequenceFlow) {
 			return getVisibleProperties(((SequenceFlow) object).getSource());
+		}
+		if (object instanceof Expression) {
+			return getVisibleProperties(object.eContainer());
+		}
+		if (object instanceof Assignment) {
+			return getVisibleProperties(object.eContainer());			
 		}
 		if (object instanceof FlowObject) {
 			List<Property> properties = new ArrayList<Property>();
