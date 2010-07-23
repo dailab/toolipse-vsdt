@@ -32,11 +32,11 @@ public class BoundaryEventBlockRule extends AbstractVsdtRule {
 	protected Activity 		_activity= null;
 	protected Intermediate	_intermediate= null;
 	
-	@Override
-	protected void resetVars() {
-		_activity= null;
-		_intermediate= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_activity= null;
+//		_intermediate= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
@@ -50,7 +50,9 @@ public class BoundaryEventBlockRule extends AbstractVsdtRule {
 	 * - redirect sequence flows
 	 */
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_activity=		(Activity)		matches.get(RuleWrapper.ACTIVITY);
+		_intermediate=	(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
 		BpmnEventHandlerBlock ehBlock= StrucBpmnFactory.eINSTANCE.createBpmnEventHandlerBlock();
 		
 		FlowObjectContainer container= _activity.getParent();
@@ -63,11 +65,11 @@ public class BoundaryEventBlockRule extends AbstractVsdtRule {
 		
 	}
 
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_activity=		(Activity)		matches.get(RuleWrapper.ACTIVITY);
-		_intermediate=	(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_activity=		(Activity)		matches.get(RuleWrapper.ACTIVITY);
+//		_intermediate=	(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
+//	}
 	
 	/**
 	 * wrapper class for this rule

@@ -52,18 +52,18 @@ public class BoundaryEventLoopRule extends AbstractVsdtRule {
 	protected FlowObject 			_foLoop= null;
 	protected FlowObject 			_foComp= null;
 	
-	@Override
-	protected void resetVars() {
-		_seqFlowGL= null;
-		_seqFlowLA= null;
-		_seqFlowIC= null;
-		_seqFlowCG= null;
-		_intermediate= null;
-		_activity= null;
-		_gateway= null;
-		_foLoop= null;
-		_foComp= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_seqFlowGL= null;
+//		_seqFlowLA= null;
+//		_seqFlowIC= null;
+//		_seqFlowCG= null;
+//		_intermediate= null;
+//		_activity= null;
+//		_gateway= null;
+//		_foLoop= null;
+//		_foComp= null;
+//	}
 	
 	/**
 	 * - create BpmnEventHandlerCase
@@ -72,7 +72,18 @@ public class BoundaryEventLoopRule extends AbstractVsdtRule {
 	 * - TODO name further steps
 	 */
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_ehBlock=		(BpmnEventHandlerBlock)matches.get(RuleWrapper.EH_BLOCK);
+		_seqFlowGL=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWGL);
+		_seqFlowLA=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWLA);
+		_seqFlowIC=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWIC);
+		_seqFlowCG=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWCG);
+		_intermediate=	(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
+		_activity=		(Activity)		matches.get(RuleWrapper.ACTIVITY);
+		_gateway=		(Gateway)		matches.get(RuleWrapper.GATEWAY);
+		_foLoop=			(FlowObject)	matches.get(RuleWrapper.FO_LOOP);
+		_foComp=			(FlowObject)	matches.get(RuleWrapper.FO_COMP);
+		
 		final BusinessProcessDiagram bpd= _gateway.getPool().getParent();
 		
 		// create Event Handler Case
@@ -157,19 +168,19 @@ public class BoundaryEventLoopRule extends AbstractVsdtRule {
 		return new RuleWrapper();
 	}
 
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_ehBlock=		(BpmnEventHandlerBlock)matches.get(RuleWrapper.EH_BLOCK);
-		_seqFlowGL=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWGL);
-		_seqFlowLA=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWLA);
-		_seqFlowIC=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWIC);
-		_seqFlowCG=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWCG);
-		_intermediate=	(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
-		_activity=		(Activity)		matches.get(RuleWrapper.ACTIVITY);
-		_gateway=		(Gateway)		matches.get(RuleWrapper.GATEWAY);
-		_foLoop=			(FlowObject)	matches.get(RuleWrapper.FO_LOOP);
-		_foComp=			(FlowObject)	matches.get(RuleWrapper.FO_COMP);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_ehBlock=		(BpmnEventHandlerBlock)matches.get(RuleWrapper.EH_BLOCK);
+//		_seqFlowGL=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWGL);
+//		_seqFlowLA=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWLA);
+//		_seqFlowIC=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWIC);
+//		_seqFlowCG=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWCG);
+//		_intermediate=	(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
+//		_activity=		(Activity)		matches.get(RuleWrapper.ACTIVITY);
+//		_gateway=		(Gateway)		matches.get(RuleWrapper.GATEWAY);
+//		_foLoop=			(FlowObject)	matches.get(RuleWrapper.FO_LOOP);
+//		_foComp=			(FlowObject)	matches.get(RuleWrapper.FO_COMP);
+//	}
 	
 	/**
 	 * wrapper class for this rule

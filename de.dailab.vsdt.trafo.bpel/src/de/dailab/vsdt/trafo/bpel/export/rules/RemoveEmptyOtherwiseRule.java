@@ -9,6 +9,7 @@ import org.xmlsoap.schemas.ws._2003._03.business.process.TActivityContainer;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TSwitch;
 
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.base.util.Util;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
@@ -25,10 +26,10 @@ public class RemoveEmptyOtherwiseRule extends AbstractVsdtRule {
 	public static final int OTHERWISE= 0;
 	
 	
-	@Override
-	protected void resetVars() {
-		otherwise= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		otherwise= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
@@ -36,14 +37,16 @@ public class RemoveEmptyOtherwiseRule extends AbstractVsdtRule {
 	}
 
 	@Override
-	protected void apply() {
-		deleteFromOwner(otherwise);
+	protected void apply(List<EObject> matches){
+		otherwise=	(TActivityContainer)	matches.get(OTHERWISE);
+		
+		Util.deleteFromOwner(otherwise);
 	}
 	
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		otherwise=	(TActivityContainer)	matches.get(OTHERWISE);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		otherwise=	(TActivityContainer)	matches.get(OTHERWISE);
+//	}
 	
 	/**
 	 * wrapper for the rule

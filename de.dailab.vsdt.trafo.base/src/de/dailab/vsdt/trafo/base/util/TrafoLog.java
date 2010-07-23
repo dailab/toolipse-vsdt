@@ -11,8 +11,8 @@ import org.apache.log4j.RollingFileAppender;
 import org.apache.log4j.WriterAppender;
 
 /**
- * Just a simple class to collect logged events and error messages
- * Delegating to a logging framework while providing some additional functionality.
+ * Just a simple class to collect logged events and error messages, delegating
+ * to a logging framework while providing some additional functionality.
  * 
  * @author tkuester
  */

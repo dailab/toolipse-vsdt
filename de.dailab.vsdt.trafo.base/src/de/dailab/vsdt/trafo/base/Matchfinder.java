@@ -17,113 +17,113 @@ import org.eclipse.emf.ecore.EObject;
  */
 public class Matchfinder {
 	
-	/**current set of evaluated LHS variables*/
-	private List<Variable> lhsVars = new ArrayList<Variable>();
+	/** Current set of evaluated LHS variables */
+	private final List<Variable> lhsVars;
 	
-	/**all sets of evaluated NAC variables*/
-	private List<List<Variable>> nacVars = new ArrayList<List<Variable>>();
-	
-	/**current match*/
-	private List<EObject> match= null;
+	/** All sets of evaluated NAC variables */
+	private final List<List<Variable>> nacVars;
 	
 	/**
 	 * Default constructor.
 	 * 
-	 * @param lhsVars	set of evaluated LHS variables
-	 * @param nacVars	set of all NAC variables
+	 * @param lhsVars	set of variables for LHS
+	 * @param nacVars	sets of variables for all NACs
 	 */
 	public Matchfinder(List<Variable> lhsVars, List<List<Variable>> nacVars){
 		this.lhsVars = lhsVars;
 		this.nacVars = nacVars;
 	}
-		
 	
-	// EVALUATION OF LHS
-	
+
 	/**
-	 * start backtracking algorithm
+	 * Start backtracking algorithm. The search will return the first match for
+	 * the given LHS and NACs instantiating all the LHS variables according to
+	 * the LHS without violating the NACs
+	 * 
+	 * @return	Match or null
 	 */
-	public boolean findMatches() {
+	public List<EObject> findMatches() {
 		return findMatches(0);
 	}
 	
 	
+	// EVALUATION OF LHS
+	
 	/**
-	 * Find a match for LHS by a (restricted) depth-first search.
-	 * Variables are instantiated in their order.
+	 * Find a match for LHS variables by backtracking. The Variables are
+	 * instantiated one after another
 	 */
-	private boolean findMatches(int index) {
+	private List<EObject> findMatches(int index) {
 		
+		// all LHS variables instantiated? 
 		if (index >= lhsVars.size()) {
-			//all LHS variables instantiated: copy instance values to matches-list
-			match = new ArrayList<EObject>();
+			// create potential match
+			List<EObject> match = new ArrayList<EObject>(lhsVars.size());
 			for (Variable variable : lhsVars) {
 				match.add(variable.getInstanceValue());
 			}
-			
-			//check NACs for this match, return if match is OK
-			return evalAllNacsForMatch();
+			// check NACs for this match, return match if OK, else null
+			return evalAllNacsForMatch(match);
 		}
-		
+
+		// try next possible instantiation for this variable 
 		Variable var = lhsVars.get(index);
-		
-		boolean result = var.nextInstance();
-		while (result) {
-			//try next value			
-			if (findMatches(index + 1)) {
-				//match for current variable found, try next variable
-				return true;
+		while (var.nextInstance()) {
+			// find matches for next variables in LHS
+			List<EObject> match = findMatches(index + 1);
+			// match found for this instantiation?
+			if (match != null) {
+				return match;
 			}
-			result= var.nextInstance();
 		}
 		
-		return false;
+		return null;
 	}
 
 	
 	// EVALUATION OF NACS
 	
 	/**
-	 * evaluate all the NACs for the match found at this point.
+	 * Try to find a match for one of the NACs instantiating the variables
+	 * according to the match.
+	 *
+	 * @param match		a match for the LHS variables 
+	 * @return			null if a match is found for any of the NACs, otherwise the match
 	 */
-	private boolean evalAllNacsForMatch() {
+	private List<EObject> evalAllNacsForMatch(List<EObject> match) {
+		// for all the NACs in the list...
 		for (List<Variable> nac : nacVars) {
-			setNacVariables(nac, match);
+			// instantiate the NAC variables according to the match
+			for (int i=0; i < match.size() && i < nac.size(); i++) {
+				if (nac.get(i) != null) {
+					nac.get(i).setDomain(match.get(i));
+				}
+			}
+			
+			// return null, if a match can be found for the remaining NAC variables
 			if (findNacMatch(nac, 0)) {
-				match= null;
-				return false;
+				return null;
 			}
 		}
-		return true;
-	}
-	
-	
-	private void setNacVariables(List<Variable> nac, List<EObject> match) {
-		for (int i=0; i < match.size() && i < nac.size(); i++) {
-			if (nac.get(i) != null) {
-				nac.get(i).setDomain(match.get(i));
-			}
-		}
+		return match;
 	}
 	
 	
 	/**
-	 * Find a match for the current NAC by a (restricted) depth-first search.
-	 * mostly the same as for LHS-variables
+	 * Try to find a match for the NAC variables using backtracking. Matching
+	 * works mostly like the one for the LHS variables.
 	 * 
 	 * @return true, if the NAC did apply
 	 */
-	
 	private boolean findNacMatch(List<Variable> nac, int index) {
 		
+		// all NAC variables instantiated -> match found!
 		if (index >= nac.size()) {
-			//NAC match found
-			for (int i = 0; i < nac.size(); i++) {
-				//de-instantiate variables
-				Variable current = nac.get(i);
-				if (current != null) {
-					current.deinstanciate();
-					current.setDynamicDomain(null);
+			// reset variables
+			for (Variable var : nac) {
+				if (var != null) {
+					var.deinstanciate();
+					var.setDynamicDomain(null);
 				}
 			}
 			return true;
@@ -131,33 +131,20 @@ public class Matchfinder {
 		
 		Variable var = nac.get(index);
 		if (var == null) {
-			//variable not relevant for the NAC; continue with next variable
+			// variable not relevant for the NAC; continue with next variable
 			return findNacMatch(nac, index + 1);
 		}
 		
-		boolean result = var.nextInstance();
-		while (result) {
-			//try next value			
+		// try next possible instantiation for this variable 
+		while (var.nextInstance()) {
+			// find matches for next variables in NAC
 			if (findNacMatch(nac, index + 1)) {
-				//match for current variable found, try next variable
+				// match found for this instantiation
 				return true;
 			}
-			result= var.nextInstance();
 		}
 		
 		return false;
 	}
 	
-
-	// SOLUTIONS
-	
-	/**
-	 * Returns the match
-	 *
-	 * @return	solution
-	 */
-	public List<EObject> getSolution(){
-		return match;
-	}
-
 }

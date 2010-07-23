@@ -29,15 +29,15 @@ public class AddToBlockRule extends AbstractVsdtRule {
 	protected Gateway		_fork= null;
 	protected Gateway		_merge= null;
 	
-	@Override
-	protected void resetVars() {
-		_seqFlow1= null;
-		_seqFlow2= null;
-		_flowobject= null;
-		_block= null;
-		_fork= null;
-		_merge= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_seqFlow1= null;
+//		_seqFlow2= null;
+//		_flowobject= null;
+//		_block= null;
+//		_fork= null;
+//		_merge= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
@@ -47,7 +47,14 @@ public class AddToBlockRule extends AbstractVsdtRule {
 	/**
 	 */
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_seqFlow1=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW1);
+		_seqFlow2=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW2);
+		_flowobject=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT);
+		_block=			(BpmnBlock)		matches.get(RuleWrapper.BLOCK);
+		_fork=			(Gateway)		matches.get(RuleWrapper.FORK);
+		_merge=			(Gateway)		matches.get(RuleWrapper.MERGE);
+		
 		/*
 		// add condition to block
 		Expression condition= CreateBlockRule.getCondition(_seqFlow1);
@@ -66,15 +73,15 @@ public class AddToBlockRule extends AbstractVsdtRule {
 		*/
 	}
 	
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_seqFlow1=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW1);
-		_seqFlow2=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW2);
-		_flowobject=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT);
-		_block=			(BpmnBlock)		matches.get(RuleWrapper.BLOCK);
-		_fork=			(Gateway)		matches.get(RuleWrapper.FORK);
-		_merge=			(Gateway)		matches.get(RuleWrapper.MERGE);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_seqFlow1=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW1);
+//		_seqFlow2=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW2);
+//		_flowobject=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT);
+//		_block=			(BpmnBlock)		matches.get(RuleWrapper.BLOCK);
+//		_fork=			(Gateway)		matches.get(RuleWrapper.FORK);
+//		_merge=			(Gateway)		matches.get(RuleWrapper.MERGE);
+//	}
 	
 	
 	/**

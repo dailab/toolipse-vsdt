@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.base.util.Util;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InsertEmptyRule;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
@@ -23,10 +24,10 @@ public class RemoveEmptyRule extends AbstractVsdtRule {
 	
 	protected Activity _emptyAct= null;
 	
-	@Override
-	protected void resetVars() {
-		_emptyAct= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_emptyAct= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
@@ -35,14 +36,16 @@ public class RemoveEmptyRule extends AbstractVsdtRule {
 
 	
 	@Override
-	protected void apply() {
-		deleteFromOwner(_emptyAct);
+	protected void apply(List<EObject> matches){
+		_emptyAct=	(Activity)	matches.get(RuleWrapper.EMPTY_ACT);
+		
+		Util.deleteFromOwner(_emptyAct);
 	}
 	
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_emptyAct=	(Activity)	matches.get(RuleWrapper.EMPTY_ACT);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_emptyAct=	(Activity)	matches.get(RuleWrapper.EMPTY_ACT);
+//	}
 	
 	/**
 	 * wrapper for the rule

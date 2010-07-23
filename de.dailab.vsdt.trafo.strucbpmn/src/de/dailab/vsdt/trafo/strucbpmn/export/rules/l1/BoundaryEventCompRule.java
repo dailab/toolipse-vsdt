@@ -33,14 +33,14 @@ public class BoundaryEventCompRule extends AbstractVsdtRule {
 	protected Intermediate 			_intermediate= null;
 	protected Activity 				_compAct= null;
 	
-	@Override
-	protected void resetVars() {
-		_ehBlock= null;
-		_association= null;
-		_activity= null;
-		_intermediate= null;
-		_compAct= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_ehBlock= null;
+//		_association= null;
+//		_activity= null;
+//		_intermediate= null;
+//		_compAct= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
@@ -54,7 +54,13 @@ public class BoundaryEventCompRule extends AbstractVsdtRule {
 	 * - remove association
 	 */
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_ehBlock=	(BpmnEventHandlerBlock)matches.get(RuleWrapper.EHBLOCK);
+		_association=(Association)	matches.get(RuleWrapper.ASSOCIATION);
+		_activity=	(Activity)		matches.get(RuleWrapper.ACTIVITY);
+		_intermediate=(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
+		_compAct=	(Activity)		matches.get(RuleWrapper.COMP_ACT);
+		
 		BpmnEventHandlerCase ehCase= StrucBpmnFactory.eINSTANCE.createBpmnEventHandlerCase();
 		_ehBlock.getEventHandlerCases().add(ehCase);
 		
@@ -64,14 +70,14 @@ public class BoundaryEventCompRule extends AbstractVsdtRule {
 		deleteAssociation(_association);
 	}
 
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_ehBlock=	(BpmnEventHandlerBlock)matches.get(RuleWrapper.EHBLOCK);
-		_association=(Association)	matches.get(RuleWrapper.ASSOCIATION);
-		_activity=	(Activity)		matches.get(RuleWrapper.ACTIVITY);
-		_intermediate=(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
-		_compAct=	(Activity)		matches.get(RuleWrapper.COMP_ACT);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_ehBlock=	(BpmnEventHandlerBlock)matches.get(RuleWrapper.EHBLOCK);
+//		_association=(Association)	matches.get(RuleWrapper.ASSOCIATION);
+//		_activity=	(Activity)		matches.get(RuleWrapper.ACTIVITY);
+//		_intermediate=(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
+//		_compAct=	(Activity)		matches.get(RuleWrapper.COMP_ACT);
+//	}
 	
 	/**
 	 * wrapper class for this rule

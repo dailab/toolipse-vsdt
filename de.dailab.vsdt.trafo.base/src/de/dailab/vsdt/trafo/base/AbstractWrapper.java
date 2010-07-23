@@ -13,10 +13,10 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import de.dailab.vsdt.trafo.base.queries.InjectivityQuery;
 import de.dailab.vsdt.trafo.base.queries.SourceQuery;
 import de.dailab.vsdt.trafo.base.queries.TargetQuery;
+import de.dailab.vsdt.trafo.base.util.Util;
 
 /**
- * A wrapper class of the rule <em>SimpleRuleRule</em>'
- * for null, used for matching the LHS.
+ * Class wrapping the matching part of the Rules.
  */
 public abstract class AbstractWrapper {
 	
@@ -137,10 +137,9 @@ public abstract class AbstractWrapper {
 			
 	
 	/**
-	 * Create InjectivityQueries for _all_ variables in the given list.
-	 * the types in the second list have to correspond to the variables
-	 * in the first list.
-	 * as result two variables can not have the same instance.
+	 * Create InjectivityQueries for _all_ variables in the given list that can
+	 * have shared instances. As result two variables can not have the same 
+	 * instance.
 	 * 
 	 * @param vars	list of variables
 	 */ 
@@ -149,63 +148,14 @@ public abstract class AbstractWrapper {
 			Variable var1= vars.get(i);
 			for (int j = i + 1; j < vars.size(); j++) {
 				Variable var2= vars.get(j);
-				if(typesLinked(var1.getType(), var2.getType())) {
+				if (Util.typesLinked(var1.getType(), var2.getType())) {
 					InjectivityQuery iq = new InjectivityQuery(var1, var2);
-					vars.get(i).addQuery(iq);
+					var1.addQuery(iq);
 				}
 			}
 		}
 	}
 	
-	
-	/**
-	 * create a single injectivity query for the given variables
-	 * note that the first variable has to be instantiated before the second!
-	 * 
-	 * @param vars		variable list
-	 * @param creator	index of first variable in list
-	 * @param target	index of second variable in list
-	 */
-	protected void addInjectivityQuery(List<Variable> vars, int creator, int target) {
-		addInjectivityQuery(vars.get(creator), vars.get(target));
-	}
-	
-	
-	/**
-	 * create a single injectivity query for the given variables
-	 * note that the first variable has to be instantiated before the second!
-	 * 
-	 * @param creator	first variable
-	 * @param target	second variable
-	 */
-	protected void addInjectivityQuery(Variable creator, Variable target) {
-		InjectivityQuery iq = new InjectivityQuery(creator,target);
-		creator.addQuery(iq);
-	}
-	
-	
-	/**
-	 * Check if type1 is subtype of type2 or vice versa.
-	 * 
-	 * @param type1	first checked type
-	 * @param type2	second checked type
-	 * @return		if there is a subtype relation between types
-	 */
-	protected boolean typesLinked(EClass type1, EClass type2){
-		if(type1==null || type2==null){
-			return false;
-		}
-		if(type1.equals(type2)){
-			return true;
-		}
-		if(type1.getEAllSuperTypes().contains(type2)){
-			return true;
-		}
-		if(type2.getEAllSuperTypes().contains(type1)){
-			return true;
-		}
-		return false;
-	}
 	
 	
 	/**
@@ -220,23 +170,10 @@ public abstract class AbstractWrapper {
 	 * @return		first solution with correct index
 	 */
 	public List<EObject> getSolution() {
-		Matchfinder matchfinder= new Matchfinder(lhsVariables,nacVariables);
-		matchfinder.findMatches();
-		return matchfinder.getSolution();
+		Matchfinder matchfinder= new Matchfinder(lhsVariables, nacVariables);
+		return matchfinder.findMatches();
 	}
 	
-	
-//	/**
-//	 * shuffle the vector of EObjects (the domain set) and return it
-//	 * 
-//	 * @param domain	domain
-//	 * @return			randomized domain
-//	 */
-//	protected List<EObject> shuffleDomain(List<EObject> domain){
-//		List<EObject> domainCopy = new Vector<EObject>(domain);
-//		Collections.shuffle(domainCopy);
-//		return domainCopy;
-//	}
 	
 	/**
 	 * returns the list of all instances for a give eClass
@@ -246,12 +183,30 @@ public abstract class AbstractWrapper {
 	 */
 	protected List<EObject> getDomainForType(EClass type) {
 		List<EObject> domain = typeToDomain.get(type);
-		if(domain == null){
+		if (domain == null) {
 			domain = new Vector<EObject>();
 		}
 		return domain;
 	}
 	
+	/**
+	 * add a number of null-matches to the given NAC-varSet
+	 * 
+	 * @param vars		the list of (NAC) variables
+	 * @param types		the list of types
+	 * @param count		the number of null-matches to insert
+	 */
+	protected void addNullMatches(List<Variable> vars, int count) {
+		for (int i= 0; i < count; i++) {
+			vars.add(null);
+		}
+	}
+	
+	
+	
+	// HELPER METHODS FOR MANAGING VARIABLE QUERIES
+	
+
 	/**
 	 * add a new target query for a reference.
 	 * use this query, if the source variable has been declared first
@@ -283,21 +238,34 @@ public abstract class AbstractWrapper {
 		SourceQuery sq = new SourceQuery(source, target, ref);
 		target.addQuery(sq);
 	}
-	
+
 	/**
-	 * add a number of null-matches to the given NAC-varSet
+	 * create a single injectivity query for the given variables
+	 * note that the first variable has to be instantiated before the second!
 	 * 
-	 * @param vars		the list of (NAC) variables
-	 * @param types		the list of types
-	 * @param count		the number of null-matches to insert
+	 * @param vars		variable list
+	 * @param creator	index of first variable in list
+	 * @param target	index of second variable in list
 	 */
-	protected void addNullMatches(List<Variable> vars, int count) {
-		for (int i=0; i<count; i++) {
-			vars.add(null);
-		}
+	protected void addInjectivityQuery(List<Variable> vars, int creator, int target) {
+		addInjectivityQuery(vars.get(creator), vars.get(target));
 	}
 	
-	// ONLY OBSOLETE METHODS BEYOND THIS POINT
+	/**
+	 * create a single injectivity query for the given variables
+	 * note that the first variable has to be instantiated before the second!
+	 * 
+	 * @param creator	first variable
+	 * @param target	second variable
+	 */
+	protected void addInjectivityQuery(Variable creator, Variable target) {
+		InjectivityQuery iq = new InjectivityQuery(creator,target);
+		creator.addQuery(iq);
+	}
+	
+	
+	
+	// ONLY UNUSED METHODS BEYOND THIS POINT
 
 	/**
 	 * add a new target query for a reference.

@@ -49,12 +49,12 @@ public class InitialGatewayRule extends AbstractVsdtRule {
 					  START1= 1,
 					  START2= 2;
 	
-	@Override
-	protected void resetVars() {
-		_container= null;
-		_start1= null;
-		_start2= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_container= null;
+//		_start1= null;
+//		_start2= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
@@ -63,7 +63,11 @@ public class InitialGatewayRule extends AbstractVsdtRule {
 
 	
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_container=	(FlowObjectContainer)	matches.get(CONTAINER);
+		_start1= 	(FlowObject) 			matches.get(START1);
+		_start2= 	(FlowObject) 			matches.get(START2);
+	
 		// the pattern of this rule requires two starting FlowObjects.
 		// now find ALL starting FlowObjects in the process
 		List<FlowObject> startingFlowObjects= new ArrayList<FlowObject>();
@@ -89,12 +93,12 @@ public class InitialGatewayRule extends AbstractVsdtRule {
 		}
 	}
 	
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_container=	(FlowObjectContainer)	matches.get(CONTAINER);
-		_start1= 	(FlowObject) 			matches.get(START1);
-		_start2= 	(FlowObject) 			matches.get(START2);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_container=	(FlowObjectContainer)	matches.get(CONTAINER);
+//		_start1= 	(FlowObject) 			matches.get(START1);
+//		_start2= 	(FlowObject) 			matches.get(START2);
+//	}
 	
 	/**
 	 * wrapper for the rule

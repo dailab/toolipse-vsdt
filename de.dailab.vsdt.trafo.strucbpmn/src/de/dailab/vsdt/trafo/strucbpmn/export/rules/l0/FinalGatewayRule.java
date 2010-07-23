@@ -48,12 +48,12 @@ public class FinalGatewayRule extends AbstractVsdtRule {
 					  END1= 1,
 					  END2= 2;
 	
-	@Override
-	protected void resetVars() {
-		_container= null;
-		_end1= null;
-		_end2= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_container= null;
+//		_end1= null;
+//		_end2= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
@@ -62,7 +62,11 @@ public class FinalGatewayRule extends AbstractVsdtRule {
 
 	
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_container=	(FlowObjectContainer)	matches.get(CONTAINER);
+		_end1= 		(FlowObject) 			matches.get(END1);
+		_end2= 		(FlowObject) 			matches.get(END2);
+		
 		// the pattern of this rule requires two ending FlowObjects.
 		// now find ALL ending FlowObjects in the process
 		List<FlowObject> endingFlowObjects= new ArrayList<FlowObject>();
@@ -87,12 +91,12 @@ public class FinalGatewayRule extends AbstractVsdtRule {
 		}
 	}
 	
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_container=	(FlowObjectContainer)	matches.get(CONTAINER);
-		_end1= 		(FlowObject) 			matches.get(END1);
-		_end2= 		(FlowObject) 			matches.get(END2);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_container=	(FlowObjectContainer)	matches.get(CONTAINER);
+//		_end1= 		(FlowObject) 			matches.get(END1);
+//		_end2= 		(FlowObject) 			matches.get(END2);
+//	}
 	
 	/**
 	 * wrapper for the rule

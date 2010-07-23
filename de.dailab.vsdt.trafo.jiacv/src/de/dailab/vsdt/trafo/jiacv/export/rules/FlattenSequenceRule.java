@@ -25,10 +25,10 @@ public class FlattenSequenceRule extends AbstractVsdtRule {
 
 	public static final int SEQUENCE= 0;
 	
-	@Override
-	protected void resetVars() {
-		_sequence= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_sequence= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
@@ -36,7 +36,9 @@ public class FlattenSequenceRule extends AbstractVsdtRule {
 	}
 
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_sequence=	(Seq)	matches.get(SEQUENCE);
+		
 		Seq childSeq= null;
 		for (Object child : _sequence.getScripts()) {
 			if (child instanceof Seq) {
@@ -51,10 +53,10 @@ public class FlattenSequenceRule extends AbstractVsdtRule {
 		}
 	}
 	
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_sequence=	(Seq)	matches.get(SEQUENCE);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_sequence=	(Seq)	matches.get(SEQUENCE);
+//	}
 	
 	/**
 	 * wrapper for the rule

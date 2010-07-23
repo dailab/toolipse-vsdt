@@ -38,10 +38,10 @@ public class InsertGatewayRule extends AbstractVsdtRule {
 	
 	private final int FLOWOBJECT= 0;
 	
-	@Override
-	protected void resetVars() {
-		_flowObject= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_flowObject= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
@@ -50,7 +50,8 @@ public class InsertGatewayRule extends AbstractVsdtRule {
 
 	
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_flowObject=	(FlowObject)	matches.get(FLOWOBJECT);
 		
 		//get container
 		FlowObjectContainer container= _flowObject.getParent();
@@ -118,10 +119,10 @@ public class InsertGatewayRule extends AbstractVsdtRule {
 		
 	}
 	
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_flowObject=	(FlowObject)	matches.get(FLOWOBJECT);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_flowObject=	(FlowObject)	matches.get(FLOWOBJECT);
+//	}
 	
 	/**
 	 * wrapper for the rule

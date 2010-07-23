@@ -39,18 +39,18 @@ public class LoopRule extends AbstractVsdtRule {
 	protected Gateway 		_gateway1= null;
 	protected Gateway 		_gateway2= null;
 	
-	@Override
-	protected void resetVars() {
-		_seqFlow11= null;
-		_seqFlow12= null;
-		_seqFlow21= null;
-		_seqFlow22= null;
-		_seqFlowQuit= null;
-		_flowObject1= null;
-		_flowObject2= null;
-		_gateway1= null;
-		_gateway2= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_seqFlow11= null;
+//		_seqFlow12= null;
+//		_seqFlow21= null;
+//		_seqFlow22= null;
+//		_seqFlowQuit= null;
+//		_flowObject1= null;
+//		_flowObject2= null;
+//		_gateway1= null;
+//		_gateway2= null;
+//	}
 		
 	
 	@Override
@@ -66,7 +66,16 @@ public class LoopRule extends AbstractVsdtRule {
 	 * - redirect sequence flows  
 	 */
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_seqFlow11= 	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW11);
+		_seqFlow12= 	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW12);
+		_seqFlow21= 	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW21);
+		_seqFlow22= 	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW22);
+		_seqFlowQuit= 	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWQUIT);
+		_flowObject1=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
+		_flowObject2=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
+		_gateway1= 		(Gateway)		matches.get(RuleWrapper.GATEWAY1);
+		_gateway2= 		(Gateway)		matches.get(RuleWrapper.GATEWAY2);
 		
 		// create pseudo-branches encapsulating flow objects, conditions and gates
 		BpmnBranch firstBranch= StrucBpmnElementFactory.createBranch(
@@ -111,18 +120,18 @@ public class LoopRule extends AbstractVsdtRule {
 	}
 
 	
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_seqFlow11= 	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW11);
-		_seqFlow12= 	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW12);
-		_seqFlow21= 	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW21);
-		_seqFlow22= 	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW22);
-		_seqFlowQuit= 	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWQUIT);
-		_flowObject1=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
-		_flowObject2=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
-		_gateway1= 		(Gateway)		matches.get(RuleWrapper.GATEWAY1);
-		_gateway2= 		(Gateway)		matches.get(RuleWrapper.GATEWAY2);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_seqFlow11= 	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW11);
+//		_seqFlow12= 	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW12);
+//		_seqFlow21= 	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW21);
+//		_seqFlow22= 	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW22);
+//		_seqFlowQuit= 	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWQUIT);
+//		_flowObject1=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
+//		_flowObject2=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
+//		_gateway1= 		(Gateway)		matches.get(RuleWrapper.GATEWAY1);
+//		_gateway2= 		(Gateway)		matches.get(RuleWrapper.GATEWAY2);
+//	}
 	
 	/**
 	 * wrapper class for this rule

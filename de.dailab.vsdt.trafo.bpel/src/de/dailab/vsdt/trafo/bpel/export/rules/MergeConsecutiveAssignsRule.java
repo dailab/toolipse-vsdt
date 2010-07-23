@@ -9,6 +9,7 @@ import org.xmlsoap.schemas.ws._2003._03.business.process.TAssign;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TSequence;
 
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.base.util.Util;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
@@ -26,10 +27,10 @@ public class MergeConsecutiveAssignsRule extends AbstractVsdtRule {
 	public static final int ASSIGN= 0;
 	
 	
-	@Override
-	protected void resetVars() {
-		_assign= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_assign= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
@@ -37,20 +38,22 @@ public class MergeConsecutiveAssignsRule extends AbstractVsdtRule {
 	}
 
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_assign=   (TAssign)	matches.get(ASSIGN);
+		
 		TSequence sequence = (TSequence) _assign.eContainer();
 		
 		int index= sequence.getActivityIndex(_assign);
 		TAssign assign2= (TAssign) sequence.getActivity().getValue(index+1);
 		_assign.setName(_assign.getName() + "_and_" + assign2.getName());
 		_assign.getCopy().addAll(assign2.getCopy());
-		deleteFromOwner(assign2);
+		Util.deleteFromOwner(assign2);
 	}
 	
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_assign=   (TAssign)	matches.get(ASSIGN);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_assign=   (TAssign)	matches.get(ASSIGN);
+//	}
 	
 	/**
 	 * wrapper for the rule

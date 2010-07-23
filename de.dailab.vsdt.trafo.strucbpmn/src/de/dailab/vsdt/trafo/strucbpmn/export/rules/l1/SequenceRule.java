@@ -11,6 +11,7 @@ import de.dailab.vsdt.FlowObjectContainer;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.base.util.Util;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnSequence;
 import de.dailab.vsdt.trafo.strucbpmn.StrucBpmnFactory;
@@ -31,25 +32,25 @@ public class SequenceRule extends AbstractVsdtRule {
 	protected SequenceFlow	_seqFlow= null;
 	protected FlowObject	_flowObject1= null;
 	protected FlowObject	_flowObject2= null;
-	
-	@Override
-	protected void resetVars() {
-		_seqFlow= null;
-		_flowObject1= null;
-		_flowObject2= null;
-	}
+//	
+//	@Override
+//	protected void resetVars() {
+//		_seqFlow= null;
+//		_flowObject1= null;
+//		_flowObject2= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
 		return new RuleWrapper();
 	}
 
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_seqFlow=	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW);
-		_flowObject1=(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
-		_flowObject2=(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_seqFlow=	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW);
+//		_flowObject1=(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
+//		_flowObject2=(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
+//	}
 	
 	/**
 	 * - If one of the flowObjects is a bpmnSeq, use this, otherwise create a new one
@@ -59,7 +60,11 @@ public class SequenceRule extends AbstractVsdtRule {
 	 * - remove the sequence flow in between the flowObjects
 	 */
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_seqFlow=	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW);
+		_flowObject1=(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
+		_flowObject2=(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
+		
 		// create new sequence or use existing one
 		BpmnSequence sequence= null;
 		
@@ -78,7 +83,7 @@ public class SequenceRule extends AbstractVsdtRule {
 		if (_flowObject2 instanceof BpmnSequence
 				&& !((BpmnSequence) _flowObject2).isNeedsToPersist()) {
 			sequence.getElements().addAll(((BpmnSequence) _flowObject2).getElements());
-			deleteFromOwner(_flowObject2);
+			Util.deleteFromOwner(_flowObject2);
 		} else {
 			sequence.getElements().add(_flowObject2);
 		}

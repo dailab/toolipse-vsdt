@@ -12,6 +12,7 @@ import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.base.util.Util;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
@@ -38,17 +39,17 @@ public class CreateBlockRule extends AbstractVsdtRule {
 	protected Gateway		_fork= null;
 	protected Gateway		_merge= null;
 	
-	@Override
-	protected void resetVars() {
-		_seqFlow11= null;
-		_seqFlow12= null;
-		_flowobject1= null;
-		_seqFlow21= null;
-		_seqFlow22= null;
-		_flowobject2= null;
-		_fork= null;
-		_merge= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_seqFlow11= null;
+//		_seqFlow12= null;
+//		_flowobject1= null;
+//		_seqFlow21= null;
+//		_seqFlow22= null;
+//		_flowobject2= null;
+//		_fork= null;
+//		_merge= null;
+//	}
 		
 	
 	@Override
@@ -59,7 +60,16 @@ public class CreateBlockRule extends AbstractVsdtRule {
 	/**
 	 */
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_seqFlow11=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW11);
+		_seqFlow12=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW12);
+		_flowobject1=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
+		_seqFlow21=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW21);
+		_seqFlow22=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW22);
+		_flowobject2=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
+		_fork=			(Gateway)		matches.get(RuleWrapper.FORK);
+		_merge=			(Gateway)		matches.get(RuleWrapper.MERGE);
+		
 		/*
 		// create condition map
 		Map<FlowObject, Expression> conditions= new HashMap<FlowObject, Expression>();
@@ -122,20 +132,20 @@ public class CreateBlockRule extends AbstractVsdtRule {
 	public static void delete(SequenceFlow seqFlow) {
 		seqFlow.setSource(null);
 		seqFlow.setTarget(null);
-		deleteFromOwner(seqFlow);
+		Util.deleteFromOwner(seqFlow);
 	}
 	
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_seqFlow11=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW11);
-		_seqFlow12=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW12);
-		_flowobject1=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
-		_seqFlow21=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW21);
-		_seqFlow22=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW22);
-		_flowobject2=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
-		_fork=			(Gateway)		matches.get(RuleWrapper.FORK);
-		_merge=			(Gateway)		matches.get(RuleWrapper.MERGE);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_seqFlow11=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW11);
+//		_seqFlow12=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW12);
+//		_flowobject1=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
+//		_seqFlow21=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW21);
+//		_seqFlow22=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW22);
+//		_flowobject2=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
+//		_fork=			(Gateway)		matches.get(RuleWrapper.FORK);
+//		_merge=			(Gateway)		matches.get(RuleWrapper.MERGE);
+//	}
 	
 	
 	/**

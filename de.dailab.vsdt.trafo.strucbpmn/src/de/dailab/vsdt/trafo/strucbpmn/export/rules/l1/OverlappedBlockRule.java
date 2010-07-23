@@ -55,28 +55,28 @@ public class OverlappedBlockRule extends AbstractVsdtRule {
 	protected Gateway		_gateway3= null;
 	protected Gateway		_gateway4= null;
 	
-	@Override
-	protected void resetVars() {
-		_seqFlowA1= null;
-		_seqFlowA2= null;
-		_seqFlowB1= null;
-		_seqFlowB2= null;
-		_seqFlowC1= null;
-		_seqFlowC2= null;
-		_seqFlowD1= null;
-		_seqFlowD2= null;
-		_seqFlowE1= null;
-		_seqFlowE2= null;
-		_flowobjectA= null;
-		_flowobjectB= null;
-		_flowobjectC= null;
-		_flowobjectD= null;
-		_flowobjectE= null;
-		_gateway1= null;
-		_gateway2= null;
-		_gateway3= null;
-		_gateway4= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_seqFlowA1= null;
+//		_seqFlowA2= null;
+//		_seqFlowB1= null;
+//		_seqFlowB2= null;
+//		_seqFlowC1= null;
+//		_seqFlowC2= null;
+//		_seqFlowD1= null;
+//		_seqFlowD2= null;
+//		_seqFlowE1= null;
+//		_seqFlowE2= null;
+//		_flowobjectA= null;
+//		_flowobjectB= null;
+//		_flowobjectC= null;
+//		_flowobjectD= null;
+//		_flowobjectE= null;
+//		_gateway1= null;
+//		_gateway2= null;
+//		_gateway3= null;
+//		_gateway4= null;
+//	}
 		
 	
 	@Override
@@ -90,24 +90,7 @@ public class OverlappedBlockRule extends AbstractVsdtRule {
 	 * - reroute Sequence Flows over duplicate to Gateway 4
 	 */
 	@Override
-	protected void apply() {
-		
-		// create copy
-		FlowObject copy= (FlowObject) EcoreUtil.copy(_flowobjectD);
-		copy.setParent(_flowobjectD.getParent());
-		
-		//reroute sfA2 to copy
-		_seqFlowA2.setTarget(copy);
-		
-		//create sf between copy and g4
-		SequenceFlow seqFlow= VsdtFactory.eINSTANCE.createSequenceFlow();
-		seqFlow.setParent(_seqFlowA1.getParent());
-		seqFlow.setSource(copy);
-		seqFlow.setTarget(_gateway4);
-	}
-
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
+	protected void apply(List<EObject> matches){
 		_seqFlowA1=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWA1);
 		_seqFlowA2=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWA2);
 		_seqFlowB1=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWB1);
@@ -127,7 +110,43 @@ public class OverlappedBlockRule extends AbstractVsdtRule {
 		_gateway2=		(Gateway)		matches.get(RuleWrapper.GATEWAY2);
 		_gateway3=		(Gateway)		matches.get(RuleWrapper.GATEWAY3);
 		_gateway4=		(Gateway)		matches.get(RuleWrapper.GATEWAY4);
+		
+		// create copy
+		FlowObject copy= (FlowObject) EcoreUtil.copy(_flowobjectD);
+		copy.setParent(_flowobjectD.getParent());
+		
+		//reroute sfA2 to copy
+		_seqFlowA2.setTarget(copy);
+		
+		//create sf between copy and g4
+		SequenceFlow seqFlow= VsdtFactory.eINSTANCE.createSequenceFlow();
+		seqFlow.setParent(_seqFlowA1.getParent());
+		seqFlow.setSource(copy);
+		seqFlow.setTarget(_gateway4);
 	}
+
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_seqFlowA1=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWA1);
+//		_seqFlowA2=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWA2);
+//		_seqFlowB1=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWB1);
+//		_seqFlowB2=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWB2);
+//		_seqFlowC1=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWC1);
+//		_seqFlowC2=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWC2);
+//		_seqFlowD1=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWD1);
+//		_seqFlowD2=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWD2);
+//		_seqFlowE1=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWE1);
+//		_seqFlowE2=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWE2);
+//		_flowobjectA=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECTA);
+//		_flowobjectB=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECTB);
+//		_flowobjectC=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECTC);
+//		_flowobjectD=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECTD);
+//		_flowobjectE=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECTE);
+//		_gateway1=		(Gateway)		matches.get(RuleWrapper.GATEWAY1);
+//		_gateway2=		(Gateway)		matches.get(RuleWrapper.GATEWAY2);
+//		_gateway3=		(Gateway)		matches.get(RuleWrapper.GATEWAY3);
+//		_gateway4=		(Gateway)		matches.get(RuleWrapper.GATEWAY4);
+//	}
 	
 	
 	/**

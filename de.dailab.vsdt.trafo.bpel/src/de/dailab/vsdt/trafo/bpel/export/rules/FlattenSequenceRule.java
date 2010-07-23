@@ -24,10 +24,10 @@ public class FlattenSequenceRule extends AbstractVsdtRule {
 	public static final int SEQUENCE= 0;
 	
 	
-	@Override
-	protected void resetVars() {
-		_sequence= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_sequence= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
@@ -35,7 +35,8 @@ public class FlattenSequenceRule extends AbstractVsdtRule {
 	}
 
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_sequence=	(TSequence)	matches.get(SEQUENCE);
 		/*
 		 * memorize the sequences position
 		 * remove sequence
@@ -48,10 +49,10 @@ public class FlattenSequenceRule extends AbstractVsdtRule {
 		_sequence.getActivity().addAll(index, child.getActivity());
 	}
 	
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_sequence=	(TSequence)	matches.get(SEQUENCE);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_sequence=	(TSequence)	matches.get(SEQUENCE);
+//	}
 	
 	/**
 	 * wrapper for the rule

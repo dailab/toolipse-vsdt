@@ -30,22 +30,22 @@ public class ConnectLinkRule extends AbstractVsdtRule {
 	protected Event link1= null;
 	protected Event link2= null;
 	
-	@Override
-	protected void resetVars() {
-		link1= null;
-		link2= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		link1= null;
+//		link2= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
 		return new RuleWrapper();
 	}
 
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		link1=(Event)	matches.get(RuleWrapper.LINK1);
-		link2=(Event)	matches.get(RuleWrapper.LINK2);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		link1=(Event)	matches.get(RuleWrapper.LINK1);
+//		link2=(Event)	matches.get(RuleWrapper.LINK2);
+//	}
 	
 	/**
 	 * - If one of the flowObjects is a bpmnSeq, use this, otherwise create a new one
@@ -55,7 +55,10 @@ public class ConnectLinkRule extends AbstractVsdtRule {
 	 * - remove the sequence flow in between the flowObjects
 	 */
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches) {
+		link1=(Event)	matches.get(RuleWrapper.LINK1);
+		link2=(Event)	matches.get(RuleWrapper.LINK2);
+		
 		// create connection
 		SequenceFlow sequenceFlow= VsdtFactory.eINSTANCE.createSequenceFlow();
 		sequenceFlow.setSource(link1);

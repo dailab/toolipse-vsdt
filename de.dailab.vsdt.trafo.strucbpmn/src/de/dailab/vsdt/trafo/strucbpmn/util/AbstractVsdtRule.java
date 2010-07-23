@@ -3,6 +3,7 @@ package de.dailab.vsdt.trafo.strucbpmn.util;
 import de.dailab.vsdt.Association;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.trafo.base.AbstractRule;
+import de.dailab.vsdt.trafo.base.util.Util;
 
 
 /**
@@ -38,7 +39,7 @@ public abstract class AbstractVsdtRule extends AbstractRule {
 		if (seqFlow != null) {
 			seqFlow.setSource(null);
 			seqFlow.setTarget(null);
-			deleteFromOwner(seqFlow);
+			Util.deleteFromOwner(seqFlow);
 		}
 	}
 	
@@ -46,7 +47,7 @@ public abstract class AbstractVsdtRule extends AbstractRule {
 		if (association != null) {
 			association.setSource(null);
 			association.setTarget(null);
-			deleteFromOwner(association);
+			Util.deleteFromOwner(association);
 		}
 	}
 

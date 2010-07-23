@@ -48,18 +48,18 @@ public class BoundaryEventSkipRule extends AbstractVsdtRule {
 	protected FlowObject 			_foSkip= null;
 	protected FlowObject 			_foComp= null;
 	
-	@Override
-	protected void resetVars() {
-		_seqFlowAS= null;
-		_seqFlowSG= null;
-		_seqFlowIC= null;
-		_seqFlowCG= null;
-		_intermediate= null;
-		_activity= null;
-		_gateway= null;
-		_foSkip= null;
-		_foComp= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_seqFlowAS= null;
+//		_seqFlowSG= null;
+//		_seqFlowIC= null;
+//		_seqFlowCG= null;
+//		_intermediate= null;
+//		_activity= null;
+//		_gateway= null;
+//		_foSkip= null;
+//		_foComp= null;
+//	}
 	
 	/**
 	 * - create BpmnEventHandlerCase
@@ -69,7 +69,17 @@ public class BoundaryEventSkipRule extends AbstractVsdtRule {
 	 * - remove sequence flows IC and CG
 	 */
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_ehBlock=		(BpmnEventHandlerBlock)matches.get(RuleWrapper.EH_BLOCK);
+		_seqFlowAS=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWAS);
+		_seqFlowSG=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWSG);
+		_seqFlowIC=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWIC);
+		_seqFlowCG=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWCG);
+		_intermediate=	(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
+		_activity=		(Activity)		matches.get(RuleWrapper.ACTIVITY);
+		_gateway=		(Gateway)		matches.get(RuleWrapper.GATEWAY);
+		_foSkip=			(FlowObject)	matches.get(RuleWrapper.FO_SKIP);
+		_foComp=			(FlowObject)	matches.get(RuleWrapper.FO_COMP);
 		
 		BpmnEventHandlerCase ehCase= StrucBpmnFactory.eINSTANCE.createBpmnEventHandlerCase();
 		ehCase.setIntermediate(_intermediate);
@@ -102,19 +112,19 @@ public class BoundaryEventSkipRule extends AbstractVsdtRule {
 		return new RuleWrapper();
 	}
 
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_ehBlock=		(BpmnEventHandlerBlock)matches.get(RuleWrapper.EH_BLOCK);
-		_seqFlowAS=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWAS);
-		_seqFlowSG=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWSG);
-		_seqFlowIC=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWIC);
-		_seqFlowCG=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWCG);
-		_intermediate=	(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
-		_activity=		(Activity)		matches.get(RuleWrapper.ACTIVITY);
-		_gateway=		(Gateway)		matches.get(RuleWrapper.GATEWAY);
-		_foSkip=			(FlowObject)	matches.get(RuleWrapper.FO_SKIP);
-		_foComp=			(FlowObject)	matches.get(RuleWrapper.FO_COMP);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_ehBlock=		(BpmnEventHandlerBlock)matches.get(RuleWrapper.EH_BLOCK);
+//		_seqFlowAS=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWAS);
+//		_seqFlowSG=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWSG);
+//		_seqFlowIC=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWIC);
+//		_seqFlowCG=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWCG);
+//		_intermediate=	(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
+//		_activity=		(Activity)		matches.get(RuleWrapper.ACTIVITY);
+//		_gateway=		(Gateway)		matches.get(RuleWrapper.GATEWAY);
+//		_foSkip=			(FlowObject)	matches.get(RuleWrapper.FO_SKIP);
+//		_foComp=			(FlowObject)	matches.get(RuleWrapper.FO_COMP);
+//	}
 	
 	/**
 	 * wrapper class for this rule

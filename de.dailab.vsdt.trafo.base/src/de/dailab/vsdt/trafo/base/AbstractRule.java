@@ -2,9 +2,9 @@ package de.dailab.vsdt.trafo.base;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
+
+import de.dailab.vsdt.trafo.base.util.Util;
 
 /**
  * AbstractRule
@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.EReference;
  */
 public abstract class AbstractRule {
 		
-	/**the rule's wrapper*/
-	private AbstractWrapper wrapper = null;
+//	/**the rule's wrapper*/
+//	private AbstractWrapper wrapper = null;
 	
 	/**
 	 * Executes this rule. First a wrapper is instantiated and initialized.
@@ -27,21 +27,28 @@ public abstract class AbstractRule {
 	 * 
 	 * @return	rule applied?
 	 */
-	public boolean execute(EObject object) {
+	public final boolean execute(EObject object) {
 		
-		EObject root = getRoot(object);
-		wrapper = getWrapper();
+		EObject root = Util.getRoot(object);
+		AbstractWrapper wrapper = getWrapper();
 		wrapper.init(root);
 		List<EObject> match = wrapper.getSolution();
 		
 		if (match == null){
-			reset();
+//			reset();
+//			resetVars();
 			return false;
 		} else {
-			internalSetWeightedLHS(match);
-			apply();
-			reset();
- 			return true;
+
+//			try {
+//				setWeightedLHS(match);
+				apply(match);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+			
+//			resetVars();
+			return true;
 		}
 	}
 	
@@ -49,7 +56,7 @@ public abstract class AbstractRule {
 	/**
 	 * apply this rule. transforms the LHS to the RHS.
 	 */
-	protected abstract void apply();
+	protected abstract void apply(List<EObject> match);
 	
 	
 	/**
@@ -61,72 +68,19 @@ public abstract class AbstractRule {
 	protected abstract AbstractWrapper getWrapper();
 	
 	
-	/**
-	 * instantiates the rule variables according to the match found by the wrapper
-	 * 
-	 * @param matches	the match
-	 */
-	protected abstract void setWeightedLHS(List<EObject> matches) throws Exception;
+//	/**
+//	 * instantiates the rule variables according to the match found by the wrapper
+//	 * 
+//	 * @param matches	the match
+//	 */
+//	protected abstract void setWeightedLHS(List<EObject> matches);// throws Exception;
+//	
 	
-	private void internalSetWeightedLHS(List<EObject> matches) {
-		if ( matches==null ) {
-			resetVars();
-		} else {
-			try {
-				setWeightedLHS(matches);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
+//	/**
+//	 * set all vars to null
+//	 */
+//	@Deprecated
+//	protected abstract void resetVars();
 	
-	/**
-	 * reset the rule after execution by assigning the variables with it's default values
-	 * call's subclass's resetVars method to reset the rule-dependent variables
-	 */
-	private void reset() {
-		this.wrapper= null;
-		resetVars();
-	}
-	
-	/**
-	 * set all vars to null
-	 */
-	protected abstract void resetVars();
-	
-	
-	/**
-	 * Returns topmost element of an EMF instance.
-	 * 
-	 * @param currentObject	object inside the EMF tree 
-	 * @return				topmost element in EMF tree
-	 */
-	private EObject getRoot(EObject currentObject) {
-		EObject parent = currentObject.eContainer();
-		if (parent != null) {
-			return getRoot(parent);
-		} else {
-			return currentObject;
-		}	
-	}
-	
-	
-	/**
-	 * Removes containing reference from parent to the deleted EObject.
-	 *  
-	 * @param eObject deleted EObject
-	 */
-	public static void deleteFromOwner(EObject eObject) {
-		if (eObject != null && eObject.eContainer() != null) {
-			EObject owner = eObject.eContainer();
-			EReference contains = (EReference)eObject.eContainingFeature();
-			if(contains.isMany()){
-				((EList)owner.eGet(contains)).remove(eObject);
-			}
-			else{
-				owner.eUnset(contains);
-			}
-		}
-	}
 	
 }

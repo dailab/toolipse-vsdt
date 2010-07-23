@@ -36,18 +36,18 @@ public class SplitForkRule extends AbstractVsdtRule {
 	protected Gateway		_fork= null;
 	protected Gateway		_merge= null;
 	
-	@Override
-	protected void resetVars() {
-		_seqFlow11= null;
-		_seqFlow12= null;
-		_seqFlow21= null;
-		_seqFlow22= null;
-		_flowobject1= null;
-		_flowobject2= null;
-		_block= null;
-		_fork= null;
-		_merge= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_seqFlow11= null;
+//		_seqFlow12= null;
+//		_seqFlow21= null;
+//		_seqFlow22= null;
+//		_flowobject1= null;
+//		_flowobject2= null;
+//		_block= null;
+//		_fork= null;
+//		_merge= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
@@ -61,7 +61,16 @@ public class SplitForkRule extends AbstractVsdtRule {
 	 * - create new condition for that seqFlow
 	 */
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_seqFlow11=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW11);
+		_seqFlow12=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW12);
+		_seqFlow21=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW21);
+		_seqFlow22=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW22);
+		_flowobject1=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
+		_flowobject2=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
+		_block=			(BpmnBlock)		matches.get(RuleWrapper.BLOCK);
+		_fork=			(Gateway)		matches.get(RuleWrapper.FORK);
+		_merge=			(Gateway)		matches.get(RuleWrapper.MERGE);
 
 		//create new gateway
 		Gateway fork2= VsdtFactory.eINSTANCE.createGateway();
@@ -96,18 +105,18 @@ public class SplitForkRule extends AbstractVsdtRule {
 		seqFlow2.setConditionExpression(disjunctive);
 	}
 	
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_seqFlow11=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW11);
-		_seqFlow12=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW12);
-		_seqFlow21=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW21);
-		_seqFlow22=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW22);
-		_flowobject1=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
-		_flowobject2=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
-		_block=			(BpmnBlock)		matches.get(RuleWrapper.BLOCK);
-		_fork=			(Gateway)		matches.get(RuleWrapper.FORK);
-		_merge=			(Gateway)		matches.get(RuleWrapper.MERGE);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_seqFlow11=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW11);
+//		_seqFlow12=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW12);
+//		_seqFlow21=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW21);
+//		_seqFlow22=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW22);
+//		_flowobject1=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
+//		_flowobject2=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
+//		_block=			(BpmnBlock)		matches.get(RuleWrapper.BLOCK);
+//		_fork=			(Gateway)		matches.get(RuleWrapper.FORK);
+//		_merge=			(Gateway)		matches.get(RuleWrapper.MERGE);
+//	}
 	
 	
 	/**

@@ -41,12 +41,12 @@ public class InsertEmptyRule extends AbstractVsdtRule {
 	protected FlowObject _flowObject= null;
 	protected Gateway _gateway= null;
 	
-	@Override
-	protected void resetVars() {
-		_seqFlow= null;
-		_flowObject= null;
-		_gateway= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_seqFlow= null;
+//		_flowObject= null;
+//		_gateway= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
@@ -55,7 +55,10 @@ public class InsertEmptyRule extends AbstractVsdtRule {
 
 	
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_seqFlow=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW);
+		_flowObject=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT);
+		_gateway=		(Gateway)		matches.get(RuleWrapper.GATEWAY);
 		
 		//create none activity
 		FlowObjectContainer container= _gateway.getParent();
@@ -75,13 +78,13 @@ public class InsertEmptyRule extends AbstractVsdtRule {
 		seqFlow2.setSource(activity);
 		seqFlow2.setTarget(_gateway);
 	}
-	
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_seqFlow=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW);
-		_flowObject=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT);
-		_gateway=		(Gateway)		matches.get(RuleWrapper.GATEWAY);
-	}
+//	
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_seqFlow=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW);
+//		_flowObject=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT);
+//		_gateway=		(Gateway)		matches.get(RuleWrapper.GATEWAY);
+//	}
 	
 	
 	/**

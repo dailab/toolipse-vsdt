@@ -16,6 +16,7 @@ import org.xmlsoap.schemas.ws._2003._03.business.process.TSequence;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TWhile;
 
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.base.util.Util;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
@@ -31,10 +32,10 @@ public class SingletonSequenceRule extends AbstractVsdtRule {
 
 	public static final int SEQUENCE= 0;
 	
-	@Override
-	protected void resetVars() {
-		_sequence= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_sequence= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
@@ -42,7 +43,9 @@ public class SingletonSequenceRule extends AbstractVsdtRule {
 	}
 
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_sequence=	(TSequence)	matches.get(SEQUENCE);
+		
 		if (! _sequence.getActivity().isEmpty()) {
 			// replace sequence with it's content (exactly one child element
 			TActivity childAct= (TActivity) _sequence.getActivity().getValue(0);
@@ -83,13 +86,13 @@ public class SingletonSequenceRule extends AbstractVsdtRule {
 			}
 		}
 		// remove sequence
-		deleteFromOwner(_sequence);
+		Util.deleteFromOwner(_sequence);
 	}
 	
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_sequence=	(TSequence)	matches.get(SEQUENCE);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_sequence=	(TSequence)	matches.get(SEQUENCE);
+//	}
 	
 	/**
 	 * wrapper for the rule

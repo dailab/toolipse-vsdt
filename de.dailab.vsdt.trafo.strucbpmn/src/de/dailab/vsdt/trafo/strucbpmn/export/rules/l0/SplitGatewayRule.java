@@ -36,10 +36,10 @@ public class SplitGatewayRule extends AbstractVsdtRule {
 	private final int GATEWAY= 0;
 	
 	
-	@Override
-	protected void resetVars() {
-		_gateway= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		_gateway= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
@@ -48,7 +48,8 @@ public class SplitGatewayRule extends AbstractVsdtRule {
 
 	
 	@Override
-	protected void apply() {
+	protected void apply(List<EObject> matches){
+		_gateway=	(Gateway)	matches.get(GATEWAY);
 		
 		//create gateway2
 		FlowObjectContainer container= _gateway.getParent();
@@ -74,10 +75,10 @@ public class SplitGatewayRule extends AbstractVsdtRule {
 		seqFlow.setTarget(_gateway);
 	}
 	
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		_gateway=	(Gateway)	matches.get(GATEWAY);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		_gateway=	(Gateway)	matches.get(GATEWAY);
+//	}
 	
 	/**
 	 * wrapper for the rule

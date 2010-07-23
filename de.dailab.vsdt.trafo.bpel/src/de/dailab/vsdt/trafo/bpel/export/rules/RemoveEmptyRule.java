@@ -8,6 +8,7 @@ import org.xmlsoap.schemas.ws._2003._03.business.process.ProcessPackage;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TEmpty;
 
 import de.dailab.vsdt.trafo.base.AbstractWrapper;
+import de.dailab.vsdt.trafo.base.util.Util;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
@@ -24,10 +25,10 @@ public class RemoveEmptyRule extends AbstractVsdtRule {
 	public static final int EMPTY= 0;
 	
 	
-	@Override
-	protected void resetVars() {
-		empty= null;
-	}
+//	@Override
+//	protected void resetVars() {
+//		empty= null;
+//	}
 	
 	@Override
 	protected AbstractWrapper getWrapper() {
@@ -35,14 +36,16 @@ public class RemoveEmptyRule extends AbstractVsdtRule {
 	}
 
 	@Override
-	protected void apply() {
-		deleteFromOwner(empty);
+	protected void apply(List<EObject> matches){
+		empty=	(TEmpty)	matches.get(EMPTY);
+		
+		Util.deleteFromOwner(empty);
 	}
 	
-	@Override
-	protected void setWeightedLHS(List<EObject> matches){
-		empty=	(TEmpty)	matches.get(EMPTY);
-	}
+//	@Override
+//	protected void setWeightedLHS(List<EObject> matches){
+//		empty=	(TEmpty)	matches.get(EMPTY);
+//	}
 	
 	/**
 	 * wrapper for the rule
