@@ -6,31 +6,28 @@ import java.util.Queue;
 
 import org.eclipse.emf.ecore.EObject;
 
-import de.dailab.vsdt.trafo.base.logger.TrafoLog;
+import de.dailab.vsdt.trafo.base.util.TrafoLog;
 
 /**
- * User class for executing a transformation sequence.
- * 
- * this class as well as the whole package has been
- * edited and improved by holger endert and tobias küster
- * 
- * @author Enrico Biermann <br>
- * @author Guenter Kuhns <br>
+ * The Transformation class encapsulates a number of Rule Layers, that is a List
+ * of Lists of Rules, and provides a Method for applying these rules to a given
+ * EObject graph. The Rule Layers are executed consecutively to all EObjects
+ * related to the EObject given as root node.
  */
 public abstract class Transformation {
 	
-	/**this list is containing one List for each layer, holding this layer's rules*/
+	/** List containing one List of Rules for each layer */
 	protected List<List<AbstractRule>> rules= null;
 	
 	/**
-	 * fill rules list with one list for each layer, holding that layer's rules.
+	 * Fill Layers List with one List of Rules for each layer.
 	 * 
 	 * Example:
 	 * List<List<AbstractRule>> layers= new ArrayList<List<AbstractRule>>();
 	 * List<AbstractRule> layer1= new ArrayList<AbstractRule>();
-	 * layer1.add(new SplitGatewayRule(root));
-	 * layer1.add(new InsertGatewayRule(root));
-	 * layer1.add(new InsertEmptyRule(root));
+	 * layer1.add(new SplitGatewayRule());
+	 * layer1.add(new InsertGatewayRule());
+	 * layer1.add(new InsertEmptyRule());
 	 * layers.add(layer1);
 	 * return layers;
 	 */

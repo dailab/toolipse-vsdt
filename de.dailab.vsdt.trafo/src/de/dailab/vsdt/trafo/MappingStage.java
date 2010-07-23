@@ -1,6 +1,6 @@
 package de.dailab.vsdt.trafo;
 
-import de.dailab.vsdt.trafo.base.logger.TrafoLog;
+import de.dailab.vsdt.trafo.base.util.TrafoLog;
 
 /**
  * Each instance of this class represents one stage in a mapping to an executable language,

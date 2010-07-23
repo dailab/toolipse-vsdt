@@ -35,7 +35,7 @@ import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.VsdtPackage;
 import de.dailab.vsdt.trafo.MappingStage;
-import de.dailab.vsdt.trafo.base.logger.TrafoLog;
+import de.dailab.vsdt.trafo.base.util.TrafoLog;
 import de.dailab.vsdt.util.VsdtHelper;
 
 /**

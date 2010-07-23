@@ -76,7 +76,7 @@ import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.trafo.base.logger.TrafoLog;
+import de.dailab.vsdt.trafo.base.util.TrafoLog;
 import de.dailab.vsdt.trafo.bpel.util.BpelProcessSet;
 import de.dailab.vsdt.trafo.bpel.util.BpelStaticHelper;
 import de.dailab.vsdt.trafo.bpel.util.BpelVisitorConstants;

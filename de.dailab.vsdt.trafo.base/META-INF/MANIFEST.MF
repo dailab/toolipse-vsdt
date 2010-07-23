@@ -9,7 +9,7 @@ Bundle-Vendor: TFS and DAI-Labor, TU Berlin
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Export-Package: de.dailab.vsdt.trafo.base,
- de.dailab.vsdt.trafo.base.logger,
  de.dailab.vsdt.trafo.base.queries,
+ de.dailab.vsdt.trafo.base.util,
  org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

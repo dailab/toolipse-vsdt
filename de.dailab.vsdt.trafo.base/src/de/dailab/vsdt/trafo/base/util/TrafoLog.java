@@ -1,4 +1,4 @@
-package de.dailab.vsdt.trafo.base.logger;
+package de.dailab.vsdt.trafo.base.util;
 
 import java.io.CharArrayWriter;
 import java.io.IOException;

@@ -33,7 +33,7 @@ import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.TextAnnotation;
-import de.dailab.vsdt.trafo.base.logger.TrafoLog;
+import de.dailab.vsdt.trafo.base.util.TrafoLog;
 import de.dailab.vsdt.trafo.impl.BpmnElementMapping;
 
 /**

@@ -58,7 +58,7 @@ import de.dailab.vsdt.Property;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.TriggerType;
-import de.dailab.vsdt.trafo.base.logger.TrafoLog;
+import de.dailab.vsdt.trafo.base.util.TrafoLog;
 import de.dailab.vsdt.trafo.impl.BpmnElementMapping;
 import de.dailab.vsdt.trafo.jiacv.util.Bpmn2JiacConstants;
 import de.dailab.vsdt.trafo.jiacv.util.JadlElementFactory;

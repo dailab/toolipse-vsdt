@@ -34,7 +34,7 @@ import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.trafo.MappingStage;
-import de.dailab.vsdt.trafo.base.logger.TrafoLog;
+import de.dailab.vsdt.trafo.base.util.TrafoLog;
 
 /**
  * STP to BPMN visitor. This visitor is performing a top-down pass of the STP BPMN model. 

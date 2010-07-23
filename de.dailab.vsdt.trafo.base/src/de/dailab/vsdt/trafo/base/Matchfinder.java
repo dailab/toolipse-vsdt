@@ -1,7 +1,6 @@
 package de.dailab.vsdt.trafo.base;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -56,7 +55,7 @@ public class Matchfinder {
 	private boolean findMatches(int index) {
 		
 		if (index >= lhsVars.size()) {
-			//all LHS vars instantiated: copy instance values to matches-list
+			//all LHS variables instantiated: copy instance values to matches-list
 			match = new ArrayList<EObject>();
 			for (Variable variable : lhsVars) {
 				match.add(variable.getInstanceValue());
@@ -76,7 +75,7 @@ public class Matchfinder {
 				return true;
 			}
 			result= var.nextInstance();
-		};
+		}
 		
 		return false;
 	}
@@ -88,10 +87,9 @@ public class Matchfinder {
 	 * evaluate all the NACs for the match found at this point.
 	 */
 	private boolean evalAllNacsForMatch() {
-		for (Iterator<List<Variable>> iter = nacVars.iterator(); iter.hasNext();) {
-			List<Variable> nac= iter.next();
+		for (List<Variable> nac : nacVars) {
 			setNacVariables(nac, match);
-			if (findNacMatch(nac,0)) {
+			if (findNacMatch(nac, 0)) {
 				match= null;
 				return false;
 			}
@@ -121,7 +119,7 @@ public class Matchfinder {
 		if (index >= nac.size()) {
 			//NAC match found
 			for (int i = 0; i < nac.size(); i++) {
-				//deinstantiate variables
+				//de-instantiate variables
 				Variable current = nac.get(i);
 				if (current != null) {
 					current.deinstanciate();
@@ -133,7 +131,7 @@ public class Matchfinder {
 		
 		Variable var = nac.get(index);
 		if (var == null) {
-			//var not relevant for the NAC; continue with next variable
+			//variable not relevant for the NAC; continue with next variable
 			return findNacMatch(nac, index + 1);
 		}
 		

@@ -36,7 +36,7 @@ import de.dailab.jiactng.jadl.ontology.JadlParseException;
 import de.dailab.jiactng.jadl.util.SimpleJadlParser;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.trafo.MappingResultSaver;
-import de.dailab.vsdt.trafo.base.logger.TrafoLog;
+import de.dailab.vsdt.trafo.base.util.TrafoLog;
 
 public class JiacVResultSaver extends MappingResultSaver {
 

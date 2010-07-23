@@ -32,7 +32,7 @@ import org.eclipse.ui.IWorkbench;
 import de.dailab.vsdt.trafo.MappingResultSaver;
 import de.dailab.vsdt.trafo.MappingStage;
 import de.dailab.vsdt.trafo.MappingWrapper;
-import de.dailab.vsdt.trafo.base.logger.TrafoLog;
+import de.dailab.vsdt.trafo.base.util.TrafoLog;
 
 public abstract class BpmnTrafoWizard extends Wizard {
 	

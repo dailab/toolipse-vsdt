@@ -37,7 +37,7 @@ import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.trafo.MappingStage;
-import de.dailab.vsdt.trafo.base.logger.TrafoLog;
+import de.dailab.vsdt.trafo.base.util.TrafoLog;
 import de.dailab.vsdt.trafo.jiaciv.util.JiacVisitorConstants;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBranch;

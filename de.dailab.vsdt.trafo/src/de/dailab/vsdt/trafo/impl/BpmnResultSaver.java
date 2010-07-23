@@ -27,7 +27,7 @@ import de.dailab.vsdt.diagram.part.VsdtDiagramEditorPlugin;
 import de.dailab.vsdt.meta.diagram.edit.parts.BusinessProcessSystemEditPart;
 import de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditorUtil;
 import de.dailab.vsdt.trafo.MappingResultSaver;
-import de.dailab.vsdt.trafo.base.logger.TrafoLog;
+import de.dailab.vsdt.trafo.base.util.TrafoLog;
 
 /**
  * Default implementation of MappingResultSaver to be used for BPMN files.

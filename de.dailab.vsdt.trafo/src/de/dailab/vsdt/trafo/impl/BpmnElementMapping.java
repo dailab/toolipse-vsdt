@@ -8,7 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.trafo.MappingStage;
-import de.dailab.vsdt.trafo.base.logger.TrafoLog;
+import de.dailab.vsdt.trafo.base.util.TrafoLog;
 import de.dailab.vsdt.util.VsdtExpressionVisitor;
 
 /**

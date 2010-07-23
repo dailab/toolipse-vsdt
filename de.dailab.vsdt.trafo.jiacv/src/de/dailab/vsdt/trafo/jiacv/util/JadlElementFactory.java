@@ -28,7 +28,7 @@ import de.dailab.jiactng.jadl.VariableDeclaration;
 import de.dailab.jiactng.jadl.While;
 import de.dailab.jiactng.jadl.ontology.JadlParseException;
 import de.dailab.vsdt.Property;
-import de.dailab.vsdt.trafo.base.logger.TrafoLog;
+import de.dailab.vsdt.trafo.base.util.TrafoLog;
 import de.dailab.vsdt.trafo.strucbpmn.DisjunctiveExpression;
 
 /**
