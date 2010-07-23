@@ -33,7 +33,7 @@
 			<li><em>Technical Support</em>: <span class='gen_doc'>The Technical Support receives tickets that can not be handled by the help desk, e.g. new problems.</span></li>
 			
 		</ul>
-		The Pool's Process is of type <span class='gen_type'>private</span>. In this Process, a number of elements are executed in sequence. 
+		The Process is of type <span class='gen_type'>private</span>. In this Process, a number of elements are executed in sequence. 
 		<div class='gen_block'>
 			First, in Event '<em>Receive Ticket</em>' the Message '<em>HelpDeskQuestion</em>' of the Service '<em>CS.askHelpdesk</em>' is received. <span class='gen_doc'>In the ticket the customer describes his poblem.</span> 
 			After that, starting at the Gateway '<em>Known Problem?</em>', one out of several branches will be accomplished: 
@@ -74,7 +74,7 @@
 		
 		<h3 id="_hK98MAzEEd6Oi9RfBDu6Tw">Development</h3>
 		The Pool '<em>Development</em>' belongs to Participant '<em>Development</em>'. <span class='gen_doc'>This Pool stands for the Development department, being further distinguished into bugfixing and others.</span>
-		The Pool's Process is of type <span class='gen_type'>collaboration</span>. In this Process, a number of elements are performed in sequence. 
+		The Process is of type <span class='gen_type'>private</span>. In this Process, a number of elements are performed in sequence. 
 		<div class='gen_block'>
 			First, in Event '<em>Receive Bug</em>' the Message '<em>BugTrackerTicket</em>' of the Service '<em>Dev.fileBug</em>' is received. <span class='gen_doc'>The development team receives a bug report and immediately drops everything else to fix the bug.</span> 
 			After that, a part of the Process will be conducted in a loop. 
@@ -106,7 +106,7 @@
 		
 		<h3 id="_4-HEcAzIEd6UAPS6PsSOjQ">Customer</h3>
 		The Pool '<em>Customer</em>' belongs to Participant '<em>Customer</em>'. <span class='gen_doc'>This is a blackbox Pool which represents the customer making the call at the help desk. No internal process is shown for this Pool.</span>
-		The Pool's Process is of type <span class='gen_type'>abstract</span>.
+		The Process is of type <span class='gen_type'>private</span>.
 		
 	</body>
 </html>
