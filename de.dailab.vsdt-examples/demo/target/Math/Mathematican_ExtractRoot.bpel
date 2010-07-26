@@ -61,7 +61,7 @@
               <bpws:to part="d" variable="Mathematican_ProcessData"/>
             </bpws:copy>
           </bpws:assign>
-          <bpws:while name="_2_epsgreaterthand_loop" condition=" ( (bpws:getVariableData('Mathematican_ProcessData','d') &lt; 0)  and  ( (0 - bpws:getVariableData('Mathematican_ProcessData','d'))  > bpws:getVariableData('Mathematican_ProcessData','eps')) )  or  ( (bpws:getVariableData('Mathematican_ProcessData','d') > 0)  and  (bpws:getVariableData('Mathematican_ProcessData','d') > bpws:getVariableData('Mathematican_ProcessData','eps')) ) ">
+          <bpws:while name="__SPLIT___epsgreaterthand_loop" condition=" ( (bpws:getVariableData('Mathematican_ProcessData','d') &lt; 0)  and  ( (0 - bpws:getVariableData('Mathematican_ProcessData','d'))  > bpws:getVariableData('Mathematican_ProcessData','eps')) )  or  ( (bpws:getVariableData('Mathematican_ProcessData','d') > 0)  and  (bpws:getVariableData('Mathematican_ProcessData','d') > bpws:getVariableData('Mathematican_ProcessData','eps')) ) ">
             <bpws:sequence>
               <bpws:switch>
                 <bpws:case condition=" (bpws:getVariableData('Mathematican_ProcessData','current') * bpws:getVariableData('Mathematican_ProcessData','current'))  > bpws:getVariableData('Mathematican_ProcessData','number')">
