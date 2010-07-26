@@ -6,7 +6,13 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * TODO javadoc
+ * This class provides a simple backtracking search algorithm for finding a 
+ * match for the given LHS and NACs. First, a match for the LHS is searched for.
+ * Then, given the variable instantiation provided by the match, a match for the
+ * NACs is searched. If no NAC match can be found, the match is valid and will
+ * be returned. Both algorithms work very similar, as a depth-first backtracking
+ * search, returning the first-possible match for LHS and NACs, i.e. it is not
+ * possible to use this class to find all matches for the LHS and NAC!
  */
 public class Matcher {
 	
@@ -26,7 +32,6 @@ public class Matcher {
 		this.lhsVars = lhsVars;
 		this.nacVars = nacVars;
 	}
-	
 
 	/**
 	 * Start backtracking algorithm. The search will return the first match for
@@ -87,10 +92,12 @@ public class Matcher {
 		// for all the NACs in the list...
 		for (List<Variable> nac : nacVars) {
 
-			// instantiate the NAC variables according to the match
+			// set the NAC variables' domains according to the match
 			for (int i=0; i < match.size() && i < nac.size(); i++) {
 				if (nac.get(i) != null) {
-					nac.get(i).setDomain(match.get(i));
+					List<EObject> domain = nac.get(i).getDomain();
+					domain.clear();
+					domain.add(match.get(i));
 				}
 			}
 
@@ -111,7 +118,6 @@ public class Matcher {
 		}
 		return true;
 	}
-	
 	
 	/**
 	 * Try to find a match for the NAC variables using backtracking. Matching

@@ -9,7 +9,12 @@ import org.eclipse.emf.ecore.EObject;
 import de.dailab.vsdt.trafo.base.queries.Constraint;
 
 /**
- * TODO javadoc
+ * A Variable represents an instantiation for some object in the Transformation
+ * Rule's patterns. It is defined by a type and a number of constraints. The 
+ * variable provides functionality similar to an iterator, probing for the next
+ * possible instance value for this variable, given the constraints and the
+ * current instantiation of the other variables w.r.t. which this variable's
+ * value is constrained.
  */
 public class Variable {
 	
@@ -49,21 +54,13 @@ public class Variable {
 	}
 	
 	/**
+	 * This method can be used for further constraining a variables domain.
+	 * Warning: This method returns the domain list itself, not a copy!
+	 * 
      * @return	all possible values for this variable
      */	
 	public List<EObject> getDomain() {
 		return this.domain;
-	}
-	
-	
-	/**
-	 * Reduce domain to a single value - used for defining matches in the NAC.
-	 * 
-	 * @param dom	value for this variable
-	 */
-	public void setDomain(EObject dom) {
-		this.domain.clear();
-		this.domain.add(dom);
 	}
 	
 	/**
@@ -99,8 +96,9 @@ public class Variable {
 	}
 	
 	/**
-	 * Instantiates variable with possible value from domain. This triggers query evaluation.
-	 * If conflict occurs at queries, variable is instantiated with next possible value.
+	 * Instantiate the Variable with the next possible value from the domain so
+	 * that all the Constraints are satisfied. The actual instance value can be
+	 * retrieved with the {@link #getInstanceValue()} method. 
 	 * 
 	 * @return	instantiation successful?
 	 */ 
@@ -111,13 +109,13 @@ public class Variable {
 			
 			instanciated= true;
 			instanceValue= domain.get(instanceIndex);
-			if (!dynamicDomain.contains(instanceValue)) {
+			if (! dynamicDomain.contains(instanceValue)) {
 				return nextInstance();
 			}
 			
 			//Check Queries for Inconsistencies
-			for (Constraint query : constraints) {
-				if (! query.apply()){
+			for (Constraint constraint : constraints) {
+				if (! constraint.apply()){
 					//try next possible value
 					return nextInstance();
 				}

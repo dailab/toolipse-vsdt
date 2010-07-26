@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import de.dailab.vsdt.trafo.base.queries.InjectivityConstraint;
 import de.dailab.vsdt.trafo.base.queries.ReferenceConstraint;
-import de.dailab.vsdt.trafo.base.queries.VariableConstraint;
+import de.dailab.vsdt.trafo.base.queries.AttributeConstraint;
 import de.dailab.vsdt.trafo.base.util.Util;
 
 /**
@@ -101,7 +101,7 @@ public abstract class TransformationRule {
 	// HELPER METHODS
 	
 	/**
-	 * to be used in initLHSvariables and initNACVariables
+	 * Use this for adding variables of a given type to one of the variable sets.
 	 * 
 	 * @param vars		list of variables
 	 * @param type		the type to create
@@ -121,8 +121,8 @@ public abstract class TransformationRule {
 	}
 	
 	/**
-	 * add a number of null-matches to the given NAC-varSet. This is useful if
-	 * there are variables in the LHS that are not needed in the NAC.
+	 * Add a number of dummy variables to the given NAC varSet. This is useful
+	 * if there are variables in the LHS that are not needed in the NAC.
 	 * 
 	 * @param vars		the list of (NAC) variables
 	 * @param types		the list of types
@@ -139,8 +139,7 @@ public abstract class TransformationRule {
 	
 
 	/**
-	 * add a new target query for a reference.
-	 * use this query, if the source variable has been declared first
+	 * Create a ReferenceConstraint and add it to the variable.
 	 * 
 	 * @param varSet	the variable set
 	 * @param selfNr	the index of the source element
@@ -154,7 +153,7 @@ public abstract class TransformationRule {
 	}
 	
 	/**
-	 * add a new variable query for an attribute value.
+	 * Create an AttributeConstraint add it to the Variable.
 	 * 
 	 * @param varSet	the variable set
 	 * @param selfNr	the index of the source element
@@ -162,19 +161,18 @@ public abstract class TransformationRule {
 	 * @param selfAtt	attribute of source element
 	 * @param otherAtt	attribute of target element
 	 */
-	protected final void addVariableConstraint(List<Variable> varSet, int selfNr, int otherNr, EAttribute selfAtt, EAttribute otherAtt) {
+	protected final void addAttributeConstraint(List<Variable> varSet, int selfNr, int otherNr, EAttribute selfAtt, EAttribute otherAtt) {
 		Variable self = varSet.get(selfNr);
 		Variable other = varSet.get(otherNr);
-		self.addConstraint(new VariableConstraint(self, other, selfAtt, otherAtt));
+		self.addConstraint(new AttributeConstraint(self, other, selfAtt, otherAtt));
 	}
 	
 	/**
-	 * create a single injectivity query for the given variables
-	 * note that the first variable has to be instantiated before the second!
+	 * Create an InjectivityConstraint and add it to the variable.
 	 * 
 	 * @param vars		variable list
-	 * @param creator	index of first variable in list
-	 * @param other	index of second variable in list
+	 * @param selfNr 	index of first variable in list
+	 * @param otherNr	index of second variable in list
 	 */
 	protected final void addInjectivityConstraint(List<Variable> varSet, int selfNr, int otherNr) {
 		Variable self = varSet.get(selfNr);
@@ -183,8 +181,8 @@ public abstract class TransformationRule {
 	}
 
 	/**
-	 * Create InjectivityQueries for _all_ variables in the given list that can
-	 * have shared instances. As result two variables can not have the same 
+	 * Create InjectivityConstraints for _all_ variables in the given list that
+	 * can have shared instances. As result two variables can not have the same 
 	 * instance.
 	 * 
 	 * @param vars	list of variables

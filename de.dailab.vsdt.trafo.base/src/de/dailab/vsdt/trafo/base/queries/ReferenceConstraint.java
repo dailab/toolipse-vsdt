@@ -9,29 +9,30 @@ import org.eclipse.emf.ecore.EReference;
 import de.dailab.vsdt.trafo.base.Variable;
 
 /**
- * TODO javadoc
+ * This Constraint checks whether the variables are in some way related to each
+ * other. 
  */
 public class ReferenceConstraint extends Constraint {
 	
-	/**the reference*/
-	private final EReference ref;
+	/** the variable's reference */
+	private final EReference reference;
 	
 	/**
-	 * Default constructor.
+	 * Create Reference Constraint.
 	 *  
-	 * @param creator	instantiated variable
-	 * @param target	other variable, target of a link from creator
-	 * @param ref		reference feature
+	 * @param self			instantiated variable
+	 * @param other			other variable, target of a link from creator
+	 * @param reference		reference feature
 	 */
-	public ReferenceConstraint (Variable creator, Variable target, EReference ref) {
-		super(creator, target);
-		this.ref= ref;
+	public ReferenceConstraint(Variable self, Variable other, EReference reference) {
+		super(self, other);
+		this.reference= reference;
 	}
 	
 	@Override
 	public boolean checkVariableValue(EObject self, EObject other) {
-		Object value = self.eGet(ref);
-		if (ref.isMany()) {
+		Object value = self.eGet(reference);
+		if (reference.isMany()) {
 			return ((List) value).contains(other);
 		} else {
 			return value == other;
@@ -40,8 +41,8 @@ public class ReferenceConstraint extends Constraint {
 	
 	@Override
 	public void constrainTargetValues(EObject self, List<EObject> otherDomain) {
-		Object value = self.eGet(ref);
-		if (ref.isMany()) {
+		Object value = self.eGet(reference);
+		if (reference.isMany()) {
 			otherDomain.retainAll((List) value);
 		} else {
 			otherDomain.retainAll(Collections.singletonList(value));

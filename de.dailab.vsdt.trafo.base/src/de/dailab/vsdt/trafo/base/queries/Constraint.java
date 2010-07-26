@@ -8,22 +8,25 @@ import org.eclipse.emf.ecore.EObject;
 import de.dailab.vsdt.trafo.base.Variable;
 
 /**
- * TODO javadoc
+ * A Constraint is some clause that constrains the domains of two related 
+ * variables. A Constraint can be related to the Variables having disjunct
+ * values, having matching attribute values or one variable referencing the 
+ * other. 
  */
 public abstract class Constraint {
 	
- 	/** instantiated variable - instantiation evaluated by query */
+ 	/** the variable this constraint is applied to */
 	private final Variable variable;
 	
-	/** uninstantiated variable - domain can be changed by query */
+	/** other variable which is constrained w.r.t. the first variable*/
 	private final Variable other;
 	
-	/** old domain values of target variable */
-	private List<EObject> preDynamic = null;
+	/** stored domain values of other variable */
+	private List<EObject> oldDomain = null;
 	
 	
 	/**
-	 * Default constructor.
+	 * Create new Constraint.
 	 *  
 	 * @param variable	instantiated variable
 	 * @param other		other variable to be constrained
@@ -34,33 +37,33 @@ public abstract class Constraint {
 	}
 	
 	/**
-	 * Undo apply method - if evaluated variable gets other value or is 
-	 * de-instantiated. Old domain of target variable is restored.
+	 * When applied, a constraint can do two things: If the other variable has
+	 * already been instantiated, there is nothing more to do than to check
+	 * whether the variable under evaluation is fit for this other variable's
+	 * instantiation. Otherwise, if the other variable has not yet been
+	 * instantiated but only the variable under evaluation, then the other
+	 * variables domain is reduced to satisfy the constraint.
+	 * 
+	 * @return		True, if the constraint could be satisfied for any variable.
 	 */
-	public final void undo() {
-		if (preDynamic != null) {
-			this.other.setDynamicDomain(preDynamic);
-		}
-		this.preDynamic = null;
-	}
-	
-
 	public final boolean apply() {
 		
-		EObject thisValue = variable.getInstanceValue();
+		EObject self = variable.getInstanceValue();
+		
 		if (other.isInstanciated()) {
 			EObject otherValue = other.getInstanceValue();
-			return checkVariableValue(thisValue, otherValue);
+			return checkVariableValue(self, otherValue);
 
 		} else {
-			if (preDynamic == null) {
-				preDynamic = other.getDynamicDomain();
+			// create backup of other's domain values
+			if (oldDomain == null) {
+				oldDomain = other.getDynamicDomain();
 			}
 			
-			List<EObject> targetvalues= new Vector<EObject>(preDynamic);
-			constrainTargetValues(thisValue, targetvalues);
-			if (! targetvalues.isEmpty()) {
-				other.setDynamicDomain(targetvalues);
+			List<EObject> otherDomain= new Vector<EObject>(oldDomain);
+			constrainTargetValues(self, otherDomain);
+			if (! otherDomain.isEmpty()) {
+				other.setDynamicDomain(otherDomain);
 				return true;
 			} else {
 				return false;	
@@ -68,8 +71,36 @@ public abstract class Constraint {
 		}
 	}
 	
-	public abstract boolean checkVariableValue(EObject thisValue, EObject otherValue);
+	/**
+	 * Check whether the variable's value (i.e. its instantiation) satisfies the
+	 * constraint given the other variable's value.
+	 * 
+	 * @param self		the variable's instantiation
+	 * @param other		the other variable's instantiation
+	 * @return			instantiations satisfy constraint?
+	 */
+	public abstract boolean checkVariableValue(EObject self, EObject other);
 	
-	public abstract void constrainTargetValues(EObject thisValue, List<EObject> targetValues);
+	/**
+	 * Reduce the given domain of the other variable to satisfy the constraint
+	 * given the variable's instantiation.
+	 * 
+	 * @param self			the variable's instantiation
+	 * @param otherDomain	possible values for other variable
+	 */
+	public abstract void constrainTargetValues(EObject self, List<EObject> otherDomain);
+	
+	/**
+	 * Undo apply method. This is only needed if the constainTargetValues method
+	 * has been called (but will be invoked in any case non the less), restoring
+	 * the other variables domain to what is was before the application of the
+	 * constraint.
+	 */
+	public final void undo() {
+		if (oldDomain != null) {
+			other.setDynamicDomain(oldDomain);
+		}
+		oldDomain = null;
+	}
 	
 }
