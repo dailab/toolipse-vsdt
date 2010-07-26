@@ -7,11 +7,10 @@ import java.util.Vector;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EReference;
 
 import de.dailab.vsdt.trafo.base.queries.InjectivityConstraint;
-import de.dailab.vsdt.trafo.base.queries.SourceConstraint;
-import de.dailab.vsdt.trafo.base.queries.TargetConstraint;
+import de.dailab.vsdt.trafo.base.queries.ReferenceConstraint;
 import de.dailab.vsdt.trafo.base.queries.VariableConstraint;
 import de.dailab.vsdt.trafo.base.util.Util;
 
@@ -115,12 +114,74 @@ public abstract class TransformationRule {
 		vars.add(new Variable(type, domain));
 	}
 	
-	protected void addVariable(List<Variable> vars, EClass type, int multiplicity) {
-		for (int i = 0; i < multiplicity; i++) {
+	protected void addVariable(List<Variable> vars, EClass type, int count) {
+		for (int i = 0; i < count; i++) {
 			addVariable(vars, type);
 		}
 	}
 	
+	/**
+	 * add a number of null-matches to the given NAC-varSet. This is useful if
+	 * there are variables in the LHS that are not needed in the NAC.
+	 * 
+	 * @param vars		the list of (NAC) variables
+	 * @param types		the list of types
+	 * @param count		the number of null-matches to insert
+	 */
+	protected final void addNullVariable(List<Variable> vars, int count) {
+		for (int i= 0; i < count; i++) {
+			vars.add(null);
+		}
+	}
+	
+	
+	// HELPER METHODS FOR MANAGING VARIABLE CONSTRAINTS
+	
+
+	/**
+	 * add a new target query for a reference.
+	 * use this query, if the source variable has been declared first
+	 * 
+	 * @param varSet	the variable set
+	 * @param selfNr	the index of the source element
+	 * @param otherNr	the index of the target element
+	 * @param ref		the reference
+	 */
+	protected final void addReferenceConstraint(List<Variable> varSet, int selfNr, int otherNr, EReference ref) {
+		Variable self = varSet.get(selfNr);
+		Variable other = varSet.get(otherNr);
+		self.addConstraint(new ReferenceConstraint(self, other, ref));
+	}
+	
+	/**
+	 * add a new variable query for an attribute value.
+	 * 
+	 * @param varSet	the variable set
+	 * @param selfNr	the index of the source element
+	 * @param otherNr	the index of the target element
+	 * @param selfAtt	attribute of source element
+	 * @param otherAtt	attribute of target element
+	 */
+	protected final void addVariableConstraint(List<Variable> varSet, int selfNr, int otherNr, EAttribute selfAtt, EAttribute otherAtt) {
+		Variable self = varSet.get(selfNr);
+		Variable other = varSet.get(otherNr);
+		self.addConstraint(new VariableConstraint(self, other, selfAtt, otherAtt));
+	}
+	
+	/**
+	 * create a single injectivity query for the given variables
+	 * note that the first variable has to be instantiated before the second!
+	 * 
+	 * @param vars		variable list
+	 * @param creator	index of first variable in list
+	 * @param other	index of second variable in list
+	 */
+	protected final void addInjectivityConstraint(List<Variable> varSet, int selfNr, int otherNr) {
+		Variable self = varSet.get(selfNr);
+		Variable other = varSet.get(otherNr);
+		self.addConstraint(new InjectivityConstraint(self, other));
+	}
+
 	/**
 	 * Create InjectivityQueries for _all_ variables in the given list that can
 	 * have shared instances. As result two variables can not have the same 
@@ -134,107 +195,10 @@ public abstract class TransformationRule {
 			for (int j = i + 1; j < vars.size(); j++) {
 				Variable var2= vars.get(j);
 				if (Util.typesLinked(var1.getType(), var2.getType())) {
-					InjectivityConstraint iq = new InjectivityConstraint(var1, var2);
-					var1.addQuery(iq);
+					var1.addConstraint(new InjectivityConstraint(var1, var2));
 				}
 			}
 		}
-	}
-	
-	/**
-	 * returns the list of all instances for a give eClass
-	 * 
-	 * @param type	the eClass of interest
-	 * @return		list of all instances
-	 */
-//	protected final List<EObject> getDomainForType(EClass type) {
-//		List<EObject> domain = instancesMap.get(type);
-//		if (domain == null) {
-//			return new Vector<EObject>();
-//		}
-//		return new Vector<EObject>(domain);
-//	}
-	
-	/**
-	 * add a number of null-matches to the given NAC-varSet. This is useful if
-	 * there are variables in the LHS that are not needed in the NAC.
-	 * 
-	 * @param vars		the list of (NAC) variables
-	 * @param types		the list of types
-	 * @param count		the number of null-matches to insert
-	 */
-	protected final void addNullMatches(List<Variable> vars, int count) {
-		for (int i= 0; i < count; i++) {
-			vars.add(null);
-		}
-	}
-	
-	
-	
-	// HELPER METHODS FOR MANAGING VARIABLE QUERIES
-	
-
-	/**
-	 * add a new target query for a reference.
-	 * use this query, if the source variable has been declared first
-	 * 
-	 * @param varSet	the variable set
-	 * @param sourceNr	the index of the source element
-	 * @param targetNr	the index of the target element
-	 * @param ref		the reference
-	 */
-	protected final void addTargetConstraint(List<Variable> varSet, int sourceNr, int targetNr, EStructuralFeature ref) {
-		Variable source = varSet.get(sourceNr);
-		Variable target = varSet.get(targetNr);
-		TargetConstraint tq = new TargetConstraint(source, target, ref);
-		source.addQuery(tq);
-	}
-	
-	/**
-	 * add a new source query for a reference.
-	 * use this query, if the target variable has been declared first
-	 * 
-	 * @param varSet	the variable set
-	 * @param sourceNr	the index of the source element
-	 * @param targetNr	the index of the target element
-	 * @param ref		the reference
-	 */
-	protected final void addSourceConstraint(List<Variable> varSet, int sourceNr, int targetNr, EStructuralFeature ref) {
-		Variable source = varSet.get(sourceNr);
-		Variable target = varSet.get(targetNr);
-		SourceConstraint sq = new SourceConstraint(source, target, ref);
-		target.addQuery(sq);
-	}
-
-	/**
-	 * add a new variable query for an attribute value.
-	 * 
-	 * @param varSet	the variable set
-	 * @param sourceNr	the index of the source element
-	 * @param targetNr	the index of the target element
-	 * @param srcAtt	attribute of source element
-	 * @param trgAtt	attribute of target element
-	 */
-	protected final void addVariableConstraint(List<Variable> varSet, int sourceNr, int targetNr, EAttribute srcAtt, EAttribute trgAtt) {
-		Variable source = varSet.get(sourceNr);
-		Variable target = varSet.get(targetNr);
-		VariableConstraint vq = new VariableConstraint(source, target, srcAtt, trgAtt);
-		target.addQuery(vq);
-	}
-	
-	/**
-	 * create a single injectivity query for the given variables
-	 * note that the first variable has to be instantiated before the second!
-	 * 
-	 * @param vars		variable list
-	 * @param creator	index of first variable in list
-	 * @param target	index of second variable in list
-	 */
-	protected final void addInjectivityConstraint(List<Variable> varSet, int sourceNr, int targetNr) {
-		Variable source = varSet.get(sourceNr);
-		Variable target = varSet.get(targetNr);
-		InjectivityConstraint iq = new InjectivityConstraint(source, target);
-		source.addQuery(iq);
 	}
 	
 }

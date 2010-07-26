@@ -80,7 +80,7 @@ public class SplitMergeRule extends AbstractVsdtRule {
 		addBranchTargetQueries(lhsVariables, FORK, SEQFLOW11, FLOWOBJECT1, SEQFLOW12, MERGE);
 		addBranchTargetQueries(lhsVariables, FORK, SEQFLOW21, FLOWOBJECT2, SEQFLOW22, BLOCK);
 		
-		addTargetConstraint(lhsVariables, BLOCK, MERGE, struc.getBpmnBlock_SecondGateway());
+		addReferenceConstraint(lhsVariables, BLOCK, MERGE, struc.getBpmnBlock_SecondGateway());
 	}
 	
 	@Override

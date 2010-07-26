@@ -65,8 +65,8 @@ public class InsertEmptyRule2 extends AbstractVsdtRule {
 		addVariable(lhsVariables, bpmn.getActivity());		// ACTIVITY
 		
 		//queries
-		addTargetConstraint(lhsVariables, SEQFLOW, GATEWAY, bpmn.getSequenceFlow_Source());
-		addTargetConstraint(lhsVariables, SEQFLOW, ACTIVITY, bpmn.getSequenceFlow_Target());
+		addReferenceConstraint(lhsVariables, SEQFLOW, GATEWAY, bpmn.getSequenceFlow_Source());
+		addReferenceConstraint(lhsVariables, SEQFLOW, ACTIVITY, bpmn.getSequenceFlow_Target());
 		
 		//reduce domains
 		for (Iterator<EObject> iter = lhsVariables.get(ACTIVITY).getDomain().iterator(); iter.hasNext();) {

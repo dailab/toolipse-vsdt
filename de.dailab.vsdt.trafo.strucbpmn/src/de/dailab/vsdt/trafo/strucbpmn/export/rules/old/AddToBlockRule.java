@@ -68,8 +68,8 @@ public class AddToBlockRule extends AbstractVsdtRule {
 		
 		addBranchTargetQueries(lhsVariables, FORK, SEQFLOW1, FLOWOBJECT, SEQFLOW2, MERGE);
 		
-		addTargetConstraint(lhsVariables, BLOCK, FORK, struc.getBpmnBlock_FirstGateway());
-		addTargetConstraint(lhsVariables, BLOCK, MERGE, struc.getBpmnBlock_SecondGateway());
+		addReferenceConstraint(lhsVariables, BLOCK, FORK, struc.getBpmnBlock_FirstGateway());
+		addReferenceConstraint(lhsVariables, BLOCK, MERGE, struc.getBpmnBlock_SecondGateway());
 	}
 	
 	@Override

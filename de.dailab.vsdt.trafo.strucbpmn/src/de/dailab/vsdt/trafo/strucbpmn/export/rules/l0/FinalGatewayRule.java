@@ -82,8 +82,8 @@ public class FinalGatewayRule extends AbstractVsdtRule {
 		addVariable(lhsVariables, bpmn.getFlowObject()); // END 2
 		
 		addInjectivityConstraint(lhsVariables, END1, END2);
-		addTargetConstraint(lhsVariables, CONTAINER, END1, bpmn.getFlowObjectContainer_ContainedFlowObjects());
-		addTargetConstraint(lhsVariables, CONTAINER, END2, bpmn.getFlowObjectContainer_ContainedFlowObjects());
+		addReferenceConstraint(lhsVariables, CONTAINER, END1, bpmn.getFlowObjectContainer_ContainedFlowObjects());
+		addReferenceConstraint(lhsVariables, CONTAINER, END2, bpmn.getFlowObjectContainer_ContainedFlowObjects());
 		
 		//reduce domains
 		for (Iterator<EObject> iter = lhsVariables.get(CONTAINER).getDomain().iterator(); iter.hasNext();) {

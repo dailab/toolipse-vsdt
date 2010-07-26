@@ -60,7 +60,7 @@ public class BoundaryEventBlockRule extends AbstractVsdtRule {
 		addVariable(lhsVariables, bpmn.getIntermediate());	// INTERMEDIATE
 		
 		//queries
-		addTargetConstraint(lhsVariables,ACTIVITY,INTERMEDIATE,bpmn.getActivity_BoundaryEvents());
+		addReferenceConstraint(lhsVariables,ACTIVITY,INTERMEDIATE,bpmn.getActivity_BoundaryEvents());
  		
 	}
 
@@ -78,11 +78,11 @@ public class BoundaryEventBlockRule extends AbstractVsdtRule {
 		
 		List<Variable> nacVars = new Vector<Variable>();
 		addVariable(nacVars, bpmn.getActivity());	// ACTIVITY
-		addNullMatches(nacVars, 1);						// INTERMEDIATE
+		addNullVariable(nacVars, 1);						// INTERMEDIATE
 		addVariable(nacVars, struc.getBpmnEventHandlerBlock());	// EHBLOCK
 		
 		//queries
-		addSourceConstraint(nacVars, NAC_EHBLOCK, ACTIVITY, struc.getBpmnEventHandlerBlock_Activity());
+		addReferenceConstraint(nacVars, NAC_EHBLOCK, ACTIVITY, struc.getBpmnEventHandlerBlock_Activity());
 		
 		return nacVars;
 	}

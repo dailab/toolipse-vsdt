@@ -99,7 +99,7 @@ public class SplitForkRule extends AbstractVsdtRule {
 		addBranchTargetQueries(lhsVariables, FORK, SEQFLOW11, FLOWOBJECT1, SEQFLOW12, MERGE);
 		addBranchTargetQueries(lhsVariables, BLOCK, SEQFLOW21, FLOWOBJECT2, SEQFLOW22, MERGE);
 		
-		addTargetConstraint(lhsVariables, BLOCK, FORK, struc.getBpmnBlock_FirstGateway());
+		addReferenceConstraint(lhsVariables, BLOCK, FORK, struc.getBpmnBlock_FirstGateway());
 	}
 	
 	@Override

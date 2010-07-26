@@ -13,26 +13,26 @@ import de.dailab.vsdt.trafo.base.queries.Constraint;
  */
 public class Variable {
 	
-	/**this variable's type*/
+	/** this variable's type */
 	private final EClass type;
 
-	/**all possible values for this variable*/
+	/** all possible values for this variable */
 	private final List<EObject> domain;
 	
-	/**queries associated with this variable*/
-	private final List<Constraint> queries;
+	/** constraints associated with this variable */
+	private final List<Constraint> constraints;
 
-	/**possible values - already reduced by queries*/
+	/** possible values, already reduced by constraints */
 	private List<EObject> dynamicDomain = null;
 
 	
-	/**status of variable*/
+	/** status of variable */
 	private boolean instanciated = false;
 	
-	/**index of current value for variable inside the domain*/
+	/** index of current value for variable inside the domain */
 	private int instanceIndex = 0;
 	
-	/**current value of variable*/
+	/** current value of variable */
 	private EObject instanceValue = null;
 	
 	
@@ -44,7 +44,7 @@ public class Variable {
 	public Variable(EClass type, List<EObject> domain) {
 		this.type= type;
 		this.domain = new Vector<EObject>(domain);
-		this.queries = new Vector<Constraint>();
+		this.constraints = new Vector<Constraint>();
 		this.dynamicDomain = new Vector<EObject>(domain);
 	}
 	
@@ -89,12 +89,13 @@ public class Variable {
 	}
 	
 	/**
-	 * Adds a query to this variable.
+	 * Adds a Constraint to this variable. The Constraint's variable should be
+	 * this variable!
 	 * 
-	 * @param query	query for adding
+	 * @param constraint Some Constraint to be added to this Variable
 	 */		
-	public void addQuery(Constraint query) {
-		this.queries.add(query);
+	public void addConstraint(Constraint query) {
+		this.constraints.add(query);
 	}
 	
 	/**
@@ -115,7 +116,7 @@ public class Variable {
 			}
 			
 			//Check Queries for Inconsistencies
-			for (Constraint query : queries) {
+			for (Constraint query : constraints) {
 				if (! query.apply()){
 					//try next possible value
 					return nextInstance();
@@ -151,8 +152,8 @@ public class Variable {
 		instanceIndex= 0;
 		instanceValue= null;
 		instanciated= false;
-		for (int i = queries.size() - 1; i >= 0; i--) {
-			queries.get(i).undo();
+		for (int i = constraints.size() - 1; i >= 0; i--) {
+			constraints.get(i).undo();
 		}
 		dynamicDomain = null;
 	}

@@ -226,8 +226,8 @@ public class BlockRule extends AbstractVsdtRule {
 				  NAC_GATEWAY=	LAST_LHS_VAR+4;
 		
 		List<Variable> nacVars = new Vector<Variable>();
-		addNullMatches(nacVars, 3);					// SEQFLOW1, SEQFLOW2, SEQ
-		addNullMatches(nacVars, 3);					// SEQFLOW1, SEQFLOW2, SEQ
+		addNullVariable(nacVars, 3);					// SEQFLOW1, SEQFLOW2, SEQ
+		addNullVariable(nacVars, 3);					// SEQFLOW1, SEQFLOW2, SEQ
 		addVariable(nacVars, bpmn.getGateway());	// FORK
 		addVariable(nacVars, bpmn.getGateway());	// MERGE
 		addVariable(nacVars, bpmn.getSequenceFlow());// NAC_SEQFLOW1
@@ -237,10 +237,10 @@ public class BlockRule extends AbstractVsdtRule {
 		
 		//queries
 		addInjectivityConstraint(nacVars, MERGE, NAC_GATEWAY);
-		addSourceConstraint(nacVars, NAC_SEQFLOW1, FORK, bpmn.getSequenceFlow_Source());
-		addTargetConstraint(nacVars, NAC_SEQFLOW1, NAC_SEQ, bpmn.getSequenceFlow_Target());
-		addTargetConstraint(nacVars, NAC_SEQFLOW2, NAC_SEQ, bpmn.getSequenceFlow_Source());
-		addTargetConstraint(nacVars, NAC_SEQFLOW2, NAC_GATEWAY, bpmn.getSequenceFlow_Target());
+		addReferenceConstraint(nacVars, NAC_SEQFLOW1, FORK, bpmn.getSequenceFlow_Source());
+		addReferenceConstraint(nacVars, NAC_SEQFLOW1, NAC_SEQ, bpmn.getSequenceFlow_Target());
+		addReferenceConstraint(nacVars, NAC_SEQFLOW2, NAC_SEQ, bpmn.getSequenceFlow_Source());
+		addReferenceConstraint(nacVars, NAC_SEQFLOW2, NAC_GATEWAY, bpmn.getSequenceFlow_Target());
 		
 		return nacVars;
 	}
@@ -256,16 +256,16 @@ public class BlockRule extends AbstractVsdtRule {
 				  NAC_SEQ=	LAST_LHS_VAR+2;
 
 		List<Variable> nacVars = new Vector<Variable>();
-		addNullMatches(nacVars, 3);					// SEQFLOW1, SEQFLOW2, SEQ
-		addNullMatches(nacVars, 3);					// SEQFLOW1, SEQFLOW2, SEQ
+		addNullVariable(nacVars, 3);					// SEQFLOW1, SEQFLOW2, SEQ
+		addNullVariable(nacVars, 3);					// SEQFLOW1, SEQFLOW2, SEQ
 		addVariable(nacVars, bpmn.getGateway());	// FORK
-		addNullMatches(nacVars, 1);					// MERGE
+		addNullVariable(nacVars, 1);					// MERGE
 		addVariable(nacVars, bpmn.getSequenceFlow());// NAC_SEQFLOW1
 		addVariable(nacVars, bpmn.getFlowObject());	// NAC_SEQ
 		
 		//queries
-		addSourceConstraint(nacVars, NAC_SEQFLOW1, FORK, bpmn.getSequenceFlow_Source());
-		addTargetConstraint(nacVars, NAC_SEQFLOW1, NAC_SEQ, bpmn.getSequenceFlow_Target());
+		addReferenceConstraint(nacVars, NAC_SEQFLOW1, FORK, bpmn.getSequenceFlow_Source());
+		addReferenceConstraint(nacVars, NAC_SEQFLOW1, NAC_SEQ, bpmn.getSequenceFlow_Target());
 		
 		//reduce domains
 		for (Iterator<EObject> iter = nacVars.get(NAC_SEQ).getDomain().iterator(); iter.hasNext();) {

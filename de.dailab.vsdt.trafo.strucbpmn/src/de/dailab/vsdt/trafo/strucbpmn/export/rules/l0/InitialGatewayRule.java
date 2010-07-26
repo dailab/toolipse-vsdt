@@ -84,8 +84,8 @@ public class InitialGatewayRule extends AbstractVsdtRule {
 		addVariable(lhsVariables, bpmn.getFlowObject()); // START 2
 		
 		addInjectivityConstraint(lhsVariables, START1, START2);
-		addTargetConstraint(lhsVariables, CONTAINER, START1, bpmn.getFlowObjectContainer_ContainedFlowObjects());
-		addTargetConstraint(lhsVariables, CONTAINER, START2, bpmn.getFlowObjectContainer_ContainedFlowObjects());
+		addReferenceConstraint(lhsVariables, CONTAINER, START1, bpmn.getFlowObjectContainer_ContainedFlowObjects());
+		addReferenceConstraint(lhsVariables, CONTAINER, START2, bpmn.getFlowObjectContainer_ContainedFlowObjects());
 		
 		//reduce domains
 		for (Iterator<EObject> iter = lhsVariables.get(CONTAINER).getDomain().iterator(); iter.hasNext();) {

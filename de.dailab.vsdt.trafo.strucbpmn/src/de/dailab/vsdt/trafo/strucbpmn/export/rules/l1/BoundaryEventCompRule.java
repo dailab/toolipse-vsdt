@@ -65,11 +65,11 @@ public class BoundaryEventCompRule extends AbstractVsdtRule {
 		addVariable(lhsVariables, bpmn.getActivity());		// COMP_ACT
 		
 		//queries
-		addTargetConstraint(lhsVariables,EHBLOCK,ACTIVITY,struc.getBpmnEventHandlerBlock_Activity());
-		addTargetConstraint(lhsVariables,ACTIVITY,INTERMEDIATE,bpmn.getActivity_BoundaryEvents());
-		addTargetConstraint(lhsVariables,INTERMEDIATE,COMP_ACT,bpmn.getEvent_Activity());
-		addTargetConstraint(lhsVariables,ASSOCIATION,INTERMEDIATE,bpmn.getAssociation_Source());
- 		addTargetConstraint(lhsVariables,ASSOCIATION,COMP_ACT,bpmn.getAssociation_Target());
+		addReferenceConstraint(lhsVariables,EHBLOCK,ACTIVITY,struc.getBpmnEventHandlerBlock_Activity());
+		addReferenceConstraint(lhsVariables,ACTIVITY,INTERMEDIATE,bpmn.getActivity_BoundaryEvents());
+		addReferenceConstraint(lhsVariables,INTERMEDIATE,COMP_ACT,bpmn.getEvent_Activity());
+		addReferenceConstraint(lhsVariables,ASSOCIATION,INTERMEDIATE,bpmn.getAssociation_Source());
+ 		addReferenceConstraint(lhsVariables,ASSOCIATION,COMP_ACT,bpmn.getAssociation_Target());
  		
 		//reduce activity
  		for (Iterator<EObject> iter = lhsVariables.get(ACTIVITY).getDomain().iterator(); iter.hasNext();) {

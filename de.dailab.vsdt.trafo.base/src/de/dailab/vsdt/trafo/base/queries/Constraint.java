@@ -13,59 +13,63 @@ import de.dailab.vsdt.trafo.base.Variable;
 public abstract class Constraint {
 	
  	/** instantiated variable - instantiation evaluated by query */
-	protected final Variable variable;
+	private final Variable variable;
 	
 	/** uninstantiated variable - domain can be changed by query */
-	protected final Variable target;
+	private final Variable other;
 	
 	/** old domain values of target variable */
-	protected List<EObject> preDynamic = null;
+	private List<EObject> preDynamic = null;
 	
 	
 	/**
 	 * Default constructor.
 	 *  
 	 * @param variable	instantiated variable
-	 * @param target	other variable to be constrained
+	 * @param other		other variable to be constrained
 	 */
-	public Constraint(Variable creator, Variable target) {
-		this.variable = creator;
-		this.target = target;
-	}
-	
-	
-	/**
-	 * Query initialization. Current domain of target variables is saved.
-	 */
-	public final void init(){
-//		if (preDynamic == null) {
-//			preDynamic = target.getDynamicDomain();
-//		}
+	public Constraint(Variable variable, Variable other) {
+		this.variable = variable;
+		this.other = other;
 	}
 	
 	/**
-	 * Undo eval method - if evaluated variable gets other value or is 
+	 * Undo apply method - if evaluated variable gets other value or is 
 	 * de-instantiated. Old domain of target variable is restored.
 	 */
 	public final void undo() {
 		if (preDynamic != null) {
-			this.target.setDynamicDomain(preDynamic);
+			this.other.setDynamicDomain(preDynamic);
 		}
 		this.preDynamic = null;
 	}
 	
 
 	public final boolean apply() {
-		if (preDynamic == null) {
-			// set preDynamic only if target is the target and not the source!
-			preDynamic = target.getDynamicDomain();
+		
+		EObject thisValue = variable.getInstanceValue();
+		if (other.isInstanciated()) {
+			EObject otherValue = other.getInstanceValue();
+			return checkVariableValue(thisValue, otherValue);
+
+		} else {
+			if (preDynamic == null) {
+				preDynamic = other.getDynamicDomain();
+			}
+			
+			List<EObject> targetvalues= new Vector<EObject>(preDynamic);
+			constrainTargetValues(thisValue, targetvalues);
+			if (! targetvalues.isEmpty()) {
+				other.setDynamicDomain(targetvalues);
+				return true;
+			} else {
+				return false;	
+			}
 		}
-		return internalApply();
 	}
 	
-	/**
-	 * evaluate this query
-	 */
-	public abstract boolean internalApply();
+	public abstract boolean checkVariableValue(EObject thisValue, EObject otherValue);
+	
+	public abstract void constrainTargetValues(EObject thisValue, List<EObject> targetValues);
 	
 }

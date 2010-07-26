@@ -54,7 +54,7 @@ public class ConnectLinkRule extends AbstractVsdtRule {
 		addVariable(lhsVariables, bpmn.getEvent());	// LINK2
 
 		//queries
-		addTargetConstraint(lhsVariables, LINK1, LINK2, bpmn.getEvent_LinkedTo());
+		addReferenceConstraint(lhsVariables, LINK1, LINK2, bpmn.getEvent_LinkedTo());
 		addInjectivityConstraint(lhsVariables, LINK1, LINK2);
 
 		//reduce link 1
