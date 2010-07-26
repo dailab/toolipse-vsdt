@@ -42,7 +42,7 @@ public class FlattenSequenceRule extends AbstractVsdtRule {
 	
 	@Override
 	public void initLHSVariables() {
-		addVariableType(jadl.getSeq(), lhsVariables); // SEQUENCE
+		addVariable(lhsVariables, jadl.getSeq()); // SEQUENCE
 		
 		//reduce domains
 		for (Iterator<EObject> iter = lhsVariables.get(SEQUENCE).getDomain().iterator(); iter.hasNext();) {

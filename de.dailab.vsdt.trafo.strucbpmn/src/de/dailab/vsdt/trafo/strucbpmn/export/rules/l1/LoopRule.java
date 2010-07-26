@@ -100,15 +100,15 @@ public class LoopRule extends AbstractVsdtRule {
 	@Override
 	public void initLHSVariables() {
 	
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW11 
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW12 
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW21 
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW22
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOWQUIT
-		addVariableType(bpmn.getFlowObject(), lhsVariables);	// SEQ1
-		addVariableType(bpmn.getFlowObject(), lhsVariables);	// SEQ2
-		addVariableType(bpmn.getGateway(), lhsVariables);		// MERGE
-		addVariableType(bpmn.getGateway(), lhsVariables);		// FORK
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOW11 
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOW12 
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOW21 
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOW22
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOWQUIT
+		addVariable(lhsVariables, bpmn.getFlowObject());	// SEQ1
+		addVariable(lhsVariables, bpmn.getFlowObject());	// SEQ2
+		addVariable(lhsVariables, bpmn.getGateway());		// MERGE
+		addVariable(lhsVariables, bpmn.getGateway());		// FORK
 		
 		//queries
 		addInjectivityQuery(lhsVariables,SEQFLOW21,SEQFLOWQUIT);

@@ -56,8 +56,8 @@ public class BoundaryEventBlockRule extends AbstractVsdtRule {
 
 	@Override
 	public void initLHSVariables() {
-		addVariableType(bpmn.getActivity(), lhsVariables);		// ACTIVITY
-		addVariableType(bpmn.getIntermediate(), lhsVariables);	// INTERMEDIATE
+		addVariable(lhsVariables, bpmn.getActivity());		// ACTIVITY
+		addVariable(lhsVariables, bpmn.getIntermediate());	// INTERMEDIATE
 		
 		//queries
 		addTargetQuery(lhsVariables,ACTIVITY,INTERMEDIATE,bpmn.getActivity_BoundaryEvents());
@@ -77,9 +77,9 @@ public class BoundaryEventBlockRule extends AbstractVsdtRule {
 		final int NAC_EHBLOCK=	LAST_LHS_VAR+1;
 		
 		List<Variable> nacVars = new Vector<Variable>();
-		addVariableType(bpmn.getActivity(), nacVars);	// ACTIVITY
+		addVariable(nacVars, bpmn.getActivity());	// ACTIVITY
 		addNullMatches(nacVars, 1);						// INTERMEDIATE
-		addVariableType(struc.getBpmnEventHandlerBlock(), nacVars);	// EHBLOCK
+		addVariable(nacVars, struc.getBpmnEventHandlerBlock());	// EHBLOCK
 		
 		//queries
 		addSourceQuery(nacVars, NAC_EHBLOCK, ACTIVITY, struc.getBpmnEventHandlerBlock_Activity());

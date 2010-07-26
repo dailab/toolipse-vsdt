@@ -8,7 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * TODO javadoc
  */
-public class Matchfinder {
+public class Matcher {
 	
 	/** Current set of evaluated LHS variables */
 	private final List<Variable> lhsVars;
@@ -22,7 +22,7 @@ public class Matchfinder {
 	 * @param lhsVars	set of variables for LHS
 	 * @param nacVars	sets of variables for all NACs
 	 */
-	public Matchfinder(List<Variable> lhsVars, List<List<Variable>> nacVars){
+	public Matcher(List<Variable> lhsVars, List<List<Variable>> nacVars){
 		this.lhsVars = lhsVars;
 		this.nacVars = nacVars;
 	}

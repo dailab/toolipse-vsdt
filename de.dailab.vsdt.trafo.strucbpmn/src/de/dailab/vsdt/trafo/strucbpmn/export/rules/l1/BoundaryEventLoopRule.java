@@ -150,16 +150,16 @@ public class BoundaryEventLoopRule extends AbstractVsdtRule {
 	
 	@Override
 	public void initLHSVariables() {
-		addVariableType(struc.getBpmnEventHandlerBlock(), lhsVariables);// EH_BLOCK
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOWGL
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOWLA
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOWIC
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOWCG
-		addVariableType(bpmn.getIntermediate(), lhsVariables);	// INTERMEDIATE
-		addVariableType(bpmn.getActivity(), lhsVariables);		// ACTIVITY
-		addVariableType(bpmn.getGateway(), lhsVariables);		// GATEWAY
-		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FO_LOOP
-		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FO_COMP
+		addVariable(lhsVariables, struc.getBpmnEventHandlerBlock());//EH_BLOCK
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOWGL
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOWLA
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOWIC
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOWCG
+		addVariable(lhsVariables, bpmn.getIntermediate());	// INTERMEDIATE
+		addVariable(lhsVariables, bpmn.getActivity());		// ACTIVITY
+		addVariable(lhsVariables, bpmn.getGateway());		// GATEWAY
+		addVariable(lhsVariables, bpmn.getFlowObject());	// FO_LOOP
+		addVariable(lhsVariables, bpmn.getFlowObject());	// FO_COMP
 		
 		//queries
 		addTargetQuery(lhsVariables,EH_BLOCK,ACTIVITY,struc.getBpmnEventHandlerBlock_Activity());

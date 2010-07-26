@@ -87,10 +87,10 @@ public class SplitForkRule extends AbstractVsdtRule {
 	@Override
 	public void initLHSVariables() {
 		
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables, 4);	// SEQFLOW1s
-		addVariableType(bpmn.getFlowObject(), lhsVariables, 2);		// FLOWOBJECTs
-		addVariableType(struc.getBpmnBlock(), lhsVariables);		// BLOCK
-		addVariableType(bpmn.getGateway(), lhsVariables, 2);		// GATEWAYS
+		addVariable(lhsVariables, bpmn.getSequenceFlow(), 4);	// SEQFLOW1s
+		addVariable(lhsVariables, bpmn.getFlowObject(), 2);		// FLOWOBJECTs
+		addVariable(lhsVariables, struc.getBpmnBlock());		// BLOCK
+		addVariable(lhsVariables, bpmn.getGateway(), 2);		// GATEWAYS
 		
 		//queries
 		addInjectivityQuery(lhsVariables,FORK,MERGE);

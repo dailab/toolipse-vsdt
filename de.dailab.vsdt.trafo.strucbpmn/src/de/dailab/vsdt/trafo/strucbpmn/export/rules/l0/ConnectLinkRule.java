@@ -50,8 +50,8 @@ public class ConnectLinkRule extends AbstractVsdtRule {
 	@Override
 	public void initLHSVariables() {
 		 
-		addVariableType(bpmn.getEvent(), lhsVariables);	// LINK1
-		addVariableType(bpmn.getEvent(), lhsVariables);	// LINK2
+		addVariable(lhsVariables, bpmn.getEvent());	// LINK1
+		addVariable(lhsVariables, bpmn.getEvent());	// LINK2
 
 		//queries
 		addTargetQuery(lhsVariables, LINK1, LINK2, bpmn.getEvent_LinkedTo());

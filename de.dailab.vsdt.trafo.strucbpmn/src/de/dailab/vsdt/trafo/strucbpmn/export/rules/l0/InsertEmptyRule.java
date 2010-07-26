@@ -66,9 +66,9 @@ public class InsertEmptyRule extends AbstractVsdtRule {
 
 	@Override
 	public void initLHSVariables() {
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW
-		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT
-		addVariableType(bpmn.getGateway(), lhsVariables);		// GATEWAY
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOW
+		addVariable(lhsVariables, bpmn.getFlowObject());	// FLOWOBJECT
+		addVariable(lhsVariables, bpmn.getGateway());		// GATEWAY
 		
 		//queries
 		addTargetQuery(lhsVariables, SEQFLOW, FLOWOBJECT, bpmn.getSequenceFlow_Source());

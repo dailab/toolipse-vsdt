@@ -68,10 +68,10 @@ public class SplitMergeRule extends AbstractVsdtRule {
 	@Override
 	public void initLHSVariables() {
 		
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables, 4);	// SEQFLOW11
-		addVariableType(bpmn.getFlowObject(), lhsVariables, 2);		// FLOWOBJECT1
-		addVariableType(struc.getBpmnBlock(), lhsVariables);		// BLOCK
-		addVariableType(bpmn.getGateway(), lhsVariables, 2);		// FORK
+		addVariable(lhsVariables, bpmn.getSequenceFlow(), 4);	// SEQFLOW11
+		addVariable(lhsVariables, bpmn.getFlowObject(), 2);		// FLOWOBJECT1
+		addVariable(lhsVariables, struc.getBpmnBlock());		// BLOCK
+		addVariable(lhsVariables, bpmn.getGateway(), 2);		// FORK
 		
 		//queries
 		addInjectivityQuery(lhsVariables,FORK,MERGE);

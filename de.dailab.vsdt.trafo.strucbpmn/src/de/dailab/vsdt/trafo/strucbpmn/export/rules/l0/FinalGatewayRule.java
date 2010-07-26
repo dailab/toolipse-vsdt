@@ -77,9 +77,9 @@ public class FinalGatewayRule extends AbstractVsdtRule {
 	 */
 	@Override
 	public void initLHSVariables() {
-		addVariableType(bpmn.getFlowObjectContainer(), lhsVariables); // CONTAINER
-		addVariableType(bpmn.getFlowObject(), lhsVariables); // END 1
-		addVariableType(bpmn.getFlowObject(), lhsVariables); // END 2
+		addVariable(lhsVariables, bpmn.getFlowObjectContainer()); // CONTAINER
+		addVariable(lhsVariables, bpmn.getFlowObject()); // END 1
+		addVariable(lhsVariables, bpmn.getFlowObject()); // END 2
 		
 		addInjectivityQuery(lhsVariables, END1, END2);
 		addTargetQuery(lhsVariables, CONTAINER, END1, bpmn.getFlowObjectContainer_ContainedFlowObjects());

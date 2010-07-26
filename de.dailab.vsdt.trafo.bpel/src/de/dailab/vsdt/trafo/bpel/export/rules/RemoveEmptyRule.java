@@ -33,7 +33,7 @@ public class RemoveEmptyRule extends AbstractVsdtRule {
 	
 	@Override
 	public void initLHSVariables() {
-		addVariableType(bpel.getTEmpty(), lhsVariables); // EMPTY
+		addVariable(lhsVariables, bpel.getTEmpty()); // EMPTY
 		
 		//reduce domains
 		for (Iterator<EObject> iter = lhsVariables.get(EMPTY).getDomain().iterator(); iter.hasNext();) {

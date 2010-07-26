@@ -230,14 +230,14 @@ public class BlockRule extends AbstractVsdtRule {
 	@Override
 	public void initLHSVariables() {
 		
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW11
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW12
-		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT1
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW21
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW22
-		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT2
-		addVariableType(bpmn.getGateway(), lhsVariables);		// FORK
-		addVariableType(bpmn.getGateway(), lhsVariables);		// MERGE
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOW11
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOW12
+		addVariable(lhsVariables, bpmn.getFlowObject());	// FLOWOBJECT1
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOW21
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOW22
+		addVariable(lhsVariables, bpmn.getFlowObject());	// FLOWOBJECT2
+		addVariable(lhsVariables, bpmn.getGateway());		// FORK
+		addVariable(lhsVariables, bpmn.getGateway());		// MERGE
 		
 		//queries
 		addInjectivityQuery(lhsVariables,FORK,MERGE);

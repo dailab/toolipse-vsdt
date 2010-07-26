@@ -41,7 +41,7 @@ public class MergeConsecutiveAssignsRule extends AbstractVsdtRule {
 	
 	@Override
 	public void initLHSVariables() {
-		addVariableType(bpel.getTAssign(), lhsVariables); // ASSIGN
+		addVariable(lhsVariables, bpel.getTAssign()); // ASSIGN
 		
 		//reduce domains
 		for (Iterator<EObject> iter = lhsVariables.get(ASSIGN).getDomain().iterator(); iter.hasNext();) {

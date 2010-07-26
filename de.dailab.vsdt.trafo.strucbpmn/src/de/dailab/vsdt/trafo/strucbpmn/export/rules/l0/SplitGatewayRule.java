@@ -61,7 +61,7 @@ public class SplitGatewayRule extends AbstractVsdtRule {
 	
 	@Override
 	public void initLHSVariables() {
-		addVariableType(bpmn.getGateway(), lhsVariables); // GATEWAY
+		addVariable(lhsVariables, bpmn.getGateway()); // GATEWAY
 		
 		//reduce domains
 		for (Iterator<EObject> iter = lhsVariables.get(GATEWAY).getDomain().iterator(); iter.hasNext();) {

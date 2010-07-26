@@ -78,9 +78,9 @@ public class SequenceRule extends AbstractVsdtRule {
 	@Override
 	public void initLHSVariables() {
 		 
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW 
-		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT1
-		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT2
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOW 
+		addVariable(lhsVariables, bpmn.getFlowObject());	// FLOWOBJECT1
+		addVariable(lhsVariables, bpmn.getFlowObject());	// FLOWOBJECT2
 
 		//queries
 		addSeqFlowTargetQueries(lhsVariables, SEQFLOW, FLOWOBJECT1, FLOWOBJECT2);

@@ -86,14 +86,14 @@ public class Util {
 	 * @param root	topmost element of the instance (sub-)tree
 	 * @return		map associating EClasses with Lists of EObjects
 	 */
-	public static Map<EClass,List<EObject>> createTypeMap(EObject eObject) {
+	public static Map<EClass,List<EObject>> createInstancesMap(EObject eObject) {
 		Map<EClass,List<EObject>> typeToDomain = new HashMap<EClass,List<EObject>>();
 		EObject root = Util.getRoot(eObject);
-		fillTypeMap(typeToDomain, root);
+		fillInstancesMap(typeToDomain, root);
 		return typeToDomain;
 	}
 		
-	private static void fillTypeMap(Map<EClass,List<EObject>> typeToDomain, EObject root) {
+	private static void fillInstancesMap(Map<EClass,List<EObject>> typeToDomain, EObject root) {
 		List<EObject> vec = null;
 		
 		// fill types vector with element's class and all super types
@@ -114,7 +114,7 @@ public class Util {
 		}
 		//recursive call for child elements
 		for (EObject child : root.eContents()) { 
-			fillTypeMap(typeToDomain, child);
+			fillInstancesMap(typeToDomain, child);
 		}
 	}
 	

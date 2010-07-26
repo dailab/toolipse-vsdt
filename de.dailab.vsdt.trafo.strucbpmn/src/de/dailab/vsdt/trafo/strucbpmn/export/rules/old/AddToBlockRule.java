@@ -56,12 +56,12 @@ public class AddToBlockRule extends AbstractVsdtRule {
 	@Override
 	public void initLHSVariables() {
 		
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW1
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW2
-		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT
-		addVariableType(struc.getBpmnBlock(), lhsVariables);	// BLOCK
-		addVariableType(bpmn.getGateway(), lhsVariables);		// FORK
-		addVariableType(bpmn.getGateway(), lhsVariables);		// MERGE
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOW1
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOW2
+		addVariable(lhsVariables, bpmn.getFlowObject());	// FLOWOBJECT
+		addVariable(lhsVariables, struc.getBpmnBlock());	// BLOCK
+		addVariable(lhsVariables, bpmn.getGateway());		// FORK
+		addVariable(lhsVariables, bpmn.getGateway());		// MERGE
 		
 		//queries
 		addInjectivityQuery(lhsVariables,FORK,MERGE);

@@ -157,14 +157,14 @@ public class BlockRule extends AbstractVsdtRule {
 	@Override
 	public void initLHSVariables() {
 		
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW11
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW12
-		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT1
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW21
-		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW22
-		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT2
-		addVariableType(bpmn.getGateway(), lhsVariables);		// FORK
-		addVariableType(bpmn.getGateway(), lhsVariables);		// MERGE
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOW11
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOW12
+		addVariable(lhsVariables, bpmn.getFlowObject());	// FLOWOBJECT1
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOW21
+		addVariable(lhsVariables, bpmn.getSequenceFlow());	// SEQFLOW22
+		addVariable(lhsVariables, bpmn.getFlowObject());	// FLOWOBJECT2
+		addVariable(lhsVariables, bpmn.getGateway());		// FORK
+		addVariable(lhsVariables, bpmn.getGateway());		// MERGE
 		
 		//queries
 		addInjectivityQuery(lhsVariables,FORK,MERGE);
@@ -226,14 +226,14 @@ public class BlockRule extends AbstractVsdtRule {
 				  NAC_GATEWAY=	LAST_LHS_VAR+4;
 		
 		List<Variable> nacVars = new Vector<Variable>();
-		addNullMatches(nacVars, 3);						// SEQFLOW1, SEQFLOW2, SEQ
-		addNullMatches(nacVars, 3);						// SEQFLOW1, SEQFLOW2, SEQ
-		addVariableType(bpmn.getGateway(), nacVars);	// FORK
-		addVariableType(bpmn.getGateway(), nacVars);	// MERGE
-		addVariableType(bpmn.getSequenceFlow(), nacVars);// NAC_SEQFLOW1
-		addVariableType(bpmn.getSequenceFlow(), nacVars);// NAC_SEQFLOW2
-		addVariableType(bpmn.getFlowObject(), nacVars);	// NAC_SEQ
-		addVariableType(bpmn.getFlowObject(), nacVars);	// NAC_GATEWAY
+		addNullMatches(nacVars, 3);					// SEQFLOW1, SEQFLOW2, SEQ
+		addNullMatches(nacVars, 3);					// SEQFLOW1, SEQFLOW2, SEQ
+		addVariable(nacVars, bpmn.getGateway());	// FORK
+		addVariable(nacVars, bpmn.getGateway());	// MERGE
+		addVariable(nacVars, bpmn.getSequenceFlow());// NAC_SEQFLOW1
+		addVariable(nacVars, bpmn.getSequenceFlow());// NAC_SEQFLOW2
+		addVariable(nacVars, bpmn.getFlowObject());	// NAC_SEQ
+		addVariable(nacVars, bpmn.getFlowObject());	// NAC_GATEWAY
 		
 		//queries
 		addInjectivityQuery(nacVars, MERGE, NAC_GATEWAY);
@@ -256,12 +256,12 @@ public class BlockRule extends AbstractVsdtRule {
 				  NAC_SEQ=	LAST_LHS_VAR+2;
 
 		List<Variable> nacVars = new Vector<Variable>();
-		addNullMatches(nacVars, 3);						// SEQFLOW1, SEQFLOW2, SEQ
-		addNullMatches(nacVars, 3);						// SEQFLOW1, SEQFLOW2, SEQ
-		addVariableType(bpmn.getGateway(), nacVars);	// FORK
-		addNullMatches(nacVars, 1);						// MERGE
-		addVariableType(bpmn.getSequenceFlow(), nacVars);// NAC_SEQFLOW1
-		addVariableType(bpmn.getFlowObject(), nacVars);	// NAC_SEQ
+		addNullMatches(nacVars, 3);					// SEQFLOW1, SEQFLOW2, SEQ
+		addNullMatches(nacVars, 3);					// SEQFLOW1, SEQFLOW2, SEQ
+		addVariable(nacVars, bpmn.getGateway());	// FORK
+		addNullMatches(nacVars, 1);					// MERGE
+		addVariable(nacVars, bpmn.getSequenceFlow());// NAC_SEQFLOW1
+		addVariable(nacVars, bpmn.getFlowObject());	// NAC_SEQ
 		
 		//queries
 		addSourceQuery(nacVars, NAC_SEQFLOW1, FORK, bpmn.getSequenceFlow_Source());

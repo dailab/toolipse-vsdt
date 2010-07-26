@@ -79,9 +79,9 @@ public class InitialGatewayRule extends AbstractVsdtRule {
 	 */
 	@Override
 	public void initLHSVariables() {
-		addVariableType(bpmn.getFlowObjectContainer(), lhsVariables); // CONTAINER
-		addVariableType(bpmn.getFlowObject(), lhsVariables); // START 1
-		addVariableType(bpmn.getFlowObject(), lhsVariables); // START 2
+		addVariable(lhsVariables, bpmn.getFlowObjectContainer()); // CONTAINER
+		addVariable(lhsVariables, bpmn.getFlowObject()); // START 1
+		addVariable(lhsVariables, bpmn.getFlowObject()); // START 2
 		
 		addInjectivityQuery(lhsVariables, START1, START2);
 		addTargetQuery(lhsVariables, CONTAINER, START1, bpmn.getFlowObjectContainer_ContainedFlowObjects());

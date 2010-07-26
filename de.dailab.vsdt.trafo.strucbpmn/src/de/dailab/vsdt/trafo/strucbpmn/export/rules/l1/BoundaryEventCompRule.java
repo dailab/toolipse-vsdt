@@ -58,11 +58,11 @@ public class BoundaryEventCompRule extends AbstractVsdtRule {
 
 	@Override
 	public void initLHSVariables() {
-		addVariableType(struc.getBpmnEventHandlerBlock(), lhsVariables);// EHBLOCK
-		addVariableType(bpmn.getAssociation(), lhsVariables);	// ASSOCIATION
-		addVariableType(bpmn.getActivity(), lhsVariables);		// ACTIVITY
-		addVariableType(bpmn.getIntermediate(), lhsVariables);	// INTERMEDIATE
-		addVariableType(bpmn.getActivity(), lhsVariables);		// COMP_ACT
+		addVariable(lhsVariables, struc.getBpmnEventHandlerBlock());// EHBLOCK
+		addVariable(lhsVariables, bpmn.getAssociation());	// ASSOCIATION
+		addVariable(lhsVariables, bpmn.getActivity());		// ACTIVITY
+		addVariable(lhsVariables, bpmn.getIntermediate());	// INTERMEDIATE
+		addVariable(lhsVariables, bpmn.getActivity());		// COMP_ACT
 		
 		//queries
 		addTargetQuery(lhsVariables,EHBLOCK,ACTIVITY,struc.getBpmnEventHandlerBlock_Activity());

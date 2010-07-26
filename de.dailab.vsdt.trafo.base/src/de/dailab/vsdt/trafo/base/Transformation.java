@@ -47,7 +47,7 @@ public abstract class Transformation {
 			rules = initRules();
 		}
 
-		Map<EClass,List<EObject>> typeToDomain = Util.createTypeMap(eObject); 
+		Map<EClass,List<EObject>> instancesMap = Util.createInstancesMap(eObject); 
 
 		for (List<AbstractRule> layer : rules) {
 			
@@ -63,7 +63,7 @@ public abstract class Transformation {
 					
 					AbstractRule rule = applicableRules.remove();
 					
-					boolean executed= rule.execute(eObject, typeToDomain);
+					boolean executed= rule.execute(instancesMap);
 					
 					oldTime= newTime;
 					newTime= System.currentTimeMillis();
@@ -83,7 +83,7 @@ public abstract class Transformation {
 					if (executed) {
 						applicableRules.clear();
 						applicableRules.addAll(layer);
-						typeToDomain = Util.createTypeMap(eObject);
+						instancesMap = Util.createInstancesMap(eObject);
 					}
 				}
 			} catch (Exception e) {

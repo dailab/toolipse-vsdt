@@ -106,7 +106,7 @@ public class InsertGatewayRule extends AbstractVsdtRule {
 	
 	@Override
 	public void initLHSVariables() {
-		addVariableType(bpmn.getFlowObject(), lhsVariables); // FLOWOBJECT
+		addVariable(lhsVariables, bpmn.getFlowObject()); // FLOWOBJECT
 		
 		//reduce domains
 		for (Iterator<EObject> iter = lhsVariables.get(FLOWOBJECT).getDomain().iterator(); iter.hasNext();) {

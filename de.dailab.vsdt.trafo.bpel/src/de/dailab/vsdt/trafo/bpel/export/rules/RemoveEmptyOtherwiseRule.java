@@ -34,7 +34,7 @@ public class RemoveEmptyOtherwiseRule extends AbstractVsdtRule {
 	
 	@Override
 	public void initLHSVariables() {
-		addVariableType(bpel.getTActivityContainer(), lhsVariables); // OTHERWISE
+		addVariable(lhsVariables, bpel.getTActivityContainer()); // OTHERWISE
 		
 		//reduce domains
 		for (Iterator<EObject> iter = lhsVariables.get(OTHERWISE).getDomain().iterator(); iter.hasNext();) {
