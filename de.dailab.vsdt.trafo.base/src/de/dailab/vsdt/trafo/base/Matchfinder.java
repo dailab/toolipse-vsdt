@@ -6,14 +6,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * Class : Matchfinder <br/>
- * Package : rules <br/>
- * Project : RuleProject <br/>
- * Created On : 10.01.2006 <br/>
- * Description : Main class of CSP algorithm for match finding.
- * 
- * @author Enrico Biermann <br>
- * @author Guenter Kuhns <br>
+ * TODO javadoc
  */
 public class Matchfinder {
 	

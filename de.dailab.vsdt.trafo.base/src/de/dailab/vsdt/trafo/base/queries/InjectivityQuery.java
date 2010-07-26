@@ -3,15 +3,7 @@ package de.dailab.vsdt.trafo.base.queries;
 import de.dailab.vsdt.trafo.base.Variable;
 
 /**
- * Class : InjectivityQuery <br/>
- * Package : rules <br/>
- * Project : RuleProject <br/>
- * Created On : 10.01.2006 <br/>
- * Description : Query class for the Matchfinder. 
- * Ensures that the match morphism is injective. 
- * 
- * @author Enrico Biermann <br>
- * @author Guenter Kuhns <br>
+ * TODO javadoc
  */
 public class InjectivityQuery extends Query {
 	

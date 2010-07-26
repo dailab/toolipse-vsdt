@@ -7,16 +7,7 @@ import de.dailab.vsdt.trafo.base.Variable;
 
 
 /**
- * Class : TypeQuery <br/>
- * Package : rules <br/>
- * Project : RuleProject <br/>
- * Created On : 15.01.2006 <br/>
- * Description : Query class for the Matchfinder.
- *  
- * Ensures that NAC objects have the correct sub-type of their LHS type.
- * 
- * @author Enrico Biermann <br>
- * @author Guenter Kuhns <br>
+ * TODO javadoc
  */
 public class TypeQuery extends Query{
 	

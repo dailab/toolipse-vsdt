@@ -7,13 +7,10 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.FlowObjectContainer;
-import de.dailab.vsdt.Intermediate;
-import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.base.Variable;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerBlock;
 import de.dailab.vsdt.trafo.strucbpmn.StrucBpmnFactory;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
  * Boundary Event Block Rule
@@ -29,19 +26,10 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  */
 public class BoundaryEventBlockRule extends AbstractVsdtRule {
 	
-	protected Activity 		_activity= null;
-	protected Intermediate	_intermediate= null;
-	
-//	@Override
-//	protected void resetVars() {
-//		_activity= null;
-//		_intermediate= null;
-//	}
-	
-	@Override
-	protected AbstractWrapper getWrapper() {
-		return new RuleWrapper();
-	}
+	public static final int ACTIVITY= 0,
+							INTERMEDIATE= 1,
+							//last LHS variable (for NACs)
+							LAST_LHS_VAR= INTERMEDIATE;
 	
 	/**
 	 * - create EH block
@@ -51,8 +39,9 @@ public class BoundaryEventBlockRule extends AbstractVsdtRule {
 	 */
 	@Override
 	protected void apply(List<EObject> matches){
-		_activity=		(Activity)		matches.get(RuleWrapper.ACTIVITY);
-		_intermediate=	(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
+		Activity _activity=		(Activity)		matches.get(ACTIVITY);
+//		Intermediate _intermediate=	(Intermediate)	matches.get(INTERMEDIATE);
+		
 		BpmnEventHandlerBlock ehBlock= StrucBpmnFactory.eINSTANCE.createBpmnEventHandlerBlock();
 		
 		FlowObjectContainer container= _activity.getParent();
@@ -65,56 +54,37 @@ public class BoundaryEventBlockRule extends AbstractVsdtRule {
 		
 	}
 
-//	@Override
-//	protected void setWeightedLHS(List<EObject> matches){
-//		_activity=		(Activity)		matches.get(RuleWrapper.ACTIVITY);
-//		_intermediate=	(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
-//	}
+	@Override
+	public void initLHSVariables() {
+		addVariableType(bpmn.getActivity(), lhsVariables);		// ACTIVITY
+		addVariableType(bpmn.getIntermediate(), lhsVariables);	// INTERMEDIATE
+		
+		//queries
+		addTargetQuery(lhsVariables,ACTIVITY,INTERMEDIATE,bpmn.getActivity_BoundaryEvents());
+ 		
+	}
+
+	@Override
+	protected void initNACVariables() {
+		nacVariables.add(createNAC1());
+	}
 	
 	/**
-	 * wrapper class for this rule
-	 * 
-	 * @author tkuester
+	 * NAC1: The activity is not yet wrapped in a BoundaryEventBlock
+	 * @return
 	 */
-	class RuleWrapper extends AbstractVsdtWrapper {
+	private List<Variable> createNAC1() {
+		final int NAC_EHBLOCK=	LAST_LHS_VAR+1;
 		
-		public static final int ACTIVITY= 0,
-								INTERMEDIATE= 1,
-								//last LHS variable (for NACs)
-								LAST_LHS_VAR= INTERMEDIATE;
-
-		@Override
-		public void initLHSVariables() {
-			addVariableType(bpmn.getActivity(), lhsVariables);		// ACTIVITY
-			addVariableType(bpmn.getIntermediate(), lhsVariables);	// INTERMEDIATE
-			
-			//queries
-			addTargetQuery(lhsVariables,ACTIVITY,INTERMEDIATE,bpmn.getActivity_BoundaryEvents());
-	 		
-		}
-
-		@Override
-		protected void initNACVariables() {
-			nacVariables.add(createNAC1());
-		}
+		List<Variable> nacVars = new Vector<Variable>();
+		addVariableType(bpmn.getActivity(), nacVars);	// ACTIVITY
+		addNullMatches(nacVars, 1);						// INTERMEDIATE
+		addVariableType(struc.getBpmnEventHandlerBlock(), nacVars);	// EHBLOCK
 		
-		/**
-		 * NAC1: The activity is not yet wrapped in a BoundaryEventBlock
-		 * @return
-		 */
-		private List<Variable> createNAC1() {
-			final int NAC_EHBLOCK=	LAST_LHS_VAR+1;
-			
-			List<Variable> nacVars = new Vector<Variable>();
-			addVariableType(bpmn.getActivity(), nacVars);	// ACTIVITY
-			addNullMatches(nacVars, 1);						// INTERMEDIATE
-			addVariableType(struc.getBpmnEventHandlerBlock(), nacVars);	// EHBLOCK
-			
-			//queries
-			addSourceQuery(nacVars, NAC_EHBLOCK, ACTIVITY, struc.getBpmnEventHandlerBlock_Activity());
-			
-			return nacVars;
-		}
+		//queries
+		addSourceQuery(nacVars, NAC_EHBLOCK, ACTIVITY, struc.getBpmnEventHandlerBlock_Activity());
 		
+		return nacVars;
 	}
+
 }

@@ -8,12 +8,10 @@ import org.eclipse.emf.ecore.EObject;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.Association;
 import de.dailab.vsdt.Intermediate;
-import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerCase;
 import de.dailab.vsdt.trafo.strucbpmn.StrucBpmnFactory;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
  * Boundary Event Compensation Rule
@@ -27,25 +25,13 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  */
 public class BoundaryEventCompRule extends AbstractVsdtRule {
 	
-	protected BpmnEventHandlerBlock	_ehBlock= null;
-	protected Association			_association= null;
-	protected Activity 				_activity= null;
-	protected Intermediate 			_intermediate= null;
-	protected Activity 				_compAct= null;
-	
-//	@Override
-//	protected void resetVars() {
-//		_ehBlock= null;
-//		_association= null;
-//		_activity= null;
-//		_intermediate= null;
-//		_compAct= null;
-//	}
-	
-	@Override
-	protected AbstractWrapper getWrapper() {
-		return new RuleWrapper();
-	}
+	public static final int EHBLOCK= 0,
+							ASSOCIATION= 1,
+							ACTIVITY= 2,
+							INTERMEDIATE= 3,
+							COMP_ACT= 4,
+							//last LHS variable (for NACs)
+							LAST_LHS_VAR= COMP_ACT;
 	
 	/**
 	 * - create BpmnEventHandlerCase
@@ -55,11 +41,11 @@ public class BoundaryEventCompRule extends AbstractVsdtRule {
 	 */
 	@Override
 	protected void apply(List<EObject> matches){
-		_ehBlock=	(BpmnEventHandlerBlock)matches.get(RuleWrapper.EHBLOCK);
-		_association=(Association)	matches.get(RuleWrapper.ASSOCIATION);
-		_activity=	(Activity)		matches.get(RuleWrapper.ACTIVITY);
-		_intermediate=(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
-		_compAct=	(Activity)		matches.get(RuleWrapper.COMP_ACT);
+		BpmnEventHandlerBlock _ehBlock=	(BpmnEventHandlerBlock)matches.get(EHBLOCK);
+		Association _association=(Association)	matches.get(ASSOCIATION);
+//		Activity _activity=	(Activity)		matches.get(ACTIVITY);
+		Intermediate _intermediate=(Intermediate)	matches.get(INTERMEDIATE);
+		Activity _compAct=	(Activity)		matches.get(COMP_ACT);
 		
 		BpmnEventHandlerCase ehCase= StrucBpmnFactory.eINSTANCE.createBpmnEventHandlerCase();
 		_ehBlock.getEventHandlerCases().add(ehCase);
@@ -70,63 +56,38 @@ public class BoundaryEventCompRule extends AbstractVsdtRule {
 		deleteAssociation(_association);
 	}
 
-//	@Override
-//	protected void setWeightedLHS(List<EObject> matches){
-//		_ehBlock=	(BpmnEventHandlerBlock)matches.get(RuleWrapper.EHBLOCK);
-//		_association=(Association)	matches.get(RuleWrapper.ASSOCIATION);
-//		_activity=	(Activity)		matches.get(RuleWrapper.ACTIVITY);
-//		_intermediate=(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
-//		_compAct=	(Activity)		matches.get(RuleWrapper.COMP_ACT);
-//	}
-	
-	/**
-	 * wrapper class for this rule
-	 * 
-	 * @author tkuester
-	 */
-	class RuleWrapper extends AbstractVsdtWrapper {
+	@Override
+	public void initLHSVariables() {
+		addVariableType(struc.getBpmnEventHandlerBlock(), lhsVariables);// EHBLOCK
+		addVariableType(bpmn.getAssociation(), lhsVariables);	// ASSOCIATION
+		addVariableType(bpmn.getActivity(), lhsVariables);		// ACTIVITY
+		addVariableType(bpmn.getIntermediate(), lhsVariables);	// INTERMEDIATE
+		addVariableType(bpmn.getActivity(), lhsVariables);		// COMP_ACT
 		
-		public static final int EHBLOCK= 0,
-								ASSOCIATION= 1,
-								ACTIVITY= 2,
-								INTERMEDIATE= 3,
-								COMP_ACT= 4,
-								//last LHS variable (for NACs)
-								LAST_LHS_VAR= COMP_ACT;
-
-		@Override
-		public void initLHSVariables() {
-			addVariableType(struc.getBpmnEventHandlerBlock(), lhsVariables);// EHBLOCK
-			addVariableType(bpmn.getAssociation(), lhsVariables);	// ASSOCIATION
-			addVariableType(bpmn.getActivity(), lhsVariables);		// ACTIVITY
-			addVariableType(bpmn.getIntermediate(), lhsVariables);	// INTERMEDIATE
-			addVariableType(bpmn.getActivity(), lhsVariables);		// COMP_ACT
+		//queries
+		addTargetQuery(lhsVariables,EHBLOCK,ACTIVITY,struc.getBpmnEventHandlerBlock_Activity());
+		addTargetQuery(lhsVariables,ACTIVITY,INTERMEDIATE,bpmn.getActivity_BoundaryEvents());
+		addTargetQuery(lhsVariables,INTERMEDIATE,COMP_ACT,bpmn.getEvent_Activity());
+		addTargetQuery(lhsVariables,ASSOCIATION,INTERMEDIATE,bpmn.getAssociation_Source());
+ 		addTargetQuery(lhsVariables,ASSOCIATION,COMP_ACT,bpmn.getAssociation_Target());
+ 		
+		//reduce activity
+ 		for (Iterator<EObject> iter = lhsVariables.get(ACTIVITY).getDomain().iterator(); iter.hasNext();) {
+			boolean ok= true;
+			Activity activity= (Activity) iter.next();
 			
-			//queries
-			addTargetQuery(lhsVariables,EHBLOCK,ACTIVITY,struc.getBpmnEventHandlerBlock_Activity());
-			addTargetQuery(lhsVariables,ACTIVITY,INTERMEDIATE,bpmn.getActivity_BoundaryEvents());
-			addTargetQuery(lhsVariables,INTERMEDIATE,COMP_ACT,bpmn.getEvent_Activity());
-			addTargetQuery(lhsVariables,ASSOCIATION,INTERMEDIATE,bpmn.getAssociation_Source());
-	 		addTargetQuery(lhsVariables,ASSOCIATION,COMP_ACT,bpmn.getAssociation_Target());
-	 		
-			//reduce activity
-	 		for (Iterator<EObject> iter = lhsVariables.get(ACTIVITY).getDomain().iterator(); iter.hasNext();) {
-				boolean ok= true;
-				Activity activity= (Activity) iter.next();
+			//has neither incoming nor outgoing sequence flows
+			ok &= activity.getIncomingSeq().size() == 0;
+			ok &= activity.getOutgoingSeq().size() == 0;
 				
-				//has neither incoming nor outgoing sequence flows
-				ok &= activity.getIncomingSeq().size() == 0;
-				ok &= activity.getOutgoingSeq().size() == 0;
-					
-				if (!ok) {
-					iter.remove();
-				}
+			if (!ok) {
+				iter.remove();
 			}
 		}
-
-		@Override
-		protected void initNACVariables() {
-		}	
-		
 	}
+
+	@Override
+	protected void initNACVariables() {
+	}	
+		
 }

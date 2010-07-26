@@ -76,7 +76,6 @@ public class Util {
 	}
 	
 	
-
 	/**
 	 * Associate objects inside the instance with their types. This method
 	 * traverses the containment structure beginning with the root element.

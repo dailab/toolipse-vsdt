@@ -15,13 +15,11 @@ import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerCase;
 import de.dailab.vsdt.trafo.strucbpmn.StrucBpmnFactory;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InsertEmptyRule;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 import de.dailab.vsdt.util.VsdtElementFactory;
 
 /**
@@ -41,29 +39,16 @@ import de.dailab.vsdt.util.VsdtElementFactory;
  */
 public class BoundaryEventLoopRule extends AbstractVsdtRule {
 
-	protected BpmnEventHandlerBlock _ehBlock= null;
-	protected SequenceFlow 			_seqFlowGL= null;
-	protected SequenceFlow 			_seqFlowLA= null;
-	protected SequenceFlow 			_seqFlowIC= null;
-	protected SequenceFlow 			_seqFlowCG= null;
-	protected Activity 				_activity= null;
-	protected Intermediate 			_intermediate= null;
-	protected Gateway 				_gateway= null;
-	protected FlowObject 			_foLoop= null;
-	protected FlowObject 			_foComp= null;
-	
-//	@Override
-//	protected void resetVars() {
-//		_seqFlowGL= null;
-//		_seqFlowLA= null;
-//		_seqFlowIC= null;
-//		_seqFlowCG= null;
-//		_intermediate= null;
-//		_activity= null;
-//		_gateway= null;
-//		_foLoop= null;
-//		_foComp= null;
-//	}
+	public static final int EH_BLOCK= 0,
+							SEQFLOWGL= 1,
+							SEQFLOWLA= 2,
+							SEQFLOWIC= 3,
+							SEQFLOWCG= 4,
+							INTERMEDIATE= 5,
+							ACTIVITY= 6,
+							GATEWAY= 7,
+							FO_LOOP= 8,
+							FO_COMP= 9;
 	
 	/**
 	 * - create BpmnEventHandlerCase
@@ -73,16 +58,16 @@ public class BoundaryEventLoopRule extends AbstractVsdtRule {
 	 */
 	@Override
 	protected void apply(List<EObject> matches){
-		_ehBlock=		(BpmnEventHandlerBlock)matches.get(RuleWrapper.EH_BLOCK);
-		_seqFlowGL=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWGL);
-		_seqFlowLA=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWLA);
-		_seqFlowIC=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWIC);
-		_seqFlowCG=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWCG);
-		_intermediate=	(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
-		_activity=		(Activity)		matches.get(RuleWrapper.ACTIVITY);
-		_gateway=		(Gateway)		matches.get(RuleWrapper.GATEWAY);
-		_foLoop=			(FlowObject)	matches.get(RuleWrapper.FO_LOOP);
-		_foComp=			(FlowObject)	matches.get(RuleWrapper.FO_COMP);
+		BpmnEventHandlerBlock _ehBlock=	(BpmnEventHandlerBlock)matches.get(EH_BLOCK);
+//		SequenceFlow _seqFlowGL=		(SequenceFlow)	matches.get(SEQFLOWGL);
+//		SequenceFlow _seqFlowLA=		(SequenceFlow)	matches.get(SEQFLOWLA);
+		SequenceFlow _seqFlowIC=		(SequenceFlow)	matches.get(SEQFLOWIC);
+		SequenceFlow _seqFlowCG=		(SequenceFlow)	matches.get(SEQFLOWCG);
+		Intermediate _intermediate=		(Intermediate)	matches.get(INTERMEDIATE);
+//		Activity _activity=				(Activity)		matches.get(ACTIVITY);
+		Gateway _gateway=				(Gateway)		matches.get(GATEWAY);
+//		FlowObject _foLoop=				(FlowObject)	matches.get(FO_LOOP);
+		FlowObject _foComp=				(FlowObject)	matches.get(FO_COMP);
 		
 		final BusinessProcessDiagram bpd= _gateway.getPool().getParent();
 		
@@ -164,66 +149,28 @@ public class BoundaryEventLoopRule extends AbstractVsdtRule {
 	}
 	
 	@Override
-	protected AbstractWrapper getWrapper() {
-		return new RuleWrapper();
+	public void initLHSVariables() {
+		addVariableType(struc.getBpmnEventHandlerBlock(), lhsVariables);// EH_BLOCK
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOWGL
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOWLA
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOWIC
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOWCG
+		addVariableType(bpmn.getIntermediate(), lhsVariables);	// INTERMEDIATE
+		addVariableType(bpmn.getActivity(), lhsVariables);		// ACTIVITY
+		addVariableType(bpmn.getGateway(), lhsVariables);		// GATEWAY
+		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FO_LOOP
+		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FO_COMP
+		
+		//queries
+		addTargetQuery(lhsVariables,EH_BLOCK,ACTIVITY,struc.getBpmnEventHandlerBlock_Activity());
+		addTargetQuery(lhsVariables,ACTIVITY,INTERMEDIATE,bpmn.getActivity_BoundaryEvents());
+		
+		addBranchTargetQueries(lhsVariables, GATEWAY, SEQFLOWGL, FO_LOOP, SEQFLOWLA, EH_BLOCK);
+		addBranchTargetQueries(lhsVariables, INTERMEDIATE, SEQFLOWIC, FO_COMP, SEQFLOWCG, GATEWAY);
 	}
 
-//	@Override
-//	protected void setWeightedLHS(List<EObject> matches){
-//		_ehBlock=		(BpmnEventHandlerBlock)matches.get(RuleWrapper.EH_BLOCK);
-//		_seqFlowGL=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWGL);
-//		_seqFlowLA=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWLA);
-//		_seqFlowIC=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWIC);
-//		_seqFlowCG=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOWCG);
-//		_intermediate=	(Intermediate)	matches.get(RuleWrapper.INTERMEDIATE);
-//		_activity=		(Activity)		matches.get(RuleWrapper.ACTIVITY);
-//		_gateway=		(Gateway)		matches.get(RuleWrapper.GATEWAY);
-//		_foLoop=			(FlowObject)	matches.get(RuleWrapper.FO_LOOP);
-//		_foComp=			(FlowObject)	matches.get(RuleWrapper.FO_COMP);
-//	}
-	
-	/**
-	 * wrapper class for this rule
-	 * 
-	 * @author tkuester
-	 */
-	class RuleWrapper extends AbstractVsdtWrapper {
-		
-		public static final int EH_BLOCK= 0,
-								SEQFLOWGL= 1,
-								SEQFLOWLA= 2,
-								SEQFLOWIC= 3,
-								SEQFLOWCG= 4,
-								INTERMEDIATE= 5,
-								ACTIVITY= 6,
-								GATEWAY= 7,
-								FO_LOOP= 8,
-								FO_COMP= 9;
-		
-		@Override
-		public void initLHSVariables() {
-			addVariableType(struc.getBpmnEventHandlerBlock(), lhsVariables);// EH_BLOCK
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOWGL
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOWLA
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOWIC
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOWCG
-			addVariableType(bpmn.getIntermediate(), lhsVariables);	// INTERMEDIATE
-			addVariableType(bpmn.getActivity(), lhsVariables);		// ACTIVITY
-			addVariableType(bpmn.getGateway(), lhsVariables);		// GATEWAY
-			addVariableType(bpmn.getFlowObject(), lhsVariables);	// FO_LOOP
-			addVariableType(bpmn.getFlowObject(), lhsVariables);	// FO_COMP
-			
-			//queries
-			addTargetQuery(lhsVariables,EH_BLOCK,ACTIVITY,struc.getBpmnEventHandlerBlock_Activity());
-			addTargetQuery(lhsVariables,ACTIVITY,INTERMEDIATE,bpmn.getActivity_BoundaryEvents());
-			
-			addBranchTargetQueries(lhsVariables, GATEWAY, SEQFLOWGL, FO_LOOP, SEQFLOWLA, EH_BLOCK);
-			addBranchTargetQueries(lhsVariables, INTERMEDIATE, SEQFLOWIC, FO_COMP, SEQFLOWCG, GATEWAY);
-		}
-
-		@Override
-		protected void initNACVariables() {
-		}
+	@Override
+	protected void initNACVariables() {
 	}
 	
 }

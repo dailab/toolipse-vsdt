@@ -10,8 +10,6 @@ import de.dailab.vsdt.FlowObjectContainer;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.VsdtPackage;
-import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
@@ -31,25 +29,11 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
  */
 public class SplitGatewayRule extends AbstractVsdtRule {
 	
-	protected Gateway _gateway= null;
-	
 	private final int GATEWAY= 0;
-	
-	
-//	@Override
-//	protected void resetVars() {
-//		_gateway= null;
-//	}
-	
-	@Override
-	protected AbstractWrapper getWrapper() {
-		return new RuleWrapper();
-	}
-
 	
 	@Override
 	protected void apply(List<EObject> matches){
-		_gateway=	(Gateway)	matches.get(GATEWAY);
+		Gateway _gateway=	(Gateway)	matches.get(GATEWAY);
 		
 		//create gateway2
 		FlowObjectContainer container= _gateway.getParent();
@@ -75,40 +59,27 @@ public class SplitGatewayRule extends AbstractVsdtRule {
 		seqFlow.setTarget(_gateway);
 	}
 	
-//	@Override
-//	protected void setWeightedLHS(List<EObject> matches){
-//		_gateway=	(Gateway)	matches.get(GATEWAY);
-//	}
-	
-	/**
-	 * wrapper for the rule
-	 */
-	class RuleWrapper extends AbstractWrapper {
-
-		protected VsdtPackage bpmn= VsdtPackage.eINSTANCE;
+	@Override
+	public void initLHSVariables() {
+		addVariableType(bpmn.getGateway(), lhsVariables); // GATEWAY
 		
-		@Override
-		public void initLHSVariables() {
-			addVariableType(bpmn.getGateway(), lhsVariables); // GATEWAY
+		//reduce domains
+		for (Iterator<EObject> iter = lhsVariables.get(GATEWAY).getDomain().iterator(); iter.hasNext();) {
+			boolean ok= true;
+			Gateway gateway= (Gateway) iter.next();
 			
-			//reduce domains
-			for (Iterator<EObject> iter = lhsVariables.get(GATEWAY).getDomain().iterator(); iter.hasNext();) {
-				boolean ok= true;
-				Gateway gateway= (Gateway) iter.next();
-				
-				//both >1 incoming and outgoing sequences
-				ok &= gateway.getIncomingSeq().size() > 1 && 
-						gateway.getOutgoingSeq().size() > 1;
-									
-				if (!ok) {
-					iter.remove();
-				}
+			//both >1 incoming and outgoing sequences
+			ok &= gateway.getIncomingSeq().size() > 1 && 
+					gateway.getOutgoingSeq().size() > 1;
+								
+			if (!ok) {
+				iter.remove();
 			}
 		}
+	}
 
-		@Override
-		protected void initNACVariables() {
-		}
+	@Override
+	protected void initNACVariables() {
 	}
 	
 }

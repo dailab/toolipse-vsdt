@@ -8,15 +8,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import de.dailab.vsdt.trafo.base.Variable;
 
 /**
- * Class : TargetQuery <br/>
- * Package : rules <br/>
- * Project : RuleProject <br/>
- * Created On : 10.01.2006 <br/>
- * Description : Query class for the Matchfinder. 
- * Ensures that references of instantiated variables have valid targets.
- * 
- * @author Enrico Biermann <br>
- * @author Guenter Kuhns <br>
+ * TODO javadoc
  */
 public class TargetQuery extends Query {
 	

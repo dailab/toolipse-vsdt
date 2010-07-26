@@ -13,9 +13,7 @@ import de.dailab.vsdt.FlowObjectContainer;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
  * Final Gateway Rule
@@ -40,32 +38,15 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  */
 public class FinalGatewayRule extends AbstractVsdtRule {
 	
-	protected FlowObjectContainer _container= null;
-	protected FlowObject _end1= null;
-	protected FlowObject _end2= null;
-	
 	private final int CONTAINER= 0,
 					  END1= 1,
 					  END2= 2;
 	
-//	@Override
-//	protected void resetVars() {
-//		_container= null;
-//		_end1= null;
-//		_end2= null;
-//	}
-	
-	@Override
-	protected AbstractWrapper getWrapper() {
-		return new RuleWrapper();
-	}
-
-	
 	@Override
 	protected void apply(List<EObject> matches){
-		_container=	(FlowObjectContainer)	matches.get(CONTAINER);
-		_end1= 		(FlowObject) 			matches.get(END1);
-		_end2= 		(FlowObject) 			matches.get(END2);
+		FlowObjectContainer _container=	(FlowObjectContainer)	matches.get(CONTAINER);
+//		FlowObject _end1= 				(FlowObject) 			matches.get(END1);
+//		FlowObject _end2= 				(FlowObject) 			matches.get(END2);
 		
 		// the pattern of this rule requires two ending FlowObjects.
 		// now find ALL ending FlowObjects in the process
@@ -91,56 +72,42 @@ public class FinalGatewayRule extends AbstractVsdtRule {
 		}
 	}
 	
-//	@Override
-//	protected void setWeightedLHS(List<EObject> matches){
-//		_container=	(FlowObjectContainer)	matches.get(CONTAINER);
-//		_end1= 		(FlowObject) 			matches.get(END1);
-//		_end2= 		(FlowObject) 			matches.get(END2);
-//	}
-	
 	/**
-	 * wrapper for the rule
+	 * flow object container with at least two end events inside of it
 	 */
-	class RuleWrapper extends AbstractVsdtWrapper {
-
-		/**
-		 * flow object container with at least two end events inside of it
-		 */
-		@Override
-		public void initLHSVariables() {
-			addVariableType(bpmn.getFlowObjectContainer(), lhsVariables); // CONTAINER
-			addVariableType(bpmn.getFlowObject(), lhsVariables); // END 1
-			addVariableType(bpmn.getFlowObject(), lhsVariables); // END 2
-			
-			addInjectivityQuery(lhsVariables, END1, END2);
-			addTargetQuery(lhsVariables, CONTAINER, END1, bpmn.getFlowObjectContainer_ContainedFlowObjects());
-			addTargetQuery(lhsVariables, CONTAINER, END2, bpmn.getFlowObjectContainer_ContainedFlowObjects());
-			
-			//reduce domains
-			for (Iterator<EObject> iter = lhsVariables.get(CONTAINER).getDomain().iterator(); iter.hasNext();) {
-				FlowObjectContainer foc= (FlowObjectContainer) iter.next();
-				if ((foc instanceof AbstractProcess) && ((AbstractProcess) foc).isAdHoc()) {
-					iter.remove();
-				}
-			}
-			for (Iterator<EObject> iter = lhsVariables.get(END1).getDomain().iterator(); iter.hasNext();) {
-				FlowObject flowObject= (FlowObject) iter.next();
-				if (! flowObject.isEndingNode()) {
-					iter.remove();
-				}
-			}
-			for (Iterator<EObject> iter = lhsVariables.get(END2).getDomain().iterator(); iter.hasNext();) {
-				FlowObject flowObject= (FlowObject) iter.next();
-				if (! flowObject.isEndingNode()) {
-					iter.remove();
-				}
+	@Override
+	public void initLHSVariables() {
+		addVariableType(bpmn.getFlowObjectContainer(), lhsVariables); // CONTAINER
+		addVariableType(bpmn.getFlowObject(), lhsVariables); // END 1
+		addVariableType(bpmn.getFlowObject(), lhsVariables); // END 2
+		
+		addInjectivityQuery(lhsVariables, END1, END2);
+		addTargetQuery(lhsVariables, CONTAINER, END1, bpmn.getFlowObjectContainer_ContainedFlowObjects());
+		addTargetQuery(lhsVariables, CONTAINER, END2, bpmn.getFlowObjectContainer_ContainedFlowObjects());
+		
+		//reduce domains
+		for (Iterator<EObject> iter = lhsVariables.get(CONTAINER).getDomain().iterator(); iter.hasNext();) {
+			FlowObjectContainer foc= (FlowObjectContainer) iter.next();
+			if ((foc instanceof AbstractProcess) && ((AbstractProcess) foc).isAdHoc()) {
+				iter.remove();
 			}
 		}
-
-		@Override
-		protected void initNACVariables() {
+		for (Iterator<EObject> iter = lhsVariables.get(END1).getDomain().iterator(); iter.hasNext();) {
+			FlowObject flowObject= (FlowObject) iter.next();
+			if (! flowObject.isEndingNode()) {
+				iter.remove();
+			}
 		}
-
+		for (Iterator<EObject> iter = lhsVariables.get(END2).getDomain().iterator(); iter.hasNext();) {
+			FlowObject flowObject= (FlowObject) iter.next();
+			if (! flowObject.isEndingNode()) {
+				iter.remove();
+			}
+		}
 	}
-	
+
+	@Override
+	protected void initNACVariables() {
+	}
+
 }

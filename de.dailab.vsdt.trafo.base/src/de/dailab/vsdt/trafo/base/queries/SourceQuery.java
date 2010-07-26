@@ -8,15 +8,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import de.dailab.vsdt.trafo.base.Variable;
 
 /**
- * Class : SourceQuery <br/>
- * Package : rules <br/>
- * Project : RuleProject <br/>
- * Created On : 10.01.2006 <br/>
- * Description : Query class for the Matchfinder. 
- * Ensures that references to instantiated variables have valid sources.
- * 
- * @author Enrico Biermann <br>
- * @author Guenter Kuhns <br>
+ * TODO javadoc
  */
 public class SourceQuery extends Query {
 	

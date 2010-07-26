@@ -12,13 +12,11 @@ import de.dailab.vsdt.FlowObjectContainer;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBranch;
 import de.dailab.vsdt.trafo.strucbpmn.DisjunctiveExpression;
 import de.dailab.vsdt.trafo.strucbpmn.StrucBpmnFactory;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 import de.dailab.vsdt.trafo.strucbpmn.util.StrucBpmnElementFactory;
 
 /**
@@ -35,37 +33,21 @@ import de.dailab.vsdt.trafo.strucbpmn.util.StrucBpmnElementFactory;
  * The inner sequence flows are deleted, the outer sequence flows redirected. 
  */
 public class BlockRule extends AbstractVsdtRule {
-	
+
 	/*
 	 * the two branches identified by this rule are not used in the apply() method,
 	 * but they are still used so the rule does take nested loops for blocks
 	 */
-	protected SequenceFlow	_seqFlow11= null;
-	protected SequenceFlow	_seqFlow12= null;
-	protected FlowObject	_flowobject1= null;
-	protected SequenceFlow	_seqFlow21= null;
-	protected SequenceFlow	_seqFlow22= null;
-	protected FlowObject	_flowobject2= null;
-	protected Gateway		_fork= null;
-	protected Gateway		_merge= null;
-	
-//	@Override
-//	protected void resetVars() {
-//		_seqFlow11= null;
-//		_seqFlow12= null;
-//		_flowobject1= null;
-//		_seqFlow21= null;
-//		_seqFlow22= null;
-//		_flowobject2= null;
-//		_fork= null;
-//		_merge= null;
-//	}
-		
-	
-	@Override
-	protected AbstractWrapper getWrapper() {
-		return new RuleWrapper();
-	}
+	public static final int SEQFLOW11= 0,
+							SEQFLOW12= 1,
+							FLOWOBJECT1= 2,
+							SEQFLOW21= 3,
+							SEQFLOW22= 4,
+							FLOWOBJECT2= 5,
+							FORK= 6,
+							MERGE= 7,
+							//last LHS variable (for NACs)
+							LAST_LHS_VAR= MERGE;
 	
 	/**
 	 * - create block structure
@@ -77,22 +59,22 @@ public class BlockRule extends AbstractVsdtRule {
 	 */
 	@Override
 	protected void apply(List<EObject> matches){
-		_seqFlow11=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW11);
-		_seqFlow12=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW12);
-		_flowobject1=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
-		_seqFlow21=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW21);
-		_seqFlow22=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW22);
-		_flowobject2=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
-		_fork=			(Gateway)		matches.get(RuleWrapper.FORK);
-		_merge=			(Gateway)		matches.get(RuleWrapper.MERGE);
+//		SequenceFlow _seqFlow11=	(SequenceFlow)	matches.get(SEQFLOW11);
+//		SequenceFlow _seqFlow12=	(SequenceFlow)	matches.get(SEQFLOW12);
+//		FlowObject _flowobject1=	(FlowObject)	matches.get(FLOWOBJECT1);
+//		SequenceFlow _seqFlow21=	(SequenceFlow)	matches.get(SEQFLOW21);
+//		SequenceFlow _seqFlow22=	(SequenceFlow)	matches.get(SEQFLOW22);
+//		FlowObject _flowobject2=	(FlowObject)	matches.get(FLOWOBJECT2);
+		Gateway _fork=				(Gateway)		matches.get(FORK);
+		Gateway _merge=				(Gateway)		matches.get(MERGE);
 		
 		List<SequenceFlow> branches= new ArrayList<SequenceFlow>();
 		List<SequenceFlow> falseFork= new ArrayList<SequenceFlow>();
 		List<SequenceFlow> falseMerge= new ArrayList<SequenceFlow>();
-		getBranches(branches, falseFork, falseMerge);
+		getBranches(_fork, _merge, branches, falseFork, falseMerge);
 
-		splitFork(falseFork);
-		splitMerge(falseMerge);
+		splitFork(_fork, falseFork);
+		splitMerge(_merge, falseMerge);
 
 		List<SequenceFlow> obsoleteSequenceFlows= new ArrayList<SequenceFlow>();
 
@@ -151,7 +133,7 @@ public class BlockRule extends AbstractVsdtRule {
 	 * 
 	 * @param falseFork		list of false forking sequence flows (possibly empty, but not null)
 	 */
-	private void splitFork(List<SequenceFlow> falseFork) {
+	private void splitFork(Gateway _fork, List<SequenceFlow> falseFork) {
 		if (! falseFork.isEmpty()) {
 			//create new gateway
 			Gateway fork2= VsdtFactory.eINSTANCE.createGateway();
@@ -195,7 +177,7 @@ public class BlockRule extends AbstractVsdtRule {
 	 * 
 	 * @param falseMerge	list of false merging sequence flows (possibly empty, but not null)
 	 */
-	private void splitMerge(List<SequenceFlow> falseMerge) {
+	private void splitMerge(Gateway _merge, List<SequenceFlow> falseMerge) {
 		if (! falseMerge.isEmpty()) {
 			//create new gateway
 			Gateway merge2= VsdtFactory.eINSTANCE.createGateway();
@@ -227,7 +209,7 @@ public class BlockRule extends AbstractVsdtRule {
 	 * @param falseFork		seqFlows starting at fork but not starting a branch
 	 * @param falseMerge	seqFlows ending at merge but not ending a branch
 	 */
-	private void getBranches(List<SequenceFlow> branches, List<SequenceFlow> falseFork, List<SequenceFlow> falseMerge) {
+	private void getBranches(Gateway _fork, Gateway _merge, List<SequenceFlow> branches, List<SequenceFlow> falseFork, List<SequenceFlow> falseMerge) {
 		List<SequenceFlow> endingAtMerge= new ArrayList<SequenceFlow>();
 		for (SequenceFlow seqFlow : _fork.getOutgoingSeq()) {
 			FlowObject flowObject= seqFlow.getTarget();
@@ -244,60 +226,28 @@ public class BlockRule extends AbstractVsdtRule {
 		falseMerge.addAll(_merge.getIncomingSeq());
 		falseMerge.removeAll(endingAtMerge);
 	}
-
-//	
-//	@Override
-//	protected void setWeightedLHS(List<EObject> matches){
-//		_seqFlow11=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW11);
-//		_seqFlow12=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW12);
-//		_flowobject1=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
-//		_seqFlow21=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW21);
-//		_seqFlow22=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW22);
-//		_flowobject2=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
-//		_fork=			(Gateway)		matches.get(RuleWrapper.FORK);
-//		_merge=			(Gateway)		matches.get(RuleWrapper.MERGE);
-//	}
 	
-	/**
-	 * wrapper class for this rule
-	 * 
-	 * @author tkuester
-	 */
-	class RuleWrapper extends AbstractVsdtWrapper {
-			
-		public static final int SEQFLOW11= 0,
-								SEQFLOW12= 1,
-								FLOWOBJECT1= 2,
-								SEQFLOW21= 3,
-								SEQFLOW22= 4,
-								FLOWOBJECT2= 5,
-								FORK= 6,
-								MERGE= 7,
-								//last LHS variable (for NACs)
-								LAST_LHS_VAR= MERGE;
+	@Override
+	public void initLHSVariables() {
 		
-		@Override
-		public void initLHSVariables() {
-			
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW11
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW12
-			addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT1
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW21
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW22
-			addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT2
-			addVariableType(bpmn.getGateway(), lhsVariables);		// FORK
-			addVariableType(bpmn.getGateway(), lhsVariables);		// MERGE
-			
-			//queries
-			addInjectivityQuery(lhsVariables,FORK,MERGE);
-			addInjectivityQuery(lhsVariables,FLOWOBJECT1,FLOWOBJECT2);
-			
-			addBranchTargetQueries(lhsVariables, FORK, SEQFLOW11, FLOWOBJECT1, SEQFLOW12, MERGE);
-			addBranchTargetQueries(lhsVariables, FORK, SEQFLOW21, FLOWOBJECT2, SEQFLOW22, MERGE);
-		}
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW11
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW12
+		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT1
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW21
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW22
+		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT2
+		addVariableType(bpmn.getGateway(), lhsVariables);		// FORK
+		addVariableType(bpmn.getGateway(), lhsVariables);		// MERGE
 		
-		@Override
-		protected void initNACVariables() {
-		}
+		//queries
+		addInjectivityQuery(lhsVariables,FORK,MERGE);
+		addInjectivityQuery(lhsVariables,FLOWOBJECT1,FLOWOBJECT2);
+		
+		addBranchTargetQueries(lhsVariables, FORK, SEQFLOW11, FLOWOBJECT1, SEQFLOW12, MERGE);
+		addBranchTargetQueries(lhsVariables, FORK, SEQFLOW21, FLOWOBJECT2, SEQFLOW22, MERGE);
+	}
+	
+	@Override
+	protected void initNACVariables() {
 	}
 }

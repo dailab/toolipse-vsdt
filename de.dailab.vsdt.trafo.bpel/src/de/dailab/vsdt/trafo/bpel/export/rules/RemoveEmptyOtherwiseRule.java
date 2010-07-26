@@ -8,7 +8,6 @@ import org.xmlsoap.schemas.ws._2003._03.business.process.ProcessPackage;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TActivityContainer;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TSwitch;
 
-import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.base.util.Util;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
@@ -21,68 +20,45 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
  */
 public class RemoveEmptyOtherwiseRule extends AbstractVsdtRule {
 	
-	protected TActivityContainer otherwise= null;
-
 	public static final int OTHERWISE= 0;
 	
-	
-//	@Override
-//	protected void resetVars() {
-//		otherwise= null;
-//	}
-	
-	@Override
-	protected AbstractWrapper getWrapper() {
-		return new RuleWrapper();
-	}
-
 	@Override
 	protected void apply(List<EObject> matches){
-		otherwise=	(TActivityContainer)	matches.get(OTHERWISE);
+		TActivityContainer otherwise=	(TActivityContainer)	matches.get(OTHERWISE);
 		
 		Util.deleteFromOwner(otherwise);
 	}
 	
-//	@Override
-//	protected void setWeightedLHS(List<EObject> matches){
-//		otherwise=	(TActivityContainer)	matches.get(OTHERWISE);
-//	}
 	
-	/**
-	 * wrapper for the rule
-	 */
-	class RuleWrapper extends AbstractWrapper {
+	protected ProcessPackage bpel= ProcessPackage.eINSTANCE;
+	
+	@Override
+	public void initLHSVariables() {
+		addVariableType(bpel.getTActivityContainer(), lhsVariables); // OTHERWISE
 		
-		protected ProcessPackage bpel= ProcessPackage.eINSTANCE;
-		
-		@Override
-		public void initLHSVariables() {
-			addVariableType(bpel.getTActivityContainer(), lhsVariables); // OTHERWISE
+		//reduce domains
+		for (Iterator<EObject> iter = lhsVariables.get(OTHERWISE).getDomain().iterator(); iter.hasNext();) {
+			TActivityContainer otherwise= (TActivityContainer) iter.next();
 			
-			//reduce domains
-			for (Iterator<EObject> iter = lhsVariables.get(OTHERWISE).getDomain().iterator(); iter.hasNext();) {
-				TActivityContainer otherwise= (TActivityContainer) iter.next();
+			boolean ok= false;
+			// really is an otherwise
+			if (otherwise.eContainer() instanceof TSwitch) {
+				TSwitch tSwitch = (TSwitch) otherwise.eContainer();
 				
-				boolean ok= false;
-				// really is an otherwise
-				if (otherwise.eContainer() instanceof TSwitch) {
-					TSwitch tSwitch = (TSwitch) otherwise.eContainer();
-					
-					if (otherwise == tSwitch.getOtherwise()) {
-						ok= otherwise.eContents().isEmpty();
-					}
-				}
-				
-				if (! ok) {
-					// not an otherwise element or has children
-					iter.remove();
+				if (otherwise == tSwitch.getOtherwise()) {
+					ok= otherwise.eContents().isEmpty();
 				}
 			}
+			
+			if (! ok) {
+				// not an otherwise element or has children
+				iter.remove();
+			}
 		}
+	}
 
-		@Override
-		protected void initNACVariables() {
-		}
+	@Override
+	protected void initNACVariables() {
 	}
 	
 }

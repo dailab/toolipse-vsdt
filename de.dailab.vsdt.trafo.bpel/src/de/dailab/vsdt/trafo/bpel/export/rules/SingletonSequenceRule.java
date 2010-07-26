@@ -15,7 +15,6 @@ import org.xmlsoap.schemas.ws._2003._03.business.process.TScope;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TSequence;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TWhile;
 
-import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.base.util.Util;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
@@ -28,23 +27,11 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
  */
 public class SingletonSequenceRule extends AbstractVsdtRule {
 	
-	protected TSequence _sequence= null;
-
 	public static final int SEQUENCE= 0;
 	
-//	@Override
-//	protected void resetVars() {
-//		_sequence= null;
-//	}
-	
-	@Override
-	protected AbstractWrapper getWrapper() {
-		return new RuleWrapper();
-	}
-
 	@Override
 	protected void apply(List<EObject> matches){
-		_sequence=	(TSequence)	matches.get(SEQUENCE);
+		TSequence _sequence=	(TSequence)	matches.get(SEQUENCE);
 		
 		if (! _sequence.getActivity().isEmpty()) {
 			// replace sequence with it's content (exactly one child element
@@ -89,36 +76,25 @@ public class SingletonSequenceRule extends AbstractVsdtRule {
 		Util.deleteFromOwner(_sequence);
 	}
 	
-//	@Override
-//	protected void setWeightedLHS(List<EObject> matches){
-//		_sequence=	(TSequence)	matches.get(SEQUENCE);
-//	}
+	protected ProcessPackage bpel= ProcessPackage.eINSTANCE;
 	
-	/**
-	 * wrapper for the rule
-	 */
-	class RuleWrapper extends AbstractWrapper {
+	@Override
+	public void initLHSVariables() {
+		addVariableType(bpel.getTSequence(), lhsVariables); // SEQUENCE
 		
-		protected ProcessPackage bpel= ProcessPackage.eINSTANCE;
-		
-		@Override
-		public void initLHSVariables() {
-			addVariableType(bpel.getTSequence(), lhsVariables); // SEQUENCE
+		//reduce domains
+		for (Iterator<EObject> iter = lhsVariables.get(SEQUENCE).getDomain().iterator(); iter.hasNext();) {
+			TSequence sequence= (TSequence) iter.next();
 			
-			//reduce domains
-			for (Iterator<EObject> iter = lhsVariables.get(SEQUENCE).getDomain().iterator(); iter.hasNext();) {
-				TSequence sequence= (TSequence) iter.next();
-				
-				if (sequence.getActivity().size() > 1) {
-					// has more than one children
-					iter.remove();
-				}
+			if (sequence.getActivity().size() > 1) {
+				// has more than one children
+				iter.remove();
 			}
 		}
+	}
 
-		@Override
-		protected void initNACVariables() {
-		}
+	@Override
+	protected void initNACVariables() {
 	}
 	
 }

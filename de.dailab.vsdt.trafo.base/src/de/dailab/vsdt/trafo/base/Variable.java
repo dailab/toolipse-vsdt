@@ -9,14 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import de.dailab.vsdt.trafo.base.queries.Query;
 
 /**
- * Class : Variable <br/>
- * Package : rules <br/>
- * Project : RuleProject <br/>
- * Created On : 10.01.2006 <br/>
- * Description : Representation of an LHS or NAC node for the Matchfinder.
- * 
- * @author Enrico Biermann <br>
- * @author Guenter Kuhns <br>
+ * TODO javadoc
  */
 public class Variable {
 	

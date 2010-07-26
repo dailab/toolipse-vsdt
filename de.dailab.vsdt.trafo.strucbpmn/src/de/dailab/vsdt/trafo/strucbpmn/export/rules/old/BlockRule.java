@@ -12,10 +12,8 @@ import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.base.Variable;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
  * Block Rule
@@ -32,37 +30,22 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  */
 @Deprecated
 public class BlockRule extends AbstractVsdtRule {
-	
+
 	/*
 	 * the two branches identified by this rule are not used in the apply() method,
 	 * but they are still used so the rule does take nested loops for blocks
 	 */
-	protected SequenceFlow	_seqFlow11= null;
-	protected SequenceFlow	_seqFlow12= null;
-	protected FlowObject	_flowobject1= null;
-	protected SequenceFlow	_seqFlow21= null;
-	protected SequenceFlow	_seqFlow22= null;
-	protected FlowObject	_flowobject2= null;
-	protected Gateway		_fork= null;
-	protected Gateway		_merge= null;
 	
-//	@Override
-//	protected void resetVars() {
-//		_seqFlow11= null;
-//		_seqFlow12= null;
-//		_flowobject1= null;
-//		_seqFlow21= null;
-//		_seqFlow22= null;
-//		_flowobject2= null;
-//		_fork= null;
-//		_merge= null;
-//	}
-		
-	
-	@Override
-	protected AbstractWrapper getWrapper() {
-		return new RuleWrapper();
-	}
+	public static final int SEQFLOW11= 0,
+							SEQFLOW12= 1,
+							FLOWOBJECT1= 2,
+							SEQFLOW21= 3,
+							SEQFLOW22= 4,
+							FLOWOBJECT2= 5,
+							FORK= 6,
+							MERGE= 7,
+							//last LHS variable (for NACs)
+							LAST_LHS_VAR= MERGE;
 	
 	/**
 	 * - create block structure
@@ -74,14 +57,14 @@ public class BlockRule extends AbstractVsdtRule {
 	 */
 	@Override
 	protected void apply(List<EObject> matches){
-		_seqFlow11=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW11);
-		_seqFlow12=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW12);
-		_flowobject1=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
-		_seqFlow21=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW21);
-		_seqFlow22=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW22);
-		_flowobject2=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
-		_fork=			(Gateway)		matches.get(RuleWrapper.FORK);
-		_merge=			(Gateway)		matches.get(RuleWrapper.MERGE);
+//		SequenceFlow _seqFlow11=	(SequenceFlow)	matches.get(SEQFLOW11);
+//		SequenceFlow _seqFlow12=	(SequenceFlow)	matches.get(SEQFLOW12);
+//		FlowObject _flowobject1=	(FlowObject)	matches.get(FLOWOBJECT1);
+//		SequenceFlow _seqFlow21=	(SequenceFlow)	matches.get(SEQFLOW21);
+//		SequenceFlow _seqFlow22=	(SequenceFlow)	matches.get(SEQFLOW22);
+//		FlowObject _flowobject2=	(FlowObject)	matches.get(FLOWOBJECT2);
+//		Gateway _fork=				(Gateway)		matches.get(FORK);
+//		Gateway _merge=				(Gateway)		matches.get(MERGE);
 		
 		/*
 		 * ASSERTION:
@@ -170,165 +153,133 @@ public class BlockRule extends AbstractVsdtRule {
 			return seqFlow.getConditionExpression() == null ? nullExp : seqFlow.getConditionExpression();
 		}
 	}
+
+	@Override
+	public void initLHSVariables() {
+		
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW11
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW12
+		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT1
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW21
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW22
+		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT2
+		addVariableType(bpmn.getGateway(), lhsVariables);		// FORK
+		addVariableType(bpmn.getGateway(), lhsVariables);		// MERGE
+		
+		//queries
+		addInjectivityQuery(lhsVariables,FORK,MERGE);
+		addInjectivityQuery(lhsVariables,FLOWOBJECT1,FLOWOBJECT2);
+		
+		addBranchTargetQueries(lhsVariables, FORK, SEQFLOW11, FLOWOBJECT1, SEQFLOW12, MERGE);
+		addBranchTargetQueries(lhsVariables, FORK, SEQFLOW21, FLOWOBJECT2, SEQFLOW22, MERGE);
+		
+		//reduce fork
+		for (Iterator<EObject> iter = lhsVariables.get(FORK).getDomain().iterator(); iter.hasNext();) {
+			boolean ok= true;
+			Gateway gateway = (Gateway) iter.next();
+			
+			//more than one outgoing sequence
+			ok &= gateway.getOutgoingSeq().size() > 1;
+			
+			if (!ok) {
+				iter.remove();
+			}
+		}	
+		//reduce merge
+		for (Iterator<EObject> iter = lhsVariables.get(MERGE).getDomain().iterator(); iter.hasNext();) {
+			boolean ok= true;
+			Gateway gateway = (Gateway) iter.next();
+			
+			//more than one incoming sequence
+			ok &= gateway.getIncomingSeq().size() > 1;
+			
+			if (!ok) {
+				iter.remove();
+			}
+		}
+	}
+
 	
-//	@Override
-//	protected void setWeightedLHS(List<EObject> matches){
-//		_seqFlow11=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW11);
-//		_seqFlow12=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW12);
-//		_flowobject1=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
-//		_seqFlow21=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW21);
-//		_seqFlow22=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW22);
-//		_flowobject2=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
-//		_fork=			(Gateway)		matches.get(RuleWrapper.FORK);
-//		_merge=			(Gateway)		matches.get(RuleWrapper.MERGE);
-//	}
-	
+	@Override
+	protected void initNACVariables() {
+		// NAC: there may not be a outgoing sequence not ending in the merge gateway.
+		nacVariables.add(createNAC1());
+		// NAC: there may not be a outgoing sequence not ending at all
+		nacVariables.add(createNAC2());
+		/* 
+		 * incoming sequences not starting at the forking gateway, on the other hand, are no problem,
+		 * since the merging gateway can easily be split (see splitMerge method)
+		 */
+	}
 	
 	/**
-	 * wrapper class for this rule
+	 * NAC: there may not be a outgoing sequence not ending in the merge gateway.
+	 * This NAC also makes sure that there are no child-blocks that have not yet been mapped.
+	 * In this case the NAC_GATEWAY would be the forking gateway of the child block.
 	 * 
-	 * @author tkuester
+	 * @return	new NAC
 	 */
-	class RuleWrapper extends AbstractVsdtWrapper {
-			
-		public static final int SEQFLOW11= 0,
-								SEQFLOW12= 1,
-								FLOWOBJECT1= 2,
-								SEQFLOW21= 3,
-								SEQFLOW22= 4,
-								FLOWOBJECT2= 5,
-								FORK= 6,
-								MERGE= 7,
-								//last LHS variable (for NACs)
-								LAST_LHS_VAR= MERGE;
+	private List<Variable> createNAC1() {
+		final int NAC_SEQFLOW1=	LAST_LHS_VAR+1,
+				  NAC_SEQFLOW2=	LAST_LHS_VAR+2,
+				  NAC_SEQ=		LAST_LHS_VAR+3,
+				  NAC_GATEWAY=	LAST_LHS_VAR+4;
 		
-		@Override
-		public void initLHSVariables() {
-			
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW11
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW12
-			addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT1
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW21
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW22
-			addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT2
-			addVariableType(bpmn.getGateway(), lhsVariables);		// FORK
-			addVariableType(bpmn.getGateway(), lhsVariables);		// MERGE
-			
-			//queries
-			addInjectivityQuery(lhsVariables,FORK,MERGE);
-			addInjectivityQuery(lhsVariables,FLOWOBJECT1,FLOWOBJECT2);
-			
-			addBranchTargetQueries(lhsVariables, FORK, SEQFLOW11, FLOWOBJECT1, SEQFLOW12, MERGE);
-			addBranchTargetQueries(lhsVariables, FORK, SEQFLOW21, FLOWOBJECT2, SEQFLOW22, MERGE);
-			
-			//reduce fork
-			for (Iterator<EObject> iter = lhsVariables.get(FORK).getDomain().iterator(); iter.hasNext();) {
-				boolean ok= true;
-				Gateway gateway = (Gateway) iter.next();
-				
-				//more than one outgoing sequence
-				ok &= gateway.getOutgoingSeq().size() > 1;
-				
-				if (!ok) {
-					iter.remove();
-				}
-			}	
-			//reduce merge
-			for (Iterator<EObject> iter = lhsVariables.get(MERGE).getDomain().iterator(); iter.hasNext();) {
-				boolean ok= true;
-				Gateway gateway = (Gateway) iter.next();
-				
-				//more than one incoming sequence
-				ok &= gateway.getIncomingSeq().size() > 1;
-				
-				if (!ok) {
-					iter.remove();
-				}
-			}
-		}
-
+		List<Variable> nacVars = new Vector<Variable>();
+		addNullMatches(nacVars, 3);						// SEQFLOW1, SEQFLOW2, SEQ
+		addNullMatches(nacVars, 3);						// SEQFLOW1, SEQFLOW2, SEQ
+		addVariableType(bpmn.getGateway(), nacVars);	// FORK
+		addVariableType(bpmn.getGateway(), nacVars);	// MERGE
+		addVariableType(bpmn.getSequenceFlow(), nacVars);// NAC_SEQFLOW1
+		addVariableType(bpmn.getSequenceFlow(), nacVars);// NAC_SEQFLOW2
+		addVariableType(bpmn.getFlowObject(), nacVars);	// NAC_SEQ
+		addVariableType(bpmn.getFlowObject(), nacVars);	// NAC_GATEWAY
 		
-		@Override
-		protected void initNACVariables() {
-			// NAC: there may not be a outgoing sequence not ending in the merge gateway.
-			nacVariables.add(createNAC1());
-			// NAC: there may not be a outgoing sequence not ending at all
-			nacVariables.add(createNAC2());
-			/* 
-			 * incoming sequences not starting at the forking gateway, on the other hand, are no problem,
-			 * since the merging gateway can easily be split (see splitMerge method)
-			 */
-		}
+		//queries
+		addInjectivityQuery(nacVars, MERGE, NAC_GATEWAY);
+		addSourceQuery(nacVars, NAC_SEQFLOW1, FORK, bpmn.getSequenceFlow_Source());
+		addTargetQuery(nacVars, NAC_SEQFLOW1, NAC_SEQ, bpmn.getSequenceFlow_Target());
+		addTargetQuery(nacVars, NAC_SEQFLOW2, NAC_SEQ, bpmn.getSequenceFlow_Source());
+		addTargetQuery(nacVars, NAC_SEQFLOW2, NAC_GATEWAY, bpmn.getSequenceFlow_Target());
 		
-		/**
-		 * NAC: there may not be a outgoing sequence not ending in the merge gateway.
-		 * This NAC also makes sure that there are no child-blocks that have not yet been mapped.
-		 * In this case the NAC_GATEWAY would be the forking gateway of the child block.
-		 * 
-		 * @return	new NAC
-		 */
-		private List<Variable> createNAC1() {
-			final int NAC_SEQFLOW1=	LAST_LHS_VAR+1,
-					  NAC_SEQFLOW2=	LAST_LHS_VAR+2,
-					  NAC_SEQ=		LAST_LHS_VAR+3,
-					  NAC_GATEWAY=	LAST_LHS_VAR+4;
-			
-			List<Variable> nacVars = new Vector<Variable>();
-			addNullMatches(nacVars, 3);						// SEQFLOW1, SEQFLOW2, SEQ
-			addNullMatches(nacVars, 3);						// SEQFLOW1, SEQFLOW2, SEQ
-			addVariableType(bpmn.getGateway(), nacVars);	// FORK
-			addVariableType(bpmn.getGateway(), nacVars);	// MERGE
-			addVariableType(bpmn.getSequenceFlow(), nacVars);// NAC_SEQFLOW1
-			addVariableType(bpmn.getSequenceFlow(), nacVars);// NAC_SEQFLOW2
-			addVariableType(bpmn.getFlowObject(), nacVars);	// NAC_SEQ
-			addVariableType(bpmn.getFlowObject(), nacVars);	// NAC_GATEWAY
-			
-			//queries
-			addInjectivityQuery(nacVars, MERGE, NAC_GATEWAY);
-			addSourceQuery(nacVars, NAC_SEQFLOW1, FORK, bpmn.getSequenceFlow_Source());
-			addTargetQuery(nacVars, NAC_SEQFLOW1, NAC_SEQ, bpmn.getSequenceFlow_Target());
-			addTargetQuery(nacVars, NAC_SEQFLOW2, NAC_SEQ, bpmn.getSequenceFlow_Source());
-			addTargetQuery(nacVars, NAC_SEQFLOW2, NAC_GATEWAY, bpmn.getSequenceFlow_Target());
-			
-			return nacVars;
-		}
-		
-		/**
-		 * NAC: there may not be a outgoing sequence not ending at all
-		 * this should be handled by a different rule for "open blocks"
-		 * 
-		 * @return	new NAC
-		 */
-		private List<Variable> createNAC2() {
-			final int NAC_SEQFLOW1=	LAST_LHS_VAR+1,
-					  NAC_SEQ=	LAST_LHS_VAR+2;
-
-			List<Variable> nacVars = new Vector<Variable>();
-			addNullMatches(nacVars, 3);						// SEQFLOW1, SEQFLOW2, SEQ
-			addNullMatches(nacVars, 3);						// SEQFLOW1, SEQFLOW2, SEQ
-			addVariableType(bpmn.getGateway(), nacVars);	// FORK
-			addNullMatches(nacVars, 1);						// MERGE
-			addVariableType(bpmn.getSequenceFlow(), nacVars);// NAC_SEQFLOW1
-			addVariableType(bpmn.getFlowObject(), nacVars);	// NAC_SEQ
-			
-			//queries
-			addSourceQuery(nacVars, NAC_SEQFLOW1, FORK, bpmn.getSequenceFlow_Source());
-			addTargetQuery(nacVars, NAC_SEQFLOW1, NAC_SEQ, bpmn.getSequenceFlow_Target());
-			
-			//reduce domains
-			for (Iterator<EObject> iter = nacVars.get(NAC_SEQ).getDomain().iterator(); iter.hasNext();) {
-				boolean ok= true;
-				FlowObject flowObject = (FlowObject) iter.next();
-				
-				//no outgoing sequence
-				ok &= flowObject.getOutgoingSeq().size() == 0;
-				
-				if (!ok) {
-					iter.remove();
-				}
-			}
-			return nacVars;
-		}
-		
+		return nacVars;
 	}
+	
+	/**
+	 * NAC: there may not be a outgoing sequence not ending at all
+	 * this should be handled by a different rule for "open blocks"
+	 * 
+	 * @return	new NAC
+	 */
+	private List<Variable> createNAC2() {
+		final int NAC_SEQFLOW1=	LAST_LHS_VAR+1,
+				  NAC_SEQ=	LAST_LHS_VAR+2;
+
+		List<Variable> nacVars = new Vector<Variable>();
+		addNullMatches(nacVars, 3);						// SEQFLOW1, SEQFLOW2, SEQ
+		addNullMatches(nacVars, 3);						// SEQFLOW1, SEQFLOW2, SEQ
+		addVariableType(bpmn.getGateway(), nacVars);	// FORK
+		addNullMatches(nacVars, 1);						// MERGE
+		addVariableType(bpmn.getSequenceFlow(), nacVars);// NAC_SEQFLOW1
+		addVariableType(bpmn.getFlowObject(), nacVars);	// NAC_SEQ
+		
+		//queries
+		addSourceQuery(nacVars, NAC_SEQFLOW1, FORK, bpmn.getSequenceFlow_Source());
+		addTargetQuery(nacVars, NAC_SEQFLOW1, NAC_SEQ, bpmn.getSequenceFlow_Target());
+		
+		//reduce domains
+		for (Iterator<EObject> iter = nacVars.get(NAC_SEQ).getDomain().iterator(); iter.hasNext();) {
+			boolean ok= true;
+			FlowObject flowObject = (FlowObject) iter.next();
+			
+			//no outgoing sequence
+			ok &= flowObject.getOutgoingSeq().size() == 0;
+			
+			if (!ok) {
+				iter.remove();
+			}
+		}
+		return nacVars;
+	}
+	
 }

@@ -13,8 +13,6 @@ import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.GatewayType;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.VsdtPackage;
-import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
@@ -34,24 +32,11 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
  */
 public class InsertGatewayRule extends AbstractVsdtRule {
 	
-	protected FlowObject _flowObject= null;
-	
 	private final int FLOWOBJECT= 0;
-	
-//	@Override
-//	protected void resetVars() {
-//		_flowObject= null;
-//	}
-	
-	@Override
-	protected AbstractWrapper getWrapper() {
-		return new RuleWrapper();
-	}
-
 	
 	@Override
 	protected void apply(List<EObject> matches){
-		_flowObject=	(FlowObject)	matches.get(FLOWOBJECT);
+		FlowObject _flowObject=	(FlowObject)	matches.get(FLOWOBJECT);
 		
 		//get container
 		FlowObjectContainer container= _flowObject.getParent();
@@ -119,44 +104,30 @@ public class InsertGatewayRule extends AbstractVsdtRule {
 		
 	}
 	
-//	@Override
-//	protected void setWeightedLHS(List<EObject> matches){
-//		_flowObject=	(FlowObject)	matches.get(FLOWOBJECT);
-//	}
-	
-	/**
-	 * wrapper for the rule
-	 */
-	class RuleWrapper extends AbstractWrapper {
-
-		protected VsdtPackage bpmn= VsdtPackage.eINSTANCE;
+	@Override
+	public void initLHSVariables() {
+		addVariableType(bpmn.getFlowObject(), lhsVariables); // FLOWOBJECT
 		
-		@Override
-		public void initLHSVariables() {
-			addVariableType(bpmn.getFlowObject(), lhsVariables); // FLOWOBJECT
+		//reduce domains
+		for (Iterator<EObject> iter = lhsVariables.get(FLOWOBJECT).getDomain().iterator(); iter.hasNext();) {
+			boolean ok= true;
+			FlowObject flowObject= (FlowObject) iter.next();
 			
-			//reduce domains
-			for (Iterator<EObject> iter = lhsVariables.get(FLOWOBJECT).getDomain().iterator(); iter.hasNext();) {
-				boolean ok= true;
-				FlowObject flowObject= (FlowObject) iter.next();
-				
-				// not a gateway (important to prevent infinite loop!
-				ok &= ! (flowObject instanceof Gateway);
-				
-				//  >1 incoming or outgoing sequences
-				ok &= flowObject.getIncomingSeq().size() > 1 || 
-						flowObject.getOutgoingSeq().size() > 1;
-									
-				if (! ok) {
-					iter.remove();
-				}
+			// not a gateway (important to prevent infinite loop!
+			ok &= ! (flowObject instanceof Gateway);
+			
+			//  >1 incoming or outgoing sequences
+			ok &= flowObject.getIncomingSeq().size() > 1 || 
+					flowObject.getOutgoingSeq().size() > 1;
+								
+			if (! ok) {
+				iter.remove();
 			}
 		}
-
-		@Override
-		protected void initNACVariables() {
-		}
-
 	}
-	
+
+	@Override
+	protected void initNACVariables() {
+	}
+
 }

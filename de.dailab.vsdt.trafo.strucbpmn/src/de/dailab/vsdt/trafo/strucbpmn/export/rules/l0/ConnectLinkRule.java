@@ -9,16 +9,10 @@ import de.dailab.vsdt.Event;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
  * Connect Link Rule
- * 
- * FIXME: Currently this rule supports only 1:1 relations of link events. However, it
- * should be possible to support n:m relations. Therefore, instead of simply removing
- * the link-reference a better NAC has to be found.
  * 
  * PATTERN: two link events, being linked together.
  * 
@@ -27,25 +21,8 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  */
 public class ConnectLinkRule extends AbstractVsdtRule {
 
-	protected Event link1= null;
-	protected Event link2= null;
-	
-//	@Override
-//	protected void resetVars() {
-//		link1= null;
-//		link2= null;
-//	}
-	
-	@Override
-	protected AbstractWrapper getWrapper() {
-		return new RuleWrapper();
-	}
-
-//	@Override
-//	protected void setWeightedLHS(List<EObject> matches){
-//		link1=(Event)	matches.get(RuleWrapper.LINK1);
-//		link2=(Event)	matches.get(RuleWrapper.LINK2);
-//	}
+	public static final int LINK1= 0,
+							LINK2= 1;
 	
 	/**
 	 * - If one of the flowObjects is a bpmnSeq, use this, otherwise create a new one
@@ -56,8 +33,8 @@ public class ConnectLinkRule extends AbstractVsdtRule {
 	 */
 	@Override
 	protected void apply(List<EObject> matches) {
-		link1=(Event)	matches.get(RuleWrapper.LINK1);
-		link2=(Event)	matches.get(RuleWrapper.LINK2);
+		Event link1= (Event) matches.get(LINK1);
+		Event link2= (Event) matches.get(LINK2);
 		
 		// create connection
 		SequenceFlow sequenceFlow= VsdtFactory.eINSTANCE.createSequenceFlow();
@@ -69,51 +46,40 @@ public class ConnectLinkRule extends AbstractVsdtRule {
 		link2.setLinkedTo(null);
 	}
 	
-	/**
-	 * wrapper class for this rule
-	 * 
-	 * @author tkuester
-	 */
-	class RuleWrapper extends AbstractVsdtWrapper {
-		
-		public static final int LINK1= 0,
-								LINK2= 1;
 
-		@Override
-		public void initLHSVariables() {
-			 
-			addVariableType(bpmn.getEvent(), lhsVariables);	// LINK1
-			addVariableType(bpmn.getEvent(), lhsVariables);	// LINK2
+	@Override
+	public void initLHSVariables() {
+		 
+		addVariableType(bpmn.getEvent(), lhsVariables);	// LINK1
+		addVariableType(bpmn.getEvent(), lhsVariables);	// LINK2
 
-			//queries
-			addTargetQuery(lhsVariables, LINK1, LINK2, bpmn.getEvent_LinkedTo());
-			addInjectivityQuery(lhsVariables, LINK1, LINK2);
+		//queries
+		addTargetQuery(lhsVariables, LINK1, LINK2, bpmn.getEvent_LinkedTo());
+		addInjectivityQuery(lhsVariables, LINK1, LINK2);
 
-			//reduce link 1
-			for (Iterator<EObject> iter = lhsVariables.get(LINK1).getDomain().iterator(); iter.hasNext();) {
-				Event event= (Event) iter.next();
-				if (! event.isThrowing() || 
-						(event.getTrigger() != TriggerType.LINK
-						&& event.getTrigger() != TriggerType.MULTIPLE)) {
-					iter.remove();
-				}
-			}
-			
-			//reduce link 2
-			for (Iterator<EObject> iter = lhsVariables.get(LINK2).getDomain().iterator(); iter.hasNext();) {
-				Event event= (Event) iter.next();
-				if (event.isThrowing() || 
-						(event.getTrigger() != TriggerType.LINK
-						&& event.getTrigger() != TriggerType.MULTIPLE)) {
-					iter.remove();
-				}
+		//reduce link 1
+		for (Iterator<EObject> iter = lhsVariables.get(LINK1).getDomain().iterator(); iter.hasNext();) {
+			Event event= (Event) iter.next();
+			if (! event.isThrowing() || 
+					(event.getTrigger() != TriggerType.LINK
+					&& event.getTrigger() != TriggerType.MULTIPLE)) {
+				iter.remove();
 			}
 		}
 		
-		@Override
-		protected void initNACVariables() {
+		//reduce link 2
+		for (Iterator<EObject> iter = lhsVariables.get(LINK2).getDomain().iterator(); iter.hasNext();) {
+			Event event= (Event) iter.next();
+			if (event.isThrowing() || 
+					(event.getTrigger() != TriggerType.LINK
+					&& event.getTrigger() != TriggerType.MULTIPLE)) {
+				iter.remove();
+			}
 		}
-		
 	}
 	
+	@Override
+	protected void initNACVariables() {
+	}
+		
 }

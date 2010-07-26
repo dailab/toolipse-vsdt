@@ -11,9 +11,7 @@ import de.dailab.vsdt.FlowObjectContainer;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
  * Insert Empty Rule 2
@@ -31,28 +29,15 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  */
 public class InsertEmptyRule2 extends AbstractVsdtRule {
 	
-	protected SequenceFlow _seqFlow= null;
-	protected Gateway _gateway= null;
-	protected Activity _activity= null;
-	
-//	@Override
-//	protected void resetVars() {
-//		_seqFlow= null;
-//		_activity= null;
-//		_gateway= null;
-//	}
-	
-	@Override
-	protected AbstractWrapper getWrapper() {
-		return new RuleWrapper();
-	}
-
+	public static final int SEQFLOW= 0,
+							GATEWAY= 1,
+							ACTIVITY= 2;
 	
 	@Override
 	protected void apply(List<EObject> matches){
-		_seqFlow=	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW);
-		_activity=	(Activity)		matches.get(RuleWrapper.ACTIVITY);
-		_gateway=	(Gateway)		matches.get(RuleWrapper.GATEWAY);
+		SequenceFlow _seqFlow=	(SequenceFlow)	matches.get(SEQFLOW);
+		Activity _activity=		(Activity)		matches.get(ACTIVITY);
+		Gateway _gateway=		(Gateway)		matches.get(GATEWAY);
 		
 		//create none activity
 		FlowObjectContainer container= _gateway.getParent();
@@ -73,46 +58,28 @@ public class InsertEmptyRule2 extends AbstractVsdtRule {
 		seqFlow2.setTarget(_activity);
 	}
 	
-//	@Override
-//	protected void setWeightedLHS(List<EObject> matches){
-//		_seqFlow=	(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW);
-//		_activity=	(Activity)		matches.get(RuleWrapper.ACTIVITY);
-//		_gateway=	(Gateway)		matches.get(RuleWrapper.GATEWAY);
-//	}
-	
-	
-	/**
-	 * wrapper for the rule
-	 */
-	class RuleWrapper extends AbstractVsdtWrapper {
+	@Override
+	public void initLHSVariables() {
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW
+		addVariableType(bpmn.getGateway(), lhsVariables);		// GATEWAY
+		addVariableType(bpmn.getActivity(), lhsVariables);	// ACTIVITY
 		
-		public static final int SEQFLOW= 0,
-								GATEWAY= 1,
-								ACTIVITY= 2;
+		//queries
+		addTargetQuery(lhsVariables, SEQFLOW, GATEWAY, bpmn.getSequenceFlow_Source());
+		addTargetQuery(lhsVariables, SEQFLOW, ACTIVITY, bpmn.getSequenceFlow_Target());
 		
-		@Override
-		public void initLHSVariables() {
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW
-			addVariableType(bpmn.getGateway(), lhsVariables);		// GATEWAY
-			addVariableType(bpmn.getActivity(), lhsVariables);	// ACTIVITY
-			
-			//queries
-			addTargetQuery(lhsVariables, SEQFLOW, GATEWAY, bpmn.getSequenceFlow_Source());
-			addTargetQuery(lhsVariables, SEQFLOW, ACTIVITY, bpmn.getSequenceFlow_Target());
-			
-			//reduce domains
-			for (Iterator<EObject> iter = lhsVariables.get(ACTIVITY).getDomain().iterator(); iter.hasNext();) {
-				Activity activity= (Activity) iter.next();
-				// activity with boundary event
-				if (activity.getBoundaryEvents().isEmpty()) {
-					iter.remove();
-				}
+		//reduce domains
+		for (Iterator<EObject> iter = lhsVariables.get(ACTIVITY).getDomain().iterator(); iter.hasNext();) {
+			Activity activity= (Activity) iter.next();
+			// activity with boundary event
+			if (activity.getBoundaryEvents().isEmpty()) {
+				iter.remove();
 			}
 		}
-		
-		@Override
-		protected void initNACVariables() {
-		}
+	}
+	
+	@Override
+	protected void initNACVariables() {
 	}
 	
 }

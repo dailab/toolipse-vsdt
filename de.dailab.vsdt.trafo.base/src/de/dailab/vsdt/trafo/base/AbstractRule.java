@@ -7,15 +7,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * AbstractRule
- * 
- * This class contains common functionality 
- * and is a parent class for all generated rule classes. <br/>
- * 
- * @author Enrico Biermann <br>
- * @author Guenter Kuhns <br>
+ * TODO javadoc
  */
-public abstract class AbstractRule {
+public abstract class AbstractRule extends AbstractWrapper {
 	
 	/**
 	 * Executes this rule. First a wrapper is instantiated and initialized.
@@ -27,9 +21,10 @@ public abstract class AbstractRule {
 	public final boolean execute(EObject object, Map<EClass, List<EObject>> typeToDomain) {
 
 		// find match for LHS and NACs
-		AbstractWrapper wrapper = getWrapper();
-		wrapper.init(object, typeToDomain);
-		List<EObject> match = wrapper.getSolution();
+//		AbstractWrapper wrapper = getWrapper();
+		init(typeToDomain);
+		Matchfinder matcher = new Matchfinder(lhsVariables, nacVariables);
+		List<EObject> match = matcher.findMatches();
 
 		// if match found, apply rule's RHS
 		if (match != null) {
@@ -47,12 +42,12 @@ public abstract class AbstractRule {
 	protected abstract void apply(List<EObject> match);
 	
 	
-	/**
-	 * this method has to be overwritten in the sub class and
-	 * has to return a concrete wrapper for the concrete rule.
-	 * 
-	 * @return	the wrapper
-	 */
-	protected abstract AbstractWrapper getWrapper();
+//	/**
+//	 * this method has to be overwritten in the sub class and
+//	 * has to return a concrete wrapper for the concrete rule.
+//	 * 
+//	 * @return	the wrapper
+//	 */
+//	protected abstract AbstractWrapper getWrapper();
 	
 }

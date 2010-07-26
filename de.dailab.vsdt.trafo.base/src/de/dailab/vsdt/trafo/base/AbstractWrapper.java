@@ -33,11 +33,10 @@ public abstract class AbstractWrapper {
 	/**
 	 * Calls all required methods:
 	 */
-	public void init(EObject root, Map<EClass,List<EObject>> typeToDomain) {
-
-		// XXX why does the type map have to be recalculated each time?
-//		this.typeToDomain = typeToDomain;
-		this.typeToDomain = Util.createTypeMap(root);
+	public void init(Map<EClass,List<EObject>> typeToDomain) {
+		this.typeToDomain = typeToDomain;
+		this.lhsVariables = new Vector<Variable>();
+		this.nacVariables = new Vector<List<Variable>>();
 		
 		initLHSVariables();
 		initNACVariables();
@@ -121,15 +120,15 @@ public abstract class AbstractWrapper {
 	protected void initVarQueries(){
 	}
 		
-	/**
-	 * Using Matchfinder for computing solutions. Matches for LHS are checked with NACs.
-	 * 
-	 * @return		first solution with correct index
-	 */
-	public List<EObject> getSolution() {
-		Matchfinder matchfinder= new Matchfinder(lhsVariables, nacVariables);
-		return matchfinder.findMatches();
-	}
+//	/**
+//	 * Using Matcher for computing solutions.
+//	 * 
+//	 * @return		first solution with correct index
+//	 */
+//	public final List<EObject> getSolution() {
+//		Matchfinder matchfinder= new Matchfinder(lhsVariables, nacVariables);
+//		return matchfinder.findMatches();
+//	}
 	
 	
 	/**
@@ -211,7 +210,6 @@ public abstract class AbstractWrapper {
 		VariableQuery vq = new VariableQuery(source, target, srcAtt, trgAtt);
 		target.addQuery(vq);
 	}
-
 	
 	/**
 	 * create a single injectivity query for the given variables

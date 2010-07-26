@@ -83,6 +83,7 @@ public abstract class Transformation {
 					if (executed) {
 						applicableRules.clear();
 						applicableRules.addAll(layer);
+						typeToDomain = Util.createTypeMap(eObject);
 					}
 				}
 			} catch (Exception e) {

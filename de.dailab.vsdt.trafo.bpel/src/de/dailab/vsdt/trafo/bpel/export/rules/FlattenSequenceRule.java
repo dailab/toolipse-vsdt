@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.xmlsoap.schemas.ws._2003._03.business.process.ProcessPackage;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TSequence;
 
-import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
@@ -19,24 +18,11 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
  */
 public class FlattenSequenceRule extends AbstractVsdtRule {
 	
-	protected TSequence _sequence= null;
-
 	public static final int SEQUENCE= 0;
 	
-	
-//	@Override
-//	protected void resetVars() {
-//		_sequence= null;
-//	}
-	
-	@Override
-	protected AbstractWrapper getWrapper() {
-		return new FlattenSequenceRuleWrapper();
-	}
-
 	@Override
 	protected void apply(List<EObject> matches){
-		_sequence=	(TSequence)	matches.get(SEQUENCE);
+		TSequence _sequence=	(TSequence)	matches.get(SEQUENCE);
 		/*
 		 * memorize the sequences position
 		 * remove sequence
@@ -49,36 +35,25 @@ public class FlattenSequenceRule extends AbstractVsdtRule {
 		_sequence.getActivity().addAll(index, child.getActivity());
 	}
 	
-//	@Override
-//	protected void setWeightedLHS(List<EObject> matches){
-//		_sequence=	(TSequence)	matches.get(SEQUENCE);
-//	}
+	protected ProcessPackage bpel= ProcessPackage.eINSTANCE;
 	
-	/**
-	 * wrapper for the rule
-	 */
-	class FlattenSequenceRuleWrapper extends AbstractWrapper {
+	@Override
+	public void initLHSVariables() {
+		addVariableType(bpel.getTSequence(), lhsVariables); // SEQUENCE
 		
-		protected ProcessPackage bpel= ProcessPackage.eINSTANCE;
-		
-		@Override
-		public void initLHSVariables() {
-			addVariableType(bpel.getTSequence(), lhsVariables); // SEQUENCE
+		//reduce domains
+		for (Iterator<EObject> iter = lhsVariables.get(SEQUENCE).getDomain().iterator(); iter.hasNext();) {
+			TSequence sequence= (TSequence) iter.next();
 			
-			//reduce domains
-			for (Iterator<EObject> iter = lhsVariables.get(SEQUENCE).getDomain().iterator(); iter.hasNext();) {
-				TSequence sequence= (TSequence) iter.next();
-				
-				if (sequence.getSequence().isEmpty()) {
-					// has no other sequences as direct children
-					iter.remove();
-				}
+			if (sequence.getSequence().isEmpty()) {
+				// has no other sequences as direct children
+				iter.remove();
 			}
 		}
+	}
 
-		@Override
-		protected void initNACVariables() {
-		}
+	@Override
+	protected void initNACVariables() {
 	}
 	
 }

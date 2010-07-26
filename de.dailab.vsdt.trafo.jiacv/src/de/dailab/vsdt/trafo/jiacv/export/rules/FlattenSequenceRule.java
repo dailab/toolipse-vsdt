@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.dailab.jiactng.jadl.JadlPackage;
 import de.dailab.jiactng.jadl.Seq;
-import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
@@ -21,23 +20,11 @@ public class FlattenSequenceRule extends AbstractVsdtRule {
 
 	protected JadlPackage jadl= JadlPackage.eINSTANCE;
 	
-	protected Seq _sequence= null;
-
 	public static final int SEQUENCE= 0;
 	
-//	@Override
-//	protected void resetVars() {
-//		_sequence= null;
-//	}
-	
-	@Override
-	protected AbstractWrapper getWrapper() {
-		return new FlattenSequenceRuleWrapper();
-	}
-
 	@Override
 	protected void apply(List<EObject> matches){
-		_sequence=	(Seq)	matches.get(SEQUENCE);
+		Seq _sequence=	(Seq)	matches.get(SEQUENCE);
 		
 		Seq childSeq= null;
 		for (Object child : _sequence.getScripts()) {
@@ -53,42 +40,31 @@ public class FlattenSequenceRule extends AbstractVsdtRule {
 		}
 	}
 	
-//	@Override
-//	protected void setWeightedLHS(List<EObject> matches){
-//		_sequence=	(Seq)	matches.get(SEQUENCE);
-//	}
-	
-	/**
-	 * wrapper for the rule
-	 */
-	class FlattenSequenceRuleWrapper extends AbstractWrapper {
+	@Override
+	public void initLHSVariables() {
+		addVariableType(jadl.getSeq(), lhsVariables); // SEQUENCE
 		
-		@Override
-		public void initLHSVariables() {
-			addVariableType(jadl.getSeq(), lhsVariables); // SEQUENCE
+		//reduce domains
+		for (Iterator<EObject> iter = lhsVariables.get(SEQUENCE).getDomain().iterator(); iter.hasNext();) {
+			Seq sequence= (Seq) iter.next();
 			
-			//reduce domains
-			for (Iterator<EObject> iter = lhsVariables.get(SEQUENCE).getDomain().iterator(); iter.hasNext();) {
-				Seq sequence= (Seq) iter.next();
-				
-				// this could be done more graphically with another object in the pattern
-				// but this way it should be somewhat faster...
-				boolean hasSeq= false;;
-				for (Object script : sequence.getScripts()) {
-					if (script instanceof Seq) {
-						hasSeq= true;
-					}
-				}
-				if (! hasSeq) {
-					// has no other sequences as direct children
-					iter.remove();
+			// this could be done more graphically with another object in the pattern
+			// but this way it should be somewhat faster...
+			boolean hasSeq= false;;
+			for (Object script : sequence.getScripts()) {
+				if (script instanceof Seq) {
+					hasSeq= true;
 				}
 			}
+			if (! hasSeq) {
+				// has no other sequences as direct children
+				iter.remove();
+			}
 		}
+	}
 
-		@Override
-		protected void initNACVariables() {
-		}
+	@Override
+	protected void initNACVariables() {
 	}
 	
 }

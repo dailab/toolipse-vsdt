@@ -7,14 +7,11 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.dailab.vsdt.ConditionType;
 import de.dailab.vsdt.Expression;
-import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.base.util.Util;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
  * Create Block Rule
@@ -29,46 +26,28 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  */
 @Deprecated
 public class CreateBlockRule extends AbstractVsdtRule {
-	
-	protected SequenceFlow	_seqFlow11= null;
-	protected SequenceFlow	_seqFlow12= null;
-	protected FlowObject	_flowobject1= null;
-	protected SequenceFlow	_seqFlow21= null;
-	protected SequenceFlow	_seqFlow22= null;
-	protected FlowObject	_flowobject2= null;
-	protected Gateway		_fork= null;
-	protected Gateway		_merge= null;
-	
-//	@Override
-//	protected void resetVars() {
-//		_seqFlow11= null;
-//		_seqFlow12= null;
-//		_flowobject1= null;
-//		_seqFlow21= null;
-//		_seqFlow22= null;
-//		_flowobject2= null;
-//		_fork= null;
-//		_merge= null;
-//	}
-		
-	
-	@Override
-	protected AbstractWrapper getWrapper() {
-		return new RuleWrapper();
-	}
+
+	public static final int SEQFLOW11= 0,
+							SEQFLOW12= 1,
+							FLOWOBJECT1= 2,
+							SEQFLOW21= 3,
+							SEQFLOW22= 4,
+							FLOWOBJECT2= 5,
+							FORK= 6,
+							MERGE= 7;
 	
 	/**
 	 */
 	@Override
 	protected void apply(List<EObject> matches){
-		_seqFlow11=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW11);
-		_seqFlow12=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW12);
-		_flowobject1=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
-		_seqFlow21=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW21);
-		_seqFlow22=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW22);
-		_flowobject2=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
-		_fork=			(Gateway)		matches.get(RuleWrapper.FORK);
-		_merge=			(Gateway)		matches.get(RuleWrapper.MERGE);
+//		SequenceFlow _seqFlow11=	(SequenceFlow)	matches.get(SEQFLOW11);
+//		SequenceFlow _seqFlow12=	(SequenceFlow)	matches.get(SEQFLOW12);
+//		FlowObject _flowobject1=	(FlowObject)	matches.get(FLOWOBJECT1);
+//		SequenceFlow _seqFlow21=	(SequenceFlow)	matches.get(SEQFLOW21);
+//		SequenceFlow _seqFlow22=	(SequenceFlow)	matches.get(SEQFLOW22);
+//		FlowObject _flowobject2=	(FlowObject)	matches.get(FLOWOBJECT2);
+//		Gateway _fork=				(Gateway)		matches.get(FORK);
+//		Gateway _merge=				(Gateway)		matches.get(MERGE);
 		
 		/*
 		// create condition map
@@ -134,75 +113,45 @@ public class CreateBlockRule extends AbstractVsdtRule {
 		seqFlow.setTarget(null);
 		Util.deleteFromOwner(seqFlow);
 	}
-	
-//	@Override
-//	protected void setWeightedLHS(List<EObject> matches){
-//		_seqFlow11=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW11);
-//		_seqFlow12=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW12);
-//		_flowobject1=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT1);
-//		_seqFlow21=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW21);
-//		_seqFlow22=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW22);
-//		_flowobject2=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT2);
-//		_fork=			(Gateway)		matches.get(RuleWrapper.FORK);
-//		_merge=			(Gateway)		matches.get(RuleWrapper.MERGE);
-//	}
-	
-	
-	/**
-	 * wrapper class for this rule
-	 * 
-	 * @author tkuester
-	 */
-	class RuleWrapper extends AbstractVsdtWrapper {
-			
-		public static final int SEQFLOW11= 0,
-								SEQFLOW12= 1,
-								FLOWOBJECT1= 2,
-								SEQFLOW21= 3,
-								SEQFLOW22= 4,
-								FLOWOBJECT2= 5,
-								FORK= 6,
-								MERGE= 7;
 		
-		@Override
-		public void initLHSVariables() {
-			
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW11
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW12
-			addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT1
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW21
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW22
-			addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT2
-			addVariableType(bpmn.getGateway(), lhsVariables);		// FORK
-			addVariableType(bpmn.getGateway(), lhsVariables);		// MERGE
-			
-			//queries
-			addInjectivityQuery(lhsVariables,FORK,MERGE);
-			addInjectivityQuery(lhsVariables,FLOWOBJECT1,FLOWOBJECT2);
-			
-			addBranchTargetQueries(lhsVariables, FORK, SEQFLOW11, FLOWOBJECT1, SEQFLOW12, MERGE);
-			addBranchTargetQueries(lhsVariables, FORK, SEQFLOW21, FLOWOBJECT2, SEQFLOW22, MERGE);
-			
-			//reduce fork
-			for (Iterator<EObject> iter = lhsVariables.get(FORK).getDomain().iterator(); iter.hasNext();) {
-				Gateway gateway = (Gateway) iter.next();
-				// not yet added to a block
-				if (gateway.getParent() == null) {
-					iter.remove();
-				}
-			}	
-			//reduce merge
-			for (Iterator<EObject> iter = lhsVariables.get(MERGE).getDomain().iterator(); iter.hasNext();) {
-				Gateway gateway = (Gateway) iter.next();
-				// not yet added to a block
-				if (gateway.getParent() == null) {
-					iter.remove();
-				}
+	@Override
+	public void initLHSVariables() {
+		
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW11
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW12
+		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT1
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW21
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW22
+		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT2
+		addVariableType(bpmn.getGateway(), lhsVariables);		// FORK
+		addVariableType(bpmn.getGateway(), lhsVariables);		// MERGE
+		
+		//queries
+		addInjectivityQuery(lhsVariables,FORK,MERGE);
+		addInjectivityQuery(lhsVariables,FLOWOBJECT1,FLOWOBJECT2);
+		
+		addBranchTargetQueries(lhsVariables, FORK, SEQFLOW11, FLOWOBJECT1, SEQFLOW12, MERGE);
+		addBranchTargetQueries(lhsVariables, FORK, SEQFLOW21, FLOWOBJECT2, SEQFLOW22, MERGE);
+		
+		//reduce fork
+		for (Iterator<EObject> iter = lhsVariables.get(FORK).getDomain().iterator(); iter.hasNext();) {
+			Gateway gateway = (Gateway) iter.next();
+			// not yet added to a block
+			if (gateway.getParent() == null) {
+				iter.remove();
+			}
+		}	
+		//reduce merge
+		for (Iterator<EObject> iter = lhsVariables.get(MERGE).getDomain().iterator(); iter.hasNext();) {
+			Gateway gateway = (Gateway) iter.next();
+			// not yet added to a block
+			if (gateway.getParent() == null) {
+				iter.remove();
 			}
 		}
-		
-		@Override
-		protected void initNACVariables() {
-		}
+	}
+	
+	@Override
+	protected void initNACVariables() {
 	}
 }

@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.xmlsoap.schemas.ws._2003._03.business.process.ProcessPackage;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TEmpty;
 
-import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.base.util.Util;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
@@ -20,64 +19,41 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
  */
 public class RemoveEmptyRule extends AbstractVsdtRule {
 	
-	protected TEmpty empty= null;
-
 	public static final int EMPTY= 0;
 	
-	
-//	@Override
-//	protected void resetVars() {
-//		empty= null;
-//	}
-	
-	@Override
-	protected AbstractWrapper getWrapper() {
-		return new RuleWrapper();
-	}
-
 	@Override
 	protected void apply(List<EObject> matches){
-		empty=	(TEmpty)	matches.get(EMPTY);
+		TEmpty empty=	(TEmpty)	matches.get(EMPTY);
 		
 		Util.deleteFromOwner(empty);
 	}
 	
-//	@Override
-//	protected void setWeightedLHS(List<EObject> matches){
-//		empty=	(TEmpty)	matches.get(EMPTY);
-//	}
 	
-	/**
-	 * wrapper for the rule
-	 */
-	class RuleWrapper extends AbstractWrapper {
+	protected ProcessPackage bpel= ProcessPackage.eINSTANCE;
+	
+	@Override
+	public void initLHSVariables() {
+		addVariableType(bpel.getTEmpty(), lhsVariables); // EMPTY
 		
-		protected ProcessPackage bpel= ProcessPackage.eINSTANCE;
-		
-		@Override
-		public void initLHSVariables() {
-			addVariableType(bpel.getTEmpty(), lhsVariables); // EMPTY
+		//reduce domains
+		for (Iterator<EObject> iter = lhsVariables.get(EMPTY).getDomain().iterator(); iter.hasNext();) {
+			TEmpty empty= (TEmpty) iter.next();
 			
-			//reduce domains
-			for (Iterator<EObject> iter = lhsVariables.get(EMPTY).getDomain().iterator(); iter.hasNext();) {
-				TEmpty empty= (TEmpty) iter.next();
-				
-				// no attributes may be set
-				boolean ok= true;
-				ok&= empty.getName() == null;
-				ok&= empty.getSource().isEmpty();
-				ok&= empty.getTarget().isEmpty();
-				ok&= empty.getJoinCondition() == null;
-				
-				if (! ok) {
-					iter.remove();
-				}
+			// no attributes may be set
+			boolean ok= true;
+			ok&= empty.getName() == null;
+			ok&= empty.getSource().isEmpty();
+			ok&= empty.getTarget().isEmpty();
+			ok&= empty.getJoinCondition() == null;
+			
+			if (! ok) {
+				iter.remove();
 			}
 		}
+	}
 
-		@Override
-		protected void initNACVariables() {
-		}
+	@Override
+	protected void initNACVariables() {
 	}
 	
 }

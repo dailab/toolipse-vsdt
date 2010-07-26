@@ -6,15 +6,7 @@ import org.eclipse.emf.ecore.EObject;
 import de.dailab.vsdt.trafo.base.Variable;
 
 /**
- * Class : VariableQuery <br/>
- * Package : rules <br/>
- * Project : RuleProject <br/>
- * Created On : 15.01.2006 <br/>
- * Description : Query class for the Matchfinder. Ensures equality 
- * of attributes which is demanded by rule by using same variable. 
- * 
- * @author Enrico Biermann <br>
- * @author Guenter Kuhns <br>
+ * TODO javadoc
  */
 public class VariableQuery extends Query {
 	

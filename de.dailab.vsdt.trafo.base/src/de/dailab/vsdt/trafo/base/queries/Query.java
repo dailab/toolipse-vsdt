@@ -8,14 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import de.dailab.vsdt.trafo.base.Variable;
 
 /**
- * Class : Query <br/>
- * Package : rules <br/>
- * Project : RuleProject <br/>
- * Created On : 10.01.2006 <br/>
- * Description : Parent class of the other query types.
- * 
- * @author Enrico Biermann <br>
- * @author Guenter Kuhns <br>
+ * TODO javadoc
  */
 public abstract class Query {
 	

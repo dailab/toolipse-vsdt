@@ -13,9 +13,7 @@ import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.trafo.base.AbstractWrapper;
 import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
 
 /**
  * Insert Empty Rule
@@ -37,28 +35,15 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtWrapper;
  */
 public class InsertEmptyRule extends AbstractVsdtRule {
 	
-	protected SequenceFlow _seqFlow= null;
-	protected FlowObject _flowObject= null;
-	protected Gateway _gateway= null;
-	
-//	@Override
-//	protected void resetVars() {
-//		_seqFlow= null;
-//		_flowObject= null;
-//		_gateway= null;
-//	}
-	
-	@Override
-	protected AbstractWrapper getWrapper() {
-		return new RuleWrapper();
-	}
-
+	public static final int SEQFLOW= 0,
+	FLOWOBJECT= 1,
+	GATEWAY= 2;
 	
 	@Override
 	protected void apply(List<EObject> matches){
-		_seqFlow=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW);
-		_flowObject=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT);
-		_gateway=		(Gateway)		matches.get(RuleWrapper.GATEWAY);
+		SequenceFlow _seqFlow=	(SequenceFlow)	matches.get(SEQFLOW);
+//		FlowObject _flowObject=	(FlowObject)	matches.get(FLOWOBJECT);
+		Gateway _gateway=		(Gateway)		matches.get(GATEWAY);
 		
 		//create none activity
 		FlowObjectContainer container= _gateway.getParent();
@@ -78,70 +63,52 @@ public class InsertEmptyRule extends AbstractVsdtRule {
 		seqFlow2.setSource(activity);
 		seqFlow2.setTarget(_gateway);
 	}
-//	
-//	@Override
-//	protected void setWeightedLHS(List<EObject> matches){
-//		_seqFlow=		(SequenceFlow)	matches.get(RuleWrapper.SEQFLOW);
-//		_flowObject=	(FlowObject)	matches.get(RuleWrapper.FLOWOBJECT);
-//		_gateway=		(Gateway)		matches.get(RuleWrapper.GATEWAY);
-//	}
-	
-	
-	/**
-	 * wrapper for the rule
-	 */
-	class RuleWrapper extends AbstractVsdtWrapper {
+
+	@Override
+	public void initLHSVariables() {
+		addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW
+		addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT
+		addVariableType(bpmn.getGateway(), lhsVariables);		// GATEWAY
 		
-		public static final int SEQFLOW= 0,
-								FLOWOBJECT= 1,
-								GATEWAY= 2;
+		//queries
+		addTargetQuery(lhsVariables, SEQFLOW, FLOWOBJECT, bpmn.getSequenceFlow_Source());
+		addTargetQuery(lhsVariables, SEQFLOW, GATEWAY, bpmn.getSequenceFlow_Target());
 		
-		@Override
-		public void initLHSVariables() {
-			addVariableType(bpmn.getSequenceFlow(), lhsVariables);	// SEQFLOW
-			addVariableType(bpmn.getFlowObject(), lhsVariables);	// FLOWOBJECT
-			addVariableType(bpmn.getGateway(), lhsVariables);		// GATEWAY
+		//reduce domains
+		for (Iterator<EObject> iter = lhsVariables.get(FLOWOBJECT).getDomain().iterator(); iter.hasNext();) {
+			FlowObject flowObject= (FlowObject) iter.next();
+			boolean ok=false;
 			
-			//queries
-			addTargetQuery(lhsVariables, SEQFLOW, FLOWOBJECT, bpmn.getSequenceFlow_Source());
-			addTargetQuery(lhsVariables, SEQFLOW, GATEWAY, bpmn.getSequenceFlow_Target());
+			//flow object may be a gateway...
+			if (flowObject instanceof Gateway) {
+				ok= true;
+			}
 			
-			//reduce domains
-			for (Iterator<EObject> iter = lhsVariables.get(FLOWOBJECT).getDomain().iterator(); iter.hasNext();) {
-				FlowObject flowObject= (FlowObject) iter.next();
-				boolean ok=false;
-				
-				//flow object may be a gateway...
-				if (flowObject instanceof Gateway) {
+			//...or an activity with boundary event...
+			if (flowObject instanceof Activity) {
+				Activity activity = (Activity) flowObject;
+				if (! activity.getBoundaryEvents().isEmpty()) {
 					ok= true;
 				}
-				
-				//...or an activity with boundary event...
-				if (flowObject instanceof Activity) {
-					Activity activity = (Activity) flowObject;
-					if (! activity.getBoundaryEvents().isEmpty()) {
-						ok= true;
-					}
-						
-				}
-				
-				//...or a boundary event
-				if (flowObject instanceof Intermediate) {
-					Intermediate intermediate = (Intermediate) flowObject;
-					if (intermediate.getAttachedTo() != null) {
-						ok= true;
-					}
-				}
-				
-				if (! ok) {
-					iter.remove();
+					
+			}
+			
+			//...or a boundary event
+			if (flowObject instanceof Intermediate) {
+				Intermediate intermediate = (Intermediate) flowObject;
+				if (intermediate.getAttachedTo() != null) {
+					ok= true;
 				}
 			}
+			
+			if (! ok) {
+				iter.remove();
+			}
 		}
-		
-		@Override
-		protected void initNACVariables() {
-		}
+	}
+	
+	@Override
+	protected void initNACVariables() {
 	}
 	
 }
