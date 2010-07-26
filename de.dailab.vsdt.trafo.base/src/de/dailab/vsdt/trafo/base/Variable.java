@@ -6,7 +6,7 @@ import java.util.Vector;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import de.dailab.vsdt.trafo.base.queries.Query;
+import de.dailab.vsdt.trafo.base.queries.Constraint;
 
 /**
  * TODO javadoc
@@ -20,7 +20,7 @@ public class Variable {
 	private final List<EObject> domain;
 	
 	/**queries associated with this variable*/
-	private final List<Query> queries;
+	private final List<Constraint> queries;
 
 	/**possible values - already reduced by queries*/
 	private List<EObject> dynamicDomain = null;
@@ -44,7 +44,8 @@ public class Variable {
 	public Variable(EClass type, List<EObject> domain) {
 		this.type= type;
 		this.domain = new Vector<EObject>(domain);
-		this.queries = new Vector<Query>();
+		this.queries = new Vector<Constraint>();
+		this.dynamicDomain = new Vector<EObject>(domain);
 	}
 	
 	/**
@@ -92,7 +93,7 @@ public class Variable {
 	 * 
 	 * @param query	query for adding
 	 */		
-	public void addQuery(Query query) {
+	public void addQuery(Constraint query) {
 		this.queries.add(query);
 	}
 	
@@ -114,8 +115,8 @@ public class Variable {
 			}
 			
 			//Check Queries for Inconsistencies
-			for (Query query : queries) {
-				if (! query.eval()){
+			for (Constraint query : queries) {
+				if (! query.apply()){
 					//try next possible value
 					return nextInstance();
 				}
@@ -151,8 +152,9 @@ public class Variable {
 		instanceValue= null;
 		instanciated= false;
 		for (int i = queries.size() - 1; i >= 0; i--) {
-			queries.get(i).reEval();
+			queries.get(i).undo();
 		}
+		dynamicDomain = null;
 	}
 	
 	/**

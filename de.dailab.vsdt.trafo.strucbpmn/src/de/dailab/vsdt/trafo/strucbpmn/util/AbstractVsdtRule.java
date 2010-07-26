@@ -79,8 +79,8 @@ public abstract class AbstractVsdtRule extends TransformationRule {
 	 * @param target		number of variable for the sequence flow's target
 	 */
 	protected void addSeqFlowTargetQueries(List<Variable> variables, int seqFlow, int source, int target) {
-		addTargetQuery(variables, seqFlow, source, bpmn.getSequenceFlow_Source());
-		addTargetQuery(variables, seqFlow, target, bpmn.getSequenceFlow_Target());
+		addTargetConstraint(variables, seqFlow, source, bpmn.getSequenceFlow_Source());
+		addTargetConstraint(variables, seqFlow, target, bpmn.getSequenceFlow_Target());
 	}
 	
 	/**

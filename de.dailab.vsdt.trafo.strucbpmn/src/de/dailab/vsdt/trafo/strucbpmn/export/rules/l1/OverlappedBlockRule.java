@@ -105,7 +105,7 @@ public class OverlappedBlockRule extends AbstractVsdtRule {
 		addVariable(lhsVariables, bpmn.getGateway(), 4);	   // GATEWAYs
 		
 		//queries
-		createInjectivityQueries(lhsVariables);
+		createInjectivityConstraints(lhsVariables);
 
 		addBranchTargetQueries(lhsVariables, GATEWAY1, SEQFLOWA1, FLOWOBJECTA, SEQFLOWA2, GATEWAY3);
 		addBranchTargetQueries(lhsVariables, GATEWAY1, SEQFLOWB1, FLOWOBJECTB, SEQFLOWB2, GATEWAY2);

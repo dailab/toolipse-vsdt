@@ -105,8 +105,8 @@ public class BoundaryEventSkipRule extends AbstractVsdtRule {
 		addVariable(lhsVariables, bpmn.getFlowObject());	// FO_COMP
 		
 		//queries
-		addTargetQuery(lhsVariables,EH_BLOCK,ACTIVITY,struc.getBpmnEventHandlerBlock_Activity());
-		addTargetQuery(lhsVariables,ACTIVITY,INTERMEDIATE,bpmn.getActivity_BoundaryEvents());
+		addTargetConstraint(lhsVariables,EH_BLOCK,ACTIVITY,struc.getBpmnEventHandlerBlock_Activity());
+		addTargetConstraint(lhsVariables,ACTIVITY,INTERMEDIATE,bpmn.getActivity_BoundaryEvents());
 		
 		addBranchTargetQueries(lhsVariables, EH_BLOCK, SEQFLOWAS, FO_SKIP, SEQFLOWSG, GATEWAY);
 		addBranchTargetQueries(lhsVariables, INTERMEDIATE, SEQFLOWIC, FO_COMP, SEQFLOWCG, GATEWAY);

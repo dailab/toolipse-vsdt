@@ -162,8 +162,8 @@ public class BoundaryEventLoopRule extends AbstractVsdtRule {
 		addVariable(lhsVariables, bpmn.getFlowObject());	// FO_COMP
 		
 		//queries
-		addTargetQuery(lhsVariables,EH_BLOCK,ACTIVITY,struc.getBpmnEventHandlerBlock_Activity());
-		addTargetQuery(lhsVariables,ACTIVITY,INTERMEDIATE,bpmn.getActivity_BoundaryEvents());
+		addTargetConstraint(lhsVariables,EH_BLOCK,ACTIVITY,struc.getBpmnEventHandlerBlock_Activity());
+		addTargetConstraint(lhsVariables,ACTIVITY,INTERMEDIATE,bpmn.getActivity_BoundaryEvents());
 		
 		addBranchTargetQueries(lhsVariables, GATEWAY, SEQFLOWGL, FO_LOOP, SEQFLOWLA, EH_BLOCK);
 		addBranchTargetQueries(lhsVariables, INTERMEDIATE, SEQFLOWIC, FO_COMP, SEQFLOWCG, GATEWAY);

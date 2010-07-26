@@ -1,5 +1,8 @@
 package de.dailab.vsdt.trafo.base.queries;
 
+import java.util.List;
+import java.util.Vector;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 
@@ -8,7 +11,7 @@ import de.dailab.vsdt.trafo.base.Variable;
 /**
  * TODO javadoc
  */
-public class VariableQuery extends Query {
+public class VariableConstraint extends Constraint {
 	
 	/** compared attributes: source */
 	private final EAttribute sourceAttribute;
@@ -24,7 +27,7 @@ public class VariableQuery extends Query {
 	 * @param sourceAttribute	compared attribute at creator
 	 * @param targetAttribute	compared attribute at target
 	 */
-	public VariableQuery(Variable creator, Variable target, EAttribute sourceAttribute, EAttribute targetAttribute) {
+	public VariableConstraint(Variable creator, Variable target, EAttribute sourceAttribute, EAttribute targetAttribute) {
 		super(creator, target);
 		this.sourceAttribute = sourceAttribute;
 		this.targetAttribute = targetAttribute;
@@ -33,31 +36,31 @@ public class VariableQuery extends Query {
 	/**
 	 * Evaluate query. Objects at target domain with different attribute value are removed.
 	 */
-	public boolean eval() {
-		if(creator.isInstanciated()) {
-			init();
-			//get attribute values
-			Object sourceValue = creator.getInstanceValue().eGet(sourceAttribute);
-			
-			if (target.isInstanciated()) {
-				//target instantiated: return true if the values match
-				Object targetValue= target.getInstanceValue().eGet(targetAttribute);
-				return matches(sourceValue, targetValue);
-			} else {
-				//target not instantiated: retain matching targets
-				for (EObject targetObject : preDynamic) {
-					Object targetValue= targetObject.eGet(targetAttribute);
-					if (matches(sourceValue, targetValue)) {
-						values.add(targetObject);
-					}
-				}
-				if (! values.isEmpty()) {
-					target.setDynamicDomain(values);
-					return true;
+	public boolean internalApply() {
+		List<EObject> values= new Vector<EObject>();
+		
+		//get attribute values
+		Object sourceValue = variable.getInstanceValue().eGet(sourceAttribute);
+		
+		if (target.isInstanciated()) {
+			//target instantiated: return true if the values match
+			Object targetValue= target.getInstanceValue().eGet(targetAttribute);
+			return matches(sourceValue, targetValue);
+		} else {
+			//target not instantiated: retain matching targets
+			for (EObject targetObject : preDynamic) {
+				Object targetValue= targetObject.eGet(targetAttribute);
+				if (matches(sourceValue, targetValue)) {
+					values.add(targetObject);
 				}
 			}
+			if (! values.isEmpty()) {
+				target.setDynamicDomain(values);
+				return true;
+			} else {
+				return false;
+			}
 		}
-		return false;
 	}
 	
 	/**

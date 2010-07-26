@@ -9,10 +9,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import de.dailab.vsdt.trafo.base.queries.InjectivityQuery;
-import de.dailab.vsdt.trafo.base.queries.SourceQuery;
-import de.dailab.vsdt.trafo.base.queries.TargetQuery;
-import de.dailab.vsdt.trafo.base.queries.VariableQuery;
+import de.dailab.vsdt.trafo.base.queries.InjectivityConstraint;
+import de.dailab.vsdt.trafo.base.queries.SourceConstraint;
+import de.dailab.vsdt.trafo.base.queries.TargetConstraint;
+import de.dailab.vsdt.trafo.base.queries.VariableConstraint;
 import de.dailab.vsdt.trafo.base.util.Util;
 
 /**
@@ -128,13 +128,13 @@ public abstract class TransformationRule {
 	 * 
 	 * @param vars	list of variables
 	 */ 
-	protected final void createInjectivityQueries(List<Variable> vars) {
+	protected final void createInjectivityConstraints(List<Variable> vars) {
 		for(int i = 0; i < vars.size(); i++) {
 			Variable var1= vars.get(i);
 			for (int j = i + 1; j < vars.size(); j++) {
 				Variable var2= vars.get(j);
 				if (Util.typesLinked(var1.getType(), var2.getType())) {
-					InjectivityQuery iq = new InjectivityQuery(var1, var2);
+					InjectivityConstraint iq = new InjectivityConstraint(var1, var2);
 					var1.addQuery(iq);
 				}
 			}
@@ -183,10 +183,10 @@ public abstract class TransformationRule {
 	 * @param targetNr	the index of the target element
 	 * @param ref		the reference
 	 */
-	protected final void addTargetQuery(List<Variable> varSet, int sourceNr, int targetNr, EStructuralFeature ref) {
+	protected final void addTargetConstraint(List<Variable> varSet, int sourceNr, int targetNr, EStructuralFeature ref) {
 		Variable source = varSet.get(sourceNr);
 		Variable target = varSet.get(targetNr);
-		TargetQuery tq = new TargetQuery(source, target, ref);
+		TargetConstraint tq = new TargetConstraint(source, target, ref);
 		source.addQuery(tq);
 	}
 	
@@ -199,10 +199,10 @@ public abstract class TransformationRule {
 	 * @param targetNr	the index of the target element
 	 * @param ref		the reference
 	 */
-	protected final void addSourceQuery(List<Variable> varSet, int sourceNr, int targetNr, EStructuralFeature ref) {
+	protected final void addSourceConstraint(List<Variable> varSet, int sourceNr, int targetNr, EStructuralFeature ref) {
 		Variable source = varSet.get(sourceNr);
 		Variable target = varSet.get(targetNr);
-		SourceQuery sq = new SourceQuery(source, target, ref);
+		SourceConstraint sq = new SourceConstraint(source, target, ref);
 		target.addQuery(sq);
 	}
 
@@ -215,10 +215,10 @@ public abstract class TransformationRule {
 	 * @param srcAtt	attribute of source element
 	 * @param trgAtt	attribute of target element
 	 */
-	protected final void addVariableQuery(List<Variable> varSet, int sourceNr, int targetNr, EAttribute srcAtt, EAttribute trgAtt) {
+	protected final void addVariableConstraint(List<Variable> varSet, int sourceNr, int targetNr, EAttribute srcAtt, EAttribute trgAtt) {
 		Variable source = varSet.get(sourceNr);
 		Variable target = varSet.get(targetNr);
-		VariableQuery vq = new VariableQuery(source, target, srcAtt, trgAtt);
+		VariableConstraint vq = new VariableConstraint(source, target, srcAtt, trgAtt);
 		target.addQuery(vq);
 	}
 	
@@ -230,10 +230,10 @@ public abstract class TransformationRule {
 	 * @param creator	index of first variable in list
 	 * @param target	index of second variable in list
 	 */
-	protected final void addInjectivityQuery(List<Variable> varSet, int sourceNr, int targetNr) {
+	protected final void addInjectivityConstraint(List<Variable> varSet, int sourceNr, int targetNr) {
 		Variable source = varSet.get(sourceNr);
 		Variable target = varSet.get(targetNr);
-		InjectivityQuery iq = new InjectivityQuery(source, target);
+		InjectivityConstraint iq = new InjectivityConstraint(source, target);
 		source.addQuery(iq);
 	}
 	

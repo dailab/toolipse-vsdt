@@ -6,7 +6,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 
 import de.dailab.vsdt.trafo.MappingStage;
-import de.dailab.vsdt.trafo.base.AbstractRule;
+import de.dailab.vsdt.trafo.base.TransformationRule;
 import de.dailab.vsdt.trafo.base.Transformation;
 import de.dailab.vsdt.trafo.bpel.export.rules.FlattenSequenceRule;
 import de.dailab.vsdt.trafo.bpel.export.rules.MergeConsecutiveAssignsRule;
@@ -34,11 +34,11 @@ public class Bpmn2BpelCleanUp extends MappingStage {
 	class InternalTransformation extends Transformation {
 		
 		@Override
-		protected List<List<AbstractRule>> initRules() {
-			List<List<AbstractRule>> layers= new ArrayList<List<AbstractRule>>();
+		protected List<List<TransformationRule>> initRules() {
+			List<List<TransformationRule>> layers= new ArrayList<List<TransformationRule>>();
 			
 			//clean up
-			List<AbstractRule> layer0= new ArrayList<AbstractRule>();
+			List<TransformationRule> layer0= new ArrayList<TransformationRule>();
 			layer0.add(new FlattenSequenceRule());
 			layer0.add(new MergeConsecutiveAssignsRule());
 			layer0.add(new SingletonSequenceRule());

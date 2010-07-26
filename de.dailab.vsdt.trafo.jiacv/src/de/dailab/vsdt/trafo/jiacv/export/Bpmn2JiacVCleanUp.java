@@ -6,7 +6,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 
 import de.dailab.vsdt.trafo.MappingStage;
-import de.dailab.vsdt.trafo.base.AbstractRule;
+import de.dailab.vsdt.trafo.base.TransformationRule;
 import de.dailab.vsdt.trafo.base.Transformation;
 
 public class Bpmn2JiacVCleanUp extends MappingStage {
@@ -30,11 +30,11 @@ public class Bpmn2JiacVCleanUp extends MappingStage {
 	class InternalTransformation extends Transformation {
 		
 		@Override
-		protected List<List<AbstractRule>> initRules() {
-			List<List<AbstractRule>> layers= new ArrayList<List<AbstractRule>>();
+		protected List<List<TransformationRule>> initRules() {
+			List<List<TransformationRule>> layers= new ArrayList<List<TransformationRule>>();
 			
 			//clean up
-			List<AbstractRule> layer0= new ArrayList<AbstractRule>();
+			List<TransformationRule> layer0= new ArrayList<TransformationRule>();
 //			layer0.add(new FlattenSequenceRule(root));
 	
 			layers.add(layer0);

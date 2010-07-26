@@ -64,12 +64,12 @@ public class AddToBlockRule extends AbstractVsdtRule {
 		addVariable(lhsVariables, bpmn.getGateway());		// MERGE
 		
 		//queries
-		addInjectivityQuery(lhsVariables,FORK,MERGE);
+		addInjectivityConstraint(lhsVariables,FORK,MERGE);
 		
 		addBranchTargetQueries(lhsVariables, FORK, SEQFLOW1, FLOWOBJECT, SEQFLOW2, MERGE);
 		
-		addTargetQuery(lhsVariables, BLOCK, FORK, struc.getBpmnBlock_FirstGateway());
-		addTargetQuery(lhsVariables, BLOCK, MERGE, struc.getBpmnBlock_SecondGateway());
+		addTargetConstraint(lhsVariables, BLOCK, FORK, struc.getBpmnBlock_FirstGateway());
+		addTargetConstraint(lhsVariables, BLOCK, MERGE, struc.getBpmnBlock_SecondGateway());
 	}
 	
 	@Override

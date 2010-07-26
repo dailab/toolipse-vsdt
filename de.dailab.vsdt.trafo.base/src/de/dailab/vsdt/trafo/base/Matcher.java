@@ -55,8 +55,8 @@ public class Matcher {
 			for (Variable variable : lhsVars) {
 				match.add(variable.getInstanceValue());
 			}
-			// check NACs for this match, return match if OK, else null
-			return evalAllNacsForMatch(match);
+			// check whether the match is compatible with NACs
+			return isCompatibleWithNACs(match) ? match : null;
 		}
 
 		// try next possible instantiation for this variable 
@@ -81,24 +81,35 @@ public class Matcher {
 	 * according to the match.
 	 *
 	 * @param match		a match for the LHS variables 
-	 * @return			null if a match is found for any of the NACs, otherwise the match
+	 * @return			whether the variable match is compatible with the NACs
 	 */
-	private List<EObject> evalAllNacsForMatch(List<EObject> match) {
+	private boolean isCompatibleWithNACs(List<EObject> match) {
 		// for all the NACs in the list...
 		for (List<Variable> nac : nacVars) {
+
 			// instantiate the NAC variables according to the match
 			for (int i=0; i < match.size() && i < nac.size(); i++) {
 				if (nac.get(i) != null) {
 					nac.get(i).setDomain(match.get(i));
 				}
 			}
+
+			// find NAC match
+			boolean matchesNac= findNacMatch(nac, 0);
 			
-			// return null, if a match can be found for the remaining NAC variables
-			if (findNacMatch(nac, 0)) {
-				return null;
+			// reset variables
+			for (Variable var : nac) {
+				if (var != null) {
+					var.deinstanciate();
+				}
+			}
+			
+			// return false if a match can be found for any of the NACs
+			if (matchesNac) {
+				return false;
 			}
 		}
-		return match;
+		return true;
 	}
 	
 	
@@ -112,22 +123,14 @@ public class Matcher {
 		
 		// all NAC variables instantiated -> match found!
 		if (index >= nac.size()) {
-			// reset variables
-			for (Variable var : nac) {
-				if (var != null) {
-					var.deinstanciate();
-					var.setDynamicDomain(null);
-				}
-			}
 			return true;
 		}
 		
 		Variable var = nac.get(index);
+		// variable not relevant for the NAC; continue with next variable
 		if (var == null) {
-			// variable not relevant for the NAC; continue with next variable
 			return findNacMatch(nac, index + 1);
 		}
-		
 		// try next possible instantiation for this variable 
 		while (var.nextInstance()) {
 			// find matches for next variables in NAC
@@ -136,7 +139,6 @@ public class Matcher {
 				return true;
 			}
 		}
-		
 		return false;
 	}
 	

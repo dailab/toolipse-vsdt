@@ -84,7 +84,7 @@ public class SequenceRule extends AbstractVsdtRule {
 
 		//queries
 		addSeqFlowTargetQueries(lhsVariables, SEQFLOW, FLOWOBJECT1, FLOWOBJECT2);
-		addInjectivityQuery(lhsVariables,FLOWOBJECT1,FLOWOBJECT2);
+		addInjectivityConstraint(lhsVariables,FLOWOBJECT1,FLOWOBJECT2);
 
 		//reduce flowobject1
 		for (Iterator<EObject> iter = lhsVariables.get(FLOWOBJECT1).getDomain().iterator(); iter.hasNext();) {

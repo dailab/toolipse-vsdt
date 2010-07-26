@@ -111,14 +111,14 @@ public class LoopRule extends AbstractVsdtRule {
 		addVariable(lhsVariables, bpmn.getGateway());		// FORK
 		
 		//queries
-		addInjectivityQuery(lhsVariables,SEQFLOW21,SEQFLOWQUIT);
-		addInjectivityQuery(lhsVariables,GATEWAY1,GATEWAY2);
-		addInjectivityQuery(lhsVariables,FLOWOBJECT1,FLOWOBJECT2);
+		addInjectivityConstraint(lhsVariables,SEQFLOW21,SEQFLOWQUIT);
+		addInjectivityConstraint(lhsVariables,GATEWAY1,GATEWAY2);
+		addInjectivityConstraint(lhsVariables,FLOWOBJECT1,FLOWOBJECT2);
 		
 		addBranchTargetQueries(lhsVariables, GATEWAY1, SEQFLOW11, FLOWOBJECT1, SEQFLOW12, GATEWAY2);
 		addBranchTargetQueries(lhsVariables, GATEWAY2, SEQFLOW21, FLOWOBJECT2, SEQFLOW22, GATEWAY1);
 		
-		addTargetQuery(lhsVariables,SEQFLOWQUIT,GATEWAY2,bpmn.getSequenceFlow_Source());
+		addTargetConstraint(lhsVariables,SEQFLOWQUIT,GATEWAY2,bpmn.getSequenceFlow_Source());
 		
 		//reduce domains
 		for (Iterator<EObject> iter = lhsVariables.get(GATEWAY1).getDomain().iterator(); iter.hasNext();) {

@@ -167,8 +167,8 @@ public class BlockRule extends AbstractVsdtRule {
 		addVariable(lhsVariables, bpmn.getGateway());		// MERGE
 		
 		//queries
-		addInjectivityQuery(lhsVariables,FORK,MERGE);
-		addInjectivityQuery(lhsVariables,FLOWOBJECT1,FLOWOBJECT2);
+		addInjectivityConstraint(lhsVariables,FORK,MERGE);
+		addInjectivityConstraint(lhsVariables,FLOWOBJECT1,FLOWOBJECT2);
 		
 		addBranchTargetQueries(lhsVariables, FORK, SEQFLOW11, FLOWOBJECT1, SEQFLOW12, MERGE);
 		addBranchTargetQueries(lhsVariables, FORK, SEQFLOW21, FLOWOBJECT2, SEQFLOW22, MERGE);
@@ -236,11 +236,11 @@ public class BlockRule extends AbstractVsdtRule {
 		addVariable(nacVars, bpmn.getFlowObject());	// NAC_GATEWAY
 		
 		//queries
-		addInjectivityQuery(nacVars, MERGE, NAC_GATEWAY);
-		addSourceQuery(nacVars, NAC_SEQFLOW1, FORK, bpmn.getSequenceFlow_Source());
-		addTargetQuery(nacVars, NAC_SEQFLOW1, NAC_SEQ, bpmn.getSequenceFlow_Target());
-		addTargetQuery(nacVars, NAC_SEQFLOW2, NAC_SEQ, bpmn.getSequenceFlow_Source());
-		addTargetQuery(nacVars, NAC_SEQFLOW2, NAC_GATEWAY, bpmn.getSequenceFlow_Target());
+		addInjectivityConstraint(nacVars, MERGE, NAC_GATEWAY);
+		addSourceConstraint(nacVars, NAC_SEQFLOW1, FORK, bpmn.getSequenceFlow_Source());
+		addTargetConstraint(nacVars, NAC_SEQFLOW1, NAC_SEQ, bpmn.getSequenceFlow_Target());
+		addTargetConstraint(nacVars, NAC_SEQFLOW2, NAC_SEQ, bpmn.getSequenceFlow_Source());
+		addTargetConstraint(nacVars, NAC_SEQFLOW2, NAC_GATEWAY, bpmn.getSequenceFlow_Target());
 		
 		return nacVars;
 	}
@@ -264,8 +264,8 @@ public class BlockRule extends AbstractVsdtRule {
 		addVariable(nacVars, bpmn.getFlowObject());	// NAC_SEQ
 		
 		//queries
-		addSourceQuery(nacVars, NAC_SEQFLOW1, FORK, bpmn.getSequenceFlow_Source());
-		addTargetQuery(nacVars, NAC_SEQFLOW1, NAC_SEQ, bpmn.getSequenceFlow_Target());
+		addSourceConstraint(nacVars, NAC_SEQFLOW1, FORK, bpmn.getSequenceFlow_Source());
+		addTargetConstraint(nacVars, NAC_SEQFLOW1, NAC_SEQ, bpmn.getSequenceFlow_Target());
 		
 		//reduce domains
 		for (Iterator<EObject> iter = nacVars.get(NAC_SEQ).getDomain().iterator(); iter.hasNext();) {
