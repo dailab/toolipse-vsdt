@@ -18,7 +18,7 @@ import de.dailab.vsdt.trafo.base.util.Util;
 /**
  * TODO javadoc
  */
-public abstract class AbstractRule {
+public abstract class TransformationRule {
 	
 	/**HashMap for collecting instance objects of model types*/
 	protected Map<EClass, List<EObject>> instancesMap;
@@ -108,7 +108,11 @@ public abstract class AbstractRule {
 	 * @param type		the type to create
 	 */
 	protected void addVariable(List<Variable> vars, EClass type) {
-		vars.add(new Variable(type, getDomainForType(type)));
+		List<EObject> domain = instancesMap.get(type);
+		if (domain == null) {
+			domain= new Vector<EObject>();
+		}
+		vars.add(new Variable(type, domain));
 	}
 	
 	protected void addVariable(List<Variable> vars, EClass type, int multiplicity) {
@@ -143,16 +147,17 @@ public abstract class AbstractRule {
 	 * @param type	the eClass of interest
 	 * @return		list of all instances
 	 */
-	protected final List<EObject> getDomainForType(EClass type) {
-		List<EObject> domain = instancesMap.get(type);
-		if (domain == null) {
-			return new Vector<EObject>();
-		}
-		return new Vector<EObject>(domain);
-	}
+//	protected final List<EObject> getDomainForType(EClass type) {
+//		List<EObject> domain = instancesMap.get(type);
+//		if (domain == null) {
+//			return new Vector<EObject>();
+//		}
+//		return new Vector<EObject>(domain);
+//	}
 	
 	/**
-	 * add a number of null-matches to the given NAC-varSet
+	 * add a number of null-matches to the given NAC-varSet. This is useful if
+	 * there are variables in the LHS that are not needed in the NAC.
 	 * 
 	 * @param vars		the list of (NAC) variables
 	 * @param types		the list of types
@@ -225,20 +230,11 @@ public abstract class AbstractRule {
 	 * @param creator	index of first variable in list
 	 * @param target	index of second variable in list
 	 */
-	protected final void addInjectivityQuery(List<Variable> vars, int creator, int target) {
-		addInjectivityQuery(vars.get(creator), vars.get(target));
+	protected final void addInjectivityQuery(List<Variable> varSet, int sourceNr, int targetNr) {
+		Variable source = varSet.get(sourceNr);
+		Variable target = varSet.get(targetNr);
+		InjectivityQuery iq = new InjectivityQuery(source, target);
+		source.addQuery(iq);
 	}
 	
-	/**
-	 * create a single injectivity query for the given variables
-	 * note that the first variable has to be instantiated before the second!
-	 * 
-	 * @param creator	first variable
-	 * @param target	second variable
-	 */
-	protected final void addInjectivityQuery(Variable creator, Variable target) {
-		InjectivityQuery iq = new InjectivityQuery(creator, target);
-		creator.addQuery(iq);
-	}
-		
 }

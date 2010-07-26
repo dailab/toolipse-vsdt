@@ -20,7 +20,7 @@ import de.dailab.vsdt.trafo.base.util.Util;
 public abstract class Transformation {
 	
 	/** List containing one List of Rules for each layer */
-	protected List<List<AbstractRule>> rules= null;
+	protected List<List<TransformationRule>> rules= null;
 	
 	/**
 	 * Fill Layers List with one List of Rules for each layer.
@@ -34,7 +34,7 @@ public abstract class Transformation {
 	 * layers.add(layer1);
 	 * return layers;
 	 */
-	protected abstract List<List<AbstractRule>> initRules();
+	protected abstract List<List<TransformationRule>> initRules();
 	
 
 	/**
@@ -49,9 +49,9 @@ public abstract class Transformation {
 
 		Map<EClass,List<EObject>> instancesMap = Util.createInstancesMap(eObject); 
 
-		for (List<AbstractRule> layer : rules) {
+		for (List<TransformationRule> layer : rules) {
 			
-			Queue<AbstractRule> applicableRules= new LinkedList<AbstractRule>();
+			Queue<TransformationRule> applicableRules= new LinkedList<TransformationRule>();
 			applicableRules.addAll(layer);
 			
 			long oldTime;
@@ -61,7 +61,7 @@ public abstract class Transformation {
 				//as long as there are applicable rules...
 				while (! applicableRules.isEmpty()) {
 					
-					AbstractRule rule = applicableRules.remove();
+					TransformationRule rule = applicableRules.remove();
 					
 					boolean executed= rule.execute(instancesMap);
 					

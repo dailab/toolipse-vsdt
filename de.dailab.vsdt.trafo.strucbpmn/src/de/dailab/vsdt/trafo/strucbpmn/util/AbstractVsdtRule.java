@@ -5,7 +5,7 @@ import java.util.List;
 import de.dailab.vsdt.Association;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtPackage;
-import de.dailab.vsdt.trafo.base.AbstractRule;
+import de.dailab.vsdt.trafo.base.TransformationRule;
 import de.dailab.vsdt.trafo.base.Variable;
 import de.dailab.vsdt.trafo.base.util.Util;
 import de.dailab.vsdt.trafo.strucbpmn.StrucBpmnPackage;
@@ -17,7 +17,7 @@ import de.dailab.vsdt.trafo.strucbpmn.StrucBpmnPackage;
  * 
  * @author kuester
  */
-public abstract class AbstractVsdtRule extends AbstractRule {
+public abstract class AbstractVsdtRule extends TransformationRule {
 	
 	/** suffix used for gateway automatically split in two */
 	public static final String SUFFIX_SPLIT = "__SPLIT__";

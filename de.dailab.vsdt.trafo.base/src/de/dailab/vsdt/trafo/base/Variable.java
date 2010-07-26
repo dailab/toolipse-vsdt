@@ -13,6 +13,19 @@ import de.dailab.vsdt.trafo.base.queries.Query;
  */
 public class Variable {
 	
+	/**this variable's type*/
+	private final EClass type;
+
+	/**all possible values for this variable*/
+	private final List<EObject> domain;
+	
+	/**queries associated with this variable*/
+	private final List<Query> queries;
+
+	/**possible values - already reduced by queries*/
+	private List<EObject> dynamicDomain = null;
+
+	
 	/**status of variable*/
 	private boolean instanciated = false;
 	
@@ -22,18 +35,6 @@ public class Variable {
 	/**current value of variable*/
 	private EObject instanceValue = null;
 	
-	/**all possible values for this variable*/
-	private List<EObject> domain = new Vector<EObject>();
-	
-	/**possible values - already reduced by queries*/
-	private List<EObject> dynamicDomain = null;
-	
-	/**queries associated with this variable*/
-	private List<Query> queries = new Vector<Query>();
-	
-	/**this variable's type*/
-	private EClass type= null;
-
 	
 	/**
 	 * Default constructor.
@@ -42,9 +43,8 @@ public class Variable {
 	 */
 	public Variable(EClass type, List<EObject> domain) {
 		this.type= type;
-		if (domain != null) {
-			this.domain.addAll(domain);
-		}
+		this.domain = new Vector<EObject>(domain);
+		this.queries = new Vector<Query>();
 	}
 	
 	/**
@@ -143,7 +143,8 @@ public class Variable {
 	}
 	
 	/**
-	 * Remove value from variable. Restore variable status before first instanciation.
+	 * Remove value from variable. Restore variable status before first
+	 * instantiation.
 	 */
 	public void deinstanciate() {
 		instanceIndex= 0;

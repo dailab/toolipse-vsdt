@@ -6,7 +6,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 
 import de.dailab.vsdt.trafo.MappingStage;
-import de.dailab.vsdt.trafo.base.AbstractRule;
+import de.dailab.vsdt.trafo.base.TransformationRule;
 import de.dailab.vsdt.trafo.base.Transformation;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.ConnectLinkRule;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.FinalGatewayRule;
@@ -44,8 +44,8 @@ public class Bpmn2StrucBpmnTransformation extends MappingStage {
 	class InternalTransformation extends Transformation {
 
 		@Override
-		protected List<List<AbstractRule>> initRules() {
-			List<List<AbstractRule>> layers= new ArrayList<List<AbstractRule>>();
+		protected List<List<TransformationRule>> initRules() {
+			List<List<TransformationRule>> layers= new ArrayList<List<TransformationRule>>();
 			
 			/*
 			 * The ordering of the structuring rules is of great importance, as 
@@ -58,7 +58,7 @@ public class Bpmn2StrucBpmnTransformation extends MappingStage {
 			 */
 			
 			//normalization
-			List<AbstractRule> layer0= new ArrayList<AbstractRule>();
+			List<TransformationRule> layer0= new ArrayList<TransformationRule>();
 			layer0.add(new ConnectLinkRule());
 			layer0.add(new InsertEmptyRule());
 			layer0.add(new InsertEmptyRule2());
@@ -69,7 +69,7 @@ public class Bpmn2StrucBpmnTransformation extends MappingStage {
 			layers.add(layer0);
 			
 			//structure mapping
-			List<AbstractRule> layer1= new ArrayList<AbstractRule>();
+			List<TransformationRule> layer1= new ArrayList<TransformationRule>();
 			layer1.add(new SequenceRule());
 			layer1.add(new LoopRule());
 			layer1.add(new BoundaryEventBlockRule());
@@ -81,7 +81,7 @@ public class Bpmn2StrucBpmnTransformation extends MappingStage {
 			layers.add(layer1);
 			
 			//clean up
-			List<AbstractRule> layer2= new ArrayList<AbstractRule>();
+			List<TransformationRule> layer2= new ArrayList<TransformationRule>();
 			layer2.add(new RemoveEmptyRule());
 			layers.add(layer2);
 			
