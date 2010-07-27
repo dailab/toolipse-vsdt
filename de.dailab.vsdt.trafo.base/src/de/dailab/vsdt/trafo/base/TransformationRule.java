@@ -10,7 +10,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 
 import de.dailab.vsdt.trafo.base.constraints.AttributeConstraint;
-import de.dailab.vsdt.trafo.base.constraints.Constraint;
 import de.dailab.vsdt.trafo.base.constraints.InjectivityConstraint;
 import de.dailab.vsdt.trafo.base.constraints.ReferenceConstraint;
 import de.dailab.vsdt.trafo.base.util.Util;
@@ -20,9 +19,6 @@ import de.dailab.vsdt.trafo.base.util.Util;
  * rule's pattern, or head, and optionally some Negative Application Conditions
  * (NACs). The rule is executed if a match can be found for the LHS and for none
  * of the NACs. Variables in the LHS and NACs can be connected by Constraints.
- * 
- * @see Matcher
- * @see Constraint
  */
 public abstract class TransformationRule {
 	

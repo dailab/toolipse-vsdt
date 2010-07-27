@@ -5,11 +5,11 @@ Bundle-SymbolicName: de.dailab.vsdt.trafo.base;singleton:=true
 Bundle-Version: 1.4.0.20100720
 Bundle-ClassPath: .,
  lib/log4j-1.2.15.jar
-Bundle-Vendor: TFS and DAI-Labor, TU Berlin
+Bundle-Vendor: DAI-Labor, TU Berlin
 Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Export-Package: de.dailab.vsdt.trafo.base,
- de.dailab.vsdt.trafo.base.queries,
+ de.dailab.vsdt.trafo.base.constraints,
  de.dailab.vsdt.trafo.base.util,
  org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
