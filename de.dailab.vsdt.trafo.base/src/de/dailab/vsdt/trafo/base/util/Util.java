@@ -1,9 +1,11 @@
 package de.dailab.vsdt.trafo.base.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
+import java.util.Queue;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -70,49 +72,39 @@ public class Util {
 	 * traverses the containment structure beginning with the root element.
 	 * For each element's class and it's super classes a new entry in the
 	 * typeToDomain map is created and the element is inserted in the list.
-	 * Finally the method is called for the element's children.
+	 * Finally the same is repeated for the element's children.
 	 * 
 	 * @param root		topmost element of the instance (sub-)tree
 	 * @return			map associating EClasses with Lists of EObjects
 	 */
 	public static Map<EClass,List<EObject>> createInstancesMap(EObject eObject) {
 		Map<EClass, List<EObject>> instancesMap = new HashMap<EClass, List<EObject>>();
-		EObject root = Util.getRoot(eObject);
-		fillInstancesMap(instancesMap, root);
-		return instancesMap;
-	}
-		
-	/**
-	 * Fill instances map by associating the given object to its class and all
-	 * of its super classes and recursively calling the algorithm for all 
-	 * objects contained in this object.
-	 * 
-	 * @param instancesMap	existing instance map, to be modified
-	 * @param object		some object not yet in the map
-	 */
-	private static void fillInstancesMap(Map<EClass,List<EObject>> instancesMap, EObject object) {
-		List<EObject> vec = null;
-		
-		// fill types vector with element's class and all super types
-		List<EClass> types = new Vector<EClass>();
-		types.add(object.eClass());
-		types.addAll(object.eClass().getEAllSuperTypes());
-		
-		for (EClass type : types) {
-			if (instancesMap.get(type) == null) {
-				//initialize with empty vector
-				vec = new Vector<EObject>();
-				instancesMap.put(type, vec);
-			} else {
-				vec = instancesMap.get(type);
+		Queue<EObject> objects = new LinkedList<EObject>();
+		objects.add(Util.getRoot(eObject));
+
+		while (! objects.isEmpty()) {
+			EObject object = objects.remove();
+			
+			// get list with objects classes and the classes super classes
+			List<EClass> types = new ArrayList<EClass>();
+			types.add(object.eClass());
+			types.addAll(object.eClass().getEAllSuperTypes());
+			
+			// add object to all the classes' instance lists
+			for (EClass type : types) {
+				if (instancesMap.get(type) == null) {
+					// initialize with empty List
+					instancesMap.put(type, new ArrayList<EObject>());
+				}
+				// put element in domain list
+				List<EObject> instances = instancesMap.get(type);
+				instances.add(object);
 			}
-			//put element in domain vector
-			vec.add(object);
+			// repeat for child elements
+			objects.addAll(object.eContents());
 		}
-		//recursive call for child elements
-		for (EObject child : object.eContents()) { 
-			fillInstancesMap(instancesMap, child);
-		}
+		
+		return instancesMap;
 	}
 	
 }

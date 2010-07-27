@@ -51,25 +51,16 @@ public abstract class Constraint {
 		EObject self = variable.getInstanceValue();
 		
 		if (other.isInstanciated()) {
-			EObject otherValue = other.getInstanceValue();
-			return checkVariableValue(self, otherValue);
+			// check variable value
+			return checkVariableValue(self, other.getInstanceValue());
 
 		} else {
-						
-			// create backup of other's domain values
-//			if (oldDomain == null) {
-				oldDomain = new ArrayList<EObject>(other.getConstrainedDomain());
-//			}
+			// create backup of other variable's domain values
+			oldDomain = new ArrayList<EObject>(other.getConstrainedDomain());
 				
+			// constrain other variable's domain
 			List<EObject> otherDomain= other.getConstrainedDomain();
-//			List<EObject> otherDomain= new ArrayList<EObject>(oldDomain);
-
 			constrainTargetValues(self, otherDomain);
-			
-//			other.setConstrainedDomain(otherDomain);
-//			other.getConstrainedDomain().clear();
-//			other.getConstrainedDomain().addAll(otherDomain);
-			
 			return ! otherDomain.isEmpty();
 		}
 	}
@@ -101,11 +92,10 @@ public abstract class Constraint {
 	 */
 	public final void undo() {
 		if (oldDomain != null) {
-//			other.getConstrainedDomain().clear();
-//			other.getConstrainedDomain().addAll(oldDomain);
-			other.setConstrainedDomain(oldDomain);
+			other.getConstrainedDomain().clear();
+			other.getConstrainedDomain().addAll(oldDomain);
+			oldDomain = null; // undo may be called only once
 		}
-		oldDomain = null;
 	}
 	
 }

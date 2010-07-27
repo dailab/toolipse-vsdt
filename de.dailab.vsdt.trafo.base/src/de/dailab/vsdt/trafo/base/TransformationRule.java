@@ -1,8 +1,8 @@
 package de.dailab.vsdt.trafo.base;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -43,8 +43,8 @@ public abstract class TransformationRule {
 
 		// initialize rule
 		this.instancesMap = instancesMap;
-		this.lhsVariables = new Vector<Variable>();
-		this.nacVariables = new Vector<List<Variable>>();
+		this.lhsVariables = new ArrayList<Variable>();
+		this.nacVariables = new ArrayList<List<Variable>>();
 		
 		initLHSVariables();
 		initNACVariables();
@@ -103,7 +103,7 @@ public abstract class TransformationRule {
 	protected void addVariable(List<Variable> vars, EClass type) {
 		List<EObject> domain = instancesMap.get(type);
 		if (domain == null) {
-			domain= new Vector<EObject>();
+			domain= new ArrayList<EObject>();
 		}
 		vars.add(new Variable(type, domain));
 	}

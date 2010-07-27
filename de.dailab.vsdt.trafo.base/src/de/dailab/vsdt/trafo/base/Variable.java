@@ -1,7 +1,8 @@
 package de.dailab.vsdt.trafo.base;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Vector;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -28,14 +29,11 @@ public class Variable {
 	private final List<Constraint> constraints;
 
 	/** possible values, reduced by constraints */
-	private List<EObject> constrainedDomain;
+	private final List<EObject> constrainedDomain;
 
 	
-	/** status of variable */
-	private boolean instanciated = false;
-	
-	/** index of current value for variable inside the domain */
-	private int instanceIndex = -1;
+	/** iterator used to check one possible instance value after the other */ 
+	private Iterator<EObject> domainIterator= null;
 	
 	/** current value of variable */
 	private EObject instanceValue = null;
@@ -49,9 +47,9 @@ public class Variable {
 	 */
 	public Variable(EClass type, List<EObject> domain) {
 		this.type= type;
-		this.domain = new Vector<EObject>(domain);
-		this.constraints = new Vector<Constraint>();
-		this.constrainedDomain = new Vector<EObject>(domain);
+		this.domain = new ArrayList<EObject>(domain);
+		this.constraints = new ArrayList<Constraint>();
+		this.constrainedDomain = new ArrayList<EObject>(domain);
 	}
 	
 	/**
@@ -71,61 +69,30 @@ public class Variable {
 	 * 
 	 * @return	instantiation successful?
 	 */ 
-	private boolean instanciate() {
-		if (instanceIndex < domain.size()) {
-			instanciated= true;
-
-			// get next value from domain that is also in the constrained domain
-			instanceValue= domain.get(instanceIndex);
-			if (! constrainedDomain.contains(instanceValue)) {
-				return nextInstance();
-			}
-			
-			//Check Queries for Inconsistencies
-			for (Constraint constraint : constraints) {
-				if (! constraint.apply()){
-					//try next possible value
-					return nextInstance();
-				}
-			}
-			//instantiation successful
-			return true;
-
-		} else {
-			// no possible value found
-			deinstanciate();
-			return false;
-		}
-	}
-	
-	/**
-	 * Instantiate variable with next possible value.
-	 * 
-	 * @return	instantiation successful?
-	 */
 	public boolean nextInstance() {
 		// before trying the next value, undo the constraints imposed upon other
 		// variables to comply to the current value
 		undoConstraints();	
-			
-		instanceIndex++;			
-		if (instanceIndex < domain.size()) {
-//			instanciated= true;
+		
+		if (domainIterator == null) {
+			domainIterator = domain.iterator();
+		}
+		if (domainIterator.hasNext()) {
+			instanceValue = domainIterator.next();
 
 			// get next value from domain that is also in the constrained domain
-			instanceValue= domain.get(instanceIndex);
 			if (! constrainedDomain.contains(instanceValue)) {
 				return nextInstance();
 			}
 			
-			//Check Queries for Inconsistencies
+			// check Constraints for Inconsistencies with other Variables
 			for (Constraint constraint : constraints) {
 				if (! constraint.apply()){
-					//try next possible value
+					// try next possible value
 					return nextInstance();
 				}
 			}
-			//instantiation successful
+			// instantiation successful
 			return true;
 
 		} else {
@@ -149,9 +116,8 @@ public class Variable {
 	 * Reset this variable's instantiation, also undoing any constraints. 
 	 */
 	public void deinstanciate() {
-		instanceIndex= -1;
-		instanceValue= null;
-//		instanciated= false;
+		domainIterator = null;
+		instanceValue  = null;
 		undoConstraints();
 	}
 
@@ -172,19 +138,7 @@ public class Variable {
 	 * @return	domain constrained according to constraints
 	 */
 	public List<EObject> getConstrainedDomain() {
-//		return new Vector<EObject>(constrainedDomain);
 		return constrainedDomain;
-	}
-	
-	/**
-	 * Sets constrained domain for this variable.
-	 * 
-	 * @param constrainedDomain		new constrained domain
-	 */ 
-	@Deprecated
-	public void setConstrainedDomain(List<EObject> domainValues) {
-		constrainedDomain.clear();
-		constrainedDomain.addAll(domainValues);
 	}
 	
 	/**
@@ -198,8 +152,7 @@ public class Variable {
 	 * @return	true, if the variable is instantiated
 	 */
 	public boolean isInstanciated() {
-//		return instanciated;
-		return instanceIndex >= 0;
+		return instanceValue != null;
 	}
 	
 	/**
