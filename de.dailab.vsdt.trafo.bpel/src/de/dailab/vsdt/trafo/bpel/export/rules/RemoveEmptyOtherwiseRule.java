@@ -23,10 +23,10 @@ public class RemoveEmptyOtherwiseRule extends AbstractVsdtRule {
 	public static final int OTHERWISE= 0;
 	
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 		TActivityContainer otherwise=	(TActivityContainer)	matches.get(OTHERWISE);
 		
-		Util.deleteFromOwner(otherwise);
+		Util.deleteFromModel(otherwise);
 	}
 	
 	

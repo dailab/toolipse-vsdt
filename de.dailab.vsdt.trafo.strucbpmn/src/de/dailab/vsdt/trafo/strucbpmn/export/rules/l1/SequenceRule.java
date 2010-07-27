@@ -41,7 +41,7 @@ public class SequenceRule extends AbstractVsdtRule {
 	 * - remove the sequence flow in between the flowObjects
 	 */
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 		SequenceFlow _seqFlow=	(SequenceFlow)	matches.get(SEQFLOW);
 		FlowObject _flowObject1=(FlowObject)	matches.get(FLOWOBJECT1);
 		FlowObject _flowObject2=(FlowObject)	matches.get(FLOWOBJECT2);
@@ -64,7 +64,7 @@ public class SequenceRule extends AbstractVsdtRule {
 		if (_flowObject2 instanceof BpmnSequence
 				&& !((BpmnSequence) _flowObject2).isNeedsToPersist()) {
 			sequence.getElements().addAll(((BpmnSequence) _flowObject2).getElements());
-			Util.deleteFromOwner(_flowObject2);
+			Util.deleteFromModel(_flowObject2);
 		} else {
 			sequence.getElements().add(_flowObject2);
 		}

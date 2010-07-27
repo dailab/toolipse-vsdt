@@ -40,7 +40,7 @@ public class BoundaryEventCompRule extends AbstractVsdtRule {
 	 * - remove association
 	 */
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 		BpmnEventHandlerBlock _ehBlock=	(BpmnEventHandlerBlock)matches.get(EHBLOCK);
 		Association _association=(Association)	matches.get(ASSOCIATION);
 //		Activity _activity=	(Activity)		matches.get(ACTIVITY);

@@ -36,11 +36,11 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 public class InsertEmptyRule extends AbstractVsdtRule {
 	
 	public static final int SEQFLOW= 0,
-	FLOWOBJECT= 1,
-	GATEWAY= 2;
+	                        FLOWOBJECT= 1,
+	                        GATEWAY= 2;
 	
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 		SequenceFlow _seqFlow=	(SequenceFlow)	matches.get(SEQFLOW);
 //		FlowObject _flowObject=	(FlowObject)	matches.get(FLOWOBJECT);
 		Gateway _gateway=		(Gateway)		matches.get(GATEWAY);

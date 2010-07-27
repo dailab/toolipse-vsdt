@@ -36,7 +36,7 @@ public class SplitMergeRule extends AbstractVsdtRule {
 	 * - connect gateways with sequence flow
 	 */
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 //		SequenceFlow _seqFlow11=	(SequenceFlow)	matches.get(SEQFLOW11);
 //		SequenceFlow _seqFlow12=	(SequenceFlow)	matches.get(SEQFLOW12);
 //		SequenceFlow _seqFlow21=	(SequenceFlow)	matches.get(SEQFLOW21);

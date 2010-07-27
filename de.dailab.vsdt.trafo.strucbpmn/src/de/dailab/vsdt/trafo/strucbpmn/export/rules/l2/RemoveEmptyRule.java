@@ -23,10 +23,10 @@ public class RemoveEmptyRule extends AbstractVsdtRule {
 	public static final int EMPTY_ACT= 0;
 	
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 		Activity _emptyAct=	(Activity)	matches.get(EMPTY_ACT);
 		
-		Util.deleteFromOwner(_emptyAct);
+		Util.deleteFromModel(_emptyAct);
 	}
 	
 	

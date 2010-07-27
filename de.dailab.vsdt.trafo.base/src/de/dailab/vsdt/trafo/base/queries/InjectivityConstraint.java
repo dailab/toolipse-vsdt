@@ -15,18 +15,24 @@ public class InjectivityConstraint extends Constraint {
 	/**
 	 * Create Injectivity Constraint.
 	 * 
-	 * @param self		instantiated variable
+	 * @param variable	instantiated variable
 	 * @param other		other variable of same type
 	 */
-	public InjectivityConstraint(Variable self, Variable other) {
-		super(self, other);
+	public InjectivityConstraint(Variable variable, Variable other) {
+		super(variable, other);
 	}
 
+	/**
+	 * not the same
+	 */
 	@Override
 	public boolean checkVariableValue(EObject self, EObject other) {
 		return self != other;
 	}
 	
+	/**
+	 * remove self from domain
+	 */
 	@Override
 	public void constrainTargetValues(EObject self, List<EObject> otherDomain) {
 		otherDomain.remove(self);

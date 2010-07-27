@@ -53,7 +53,7 @@ public class BoundaryEventSkipRule extends AbstractVsdtRule {
 	 * - remove sequence flows IC and CG
 	 */
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 		BpmnEventHandlerBlock _ehBlock=	(BpmnEventHandlerBlock)matches.get(EH_BLOCK);
 //		SequenceFlow _seqFlowAS=		(SequenceFlow)	matches.get(SEQFLOWAS);
 //		SequenceFlow _seqFlowSG=		(SequenceFlow)	matches.get(SEQFLOWSG);

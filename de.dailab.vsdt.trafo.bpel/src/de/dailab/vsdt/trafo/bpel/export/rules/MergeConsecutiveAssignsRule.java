@@ -24,7 +24,7 @@ public class MergeConsecutiveAssignsRule extends AbstractVsdtRule {
 	public static final int ASSIGN= 0;
 	
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 		TAssign _assign=   (TAssign)	matches.get(ASSIGN);
 		
 		TSequence sequence = (TSequence) _assign.eContainer();
@@ -33,7 +33,7 @@ public class MergeConsecutiveAssignsRule extends AbstractVsdtRule {
 		TAssign assign2= (TAssign) sequence.getActivity().getValue(index+1);
 		_assign.setName(_assign.getName() + "_and_" + assign2.getName());
 		_assign.getCopy().addAll(assign2.getCopy());
-		Util.deleteFromOwner(assign2);
+		Util.deleteFromModel(assign2);
 	}
 	
 	

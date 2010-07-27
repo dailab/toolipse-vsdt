@@ -26,7 +26,7 @@ public class AddToBlockRule extends AbstractVsdtRule {
 	/**
 	 */
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 //		SequenceFlow _seqFlow1=		(SequenceFlow)	matches.get(SEQFLOW1);
 //		SequenceFlow _seqFlow2=		(SequenceFlow)	matches.get(SEQFLOW2);
 //		FlowObject _flowobject=	(FlowObject)	matches.get(FLOWOBJECT);

@@ -57,7 +57,7 @@ public class BoundaryEventLoopRule extends AbstractVsdtRule {
 	 * - TODO name further steps
 	 */
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 		BpmnEventHandlerBlock _ehBlock=	(BpmnEventHandlerBlock)matches.get(EH_BLOCK);
 //		SequenceFlow _seqFlowGL=		(SequenceFlow)	matches.get(SEQFLOWGL);
 //		SequenceFlow _seqFlowLA=		(SequenceFlow)	matches.get(SEQFLOWLA);

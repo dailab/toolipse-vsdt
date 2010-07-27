@@ -29,10 +29,10 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
  */
 public class SplitGatewayRule extends AbstractVsdtRule {
 	
-	private final int GATEWAY= 0;
+	public static final int GATEWAY= 0;
 	
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 		Gateway _gateway=	(Gateway)	matches.get(GATEWAY);
 		
 		//create gateway2

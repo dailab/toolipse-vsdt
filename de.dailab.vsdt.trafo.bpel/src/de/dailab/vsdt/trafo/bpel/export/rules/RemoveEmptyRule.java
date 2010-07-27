@@ -22,10 +22,10 @@ public class RemoveEmptyRule extends AbstractVsdtRule {
 	public static final int EMPTY= 0;
 	
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 		TEmpty empty=	(TEmpty)	matches.get(EMPTY);
 		
-		Util.deleteFromOwner(empty);
+		Util.deleteFromModel(empty);
 	}
 	
 	

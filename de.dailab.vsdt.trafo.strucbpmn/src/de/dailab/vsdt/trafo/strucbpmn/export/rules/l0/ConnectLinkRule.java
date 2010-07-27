@@ -32,7 +32,7 @@ public class ConnectLinkRule extends AbstractVsdtRule {
 	 * - remove the sequence flow in between the flowObjects
 	 */
 	@Override
-	protected void apply(List<EObject> matches) {
+	protected void excecute(List<EObject> matches) {
 		Event link1= (Event) matches.get(LINK1);
 		Event link2= (Event) matches.get(LINK2);
 		

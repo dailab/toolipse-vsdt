@@ -20,15 +20,18 @@ public class ReferenceConstraint extends Constraint {
 	/**
 	 * Create Reference Constraint.
 	 *  
-	 * @param self			instantiated variable
+	 * @param variable		instantiated variable
 	 * @param other			other variable, target of a link from creator
 	 * @param reference		reference feature
 	 */
-	public ReferenceConstraint(Variable self, Variable other, EReference reference) {
-		super(self, other);
+	public ReferenceConstraint(Variable variable, Variable other, EReference reference) {
+		super(variable, other);
 		this.reference= reference;
 	}
 	
+	/**
+	 * check whether self references other
+	 */
 	@Override
 	public boolean checkVariableValue(EObject self, EObject other) {
 		Object value = self.eGet(reference);
@@ -39,6 +42,9 @@ public class ReferenceConstraint extends Constraint {
 		}
 	}
 	
+	/**
+	 * retain all elements from domain that are references by self
+	 */
 	@Override
 	public void constrainTargetValues(EObject self, List<EObject> otherDomain) {
 		Object value = self.eGet(reference);

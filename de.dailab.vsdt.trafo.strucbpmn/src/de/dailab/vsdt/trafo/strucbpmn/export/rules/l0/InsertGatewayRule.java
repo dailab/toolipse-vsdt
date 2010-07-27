@@ -32,10 +32,10 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
  */
 public class InsertGatewayRule extends AbstractVsdtRule {
 	
-	private final int FLOWOBJECT= 0;
+	public static final int FLOWOBJECT= 0;
 	
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 		FlowObject _flowObject=	(FlowObject)	matches.get(FLOWOBJECT);
 		
 		//get container

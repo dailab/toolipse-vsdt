@@ -23,23 +23,29 @@ public class AttributeConstraint extends Constraint {
 	/**
 	 * Create Attribute Constraint.
 	 * 
-	 * @param self				instantiated variable 
-	 * @param other				second variable, has equal attribute value to creator
-	 * @param selfAttribute		compared attribute at creator
-	 * @param otherAttribute	compared attribute at target
+	 * @param variable			instantiated variable 
+	 * @param other				second variable, has equal attribute value
+	 * @param selfAttribute		compared attribute at self
+	 * @param otherAttribute	compared attribute at other
 	 */
-	public AttributeConstraint(Variable self, Variable other, EAttribute selfAttribute, EAttribute otherAttribute) {
-		super(self, other);
+	public AttributeConstraint(Variable variable, Variable other, EAttribute selfAttribute, EAttribute otherAttribute) {
+		super(variable, other);
 		this.selfAttribute = selfAttribute;
 		this.otherAttribute = otherAttribute;
 	}
 
+	/**
+	 * attribute values have to match
+	 */
 	@Override
 	public boolean checkVariableValue(EObject self, EObject other) {
 		return matches(self.eGet(selfAttribute),
 				       other.eGet(otherAttribute));
 	}
 	
+	/**
+	 * remove elements where attribute values do not match
+	 */
 	@Override
 	public void constrainTargetValues(EObject self, List<EObject> otherDomain) {
 		Object value = self.eGet(selfAttribute);

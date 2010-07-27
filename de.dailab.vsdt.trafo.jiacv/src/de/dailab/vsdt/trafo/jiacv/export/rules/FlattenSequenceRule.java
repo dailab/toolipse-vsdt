@@ -23,7 +23,7 @@ public class FlattenSequenceRule extends AbstractVsdtRule {
 	public static final int SEQUENCE= 0;
 	
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 		Seq _sequence=	(Seq)	matches.get(SEQUENCE);
 		
 		Seq childSeq= null;

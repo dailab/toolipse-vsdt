@@ -34,7 +34,7 @@ public class InsertEmptyRule2 extends AbstractVsdtRule {
 							ACTIVITY= 2;
 	
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 		SequenceFlow _seqFlow=	(SequenceFlow)	matches.get(SEQFLOW);
 		Activity _activity=		(Activity)		matches.get(ACTIVITY);
 		Gateway _gateway=		(Gateway)		matches.get(GATEWAY);

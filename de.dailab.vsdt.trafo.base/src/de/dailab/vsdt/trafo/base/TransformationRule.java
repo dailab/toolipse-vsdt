@@ -9,13 +9,20 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 
+import de.dailab.vsdt.trafo.base.queries.Constraint;
 import de.dailab.vsdt.trafo.base.queries.InjectivityConstraint;
 import de.dailab.vsdt.trafo.base.queries.ReferenceConstraint;
 import de.dailab.vsdt.trafo.base.queries.AttributeConstraint;
 import de.dailab.vsdt.trafo.base.util.Util;
 
 /**
- * TODO javadoc
+ * Class for a Transformation Rule. A Rule has a Left Hand Side (LHS), being the
+ * rule's pattern, or head, and optionally some Negative Application Conditions
+ * (NACs). The rule is executed if a match can be found for the LHS and for none
+ * of the NACs. Variables in the LHS and NACs can be connected by Constraints.
+ * 
+ * @see Matcher
+ * @see Constraint
  */
 public abstract class TransformationRule {
 	
@@ -29,14 +36,14 @@ public abstract class TransformationRule {
 	protected List<List<Variable>> nacVariables;
 	
 	/**
-	 * Executes this rule. First a wrapper is instantiated and initialized.
-	 * Then a match has to be found. If there is a match, the rule is applied
-	 * according to the match.
+	 * Apply this rule. First a wrapper is instantiated and initialized. Then a
+	 * match has to be found. If there is a match, the rule is applied according
+	 * to the match.
 	 * 
-	 * @param instancesMap		map of types to instances
-	 * @return	rule applied?
+	 * @param instancesMap	map of types to instances
+	 * @return				rule applied?
 	 */
-	public final boolean execute(Map<EClass, List<EObject>> instancesMap) {
+	public final boolean apply(Map<EClass, List<EObject>> instancesMap) {
 
 		// initialize rule
 		this.instancesMap = instancesMap;
@@ -47,64 +54,55 @@ public abstract class TransformationRule {
 		initNACVariables();
 		
 		// find match for LHS and NACs
-		Matcher matcher = new Matcher(lhsVariables, nacVariables);
-		List<EObject> match = matcher.findMatches();
+		List<EObject> match = Matcher.findMatches(lhsVariables, nacVariables);
 
-		// if match found, apply rule's RHS
+		// if match found, execute the rule
 		if (match != null) {
-			apply(match);
+			excecute(match);
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	
 	/**
-	 * apply this rule. transforms the LHS to the RHS.
-	 */
-	protected abstract void apply(List<EObject> match);
-	
-	
-	/**
-	 * Initialization of LHS variables. Domain are all elements of the 
-	 * instance with correct type or a child type.
-	 * 1.: Add Variable Types
-	 * 2.: Add Queries
-	 * 3.: Reduce Domains
-	 * 
-	 *  example:
-	 *  addVariableType(refPackage.getSequenceRef(), types, lhsVariables);
-	 *  ...
-	 *  addinjectivityQuery(lhsVariables,SEQREF1,SEQREF2);
-	 *  addTargetQuery(lhsVariables,SEQFLOW1,FORK,bpmn.getSequenceFlow_Source());
-	 *  ...
-	 *  reduce domains
+	 * Use this method to initialize the LHS variables stored in the field
+	 * {@link #lhsVariables}.
+	 * - use {@link #addVariable(List, EClass)} to add typed variables
+	 * - use {@link Variable#getDomain()} to reduce the variables domain, e.g.
+	 *   removing instance values which have illegal attribute values
+	 * - use add...Constraint methods to add constraints linking the variables
+	 *   to other variables
 	 */
 	protected abstract void initLHSVariables();
 	
 	/**
-	 * Initialization of NAC variables. Domain are all elements of the 
-	 * instance with correct type or a child type. Type queries are also
-	 * created.
-	 * 
-	 * Here one method should be called for each NAC, being structured like 
-	 * initLHSVariables() and returning the List of NAC variables
-	 * 
-	 * Example:
-	 * nacVariables.add(createNAC1());
+	 * Use this method to initialize the NACs' variables stored in the field
+	 * {@link #nacVariables}, just like in {@link #initLHSVariables()}. Before
+	 * their own variables, all NACs have to include all LHS variables, in the
+	 * same order as in the LHS. Thus, the first NAC variable has the index
+	 * #lhsVariables.size(). However, LHS variables that are of no relevance
+	 * to the NAC can be substituted by a null-variable using the method
+	 * {@link #addNullVariable(List, int)}.
 	 */
 	protected abstract void initNACVariables();
 
+	/**
+	 * Execute this rule. Match is a list of EObjects with the instantiation
+	 * values of the variables in the order in which the variables were added to
+	 * the LHS in initLHSVariables 
+	 */
+	protected abstract void excecute(List<EObject> match);
 	
 	
-	// HELPER METHODS
+	
+	// HELPER METHODS FOR MANAGING VARIABLES
 	
 	/**
 	 * Use this for adding variables of a given type to one of the variable sets.
 	 * 
 	 * @param vars		list of variables
-	 * @param type		the type to create
+	 * @param type		the type of the variable to create
 	 */
 	protected void addVariable(List<Variable> vars, EClass type) {
 		List<EObject> domain = instancesMap.get(type);
@@ -114,6 +112,13 @@ public abstract class TransformationRule {
 		vars.add(new Variable(type, domain));
 	}
 	
+	/**
+	 * Add multiple variables of one type at once.
+	 * 
+	 * @param vars		list of variables
+	 * @param type		the type of the variables to create
+	 * @param count		number of variables of given type to create
+	 */
 	protected void addVariable(List<Variable> vars, EClass type, int count) {
 		for (int i = 0; i < count; i++) {
 			addVariable(vars, type);
@@ -136,7 +141,6 @@ public abstract class TransformationRule {
 	
 	
 	// HELPER METHODS FOR MANAGING VARIABLE CONSTRAINTS
-	
 
 	/**
 	 * Create a ReferenceConstraint and add it to the variable.

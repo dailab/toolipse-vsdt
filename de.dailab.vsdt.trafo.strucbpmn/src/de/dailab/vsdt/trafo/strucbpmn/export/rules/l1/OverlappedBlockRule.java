@@ -59,7 +59,7 @@ public class OverlappedBlockRule extends AbstractVsdtRule {
 	 * - reroute Sequence Flows over duplicate to Gateway 4
 	 */
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 		SequenceFlow _seqFlowA1=	(SequenceFlow)	matches.get(SEQFLOWA1);
 		SequenceFlow _seqFlowA2=	(SequenceFlow)	matches.get(SEQFLOWA2);
 //		SequenceFlow _seqFlowB1=	(SequenceFlow)	matches.get(SEQFLOWB1);

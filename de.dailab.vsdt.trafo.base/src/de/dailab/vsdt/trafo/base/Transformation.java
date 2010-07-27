@@ -12,84 +12,60 @@ import de.dailab.vsdt.trafo.base.util.TrafoLog;
 import de.dailab.vsdt.trafo.base.util.Util;
 
 /**
- * The Transformation class encapsulates a number of Rule Layers, that is a List
- * of Lists of Rules, and provides a Method for applying these rules to a given
- * EObject graph. The Rule Layers are executed consecutively to all EObjects
- * related to the EObject given as root node.
+ * This class provides the functionality to take an EObject and some rules, or
+ * more specifically, layers of rules, and to apply the rules to the EObject's
+ * instance graph, layer by layer, until no more rules can be executed.
  */
 public abstract class Transformation {
 	
-	/** List containing one List of Rules for each layer */
-	protected List<List<TransformationRule>> rules= null;
-	
 	/**
-	 * Fill Layers List with one List of Rules for each layer.
+	 * Transform functionality. The EObject is used to access the entire model,
+	 * i.e., from this EObject the Algorithm will go up to the root and then
+	 * down in every leaf of the containment hierarchy, so it finds every object
+	 * in the graph. Then, the Lists of TransformationRules are applied, one by
+	 * one. Whenever a rule can be executed, all the other rules of that layer
+	 * are considered again, and the object graph is recalculated, too. If none
+	 * of the rules of one layer could be executed, the next layer is tried. The
+	 * process ends after the last rule layer has been tried.
 	 * 
-	 * Example:
-	 * List<List<AbstractRule>> layers= new ArrayList<List<AbstractRule>>();
-	 * List<AbstractRule> layer1= new ArrayList<AbstractRule>();
-	 * layer1.add(new SplitGatewayRule());
-	 * layer1.add(new InsertGatewayRule());
-	 * layer1.add(new InsertEmptyRule());
-	 * layers.add(layer1);
-	 * return layers;
+	 * @param eObject	some EObject of the instance graph
+	 * @param rules		List of Rule Layers
+	 * @return			true, if any of the rules have been successfully executed
 	 */
-	protected abstract List<List<TransformationRule>> initRules();
-	
-
-	/**
-	 * Transform functionality. Iterate over the layers. Rules inside the given
-	 * layer are applied with match. Continues with next layer once no more rule
-	 * in the current layer is applicable.
-	 */
-	public final void transform(EObject eObject) {
-		if (rules == null) {
-			rules = initRules();
-		}
-
+	public static final boolean transform(EObject eObject, List<List<TransformationRule>> rules) {
+		if (eObject == null || rules == null)
+			throw new IllegalArgumentException("Argument must not be null");
+		
 		Map<EClass,List<EObject>> instancesMap = Util.createInstancesMap(eObject); 
 
+		boolean executedAnyRules = false;
 		for (List<TransformationRule> layer : rules) {
 			
 			Queue<TransformationRule> applicableRules= new LinkedList<TransformationRule>();
 			applicableRules.addAll(layer);
 			
-			long oldTime;
-			long newTime= System.currentTimeMillis();
-			
-			try {
-				//as long as there are applicable rules...
-				while (! applicableRules.isEmpty()) {
-					
-					TransformationRule rule = applicableRules.remove();
-					
-					boolean executed= rule.execute(instancesMap);
-					
-					oldTime= newTime;
-					newTime= System.currentTimeMillis();
+			//as long as there are applicable rules...
+			while (! applicableRules.isEmpty()) {
 
-					// logging
-					StringBuffer buff= new StringBuffer();
-					buff.append(executed ? "executing " : "skipping ");
-					buff.append(rule.getClass().getSimpleName());
-					buff.append(" (").append(newTime-oldTime).append(" ms)");
-					if (executed) {
-						TrafoLog.debug(buff.toString());
-					} else {
-						TrafoLog.trace(buff.toString());
-					}
+				// apply next Transformation Rule
+				TransformationRule rule = applicableRules.remove();
+				if (rule.apply(instancesMap)) {
+					//application successful	
+					TrafoLog.debug("Executed " + rule.getClass().getSimpleName());
+					executedAnyRules = true;
 					
-					//application successful: re-insert all rules in the list and try again; else: continue with next rule, if any
-					if (executed) {
-						applicableRules.clear();
-						applicableRules.addAll(layer);
-						instancesMap = Util.createInstancesMap(eObject);
-					}
+					// re-insert all rules in the list and try again
+					applicableRules.clear();
+					applicableRules.addAll(layer);
+					instancesMap = Util.createInstancesMap(eObject);
+
+				} else {
+					// continue with next rule, if any
+					TrafoLog.trace("Skipped " + rule.getClass().getSimpleName());
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
 		}
+		return executedAnyRules;
 	}
 	
 }

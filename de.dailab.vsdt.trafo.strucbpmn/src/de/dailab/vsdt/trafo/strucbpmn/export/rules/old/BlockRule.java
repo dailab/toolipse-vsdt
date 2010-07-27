@@ -56,7 +56,7 @@ public class BlockRule extends AbstractVsdtRule {
 	 * - remove obsolete sequence flows
 	 */
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 //		SequenceFlow _seqFlow11=	(SequenceFlow)	matches.get(SEQFLOW11);
 //		SequenceFlow _seqFlow12=	(SequenceFlow)	matches.get(SEQFLOW12);
 //		FlowObject _flowobject1=	(FlowObject)	matches.get(FLOWOBJECT1);

@@ -13,8 +13,6 @@ import org.apache.log4j.WriterAppender;
 /**
  * Just a simple class to collect logged events and error messages, delegating
  * to a logging framework while providing some additional functionality.
- * 
- * @author tkuester
  */
 public class TrafoLog {
 	

@@ -9,6 +9,11 @@ import de.dailab.vsdt.trafo.MappingStage;
 import de.dailab.vsdt.trafo.base.TransformationRule;
 import de.dailab.vsdt.trafo.base.Transformation;
 
+/**
+ * Transformation of JIAC V models to improve readability.
+ * 
+ * @author kuester
+ */
 public class Bpmn2JiacVCleanUp extends MappingStage {
 	
 	@Override
@@ -17,28 +22,19 @@ public class Bpmn2JiacVCleanUp extends MappingStage {
 	
 	@Override
 	protected boolean internalApply() {
-		Transformation transformation= new InternalTransformation();
+		List<List<TransformationRule>> rules= new ArrayList<List<TransformationRule>>();
+		
+		//clean up
+		List<TransformationRule> layer0= new ArrayList<TransformationRule>();
+//		layer0.add(new FlattenSequenceRule(root));
+		rules.add(layer0);
+		
 		for (Object o : wrapper.getTargetModels()) {
 			if (o instanceof EObject) {
-				EObject eObject = (EObject) o;
-				transformation.transform(eObject);
+				Transformation.transform((EObject) o, rules);
 			}
 		}
 		return true;
 	}
 	
-	class InternalTransformation extends Transformation {
-		
-		@Override
-		protected List<List<TransformationRule>> initRules() {
-			List<List<TransformationRule>> layers= new ArrayList<List<TransformationRule>>();
-			
-			//clean up
-			List<TransformationRule> layer0= new ArrayList<TransformationRule>();
-//			layer0.add(new FlattenSequenceRule(root));
-	
-			layers.add(layer0);
-			return layers;
-		}
-	}
 }

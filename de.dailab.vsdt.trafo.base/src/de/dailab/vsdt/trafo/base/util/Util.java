@@ -13,13 +13,11 @@ import org.eclipse.emf.ecore.EReference;
 /**
  * Utility class providing some methods needed for the Pattern Matching and
  * Graph Transformation stuff.
- * 
- * @author kuester
  */
 public class Util {
 
 	/**
-	 * Returns topmost element of an EMF instance.
+	 * Returns topmost element of an EMF instance graph.
 	 * 
 	 * @param currentObject	object inside the EMF tree 
 	 * @return				topmost element in EMF tree
@@ -36,43 +34,34 @@ public class Util {
 	/**
 	 * Removes containing reference from parent to the deleted EObject.
 	 *  
-	 * @param eObject deleted EObject
+	 * @param eObject	deleted EObject
 	 */
-	public static void deleteFromOwner(EObject eObject) {
+	public static void deleteFromModel(EObject eObject) {
 		if (eObject != null && eObject.eContainer() != null) {
-			EObject owner = eObject.eContainer();
+			EObject container = eObject.eContainer();
 			EReference contains = (EReference)eObject.eContainingFeature();
 			if(contains.isMany()){
-				((EList)owner.eGet(contains)).remove(eObject);
+				((EList) container.eGet(contains)).remove(eObject);
 			}
 			else{
-				owner.eUnset(contains);
+				container.eUnset(contains);
 			}
 		}
 	}
 	
 
 	/**
-	 * Check if type1 is subtype of type2 or vice versa.
+	 * Check if type1 is sub-type of type2 or vice versa.
 	 * 
-	 * @param type1	first checked type
-	 * @param type2	second checked type
-	 * @return		if there is a subtype relation between types
+	 * @param type1		first checked type
+	 * @param type2		second checked type
+	 * @return			if there is a sub-type relation between types
 	 */
 	public static boolean typesLinked(EClass type1, EClass type2){
-		if(type1==null || type2==null){
-			return false;
-		}
-		if(type1.equals(type2)){
-			return true;
-		}
-		if(type1.getEAllSuperTypes().contains(type2)){
-			return true;
-		}
-		if(type2.getEAllSuperTypes().contains(type1)){
-			return true;
-		}
-		return false;
+		return type1 != null && type2 != null &&
+				(type1.equals(type2) || 
+				 type1.isSuperTypeOf(type2) || 
+				 type2.isSuperTypeOf(type1));
 	}
 	
 	
@@ -83,40 +72,47 @@ public class Util {
 	 * typeToDomain map is created and the element is inserted in the list.
 	 * Finally the method is called for the element's children.
 	 * 
-	 * @param root	topmost element of the instance (sub-)tree
-	 * @return		map associating EClasses with Lists of EObjects
+	 * @param root		topmost element of the instance (sub-)tree
+	 * @return			map associating EClasses with Lists of EObjects
 	 */
 	public static Map<EClass,List<EObject>> createInstancesMap(EObject eObject) {
-		Map<EClass,List<EObject>> typeToDomain = new HashMap<EClass,List<EObject>>();
+		Map<EClass, List<EObject>> instancesMap = new HashMap<EClass, List<EObject>>();
 		EObject root = Util.getRoot(eObject);
-		fillInstancesMap(typeToDomain, root);
-		return typeToDomain;
+		fillInstancesMap(instancesMap, root);
+		return instancesMap;
 	}
 		
-	private static void fillInstancesMap(Map<EClass,List<EObject>> typeToDomain, EObject root) {
+	/**
+	 * Fill instances map by associating the given object to its class and all
+	 * of its super classes and recursively calling the algorithm for all 
+	 * objects contained in this object.
+	 * 
+	 * @param instancesMap	existing instance map, to be modified
+	 * @param object		some object not yet in the map
+	 */
+	private static void fillInstancesMap(Map<EClass,List<EObject>> instancesMap, EObject object) {
 		List<EObject> vec = null;
 		
 		// fill types vector with element's class and all super types
 		List<EClass> types = new Vector<EClass>();
-		types.add(root.eClass());
-		types.addAll(root.eClass().getEAllSuperTypes());
+		types.add(object.eClass());
+		types.addAll(object.eClass().getEAllSuperTypes());
 		
 		for (EClass type : types) {
-			if (typeToDomain.get(type) == null) {
+			if (instancesMap.get(type) == null) {
 				//initialize with empty vector
 				vec = new Vector<EObject>();
-				typeToDomain.put(type, vec);
+				instancesMap.put(type, vec);
 			} else {
-				vec = typeToDomain.get(type);
+				vec = instancesMap.get(type);
 			}
 			//put element in domain vector
-			vec.add(root);
+			vec.add(object);
 		}
 		//recursive call for child elements
-		for (EObject child : root.eContents()) { 
-			fillInstancesMap(typeToDomain, child);
+		for (EObject child : object.eContents()) { 
+			fillInstancesMap(instancesMap, child);
 		}
 	}
-	
 	
 }

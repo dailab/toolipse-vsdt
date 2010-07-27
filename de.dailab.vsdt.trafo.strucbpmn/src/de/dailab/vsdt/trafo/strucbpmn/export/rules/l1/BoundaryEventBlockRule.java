@@ -38,7 +38,7 @@ public class BoundaryEventBlockRule extends AbstractVsdtRule {
 	 * - redirect sequence flows
 	 */
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 		Activity _activity=		(Activity)		matches.get(ACTIVITY);
 //		Intermediate _intermediate=	(Intermediate)	matches.get(INTERMEDIATE);
 		

@@ -38,12 +38,12 @@ import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
  */
 public class FinalGatewayRule extends AbstractVsdtRule {
 	
-	private final int CONTAINER= 0,
-					  END1= 1,
-					  END2= 2;
+	public static final int CONTAINER= 0,
+					        END1= 1,
+					        END2= 2;
 	
 	@Override
-	protected void apply(List<EObject> matches){
+	protected void excecute(List<EObject> matches){
 		FlowObjectContainer _container=	(FlowObjectContainer)	matches.get(CONTAINER);
 //		FlowObject _end1= 				(FlowObject) 			matches.get(END1);
 //		FlowObject _end2= 				(FlowObject) 			matches.get(END2);

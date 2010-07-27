@@ -53,7 +53,7 @@ public abstract class AbstractVsdtRule extends TransformationRule {
 		if (seqFlow != null) {
 			seqFlow.setSource(null);
 			seqFlow.setTarget(null);
-			Util.deleteFromOwner(seqFlow);
+			Util.deleteFromModel(seqFlow);
 		}
 	}
 	
@@ -66,7 +66,7 @@ public abstract class AbstractVsdtRule extends TransformationRule {
 		if (association != null) {
 			association.setSource(null);
 			association.setTarget(null);
-			Util.deleteFromOwner(association);
+			Util.deleteFromModel(association);
 		}
 	}
 
