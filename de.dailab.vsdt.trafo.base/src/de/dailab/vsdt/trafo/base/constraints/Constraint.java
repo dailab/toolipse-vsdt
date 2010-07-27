@@ -1,7 +1,7 @@
 package de.dailab.vsdt.trafo.base.constraints;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -21,7 +21,7 @@ public abstract class Constraint {
 	/** other variable which is constrained w.r.t. the first variable*/
 	private final Variable other;
 	
-	/** stored domain values of other variable */
+	/** stored constrained domain values of other variable */
 	private List<EObject> oldDomain = null;
 	
 	
@@ -55,19 +55,25 @@ public abstract class Constraint {
 			return checkVariableValue(self, otherValue);
 
 		} else {
+						
 			// create backup of other's domain values
 			if (oldDomain == null) {
-				oldDomain = other.getDynamicDomain();
+				oldDomain = new ArrayList<EObject>(other.getConstrainedDomain());
+//				oldDomain = other.getConstrainedDomain();
 			}
-			
-			List<EObject> otherDomain= new Vector<EObject>(oldDomain);
+				
+//			List<EObject> otherDomain= other.getConstrainedDomain();
+//			List<EObject> otherDomain= new ArrayList<EObject>(other.getConstrainedDomain());
+//			List<EObject> otherDomain= new ArrayList<EObject>(new ArrayList<EObject>(other.getConstrainedDomain()));
+			List<EObject> otherDomain= new ArrayList<EObject>(oldDomain);
+
 			constrainTargetValues(self, otherDomain);
-			if (! otherDomain.isEmpty()) {
-				other.setDynamicDomain(otherDomain);
-				return true;
-			} else {
-				return false;	
-			}
+			
+			other.setConstrainedDomain(otherDomain);
+//			other.getConstrainedDomain().clear();
+//			other.getConstrainedDomain().addAll(otherDomain);
+			
+			return ! otherDomain.isEmpty();
 		}
 	}
 	
@@ -82,8 +88,8 @@ public abstract class Constraint {
 	public abstract boolean checkVariableValue(EObject self, EObject other);
 	
 	/**
-	 * Reduce the given domain of the other variable to satisfy the constraint
-	 * given the variable's instantiation.
+	 * Reduce the given domain of the other variable (in-place) to satisfy the
+	 * constraint given the variable's instantiation.
 	 * 
 	 * @param self			the variable's instantiation
 	 * @param otherDomain	possible values for other variable
@@ -98,7 +104,9 @@ public abstract class Constraint {
 	 */
 	public final void undo() {
 		if (oldDomain != null) {
-			other.setDynamicDomain(oldDomain);
+//			other.getConstrainedDomain().clear();
+//			other.getConstrainedDomain().addAll(oldDomain);
+			other.setConstrainedDomain(oldDomain);
 		}
 		oldDomain = null;
 	}

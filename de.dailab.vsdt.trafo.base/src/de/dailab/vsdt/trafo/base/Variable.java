@@ -27,8 +27,8 @@ public class Variable {
 	/** constraints associated with this variable */
 	private final List<Constraint> constraints;
 
-	/** possible values, already reduced by constraints */
-	private List<EObject> dynamicDomain = null;
+	/** possible values, reduced by constraints */
+	private List<EObject> constrainedDomain;
 
 	
 	/** status of variable */
@@ -42,47 +42,16 @@ public class Variable {
 	
 	
 	/**
-	 * Default constructor.
+	 * Create new Variable
 	 * 
+	 * @param type		type of this variable
 	 * @param domain	all possible values for this variable
 	 */
 	public Variable(EClass type, List<EObject> domain) {
 		this.type= type;
 		this.domain = new Vector<EObject>(domain);
 		this.constraints = new Vector<Constraint>();
-		this.dynamicDomain = new Vector<EObject>(domain);
-	}
-	
-	/**
-	 * This method can be used for further constraining a variables domain.
-	 * Warning: This method returns the domain list itself, not a copy!
-	 * 
-     * @return	all possible values for this variable
-     */	
-	public List<EObject> getDomain() {
-		return this.domain;
-	}
-	
-	/**
-	 * Returns domain reduced by values which are already excluded by queries.
-	 * 
-	 * @return	domain reduced by queries
-	 */
-	public List<EObject> getDynamicDomain() {
-		if (dynamicDomain == null) {
-			dynamicDomain = new Vector<EObject>();
-			dynamicDomain.addAll(domain);
-		}
-		return dynamicDomain;
-	}
-	
-	/**
-	 * Sets possible values for this variable.
-	 * 
-	 * @param dynamicDomain	new possible values
-	 */ 
-	public void setDynamicDomain(List<EObject> dynamicDomain) {
-		this.dynamicDomain = dynamicDomain;
+		this.constrainedDomain = new Vector<EObject>(domain);
 	}
 	
 	/**
@@ -91,8 +60,8 @@ public class Variable {
 	 * 
 	 * @param constraint Some Constraint to be added to this Variable
 	 */		
-	public void addConstraint(Constraint query) {
-		this.constraints.add(query);
+	public void addConstraint(Constraint constraint) {
+		constraints.add(constraint);
 	}
 	
 	/**
@@ -104,12 +73,11 @@ public class Variable {
 	 */ 
 	private boolean instanciate() {
 		if (instanceIndex < domain.size()) {
-			//initialize dynamic domain, if needed
-			getDynamicDomain();
-			
 			instanciated= true;
+
+			// get next value from domain that is also in the constrained domain
 			instanceValue= domain.get(instanceIndex);
-			if (! dynamicDomain.contains(instanceValue)) {
+			if (! constrainedDomain.contains(instanceValue)) {
 				return nextInstance();
 			}
 			
@@ -140,11 +108,40 @@ public class Variable {
 			instanceIndex++;			
 		}
 		return instanciate();
+		
+//		deinstanciate();
+//		
+//		if (instanceIndex < domain.size()) {
+//			instanciated= true;
+//
+//			// get next value from domain that is also in the constrained domain
+//			instanceValue= domain.get(instanceIndex);
+//			if (! constrainedDomain.contains(instanceValue)) {
+//				return nextInstance();
+//			}
+//			
+//			//Check Queries for Inconsistencies
+//			for (Constraint constraint : constraints) {
+//				if (! constraint.apply()){
+//					//try next possible value
+//					return nextInstance();
+//				}
+//			}
+//			//instantiation successful
+//			return true;
+//
+//		} else {
+//			// no possible value found; reset instance index and de-instantiate
+//			instanceIndex= -1;
+//			deinstanciate();
+//			return false;
+//		}
 	}
 	
 	/**
-	 * Remove value from variable. Restore variable status before first
-	 * instantiation.
+	 * Reset this variable's instantiation. More importantly, this method undoes
+	 * all the constraints associated with this variable, therefore also lifting
+	 * the constraints imposed on other variables.
 	 */
 	public void deinstanciate() {
 		instanceIndex= 0;
@@ -153,25 +150,53 @@ public class Variable {
 		for (int i = constraints.size() - 1; i >= 0; i--) {
 			constraints.get(i).undo();
 		}
-		dynamicDomain = null;
+	}
+
+	/**
+	 * This method can be used for further reducing a variables domain.
+	 * Warning: This method returns the domain list itself, not a copy!
+	 * 
+     * @return	the List representing the variables domain
+     */	
+	public List<EObject> getDomain() {
+		return this.domain;
 	}
 	
 	/**
-	 * Returns current value of variable.
+	 * This method can be used for constraining a variables domain.
+	 * Warning: This method returns the domain list itself, not a copy!
 	 * 
-	 * @return	current value of variable
+	 * @return	domain constrained according to constraints
+	 */
+	public List<EObject> getConstrainedDomain() {
+//		return new Vector<EObject>(constrainedDomain);
+		return constrainedDomain;
+	}
+	
+	/**
+	 * Sets constrained domain for this variable.
+	 * 
+	 * @param constrainedDomain		new constrained domain
+	 */ 
+	@Deprecated
+	public void setConstrainedDomain(List<EObject> domainValues) {
+		constrainedDomain.clear();
+		constrainedDomain.addAll(domainValues);
+	}
+	
+	/**
+	 * @return	the current instantiation value of variable
 	 */
 	public EObject getInstanceValue() {
 		return instanceValue;
 	}
 	
 	/**
-	 * Returns if variable is instantiated (has a value).
-	 * 
-	 * @return	if variable is instantiated (has a value)
+	 * @return	true, if the variable is instantiated
 	 */
 	public boolean isInstanciated() {
 		return instanciated;
+//		return instanceIndex >= 0;
 	}
 	
 	/**
