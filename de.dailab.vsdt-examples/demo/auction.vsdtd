@@ -3,11 +3,10 @@
   <vsdt:BusinessProcessSystem xmi:id="_Dy25MOlvEd6Uvb7BxkBYxw" name="Auction" id="_Dy2SIOlvEd6Uvb7BxkBYxw" version="0.1" author="Tobias Küster" expressionLanguage="VSDT Expression Language" creationDate="2009-12-15T12:43:27.298+0100" modificationDate="2009-12-15T12:43:27.298+0100">
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_IxgkgelvEd6Uvb7BxkBYxw" name="Create Auction" documentation="The Seller sends a Proposal for a new Auction to the Auctioneer, who checks the proposal and sends back an 'accept' or a 'decline' response." id="_IxgkgOlvEd6Uvb7BxkBYxw" participants="_FnSrQelvEd6Uvb7BxkBYxw _G8oGgelvEd6Uvb7BxkBYxw">
       <pools xmi:type="vsdt:Pool" xmi:id="_SR1rQelvEd6Uvb7BxkBYxw" name="Auctioneer" id="_SR1rQOlvEd6Uvb7BxkBYxw" participant="_FnSrQelvEd6Uvb7BxkBYxw">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_SR3gculvEd6Uvb7BxkBYxw" name="Auctioneer_Process" id="_SR3gcelvEd6Uvb7BxkBYxw"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_SR3gcOlvEd6Uvb7BxkBYxw" id="_SR25YOlvEd6Uvb7BxkBYxw" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_SR3gcOlvEd6Uvb7BxkBYxw" id="_SR25YOlvEd6Uvb7BxkBYxw">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_pWqRwelvEd6Uvb7BxkBYxw" name="create auction" id="_pWqRwOlvEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_sHAEoOouEd6xFKyk2BwCAQ" implementation="_jCf-QOouEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_r8UFYelvEd6Uvb7BxkBYxw" name="check description" id="_r8UFYOlvEd6Uvb7BxkBYxw"/>
-          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_s1H8selvEd6Uvb7BxkBYxw" name="acceptable?" id="_s1H8sOlvEd6Uvb7BxkBYxw" markerVisible="true"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_s1H8selvEd6Uvb7BxkBYxw" name="acceptable?" id="_s1H8sOlvEd6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_vQzU8elvEd6Uvb7BxkBYxw" name="accept" id="_vQzU8OlvEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_sJpI8OouEd6xFKyk2BwCAQ" implementation="_0kIpAOouEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_wXwV8elvEd6Uvb7BxkBYxw" name="decline" id="_wXwV8OlvEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_sRW6gOouEd6xFKyk2BwCAQ" implementation="_4WSsAOouEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_w0MaUelvEd6Uvb7BxkBYxw" id="_w0MaUOlvEd6Uvb7BxkBYxw"/>
@@ -16,13 +15,12 @@
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_STyzEelvEd6Uvb7BxkBYxw" name="Seller" id="_STyzEOlvEd6Uvb7BxkBYxw" participant="_G8oGgelvEd6Uvb7BxkBYxw">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_STzaI-lvEd6Uvb7BxkBYxw" name="Seller_Process" id="_STzaIulvEd6Uvb7BxkBYxw"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_STzaIelvEd6Uvb7BxkBYxw" id="_STzaIOlvEd6Uvb7BxkBYxw" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_STzaIelvEd6Uvb7BxkBYxw" id="_STzaIOlvEd6Uvb7BxkBYxw">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_gVU0IelvEd6Uvb7BxkBYxw" name="create auction" id="_gVU0IOlvEd6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_hlVDcelvEd6Uvb7BxkBYxw" name="send description" documentation="The Seller sends the Auction description to the Auctioneer." id="_hlVDcOlvEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_sHAEoOouEd6xFKyk2BwCAQ" implementation="_jCf-QOouEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_ncqDMelvEd6Uvb7BxkBYxw" name="accepted?" documentation="wait which response will come first..." id="_ncqDMOlvEd6Uvb7BxkBYxw" gatewayType="XOR_EVENT"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_19lWAelvEd6Uvb7BxkBYxw" name="yes" documentation="Acceptance Notification received!" id="_19lWAOlvEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_sJpI8OouEd6xFKyk2BwCAQ" implementation="_0kIpAOouEd6xFKyk2BwCAQ"/>
-          <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_3IUDwelvEd6Uvb7BxkBYxw" name="no" documentation="Auction was not acceted" id="_3IUDwOlvEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_sRW6gOouEd6xFKyk2BwCAQ" implementation="_4WSsAOouEd6xFKyk2BwCAQ"/>
+          <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_3IUDwelvEd6Uvb7BxkBYxw" name="no" documentation="Auction was not accepted" id="_3IUDwOlvEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_sRW6gOouEd6xFKyk2BwCAQ" implementation="_4WSsAOouEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_ABMwAelwEd6Uvb7BxkBYxw" documentation="End the service" id="_ABMwAOlwEd6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_VyWIIelwEd6Uvb7BxkBYxw" id="_VyWIIOlwEd6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_f--UMelwEd6Uvb7BxkBYxw" name="do other preparations" id="_f--UMOlwEd6Uvb7BxkBYxw"/>
@@ -50,8 +48,7 @@
     </businessProcesses>
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_JbA0gelvEd6Uvb7BxkBYxw" name="Place Bid" documentation="The Bidder places a bid an a certain auction. The Auctioneer checks whether the Bid is valid and high enough and notifies the Bidder accordingly." id="_JbA0gOlvEd6Uvb7BxkBYxw" participants="_IIqb0elvEd6Uvb7BxkBYxw _FnSrQelvEd6Uvb7BxkBYxw">
       <pools xmi:type="vsdt:Pool" xmi:id="_XsNpQelvEd6Uvb7BxkBYxw" name="Bidder" id="_XsNpQOlvEd6Uvb7BxkBYxw" participant="_IIqb0elvEd6Uvb7BxkBYxw">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_XsOQUulvEd6Uvb7BxkBYxw" name="Bidder_Process" id="_XsOQUelvEd6Uvb7BxkBYxw"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_XsOQUOlvEd6Uvb7BxkBYxw" id="_XsNpQulvEd6Uvb7BxkBYxw" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_XsOQUOlvEd6Uvb7BxkBYxw" id="_XsNpQulvEd6Uvb7BxkBYxw">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_ojjfIepGEd6FP7KXlO1S-A" name="do bid" id="_ojjfIOpGEd6FP7KXlO1S-A"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_pK9dYepGEd6FP7KXlO1S-A" name="send bid" id="_pK9dYOpGEd6FP7KXlO1S-A"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_qE-1oepGEd6FP7KXlO1S-A" id="_qE-1oOpGEd6FP7KXlO1S-A"/>
@@ -62,8 +59,7 @@
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_XsWMIelvEd6Uvb7BxkBYxw" name="Auctioneer" id="_XsWMIOlvEd6Uvb7BxkBYxw" participant="_FnSrQelvEd6Uvb7BxkBYxw">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_XsWzMelvEd6Uvb7BxkBYxw" name="Auctioneer_Process" id="_XsWzMOlvEd6Uvb7BxkBYxw"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_XsWMI-lvEd6Uvb7BxkBYxw" id="_XsWMIulvEd6Uvb7BxkBYxw" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_XsWMI-lvEd6Uvb7BxkBYxw" id="_XsWMIulvEd6Uvb7BxkBYxw">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_sFDP8epGEd6FP7KXlO1S-A" name="receive bid" id="_sFDP8OpGEd6FP7KXlO1S-A" trigger="MESSAGE" message="_nlS8oAHrEd-svc1eBRPgjg" implementation="_d7GIMAHrEd-svc1eBRPgjg"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_tDWEMepGEd6FP7KXlO1S-A" name="check bid" id="_tDWEMOpGEd6FP7KXlO1S-A"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_toFwAepGEd6FP7KXlO1S-A" id="_toFwAOpGEd6FP7KXlO1S-A"/>
@@ -101,12 +97,11 @@
     </businessProcesses>
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_KCE0gelvEd6Uvb7BxkBYxw" name="Close Auction" id="_KCE0gOlvEd6Uvb7BxkBYxw" participants="_FnSrQelvEd6Uvb7BxkBYxw _IIqb0elvEd6Uvb7BxkBYxw _G8oGgelvEd6Uvb7BxkBYxw">
       <pools xmi:type="vsdt:Pool" xmi:id="_asUkQelvEd6Uvb7BxkBYxw" name="Auctioneer" id="_asUkQOlvEd6Uvb7BxkBYxw" participant="_FnSrQelvEd6Uvb7BxkBYxw">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_asVyY-lvEd6Uvb7BxkBYxw" name="Auctioneer_Process" id="_asVyYulvEd6Uvb7BxkBYxw"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_asVyYelvEd6Uvb7BxkBYxw" id="_asVyYOlvEd6Uvb7BxkBYxw" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_asVyYelvEd6Uvb7BxkBYxw" id="_asVyYOlvEd6Uvb7BxkBYxw">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_lP-60elwEd6Uvb7BxkBYxw" name="auction over" id="_lP-60OlwEd6Uvb7BxkBYxw" trigger="TIMER">
             <timeDate xmi:type="vsdt:Expression" xmi:id="_35WmcOowEd6xFKyk2BwCAQ" expression="'when the auction is over'"/>
           </containedFlowObjects>
-          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_qmBLYelwEd6Uvb7BxkBYxw" name="exists bid?" id="_qmBLYOlwEd6Uvb7BxkBYxw" markerVisible="true"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_qmBLYelwEd6Uvb7BxkBYxw" name="exists bid?" id="_qmBLYOlwEd6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_sqGjAelwEd6Uvb7BxkBYxw" name="inform seller" id="_sqGjAOlwEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_uyK08OovEd6xFKyk2BwCAQ" implementation="_p_yEAOovEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_JDCHcelxEd6Uvb7BxkBYxw" name="inform bidder" id="_JDCHcOlxEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_uyK08OovEd6xFKyk2BwCAQ" implementation="_p_yEAOovEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_OH2sMelxEd6Uvb7BxkBYxw" id="_OH2sMOlxEd6Uvb7BxkBYxw"/>
@@ -136,8 +131,7 @@
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_aseVQelvEd6Uvb7BxkBYxw" name="Bidder" id="_aseVQOlvEd6Uvb7BxkBYxw" participant="_IIqb0elvEd6Uvb7BxkBYxw">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_aseVRelvEd6Uvb7BxkBYxw" name="Bidder_Process" id="_aseVROlvEd6Uvb7BxkBYxw"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_aseVQ-lvEd6Uvb7BxkBYxw" id="_aseVQulvEd6Uvb7BxkBYxw" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_aseVQ-lvEd6Uvb7BxkBYxw" id="_aseVQulvEd6Uvb7BxkBYxw">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_38Qh0elyEd6Uvb7BxkBYxw" name="award notification" id="_38Qh0OlyEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_uyK08OovEd6xFKyk2BwCAQ" implementation="_8bDsgOovEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_lQzA4el1Ed6Uvb7BxkBYxw" name="transfer money to auctioneer" id="_lQzA4Ol1Ed6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_mJlDAel1Ed6Uvb7BxkBYxw" name="inform auctioneer" id="_mJlDAOl1Ed6Uvb7BxkBYxw" activityType="SEND" inMessage="_u3bvcOovEd6xFKyk2BwCAQ" implementation="_1XXnUOovEd6xFKyk2BwCAQ"/>
@@ -151,8 +145,7 @@
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_asmREelvEd6Uvb7BxkBYxw" name="Seller" id="_asmREOlvEd6Uvb7BxkBYxw" participant="_G8oGgelvEd6Uvb7BxkBYxw">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_asmRFelvEd6Uvb7BxkBYxw" name="Seller_Process" id="_asmRFOlvEd6Uvb7BxkBYxw"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_asmRE-lvEd6Uvb7BxkBYxw" id="_asmREulvEd6Uvb7BxkBYxw" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_asmRE-lvEd6Uvb7BxkBYxw" id="_asmREulvEd6Uvb7BxkBYxw">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_d_JVAOlxEd6Uvb7BxkBYxw" name="sold" id="_d_It8OlxEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_uyK08OovEd6xFKyk2BwCAQ" implementation="_p_yEAOovEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_4qSsgelyEd6Uvb7BxkBYxw" name="not sold" id="_4qSsgOlyEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_u0ZCgOovEd6xFKyk2BwCAQ" implementation="_r-lTAOovEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_8iH5selyEd6Uvb7BxkBYxw" name="dismiss auction" id="_8iH5sOlyEd6Uvb7BxkBYxw"/>
