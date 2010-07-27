@@ -57,19 +57,16 @@ public abstract class Constraint {
 		} else {
 						
 			// create backup of other's domain values
-			if (oldDomain == null) {
+//			if (oldDomain == null) {
 				oldDomain = new ArrayList<EObject>(other.getConstrainedDomain());
-//				oldDomain = other.getConstrainedDomain();
-			}
+//			}
 				
-//			List<EObject> otherDomain= other.getConstrainedDomain();
-//			List<EObject> otherDomain= new ArrayList<EObject>(other.getConstrainedDomain());
-//			List<EObject> otherDomain= new ArrayList<EObject>(new ArrayList<EObject>(other.getConstrainedDomain()));
-			List<EObject> otherDomain= new ArrayList<EObject>(oldDomain);
+			List<EObject> otherDomain= other.getConstrainedDomain();
+//			List<EObject> otherDomain= new ArrayList<EObject>(oldDomain);
 
 			constrainTargetValues(self, otherDomain);
 			
-			other.setConstrainedDomain(otherDomain);
+//			other.setConstrainedDomain(otherDomain);
 //			other.getConstrainedDomain().clear();
 //			other.getConstrainedDomain().addAll(otherDomain);
 			

@@ -35,7 +35,7 @@ public class Variable {
 	private boolean instanciated = false;
 	
 	/** index of current value for variable inside the domain */
-	private int instanceIndex = 0;
+	private int instanceIndex = -1;
 	
 	/** current value of variable */
 	private EObject instanceValue = null;
@@ -104,52 +104,55 @@ public class Variable {
 	 * @return	instantiation successful?
 	 */
 	public boolean nextInstance() {
-		if (instanciated) {
-			instanceIndex++;			
-		}
-		return instanciate();
-		
-//		deinstanciate();
-//		
-//		if (instanceIndex < domain.size()) {
+		// before trying the next value, undo the constraints imposed upon other
+		// variables to comply to the current value
+		undoConstraints();	
+			
+		instanceIndex++;			
+		if (instanceIndex < domain.size()) {
 //			instanciated= true;
-//
-//			// get next value from domain that is also in the constrained domain
-//			instanceValue= domain.get(instanceIndex);
-//			if (! constrainedDomain.contains(instanceValue)) {
-//				return nextInstance();
-//			}
-//			
-//			//Check Queries for Inconsistencies
-//			for (Constraint constraint : constraints) {
-//				if (! constraint.apply()){
-//					//try next possible value
-//					return nextInstance();
-//				}
-//			}
-//			//instantiation successful
-//			return true;
-//
-//		} else {
-//			// no possible value found; reset instance index and de-instantiate
-//			instanceIndex= -1;
-//			deinstanciate();
-//			return false;
-//		}
+
+			// get next value from domain that is also in the constrained domain
+			instanceValue= domain.get(instanceIndex);
+			if (! constrainedDomain.contains(instanceValue)) {
+				return nextInstance();
+			}
+			
+			//Check Queries for Inconsistencies
+			for (Constraint constraint : constraints) {
+				if (! constraint.apply()){
+					//try next possible value
+					return nextInstance();
+				}
+			}
+			//instantiation successful
+			return true;
+
+		} else {
+			// no possible value found; backtrack to previous variable
+			deinstanciate();
+			return false;
+		}
 	}
 	
 	/**
-	 * Reset this variable's instantiation. More importantly, this method undoes
-	 * all the constraints associated with this variable, therefore also lifting
-	 * the constraints imposed on other variables.
+	 * This method undoes all the constraints associated with this variable, 
+	 * therefore also lifting the constraints imposed on other variables.
 	 */
-	public void deinstanciate() {
-		instanceIndex= 0;
-		instanceValue= null;
-		instanciated= false;
+	public void undoConstraints() {
 		for (int i = constraints.size() - 1; i >= 0; i--) {
 			constraints.get(i).undo();
 		}
+	}
+	
+	/**
+	 * Reset this variable's instantiation, also undoing any constraints. 
+	 */
+	public void deinstanciate() {
+		instanceIndex= -1;
+		instanceValue= null;
+//		instanciated= false;
+		undoConstraints();
 	}
 
 	/**
@@ -195,8 +198,8 @@ public class Variable {
 	 * @return	true, if the variable is instantiated
 	 */
 	public boolean isInstanciated() {
-		return instanciated;
-//		return instanceIndex >= 0;
+//		return instanciated;
+		return instanceIndex >= 0;
 	}
 	
 	/**
