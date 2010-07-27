@@ -6,7 +6,7 @@ import java.util.Vector;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import de.dailab.vsdt.trafo.base.queries.Constraint;
+import de.dailab.vsdt.trafo.base.constraints.Constraint;
 
 /**
  * A Variable represents an instantiation for some object in the Transformation

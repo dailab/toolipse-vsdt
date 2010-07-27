@@ -9,10 +9,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 
-import de.dailab.vsdt.trafo.base.queries.Constraint;
-import de.dailab.vsdt.trafo.base.queries.InjectivityConstraint;
-import de.dailab.vsdt.trafo.base.queries.ReferenceConstraint;
-import de.dailab.vsdt.trafo.base.queries.AttributeConstraint;
+import de.dailab.vsdt.trafo.base.constraints.AttributeConstraint;
+import de.dailab.vsdt.trafo.base.constraints.Constraint;
+import de.dailab.vsdt.trafo.base.constraints.InjectivityConstraint;
+import de.dailab.vsdt.trafo.base.constraints.ReferenceConstraint;
 import de.dailab.vsdt.trafo.base.util.Util;
 
 /**
