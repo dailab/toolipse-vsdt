@@ -376,16 +376,16 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			Case timerCase= jadlFac.createCase();
 			timerCase.setBody(jadlFac.createSeq()); // empty case body
 			TimerEvent timer= jadlFac.createTimerEvent();
-			if (event.getTimeCycle() != null) {
+			if (event.isAsDuration()) {
 				try {
-					timer.setTimeout(Integer.parseInt(event.getTimeCycle().getExpression()));
+					timer.setTimeout(Integer.parseInt(event.getTimeExpression().getExpression()));
 					timerCase.setEventedCase(timer);
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
 				}
-			} else if (event.getTimeDate() != null) {
+			} else {
 				TimeConst time= jadlFac.createTimeConst();
-				time.setConst(event.getTimeDate().getExpression());
+				time.setConst(event.getTimeExpression().getExpression());
 				timer.setTime(time);
 				timerCase.setEventedCase(timer);
 			}
@@ -418,7 +418,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			if (event.getLinkedTo() != null) {
 				children.add(visitEvent(event, TriggerType.LINK));
 			}
-			if (event.getTimeCycle() != null || event.getTimeDate() != null) {
+			if (event.getTimeExpression() != null && event.getTimeExpression().getExpression() != null) {
 				children.add(visitEvent(event, TriggerType.TIMER));
 			}
 			if (event.getRuleExpression() != null && event.getRuleExpression().getExpression() != null) {

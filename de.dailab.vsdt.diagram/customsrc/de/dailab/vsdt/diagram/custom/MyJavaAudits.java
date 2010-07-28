@@ -787,8 +787,8 @@ public class MyJavaAudits {
 			ok&= self.getImplementation() != null;
 			break;
 		case TIMER:
-			//cycle or date
-			ok&= self.getTimeCycle() != null ^ self.getTimeDate() != null;
+			//time expression set
+			ok&= self.getTimeExpression() != null && self.getTimeExpression().getExpression() != null;
 			break;
 		case ERROR:
 			//code (must in normal flow, may as event handler)
@@ -804,7 +804,6 @@ public class MyJavaAudits {
 			break;
 		case RULE:
 			// rule name and expression
-			ok&= self.getRuleName() != null;
 			ok&= self.getRuleExpression() != null && self.getRuleExpression().getExpression() != null;
 			break;
 		case SIGNAL:

@@ -67,9 +67,7 @@ public class EventItemProvider
 			addTriggerPropertyDescriptor(object);
 			addMessagePropertyDescriptor(object);
 			addImplementationPropertyDescriptor(object);
-			addTimeDatePropertyDescriptor(object);
-			addTimeCyclePropertyDescriptor(object);
-			addRuleNamePropertyDescriptor(object);
+			addAsDurationPropertyDescriptor(object);
 			addRuleExpressionPropertyDescriptor(object);
 			addErrorCodePropertyDescriptor(object);
 			addActivityPropertyDescriptor(object);
@@ -146,68 +144,24 @@ public class EventItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Time Date feature.
+	 * This adds a property descriptor for the As Duration feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addTimeDatePropertyDescriptor(Object object) {
+	protected void addAsDurationPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Event_timeDate_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Event_timeDate_feature", "_UI_Event_type"),
-				 VsdtPackage.Literals.EVENT__TIME_DATE,
+				 getString("_UI_Event_asDuration_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Event_asDuration_feature", "_UI_Event_type"),
+				 VsdtPackage.Literals.EVENT__AS_DURATION,
 				 true,
 				 false,
 				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
-				 getString("_UI_TriggerAttributesPropertyCategory"),
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Time Cycle feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTimeCyclePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Event_timeCycle_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Event_timeCycle_feature", "_UI_Event_type"),
-				 VsdtPackage.Literals.EVENT__TIME_CYCLE,
-				 true,
-				 false,
-				 false,
-				 null,
-				 getString("_UI_TriggerAttributesPropertyCategory"),
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Rule Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addRuleNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Event_ruleName_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Event_ruleName_feature", "_UI_Event_type"),
-				 VsdtPackage.Literals.EVENT__RULE_NAME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 getString("_UI_TriggerAttributesPropertyCategory"),
 				 null));
 	}
 
@@ -352,6 +306,7 @@ public class EventItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(VsdtPackage.Literals.EVENT__TIME_EXPRESSION);
 			childrenFeatures.add(VsdtPackage.Literals.EVENT__RULE_EXPRESSION);
 		}
 		return childrenFeatures;
@@ -397,13 +352,12 @@ public class EventItemProvider
 
 		switch (notification.getFeatureID(Event.class)) {
 			case VsdtPackage.EVENT__TRIGGER:
-			case VsdtPackage.EVENT__TIME_DATE:
-			case VsdtPackage.EVENT__TIME_CYCLE:
-			case VsdtPackage.EVENT__RULE_NAME:
+			case VsdtPackage.EVENT__AS_DURATION:
 			case VsdtPackage.EVENT__ERROR_CODE:
 			case VsdtPackage.EVENT__SIGNAL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+			case VsdtPackage.EVENT__TIME_EXPRESSION:
 			case VsdtPackage.EVENT__RULE_EXPRESSION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -424,8 +378,36 @@ public class EventItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(VsdtPackage.Literals.EVENT__TIME_EXPRESSION,
+				 VsdtFactory.eINSTANCE.createExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(VsdtPackage.Literals.EVENT__RULE_EXPRESSION,
 				 VsdtFactory.eINSTANCE.createExpression()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == VsdtPackage.Literals.EVENT__TIME_EXPRESSION ||
+			childFeature == VsdtPackage.Literals.EVENT__RULE_EXPRESSION;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

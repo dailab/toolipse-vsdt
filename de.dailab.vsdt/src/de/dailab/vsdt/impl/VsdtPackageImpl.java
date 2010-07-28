@@ -722,7 +722,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEvent_TimeDate() {
+	public EReference getEvent_TimeExpression() {
 		return (EReference)eventEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -731,17 +731,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEvent_TimeCycle() {
-		return (EReference)eventEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getEvent_RuleName() {
-		return (EAttribute)eventEClass.getEStructuralFeatures().get(5);
+	public EAttribute getEvent_AsDuration() {
+		return (EAttribute)eventEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -750,7 +741,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getEvent_RuleExpression() {
-		return (EReference)eventEClass.getEStructuralFeatures().get(6);
+		return (EReference)eventEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -759,7 +750,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EAttribute getEvent_ErrorCode() {
-		return (EAttribute)eventEClass.getEStructuralFeatures().get(7);
+		return (EAttribute)eventEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -768,7 +759,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getEvent_Activity() {
-		return (EReference)eventEClass.getEStructuralFeatures().get(8);
+		return (EReference)eventEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -777,7 +768,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EAttribute getEvent_Signal() {
-		return (EAttribute)eventEClass.getEStructuralFeatures().get(9);
+		return (EAttribute)eventEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -786,7 +777,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getEvent_LinkedTo() {
-		return (EReference)eventEClass.getEStructuralFeatures().get(10);
+		return (EReference)eventEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -2158,9 +2149,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		createEAttribute(eventEClass, EVENT__TRIGGER);
 		createEReference(eventEClass, EVENT__MESSAGE);
 		createEReference(eventEClass, EVENT__IMPLEMENTATION);
-		createEReference(eventEClass, EVENT__TIME_DATE);
-		createEReference(eventEClass, EVENT__TIME_CYCLE);
-		createEAttribute(eventEClass, EVENT__RULE_NAME);
+		createEReference(eventEClass, EVENT__TIME_EXPRESSION);
+		createEAttribute(eventEClass, EVENT__AS_DURATION);
 		createEReference(eventEClass, EVENT__RULE_EXPRESSION);
 		createEAttribute(eventEClass, EVENT__ERROR_CODE);
 		createEReference(eventEClass, EVENT__ACTIVITY);
@@ -2456,9 +2446,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		initEAttribute(getEvent_Trigger(), this.getTriggerType(), "trigger", null, 1, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEvent_Message(), this.getMessage(), null, "message", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEvent_Implementation(), this.getImplementation(), null, "implementation", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEvent_TimeDate(), this.getExpression(), null, "timeDate", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEvent_TimeCycle(), this.getExpression(), null, "timeCycle", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEvent_RuleName(), ecorePackage.getEString(), "ruleName", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEvent_TimeExpression(), this.getExpression(), null, "timeExpression", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEvent_AsDuration(), ecorePackage.getEBoolean(), "asDuration", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEvent_RuleExpression(), this.getExpression(), null, "ruleExpression", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_ErrorCode(), ecorePackage.getEString(), "errorCode", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEvent_Activity(), this.getActivity(), null, "activity", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

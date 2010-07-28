@@ -35,9 +35,8 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getTrigger <em>Trigger</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getMessage <em>Message</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getImplementation <em>Implementation</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.EventImpl#getTimeDate <em>Time Date</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.EventImpl#getTimeCycle <em>Time Cycle</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.EventImpl#getRuleName <em>Rule Name</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.EventImpl#getTimeExpression <em>Time Expression</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.EventImpl#isAsDuration <em>As Duration</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getRuleExpression <em>Rule Expression</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getErrorCode <em>Error Code</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getActivity <em>Activity</em>}</li>
@@ -86,41 +85,32 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 	 */
 	protected Implementation implementation;
 	/**
-	 * The cached value of the '{@link #getTimeDate() <em>Time Date</em>}' containment reference.
+	 * The cached value of the '{@link #getTimeExpression() <em>Time Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTimeDate()
+	 * @see #getTimeExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression timeDate;
+	protected Expression timeExpression;
 	/**
-	 * The cached value of the '{@link #getTimeCycle() <em>Time Cycle</em>}' containment reference.
+	 * The default value of the '{@link #isAsDuration() <em>As Duration</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTimeCycle()
+	 * @see #isAsDuration()
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression timeCycle;
+	protected static final boolean AS_DURATION_EDEFAULT = false;
 	/**
-	 * The default value of the '{@link #getRuleName() <em>Rule Name</em>}' attribute.
+	 * The cached value of the '{@link #isAsDuration() <em>As Duration</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRuleName()
+	 * @see #isAsDuration()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String RULE_NAME_EDEFAULT = null;
-	/**
-	 * The cached value of the '{@link #getRuleName() <em>Rule Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRuleName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String ruleName = RULE_NAME_EDEFAULT;
+	protected boolean asDuration = AS_DURATION_EDEFAULT;
 	/**
 	 * The cached value of the '{@link #getRuleExpression() <em>Rule Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -305,8 +295,8 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression getTimeDate() {
-		return timeDate;
+	public Expression getTimeExpression() {
+		return timeExpression;
 	}
 
 	/**
@@ -314,11 +304,11 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTimeDate(Expression newTimeDate, NotificationChain msgs) {
-		Expression oldTimeDate = timeDate;
-		timeDate = newTimeDate;
+	public NotificationChain basicSetTimeExpression(Expression newTimeExpression, NotificationChain msgs) {
+		Expression oldTimeExpression = timeExpression;
+		timeExpression = newTimeExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VsdtPackage.EVENT__TIME_DATE, oldTimeDate, newTimeDate);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VsdtPackage.EVENT__TIME_EXPRESSION, oldTimeExpression, newTimeExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -329,18 +319,18 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTimeDate(Expression newTimeDate) {
-		if (newTimeDate != timeDate) {
+	public void setTimeExpression(Expression newTimeExpression) {
+		if (newTimeExpression != timeExpression) {
 			NotificationChain msgs = null;
-			if (timeDate != null)
-				msgs = ((InternalEObject)timeDate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VsdtPackage.EVENT__TIME_DATE, null, msgs);
-			if (newTimeDate != null)
-				msgs = ((InternalEObject)newTimeDate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VsdtPackage.EVENT__TIME_DATE, null, msgs);
-			msgs = basicSetTimeDate(newTimeDate, msgs);
+			if (timeExpression != null)
+				msgs = ((InternalEObject)timeExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VsdtPackage.EVENT__TIME_EXPRESSION, null, msgs);
+			if (newTimeExpression != null)
+				msgs = ((InternalEObject)newTimeExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VsdtPackage.EVENT__TIME_EXPRESSION, null, msgs);
+			msgs = basicSetTimeExpression(newTimeExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.EVENT__TIME_DATE, newTimeDate, newTimeDate));
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.EVENT__TIME_EXPRESSION, newTimeExpression, newTimeExpression));
 	}
 
 	/**
@@ -348,8 +338,8 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression getTimeCycle() {
-		return timeCycle;
+	public boolean isAsDuration() {
+		return asDuration;
 	}
 
 	/**
@@ -357,54 +347,11 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTimeCycle(Expression newTimeCycle, NotificationChain msgs) {
-		Expression oldTimeCycle = timeCycle;
-		timeCycle = newTimeCycle;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VsdtPackage.EVENT__TIME_CYCLE, oldTimeCycle, newTimeCycle);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTimeCycle(Expression newTimeCycle) {
-		if (newTimeCycle != timeCycle) {
-			NotificationChain msgs = null;
-			if (timeCycle != null)
-				msgs = ((InternalEObject)timeCycle).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VsdtPackage.EVENT__TIME_CYCLE, null, msgs);
-			if (newTimeCycle != null)
-				msgs = ((InternalEObject)newTimeCycle).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VsdtPackage.EVENT__TIME_CYCLE, null, msgs);
-			msgs = basicSetTimeCycle(newTimeCycle, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.EVENT__TIME_CYCLE, newTimeCycle, newTimeCycle));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getRuleName() {
-		return ruleName;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setRuleName(String newRuleName) {
-		String oldRuleName = ruleName;
-		ruleName = newRuleName;
+	public void setAsDuration(boolean newAsDuration) {
+		boolean oldAsDuration = asDuration;
+		asDuration = newAsDuration;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.EVENT__RULE_NAME, oldRuleName, ruleName));
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.EVENT__AS_DURATION, oldAsDuration, asDuration));
 	}
 
 	/**
@@ -661,10 +608,8 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case VsdtPackage.EVENT__TIME_DATE:
-				return basicSetTimeDate(null, msgs);
-			case VsdtPackage.EVENT__TIME_CYCLE:
-				return basicSetTimeCycle(null, msgs);
+			case VsdtPackage.EVENT__TIME_EXPRESSION:
+				return basicSetTimeExpression(null, msgs);
 			case VsdtPackage.EVENT__RULE_EXPRESSION:
 				return basicSetRuleExpression(null, msgs);
 		}
@@ -687,12 +632,10 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 			case VsdtPackage.EVENT__IMPLEMENTATION:
 				if (resolve) return getImplementation();
 				return basicGetImplementation();
-			case VsdtPackage.EVENT__TIME_DATE:
-				return getTimeDate();
-			case VsdtPackage.EVENT__TIME_CYCLE:
-				return getTimeCycle();
-			case VsdtPackage.EVENT__RULE_NAME:
-				return getRuleName();
+			case VsdtPackage.EVENT__TIME_EXPRESSION:
+				return getTimeExpression();
+			case VsdtPackage.EVENT__AS_DURATION:
+				return isAsDuration();
 			case VsdtPackage.EVENT__RULE_EXPRESSION:
 				return getRuleExpression();
 			case VsdtPackage.EVENT__ERROR_CODE:
@@ -726,14 +669,11 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 			case VsdtPackage.EVENT__IMPLEMENTATION:
 				setImplementation((Implementation)newValue);
 				return;
-			case VsdtPackage.EVENT__TIME_DATE:
-				setTimeDate((Expression)newValue);
+			case VsdtPackage.EVENT__TIME_EXPRESSION:
+				setTimeExpression((Expression)newValue);
 				return;
-			case VsdtPackage.EVENT__TIME_CYCLE:
-				setTimeCycle((Expression)newValue);
-				return;
-			case VsdtPackage.EVENT__RULE_NAME:
-				setRuleName((String)newValue);
+			case VsdtPackage.EVENT__AS_DURATION:
+				setAsDuration((Boolean)newValue);
 				return;
 			case VsdtPackage.EVENT__RULE_EXPRESSION:
 				setRuleExpression((Expression)newValue);
@@ -771,14 +711,11 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 			case VsdtPackage.EVENT__IMPLEMENTATION:
 				setImplementation((Implementation)null);
 				return;
-			case VsdtPackage.EVENT__TIME_DATE:
-				setTimeDate((Expression)null);
+			case VsdtPackage.EVENT__TIME_EXPRESSION:
+				setTimeExpression((Expression)null);
 				return;
-			case VsdtPackage.EVENT__TIME_CYCLE:
-				setTimeCycle((Expression)null);
-				return;
-			case VsdtPackage.EVENT__RULE_NAME:
-				setRuleName(RULE_NAME_EDEFAULT);
+			case VsdtPackage.EVENT__AS_DURATION:
+				setAsDuration(AS_DURATION_EDEFAULT);
 				return;
 			case VsdtPackage.EVENT__RULE_EXPRESSION:
 				setRuleExpression((Expression)null);
@@ -813,12 +750,10 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 				return message != null;
 			case VsdtPackage.EVENT__IMPLEMENTATION:
 				return implementation != null;
-			case VsdtPackage.EVENT__TIME_DATE:
-				return timeDate != null;
-			case VsdtPackage.EVENT__TIME_CYCLE:
-				return timeCycle != null;
-			case VsdtPackage.EVENT__RULE_NAME:
-				return RULE_NAME_EDEFAULT == null ? ruleName != null : !RULE_NAME_EDEFAULT.equals(ruleName);
+			case VsdtPackage.EVENT__TIME_EXPRESSION:
+				return timeExpression != null;
+			case VsdtPackage.EVENT__AS_DURATION:
+				return asDuration != AS_DURATION_EDEFAULT;
 			case VsdtPackage.EVENT__RULE_EXPRESSION:
 				return ruleExpression != null;
 			case VsdtPackage.EVENT__ERROR_CODE:
@@ -845,8 +780,8 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (trigger: ");
 		result.append(trigger);
-		result.append(", ruleName: ");
-		result.append(ruleName);
+		result.append(", asDuration: ");
+		result.append(asDuration);
 		result.append(", errorCode: ");
 		result.append(errorCode);
 		result.append(", signal: ");

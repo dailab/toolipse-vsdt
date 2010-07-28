@@ -1253,31 +1253,22 @@ public interface VsdtPackage extends EPackage {
 	int EVENT__IMPLEMENTATION = FLOW_OBJECT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Time Date</b></em>' containment reference.
+	 * The feature id for the '<em><b>Time Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__TIME_DATE = FLOW_OBJECT_FEATURE_COUNT + 3;
+	int EVENT__TIME_EXPRESSION = FLOW_OBJECT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Time Cycle</b></em>' containment reference.
+	 * The feature id for the '<em><b>As Duration</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__TIME_CYCLE = FLOW_OBJECT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Rule Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT__RULE_NAME = FLOW_OBJECT_FEATURE_COUNT + 5;
+	int EVENT__AS_DURATION = FLOW_OBJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Rule Expression</b></em>' containment reference.
@@ -1286,7 +1277,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__RULE_EXPRESSION = FLOW_OBJECT_FEATURE_COUNT + 6;
+	int EVENT__RULE_EXPRESSION = FLOW_OBJECT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Error Code</b></em>' attribute.
@@ -1295,7 +1286,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__ERROR_CODE = FLOW_OBJECT_FEATURE_COUNT + 7;
+	int EVENT__ERROR_CODE = FLOW_OBJECT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Activity</b></em>' reference.
@@ -1304,7 +1295,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__ACTIVITY = FLOW_OBJECT_FEATURE_COUNT + 8;
+	int EVENT__ACTIVITY = FLOW_OBJECT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Signal</b></em>' attribute.
@@ -1313,7 +1304,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__SIGNAL = FLOW_OBJECT_FEATURE_COUNT + 9;
+	int EVENT__SIGNAL = FLOW_OBJECT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Linked To</b></em>' reference.
@@ -1322,7 +1313,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__LINKED_TO = FLOW_OBJECT_FEATURE_COUNT + 10;
+	int EVENT__LINKED_TO = FLOW_OBJECT_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>Event</em>' class.
@@ -1331,7 +1322,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 11;
+	int EVENT_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1469,31 +1460,22 @@ public interface VsdtPackage extends EPackage {
 	int START__IMPLEMENTATION = EVENT__IMPLEMENTATION;
 
 	/**
-	 * The feature id for the '<em><b>Time Date</b></em>' containment reference.
+	 * The feature id for the '<em><b>Time Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int START__TIME_DATE = EVENT__TIME_DATE;
+	int START__TIME_EXPRESSION = EVENT__TIME_EXPRESSION;
 
 	/**
-	 * The feature id for the '<em><b>Time Cycle</b></em>' containment reference.
+	 * The feature id for the '<em><b>As Duration</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int START__TIME_CYCLE = EVENT__TIME_CYCLE;
-
-	/**
-	 * The feature id for the '<em><b>Rule Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int START__RULE_NAME = EVENT__RULE_NAME;
+	int START__AS_DURATION = EVENT__AS_DURATION;
 
 	/**
 	 * The feature id for the '<em><b>Rule Expression</b></em>' containment reference.
@@ -1685,31 +1667,22 @@ public interface VsdtPackage extends EPackage {
 	int INTERMEDIATE__IMPLEMENTATION = EVENT__IMPLEMENTATION;
 
 	/**
-	 * The feature id for the '<em><b>Time Date</b></em>' containment reference.
+	 * The feature id for the '<em><b>Time Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERMEDIATE__TIME_DATE = EVENT__TIME_DATE;
+	int INTERMEDIATE__TIME_EXPRESSION = EVENT__TIME_EXPRESSION;
 
 	/**
-	 * The feature id for the '<em><b>Time Cycle</b></em>' containment reference.
+	 * The feature id for the '<em><b>As Duration</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERMEDIATE__TIME_CYCLE = EVENT__TIME_CYCLE;
-
-	/**
-	 * The feature id for the '<em><b>Rule Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTERMEDIATE__RULE_NAME = EVENT__RULE_NAME;
+	int INTERMEDIATE__AS_DURATION = EVENT__AS_DURATION;
 
 	/**
 	 * The feature id for the '<em><b>Rule Expression</b></em>' containment reference.
@@ -1910,31 +1883,22 @@ public interface VsdtPackage extends EPackage {
 	int END__IMPLEMENTATION = EVENT__IMPLEMENTATION;
 
 	/**
-	 * The feature id for the '<em><b>Time Date</b></em>' containment reference.
+	 * The feature id for the '<em><b>Time Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int END__TIME_DATE = EVENT__TIME_DATE;
+	int END__TIME_EXPRESSION = EVENT__TIME_EXPRESSION;
 
 	/**
-	 * The feature id for the '<em><b>Time Cycle</b></em>' containment reference.
+	 * The feature id for the '<em><b>As Duration</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int END__TIME_CYCLE = EVENT__TIME_CYCLE;
-
-	/**
-	 * The feature id for the '<em><b>Rule Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int END__RULE_NAME = EVENT__RULE_NAME;
+	int END__AS_DURATION = EVENT__AS_DURATION;
 
 	/**
 	 * The feature id for the '<em><b>Rule Expression</b></em>' containment reference.
@@ -4269,37 +4233,26 @@ public interface VsdtPackage extends EPackage {
 	EReference getEvent_Implementation();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.dailab.vsdt.Event#getTimeDate <em>Time Date</em>}'.
+	 * Returns the meta object for the containment reference '{@link de.dailab.vsdt.Event#getTimeExpression <em>Time Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Time Date</em>'.
-	 * @see de.dailab.vsdt.Event#getTimeDate()
+	 * @return the meta object for the containment reference '<em>Time Expression</em>'.
+	 * @see de.dailab.vsdt.Event#getTimeExpression()
 	 * @see #getEvent()
 	 * @generated
 	 */
-	EReference getEvent_TimeDate();
+	EReference getEvent_TimeExpression();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link de.dailab.vsdt.Event#getTimeCycle <em>Time Cycle</em>}'.
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Event#isAsDuration <em>As Duration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Time Cycle</em>'.
-	 * @see de.dailab.vsdt.Event#getTimeCycle()
+	 * @return the meta object for the attribute '<em>As Duration</em>'.
+	 * @see de.dailab.vsdt.Event#isAsDuration()
 	 * @see #getEvent()
 	 * @generated
 	 */
-	EReference getEvent_TimeCycle();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Event#getRuleName <em>Rule Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Rule Name</em>'.
-	 * @see de.dailab.vsdt.Event#getRuleName()
-	 * @see #getEvent()
-	 * @generated
-	 */
-	EAttribute getEvent_RuleName();
+	EAttribute getEvent_AsDuration();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link de.dailab.vsdt.Event#getRuleExpression <em>Rule Expression</em>}'.
@@ -6130,28 +6083,20 @@ public interface VsdtPackage extends EPackage {
 		EReference EVENT__IMPLEMENTATION = eINSTANCE.getEvent_Implementation();
 
 		/**
-		 * The meta object literal for the '<em><b>Time Date</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Time Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EVENT__TIME_DATE = eINSTANCE.getEvent_TimeDate();
+		EReference EVENT__TIME_EXPRESSION = eINSTANCE.getEvent_TimeExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Time Cycle</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>As Duration</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EVENT__TIME_CYCLE = eINSTANCE.getEvent_TimeCycle();
-
-		/**
-		 * The meta object literal for the '<em><b>Rule Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EVENT__RULE_NAME = eINSTANCE.getEvent_RuleName();
+		EAttribute EVENT__AS_DURATION = eINSTANCE.getEvent_AsDuration();
 
 		/**
 		 * The meta object literal for the '<em><b>Rule Expression</b></em>' containment reference feature.

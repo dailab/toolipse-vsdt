@@ -27,12 +27,10 @@ import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
-import de.dailab.vsdt.End;
 import de.dailab.vsdt.Event;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Message;
-import de.dailab.vsdt.Start;
 import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.VsdtPackage;
 import de.dailab.vsdt.diagram.actions.ParameterAssignmentsAction;
@@ -46,13 +44,12 @@ public class EventSection extends FlowObjectSection {
 							   DISPLAY_GROUP= "Event Trigger Attributes",
 							   DISPLAY_MESSAGE= "Message",
 							   DISPLAY_IMPL= "Implementation",
-							   DISPLAY_TIME_DATE= "Time Date",
-							   DISPLAY_TIME_CYCLE= "Time Cycle",
+							   DISPLAY_TIME_EXPRESSION= "Time Expr.",
+							   DISPLAY_TIME_IS_DURATION= "As Duration?",
 							   DISPLAY_ERROR= "Error Code",
-							   DISPLAY_RULE_NAME= "Rule Name",
 							   DISPLAY_RULE_EXP= "Rule Expression",
 							   DISPLAY_LINK= "Linked To",
-							   DISPLAY_ACTIVITY= "Activity",
+							   DISPLAY_ACTIVITY= "Compensate",
 							   DISPLAY_SIGNAL= "Signal",
 
 							   DISPLAY_HIGHLIGH_LINK= "Highlight Opposite",
@@ -66,9 +63,10 @@ public class EventSection extends FlowObjectSection {
     private Group triggerGroup;
     private VsdtFeatureCombo<Message> messageCombo;
     private VsdtFeatureCombo<Implementation> implementationCombo;
-    private ExpressionComposite timeDateText;
-    private ExpressionComposite timeCycleText;
-    private Text ruleNameText;
+    private ExpressionComposite timeExpressionComp;
+//    private ExpressionComposite timeCycleText;
+    private Button asDurationButton;
+//    private Text ruleNameText;
     private ExpressionComposite ruleExpText;
     private VsdtFeatureCombo<Event> linkedToCombo;
     private Text errorCodeText;
@@ -88,8 +86,8 @@ public class EventSection extends FlowObjectSection {
         super.setInput(part, selection);
         if (eObject instanceof Event) {
         	this.event= (Event) eObject;
-        	timeDateText.setOwnerAndFeature(event, pack.getEvent_TimeDate());
-        	timeCycleText.setOwnerAndFeature(event, pack.getEvent_TimeCycle());
+        	timeExpressionComp.setOwnerAndFeature(event, pack.getEvent_TimeExpression());
+//        	timeCycleText.setOwnerAndFeature(event, pack.getEvent_TimeCycle());
         	ruleExpText.setOwnerAndFeature(event, pack.getEvent_RuleExpression());
         }
     }
@@ -130,10 +128,11 @@ public class EventSection extends FlowObjectSection {
 
 		messageCombo.setSelected(event.getMessage());
     	implementationCombo.setSelected(event.getImplementation());
-    	timeDateText.setText(getExpression(event.getTimeDate()));
-    	timeCycleText.setText(getExpression(event.getTimeCycle()));
+    	timeExpressionComp.setText(getExpression(event.getTimeExpression()));
+    	asDurationButton.setSelection(event.isAsDuration());
+//    	timeCycleText.setText(getExpression(event.getTimeCycle()));
     	errorCodeText.setText(nonNull(event.getErrorCode()));
-    	ruleNameText.setText(nonNull(event.getRuleName()));
+//    	ruleNameText.setText(nonNull(event.getRuleName()));
     	ruleExpText.setText(getExpression(event.getRuleExpression()));
     	linkedToCombo.setSelected(event.getLinkedTo());
     	activityCombo.setSelected(event.getActivity());
@@ -142,19 +141,21 @@ public class EventSection extends FlowObjectSection {
     	parAssignButton.setEnabled(event.getImplementation() != null && event.getTrigger() == TriggerType.MESSAGE);
     	
     	if (eventTypeCombo.getSelectionIndex() != -1) {
-    		String trigger= eventTypeCombo.getItem(eventTypeCombo.getSelectionIndex());
-    		boolean isMulti= TriggerType.MULTIPLE.getLiteral().equals(trigger);
-        	messageCombo.getCombo().setEnabled(TriggerType.MESSAGE.getLiteral().equals(trigger) || isMulti);
-        	implementationCombo.getCombo().setEnabled(TriggerType.MESSAGE.getLiteral().equals(trigger) || isMulti);
-        	errorCodeText.setEnabled(TriggerType.ERROR.getLiteral().equals(trigger) || isMulti && !(event instanceof Start));
-        	timeCycleText.setEnabled(TriggerType.TIMER.getLiteral().equals(trigger) || isMulti && !(event instanceof End));
-        	timeDateText.setEnabled(TriggerType.TIMER.getLiteral().equals(trigger) || isMulti && !(event instanceof End));
-        	ruleNameText.setEnabled(TriggerType.RULE.getLiteral().equals(trigger) || isMulti && !(event instanceof End));
-        	ruleExpText.setEnabled(TriggerType.RULE.getLiteral().equals(trigger) || isMulti && !(event instanceof End));
-        	linkedToCombo.getCombo().setEnabled(TriggerType.LINK.getLiteral().equals(trigger) || isMulti);
-        	highlightOpposite.setEnabled((TriggerType.LINK.getLiteral().equals(trigger) || isMulti) && event.getLinkedTo() != null);
-        	activityCombo.getCombo().setEnabled(TriggerType.COMPENSATION.getLiteral().equals(trigger) || isMulti && !(event instanceof Start));
-        	signalText.setEnabled(TriggerType.SIGNAL.getLiteral().equals(trigger) || isMulti);
+    		TriggerType trigger = TriggerType.get(eventTypeCombo.getItem(eventTypeCombo.getSelectionIndex()));
+    		List<TriggerType> validTriggerTypes= event.getValidTriggerTypes();
+    		boolean isMulti= TriggerType.MULTIPLE == trigger;
+        	messageCombo.getCombo().setEnabled(TriggerType.MESSAGE == trigger || isMulti && validTriggerTypes.contains(TriggerType.MESSAGE));
+        	implementationCombo.getCombo().setEnabled(messageCombo.getCombo().isEnabled());
+        	errorCodeText.setEnabled(TriggerType.ERROR== trigger || isMulti && validTriggerTypes.contains(TriggerType.ERROR));
+//        	timeCycleText.setEnabled(TriggerType.TIMER.getLiteral().equals(trigger) || isMulti && !(event instanceof End));
+        	timeExpressionComp.setEnabled(TriggerType.TIMER == trigger || isMulti && validTriggerTypes.contains(TriggerType.TIMER));
+        	asDurationButton.setEnabled(timeExpressionComp.isEnabled());
+//        	ruleNameText.setEnabled(TriggerType.RULE.getLiteral().equals(trigger) || isMulti && !(event instanceof End));
+        	ruleExpText.setEnabled(TriggerType.RULE== trigger || isMulti && validTriggerTypes.contains(TriggerType.RULE));
+        	linkedToCombo.getCombo().setEnabled(TriggerType.LINK == trigger || isMulti && validTriggerTypes.contains(TriggerType.LINK));
+        	highlightOpposite.setEnabled(linkedToCombo.getCombo().isEnabled() && event.getLinkedTo() != null);
+        	activityCombo.getCombo().setEnabled(TriggerType.COMPENSATION == trigger || isMulti && validTriggerTypes.contains(TriggerType.COMPENSATION));
+        	signalText.setEnabled(TriggerType.SIGNAL== trigger || isMulti && validTriggerTypes.contains(TriggerType.SIGNAL));
     	}
     }
  
@@ -187,14 +188,16 @@ public class EventSection extends FlowObjectSection {
     	messageCombo.getCombo().addSelectionListener(this);
 		
 		//timer trigger
-		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_TIME_DATE, messageCombo.getCombo(), 0);
-		timeDateText= addExpressionComposite(triggerGroup, messageCombo.getCombo(), label, 50);
-		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_TIME_CYCLE, timeDateText, 0);
-		timeCycleText= addExpressionComposite(triggerGroup, timeDateText, label, 50);
+        asDurationButton= FormLayoutUtil.addButton(triggerGroup, DISPLAY_TIME_IS_DURATION, SWT.CHECK, messageCombo.getCombo(), null, 50);
+        asDurationButton.addSelectionListener(this);
+		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_TIME_EXPRESSION, messageCombo.getCombo(), 0);
+		timeExpressionComp= addExpressionComposite(triggerGroup, messageCombo.getCombo(), label, asDurationButton);
+//		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_TIME_CYCLE, timeExpressionComp, 0);
+//		timeCycleText= addExpressionComposite(triggerGroup, timeExpressionComp, label, 50);
 		
 		//error trigger
-		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_ERROR, timeCycleText, 0);
-		errorCodeText= FormLayoutUtil.addText(triggerGroup, timeCycleText, label, 50, SWT.NONE);
+		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_ERROR, timeExpressionComp, 0);
+		errorCodeText= FormLayoutUtil.addText(triggerGroup, timeExpressionComp, label, 50, SWT.NONE);
 		errorCodeText.addFocusListener(this);
 		
 		//compensation trigger
@@ -203,11 +206,11 @@ public class EventSection extends FlowObjectSection {
 		activityCombo.getCombo().addSelectionListener(this);
 		
 		//rule trigger
-		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_RULE_NAME, 0, 50);
-		ruleNameText= FormLayoutUtil.addText(triggerGroup, 0, label, 100, SWT.NONE);
-		ruleNameText.addFocusListener(this);
-		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_RULE_EXP, ruleNameText, 50);
-		ruleExpText= addExpressionComposite(triggerGroup, ruleNameText, label, 100);
+//		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_RULE_NAME, 0, 50);
+//		ruleNameText= FormLayoutUtil.addText(triggerGroup, 0, label, 100, SWT.NONE);
+//		ruleNameText.addFocusListener(this);
+		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_RULE_EXP, 0, 50);
+		ruleExpText= addExpressionComposite(triggerGroup, 0, label, 100);
 		
 		//link trigger
 		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_LINK, ruleExpText, 50);
@@ -225,9 +228,9 @@ public class EventSection extends FlowObjectSection {
     public void focusLost(FocusEvent e) {
     	Object src= e.getSource();
     	// expressions are handled by the ExpressionComposites (see setInput)
-    	if (src.equals(ruleNameText)) {
-    		setPropertyValue(event, pack.getEvent_RuleName(), nullIfEmpty(ruleNameText.getText()));
-    	}
+//    	if (src.equals(ruleNameText)) {
+//    		setPropertyValue(event, pack.getEvent_RuleName(), nullIfEmpty(ruleNameText.getText()));
+//    	}
     	if (src.equals(errorCodeText)) {
     		setPropertyValue(event, pack.getEvent_ErrorCode(), nullIfEmpty(errorCodeText.getText()));
     	}
@@ -292,6 +295,9 @@ public class EventSection extends FlowObjectSection {
     	}
     	if (src.equals(activityCombo.getCombo())) {
     		setPropertyValue(event, pack.getEvent_Activity(), activityCombo.getSelected());
+    	}
+    	if (src.equals(asDurationButton)) {
+    		setPropertyValue(event, pack.getEvent_AsDuration(), asDurationButton.getSelection());
     	}
     	refresh();
     }

@@ -17,7 +17,6 @@ import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.Event;
-import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.GatewayType;
@@ -362,11 +361,16 @@ public class Bpmn2TextElementMapping extends MappingStage {
 //			}
 			break;
 		case TIMER:
-			boolean cyclic= event.getTimeCycle() != null;
-			Expression timeExpression= (cyclic ? event.getTimeCycle() : event.getTimeDate());
-			String time= timeExpression != null? ("the time" + code(timeExpression.getExpression())) : "an unspecified time"; 
+//			boolean cyclic= event.getTimeCycle() != null;
+//			Expression timeExpression= (cyclic ? event.getTimeCycle() : event.getTimeDate());
+			String time= event.getTimeExpression() == null? "an unspecified time"
+					: code(event.getTimeExpression().getExpression()); 
 			if (! boundary) {
-				builder.append("the Process waits " + (cyclic?"for ":"until ")+time);
+				builder.append("the Process waits " + (event.isAsDuration() ? "for ":"until "));
+			}
+			builder.append(time);
+			if (boundary) {
+				builder.append(event.isAsDuration() ? "elapsed" : "is reached");
 			}
 			break;
 		case LINK:
@@ -387,12 +391,12 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			builder.append("the Process terminates");
 			break;
 		case RULE:
-			String ruleName= event.getRuleName();
+			// append rule expression for more details?
+			String rule= null; // event.getRuleExpression().getExpression();
 			if (! boundary) {
 				builder.append("the Process waits until ");
 			}
-			builder.append((ruleName != null ? "the Rule " + name(ruleName) : "a Rule") + " applies");
-			// append rule expression for more details?
+			builder.append((rule != null ? "the Rule " + code(rule) : "a Rule") + " applies");
 			break;
 		case SIGNAL:
 			String s= event.getSignal();
@@ -433,12 +437,12 @@ public class Bpmn2TextElementMapping extends MappingStage {
 				isNotFirst= true;
 				visitEvent(event, TriggerType.SIGNAL, boundary);
 			}
-			if (event.getTimeCycle() != null || event.getTimeDate() != null) {
+			if (event.getTimeExpression() != null && event.getTimeExpression().getExpression() != null) {
 				if (isNotFirst) builder.append(" and ");
 				isNotFirst= true;
 				visitEvent(event, TriggerType.TIMER, boundary);
 			}
-			if (event.getRuleName() != null || (event.getRuleExpression() != null && event.getRuleExpression().getExpression() != null)) {
+			if (event.getRuleExpression() != null && event.getRuleExpression().getExpression() != null) {
 				if (isNotFirst) builder.append(" and ");
 				isNotFirst= true;
 				visitEvent(event, TriggerType.RULE, boundary);

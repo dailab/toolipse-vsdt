@@ -444,6 +444,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 			}
 			break;
 		case TIMER:
+			String timeCondition = BpelStaticHelper.getCondition(event.getTimeExpression());
 			if (event instanceof Intermediate) {
 				//create Wait or event handler
 				if (StrucBpmnMappingAssistant.isStartingOrEndingNode(event, false)) {
@@ -452,13 +453,19 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 					TProcess process= (TProcess) wrapper.getMapping(event.getPool());
 					TScope scope= BpelStaticHelper.getScope(process);
 					TOnAlarm onAlarm= bpelFac.createTOnAlarm();
-					onAlarm.setFor(BpelStaticHelper.getCondition(event.getTimeCycle()));
-					onAlarm.setUntil(BpelStaticHelper.getCondition(event.getTimeDate()));
+					if (event.isAsDuration()) {
+						onAlarm.setFor(timeCondition);
+					} else {
+						onAlarm.setUntil(timeCondition);
+					}
 					BpelStaticHelper.getEventHandlers(scope).getOnAlarm().add(onAlarm);
 				} else {
 					TWait tWait= bpelFac.createTWait();
-					tWait.setFor(BpelStaticHelper.getCondition(event.getTimeCycle()));
-					tWait.setUntil(BpelStaticHelper.getCondition(event.getTimeDate()));
+					if (event.isAsDuration()) {
+						tWait.setFor(timeCondition);
+					} else {
+						tWait.setUntil(timeCondition);
+					}
 					mapping= tWait;
 				}
 			} else {
@@ -489,7 +496,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 			if (event.getMessage() != null && event.getImplementation() != null) {
 				children.add(visitEvent(event, TriggerType.MESSAGE));
 			}
-			if (event.getTimeCycle() != null || event.getTimeDate() != null) {
+			if (event.getTimeExpression() != null && event.getRuleExpression().getExpression() != null) {
 				children.add(visitEvent(event, TriggerType.TIMER));
 			}
 			if (event.getRuleExpression() != null && event.getRuleExpression().getExpression() != null) {
@@ -652,8 +659,12 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 			QName faultName= new QName(intermediate.getName() + "_Exit");
 			
 			TOnAlarm onAlarm= bpelFac.createTOnAlarm();
-			onAlarm.setFor(BpelStaticHelper.getCondition(intermediate.getTimeCycle()));
-			onAlarm.setUntil(BpelStaticHelper.getCondition(intermediate.getTimeDate()));
+			String timeCondition = BpelStaticHelper.getCondition(intermediate.getTimeExpression());
+			if (intermediate.isAsDuration()) {
+				onAlarm.setFor(timeCondition);
+			} else {
+				onAlarm.setUntil(timeCondition);
+			}
 			TThrow tThrow= bpelFac.createTThrow();
 			tThrow.setFaultName(faultName);
 			onAlarm.setThrow(tThrow);
@@ -698,7 +709,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 			if (intermediate.getLinkedTo() != null) {
 				visitIntermediateOnBoundary(intermediate, TriggerType.LINK, scope);
 			}
-			if (intermediate.getTimeCycle() != null || intermediate.getTimeDate() != null) {
+			if (intermediate.getTimeExpression() != null || intermediate.getTimeExpression().getExpression() != null) {
 				visitIntermediateOnBoundary(intermediate, TriggerType.TIMER, scope);
 			}
 			if (intermediate.getRuleExpression() != null && intermediate.getRuleExpression().getExpression() != null) {

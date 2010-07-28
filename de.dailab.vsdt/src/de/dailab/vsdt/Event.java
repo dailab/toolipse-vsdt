@@ -21,9 +21,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.Event#getTrigger <em>Trigger</em>}</li>
  *   <li>{@link de.dailab.vsdt.Event#getMessage <em>Message</em>}</li>
  *   <li>{@link de.dailab.vsdt.Event#getImplementation <em>Implementation</em>}</li>
- *   <li>{@link de.dailab.vsdt.Event#getTimeDate <em>Time Date</em>}</li>
- *   <li>{@link de.dailab.vsdt.Event#getTimeCycle <em>Time Cycle</em>}</li>
- *   <li>{@link de.dailab.vsdt.Event#getRuleName <em>Rule Name</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Event#getTimeExpression <em>Time Expression</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Event#isAsDuration <em>As Duration</em>}</li>
  *   <li>{@link de.dailab.vsdt.Event#getRuleExpression <em>Rule Expression</em>}</li>
  *   <li>{@link de.dailab.vsdt.Event#getErrorCode <em>Error Code</em>}</li>
  *   <li>{@link de.dailab.vsdt.Event#getActivity <em>Activity</em>}</li>
@@ -119,82 +118,56 @@ public interface Event extends FlowObject {
 	void setImplementation(Implementation value);
 
 	/**
-	 * Returns the value of the '<em><b>Time Date</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Time Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Time Date</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Time Expression</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Time Date</em>' containment reference.
-	 * @see #setTimeDate(Expression)
-	 * @see de.dailab.vsdt.VsdtPackage#getEvent_TimeDate()
+	 * @return the value of the '<em>Time Expression</em>' containment reference.
+	 * @see #setTimeExpression(Expression)
+	 * @see de.dailab.vsdt.VsdtPackage#getEvent_TimeExpression()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Expression getTimeDate();
+	Expression getTimeExpression();
 
 	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Event#getTimeDate <em>Time Date</em>}' containment reference.
+	 * Sets the value of the '{@link de.dailab.vsdt.Event#getTimeExpression <em>Time Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Time Date</em>' containment reference.
-	 * @see #getTimeDate()
+	 * @param value the new value of the '<em>Time Expression</em>' containment reference.
+	 * @see #getTimeExpression()
 	 * @generated
 	 */
-	void setTimeDate(Expression value);
+	void setTimeExpression(Expression value);
 
 	/**
-	 * Returns the value of the '<em><b>Time Cycle</b></em>' containment reference.
+	 * Returns the value of the '<em><b>As Duration</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Time Cycle</em>' attribute isn't clear,
+	 * If the meaning of the '<em>As Duration</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Time Cycle</em>' containment reference.
-	 * @see #setTimeCycle(Expression)
-	 * @see de.dailab.vsdt.VsdtPackage#getEvent_TimeCycle()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getTimeCycle();
-
-	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Event#getTimeCycle <em>Time Cycle</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Time Cycle</em>' containment reference.
-	 * @see #getTimeCycle()
-	 * @generated
-	 */
-	void setTimeCycle(Expression value);
-
-	/**
-	 * Returns the value of the '<em><b>Rule Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Rule Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Rule Name</em>' attribute.
-	 * @see #setRuleName(String)
-	 * @see de.dailab.vsdt.VsdtPackage#getEvent_RuleName()
+	 * @return the value of the '<em>As Duration</em>' attribute.
+	 * @see #setAsDuration(boolean)
+	 * @see de.dailab.vsdt.VsdtPackage#getEvent_AsDuration()
 	 * @model
 	 * @generated
 	 */
-	String getRuleName();
+	boolean isAsDuration();
 
 	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Event#getRuleName <em>Rule Name</em>}' attribute.
+	 * Sets the value of the '{@link de.dailab.vsdt.Event#isAsDuration <em>As Duration</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Rule Name</em>' attribute.
-	 * @see #getRuleName()
+	 * @param value the new value of the '<em>As Duration</em>' attribute.
+	 * @see #isAsDuration()
 	 * @generated
 	 */
-	void setRuleName(String value);
+	void setAsDuration(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Rule Expression</b></em>' containment reference.

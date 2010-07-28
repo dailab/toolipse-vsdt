@@ -369,9 +369,13 @@ public class Bpel2BpmnElementMapping extends MappingStage {
 		for (TOnAlarm onAlarm : tPick.getOnAlarm()) {
 			Intermediate event= vsdtFac.createIntermediate();
 			event.setTrigger(TriggerType.TIMER);
-			event.setTimeDate(VsdtElementFactory.createExpression(onAlarm.getUntil()));
-			event.setTimeCycle(VsdtElementFactory.createExpression(onAlarm.getFor()));
-			
+			if (onAlarm.getUntil() != null) {
+				event.setTimeExpression(VsdtElementFactory.createExpression(onAlarm.getUntil()));
+				event.setAsDuration(false);
+			} else if (onAlarm.getFor() != null) {
+				event.setTimeExpression(VsdtElementFactory.createExpression(onAlarm.getFor()));
+				event.setAsDuration(true);
+			}
 			TActivity tActivity= BpelUtil.getActivity(onAlarm);
 			FlowObject flowObject= visitActivity(tActivity);
 			
@@ -464,8 +468,13 @@ public class Bpel2BpmnElementMapping extends MappingStage {
 		if (ehb.getEventHandlers() != null) {
 			for (TOnAlarm onAlarm : ehb.getEventHandlers().getOnAlarm()) {
 				Intermediate intermediate= VsdtElementFactory.createIntermediate(null, TriggerType.TIMER);
-				intermediate.setTimeCycle(VsdtElementFactory.createExpression(onAlarm.getFor()));
-				intermediate.setTimeDate(VsdtElementFactory.createExpression(onAlarm.getUntil()));
+				if (onAlarm.getUntil() != null) {
+					intermediate.setTimeExpression(VsdtElementFactory.createExpression(onAlarm.getUntil()));
+					intermediate.setAsDuration(false);
+				} else if (onAlarm.getFor() != null) {
+					intermediate.setTimeExpression(VsdtElementFactory.createExpression(onAlarm.getFor()));
+					intermediate.setAsDuration(true);
+				}
 				FlowObject flowObject= visitActivity(BpelUtil.getActivity(onAlarm));
 				block.getEventHandlerCases().add(StrucBpmnElementFactory.createEventHandlerCase(intermediate, flowObject, null, null));
 			}
@@ -550,8 +559,13 @@ public class Bpel2BpmnElementMapping extends MappingStage {
 		TrafoLog.trace("Visiting Wait" + tWait.toString());
 		Intermediate event= vsdtFac.createIntermediate();
 		event.setTrigger(TriggerType.TIMER);
-		event.setTimeDate(VsdtElementFactory.createExpression(tWait.getUntil()));
-		event.setTimeCycle(VsdtElementFactory.createExpression(tWait.getFor()));
+		if (tWait.getUntil() != null) {
+			event.setTimeExpression(VsdtElementFactory.createExpression(tWait.getUntil()));
+			event.setAsDuration(false);
+		} else if (tWait.getFor() != null) {
+			event.setTimeExpression(VsdtElementFactory.createExpression(tWait.getFor()));
+			event.setAsDuration(true);
+		}
 		return event;
 	}
 

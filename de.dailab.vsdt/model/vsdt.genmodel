@@ -164,9 +164,8 @@
           propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Event/message"/>
       <genFeatures notify="false" createChild="false" propertyCategory="Trigger Attributes"
           propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Event/implementation"/>
-      <genFeatures createChild="false" propertyCategory="Trigger Attributes" ecoreFeature="ecore:EReference vsdt.ecore#//Event/timeDate"/>
-      <genFeatures createChild="false" propertyCategory="Trigger Attributes" ecoreFeature="ecore:EReference vsdt.ecore#//Event/timeCycle"/>
-      <genFeatures createChild="false" propertyCategory="Trigger Attributes" ecoreFeature="ecore:EAttribute vsdt.ecore#//Event/ruleName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Event/timeExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Event/asDuration"/>
       <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Trigger Attributes"
           ecoreFeature="ecore:EReference vsdt.ecore#//Event/ruleExpression"/>
       <genFeatures createChild="false" propertyCategory="Trigger Attributes" ecoreFeature="ecore:EAttribute vsdt.ecore#//Event/errorCode"/>

@@ -338,18 +338,19 @@ public class DefaultBpmnValidation extends MappingStage {
 			isOK&= testChild(visitImplementation(event.getImplementation()),event,vsdt.getEvent_Message());
 		}
 		if (event.getTrigger() == TriggerType.RULE) {
-			event.setRuleName(norm(event.getRuleName(), NORM_NAME_ELEMENT));
+//			event.setRuleName(norm(event.getRuleName(), NORM_NAME_ELEMENT));
 			isOK&= testChild(visitExpression(event.getRuleExpression()),event,vsdt.getEvent_RuleExpression());
 		}
 		if (event.getTrigger() == TriggerType.TIMER) {
-			isOK&= test(event.getTimeCycle() != null || event.getTimeDate() != null,
-					"Either Time Cycle or Time Date must be set");
-			if (event.getTimeCycle() != null) {
-				visitExpression(event.getTimeCycle());
-			}
-			if (event.getTimeDate() != null) {
-				visitExpression(event.getTimeDate());
-			}
+			visitExpression(event.getTimeExpression());
+//			isOK&= test(event.getTimeCycle() != null || event.getTimeDate() != null,
+//					"Either Time Cycle or Time Date must be set");
+//			if (event.getTimeCycle() != null) {
+//				visitExpression(event.getTimeCycle());
+//			}
+//			if (event.getTimeDate() != null) {
+//				visitExpression(event.getTimeDate());
+//			}
 		}
 		if (event.getTrigger() == TriggerType.LINK) {
 			isOK&= test(event.getLinkedTo() != null,"Link must not be null");
