@@ -77,7 +77,7 @@ public class Util {
 	 * @param root		topmost element of the instance (sub-)tree
 	 * @return			map associating EClasses with Lists of EObjects
 	 */
-	public static Map<EClass,List<EObject>> createInstancesMap(EObject eObject) {
+	public static Map<EClass, List<EObject>> createInstancesMap(EObject eObject) {
 		Map<EClass, List<EObject>> instancesMap = new HashMap<EClass, List<EObject>>();
 		Queue<EObject> objects = new LinkedList<EObject>();
 		objects.add(Util.getRoot(eObject));

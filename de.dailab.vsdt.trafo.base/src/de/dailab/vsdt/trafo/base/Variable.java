@@ -17,7 +17,7 @@ import de.dailab.vsdt.trafo.base.constraints.Constraint;
  * current instantiation of the other variables w.r.t. which this variable's
  * value is constrained.
  */
-public class Variable {
+public final class Variable {
 	
 	/** this variable's type */
 	private final EClass type;

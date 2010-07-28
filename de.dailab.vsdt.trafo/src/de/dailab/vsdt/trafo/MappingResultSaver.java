@@ -13,9 +13,10 @@ import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import de.dailab.vsdt.trafo.base.util.TrafoLog;
 
 /**
- * This class is used to provide a target language specific save method for the results
- * of the transformation. Actually, the behaviour of this class could also be realised
- * as an additional BpmnMappingStage object, but this way the method names are clearer.
+ * This class is used to provide a target language specific save method for the 
+ * results of the transformation. Actually, the behavior of this class could 
+ * also be realized as an additional BpmnMappingStage object, but this way the 
+ * method names are clearer.
  * 
  * @author kuester
  */
@@ -44,8 +45,9 @@ public abstract class MappingResultSaver {
 	}
 	
 	/**
-	 * Saves the target models from the wrapper object to the directory given in the path field.
-	 * Additionally, this method will provide some checks and logging stuff.
+	 * Saves the target models from the wrapper object to the directory given in
+	 * the path field. Additionally, this method will provide some checks and 
+	 * logging stuff.
 	 * 
 	 * @return	saving successful?
 	 */

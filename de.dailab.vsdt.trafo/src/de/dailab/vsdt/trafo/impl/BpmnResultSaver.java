@@ -30,8 +30,8 @@ import de.dailab.vsdt.trafo.MappingResultSaver;
 import de.dailab.vsdt.trafo.base.util.TrafoLog;
 
 /**
- * Default implementation of MappingResultSaver to be used for BPMN files.
- * This class can be used for importing BPMN diagrams from other sources, e.g. BPEL.
+ * Default implementation of MappingResultSaver to be used for BPMN files. This 
+ * class can be used for importing BPMN diagrams from other sources, e.g. BPEL.
  * 
  * @author kuester
  */
@@ -45,15 +45,16 @@ public class BpmnResultSaver extends MappingResultSaver {
 	public static final String EXT= ".vsdt";
 	
 	/** 
-	 * this suffix is inserted between the filename and the extension, 
-	 * e.g. to distinguish from existing files with same extension
-	 * when importing from other BPMN editors
+	 * this suffix is inserted between the filename and the extension, e.g. to 
+	 * distinguish from existing files with same extension when importing from 
+	 * other BPMN editors
 	 */
 	private String suffix= "";
 
 	/**
-	 * Save the result to a couple of BPEL and WSDL files for each pool/process in the diagram.
-	 * Additionally the content of the log list can be saved to a text file.
+	 * Save the result to a couple of BPEL and WSDL files for each pool/process 
+	 * in the diagram. Additionally the content of the log list can be saved to 
+	 * a text file.
 	 * 
 	 * @param path		path where to save the stuff
 	 * @return			successfully saved?
@@ -130,7 +131,7 @@ public class BpmnResultSaver extends MappingResultSaver {
 			diagramResource.save(VsdtDiagramEditorUtil.getSaveOptions());
 			return true;
 		} catch (ExecutionException e) {
-			TrafoLog.warn("Unable to create Agent World Diagram; creating model file instead");
+			TrafoLog.warn("Unable to create diagram file; creating model file instead");
 			return false;
 		}
 	}

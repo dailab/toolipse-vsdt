@@ -100,7 +100,7 @@ public abstract class TransformationRule {
 	 * @param vars		list of variables
 	 * @param type		the type of the variable to create
 	 */
-	protected void addVariable(List<Variable> vars, EClass type) {
+	protected final void addVariable(List<Variable> vars, EClass type) {
 		List<EObject> domain = instancesMap.get(type);
 		if (domain == null) {
 			domain= new ArrayList<EObject>();
@@ -115,7 +115,7 @@ public abstract class TransformationRule {
 	 * @param type		the type of the variables to create
 	 * @param count		number of variables of given type to create
 	 */
-	protected void addVariable(List<Variable> vars, EClass type, int count) {
+	protected final void addVariable(List<Variable> vars, EClass type, int count) {
 		for (int i = 0; i < count; i++) {
 			addVariable(vars, type);
 		}

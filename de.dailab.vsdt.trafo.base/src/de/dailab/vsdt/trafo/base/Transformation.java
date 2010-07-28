@@ -16,7 +16,7 @@ import de.dailab.vsdt.trafo.base.util.Util;
  * more specifically, layers of rules, and to apply the rules to the EObject's
  * instance graph, layer by layer, until no more rules can be executed.
  */
-public abstract class Transformation {
+public class Transformation {
 	
 	/**
 	 * Transform functionality. The EObject is used to access the entire model,

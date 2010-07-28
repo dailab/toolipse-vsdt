@@ -7,8 +7,8 @@ import java.util.Map;
 
 /**
  * This class is holding both the source and target models of the transformation.
- * Instances of this class are used to carry the models from one stage of the trans-
- * formation to the next. 
+ * Instances of this class are used to carry the models from one stage of the
+ * transformation to the next. 
  * 
  * @author kuester
  */

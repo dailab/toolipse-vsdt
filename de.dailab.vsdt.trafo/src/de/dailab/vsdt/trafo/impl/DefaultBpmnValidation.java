@@ -39,19 +39,20 @@ import de.dailab.vsdt.trafo.base.util.TrafoLog;
 import de.dailab.vsdt.util.VsdtHelper;
 
 /**
- * Abstract BPMN pre-visitor. This purpose of the pre-visitor is to check if all constraints needed for the mapping
- * are satisfied and to put the diagram in a normalized form, e.g. by applying normalization rules and by removing
- * illegal characters from names. Afterwards, the actual export visitor will not have to care much about null-checks,
- * naming conventions etc., making the export logic less heavy and easier to understand.
+ * Abstract BPMN pre-visitor. This purpose of the pre-visitor is to check if all
+ * constraints needed for the mapping are satisfied and to put the diagram in a 
+ * normalized form, e.g. by applying normalization rules and by removing illegal 
+ * characters from names. Afterwards, the actual export visitor will not have to 
+ * care much about null-checks, naming conventions etc., making the export logic 
+ * less heavy and easier to understand.
  * 
  * Methods that are encouraged to be overwritten in a subclass are marked with three 'X'
  * 
  * Objects and attributes that are NOT visited yet are
- * most BPD attributes
- * adHoc attributes
- * status attributes
- * input, output, IOrules, quantities
- * transactions
+ * - most BPD attributes
+ * - adHoc attributes
+ * - input, output, IOrules, quantities
+ * - transactions
  * 
  * @author tkuester
  */
@@ -81,16 +82,6 @@ public class DefaultBpmnValidation extends MappingStage {
 	//////////////////////////////////////////////////////////
 	// NORMALIZATION, E.G. OF NAMES
 	//////////////////////////////////////////////////////////
-	
-//	/**
-//	 * Translate the Expression to the target language. By default, this method does nothing.
-//	 * XXX Should be overwritten in language specific implementations.
-//	 * 
-//	 * @param expression	Some Expression with Expression Language == VSDT Expression Language
-//	 */
-//	protected boolean translateVxlExpression(Expression expression) {
-//		return true;
-//	}
 	
 	/**
 	 * trim a name off all white spaces and other non-alphanumeric chars
@@ -147,9 +138,10 @@ public class DefaultBpmnValidation extends MappingStage {
 	
 	/**
 	 * Replace illegal characters.
-	 * XXX This method should be overwritten if the specific language allows more or less
-	 * characters to be used in names or another replacing algorithm shall be used.
-	 * Default: special chars and white spaces replaced with ''.
+	 * XXX This method should be overwritten if the specific language allows 
+	 * more or less characters to be used in names or another replacing algorithm 
+	 * shall be used. Default: special chars and white spaces replaced with ''.
+	 * 
 	 * @param s			the string to norm
 	 * @param type		type of the string to norm, e.g. expression, condition, name, ...
 	 * @return
@@ -163,7 +155,8 @@ public class DefaultBpmnValidation extends MappingStage {
 	//////////////////////////////////////////////////////////
 	
 	/**
-	 * helper method for testing conditions. If the condition is false, the given errorMessage is logged.
+	 * helper method for testing conditions. If the condition is false, the 
+	 * given errorMessage is logged.
 	 * 
 	 * @param condition		some test condition
 	 * @param errorMessage	error message to be logged in case the test fails
@@ -178,6 +171,7 @@ public class DefaultBpmnValidation extends MappingStage {
 	
 	/**
 	 * test whether the given element is null and print out a message accordingly
+	 * 
 	 * @param object	some required element, that may not be null
 	 * @return			element is null?
 	 */
@@ -189,7 +183,8 @@ public class DefaultBpmnValidation extends MappingStage {
 	}
 	
 	/**
-	 * helper method for testing a children's condition. If the condition fails (that is, the child contains errors) an "at"-entry is logged.
+	 * helper method for testing a children's condition. If the condition fails 
+	 * (that is, the child contains errors) an "at"-entry is logged.
 	 * 
 	 * @param condition		some test condition for a child element
 	 * @param parent		the parent element
@@ -489,8 +484,9 @@ public class DefaultBpmnValidation extends MappingStage {
 	
 	/**
 	 * no checks here.
-	 * message is NOT checked, because it is only important if referred to by an event or
-	 * activity; thus the check will be made in the event and activity attribute sets
+	 * message is NOT checked, because it is only important if referred to by an 
+	 * event or activity; thus the check will be made in the event and activity 
+	 * attribute sets
 	 */
 	protected boolean visitMessageFlow(MessageFlow messageFlow) {
 		if (testIsNull(messageFlow)) return false;

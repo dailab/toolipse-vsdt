@@ -75,16 +75,18 @@ public abstract class BpmnTrafoWizard extends Wizard {
 	}
 	
 	/**
-	 * Override this method to return the OptionsPage to use. In case no specific options
-	 * other than the default are required, a new BpmnExportWizardOptionsPage can be returned,
-	 * otherwise the BEWOP should be extended by a custom Page, providing additional options.
+	 * Override this method to return the OptionsPage to use. In case no specific
+	 * options other than the default are required, a new BpmnExportWizardOptionsPage
+	 * can be returned, otherwise the BEWOP should be extended by a custom Page, 
+	 * providing additional options.
 	 * 
 	 * @return	generic or customized BpmnExportWizardOptionsPage
 	 */
 	protected abstract BpmnTrafoWizardOptionsPage createOptionsPage(String title, IStructuredSelection selection);
 	
 	/**
-	 * in this method the several stages of the mapping and the result saver are initialized
+	 * In this method the several stages of the mapping and the result saver are
+	 * initialized.
 	 */
 	protected abstract void initializeMappingStages();
 	
@@ -98,17 +100,19 @@ public abstract class BpmnTrafoWizard extends Wizard {
 	}
 	
 	/**
-	 * in this method, additional options provided by the OptionsPage can be read and applied to the
-	 * mapping stages. This method is called in the performFinish method before invoking the transformation.
+	 * In this method, additional options provided by the OptionsPage can be 
+	 * read and applied to the mapping stages. This method is called in the 
+	 * performFinish method before invoking the transformation.
 	 */
 	protected abstract void applyOptions();
 
 	/**
-	 * When finishing the dialog, the transformation is performed for each of the selected resources.
-	 * The transformation is performed inside of a Progress Dialog, so the user has some kind of
-	 * feedback that something happens when he clicks the Finish-button (although the dialog does
-	 * not indicate any progress in the transformation as such). Finally, a dialog is shown with
-	 * the result of the transformation.
+	 * When finishing the dialog, the transformation is performed for each of
+	 * the selected resources. The transformation is performed inside of a 
+	 * Progress Dialog, so the user has some kind of feedback that something 
+	 * happens when he clicks the Finish-button (although the dialog does not 
+	 * indicate any progress in the transformation as such). Finally, a dialog 
+	 * is shown with the result of the transformation.
 	 */
 	@Override
 	public boolean performFinish() {
@@ -178,9 +182,10 @@ public abstract class BpmnTrafoWizard extends Wizard {
 	}
 	
 	/**
-	 * Do the actual transformation. After doing some preparations, the given source object is put
-	 * in a {@link MappingWrapper} and passed from one {@link MappingStage} to the next. Finally,
-	 * the results are saved using a {@link MappingResultSaver}.
+	 * Do the actual transformation. After doing some preparations, the given 
+	 * source object is put in a {@link MappingWrapper} and passed from one 
+	 * {@link MappingStage} to the next. Finally, the results are saved using a 
+	 * {@link MappingResultSaver}.
 	 * 
 	 * @param source	source object for which to perform the transformation
 	 * @return			transformation successful?
