@@ -64,7 +64,6 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getInMessage <em>In Message</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getOutMessage <em>Out Message</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getImplementation <em>Implementation</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#isInstantiate <em>Instantiate</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getPerformers <em>Performers</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getScript <em>Script</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getActivityRef <em>Activity Ref</em>}</li>
@@ -228,26 +227,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 * @ordered
 	 */
 	protected Implementation implementation;
-
-	/**
-	 * The default value of the '{@link #isInstantiate() <em>Instantiate</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isInstantiate()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean INSTANTIATE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isInstantiate() <em>Instantiate</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isInstantiate()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean instantiate = INSTANTIATE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getPerformers() <em>Performers</em>}' attribute list.
@@ -678,27 +657,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isInstantiate() {
-		return instantiate;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setInstantiate(boolean newInstantiate) {
-		boolean oldInstantiate = instantiate;
-		instantiate = newInstantiate;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ACTIVITY__INSTANTIATE, oldInstantiate, instantiate));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<String> getPerformers() {
 		if (performers == null) {
 			performers = new EDataTypeUniqueEList<String>(String.class, this, VsdtPackage.ACTIVITY__PERFORMERS);
@@ -1087,8 +1045,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 			case VsdtPackage.ACTIVITY__IMPLEMENTATION:
 				if (resolve) return getImplementation();
 				return basicGetImplementation();
-			case VsdtPackage.ACTIVITY__INSTANTIATE:
-				return isInstantiate();
 			case VsdtPackage.ACTIVITY__PERFORMERS:
 				return getPerformers();
 			case VsdtPackage.ACTIVITY__SCRIPT:
@@ -1165,9 +1121,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				return;
 			case VsdtPackage.ACTIVITY__IMPLEMENTATION:
 				setImplementation((Implementation)newValue);
-				return;
-			case VsdtPackage.ACTIVITY__INSTANTIATE:
-				setInstantiate((Boolean)newValue);
 				return;
 			case VsdtPackage.ACTIVITY__PERFORMERS:
 				getPerformers().clear();
@@ -1247,9 +1200,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 			case VsdtPackage.ACTIVITY__IMPLEMENTATION:
 				setImplementation((Implementation)null);
 				return;
-			case VsdtPackage.ACTIVITY__INSTANTIATE:
-				setInstantiate(INSTANTIATE_EDEFAULT);
-				return;
 			case VsdtPackage.ACTIVITY__PERFORMERS:
 				getPerformers().clear();
 				return;
@@ -1312,8 +1262,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				return outMessage != null;
 			case VsdtPackage.ACTIVITY__IMPLEMENTATION:
 				return implementation != null;
-			case VsdtPackage.ACTIVITY__INSTANTIATE:
-				return instantiate != INSTANTIATE_EDEFAULT;
 			case VsdtPackage.ACTIVITY__PERFORMERS:
 				return performers != null && !performers.isEmpty();
 			case VsdtPackage.ACTIVITY__SCRIPT:
@@ -1396,8 +1344,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 		result.append(adHoc);
 		result.append(", activityType: ");
 		result.append(activityType);
-		result.append(", instantiate: ");
-		result.append(instantiate);
 		result.append(", performers: ");
 		result.append(performers);
 		result.append(", script: ");

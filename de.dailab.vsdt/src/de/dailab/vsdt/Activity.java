@@ -25,7 +25,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.Activity#getInMessage <em>In Message</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getOutMessage <em>Out Message</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getImplementation <em>Implementation</em>}</li>
- *   <li>{@link de.dailab.vsdt.Activity#isInstantiate <em>Instantiate</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getPerformers <em>Performers</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getScript <em>Script</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getActivityRef <em>Activity Ref</em>}</li>
@@ -242,32 +241,6 @@ public interface Activity extends FlowObject, AbstractProcess, FlowObjectContain
 	 * @generated
 	 */
 	void setImplementation(Implementation value);
-
-	/**
-	 * Returns the value of the '<em><b>Instantiate</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Instantiate</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Instantiate</em>' attribute.
-	 * @see #setInstantiate(boolean)
-	 * @see de.dailab.vsdt.VsdtPackage#getActivity_Instantiate()
-	 * @model
-	 * @generated
-	 */
-	boolean isInstantiate();
-
-	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Activity#isInstantiate <em>Instantiate</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Instantiate</em>' attribute.
-	 * @see #isInstantiate()
-	 * @generated
-	 */
-	void setInstantiate(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Performers</b></em>' attribute list.

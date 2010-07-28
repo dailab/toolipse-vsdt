@@ -26,7 +26,6 @@ import de.dailab.vsdt.VsdtPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.GatewayImpl#getGatewayType <em>Gateway Type</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.GatewayImpl#isInstantiate <em>Instantiate</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.GatewayImpl#getIncomingCondition <em>Incoming Condition</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.GatewayImpl#getOutgoingCondition <em>Outgoing Condition</em>}</li>
  * </ul>
@@ -54,26 +53,6 @@ public class GatewayImpl extends FlowObjectImpl implements Gateway {
 	 * @ordered
 	 */
 	protected GatewayType gatewayType = GATEWAY_TYPE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isInstantiate() <em>Instantiate</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isInstantiate()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean INSTANTIATE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isInstantiate() <em>Instantiate</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isInstantiate()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean instantiate = INSTANTIATE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getIncomingCondition() <em>Incoming Condition</em>}' containment reference.
@@ -136,27 +115,6 @@ public class GatewayImpl extends FlowObjectImpl implements Gateway {
 			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.GATEWAY__GATEWAY_TYPE, oldGatewayType, gatewayType));
 	}
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isInstantiate() {
-		return instantiate;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setInstantiate(boolean newInstantiate) {
-		boolean oldInstantiate = instantiate;
-		instantiate = newInstantiate;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.GATEWAY__INSTANTIATE, oldInstantiate, instantiate));
-	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -270,8 +228,6 @@ public class GatewayImpl extends FlowObjectImpl implements Gateway {
 		switch (featureID) {
 			case VsdtPackage.GATEWAY__GATEWAY_TYPE:
 				return getGatewayType();
-			case VsdtPackage.GATEWAY__INSTANTIATE:
-				return isInstantiate();
 			case VsdtPackage.GATEWAY__INCOMING_CONDITION:
 				return getIncomingCondition();
 			case VsdtPackage.GATEWAY__OUTGOING_CONDITION:
@@ -290,9 +246,6 @@ public class GatewayImpl extends FlowObjectImpl implements Gateway {
 		switch (featureID) {
 			case VsdtPackage.GATEWAY__GATEWAY_TYPE:
 				setGatewayType((GatewayType)newValue);
-				return;
-			case VsdtPackage.GATEWAY__INSTANTIATE:
-				setInstantiate((Boolean)newValue);
 				return;
 			case VsdtPackage.GATEWAY__INCOMING_CONDITION:
 				setIncomingCondition((Expression)newValue);
@@ -315,9 +268,6 @@ public class GatewayImpl extends FlowObjectImpl implements Gateway {
 			case VsdtPackage.GATEWAY__GATEWAY_TYPE:
 				setGatewayType(GATEWAY_TYPE_EDEFAULT);
 				return;
-			case VsdtPackage.GATEWAY__INSTANTIATE:
-				setInstantiate(INSTANTIATE_EDEFAULT);
-				return;
 			case VsdtPackage.GATEWAY__INCOMING_CONDITION:
 				setIncomingCondition((Expression)null);
 				return;
@@ -338,8 +288,6 @@ public class GatewayImpl extends FlowObjectImpl implements Gateway {
 		switch (featureID) {
 			case VsdtPackage.GATEWAY__GATEWAY_TYPE:
 				return gatewayType != GATEWAY_TYPE_EDEFAULT;
-			case VsdtPackage.GATEWAY__INSTANTIATE:
-				return instantiate != INSTANTIATE_EDEFAULT;
 			case VsdtPackage.GATEWAY__INCOMING_CONDITION:
 				return incomingCondition != null;
 			case VsdtPackage.GATEWAY__OUTGOING_CONDITION:
@@ -360,8 +308,6 @@ public class GatewayImpl extends FlowObjectImpl implements Gateway {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (gatewayType: ");
 		result.append(gatewayType);
-		result.append(", instantiate: ");
-		result.append(instantiate);
 		result.append(')');
 		return result.toString();
 	}

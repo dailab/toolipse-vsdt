@@ -7,7 +7,6 @@ import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
@@ -34,7 +33,7 @@ implements SelectionListener {
     protected Gateway gateway;
 
     private Combo typeCombo;
-    private Button xorEventInstantiateButton;
+//    private Button xorEventInstantiateButton;
     private ExpressionComposite complexIncomingCondText;
     private ExpressionComposite complexOutgoingCondText;
     
@@ -57,11 +56,11 @@ implements SelectionListener {
  	protected void internalRefresh() {
     	typeCombo.select(gateway.getGatewayType().getValue());
     	
-    	xorEventInstantiateButton.setEnabled(gateway.getGatewayType() == GatewayType.XOR_EVENT);
+//    	xorEventInstantiateButton.setEnabled(gateway.getGatewayType() == GatewayType.XOR_EVENT);
     	complexIncomingCondText.setEnabled(gateway.getGatewayType() == GatewayType.COMPLEX);
     	complexOutgoingCondText.setEnabled(gateway.getGatewayType() == GatewayType.COMPLEX);
     	
-		xorEventInstantiateButton.setSelection(gateway.isInstantiate());
+//		xorEventInstantiateButton.setSelection(gateway.isInstantiate());
 		complexIncomingCondText.setText(getExpression(gateway.getIncomingCondition()));
 		complexOutgoingCondText.setText(getExpression(gateway.getOutgoingCondition()));
     }
@@ -85,14 +84,14 @@ implements SelectionListener {
         // gateway type attributes
         Group attributesGroup= FormLayoutUtil.addGroup(composite, DISPLAY_TYPE_GROUP, typeCombo, 0, 100);
         
-    	xorEventInstantiateButton= FormLayoutUtil.addButton(attributesGroup, DISPLAY_XOR_EVENT_INSTANTIATE, SWT.CHECK, 0, 0, null);
-    	xorEventInstantiateButton.addSelectionListener(this);
+//    	xorEventInstantiateButton= FormLayoutUtil.addButton(attributesGroup, DISPLAY_XOR_EVENT_INSTANTIATE, SWT.CHECK, 0, 0, null);
+//    	xorEventInstantiateButton.addSelectionListener(this);
     	
-    	label= FormLayoutUtil.addLabel(attributesGroup, DISPLAY_COMPLEX_INCOMINGCOND, xorEventInstantiateButton, 0);
-    	complexIncomingCondText= addExpressionComposite(attributesGroup, xorEventInstantiateButton, label, 50);
+    	label= FormLayoutUtil.addLabel(attributesGroup, DISPLAY_COMPLEX_INCOMINGCOND, 0, 0);
+    	complexIncomingCondText= addExpressionComposite(attributesGroup, 0, label, 50);
 
-    	label= FormLayoutUtil.addLabel(attributesGroup, DISPLAY_COMPLEX_OUTGOINGCOND, xorEventInstantiateButton, 50);
-    	complexOutgoingCondText= addExpressionComposite(attributesGroup, xorEventInstantiateButton, label, 100);
+    	label= FormLayoutUtil.addLabel(attributesGroup, DISPLAY_COMPLEX_OUTGOINGCOND, 0, 50);
+    	complexOutgoingCondText= addExpressionComposite(attributesGroup, 0, label, 100);
     }
     
     
@@ -107,9 +106,9 @@ implements SelectionListener {
     	if (src.equals(typeCombo)) {
     		setPropertyValue(gateway, pack.getGateway_GatewayType(), GatewayType.get(typeCombo.getSelectionIndex()));
     	}
-		if (src.equals(xorEventInstantiateButton)) {
-			setPropertyValue(gateway, pack.getGateway_Instantiate(), xorEventInstantiateButton.getSelection());
-		}
+//		if (src.equals(xorEventInstantiateButton)) {
+//			setPropertyValue(gateway, pack.getGateway_Instantiate(), xorEventInstantiateButton.getSelection());
+//		}
     	refresh();
     }
 

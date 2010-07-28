@@ -920,7 +920,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getActivity_Instantiate() {
+	public EAttribute getActivity_Performers() {
 		return (EAttribute)activityEClass.getEStructuralFeatures().get(9);
 	}
 
@@ -929,7 +929,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getActivity_Performers() {
+	public EAttribute getActivity_Script() {
 		return (EAttribute)activityEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -938,17 +938,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getActivity_Script() {
-		return (EAttribute)activityEClass.getEStructuralFeatures().get(11);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getActivity_ActivityRef() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(12);
+		return (EReference)activityEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -957,7 +948,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_Transaction() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(13);
+		return (EReference)activityEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -966,7 +957,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_DiagramRef() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(14);
+		return (EReference)activityEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -975,7 +966,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_ProcessRef() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(15);
+		return (EReference)activityEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -984,7 +975,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_InputPropertyMaps() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(16);
+		return (EReference)activityEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -993,7 +984,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_OutputPropertyMaps() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(17);
+		return (EReference)activityEClass.getEStructuralFeatures().get(16);
 	}
 
 	/**
@@ -1190,17 +1181,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getGateway_Instantiate() {
-		return (EAttribute)gatewayEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getGateway_IncomingCondition() {
-		return (EReference)gatewayEClass.getEStructuralFeatures().get(2);
+		return (EReference)gatewayEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1209,7 +1191,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getGateway_OutgoingCondition() {
-		return (EReference)gatewayEClass.getEStructuralFeatures().get(3);
+		return (EReference)gatewayEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2202,7 +2184,6 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		createEReference(activityEClass, ACTIVITY__IN_MESSAGE);
 		createEReference(activityEClass, ACTIVITY__OUT_MESSAGE);
 		createEReference(activityEClass, ACTIVITY__IMPLEMENTATION);
-		createEAttribute(activityEClass, ACTIVITY__INSTANTIATE);
 		createEAttribute(activityEClass, ACTIVITY__PERFORMERS);
 		createEAttribute(activityEClass, ACTIVITY__SCRIPT);
 		createEReference(activityEClass, ACTIVITY__ACTIVITY_REF);
@@ -2239,7 +2220,6 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 
 		gatewayEClass = createEClass(GATEWAY);
 		createEAttribute(gatewayEClass, GATEWAY__GATEWAY_TYPE);
-		createEAttribute(gatewayEClass, GATEWAY__INSTANTIATE);
 		createEReference(gatewayEClass, GATEWAY__INCOMING_CONDITION);
 		createEReference(gatewayEClass, GATEWAY__OUTGOING_CONDITION);
 
@@ -2506,7 +2486,6 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		initEReference(getActivity_InMessage(), this.getMessage(), null, "inMessage", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActivity_OutMessage(), this.getMessage(), null, "outMessage", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActivity_Implementation(), this.getImplementation(), null, "implementation", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getActivity_Instantiate(), ecorePackage.getEBoolean(), "instantiate", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActivity_Performers(), ecorePackage.getEString(), "performers", null, 0, -1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActivity_Script(), ecorePackage.getEString(), "script", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActivity_ActivityRef(), this.getActivity(), null, "activityRef", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2549,7 +2528,6 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 
 		initEClass(gatewayEClass, Gateway.class, "Gateway", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGateway_GatewayType(), this.getGatewayType(), "gatewayType", null, 0, 1, Gateway.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getGateway_Instantiate(), ecorePackage.getEBoolean(), "instantiate", null, 0, 1, Gateway.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGateway_IncomingCondition(), this.getExpression(), null, "incomingCondition", null, 0, 1, Gateway.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getGateway_OutgoingCondition(), this.getExpression(), null, "outgoingCondition", null, 0, 1, Gateway.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

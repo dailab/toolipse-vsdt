@@ -109,7 +109,7 @@ implements FocusListener, SelectionListener {
     private VsdtFeatureCombo<Implementation> implCombo;
     private VsdtFeatureCombo<Message> inMessageCombo;
     private VsdtFeatureCombo<Message> outMessageCombo;
-    private Button instantiateButton;
+//    private Button instantiateButton;
     private Text scriptText;
     private VsdtFeatureCombo<Activity> taskRefCombo;
     
@@ -173,7 +173,7 @@ implements FocusListener, SelectionListener {
     	inMessageCombo.getCombo().setEnabled(at == ActivityType.SEND || at == ActivityType.SERVICE || at == ActivityType.USER);
     	outMessageCombo.getCombo().setEnabled(at == ActivityType.RECEIVE || at == ActivityType.SERVICE || at == ActivityType.USER);
     	implCombo.getCombo().setEnabled(at == ActivityType.RECEIVE || at == ActivityType.SEND || at == ActivityType.SERVICE || at == ActivityType.USER);
-    	instantiateButton.setEnabled(at == ActivityType.RECEIVE);
+//    	instantiateButton.setEnabled(at == ActivityType.RECEIVE);
     	scriptText.setEnabled(at == ActivityType.SCRIPT);
     	taskRefCombo.getCombo().setEnabled(at == ActivityType.TASKREFERENCE);
     	
@@ -201,7 +201,7 @@ implements FocusListener, SelectionListener {
     	implCombo.setSelected(activity.getImplementation());
     	scriptText.setText(nonNull(activity.getScript()));
     	taskRefCombo.setSelected(activity.getActivityRef());
-    	instantiateButton.setSelection(activity.isInstantiate());
+//    	instantiateButton.setSelection(activity.isInstantiate());
     	
     	//refresh subprocess attributes
     	transactionButton.setSelection(activity.getTransaction() != null);
@@ -378,9 +378,9 @@ implements FocusListener, SelectionListener {
     	if (src.equals(processRefCombo.getCombo())) {
     		setPropertyValue(activity, pack.getActivity_ProcessRef(), processRefCombo.getSelected());
     	}
-    	if (src.equals(instantiateButton)) {
-    		setPropertyValue(activity, pack.getActivity_Instantiate(), instantiateButton.getSelection());
-    	}
+//    	if (src.equals(instantiateButton)) {
+//    		setPropertyValue(activity, pack.getActivity_Instantiate(), instantiateButton.getSelection());
+//    	}
     	if (activity.getLoopAttributes() instanceof MultiLoopAttSet) {
 			MultiLoopAttSet attSet = (MultiLoopAttSet) activity.getLoopAttributes();
 	    	if (src.equals(multiOrderingSeqButton)) {
@@ -440,11 +440,11 @@ implements FocusListener, SelectionListener {
     private void fillTaskAttributesGroup(Group group) {
     	CLabel label;
 
-		instantiateButton= FormLayoutUtil.addButton(group, DISPLAY_TASK_INSTANTIATE, SWT.CHECK, 0, 0, null);
-		instantiateButton.addSelectionListener(this);
+//		instantiateButton= FormLayoutUtil.addButton(group, DISPLAY_TASK_INSTANTIATE, SWT.CHECK, 0, 0, null);
+//		instantiateButton.addSelectionListener(this);
 		
-		label= FormLayoutUtil.addLabel(group, DISPLAY_TASK_IMPL, instantiateButton, 0);
-		implCombo= new VsdtFeatureCombo<Implementation>(FormLayoutUtil.addCombo(group, SWT.READ_ONLY, instantiateButton, label, 100));
+		label= FormLayoutUtil.addLabel(group, DISPLAY_TASK_IMPL, 0, 0);
+		implCombo= new VsdtFeatureCombo<Implementation>(FormLayoutUtil.addCombo(group, SWT.READ_ONLY, 0, label, 100));
 		implCombo.getCombo().addSelectionListener(this);
 		
 		label= FormLayoutUtil.addLabel(group, DISPLAY_TASK_INMESSAGE, implCombo.getCombo(), 0);

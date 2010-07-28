@@ -16,7 +16,6 @@ package de.dailab.vsdt;
  * The following features are supported:
  * <ul>
  *   <li>{@link de.dailab.vsdt.Gateway#getGatewayType <em>Gateway Type</em>}</li>
- *   <li>{@link de.dailab.vsdt.Gateway#isInstantiate <em>Instantiate</em>}</li>
  *   <li>{@link de.dailab.vsdt.Gateway#getIncomingCondition <em>Incoming Condition</em>}</li>
  *   <li>{@link de.dailab.vsdt.Gateway#getOutgoingCondition <em>Outgoing Condition</em>}</li>
  * </ul>
@@ -55,32 +54,6 @@ public interface Gateway extends FlowObject {
 	 * @generated
 	 */
 	void setGatewayType(GatewayType value);
-
-	/**
-	 * Returns the value of the '<em><b>Instantiate</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Instantiate</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Instantiate</em>' attribute.
-	 * @see #setInstantiate(boolean)
-	 * @see de.dailab.vsdt.VsdtPackage#getGateway_Instantiate()
-	 * @model
-	 * @generated
-	 */
-	boolean isInstantiate();
-
-	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Gateway#isInstantiate <em>Instantiate</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Instantiate</em>' attribute.
-	 * @see #isInstantiate()
-	 * @generated
-	 */
-	void setInstantiate(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Incoming Condition</b></em>' containment reference.

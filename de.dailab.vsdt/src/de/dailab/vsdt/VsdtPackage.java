@@ -2216,22 +2216,13 @@ public interface VsdtPackage extends EPackage {
 	int ACTIVITY__IMPLEMENTATION = FLOW_OBJECT_FEATURE_COUNT + 12;
 
 	/**
-	 * The feature id for the '<em><b>Instantiate</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTIVITY__INSTANTIATE = FLOW_OBJECT_FEATURE_COUNT + 13;
-
-	/**
 	 * The feature id for the '<em><b>Performers</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__PERFORMERS = FLOW_OBJECT_FEATURE_COUNT + 14;
+	int ACTIVITY__PERFORMERS = FLOW_OBJECT_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Script</b></em>' attribute.
@@ -2240,7 +2231,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__SCRIPT = FLOW_OBJECT_FEATURE_COUNT + 15;
+	int ACTIVITY__SCRIPT = FLOW_OBJECT_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Activity Ref</b></em>' reference.
@@ -2249,7 +2240,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__ACTIVITY_REF = FLOW_OBJECT_FEATURE_COUNT + 16;
+	int ACTIVITY__ACTIVITY_REF = FLOW_OBJECT_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Transaction</b></em>' containment reference.
@@ -2258,7 +2249,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__TRANSACTION = FLOW_OBJECT_FEATURE_COUNT + 17;
+	int ACTIVITY__TRANSACTION = FLOW_OBJECT_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Diagram Ref</b></em>' reference.
@@ -2267,7 +2258,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__DIAGRAM_REF = FLOW_OBJECT_FEATURE_COUNT + 18;
+	int ACTIVITY__DIAGRAM_REF = FLOW_OBJECT_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Process Ref</b></em>' reference.
@@ -2276,7 +2267,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__PROCESS_REF = FLOW_OBJECT_FEATURE_COUNT + 19;
+	int ACTIVITY__PROCESS_REF = FLOW_OBJECT_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Input Property Maps</b></em>' containment reference list.
@@ -2285,7 +2276,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__INPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 20;
+	int ACTIVITY__INPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Output Property Maps</b></em>' containment reference list.
@@ -2294,7 +2285,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__OUTPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 21;
+	int ACTIVITY__OUTPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 20;
 
 	/**
 	 * The number of structural features of the '<em>Activity</em>' class.
@@ -2303,7 +2294,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 22;
+	int ACTIVITY_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 21;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -2612,22 +2603,13 @@ public interface VsdtPackage extends EPackage {
 	int GATEWAY__GATEWAY_TYPE = FLOW_OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Instantiate</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GATEWAY__INSTANTIATE = FLOW_OBJECT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Incoming Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GATEWAY__INCOMING_CONDITION = FLOW_OBJECT_FEATURE_COUNT + 2;
+	int GATEWAY__INCOMING_CONDITION = FLOW_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Condition</b></em>' containment reference.
@@ -2636,7 +2618,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATEWAY__OUTGOING_CONDITION = FLOW_OBJECT_FEATURE_COUNT + 3;
+	int GATEWAY__OUTGOING_CONDITION = FLOW_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Gateway</em>' class.
@@ -2645,7 +2627,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATEWAY_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 4;
+	int GATEWAY_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.ArtifactImpl <em>Artifact</em>}' class.
@@ -4525,17 +4507,6 @@ public interface VsdtPackage extends EPackage {
 	EReference getActivity_Implementation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Activity#isInstantiate <em>Instantiate</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Instantiate</em>'.
-	 * @see de.dailab.vsdt.Activity#isInstantiate()
-	 * @see #getActivity()
-	 * @generated
-	 */
-	EAttribute getActivity_Instantiate();
-
-	/**
 	 * Returns the meta object for the attribute list '{@link de.dailab.vsdt.Activity#getPerformers <em>Performers</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4846,17 +4817,6 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getGateway_GatewayType();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Gateway#isInstantiate <em>Instantiate</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Instantiate</em>'.
-	 * @see de.dailab.vsdt.Gateway#isInstantiate()
-	 * @see #getGateway()
-	 * @generated
-	 */
-	EAttribute getGateway_Instantiate();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link de.dailab.vsdt.Gateway#getIncomingCondition <em>Incoming Condition</em>}'.
@@ -6354,14 +6314,6 @@ public interface VsdtPackage extends EPackage {
 		EReference ACTIVITY__IMPLEMENTATION = eINSTANCE.getActivity_Implementation();
 
 		/**
-		 * The meta object literal for the '<em><b>Instantiate</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ACTIVITY__INSTANTIATE = eINSTANCE.getActivity_Instantiate();
-
-		/**
 		 * The meta object literal for the '<em><b>Performers</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6606,14 +6558,6 @@ public interface VsdtPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute GATEWAY__GATEWAY_TYPE = eINSTANCE.getGateway_GatewayType();
-
-		/**
-		 * The meta object literal for the '<em><b>Instantiate</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute GATEWAY__INSTANTIATE = eINSTANCE.getGateway_Instantiate();
 
 		/**
 		 * The meta object literal for the '<em><b>Incoming Condition</b></em>' containment reference feature.

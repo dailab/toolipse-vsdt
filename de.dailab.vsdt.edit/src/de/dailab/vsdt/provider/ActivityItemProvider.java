@@ -71,7 +71,6 @@ public class ActivityItemProvider
 			addInMessagePropertyDescriptor(object);
 			addOutMessagePropertyDescriptor(object);
 			addImplementationPropertyDescriptor(object);
-			addInstantiatePropertyDescriptor(object);
 			addPerformersPropertyDescriptor(object);
 			addScriptPropertyDescriptor(object);
 			addActivityRefPropertyDescriptor(object);
@@ -209,28 +208,6 @@ public class ActivityItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Instantiate feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addInstantiatePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Activity_instantiate_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_instantiate_feature", "_UI_Activity_type"),
-				 VsdtPackage.Literals.ACTIVITY__INSTANTIATE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -473,7 +450,6 @@ public class ActivityItemProvider
 		switch (notification.getFeatureID(Activity.class)) {
 			case VsdtPackage.ACTIVITY__AD_HOC:
 			case VsdtPackage.ACTIVITY__ACTIVITY_TYPE:
-			case VsdtPackage.ACTIVITY__INSTANTIATE:
 			case VsdtPackage.ACTIVITY__PERFORMERS:
 			case VsdtPackage.ACTIVITY__SCRIPT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

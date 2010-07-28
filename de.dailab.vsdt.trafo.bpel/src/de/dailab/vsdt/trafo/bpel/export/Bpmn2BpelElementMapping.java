@@ -579,7 +579,8 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 			break;
 		case RECEIVE:
 			//create Receive
-			mapping= createReceive(activity.getOutMessage(),activity.getImplementation(), activity.isInstantiate());
+//			mapping= createReceive(activity.getOutMessage(),activity.getImplementation(), activity.isInstantiate());
+			mapping= createReceive(activity.getOutMessage(),activity.getImplementation(), false);
 			break;
 		case SEND:
 			//create Reply/Invoke
@@ -803,9 +804,9 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 		case XOR_EVENT: {
 			//create pick
 			TPick block= ProcessFactory.eINSTANCE.createTPick();
-			if (fork.isInstantiate()) {
-				((TPick) block).setCreateInstance(TBoolean.YES);
-			}
+//			if (fork.isInstantiate()) {
+//				((TPick) block).setCreateInstance(TBoolean.YES);
+//			}
 
 			for (BpmnBranch branch : bpmnBlock.getElements()) {
 				FlowObject flowObject = branch.getElement();

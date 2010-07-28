@@ -192,7 +192,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/inMessage"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/outMessage"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/implementation"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/instantiate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/performers"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/script"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/activityRef"/>
@@ -232,7 +231,6 @@
     </genClasses>
     <genClasses ecoreClass="vsdt.ecore#//Gateway">
       <genFeatures createChild="false" propertyCategory="General" ecoreFeature="ecore:EAttribute vsdt.ecore#//Gateway/gatewayType"/>
-      <genFeatures createChild="false" propertyCategory="Gateway Type Atributes" ecoreFeature="ecore:EAttribute vsdt.ecore#//Gateway/instantiate"/>
       <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Gateway Type Atributes"
           ecoreFeature="ecore:EReference vsdt.ecore#//Gateway/incomingCondition"/>
       <genFeatures property="Readonly" children="true" createChild="true" propertyCategory="Gateway Type Atributes"
