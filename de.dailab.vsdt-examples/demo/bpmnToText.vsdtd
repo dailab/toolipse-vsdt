@@ -52,9 +52,7 @@
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_WH2r0dN8Ed6IL7PHwv22lw" name="Answering Support Call" documentation="This Business Process is about handling incoming support calls." id="_fvliInz4Ed6pGOp9FzmQww" participants="_WH2sENN8Ed6IL7PHwv22lw _WH2sEtN8Ed6IL7PHwv22lw _WH2sEdN8Ed6IL7PHwv22lw">
       <pools xmi:type="vsdt:Pool" xmi:id="_WH2r0tN8Ed6IL7PHwv22lw" name="Customer Support" documentation="This Pool illustrates the process of Customer Support." id="_yxZuwAzBEd6Oi9RfBDu6Tw" participant="_WH2sENN8Ed6IL7PHwv22lw">
         <lanes xmi:type="vsdt:Lane" xmi:id="_WH2r1NN8Ed6IL7PHwv22lw" name="Help Desk" documentation="This Lane represents the Help Desk, which receives all incoming trouble tickets and will look up the answers for known problems or escalate the ticket to the technical support." id="_yxZuwgzBEd6Oi9RfBDu6Tw">
-          <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_WH2r1dN8Ed6IL7PHwv22lw" name="Receive Ticket" documentation="In the ticket the customer describes his poblem." id="_BR48sAzCEd6Oi9RfBDu6Tw" trigger="MESSAGE" message="_WH2sFdN8Ed6IL7PHwv22lw" implementation="_WH3S4tN8Ed6IL7PHwv22lw">
-            <timeCycle xmi:type="vsdt:Expression" xmi:id="_WH2r1tN8Ed6IL7PHwv22lw" expression="123"/>
-          </containedFlowObjects>
+          <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_WH2r1dN8Ed6IL7PHwv22lw" name="Receive Ticket" documentation="In the ticket the customer describes his poblem." id="_BR48sAzCEd6Oi9RfBDu6Tw" trigger="MESSAGE" message="_WH2sFdN8Ed6IL7PHwv22lw" implementation="_WH3S4tN8Ed6IL7PHwv22lw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_WH2r19N8Ed6IL7PHwv22lw" name="File Ticket" documentation="The ticked is filed, so it can be used for statistical purposes, such as which problems occured how often and from what kinds of users." id="_F6_OwAzCEd6Oi9RfBDu6Tw" activityType="USER"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_WH2r2NN8Ed6IL7PHwv22lw" name="End Process" documentation="The process terminates." id="_LgpPsAzCEd6Oi9RfBDu6Tw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_WH2r2dN8Ed6IL7PHwv22lw" name="Look up answer in Database" documentation="The problem turned out to be a known problem and the answer can be looked up in some sort of problem-solution-database." id="_N_-Y4AzCEd6Oi9RfBDu6Tw" activityType="USER" inMessage="_WH2sGNN8Ed6IL7PHwv22lw" outMessage="_WH2sGtN8Ed6IL7PHwv22lw" implementation="_WH3S5dN8Ed6IL7PHwv22lw"/>
@@ -64,8 +62,8 @@
         </lanes>
         <lanes xmi:type="vsdt:Lane" xmi:id="_WH2r3dN8Ed6IL7PHwv22lw" name="Technical Support" documentation="The Technical Support receives tickets that can not be handled by the help desk, e.g. new problems." id="_e3nrcAzCEd6Oi9RfBDu6Tw">
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_WH2r3tN8Ed6IL7PHwv22lw" name="Try to reproduce Problem" documentation="The support crew will try to reproduce the problem as described in the problem ticket. Depending on the outcome, further steps are taken." id="_xPgowAzCEd6Oi9RfBDu6Tw" activityType="MANUAL">
-            <boundaryEvents xmi:type="vsdt:Intermediate" xmi:id="_WH2r39N8Ed6IL7PHwv22lw" name="Timeout" documentation="The problem could not be reproduced after a reasonable time of trying to do so." id="_-3ndMAzCEd6Oi9RfBDu6Tw" trigger="TIMER">
-              <timeCycle xmi:type="vsdt:Expression" xmi:id="_WH2r4NN8Ed6IL7PHwv22lw" expression="'30 minutes'"/>
+            <boundaryEvents xmi:type="vsdt:Intermediate" xmi:id="_WH2r39N8Ed6IL7PHwv22lw" name="Timeout" documentation="The problem could not be reproduced after a reasonable time of trying to do so." id="_-3ndMAzCEd6Oi9RfBDu6Tw" trigger="TIMER" asDuration="true">
+              <timeExpression xmi:type="vsdt:Expression" xmi:id="_WH2r4NN8Ed6IL7PHwv22lw" expression="'30 minutes'"/>
             </boundaryEvents>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_WH2r4dN8Ed6IL7PHwv22lw" name="Kind of Problem?" documentation="Determine whether the problem is a simple usage problem, or a bug in the system, or both." id="__5qwEAzCEd6Oi9RfBDu6Tw" gatewayType="OR"/>
@@ -92,8 +90,7 @@
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_HDsxAXOqEd-YkfVymep_tA" name="Bug not fixed" documentation="The process ends, but the bug could not be fixed." id="_HDsxAHOqEd-YkfVymep_tA"/>
         </lanes>
       </pools>
-      <pools xmi:type="vsdt:Pool" xmi:id="_WH2r89N8Ed6IL7PHwv22lw" name="Customer" documentation="This is a blackbox Pool which represents the customer making the call at the help desk. No internal process is shown for this Pool." id="_4-HEcAzIEd6UAPS6PsSOjQ" participant="_WH2sEdN8Ed6IL7PHwv22lw">
-      </pools>
+      <pools xmi:type="vsdt:Pool" xmi:id="_WH2r89N8Ed6IL7PHwv22lw" name="Customer" documentation="This is a blackbox Pool which represents the customer making the call at the help desk. No internal process is shown for this Pool." id="_4-HEcAzIEd6UAPS6PsSOjQ" participant="_WH2sEdN8Ed6IL7PHwv22lw"/>
       <artifacts xmi:type="vsdt:DataObject" xmi:id="_KTRcoHOwEd-5uaez8HAwUg" name="Trouble Ticket" id="_KTQ1kHOwEd-5uaez8HAwUg"/>
       <artifacts xmi:type="vsdt:DataObject" xmi:id="_RIV3AXOwEd-5uaez8HAwUg" name="Bug Report" id="_RIV3AHOwEd-5uaez8HAwUg"/>
       <artifacts xmi:type="vsdt:DataObject" xmi:id="_T-6bgXOwEd-5uaez8HAwUg" name="Bug Report (Resolved)" id="_T-6bgHOwEd-5uaez8HAwUg"/>
