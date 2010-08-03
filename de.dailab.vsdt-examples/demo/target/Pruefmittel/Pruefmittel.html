@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link href="bpmn2text.css" rel="stylesheet" type="text/css" />
+		<title>Pruefmittel</title>
+	</head>
+	<body>
+		
+		<h1>Pruefmittel</h1>
+		
+		<ul>
+			<li>Author: Tobias Küster</li>
+			<li>Version: 0.1</li>
+			<li>Created: Mon Apr 19 13:07:29 CEST 2010</li>
+			<li>Modified: Mon Apr 19 13:07:29 CEST 2010</li>
+			
+		</ul>
+		Beispiel-Diagramme für Textgenerierung
+		<img class="gen_diagram" src="Pruefmittel.png">
+		<em>BusinessProcessSystem 'Pruefmittel'</em>
+		
+		<h2 id="_OPPccEuvEd-d39CJvpAVxA">Beschaffung von Prüfmitteln</h2>
+		
+		<img class="gen_diagram" src="Beschaffung von Prüfmitteln.png">
+		<em>BusinessProcessDiagram 'Beschaffung von Prüfmitteln'</em>
+		
+		<h3 id="_2WiFcEuvEd-d39CJvpAVxA">QMK</h3>
+		The Pool '<em>QMK</em>' belongs to Participant '<em>QMK</em>'. 
+		The Process is of type <span class='gen_type'>private</span>. In this Process, in Event '<em>Bestellunterlagen</em>' a Message is received.  Furthermore, the  Task '<em>Bestellunterlagen prüfen</em>' is conducted.  Alongside, the normal flow and the exceptional flow are merged in the Gateway '<em>Anf. erfüllt?</em>'. Aside from that, the  Task '<em>Rücksprache, ggf. Modifikation</em>' is performed.  Besides, the normal flow and the exceptional flow are merged in the Gateway '<em>Genehmigung erf.?</em>'. Aside from that, a number of elements are processed in sequence. 
+		<div class='gen_block'>
+			First, the  Task '<em>Bestellunterlagen freigeben</em>' is processed.  
+			After that, the  Task '<em>an Einkauf weiterleiten</em>' is performed.  
+			After that, the  Task '<em>empfange Bestätigung</em>' is performed.  
+			
+		</div>
+		Alongside, a number of elements are carried out in sequence. 
+		<div class='gen_block'>
+			First, in Event '<em>Konstr.unterlagen</em>' a Message is received.  
+			Hereupon, the  Task '<em>Konstruktionsunterlagen prüfen</em>' is processed.  
+			Next, starting at the Gateway '<em>Anf. erfüllt?</em>', one out of several branches will be carried out: 
+			<div class='gen_block'>
+				If the condition '<span class='gen_code'>null</span>' holds true, nothing happens. 
+				If the condition '<span class='gen_code'>null</span>' holds true, the  Task '<em>Rücksprache, ggf. Modifikation</em>' is accomplished.  
+				
+			</div>
+			
+			Hereupon, the  Task '<em>Konstruktionsunterlagen freigeben</em>' is carried out.  
+			Hereafter, the  Task '<em>an Prüfplaner weiterleiten</em>' is carried out.  
+			After that, the  Task '<em>empfange PM und Dokumentation</em>' is processed.  
+			
+		</div>
+		Aside from that, a number of elements are performed in sequence. 
+		<div class='gen_block'>
+			First, the  Task '<em>Aufnahme in PMÜ</em>' is performed.  
+			Hereupon, nothing special happens.  
+			
+		</div>
+		
+		
+		<h3 id="_2WwH4EuvEd-d39CJvpAVxA">Prüfplaner</h3>
+		The Pool '<em>Prüfplaner</em>' belongs to Participant '<em>Prüfplaner</em>'. 
+		The Process is of type <span class='gen_type'>private</span>. In this Process, a number of elements are carried out in sequence. 
+		<div class='gen_block'>
+			First, one out of several branches will be carried out depending on the evaluation of a complex condition .
+			<div class='gen_block'>
+				First, a number of elements are processed in sequence. 
+				<div class='gen_block'>
+					First, in Event '<em>Bedarf Sonder-PM</em>' the Process waits until a Rule applies.  
+					Afterwards, the  Task '<em>Lastenheft erstellen</em>' is conducted.  
+					Thereafter, starting at the Gateway '<em>interne Fertigung?</em>', one out of several branches will be carried out: 
+					<div class='gen_block'>
+						If the condition '<span class='gen_code'>null</span>' holds true, a number of elements are accomplished in sequence. 
+						<div class='gen_block'>
+							First, the  Task '<em>Bestellunterlagen mit Lastenheft erstellen und freigeben</em>' is performed.  
+							
+							Afterwards, the  Task '<em>Bestellunterlagen an QMK weiterleiten</em>' is conducted.  
+							
+						</div>
+						
+						If the condition '<span class='gen_code'>null</span>' holds true, a number of elements are conducted in sequence. 
+						<div class='gen_block'>
+							First, the  Task '<em>Entwicklung des Sonder-PMs, Erstellung Pflichtenheft</em>' is conducted.  
+							Next, the  Task '<em>Konstruktionsunterlagen an QMK weiterleiten</em>' is executed.  
+							Afterwards, the  Task '<em>empfange Freigabe</em>' is processed.  
+							Next, the  Task '<em>Werkstattauftrag erstellen</em>' is executed.  
+							
+						</div>
+						
+						
+					</div>
+					
+					
+				</div>
+				
+				More over, a number of elements are performed in sequence. 
+				<div class='gen_block'>
+					First, in Event '<em>Bedarf Standard-PM</em>' the Process waits until a Rule applies.  
+					After that, the  Task '<em>Prüfmittelbeschaffungs- spezifikation erstellen und freigeben</em>' is accomplished.  
+					Afterwards, the  Task '<em>Bestellunterlagen an QMK weiterleiten</em>' is conducted.  
+					
+				</div>
+				
+				
+			</div>
+			
+			Following that, nothing special happens.  
+			
+		</div>
+		
+		
+		<h3 id="_iKd38EuzEd-d39CJvpAVxA">Betriebsmittelbau</h3>
+		The Pool '<em>Betriebsmittelbau</em>' belongs to Participant '<em>Betriebsmittelbau</em>'. 
+		The Process is of type <span class='gen_type'>private</span>. In this Process, a number of elements are carried out in sequence. 
+		<div class='gen_block'>
+			First, in Event '<em>Auftrag</em>' a Message is received.  
+			Hereupon, the  Task '<em>Prüfmittel gemäß Vorgabe herstellen</em>' is executed.  
+			Hereupon, the  Task '<em>Abnahmeprüfung durchführen, Erstellung Kalibrierungsprotokoll</em>' is conducted.  
+			Next, the  Task '<em>Prüfmittel und Dokumentation an QMK übergeben</em>' is performed.  
+			After that, nothing special happens.  
+			
+		</div>
+		
+		
+		<h3 id="_iKqFMEuzEd-d39CJvpAVxA">Einkauf</h3>
+		The Pool '<em>Einkauf</em>' belongs to Participant '<em>Einkauf</em>'. 
+		The Process is of type <span class='gen_type'>private</span>. In this Process, a number of elements are executed in sequence. 
+		<div class='gen_block'>
+			First, in Event '<em>Bestellunterlagen</em>' a Message is received.  
+			Afterwards, the  Task '<em>Prüfen, ob Freigabe vorliegt</em>' is conducted.  
+			Following that, starting at the Gateway '<em>Freigabe?</em>', one out of several branches will be processed: 
+			<div class='gen_block'>
+				If the condition '<span class='gen_code'>null</span>' holds true, a number of elements are processed in sequence. 
+				<div class='gen_block'>
+					First, the  Task '<em>Weiterleiten an QMK</em>' is accomplished.  
+					Following that, nothing special happens.  
+					
+				</div>
+				
+				If the condition '<span class='gen_code'>null</span>' holds true, a number of elements are accomplished in sequence. 
+				<div class='gen_block'>
+					First, the  Task '<em>Bestellung auslösen</em>' is accomplished.  
+					Next, the  Task '<em>Benachrichtige QMK</em>' is accomplished.  
+					Hereupon, nothing special happens.  
+					
+				</div>
+				
+				
+			</div>
+			
+			
+		</div>
+		
+		
+		<h2 id="_PyQuYEuvEd-d39CJvpAVxA">Inbetriebnahme von Prüfmitteln</h2>
+		
+		<img class="gen_diagram" src="Inbetriebnahme von Prüfmitteln.png">
+		<em>BusinessProcessDiagram 'Inbetriebnahme von Prüfmitteln'</em>
+		
+		<h3 id="_hEUDAEvFEd-d39CJvpAVxA">Kalibirierstelle</h3>
+		The Pool '<em>Kalibirierstelle</em>' belongs to Participant '<em>Kalibirierstelle</em>'. 
+		The Process is of type <span class='gen_type'>private</span>. In this Process, the normal flow and the exceptional flow are merged in the Gateway '<em>gült. Kalib.zeugn.?</em>'. Besides, in Event '<em>Bedarf für Kalib.</em>' the Process waits until a Rule applies.  Besides, the normal flow and the exceptional flow are merged in the Gateway '<em>Erstkalibrierung?</em>'. In addition, the  Task '<em>Zyklusstart in SAP-Wartungsplan eintragen</em>' is executed.  In addition, a number of elements are processed in sequence. 
+		<div class='gen_block'>
+			First, the  Task '<em>Kalibrierprüfung in SAP auslösen</em>' is carried out.  
+			After that, the  Task '<em>Kalibrierprüfung durchführen</em>' is performed.  
+			
+		</div>
+		In addition, a number of elements are accomplished in sequence. 
+		<div class='gen_block'>
+			First, the  Task '<em>Kennzeichnung mit Kalibrierlabel</em>' is processed.  
+			Hereafter, the  Task '<em>Prüfmittel an Fachabteilung übergeben</em>' is executed.  
+			Hereupon, nothing special happens.  
+			
+		</div>
+		Alongside, the normal flow and the exceptional flow are merged in the Gateway '<em>__INITIAL_GATEWAY____SPLIT__</em>'. In addition, a number of elements are accomplished in sequence. 
+		<div class='gen_block'>
+			First, one out of several branches will be accomplished depending on the evaluation of a complex condition .
+			<div class='gen_block'>
+				First, in Event '<em>Prüfmittel angeliefert</em>' a Message is received.  
+				Aside from that, in Event '<em>Best.unterl. vorh.</em>' the Process waits until a Rule applies.  
+				
+			</div>
+			
+			Thereafter, the  Task '<em>Sichtprüfung</em>' is executed.  
+			Afterwards, the  Task '<em>Stammdatensatz in SAP anlegen</em>' is processed.  
+			After that, the  Task '<em>PM mit ID-Labels kennzeichnen</em>' is carried out.  
+			Hereupon, starting at the Gateway '<em>ex. Wartungsanw.?</em>', one out of several branches will be conducted: 
+			<div class='gen_block'>
+				If the condition '<span class='gen_code'>null</span>' holds true, the  Task '<em>Anleitung erstellen</em>' is carried out.  
+				If the condition '<span class='gen_code'>null</span>' holds true, nothing happens. 
+				
+			</div>
+			
+			Hereafter, the  Task '<em>Wartungsplan in SAP erstellen</em>' is carried out.  
+			Next, the  Task '<em>aus gültges Kalibrierzeugnis prüfen</em>' is executed.  
+			
+		</div>
+		
+		
+	</body>
+</html>
