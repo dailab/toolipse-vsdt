@@ -75,6 +75,7 @@ implements FocusListener, SelectionListener {
 							   DISPLAY_TASK_ACTIVITYREF= "Activity Ref",
 							   
 							   DISPLAY_SUB_TRANSACTION= "Transaction",
+							   DISPLAY_SUB_EVENTED= "Evented Subpr.",
 							   DISPLAY_SUB_ADHOC= "Ad Hoc",
 							   DISPLAY_SUB_ADHOC_ORDERING= "Ad Hoc Ordering",
 //							   DISPLAY_SUB_ADHOC_PAR= "Parallel",
@@ -115,6 +116,7 @@ implements FocusListener, SelectionListener {
     
     private Group subprocessAttGroup;
     private Button transactionButton;
+    private Button eventedSubprocessButton;
     private Button adHocButton;
     private ExpressionComposite adHocConditionText;
 //    private Button adHocSeqButton;
@@ -206,6 +208,7 @@ implements FocusListener, SelectionListener {
     	//refresh subprocess attributes
     	transactionButton.setSelection(activity.getTransaction() != null);
     	adHocButton.setSelection(activity.isAdHoc());
+    	eventedSubprocessButton.setSelection(activity.isEventedSubprocess());
 //    	adHocSeqButton.setSelection(activity.getAdHocOrdering() == OrderingType.SEQUENTIAL);
 //    	adHocParButton.setSelection(activity.getAdHocOrdering() == OrderingType.PARALLEL);
     	adHocConditionText.setText(getExpression(activity.getAdHocCompletionCondition()));
@@ -359,6 +362,9 @@ implements FocusListener, SelectionListener {
     	if (src.equals(adHocButton)) {
     		setPropertyValue(activity, pack.getAbstractProcess_AdHoc(), adHocButton.getSelection());
     	}
+    	if (src.equals(eventedSubprocessButton)) {
+    		setPropertyValue(activity, pack.getActivity_EventedSubprocess(), eventedSubprocessButton.getSelection());
+    	}
 //    	if (src.equals(adHocSeqButton) || src.equals(adHocParButton)) {
 //    		setPropertyValue(activity, pack.getAbstractProcess_AdHocOrdering(), adHocSeqButton.getSelection() ? OrderingType.SEQUENTIAL : OrderingType.PARALLEL);
 //    	}
@@ -470,8 +476,11 @@ implements FocusListener, SelectionListener {
     	
     	transactionButton= FormLayoutUtil.addButton(group, DISPLAY_SUB_TRANSACTION, SWT.CHECK, 0, 0, null);
     	transactionButton.addSelectionListener(this);
-    	
-    	adHocButton= FormLayoutUtil.addButton(group, DISPLAY_SUB_ADHOC, SWT.CHECK, transactionButton, 0, null);
+
+    	eventedSubprocessButton= FormLayoutUtil.addButton(group, DISPLAY_SUB_EVENTED, SWT.CHECK, transactionButton, 0, null);
+    	eventedSubprocessButton.addSelectionListener(this);
+
+    	adHocButton= FormLayoutUtil.addButton(group, DISPLAY_SUB_ADHOC, SWT.CHECK, eventedSubprocessButton, 0, null);
     	adHocButton.addSelectionListener(this);
     	
     	label= FormLayoutUtil.addLabel(group, DISPLAY_SUB_ADHOCCONDITION, adHocButton, 0);

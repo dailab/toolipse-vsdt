@@ -69,7 +69,7 @@ public class EventFigure extends Ellipse implements IDecoratableFigure {
 		int y= b.y + w/8;	// y position of inner figure
 		
 		if (nonInterrupting) {
-			g.setLineStyle(SWT.LINE_DASH);
+			g.setLineStyle(SWT.LINE_CUSTOM);
 		}
 		switch (eventType) {
 		case START:
@@ -230,8 +230,10 @@ public class EventFigure extends Ellipse implements IDecoratableFigure {
 	public void setNonInterrupting(boolean nonInterrupting) {
 		this.nonInterrupting = nonInterrupting;
 		if (nonInterrupting) {
-			this.setLineStyle(SWT.LINE_DASH);
+			this.setLineDash(new float[] {5, 5});
+			this.setLineStyle(SWT.LINE_CUSTOM);
 		} else {
+			this.setLineDash(null);
 			this.setLineStyle(SWT.LINE_SOLID);
 		}
 	}

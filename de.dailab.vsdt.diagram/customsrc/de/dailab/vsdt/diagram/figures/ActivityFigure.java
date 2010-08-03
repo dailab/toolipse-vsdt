@@ -10,6 +10,7 @@ import org.eclipse.draw2d.RoundedRectangle;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 
@@ -53,14 +54,15 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 	}
 	
 	/**
-	 * @param loopType			the loop type
-	 * @param activityType		the activity type
-	 * @param adHoc				whether the activity is adHoc
-	 * @param isTransaction		whether it is a transaction
-	 * @param isCompensation	whether it is a compensation
-	 * @param hasAssignments	whether the activity has assignments
-	 * @param hasProperties		whether the activity has properties 
-	 * @param depth				depth of containment of this activity
+	 * @param loopType				the loop type
+	 * @param activityType			the activity type
+	 * @param adHoc					whether the activity is adHoc
+	 * @param isTransaction			whether it is a transaction
+	 * @param isCompensation		whether it is a compensation
+	 * @param hasAssignments		whether the activity has assignments
+	 * @param hasProperties			whether the activity has properties 
+	 * @param isEventedSubprocess	whether the activity is an evented subprocess
+	 * @param depth					depth of containment of this activity
 	 */
 	public ActivityFigure(
 			LoopType loopType,
@@ -70,6 +72,7 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 			boolean isCompensation,
 			boolean hasAssignments,
 			boolean hasProperties,
+			boolean isEventedSubprocess,
 			int depth) {
 		setDepth(depth);
 		init();
@@ -80,6 +83,7 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 		setCompensation(isCompensation);
 		setHasAssignments(hasAssignments);
 		setHasProperties(hasProperties);
+		setEventedSubprocess(isEventedSubprocess);
 	}
 	
 	/**
@@ -148,6 +152,8 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 	@Override
 	public void paintFigure(Graphics g) {
 		super.paintFigure(g);
+		
+		g.setLineStyle(SWT.LINE_SOLID);
 		
 		Rectangle b= getBounds();
 		// draw transaction border
@@ -278,6 +284,17 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 	
 	public void setHasProperties(boolean hasProperties) {
 		this.hasProperties = hasProperties;
+	}
+	
+	public void setEventedSubprocess(boolean isEventedSubprocess) {
+		if (isEventedSubprocess) {
+			this.setLineDash(new float[] {5, 5});
+			this.setLineStyle(SWT.LINE_CUSTOM);
+		} else {
+			this.setLineStyle(SWT.LINE_SOLID);
+			this.setLineDash(null);
+		}
+		repaint();
 	}
 	
 	public void setDepth(int depth) {

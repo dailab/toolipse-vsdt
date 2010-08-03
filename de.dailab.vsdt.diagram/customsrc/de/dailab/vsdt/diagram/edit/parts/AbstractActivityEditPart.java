@@ -59,6 +59,9 @@ public abstract class AbstractActivityEditPart extends AbstractVsdtBorderedShape
 		case VsdtPackage.ACTIVITY__PARENT:
 			getPrimaryShape().setDepth(VsdtHelper.getDepth(getCastedModel()));
 			break;
+		case VsdtPackage.ACTIVITY__EVENTED_SUBPROCESS:
+			getPrimaryShape().setEventedSubprocess(getCastedModel().isEventedSubprocess());
+			break;
 		}
 		if (feature != VsdtPackage.ACTIVITY__BOUNDARY_EVENTS) {
 			// problem with refreshing in this case since GMF 2.1
@@ -113,6 +116,7 @@ public abstract class AbstractActivityEditPart extends AbstractVsdtBorderedShape
 				activity.isCompensation(),
 				! activity.getAssignments().isEmpty(),
 				! activity.getProperties().isEmpty(),
+				activity.isEventedSubprocess(),
 				VsdtHelper.getDepth(activity));
 		return figure;
 	}
