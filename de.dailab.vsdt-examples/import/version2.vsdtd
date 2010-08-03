@@ -3,8 +3,7 @@
   <vsdt:BusinessProcessSystem xmi:id="_9eqGoD11Ed-HP4AtM3m1HQ" name="Import Example Diagram" documentation="This is an example diagram for the import feature. The diagram has a base version and two versions derived from the base version, each including a couple of changes and additions. If the two derived diagrams are imported back into the base version, all the changes from the revisions should be merged into the base version." id="_9epfkD11Ed-HP4AtM3m1HQ" version="0.1" author="Tobias Küster" expressionLanguage="VSDT Expression Language" creationDate="2010-04-01T12:04:29.065+0200" modificationDate="2010-04-01T12:04:29.065+0200">
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_ASKJAD12Ed-HP4AtM3m1HQ" name="Use Case 1" id="_ASJh8D12Ed-HP4AtM3m1HQ" participants="_-EuoIT11Ed-HP4AtM3m1HQ __Yxp8T11Ed-HP4AtM3m1HQ _LR9LgT2DEd-HP4AtM3m1HQ">
       <pools xmi:type="vsdt:Pool" xmi:id="_DOPfoT12Ed-HP4AtM3m1HQ" name="Actor 1" id="_DOPfoD12Ed-HP4AtM3m1HQ" participant="_-EuoIT11Ed-HP4AtM3m1HQ">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_DOSi8D12Ed-HP4AtM3m1HQ" name="Actor 1_Process" id="_DOR74j12Ed-HP4AtM3m1HQ"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_DOR74T12Ed-HP4AtM3m1HQ" id="_DOR74D12Ed-HP4AtM3m1HQ" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_DOR74T12Ed-HP4AtM3m1HQ" id="_DOR74D12Ed-HP4AtM3m1HQ">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_EQ-H8D12Ed-HP4AtM3m1HQ" name="Start" id="_EQ9g4D12Ed-HP4AtM3m1HQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_HR_B4T12Ed-HP4AtM3m1HQ" name="A 1" id="_HR_B4D12Ed-HP4AtM3m1HQ" activityType="SEND" inMessage="_Lcs4YD2CEd-HP4AtM3m1HQ" implementation="_IpQgYD2CEd-HP4AtM3m1HQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_H8q9oD12Ed-HP4AtM3m1HQ" name="A 21" id="_H8qWkD12Ed-HP4AtM3m1HQ"/>
@@ -19,12 +18,10 @@
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_DPIQcT12Ed-HP4AtM3m1HQ" name="Actor 2" id="_DPIQcD12Ed-HP4AtM3m1HQ" participant="__Yxp8T11Ed-HP4AtM3m1HQ">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_DPI3gT12Ed-HP4AtM3m1HQ" name="Actor 2_Process" id="_DPI3gD12Ed-HP4AtM3m1HQ">
           <properties xmi:type="vsdt:Property" xmi:id="_WqjQ4D2CEd-HP4AtM3m1HQ" name="p1" type="string"/>
           <properties xmi:type="vsdt:Property" xmi:id="_YRVBcD2CEd-HP4AtM3m1HQ" name="r" type="string"/>
           <properties xmi:type="vsdt:Property" xmi:id="_Qt_g8D2EEd-HP4AtM3m1HQ" name="p3" type="boolean"/>
-        </process>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_DPIQcz12Ed-HP4AtM3m1HQ" id="_DPIQcj12Ed-HP4AtM3m1HQ" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_DPIQcz12Ed-HP4AtM3m1HQ" id="_DPIQcj12Ed-HP4AtM3m1HQ">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_TsZ7MT12Ed-HP4AtM3m1HQ" name="Start" id="_TsZ7MD12Ed-HP4AtM3m1HQ" trigger="MESSAGE" message="_Lcs4YD2CEd-HP4AtM3m1HQ" implementation="_IpQgYD2CEd-HP4AtM3m1HQ">
             <assignments xmi:type="vsdt:Assignment" xmi:id="_dHYxcD2CEd-HP4AtM3m1HQ" to="_WqjQ4D2CEd-HP4AtM3m1HQ" assignTime="END">
               <from xmi:type="vsdt:Expression" xmi:id="_dHYxcT2CEd-HP4AtM3m1HQ" expression="$par1"/>
@@ -49,8 +46,7 @@
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_ZxZQkT2DEd-HP4AtM3m1HQ" name="Actor 3" id="_ZxZQkD2DEd-HP4AtM3m1HQ" participant="_LR9LgT2DEd-HP4AtM3m1HQ">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_Zxaesz2DEd-HP4AtM3m1HQ" name="Actor 3_Process" id="_Zxaesj2DEd-HP4AtM3m1HQ"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_ZxaesT2DEd-HP4AtM3m1HQ" id="_ZxaesD2DEd-HP4AtM3m1HQ" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_ZxaesT2DEd-HP4AtM3m1HQ" id="_ZxaesD2DEd-HP4AtM3m1HQ">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_E-ZtUT2EEd-HP4AtM3m1HQ" name="Start" id="_E-ZtUD2EEd-HP4AtM3m1HQ" trigger="MESSAGE" message="_VWYoYD2EEd-HP4AtM3m1HQ" implementation="_Tr9G4D2EEd-HP4AtM3m1HQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_F_pH4T2EEd-HP4AtM3m1HQ" name="C 1" id="_F_pH4D2EEd-HP4AtM3m1HQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_Gj2oMT2EEd-HP4AtM3m1HQ" name="C 2" id="_Gj2oMD2EEd-HP4AtM3m1HQ"/>
@@ -92,8 +88,7 @@
     </businessProcesses>
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_MTGfcT2DEd-HP4AtM3m1HQ" name="Use Case 2" id="_MTGfcD2DEd-HP4AtM3m1HQ" participants="_LR9LgT2DEd-HP4AtM3m1HQ">
       <pools xmi:type="vsdt:Pool" xmi:id="_QW3P0T2DEd-HP4AtM3m1HQ" name="Actor 3" id="_QW3P0D2DEd-HP4AtM3m1HQ" participant="_LR9LgT2DEd-HP4AtM3m1HQ">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_QW4d8T2DEd-HP4AtM3m1HQ" name="Actor 3_Process" id="_QW4d8D2DEd-HP4AtM3m1HQ"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_QW324T2DEd-HP4AtM3m1HQ" id="_QW324D2DEd-HP4AtM3m1HQ" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_QW324T2DEd-HP4AtM3m1HQ" id="_QW324D2DEd-HP4AtM3m1HQ">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_WWdawT2DEd-HP4AtM3m1HQ" name="Start" id="_WWdawD2DEd-HP4AtM3m1HQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_WvtoQD2DEd-HP4AtM3m1HQ" name="A 1" id="_WvtBMD2DEd-HP4AtM3m1HQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_XYsT0T2DEd-HP4AtM3m1HQ" name="A 2" id="_XYsT0D2DEd-HP4AtM3m1HQ"/>
