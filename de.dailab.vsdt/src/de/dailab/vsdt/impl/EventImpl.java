@@ -32,6 +32,7 @@ import de.dailab.vsdt.VsdtPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.dailab.vsdt.impl.EventImpl#isNonInterrupting <em>Non Interrupting</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getTrigger <em>Trigger</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getMessage <em>Message</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getImplementation <em>Implementation</em>}</li>
@@ -48,6 +49,24 @@ import de.dailab.vsdt.VsdtPackage;
  * @generated
  */
 public abstract class EventImpl extends FlowObjectImpl implements Event {
+	/**
+	 * The default value of the '{@link #isNonInterrupting() <em>Non Interrupting</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isNonInterrupting()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean NON_INTERRUPTING_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isNonInterrupting() <em>Non Interrupting</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isNonInterrupting()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean nonInterrupting = NON_INTERRUPTING_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getTrigger() <em>Trigger</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -191,6 +210,31 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 	@Override
 	protected EClass eStaticClass() {
 		return VsdtPackage.Literals.EVENT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean isNonInterrupting() {
+		if (isOnBoundary() || ((this instanceof Start) && isInEventedSubprocess())) {
+			return nonInterrupting;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNonInterrupting(boolean newNonInterrupting) {
+		boolean oldNonInterrupting = nonInterrupting;
+		nonInterrupting = newNonInterrupting;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.EVENT__NON_INTERRUPTING, oldNonInterrupting, nonInterrupting));
 	}
 
 	/**
@@ -505,22 +549,12 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * added self-opposite behavior
-	 * FIXME: doesn't work; is reset to null on reloading the diagram
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public void setLinkedTo(Event newLinkedTo) {
 		Event oldLinkedTo = linkedTo;
 		linkedTo = newLinkedTo;
-		
-//		if (newLinkedTo != null && newLinkedTo.getLinkedTo() != this) {
-//			newLinkedTo.setLinkedTo(this);
-//		}
-//		if (oldLinkedTo != null) {
-//			oldLinkedTo.setLinkedTo(null);
-//		}
-		
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.EVENT__LINKED_TO, oldLinkedTo, linkedTo));
 	}
@@ -536,28 +570,48 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 	 */
 	public EList<TriggerType> getValidTriggerTypes() {
 		EList<TriggerType> triggers= new BasicEList<TriggerType>();
-		triggers.add(TriggerType.NONE);
+
 		triggers.add(TriggerType.MESSAGE);
 		triggers.add(TriggerType.MULTIPLE);
 		triggers.add(TriggerType.SIGNAL);
+		
 		if (this instanceof Start) {
 			triggers.add(TriggerType.TIMER);
 			triggers.add(TriggerType.RULE);
+			if (isInEventedSubprocess()) {
+				triggers.add(TriggerType.ESCALATION);
+				if (! isNonInterrupting()) {
+					triggers.add(TriggerType.ERROR);
+					triggers.add(TriggerType.COMPENSATION);
+				}
+			} else {
+				triggers.add(TriggerType.NONE);
+			}
 		}
 		if (this instanceof Intermediate) {
-			if (! this.isThrowing()) {
+			if (isThrowing()) {
+				triggers.add(TriggerType.ESCALATION);
+				triggers.add(TriggerType.COMPENSATION);
+				triggers.add(TriggerType.LINK);
+			} else {
 				triggers.add(TriggerType.TIMER);
 				triggers.add(TriggerType.RULE);
-			}
-			if (((Intermediate) this).getAttachedTo() != null) {
-				triggers.add(TriggerType.CANCEL);
-				triggers.add(TriggerType.ERROR);
-				triggers.add(TriggerType.COMPENSATION);
-			} else {
-				triggers.add(TriggerType.LINK);
+				if (isOnBoundary()) {
+					triggers.add(TriggerType.ESCALATION);
+					if (! isNonInterrupting()) {
+						triggers.add(TriggerType.CANCEL);
+						triggers.add(TriggerType.ERROR);
+						triggers.add(TriggerType.COMPENSATION);
+					}
+				} else {
+					triggers.add(TriggerType.NONE);
+					triggers.add(TriggerType.LINK);
+				}
 			}
 		}
 		if (this instanceof End) {
+			triggers.add(TriggerType.NONE);
+			triggers.add(TriggerType.ESCALATION);
 			triggers.add(TriggerType.ERROR);
 			triggers.add(TriggerType.CANCEL);
 			triggers.add(TriggerType.COMPENSATION);
@@ -602,6 +656,31 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Check whether this event in in an evented subprocess.
+	 * This check is most relevant for start events starting an evented
+	 * subprocess, but for more generality we will only check whether this event
+	 * is (directly) in an evented subprocess. The check, whether it is a start
+	 * event, has to be done separately.
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean isInEventedSubprocess() {
+		return (getAbstractProcess() instanceof Activity) &&
+				((Activity) getAbstractProcess()).isEventedSubprocess();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * check whether this is an intermediate event on an activity's boundary
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean isOnBoundary() {
+		return (this instanceof Intermediate) && ((Intermediate) this).getAttachedTo() != null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -624,6 +703,8 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case VsdtPackage.EVENT__NON_INTERRUPTING:
+				return isNonInterrupting();
 			case VsdtPackage.EVENT__TRIGGER:
 				return getTrigger();
 			case VsdtPackage.EVENT__MESSAGE:
@@ -660,6 +741,9 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case VsdtPackage.EVENT__NON_INTERRUPTING:
+				setNonInterrupting((Boolean)newValue);
+				return;
 			case VsdtPackage.EVENT__TRIGGER:
 				setTrigger((TriggerType)newValue);
 				return;
@@ -702,6 +786,9 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case VsdtPackage.EVENT__NON_INTERRUPTING:
+				setNonInterrupting(NON_INTERRUPTING_EDEFAULT);
+				return;
 			case VsdtPackage.EVENT__TRIGGER:
 				setTrigger(TRIGGER_EDEFAULT);
 				return;
@@ -744,6 +831,8 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case VsdtPackage.EVENT__NON_INTERRUPTING:
+				return nonInterrupting != NON_INTERRUPTING_EDEFAULT;
 			case VsdtPackage.EVENT__TRIGGER:
 				return trigger != TRIGGER_EDEFAULT;
 			case VsdtPackage.EVENT__MESSAGE:
@@ -778,7 +867,9 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (trigger: ");
+		result.append(" (nonInterrupting: ");
+		result.append(nonInterrupting);
+		result.append(", trigger: ");
 		result.append(trigger);
 		result.append(", asDuration: ");
 		result.append(asDuration);

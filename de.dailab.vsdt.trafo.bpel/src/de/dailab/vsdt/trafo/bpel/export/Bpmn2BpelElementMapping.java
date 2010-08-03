@@ -186,12 +186,6 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 		TrafoLog.trace("Visiting Pool '" + pool.getName() + "'");
 		Pool process= pool;
 		
-		//check process type
-		ProcessType type= process.getProcessType();
-		if (type != ProcessType.ABSTRACT && type != ProcessType.PRIVATE) {
-			TrafoLog.info(pool.getName() + ": Process with Process Type " + type.getName() + " will not be mapped. Skipping.");
-			return null;
-		}
 		//check adHoc
 		if (process.isAdHoc()) {
 			TrafoLog.warn(pool.getName() + ": A mapping for AdHoc Processes is not defined. Skipping.");
@@ -1193,7 +1187,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 		BusinessProcessSystem bps= process.getParent().getParent();
 		TProcess tProcess= bpelFac.createTProcess();
 		tProcess.setName(process.getName() + "_" + process.getParent().getName());
-		tProcess.setAbstractProcess(TBoolean.get(process.getProcessType()==ProcessType.ABSTRACT));
+		tProcess.setAbstractProcess(TBoolean.get(process.getProcessType()==ProcessType.PUBLIC));
 		tProcess.setSuppressJoinFailure(TBoolean.get(false));
 		tProcess.setEnableInstanceCompensation(TBoolean.get(false));
 		tProcess.setQueryLanguage(bps.getQueryLanguage() != null ? bps.getQueryLanguage() : NS_XPATH_URI);

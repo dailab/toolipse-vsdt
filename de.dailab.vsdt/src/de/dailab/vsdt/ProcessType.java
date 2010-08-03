@@ -33,6 +33,14 @@ public enum ProcessType implements Enumerator {
 	NONE(0, "NONE", "NONE"),
 
 	/**
+	 * The '<em><b>PUBLIC</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PUBLIC_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	PUBLIC(1, "PUBLIC", "PUBLIC"), /**
 	 * The '<em><b>PRIVATE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -40,27 +48,7 @@ public enum ProcessType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	PRIVATE(1, "PRIVATE", "PRIVATE"),
-
-	/**
-	 * The '<em><b>ABSTRACT</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #ABSTRACT_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	ABSTRACT(2, "ABSTRACT", "ABSTRACT"),
-
-	/**
-	 * The '<em><b>COLLABORATION</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #COLLABORATION_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	COLLABORATION(3, "COLLABORATION", "COLLABORATION");
+	PRIVATE(2, "PRIVATE", "PRIVATE");
 
 	/**
 	 * The '<em><b>NONE</b></em>' literal value.
@@ -78,6 +66,21 @@ public enum ProcessType implements Enumerator {
 	public static final int NONE_VALUE = 0;
 
 	/**
+	 * The '<em><b>PUBLIC</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>PUBLIC</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #PUBLIC
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PUBLIC_VALUE = 1;
+
+	/**
 	 * The '<em><b>PRIVATE</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -90,37 +93,7 @@ public enum ProcessType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PRIVATE_VALUE = 1;
-
-	/**
-	 * The '<em><b>ABSTRACT</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>ABSTRACT</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #ABSTRACT
-	 * @model
-	 * @generated
-	 * @ordered
-	 */
-	public static final int ABSTRACT_VALUE = 2;
-
-	/**
-	 * The '<em><b>COLLABORATION</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>COLLABORATION</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #COLLABORATION
-	 * @model
-	 * @generated
-	 * @ordered
-	 */
-	public static final int COLLABORATION_VALUE = 3;
+	public static final int PRIVATE_VALUE = 2;
 
 	/**
 	 * An array of all the '<em><b>Process Type</b></em>' enumerators.
@@ -131,9 +104,8 @@ public enum ProcessType implements Enumerator {
 	private static final ProcessType[] VALUES_ARRAY =
 		new ProcessType[] {
 			NONE,
+			PUBLIC,
 			PRIVATE,
-			ABSTRACT,
-			COLLABORATION,
 		};
 
 	/**
@@ -185,9 +157,8 @@ public enum ProcessType implements Enumerator {
 	public static ProcessType get(int value) {
 		switch (value) {
 			case NONE_VALUE: return NONE;
+			case PUBLIC_VALUE: return PUBLIC;
 			case PRIVATE_VALUE: return PRIVATE;
-			case ABSTRACT_VALUE: return ABSTRACT;
-			case COLLABORATION_VALUE: return COLLABORATION;
 		}
 		return null;
 	}

@@ -65,7 +65,6 @@ public class AbstractProcessItemProvider
 			super.getPropertyDescriptors(object);
 
 			addAdHocPropertyDescriptor(object);
-//			addAdHocOrderingPropertyDescriptor(object);
 			addAdHocCompletionConditionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -133,7 +132,7 @@ public class AbstractProcessItemProvider
 				 false,
 				 false,
 				 null,
-				 null,
+				 getString("_UI_ProcessPropertyCategory"),
 				 null));
 	}
 
@@ -193,9 +192,8 @@ public class AbstractProcessItemProvider
 
 		switch (notification.getFeatureID(AbstractProcess.class)) {
 			case VsdtPackage.ABSTRACT_PROCESS__AD_HOC:
-//			case VsdtPackage.ABSTRACT_PROCESS__AD_HOC_ORDERING:
-//				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-//				return;
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case VsdtPackage.ABSTRACT_PROCESS__AD_HOC_COMPLETION_CONDITION:
 			case VsdtPackage.ABSTRACT_PROCESS__PROPERTIES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));

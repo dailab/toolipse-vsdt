@@ -31,6 +31,7 @@ import de.dailab.vsdt.Event;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Message;
+import de.dailab.vsdt.Start;
 import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.VsdtPackage;
 import de.dailab.vsdt.diagram.actions.ParameterAssignmentsAction;
@@ -41,6 +42,7 @@ import de.dailab.vsdt.util.VsdtHelper;
 public class EventSection extends FlowObjectSection {
 	
 	public static final String DISPLAY_TRIGGER= "Trigger",
+							   DISPLAY_INTERRUPTING= "Non-Interrupting",
 							   DISPLAY_GROUP= "Event Trigger Attributes",
 							   DISPLAY_MESSAGE= "Message",
 							   DISPLAY_IMPL= "Implementation",
@@ -72,6 +74,8 @@ public class EventSection extends FlowObjectSection {
     private Text errorCodeText;
     private VsdtFeatureCombo<Activity> activityCombo;
     private Text signalText;
+    
+    private Button nonInterruptingButton;
 
     private Button highlightOpposite;
     private Button parAssignButton;
@@ -125,6 +129,8 @@ public class EventSection extends FlowObjectSection {
         	eventTypeCombo.add(triggerType.getLiteral());
         }
 		eventTypeCombo.select(eventTypeCombo.indexOf(event.getTrigger().getLiteral()));
+		nonInterruptingButton.setSelection(event.isNonInterrupting());
+        nonInterruptingButton.setEnabled(event.isOnBoundary() || ((event instanceof Start) && event.isInEventedSubprocess()));
 
 		messageCombo.setSelected(event.getMessage());
     	implementationCombo.setSelected(event.getImplementation());
@@ -172,8 +178,12 @@ public class EventSection extends FlowObjectSection {
 
         // event type and attributes
         label= FormLayoutUtil.addLabel(composite, DISPLAY_TRIGGER, 0, 0);
-        eventTypeCombo= FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, 0, label, parAssignButton);
+        eventTypeCombo= FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, 0, label, 50);
         eventTypeCombo.addSelectionListener(this);
+        
+        // executable
+        nonInterruptingButton= FormLayoutUtil.addButton(composite, DISPLAY_INTERRUPTING, SWT.CHECK, 0, eventTypeCombo, null);
+        nonInterruptingButton.addSelectionListener(this);
         
         // standard loop type group
         triggerGroup= FormLayoutUtil.addGroup(composite, DISPLAY_GROUP, eventTypeCombo, 0, 100);
@@ -298,6 +308,9 @@ public class EventSection extends FlowObjectSection {
     	}
     	if (src.equals(asDurationButton)) {
     		setPropertyValue(event, pack.getEvent_AsDuration(), asDurationButton.getSelection());
+    	}
+    	if (src.equals(nonInterruptingButton)) {
+    		setPropertyValue(event, pack.getEvent_NonInterrupting(), nonInterruptingButton.getSelection());
     	}
     	refresh();
     }

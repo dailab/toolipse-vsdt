@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.Activity#getIORules <em>IO Rules</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getLoopAttributes <em>Loop Attributes</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getBoundaryEvents <em>Boundary Events</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Activity#isEventedSubprocess <em>Evented Subprocess</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getActivityType <em>Activity Type</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getInMessage <em>In Message</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getOutMessage <em>Out Message</em>}</li>
@@ -134,6 +135,32 @@ public interface Activity extends FlowObject, AbstractProcess, FlowObjectContain
 	 * @generated
 	 */
 	EList<Intermediate> getBoundaryEvents();
+
+	/**
+	 * Returns the value of the '<em><b>Evented Subprocess</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Evented Subprocess</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Evented Subprocess</em>' attribute.
+	 * @see #setEventedSubprocess(boolean)
+	 * @see de.dailab.vsdt.VsdtPackage#getActivity_EventedSubprocess()
+	 * @model
+	 * @generated
+	 */
+	boolean isEventedSubprocess();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.Activity#isEventedSubprocess <em>Evented Subprocess</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Evented Subprocess</em>' attribute.
+	 * @see #isEventedSubprocess()
+	 * @generated
+	 */
+	void setEventedSubprocess(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Activity Type</b></em>' attribute.

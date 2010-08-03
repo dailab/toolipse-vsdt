@@ -46,6 +46,10 @@ public abstract class AbstractIntermediateBorderItemEditPart extends AbstractBor
 			getPrimaryShape().setThrowing(getCastedModel().isThrowing());
 			refreshVisuals();
 			break;
+		case VsdtPackage.EVENT__NON_INTERRUPTING:
+			getPrimaryShape().setNonInterrupting(getCastedModel().isNonInterrupting());
+			refreshVisuals();
+			break;
 		}
 	}
 
@@ -64,7 +68,7 @@ public abstract class AbstractIntermediateBorderItemEditPart extends AbstractBor
 	 */
 	protected IFigure initNodeShape() {
 		EventFigure figure= new EventFigure(EventFigure.INTERMEDIATE, getCastedModel()
-				.getTrigger(), false);
+				.getTrigger(), false, getCastedModel().isNonInterrupting());
 		return figure;
 	}
 

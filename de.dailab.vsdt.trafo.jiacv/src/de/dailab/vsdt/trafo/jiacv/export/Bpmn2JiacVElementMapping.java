@@ -53,7 +53,6 @@ import de.dailab.vsdt.Message;
 import de.dailab.vsdt.MultiLoopAttSet;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Pool;
-import de.dailab.vsdt.ProcessType;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.Start;
@@ -190,12 +189,6 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	public Agent visitPool(Pool pool) {
 		TrafoLog.trace("Visiting Pool '" + pool.getName() + "'");
 		
-		//check process type
-		ProcessType type= pool.getProcessType();
-		if (type != ProcessType.ABSTRACT && type != ProcessType.PRIVATE) {
-			TrafoLog.info(pool.getName() + ": Process with Process Type " + type.getName() + " will not be mapped. Skipping.");
-			return null;
-		}
 		//check adHoc
 		if (pool.isAdHoc()) {
 			TrafoLog.warn(pool.getName() + ": A mapping for AdHoc Processes is not defined. Skipping.");

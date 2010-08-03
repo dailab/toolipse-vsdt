@@ -7,7 +7,6 @@
 package de.dailab.vsdt.provider;
 
 
-import de.dailab.vsdt.FlowConditionTypes;
 import java.util.Collection;
 import java.util.List;
 
@@ -24,6 +23,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import de.dailab.vsdt.FlowConditionTypes;
 import de.dailab.vsdt.MultiLoopAttSet;
 import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.VsdtPackage;

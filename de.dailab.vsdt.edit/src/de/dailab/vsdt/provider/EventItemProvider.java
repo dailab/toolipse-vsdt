@@ -64,9 +64,11 @@ public class EventItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addNonInterruptingPropertyDescriptor(object);
 			addTriggerPropertyDescriptor(object);
 			addMessagePropertyDescriptor(object);
 			addImplementationPropertyDescriptor(object);
+			addTimeExpressionPropertyDescriptor(object);
 			addAsDurationPropertyDescriptor(object);
 			addRuleExpressionPropertyDescriptor(object);
 			addErrorCodePropertyDescriptor(object);
@@ -75,6 +77,28 @@ public class EventItemProvider
 			addLinkedToPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Non Interrupting feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNonInterruptingPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Event_nonInterrupting_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Event_nonInterrupting_feature", "_UI_Event_type"),
+				 VsdtPackage.Literals.EVENT__NON_INTERRUPTING,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -140,6 +164,28 @@ public class EventItemProvider
 				 true,
 				 null,
 				 getString("_UI_TriggerAttributesPropertyCategory"),
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Time Expression feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTimeExpressionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Event_timeExpression_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Event_timeExpression_feature", "_UI_Event_type"),
+				 VsdtPackage.Literals.EVENT__TIME_EXPRESSION,
+				 false,
+				 false,
+				 false,
+				 null,
+				 null,
 				 null));
 	}
 
@@ -351,6 +397,7 @@ public class EventItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Event.class)) {
+			case VsdtPackage.EVENT__NON_INTERRUPTING:
 			case VsdtPackage.EVENT__TRIGGER:
 			case VsdtPackage.EVENT__AS_DURATION:
 			case VsdtPackage.EVENT__ERROR_CODE:

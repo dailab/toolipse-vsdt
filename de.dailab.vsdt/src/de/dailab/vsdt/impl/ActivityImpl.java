@@ -60,6 +60,7 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getIORules <em>IO Rules</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getLoopAttributes <em>Loop Attributes</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getBoundaryEvents <em>Boundary Events</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#isEventedSubprocess <em>Evented Subprocess</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getActivityType <em>Activity Type</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getInMessage <em>In Message</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getOutMessage <em>Out Message</em>}</li>
@@ -177,6 +178,26 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 * @ordered
 	 */
 	protected EList<Intermediate> boundaryEvents;
+
+	/**
+	 * The default value of the '{@link #isEventedSubprocess() <em>Evented Subprocess</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isEventedSubprocess()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean EVENTED_SUBPROCESS_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isEventedSubprocess() <em>Evented Subprocess</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isEventedSubprocess()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean eventedSubprocess = EVENTED_SUBPROCESS_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getActivityType() <em>Activity Type</em>}' attribute.
@@ -515,6 +536,27 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 			boundaryEvents = new EObjectContainmentWithInverseEList<Intermediate>(Intermediate.class, this, VsdtPackage.ACTIVITY__BOUNDARY_EVENTS, VsdtPackage.INTERMEDIATE__ATTACHED_TO);
 		}
 		return boundaryEvents;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isEventedSubprocess() {
+		return eventedSubprocess;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEventedSubprocess(boolean newEventedSubprocess) {
+		boolean oldEventedSubprocess = eventedSubprocess;
+		eventedSubprocess = newEventedSubprocess;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ACTIVITY__EVENTED_SUBPROCESS, oldEventedSubprocess, eventedSubprocess));
 	}
 
 	/**
@@ -1034,6 +1076,8 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				return getLoopAttributes();
 			case VsdtPackage.ACTIVITY__BOUNDARY_EVENTS:
 				return getBoundaryEvents();
+			case VsdtPackage.ACTIVITY__EVENTED_SUBPROCESS:
+				return isEventedSubprocess();
 			case VsdtPackage.ACTIVITY__ACTIVITY_TYPE:
 				return getActivityType();
 			case VsdtPackage.ACTIVITY__IN_MESSAGE:
@@ -1109,6 +1153,9 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 			case VsdtPackage.ACTIVITY__BOUNDARY_EVENTS:
 				getBoundaryEvents().clear();
 				getBoundaryEvents().addAll((Collection<? extends Intermediate>)newValue);
+				return;
+			case VsdtPackage.ACTIVITY__EVENTED_SUBPROCESS:
+				setEventedSubprocess((Boolean)newValue);
 				return;
 			case VsdtPackage.ACTIVITY__ACTIVITY_TYPE:
 				setActivityType((ActivityType)newValue);
@@ -1188,6 +1235,9 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 			case VsdtPackage.ACTIVITY__BOUNDARY_EVENTS:
 				getBoundaryEvents().clear();
 				return;
+			case VsdtPackage.ACTIVITY__EVENTED_SUBPROCESS:
+				setEventedSubprocess(EVENTED_SUBPROCESS_EDEFAULT);
+				return;
 			case VsdtPackage.ACTIVITY__ACTIVITY_TYPE:
 				setActivityType(ACTIVITY_TYPE_EDEFAULT);
 				return;
@@ -1254,6 +1304,8 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				return loopAttributes != null;
 			case VsdtPackage.ACTIVITY__BOUNDARY_EVENTS:
 				return boundaryEvents != null && !boundaryEvents.isEmpty();
+			case VsdtPackage.ACTIVITY__EVENTED_SUBPROCESS:
+				return eventedSubprocess != EVENTED_SUBPROCESS_EDEFAULT;
 			case VsdtPackage.ACTIVITY__ACTIVITY_TYPE:
 				return activityType != ACTIVITY_TYPE_EDEFAULT;
 			case VsdtPackage.ACTIVITY__IN_MESSAGE:
@@ -1342,6 +1394,8 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (adHoc: ");
 		result.append(adHoc);
+		result.append(", eventedSubprocess: ");
+		result.append(eventedSubprocess);
 		result.append(", activityType: ");
 		result.append(activityType);
 		result.append(", performers: ");

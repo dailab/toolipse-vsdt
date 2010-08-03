@@ -30,9 +30,8 @@ public class PoolSection extends AbstractVsdtPropertySection {
 							   DISPLAY_PROCESS_GROUP= "Process",
 							   DISPLAY_PROC_TYPE= "Process Type",
 							   DISPLAY_PROC_NONE= "None",
-							   DISPLAY_PROC_PRIV= "Private",
-							   DISPLAY_PROC_ABST= "Abstract",
-							   DISPLAY_PROC_COLL= "Collaboration",
+							   DISPLAY_PROC_PUBLIC= "Public",
+							   DISPLAY_PROC_PRIVATE= "Private",
 							   DISPLAY_SUB_ADHOC= "Ad Hoc",
 							   DISPLAY_SUB_ADHOCCONDITION= "Compltn. Cond.",
 //							   DISPLAY_SUB_ADHOC_ORDERING= "Ad Hoc Ordering",
@@ -50,9 +49,8 @@ public class PoolSection extends AbstractVsdtPropertySection {
     private VsdtFeatureCombo<Participant> participantCombo;
     
     private Button procTypeNoneButton;
-    private Button procTypePrivButton;
-    private Button procTypeAbstButton;
-    private Button procTypeCollButton;
+    private Button procTypePublicButton;
+    private Button procTypePrivateButton;
     
     private Button adHocButton;
     private ExpressionComposite adHocConditionText;
@@ -81,9 +79,8 @@ public class PoolSection extends AbstractVsdtPropertySection {
         participantCombo.setSelected(pool.getParticipant());
 
         procTypeNoneButton.setSelection(pool.getProcessType() == ProcessType.NONE);
-        procTypePrivButton.setSelection(pool.getProcessType() == ProcessType.PRIVATE);
-        procTypeAbstButton.setSelection(pool.getProcessType() == ProcessType.ABSTRACT);
-        procTypeCollButton.setSelection(pool.getProcessType() == ProcessType.COLLABORATION);
+        procTypePrivateButton.setSelection(pool.getProcessType() == ProcessType.PUBLIC);
+        procTypePublicButton.setSelection(pool.getProcessType() == ProcessType.PRIVATE);
 
     	adHocButton.setSelection(pool.isAdHoc());
     	adHocConditionText.setEnabled(adHocButton.getSelection());
@@ -115,16 +112,14 @@ public class PoolSection extends AbstractVsdtPropertySection {
         Group processGroup= FormLayoutUtil.addGroup(composite, DISPLAY_PROCESS_GROUP, participantCombo.getCombo(), 0, 50);
         label= FormLayoutUtil.addLabel(processGroup, DISPLAY_PROC_TYPE, 0, 0);
         procTypeNoneButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_NONE, SWT.RADIO, 0, label, 50);
-        procTypePrivButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_PRIV, SWT.RADIO, 0, procTypeNoneButton, 100);
-        procTypeAbstButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_ABST, SWT.RADIO, label, label, 50);
-        procTypeCollButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_COLL, SWT.RADIO, label, procTypeAbstButton, 100);
+        procTypePrivateButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_PRIVATE, SWT.RADIO, 0, procTypeNoneButton, 100);
+        procTypePublicButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_PUBLIC, SWT.RADIO, label, label, 50);
         procTypeNoneButton.addSelectionListener(this);
-        procTypePrivButton.addSelectionListener(this);
-        procTypeAbstButton.addSelectionListener(this);
-        procTypeCollButton.addSelectionListener(this);
+        procTypePrivateButton.addSelectionListener(this);
+        procTypePublicButton.addSelectionListener(this);
         
         Group adHocGroup= FormLayoutUtil.addGroup(composite, DISPLAY_SUB_ADHOC, participantCombo.getCombo(), processGroup, 100);
-        adHocButton= FormLayoutUtil.addButton(adHocGroup, DISPLAY_SUB_ADHOC, SWT.CHECK, procTypeCollButton, 0, null);
+        adHocButton= FormLayoutUtil.addButton(adHocGroup, DISPLAY_SUB_ADHOC, SWT.CHECK, procTypePrivateButton, 0, null);
     	adHocButton.addSelectionListener(this);
         label= FormLayoutUtil.addLabel(adHocGroup, DISPLAY_SUB_ADHOCCONDITION, adHocButton, 0);
     	adHocConditionText= addExpressionComposite(adHocGroup, adHocButton, label, 100);
@@ -152,14 +147,11 @@ public class PoolSection extends AbstractVsdtPropertySection {
     	if (src.equals(procTypeNoneButton)) {
     		setPropertyValue(pool, pack.getPool_ProcessType(), ProcessType.NONE);
     	}
-    	if (src.equals(procTypeAbstButton)) {
-    		setPropertyValue(pool, pack.getPool_ProcessType(), ProcessType.ABSTRACT);
+    	if (src.equals(procTypePublicButton)) {
+    		setPropertyValue(pool, pack.getPool_ProcessType(), ProcessType.PUBLIC);
     	}
-    	if (src.equals(procTypePrivButton)) {
+    	if (src.equals(procTypePrivateButton)) {
     		setPropertyValue(pool, pack.getPool_ProcessType(), ProcessType.PRIVATE);
-    	}
-    	if (src.equals(procTypeCollButton)) {
-    		setPropertyValue(pool, pack.getPool_ProcessType(), ProcessType.COLLABORATION);
     	}
     	if (src.equals(adHocButton)) {
     		setPropertyValue(pool, pack.getAbstractProcess_AdHoc(),adHocButton.getSelection());

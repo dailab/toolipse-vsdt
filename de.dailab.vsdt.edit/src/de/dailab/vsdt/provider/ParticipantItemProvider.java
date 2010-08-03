@@ -61,32 +61,9 @@ public class ParticipantItemProvider
 			super.getPropertyDescriptors(object);
 
 			addTypePropertyDescriptor(object);
-			addAssociatedProcessesPropertyDescriptor(object);
 			addAssociatedPoolsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Associated Processes feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAssociatedProcessesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Participant_associatedProcesses_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Participant_associatedProcesses_feature", "_UI_Participant_type"),
-				 VsdtPackage.Literals.PARTICIPANT__ASSOCIATED_PROCESSES,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -103,7 +80,7 @@ public class ParticipantItemProvider
 				 getString("_UI_Participant_associatedPools_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Participant_associatedPools_feature", "_UI_Participant_type"),
 				 VsdtPackage.Literals.PARTICIPANT__ASSOCIATED_POOLS,
-				 false,
+				 true,
 				 false,
 				 true,
 				 null,

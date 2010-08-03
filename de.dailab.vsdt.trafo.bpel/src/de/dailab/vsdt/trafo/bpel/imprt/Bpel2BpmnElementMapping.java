@@ -153,7 +153,7 @@ public class Bpel2BpmnElementMapping extends MappingStage {
 		
 		// create process
 		_process = pool;
-		_process.setProcessType( tProcess.isSetAbstractProcess() ? ProcessType.ABSTRACT : ProcessType.PRIVATE);
+		_process.setProcessType( tProcess.isSetAbstractProcess() ? ProcessType.PUBLIC : ProcessType.PRIVATE);
 //		_process.setEnableInstanceCompensation(tProcess.isSetEnableInstanceCompensation());
 //		_process.setSuppressJoinFailure(tProcess.isSetSuppressJoinFailure());
 		

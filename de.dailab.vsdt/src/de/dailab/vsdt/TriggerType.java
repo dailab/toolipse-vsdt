@@ -128,7 +128,15 @@ public enum TriggerType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	SIGNAL(10, "SIGNAL", "SIGNAL");
+	SIGNAL(10, "SIGNAL", "SIGNAL"), /**
+	 * The '<em><b>ESCALATION</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #ESCALATION_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	ESCALATION(11, "ESCALATION", "ESCALATION");
 
 	/**
 	 * The '<em><b>NONE</b></em>' literal value.
@@ -296,6 +304,21 @@ public enum TriggerType implements Enumerator {
 	public static final int SIGNAL_VALUE = 10;
 
 	/**
+	 * The '<em><b>ESCALATION</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>ESCALATION</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #ESCALATION
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ESCALATION_VALUE = 11;
+
+	/**
 	 * An array of all the '<em><b>Trigger Type</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -314,6 +337,7 @@ public enum TriggerType implements Enumerator {
 			MULTIPLE,
 			TERMINATE,
 			SIGNAL,
+			ESCALATION,
 		};
 
 	/**
@@ -375,6 +399,7 @@ public enum TriggerType implements Enumerator {
 			case MULTIPLE_VALUE: return MULTIPLE;
 			case TERMINATE_VALUE: return TERMINATE;
 			case SIGNAL_VALUE: return SIGNAL;
+			case ESCALATION_VALUE: return ESCALATION;
 		}
 		return null;
 	}

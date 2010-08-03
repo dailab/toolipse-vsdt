@@ -41,6 +41,7 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getQueryLanguage <em>Query Language</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getCreationDate <em>Creation Date</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getModificationDate <em>Modification Date</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#isExecutable <em>Executable</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getBusinessProcesses <em>Business Processes</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getParticipants <em>Participants</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getMessages <em>Messages</em>}</li>
@@ -191,6 +192,26 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 	 * @ordered
 	 */
 	protected Date modificationDate = MODIFICATION_DATE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isExecutable() <em>Executable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExecutable()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean EXECUTABLE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isExecutable() <em>Executable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExecutable()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean executable = EXECUTABLE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getBusinessProcesses() <em>Business Processes</em>}' containment reference list.
@@ -417,6 +438,27 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isExecutable() {
+		return executable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExecutable(boolean newExecutable) {
+		boolean oldExecutable = executable;
+		executable = newExecutable;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.BUSINESS_PROCESS_SYSTEM__EXECUTABLE, oldExecutable, executable));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<BusinessProcessDiagram> getBusinessProcesses() {
 		if (businessProcesses == null) {
 			businessProcesses = new EObjectContainmentWithInverseEList<BusinessProcessDiagram>(BusinessProcessDiagram.class, this, VsdtPackage.BUSINESS_PROCESS_SYSTEM__BUSINESS_PROCESSES, VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARENT);
@@ -531,6 +573,8 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 				return getCreationDate();
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MODIFICATION_DATE:
 				return getModificationDate();
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__EXECUTABLE:
+				return isExecutable();
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__BUSINESS_PROCESSES:
 				return getBusinessProcesses();
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__PARTICIPANTS:
@@ -574,6 +618,9 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 				return;
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MODIFICATION_DATE:
 				setModificationDate((Date)newValue);
+				return;
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__EXECUTABLE:
+				setExecutable((Boolean)newValue);
 				return;
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__BUSINESS_PROCESSES:
 				getBusinessProcesses().clear();
@@ -628,6 +675,9 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MODIFICATION_DATE:
 				setModificationDate(MODIFICATION_DATE_EDEFAULT);
 				return;
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__EXECUTABLE:
+				setExecutable(EXECUTABLE_EDEFAULT);
+				return;
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__BUSINESS_PROCESSES:
 				getBusinessProcesses().clear();
 				return;
@@ -669,6 +719,8 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 				return CREATION_DATE_EDEFAULT == null ? creationDate != null : !CREATION_DATE_EDEFAULT.equals(creationDate);
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MODIFICATION_DATE:
 				return MODIFICATION_DATE_EDEFAULT == null ? modificationDate != null : !MODIFICATION_DATE_EDEFAULT.equals(modificationDate);
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__EXECUTABLE:
+				return executable != EXECUTABLE_EDEFAULT;
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__BUSINESS_PROCESSES:
 				return businessProcesses != null && !businessProcesses.isEmpty();
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__PARTICIPANTS:
@@ -707,6 +759,8 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 		result.append(creationDate);
 		result.append(", modificationDate: ");
 		result.append(modificationDate);
+		result.append(", executable: ");
+		result.append(executable);
 		result.append(')');
 		return result.toString();
 	}

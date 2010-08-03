@@ -3,6 +3,7 @@ package de.dailab.vsdt.diagram.figures;
 import org.eclipse.draw2d.Ellipse;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.swt.SWT;
 
 import de.dailab.vsdt.TriggerType;
 
@@ -20,6 +21,7 @@ public class EventFigure extends Ellipse implements IDecoratableFigure {
 	private int eventType= START;
 	private TriggerType triggerType= TriggerType.NONE;
 	private boolean throwing;
+	private boolean nonInterrupting;
 	
 	private IFigureDecorator decorator;
 
@@ -34,14 +36,16 @@ public class EventFigure extends Ellipse implements IDecoratableFigure {
 	}
 	
 	/**
-	 * @param eventtype		the event type; one of START, INTERMEDIATE, or END
-	 * @param triggerType	the trigger type to be shown
-	 * @param throwing		whether the event is throwing or catching
+	 * @param eventtype			the event type; one of START, INTERMEDIATE, or END
+	 * @param triggerType		the trigger type to be shown
+	 * @param throwing			whether the event is throwing or catching
+	 * @param nonInterrupting	whether the event is non-interrupting or not
 	 */
-	public EventFigure(int eventType, TriggerType triggerType, boolean throwing) {
+	public EventFigure(int eventType, TriggerType triggerType, boolean throwing, boolean nonInterrupting) {
 		this.eventType= eventType;
 		this.triggerType= triggerType;
 		this.throwing= throwing;
+		setNonInterrupting(nonInterrupting);
 		init();
 	}
 	
@@ -64,6 +68,9 @@ public class EventFigure extends Ellipse implements IDecoratableFigure {
 		int x= b.x + w/8;	// x position of inner figure
 		int y= b.y + w/8;	// y position of inner figure
 		
+		if (nonInterrupting) {
+			g.setLineStyle(SWT.LINE_DASH);
+		}
 		switch (eventType) {
 		case START:
 			break;
@@ -77,6 +84,7 @@ public class EventFigure extends Ellipse implements IDecoratableFigure {
 			g.fillOval(x, y, s, s);
 			break;
 		}
+		g.setLineStyle(SWT.LINE_SOLID);
 
 		// more abbreviations
 		s= w/2;			// width of the trigger figure
@@ -174,6 +182,14 @@ public class EventFigure extends Ellipse implements IDecoratableFigure {
 				g.drawPolygon(triangle);
 			}
 			break;
+		case ESCALATION:
+			int[] startrek= new int[] {x+s2,y, x+s-s6,y+s-s6, x+s2,y+s-s3, x+s6,y+s-s6};
+			if (throwing) {
+				g.fillPolygon(startrek);
+			} else {
+				g.drawPolygon(startrek);
+			}
+			break;
 		}
 		// decorate figure
 		if (decorator != null) {
@@ -211,4 +227,12 @@ public class EventFigure extends Ellipse implements IDecoratableFigure {
 		this.revalidate();
 	}
 	
+	public void setNonInterrupting(boolean nonInterrupting) {
+		this.nonInterrupting = nonInterrupting;
+		if (nonInterrupting) {
+			this.setLineStyle(SWT.LINE_DASH);
+		} else {
+			this.setLineStyle(SWT.LINE_SOLID);
+		}
+	}
 }

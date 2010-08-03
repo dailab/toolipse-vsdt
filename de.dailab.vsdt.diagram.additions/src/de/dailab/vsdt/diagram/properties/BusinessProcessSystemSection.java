@@ -31,6 +31,7 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
 							   DISPLAY_LANGUAGE= "Language",
 							   DISPLAY_EXP_LANG= "Expr. Language",
 							   DISPLAY_QUERY_LANG= "Query Language",
+							   DISPLAY_EXECUTABLE= "Executable",
 							   DISPLAY_CREATE_DATE= "Creation Date",
 							   DISPLAY_MOD_DATE= "Modification Date",
 							   DISPLAY_MODIFIED_NOW= "Now",
@@ -49,6 +50,8 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
     private Button orgImplButton;
     private Button orgMsgButton;
     private Button orgDataButton;
+    
+    private Button executableButton;
     
     private DateTime creationDate;
     private DateTime creationTime;
@@ -70,6 +73,8 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
 
     @Override
  	protected void internalRefresh() {
+        executableButton.setSelection(bps.isExecutable());
+        
     	versionText.setText(nonNull(bps.getVersion()));
     	authorText.setText(nonNull(bps.getAuthor()));
     	languageText.setText(nonNull(bps.getLanguage()));
@@ -99,10 +104,24 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
         super.createControls(parent, aTabbedPropertySheetPage);
         Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
+
+        // executable
+        executableButton= FormLayoutUtil.addButton(composite, DISPLAY_EXECUTABLE, SWT.CHECK, 0, 0, null);
+        executableButton.addSelectionListener(this);
+
+        // organize buttons
+        orgImplButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_IMPL, 0, 0, null, 100);
+        orgImplButton.addSelectionListener(this);
+        
+        orgMsgButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_MSG, 0, 0, null, orgImplButton);
+        orgMsgButton.addSelectionListener(this);
+        
+        orgDataButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_DATA, 0, 0, null, orgMsgButton);
+        orgDataButton.addSelectionListener(this);
         
         // author
-        label = FormLayoutUtil.addLabel(composite, DISPLAY_AUTHOR, 0, 0);
-        authorText = FormLayoutUtil.addText(composite, 0, label, 50, 0);
+        label = FormLayoutUtil.addLabel(composite, DISPLAY_AUTHOR, orgImplButton, 0);
+        authorText = FormLayoutUtil.addText(composite, orgImplButton, label, 50, 0);
         authorText.addFocusListener(this);
         
         // version
@@ -111,8 +130,8 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
         versionText.addFocusListener(this);
        
         // language
-        label = FormLayoutUtil.addLabel(composite, DISPLAY_LANGUAGE, 0, 50);
-        languageText = FormLayoutUtil.addText(composite, 0, label, 100, 0);
+        label = FormLayoutUtil.addLabel(composite, DISPLAY_LANGUAGE, orgImplButton, 50);
+        languageText = FormLayoutUtil.addText(composite, orgImplButton, label, 100, 0);
         languageText.addFocusListener(this);
         
         // expression language
@@ -124,7 +143,7 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
         label = FormLayoutUtil.addLabel(composite, DISPLAY_QUERY_LANG, label, 50);
         queryLangText = FormLayoutUtil.addText(composite, expLangText, label, 100, 0);
         queryLangText.addFocusListener(this); 
-        
+
         // creation date and time
         label= FormLayoutUtil.addLabel(composite, DISPLAY_CREATE_DATE, versionText, 0);
         creationDate= FormLayoutUtil.addDateTime(composite, versionText, label, null, SWT.DATE);
@@ -143,15 +162,6 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
         setModifiedTimeButton= FormLayoutUtil.addButton(composite, DISPLAY_MODIFIED_NOW, 0, creationDate, modificationTime, null);
         setModifiedTimeButton.addSelectionListener(this);
         
-        // organize buttons
-        orgImplButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_IMPL, 0, queryLangText, null, 100);
-        orgImplButton.addSelectionListener(this);
-        
-        orgMsgButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_MSG, 0, queryLangText, null, orgImplButton);
-        orgMsgButton.addSelectionListener(this);
-        
-        orgDataButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_DATA, 0, queryLangText, null, orgMsgButton);
-        orgDataButton.addSelectionListener(this);
     }
     
     public void focusLost(FocusEvent e) {
@@ -209,6 +219,9 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
     	}
     	if (src.equals(orgDataButton)) {
 			new OrganizeDataTypesAction().run(bps);
+    	}
+    	if (src.equals(executableButton)) {
+    		setPropertyValue(bps, pack.getBusinessProcessSystem_Executable(), executableButton.getSelection());
     	}
     }
 

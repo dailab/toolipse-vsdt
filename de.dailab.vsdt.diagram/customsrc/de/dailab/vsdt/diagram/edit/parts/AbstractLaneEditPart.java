@@ -1,11 +1,9 @@
 package de.dailab.vsdt.diagram.edit.parts;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gmf.runtime.notation.View;
 
 import de.dailab.vsdt.Lane;
-import de.dailab.vsdt.VsdtPackage;
 import de.dailab.vsdt.diagram.figures.SwimlaneFigure;
 
 

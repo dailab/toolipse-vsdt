@@ -225,13 +225,22 @@ public interface VsdtPackage extends EPackage {
 	int BUSINESS_PROCESS_SYSTEM__MODIFICATION_DATE = ID_OBJECT_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Executable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUSINESS_PROCESS_SYSTEM__EXECUTABLE = ID_OBJECT_FEATURE_COUNT + 7;
+
+	/**
 	 * The feature id for the '<em><b>Business Processes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUSINESS_PROCESS_SYSTEM__BUSINESS_PROCESSES = ID_OBJECT_FEATURE_COUNT + 7;
+	int BUSINESS_PROCESS_SYSTEM__BUSINESS_PROCESSES = ID_OBJECT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Participants</b></em>' containment reference list.
@@ -240,7 +249,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUSINESS_PROCESS_SYSTEM__PARTICIPANTS = ID_OBJECT_FEATURE_COUNT + 8;
+	int BUSINESS_PROCESS_SYSTEM__PARTICIPANTS = ID_OBJECT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Messages</b></em>' containment reference list.
@@ -249,7 +258,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUSINESS_PROCESS_SYSTEM__MESSAGES = ID_OBJECT_FEATURE_COUNT + 9;
+	int BUSINESS_PROCESS_SYSTEM__MESSAGES = ID_OBJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Implementations</b></em>' containment reference list.
@@ -258,7 +267,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS = ID_OBJECT_FEATURE_COUNT + 10;
+	int BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS = ID_OBJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Data Types</b></em>' containment reference list.
@@ -267,7 +276,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUSINESS_PROCESS_SYSTEM__DATA_TYPES = ID_OBJECT_FEATURE_COUNT + 11;
+	int BUSINESS_PROCESS_SYSTEM__DATA_TYPES = ID_OBJECT_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of structural features of the '<em>Business Process System</em>' class.
@@ -276,7 +285,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BUSINESS_PROCESS_SYSTEM_FEATURE_COUNT = ID_OBJECT_FEATURE_COUNT + 12;
+	int BUSINESS_PROCESS_SYSTEM_FEATURE_COUNT = ID_OBJECT_FEATURE_COUNT + 13;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.BusinessProcessDiagramImpl <em>Business Process Diagram</em>}' class.
@@ -1226,13 +1235,22 @@ public interface VsdtPackage extends EPackage {
 	int EVENT__INCOMING_SEQ = FLOW_OBJECT__INCOMING_SEQ;
 
 	/**
+	 * The feature id for the '<em><b>Non Interrupting</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT__NON_INTERRUPTING = FLOW_OBJECT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Trigger</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__TRIGGER = FLOW_OBJECT_FEATURE_COUNT + 0;
+	int EVENT__TRIGGER = FLOW_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Message</b></em>' reference.
@@ -1241,7 +1259,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__MESSAGE = FLOW_OBJECT_FEATURE_COUNT + 1;
+	int EVENT__MESSAGE = FLOW_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Implementation</b></em>' reference.
@@ -1250,7 +1268,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__IMPLEMENTATION = FLOW_OBJECT_FEATURE_COUNT + 2;
+	int EVENT__IMPLEMENTATION = FLOW_OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Time Expression</b></em>' containment reference.
@@ -1259,7 +1277,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__TIME_EXPRESSION = FLOW_OBJECT_FEATURE_COUNT + 3;
+	int EVENT__TIME_EXPRESSION = FLOW_OBJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>As Duration</b></em>' attribute.
@@ -1268,7 +1286,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__AS_DURATION = FLOW_OBJECT_FEATURE_COUNT + 4;
+	int EVENT__AS_DURATION = FLOW_OBJECT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Rule Expression</b></em>' containment reference.
@@ -1277,7 +1295,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__RULE_EXPRESSION = FLOW_OBJECT_FEATURE_COUNT + 5;
+	int EVENT__RULE_EXPRESSION = FLOW_OBJECT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Error Code</b></em>' attribute.
@@ -1286,7 +1304,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__ERROR_CODE = FLOW_OBJECT_FEATURE_COUNT + 6;
+	int EVENT__ERROR_CODE = FLOW_OBJECT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Activity</b></em>' reference.
@@ -1295,7 +1313,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__ACTIVITY = FLOW_OBJECT_FEATURE_COUNT + 7;
+	int EVENT__ACTIVITY = FLOW_OBJECT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Signal</b></em>' attribute.
@@ -1304,7 +1322,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__SIGNAL = FLOW_OBJECT_FEATURE_COUNT + 8;
+	int EVENT__SIGNAL = FLOW_OBJECT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Linked To</b></em>' reference.
@@ -1313,7 +1331,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__LINKED_TO = FLOW_OBJECT_FEATURE_COUNT + 9;
+	int EVENT__LINKED_TO = FLOW_OBJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Event</em>' class.
@@ -1322,7 +1340,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 10;
+	int EVENT_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1431,6 +1449,15 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int START__INCOMING_SEQ = EVENT__INCOMING_SEQ;
+
+	/**
+	 * The feature id for the '<em><b>Non Interrupting</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int START__NON_INTERRUPTING = EVENT__NON_INTERRUPTING;
 
 	/**
 	 * The feature id for the '<em><b>Trigger</b></em>' attribute.
@@ -1638,6 +1665,15 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int INTERMEDIATE__INCOMING_SEQ = EVENT__INCOMING_SEQ;
+
+	/**
+	 * The feature id for the '<em><b>Non Interrupting</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERMEDIATE__NON_INTERRUPTING = EVENT__NON_INTERRUPTING;
 
 	/**
 	 * The feature id for the '<em><b>Trigger</b></em>' attribute.
@@ -1854,6 +1890,15 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int END__INCOMING_SEQ = EVENT__INCOMING_SEQ;
+
+	/**
+	 * The feature id for the '<em><b>Non Interrupting</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int END__NON_INTERRUPTING = EVENT__NON_INTERRUPTING;
 
 	/**
 	 * The feature id for the '<em><b>Trigger</b></em>' attribute.
@@ -2144,13 +2189,22 @@ public interface VsdtPackage extends EPackage {
 	int ACTIVITY__BOUNDARY_EVENTS = FLOW_OBJECT_FEATURE_COUNT + 8;
 
 	/**
+	 * The feature id for the '<em><b>Evented Subprocess</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTIVITY__EVENTED_SUBPROCESS = FLOW_OBJECT_FEATURE_COUNT + 9;
+
+	/**
 	 * The feature id for the '<em><b>Activity Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__ACTIVITY_TYPE = FLOW_OBJECT_FEATURE_COUNT + 9;
+	int ACTIVITY__ACTIVITY_TYPE = FLOW_OBJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>In Message</b></em>' reference.
@@ -2159,7 +2213,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__IN_MESSAGE = FLOW_OBJECT_FEATURE_COUNT + 10;
+	int ACTIVITY__IN_MESSAGE = FLOW_OBJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Out Message</b></em>' reference.
@@ -2168,7 +2222,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__OUT_MESSAGE = FLOW_OBJECT_FEATURE_COUNT + 11;
+	int ACTIVITY__OUT_MESSAGE = FLOW_OBJECT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Implementation</b></em>' reference.
@@ -2177,7 +2231,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__IMPLEMENTATION = FLOW_OBJECT_FEATURE_COUNT + 12;
+	int ACTIVITY__IMPLEMENTATION = FLOW_OBJECT_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Performers</b></em>' attribute list.
@@ -2186,7 +2240,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__PERFORMERS = FLOW_OBJECT_FEATURE_COUNT + 13;
+	int ACTIVITY__PERFORMERS = FLOW_OBJECT_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Script</b></em>' attribute.
@@ -2195,7 +2249,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__SCRIPT = FLOW_OBJECT_FEATURE_COUNT + 14;
+	int ACTIVITY__SCRIPT = FLOW_OBJECT_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Activity Ref</b></em>' reference.
@@ -2204,7 +2258,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__ACTIVITY_REF = FLOW_OBJECT_FEATURE_COUNT + 15;
+	int ACTIVITY__ACTIVITY_REF = FLOW_OBJECT_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Transaction</b></em>' containment reference.
@@ -2213,7 +2267,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__TRANSACTION = FLOW_OBJECT_FEATURE_COUNT + 16;
+	int ACTIVITY__TRANSACTION = FLOW_OBJECT_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Diagram Ref</b></em>' reference.
@@ -2222,7 +2276,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__DIAGRAM_REF = FLOW_OBJECT_FEATURE_COUNT + 17;
+	int ACTIVITY__DIAGRAM_REF = FLOW_OBJECT_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Process Ref</b></em>' reference.
@@ -2231,7 +2285,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__PROCESS_REF = FLOW_OBJECT_FEATURE_COUNT + 18;
+	int ACTIVITY__PROCESS_REF = FLOW_OBJECT_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Input Property Maps</b></em>' containment reference list.
@@ -2240,7 +2294,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__INPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 19;
+	int ACTIVITY__INPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>Output Property Maps</b></em>' containment reference list.
@@ -2249,7 +2303,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__OUTPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 20;
+	int ACTIVITY__OUTPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 21;
 
 	/**
 	 * The number of structural features of the '<em>Activity</em>' class.
@@ -2258,7 +2312,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 21;
+	int ACTIVITY_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 22;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -4200,6 +4254,17 @@ public interface VsdtPackage extends EPackage {
 	EClass getEvent();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Event#isNonInterrupting <em>Non Interrupting</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Non Interrupting</em>'.
+	 * @see de.dailab.vsdt.Event#isNonInterrupting()
+	 * @see #getEvent()
+	 * @generated
+	 */
+	EAttribute getEvent_NonInterrupting();
+
+	/**
 	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Event#getTrigger <em>Trigger</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4414,6 +4479,17 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getActivity_BoundaryEvents();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Activity#isEventedSubprocess <em>Evented Subprocess</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Evented Subprocess</em>'.
+	 * @see de.dailab.vsdt.Activity#isEventedSubprocess()
+	 * @see #getActivity()
+	 * @generated
+	 */
+	EAttribute getActivity_EventedSubprocess();
 
 	/**
 	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Activity#getActivityType <em>Activity Type</em>}'.
@@ -5666,6 +5742,17 @@ public interface VsdtPackage extends EPackage {
 	EAttribute getBusinessProcessSystem_ModificationDate();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.BusinessProcessSystem#isExecutable <em>Executable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Executable</em>'.
+	 * @see de.dailab.vsdt.BusinessProcessSystem#isExecutable()
+	 * @see #getBusinessProcessSystem()
+	 * @generated
+	 */
+	EAttribute getBusinessProcessSystem_Executable();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.BusinessProcessSystem#getBusinessProcesses <em>Business Processes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6059,6 +6146,14 @@ public interface VsdtPackage extends EPackage {
 		EClass EVENT = eINSTANCE.getEvent();
 
 		/**
+		 * The meta object literal for the '<em><b>Non Interrupting</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EVENT__NON_INTERRUPTING = eINSTANCE.getEvent_NonInterrupting();
+
+		/**
 		 * The meta object literal for the '<em><b>Trigger</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6225,6 +6320,14 @@ public interface VsdtPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ACTIVITY__BOUNDARY_EVENTS = eINSTANCE.getActivity_BoundaryEvents();
+
+		/**
+		 * The meta object literal for the '<em><b>Evented Subprocess</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTIVITY__EVENTED_SUBPROCESS = eINSTANCE.getActivity_EventedSubprocess();
 
 		/**
 		 * The meta object literal for the '<em><b>Activity Type</b></em>' attribute feature.
@@ -7205,6 +7308,14 @@ public interface VsdtPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BUSINESS_PROCESS_SYSTEM__MODIFICATION_DATE = eINSTANCE.getBusinessProcessSystem_ModificationDate();
+
+		/**
+		 * The meta object literal for the '<em><b>Executable</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BUSINESS_PROCESS_SYSTEM__EXECUTABLE = eINSTANCE.getBusinessProcessSystem_Executable();
 
 		/**
 		 * The meta object literal for the '<em><b>Business Processes</b></em>' containment reference list feature.

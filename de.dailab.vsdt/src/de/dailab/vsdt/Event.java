@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link de.dailab.vsdt.Event#isNonInterrupting <em>Non Interrupting</em>}</li>
  *   <li>{@link de.dailab.vsdt.Event#getTrigger <em>Trigger</em>}</li>
  *   <li>{@link de.dailab.vsdt.Event#getMessage <em>Message</em>}</li>
  *   <li>{@link de.dailab.vsdt.Event#getImplementation <em>Implementation</em>}</li>
@@ -36,6 +37,32 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Event extends FlowObject {
+	/**
+	 * Returns the value of the '<em><b>Non Interrupting</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Non Interrupting</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Non Interrupting</em>' attribute.
+	 * @see #setNonInterrupting(boolean)
+	 * @see de.dailab.vsdt.VsdtPackage#getEvent_NonInterrupting()
+	 * @model
+	 * @generated
+	 */
+	boolean isNonInterrupting();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.Event#isNonInterrupting <em>Non Interrupting</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Non Interrupting</em>' attribute.
+	 * @see #isNonInterrupting()
+	 * @generated
+	 */
+	void setNonInterrupting(boolean value);
+
 	/**
 	 * Returns the value of the '<em><b>Trigger</b></em>' attribute.
 	 * The literals are from the enumeration {@link de.dailab.vsdt.TriggerType}.
@@ -322,5 +349,21 @@ public interface Event extends FlowObject {
 	 * @generated
 	 */
 	boolean isThrowing();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isInEventedSubprocess();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isOnBoundary();
 
 } // Event

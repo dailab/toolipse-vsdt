@@ -69,6 +69,7 @@ public class BusinessProcessSystemItemProvider
 			addQueryLanguagePropertyDescriptor(object);
 			addCreationDatePropertyDescriptor(object);
 			addModificationDatePropertyDescriptor(object);
+			addExecutablePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -228,6 +229,28 @@ public class BusinessProcessSystemItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Executable feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addExecutablePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BusinessProcessSystem_executable_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BusinessProcessSystem_executable_feature", "_UI_BusinessProcessSystem_type"),
+				 VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__EXECUTABLE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -305,6 +328,7 @@ public class BusinessProcessSystemItemProvider
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__QUERY_LANGUAGE:
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__CREATION_DATE:
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MODIFICATION_DATE:
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__EXECUTABLE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__BUSINESS_PROCESSES:

@@ -21,9 +21,9 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import de.dailab.common.gmf.ExpandableItemProviderAdapter;
 import de.dailab.vsdt.Transaction;
 import de.dailab.vsdt.VsdtPackage;
 
@@ -31,10 +31,10 @@ import de.dailab.vsdt.VsdtPackage;
  * This is the item provider adapter for a {@link de.dailab.vsdt.Transaction} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
- * @generated NOT
+ * @generated
  */
 public class TransactionItemProvider
-	extends ExpandableItemProviderAdapter
+	extends ItemProviderAdapter
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	

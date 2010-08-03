@@ -67,6 +67,8 @@ public class ActivityItemProvider
 
 			addAdHocPropertyDescriptor(object);
 			addAdHocCompletionConditionPropertyDescriptor(object);
+			addLoopAttributesPropertyDescriptor(object);
+			addEventedSubprocessPropertyDescriptor(object);
 			addActivityTypePropertyDescriptor(object);
 			addInMessagePropertyDescriptor(object);
 			addOutMessagePropertyDescriptor(object);
@@ -74,6 +76,7 @@ public class ActivityItemProvider
 			addPerformersPropertyDescriptor(object);
 			addScriptPropertyDescriptor(object);
 			addActivityRefPropertyDescriptor(object);
+			addTransactionPropertyDescriptor(object);
 			addDiagramRefPropertyDescriptor(object);
 			addProcessRefPropertyDescriptor(object);
 		}
@@ -121,6 +124,50 @@ public class ActivityItemProvider
 				 false,
 				 null,
 				 getString("_UI_ProcessPropertyCategory"),
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Loop Attributes feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addLoopAttributesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Activity_loopAttributes_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_loopAttributes_feature", "_UI_Activity_type"),
+				 VsdtPackage.Literals.ACTIVITY__LOOP_ATTRIBUTES,
+				 false,
+				 false,
+				 false,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Evented Subprocess feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEventedSubprocessPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Activity_eventedSubprocess_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_eventedSubprocess_feature", "_UI_Activity_type"),
+				 VsdtPackage.Literals.ACTIVITY__EVENTED_SUBPROCESS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
 				 null));
 	}
 
@@ -289,6 +336,28 @@ public class ActivityItemProvider
 	}
 	
 	/**
+	 * This adds a property descriptor for the Transaction feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTransactionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Activity_transaction_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_transaction_feature", "_UI_Activity_type"),
+				 VsdtPackage.Literals.ACTIVITY__TRANSACTION,
+				 false,
+				 false,
+				 false,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Diagram Ref feature.
 	 * <!-- begin-user-doc -->
 	 * search the workspace for other BPMN diagrams and list the result
@@ -449,6 +518,7 @@ public class ActivityItemProvider
 
 		switch (notification.getFeatureID(Activity.class)) {
 			case VsdtPackage.ACTIVITY__AD_HOC:
+			case VsdtPackage.ACTIVITY__EVENTED_SUBPROCESS:
 			case VsdtPackage.ACTIVITY__ACTIVITY_TYPE:
 			case VsdtPackage.ACTIVITY__PERFORMERS:
 			case VsdtPackage.ACTIVITY__SCRIPT:

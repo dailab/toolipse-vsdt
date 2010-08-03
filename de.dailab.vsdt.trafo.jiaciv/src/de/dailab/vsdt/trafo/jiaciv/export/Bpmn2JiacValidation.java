@@ -1,9 +1,20 @@
 package de.dailab.vsdt.trafo.jiaciv.export;
 
+import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.trafo.impl.DefaultBpmnValidation;
 
 
 public class Bpmn2JiacValidation extends DefaultBpmnValidation {
+
+	/**
+	 * Check whether the BPS to be exported is Executable
+	 */
+	@Override
+	protected boolean visitBusinessProcessSystem(BusinessProcessSystem bps) {
+		boolean isOk = super.visitBusinessProcessSystem(bps);
+		isOk &= test(bps.isExecutable(), "Business Process System must be Executable");
+		return isOk;
+	}
 	
 //	/**
 //	 * delegate to new artifact types

@@ -10,6 +10,7 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -25,6 +26,7 @@ import org.eclipse.ui.PlatformUI;
 import de.dailab.common.gmf.Util;
 import de.dailab.common.swt.views.AbstractStructuredViewerView;
 import de.dailab.vsdt.Activity;
+import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
@@ -124,24 +126,30 @@ public class InterpreterView extends AbstractStructuredViewerView {
 	}
 
 	protected void updateActionEnablement() {
-		boolean isVsdt= isVsdtDiagram();
-		Object selected= getSelectedElement(viewer);
-		startAction.setEnabled(isVsdt && ! isRunning());
-		stopAction.setEnabled(isVsdt && isRunning());
-		stepOverAction.setEnabled(isVsdt && isRunning() &&
-				selected instanceof FlowObject &&
-				getState((FlowObject) selected).isReadyState() &&
-				! getState((FlowObject) selected).isActiveState());
-		stepIntoAction.setEnabled(isVsdt && isRunning() &&
-				selected instanceof FlowObject &&
-				getState((FlowObject) selected).isReadyState() &&
-				! getState((FlowObject) selected).isActiveState());
-		stepOutAction.setEnabled(isVsdt && isRunning() &&
-				selected instanceof FlowObject &&
-				getState((FlowObject) selected).isActiveState() && 
-				getState((FlowObject) selected).isReadyState());
+		// by default, de-activate everything
+		startAction.setEnabled(false);
+		stopAction.setEnabled(false);
+		stepOverAction.setEnabled(false);
+		stepIntoAction.setEnabled(false);
+		stepOutAction.setEnabled(false);
+		// interpreter type selection actions only enabled when not running
 		for (Action selectAction : simulationTypeSelectActions) {
 			selectAction.setEnabled(! isRunning());
+		}
+		if (isVsdtDiagram()) {
+			startAction.setEnabled(! isRunning());
+			stopAction.setEnabled(isRunning());
+			if (isRunning()) {
+				Object selected= getSelectedElement(viewer);
+				if (selected instanceof FlowObject) {
+					FlowObject flowObject = (FlowObject) selected;
+					boolean active = getState(flowObject).isActiveState();
+					boolean ready = getState(flowObject).isReadyState();
+					stepOverAction.setEnabled(ready && ! active);
+					stepIntoAction.setEnabled(ready && ! active);
+					stepOutAction.setEnabled(ready && active);
+				}
+			}
 		}
 	}
 	
@@ -205,17 +213,31 @@ public class InterpreterView extends AbstractStructuredViewerView {
 			IEditorPart editor= ((IWorkbenchPage) viewer.getInput()).getActiveEditor();
 			for (Action selectAction : simulationTypeSelectActions) {
 				if (selectAction.isChecked()) {
+					BusinessProcessDiagramEditPart editPart = (BusinessProcessDiagramEditPart) 
+					((VsdtDiagramEditor) editor).getDiagramEditPart();
 					if (selectAction.getText() == SIMULATIONTYPE_INTERPRETER) {
-						simulation= new InterpretingSimulation();
+						BusinessProcessDiagram bpd = editPart.getCastedModel();
+						if (bpd.getParent().isExecutable()) {
+							simulation= new InterpretingSimulation();
+						} else {
+							String title= "Process Not Executable";
+							String message = "The opened Process Diagram is not " +
+									"executable. If you want to interpret this " +
+									"Process, please set the Business Process " +
+									"System's executable flag to True.";
+							MessageDialog.openInformation(viewer.getControl().getShell(), title, message);
+							break;
+						}
 					} else if (selectAction.getText() == SIMULATIONTYPE_MANUAL) {
 						simulation= new ManualSimulation();
 					} else {
 						simulation= new ManualSimulation(); // default
 					}
 					simulation.setViewer(viewer);
-					List<FlowObject> result= simulation.start((BusinessProcessDiagramEditPart) ((VsdtDiagramEditor) editor).getDiagramEditPart());
+					List<FlowObject> result= simulation.start(editPart);
 					setSelection(result);
 					updateActionEnablement();
+					break;
 				}
 			}
 		}

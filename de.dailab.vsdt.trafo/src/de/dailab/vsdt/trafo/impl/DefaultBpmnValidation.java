@@ -203,6 +203,11 @@ public class DefaultBpmnValidation extends MappingStage {
 	// VISITOR LOGIC
 	//////////////////////////////////////////////////////////
 	
+	/**
+	 * Check Messages and Stuff, Delegate to Business Process Diagrams
+	 * 
+	 * XXX Transformations to Code should also check whether the isExecutable flag is set!
+	 */
 	protected boolean visitBusinessProcessSystem(BusinessProcessSystem bps) {
 		if (testIsNull(bps)) return false;
 		boolean isOK= true;

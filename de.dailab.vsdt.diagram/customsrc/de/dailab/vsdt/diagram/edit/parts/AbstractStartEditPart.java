@@ -44,6 +44,10 @@ public abstract class AbstractStartEditPart extends AbstractVsdtBorderedShapeEdi
 			getPrimaryShape().setThrowing(getCastedModel().isThrowing());
 			refreshVisuals();
 			break;
+		case VsdtPackage.EVENT__NON_INTERRUPTING:
+			getPrimaryShape().setNonInterrupting(getCastedModel().isNonInterrupting());
+			refreshVisuals();
+			break;
 		}
 	}
 
@@ -62,7 +66,7 @@ public abstract class AbstractStartEditPart extends AbstractVsdtBorderedShapeEdi
 	 */
 	protected IFigure initNodeShape() {
 		EventFigure figure= new EventFigure(EventFigure.START, getCastedModel()
-				.getTrigger(), false);
+				.getTrigger(), false, getCastedModel().isNonInterrupting());
 		return figure;
 	}
 

@@ -25,6 +25,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getQueryLanguage <em>Query Language</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getCreationDate <em>Creation Date</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getModificationDate <em>Modification Date</em>}</li>
+ *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#isExecutable <em>Executable</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getBusinessProcesses <em>Business Processes</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getParticipants <em>Participants</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getMessages <em>Messages</em>}</li>
@@ -219,6 +220,32 @@ public interface BusinessProcessSystem extends IdObject {
 	 * @generated
 	 */
 	void setModificationDate(Date value);
+
+	/**
+	 * Returns the value of the '<em><b>Executable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Executable</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Executable</em>' attribute.
+	 * @see #setExecutable(boolean)
+	 * @see de.dailab.vsdt.VsdtPackage#getBusinessProcessSystem_Executable()
+	 * @model
+	 * @generated
+	 */
+	boolean isExecutable();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.BusinessProcessSystem#isExecutable <em>Executable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Executable</em>' attribute.
+	 * @see #isExecutable()
+	 * @generated
+	 */
+	void setExecutable(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Business Processes</b></em>' containment reference list.

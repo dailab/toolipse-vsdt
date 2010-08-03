@@ -21,6 +21,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="queryLanguage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="creationDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="modificationDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="executable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="businessProcesses" upperBound="-1"
         eType="#//BusinessProcessDiagram" containment="true" eOpposite="#//BusinessProcessDiagram/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="participants" upperBound="-1"
@@ -75,9 +76,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ProcessType">
     <eLiterals name="NONE"/>
-    <eLiterals name="PRIVATE" value="1"/>
-    <eLiterals name="ABSTRACT" value="2"/>
-    <eLiterals name="COLLABORATION" value="3"/>
+    <eLiterals name="PUBLIC" value="1" literal="PUBLIC"/>
+    <eLiterals name="PRIVATE" value="2" literal="PRIVATE"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FlowObjectContainer" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="containedFlowObjects" upperBound="-1"
@@ -116,6 +116,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true" eSuperTypes="#//FlowObject">
     <eOperations name="getValidTriggerTypes" upperBound="-1" eType="#//TriggerType"/>
     <eOperations name="isThrowing" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isInEventedSubprocess" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isOnBoundary" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nonInterrupting" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="trigger" lowerBound="1"
         eType="#//TriggerType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="message" eType="#//Message"/>
@@ -148,6 +151,7 @@
     <eLiterals name="MULTIPLE" value="8"/>
     <eLiterals name="TERMINATE" value="9"/>
     <eLiterals name="SIGNAL" value="10"/>
+    <eLiterals name="ESCALATION" value="11"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Activity" eSuperTypes="#//FlowObject #//AbstractProcess #//FlowObjectContainer">
     <eOperations name="initializeInputSet"/>
@@ -163,6 +167,7 @@
         containment="true" eOpposite="#//LoopAttributeSet/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundaryEvents" upperBound="-1"
         eType="#//Intermediate" containment="true" eOpposite="#//Intermediate/attachedTo"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="eventedSubprocess" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="activityType" lowerBound="1"
         eType="#//ActivityType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inMessage" eType="#//Message"/>

@@ -68,6 +68,8 @@ public class ImplementationItemProvider
 			addOperationPropertyDescriptor(object);
 			addDescriptionPropertyDescriptor(object);
 			addLocationPropertyDescriptor(object);
+			addInputMessagePropertyDescriptor(object);
+			addOutputMessagePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -200,6 +202,50 @@ public class ImplementationItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Input Message feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addInputMessagePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Implementation_inputMessage_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Implementation_inputMessage_feature", "_UI_Implementation_type"),
+				 VsdtPackage.Literals.IMPLEMENTATION__INPUT_MESSAGE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Output Message feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addOutputMessagePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Implementation_outputMessage_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Implementation_outputMessage_feature", "_UI_Implementation_type"),
+				 VsdtPackage.Literals.IMPLEMENTATION__OUTPUT_MESSAGE,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

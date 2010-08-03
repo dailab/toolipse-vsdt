@@ -29,7 +29,7 @@ import de.dailab.common.gmf.ExpandableItemProviderAdapter;
  * @generated NOT
  */
 public class LoopAttributeSetItemProvider
-	extends ExpandableItemProviderAdapter
+extends ExpandableItemProviderAdapter
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -57,12 +57,22 @@ public class LoopAttributeSetItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-//			addLoopCounterPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
-//	/**
+/**
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getText(Object object) {
+		return getString("_UI_LoopAttributeSet_type");
+	}
+
+	//	/**
 //	 * This adds a property descriptor for the Loop Counter feature.
 //	 * <!-- begin-user-doc -->
 //	 * <!-- end-user-doc -->
@@ -106,12 +116,6 @@ public class LoopAttributeSetItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-//		switch (notification.getFeatureID(LoopAttributeSet.class)) {
-//			case VsdtPackage.LOOP_ATTRIBUTE_SET__LOOP_COUNTER:
-//				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-//				return;
-//		}
 		super.notifyChanged(notification);
 	}
 

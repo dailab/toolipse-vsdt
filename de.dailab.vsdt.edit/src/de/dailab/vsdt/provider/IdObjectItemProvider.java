@@ -21,9 +21,9 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import de.dailab.common.gmf.ExpandableItemProviderAdapter;
 import de.dailab.vsdt.IdObject;
 import de.dailab.vsdt.VsdtPackage;
 
@@ -31,10 +31,10 @@ import de.dailab.vsdt.VsdtPackage;
  * This is the item provider adapter for a {@link de.dailab.vsdt.IdObject} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
- * @generated NOT
+ * @generated
  */
 public class IdObjectItemProvider
-	extends ExpandableItemProviderAdapter
+	extends ItemProviderAdapter
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -106,7 +106,7 @@ public class IdObjectItemProvider
 				 getString("_UI_IdObject_id_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_IdObject_id_feature", "_UI_IdObject_type"),
 				 VsdtPackage.Literals.ID_OBJECT__ID,
-				 true,
+				 false,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
