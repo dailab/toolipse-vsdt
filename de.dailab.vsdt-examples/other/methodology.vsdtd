@@ -53,8 +53,7 @@
   <vsdt:BusinessProcessSystem xmi:id="_R7Jl8DWUEd-98prPmAEv_Q" name="Process Oriented Agent Software Engineering" id="_x-b-YLKREd6GMtoRM-Kpdw" version="0.1" author="Tobias Küster" expressionLanguage="VSDT Expression Language" creationDate="2009-10-06T18:03:26.150+0200" modificationDate="2009-10-06T18:03:26.150+0200">
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_R7Jl8TWUEd-98prPmAEv_Q" name="POASE" id="_4KFoULKREd6GMtoRM-Kpdw" participants="_R7K0KDWUEd-98prPmAEv_Q _R7K0KTWUEd-98prPmAEv_Q _R7K0JzWUEd-98prPmAEv_Q">
       <pools xmi:type="vsdt:Pool" xmi:id="_R7Jl8jWUEd-98prPmAEv_Q" name="Process Oriented Agent Engineering" id="_-UsJYLKREd6GMtoRM-Kpdw" boundaryVisible="false">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_R7KNADWUEd-98prPmAEv_Q" name="Process Oriented Agent Engineering_Process" id="_-UuloLKREd6GMtoRM-Kpdw"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_R7KNATWUEd-98prPmAEv_Q" id="_-Ut-kLKREd6GMtoRM-Kpdw" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_R7KNATWUEd-98prPmAEv_Q" id="_-Ut-kLKREd6GMtoRM-Kpdw">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_R7KNAjWUEd-98prPmAEv_Q" id="_Bg1VQLKSEd6GMtoRM-Kpdw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_R7KNAzWUEd-98prPmAEv_Q" name="Use Case Analysis" id="_CQG2ELKSEd6GMtoRM-Kpdw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_R7KNBDWUEd-98prPmAEv_Q" name="Business Process &#xA;Design" id="_FrjCMLKSEd6GMtoRM-Kpdw"/>
