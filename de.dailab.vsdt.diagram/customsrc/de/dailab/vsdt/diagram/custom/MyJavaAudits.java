@@ -839,8 +839,7 @@ public class MyJavaAudits {
 			ok&= self.getDiagramRef() != null;
 			ok&= self.getProcessRef() != null;
 			break;
-		case ActivityType.SUBPROCESSREFERENCE_VALUE:
-		case ActivityType.TASKREFERENCE_VALUE:
+		case ActivityType.REFERENCE_VALUE:
 			//activity reference
 			ok&= self.getActivityRef() != null;
 			break;

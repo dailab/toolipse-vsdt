@@ -2666,12 +2666,12 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		addEEnumLiteral(activityTypeEEnum, ActivityType.RECEIVE);
 		addEEnumLiteral(activityTypeEEnum, ActivityType.SEND);
 		addEEnumLiteral(activityTypeEEnum, ActivityType.USER);
-		addEEnumLiteral(activityTypeEEnum, ActivityType.SCRIPT);
 		addEEnumLiteral(activityTypeEEnum, ActivityType.MANUAL);
-		addEEnumLiteral(activityTypeEEnum, ActivityType.TASKREFERENCE);
+		addEEnumLiteral(activityTypeEEnum, ActivityType.SCRIPT);
+		addEEnumLiteral(activityTypeEEnum, ActivityType.BUSINESSRULE);
 		addEEnumLiteral(activityTypeEEnum, ActivityType.EMBEDDED);
 		addEEnumLiteral(activityTypeEEnum, ActivityType.INDEPENDENT);
-		addEEnumLiteral(activityTypeEEnum, ActivityType.SUBPROCESSREFERENCE);
+		addEEnumLiteral(activityTypeEEnum, ActivityType.REFERENCE);
 
 		initEEnum(loopTypeEEnum, LoopType.class, "LoopType");
 		addEEnumLiteral(loopTypeEEnum, LoopType.NONE);

@@ -475,7 +475,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	private void visitActivity(Activity activity) {
 		final ActivityType type= activity.getActivityType();
 		String actType= (type != ActivityType.NONE ? type(type) : "") + " Task";
-		if (type == ActivityType.EMBEDDED || type == ActivityType.SUBPROCESSREFERENCE || type == ActivityType.INDEPENDENT) {
+		if (type == ActivityType.EMBEDDED || type == ActivityType.INDEPENDENT) {
 			actType= type(type) + " Subprocess";
 			if (activity.getTransaction() != null) {
 				actType= "Transaction";
@@ -528,8 +528,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			}
 			builder.append(". ");
 			break;
-		case TASKREFERENCE:
-		case SUBPROCESSREFERENCE:
+		case REFERENCE:
 			builder.append(", which references to " + (activity.getActivityRef() != null ? 
 					name(activity.getActivityRef().getName()) : "another Activity") + ".");
 			break;

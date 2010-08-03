@@ -66,8 +66,7 @@ public class Bpmn2BpelValidation extends DefaultBpmnValidation {
 			Activity activity) {
 		boolean ok= super.visitActivity(activity);
 		
-		if (activity.getActivityType() == ActivityType.TASKREFERENCE ||
-				activity.getActivityType() == ActivityType.SUBPROCESSREFERENCE) {
+		if (activity.getActivityType() == ActivityType.REFERENCE) {
 			ok&= test(! BpmnMappingHelper.isParentOrEqual(activity.getActivityRef(),activity),
 					"An Activity may not reference a (transitive) parent of itself.");
 		}

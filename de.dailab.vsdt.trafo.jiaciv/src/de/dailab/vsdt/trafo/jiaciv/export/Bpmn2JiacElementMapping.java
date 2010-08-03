@@ -385,11 +385,11 @@ public class Bpmn2JiacElementMapping extends MappingStage implements JiacVisitor
 			mapping= jadlFac.createStepModel();
 			((StepModel)mapping).setPecall(assistant.createPlanelementCallModel(actModel.getName()));
 			break;
-		case SUBPROCESSREFERENCE:
-			//create PE call
-			mapping= jadlFac.createStepModel();
-			((StepModel)mapping).setPecall(assistant.createPlanelementCallModel(activity.getActivityRef().getName()));
-			break;
+//		case SUBPROCESSREFERENCE:
+//			//create PE call
+//			mapping= jadlFac.createStepModel();
+//			((StepModel)mapping).setPecall(assistant.createPlanelementCallModel(activity.getActivityRef().getName()));
+//			break;
 		case INDEPENDENT:
 			if (activity.getProcessRef() != null) {
 				String procName= activity.getProcessRef() + "_act";
@@ -410,7 +410,7 @@ public class Bpmn2JiacElementMapping extends MappingStage implements JiacVisitor
 		case SCRIPT:
 			mapping= JiacMiniParser.parseScript(activity.getScript());
 			break;
-		case TASKREFERENCE:
+		case REFERENCE:
 			if (activity.getActivityRef() != activity) {
 				return visitActivity(activity.getActivityRef());	
 			}

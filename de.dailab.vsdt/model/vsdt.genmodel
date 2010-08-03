@@ -33,12 +33,12 @@
       <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/RECEIVE"/>
       <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/SEND"/>
       <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/USER"/>
-      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/SCRIPT"/>
       <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/MANUAL"/>
-      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/TASKREFERENCE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/SCRIPT"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/BUSINESSRULE"/>
       <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/EMBEDDED"/>
       <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/INDEPENDENT"/>
-      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/SUBPROCESSREFERENCE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/REFERENCE"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="vsdt.ecore#//LoopType">
       <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//LoopType/NONE"/>

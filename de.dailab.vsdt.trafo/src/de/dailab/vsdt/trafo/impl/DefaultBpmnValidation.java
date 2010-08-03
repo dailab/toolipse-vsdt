@@ -404,9 +404,8 @@ public class DefaultBpmnValidation extends MappingStage {
 			isOK&= testChild(visitMessage(activity.getOutMessage()),activity,vsdt.getActivity_OutMessage());
 			isOK&= testChild(visitImplementation(activity.getImplementation()),activity,vsdt.getActivity_Implementation());
 			break;
-		case ActivityType.TASKREFERENCE_VALUE:
-		case ActivityType.SUBPROCESSREFERENCE_VALUE:
-			isOK&= test(activity.getActivityRef() != null,"Task Reference Must not be null");
+		case ActivityType.REFERENCE_VALUE:
+			isOK&= test(activity.getActivityRef() != null,"Activity Reference Must not be null");
 			isOK&= test(activity.getActivityRef() != activity,"An Activity may not reference itself");
 			break;
 		case ActivityType.INDEPENDENT_VALUE:

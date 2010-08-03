@@ -298,7 +298,6 @@ public class Bpmn2StpBpmnElementMapping extends BpmnElementMapping {
 			switch (((Activity) flowObject).getActivityType()) {
 			case EMBEDDED:
 			case INDEPENDENT:
-			case SUBPROCESSREFERENCE:
 				at= org.eclipse.stp.bpmn.ActivityType.SUB_PROCESS_LITERAL;
 				break;
 			case MANUAL:
@@ -307,7 +306,7 @@ public class Bpmn2StpBpmnElementMapping extends BpmnElementMapping {
 			case SCRIPT:
 			case SEND:
 			case SERVICE:
-			case TASKREFERENCE:
+			case REFERENCE:
 			case USER:
 				at= org.eclipse.stp.bpmn.ActivityType.TASK_LITERAL;
 				break;

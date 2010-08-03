@@ -123,7 +123,7 @@ implements FocusListener, SelectionListener {
 //    private Button adHocParButton;
     private VsdtFeatureCombo<BusinessProcessDiagram> diagramRefCombo;
     private VsdtFeatureCombo<Pool> processRefCombo;
-    private VsdtFeatureCombo<Activity> subprocessRefCombo;
+//    private VsdtFeatureCombo<Activity> subprocessRefCombo;
     
     private Button orgPropButton;
     private Button parAssignButton;
@@ -163,7 +163,7 @@ implements FocusListener, SelectionListener {
     		}
     		taskRefCombo.fillCombo(acts);
     		diagramRefCombo.fillCombo(activity.getPool().getParent().getParent().getBusinessProcesses());
-    		subprocessRefCombo.fillCombo(acts);
+//    		subprocessRefCombo.fillCombo(acts);
     		firstRun= false;
     	}
     	//if a diagram reference is set, add the diagram's processes to the list 
@@ -177,7 +177,7 @@ implements FocusListener, SelectionListener {
     	implCombo.getCombo().setEnabled(at == ActivityType.RECEIVE || at == ActivityType.SEND || at == ActivityType.SERVICE || at == ActivityType.USER);
 //    	instantiateButton.setEnabled(at == ActivityType.RECEIVE);
     	scriptText.setEnabled(at == ActivityType.SCRIPT);
-    	taskRefCombo.getCombo().setEnabled(at == ActivityType.TASKREFERENCE);
+    	taskRefCombo.getCombo().setEnabled(at == ActivityType.REFERENCE);
     	
     	subprocessAttGroup.setVisible(activity.getActivityType().getValue() >= ActivityType.EMBEDDED_VALUE);
     	transactionButton.setEnabled(at == ActivityType.EMBEDDED);
@@ -187,7 +187,7 @@ implements FocusListener, SelectionListener {
     	adHocConditionText.setEnabled(at == ActivityType.EMBEDDED && activity.isAdHoc());
     	diagramRefCombo.getCombo().setEnabled(at == ActivityType.INDEPENDENT);
     	processRefCombo.getCombo().setEnabled(at == ActivityType.INDEPENDENT && activity.getDiagramRef() != null);
-    	subprocessRefCombo.getCombo().setEnabled(at == ActivityType.SUBPROCESSREFERENCE);
+//    	subprocessRefCombo.getCombo().setEnabled(at == ActivityType.SUBPROCESSREFERENCE);
     	
     	parAssignButton.setEnabled(activity.getImplementation() != null && (at == ActivityType.SERVICE || at == ActivityType.RECEIVE || at == ActivityType.SEND || at == ActivityType.USER));
     	
@@ -214,7 +214,7 @@ implements FocusListener, SelectionListener {
     	adHocConditionText.setText(getExpression(activity.getAdHocCompletionCondition()));
     	diagramRefCombo.setSelected(activity.getDiagramRef());
     	processRefCombo.setSelected(activity.getProcessRef());
-    	subprocessRefCombo.setSelected(activity.getActivityRef());
+//    	subprocessRefCombo.setSelected(activity.getActivityRef());
     	
     	if (activity.getLoopAttributes() instanceof MultiLoopAttSet) {
 			MultiLoopAttSet attSet = (MultiLoopAttSet) activity.getLoopAttributes();
@@ -305,7 +305,7 @@ implements FocusListener, SelectionListener {
 			new ParameterAssignmentsAction().run(activity);
     	}
     	if (src.equals(actTypeCombo)) {
-    		setPropertyValue(activity, pack.getActivity_ActivityType(), ActivityType.get(actTypeCombo.getSelectionIndex()));
+    		setPropertyValue(activity, pack.getActivity_ActivityType(), ActivityType.get(actTypeCombo.getItem(actTypeCombo.getSelectionIndex())));
     	}
     	if (src.equals(loopTypeCombo)) {
     		LoopAttributeSet attSeq= null;
@@ -368,9 +368,9 @@ implements FocusListener, SelectionListener {
 //    	if (src.equals(adHocSeqButton) || src.equals(adHocParButton)) {
 //    		setPropertyValue(activity, pack.getAbstractProcess_AdHocOrdering(), adHocSeqButton.getSelection() ? OrderingType.SEQUENTIAL : OrderingType.PARALLEL);
 //    	}
-    	if (src.equals(subprocessRefCombo.getCombo())) {
-    		setPropertyValue(activity, pack.getActivity_ActivityRef(), subprocessRefCombo.getSelected());
-    	}
+//    	if (src.equals(subprocessRefCombo.getCombo())) {
+//    		setPropertyValue(activity, pack.getActivity_ActivityRef(), subprocessRefCombo.getSelected());
+//    	}
     	if (src.equals(diagramRefCombo.getCombo())) {
     		BusinessProcessDiagram selected= diagramRefCombo.getSelected();
     		setPropertyValue(activity, pack.getActivity_DiagramRef(), selected);
@@ -501,9 +501,9 @@ implements FocusListener, SelectionListener {
     	processRefCombo= new VsdtFeatureCombo<Pool>(FormLayoutUtil.addCombo(group, SWT.READ_ONLY, diagramRefCombo.getCombo(), label, 100));
     	processRefCombo.getCombo().addSelectionListener(this);
 
-    	label= FormLayoutUtil.addLabel(group, DISPLAY_TASK_ACTIVITYREF, processRefCombo.getCombo(), 0);
-    	subprocessRefCombo= new VsdtFeatureCombo<Activity>(FormLayoutUtil.addCombo(group, SWT.READ_ONLY, processRefCombo.getCombo(), label, 100));
-    	subprocessRefCombo.getCombo().addSelectionListener(this);
+//    	label= FormLayoutUtil.addLabel(group, DISPLAY_TASK_ACTIVITYREF, processRefCombo.getCombo(), 0);
+//    	subprocessRefCombo= new VsdtFeatureCombo<Activity>(FormLayoutUtil.addCombo(group, SWT.READ_ONLY, processRefCombo.getCombo(), label, 100));
+//    	subprocessRefCombo.getCombo().addSelectionListener(this);
     }
     
     private List<Pool> getValidProcesses(BusinessProcessDiagram diagramRef) {

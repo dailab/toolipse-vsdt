@@ -209,7 +209,10 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 			int marginY= 3;
 			Image icon= FigureHelper.getIcon(activityType.getName().toLowerCase());
 			if (icon != null) {
+				// marker at top-right corner (VSDT's own)
 				g.drawImage(icon, b.x + b.width - imgSize - marginX, b.y + marginY);
+				// marker at top-left corner (standard since BPMN 2.0)
+//				g.drawImage(icon, b.x + marginX, b.y + marginY);
 			}
 			if (hasProperties) {
 				icon= FigureHelper.getIcon("property");
@@ -260,7 +263,7 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 	
 	public void setActivityType(ActivityType activityType) {
 		this.activityType= activityType;
-		isSubprocess= activityType == ActivityType.EMBEDDED || activityType == ActivityType.INDEPENDENT || activityType == ActivityType.SUBPROCESSREFERENCE;
+		isSubprocess= activityType == ActivityType.EMBEDDED || activityType == ActivityType.INDEPENDENT;
 		this.createInnerFigures();
 	}
 	

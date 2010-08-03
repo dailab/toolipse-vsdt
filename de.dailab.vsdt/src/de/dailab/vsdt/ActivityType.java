@@ -73,16 +73,6 @@ public enum ActivityType implements Enumerator {
 	USER(4, "USER", "USER"),
 
 	/**
-	 * The '<em><b>SCRIPT</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #SCRIPT_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	SCRIPT(5, "SCRIPT", "SCRIPT"),
-
-	/**
 	 * The '<em><b>MANUAL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,17 +80,25 @@ public enum ActivityType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	MANUAL(6, "MANUAL", "MANUAL"),
-
-	/**
-	 * The '<em><b>TASKREFERENCE</b></em>' literal object.
+	MANUAL(5, "MANUAL", "MANUAL"), /**
+	 * The '<em><b>SCRIPT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #TASKREFERENCE_VALUE
+	 * @see #SCRIPT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	TASKREFERENCE(7, "TASKREFERENCE", "TASKREFERENCE"), /**
+	SCRIPT(6, "SCRIPT", "SCRIPT"), /**
+	 * The '<em><b>BUSINESSRULE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BUSINESSRULE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	BUSINESSRULE(7, "BUSINESSRULE", "BUSINESSRULE"),
+
+	/**
 	 * The '<em><b>EMBEDDED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -119,14 +117,14 @@ public enum ActivityType implements Enumerator {
 	 * @ordered
 	 */
 	INDEPENDENT(9, "INDEPENDENT", "INDEPENDENT"), /**
-	 * The '<em><b>SUBPROCESSREFERENCE</b></em>' literal object.
+	 * The '<em><b>REFERENCE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #SUBPROCESSREFERENCE_VALUE
+	 * @see #REFERENCE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	SUBPROCESSREFERENCE(10, "SUBPROCESSREFERENCE", "SUBPROCESSREFERENCE");
+	REFERENCE(10, "REFERENCE", "REFERENCE");
 
 	/**
 	 * The '<em><b>NONE</b></em>' literal value.
@@ -204,21 +202,6 @@ public enum ActivityType implements Enumerator {
 	public static final int USER_VALUE = 4;
 
 	/**
-	 * The '<em><b>SCRIPT</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>SCRIPT</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #SCRIPT
-	 * @model
-	 * @generated
-	 * @ordered
-	 */
-	public static final int SCRIPT_VALUE = 5;
-
-	/**
 	 * The '<em><b>MANUAL</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -231,22 +214,37 @@ public enum ActivityType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int MANUAL_VALUE = 6;
+	public static final int MANUAL_VALUE = 5;
 
 	/**
-	 * The '<em><b>TASKREFERENCE</b></em>' literal value.
+	 * The '<em><b>SCRIPT</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>TASKREFERENCE</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>SCRIPT</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #TASKREFERENCE
+	 * @see #SCRIPT
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int TASKREFERENCE_VALUE = 7;
+	public static final int SCRIPT_VALUE = 6;
+
+	/**
+	 * The '<em><b>BUSINESSRULE</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>BUSINESSRULE</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #BUSINESSRULE
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BUSINESSRULE_VALUE = 7;
 
 	/**
 	 * The '<em><b>EMBEDDED</b></em>' literal value.
@@ -279,19 +277,19 @@ public enum ActivityType implements Enumerator {
 	public static final int INDEPENDENT_VALUE = 9;
 
 	/**
-	 * The '<em><b>SUBPROCESSREFERENCE</b></em>' literal value.
+	 * The '<em><b>REFERENCE</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>SUBPROCESSREFERENCE</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>REFERENCE</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #SUBPROCESSREFERENCE
+	 * @see #REFERENCE
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SUBPROCESSREFERENCE_VALUE = 10;
+	public static final int REFERENCE_VALUE = 10;
 
 	/**
 	 * An array of all the '<em><b>Activity Type</b></em>' enumerators.
@@ -306,12 +304,12 @@ public enum ActivityType implements Enumerator {
 			RECEIVE,
 			SEND,
 			USER,
-			SCRIPT,
 			MANUAL,
-			TASKREFERENCE,
+			SCRIPT,
+			BUSINESSRULE,
 			EMBEDDED,
 			INDEPENDENT,
-			SUBPROCESSREFERENCE,
+			REFERENCE,
 		};
 
 	/**
@@ -367,12 +365,12 @@ public enum ActivityType implements Enumerator {
 			case RECEIVE_VALUE: return RECEIVE;
 			case SEND_VALUE: return SEND;
 			case USER_VALUE: return USER;
-			case SCRIPT_VALUE: return SCRIPT;
 			case MANUAL_VALUE: return MANUAL;
-			case TASKREFERENCE_VALUE: return TASKREFERENCE;
+			case SCRIPT_VALUE: return SCRIPT;
+			case BUSINESSRULE_VALUE: return BUSINESSRULE;
 			case EMBEDDED_VALUE: return EMBEDDED;
 			case INDEPENDENT_VALUE: return INDEPENDENT;
-			case SUBPROCESSREFERENCE_VALUE: return SUBPROCESSREFERENCE;
+			case REFERENCE_VALUE: return REFERENCE;
 		}
 		return null;
 	}

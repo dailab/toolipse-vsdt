@@ -564,8 +564,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 			TActivity childActivity= visitFlowObjects(activity.getGraphicalElements());
 			((TScope)mapping).setActivity(childActivity);
 			break;
-		case TASKREFERENCE:
-		case SUBPROCESSREFERENCE:
+		case REFERENCE:
 			//create copy of the mapping of the referenced activity
 			Activity ref= activity.getActivityRef();
 			//prevent infinite loop (in case of recursive-like references)

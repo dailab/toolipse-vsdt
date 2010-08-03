@@ -192,12 +192,12 @@
     <eLiterals name="RECEIVE" value="2"/>
     <eLiterals name="SEND" value="3"/>
     <eLiterals name="USER" value="4"/>
-    <eLiterals name="SCRIPT" value="5"/>
-    <eLiterals name="MANUAL" value="6"/>
-    <eLiterals name="TASKREFERENCE" value="7"/>
+    <eLiterals name="MANUAL" value="5"/>
+    <eLiterals name="SCRIPT" value="6"/>
+    <eLiterals name="BUSINESSRULE" value="7"/>
     <eLiterals name="EMBEDDED" value="8"/>
     <eLiterals name="INDEPENDENT" value="9"/>
-    <eLiterals name="SUBPROCESSREFERENCE" value="10"/>
+    <eLiterals name="REFERENCE" value="10"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="LoopType">
     <eLiterals name="NONE"/>

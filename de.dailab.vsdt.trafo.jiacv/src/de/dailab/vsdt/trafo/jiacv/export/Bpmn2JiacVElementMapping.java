@@ -485,8 +485,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			// do not create a new plan; just put contents in a seq or par
 			mapping= visitFlowObjects(activity.getContainedFlowObjects());
 			break;
-		case TASKREFERENCE:
-		case SUBPROCESSREFERENCE:
+		case REFERENCE:
 			mapping= (Script) EcoreUtil.copy(visitFlowObject(activity.getActivityRef()));
 			break;
 		case SEND:
