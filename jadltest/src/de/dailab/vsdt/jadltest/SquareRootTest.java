@@ -7,7 +7,7 @@ public class SquareRootTest {
 	
 	public static void main(String[] args) {
 		// load service file
-		File file= new File("code/Algorithms_ExtractRoot.jadl");
+		File file= new File("code/ExtractRoot_Mathematican.jadl");
 		if (! file.exists()) {
 			System.err.println("file not found");
 			System.exit(1);
@@ -17,7 +17,7 @@ public class SquareRootTest {
 		testPlatform.initPlatform(new File[] {file}, null);
 		
 		// invoke service
-		Serializable[] result= testPlatform.invokeService(InterpreterTest.AGENT_A, "Algorithms_ExtractRoot_start", true, 2d, 0.01 );
+		Serializable[] result= testPlatform.invokeService(InterpreterTest.AGENT_A, "ExtractRoot_Mathematican_start", true, 2d, 0.01 );
 		Double res= (Double) result[0];
 		System.out.println("--> SQUARE ROOT RESULT: " + res);
 		
