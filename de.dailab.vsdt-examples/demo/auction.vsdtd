@@ -3,26 +3,64 @@
   <vsdt:BusinessProcessSystem xmi:id="_Dy25MOlvEd6Uvb7BxkBYxw" name="Auction" id="_Dy2SIOlvEd6Uvb7BxkBYxw" version="0.1" author="Tobias Küster" expressionLanguage="VSDT Expression Language" creationDate="2009-12-15T12:43:27.298+0100" modificationDate="2009-12-15T12:43:27.298+0100" executable="true">
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_IxgkgelvEd6Uvb7BxkBYxw" name="Create Auction" documentation="The Seller sends a Proposal for a new Auction to the Auctioneer, who checks the proposal and sends back an 'accept' or a 'decline' response." id="_IxgkgOlvEd6Uvb7BxkBYxw" participants="_FnSrQelvEd6Uvb7BxkBYxw _G8oGgelvEd6Uvb7BxkBYxw">
       <pools xmi:type="vsdt:Pool" xmi:id="_SR1rQelvEd6Uvb7BxkBYxw" name="Auctioneer" id="_SR1rQOlvEd6Uvb7BxkBYxw" participant="_FnSrQelvEd6Uvb7BxkBYxw">
+        <properties xmi:type="vsdt:Property" xmi:id="_DRZCQKOoEd-Dv7BtDB8F7Q" name="theAuction" type="de.dailab.jiactng.examples.auction.onto.Auction"/>
+        <properties xmi:type="vsdt:Property" xmi:id="_HHS80KOoEd-Dv7BtDB8F7Q" name="accept" type="boolean"/>
         <lanes xmi:type="vsdt:Lane" xmi:id="_SR3gcOlvEd6Uvb7BxkBYxw" id="_SR25YOlvEd6Uvb7BxkBYxw">
-          <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_pWqRwelvEd6Uvb7BxkBYxw" name="create auction" id="_pWqRwOlvEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_sHAEoOouEd6xFKyk2BwCAQ" implementation="_jCf-QOouEd6xFKyk2BwCAQ"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_r8UFYelvEd6Uvb7BxkBYxw" name="check description" id="_r8UFYOlvEd6Uvb7BxkBYxw"/>
+          <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_pWqRwelvEd6Uvb7BxkBYxw" name="create auction" id="_pWqRwOlvEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_sHAEoOouEd6xFKyk2BwCAQ" implementation="_jCf-QOouEd6xFKyk2BwCAQ">
+            <assignments xmi:type="vsdt:Assignment" xmi:id="_XSXAwKOpEd-Dv7BtDB8F7Q" to="_DRZCQKOoEd-Dv7BtDB8F7Q" assignTime="END">
+              <from xmi:type="vsdt:Expression" xmi:id="_XSXAwaOpEd-Dv7BtDB8F7Q" expression="auctionDesc"/>
+            </assignments>
+          </containedFlowObjects>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_r8UFYelvEd6Uvb7BxkBYxw" name="check description" id="_r8UFYOlvEd6Uvb7BxkBYxw" activityType="SCRIPT" script="// always accept auction&#xA;accept = true;"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_s1H8selvEd6Uvb7BxkBYxw" name="acceptable?" id="_s1H8sOlvEd6Uvb7BxkBYxw"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_vQzU8elvEd6Uvb7BxkBYxw" name="accept" id="_vQzU8OlvEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_sJpI8OouEd6xFKyk2BwCAQ" implementation="_0kIpAOouEd6xFKyk2BwCAQ"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_wXwV8elvEd6Uvb7BxkBYxw" name="decline" id="_wXwV8OlvEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_sRW6gOouEd6xFKyk2BwCAQ" implementation="_4WSsAOouEd6xFKyk2BwCAQ"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_vQzU8elvEd6Uvb7BxkBYxw" name="accept" id="_vQzU8OlvEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_sJpI8OouEd6xFKyk2BwCAQ" implementation="_0kIpAOouEd6xFKyk2BwCAQ">
+            <assignments xmi:type="vsdt:Assignment" xmi:id="_Zc1UQKOpEd-Dv7BtDB8F7Q" to="_lsIAAOo7Ed6FP7KXlO1S-A">
+              <from xmi:type="vsdt:Expression" xmi:id="_ktl20KOpEd-Dv7BtDB8F7Q" expression="new Message()"/>
+            </assignments>
+            <assignments xmi:type="vsdt:Assignment" xmi:id="_ZmXqwKOpEd-Dv7BtDB8F7Q" to="_e203wKOpEd-Dv7BtDB8F7Q" toQuery="message">
+              <from xmi:type="vsdt:Expression" xmi:id="_h4LI4KOpEd-Dv7BtDB8F7Q" expression="&quot;Your Auction has been accepted&quot;"/>
+            </assignments>
+            <assignments xmi:type="vsdt:Assignment" xmi:id="_SH15IKOoEd-Dv7BtDB8F7Q" to="_lsIAAOo7Ed6FP7KXlO1S-A">
+              <from xmi:type="vsdt:Expression" xmi:id="_2ZreEKOpEd-Dv7BtDB8F7Q" expression="msg"/>
+            </assignments>
+            <properties xmi:type="vsdt:Property" xmi:id="_e203wKOpEd-Dv7BtDB8F7Q" name="msg" type="de.dailab.jiactng.examples.auction.onto.Message"/>
+          </containedFlowObjects>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_wXwV8elvEd6Uvb7BxkBYxw" name="decline" id="_wXwV8OlvEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_sRW6gOouEd6xFKyk2BwCAQ" implementation="_4WSsAOouEd6xFKyk2BwCAQ">
+            <assignments xmi:type="vsdt:Assignment" xmi:id="_UhsscKOoEd-Dv7BtDB8F7Q" to="_oLRjAOo7Ed6FP7KXlO1S-A">
+              <from xmi:type="vsdt:Expression" xmi:id="_UhtTgKOoEd-Dv7BtDB8F7Q" expression="&quot;Sorry, your auction has been rejected.&quot;"/>
+            </assignments>
+          </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_w0MaUelvEd6Uvb7BxkBYxw" id="_w0MaUOlvEd6Uvb7BxkBYxw"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_QF_CQelwEd6Uvb7BxkBYxw" name="create auction" id="_QF_CQOlwEd6Uvb7BxkBYxw"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_QF_CQelwEd6Uvb7BxkBYxw" name="create auction" id="_QF_CQOlwEd6Uvb7BxkBYxw" activityType="SCRIPT" script="// put Auction object into memory&#xA;var $bid : Bid;&#xA;$bid = new Bid();&#xA;$bid.value = 0;&#xA;$auction.highestBid = $bid;&#xA;write $auction;&#xA;print &quot;     Auctioneer: Auction object written to memory.&quot;;"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_RP87AelwEd6Uvb7BxkBYxw" id="_RP87AOlwEd6Uvb7BxkBYxw"/>
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_STyzEelvEd6Uvb7BxkBYxw" name="Seller" id="_STyzEOlvEd6Uvb7BxkBYxw" participant="_G8oGgelvEd6Uvb7BxkBYxw">
+        <properties xmi:type="vsdt:Property" xmi:id="_uc_mQKOnEd-Dv7BtDB8F7Q" name="theAuction" type="de.dailab.jiactng.examples.auction.onto.Auction"/>
         <lanes xmi:type="vsdt:Lane" xmi:id="_STzaIelvEd6Uvb7BxkBYxw" id="_STzaIOlvEd6Uvb7BxkBYxw">
-          <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_gVU0IelvEd6Uvb7BxkBYxw" name="create auction" id="_gVU0IOlvEd6Uvb7BxkBYxw"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_hlVDcelvEd6Uvb7BxkBYxw" name="send description" documentation="The Seller sends the Auction description to the Auctioneer." id="_hlVDcOlvEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_sHAEoOouEd6xFKyk2BwCAQ" implementation="_jCf-QOouEd6xFKyk2BwCAQ"/>
+          <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_gVU0IelvEd6Uvb7BxkBYxw" name="create auction" id="_gVU0IOlvEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_C6cCMKOlEd-Dv7BtDB8F7Q" implementation="_7PRGQKOkEd-Dv7BtDB8F7Q">
+            <assignments xmi:type="vsdt:Assignment" xmi:id="_003HQKOnEd-Dv7BtDB8F7Q" to="_uc_mQKOnEd-Dv7BtDB8F7Q" assignTime="END">
+              <from xmi:type="vsdt:Expression" xmi:id="_003HQaOnEd-Dv7BtDB8F7Q" expression="auction"/>
+            </assignments>
+          </containedFlowObjects>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_hlVDcelvEd6Uvb7BxkBYxw" name="send description" documentation="The Seller sends the Auction description to the Auctioneer." id="_hlVDcOlvEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_sHAEoOouEd6xFKyk2BwCAQ" implementation="_jCf-QOouEd6xFKyk2BwCAQ">
+            <assignments xmi:type="vsdt:Assignment" xmi:id="__hmWwKOnEd-Dv7BtDB8F7Q" to="_uno1YOouEd6xFKyk2BwCAQ">
+              <from xmi:type="vsdt:Expression" xmi:id="__hmWwaOnEd-Dv7BtDB8F7Q" expression="theAuction"/>
+            </assignments>
+          </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_ncqDMelvEd6Uvb7BxkBYxw" name="accepted?" documentation="wait which response will come first..." id="_ncqDMOlvEd6Uvb7BxkBYxw" gatewayType="XOR_EVENT"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_19lWAelvEd6Uvb7BxkBYxw" name="yes" documentation="Acceptance Notification received!" id="_19lWAOlvEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_sJpI8OouEd6xFKyk2BwCAQ" implementation="_0kIpAOouEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_3IUDwelvEd6Uvb7BxkBYxw" name="no" documentation="Auction was not accepted" id="_3IUDwOlvEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_sRW6gOouEd6xFKyk2BwCAQ" implementation="_4WSsAOouEd6xFKyk2BwCAQ"/>
-          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_ABMwAelwEd6Uvb7BxkBYxw" documentation="End the service" id="_ABMwAOlwEd6Uvb7BxkBYxw"/>
-          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_VyWIIelwEd6Uvb7BxkBYxw" id="_VyWIIOlwEd6Uvb7BxkBYxw"/>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_ABMwAelwEd6Uvb7BxkBYxw" documentation="End the service" id="_ABMwAOlwEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_DDDysKOlEd-Dv7BtDB8F7Q" implementation="_7PRGQKOkEd-Dv7BtDB8F7Q">
+            <assignments xmi:type="vsdt:Assignment" xmi:id="_aTsAkKOlEd-Dv7BtDB8F7Q" to="_MAKQkKOlEd-Dv7BtDB8F7Q">
+              <from xmi:type="vsdt:Expression" xmi:id="_aTsnoKOlEd-Dv7BtDB8F7Q" expression="false"/>
+            </assignments>
+          </containedFlowObjects>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_VyWIIelwEd6Uvb7BxkBYxw" id="_VyWIIOlwEd6Uvb7BxkBYxw" trigger="MESSAGE" message="_DDDysKOlEd-Dv7BtDB8F7Q" implementation="_7PRGQKOkEd-Dv7BtDB8F7Q">
+            <assignments xmi:type="vsdt:Assignment" xmi:id="_bpUWwKOlEd-Dv7BtDB8F7Q" to="_MAKQkKOlEd-Dv7BtDB8F7Q">
+              <from xmi:type="vsdt:Expression" xmi:id="_bpUWwaOlEd-Dv7BtDB8F7Q" expression="true"/>
+            </assignments>
+          </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_f--UMelwEd6Uvb7BxkBYxw" name="do other preparations" id="_f--UMOlwEd6Uvb7BxkBYxw"/>
         </lanes>
       </pools>
@@ -31,7 +69,7 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_r8g5selvEd6Uvb7BxkBYxw" id="_r8g5sOlvEd6Uvb7BxkBYxw" source="_pWqRwelvEd6Uvb7BxkBYxw" target="_r8UFYelvEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_s1V_IelvEd6Uvb7BxkBYxw" id="_s1V_IOlvEd6Uvb7BxkBYxw" source="_r8UFYelvEd6Uvb7BxkBYxw" target="_s1H8selvEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_vRAJQelvEd6Uvb7BxkBYxw" name="yes" id="_vRAJQOlvEd6Uvb7BxkBYxw" conditionType="EXPRESSION" source="_s1H8selvEd6Uvb7BxkBYxw" target="_vQzU8elvEd6Uvb7BxkBYxw">
-        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_JsWBMCH7Ed-JbZfg5MwSoA" expression="true"/>
+        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_NHZeEKOoEd-Dv7BtDB8F7Q" expression="accept"/>
       </connections>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_wX8jMelvEd6Uvb7BxkBYxw" name="no" id="_wX8jMOlvEd6Uvb7BxkBYxw" conditionType="DEFAULT" source="_s1H8selvEd6Uvb7BxkBYxw" target="_wXwV8elvEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_w0_rkelvEd6Uvb7BxkBYxw" id="_w0_rkOlvEd6Uvb7BxkBYxw" source="_wXwV8elvEd6Uvb7BxkBYxw" target="_w0MaUelvEd6Uvb7BxkBYxw"/>
@@ -223,34 +261,49 @@
     <participants xmi:type="vsdt:Participant" xmi:id="_FnSrQelvEd6Uvb7BxkBYxw" name="Auctioneer" documentation="This is the Auctioneer, acting as a trustee between Seller and Bidder." id="_FnSrQOlvEd6Uvb7BxkBYxw" associatedProcesses="_KCE0gelvEd6Uvb7BxkBYxw _IxgkgelvEd6Uvb7BxkBYxw _JbA0gelvEd6Uvb7BxkBYxw" associatedPools="_SR1rQelvEd6Uvb7BxkBYxw _XsWMIelvEd6Uvb7BxkBYxw _asUkQelvEd6Uvb7BxkBYxw"/>
     <participants xmi:type="vsdt:Participant" xmi:id="_G8oGgelvEd6Uvb7BxkBYxw" name="Seller" documentation="This is the Seller, intending to sell something at the auction." id="_G8oGgOlvEd6Uvb7BxkBYxw" associatedProcesses="_IxgkgelvEd6Uvb7BxkBYxw _KCE0gelvEd6Uvb7BxkBYxw" associatedPools="_STyzEelvEd6Uvb7BxkBYxw _asmREelvEd6Uvb7BxkBYxw"/>
     <participants xmi:type="vsdt:Participant" xmi:id="_IIqb0elvEd6Uvb7BxkBYxw" name="Bidder" documentation="This is the Bidder, intending to buy something at the auction." id="_IIqb0OlvEd6Uvb7BxkBYxw" associatedProcesses="_KCE0gelvEd6Uvb7BxkBYxw _JbA0gelvEd6Uvb7BxkBYxw" associatedPools="_XsNpQelvEd6Uvb7BxkBYxw _aseVQelvEd6Uvb7BxkBYxw"/>
+    <messages xmi:type="vsdt:Message" xmi:id="_C6cCMKOlEd-Dv7BtDB8F7Q" name="createAuctionRequest">
+      <properties xmi:type="vsdt:Property" xmi:id="_GGYZwKOlEd-Dv7BtDB8F7Q" name="auction" type="de.dailab.jiactng.examples.auction.onto.Auction"/>
+    </messages>
+    <messages xmi:type="vsdt:Message" xmi:id="_DDDysKOlEd-Dv7BtDB8F7Q" name="createAuctionResponse">
+      <properties xmi:type="vsdt:Property" xmi:id="_MAKQkKOlEd-Dv7BtDB8F7Q" name="result" type="boolean"/>
+    </messages>
+    <messages xmi:type="vsdt:Message" xmi:id="_sHAEoOouEd6xFKyk2BwCAQ" name="auctionMessage">
+      <properties xmi:type="vsdt:Property" xmi:id="_uno1YOouEd6xFKyk2BwCAQ" name="auctionDesc" type="de.dailab.jiactng.examples.auction.onto.Auction"/>
+    </messages>
+    <messages xmi:type="vsdt:Message" xmi:id="_MVmYQKOpEd-Dv7BtDB8F7Q" name="placeBidRequest">
+      <properties xmi:type="vsdt:Property" xmi:id="_QQJiQKOpEd-Dv7BtDB8F7Q" name="bid" type="de.dailab.jiactng.examples.auction.onto.Bid"/>
+    </messages>
+    <messages xmi:type="vsdt:Message" xmi:id="_MNXCQKOpEd-Dv7BtDB8F7Q" name="placeBidResponse">
+      <properties xmi:type="vsdt:Property" xmi:id="_RsxRQKOpEd-Dv7BtDB8F7Q" name="result" type="boolean"/>
+    </messages>
+    <messages xmi:type="vsdt:Message" xmi:id="_nlS8oAHrEd-svc1eBRPgjg" name="bidMessage">
+      <properties xmi:type="vsdt:Property" xmi:id="_0w4wwKOoEd-Dv7BtDB8F7Q" name="bidDesc" type="de.dailab.jiactng.examples.auction.onto.Bid"/>
+    </messages>
     <messages xmi:type="vsdt:Message" xmi:id="_sJpI8OouEd6xFKyk2BwCAQ" name="accept">
-      <properties xmi:type="vsdt:Property" xmi:id="_lsIAAOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_lsIAAOo7Ed6FP7KXlO1S-A" name="message" type="de.dailab.jiactng.examples.auction.onto.Message"/>
     </messages>
     <messages xmi:type="vsdt:Message" xmi:id="_sRW6gOouEd6xFKyk2BwCAQ" name="decline">
-      <properties xmi:type="vsdt:Property" xmi:id="_oLRjAOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
-    </messages>
-    <messages xmi:type="vsdt:Message" xmi:id="_sHAEoOouEd6xFKyk2BwCAQ" name="descriptionMessage">
-      <properties xmi:type="vsdt:Property" xmi:id="_uno1YOouEd6xFKyk2BwCAQ" name="desc" type="string"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_oLRjAOo7Ed6FP7KXlO1S-A" name="message" type="de.dailab.jiactng.examples.auction.onto.Message"/>
     </messages>
     <messages xmi:type="vsdt:Message" xmi:id="_uyK08OovEd6xFKyk2BwCAQ" name="notifySold">
-      <properties xmi:type="vsdt:Property" xmi:id="_rJjSAOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_rJjSAOo7Ed6FP7KXlO1S-A" name="message" type="de.dailab.jiactng.examples.auction.onto.Message"/>
     </messages>
     <messages xmi:type="vsdt:Message" xmi:id="_u0ZCgOovEd6xFKyk2BwCAQ" name="notifyNotSold">
-      <properties xmi:type="vsdt:Property" xmi:id="_tdylgOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
-    </messages>
-    <messages xmi:type="vsdt:Message" xmi:id="_u2GSsOovEd6xFKyk2BwCAQ" name="notifyShipped">
-      <properties xmi:type="vsdt:Property" xmi:id="_uRmBAOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_tdylgOo7Ed6FP7KXlO1S-A" name="message" type="de.dailab.jiactng.examples.auction.onto.Message"/>
     </messages>
     <messages xmi:type="vsdt:Message" xmi:id="_u3bvcOovEd6xFKyk2BwCAQ" name="notifyPaid">
-      <properties xmi:type="vsdt:Property" xmi:id="_u-x3IOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_u-x3IOo7Ed6FP7KXlO1S-A" name="message" type="de.dailab.jiactng.examples.auction.onto.Message"/>
     </messages>
     <messages xmi:type="vsdt:Message" xmi:id="_Fyv0oOowEd6xFKyk2BwCAQ" name="notifyNotPaid">
-      <properties xmi:type="vsdt:Property" xmi:id="_vlvwgOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_vlvwgOo7Ed6FP7KXlO1S-A" name="message" type="de.dailab.jiactng.examples.auction.onto.Message"/>
+    </messages>
+    <messages xmi:type="vsdt:Message" xmi:id="_u2GSsOovEd6xFKyk2BwCAQ" name="notifyShipped">
+      <properties xmi:type="vsdt:Property" xmi:id="_uRmBAOo7Ed6FP7KXlO1S-A" name="message" type="de.dailab.jiactng.examples.auction.onto.Message"/>
     </messages>
     <messages xmi:type="vsdt:Message" xmi:id="_G1LiAOowEd6xFKyk2BwCAQ" name="notifyNotShipped">
-      <properties xmi:type="vsdt:Property" xmi:id="_wdcNgOo7Ed6FP7KXlO1S-A" name="message" type="string"/>
+      <properties xmi:type="vsdt:Property" xmi:id="_wdcNgOo7Ed6FP7KXlO1S-A" name="message" type="de.dailab.jiactng.examples.auction.onto.Message"/>
     </messages>
-    <messages xmi:type="vsdt:Message" xmi:id="_nlS8oAHrEd-svc1eBRPgjg" name="bid"/>
+    <implementations xmi:type="vsdt:Implementation" xmi:id="_7PRGQKOkEd-Dv7BtDB8F7Q" participant="_G8oGgelvEd6Uvb7BxkBYxw" interface="CreateAuction" operation="createAuction" inputMessage="_C6cCMKOlEd-Dv7BtDB8F7Q" outputMessage="_DDDysKOlEd-Dv7BtDB8F7Q"/>
     <implementations xmi:type="vsdt:Implementation" xmi:id="_jCf-QOouEd6xFKyk2BwCAQ" type="JADL" participant="_FnSrQelvEd6Uvb7BxkBYxw" interface="CreateAuction" operation="sendDescription" inputMessage="_sHAEoOouEd6xFKyk2BwCAQ"/>
     <implementations xmi:type="vsdt:Implementation" xmi:id="_0kIpAOouEd6xFKyk2BwCAQ" participant="_G8oGgelvEd6Uvb7BxkBYxw" interface="CreateAuction" operation="sendAccept" inputMessage="_sJpI8OouEd6xFKyk2BwCAQ"/>
     <implementations xmi:type="vsdt:Implementation" xmi:id="_4WSsAOouEd6xFKyk2BwCAQ" participant="_G8oGgelvEd6Uvb7BxkBYxw" interface="CreateAuction" operation="sendDecline" inputMessage="_sRW6gOouEd6xFKyk2BwCAQ"/>
@@ -266,6 +319,9 @@
     <implementations xmi:type="vsdt:Implementation" xmi:id="_d7GIMAHrEd-svc1eBRPgjg" participant="_FnSrQelvEd6Uvb7BxkBYxw" interface="PlaceBid" operation="sendBid" inputMessage="_nlS8oAHrEd-svc1eBRPgjg"/>
     <implementations xmi:type="vsdt:Implementation" xmi:id="_eGOaIAHrEd-svc1eBRPgjg" participant="_IIqb0elvEd6Uvb7BxkBYxw" interface="PlaceBid" operation="acceptBid" inputMessage="_sJpI8OouEd6xFKyk2BwCAQ"/>
     <implementations xmi:type="vsdt:Implementation" xmi:id="_eKHboAHrEd-svc1eBRPgjg" participant="_IIqb0elvEd6Uvb7BxkBYxw" interface="PlaceBid" operation="rejectBid" inputMessage="_sRW6gOouEd6xFKyk2BwCAQ"/>
+    <dataTypes xmi:type="vsdt:DataType" xmi:id="_JyhbsKOiEd-z4rxqI7XhLg" name="Auction" package="de.dailab.jiactng.examples.auction.onto" language="Java"/>
+    <dataTypes xmi:type="vsdt:DataType" xmi:id="_MPJ2MKOiEd-z4rxqI7XhLg" name="Bid" package="de.dailab.jiactng.examples.auction.onto" language="Java"/>
+    <dataTypes xmi:type="vsdt:DataType" xmi:id="_MaN2sKOiEd-z4rxqI7XhLg" name="Message" package="de.dailab.jiactng.examples.auction.onto" language="Java"/>
   </vsdt:BusinessProcessSystem>
   <notation:Diagram xmi:id="_DzNegOlvEd6Uvb7BxkBYxw" type="Vsdt_meta" element="_Dy25MOlvEd6Uvb7BxkBYxw" name="auktion.vsdtd" measurementUnit="Pixel">
     <children xmi:type="notation:Node" xmi:id="_FnaAAOlvEd6Uvb7BxkBYxw" type="1001" element="_FnSrQelvEd6Uvb7BxkBYxw">
