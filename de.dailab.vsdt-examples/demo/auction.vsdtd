@@ -99,7 +99,7 @@
       <pools xmi:type="vsdt:Pool" xmi:id="_asUkQelvEd6Uvb7BxkBYxw" name="Auctioneer" id="_asUkQOlvEd6Uvb7BxkBYxw" participant="_FnSrQelvEd6Uvb7BxkBYxw">
         <lanes xmi:type="vsdt:Lane" xmi:id="_asVyYelvEd6Uvb7BxkBYxw" id="_asVyYOlvEd6Uvb7BxkBYxw">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_lP-60elwEd6Uvb7BxkBYxw" name="auction over" id="_lP-60OlwEd6Uvb7BxkBYxw" trigger="TIMER">
-            <timeDate xmi:type="vsdt:Expression" xmi:id="_35WmcOowEd6xFKyk2BwCAQ" expression="'when the auction is over'"/>
+            <timeExpression xmi:type="vsdt:Expression" xmi:id="_35WmcOowEd6xFKyk2BwCAQ" expression="'when the auction is over'"/>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_qmBLYelwEd6Uvb7BxkBYxw" name="exists bid?" id="_qmBLYOlwEd6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_sqGjAelwEd6Uvb7BxkBYxw" name="inform seller" id="_sqGjAOlwEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_uyK08OovEd6xFKyk2BwCAQ" implementation="_p_yEAOovEd6xFKyk2BwCAQ"/>
@@ -113,14 +113,14 @@
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_H4tiAel0Ed6Uvb7BxkBYxw" name="wait for payment" id="_H4tiAOl0Ed6Uvb7BxkBYxw" gatewayType="XOR_EVENT"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_J9nZAel0Ed6Uvb7BxkBYxw" name="paid" id="_J9nZAOl0Ed6Uvb7BxkBYxw" trigger="MESSAGE" message="_u3bvcOovEd6xFKyk2BwCAQ" implementation="_1XXnUOovEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_Pr05Ael0Ed6Uvb7BxkBYxw" name="inform seller" id="_Pr05AOl0Ed6Uvb7BxkBYxw" activityType="SEND" inMessage="_u3bvcOovEd6xFKyk2BwCAQ" implementation="_5U_6gOovEd6xFKyk2BwCAQ"/>
-          <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_asGIgel0Ed6Uvb7BxkBYxw" name="timeout" id="_asGIgOl0Ed6Uvb7BxkBYxw" trigger="TIMER">
-            <timeCycle xmi:type="vsdt:Expression" xmi:id="_Gj5m8Oo_Ed6FP7KXlO1S-A" expression="1"/>
+          <containedFlowObjects asDuration="true"  xmi:type="vsdt:Intermediate" xmi:id="_asGIgel0Ed6Uvb7BxkBYxw" name="timeout" id="_asGIgOl0Ed6Uvb7BxkBYxw" trigger="TIMER">
+            <timeExpression xmi:type="vsdt:Expression" xmi:id="_Gj5m8Oo_Ed6FP7KXlO1S-A" expression="1"/>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_dUzQIOl0Ed6Uvb7BxkBYxw" name="inform seller" id="_dUypEOl0Ed6Uvb7BxkBYxw" activityType="SEND" inMessage="_Fyv0oOowEd6xFKyk2BwCAQ" implementation="_IsgQAOowEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_yCR54Ol2Ed6Uvb7BxkBYxw" name="wait for shipping" id="_yCRS0Ol2Ed6Uvb7BxkBYxw" gatewayType="XOR_EVENT"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_4Y758el2Ed6Uvb7BxkBYxw" name="shipped" id="_4Y758Ol2Ed6Uvb7BxkBYxw" trigger="MESSAGE" message="_u2GSsOovEd6xFKyk2BwCAQ" implementation="_AcPqAOowEd6xFKyk2BwCAQ"/>
-          <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_4ocVkel2Ed6Uvb7BxkBYxw" name="timeout" id="_4ocVkOl2Ed6Uvb7BxkBYxw" trigger="TIMER">
-            <timeCycle xmi:type="vsdt:Expression" xmi:id="_HTpB0Oo_Ed6FP7KXlO1S-A" expression="2"/>
+          <containedFlowObjects asDuration="true" xmi:type="vsdt:Intermediate" xmi:id="_4ocVkel2Ed6Uvb7BxkBYxw" name="timeout" id="_4ocVkOl2Ed6Uvb7BxkBYxw" trigger="TIMER">
+            <timeExpression xmi:type="vsdt:Expression" xmi:id="_HTpB0Oo_Ed6FP7KXlO1S-A" expression="2"/>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_8_PWsel2Ed6Uvb7BxkBYxw" name="inform bidder" id="_8_PWsOl2Ed6Uvb7BxkBYxw" activityType="SEND" inMessage="_G1LiAOowEd6xFKyk2BwCAQ" implementation="_InFkgOowEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_90064el2Ed6Uvb7BxkBYxw" name="transfer money back" id="_90064Ol2Ed6Uvb7BxkBYxw"/>
