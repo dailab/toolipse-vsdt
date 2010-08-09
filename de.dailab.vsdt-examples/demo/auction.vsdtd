@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:vsdt="http://de.dailab.vsdt">
-  <vsdt:BusinessProcessSystem xmi:id="_Dy25MOlvEd6Uvb7BxkBYxw" name="Auction" id="_Dy2SIOlvEd6Uvb7BxkBYxw" version="0.1" author="Tobias Küster" expressionLanguage="VSDT Expression Language" creationDate="2009-12-15T12:43:27.298+0100" modificationDate="2009-12-15T12:43:27.298+0100">
+  <vsdt:BusinessProcessSystem xmi:id="_Dy25MOlvEd6Uvb7BxkBYxw" name="Auction" id="_Dy2SIOlvEd6Uvb7BxkBYxw" version="0.1" author="Tobias Küster" expressionLanguage="VSDT Expression Language" creationDate="2009-12-15T12:43:27.298+0100" modificationDate="2009-12-15T12:43:27.298+0100" executable="true">
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_IxgkgelvEd6Uvb7BxkBYxw" name="Create Auction" documentation="The Seller sends a Proposal for a new Auction to the Auctioneer, who checks the proposal and sends back an 'accept' or a 'decline' response." id="_IxgkgOlvEd6Uvb7BxkBYxw" participants="_FnSrQelvEd6Uvb7BxkBYxw _G8oGgelvEd6Uvb7BxkBYxw">
       <pools xmi:type="vsdt:Pool" xmi:id="_SR1rQelvEd6Uvb7BxkBYxw" name="Auctioneer" id="_SR1rQOlvEd6Uvb7BxkBYxw" participant="_FnSrQelvEd6Uvb7BxkBYxw">
         <lanes xmi:type="vsdt:Lane" xmi:id="_SR3gcOlvEd6Uvb7BxkBYxw" id="_SR25YOlvEd6Uvb7BxkBYxw">
@@ -38,9 +38,9 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_1977UelvEd6Uvb7BxkBYxw" id="_1977UOlvEd6Uvb7BxkBYxw" source="_ncqDMelvEd6Uvb7BxkBYxw" target="_19lWAelvEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_3IfC4elvEd6Uvb7BxkBYxw" id="_3IfC4OlvEd6Uvb7BxkBYxw" source="_ncqDMelvEd6Uvb7BxkBYxw" target="_3IUDwelvEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_ABaLYelwEd6Uvb7BxkBYxw" id="_ABaLYOlwEd6Uvb7BxkBYxw" source="_3IUDwelvEd6Uvb7BxkBYxw" target="_ABMwAelwEd6Uvb7BxkBYxw"/>
-      <connections xmi:type="vsdt:MessageFlow" xmi:id="_FYLbwelwEd6Uvb7BxkBYxw" id="_FYLbwOlwEd6Uvb7BxkBYxw" source="_vQzU8elvEd6Uvb7BxkBYxw" target="_19lWAelvEd6Uvb7BxkBYxw"/>
-      <connections xmi:type="vsdt:MessageFlow" xmi:id="_GQj1QelwEd6Uvb7BxkBYxw" id="_GQj1QOlwEd6Uvb7BxkBYxw" source="_wXwV8elvEd6Uvb7BxkBYxw" target="_3IUDwelvEd6Uvb7BxkBYxw"/>
-      <connections xmi:type="vsdt:MessageFlow" xmi:id="_K307UelwEd6Uvb7BxkBYxw" id="_K307UOlwEd6Uvb7BxkBYxw" source="_hlVDcelvEd6Uvb7BxkBYxw" target="_pWqRwelvEd6Uvb7BxkBYxw"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_FYLbwelwEd6Uvb7BxkBYxw" id="_FYLbwOlwEd6Uvb7BxkBYxw" message="_sJpI8OouEd6xFKyk2BwCAQ" source="_vQzU8elvEd6Uvb7BxkBYxw" target="_19lWAelvEd6Uvb7BxkBYxw"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_GQj1QelwEd6Uvb7BxkBYxw" id="_GQj1QOlwEd6Uvb7BxkBYxw" message="_sRW6gOouEd6xFKyk2BwCAQ" source="_wXwV8elvEd6Uvb7BxkBYxw" target="_3IUDwelvEd6Uvb7BxkBYxw"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_K307UelwEd6Uvb7BxkBYxw" id="_K307UOlwEd6Uvb7BxkBYxw" message="_sHAEoOouEd6xFKyk2BwCAQ" source="_hlVDcelvEd6Uvb7BxkBYxw" target="_pWqRwelvEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_QGQIAelwEd6Uvb7BxkBYxw" id="_QGQIAOlwEd6Uvb7BxkBYxw" source="_vQzU8elvEd6Uvb7BxkBYxw" target="_QF_CQelwEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_RQGsAelwEd6Uvb7BxkBYxw" id="_RQGsAOlwEd6Uvb7BxkBYxw" source="_QF_CQelwEd6Uvb7BxkBYxw" target="_RP87AelwEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_f_MWoelwEd6Uvb7BxkBYxw" id="_f_MWoOlwEd6Uvb7BxkBYxw" source="_f--UMelwEd6Uvb7BxkBYxw" target="_VyWIIelwEd6Uvb7BxkBYxw"/>
@@ -50,7 +50,7 @@
       <pools xmi:type="vsdt:Pool" xmi:id="_XsNpQelvEd6Uvb7BxkBYxw" name="Bidder" id="_XsNpQOlvEd6Uvb7BxkBYxw" participant="_IIqb0elvEd6Uvb7BxkBYxw">
         <lanes xmi:type="vsdt:Lane" xmi:id="_XsOQUOlvEd6Uvb7BxkBYxw" id="_XsNpQulvEd6Uvb7BxkBYxw">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_ojjfIepGEd6FP7KXlO1S-A" name="do bid" id="_ojjfIOpGEd6FP7KXlO1S-A"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_pK9dYepGEd6FP7KXlO1S-A" name="send bid" id="_pK9dYOpGEd6FP7KXlO1S-A"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_pK9dYepGEd6FP7KXlO1S-A" name="send bid" id="_pK9dYOpGEd6FP7KXlO1S-A" activityType="SEND" inMessage="_nlS8oAHrEd-svc1eBRPgjg" implementation="_d7GIMAHrEd-svc1eBRPgjg"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_qE-1oepGEd6FP7KXlO1S-A" id="_qE-1oOpGEd6FP7KXlO1S-A"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_U3Y70QEWEd-J148KloFDDQ" id="_U3Y70AEWEd-J148KloFDDQ" gatewayType="XOR_EVENT"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_XYhb0QEWEd-J148KloFDDQ" name="accepted" id="_XYhb0AEWEd-J148KloFDDQ" trigger="MESSAGE" message="_sJpI8OouEd6xFKyk2BwCAQ" implementation="_eGOaIAHrEd-svc1eBRPgjg"/>
@@ -64,19 +64,19 @@
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_tDWEMepGEd6FP7KXlO1S-A" name="check bid" id="_tDWEMOpGEd6FP7KXlO1S-A"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_toFwAepGEd6FP7KXlO1S-A" id="_toFwAOpGEd6FP7KXlO1S-A"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_ReXKgQEWEd-J148KloFDDQ" name="valid?" id="_ReXKgAEWEd-J148KloFDDQ"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_keJOQQEWEd-J148KloFDDQ" name="accept bid" id="_keJOQAEWEd-J148KloFDDQ"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_keJOQQEWEd-J148KloFDDQ" name="accept bid" id="_keJOQAEWEd-J148KloFDDQ" activityType="SEND" inMessage="_sJpI8OouEd6xFKyk2BwCAQ" implementation="_eGOaIAHrEd-svc1eBRPgjg"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_nD5IgQEWEd-J148KloFDDQ" name="update auction" id="_nD5IgAEWEd-J148KloFDDQ" activityType="EMBEDDED">
             <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_LIAP8QEXEd-J148KloFDDQ" name="add bidder" id="_LIAP8AEXEd-J148KloFDDQ"/>
             <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_MfdyIAEXEd-J148KloFDDQ" name="notify all" id="_MfdLEAEXEd-J148KloFDDQ"/>
             <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_Nbv0MQEXEd-J148KloFDDQ" name="add bid" id="_Nbv0MAEXEd-J148KloFDDQ"/>
           </containedFlowObjects>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_ruTCIAEWEd-J148KloFDDQ" name="reject bid" id="_ruSbEAEWEd-J148KloFDDQ"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_ruTCIAEWEd-J148KloFDDQ" name="reject bid" id="_ruSbEAEWEd-J148KloFDDQ" activityType="SEND" inMessage="_sRW6gOouEd6xFKyk2BwCAQ" implementation="_eKHboAHrEd-svc1eBRPgjg"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_UMlO0QEXEd-J148KloFDDQ" id="_UMlO0AEXEd-J148KloFDDQ"/>
         </lanes>
       </pools>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_pQkWIepGEd6FP7KXlO1S-A" id="_pQkWIOpGEd6FP7KXlO1S-A" source="_ojjfIepGEd6FP7KXlO1S-A" target="_pK9dYepGEd6FP7KXlO1S-A"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_tDjfkepGEd6FP7KXlO1S-A" id="_tDjfkOpGEd6FP7KXlO1S-A" source="_sFDP8epGEd6FP7KXlO1S-A" target="_tDWEMepGEd6FP7KXlO1S-A"/>
-      <connections xmi:type="vsdt:MessageFlow" xmi:id="_KauIoAEWEd-J148KloFDDQ" id="_KathkAEWEd-J148KloFDDQ" source="_pK9dYepGEd6FP7KXlO1S-A" target="_sFDP8epGEd6FP7KXlO1S-A"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_KauIoAEWEd-J148KloFDDQ" id="_KathkAEWEd-J148KloFDDQ" message="_nlS8oAHrEd-svc1eBRPgjg" source="_pK9dYepGEd6FP7KXlO1S-A" target="_sFDP8epGEd6FP7KXlO1S-A"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_RfHYcAEWEd-J148KloFDDQ" id="_toRWMOpGEd6FP7KXlO1S-A" source="_tDWEMepGEd6FP7KXlO1S-A" target="_ReXKgQEWEd-J148KloFDDQ"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_U31AsQEWEd-J148KloFDDQ" id="_qFM4EOpGEd6FP7KXlO1S-A" source="_pK9dYepGEd6FP7KXlO1S-A" target="_U3Y70QEWEd-J148KloFDDQ"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_XZCZMQEWEd-J148KloFDDQ" id="_XZCZMAEWEd-J148KloFDDQ" source="_XYhb0QEWEd-J148KloFDDQ" target="_qE-1oepGEd6FP7KXlO1S-A"/>
@@ -85,11 +85,11 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_keksEQEWEd-J148KloFDDQ" name="yes" id="_Re1roAEWEd-J148KloFDDQ" conditionType="EXPRESSION" source="_ReXKgQEWEd-J148KloFDDQ" target="_keJOQQEWEd-J148KloFDDQ">
         <conditionExpression xmi:type="vsdt:Expression" xmi:id="_MrlZgCH7Ed-JbZfg5MwSoA" expression="true"/>
       </connections>
-      <connections xmi:type="vsdt:MessageFlow" xmi:id="_mJ6MgQEWEd-J148KloFDDQ" id="_mJ6MgAEWEd-J148KloFDDQ" source="_keJOQQEWEd-J148KloFDDQ" target="_XYhb0QEWEd-J148KloFDDQ"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_mJ6MgQEWEd-J148KloFDDQ" id="_mJ6MgAEWEd-J148KloFDDQ" message="_sJpI8OouEd6xFKyk2BwCAQ" source="_keJOQQEWEd-J148KloFDDQ" target="_XYhb0QEWEd-J148KloFDDQ"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_nEIZEQEWEd-J148KloFDDQ" id="_nEIZEAEWEd-J148KloFDDQ" source="_nD5IgQEWEd-J148KloFDDQ" target="_toFwAepGEd6FP7KXlO1S-A"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_nEXCkQEWEd-J148KloFDDQ" id="_keWpoAEWEd-J148KloFDDQ" source="_keJOQQEWEd-J148KloFDDQ" target="_nD5IgQEWEd-J148KloFDDQ"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_rukH4QEWEd-J148KloFDDQ" name="no" id="_rukH4AEWEd-J148KloFDDQ" conditionType="DEFAULT" source="_ReXKgQEWEd-J148KloFDDQ" target="_ruTCIAEWEd-J148KloFDDQ"/>
-      <connections xmi:type="vsdt:MessageFlow" xmi:id="_vC18EAEWEd-J148KloFDDQ" id="_vC1VAAEWEd-J148KloFDDQ" source="_ruTCIAEWEd-J148KloFDDQ" target="_a67yoQEWEd-J148KloFDDQ"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_vC18EAEWEd-J148KloFDDQ" id="_vC1VAAEWEd-J148KloFDDQ" message="_sRW6gOouEd6xFKyk2BwCAQ" source="_ruTCIAEWEd-J148KloFDDQ" target="_a67yoQEWEd-J148KloFDDQ"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_wCjsoQEWEd-J148KloFDDQ" id="_wCjsoAEWEd-J148KloFDDQ" source="_a67yoQEWEd-J148KloFDDQ" target="_wCFLgAEWEd-J148KloFDDQ"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_UMzRQQEXEd-J148KloFDDQ" id="_UMzRQAEXEd-J148KloFDDQ" source="_ruTCIAEWEd-J148KloFDDQ" target="_UMlO0QEXEd-J148KloFDDQ"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_VuE2wQEXEd-J148KloFDDQ" id="_VuE2wAEXEd-J148KloFDDQ" source="_Nbv0MQEXEd-J148KloFDDQ" target="_MfdyIAEXEd-J148KloFDDQ"/>
@@ -113,13 +113,13 @@
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_H4tiAel0Ed6Uvb7BxkBYxw" name="wait for payment" id="_H4tiAOl0Ed6Uvb7BxkBYxw" gatewayType="XOR_EVENT"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_J9nZAel0Ed6Uvb7BxkBYxw" name="paid" id="_J9nZAOl0Ed6Uvb7BxkBYxw" trigger="MESSAGE" message="_u3bvcOovEd6xFKyk2BwCAQ" implementation="_1XXnUOovEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_Pr05Ael0Ed6Uvb7BxkBYxw" name="inform seller" id="_Pr05AOl0Ed6Uvb7BxkBYxw" activityType="SEND" inMessage="_u3bvcOovEd6xFKyk2BwCAQ" implementation="_5U_6gOovEd6xFKyk2BwCAQ"/>
-          <containedFlowObjects asDuration="true"  xmi:type="vsdt:Intermediate" xmi:id="_asGIgel0Ed6Uvb7BxkBYxw" name="timeout" id="_asGIgOl0Ed6Uvb7BxkBYxw" trigger="TIMER">
+          <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_asGIgel0Ed6Uvb7BxkBYxw" name="timeout" id="_asGIgOl0Ed6Uvb7BxkBYxw" trigger="TIMER" asDuration="true">
             <timeExpression xmi:type="vsdt:Expression" xmi:id="_Gj5m8Oo_Ed6FP7KXlO1S-A" expression="1"/>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_dUzQIOl0Ed6Uvb7BxkBYxw" name="inform seller" id="_dUypEOl0Ed6Uvb7BxkBYxw" activityType="SEND" inMessage="_Fyv0oOowEd6xFKyk2BwCAQ" implementation="_IsgQAOowEd6xFKyk2BwCAQ"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_yCR54Ol2Ed6Uvb7BxkBYxw" name="wait for shipping" id="_yCRS0Ol2Ed6Uvb7BxkBYxw" gatewayType="XOR_EVENT"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_4Y758el2Ed6Uvb7BxkBYxw" name="shipped" id="_4Y758Ol2Ed6Uvb7BxkBYxw" trigger="MESSAGE" message="_u2GSsOovEd6xFKyk2BwCAQ" implementation="_AcPqAOowEd6xFKyk2BwCAQ"/>
-          <containedFlowObjects asDuration="true" xmi:type="vsdt:Intermediate" xmi:id="_4ocVkel2Ed6Uvb7BxkBYxw" name="timeout" id="_4ocVkOl2Ed6Uvb7BxkBYxw" trigger="TIMER">
+          <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_4ocVkel2Ed6Uvb7BxkBYxw" name="timeout" id="_4ocVkOl2Ed6Uvb7BxkBYxw" trigger="TIMER" asDuration="true">
             <timeExpression xmi:type="vsdt:Expression" xmi:id="_HTpB0Oo_Ed6FP7KXlO1S-A" expression="2"/>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_8_PWsel2Ed6Uvb7BxkBYxw" name="inform bidder" id="_8_PWsOl2Ed6Uvb7BxkBYxw" activityType="SEND" inMessage="_G1LiAOowEd6xFKyk2BwCAQ" implementation="_InFkgOowEd6xFKyk2BwCAQ"/>
@@ -164,12 +164,12 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_OaUVMOlxEd6Uvb7BxkBYxw" id="_OaTuIOlxEd6Uvb7BxkBYxw" source="_OH2sMelxEd6Uvb7BxkBYxw" target="_OaJ9IelxEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_RQbmselxEd6Uvb7BxkBYxw" id="_RQbmsOlxEd6Uvb7BxkBYxw" source="_OaJ9IelxEd6Uvb7BxkBYxw" target="_RQR1selxEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_ZhKGwelxEd6Uvb7BxkBYxw" id="_ZhKGwOlxEd6Uvb7BxkBYxw" source="_lP-60elwEd6Uvb7BxkBYxw" target="_qmBLYelwEd6Uvb7BxkBYxw"/>
-      <connections xmi:type="vsdt:MessageFlow" xmi:id="_rXf2MelxEd6Uvb7BxkBYxw" id="_rXf2MOlxEd6Uvb7BxkBYxw" source="_sqGjAelwEd6Uvb7BxkBYxw" target="_d_JVAOlxEd6Uvb7BxkBYxw"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_rXf2MelxEd6Uvb7BxkBYxw" id="_rXf2MOlxEd6Uvb7BxkBYxw" message="_uyK08OovEd6xFKyk2BwCAQ" source="_sqGjAelwEd6Uvb7BxkBYxw" target="_d_JVAOlxEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_qKsPYelyEd6Uvb7BxkBYxw" name="no" id="_w0TSkOlwEd6Uvb7BxkBYxw" conditionType="DEFAULT" source="_qmBLYelwEd6Uvb7BxkBYxw" target="_qKUb8elyEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_v5HKwelyEd6Uvb7BxkBYxw" id="_v5HKwOlyEd6Uvb7BxkBYxw" source="_cnVioelzEd6Uvb7BxkBYxw" target="_JDCHcelxEd6Uvb7BxkBYxw"/>
-      <connections xmi:type="vsdt:MessageFlow" xmi:id="_5hyVMelyEd6Uvb7BxkBYxw" id="_5hyVMOlyEd6Uvb7BxkBYxw" source="_qKUb8elyEd6Uvb7BxkBYxw" target="_4qSsgelyEd6Uvb7BxkBYxw"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_5hyVMelyEd6Uvb7BxkBYxw" id="_5hyVMOlyEd6Uvb7BxkBYxw" message="_u0ZCgOovEd6xFKyk2BwCAQ" source="_qKUb8elyEd6Uvb7BxkBYxw" target="_4qSsgelyEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="__3xm4elyEd6Uvb7BxkBYxw" id="__3xm4OlyEd6Uvb7BxkBYxw" source="_8iH5selyEd6Uvb7BxkBYxw" target="__3oc8elyEd6Uvb7BxkBYxw"/>
-      <connections xmi:type="vsdt:MessageFlow" xmi:id="_FlW0wOlzEd6Uvb7BxkBYxw" id="_FlWNsOlzEd6Uvb7BxkBYxw" source="_JDCHcelxEd6Uvb7BxkBYxw" target="_38Qh0elyEd6Uvb7BxkBYxw"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_FlW0wOlzEd6Uvb7BxkBYxw" id="_FlWNsOlzEd6Uvb7BxkBYxw" message="_uyK08OovEd6xFKyk2BwCAQ" source="_JDCHcelxEd6Uvb7BxkBYxw" target="_38Qh0elyEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_cnhI0elzEd6Uvb7BxkBYxw" id="_cnhI0OlzEd6Uvb7BxkBYxw" source="_cnVioelzEd6Uvb7BxkBYxw" target="_sqGjAelwEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_cnrg4elzEd6Uvb7BxkBYxw" name="yes" id="_sqQ7EOlwEd6Uvb7BxkBYxw" conditionType="EXPRESSION" source="_qmBLYelwEd6Uvb7BxkBYxw" target="_cnVioelzEd6Uvb7BxkBYxw">
         <conditionExpression xmi:type="vsdt:Expression" xmi:id="_OAYCMCH7Ed-JbZfg5MwSoA" expression="true"/>
@@ -187,10 +187,10 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_qokzUel0Ed6Uvb7BxkBYxw" id="_qokzUOl0Ed6Uvb7BxkBYxw" source="_qoeFoel0Ed6Uvb7BxkBYxw" target="_8iH5selyEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_qotWMel0Ed6Uvb7BxkBYxw" id="_8iUG8OlyEd6Uvb7BxkBYxw" source="_4qSsgelyEd6Uvb7BxkBYxw" target="_qoeFoel0Ed6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_B2E0sel1Ed6Uvb7BxkBYxw" id="_dmn1YOlzEd6Uvb7BxkBYxw" source="_dmiV0elzEd6Uvb7BxkBYxw" target="_H4tiAel0Ed6Uvb7BxkBYxw"/>
-      <connections xmi:type="vsdt:MessageFlow" xmi:id="_ifiaMel1Ed6Uvb7BxkBYxw" id="_ifiaMOl1Ed6Uvb7BxkBYxw" source="_dUzQIOl0Ed6Uvb7BxkBYxw" target="_mmqdEel0Ed6Uvb7BxkBYxw"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_ifiaMel1Ed6Uvb7BxkBYxw" id="_ifiaMOl1Ed6Uvb7BxkBYxw" message="_Fyv0oOowEd6xFKyk2BwCAQ" source="_dUzQIOl0Ed6Uvb7BxkBYxw" target="_mmqdEel0Ed6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_lQ_OIel1Ed6Uvb7BxkBYxw" id="_lQ_OIOl1Ed6Uvb7BxkBYxw" source="_38Qh0elyEd6Uvb7BxkBYxw" target="_lQzA4el1Ed6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_mJu0Ael1Ed6Uvb7BxkBYxw" id="_mJu0AOl1Ed6Uvb7BxkBYxw" source="_lQzA4el1Ed6Uvb7BxkBYxw" target="_mJlDAel1Ed6Uvb7BxkBYxw"/>
-      <connections xmi:type="vsdt:MessageFlow" xmi:id="_zoHEsel1Ed6Uvb7BxkBYxw" id="_zoHEsOl1Ed6Uvb7BxkBYxw" source="_Pr05Ael0Ed6Uvb7BxkBYxw" target="_mK2Dwel0Ed6Uvb7BxkBYxw"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_zoHEsel1Ed6Uvb7BxkBYxw" id="_zoHEsOl1Ed6Uvb7BxkBYxw" message="_u3bvcOovEd6xFKyk2BwCAQ" source="_Pr05Ael0Ed6Uvb7BxkBYxw" target="_mK2Dwel0Ed6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_LMhKMel2Ed6Uvb7BxkBYxw" id="_LMhKMOl2Ed6Uvb7BxkBYxw" source="_mK2Dwel0Ed6Uvb7BxkBYxw" target="_LMSgsel2Ed6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_yCnREel2Ed6Uvb7BxkBYxw" id="_PsBGQOl0Ed6Uvb7BxkBYxw" source="_Pr05Ael0Ed6Uvb7BxkBYxw" target="_yCR54Ol2Ed6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_0Ui3cel2Ed6Uvb7BxkBYxw" id="_0Ui3cOl2Ed6Uvb7BxkBYxw" source="_LMSgsel2Ed6Uvb7BxkBYxw" target="_0UVcEel2Ed6Uvb7BxkBYxw"/>
@@ -200,7 +200,7 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_G-bjsel3Ed6Uvb7BxkBYxw" id="_G-bjsOl3Ed6Uvb7BxkBYxw" source="_G-VdEel3Ed6Uvb7BxkBYxw" target="_OaJ9IelxEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_G-fOEel3Ed6Uvb7BxkBYxw" id="_Iz074OlzEd6Uvb7BxkBYxw" source="_qKUb8elyEd6Uvb7BxkBYxw" target="_G-TA0Ol3Ed6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_TtB9Qel3Ed6Uvb7BxkBYxw" id="_TtB9QOl3Ed6Uvb7BxkBYxw" source="_4ocVkel2Ed6Uvb7BxkBYxw" target="_8_PWsel2Ed6Uvb7BxkBYxw"/>
-      <connections xmi:type="vsdt:MessageFlow" xmi:id="_XUCgMel3Ed6Uvb7BxkBYxw" id="_XUCgMOl3Ed6Uvb7BxkBYxw" source="_0UVcEel2Ed6Uvb7BxkBYxw" target="_4Y758el2Ed6Uvb7BxkBYxw"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_XUCgMel3Ed6Uvb7BxkBYxw" id="_XUCgMOl3Ed6Uvb7BxkBYxw" message="_u2GSsOovEd6xFKyk2BwCAQ" source="_0UVcEel2Ed6Uvb7BxkBYxw" target="_4Y758el2Ed6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_eGnAMel3Ed6Uvb7BxkBYxw" id="_ku-QwOl2Ed6Uvb7BxkBYxw" source="_mJlDAel1Ed6Uvb7BxkBYxw" target="_eFwroOl3Ed6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_hOf-Mel3Ed6Uvb7BxkBYxw" id="_eGC_gOl3Ed6Uvb7BxkBYxw" source="_eFwroOl3Ed6Uvb7BxkBYxw" target="_hOLOEOl3Ed6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_iCeY0el3Ed6Uvb7BxkBYxw" id="_eGMJcOl3Ed6Uvb7BxkBYxw" source="_eFwroOl3Ed6Uvb7BxkBYxw" target="_iCME8el3Ed6Uvb7BxkBYxw"/>
@@ -210,8 +210,8 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_Aj0bQel4Ed6Uvb7BxkBYxw" id="_9_hSgOl3Ed6Uvb7BxkBYxw" source="_9_SB8el3Ed6Uvb7BxkBYxw" target="_AjedAel4Ed6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_HOtl8el4Ed6Uvb7BxkBYxw" id="_AjrRUOl4Ed6Uvb7BxkBYxw" source="_AjedAel4Ed6Uvb7BxkBYxw" target="_OH2sMelxEd6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_IZc6wel4Ed6Uvb7BxkBYxw" id="_IZc6wOl4Ed6Uvb7BxkBYxw" source="_90064el2Ed6Uvb7BxkBYxw" target="_OH2sMelxEd6Uvb7BxkBYxw"/>
-      <connections xmi:type="vsdt:MessageFlow" xmi:id="_Sg4dwel4Ed6Uvb7BxkBYxw" id="_Sg4dwOl4Ed6Uvb7BxkBYxw" source="_9_SB8el3Ed6Uvb7BxkBYxw" target="_hOLOEOl3Ed6Uvb7BxkBYxw"/>
-      <connections xmi:type="vsdt:MessageFlow" xmi:id="_TE-pUel4Ed6Uvb7BxkBYxw" id="_TE-pUOl4Ed6Uvb7BxkBYxw" source="_8_PWsel2Ed6Uvb7BxkBYxw" target="_iCME8el3Ed6Uvb7BxkBYxw"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_Sg4dwel4Ed6Uvb7BxkBYxw" id="_Sg4dwOl4Ed6Uvb7BxkBYxw" message="_u2GSsOovEd6xFKyk2BwCAQ" source="_9_SB8el3Ed6Uvb7BxkBYxw" target="_hOLOEOl3Ed6Uvb7BxkBYxw"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_TE-pUel4Ed6Uvb7BxkBYxw" id="_TE-pUOl4Ed6Uvb7BxkBYxw" message="_G1LiAOowEd6xFKyk2BwCAQ" source="_8_PWsel2Ed6Uvb7BxkBYxw" target="_iCME8el3Ed6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:MessageFlow" xmi:id="_uid5Mel4Ed6Uvb7BxkBYxw" id="_uid5MOl4Ed6Uvb7BxkBYxw" source="_mJlDAel1Ed6Uvb7BxkBYxw" target="_J9nZAel0Ed6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_arTsEel5Ed6Uvb7BxkBYxw" id="_arTsEOl5Ed6Uvb7BxkBYxw" source="_arFCkel5Ed6Uvb7BxkBYxw" target="_qoeFoel0Ed6Uvb7BxkBYxw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_arddEel5Ed6Uvb7BxkBYxw" id="_sQjdwOl0Ed6Uvb7BxkBYxw" source="_mmqdEel0Ed6Uvb7BxkBYxw" target="_arFCkel5Ed6Uvb7BxkBYxw"/>
