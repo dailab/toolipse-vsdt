@@ -506,7 +506,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		case MANUAL:
 		case USER:
 			// TODO implement missing mappings
-			TrafoLog.nyi("Mapping for Activity with trigger " + activity.getActivityType().getName());
+			TrafoLog.nyi("Mapping for Activity with type " + activity.getActivityType().getName());
 		default:
 			TrafoLog.warn("Could not find a Mapping for Activity " + activity.getNameOrId());
 		}
@@ -706,8 +706,8 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 					Receive receive= (Receive) event;
 					// will be preceded by listen and onMessage
 					MessageEvent messageEvent= jadlFac.createMessageEvent();
-					messageEvent.setAddress(receive.getAddress());
-//					messageEvent.setType( (Type) EcoreUtil.copy(receive.getType()));
+					Expression address = receive.getAddress();
+					messageEvent.setAddress((Expression) EcoreUtil.copy(address));
 					Property property= (Property) wrapper.getMapping(receive);
 					messageEvent.setType(jef.createType(property.getType()));
 					Case messageCase= jadlFac.createCase();
@@ -715,7 +715,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 					messageCase.setBody(body);
 					block.getCases().add(messageCase);
 					// add listen
-					messageListeners.get(_currentService).add(receive.getAddress());
+					messageListeners.get(_currentService).add((Expression) EcoreUtil.copy(address));
 				}
 			}
 			mapping= block;
@@ -1077,9 +1077,11 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			if (script instanceof Receive) {
 				return script;
 			}
-			// case 3: receive as an assign value // XXX can be removed
+			// case 3: receive as an assign value 
 			// once it is settled that receive is no AssignValue anymore
 			if (script instanceof Assign && ((Assign) script).getValue() instanceof Receive) {
+				// XXX remove this case after some time of testing (since Q2 2010)
+				System.err.println("THIS LINE SHOULD NOT APPEAR (in Bpmn2JiacVElementMapping.getFirstEventElement)");
 				return (Receive) ((Assign) script).getValue();
 			}
 			// case 4: a sequence wrapped in a sequence
@@ -1164,7 +1166,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	 */
 	private Script buildReceive(Message message, Participant participant) {
 //		String address= message.getTo() != null ? message.getTo().getName() : "unknown";
-		String address= (participant != null ? participant.getName() : "unknown") + "_" + message.getName();
+		String address= (participant != null ? (participant.getName()  + "_" ) : "") + message.getName();
 		int timeout= 10000;
 		if (message.getProperties().size() == 1) {
 			Property property= message.getProperties().get(0);
@@ -1174,6 +1176,8 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 //			assign.setValue(receive);
 //			return assign;
 			wrapper.map(receive, property); // put type in map, for later retrieval when creating onMessage
+			// this is necessary as the receive itself only known the name of the variable, but not the type
+			// however, one could use another map for this association, too
 			return receive;
 		} else {
 			Seq seq= jadlFac.createSeq();
@@ -1215,7 +1219,6 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		if (scripts != null) {
 			for (Script script : scripts) {
 				AtomList list = jadlFac.createAtomList();
-				//FIXME handle non-atomic scripts
 				if (script instanceof Atom) {
 					list.getAtoms().add((Atom) script);
 				} else if (script instanceof Seq) {
