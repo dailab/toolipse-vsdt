@@ -1,30 +1,30 @@
 
 
 service CloseAuction_Bidder_awardnotification ( in $message : string ) ( out ) {
-    listen "Bidder_notifyShipped" ;
     listen "Bidder_notifyNotShipped" ;
+    listen "Bidder_notifyShipped" ;
     {
         {
             print "Executing transfermoneytoauctioneer" ;
         }
         {
             var $message : string ;
-            send "Auctioneer_notifyPayed" $message ;
+            send $message to "Auctioneer_notifyPaid" ;
         }
         switch {
-            case ( onmessage "Bidder_notifyShipped" string ) {
+            case ( onmessage string at "Bidder_notifyShipped" ) {
                 {
                     var $message : string ;
-                    receive timeout 10000 "Bidder_notifyShipped" $message ;
+                    receive $message from "Bidder_notifyShipped" timeout 10000 ;
                 }
                 {
                     print "Executing ratepositively" ;
                 }
             }
-            case ( onmessage "Bidder_notifyNotShipped" string ) {
+            case ( onmessage string at "Bidder_notifyNotShipped" ) {
                 {
                     var $message : string ;
-                    receive timeout 10000 "Bidder_notifyNotShipped" $message ;
+                    receive $message from "Bidder_notifyNotShipped" timeout 10000 ;
                 }
                 {
                     print "Executing ratenegatively" ;

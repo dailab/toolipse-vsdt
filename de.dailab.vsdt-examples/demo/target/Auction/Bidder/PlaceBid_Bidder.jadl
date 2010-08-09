@@ -5,19 +5,20 @@ service PlaceBid_Bidder_dobid ( in ) ( out ) {
     listen "Bidder_decline" ;
     {
         {
-            print "Executing sendbid" ;
+            {
+            }
         }
         switch {
-            case ( onmessage "Bidder_accept" string ) {
+            case ( onmessage string at "Bidder_accept" ) {
                 {
                     var $message : string ;
-                    receive timeout 10000 "Bidder_accept" $message ;
+                    receive $message from "Bidder_accept" timeout 10000 ;
                 }
             }
-            case ( onmessage "Bidder_decline" string ) {
+            case ( onmessage string at "Bidder_decline" ) {
                 {
                     var $message : string ;
-                    receive timeout 10000 "Bidder_decline" $message ;
+                    receive $message from "Bidder_decline" timeout 10000 ;
                 }
             }
         }

@@ -5,9 +5,10 @@ service PlaceBid_Auctioneer_receivebid ( in ) ( out ) {
         {
             print "Executing checkbid" ;
         }
-        if ( "not valid" ) {
+        if ( true ) {
             {
-                print "Executing acceptbid" ;
+                var $message : string ;
+                send $message to "Bidder_accept" ;
             }
             {
                 {
@@ -25,7 +26,8 @@ service PlaceBid_Auctioneer_receivebid ( in ) ( out ) {
         }
         else {
             {
-                print "Executing rejectbid" ;
+                var $message : string ;
+                send $message to "Bidder_decline" ;
             }
         }
     }

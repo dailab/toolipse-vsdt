@@ -4,30 +4,30 @@ service CloseAuction_Seller ( in ) ( out ) {
 }
 
 service CloseAuction_Seller_0_sold ( in $message : string ) ( out ) {
-    listen "Seller_notifyPayed" ;
-    listen "Seller_notifyNotPayed" ;
+    listen "Seller_notifyPaid" ;
+    listen "Seller_notifyNotPaid" ;
     {
         switch {
-            case ( onmessage "Seller_notifyPayed" string ) {
+            case ( onmessage string at "Seller_notifyPaid" ) {
                 {
                     var $message : string ;
-                    receive timeout 10000 "Seller_notifyPayed" $message ;
+                    receive $message from "Seller_notifyPaid" timeout 10000 ;
                 }
                 {
                     print "Executing sendgoods" ;
                 }
                 {
                     var $message : string ;
-                    send "Auctioneer_notifyShipped" $message ;
+                    send $message to "Auctioneer_notifyShipped" ;
                 }
                 {
                     print "Executing ratepositively" ;
                 }
             }
-            case ( onmessage "Seller_notifyNotPayed" string ) {
+            case ( onmessage string at "Seller_notifyNotPaid" ) {
                 {
                     var $message : string ;
-                    receive timeout 10000 "Seller_notifyNotPayed" $message ;
+                    receive $message from "Seller_notifyNotPaid" timeout 10000 ;
                 }
                 {
                     print "Executing ratenegatively" ;
@@ -40,8 +40,7 @@ service CloseAuction_Seller_0_sold ( in $message : string ) ( out ) {
             }
         }
     }
-    invoke CloseAuction_Seller ( ) ( ) ;
-}
+    invoke CloseAuction_Seller ( ) ( ) ; }
 
 service CloseAuction_Seller_1_notsold ( in $message : string ) ( out ) {
     {
@@ -49,5 +48,4 @@ service CloseAuction_Seller_1_notsold ( in $message : string ) ( out ) {
             print "Executing dismissauction" ;
         }
     }
-    invoke CloseAuction_Seller ( ) ( ) ;
-}
+    invoke CloseAuction_Seller ( ) ( ) ; }

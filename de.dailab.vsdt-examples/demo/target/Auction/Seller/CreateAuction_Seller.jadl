@@ -1,27 +1,27 @@
 
 
 service CreateAuction_Seller_createauction ( in ) ( out ) {
-    listen "Seller_decline" ;
     listen "Seller_accept" ;
+    listen "Seller_decline" ;
     {
         {
             var $desc : string ;
-            send "Auctioneer_descriptionMessage" $desc ;
+            send $desc to "Auctioneer_descriptionMessage" ;
         }
         switch {
-            case ( onmessage "Seller_accept" string ) {
+            case ( onmessage string at "Seller_accept" ) {
                 {
                     var $message : string ;
-                    receive timeout 10000 "Seller_accept" $message ;
+                    receive $message from "Seller_accept" timeout 10000 ;
                 }
                 {
                     print "Executing dootherpreparations" ;
                 }
             }
-            case ( onmessage "Seller_decline" string ) {
+            case ( onmessage string at "Seller_decline" ) {
                 {
                     var $message : string ;
-                    receive timeout 10000 "Seller_decline" $message ;
+                    receive $message from "Seller_decline" timeout 10000 ;
                 }
             }
         }
