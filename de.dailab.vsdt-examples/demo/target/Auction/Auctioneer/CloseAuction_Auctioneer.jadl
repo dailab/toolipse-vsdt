@@ -1,35 +1,36 @@
-
+import de.dailab.jiactng.examples.auction.onto.Auction ; import de.dailab.jiactng.examples.auction.onto.Bid ; import
+de.dailab.jiactng.examples.auction.onto.Message ; node
 
 service CloseAuction_Auctioneer_auctionover ( in ) ( out ) {
-    listen "Auctioneer_notifyShipped" ;
-    listen "Auctioneer_notifyPaid" ;
+    listen "auctioneer_notifyshipped" ;
+    listen "auctioneer_notifypaid" ;
     {
-        case ( ontimer until "when the auction is over" ) {
-        }
         if ( true ) {
             par {
-                { var $message : string ;
-                } { var $message : string ;
+                { var $message : Message ;
+                send $message to "seller_notifysold" ;
+                } { var $message : Message ;
+                send $message to "seller_notifysold" ;
                 } }
             switch {
-                case ( onmessage string at "Auctioneer_notifyPaid" ) {
+                case ( onmessage Message at "auctioneer_notifypaid" ) {
                     {
-                        var $message : string ;
-                        receive $message from "Auctioneer_notifyPaid" timeout 10000 ;
+                        var $message : Message ;
+                        receive $message from "auctioneer_notifypaid" timeout 10000 ;
                     }
                     {
-                        var $message : string ;
-                        send $message to "Seller_notifyPaid" ;
+                        var $message : Message ;
+                        send $message to "seller_notifypaid" ;
                     }
                     switch {
-                        case ( onmessage string at "Auctioneer_notifyShipped" ) {
+                        case ( onmessage Message at "auctioneer_notifyshipped" ) {
                             {
-                                var $message : string ;
-                                receive $message from "Auctioneer_notifyShipped" timeout 10000 ;
+                                var $message : Message ;
+                                receive $message from "auctioneer_notifyshipped" timeout 10000 ;
                             }
                             {
-                                var $message : string ;
-                                send $message to "Bidder_notifyShipped" ;
+                                var $message : Message ;
+                                send $message to "bidder_notifyshipped" ;
                             }
                             {
                                 print "Executing transfermoneytoseller" ;
@@ -37,8 +38,8 @@ service CloseAuction_Auctioneer_auctionover ( in ) ( out ) {
                         }
                         case ( ontimer timeout 2 ) {
                             {
-                                var $message : string ;
-                                send $message to "Bidder_notifyNotShipped" ;
+                                var $message : Message ;
+                                send $message to "bidder_notifynotshipped" ;
                             }
                             {
                                 print "Executing transfermoneyback" ;
@@ -48,16 +49,16 @@ service CloseAuction_Auctioneer_auctionover ( in ) ( out ) {
                 }
                 case ( ontimer timeout 1 ) {
                     {
-                        var $message : string ;
-                        send $message to "Seller_notifyNotPaid" ;
+                        var $message : Message ;
+                        send $message to "seller_notifynotpaid" ;
                     }
                 }
             }
         }
         else {
             {
-                var $message : string ;
-                send $message to "Seller_notifyNotSold" ;
+                var $message : Message ;
+                send $message to "seller_notifynotsold" ;
             }
         }
         {

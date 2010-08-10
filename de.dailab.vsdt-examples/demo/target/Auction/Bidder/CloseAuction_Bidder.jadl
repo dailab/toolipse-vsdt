@@ -1,30 +1,31 @@
+import de.dailab.jiactng.examples.auction.onto.Auction ; import de.dailab.jiactng.examples.auction.onto.Bid ; import
+de.dailab.jiactng.examples.auction.onto.Message ; node
 
-
-service CloseAuction_Bidder_awardnotification ( in $message : string ) ( out ) {
-    listen "Bidder_notifyNotShipped" ;
-    listen "Bidder_notifyShipped" ;
+service CloseAuction_Bidder_awardnotification ( in $message : Message ) ( out ) {
+    listen "bidder_notifynotshipped" ;
+    listen "bidder_notifyshipped" ;
     {
         {
             print "Executing transfermoneytoauctioneer" ;
         }
         {
-            var $message : string ;
-            send $message to "Auctioneer_notifyPaid" ;
+            var $message : Message ;
+            send $message to "auctioneer_notifypaid" ;
         }
         switch {
-            case ( onmessage string at "Bidder_notifyShipped" ) {
+            case ( onmessage Message at "bidder_notifyshipped" ) {
                 {
-                    var $message : string ;
-                    receive $message from "Bidder_notifyShipped" timeout 10000 ;
+                    var $message : Message ;
+                    receive $message from "bidder_notifyshipped" timeout 10000 ;
                 }
                 {
                     print "Executing ratepositively" ;
                 }
             }
-            case ( onmessage string at "Bidder_notifyNotShipped" ) {
+            case ( onmessage Message at "bidder_notifynotshipped" ) {
                 {
-                    var $message : string ;
-                    receive $message from "Bidder_notifyNotShipped" timeout 10000 ;
+                    var $message : Message ;
+                    receive $message from "bidder_notifynotshipped" timeout 10000 ;
                 }
                 {
                     print "Executing ratenegatively" ;

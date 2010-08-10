@@ -1,33 +1,35 @@
-
+import de.dailab.jiactng.examples.auction.onto.Auction ; import de.dailab.jiactng.examples.auction.onto.Bid ; import
+de.dailab.jiactng.examples.auction.onto.Message ; node
 
 service CloseAuction_Seller ( in ) ( out ) {
 }
+node
 
-service CloseAuction_Seller_0_sold ( in $message : string ) ( out ) {
-    listen "Seller_notifyPaid" ;
-    listen "Seller_notifyNotPaid" ;
+service CloseAuction_Seller_0_sold ( in $message : Message ) ( out ) {
+    listen "seller_notifypaid" ;
+    listen "seller_notifynotpaid" ;
     {
         switch {
-            case ( onmessage string at "Seller_notifyPaid" ) {
+            case ( onmessage Message at "seller_notifypaid" ) {
                 {
-                    var $message : string ;
-                    receive $message from "Seller_notifyPaid" timeout 10000 ;
+                    var $message : Message ;
+                    receive $message from "seller_notifypaid" timeout 10000 ;
                 }
                 {
                     print "Executing sendgoods" ;
                 }
                 {
-                    var $message : string ;
-                    send $message to "Auctioneer_notifyShipped" ;
+                    var $message : Message ;
+                    send $message to "auctioneer_notifyshipped" ;
                 }
                 {
                     print "Executing ratepositively" ;
                 }
             }
-            case ( onmessage string at "Seller_notifyNotPaid" ) {
+            case ( onmessage Message at "seller_notifynotpaid" ) {
                 {
-                    var $message : string ;
-                    receive $message from "Seller_notifyNotPaid" timeout 10000 ;
+                    var $message : Message ;
+                    receive $message from "seller_notifynotpaid" timeout 10000 ;
                 }
                 {
                     print "Executing ratenegatively" ;
@@ -41,8 +43,9 @@ service CloseAuction_Seller_0_sold ( in $message : string ) ( out ) {
         }
     }
     invoke CloseAuction_Seller ( ) ( ) ; }
+node
 
-service CloseAuction_Seller_1_notsold ( in $message : string ) ( out ) {
+service CloseAuction_Seller_1_notsold ( in $message : Message ) ( out ) {
     {
         {
             print "Executing dismissauction" ;

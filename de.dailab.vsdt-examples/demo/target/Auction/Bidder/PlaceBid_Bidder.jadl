@@ -1,24 +1,36 @@
+import de.dailab.jiactng.examples.auction.onto.Auction ; import de.dailab.jiactng.examples.auction.onto.Bid ; import
+de.dailab.jiactng.examples.auction.onto.Message ; node
 
-
-service PlaceBid_Bidder_dobid ( in ) ( out ) {
-    listen "Bidder_accept" ;
-    listen "Bidder_decline" ;
+service PlaceBid_Bidder_dobid ( in $bid : Bid ) ( out $result : bool ) {
+    var $theBid : Bid ;
+    listen "bidder_accept" ;
+    listen "bidder_decline" ;
     {
         {
-            {
-            }
+            $theBid = $bid ;
+        }
+        {
+            var $bidDesc : Bid ;
+            $bidDesc = $theBid ;
+            send $bidDesc to "auctioneer_bidmessage" ;
         }
         switch {
-            case ( onmessage string at "Bidder_accept" ) {
+            case ( onmessage Message at "bidder_accept" ) {
                 {
-                    var $message : string ;
-                    receive $message from "Bidder_accept" timeout 10000 ;
+                    var $message : Message ;
+                    receive $message from "bidder_accept" timeout 10000 ;
+                }
+                {
+                    $result = true ;
                 }
             }
-            case ( onmessage string at "Bidder_decline" ) {
+            case ( onmessage Message at "bidder_decline" ) {
                 {
-                    var $message : string ;
-                    receive $message from "Bidder_decline" timeout 10000 ;
+                    var $message : Message ;
+                    receive $message from "bidder_decline" timeout 10000 ;
+                }
+                {
+                    $result = false ;
                 }
             }
         }

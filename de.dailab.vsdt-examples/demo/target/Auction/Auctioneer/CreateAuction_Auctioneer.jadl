@@ -1,23 +1,38 @@
+import de.dailab.jiactng.examples.auction.onto.Auction ; import de.dailab.jiactng.examples.auction.onto.Bid ; import
+de.dailab.jiactng.examples.auction.onto.Message ; node
 
-
-service CreateAuction_Auctioneer_createauction ( in $desc : string ) ( out ) {
+service CreateAuction_Auctioneer_createauction ( in $auctionDesc : Auction ) ( out ) {
+    var $theAuction : Auction ;
+    var $accept : bool ;
     {
         {
-            print "Executing checkdescription" ;
+            $theAuction = $auctionDesc ;
         }
-        if ( true ) {
+        {
+            $accept = true ;
+        }
+        if ( $accept ) {
             {
-                var $message : string ;
-                send $message to "Seller_accept" ;
+                var $message : Message ;
+                $message . message = "Your Auction has been accepted" ;
+                send $message to "seller_accept" ;
             }
             {
-                print "Executing createauction" ;
+                {
+                    var $bid : Bid ;
+                    $bid = new Bid ( ) ;
+                    $bid . value = 0 ;
+                    $theAuction . highestBid = $bid ;
+                    write $theAuction ;
+                    print "     Auctioneer: Auction object written to memory." ;
+                }
             }
         }
         else {
             {
-                var $message : string ;
-                send $message to "Seller_decline" ;
+                var $message : Message ;
+                $message . message = "Sorry, your auction has been rejected." ;
+                send $message to "seller_decline" ;
             }
         }
     }
