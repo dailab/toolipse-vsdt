@@ -1,6 +1,48 @@
-when	de.dailab.vsdt.impl.StartImpl@5501e264 (name: createauction, documentation: , id: _pWqRwOlvEd6Uvb7BxkBYxw, categories: null) (nonInterrupting: false, trigger: MESSAGE, asDuration: false, errorCode: null, signal: null)then	de.dailab.jiactng.jadl.impl.ServiceImpl@5357dfa (accessLevel: node, name: CreateAuction_Auctioneer_createauction, configured: false)
+package foo; // TODO package declaration
 
-when	de.dailab.vsdt.impl.StartImpl@1287a9b2 (name: receivebid, documentation: , id: _sFDP8OpGEd6FP7KXlO1S-A, categories: null) (nonInterrupting: false, trigger: MESSAGE, asDuration: false, errorCode: null, signal: null)then	de.dailab.jiactng.jadl.impl.ServiceImpl@34ab4bbe (accessLevel: node, name: PlaceBid_Auctioneer_receivebid, configured: false)
+# Standard imports
+import java.io.Serializable;
+import de.dailab.jiactng.agentcore.action.Action;
+import de.dailab.jiactng.agentcore.action.DoAction;
+import de.dailab.jiactng.agentcore.comm.message.IJiacMessage;
+import de.dailab.jiactng.ruleengine.timer.TimeFact;
 
-when	de.dailab.vsdt.impl.StartImpl@40b3f220 (name: auctionover, documentation: , id: _lP-60OlwEd6Uvb7BxkBYxw, categories: null) (nonInterrupting: false, trigger: TIMER, asDuration: false, errorCode: null, signal: null)then	de.dailab.jiactng.jadl.impl.ServiceImpl@157846d4 (accessLevel: node, name: CloseAuction_Auctioneer_auctionover, configured: false)
+# Domain imports
+import de.dailab.jiactng.examples.auction.onto.Auction;
+import de.dailab.jiactng.examples.auction.onto.Bid;
+import de.dailab.jiactng.examples.auction.onto.Message;
+
+rule "CreateAuction_Auctioneer_createauction"
+when
+	Action( name == "CreateAuction_Auctioneer_createauction")
+	jiacMessage : IJiacMessage()
+	eval("auctioneer_auctionmessage".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
+	auctionDesc : Auction() from jiacMessage.payload
+then
+	System.out.println("RULE CreateAuction_Auctioneer_createauction");
+	insert( new DoAction(action, null, new Serializable[] { auctionDesc }) );
+	retract( jiacMessage);
+end
+
+rule "PlaceBid_Auctioneer_receivebid"
+when
+	Action( name == "PlaceBid_Auctioneer_receivebid")
+	jiacMessage : IJiacMessage()
+	eval("auctioneer_bidmessage".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
+	bidDesc : Bid() from jiacMessage.payload
+then
+	System.out.println("RULE PlaceBid_Auctioneer_receivebid");
+	insert( new DoAction(action, null, new Serializable[] { bidDesc }) );
+	retract( jiacMessage);
+end
+
+rule "CloseAuction_Auctioneer_auctionover"
+when
+	Action( name == "CloseAuction_Auctioneer_auctionover")
+	 # de.dailab.vsdt.impl.StartImpl@5c149045 (name: auctionover, documentation: , id: _lP-60OlwEd6Uvb7BxkBYxw, categories: null) (nonInterrupting: false, trigger: TIMER, asDuration: false, errorCode: null, signal: null)
+then
+	System.out.println("RULE CloseAuction_Auctioneer_auctionover");
+	insert( new DoAction(action, null, new Serializable[] {  }) );
+	retract( jiacMessage);
+end
 

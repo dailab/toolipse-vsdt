@@ -1,6 +1,50 @@
-when	de.dailab.vsdt.impl.StartImpl@7a947037 (name: createauction, documentation: , id: _gVU0IOlvEd6Uvb7BxkBYxw, categories: null) (nonInterrupting: false, trigger: MESSAGE, asDuration: false, errorCode: null, signal: null)then	de.dailab.jiactng.jadl.impl.ServiceImpl@7db63b8f (accessLevel: node, name: CreateAuction_Seller_createauction, configured: false)
+package foo; // TODO package declaration
 
-when	de.dailab.vsdt.impl.StartImpl@33d3b966 (name: sold, documentation: , id: _d_It8OlxEd6Uvb7BxkBYxw, categories: null) (nonInterrupting: false, trigger: MESSAGE, asDuration: false, errorCode: null, signal: null)then	de.dailab.jiactng.jadl.impl.ServiceImpl@5bb932cf (accessLevel: node, name: CloseAuction_Seller_0_sold, configured: false)
+# Standard imports
+import java.io.Serializable;
+import de.dailab.jiactng.agentcore.action.Action;
+import de.dailab.jiactng.agentcore.action.DoAction;
+import de.dailab.jiactng.agentcore.comm.message.IJiacMessage;
+import de.dailab.jiactng.ruleengine.timer.TimeFact;
 
-when	de.dailab.vsdt.impl.StartImpl@1130f21f (name: notsold, documentation: , id: _4qSsgOlyEd6Uvb7BxkBYxw, categories: null) (nonInterrupting: false, trigger: MESSAGE, asDuration: false, errorCode: null, signal: null)then	de.dailab.jiactng.jadl.impl.ServiceImpl@313e868 (accessLevel: node, name: CloseAuction_Seller_1_notsold, configured: false)
+# Domain imports
+import de.dailab.jiactng.examples.auction.onto.Auction;
+import de.dailab.jiactng.examples.auction.onto.Bid;
+import de.dailab.jiactng.examples.auction.onto.Message;
+
+rule "CreateAuction_Seller_createauction"
+when
+	Action( name == "CreateAuction_Seller_createauction")
+	jiacMessage : IJiacMessage()
+	eval("seller_createauctionrequest".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
+	auction : Auction() from jiacMessage.payload
+then
+	System.out.println("RULE CreateAuction_Seller_createauction");
+	insert( new DoAction(action, null, new Serializable[] { auction }) );
+	retract( jiacMessage);
+end
+
+rule "CloseAuction_Seller_0_sold"
+when
+	Action( name == "CloseAuction_Seller_0_sold")
+	jiacMessage : IJiacMessage()
+	eval("seller_notifysold".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
+	message : Message() from jiacMessage.payload
+then
+	System.out.println("RULE CloseAuction_Seller_0_sold");
+	insert( new DoAction(action, null, new Serializable[] { message }) );
+	retract( jiacMessage);
+end
+
+rule "CloseAuction_Seller_1_notsold"
+when
+	Action( name == "CloseAuction_Seller_1_notsold")
+	jiacMessage : IJiacMessage()
+	eval("seller_notifynotsold".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
+	message : Message() from jiacMessage.payload
+then
+	System.out.println("RULE CloseAuction_Seller_1_notsold");
+	insert( new DoAction(action, null, new Serializable[] { message }) );
+	retract( jiacMessage);
+end
 

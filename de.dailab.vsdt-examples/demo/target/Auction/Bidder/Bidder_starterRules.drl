@@ -1,4 +1,38 @@
-when	de.dailab.vsdt.impl.StartImpl@75f369e6 (name: dobid, documentation: , id: _ojjfIOpGEd6FP7KXlO1S-A, categories: null) (nonInterrupting: false, trigger: MESSAGE, asDuration: false, errorCode: null, signal: null)then	de.dailab.jiactng.jadl.impl.ServiceImpl@f5c2181 (accessLevel: node, name: PlaceBid_Bidder_dobid, configured: false)
+package foo; // TODO package declaration
 
-when	de.dailab.vsdt.impl.StartImpl@3f9e7493 (name: awardnotification, documentation: , id: _38Qh0OlyEd6Uvb7BxkBYxw, categories: null) (nonInterrupting: false, trigger: MESSAGE, asDuration: false, errorCode: null, signal: null)then	de.dailab.jiactng.jadl.impl.ServiceImpl@51d253b7 (accessLevel: node, name: CloseAuction_Bidder_awardnotification, configured: false)
+# Standard imports
+import java.io.Serializable;
+import de.dailab.jiactng.agentcore.action.Action;
+import de.dailab.jiactng.agentcore.action.DoAction;
+import de.dailab.jiactng.agentcore.comm.message.IJiacMessage;
+import de.dailab.jiactng.ruleengine.timer.TimeFact;
+
+# Domain imports
+import de.dailab.jiactng.examples.auction.onto.Auction;
+import de.dailab.jiactng.examples.auction.onto.Bid;
+import de.dailab.jiactng.examples.auction.onto.Message;
+
+rule "PlaceBid_Bidder_dobid"
+when
+	Action( name == "PlaceBid_Bidder_dobid")
+	jiacMessage : IJiacMessage()
+	eval("bidder_placebidrequest".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
+	bid : Bid() from jiacMessage.payload
+then
+	System.out.println("RULE PlaceBid_Bidder_dobid");
+	insert( new DoAction(action, null, new Serializable[] { bid }) );
+	retract( jiacMessage);
+end
+
+rule "CloseAuction_Bidder_awardnotification"
+when
+	Action( name == "CloseAuction_Bidder_awardnotification")
+	jiacMessage : IJiacMessage()
+	eval("bidder_notifysold".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
+	message : Message() from jiacMessage.payload
+then
+	System.out.println("RULE CloseAuction_Bidder_awardnotification");
+	insert( new DoAction(action, null, new Serializable[] { message }) );
+	retract( jiacMessage);
+end
 
