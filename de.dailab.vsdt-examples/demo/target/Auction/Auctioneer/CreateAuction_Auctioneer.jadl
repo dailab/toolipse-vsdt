@@ -3,6 +3,7 @@ de.dailab.jiactng.examples.auction.onto.Message ; node
 
 service CreateAuction_Auctioneer_createauction ( in $auctionDesc : Auction ) ( out ) {
     var $theAuction : Auction ;
+    $theAuction = new Auction ( ) ;
     var $accept : bool ;
     {
         {
@@ -14,6 +15,7 @@ service CreateAuction_Auctioneer_createauction ( in $auctionDesc : Auction ) ( o
         if ( $accept ) {
             {
                 var $message : Message ;
+                $message = new Message ( ) ;
                 $message . message = "Your Auction has been accepted" ;
                 send $message to "seller_accept" ;
             }
@@ -31,6 +33,7 @@ service CreateAuction_Auctioneer_createauction ( in $auctionDesc : Auction ) ( o
         else {
             {
                 var $message : Message ;
+                $message = new Message ( ) ;
                 $message . message = "Sorry, your auction has been rejected." ;
                 send $message to "seller_decline" ;
             }

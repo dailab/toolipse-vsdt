@@ -1,4 +1,4 @@
-
+node
 
 service Faculty_Mathematican_start ( in $param : int ) ( out $result : int ) {
     var $n : int ;

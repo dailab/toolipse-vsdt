@@ -1,0 +1,4 @@
+when	de.dailab.vsdt.impl.StartImpl@75f369e6 (name: dobid, documentation: , id: _ojjfIOpGEd6FP7KXlO1S-A, categories: null) (nonInterrupting: false, trigger: MESSAGE, asDuration: false, errorCode: null, signal: null)then	de.dailab.jiactng.jadl.impl.ServiceImpl@f5c2181 (accessLevel: node, name: PlaceBid_Bidder_dobid, configured: false)
+
+when	de.dailab.vsdt.impl.StartImpl@3f9e7493 (name: awardnotification, documentation: , id: _38Qh0OlyEd6Uvb7BxkBYxw, categories: null) (nonInterrupting: false, trigger: MESSAGE, asDuration: false, errorCode: null, signal: null)then	de.dailab.jiactng.jadl.impl.ServiceImpl@51d253b7 (accessLevel: node, name: CloseAuction_Bidder_awardnotification, configured: false)
+

@@ -3,14 +3,16 @@ de.dailab.jiactng.examples.auction.onto.Message ; node
 
 service PlaceBid_Bidder_dobid ( in $bid : Bid ) ( out $result : bool ) {
     var $theBid : Bid ;
-    listen "bidder_accept" ;
+    $theBid = new Bid ( ) ;
     listen "bidder_decline" ;
+    listen "bidder_accept" ;
     {
         {
             $theBid = $bid ;
         }
         {
             var $bidDesc : Bid ;
+            $bidDesc = new Bid ( ) ;
             $bidDesc = $theBid ;
             send $bidDesc to "auctioneer_bidmessage" ;
         }
@@ -18,6 +20,7 @@ service PlaceBid_Bidder_dobid ( in $bid : Bid ) ( out $result : bool ) {
             case ( onmessage Message at "bidder_accept" ) {
                 {
                     var $message : Message ;
+                    $message = new Message ( ) ;
                     receive $message from "bidder_accept" timeout 10000 ;
                 }
                 {
@@ -27,6 +30,7 @@ service PlaceBid_Bidder_dobid ( in $bid : Bid ) ( out $result : bool ) {
             case ( onmessage Message at "bidder_decline" ) {
                 {
                     var $message : Message ;
+                    $message = new Message ( ) ;
                     receive $message from "bidder_decline" timeout 10000 ;
                 }
                 {

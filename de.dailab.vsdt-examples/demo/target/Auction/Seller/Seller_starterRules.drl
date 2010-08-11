@@ -1,0 +1,6 @@
+when	de.dailab.vsdt.impl.StartImpl@7a947037 (name: createauction, documentation: , id: _gVU0IOlvEd6Uvb7BxkBYxw, categories: null) (nonInterrupting: false, trigger: MESSAGE, asDuration: false, errorCode: null, signal: null)then	de.dailab.jiactng.jadl.impl.ServiceImpl@7db63b8f (accessLevel: node, name: CreateAuction_Seller_createauction, configured: false)
+
+when	de.dailab.vsdt.impl.StartImpl@33d3b966 (name: sold, documentation: , id: _d_It8OlxEd6Uvb7BxkBYxw, categories: null) (nonInterrupting: false, trigger: MESSAGE, asDuration: false, errorCode: null, signal: null)then	de.dailab.jiactng.jadl.impl.ServiceImpl@5bb932cf (accessLevel: node, name: CloseAuction_Seller_0_sold, configured: false)
+
+when	de.dailab.vsdt.impl.StartImpl@1130f21f (name: notsold, documentation: , id: _4qSsgOlyEd6Uvb7BxkBYxw, categories: null) (nonInterrupting: false, trigger: MESSAGE, asDuration: false, errorCode: null, signal: null)then	de.dailab.jiactng.jadl.impl.ServiceImpl@313e868 (accessLevel: node, name: CloseAuction_Seller_1_notsold, configured: false)
+

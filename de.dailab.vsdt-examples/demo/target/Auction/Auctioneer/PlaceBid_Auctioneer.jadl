@@ -3,7 +3,10 @@ de.dailab.jiactng.examples.auction.onto.Message ; node
 
 service PlaceBid_Auctioneer_receivebid ( in $bidDesc : Bid ) ( out ) {
     var $theBid : Bid ;
+    $theBid = new Bid ( ) ;
     var $accept : bool ;
+    var $theAuction : Auction ;
+    $theAuction = new Auction ( ) ;
     {
         {
             $theBid = $bidDesc ;
@@ -11,7 +14,6 @@ service PlaceBid_Auctioneer_receivebid ( in $bidDesc : Bid ) ( out ) {
         {
             {
                 print "     Auctioneer: checking Bid..." ;
-                var $theAuction : Auction ;
                 read Auction to $theAuction ;
                 $accept = $theAuction . name == $theBid . auctionName ;
                 var $highest : Bid ;
@@ -22,6 +24,7 @@ service PlaceBid_Auctioneer_receivebid ( in $bidDesc : Bid ) ( out ) {
         if ( $accept ) {
             {
                 var $message : Message ;
+                $message = new Message ( ) ;
                 $message . message = "Your Bid has been accepted!" ;
                 send $message to "bidder_accept" ;
             }
@@ -32,6 +35,7 @@ service PlaceBid_Auctioneer_receivebid ( in $bidDesc : Bid ) ( out ) {
         else {
             {
                 var $message : Message ;
+                $message = new Message ( ) ;
                 $message . message = "Sorry, your Bid has been rejected." ;
                 send $message to "bidder_decline" ;
             }

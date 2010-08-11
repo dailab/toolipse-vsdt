@@ -13,6 +13,7 @@ service CloseAuction_Seller_0_sold ( in $message : Message ) ( out ) {
             case ( onmessage Message at "seller_notifypaid" ) {
                 {
                     var $message : Message ;
+                    $message = new Message ( ) ;
                     receive $message from "seller_notifypaid" timeout 10000 ;
                 }
                 {
@@ -20,19 +21,22 @@ service CloseAuction_Seller_0_sold ( in $message : Message ) ( out ) {
                 }
                 {
                     var $message : Message ;
+                    $message = new Message ( ) ;
+                    $message . message = "Ok, I have shipped the goods, now send me the money!" ;
                     send $message to "auctioneer_notifyshipped" ;
                 }
                 {
-                    print "Executing ratepositively" ;
+                    print "Executing ratebidderpositively" ;
                 }
             }
             case ( onmessage Message at "seller_notifynotpaid" ) {
                 {
                     var $message : Message ;
+                    $message = new Message ( ) ;
                     receive $message from "seller_notifynotpaid" timeout 10000 ;
                 }
                 {
-                    print "Executing ratenegatively" ;
+                    print "Executing ratebiddernegatively" ;
                 }
                 {
                 }
