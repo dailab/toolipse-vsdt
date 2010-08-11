@@ -4,8 +4,8 @@ de.dailab.jiactng.examples.auction.onto.Message ; node
 service CreateAuction_Seller_createauction ( in $auction : Auction ) ( out $result : bool ) {
     var $theAuction : Auction ;
     $theAuction = new Auction ( ) ;
-    listen "seller_accept" ;
     listen "seller_decline" ;
+    listen "seller_accept" ;
     {
         {
             $theAuction = $auction ;

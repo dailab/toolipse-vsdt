@@ -39,7 +39,7 @@ end
 rule "CloseAuction_Auctioneer_auctionover"
 when
 	Action( name == "CloseAuction_Auctioneer_auctionover")
-	 # de.dailab.vsdt.impl.StartImpl@5c149045 (name: auctionover, documentation: , id: _lP-60OlwEd6Uvb7BxkBYxw, categories: null) (nonInterrupting: false, trigger: TIMER, asDuration: false, errorCode: null, signal: null)
+	 # de.dailab.vsdt.impl.StartImpl@549043be (name: auctionover, documentation: , id: _lP-60OlwEd6Uvb7BxkBYxw, categories: null) (nonInterrupting: false, trigger: TIMER, asDuration: false, errorCode: null, signal: null)
 then
 	System.out.println("RULE CloseAuction_Auctioneer_auctionover");
 	insert( new DoAction(action, null, new Serializable[] {  }) );
