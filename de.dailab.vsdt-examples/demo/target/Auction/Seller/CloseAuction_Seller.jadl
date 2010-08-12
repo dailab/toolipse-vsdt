@@ -6,8 +6,8 @@ service CloseAuction_Seller ( in ) ( out ) {
 node
 
 service CloseAuction_Seller_0_sold ( in $message : Message ) ( out ) {
-    listen "seller_notifynotpaid" ;
     listen "seller_notifypaid" ;
+    listen "seller_notifynotpaid" ;
     {
         switch {
             case ( onmessage Message at "seller_notifypaid" ) {

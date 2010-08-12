@@ -158,8 +158,9 @@
         <properties xmi:type="vsdt:Property" xmi:id="_wC0NIKRuEd-vk-YM4YvDiQ" name="theBid" type="de.dailab.jiactng.examples.auction.onto.Bid"/>
         <properties xmi:type="vsdt:Property" xmi:id="_wE87IKRuEd-vk-YM4YvDiQ" name="exists" type="boolean"/>
         <lanes xmi:type="vsdt:Lane" xmi:id="_asVyYelvEd6Uvb7BxkBYxw" id="_asVyYOlvEd6Uvb7BxkBYxw">
-          <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_lP-60elwEd6Uvb7BxkBYxw" name="auction over" id="_lP-60OlwEd6Uvb7BxkBYxw" trigger="TIMER">
+          <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_lP-60elwEd6Uvb7BxkBYxw" name="auction over" id="_lP-60OlwEd6Uvb7BxkBYxw" trigger="RULE">
             <timeExpression xmi:type="vsdt:Expression" xmi:id="_35WmcOowEd6xFKyk2BwCAQ" expression="'when the auction is over'"/>
+            <ruleExpression xmi:type="vsdt:Expression" xmi:id="_Q4_KUKVeEd-2ntEMUknq8Q" expression="currentTime : TimeFact()&#xA;theAuction : Auction( completed == false, endingTime &lt; currentTime.time )"/>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_qmBLYelwEd6Uvb7BxkBYxw" name="exists bid?" id="_qmBLYOlwEd6Uvb7BxkBYxw"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_sqGjAelwEd6Uvb7BxkBYxw" name="inform seller" id="_sqGjAOlwEd6Uvb7BxkBYxw" activityType="SEND" inMessage="_uyK08OovEd6xFKyk2BwCAQ" implementation="_p_yEAOovEd6xFKyk2BwCAQ">

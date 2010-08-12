@@ -2,8 +2,8 @@ import de.dailab.jiactng.examples.auction.onto.Auction ; import de.dailab.jiactn
 de.dailab.jiactng.examples.auction.onto.Message ; node
 
 service CloseAuction_Bidder_awardnotification ( in $message : Message ) ( out ) {
-    listen "bidder_notifyshipped" ;
     listen "bidder_notifynotshipped" ;
+    listen "bidder_notifyshipped" ;
     {
         {
             print "Executing transfermoneytoauctioneer" ;

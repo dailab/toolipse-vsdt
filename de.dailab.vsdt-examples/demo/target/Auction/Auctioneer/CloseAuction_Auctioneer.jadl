@@ -1,14 +1,12 @@
 import de.dailab.jiactng.examples.auction.onto.Auction ; import de.dailab.jiactng.examples.auction.onto.Bid ; import
 de.dailab.jiactng.examples.auction.onto.Message ; node
 
-service CloseAuction_Auctioneer_auctionover ( in ) ( out ) {
-    var $theAuction : Auction ;
-    $theAuction = new Auction ( ) ;
+service CloseAuction_Auctioneer_auctionover ( in $theAuction : Auction ) ( out ) {
     var $theBid : Bid ;
     $theBid = new Bid ( ) ;
     var $exists : bool ;
-    listen "auctioneer_notifyshipped" ;
     listen "auctioneer_notifypaid" ;
+    listen "auctioneer_notifyshipped" ;
     {
         {
             {
