@@ -49,7 +49,7 @@ public class JiacVStarterRule {
 		// write head and condition: service is known
 		buffer.append("rule \"" + serviceName + "\"" + NL);
 		buffer.append("when" + NL);
-		buffer.append(TAB + "Action( name == \"" + serviceName+ "\")" + NL);
+		buffer.append(TAB + "action : Action( name == \"" + serviceName+ "\")" + NL);
 
 		// type specific conditions
 		switch (startEvent.getTrigger()) {
@@ -93,7 +93,7 @@ public class JiacVStarterRule {
 
 		// write consequence: start the service
 		buffer.append("then" + NL);
-		buffer.append(TAB + "System.out.println(\"RULE " + serviceName + "\");" + NL);
+		buffer.append(TAB + "System.out.println(\"RULE " + serviceName + "\" fired);" + NL);
 		buffer.append(TAB + "insert( new DoAction(action, null, new Serializable[] { " + parameter + " }) );" + NL);
 		
 		// type specific consequences
