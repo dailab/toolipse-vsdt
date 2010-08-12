@@ -2,6 +2,10 @@ package de.dailab.vsdt.trafo.jiacv.export;
 
 import de.dailab.jiactng.jadl.Service;
 import de.dailab.vsdt.Event;
+import de.dailab.vsdt.Message;
+import de.dailab.vsdt.Property;
+import de.dailab.vsdt.trafo.jiacv.util.JadlElementFactory;
+import de.dailab.vsdt.trafo.jiacv.util.Util;
 
 
 /**
@@ -31,18 +35,74 @@ public class JiacVStarterRule {
 	}
 
 	/**
-	 * Create a Drools Rule corresponding to this Starter Rule
+	 * Create a Drools Rule corresponding to this Starter Rule.
 	 * 
 	 * @return		string representation of the rule
 	 */
 	public String toDroolsRule() {
+		final String NL = System.getProperty("line.separator");
+		final String TAB = "\t";
+		final String serviceName = serviceToStart.getName();
+		String parameter = "";
 		StringBuffer buffer= new StringBuffer();
-		// TODO
+
+		// write head and condition: service is known
+		buffer.append("rule \"" + serviceName + "\"" + NL);
+		buffer.append("when" + NL);
+		buffer.append(TAB + "Action( name == \"" + serviceName+ "\")" + NL);
+
+		// type specific conditions
+		switch (startEvent.getTrigger()) {
+		case MESSAGE:
+			Message message = startEvent.getMessage();
+			String address = JadlElementFactory.INSTANCE.createAddressString(message, startEvent.getPool().getParticipant());
+			buffer.append(TAB + "jiacMessage : IJiacMessage()" + NL);
+			buffer.append(TAB + "eval(\"" + address + "\".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))" + NL);
+			if (message.getProperties().size() > 0) {
+				Property payload = message.getProperties().get(0);
+				parameter = payload.getName();
+				buffer.append(TAB + parameter + " : "  + Util.getType(payload) + "() from jiacMessage.payload" + NL);
+			}
+			break;
+		case RULE:
+			// condition for RULE event
+			// copy rule expression to WHEN part
+			String rule = startEvent.getRuleExpression().getExpression();
+			buffer.append(TAB + rule + NL);
+			// scan the rule expression for names of process properties
+			for (Property property : startEvent.getPool().getProperties()) {
+				if (rule.contains(property.getName())) {
+					// make these properties the service parameters
+					if (! parameter.isEmpty()) {
+						parameter += ", ";
+					}
+					parameter += property.getName();
+				}
+			}
+			
+			break;
+		case TIMER:
+			// TODO condition for TIMER event
+			// check time fact
+			// start process with no parameters
+			// mark the process as being started (how?)
+		default:
+			buffer.append(TAB + " # " + startEvent.toString() + NL);
+			break;
+		}
+
+		// write consequence: start the service
+		buffer.append("then" + NL);
+		buffer.append(TAB + "System.out.println(\"RULE " + serviceName + "\");" + NL);
+		buffer.append(TAB + "insert( new DoAction(action, null, new Serializable[] { " + parameter + " }) );" + NL);
 		
-		buffer.append("when");
-		buffer.append("\t" + startEvent.toString());
-		buffer.append("then");
-		buffer.append("\t" + serviceToStart.toString());
+		// type specific consequences
+		switch (startEvent.getTrigger()) {
+		case MESSAGE:
+			buffer.append(TAB + "retract( jiacMessage);" + NL);
+			break;
+		}
+		buffer.append("end" + NL + NL);
 		
 		return buffer.toString();
 	}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -21,9 +22,12 @@ import de.dailab.jiactng.jadl.Assign;
 import de.dailab.jiactng.jadl.Atom;
 import de.dailab.jiactng.jadl.AtomList;
 import de.dailab.jiactng.jadl.Case;
+import de.dailab.jiactng.jadl.ComplexType;
+import de.dailab.jiactng.jadl.ComplexValue;
 import de.dailab.jiactng.jadl.Expression;
 import de.dailab.jiactng.jadl.HeaderDeclaration;
 import de.dailab.jiactng.jadl.IfThenElse;
+import de.dailab.jiactng.jadl.Import;
 import de.dailab.jiactng.jadl.Invoke;
 import de.dailab.jiactng.jadl.Listen;
 import de.dailab.jiactng.jadl.MessageEvent;
@@ -44,11 +48,13 @@ import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
+import de.dailab.vsdt.DataType;
 import de.dailab.vsdt.End;
 import de.dailab.vsdt.Event;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.Implementation;
+import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.Message;
 import de.dailab.vsdt.MultiLoopAttSet;
 import de.dailab.vsdt.Participant;
@@ -61,6 +67,7 @@ import de.dailab.vsdt.trafo.base.util.TrafoLog;
 import de.dailab.vsdt.trafo.impl.BpmnElementMapping;
 import de.dailab.vsdt.trafo.jiacv.util.Bpmn2JiacConstants;
 import de.dailab.vsdt.trafo.jiacv.util.JadlElementFactory;
+import de.dailab.vsdt.trafo.jiacv.util.Util;
 import de.dailab.vsdt.trafo.jiacv.wizard.Bpmn2JiacVExportWizardOptionsPage;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBranch;
@@ -90,7 +97,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	private Service _currentService;
 	
 	/** the JADL file currently under construction */
-	private Agent _currentAgent;
+	private Agent _currentModel;
 	
 	/** map holding relation of services to listeners ( @see {@link Listen} ) */
 	private Map<Service, Set<Expression>> messageListeners;
@@ -106,7 +113,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	@Override
 	public void initialize() {
 		_currentService= null;
-		_currentAgent= null;
+		_currentModel= null;
 		messageListeners= new HashMap<Service, Set<Expression>>();
 		callingServices= new HashMap<Service, List<Service>>();
 		expressionVisitor= new JiacVExpressionVisitor(true, true);
@@ -197,8 +204,16 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		
 		// create JADL file model and map it to the Pool
 		Agent model= jadlFac.createAgent();
-		_currentAgent= model;
+		_currentModel= model;
 		getWrapper().addJadlFile(model, pool);
+		
+		// add imports for all Data Types
+		for (DataType dataType : pool.getParent().getParent().getDataTypes()) {
+			Import imprt = jadlFac.createImport();
+			String clazz = dataType.getPackage() + "." + dataType.getName();
+			imprt.setJavaClass(clazz);
+			model.getHeader().add(imprt);
+		}
 		
 		// build service (will automatically be added to the Agent model)
 		buildService(pool.getParent().getName() + "_" + pool.getName(), 
@@ -329,8 +344,10 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		}
 		
 		// create Start Rule
-		JiacVStarterRule startRule= new JiacVStarterRule(event, _currentService);
-		((JiacVExportWrapper) wrapper).addStarterRule(event.getPool().getParticipant(), startRule);
+		if (event instanceof Start) {
+			JiacVStarterRule startRule= new JiacVStarterRule(event, _currentService);
+			((JiacVExportWrapper) wrapper).addStarterRule(event.getPool().getParticipant(), startRule);
+		}
 		
 		switch (trigger) {
 		case MESSAGE:
@@ -366,27 +383,51 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		case NONE:
 			break;
 		case TIMER:
-			Case timerCase= jadlFac.createCase();
-			timerCase.setBody(jadlFac.createSeq()); // empty case body
-			TimerEvent timer= jadlFac.createTimerEvent();
-			if (event.isAsDuration()) {
-				try {
-					timer.setTimeout(Integer.parseInt(event.getTimeExpression().getExpression()));
-					timerCase.setEventedCase(timer);
-				} catch (NumberFormatException e) {
-					e.printStackTrace();
-				}
-			} else {
-				TimeConst time= jadlFac.createTimeConst();
-				time.setConst(event.getTimeExpression().getExpression());
-				timer.setTime(time);
-				timerCase.setEventedCase(timer);
+			if (event instanceof Start) {
+				// timer start event is handled by starter rule	
 			}
-			if (timerCase.getEventedCase() != null) {
-				mapping= timerCase;
+			if (event instanceof Intermediate) {
+				Case timerCase= jadlFac.createCase();
+				timerCase.setBody(jadlFac.createSeq()); // empty case body
+				TimerEvent timer= jadlFac.createTimerEvent();
+				if (event.isAsDuration()) {
+					try {
+						timer.setTimeout(Integer.parseInt(event.getTimeExpression().getExpression()));
+						timerCase.setEventedCase(timer);
+					} catch (NumberFormatException e) {
+						e.printStackTrace();
+					}
+				} else {
+					TimeConst time= jadlFac.createTimeConst();
+					time.setConst(event.getTimeExpression().getExpression());
+					timer.setTime(time);
+					timerCase.setEventedCase(timer);
+				}
+				if (timerCase.getEventedCase() != null) {
+					mapping= timerCase;
+				}
 			}
 			break;
 		case RULE:
+			String rule = event.getRuleExpression().getExpression();
+			if (event instanceof Start) {
+				// starter rule will be created holding the rule expression
+				// create service parameters according to properties used in rule
+				for (Property property : event.getPool().getProperties()) {
+					if (rule.contains(property.getName())) {
+						HeaderDeclaration header = jef.createHeaderVariableDeclaration(property.getName(), Util.getType(property));
+						_currentService.getInputs().add(header);
+					}
+				}
+			}
+			if (event instanceof Intermediate) {
+				// create case, waiting for the rule expression to become true
+				Case expressionCase = jadlFac.createCase();
+				Expression expression = jef.createExpression(rule);
+				expressionCase.setExpressionCase(expression);
+				mapping = expressionCase;
+			}
+			break;
 		case LINK:
 		case CANCEL:
 		case COMPENSATION:
@@ -709,7 +750,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 					Expression address = receive.getAddress();
 					messageEvent.setAddress((Expression) EcoreUtil.copy(address));
 					Property property= (Property) wrapper.getMapping(receive);
-					messageEvent.setType(jef.createType(property.getType()));
+					messageEvent.setType(jef.createType(Util.getType(property)));
 					Case messageCase= jadlFac.createCase();
 					messageCase.setEventedCase(messageEvent);
 					messageCase.setBody(body);
@@ -764,18 +805,18 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	 * 
 	 * {@link #callingServices}
 	 * 
-	 * @param name
+	 * @param name			Name of the Service to create
 	 * @param source		Source object, mainly for the mapping
-	 * @param body
-	 * @param properties
-	 * @param assignments
-	 * @return
+	 * @param body			Flow Objects forming the body of the service
+	 * @param properties	Process Properties, to be declared as variables
+	 * @return				new JADL service instance
 	 */
-	private Service buildService(String name, EObject source, List<FlowObject> flowObjects, List<Property> properties) {//, List<Assignment> assignments) {
+	private Service buildService(String name, EObject source, List<FlowObject> flowObjects, List<Property> properties) {
 		// create service model
 		Service service= jadlFac.createService();
+		service.setAccessLevel(AccessLevel.NODE);
 		_currentService= service;
-		_currentAgent.getServices().add(service);
+		_currentModel.getServices().add(service);
 		wrapper.map(source, service);
 		messageListeners.put(service, new HashSet<Expression>());
 		
@@ -783,7 +824,6 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		if (useMAMSspecials) {
 			service.setAccessLevel(AccessLevel.GLOBAL);
 		}
-		// TODO use process types and service run types
 		
 		// visit FlowObjects  
 		Script script= visitFlowObjects(flowObjects);
@@ -791,14 +831,27 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		// build body sequence
 		Seq body= jadlFac.createSeq();
 		service.setBody(body);
+		
 		// 1.: Variable declarations
-		body.getScripts().addAll(visitProperties(properties));
+		// declare only those process variables that are not used as service parameters
+		List<Property> properProperties= new ArrayList<Property>(properties);
+		for (Iterator<Property> iter= properProperties.iterator(); iter.hasNext(); ) {
+			String propName = "$" + iter.next().getName();
+			for (HeaderDeclaration input : service.getInputs()) {
+				if (propName.equals(input.getName())) {
+					iter.remove();
+					break;
+				}
+			}
+		}
+		body.getScripts().addAll(visitProperties(properProperties));
+		
 		// 2.: Initial Assignments
 		if (callingServices.containsKey(service)) {
 			// set services input parameters to all process properties and add assignments
 			for (Property property : properties) {
 				String inputName= "input_" + property.getName();
-				service.getInputs().add(jef.createHeaderVariableDeclaration(inputName, property.getType()));
+				service.getInputs().add(jef.createHeaderVariableDeclaration(inputName, Util.getType(property)));
 				service.getBody().getScripts().add(jef.createAssign("$" + "input_" + property.getName(), property.getName(), null));
 			}
 			// adapt the calling services to this (the called) service
@@ -816,30 +869,21 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 					invoke.getReturnVariables().add(varDecl.getName());
 				}
 				// insert the invoke at the end
-//				int offset= 0;
-//				for (Assignment assignment : assignments) {
-//					if (assignment.getAssignTime() == AssignTimeType.END) {
-//						offset++;
-//					}
-//				}
-//				int index= otherService.getBody().getScripts().size() - offset;
-				otherService.getBody().getScripts().add(invoke); //index, invoke);
+				otherService.getBody().getScripts().add(invoke);
 			}
-//		} else {
-//			body.getScripts().addAll(visitAssignments(assignments, AssignTimeType.START));
 		}
+		
 		// 3.: add listeners
 		for (Expression address : messageListeners.get(service)) {
 			Listen listen= jadlFac.createListen();
 			listen.setAddress(address);
 			body.getScripts().add(listen);
 		}
+		
 		// 4.: script
 		if (script != null) {
 			body.getScripts().add(script);	
 		}
-		// 5.: end assignments
-//		body.getScripts().addAll(visitAssignments(assignments, AssignTimeType.END));
 		
 		return service;
 	}
@@ -911,11 +955,26 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	 * 
 	 * @param properties	list of BPMN properties
 	 */
-	private List<VariableDeclaration> visitProperties(List<Property> properties) {
-		List<VariableDeclaration> declarations= new ArrayList<VariableDeclaration>();
+	private List<Atom> visitProperties(List<Property> properties) {
+		List<Atom> declarations= new ArrayList<Atom>();
 		if (properties != null) {
 			for (Property property : properties) {
-				declarations.add(jef.createVariableDeclaration(property.getName(), property.getType()));
+				final String varName = property.getName();
+				final String typeName = Util.getType(property);
+				declarations.add(jef.createVariableDeclaration(varName, typeName));
+				// initialize variables...
+				if (property.getType().contains(".")) {
+					// ...only if it is a complex type
+					Assign assign= jadlFac.createAssign();
+					assign.setVariable(jef.createVariable(varName));
+					assign.setNew(true);
+					ComplexType type = jadlFac.createComplexType();
+					type.setClazz(typeName);
+					ComplexValue complex = jadlFac.createComplexValue();
+					complex.setType(type);
+					assign.setInstance(complex);
+					declarations.add(assign);
+				}
 			}
 		}
 		return declarations;
@@ -1077,13 +1136,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			if (script instanceof Receive) {
 				return script;
 			}
-			// case 3: receive as an assign value 
-			// once it is settled that receive is no AssignValue anymore
-			if (script instanceof Assign && ((Assign) script).getValue() instanceof Receive) {
-				// XXX remove this case after some time of testing (since Q2 2010)
-				System.err.println("THIS LINE SHOULD NOT APPEAR (in Bpmn2JiacVElementMapping.getFirstEventElement)");
-				return (Receive) ((Assign) script).getValue();
-			}
+			// case 3: receive as an assign value is no longer the case
 			// case 4: a sequence wrapped in a sequence
 			if (script instanceof Seq) {
 				Script rec= getFirstEventElement((Seq) script);
@@ -1140,8 +1193,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	 * @return				Send element, or multiple Send elements in a Seq element
 	 */
 	private Script buildSend(Message message, Participant participant) {
-//		String address= message.getTo() != null ? message.getTo().getName() : "unknown";
-		String address= (participant != null ? participant.getName() : "unknown") + "_" + message.getName();
+		Expression address = jef.createAddress(message, participant);
 		if (message.getProperties().size() == 1) {
 			Send send= jef.createSend(address, message.getProperties().get(0));
 			return send;
@@ -1165,16 +1217,11 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	 * @return				Receive element, or multiple Receive elements in a Seq element
 	 */
 	private Script buildReceive(Message message, Participant participant) {
-//		String address= message.getTo() != null ? message.getTo().getName() : "unknown";
-		String address= (participant != null ? (participant.getName()  + "_" ) : "") + message.getName();
+		Expression address = jef.createAddress(message, participant);
 		int timeout= 10000;
 		if (message.getProperties().size() == 1) {
 			Property property= message.getProperties().get(0);
-			Receive receive= jef.createReceive(timeout, address, property.getType(), property.getName());
-//			Assign assign= jadlFac.createAssign();
-//			assign.setVariable(jef.createVariable(property.getName()));
-//			assign.setValue(receive);
-//			return assign;
+			Receive receive= jef.createReceive(address, Util.getType(property), property.getName(), timeout);
 			wrapper.map(receive, property); // put type in map, for later retrieval when creating onMessage
 			// this is necessary as the receive itself only known the name of the variable, but not the type
 			// however, one could use another map for this association, too
@@ -1182,11 +1229,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		} else {
 			Seq seq= jadlFac.createSeq();
 			for (Property property : message.getProperties()) {
-				Receive receive= jef.createReceive(timeout, address, property.getType(), property.getName());
-//				Assign assign= jadlFac.createAssign();
-//				assign.setVariable(jef.createVariable(property.getName()));
-//				assign.setValue(receive);
-//				seq.getScripts().add(assign);
+				Receive receive= jef.createReceive(address, Util.getType(property), property.getName(), timeout);
 				seq.getScripts().add(receive);
 				wrapper.map(receive, property); // put type in map, for later retrieval when creating onMessage
 			}
@@ -1224,7 +1267,8 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 				} else if (script instanceof Seq) {
 					for (Script script2 : ((Seq) script).getScripts()) {
 						if (script2 instanceof Atom) {
-							list.getAtoms().add((Atom) script2);
+							Atom atom = (Atom) EcoreUtil.copy(script2);
+							list.getAtoms().add(atom);
 						}
 					}
 				} else {
@@ -1235,5 +1279,4 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		}
 		return par;
 	}
-	
 }

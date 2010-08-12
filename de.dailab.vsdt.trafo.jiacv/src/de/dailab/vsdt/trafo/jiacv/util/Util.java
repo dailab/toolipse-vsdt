@@ -2,6 +2,7 @@ package de.dailab.vsdt.trafo.jiacv.util;
 
 import de.dailab.jiactng.jadl.Agent;
 import de.dailab.jiactng.jadl.Service;
+import de.dailab.vsdt.Property;
 
 /**
  * Utilities-class for the BPMN to JIAC V /JADL transformation.
@@ -26,6 +27,21 @@ public class Util {
 			return service;
 		}
 		return null;
+	}
+
+	/**
+	 * If the type is a fully qualified complex type, trim the package part.
+	 * Import statements are created in the visitPool method.
+	 * 
+	 * @param property	some Property
+	 * @return			simple name of the Property's type
+	 */
+	public static String getType(Property property) {
+		String type = property.getType();
+		if (type != null && type.contains(".")) {
+			type = type.substring(type.lastIndexOf(".") + 1);
+		}
+		return type;
 	}
 	
 }

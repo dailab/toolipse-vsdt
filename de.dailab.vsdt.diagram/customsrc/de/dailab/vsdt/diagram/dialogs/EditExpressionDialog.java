@@ -44,7 +44,7 @@ public class EditExpressionDialog extends TitleAreaDialog {
 	public static final String NL= System.getProperty("line.separator");
 	
 	public static final int WIDTH= 550;
-	public static final int HEIGHT= 250;
+	public static final int HEIGHT= 300;
 	
 	public static final String TITLE= "Edit Expression";
 	public static final String MESSAGE= "Compose and validate expressions according to the " +
@@ -56,6 +56,7 @@ public class EditExpressionDialog extends TitleAreaDialog {
 	
 	protected Text expressionText;
 	protected Button checkButton;
+	protected Button isVxlButton;
 	
 	protected List<Property> properties= null;
 	protected VsdtFeatureCombo<Property> propertiesCombo;
@@ -108,8 +109,21 @@ public class EditExpressionDialog extends TitleAreaDialog {
 		});
 		expressionText.setText(Util.nonNull(expression));
 
+		// is VXL Expression?
+		isVxlButton= FormLayoutUtil.addButton(composite, "Using VSDT Expression Language?", SWT.CHECK, expressionText, 0, null);
+		isVxlButton.setBackground(null);
+		isVxlButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				checkButton.setEnabled(isVxlButton.getSelection());
+				// TODO set expression type... needs access to the actual expression
+			}
+		});
+		// TODO set initial selection
+		isVxlButton.setSelection(true);
+		
 		// Syntax check
-		checkButton= FormLayoutUtil.addButton(composite, "Check", SWT.NONE, expressionText, null, 100);
+		checkButton= FormLayoutUtil.addButton(composite, "Check", SWT.NONE, isVxlButton, null, 100);
 		checkButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -118,7 +132,7 @@ public class EditExpressionDialog extends TitleAreaDialog {
 		});
 		
 		// Properties
-		insertPropertyButton= FormLayoutUtil.addButton(composite, "Insert Property", SWT.NONE, expressionText, null, checkButton);
+		insertPropertyButton= FormLayoutUtil.addButton(composite, "Insert Property", SWT.NONE, isVxlButton, null, checkButton);
 		insertPropertyButton.setEnabled(properties != null);
 		insertPropertyButton.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -127,8 +141,8 @@ public class EditExpressionDialog extends TitleAreaDialog {
 			}
 		});
 		
-		label= FormLayoutUtil.addLabel(composite, "Properties", expressionText, 0);
-		propertiesCombo= new VsdtFeatureCombo<Property>(FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, expressionText, label, insertPropertyButton));
+		label= FormLayoutUtil.addLabel(composite, "Properties", isVxlButton, 0);
+		propertiesCombo= new VsdtFeatureCombo<Property>(FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, isVxlButton, label, insertPropertyButton));
 		propertiesCombo.getCombo().setEnabled(properties != null);
 		if (properties != null) {
 			propertiesCombo.fillCombo(properties);
@@ -205,7 +219,8 @@ public class EditExpressionDialog extends TitleAreaDialog {
 			if (selected != null) {
 				StringBuffer buffer= new StringBuffer();
 				buffer.append(expression.substring(0, caret));
-				buffer.append("$" + selected.getName());
+//				buffer.append("$" + selected.getName());
+				buffer.append(selected.getName());
 				buffer.append(expression.substring(caret));
 				expression= buffer.toString();
 				expressionText.setText(expression);
@@ -215,7 +230,7 @@ public class EditExpressionDialog extends TitleAreaDialog {
 	
 	@Override
 	protected void okPressed() {
-		if (! forceValidation || checkExpression()) {
+		if (! forceValidation || ! isVxlButton.getSelection() || checkExpression()) {
 			super.okPressed();	
 		}
 	}

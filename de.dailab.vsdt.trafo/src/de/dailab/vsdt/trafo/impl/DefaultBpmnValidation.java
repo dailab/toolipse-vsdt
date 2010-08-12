@@ -15,6 +15,7 @@ import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.ConditionType;
 import de.dailab.vsdt.ConnectingObject;
+import de.dailab.vsdt.DataType;
 import de.dailab.vsdt.Event;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowConditionTypes;
@@ -227,6 +228,9 @@ public class DefaultBpmnValidation extends MappingStage {
 		}
 		for (Implementation webService : bps.getImplementations()) {
 			isOK&= testChild(visitImplementation(webService),bps,vsdt.getBusinessProcessSystem_Implementations());
+		}
+		for (DataType dataType : bps.getDataTypes()) {
+			isOK&= testChild(visitDataType(dataType),bps,vsdt.getBusinessProcessSystem_DataTypes());
 		}
 		return isOK;
 	}
@@ -603,6 +607,19 @@ public class DefaultBpmnValidation extends MappingStage {
 		isOK&= test(implementation.getOperation() != null,"Operation must not be null");
 		isOK&= test(implementation.getInterface() != null,"Interface must not be null");
 		isOK&= test(implementation.getParticipant() != null,"Participant must not be null");
+		
+		return isOK;
+	}
+
+	/**
+	 * XXX this method should be overwritten if the target language supports other implementation types
+	 */
+	protected boolean visitDataType(DataType dataType) {
+		if (testIsNull(dataType)) return false;
+		boolean isOK= true;
+
+		isOK&= test(dataType.getPackage() != null, "Package must not be null");
+		isOK&= test(dataType.getName() != null,"Name must not be null");
 		
 		return isOK;
 	}

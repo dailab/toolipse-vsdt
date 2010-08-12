@@ -27,6 +27,8 @@ import de.dailab.jiactng.jadl.Variable;
 import de.dailab.jiactng.jadl.VariableDeclaration;
 import de.dailab.jiactng.jadl.While;
 import de.dailab.jiactng.jadl.ontology.JadlParseException;
+import de.dailab.vsdt.Message;
+import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.trafo.base.util.TrafoLog;
 import de.dailab.vsdt.trafo.strucbpmn.DisjunctiveExpression;
@@ -86,7 +88,7 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 		List<HeaderDeclaration> declarations= new ArrayList<HeaderDeclaration>();
 		if (properties != null) {
 			for (Property property : properties) {
-				HeaderDeclaration declaration= createHeaderVariableDeclaration(property.getName(), property.getType());
+				HeaderDeclaration declaration= createHeaderVariableDeclaration(property.getName(), Util.getType(property));
 				if (declaration != null) {
 					declarations.add(declaration);
 				}
@@ -177,26 +179,43 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 	 * @param message	payload of the message
 	 * @return			newly created Send element
 	 */
-	public Send createSend(String address, Property message) {
+	public Send createSend(Expression address, Property message) {
 		Send send= jadlFac.createSend();
-		send.setAddress(createExpression(address));
+		send.setAddress(address);
 		send.setMessage(createVariableName(message.getName()));
 		return send;
 	}
 	
 	/**
+	 * Create Address Expression
+	 * 
+	 * @param message		some Message
+	 * @param participant	some Participant, or null
+	 * @return
+	 */
+	public Expression createAddress(Message message, Participant participant) {
+		return createExpression(createAddressString(message, participant));
+	}
+	
+	public String createAddressString(Message message, Participant participant) {
+		String address= (participant != null ? (participant.getName()  + "_" ) : "") + message.getName();
+		return address.toLowerCase();
+	}
+	
+	
+	/**
 	 * Create Receive element
 	 * 
-	 * @param timeout	timeout in milli seconds
 	 * @param address	address where to listen for new message
 	 * @param type		expected type of message payload
 	 * @param variable	variable to bind the received value to
+	 * @param timeout	timeout in milli seconds
 	 * @return			newly created Receive element
 	 */
-	public Receive createReceive(int timeout, String address, String type, String variable) {
+	public Receive createReceive(Expression address, String type, String variable, int timeout) {
 		Receive receive= jadlFac.createReceive();
 		receive.setTimeout(createExpression(timeout));
-		receive.setAddress(createExpression(address));
+		receive.setAddress(address);
 //		receive.setType(createType(type));
 		receive.setVariable(createVariableName(variable));
 		return receive;

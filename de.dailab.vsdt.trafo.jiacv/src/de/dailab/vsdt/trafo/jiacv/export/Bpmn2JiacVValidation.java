@@ -6,6 +6,7 @@ import java.util.Map;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.BusinessProcessSystem;
+import de.dailab.vsdt.DataType;
 import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.trafo.impl.BpmnMappingHelper;
@@ -45,6 +46,13 @@ public class Bpmn2JiacVValidation extends DefaultBpmnValidation {
 	protected boolean visitBusinessProcessSystem(BusinessProcessSystem bps) {
 		boolean isOk= super.visitBusinessProcessSystem(bps);
 		isOk &= test(bps.isExecutable(), "Business Process System must be Executable");
+		return isOk;
+	}
+
+	@Override
+	protected boolean visitDataType(DataType dataType) {
+		boolean isOk= super.visitDataType(dataType);
+		isOk &= test("java".equalsIgnoreCase(dataType.getLanguage()), "Data Types must be Java classes");
 		return isOk;
 	}
 	

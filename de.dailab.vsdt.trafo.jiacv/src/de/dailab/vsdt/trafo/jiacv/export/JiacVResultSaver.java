@@ -34,6 +34,7 @@ import de.dailab.common.gmf.imprt.DiagramImporter;
 import de.dailab.jiactng.jadl.Agent;
 import de.dailab.jiactng.jadl.ontology.JadlParseException;
 import de.dailab.jiactng.jadl.util.SimpleJadlParser;
+import de.dailab.vsdt.DataType;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.trafo.MappingResultSaver;
 import de.dailab.vsdt.trafo.base.util.TrafoLog;
@@ -107,8 +108,33 @@ public class JiacVResultSaver extends MappingResultSaver {
 		if (! file.exists()) {
 			file.createNewFile();
 		}
-		// TODO write file header
 		FileWriter writer= new FileWriter(file);
+		
+		// write file header
+		final String NL = System.getProperty("line.separator");
+		StringBuffer buffer= new StringBuffer();
+		
+		buffer.append("package foo; // TODO package declaration" + NL);
+		buffer.append(NL);
+		buffer.append("# Standard imports" + NL);
+		buffer.append("import java.io.Serializable;" + NL);
+		buffer.append("import de.dailab.jiactng.agentcore.action.Action;" + NL);
+		buffer.append("import de.dailab.jiactng.agentcore.action.DoAction;" + NL);
+		buffer.append("import de.dailab.jiactng.agentcore.comm.message.IJiacMessage;" + NL);
+		buffer.append("import de.dailab.jiactng.ruleengine.timer.TimeFact;" + NL);
+		buffer.append(NL);
+		if (rules.size() > 0) {
+			buffer.append("# Domain imports" + NL);
+			JiacVStarterRule rule = rules.get(0);
+			List<DataType> types = rule.startEvent.getPool().getParent().getParent().getDataTypes();
+			for (DataType type : types) {
+				String fullName = type.getPackage() + "." + type.getName();
+				buffer.append("import " + fullName + ";" + NL);
+			}
+			buffer.append(NL);
+		}
+		writer.write(buffer.toString());
+		
 		// write rules
 		for (JiacVStarterRule rule : rules) {
 			writer.write(rule.toDroolsRule());
