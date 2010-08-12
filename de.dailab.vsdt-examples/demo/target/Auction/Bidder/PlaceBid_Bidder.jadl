@@ -4,8 +4,8 @@ de.dailab.jiactng.examples.auction.onto.Message ; node
 service PlaceBid_Bidder_dobid ( in $bid : Bid ) ( out $result : bool ) {
     var $theBid : Bid ;
     $theBid = new Bid ( ) ;
-    listen "bidder_decline" ;
     listen "bidder_accept" ;
+    listen "bidder_decline" ;
     {
         {
             $theBid = $bid ;

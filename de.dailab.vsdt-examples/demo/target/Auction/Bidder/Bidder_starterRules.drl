@@ -14,7 +14,7 @@ import de.dailab.jiactng.examples.auction.onto.Message;
 
 rule "PlaceBid_Bidder_dobid"
 when
-	Action( name == "PlaceBid_Bidder_dobid")
+	action : Action( name == "PlaceBid_Bidder_dobid")
 	jiacMessage : IJiacMessage()
 	eval("bidder_placebidrequest".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
 	bid : Bid() from jiacMessage.payload
@@ -26,7 +26,7 @@ end
 
 rule "CloseAuction_Bidder_awardnotification"
 when
-	Action( name == "CloseAuction_Bidder_awardnotification")
+	action : Action( name == "CloseAuction_Bidder_awardnotification")
 	jiacMessage : IJiacMessage()
 	eval("bidder_notifysold".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
 	message : Message() from jiacMessage.payload

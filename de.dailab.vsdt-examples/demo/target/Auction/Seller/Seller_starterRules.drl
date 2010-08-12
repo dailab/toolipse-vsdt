@@ -14,7 +14,7 @@ import de.dailab.jiactng.examples.auction.onto.Message;
 
 rule "CreateAuction_Seller_createauction"
 when
-	Action( name == "CreateAuction_Seller_createauction")
+	action : Action( name == "CreateAuction_Seller_createauction")
 	jiacMessage : IJiacMessage()
 	eval("seller_createauctionrequest".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
 	auction : Auction() from jiacMessage.payload
@@ -26,7 +26,7 @@ end
 
 rule "CloseAuction_Seller_0_sold"
 when
-	Action( name == "CloseAuction_Seller_0_sold")
+	action : Action( name == "CloseAuction_Seller_0_sold")
 	jiacMessage : IJiacMessage()
 	eval("seller_notifysold".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
 	message : Message() from jiacMessage.payload
@@ -38,7 +38,7 @@ end
 
 rule "CloseAuction_Seller_1_notsold"
 when
-	Action( name == "CloseAuction_Seller_1_notsold")
+	action : Action( name == "CloseAuction_Seller_1_notsold")
 	jiacMessage : IJiacMessage()
 	eval("seller_notifynotsold".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
 	message : Message() from jiacMessage.payload
