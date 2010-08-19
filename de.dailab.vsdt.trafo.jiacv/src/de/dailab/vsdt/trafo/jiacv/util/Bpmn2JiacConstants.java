@@ -20,11 +20,11 @@ public interface Bpmn2JiacConstants {
 	public static final String TYPE_BOOL=		"bool";
 	public static final String TYPE_URL=		"url";
 	
-	public static final String LITERAL_POPEN=	"(";
-	public static final String LITERAL_PCLOSE=	")";
-	public static final String LITERAL_COPEN=	"{";
-	public static final String LITERAL_CCLOSE=	"}";
-	public static final String LITERAL_COLON=	":";
+//	public static final String LITERAL_POPEN=	"(";
+//	public static final String LITERAL_PCLOSE=	")";
+//	public static final String LITERAL_COPEN=	"{";
+//	public static final String LITERAL_CCLOSE=	"}";
+//	public static final String LITERAL_COLON=	":";
 	
 	/*
 	 * LITERALS FROM JADL++ EBNF

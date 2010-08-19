@@ -558,10 +558,6 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			mapping= print;
 		}
 		
-		/*
-		 * TODO Event Handler
-		 */
-
 		// create loop mappings: basic mapping is embedded in loop structure
 		if (activity.getLoopAttributes() instanceof StandardLoopAttSet) {
 			mapping= createStandardLoop(activity, mapping);

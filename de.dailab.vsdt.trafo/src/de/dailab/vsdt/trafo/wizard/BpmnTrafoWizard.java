@@ -11,6 +11,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -18,6 +20,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gmf.runtime.common.ui.util.ConsoleUtil;
+import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -42,7 +45,7 @@ public abstract class BpmnTrafoWizard extends Wizard {
 	public static final String SUCCESS_WARN_MESSAGE= "Transformation completed with warnings.";
 	public static final String ERROR_TRAFO_TITLE= "Transformation Error";
 	public static final String ERROR_TRAFO_MESSAGE= "An error occured during transformation.";
-	public static final String SEE_LOG_MESSAGE= System.getProperty("line.separator") + "Please see the log file for details.";
+//	public static final String SEE_LOG_MESSAGE= System.getProperty("line.separator") + "Please see the log file for details.";
 	private static final String FS= File.separator;
 	
 	/** the options page */
@@ -137,15 +140,20 @@ public abstract class BpmnTrafoWizard extends Wizard {
 						boolean trafoOk= performTransformation(getSouceObject(fileURI));
 
 						// show dialog
-						String logMsg = optionsPage.getCreateLog() ? SEE_LOG_MESSAGE : "";
+						String logMsg = TrafoLog.getBufferedMessages();
+						String id = "de.dailab.vsdt.trafo";
+						String details = "Please see the transformation log for details";
 						if (trafoOk) {
 							if (TrafoLog.hasWarnings()) {
-								MessageDialog.openWarning(shell, SUCCESS_TITLE, SUCCESS_WARN_MESSAGE + logMsg);
+								IStatus status = new Status(IStatus.WARNING, id, details, new Throwable(logMsg));
+								ErrorDialog.openError(shell, SUCCESS_TITLE, SUCCESS_WARN_MESSAGE, status);
+								
 							} else {
-								MessageDialog.openInformation(shell, SUCCESS_TITLE, SUCCESS_MESSAGE + logMsg);
+								MessageDialog.openInformation(shell, SUCCESS_TITLE, SUCCESS_MESSAGE);
 							}
 						} else {
-							MessageDialog.openError(shell, ERROR_TRAFO_TITLE, ERROR_TRAFO_MESSAGE + logMsg);
+							IStatus status = new Status(IStatus.ERROR, id, details, new Throwable(logMsg));
+							ErrorDialog.openError(shell, ERROR_TRAFO_TITLE, ERROR_TRAFO_MESSAGE, status);
 						}
 						
 						//refresh projects

@@ -66,8 +66,6 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 	/**
 	 * Create new Variable Declaration object.
 	 * 
-	 * XXX keep this up to date with the language syntax
-	 * 
 	 * @param varName		the name of the variable to be created
 	 * @param typeString	the type of the variable to be created
 	 * @return				new variable declaration object
@@ -197,6 +195,13 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 		return createExpression(createAddressString(message, participant));
 	}
 	
+	/**
+	 * Create an Address String based on the given Message and Participant.
+	 * 
+	 * @param message		some Message
+	 * @param participant	some Participant, on null
+	 * @return				communication address "(participant.name '_')? message.name"
+	 */
 	public String createAddressString(Message message, Participant participant) {
 		String address= (participant != null ? (participant.getName()  + "_" ) : "") + message.getName();
 		return address.toLowerCase();
@@ -216,7 +221,6 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 		Receive receive= jadlFac.createReceive();
 		receive.setTimeout(createExpression(timeout));
 		receive.setAddress(address);
-//		receive.setType(createType(type));
 		receive.setVariable(createVariableName(variable));
 		return receive;
 	}
@@ -276,9 +280,6 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 	 * @return		the VariableName
 	 */
 	public String createVariableName(String name) {
-//		VariableName varName= jadlFac.createVariableName();
-//		varName.setName("$" + name);
-//		return varName;
 		return "$" + name;
 	}
 	
@@ -303,15 +304,15 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 		if (expression instanceof DisjunctiveExpression) {
 			DisjunctiveExpression disjunctive = (DisjunctiveExpression) expression;
 			StringBuffer buff= new StringBuffer();
-			for (int i=0; i<disjunctive.getExpressions().size(); i++) {
-				if (i>0) {
+			for (int i = 0; i < disjunctive.getExpressions().size(); i++) {
+				if (i > 0) {
 					buff.append(" || ");
 				}
 				buff.append("( ");
 				buff.append(disjunctive.getExpressions().get(i));
 				buff.append(" )");
 			}
-			return  buff.toString();
+			return buff.toString();
 		} else {
 			return expression.getExpression();
 		}
