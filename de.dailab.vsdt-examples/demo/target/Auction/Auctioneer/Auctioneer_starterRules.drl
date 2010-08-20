@@ -19,7 +19,7 @@ when
 	eval("auctioneer_auctionmessage".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
 	auctionDesc : Auction() from jiacMessage.payload
 then
-	System.out.println("RULE CreateAuction_Auctioneer_createauction");
+	System.out.println("RULE CreateAuction_Auctioneer_createauction" fired);
 	insert( new DoAction(action, null, new Serializable[] { auctionDesc }) );
 	retract( jiacMessage);
 end
@@ -31,7 +31,7 @@ when
 	eval("auctioneer_bidmessage".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
 	bidDesc : Bid() from jiacMessage.payload
 then
-	System.out.println("RULE PlaceBid_Auctioneer_receivebid");
+	System.out.println("RULE PlaceBid_Auctioneer_receivebid" fired);
 	insert( new DoAction(action, null, new Serializable[] { bidDesc }) );
 	retract( jiacMessage);
 end
@@ -42,7 +42,7 @@ when
 	currentTime : TimeFact()
 theAuction : Auction( completed == false, endingTime < currentTime.time )
 then
-	System.out.println("RULE CloseAuction_Auctioneer_auctionover");
+	System.out.println("RULE CloseAuction_Auctioneer_auctionover" fired);
 	insert( new DoAction(action, null, new Serializable[] { theAuction }) );
 end
 

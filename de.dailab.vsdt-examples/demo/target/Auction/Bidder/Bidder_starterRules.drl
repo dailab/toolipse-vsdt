@@ -19,7 +19,7 @@ when
 	eval("bidder_placebidrequest".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
 	bid : Bid() from jiacMessage.payload
 then
-	System.out.println("RULE PlaceBid_Bidder_dobid");
+	System.out.println("RULE PlaceBid_Bidder_dobid" fired);
 	insert( new DoAction(action, null, new Serializable[] { bid }) );
 	retract( jiacMessage);
 end
@@ -31,7 +31,7 @@ when
 	eval("bidder_notifysold".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
 	message : Message() from jiacMessage.payload
 then
-	System.out.println("RULE CloseAuction_Bidder_awardnotification");
+	System.out.println("RULE CloseAuction_Bidder_awardnotification" fired);
 	insert( new DoAction(action, null, new Serializable[] { message }) );
 	retract( jiacMessage);
 end

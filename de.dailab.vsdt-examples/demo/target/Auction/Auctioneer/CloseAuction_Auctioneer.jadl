@@ -5,8 +5,8 @@ service CloseAuction_Auctioneer_auctionover ( in $theAuction : Auction ) ( out )
     var $theBid : Bid ;
     $theBid = new Bid ( ) ;
     var $exists : bool ;
-    listen "auctioneer_notifypaid" ;
     listen "auctioneer_notifyshipped" ;
+    listen "auctioneer_notifypaid" ;
     {
         {
             {
