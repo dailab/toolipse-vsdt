@@ -13,6 +13,7 @@ import de.dailab.vsdt.GatewayType;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.SequenceFlow;
+import de.dailab.vsdt.Start;
 import de.dailab.vsdt.TriggerType;
 
 /**
@@ -124,10 +125,16 @@ public class BasicSimulation extends AbstractSimulation implements ISimulation {
 	protected void setState(FlowObject flowObject, State state) {
 		State lastState= getState(flowObject);
 		stateMap.put(flowObject, state);
+		
 		if (flowObject instanceof Activity) {
 			Activity activity = (Activity) flowObject;
 			// set children to ready
 			if (activity.getActivityType() == ActivityType.EMBEDDED) {
+				if (activity.isEventedSubprocess()) {
+					if (state == State.READY) {
+						setState(activity, State.ACTIVE_WAITING);
+					}
+				}
 				for (FlowObject child : activity.getGraphicalElements()) {
 					if (state == State.ACTIVE_WAITING) {
 						updateState(child);
@@ -159,18 +166,48 @@ public class BasicSimulation extends AbstractSimulation implements ISimulation {
 				}
 			}
 		}
+		
 		if (flowObject instanceof Intermediate) {
 			Intermediate intermediate= (Intermediate) flowObject;
 			if (state == State.DONE) {
-				// event handler: set activity's state to failed
+				// event handler: 
 				if (intermediate.getAttachedTo() != null) {
-					setState(intermediate.getAttachedTo(), State.FAILED); 
+					if (intermediate.isNonInterrupting()) {
+						// non-interrupting: activate again
+						setState(intermediate, State.READY);
+					} else {
+						// interrupting: set activity's state to failed
+						setState(intermediate.getAttachedTo(), State.FAILED);
+					}
 				}
 				// activate other end of Link event
 				if ((intermediate.getTrigger() == TriggerType.LINK || 
 						intermediate.getTrigger() == TriggerType.MULTIPLE) && intermediate.isThrowing()) {
 					if (intermediate.getLinkedTo() != null) {
 						setState(intermediate.getLinkedTo(), State.READY);
+					}
+				}
+			}
+		}
+		
+		if (flowObject instanceof Start) {
+			Start start = (Start) flowObject;
+			if (start.getParent() instanceof Activity && ((Activity) start.getParent()).isEventedSubprocess()) {
+				Activity parent = (Activity) start.getParent();
+				// start event in evented subprocess
+				if (state == State.ACTIVE_WAITING) {
+					if (! start.isNonInterrupting()) {
+						// interrupt parent's parent activity and its children
+						// this can not be done using setState, as this would also cancel the evented subprocess itself
+						if (parent.getAbstractProcess() instanceof Activity) {
+							Activity grandparent = (Activity) parent.getAbstractProcess();
+							stateMap.put(grandparent, State.ACTIVE_WAITING);
+							for (FlowObject child : grandparent.getGraphicalElements()) {
+								if (child != parent) {
+									setState(child, State.FAILED);
+								}
+							}
+						}
 					}
 				}
 			}

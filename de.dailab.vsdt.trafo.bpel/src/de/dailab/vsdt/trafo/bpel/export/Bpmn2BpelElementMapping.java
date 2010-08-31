@@ -629,6 +629,8 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 		TrafoLog.trace("Visiting Boundary Intermediate Event '" + intermediate.getName() + "'");
 		TActivityOrCompensateContainer mapping= null;
 		
+		// TODO include cases where Boundary Event is non-interrupting
+		
 		TriggerType trigger= multiTrigger != null ? multiTrigger : intermediate.getTrigger();
 		switch (trigger) {
 		case MESSAGE: {
