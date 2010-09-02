@@ -3,8 +3,7 @@
   <vsdt:BusinessProcessSystem xmi:id="_Po25IVhEEd-HuN2dVk55Ew" name="pizza2010" documentation="Ein Pizza-Laden will seine Infrastruktur auf den neuesten Stand bringen. Die Firma macht Pizzas und liefert diese aus. Es gibt verschiedene Zulieferer welche die Zutaten für die Pizzas liefern. Verschiedene Arten von Pizzas, wie vegetarisch, fleischig und fischig werden angeboten. Allerdings sollte das neue System auch einfach in der Lage sein, neue Angebote einzubinden, einschließlich neuer Arten von Artikeln, z.B. Getränke.&#xA;Es gibt verschiedene Prozesse im Pizza-Laden. Zum einen die Bestellung. Der Kunde ruft an/bestellt über Internet, die Pizza wird gemacht, eine Rechnung erstellt, die Bestellung ausgeliefert, und die Rechnung beglichen. Bestellungen müssen auf Plausibilität sowie Entfernung geprüft werden. Die Bestellung von Zutaten ist ein weiterer Ablauf. Wenn die Vorratsmenge einer (oder mehrerer) Zutaten unter einen bestimmten Wert fällt, wird eine Nachbestellung initiiert. Es gibt verschiedene Zulieferer die sich durch Preis und Zeit bis Lieferung unterteilen. Potentiell möchte der Pizza-Laden die Lieferung von Pizzas auslagern und eine professionelle Liefer-Firma nutzen." id="_Po25IFhEEd-HuN2dVk55Ew" version="0.1" author="Tobias Küster" expressionLanguage="VSDT Expression Language" creationDate="2010-05-05T14:46:37.490+0200" modificationDate="2010-05-05T14:46:37.490+0200">
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_awXZEVhEEd-HuN2dVk55Ew" name="Pizza bestellen" documentation="Zum einen die Bestellung. Der Kunde ruft an/bestellt über Internet, die Pizza wird gemacht, eine Rechnung erstellt, die Bestellung ausgeliefert, und die Rechnung beglichen. Bestellungen müssen auf Plausibilität sowie Entfernung geprüft werden." id="_awXZEFhEEd-HuN2dVk55Ew" participants="_Uv_LAVhEEd-HuN2dVk55Ew _XDKukVhEEd-HuN2dVk55Ew _wi74EVhFEd-HuN2dVk55Ew">
       <pools xmi:type="vsdt:Pool" xmi:id="_zG1YMVhFEd-HuN2dVk55Ew" name="Pizzaria" id="_zG1YMFhFEd-HuN2dVk55Ew" participant="_Uv_LAVhEEd-HuN2dVk55Ew">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_zG2mU1hFEd-HuN2dVk55Ew" name="Pizzaria_Process" id="_zG2mUlhFEd-HuN2dVk55Ew"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_zG2mUVhFEd-HuN2dVk55Ew" id="_zG2mUFhFEd-HuN2dVk55Ew" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_zG2mUVhFEd-HuN2dVk55Ew" id="_zG2mUFhFEd-HuN2dVk55Ew">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_5PTyUVhFEd-HuN2dVk55Ew" name="Bestellung" id="_5PTyUFhFEd-HuN2dVk55Ew" trigger="MESSAGE"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_630oQFhFEd-HuN2dVk55Ew" name="Plausibilität und Entfernung überprüfen" id="_630BMFhFEd-HuN2dVk55Ew"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_AGyAcVhGEd-HuN2dVk55Ew" name="Bestellung ok?" id="_AGyAcFhGEd-HuN2dVk55Ew"/>
@@ -21,8 +20,7 @@
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_zG-iIVhFEd-HuN2dVk55Ew" name="Kunde" id="_zG-iIFhFEd-HuN2dVk55Ew" participant="_XDKukVhEEd-HuN2dVk55Ew">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_zG_JM1hFEd-HuN2dVk55Ew" name="Kunde_Process" id="_zG_JMlhFEd-HuN2dVk55Ew"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_zG_JMVhFEd-HuN2dVk55Ew" id="_zG_JMFhFEd-HuN2dVk55Ew" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_zG_JMVhFEd-HuN2dVk55Ew" id="_zG_JMFhFEd-HuN2dVk55Ew">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_EYqsYFhGEd-HuN2dVk55Ew" id="_EYqFUFhGEd-HuN2dVk55Ew"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_Ev45kVhGEd-HuN2dVk55Ew" name="Pizza bestellen" id="_Ev45kFhGEd-HuN2dVk55Ew"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_GS_EAVhGEd-HuN2dVk55Ew" name="Antwort?" id="_GS_EAFhGEd-HuN2dVk55Ew" gatewayType="XOR_EVENT"/>
@@ -35,8 +33,7 @@
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_zHGd8VhFEd-HuN2dVk55Ew" name="Lieferbetrieb" id="_zHGd8FhFEd-HuN2dVk55Ew" participant="_wi74EVhFEd-HuN2dVk55Ew">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_zHGd9VhFEd-HuN2dVk55Ew" name="Lieferbetrieb_Process" id="_zHGd9FhFEd-HuN2dVk55Ew"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_zHGd81hFEd-HuN2dVk55Ew" id="_zHGd8lhFEd-HuN2dVk55Ew" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_zHGd81hFEd-HuN2dVk55Ew" id="_zHGd8lhFEd-HuN2dVk55Ew">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_pHSJYVhGEd-HuN2dVk55Ew" name="Lieferauftrag" id="_pHSJYFhGEd-HuN2dVk55Ew" trigger="MESSAGE"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_5fTgsVhGEd-HuN2dVk55Ew" name="Bestellung abholen" id="_5fTgsFhGEd-HuN2dVk55Ew"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_6sUtcVhGEd-HuN2dVk55Ew" name="Bestellung liefern" id="_6sUtcFhGEd-HuN2dVk55Ew"/>
@@ -85,7 +82,6 @@
     </businessProcesses>
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_dETKkVhEEd-HuN2dVk55Ew" name="Zutaten bestellen" documentation="Die Bestellung von Zutaten ist ein weiterer Ablauf. Wenn die Vorratsmenge einer (oder mehrerer) Zutaten unter einen bestimmten Wert fällt, wird eine Nachbestellung initiiert. Es gibt verschiedene Zulieferer die sich durch Preis und Zeit bis Lieferung unterteilen." id="_dETKkFhEEd-HuN2dVk55Ew" participants="_WJy2kVhEEd-HuN2dVk55Ew _Uv_LAVhEEd-HuN2dVk55Ew">
       <pools xmi:type="vsdt:Pool" xmi:id="_lcwqUVhEEd-HuN2dVk55Ew" name="Zulieferer" id="_lcwqUFhEEd-HuN2dVk55Ew" participant="_WJy2kVhEEd-HuN2dVk55Ew">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_lcx4c1hEEd-HuN2dVk55Ew" name="Zulieferer_Process" id="_lcx4clhEEd-HuN2dVk55Ew"/>
         <lanes xmi:type="vsdt:Lane" xmi:id="_lcx4cVhEEd-HuN2dVk55Ew" name="Kundendienst" id="_lcx4cFhEEd-HuN2dVk55Ew">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_5crVYFhEEd-HuN2dVk55Ew" name="Angebot angefordert" id="_5cquUFhEEd-HuN2dVk55Ew" trigger="MESSAGE"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_85qZoVhEEd-HuN2dVk55Ew" name="eigenen Vorrat überprüfen" id="_85qZoFhEEd-HuN2dVk55Ew"/>
@@ -102,8 +98,7 @@
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_ldBJAVhEEd-HuN2dVk55Ew" name="Pizzaria" id="_ldBJAFhEEd-HuN2dVk55Ew" participant="_Uv_LAVhEEd-HuN2dVk55Ew">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_ldBwEVhEEd-HuN2dVk55Ew" name="Pizzaria_Process" id="_ldBwEFhEEd-HuN2dVk55Ew"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_ldBJA1hEEd-HuN2dVk55Ew" id="_ldBJAlhEEd-HuN2dVk55Ew" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_ldBJA1hEEd-HuN2dVk55Ew" id="_ldBJAlhEEd-HuN2dVk55Ew">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_rvyHkVhEEd-HuN2dVk55Ew" name="Vorrat wird knapp" id="_rvyHkFhEEd-HuN2dVk55Ew" trigger="RULE"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_wDlfEVhEEd-HuN2dVk55Ew" name="Angebote einholen" id="_wDlfEFhEEd-HuN2dVk55Ew">
             <loopAttributes xmi:type="vsdt:MultiLoopAttSet" xmi:id="_rkMGIFhFEd-HuN2dVk55Ew"/>

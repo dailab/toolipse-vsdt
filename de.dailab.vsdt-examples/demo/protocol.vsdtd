@@ -3,8 +3,7 @@
   <vsdt:BusinessProcessSystem xmi:id="_kLZn8ONHEd6Vn9XNhyTLgg" name="Protocol" id="_kLZA4ONHEd6Vn9XNhyTLgg" version="0.1" author="Tobias Küster" expressionLanguage="VSDT Expression Language" creationDate="2009-12-07T16:45:37.774+0100" modificationDate="2009-12-07T16:45:37.774+0100">
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_mcQ3UeNHEd6Vn9XNhyTLgg" name="Contract Net" id="_mcQ3UONHEd6Vn9XNhyTLgg" participants="_nfxiweNHEd6Vn9XNhyTLgg _ohYwweNHEd6Vn9XNhyTLgg">
       <pools xmi:type="vsdt:Pool" xmi:id="_r8-G0ONHEd6Vn9XNhyTLgg" name="Initiator" id="_r89fwONHEd6Vn9XNhyTLgg" participant="_nfxiweNHEd6Vn9XNhyTLgg">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_r8-t4-NHEd6Vn9XNhyTLgg" name="Initiator_Process" id="_r8-t4uNHEd6Vn9XNhyTLgg"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_r8-t4eNHEd6Vn9XNhyTLgg" id="_r8-t4ONHEd6Vn9XNhyTLgg" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_r8-t4eNHEd6Vn9XNhyTLgg" id="_r8-t4ONHEd6Vn9XNhyTLgg">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_sv7NwONHEd6Vn9XNhyTLgg" id="_sv6msONHEd6Vn9XNhyTLgg"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_tWkXAONHEd6Vn9XNhyTLgg" name="Call for Proposals" id="_tWjv8ONHEd6Vn9XNhyTLgg"/>
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_v2x0geNIEd6Vn9XNhyTLgg" name="Refused" id="_v2x0gONIEd6Vn9XNhyTLgg" trigger="MESSAGE"/>
@@ -13,7 +12,7 @@
           <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_P2_oseNJEd6Vn9XNhyTLgg" name="Proposed" id="_P2_osONJEd6Vn9XNhyTLgg" trigger="MESSAGE"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_Uwmb8eNJEd6Vn9XNhyTLgg" name="No Result or Failure" id="_Uwmb8ONJEd6Vn9XNhyTLgg"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_aV_XIeNJEd6Vn9XNhyTLgg" name="Evaluate Proposal" id="_aV_XIONJEd6Vn9XNhyTLgg"/>
-          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_yCCVseNJEd6Vn9XNhyTLgg" id="_yCCVsONJEd6Vn9XNhyTLgg" markerVisible="true"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_yCCVseNJEd6Vn9XNhyTLgg" id="_yCCVsONJEd6Vn9XNhyTLgg"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_y4xJYeNJEd6Vn9XNhyTLgg" name="Reject Proposal" id="_y4xJYONJEd6Vn9XNhyTLgg"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_0SLMUeNJEd6Vn9XNhyTLgg" name="Accept Proposal" id="_0SLMUONJEd6Vn9XNhyTLgg"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_CXL_MeNKEd6Vn9XNhyTLgg" name="Await Result" id="_CXL_MONKEd6Vn9XNhyTLgg" gatewayType="XOR_EVENT"/>
@@ -27,10 +26,9 @@
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_r9Y9keNHEd6Vn9XNhyTLgg" name="Participant" id="_r9Y9kONHEd6Vn9XNhyTLgg" participant="_ohYwweNHEd6Vn9XNhyTLgg">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_r9ZkoeNHEd6Vn9XNhyTLgg" name="Participant_Process" id="_r9ZkoONHEd6Vn9XNhyTLgg"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_r9Y9k-NHEd6Vn9XNhyTLgg" id="_r9Y9kuNHEd6Vn9XNhyTLgg" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_r9Y9k-NHEd6Vn9XNhyTLgg" id="_r9Y9kuNHEd6Vn9XNhyTLgg">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="__7fqweNHEd6Vn9XNhyTLgg" name="Receive CFP" id="__7fqwONHEd6Vn9XNhyTLgg" trigger="MESSAGE"/>
-          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_HGHeYeNIEd6Vn9XNhyTLgg" id="_HGHeYONIEd6Vn9XNhyTLgg" markerVisible="true"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_HGHeYeNIEd6Vn9XNhyTLgg" id="_HGHeYONIEd6Vn9XNhyTLgg"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_KqdH0eNIEd6Vn9XNhyTLgg" name="Propose" id="_KqdH0ONIEd6Vn9XNhyTLgg"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_MaQ4kONIEd6Vn9XNhyTLgg" name="Refuse" id="_MaQRgONIEd6Vn9XNhyTLgg"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_NOc5IeNJEd6Vn9XNhyTLgg" name="Evaluate CFP" id="_NOc5IONJEd6Vn9XNhyTLgg"/>
@@ -243,7 +241,7 @@
                 <layoutConstraint xmi:type="notation:Location" xmi:id="_IFsaIeNKEd6Vn9XNhyTLgg" x="50" y="35"/>
               </children>
               <styles xmi:type="notation:ShapeStyle" xmi:id="_IFqk8eNKEd6Vn9XNhyTLgg" fontName="Sans"/>
-              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_IFqk8uNKEd6Vn9XNhyTLgg" x="840" y="97"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_IFqk8uNKEd6Vn9XNhyTLgg" x="866" y="97"/>
             </children>
             <children xmi:type="notation:Node" xmi:id="_IgQPMONKEd6Vn9XNhyTLgg" type="2003" element="_IgOaAeNKEd6Vn9XNhyTLgg">
               <children xmi:type="notation:Node" xmi:id="_IgRdUONKEd6Vn9XNhyTLgg" type="4004">
@@ -437,7 +435,7 @@
                 <styles xmi:type="notation:FilteringStyle" xmi:id="_sAFk4-NKEd6Vn9XNhyTLgg"/>
               </children>
               <styles xmi:type="notation:ShapeStyle" xmi:id="_sAEWweNKEd6Vn9XNhyTLgg" fontName="Sans"/>
-              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sAEWwuNKEd6Vn9XNhyTLgg" x="939" y="114" width="66"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sAEWwuNKEd6Vn9XNhyTLgg" x="850" y="116" width="66"/>
             </children>
             <children xmi:type="notation:Node" xmi:id="_upfQEONKEd6Vn9XNhyTLgg" type="2004" element="_upeB8eNKEd6Vn9XNhyTLgg">
               <children xmi:type="notation:Node" xmi:id="_upgeMONKEd6Vn9XNhyTLgg" type="4005">
@@ -633,7 +631,7 @@
       </children>
       <styles xmi:type="notation:RoutingStyle" xmi:id="_IF5OceNKEd6Vn9XNhyTLgg" routing="Rectilinear"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_IF5OcuNKEd6Vn9XNhyTLgg" fontName="Sans"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_IF5Oc-NKEd6Vn9XNhyTLgg" points="[-1, -20, -68, 48]$[-1, -68, -68, 0]$[47, -68, -20, 0]"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_IF5Oc-NKEd6Vn9XNhyTLgg" points="[-1, -20, -94, 48]$[-1, -68, -94, 0]$[73, -68, -20, 0]"/>
     </edges>
     <edges xmi:type="notation:Edge" xmi:id="_IgdqkONKEd6Vn9XNhyTLgg" type="3001" element="_IganQeNKEd6Vn9XNhyTLgg" source="_CXNNUONKEd6Vn9XNhyTLgg" target="_IgQPMONKEd6Vn9XNhyTLgg">
       <children xmi:type="notation:Node" xmi:id="_IgeRoONKEd6Vn9XNhyTLgg" type="4012">
@@ -713,7 +711,7 @@
       </children>
       <styles xmi:type="notation:RoutingStyle" xmi:id="_sAYf0ONKEd6Vn9XNhyTLgg" routing="Rectilinear"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_sAYf0eNKEd6Vn9XNhyTLgg" fontName="Sans"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_sAYf0uNKEd6Vn9XNhyTLgg" points="[0, 20, -199, -37]$[0, 58, -199, 1]$[166, 58, -33, 1]"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_sAYf0uNKEd6Vn9XNhyTLgg" points="[-2, 20, -112, -39]$[-2, 59, -112, 0]$[77, 59, -33, 0]"/>
     </edges>
     <edges xmi:type="notation:Edge" xmi:id="_upt5kONKEd6Vn9XNhyTLgg" type="3001" element="_upqPMeNKEd6Vn9XNhyTLgg" source="_qIlQsONKEd6Vn9XNhyTLgg" target="_upfQEONKEd6Vn9XNhyTLgg">
       <children xmi:type="notation:Node" xmi:id="_upugoONKEd6Vn9XNhyTLgg" type="4012">
@@ -761,7 +759,7 @@
       </children>
       <styles xmi:type="notation:RoutingStyle" xmi:id="_ubxuweNLEd6Vn9XNhyTLgg" routing="Rectilinear"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_ubxuwuNLEd6Vn9XNhyTLgg" fontName="Sans"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ubxuw-NLEd6Vn9XNhyTLgg" points="[20, -1, -248, 69]$[267, -1, -1, 69]$[267, -50, -1, 20]"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ubxuw-NLEd6Vn9XNhyTLgg" points="[20, -1, -222, 69]$[241, -1, -1, 69]$[241, -50, -1, 20]"/>
     </edges>
     <edges xmi:type="notation:Edge" xmi:id="_etk7EONMEd6Vn9XNhyTLgg" type="3001" element="_eth3weNMEd6Vn9XNhyTLgg" source="_ngDksONJEd6Vn9XNhyTLgg" target="_948SQONJEd6Vn9XNhyTLgg">
       <children xmi:type="notation:Node" xmi:id="_etliIONMEd6Vn9XNhyTLgg" type="4012">
@@ -833,7 +831,7 @@
       </children>
       <styles xmi:type="notation:RoutingStyle" xmi:id="_kNd1weNNEd6Vn9XNhyTLgg" routing="Rectilinear"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_kNd1wuNNEd6Vn9XNhyTLgg" fontName="Sans"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_kNd1w-NNEd6Vn9XNhyTLgg" points="[-1, -22, 111, 328]$[-1, -176, 111, 174]$[-108, -176, 4, 174]$[-108, -330, 4, 20]"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_kNd1w-NNEd6Vn9XNhyTLgg" points="[-1, -22, 22, 330]$[-1, -352, 22, 0]$[-3, -352, 20, 0]"/>
     </edges>
   </notation:Diagram>
 </xmi:XMI>

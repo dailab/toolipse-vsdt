@@ -3,8 +3,7 @@
   <vsdt:BusinessProcessSystem xmi:id="_Je18oQTvEd-0jJA8-2XSHQ" name="minimal" id="_Je18oATvEd-0jJA8-2XSHQ" version="0.1" author="Tobias Küster" expressionLanguage="VSDT Expression Language" creationDate="2010-01-19T12:38:22.442+0100" modificationDate="2010-01-19T12:38:22.442+0100">
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_MYUEIQTvEd-0jJA8-2XSHQ" name="Use Case" id="_MYUEIATvEd-0jJA8-2XSHQ" participants="_Ku0WwQTvEd-0jJA8-2XSHQ _LucAsQTvEd-0jJA8-2XSHQ">
       <pools xmi:type="vsdt:Pool" xmi:id="_RsdeUQTvEd-0jJA8-2XSHQ" name="Actor 1" id="_RsdeUATvEd-0jJA8-2XSHQ" participant="_Ku0WwQTvEd-0jJA8-2XSHQ">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_RsfTggTvEd-0jJA8-2XSHQ" name="Actor 1_Process" id="_RsfTgQTvEd-0jJA8-2XSHQ"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_RsfTgATvEd-0jJA8-2XSHQ" id="_RsescATvEd-0jJA8-2XSHQ" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_RsfTgATvEd-0jJA8-2XSHQ" id="_RsescATvEd-0jJA8-2XSHQ">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_SeRVwQTvEd-0jJA8-2XSHQ" id="_SeRVwATvEd-0jJA8-2XSHQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_TGelQQTvEd-0jJA8-2XSHQ" name="Send Request" id="_TGelQATvEd-0jJA8-2XSHQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_T-UMMATvEd-0jJA8-2XSHQ" name="Do Someting" id="_T-TlIATvEd-0jJA8-2XSHQ"/>
@@ -13,8 +12,7 @@
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_RusS8QTvEd-0jJA8-2XSHQ" name="Actor 2" id="_RusS8ATvEd-0jJA8-2XSHQ" participant="_LucAsQTvEd-0jJA8-2XSHQ">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_RusS9QTvEd-0jJA8-2XSHQ" name="Actor 2_Process" id="_RusS9ATvEd-0jJA8-2XSHQ"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_RusS8wTvEd-0jJA8-2XSHQ" id="_RusS8gTvEd-0jJA8-2XSHQ" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_RusS8wTvEd-0jJA8-2XSHQ" id="_RusS8gTvEd-0jJA8-2XSHQ">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_cKmRIATvEd-0jJA8-2XSHQ" id="_cKlqEATvEd-0jJA8-2XSHQ" trigger="MESSAGE"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_c0HvQQTvEd-0jJA8-2XSHQ" name="Check Request" id="_c0HvQATvEd-0jJA8-2XSHQ"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_dY0XwQTvEd-0jJA8-2XSHQ" id="_dY0XwATvEd-0jJA8-2XSHQ" gatewayType="OR"/>
