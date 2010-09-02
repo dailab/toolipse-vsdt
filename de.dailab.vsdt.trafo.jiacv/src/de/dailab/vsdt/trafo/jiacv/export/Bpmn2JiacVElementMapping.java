@@ -526,8 +526,14 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			// do not create a new plan; just put contents in a seq or par
 			mapping= visitFlowObjects(activity.getContainedFlowObjects());
 			break;
-		case REFERENCE:
-			mapping= (Script) EcoreUtil.copy(visitFlowObject(activity.getActivityRef()));
+		case CALL:
+			if (activity.getCalledElement() instanceof Activity) {
+				Activity calledAct = (Activity) activity.getCalledElement();
+				mapping= (Script) EcoreUtil.copy(visitFlowObject(calledAct));
+			} else if (activity.getCalledElement() instanceof Pool) {
+				// TODO call another service, similar to invoke
+//				Pool calledPool = (Pool) activity.getCalledElement();
+			}
 			break;
 		case SEND:
 			// send element
@@ -542,8 +548,6 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			properties.addAll(message.getProperties());
 			mapping= buildReceive(message, activity.getPool().getParticipant());
 			break;
-		case INDEPENDENT:
-			// call another service, similar to invoke
 		case MANUAL:
 		case USER:
 			// TODO implement missing mappings

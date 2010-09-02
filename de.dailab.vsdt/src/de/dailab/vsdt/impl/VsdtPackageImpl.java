@@ -947,7 +947,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getActivity_ActivityRef() {
+	public EReference getActivity_Transaction() {
 		return (EReference)activityEClass.getEStructuralFeatures().get(12);
 	}
 
@@ -956,7 +956,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getActivity_Transaction() {
+	public EReference getActivity_CalledElement() {
 		return (EReference)activityEClass.getEStructuralFeatures().get(13);
 	}
 
@@ -965,7 +965,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getActivity_DiagramRef() {
+	public EReference getActivity_InputPropertyMaps() {
 		return (EReference)activityEClass.getEStructuralFeatures().get(14);
 	}
 
@@ -974,26 +974,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getActivity_ProcessRef() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(15);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getActivity_InputPropertyMaps() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(16);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getActivity_OutputPropertyMaps() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(17);
+		return (EReference)activityEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -2206,10 +2188,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		createEReference(activityEClass, ACTIVITY__IMPLEMENTATION);
 		createEAttribute(activityEClass, ACTIVITY__PERFORMERS);
 		createEAttribute(activityEClass, ACTIVITY__SCRIPT);
-		createEReference(activityEClass, ACTIVITY__ACTIVITY_REF);
 		createEReference(activityEClass, ACTIVITY__TRANSACTION);
-		createEReference(activityEClass, ACTIVITY__DIAGRAM_REF);
-		createEReference(activityEClass, ACTIVITY__PROCESS_REF);
+		createEReference(activityEClass, ACTIVITY__CALLED_ELEMENT);
 		createEReference(activityEClass, ACTIVITY__INPUT_PROPERTY_MAPS);
 		createEReference(activityEClass, ACTIVITY__OUTPUT_PROPERTY_MAPS);
 
@@ -2514,10 +2494,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		initEReference(getActivity_Implementation(), this.getImplementation(), null, "implementation", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActivity_Performers(), ecorePackage.getEString(), "performers", null, 0, -1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActivity_Script(), ecorePackage.getEString(), "script", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getActivity_ActivityRef(), this.getActivity(), null, "activityRef", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActivity_Transaction(), this.getTransaction(), null, "transaction", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getActivity_DiagramRef(), this.getBusinessProcessDiagram(), null, "diagramRef", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getActivity_ProcessRef(), this.getPool(), null, "processRef", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getActivity_CalledElement(), this.getAbstractProcess(), null, "calledElement", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActivity_InputPropertyMaps(), this.getExpression(), null, "inputPropertyMaps", null, 0, -1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActivity_OutputPropertyMaps(), this.getExpression(), null, "outputPropertyMaps", null, 0, -1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2670,8 +2648,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		addEEnumLiteral(activityTypeEEnum, ActivityType.SCRIPT);
 		addEEnumLiteral(activityTypeEEnum, ActivityType.BUSINESSRULE);
 		addEEnumLiteral(activityTypeEEnum, ActivityType.EMBEDDED);
-		addEEnumLiteral(activityTypeEEnum, ActivityType.INDEPENDENT);
-		addEEnumLiteral(activityTypeEEnum, ActivityType.REFERENCE);
+		addEEnumLiteral(activityTypeEEnum, ActivityType.CALL);
 
 		initEEnum(loopTypeEEnum, LoopType.class, "LoopType");
 		addEEnumLiteral(loopTypeEEnum, LoopType.NONE);

@@ -475,7 +475,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	private void visitActivity(Activity activity) {
 		final ActivityType type= activity.getActivityType();
 		String actType= (type != ActivityType.NONE ? type(type) : "") + " Task";
-		if (type == ActivityType.EMBEDDED || type == ActivityType.INDEPENDENT) {
+		if (type == ActivityType.EMBEDDED) {
 			actType= type(type) + " Subprocess";
 			if (activity.getTransaction() != null) {
 				actType= "Transaction";
@@ -528,22 +528,29 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			}
 			builder.append(". ");
 			break;
-		case REFERENCE:
-			builder.append(", which references to " + (activity.getActivityRef() != null ? 
-					name(activity.getActivityRef().getName()) : "another Activity") + ".");
-			break;
-		case INDEPENDENT:
-			String processRef= activity.getProcessRef() != null 
-					? "Process '" + name(activity.getProcessRef().getName()) + "'" 
-					: "another Process";
-			if (activity.getDiagramRef() == activity.getPool().getParent()) {
-				processRef += activity.getDiagramRef() != null 
-						? " in Diagram '" + name(activity.getDiagramRef().getName()) + "'" 
-						: " in another Business Process Diagram";
+		case CALL:
+			String calledElement = "another Process Element";
+			if (activity.getCalledElement() instanceof Activity) {
+				Activity other = (Activity) activity.getCalledElement();
+				calledElement = "the Activity " + other.getName();
+			} else if (activity.getCalledElement() instanceof Pool) {
+				Pool other = (Pool) activity.getCalledElement();
+				calledElement = "the Pool " + other.getName() + " in the Process Diagram " + other.getParent().getName();
 			}
-			builder.append(", which references to " + processRef + ". ");
-			// for more details: Input- and OutputPropertyMaps
+			builder.append(", which references " + calledElement + ".");
 			break;
+//		case INDEPENDENT:
+//			String processRef= activity.getProcessRef() != null 
+//					? "Process '" + name(activity.getProcessRef().getName()) + "'" 
+//					: "another Process";
+//			if (activity.getDiagramRef() == activity.getPool().getParent()) {
+//				processRef += activity.getDiagramRef() != null 
+//						? " in Diagram '" + name(activity.getDiagramRef().getName()) + "'" 
+//						: " in another Business Process Diagram";
+//			}
+//			builder.append(", which references to " + processRef + ". ");
+//			// for more details: Input- and OutputPropertyMaps
+//			break;
 		}
 		
 		// performers (not participants)

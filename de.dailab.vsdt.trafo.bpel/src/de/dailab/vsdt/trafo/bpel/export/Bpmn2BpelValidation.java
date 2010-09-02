@@ -3,12 +3,9 @@ package de.dailab.vsdt.trafo.bpel.export;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.dailab.vsdt.Activity;
-import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Property;
-import de.dailab.vsdt.trafo.impl.BpmnMappingHelper;
 import de.dailab.vsdt.trafo.impl.DefaultBpmnValidation;
 import de.dailab.vsdt.vxl.util.Util;
 
@@ -61,17 +58,17 @@ public class Bpmn2BpelValidation extends DefaultBpmnValidation {
 		return isOK;
 	}
 	
-	@Override
-	protected boolean visitActivity(
-			Activity activity) {
-		boolean ok= super.visitActivity(activity);
-		
-		if (activity.getActivityType() == ActivityType.REFERENCE) {
-			ok&= test(! BpmnMappingHelper.isParentOrEqual(activity.getActivityRef(),activity),
-					"An Activity may not reference a (transitive) parent of itself.");
-		}
-		return ok;
-	}
+//	@Override
+//	protected boolean visitActivity(
+//			Activity activity) {
+//		boolean ok= super.visitActivity(activity);
+//		
+//		if (activity.getActivityType() == ActivityType.CALL) {
+//			ok&= test(! BpmnMappingHelper.isParentOrEqual(activity.getCalledElement(), activity),
+//					"An Activity may not reference a (transitive) parent of itself.");
+//		}
+//		return ok;
+//	}
 
 	/**
 	 * substitute basic data types

@@ -223,8 +223,7 @@ public class MyJavaAudits {
 	 * Tasks must not have more than one incoming or Outgoing Message Flow
 	 */
 	public static Boolean act2TaskSingleMessage(Activity self) {
-		if (self.getActivityType() != ActivityType.EMBEDDED
-				&& self.getActivityType() != ActivityType.INDEPENDENT) {
+		if (self.getActivityType() != ActivityType.EMBEDDED) {
 			return self.getOutgoingMsg().size() < 2
 					&& self.getIncomingMsg().size() < 2;
 		}
@@ -834,14 +833,9 @@ public class MyJavaAudits {
 		case ActivityType.EMBEDDED_VALUE:
 			//none
 			break;
-		case ActivityType.INDEPENDENT_VALUE:
-			//diagram reference, process reference
-			ok&= self.getDiagramRef() != null;
-			ok&= self.getProcessRef() != null;
-			break;
-		case ActivityType.REFERENCE_VALUE:
-			//activity reference
-			ok&= self.getActivityRef() != null;
+		case ActivityType.CALL_VALUE:
+			//called element
+			ok&= self.getCalledElement() != null;
 			break;
 		case ActivityType.SERVICE_VALUE:
 		case ActivityType.USER_VALUE:

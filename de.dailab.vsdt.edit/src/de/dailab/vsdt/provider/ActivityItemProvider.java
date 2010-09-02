@@ -7,7 +7,6 @@
 package de.dailab.vsdt.provider;
 
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,8 +24,6 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import de.dailab.vsdt.Activity;
-import de.dailab.vsdt.BusinessProcessDiagram;
-import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.VsdtPackage;
 
@@ -75,10 +72,8 @@ public class ActivityItemProvider
 			addImplementationPropertyDescriptor(object);
 			addPerformersPropertyDescriptor(object);
 			addScriptPropertyDescriptor(object);
-			addActivityRefPropertyDescriptor(object);
 			addTransactionPropertyDescriptor(object);
-			addDiagramRefPropertyDescriptor(object);
-			addProcessRefPropertyDescriptor(object);
+			addCalledElementPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -303,37 +298,37 @@ public class ActivityItemProvider
 				 null));
 	}
 
-	/**
-	 * This adds a property descriptor for the Sub Process Ref feature.
-	 * <!-- begin-user-doc -->
-	 * prevent self-reference
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	protected void addActivityRefPropertyDescriptor(Object object) {
-		ItemPropertyDescriptor propertyDescriptor= new ItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				 getString("_UI_Activity_activityRef_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_activityRef_feature", "_UI_Activity_type"),
-				 VsdtPackage.Literals.ACTIVITY__ACTIVITY_REF,
-				 true,
-				 false,
-				 true,
-				 null,
-				 getString("_UI_ActivityTypeAttributesPropertyCategory"),
-				 null) {
-			@Override
-			protected Collection<?> getComboBoxObjects(Object object) {
-				Collection<?> collection= super.getComboBoxObjects(object);
-				if (collection.contains(object)) {
-					collection.remove(object);
-				}
-				return collection;
-			}
-		};
-		itemPropertyDescriptors.add(propertyDescriptor);
-	}
+//	/**
+//	 * This adds a property descriptor for the Sub Process Ref feature.
+//	 * <!-- begin-user-doc -->
+//	 * prevent self-reference
+//	 * <!-- end-user-doc -->
+//	 * @generated NOT
+//	 */
+//	protected void addActivityRefPropertyDescriptor(Object object) {
+//		ItemPropertyDescriptor propertyDescriptor= new ItemPropertyDescriptor
+//				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+//				getResourceLocator(),
+//				 getString("_UI_Activity_activityRef_feature"),
+//				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_activityRef_feature", "_UI_Activity_type"),
+//				 VsdtPackage.Literals.ACTIVITY__ACTIVITY_REF,
+//				 true,
+//				 false,
+//				 true,
+//				 null,
+//				 getString("_UI_ActivityTypeAttributesPropertyCategory"),
+//				 null) {
+//			@Override
+//			protected Collection<?> getComboBoxObjects(Object object) {
+//				Collection<?> collection= super.getComboBoxObjects(object);
+//				if (collection.contains(object)) {
+//					collection.remove(object);
+//				}
+//				return collection;
+//			}
+//		};
+//		itemPropertyDescriptors.add(propertyDescriptor);
+//	}
 	
 	/**
 	 * This adds a property descriptor for the Transaction feature.
@@ -358,88 +353,121 @@ public class ActivityItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Diagram Ref feature.
+	 * This adds a property descriptor for the Called Element feature.
 	 * <!-- begin-user-doc -->
-	 * search the workspace for other BPMN diagrams and list the result
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	protected void addDiagramRefPropertyDescriptor(Object object) {
+	protected void addCalledElementPropertyDescriptor(Object object) {
 		ItemPropertyDescriptor propertyDescriptor= new ItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				 getString("_UI_Activity_diagramRef_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_diagramRef_feature", "_UI_Activity_type"),
-				 VsdtPackage.Literals.ACTIVITY__DIAGRAM_REF,
+				(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Activity_calledElement_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_calledElement_feature", "_UI_Activity_type"),
+				 VsdtPackage.Literals.ACTIVITY__CALLED_ELEMENT,
 				 true,
 				 false,
 				 true,
 				 null,
-				 getString("_UI_SubprocessAttributesPropertyCategory"),
+				 null,
 				 null) {
+
 			@Override
 			protected Collection<?> getComboBoxObjects(Object object) {
-				return super.getComboBoxObjects(object);
-				// with VSDT 1.2, no other files have to be included anymore
-//				Collection<BusinessProcessDiagram> collection= new ArrayList<BusinessProcessDiagram>();
-//				Resource thisResource= ((Activity) object).getPool().getParentDiagram().eResource();
-//				List<Resource> allResources= ResourceFinder.getResources(thisResource,"vsdt");
-//				
-//				for (Resource resource : allResources) {
-//					for (EObject element : resource.getContents()) {
-//						if (element instanceof BusinessProcessDiagram) {
-//							BusinessProcessDiagram bpd = (BusinessProcessDiagram) element;
-//							collection.add(bpd);
+				Collection<?> collection= super.getComboBoxObjects(object);
+				if (collection.contains(object)) {
+					collection.remove(object);
+				}
+				return collection;
+			};
+		};
+		itemPropertyDescriptors.add(propertyDescriptor);
+	}
+
+//	/**
+//	 * This adds a property descriptor for the Diagram Ref feature.
+//	 * <!-- begin-user-doc -->
+//	 * search the workspace for other BPMN diagrams and list the result
+//	 * <!-- end-user-doc -->
+//	 * @generated NOT
+//	 */
+//	protected void addDiagramRefPropertyDescriptor(Object object) {
+//		ItemPropertyDescriptor propertyDescriptor= new ItemPropertyDescriptor
+//				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+//				getResourceLocator(),
+//				 getString("_UI_Activity_diagramRef_feature"),
+//				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_diagramRef_feature", "_UI_Activity_type"),
+//				 VsdtPackage.Literals.ACTIVITY__DIAGRAM_REF,
+//				 true,
+//				 false,
+//				 true,
+//				 null,
+//				 getString("_UI_SubprocessAttributesPropertyCategory"),
+//				 null) {
+//			@Override
+//			protected Collection<?> getComboBoxObjects(Object object) {
+//				return super.getComboBoxObjects(object);
+//				// with VSDT 1.2, no other files have to be included anymore
+////				Collection<BusinessProcessDiagram> collection= new ArrayList<BusinessProcessDiagram>();
+////				Resource thisResource= ((Activity) object).getPool().getParentDiagram().eResource();
+////				List<Resource> allResources= ResourceFinder.getResources(thisResource,"vsdt");
+////				
+////				for (Resource resource : allResources) {
+////					for (EObject element : resource.getContents()) {
+////						if (element instanceof BusinessProcessDiagram) {
+////							BusinessProcessDiagram bpd = (BusinessProcessDiagram) element;
+////							collection.add(bpd);
+////						}
+////					}
+////				}
+////				
+////				return collection;
+//			}
+//		};
+//		itemPropertyDescriptors.add(propertyDescriptor);
+//	}
+	
+//	/**
+//	 * This adds a property descriptor for the Process Ref feature.
+//	 * <!-- begin-user-doc -->
+//	 * filter choices, so that only processes of the given diagram can be selected
+//	 * <!-- end-user-doc -->
+//	 * @generated NOT
+//	 */
+//	protected void addProcessRefPropertyDescriptor(Object object) {
+//		ItemPropertyDescriptor propertyDescriptor= new ItemPropertyDescriptor
+//				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+//				getResourceLocator(),
+//				 getString("_UI_Activity_processRef_feature"),
+//				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_processRef_feature", "_UI_Activity_type"),
+//				 VsdtPackage.Literals.ACTIVITY__PROCESS_REF,
+//				 true,
+//				 false,
+//				 true,
+//				 null,
+//				 getString("_UI_SubprocessAttributesPropertyCategory"),
+//				 null){
+//			@Override
+//			protected Collection<?> getComboBoxObjects(Object object) {
+//				Activity activity= (Activity) object;
+//				Collection<Pool> collection= new ArrayList<Pool>();
+//				//null-value for de-selecting the process
+//				collection.add(null);
+//				//if a diagram reference is set, add the diagram's processes to the list 
+//				if (activity.getDiagramRef() != null) {
+//					BusinessProcessDiagram bpd= activity.getDiagramRef();
+//					for (Pool pool : bpd.getPools()) {
+//						if (pool.getParticipant() == activity.getPool().getParticipant()) {
+//							collection.add(pool);
 //						}
 //					}
 //				}
-//				
 //				return collection;
-			}
-		};
-		itemPropertyDescriptors.add(propertyDescriptor);
-	}
+//			}
+//		};
+//		itemPropertyDescriptors.add(propertyDescriptor);
+//	}
 	
-	/**
-	 * This adds a property descriptor for the Process Ref feature.
-	 * <!-- begin-user-doc -->
-	 * filter choices, so that only processes of the given diagram can be selected
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	protected void addProcessRefPropertyDescriptor(Object object) {
-		ItemPropertyDescriptor propertyDescriptor= new ItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				 getString("_UI_Activity_processRef_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_processRef_feature", "_UI_Activity_type"),
-				 VsdtPackage.Literals.ACTIVITY__PROCESS_REF,
-				 true,
-				 false,
-				 true,
-				 null,
-				 getString("_UI_SubprocessAttributesPropertyCategory"),
-				 null){
-			@Override
-			protected Collection<?> getComboBoxObjects(Object object) {
-				Activity activity= (Activity) object;
-				Collection<Pool> collection= new ArrayList<Pool>();
-				//null-value for de-selecting the process
-				collection.add(null);
-				//if a diagram reference is set, add the diagram's processes to the list 
-				if (activity.getDiagramRef() != null) {
-					BusinessProcessDiagram bpd= activity.getDiagramRef();
-					for (Pool pool : bpd.getPools()) {
-						if (pool.getParticipant() == activity.getPool().getParticipant()) {
-							collection.add(pool);
-						}
-					}
-				}
-				return collection;
-			}
-		};
-		itemPropertyDescriptors.add(propertyDescriptor);
-	}
 	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or

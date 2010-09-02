@@ -28,10 +28,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.Activity#getImplementation <em>Implementation</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getPerformers <em>Performers</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getScript <em>Script</em>}</li>
- *   <li>{@link de.dailab.vsdt.Activity#getActivityRef <em>Activity Ref</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getTransaction <em>Transaction</em>}</li>
- *   <li>{@link de.dailab.vsdt.Activity#getDiagramRef <em>Diagram Ref</em>}</li>
- *   <li>{@link de.dailab.vsdt.Activity#getProcessRef <em>Process Ref</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Activity#getCalledElement <em>Called Element</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getInputPropertyMaps <em>Input Property Maps</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getOutputPropertyMaps <em>Output Property Maps</em>}</li>
  * </ul>
@@ -312,32 +310,6 @@ public interface Activity extends FlowObject, AbstractProcess, FlowObjectContain
 	void setScript(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Activity Ref</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Activity Ref</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Activity Ref</em>' reference.
-	 * @see #setActivityRef(Activity)
-	 * @see de.dailab.vsdt.VsdtPackage#getActivity_ActivityRef()
-	 * @model
-	 * @generated
-	 */
-	Activity getActivityRef();
-
-	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Activity#getActivityRef <em>Activity Ref</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Activity Ref</em>' reference.
-	 * @see #getActivityRef()
-	 * @generated
-	 */
-	void setActivityRef(Activity value);
-
-	/**
 	 * Returns the value of the '<em><b>Transaction</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -364,56 +336,30 @@ public interface Activity extends FlowObject, AbstractProcess, FlowObjectContain
 	void setTransaction(Transaction value);
 
 	/**
-	 * Returns the value of the '<em><b>Diagram Ref</b></em>' reference.
+	 * Returns the value of the '<em><b>Called Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Diagram Ref</em>' reference isn't clear,
+	 * If the meaning of the '<em>Called Element</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Diagram Ref</em>' reference.
-	 * @see #setDiagramRef(BusinessProcessDiagram)
-	 * @see de.dailab.vsdt.VsdtPackage#getActivity_DiagramRef()
+	 * @return the value of the '<em>Called Element</em>' reference.
+	 * @see #setCalledElement(AbstractProcess)
+	 * @see de.dailab.vsdt.VsdtPackage#getActivity_CalledElement()
 	 * @model
 	 * @generated
 	 */
-	BusinessProcessDiagram getDiagramRef();
+	AbstractProcess getCalledElement();
 
 	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Activity#getDiagramRef <em>Diagram Ref</em>}' reference.
+	 * Sets the value of the '{@link de.dailab.vsdt.Activity#getCalledElement <em>Called Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Diagram Ref</em>' reference.
-	 * @see #getDiagramRef()
+	 * @param value the new value of the '<em>Called Element</em>' reference.
+	 * @see #getCalledElement()
 	 * @generated
 	 */
-	void setDiagramRef(BusinessProcessDiagram value);
-
-	/**
-	 * Returns the value of the '<em><b>Process Ref</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Process Ref</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Process Ref</em>' reference.
-	 * @see #setProcessRef(Pool)
-	 * @see de.dailab.vsdt.VsdtPackage#getActivity_ProcessRef()
-	 * @model
-	 * @generated
-	 */
-	Pool getProcessRef();
-
-	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Activity#getProcessRef <em>Process Ref</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Process Ref</em>' reference.
-	 * @see #getProcessRef()
-	 * @generated
-	 */
-	void setProcessRef(Pool value);
+	void setCalledElement(AbstractProcess value);
 
 	/**
 	 * Returns the value of the '<em><b>Input Property Maps</b></em>' containment reference list.

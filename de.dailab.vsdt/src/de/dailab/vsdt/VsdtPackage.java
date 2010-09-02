@@ -2252,40 +2252,22 @@ public interface VsdtPackage extends EPackage {
 	int ACTIVITY__SCRIPT = FLOW_OBJECT_FEATURE_COUNT + 15;
 
 	/**
-	 * The feature id for the '<em><b>Activity Ref</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTIVITY__ACTIVITY_REF = FLOW_OBJECT_FEATURE_COUNT + 16;
-
-	/**
 	 * The feature id for the '<em><b>Transaction</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__TRANSACTION = FLOW_OBJECT_FEATURE_COUNT + 17;
+	int ACTIVITY__TRANSACTION = FLOW_OBJECT_FEATURE_COUNT + 16;
 
 	/**
-	 * The feature id for the '<em><b>Diagram Ref</b></em>' reference.
+	 * The feature id for the '<em><b>Called Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__DIAGRAM_REF = FLOW_OBJECT_FEATURE_COUNT + 18;
-
-	/**
-	 * The feature id for the '<em><b>Process Ref</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTIVITY__PROCESS_REF = FLOW_OBJECT_FEATURE_COUNT + 19;
+	int ACTIVITY__CALLED_ELEMENT = FLOW_OBJECT_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Input Property Maps</b></em>' containment reference list.
@@ -2294,7 +2276,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__INPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 20;
+	int ACTIVITY__INPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Output Property Maps</b></em>' containment reference list.
@@ -2303,7 +2285,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__OUTPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 21;
+	int ACTIVITY__OUTPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 19;
 
 	/**
 	 * The number of structural features of the '<em>Activity</em>' class.
@@ -2312,7 +2294,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 22;
+	int ACTIVITY_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -4558,17 +4540,6 @@ public interface VsdtPackage extends EPackage {
 	EAttribute getActivity_Script();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.dailab.vsdt.Activity#getActivityRef <em>Activity Ref</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Activity Ref</em>'.
-	 * @see de.dailab.vsdt.Activity#getActivityRef()
-	 * @see #getActivity()
-	 * @generated
-	 */
-	EReference getActivity_ActivityRef();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link de.dailab.vsdt.Activity#getTransaction <em>Transaction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4580,26 +4551,15 @@ public interface VsdtPackage extends EPackage {
 	EReference getActivity_Transaction();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.dailab.vsdt.Activity#getDiagramRef <em>Diagram Ref</em>}'.
+	 * Returns the meta object for the reference '{@link de.dailab.vsdt.Activity#getCalledElement <em>Called Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Diagram Ref</em>'.
-	 * @see de.dailab.vsdt.Activity#getDiagramRef()
+	 * @return the meta object for the reference '<em>Called Element</em>'.
+	 * @see de.dailab.vsdt.Activity#getCalledElement()
 	 * @see #getActivity()
 	 * @generated
 	 */
-	EReference getActivity_DiagramRef();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.dailab.vsdt.Activity#getProcessRef <em>Process Ref</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Process Ref</em>'.
-	 * @see de.dailab.vsdt.Activity#getProcessRef()
-	 * @see #getActivity()
-	 * @generated
-	 */
-	EReference getActivity_ProcessRef();
+	EReference getActivity_CalledElement();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.Activity#getInputPropertyMaps <em>Input Property Maps</em>}'.
@@ -6378,14 +6338,6 @@ public interface VsdtPackage extends EPackage {
 		EAttribute ACTIVITY__SCRIPT = eINSTANCE.getActivity_Script();
 
 		/**
-		 * The meta object literal for the '<em><b>Activity Ref</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACTIVITY__ACTIVITY_REF = eINSTANCE.getActivity_ActivityRef();
-
-		/**
 		 * The meta object literal for the '<em><b>Transaction</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6394,20 +6346,12 @@ public interface VsdtPackage extends EPackage {
 		EReference ACTIVITY__TRANSACTION = eINSTANCE.getActivity_Transaction();
 
 		/**
-		 * The meta object literal for the '<em><b>Diagram Ref</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Called Element</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ACTIVITY__DIAGRAM_REF = eINSTANCE.getActivity_DiagramRef();
-
-		/**
-		 * The meta object literal for the '<em><b>Process Ref</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACTIVITY__PROCESS_REF = eINSTANCE.getActivity_ProcessRef();
+		EReference ACTIVITY__CALLED_ELEMENT = eINSTANCE.getActivity_CalledElement();
 
 		/**
 		 * The meta object literal for the '<em><b>Input Property Maps</b></em>' containment reference list feature.

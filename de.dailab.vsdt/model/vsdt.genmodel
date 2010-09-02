@@ -37,8 +37,7 @@
       <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/SCRIPT"/>
       <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/BUSINESSRULE"/>
       <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/EMBEDDED"/>
-      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/INDEPENDENT"/>
-      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/REFERENCE"/>
+      <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//ActivityType/CALL"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="vsdt.ecore#//LoopType">
       <genEnumLiterals ecoreEnumLiteral="vsdt.ecore#//LoopType/NONE"/>
@@ -199,10 +198,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/implementation"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/performers"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/script"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/activityRef"/>
       <genFeatures property="Readonly" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/transaction"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/diagramRef"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/processRef"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/calledElement"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/inputPropertyMaps"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/outputPropertyMaps"/>
       <genOperations ecoreOperation="vsdt.ecore#//Activity/initializeInputSet"/>

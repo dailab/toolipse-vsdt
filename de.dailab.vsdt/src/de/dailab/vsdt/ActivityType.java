@@ -109,22 +109,14 @@ public enum ActivityType implements Enumerator {
 	EMBEDDED(8, "EMBEDDED", "EMBEDDED"),
 
 	/**
-	 * The '<em><b>INDEPENDENT</b></em>' literal object.
+	 * The '<em><b>CALL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #INDEPENDENT_VALUE
+	 * @see #CALL_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	INDEPENDENT(9, "INDEPENDENT", "INDEPENDENT"), /**
-	 * The '<em><b>REFERENCE</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #REFERENCE_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	REFERENCE(10, "REFERENCE", "REFERENCE");
+	CALL(9, "CALL", "CALL");
 
 	/**
 	 * The '<em><b>NONE</b></em>' literal value.
@@ -262,34 +254,19 @@ public enum ActivityType implements Enumerator {
 	public static final int EMBEDDED_VALUE = 8;
 
 	/**
-	 * The '<em><b>INDEPENDENT</b></em>' literal value.
+	 * The '<em><b>CALL</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>INDEPENDENT</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>CALL</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #INDEPENDENT
+	 * @see #CALL
 	 * @model
 	 * @generated
 	 * @ordered
 	 */
-	public static final int INDEPENDENT_VALUE = 9;
-
-	/**
-	 * The '<em><b>REFERENCE</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>REFERENCE</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #REFERENCE
-	 * @model
-	 * @generated
-	 * @ordered
-	 */
-	public static final int REFERENCE_VALUE = 10;
+	public static final int CALL_VALUE = 9;
 
 	/**
 	 * An array of all the '<em><b>Activity Type</b></em>' enumerators.
@@ -308,8 +285,7 @@ public enum ActivityType implements Enumerator {
 			SCRIPT,
 			BUSINESSRULE,
 			EMBEDDED,
-			INDEPENDENT,
-			REFERENCE,
+			CALL,
 		};
 
 	/**
@@ -369,8 +345,7 @@ public enum ActivityType implements Enumerator {
 			case SCRIPT_VALUE: return SCRIPT;
 			case BUSINESSRULE_VALUE: return BUSINESSRULE;
 			case EMBEDDED_VALUE: return EMBEDDED;
-			case INDEPENDENT_VALUE: return INDEPENDENT;
-			case REFERENCE_VALUE: return REFERENCE;
+			case CALL_VALUE: return CALL;
 		}
 		return null;
 	}

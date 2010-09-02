@@ -24,7 +24,6 @@ import de.dailab.vsdt.AbstractProcess;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.Association;
-import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.DataObject;
 import de.dailab.vsdt.DirectionType;
 import de.dailab.vsdt.Expression;
@@ -36,7 +35,6 @@ import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.LoopAttributeSet;
 import de.dailab.vsdt.Message;
 import de.dailab.vsdt.OutputSet;
-import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.Transaction;
 import de.dailab.vsdt.TriggerType;
@@ -67,10 +65,8 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getImplementation <em>Implementation</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getPerformers <em>Performers</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getScript <em>Script</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getActivityRef <em>Activity Ref</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getTransaction <em>Transaction</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getDiagramRef <em>Diagram Ref</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getProcessRef <em>Process Ref</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getCalledElement <em>Called Element</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getInputPropertyMaps <em>Input Property Maps</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getOutputPropertyMaps <em>Output Property Maps</em>}</li>
  * </ul>
@@ -280,16 +276,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	protected String script = SCRIPT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getActivityRef() <em>Activity Ref</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getActivityRef()
-	 * @generated
-	 * @ordered
-	 */
-	protected Activity activityRef;
-
-	/**
 	 * The cached value of the '{@link #getTransaction() <em>Transaction</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -300,24 +286,14 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	protected Transaction transaction;
 
 	/**
-	 * The cached value of the '{@link #getDiagramRef() <em>Diagram Ref</em>}' reference.
+	 * The cached value of the '{@link #getCalledElement() <em>Called Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDiagramRef()
+	 * @see #getCalledElement()
 	 * @generated
 	 * @ordered
 	 */
-	protected BusinessProcessDiagram diagramRef;
-
-	/**
-	 * The cached value of the '{@link #getProcessRef() <em>Process Ref</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProcessRef()
-	 * @generated
-	 * @ordered
-	 */
-	protected Pool processRef;
+	protected AbstractProcess calledElement;
 
 	/**
 	 * The cached value of the '{@link #getInputPropertyMaps() <em>Input Property Maps</em>}' containment reference list.
@@ -732,44 +708,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Activity getActivityRef() {
-		if (activityRef != null && activityRef.eIsProxy()) {
-			InternalEObject oldActivityRef = (InternalEObject)activityRef;
-			activityRef = (Activity)eResolveProxy(oldActivityRef);
-			if (activityRef != oldActivityRef) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VsdtPackage.ACTIVITY__ACTIVITY_REF, oldActivityRef, activityRef));
-			}
-		}
-		return activityRef;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Activity basicGetActivityRef() {
-		return activityRef;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setActivityRef(Activity newActivityRef) {
-		Activity oldActivityRef = activityRef;
-		activityRef = newActivityRef;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ACTIVITY__ACTIVITY_REF, oldActivityRef, activityRef));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Transaction getTransaction() {
 		return transaction;
 	}
@@ -813,16 +751,16 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BusinessProcessDiagram getDiagramRef() {
-		if (diagramRef != null && diagramRef.eIsProxy()) {
-			InternalEObject oldDiagramRef = (InternalEObject)diagramRef;
-			diagramRef = (BusinessProcessDiagram)eResolveProxy(oldDiagramRef);
-			if (diagramRef != oldDiagramRef) {
+	public AbstractProcess getCalledElement() {
+		if (calledElement != null && calledElement.eIsProxy()) {
+			InternalEObject oldCalledElement = (InternalEObject)calledElement;
+			calledElement = (AbstractProcess)eResolveProxy(oldCalledElement);
+			if (calledElement != oldCalledElement) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VsdtPackage.ACTIVITY__DIAGRAM_REF, oldDiagramRef, diagramRef));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VsdtPackage.ACTIVITY__CALLED_ELEMENT, oldCalledElement, calledElement));
 			}
 		}
-		return diagramRef;
+		return calledElement;
 	}
 
 	/**
@@ -830,8 +768,8 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BusinessProcessDiagram basicGetDiagramRef() {
-		return diagramRef;
+	public AbstractProcess basicGetCalledElement() {
+		return calledElement;
 	}
 
 	/**
@@ -839,49 +777,11 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDiagramRef(BusinessProcessDiagram newDiagramRef) {
-		BusinessProcessDiagram oldDiagramRef = diagramRef;
-		diagramRef = newDiagramRef;
+	public void setCalledElement(AbstractProcess newCalledElement) {
+		AbstractProcess oldCalledElement = calledElement;
+		calledElement = newCalledElement;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ACTIVITY__DIAGRAM_REF, oldDiagramRef, diagramRef));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Pool getProcessRef() {
-		if (processRef != null && processRef.eIsProxy()) {
-			InternalEObject oldProcessRef = (InternalEObject)processRef;
-			processRef = (Pool)eResolveProxy(oldProcessRef);
-			if (processRef != oldProcessRef) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VsdtPackage.ACTIVITY__PROCESS_REF, oldProcessRef, processRef));
-			}
-		}
-		return processRef;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Pool basicGetProcessRef() {
-		return processRef;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setProcessRef(Pool newProcessRef) {
-		Pool oldProcessRef = processRef;
-		processRef = newProcessRef;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ACTIVITY__PROCESS_REF, oldProcessRef, processRef));
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ACTIVITY__CALLED_ELEMENT, oldCalledElement, calledElement));
 	}
 
 	/**
@@ -1093,17 +993,11 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				return getPerformers();
 			case VsdtPackage.ACTIVITY__SCRIPT:
 				return getScript();
-			case VsdtPackage.ACTIVITY__ACTIVITY_REF:
-				if (resolve) return getActivityRef();
-				return basicGetActivityRef();
 			case VsdtPackage.ACTIVITY__TRANSACTION:
 				return getTransaction();
-			case VsdtPackage.ACTIVITY__DIAGRAM_REF:
-				if (resolve) return getDiagramRef();
-				return basicGetDiagramRef();
-			case VsdtPackage.ACTIVITY__PROCESS_REF:
-				if (resolve) return getProcessRef();
-				return basicGetProcessRef();
+			case VsdtPackage.ACTIVITY__CALLED_ELEMENT:
+				if (resolve) return getCalledElement();
+				return basicGetCalledElement();
 			case VsdtPackage.ACTIVITY__INPUT_PROPERTY_MAPS:
 				return getInputPropertyMaps();
 			case VsdtPackage.ACTIVITY__OUTPUT_PROPERTY_MAPS:
@@ -1176,17 +1070,11 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 			case VsdtPackage.ACTIVITY__SCRIPT:
 				setScript((String)newValue);
 				return;
-			case VsdtPackage.ACTIVITY__ACTIVITY_REF:
-				setActivityRef((Activity)newValue);
-				return;
 			case VsdtPackage.ACTIVITY__TRANSACTION:
 				setTransaction((Transaction)newValue);
 				return;
-			case VsdtPackage.ACTIVITY__DIAGRAM_REF:
-				setDiagramRef((BusinessProcessDiagram)newValue);
-				return;
-			case VsdtPackage.ACTIVITY__PROCESS_REF:
-				setProcessRef((Pool)newValue);
+			case VsdtPackage.ACTIVITY__CALLED_ELEMENT:
+				setCalledElement((AbstractProcess)newValue);
 				return;
 			case VsdtPackage.ACTIVITY__INPUT_PROPERTY_MAPS:
 				getInputPropertyMaps().clear();
@@ -1256,17 +1144,11 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 			case VsdtPackage.ACTIVITY__SCRIPT:
 				setScript(SCRIPT_EDEFAULT);
 				return;
-			case VsdtPackage.ACTIVITY__ACTIVITY_REF:
-				setActivityRef((Activity)null);
-				return;
 			case VsdtPackage.ACTIVITY__TRANSACTION:
 				setTransaction((Transaction)null);
 				return;
-			case VsdtPackage.ACTIVITY__DIAGRAM_REF:
-				setDiagramRef((BusinessProcessDiagram)null);
-				return;
-			case VsdtPackage.ACTIVITY__PROCESS_REF:
-				setProcessRef((Pool)null);
+			case VsdtPackage.ACTIVITY__CALLED_ELEMENT:
+				setCalledElement((AbstractProcess)null);
 				return;
 			case VsdtPackage.ACTIVITY__INPUT_PROPERTY_MAPS:
 				getInputPropertyMaps().clear();
@@ -1318,14 +1200,10 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				return performers != null && !performers.isEmpty();
 			case VsdtPackage.ACTIVITY__SCRIPT:
 				return SCRIPT_EDEFAULT == null ? script != null : !SCRIPT_EDEFAULT.equals(script);
-			case VsdtPackage.ACTIVITY__ACTIVITY_REF:
-				return activityRef != null;
 			case VsdtPackage.ACTIVITY__TRANSACTION:
 				return transaction != null;
-			case VsdtPackage.ACTIVITY__DIAGRAM_REF:
-				return diagramRef != null;
-			case VsdtPackage.ACTIVITY__PROCESS_REF:
-				return processRef != null;
+			case VsdtPackage.ACTIVITY__CALLED_ELEMENT:
+				return calledElement != null;
 			case VsdtPackage.ACTIVITY__INPUT_PROPERTY_MAPS:
 				return inputPropertyMaps != null && !inputPropertyMaps.isEmpty();
 			case VsdtPackage.ACTIVITY__OUTPUT_PROPERTY_MAPS:

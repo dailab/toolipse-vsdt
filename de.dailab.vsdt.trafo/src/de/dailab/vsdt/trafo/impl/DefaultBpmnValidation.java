@@ -408,16 +408,9 @@ public class DefaultBpmnValidation extends MappingStage {
 			isOK&= testChild(visitMessage(activity.getOutMessage()),activity,vsdt.getActivity_OutMessage());
 			isOK&= testChild(visitImplementation(activity.getImplementation()),activity,vsdt.getActivity_Implementation());
 			break;
-		case ActivityType.REFERENCE_VALUE:
-			isOK&= test(activity.getActivityRef() != null,"Activity Reference Must not be null");
-			isOK&= test(activity.getActivityRef() != activity,"An Activity may not reference itself");
-			break;
-		case ActivityType.INDEPENDENT_VALUE:
-			BusinessProcessDiagram diagram= activity.getDiagramRef();
-			Pool process= activity.getProcessRef();
-			isOK&= test(diagram != null,"Diagram Reference must not be null");
-			isOK&= test(process != null,"Process Reference must not be null");
-			isOK&= test(process.getParent() == diagram, "Referenced Process must be part of Referenced Diagram");
+		case ActivityType.CALL_VALUE:
+			isOK&= test(activity.getCalledElement() != null,"Activity Reference Must not be null");
+			isOK&= test(activity.getCalledElement() != activity,"A Call Activity may not call itself");
 			break;
 		}
 		return isOK;

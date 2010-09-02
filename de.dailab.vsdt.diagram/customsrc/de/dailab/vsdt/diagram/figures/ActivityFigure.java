@@ -23,7 +23,7 @@ import de.dailab.vsdt.LoopType;
  * inspired by the GMF tutorial editor
  */
 public class ActivityFigure extends RoundedRectangle implements IDecoratableFigure {
-	
+
 	private LoopType loopType= LoopType.NONE;
 	
 	private ActivityType activityType= ActivityType.NONE;
@@ -39,6 +39,8 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 	private boolean hasAssignments= false;
 	
 	private boolean hasProperties= false;
+	
+	private boolean eventedSubprocess = false;
 	
 	private int depth= 0;
 	
@@ -153,6 +155,17 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 	public void paintFigure(Graphics g) {
 		super.paintFigure(g);
 		
+		// set border style
+
+		if ((activityType == ActivityType.EMBEDDED) && eventedSubprocess) {
+			this.setLineDash(new float[] {5, 5});
+			this.setLineStyle(SWT.LINE_CUSTOM);
+		} else {
+			this.setLineStyle(SWT.LINE_SOLID);
+			this.setLineDash(null);
+		}
+		this.setLineWidth(activityType == ActivityType.CALL ? 3 : 1);
+		
 		g.setLineStyle(SWT.LINE_SOLID);
 		
 		Rectangle b= getBounds();
@@ -207,19 +220,21 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 			int imgSize= 14;
 			int marginX= 3;
 			int marginY= 3;
-			Image icon= FigureHelper.getIcon(activityType.getName().toLowerCase());
-			if (icon != null) {
-				// marker at top-right corner (VSDT's own)
-				g.drawImage(icon, b.x + b.width - imgSize - marginX, b.y + marginY);
-				// marker at top-left corner (standard since BPMN 2.0)
-//				g.drawImage(icon, b.x + marginX, b.y + marginY);
+			if (activityType != ActivityType.NONE && activityType != ActivityType.EMBEDDED && activityType != ActivityType.CALL) {
+				Image icon= FigureHelper.getIcon(activityType.getName().toLowerCase());
+				if (icon != null) {
+					// marker at top-right corner (VSDT's own)
+					g.drawImage(icon, b.x + b.width - imgSize - marginX, b.y + marginY);
+					// marker at top-left corner (standard since BPMN 2.0)
+	//				g.drawImage(icon, b.x + marginX, b.y + marginY);
+				}
 			}
 			if (hasProperties) {
-				icon= FigureHelper.getIcon("property");
+				Image icon= FigureHelper.getIcon("property");
 				g.drawImage(icon, b.x + marginX, b.y + b.height - imgSize - marginY);
 			}
 			if (hasAssignments) {
-				icon= FigureHelper.getIcon("assignment");
+				Image icon= FigureHelper.getIcon("assignment");
 				g.drawImage(icon, b.x + b.width - imgSize - marginX, b.y + b.height - imgSize - marginY);
 			}
 		}
@@ -263,7 +278,8 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 	
 	public void setActivityType(ActivityType activityType) {
 		this.activityType= activityType;
-		isSubprocess= activityType == ActivityType.EMBEDDED || activityType == ActivityType.INDEPENDENT;
+		isSubprocess= activityType == ActivityType.EMBEDDED;
+		// TODO set subprocess flag also if called element is subprocess
 		this.createInnerFigures();
 	}
 	
@@ -290,13 +306,7 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 	}
 	
 	public void setEventedSubprocess(boolean isEventedSubprocess) {
-		if (isEventedSubprocess) {
-			this.setLineDash(new float[] {5, 5});
-			this.setLineStyle(SWT.LINE_CUSTOM);
-		} else {
-			this.setLineStyle(SWT.LINE_SOLID);
-			this.setLineDash(null);
-		}
+		this.eventedSubprocess = isEventedSubprocess;
 		repaint();
 	}
 	

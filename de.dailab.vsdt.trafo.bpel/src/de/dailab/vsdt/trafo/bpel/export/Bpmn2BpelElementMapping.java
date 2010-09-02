@@ -564,17 +564,21 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 			TActivity childActivity= visitFlowObjects(activity.getGraphicalElements());
 			((TScope)mapping).setActivity(childActivity);
 			break;
-		case REFERENCE:
+		case CALL:
 			//create copy of the mapping of the referenced activity
-			Activity ref= activity.getActivityRef();
-			//prevent infinite loop (in case of recursive-like references)
-			if (ref != activity && ! BpmnMappingHelper.isParentOrEqual(ref, activity)) {
-				EObject mappedRef= (EObject) wrapper.getMapping(ref);
-				if (mappedRef != null) {
-					mapping= (TActivity) EcoreUtil.copy(mappedRef);
-				} else {
-					mapping= visitActivity(ref);
+			if (activity.getCalledElement() instanceof Activity) {
+				Activity otherAct = (Activity) activity.getCalledElement();
+				//prevent infinite loop (in case of recursive-like references)
+				if (otherAct != activity && ! BpmnMappingHelper.isParentOrEqual(otherAct, activity)) {
+					EObject mappedRef= (EObject) wrapper.getMapping(otherAct);
+					if (mappedRef != null) {
+						mapping= (TActivity) EcoreUtil.copy(mappedRef);
+					} else {
+						mapping= visitActivity(otherAct);
+					}
 				}
+			} else {
+				TrafoLog.nyi("Call Activity calling another Process (formerly Independent Subprocess)");
 			}
 			break;
 		case RECEIVE:
@@ -599,9 +603,8 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 			// TODO distinguish mapping of USER and SERVICE task
 			mapping= createInvoke(activity.getInMessage(),activity.getOutMessage(),activity.getImplementation());
 			break;
-		case INDEPENDENT:
 		case SCRIPT:
-			// TODO: Implement missing mappings: INDEPENDENT, SCRIPT, USER
+			// TODO: Implement missing mappings: SCRIPT
 		default:
 			TrafoLog.warn("Unable to map " + activity.getActivityType() + " Activity " + activity.getNameOrId());
 		}

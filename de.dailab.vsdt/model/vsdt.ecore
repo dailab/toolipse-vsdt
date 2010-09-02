@@ -176,11 +176,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="performers" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="script" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="activityRef" eType="#//Activity"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="transaction" eType="#//Transaction"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="diagramRef" eType="#//BusinessProcessDiagram"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="processRef" eType="#//Pool"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calledElement" eType="#//AbstractProcess"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputPropertyMaps" upperBound="-1"
         eType="#//Expression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputPropertyMaps" upperBound="-1"
@@ -196,8 +194,7 @@
     <eLiterals name="SCRIPT" value="6"/>
     <eLiterals name="BUSINESSRULE" value="7"/>
     <eLiterals name="EMBEDDED" value="8"/>
-    <eLiterals name="INDEPENDENT" value="9"/>
-    <eLiterals name="REFERENCE" value="10"/>
+    <eLiterals name="CALL" value="9"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="LoopType">
     <eLiterals name="NONE"/>

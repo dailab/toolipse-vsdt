@@ -40,8 +40,8 @@ public class BpmnMappingHelper {
 			}
 			if (parent instanceof Activity) {
 				Activity act = (Activity) parent;
-				if (act.getActivityRef() != null) {
-					children.add(act.getActivityRef());
+				if (act.getCalledElement() instanceof Activity) {
+					children.add((Activity) act.getCalledElement());
 				}
 			}
 			for (FlowObject fo : children) {

@@ -390,15 +390,15 @@ public class Bpmn2JiacElementMapping extends MappingStage implements JiacVisitor
 //			mapping= jadlFac.createStepModel();
 //			((StepModel)mapping).setPecall(assistant.createPlanelementCallModel(activity.getActivityRef().getName()));
 //			break;
-		case INDEPENDENT:
-			if (activity.getProcessRef() != null) {
-				String procName= activity.getProcessRef() + "_act";
-				PlanelementCallModel peCall= jadlFac.createPlanelementCallModel();
-				peCall.setPlanelement(procName);
-				mapping= peCall;
-				//TODO input and output property maps: map to parameters? would need to be in synch with the actual process parameters... 
-			}
-			break;
+//		case INDEPENDENT:
+//			if (activity.getProcessRef() != null) {
+//				String procName= activity.getProcessRef() + "_act";
+//				PlanelementCallModel peCall= jadlFac.createPlanelementCallModel();
+//				peCall.setPlanelement(procName);
+//				mapping= peCall;
+//				//TODO input and output property maps: map to parameters? would need to be in synch with the actual process parameters... 
+//			}
+//			break;
 		case RECEIVE:
 			ReceiveSpeechactModel receiveModel= assistant.createReceiveSpeechact(name,(JADLFileModel)wrapper.getMapping(activity.getPool()));
 			mapping= assistant.createPlanelementCallModel(receiveModel.getName());
@@ -410,9 +410,9 @@ public class Bpmn2JiacElementMapping extends MappingStage implements JiacVisitor
 		case SCRIPT:
 			mapping= JiacMiniParser.parseScript(activity.getScript());
 			break;
-		case REFERENCE:
-			if (activity.getActivityRef() != activity) {
-				return visitActivity(activity.getActivityRef());	
+		case CALL:
+			if (activity.getCalledElement() != activity && activity.getCalledElement() instanceof Activity) {
+				return visitActivity((Activity) activity.getCalledElement());	
 			}
 			break;
 		default: 
