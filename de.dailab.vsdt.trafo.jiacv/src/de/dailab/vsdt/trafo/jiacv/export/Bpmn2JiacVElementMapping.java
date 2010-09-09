@@ -505,7 +505,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			Invoke invoke= jadlFac.createInvoke();
 			// set name of action to be invoked according to the implementation
 			invoke.setAction(activity.getImplementation().getOperation());
-			invoke.setNamespace(activity.getImplementation().getInterface());
+//			invoke.setNamespace(activity.getImplementation().getInterface());
 			// set input and output variables according to message variables
 			for (Property property : activity.getInMessage().getProperties()) {
 				if (useMAMSspecials) {
@@ -518,8 +518,10 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 				invoke.getReturnVariables().add(jef.createVariable(property.getName()).getName());
 			}
 			// move copy of message variables to the activity itself, so they are added to the scope
-			activity.getProperties().addAll(EcoreUtil.copyAll(activity.getInMessage().getProperties()));
-			activity.getProperties().addAll(EcoreUtil.copyAll(activity.getOutMessage().getProperties()));
+//			activity.getProperties().addAll(EcoreUtil.copyAll(activity.getInMessage().getProperties()));
+//			activity.getProperties().addAll(EcoreUtil.copyAll(activity.getOutMessage().getProperties()));
+			properties.addAll(activity.getInMessage().getProperties());
+			properties.addAll(activity.getOutMessage().getProperties());
 			mapping= invoke;
 			break;
 		case EMBEDDED:
