@@ -3,8 +3,7 @@
   <vsdt:BusinessProcessSystem xmi:id="_VL0nEA81Ed-yXs5VEidJCQ" name="EnEffCo Example Diagram" id="_VLw8sA81Ed-yXs5VEidJCQ" version="0.1" author="Tobias Küster" expressionLanguage="VSDT Expression Language" creationDate="2010-02-01T14:25:57.371+0100" modificationDate="2010-02-01T14:25:57.371+0100">
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_qMUv8Q82Ed-yXs5VEidJCQ" name="Beispielprozess" id="_qMUv8A82Ed-yXs5VEidJCQ" participants="_odyxkQ82Ed-yXs5VEidJCQ">
       <pools xmi:type="vsdt:Pool" xmi:id="_vxQYIQ82Ed-yXs5VEidJCQ" name="Cabrioinsel" id="_vxQYIA82Ed-yXs5VEidJCQ" participant="_odyxkQ82Ed-yXs5VEidJCQ">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_vxUCgQ82Ed-yXs5VEidJCQ" name="Cabrioinsel_Process" id="_vxUCgA82Ed-yXs5VEidJCQ"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_vxSNUQ82Ed-yXs5VEidJCQ" id="_vxSNUA82Ed-yXs5VEidJCQ" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_vxSNUQ82Ed-yXs5VEidJCQ" id="_vxSNUA82Ed-yXs5VEidJCQ" >
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_xsANkA82Ed-yXs5VEidJCQ" id="_xr_mgA82Ed-yXs5VEidJCQ"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_qjqnAQ84Ed-yXs5VEidJCQ" id="_qjqnAA84Ed-yXs5VEidJCQ" gatewayType="AND"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_rbJBkQ84Ed-yXs5VEidJCQ" name="Fahrgestell fertigen" id="_rbJBkA84Ed-yXs5VEidJCQ" activityType="EMBEDDED"/>
@@ -33,8 +32,7 @@
     </businessProcesses>
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_thkbcR-zEd-jx-DVG1eejg" name="Steuerungsprozess" id="_thkbcB-zEd-jx-DVG1eejg" participants="_r5SPAB-zEd-jx-DVG1eejg">
       <pools xmi:type="vsdt:Pool" xmi:id="_ylsoQSFWEd-HkcLz_uY-DQ" name="Steuerung" id="_ylsoQCFWEd-HkcLz_uY-DQ" participant="_r5SPAB-zEd-jx-DVG1eejg">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_ylt2YyFWEd-HkcLz_uY-DQ" name="Steuerung_Process" id="_ylt2YiFWEd-HkcLz_uY-DQ"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_ylt2YSFWEd-HkcLz_uY-DQ" id="_ylt2YCFWEd-HkcLz_uY-DQ" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_ylt2YSFWEd-HkcLz_uY-DQ" id="_ylt2YCFWEd-HkcLz_uY-DQ" >
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_0uTTgSFWEd-HkcLz_uY-DQ" id="_0uTTgCFWEd-HkcLz_uY-DQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_1zhPISFWEd-HkcLz_uY-DQ" name="Energiepreise erfragen" id="_1zhPICFWEd-HkcLz_uY-DQ"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_ED8gcSFaEd-HkcLz_uY-DQ" name="Scheduling: ermittle zu startende Prozesse" id="_ED8gcCFaEd-HkcLz_uY-DQ"/>
@@ -51,28 +49,20 @@
     </businessProcesses>
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_JOfOcB-0Ed-jx-DVG1eejg" name="Strom einspeisen" id="_JOenYB-0Ed-jx-DVG1eejg" participants="_85JCYR-zEd-jx-DVG1eejg">
       <pools xmi:type="vsdt:Pool" xmi:id="_kwd4kR-7Ed-jx-DVG1eejg" name="BHKW" id="_kwd4kB-7Ed-jx-DVG1eejg" participant="_85JCYR-zEd-jx-DVG1eejg">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_kwfGsR-7Ed-jx-DVG1eejg" name="BHKW_Process" id="_kwfGsB-7Ed-jx-DVG1eejg"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_kwefoR-7Ed-jx-DVG1eejg" id="_kwefoB-7Ed-jx-DVG1eejg" boundaryVisible="false"/>
+        <lanes xmi:type="vsdt:Lane" xmi:id="_kwefoR-7Ed-jx-DVG1eejg" id="_kwefoB-7Ed-jx-DVG1eejg" />
       </pools>
     </businessProcesses>
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_Kb1yYR-0Ed-jx-DVG1eejg" name="Teile transportieren" id="_Kb1yYB-0Ed-jx-DVG1eejg" participants="_zUDXcR-zEd-jx-DVG1eejg _1pIYcR-zEd-jx-DVG1eejg _0rWhkR-zEd-jx-DVG1eejg">
       <pools xmi:type="vsdt:Pool" xmi:id="_h7hrwR-7Ed-jx-DVG1eejg" name="Halteroboter" id="_h7hrwB-7Ed-jx-DVG1eejg" participant="_zUDXcR-zEd-jx-DVG1eejg">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_h7kIAx-7Ed-jx-DVG1eejg" name="Halteroboter_Process" id="_h7kIAh-7Ed-jx-DVG1eejg"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_h7kIAR-7Ed-jx-DVG1eejg" id="_h7kIAB-7Ed-jx-DVG1eejg" boundaryVisible="false"/>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_h72b4R-7Ed-jx-DVG1eejg" name="Förderband" id="_h72b4B-7Ed-jx-DVG1eejg" participant="_1pIYcR-zEd-jx-DVG1eejg">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_h73C8x-7Ed-jx-DVG1eejg" name="Förderband_Process" id="_h73C8h-7Ed-jx-DVG1eejg"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_h73C8R-7Ed-jx-DVG1eejg" id="_h73C8B-7Ed-jx-DVG1eejg" boundaryVisible="false"/>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_h8IvwR-7Ed-jx-DVG1eejg" name="Gabelstapler" id="_h8IvwB-7Ed-jx-DVG1eejg" participant="_0rWhkR-zEd-jx-DVG1eejg">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_h8JW0x-7Ed-jx-DVG1eejg" name="Gabelstapler_Process" id="_h8JW0h-7Ed-jx-DVG1eejg"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_h8JW0R-7Ed-jx-DVG1eejg" id="_h8JW0B-7Ed-jx-DVG1eejg" boundaryVisible="false"/>
       </pools>
     </businessProcesses>
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_OicbYR-0Ed-jx-DVG1eejg" name="Teile verschweißen" id="_OicbYB-0Ed-jx-DVG1eejg" participants="_xhiQ8B-zEd-jx-DVG1eejg _zUDXcR-zEd-jx-DVG1eejg">
       <pools xmi:type="vsdt:Pool" xmi:id="_l-l4kR-7Ed-jx-DVG1eejg" name="Schweißroboter" id="_l-l4kB-7Ed-jx-DVG1eejg" participant="_xhiQ8B-zEd-jx-DVG1eejg">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_l-ntwx-7Ed-jx-DVG1eejg" name="Schweißroboter_Process" id="_l-ntwh-7Ed-jx-DVG1eejg"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_l-ntwR-7Ed-jx-DVG1eejg" id="_l-ntwB-7Ed-jx-DVG1eejg" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_l-ntwR-7Ed-jx-DVG1eejg" id="_l-ntwB-7Ed-jx-DVG1eejg" >
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_n8qHwR-7Ed-jx-DVG1eejg" id="_n8qHwB-7Ed-jx-DVG1eejg"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_pv3x0R-7Ed-jx-DVG1eejg" name="Teil anfordern" id="_pv3x0B-7Ed-jx-DVG1eejg"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_qwHG0R-7Ed-jx-DVG1eejg" name="Arm in Position bringen" id="_qwHG0B-7Ed-jx-DVG1eejg"/>
@@ -84,8 +74,7 @@
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_l-vCgR-7Ed-jx-DVG1eejg" name="Halteroboter" id="_l-vCgB-7Ed-jx-DVG1eejg" participant="_zUDXcR-zEd-jx-DVG1eejg">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_l-vChR-7Ed-jx-DVG1eejg" name="Halteroboter_Process" id="_l-vChB-7Ed-jx-DVG1eejg"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_l-vCgx-7Ed-jx-DVG1eejg" id="_l-vCgh-7Ed-jx-DVG1eejg" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_l-vCgx-7Ed-jx-DVG1eejg" id="_l-vCgh-7Ed-jx-DVG1eejg" >
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_Amj1sR-8Ed-jx-DVG1eejg" id="_Amj1sB-8Ed-jx-DVG1eejg" trigger="MESSAGE"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_K_BeUB-8Ed-jx-DVG1eejg" name="Teil Halten" id="_K_A3QB-8Ed-jx-DVG1eejg" activityType="EMBEDDED">
             <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_N-dq8R-8Ed-jx-DVG1eejg" name="Teil in Position bringen" id="_N-dq8B-8Ed-jx-DVG1eejg"/>
@@ -121,8 +110,7 @@
     </businessProcesses>
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_RUvj4R-0Ed-jx-DVG1eejg" name="G.Stapler aufladen" id="_RUvj4B-0Ed-jx-DVG1eejg" participants="_2plv4R-zEd-jx-DVG1eejg _0rWhkR-zEd-jx-DVG1eejg">
       <pools xmi:type="vsdt:Pool" xmi:id="_7LVf8R-3Ed-jx-DVG1eejg" name="Ladestation" id="_7LVf8B-3Ed-jx-DVG1eejg" participant="_2plv4R-zEd-jx-DVG1eejg">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_7LX8Mx-3Ed-jx-DVG1eejg" name="Ladestation_Process" id="_7LX8Mh-3Ed-jx-DVG1eejg"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_7LX8MR-3Ed-jx-DVG1eejg" id="_7LX8MB-3Ed-jx-DVG1eejg" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_7LX8MR-3Ed-jx-DVG1eejg" id="_7LX8MB-3Ed-jx-DVG1eejg" >
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_a5KjoR-4Ed-jx-DVG1eejg" id="_a5KjoB-4Ed-jx-DVG1eejg" trigger="MESSAGE"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_nS8jwB-4Ed-jx-DVG1eejg" name="Antworten" id="_nS78sB-4Ed-jx-DVG1eejg"/>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_qxaOsR-4Ed-jx-DVG1eejg" id="_qxaOsB-4Ed-jx-DVG1eejg"/>
@@ -132,8 +120,7 @@
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_7MJ_UR-3Ed-jx-DVG1eejg" name="Gabelstapler" id="_7MJ_UB-3Ed-jx-DVG1eejg" participant="_0rWhkR-zEd-jx-DVG1eejg">
-        <process xmi:type="vsdt:BpmnProcess" xmi:id="_7MKmYx-3Ed-jx-DVG1eejg" name="Gabelstapler_Process" id="_7MKmYh-3Ed-jx-DVG1eejg"/>
-        <lanes xmi:type="vsdt:Lane" xmi:id="_7MKmYR-3Ed-jx-DVG1eejg" id="_7MKmYB-3Ed-jx-DVG1eejg" boundaryVisible="false">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_7MKmYR-3Ed-jx-DVG1eejg" id="_7MKmYB-3Ed-jx-DVG1eejg" >
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_9OxXUR-3Ed-jx-DVG1eejg" id="_9OxXUB-3Ed-jx-DVG1eejg"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_9wRh4R-3Ed-jx-DVG1eejg" name="Ladestation anfahren" id="_9wRh4B-3Ed-jx-DVG1eejg"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_Qr76oR-4Ed-jx-DVG1eejg" name="Anfrage" id="_Qr76oB-4Ed-jx-DVG1eejg"/>
