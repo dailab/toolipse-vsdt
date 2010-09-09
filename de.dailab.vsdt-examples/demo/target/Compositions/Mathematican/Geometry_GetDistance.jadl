@@ -1,0 +1,38 @@
+node
+
+service Geometry_GetDistance_RectwoPoints ( in $p1x : double $p1y : double $p2x : double $p2y : double ) ( out $message : string $distance :
+double ) {
+    var $x1 : double ;
+    var $x2 : double ;
+    var $y1 : double ;
+    var $y2 : double ;
+    var $dx : double ;
+    var $dy : double ;
+    var $d : double ;
+    {
+        {
+            $x1 = $p1x ;
+            $y1 = $p1y ;
+            $x2 = $p2x ;
+            $y2 = $p2y ;
+        }
+        {
+            print "Executing CalculateManhattanDistances" ;
+            $dx = $x2 - $x1 ;
+            $dy = $y2 - $y1 ;
+        }
+        {
+            var $arg0 : double ;
+            var $arg1 : double ;
+            var $res0 : double ;
+            var $res1 : string ;
+            $arg0 = $dx * $dx + $dy * $dy ;
+            $arg1 = 0.01 ;
+            invoke ExtractRoot_Mathematican_start ( $arg0 $arg1 ) ( $res0 $res1 ) ; $d = $res0 ;
+        }
+        {
+            $message = "Distance is " + $d ;
+            $distance = $d ;
+        }
+    }
+}

@@ -1,0 +1,36 @@
+node
+
+service Geometry_GetNorm_RectwoPoints ( in $p1x : double $p1y : double $p2x : double $p2y : double ) ( out $message : string $norm_x : double
+$norm_y : double ) {
+    var $x1 : double ;
+    var $x2 : double ;
+    var $y1 : double ;
+    var $y2 : double ;
+    var $d : double ;
+    {
+        {
+            $x1 = $p1x ;
+            $y1 = $p1y ;
+            $x2 = $p2x ;
+            $y2 = $p2y ;
+        }
+        {
+            var $arg0 : double ;
+            var $arg1 : double ;
+            var $arg2 : double ;
+            var $arg3 : double ;
+            var $res0 : string ;
+            var $res1 : double ;
+            $arg0 = $x1 ;
+            $arg1 = $y1 ;
+            $arg2 = $x2 ;
+            $arg3 = $y2 ;
+            invoke Geometry_GetDistance_RectwoPoints ( $arg0 $arg1 $arg2 $arg3 ) ( $res0 $res1 ) ; $d = $res1 ;
+        }
+        {
+            $message = "Norm of the two Points is..." ;
+            $norm_x = ( $x2 - $x1 ) / $d ;
+            $norm_y = ( $y2 - $y1 ) / $d ;
+        }
+    }
+}

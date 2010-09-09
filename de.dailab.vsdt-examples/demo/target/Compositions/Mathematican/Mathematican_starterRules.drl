@@ -1,0 +1,35 @@
+package foo; // TODO package declaration
+
+# Standard imports
+import java.io.Serializable;
+import de.dailab.jiactng.agentcore.action.Action;
+import de.dailab.jiactng.agentcore.action.DoAction;
+import de.dailab.jiactng.agentcore.comm.message.IJiacMessage;
+import de.dailab.jiactng.ruleengine.timer.TimeFact;
+
+# Domain imports
+
+rule "Geometry_GetDistance_RectwoPoints"
+when
+	action : Action( name == "Geometry_GetDistance_RectwoPoints")
+	jiacMessage : IJiacMessage()
+	eval("mathematican_getdistancerequest".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
+	p1x : double() from jiacMessage.payload
+then
+	System.out.println("RULE Geometry_GetDistance_RectwoPoints" fired);
+	insert( new DoAction(action, null, new Serializable[] { p1x }) );
+	retract( jiacMessage);
+end
+
+rule "Geometry_GetNorm_RectwoPoints"
+when
+	action : Action( name == "Geometry_GetNorm_RectwoPoints")
+	jiacMessage : IJiacMessage()
+	eval("mathematican_getdistancerequest".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))
+	p1x : double() from jiacMessage.payload
+then
+	System.out.println("RULE Geometry_GetNorm_RectwoPoints" fired);
+	insert( new DoAction(action, null, new Serializable[] { p1x }) );
+	retract( jiacMessage);
+end
+
