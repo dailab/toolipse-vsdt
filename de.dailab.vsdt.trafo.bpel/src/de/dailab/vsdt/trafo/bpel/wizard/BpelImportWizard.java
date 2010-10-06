@@ -1,5 +1,7 @@
 package de.dailab.vsdt.trafo.bpel.wizard;
 
+import java.util.ArrayList;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -10,6 +12,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.xmlsoap.schemas.ws._2003._03.business.process.DocumentRoot;
 import org.xmlsoap.schemas.ws._2003._03.business.process.util.ProcessResourceFactoryImpl;
 
+import de.dailab.vsdt.trafo.MappingStage;
 import de.dailab.vsdt.trafo.bpel.imprt.Bpel2BpmnElementMapping;
 import de.dailab.vsdt.trafo.impl.BpmnResultSaver;
 import de.dailab.vsdt.trafo.strucbpmn.imprt.StrucBpmn2BpmnStructureMapping;
@@ -27,6 +30,7 @@ public class BpelImportWizard extends BpmnImportWizard {
 	
 	@Override
 	protected void initializeMappingStages() {
+		mappingStages = new ArrayList<MappingStage>();
 		mappingStages.add(elementMapping= new Bpel2BpmnElementMapping());
 		mappingStages.add(new StrucBpmn2BpmnStructureMapping());
 		
@@ -60,7 +64,7 @@ public class BpelImportWizard extends BpmnImportWizard {
 	}
 	
 	@Override
-	protected Object getSouceObject(URI fileURI) {
+	public Object getSouceObject(URI fileURI) {
 
 		ResourceSet resourceSet= new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("bpel", new ProcessResourceFactoryImpl());

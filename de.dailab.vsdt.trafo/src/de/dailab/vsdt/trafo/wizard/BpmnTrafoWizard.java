@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -55,7 +55,7 @@ public abstract class BpmnTrafoWizard extends Wizard {
 	protected IStructuredSelection selection= new StructuredSelection();
 	
 	/** these classes handle the transformation itself*/
-	protected List<MappingStage> mappingStages= new ArrayList<MappingStage>();
+	protected List<MappingStage> mappingStages= null;
 	
 	/** this class handles saving the result of the transformation*/
 	protected MappingResultSaver resultSaver= null;
@@ -119,7 +119,6 @@ public abstract class BpmnTrafoWizard extends Wizard {
 	 */
 	@Override
 	public boolean performFinish() {
-		initializeMappingStages();
 		applyOptions();
 
 		ConsoleUtil.registerConsole(VSDT_TRAFO_CONSOLE);
@@ -137,7 +136,9 @@ public abstract class BpmnTrafoWizard extends Wizard {
 					public void run(IProgressMonitor monitor) {
 
 						// Transform!
-						boolean trafoOk= performTransformation(getSouceObject(fileURI));
+						Object sourceObject = getSouceObject(fileURI);
+						String targetDirectory = optionsPage.getPath() + FS + "target" + FS + getModelName(sourceObject) + FS;
+						boolean trafoOk= performTransformation(sourceObject, targetDirectory);
 
 						// show dialog
 						String logMsg = TrafoLog.getBufferedMessages();
@@ -195,16 +196,20 @@ public abstract class BpmnTrafoWizard extends Wizard {
 	 * {@link MappingStage} to the next. Finally, the results are saved using a 
 	 * {@link MappingResultSaver}.
 	 * 
-	 * @param source	source object for which to perform the transformation
-	 * @return			transformation successful?
+	 * @param source			source object for which to perform the transformation
+	 * @param targetDirectory	target directory (absolute)
+	 * @return					transformation successful?
 	 */
-	protected boolean performTransformation(Object source) {
-		
+	public boolean performTransformation(Object source, String targetDirectory) {
+		if (mappingStages == null) {
+			initializeMappingStages();
+		}
+
 		// preparing transformation
 		TrafoLog.reset();
-		TrafoLog.setLogLevel(optionsPage.getLogLevel());
-		File baseDir= new File(optionsPage.getPath() + FS + "target" + FS + getModelName(source) + FS);
-		if (optionsPage.getCreateLog()) {
+		TrafoLog.setLogLevel(optionsPage != null ? optionsPage.getLogLevel() : Level.INFO.toString());
+		File baseDir= new File(targetDirectory);
+		if (optionsPage != null && optionsPage.getCreateLog()) {
 			String logFile= getModelName(source) + ".log";
 			TrafoLog.addFileAppender(new File(baseDir,logFile).getAbsolutePath());
 		}
@@ -241,7 +246,7 @@ public abstract class BpmnTrafoWizard extends Wizard {
 	 * @param fileURI	URI of the source file
 	 * @return			Source model instance
 	 */
-	protected Object getSouceObject(URI fileURI) {
+	public Object getSouceObject(URI fileURI) {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		
 		Resource resource = resourceSet.getResource(fileURI, true);

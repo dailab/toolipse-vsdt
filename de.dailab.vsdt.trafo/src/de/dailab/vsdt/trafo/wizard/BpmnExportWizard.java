@@ -52,7 +52,7 @@ public abstract class BpmnExportWizard extends BpmnTrafoWizard implements IExpor
 	 * vsdtd files now contain both the model and the diagram. return the model.
 	 */
 	@Override
-	protected Object getSouceObject(URI fileURI) {
+	public Object getSouceObject(URI fileURI) {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource resource = resourceSet.getResource(fileURI, true);
 		for (EObject content : resource.getContents()) {

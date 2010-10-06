@@ -1,8 +1,11 @@
 package de.dailab.vsdt.trafo.strucbpmn.wizards;
 
+import java.util.ArrayList;
+
 import org.eclipse.jface.viewers.IStructuredSelection;
 
 import de.dailab.vsdt.BusinessProcessDiagram;
+import de.dailab.vsdt.trafo.MappingStage;
 import de.dailab.vsdt.trafo.impl.BpmnResultSaver;
 import de.dailab.vsdt.trafo.strucbpmn.imprt.StrucBpmn2BpmnStructureMapping;
 import de.dailab.vsdt.trafo.wizard.BpmnImportWizard;
@@ -17,6 +20,7 @@ public class StrucBpmnImportWizard extends BpmnImportWizard {
 	
 	@Override
 	protected void initializeMappingStages() {
+		mappingStages = new ArrayList<MappingStage>();
 		mappingStages.add(new StrucBpmn2BpmnStructureMapping());
 		
 		resultSaver= new BpmnResultSaver();

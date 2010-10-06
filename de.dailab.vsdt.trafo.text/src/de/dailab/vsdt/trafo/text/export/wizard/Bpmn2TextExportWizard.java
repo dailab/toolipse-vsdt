@@ -1,8 +1,11 @@
 package de.dailab.vsdt.trafo.text.export.wizard;
 
+import java.util.ArrayList;
+
 import org.eclipse.jface.viewers.IStructuredSelection;
 
 import de.dailab.vsdt.BusinessProcessSystem;
+import de.dailab.vsdt.trafo.MappingStage;
 import de.dailab.vsdt.trafo.MappingWrapper;
 import de.dailab.vsdt.trafo.strucbpmn.export.Bpmn2StrucBpmnTransformation;
 import de.dailab.vsdt.trafo.text.export.stages.Bpmn2TextElementMapping;
@@ -20,6 +23,7 @@ public class Bpmn2TextExportWizard extends BpmnExportWizard {
 
 	@Override
 	protected void initializeMappingStages() {
+		mappingStages = new ArrayList<MappingStage>();
 		mappingStages.add(new Bpmn2StrucBpmnTransformation());
 		mappingStages.add(new Bpmn2TextElementMapping());
 		

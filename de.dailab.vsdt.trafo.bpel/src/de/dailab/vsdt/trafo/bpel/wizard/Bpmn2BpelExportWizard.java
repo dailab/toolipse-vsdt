@@ -1,7 +1,10 @@
 package de.dailab.vsdt.trafo.bpel.wizard;
 
+import java.util.ArrayList;
+
 import org.eclipse.jface.viewers.IStructuredSelection;
 
+import de.dailab.vsdt.trafo.MappingStage;
 import de.dailab.vsdt.trafo.bpel.export.BpelResultSaver;
 import de.dailab.vsdt.trafo.bpel.export.Bpmn2BpelCleanUp;
 import de.dailab.vsdt.trafo.bpel.export.Bpmn2BpelElementMapping;
@@ -20,6 +23,7 @@ public class Bpmn2BpelExportWizard extends BpmnExportWizard {
 	
 	@Override
 	protected void initializeMappingStages() {
+		mappingStages = new ArrayList<MappingStage>();
 		mappingStages.add(new Bpmn2BpelValidation());
 		mappingStages.add(new Bpmn2StrucBpmnTransformation());
 		mappingStages.add(new Bpmn2BpelElementMapping());

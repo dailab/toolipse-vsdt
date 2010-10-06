@@ -1,8 +1,11 @@
 package de.dailab.vsdt.trafo.jiacv.wizard;
 
+import java.util.ArrayList;
+
 import org.eclipse.jface.viewers.IStructuredSelection;
 
 import de.dailab.vsdt.BusinessProcessSystem;
+import de.dailab.vsdt.trafo.MappingStage;
 import de.dailab.vsdt.trafo.MappingWrapper;
 import de.dailab.vsdt.trafo.jiacv.export.Bpmn2JiacVCleanUp;
 import de.dailab.vsdt.trafo.jiacv.export.Bpmn2JiacVElementMapping;
@@ -22,6 +25,7 @@ public class Bpmn2JiacVExportWizard extends BpmnExportWizard {
 
 	@Override
 	protected void initializeMappingStages() {
+		mappingStages = new ArrayList<MappingStage>();
 		mappingStages.add(new Bpmn2JiacVValidation());
 		mappingStages.add(new Bpmn2StrucBpmnTransformation());
 		mappingStages.add(new Bpmn2JiacVElementMapping());
