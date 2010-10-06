@@ -1,9 +1,12 @@
 package de.dailab.vsdt.trafo.stp.wizard;
 
+import java.util.ArrayList;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.stp.bpmn.BpmnDiagram;
 
+import de.dailab.vsdt.trafo.MappingStage;
 import de.dailab.vsdt.trafo.impl.BpmnResultSaver;
 import de.dailab.vsdt.trafo.stp.imprt.StpBpmn2BpmnElementMapping;
 import de.dailab.vsdt.trafo.wizard.BpmnImportWizard;
@@ -18,6 +21,7 @@ public class StpBpmnImportWizard extends BpmnImportWizard {
 	
 	@Override
 	protected void initializeMappingStages() {
+		mappingStages = new ArrayList<MappingStage>();
 		mappingStages.add(new StpBpmn2BpmnElementMapping());
 		
 		resultSaver= new BpmnResultSaver();
