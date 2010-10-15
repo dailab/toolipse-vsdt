@@ -1,3 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: de.dailab.vsdt.rsd.publisher.SerCHoServicePublisher
-Class-Path: lib\axis.jar lib\commons-discovery-0.2.jar lib\commons-logging-1.0.4.jar lib\jaxrpc.jar lib\saaj.jar lib\webserviceutils.jar lib\wsdl4j-1.5.1.jar
