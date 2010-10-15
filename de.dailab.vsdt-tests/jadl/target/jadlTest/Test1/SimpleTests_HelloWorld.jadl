@@ -1,9 +1,0 @@
-
-
-service HelloWorld ( in ) ( out ) {
-    {
-        {
-            print "Hello World!" ;
-        }
-    }
-}
