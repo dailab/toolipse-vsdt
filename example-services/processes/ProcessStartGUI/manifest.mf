@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Class-Path: lib\axis.jar lib\commons-discovery-0.2.jar lib\commons-log
- ging-1.0.4.jar lib\jaxrpc.jar lib\saaj.jar lib\webserviceutils.jar lib\wsdl4j-1.5.1.jar lib\sheaAPI-2.0.0.jar
-Main-Class: org.sercho.processgui.ProcessGUIStarter
