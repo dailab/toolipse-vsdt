@@ -2,6 +2,7 @@ package de.dailab.vsdt.diagram.interpreter.simulation;
 
 import java.util.List;
 
+import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
 
@@ -17,13 +18,24 @@ import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
 public interface ISimulation {
 
 	/**
-	 * Start a new simulation for the given BusinessProcessDiagram.
+	 * Start a new simulation for the given BusinessProcessDiagram. Use this
+	 * constructor, if you want to simulate a Business Process Diagram without
+	 * using the Interpreter View.
 	 * 
-	 * @param diagramEditPart	BusinessProcessDiagram to simulate
+	 * @param diagram			BusinessProcessDiagram to simulate
+	 * @return List of newly readied FlowObjects
+	 */
+	List<FlowObject> start(BusinessProcessDiagram diagram);
+
+	/**
+	 * Start a new simulation for the given BusinessProcessDiagramEditPart. Use
+	 * this constructor if you are using the Interpreter View.
+	 * 
+	 * @param diagramEditPart	Edit Part of the BusinessProcessDiagram to simulate
 	 * @return List of newly readied FlowObjects
 	 */
 	List<FlowObject> start(BusinessProcessDiagramEditPart diagramEditPart);
-
+	
 	/**
 	 * Stop the currently running simulation.
 	 */
