@@ -53,13 +53,13 @@ public class AssociationSection extends AbstractVsdtPropertySection {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
+//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
         
-        label= FormLayoutUtil.addLabel(composite, DISPLAY_DIRECTION, 0, 0);
-        dirNoneButton= FormLayoutUtil.addButton(composite, DISPLAY_DIRECTION_NONE, SWT.RADIO, 0, label, null);
-        dirOneButton= FormLayoutUtil.addButton(composite, DISPLAY_DIRECTION_ONE, SWT.RADIO, 0, dirNoneButton, null);
-        dirBothButton= FormLayoutUtil.addButton(composite, DISPLAY_DIRECTION_BOTH, SWT.RADIO, 0, dirOneButton, null);
+        label= FormLayoutUtil.addLabel(composite, DISPLAY_DIRECTION, lastControl, 0);
+        dirNoneButton= FormLayoutUtil.addButton(composite, DISPLAY_DIRECTION_NONE, SWT.RADIO, lastControl, label, null);
+        dirOneButton= FormLayoutUtil.addButton(composite, DISPLAY_DIRECTION_ONE, SWT.RADIO, lastControl, dirNoneButton, null);
+        dirBothButton= FormLayoutUtil.addButton(composite, DISPLAY_DIRECTION_BOTH, SWT.RADIO, lastControl, dirOneButton, null);
         dirNoneButton.addSelectionListener(this);
         dirOneButton.addSelectionListener(this);
         dirBothButton.addSelectionListener(this);

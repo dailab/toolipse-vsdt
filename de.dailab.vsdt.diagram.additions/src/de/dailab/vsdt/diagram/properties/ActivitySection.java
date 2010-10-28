@@ -250,27 +250,33 @@ implements FocusListener, SelectionListener {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
+//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
         
-        addAssignmentButton(composite);
-
-        orgPropButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_PROP, 0, 0, null, orgAssButton);
-        orgPropButton.addSelectionListener(this);
+//        addAssignmentButton(composite);
         
-        parAssignButton= FormLayoutUtil.addButton(composite, DISPLAY_PAR_ASSIGN, 0, 0, null, orgPropButton);
-        parAssignButton.addSelectionListener(this);
+//        parAssignButton= FormLayoutUtil.addButton(composite, DISPLAY_PAR_ASSIGN, 0, lastControl, null, orgPropButton);
+//        parAssignButton = new Button(buttonComposite, SWT.NONE);
+//        parAssignButton.setText(DISPLAY_PAR_ASSIGN);
+//        parAssignButton.addSelectionListener(this);
+        parAssignButton = addButton(DISPLAY_PAR_ASSIGN);
+
+//      orgPropButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_PROP, 0, lastControl, null, orgAssButton);
+//      orgPropButton = new Button(buttonComposite, SWT.NONE);
+//      orgPropButton.setText(DISPLAY_ORG_PROP);
+//      orgPropButton.addSelectionListener(this);
+      orgPropButton = addButton(DISPLAY_ORG_PROP);
 
         // activity type and attributes
-        label= FormLayoutUtil.addLabel(composite, DISPLAY_ACT_TYPE, orgPropButton, 0);
-        actTypeCombo= FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, orgPropButton, label, 50);
+        label= FormLayoutUtil.addLabel(composite, DISPLAY_ACT_TYPE, lastControl, 0);
+        actTypeCombo= FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, lastControl, label, 50);
         actTypeCombo.addSelectionListener(this);
         for (ActivityType activityType : ActivityType.values()) {
         	actTypeCombo.add(activityType.getLiteral());
         }
         // loop type and attributes
-        label= FormLayoutUtil.addLabel(composite, DISPLAY_LOOP_TYPE, orgPropButton, 50);
-        loopTypeCombo= FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, orgPropButton, label, 100);
+        label= FormLayoutUtil.addLabel(composite, DISPLAY_LOOP_TYPE, lastControl, 50);
+        loopTypeCombo= FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, lastControl, label, 100);
         loopTypeCombo.addSelectionListener(this);
         for (LoopType loopType : LoopType.values()) {
         	loopTypeCombo.add(loopType.getLiteral());

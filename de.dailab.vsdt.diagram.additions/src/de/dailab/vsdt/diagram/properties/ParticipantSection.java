@@ -50,12 +50,12 @@ public class ParticipantSection extends AbstractVsdtPropertySection {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
+//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
         
-        label= FormLayoutUtil.addLabel(composite, DISPLAY_TYPE, 0, 0);
-        typeRoleButton= FormLayoutUtil.addButton(composite, DISPLAY_TYPE_ROLE, SWT.RADIO, 0, label, null);
-        typeEntityButton= FormLayoutUtil.addButton(composite, DISPLAY_TYPE_ENTITY, SWT.RADIO, 0, typeRoleButton, null);
+        label= FormLayoutUtil.addLabel(composite, DISPLAY_TYPE, lastControl, 0);
+        typeRoleButton= FormLayoutUtil.addButton(composite, DISPLAY_TYPE_ROLE, SWT.RADIO, lastControl, label, null);
+        typeEntityButton= FormLayoutUtil.addButton(composite, DISPLAY_TYPE_ENTITY, SWT.RADIO, lastControl, typeRoleButton, null);
         typeRoleButton.addSelectionListener(this);
         typeEntityButton.addSelectionListener(this);
     }

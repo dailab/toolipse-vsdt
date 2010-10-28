@@ -168,24 +168,27 @@ public class EventSection extends FlowObjectSection {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
+//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
         
-        addAssignmentButton(composite);
+//        addAssignmentButton(composite);
         
-        parAssignButton= FormLayoutUtil.addButton(composite, DISPLAY_PAR_ASSIGN, 0, 0, null, orgAssButton);
-        parAssignButton.addSelectionListener(this);
+//        parAssignButton= FormLayoutUtil.addButton(composite, DISPLAY_PAR_ASSIGN, 0, 0, null, orgAssButton);
+//        parAssignButton = new Button(buttonComposite, SWT.NONE);
+//        parAssignButton.setText(DISPLAY_PAR_ASSIGN);
+//        parAssignButton.addSelectionListener(this);
+        parAssignButton = addButton(DISPLAY_PAR_ASSIGN);
 
         // event type and attributes
-        label= FormLayoutUtil.addLabel(composite, DISPLAY_TRIGGER, 0, 0);
-        eventTypeCombo= FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, 0, label, 50);
+        label= FormLayoutUtil.addLabel(composite, DISPLAY_TRIGGER, lastControl, 0);
+        eventTypeCombo= FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, lastControl, label, 50);
         eventTypeCombo.addSelectionListener(this);
         
-        // executable
-        nonInterruptingButton= FormLayoutUtil.addButton(composite, DISPLAY_INTERRUPTING, SWT.CHECK, 0, eventTypeCombo, null);
+        // non-interrupting?
+        nonInterruptingButton= FormLayoutUtil.addButton(composite, DISPLAY_INTERRUPTING, SWT.CHECK, lastControl, eventTypeCombo, null);
         nonInterruptingButton.addSelectionListener(this);
         
-        // standard loop type group
+        // trigger type group
         triggerGroup= FormLayoutUtil.addGroup(composite, DISPLAY_GROUP, eventTypeCombo, 0, 100);
         
         //message trigger

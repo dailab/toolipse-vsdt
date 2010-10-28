@@ -68,14 +68,14 @@ implements SelectionListener {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
+//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
 
-        addAssignmentButton(composite);
+//        addAssignmentButton(composite);
         
         // activity type and attributes
-        label= FormLayoutUtil.addLabel(composite, DISPLAY_TYPE, 0, 0);
-        typeCombo= FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, 0, label, 50);
+        label= FormLayoutUtil.addLabel(composite, DISPLAY_TYPE, lastControl, 0);
+        typeCombo= FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, lastControl, label, 50);
         typeCombo.addSelectionListener(this);
         for (GatewayType gatewayType : GatewayType.values()) {
         	typeCombo.add(gatewayType.getLiteral());
@@ -87,11 +87,11 @@ implements SelectionListener {
 //    	xorEventInstantiateButton= FormLayoutUtil.addButton(attributesGroup, DISPLAY_XOR_EVENT_INSTANTIATE, SWT.CHECK, 0, 0, null);
 //    	xorEventInstantiateButton.addSelectionListener(this);
     	
-    	label= FormLayoutUtil.addLabel(attributesGroup, DISPLAY_COMPLEX_INCOMINGCOND, 0, 0);
-    	complexIncomingCondText= addExpressionComposite(attributesGroup, 0, label, 50);
+    	label= FormLayoutUtil.addLabel(attributesGroup, DISPLAY_COMPLEX_INCOMINGCOND, lastControl, 0);
+    	complexIncomingCondText= addExpressionComposite(attributesGroup, lastControl, label, 50);
 
-    	label= FormLayoutUtil.addLabel(attributesGroup, DISPLAY_COMPLEX_OUTGOINGCOND, 0, 50);
-    	complexOutgoingCondText= addExpressionComposite(attributesGroup, 0, label, 100);
+    	label= FormLayoutUtil.addLabel(attributesGroup, DISPLAY_COMPLEX_OUTGOINGCOND, lastControl, 50);
+    	complexOutgoingCondText= addExpressionComposite(attributesGroup, lastControl, label, 100);
     }
     
     

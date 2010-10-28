@@ -102,7 +102,7 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
+//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
 
         // executable
@@ -110,18 +110,23 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
         executableButton.addSelectionListener(this);
 
         // organize buttons
-        orgImplButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_IMPL, 0, 0, null, 100);
-        orgImplButton.addSelectionListener(this);
+//        orgImplButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_IMPL, 0, 0, null, 100);
+//        orgImplButton = new Button(buttonComposite, SWT.NONE);
+//        orgImplButton.setText(DISPLAY_ORG_IMPL);
+//        orgImplButton.addSelectionListener(this);
+        orgImplButton = addButton(DISPLAY_ORG_IMPL);
         
-        orgMsgButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_MSG, 0, 0, null, orgImplButton);
-        orgMsgButton.addSelectionListener(this);
+//        orgMsgButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_MSG, 0, 0, null, orgImplButton);
+//        orgMsgButton.addSelectionListener(this);
+        orgMsgButton = addButton(DISPLAY_ORG_MSG);
         
-        orgDataButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_DATA, 0, 0, null, orgMsgButton);
-        orgDataButton.addSelectionListener(this);
+//        orgDataButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_DATA, 0, 0, null, orgMsgButton);
+//        orgDataButton.addSelectionListener(this);
+        orgDataButton = addButton(DISPLAY_ORG_DATA);
         
         // author
-        label = FormLayoutUtil.addLabel(composite, DISPLAY_AUTHOR, orgImplButton, 0);
-        authorText = FormLayoutUtil.addText(composite, orgImplButton, label, 50, 0);
+        label = FormLayoutUtil.addLabel(composite, DISPLAY_AUTHOR, lastControl, 0);
+        authorText = FormLayoutUtil.addText(composite, lastControl, label, 50, 0);
         authorText.addFocusListener(this);
         
         // version
@@ -130,8 +135,8 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
         versionText.addFocusListener(this);
        
         // language
-        label = FormLayoutUtil.addLabel(composite, DISPLAY_LANGUAGE, orgImplButton, 50);
-        languageText = FormLayoutUtil.addText(composite, orgImplButton, label, 100, 0);
+        label = FormLayoutUtil.addLabel(composite, DISPLAY_LANGUAGE, lastControl, 50);
+        languageText = FormLayoutUtil.addText(composite, lastControl, label, 100, 0);
         languageText.addFocusListener(this);
         
         // expression language

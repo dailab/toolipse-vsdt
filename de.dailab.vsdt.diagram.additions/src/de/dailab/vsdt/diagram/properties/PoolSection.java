@@ -93,19 +93,22 @@ public class PoolSection extends AbstractVsdtPropertySection {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
+//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
 
         // buttons
-        orgPropButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_PROP, SWT.NONE, 0, null, 100);
-        orgPropButton.addSelectionListener(this);
+//        orgPropButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_PROP, SWT.NONE, 0, null, 100);
+//        orgPropButton = new Button(buttonComposite, SWT.NONE);
+//        orgPropButton.setText(DISPLAY_ORG_PROP);
+//        orgPropButton.addSelectionListener(this);
+        orgPropButton = addButton(DISPLAY_ORG_PROP);
 
         // main group
-        label= FormLayoutUtil.addLabel(composite, DISPLAY_PARTICIPANT, 0, 0);
-        participantCombo= new VsdtFeatureCombo<Participant>(FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, 0, label, 50));
+        label= FormLayoutUtil.addLabel(composite, DISPLAY_PARTICIPANT, lastControl, 0);
+        participantCombo= new VsdtFeatureCombo<Participant>(FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, lastControl, label, 50));
         participantCombo.getCombo().addSelectionListener(this);
 
-        boundaryvisButton= FormLayoutUtil.addButton(composite, DISPLAY_BOUNDARY_VISIBLE, SWT.CHECK, 0, participantCombo.getCombo(), null);
+        boundaryvisButton= FormLayoutUtil.addButton(composite, DISPLAY_BOUNDARY_VISIBLE, SWT.CHECK, lastControl, participantCombo.getCombo(), null);
         boundaryvisButton.addSelectionListener(this);
 
         // process group

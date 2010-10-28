@@ -24,7 +24,7 @@ public class SequenceFlowSection extends AbstractVsdtPropertySection {
 	   						   DISPLAY_TYPE_NONE= "None",
 	   						   DISPLAY_TYPE_DEF= "Default",
 	   						   DISPLAY_TYPE_COND= "Expression",
-	   						   DISPLAY_CONDITION= "Condition Expression",
+	   						   DISPLAY_CONDITION= "Condition",
 	   						   DISPLAY_EXPRESSION= "Expression";
 	
 	private ExpressionComposite conditionText;
@@ -63,13 +63,13 @@ public class SequenceFlowSection extends AbstractVsdtPropertySection {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
+//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
         
-        label= FormLayoutUtil.addLabel(composite, DISPLAY_TYPE, 0, 0);
-        typeNoneButton= FormLayoutUtil.addButton(composite, DISPLAY_TYPE_NONE, SWT.RADIO, 0, label, null);
-        typeDefButton= FormLayoutUtil.addButton(composite, DISPLAY_TYPE_DEF, SWT.RADIO, 0, typeNoneButton, null);
-        typeCondButton= FormLayoutUtil.addButton(composite, DISPLAY_TYPE_COND, SWT.RADIO, 0, typeDefButton, null);
+        label= FormLayoutUtil.addLabel(composite, DISPLAY_TYPE, lastControl, 0);
+        typeNoneButton= FormLayoutUtil.addButton(composite, DISPLAY_TYPE_NONE, SWT.RADIO, lastControl, label, null);
+        typeDefButton= FormLayoutUtil.addButton(composite, DISPLAY_TYPE_DEF, SWT.RADIO, lastControl, typeNoneButton, null);
+        typeCondButton= FormLayoutUtil.addButton(composite, DISPLAY_TYPE_COND, SWT.RADIO, lastControl, typeDefButton, null);
         typeNoneButton.addSelectionListener(this);
         typeDefButton.addSelectionListener(this);
         typeCondButton.addSelectionListener(this);

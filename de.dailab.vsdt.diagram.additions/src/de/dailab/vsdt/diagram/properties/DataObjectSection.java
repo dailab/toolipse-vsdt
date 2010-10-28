@@ -58,22 +58,25 @@ public class DataObjectSection extends AbstractVsdtPropertySection {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
+//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
 
         // organize buttons
-        orgPropButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_PROP, 0, stateText, null, 100);
-        orgPropButton.addSelectionListener(this);
+//        orgPropButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_PROP, 0, stateText, null, 100);
+//        orgPropButton = new Button(buttonComposite, SWT.NONE);
+//        orgPropButton.setText(DISPLAY_ORG_PROP);
+//        orgPropButton.addSelectionListener(this);
+        orgPropButton = addButton(DISPLAY_ORG_PROP);
         
         //checkBoxes
-        requiredButton= FormLayoutUtil.addButton(composite, DISPLAY_REQUIRED, SWT.CHECK, 0, 0, null);
-        producedButton= FormLayoutUtil.addButton(composite, DISPLAY_PRODUCED, SWT.CHECK, 0, requiredButton, null);
+        requiredButton= FormLayoutUtil.addButton(composite, DISPLAY_REQUIRED, SWT.CHECK, lastControl, 0, null);
+        producedButton= FormLayoutUtil.addButton(composite, DISPLAY_PRODUCED, SWT.CHECK, lastControl, requiredButton, null);
         requiredButton.addSelectionListener(this);
         producedButton.addSelectionListener(this);
         
         //state
-        label= FormLayoutUtil.addLabel(composite, DISPLAY_STATE, orgPropButton, 0);
-        stateText= FormLayoutUtil.addText(composite, orgPropButton, label, 100, SWT.MULTI | SWT.V_SCROLL);
+        label= FormLayoutUtil.addLabel(composite, DISPLAY_STATE, requiredButton, 0);
+        stateText= FormLayoutUtil.addText(composite, requiredButton, label, 100, SWT.MULTI | SWT.V_SCROLL);
         ((FormData)stateText.getLayoutData()).height= 50;
         stateText.addFocusListener(this);
     }

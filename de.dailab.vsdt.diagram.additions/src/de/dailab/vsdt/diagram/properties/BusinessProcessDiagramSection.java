@@ -2,6 +2,7 @@ package de.dailab.vsdt.diagram.properties;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
@@ -50,17 +51,26 @@ public class BusinessProcessDiagramSection extends AbstractVsdtPropertySection {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
+//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         
         // organize buttons
-        orgImplButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_IMPL, 0, null, null, 100);
-        orgImplButton.addSelectionListener(this);
+//        orgImplButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_IMPL, 0, lastControl, null, 100);
+//        orgImplButton = new Button(buttonComposite, SWT.NONE);
+//        orgImplButton.setText(DISPLAY_ORG_IMPL);
+//        orgImplButton.addSelectionListener(this);
+        orgImplButton = addButton(DISPLAY_ORG_IMPL);
         
-        orgMsgButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_MSG, 0, null, null, orgImplButton);
-        orgMsgButton.addSelectionListener(this);
+//        orgMsgButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_MSG, 0, lastControl, null, orgImplButton);
+//        orgMsgButton = new Button(buttonComposite, SWT.NONE);
+//        orgMsgButton.setText(DISPLAY_ORG_MSG);
+//        orgMsgButton.addSelectionListener(this);
+        orgMsgButton = addButton(DISPLAY_ORG_MSG);
         
-        orgDataButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_DATA, 0, null, null, orgMsgButton);
-        orgDataButton.addSelectionListener(this);
+//        orgDataButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_DATA, 0, lastControl, null, orgMsgButton);
+//        orgDataButton = new Button(buttonComposite, SWT.NONE);
+//        orgDataButton.setText(DISPLAY_ORG_DATA);
+//        orgDataButton.addSelectionListener(this);
+        orgDataButton = addButton(DISPLAY_ORG_DATA);
     }
     
     public void focusLost(FocusEvent e) {

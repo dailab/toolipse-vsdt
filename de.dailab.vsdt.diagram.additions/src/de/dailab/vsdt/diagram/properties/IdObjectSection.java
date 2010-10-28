@@ -16,7 +16,7 @@ import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.IdObject;
 import de.dailab.vsdt.VsdtPackage;
 
-
+@Deprecated
 public class IdObjectSection extends AbstractVsdtPropertySection {
 
 	public static final String DISPLAY_NAME= "Name",

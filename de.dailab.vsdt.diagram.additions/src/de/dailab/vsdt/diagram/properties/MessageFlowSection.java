@@ -75,16 +75,24 @@ public class MessageFlowSection extends AbstractVsdtPropertySection {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
+//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
 
         // message
-        orgMsgButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_MSG, 0, 0, null, 100);
-        orgMsgButton.addSelectionListener(this);
-        initMsgButton= FormLayoutUtil.addButton(composite, DISPLAY_INIT_MESSAGE, 0, 0, null, orgMsgButton);
-        initMsgButton.addSelectionListener(this);
-        label= FormLayoutUtil.addLabel(composite, DISPLAY_MESSAGE, 0, 0);
-        messageCombo= new VsdtFeatureCombo<Message>(FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, 0, label, initMsgButton));
+//        orgMsgButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_MSG, 0, 0, null, 100);
+//        orgMsgButton = new Button(buttonComposite, SWT.NONE);
+//        orgMsgButton.setText(DISPLAY_ORG_MSG);
+//        orgMsgButton.addSelectionListener(this);
+        orgMsgButton = addButton(DISPLAY_ORG_MSG);
+        
+//        initMsgButton= FormLayoutUtil.addButton(composite, DISPLAY_INIT_MESSAGE, 0, lastControl, null, orgMsgButton);
+//        initMsgButton = new Button(buttonComposite, SWT.NONE);
+//        initMsgButton.setText(DISPLAY_INIT_MESSAGE);
+//        initMsgButton.addSelectionListener(this);
+        initMsgButton = addButton(DISPLAY_INIT_MESSAGE);
+        
+        label= FormLayoutUtil.addLabel(composite, DISPLAY_MESSAGE, lastControl, 0);
+        messageCombo= new VsdtFeatureCombo<Message>(FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, lastControl, label, 100));
         messageCombo.getCombo().addSelectionListener(this);
         
         //message group
