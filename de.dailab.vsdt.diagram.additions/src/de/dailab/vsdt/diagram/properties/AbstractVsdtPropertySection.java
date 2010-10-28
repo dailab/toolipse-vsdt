@@ -1,7 +1,5 @@
 package de.dailab.vsdt.diagram.properties;
 
-import org.eclipse.draw2d.ToolbarLayout;
-import org.eclipse.draw2d.text.FlowFigureLayout;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
@@ -16,6 +14,7 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
@@ -51,7 +50,6 @@ implements FocusListener, SelectionListener {
     protected IdObject idObject;
     
 	private Text nameText;
-//	private Text idText;
     private Text docText;
     
     protected Control lastControl = null;
@@ -75,7 +73,6 @@ implements FocusListener, SelectionListener {
     @Override
  	protected void internalRefresh() {
     	nameText.setText(nonNull(idObject.getName()));
-//    	idText.setText(nonNull(idObject.getId()));
         docText.setText(nonNull(idObject.getDocumentation()));
     }
  
@@ -91,12 +88,6 @@ implements FocusListener, SelectionListener {
         nameText= FormLayoutUtil.addText(composite, 0, label, 50, SWT.NONE);
         nameText.addFocusListener(this); 
 
-//		// id
-//		label = FormLayoutUtil.addLabel(composite, "Identifier", 0, 50);
-//		idText= FormLayoutUtil.addText(composite, 0, label, 100, SWT.NONE);
-//		idText.setEditable(false);
-//		idText.addFocusListener(this);
-        
         // button composite
         buttonComposite = new Composite(composite, SWT.NONE);
         RowLayout layout = new RowLayout();
@@ -104,10 +95,12 @@ implements FocusListener, SelectionListener {
         layout.marginBottom = 0;
         buttonComposite.setLayout(layout);
         buttonComposite.setLayoutData(FormLayoutUtil.createFormData(0, 50, 100));
+        // insert empty label -- otherwise the component will be too high if empty
+        new Label(buttonComposite, SWT.None);
         
         // documentation
-        label = FormLayoutUtil.addLabel(composite, DISPLAY_DOCUMENTATION, buttonComposite, 0);
-        docText= FormLayoutUtil.addText(composite, buttonComposite, label, 100, SWT.MULTI | SWT.V_SCROLL | SWT.WRAP);
+        label = FormLayoutUtil.addLabel(composite, DISPLAY_DOCUMENTATION, nameText, 0);
+        docText= FormLayoutUtil.addText(composite, nameText, label, 100, SWT.MULTI | SWT.V_SCROLL | SWT.WRAP);
         ((FormData) docText.getLayoutData()).height= 50;
         // improve text wrap
         ((FormData) docText.getLayoutData()).width= composite.getBounds().width;
@@ -121,9 +114,6 @@ implements FocusListener, SelectionListener {
     	if (e.getSource().equals(nameText)) {
     		setPropertyValue(idObject, pack.getIdObject_Name(), nullIfEmpty(nameText.getText()));
     	}
-//        	if (e.getSource().equals(idText)) {
-//        		setPropertyValue(idObject, pack.getIdObject_Id(), nullIfEmpty(idText.getText()));
-//    		}
     	if (e.getSource().equals(docText)) {
     		setPropertyValue(idObject, pack.getIdObject_Documentation(), nullIfEmpty(docText.getText()));
 		}

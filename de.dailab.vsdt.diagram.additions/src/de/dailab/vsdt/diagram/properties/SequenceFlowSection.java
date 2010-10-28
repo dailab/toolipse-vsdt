@@ -4,7 +4,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
-import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -51,6 +50,7 @@ public class SequenceFlowSection extends AbstractVsdtPropertySection {
 
     @Override
  	protected void internalRefresh() {
+    	super.internalRefresh();
     	if (sequenceFlow.getConditionExpression() != null) {
         	conditionText.setText(getExpression(sequenceFlow.getConditionExpression()));	
     	}
@@ -63,7 +63,6 @@ public class SequenceFlowSection extends AbstractVsdtPropertySection {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
         
         label= FormLayoutUtil.addLabel(composite, DISPLAY_TYPE, lastControl, 0);
@@ -78,10 +77,8 @@ public class SequenceFlowSection extends AbstractVsdtPropertySection {
         conditionText= addExpressionComposite(composite, typeNoneButton, label, 100);
     }
 
-    public void focusLost(FocusEvent e) {
-    }
-
     public void widgetSelected(SelectionEvent e) {
+    	super.widgetSelected(e);
     	Object src= e.getSource();
     	if (src.equals(typeNoneButton)) {
     		conditionText.setEnabled(false);

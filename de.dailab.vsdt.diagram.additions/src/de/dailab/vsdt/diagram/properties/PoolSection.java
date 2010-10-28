@@ -4,7 +4,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
-import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -34,9 +33,6 @@ public class PoolSection extends AbstractVsdtPropertySection {
 							   DISPLAY_PROC_PRIVATE= "Private",
 							   DISPLAY_SUB_ADHOC= "Ad Hoc",
 							   DISPLAY_SUB_ADHOCCONDITION= "Compltn. Cond.",
-//							   DISPLAY_SUB_ADHOC_ORDERING= "Ad Hoc Ordering",
-//							   DISPLAY_SUB_ADHOC_PAR= "Parallel",
-//							   DISPLAY_SUB_ADHOC_SEQ= "Sequential",
 							   
 							   DISPLAY_PARTICIPANT= "Participant",
 
@@ -73,6 +69,7 @@ public class PoolSection extends AbstractVsdtPropertySection {
 
     @Override
  	protected void internalRefresh() {
+    	super.internalRefresh();
         boundaryvisButton.setSelection(pool.isBoundaryVisible());
 
         participantCombo.fillCombo(pool.getParent().getParticipants());
@@ -86,21 +83,14 @@ public class PoolSection extends AbstractVsdtPropertySection {
     	adHocConditionText.setEnabled(adHocButton.getSelection());
     	adHocConditionText.setText(getExpression(pool.getAdHocCompletionCondition()));
     	adHocConditionText.setOwnerAndFeature(pool, pack.getAbstractProcess_AdHocCompletionCondition());
-//        	adHocSeqButton.setSelection(process.getAdHocOrdering() == OrderingType.SEQUENTIAL);
-//        	adHocParButton.setSelection(process.getAdHocOrdering() == OrderingType.PARALLEL);
     }
  
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
 
         // buttons
-//        orgPropButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_PROP, SWT.NONE, 0, null, 100);
-//        orgPropButton = new Button(buttonComposite, SWT.NONE);
-//        orgPropButton.setText(DISPLAY_ORG_PROP);
-//        orgPropButton.addSelectionListener(this);
         orgPropButton = addButton(DISPLAY_ORG_PROP);
 
         // main group
@@ -126,17 +116,10 @@ public class PoolSection extends AbstractVsdtPropertySection {
     	adHocButton.addSelectionListener(this);
         label= FormLayoutUtil.addLabel(adHocGroup, DISPLAY_SUB_ADHOCCONDITION, adHocButton, 0);
     	adHocConditionText= addExpressionComposite(adHocGroup, adHocButton, label, 100);
-//    	label= FormLayoutUtil.addLabel(adHocGroup, DISPLAY_SUB_ADHOC_ORDERING, adHocConditionText, 0);
-//    	adHocSeqButton= FormLayoutUtil.addButton(adHocGroup, DISPLAY_SUB_ADHOC_SEQ, SWT.RADIO, adHocConditionText, label, null);
-//    	adHocParButton= FormLayoutUtil.addButton(adHocGroup, DISPLAY_SUB_ADHOC_PAR, SWT.RADIO, adHocConditionText, adHocSeqButton, null);
-//    	adHocSeqButton.addSelectionListener(this);
-//    	adHocParButton.addSelectionListener(this);
-    }
-    
-    public void focusLost(FocusEvent e) {
     }
     
     public void widgetSelected(SelectionEvent e) {
+    	super.widgetSelected(e);
     	Object src= e.getSource();
     	if (src.equals(orgPropButton)) {
 			new OrganizePropertiesAction().run(pool);
@@ -159,9 +142,6 @@ public class PoolSection extends AbstractVsdtPropertySection {
     	if (src.equals(adHocButton)) {
     		setPropertyValue(pool, pack.getAbstractProcess_AdHoc(),adHocButton.getSelection());
     	}
-//    	if (src.equals(adHocSeqButton) || src.equals(adHocParButton)) {
-//    		setPropertyValue(process, pack.getAbstractProcess_AdHocOrdering(), adHocSeqButton.getSelection() ? OrderingType.SEQUENTIAL : OrderingType.PARALLEL);
-//    	}
     	refresh();
     }
 }

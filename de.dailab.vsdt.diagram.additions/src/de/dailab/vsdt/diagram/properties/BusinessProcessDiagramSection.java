@@ -2,15 +2,12 @@ package de.dailab.vsdt.diagram.properties;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
-import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.VsdtPackage;
 import de.dailab.vsdt.diagram.actions.OrganizeDataTypesAction;
@@ -44,39 +41,17 @@ public class BusinessProcessDiagramSection extends AbstractVsdtPropertySection {
     }
 
     @Override
- 	protected void internalRefresh() {
-    	// nothing to refresh
-    }
- 
-    @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         
         // organize buttons
-//        orgImplButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_IMPL, 0, lastControl, null, 100);
-//        orgImplButton = new Button(buttonComposite, SWT.NONE);
-//        orgImplButton.setText(DISPLAY_ORG_IMPL);
-//        orgImplButton.addSelectionListener(this);
         orgImplButton = addButton(DISPLAY_ORG_IMPL);
-        
-//        orgMsgButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_MSG, 0, lastControl, null, orgImplButton);
-//        orgMsgButton = new Button(buttonComposite, SWT.NONE);
-//        orgMsgButton.setText(DISPLAY_ORG_MSG);
-//        orgMsgButton.addSelectionListener(this);
         orgMsgButton = addButton(DISPLAY_ORG_MSG);
-        
-//        orgDataButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_DATA, 0, lastControl, null, orgMsgButton);
-//        orgDataButton = new Button(buttonComposite, SWT.NONE);
-//        orgDataButton.setText(DISPLAY_ORG_DATA);
-//        orgDataButton.addSelectionListener(this);
         orgDataButton = addButton(DISPLAY_ORG_DATA);
     }
     
-    public void focusLost(FocusEvent e) {
-    }
-
     public void widgetSelected(SelectionEvent e) {
+    	super.widgetSelected(e);
     	Object src= e.getSource();
     	if (src.equals(orgImplButton)) {
 			new OrganizeImplementationsAction().run(bpd.getParent());

@@ -60,6 +60,7 @@ public class MessageFlowSection extends AbstractVsdtPropertySection {
 
     @Override
  	protected void internalRefresh() {
+    	super.internalRefresh();
     	messageCombo.fillCombo(messageFlow.getParent().getParent().getMessages());
     	
     	messageCombo.setSelected(messageFlow.getMessage());
@@ -75,20 +76,10 @@ public class MessageFlowSection extends AbstractVsdtPropertySection {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
 
-        // message
-//        orgMsgButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_MSG, 0, 0, null, 100);
-//        orgMsgButton = new Button(buttonComposite, SWT.NONE);
-//        orgMsgButton.setText(DISPLAY_ORG_MSG);
-//        orgMsgButton.addSelectionListener(this);
+        // buttons
         orgMsgButton = addButton(DISPLAY_ORG_MSG);
-        
-//        initMsgButton= FormLayoutUtil.addButton(composite, DISPLAY_INIT_MESSAGE, 0, lastControl, null, orgMsgButton);
-//        initMsgButton = new Button(buttonComposite, SWT.NONE);
-//        initMsgButton.setText(DISPLAY_INIT_MESSAGE);
-//        initMsgButton.addSelectionListener(this);
         initMsgButton = addButton(DISPLAY_INIT_MESSAGE);
         
         label= FormLayoutUtil.addLabel(composite, DISPLAY_MESSAGE, lastControl, 0);
@@ -109,6 +100,7 @@ public class MessageFlowSection extends AbstractVsdtPropertySection {
     }
 
     public void focusLost(FocusEvent e) {
+    	super.focusLost(e);
     	if (e.getSource().equals(msgNameText)) {
     		if (messageFlow.getMessage() != null) {
 	    		setPropertyValue(messageFlow.getMessage(), pack.getMessage_Name(), nullIfEmpty(msgNameText.getText()));
@@ -118,6 +110,7 @@ public class MessageFlowSection extends AbstractVsdtPropertySection {
     }
     
     public void widgetSelected(SelectionEvent e) {
+    	super.widgetSelected(e);
     	Object src= e.getSource();
     	if (src.equals(orgPropButton)) {
 			new OrganizePropertiesAction().run(messageFlow.getMessage());

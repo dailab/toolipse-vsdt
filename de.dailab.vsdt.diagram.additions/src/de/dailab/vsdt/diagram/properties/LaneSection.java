@@ -32,11 +32,14 @@ public class LaneSection extends AbstractVsdtPropertySection {
 
     @Override
  	protected void internalRefresh() {
+    	super.internalRefresh();
     }
  
     public void focusLost(FocusEvent e) {
+    	super.focusLost(e);
     }
     
     public void widgetSelected(SelectionEvent e) {
+    	super.widgetSelected(e);
     }
 }

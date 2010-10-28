@@ -50,6 +50,7 @@ public class DataObjectSection extends AbstractVsdtPropertySection {
 
     @Override
  	protected void internalRefresh() {
+    	super.internalRefresh();
         stateText.setText(nonNull(dataObject.getState()));
         producedButton.setSelection(dataObject.isProducedAtCompletion());
         requiredButton.setSelection(dataObject.isRequiredForStart());
@@ -58,14 +59,9 @@ public class DataObjectSection extends AbstractVsdtPropertySection {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
 
         // organize buttons
-//        orgPropButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_PROP, 0, stateText, null, 100);
-//        orgPropButton = new Button(buttonComposite, SWT.NONE);
-//        orgPropButton.setText(DISPLAY_ORG_PROP);
-//        orgPropButton.addSelectionListener(this);
         orgPropButton = addButton(DISPLAY_ORG_PROP);
         
         //checkBoxes
@@ -82,12 +78,14 @@ public class DataObjectSection extends AbstractVsdtPropertySection {
     }
     
     public void focusLost(FocusEvent e) {
+    	super.focusLost(e);
     	if (e.getSource().equals(stateText)) {
     		setPropertyValue(dataObject, pack.getDataObject_State(), nullIfEmpty(stateText.getText()));
     	}
     }
     
     public void widgetSelected(SelectionEvent e) {
+    	super.widgetSelected(e);
     	Object src= e.getSource();
     	if (src.equals(orgPropButton)) {
 			new OrganizePropertiesAction().run(dataObject);

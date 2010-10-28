@@ -73,6 +73,7 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
 
     @Override
  	protected void internalRefresh() {
+    	super.internalRefresh();
         executableButton.setSelection(bps.isExecutable());
         
     	versionText.setText(nonNull(bps.getVersion()));
@@ -102,7 +103,6 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
 
         // executable
@@ -110,18 +110,8 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
         executableButton.addSelectionListener(this);
 
         // organize buttons
-//        orgImplButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_IMPL, 0, 0, null, 100);
-//        orgImplButton = new Button(buttonComposite, SWT.NONE);
-//        orgImplButton.setText(DISPLAY_ORG_IMPL);
-//        orgImplButton.addSelectionListener(this);
         orgImplButton = addButton(DISPLAY_ORG_IMPL);
-        
-//        orgMsgButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_MSG, 0, 0, null, orgImplButton);
-//        orgMsgButton.addSelectionListener(this);
         orgMsgButton = addButton(DISPLAY_ORG_MSG);
-        
-//        orgDataButton= FormLayoutUtil.addButton(composite, DISPLAY_ORG_DATA, 0, 0, null, orgMsgButton);
-//        orgDataButton.addSelectionListener(this);
         orgDataButton = addButton(DISPLAY_ORG_DATA);
         
         // author
@@ -170,6 +160,7 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
     }
     
     public void focusLost(FocusEvent e) {
+    	super.focusLost(e);
     	if (e.getSource().equals(authorText)) {
     		setPropertyValue(bps, pack.getBusinessProcessSystem_Author(), nullIfEmpty(authorText.getText()));
     	}
@@ -210,6 +201,7 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
     }
 
     public void widgetSelected(SelectionEvent e) {
+    	super.widgetSelected(e);
     	Object src= e.getSource();
     	if (src.equals(setModifiedTimeButton)) {
     		Date date= new Date();

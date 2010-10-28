@@ -4,7 +4,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
-import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -43,6 +42,7 @@ public class ParticipantSection extends AbstractVsdtPropertySection {
 
     @Override
  	protected void internalRefresh() {
+    	super.internalRefresh();
     	typeRoleButton.setSelection(participant.getType() == ParticipantType.ROLE);
     	typeEntityButton.setSelection(participant.getType() == ParticipantType.ENTITY);
     }
@@ -50,10 +50,8 @@ public class ParticipantSection extends AbstractVsdtPropertySection {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
-        CLabel label;
         
-        label= FormLayoutUtil.addLabel(composite, DISPLAY_TYPE, lastControl, 0);
+        CLabel label= FormLayoutUtil.addLabel(composite, DISPLAY_TYPE, lastControl, 0);
         typeRoleButton= FormLayoutUtil.addButton(composite, DISPLAY_TYPE_ROLE, SWT.RADIO, lastControl, label, null);
         typeEntityButton= FormLayoutUtil.addButton(composite, DISPLAY_TYPE_ENTITY, SWT.RADIO, lastControl, typeRoleButton, null);
         typeRoleButton.addSelectionListener(this);
@@ -61,6 +59,7 @@ public class ParticipantSection extends AbstractVsdtPropertySection {
     }
     
     public void widgetSelected(SelectionEvent e) {
+    	super.widgetSelected(e);
     	Object src= e.getSource();
     	if (src.equals(typeRoleButton)) {
     		setPropertyValue(participant, pack.getParticipant_Type(), ParticipantType.ROLE);
@@ -70,6 +69,4 @@ public class ParticipantSection extends AbstractVsdtPropertySection {
     	}
     }
     
-    public void focusLost(FocusEvent e) {
-    }
 }

@@ -4,7 +4,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
-import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -45,6 +44,7 @@ public class AssociationSection extends AbstractVsdtPropertySection {
 
     @Override
  	protected void internalRefresh() {
+    	super.internalRefresh();
     	dirNoneButton.setSelection(association.getDirection() == DirectionType.NONE);
     	dirOneButton.setSelection(association.getDirection() == DirectionType.ONE);
     	dirBothButton.setSelection(association.getDirection() == DirectionType.BOTH);
@@ -53,7 +53,6 @@ public class AssociationSection extends AbstractVsdtPropertySection {
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
         super.createControls(parent, aTabbedPropertySheetPage);
-//        Composite composite = getWidgetFactory().createFlatFormComposite(parent);
         CLabel label;
         
         label= FormLayoutUtil.addLabel(composite, DISPLAY_DIRECTION, lastControl, 0);
@@ -66,6 +65,7 @@ public class AssociationSection extends AbstractVsdtPropertySection {
     }
     
     public void widgetSelected(SelectionEvent e) {
+    	super.widgetSelected(e);
     	Object src= e.getSource();
     	if (src.equals(dirNoneButton)) {
     		setPropertyValue(association, pack.getAssociation_Direction(), DirectionType.NONE);
@@ -76,8 +76,5 @@ public class AssociationSection extends AbstractVsdtPropertySection {
     	if (src.equals(dirBothButton)) {
     		setPropertyValue(association, pack.getAssociation_Direction(), DirectionType.BOTH);
     	}
-    }
-    
-    public void focusLost(FocusEvent e) {
     }
 }

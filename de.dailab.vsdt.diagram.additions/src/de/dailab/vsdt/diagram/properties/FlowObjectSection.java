@@ -1,14 +1,12 @@
 package de.dailab.vsdt.diagram.properties;
 
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
-import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.diagram.actions.OrganizeAssignmentsAction;
 
@@ -34,14 +32,11 @@ public abstract class FlowObjectSection extends AbstractVsdtPropertySection {
         super.createControls(parent, aTabbedPropertySheetPage);
      
         // organize assignments
-//        orgAssButton= FormLayoutUtil.addButton(parent, DISPLAY_ORG_ASS, 0, lastControl, null, 100);
-//        orgAssButton = new Button(buttonComposite, SWT.NONE);
-//        orgAssButton.setText(DISPLAY_ORG_ASS);
-//        orgAssButton.addSelectionListener(this);
         orgAssButton = addButton(DISPLAY_ORG_ASS);
     }
 
     public void widgetSelected(SelectionEvent e) {
+    	super.widgetSelected(e);
     	Object src= e.getSource();
     	if (src.equals(orgAssButton)) {
 			new OrganizeAssignmentsAction().run(flowObject);
