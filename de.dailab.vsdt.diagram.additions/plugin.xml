@@ -275,76 +275,60 @@
 	<extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
       <propertySections contributorId="de.dailab.vsdt.diagram">
          <propertySection
-               class="de.dailab.vsdt.diagram.properties.IdObjectSection"
-               filter="de.dailab.vsdt.diagram.properties.IdObjectSection"
-               id="de.dailab.vsdt.diagram.properties.IdObjectSection"
-               tab="de.dailab.vsdt.diagram.properties.category">
-         </propertySection>
-         <propertySection
-               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
                class="de.dailab.vsdt.diagram.properties.BusinessProcessDiagramSection"
                filter="de.dailab.vsdt.diagram.properties.BusinessProcessDiagramSection"
                id="de.dailab.vsdt.diagram.properties.BusinessProcessDiagramSection"
                tab="de.dailab.vsdt.diagram.properties.category">
          </propertySection>
          <propertySection
-               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
                class="de.dailab.vsdt.diagram.properties.PoolSection"
                filter="de.dailab.vsdt.diagram.properties.PoolSection"
                id="de.dailab.vsdt.diagram.properties.PoolSection"
                tab="de.dailab.vsdt.diagram.properties.category">
          </propertySection>
          <propertySection
-               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
                class="de.dailab.vsdt.diagram.properties.LaneSection"
                filter="de.dailab.vsdt.diagram.properties.LaneSection"
                id="de.dailab.vsdt.diagram.properties.LaneSection"
                tab="de.dailab.vsdt.diagram.properties.category">
          </propertySection>
          <propertySection
-               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
                class="de.dailab.vsdt.diagram.properties.AssociationSection"
                filter="de.dailab.vsdt.diagram.properties.AssociationSection"
                id="de.dailab.vsdt.diagram.properties.AssociationSection"
                tab="de.dailab.vsdt.diagram.properties.category">
          </propertySection>
          <propertySection
-               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
                class="de.dailab.vsdt.diagram.properties.SequenceFlowSection"
                filter="de.dailab.vsdt.diagram.properties.SequenceFlowSection"
                id="de.dailab.vsdt.diagram.properties.SequenceFlowSection"
                tab="de.dailab.vsdt.diagram.properties.category">
          </propertySection>
          <propertySection
-               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
                class="de.dailab.vsdt.diagram.properties.MessageFlowSection"
                filter="de.dailab.vsdt.diagram.properties.MessageFlowSection"
                id="de.dailab.vsdt.diagram.properties.MessageFlowSection"
                tab="de.dailab.vsdt.diagram.properties.category">
          </propertySection>
          <propertySection
-               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
                class="de.dailab.vsdt.diagram.properties.ActivitySection"
                filter="de.dailab.vsdt.diagram.properties.ActivitySection"
                id="de.dailab.vsdt.diagram.properties.ActivitySection"
                tab="de.dailab.vsdt.diagram.properties.category">
          </propertySection>
          <propertySection
-               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
                class="de.dailab.vsdt.diagram.properties.EventSection"
                filter="de.dailab.vsdt.diagram.properties.EventSection"
                id="de.dailab.vsdt.diagram.properties.EventSection"
                tab="de.dailab.vsdt.diagram.properties.category">
          </propertySection>
          <propertySection
-               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
                class="de.dailab.vsdt.diagram.properties.GatewaySection"
                filter="de.dailab.vsdt.diagram.properties.GatewaySection"
                id="de.dailab.vsdt.diagram.properties.GatewaySection"
                tab="de.dailab.vsdt.diagram.properties.category">
          </propertySection>
          <propertySection
-               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
                class="de.dailab.vsdt.diagram.properties.DataObjectSection"
                filter="de.dailab.vsdt.diagram.properties.DataObjectSection"
                id="de.dailab.vsdt.diagram.properties.DataObjectSection"
@@ -356,27 +340,18 @@
 	<extension point="org.eclipse.ui.views.properties.tabbed.propertySections">
       <propertySections contributorId="de.dailab.vsdt.diagram.meta">
          <propertySection
-               class="de.dailab.vsdt.diagram.properties.IdObjectSection"
-               filter="de.dailab.vsdt.diagram.properties.IdObjectSection"
-               id="de.dailab.vsdt.diagram.properties.IdObjectSection"
-               tab="de.dailab.vsdt.diagram.properties.category">
-         </propertySection>
-         <propertySection
-               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
                class="de.dailab.vsdt.diagram.properties.BusinessProcessSystemSection"
                filter="de.dailab.vsdt.diagram.properties.BusinessProcessSystemSection"
                id="de.dailab.vsdt.diagram.properties.BusinessProcessSystemSection"
                tab="de.dailab.vsdt.diagram.properties.category">
          </propertySection>
          <propertySection
-               afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
                class="de.dailab.vsdt.diagram.properties.BusinessProcessDiagramSection"
                filter="de.dailab.vsdt.diagram.properties.BusinessProcessDiagramSection"
                id="de.dailab.vsdt.diagram.properties.BusinessProcessDiagramSection"
                tab="de.dailab.vsdt.diagram.properties.category">
          </propertySection>
          <propertySection
-         	   afterSection="de.dailab.vsdt.diagram.properties.IdObjectSection"
                class="de.dailab.vsdt.diagram.properties.ParticipantSection"
                filter="de.dailab.vsdt.diagram.properties.ParticipantSection"
                id="de.dailab.vsdt.diagram.properties.ParticipantSection"
