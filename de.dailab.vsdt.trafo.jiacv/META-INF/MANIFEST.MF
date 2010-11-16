@@ -6,7 +6,7 @@ Bundle-Version: 1.4.0.20101006
 Bundle-Vendor: DAI-Labor, TU Berlin
 Require-Bundle: org.eclipse.xtext,
  de.dailab.agentWorldEditor,
- de.dailab.vsdt.trafo.strucbpmn,
+ de.dailab.vsdt.trafo.strucbpmn;visibility:=reexport,
  de.dailab.agentWorldEditor.diagram,
  org.eclipse.gmf.runtime.diagram.ui,
  de.dailab.jiactng.jadlpp
