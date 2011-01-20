@@ -1,0 +1,83 @@
+\chapter{Setup}
+\label{sec:user_setup}
+
+In the following the installation process for the VSDT will be explained. As the VSDT is a plugin to
+the Eclipse IDE, the installation process is subdivided in several steps:
+\begin{enumerate}
+	\item Install Eclipse
+	\item Install Dependencies
+	\item Install VSDT
+\end{enumerate}
+
+\emph{Note} that for running the VSDT Version 5 of the Java environment is required.
+
+\emph{Note} that the versions of the dependencies may vary depending on the version of the VSDT. The
+following applies to version \version of the VSDT.
+
+
+\section{Installing Eclipse}
+\label{sec:user_setup_eclipse}
+
+For using the Visual Service Design Tool you need the Eclipse IDE which can be downloaded from
+\url{http://www.eclipse.org} for different operating systems.
+
+The VSDT \version\ works with Eclipse 3.5 ``Galileo''.\footnote{For Eclipse 3.4 you can still use
+the VSDT up to version 1.2.2.}
+
+
+\section{Installing Dependencies}
+\label{sec:user_setup_dep}
+
+The VSDT depends on a number of other plugins which again will have some dependencies on its own. It
+is recommended to use the Eclipse Update feature, as in that case all the dependencies and the
+dependencies of the dependencies will automatically be installed, too. The dependencies are:
+
+\begin{itemize}
+	\item Graphical Modeling Framework SDK (group ``Modeling'')\footnote{The VSDT \version\ was
+	created with GMF 2.1 and has been adapted to work with GMF 2.2.}
+	\item XText SDK (group ``Modeling'')
+\end{itemize}
+
+For installing the plugins, make sure you are allowed to write in the Eclipse program folder,
+especially when running Linux you should start that instance of Eclipse with \texttt{sudo}. In
+Eclipse, select \emph{Help} from the menu, then \emph{Install New Software...}. Select the
+\emph{Galileo} repository from the drop-down menu and select the Dependencies from the list below.
+Now click on \emph{Next} to automatically check calculate further dependencies and continue through
+the installation process. After that you might have to restart Eclipse. If the installation was
+successful the new features should appear in the \emph{Installed Software} tab of the same dialog.
+
+Theoretically, Eclipse can resolve the dependencies on its own, so it should be enough to select the
+VSDT itself. Still, we recommend to install the dependencies manually.
+
+
+\section{Installing the VSDT}
+\label{sec:user_setup_vsdt}
+
+Once Eclipse and GMF are set up you can install VSDT. The Visual Service Design Tool consists of the
+following features:
+
+\begin{itemize}
+	\item \emph{VSDT: Visual Service Design Tool} This is the core component of the VSDT, the visual
+	BPMN editor, along with a number of useful extensions and the basic transformation framework.
+%	\item \emph{VSDT: RSD Integration} This feature contributes an additional view to the BPMN
+%	editor, making the reuse of existing Web services easier.
+%	\item \emph{VSDT: Transformation Base} This is an enabling feature for the several export
+%	features, providing the common functionality and look and feel for the transformations.
+	\item \emph{VSDT: BPMN - BPEL Transformation} This feature provides the export to executable
+	BPEL code.
+	\item \emph{VSDT: BPMN - JIAC V Transformation} This feature provides the export to JIAC V
+	multiagent-systems. Additional Dependency: \emph{Agent World Editor}
+	\item \emph{VSDT: BPMN - STP-BPMN Transformation} This feature provides exchange with the
+	popular Eclipse STP BPMN editor. Additional Dependency: \emph{BPMN Project Feature} (
+	\item \emph{VSDT: BPMN - \dots Transformation} Further export and import features will be
+	released over time, providing transformations to other languages, such as JIAC agents.
+\end{itemize}
+
+The VSDT can be obtained from the following sites:
+\begin{center}
+	\downloadsites
+\end{center}
+
+Download the VSDT as an archived update site and add the site in the \emph{Install New software}
+dialog (see last section), using the \emph{Add...} button.
+

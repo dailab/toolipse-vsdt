@@ -1,0 +1,55 @@
+\documentclass{scrreprt}
+
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{graphicx}
+
+\newcommand{\version}{1.3.1}
+\newcommand{\updatesite}{\url{http://repositories.dai-labor.de/sites/vsdt/}}
+\newcommand{\downloadsites}{\url{http://energy.dai-labor.de/}\\\url{http://www.jiac.de}}
+
+\title{\huge The Visual Service Design Tool \\
+       \vspace{1cm} 
+       \LARGE Version \version \\
+       \LARGE Manual}
+\date{2010 / 07}
+\author{Tobias K\"uster\\
+        DAI-Labor, TU Berlin\\
+        \texttt{tobias.kuester@dai-labor.de}}
+\bibliographystyle{plain}
+
+\begin{document}
+
+	\maketitle
+
+	\tableofcontents
+
+	\input{01_intro}
+
+%	\part{User's Guide}
+	\input{21_setup}
+	\input{22_perspective}
+	\input{23_tutorial}
+	\input{24_features}
+	\input{25_preferences}
+	\input{26_transformation}
+%	\input{27_faq}
+
+%	\part{Developer Notes}
+	% plugins-ordnung
+	% auflistung der wesentlichen erweiterungen
+	% transformation framework
+	% einzelne regeln beschreiben
+	% how to write a new trafo
+
+%	\part{Appendices}
+	\begin{appendix}
+		\input{41_bpmn}
+		\input{42_vxl}
+		\input{43_changelog}
+	\end{appendix}
+
+	\bibliography{bibliography}
+
+\end{document}
+
