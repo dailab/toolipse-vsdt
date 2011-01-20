@@ -1,9 +1,7 @@
-%
-% Das hier ist hauptsaechlich aus meiner Diplomarbeit uebernommen
-%
-
 \chapter{The Business Process Modelling Notation}
 \label{sec:bpmn}
+
+%%% aus meiner Diplomarbeit
 
 % introduction
 The \emph{Business Process Modelling Notation}~\cite{omg2009bpmn} was first
@@ -44,6 +42,8 @@ used throughout the whole software engineering lifecycle, from a simplified mode
 at the requirements analysis up to a highly detailed model that can be used for
 generating code for an executable language.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{BPMN Elements}
 \label{sec:bpmn_elements}
@@ -139,6 +139,7 @@ Activity\footnote{this is not allowed for Events}.
 	\label{fig:gateways}
 \end{figure}
 
+
 \subsection{Connecting Objects}
 
 The most important connections are \emph{Sequence Flows} and \emph{Message Flows}.
@@ -161,6 +162,7 @@ further explanation.  Still there is an exception to this rule: For connecting a
 compensating Activity to a compensation Event an Association is used instead of
 a Sequence Flow.  An Association's arrow heads are optional.
 
+
 \subsection{Swimlanes}
 
 Swimlanes can be \emph{Pools} and \emph{Lanes}.  Each Pool represents one
@@ -178,6 +180,7 @@ containing two empty Lanes.
 	\caption[BPMN Swimlanes]{BPMN Swimlanes. A Pool with two Lanes}
 	\label{fig:swimlanes}
 \end{figure}
+
 
 \subsection{Artifacts}
 
@@ -204,6 +207,8 @@ Artifacts which could have more semantics, too.  This way BPMN can be extended
 with new elements to represent concepts that were not considered in the original
 specification.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Levels of Complexity}
 \label{sec:bpmn_complexity}
@@ -245,6 +250,8 @@ Of course it is free to the designers of new mappings to map the Message Flow, i
 it is available, without insisting on the existence of the non-graphical Message
 element.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Export and Code Generation}
 \label{sec:bpmn_export}
