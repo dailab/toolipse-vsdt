@@ -1,8 +1,8 @@
 \chapter{Basic Tutorial}
 \label{sec:user_tut}
 
-In this chapter the user will be guided through the creation of a simple Business Process Diagram,
-from creating the diagram file to validation and code generation.
+In this chapter the user will be guided through the creation of a simple Business
+Process Diagram, from creating the diagram file to validation and code generation.
 
 
 \section{Creating a new Business Process Diagram}
@@ -12,30 +12,34 @@ These are the basic steps for creating your first Business Process Diagram:
 
 \begin{enumerate}
 	
-	\item Start Eclipse and select a location for the workspace. This is where all the projects --
-	BPMN and others -- will be stored. When starting Eclipse for the first time, a welcome screen
-	will be shown. Read something about the features of Eclipse, if you want, then exit the screen.
+	\item Start Eclipse and select a location for the workspace.  This is where
+	all the projects -- BPMN and others -- will be stored.  When starting Eclipse
+	for the first time, a welcome screen will be shown.  Read something about the
+	features of Eclipse, if you want, then exit the screen.
 	
 	\item Change to the \emph{VSDT} Perspective.
 	
-	\item Select \emph{ New $\rightarrow$ Project $\rightarrow$ General $\rightarrow$ Project } in
-	the menu bar. Open the Navigator View to see the newly created Project.
+	\item Select \emph{ New $\rightarrow$ Project $\rightarrow$ General
+	$\rightarrow$ Project } in the menu bar.  Open the Navigator View to see the
+	newly created Project.
 	
-	\item On the project, select \emph{New $\rightarrow$ VSDT Meta Diagram} and enter a name for the
-	file. On the last page of the wizard some of the global settings for the Business Process
-	Diagram, such as the Title, Description and Author name, can be set. A file with the extension
-	'vsdtd' is created, holding both the semantic model and the notational model (i.e. the layout
+	\item On the project, select \emph{New $\rightarrow$ VSDT Meta Diagram} and
+	enter a name for the file.  On the last page of the wizard some of the global
+	settings for the Business Process Diagram, such as the Title, Description and
+	Author name, can be set.  A file with the extension 'vsdtd' is created,
+	holding both the semantic model and the notational model (i.e. the layout
 	information).
-%	Two files will be created. The first file, \verb|$NAME.vsdt_diagram| is holding the layout
-%	information for the diagram, while the other one, \verb|$NAME.vsdt|, is for the pure model data.
+%	Two files will be created.  The first file, \verb|$NAME.vsdt_diagram| is
+%	holding the layout information for the diagram, while the other one,
+%	\verb|$NAME.vsdt|, is for the pure model data.
 	
-	\emph{Note} that the files are stored in XML format and can be edited with a text editor, too.
-	However, you should do so only to fix a broken file.
-%	The diagram file can be recreated from the model file by right clicking it and choosing to
-%	initialize the diagram file.
+	\emph{Note} that the files are stored in XML format and can be edited with a
+	text editor, too.  However, you should do so only to fix a broken file.
+%	The diagram file can be recreated from the model file by right clicking it
+%	and choosing to initialize the diagram file.
 	
-	\item By now, the diagram should have opened automatically; otherwise open it manually by
-	double-clicking it. It will be opened with the graphical editor. 
+	\item By now, the diagram should have opened automatically; otherwise open it
+	manually by double-clicking it.  It will be opened with the graphical editor.
 %	For now, ignore the model file.
 
 \end{enumerate}
@@ -44,25 +48,27 @@ These are the basic steps for creating your first Business Process Diagram:
 \section{Setting up Participants and Business Processes}
 \label{sec:user_tut_meta}
 
-With the VSDT, not only individual Business Process Diagrams, but sets of Business Process Diagrams
-belonging to the same scenario -- here referred to as Business Process Systems -- can be modelled.
-For this, the modelling starts with defining the several Participants and the Business Processes
-they participate in.
+With the VSDT, not only individual Business Process Diagrams, but sets of Business
+Process Diagrams belonging to the same scenario -- here referred to as Business
+Process Systems -- can be modelled.  For this, the modelling starts with defining
+the several Participants and the Business Processes they participate in.
 
 \begin{enumerate}
 
-	\item Select a \textbf{Participant} from the palette and click on the canvas. A stick-figure
-	will appear. Repeat for each Participant relevant for the Business Process System. These can be
-	companies, roles, computer systems or individual persons.
+	\item Select a \textbf{Participant} from the palette and click on the canvas.
+	A stick-figure will appear.  Repeat for each Participant relevant for the
+	Business Process System.  These can be companies, roles, computer systems or
+	individual persons.
 	
-	\item Now select \textbf{Business Process Diagram} from the palette and draw it on the canvas.
-	These represent the individual processes (quite similar to 'Use cases').
+	\item Now select \textbf{Business Process Diagram} from the palette and draw
+	it on the canvas.  These represent the individual processes (quite similar to
+	'Use cases').
 	
-	\item Now select the connection form the palette and connect the Participants with the Business
-	Processes.
+	\item Now select the connection form the palette and connect the Participants
+	with the Business Processes.
 	
-	\item Finally, perform a double-click on one of the Business Process Diagram nodes, which will
-	open it in a new diagram editor.
+	\item Finally, perform a double-click on one of the Business Process Diagram
+	nodes, which will open it in a new diagram editor.
 	
 \end{enumerate}
 
@@ -70,54 +76,62 @@ they participate in.
 \section{Modelling a basic Business Process}
 \label{sec:user_tut_basic}
 
-Next, we will formulate a simple business process. Here, we will focus on the visual elements of
-BPMN.
+Next, we will formulate a simple business process.  Here, we will focus on the
+visual elements of BPMN.
 
 \begin{enumerate}
 
-	\item To get started, perform a right-click on the canvas and select \emph{Initialize
-	$\rightarrow$ Initialize Pools} and hit \emph{OK} to confirm the dialog. For each Participant
-	associated with the Business Process a Pool will be created.
+	\item To get started, perform a right-click on the canvas and select
+	\emph{Initialize $\rightarrow$ Initialize Pools} and hit \emph{OK} to confirm
+	the dialog.  For each Participant associated with the Business Process a Pool
+	will be created.
 	
-	\item Alternatively, select \textbf{Pool} from the top of the palette and move the mouse to the
-	canvas. Push the mouse button and drag it to the lower right to create a large Pool. Enter a
-	name for the Pool and select one of the Participants associated with the Business Process using
-	the Properties view.
+	\item Alternatively, select \textbf{Pool} from the top of the palette and
+	move the mouse to the canvas.  Push the mouse button and drag it to the lower
+	right to create a large Pool.  Enter a name for the Pool and select one of
+	the Participants associated with the Business Process using the Properties
+	view.
 	
-	\item Along with the Pool also a Lane will be created. To create more Lanes, select the
-	\textbf{Lane} element from the palette and click on the Pool's label (as existing Lanes will
-	fill the Pool's compartment completely). Note that the Lanes can not be moved manually.
-	According to the BPMN specification the first Lane will be invisible (faded out in the editor).
+	\item Along with the Pool also a Lane will be created.  To create more Lanes,
+	select the \textbf{Lane} element from the palette and click on the Pool's
+	label (as existing Lanes will fill the Pool's compartment completely).  Note
+	that the Lanes can not be moved manually.  According to the BPMN specification
+	the first Lane will be invisible (faded out in the editor).
 	
-	\item Let's create some \textbf{Flow Objects} inside of the Lane. Select one of the Flow Object
-	from the palette, i.e. Events, Activities and Gateways, and click inside of the Lane. In case
-	you selected the Event, a small menu will appear, asking whether to create a Start, End, or
-	Intermediate Event; otherwise the element will be created right away.
+	\item Let's create some \textbf{Flow Objects} inside of the Lane.  Select one
+	of the Flow Object from the palette, i.e.  Events, Activities and Gateways,
+	and click inside of the Lane.  In case you selected the Event, a small menu
+	will appear, asking whether to create a Start, End, or Intermediate Event;
+	otherwise the element will be created right away.
 		
-	\item Select the \textbf{Sequence Flow} icon from the palette and connect the several Flow
-	Objects by pressing the mouse button on the source and dragging it to the target. When
-	connecting the Activity be sure to aim for the label. If you hit the Activity's compartment you
-	can not create a connection. You can change the routing style from the toolbar or add more
-	bendpoints to a connection by dragging it.
+	\item Select the \textbf{Sequence Flow} icon from the palette and connect the
+	several Flow Objects by pressing the mouse button on the source and dragging
+	it to the target.  When connecting the Activity be sure to aim for the label.
+	If you hit the Activity's compartment you can not create a connection.  You
+	can change the routing style from the toolbar or add more bendpoints to a
+	connection by dragging it.
 	
-	\item Use the Property Sheets to alter the Elements' name, description, type, and type-specific
-	attributes. Select the element, e.g.\ an event, and open Eclipse's Property View. Select the
-	Overview sheet from the tabs to the left to find a clearly arranged form holding the various
-	attributes. If you want to set only the type of a Flow Object, e.g. for making an Event a
-	\emph{Message} Event, you can also use the element's context menu and select \emph{Edit...
+	\item Use the Property Sheets to alter the Elements' name, description, type,
+	and type-specific attributes.  Select the element, e.g.\ an event, and open
+	Eclipse's Property View.  Select the Overview sheet from the tabs to the left
+	to find a clearly arranged form holding the various attributes.  If you want
+	to set only the type of a Flow Object, e.g. for making an Event a \emph{Message}
+	Event, you can also use the element's context menu and select \emph{Edit...
 	$\rightarrow$ Set Type}, or use the keyboard shortcut \texttt{Ctrl+T}.
 
-	\item Now select the \textbf{Message Flow} icon from the palette. Select an Activity or an End
-	Event as source and draw the Message Flow to an element in a different Pool, or to some point
-	beneath the Pool and select to create a new Pool element there.
+	\item Now select the \textbf{Message Flow} icon from the palette.  Select an
+	Activity or an End Event as source and draw the Message Flow to an element in
+	a different Pool, or to some point beneath the Pool and select to create a
+	new Pool element there.
 		
-	\item Finally, we will associate an Activity with a \textbf{Data Object} (however, this will not
-	affect the generated BPEL code). Select the Data Object from the palette and create it on the
-	canvas. Select the Association connection from the palette and connect the Data Object to the
-	Activity. Select \emph{BPMN $\rightarrow$ Initialize Input/Output Set} from the Activity's
-	context menu, depending on the associations direction. Notice the new Input Element in the
-	Activity's property sheet. This Input Set references all the Activity's incoming/outgoing Data
-	Objects.
+	\item Finally, we will associate an Activity with a \textbf{Data Object}
+	(however, this will not affect the generated BPEL code).  Select the Data
+	Object from the palette and create it on the canvas.  Select the Association
+	connection from the palette and connect the Data Object to the Activity.
+	Select \emph{BPMN $\rightarrow$ Initialize Input/Output Set} from the
+	Activity's context menu, depending on the associations direction.  Notice the
+	new Input Element in the Activity's property sheet.  This Input Set references
+	all the Activity's incoming/outgoing Data Objects.
 	
 \end{enumerate}
 
@@ -125,109 +139,131 @@ BPMN.
 \section{In-depth Modelling}
 \label{sec:user_tut_ws}
 
-Now that we created the diagram visuals, this section deals with the equally important underlying,
-non-visual parts of BPMN, such as properties, assignments, conditions, and service invocations.
+Now that we created the diagram visuals, this section deals with the equally
+important underlying, non-visual parts of BPMN, such as properties, assignments,
+conditions, and service invocations.
 
-%\emph{Note:} In case of the export to BPEL this will map to a Web service call, but can map to
-%similar concepts, too, depending on the target language.
+%	\emph{Note:} In case of the export to BPEL this will map to a Web service call,
+%	but can map to similar concepts, too, depending on the target language.
 
 \begin{enumerate}
 
-%	\item Select the Pool, open its Overview property sheet and select a \textbf{Participant}. In
-%	case no Participants are defined yet -- which is likely -- hit the \emph{new Participant} button
-%	in the Pool's property sheet. Participants are the ``owners'' of the Pools. Since one
-%	Participant can own several Pools, a Participant is not created automatically for each Pool.
+%	\item Select the Pool, open its Overview property sheet and select a
+%	\textbf{Participant}.  In case no Participants are defined yet -- which is
+%	likely -- hit the \emph{new Participant} button in the Pool's property sheet.
+%	Participants are the ``owners'' of the Pools.  Since one Participant can own
+%	several Pools, a Participant is not created automatically for each Pool.
 	
-	\item Right-click the Message Flow or open its property sheet and select \emph{Initialize
-	Message}. Note that by doing so the End Event's type changes to \texttt{Message}. A new
-	(non-visual) Message object has been created and associated with the Message Flow, and its
-	source and target, if possible.
+	\item Right-click the Message Flow or open its property sheet and select
+	\emph{Initialize Message}.  Note that by doing so the End Event's type changes
+	to \texttt{Message}.  A new (non-visual) Message object has been created and
+	associated with the Message Flow, and its source and target, if possible.
 	
-	\item To define a (Web-) service invocation, select the \emph{Organize Implementations} and
-	\emph{Organize Messages} buttons from the Business Process Diagram's property sheet. Select the
-	newly created Messages and Implementations (services) from the list and set the values according
-	to the service to invoke. Alternatively, Web services can also be imported using the Web Service
-	View, which is much more comfortable and will be explained in depth later.
+	\item To define a (Web-) service invocation, select the \emph{Organize
+	Implementations} and \emph{Organize Messages} buttons from the Business
+	Process Diagram's property sheet.  Select the newly created Messages and
+	Implementations (services) from the list and set the values according to the
+	service to invoke.  Alternatively, Web services can also be imported using
+	the Web Service View, which is much more comfortable and will be explained in
+	depth later.
 
-	\item Next, we will define the process data, i.e. Properties associated to the Pool's Process.
-	Open the Pool's overview property sheet and click \emph{Organize Process Properties} or select
-	the respective item from the Pool's context menu. Create some properties using the buttons in
-	the shown dialog and edit the values of the selected Property using the text fields in the lower
-	part of the dialog. Besides the top-level process, Tasks and Subprocesses can hold Properties,
-	too, which are available only for that activity or its child activities, if any.
+	\item Next, we will define the process data, i.e.  Properties associated to
+	the Pool's Process.  Open the Pool's overview property sheet and click
+	\emph{Organize Process Properties} or select the respective item from the
+	Pool's context menu.  Create some properties using the buttons in the shown
+	dialog and edit the values of the selected Property using the text fields in
+	the lower part of the dialog.  Besides the top-level process, Tasks and
+	Subprocesses can hold Properties, too, which are available only for that
+	activity or its child activities, if any.
 	
-	\item To assign a value to a Property, you have to create an Assignment. Open the properly sheet
-	of some element in the process and click the Assignments button. Create a new Assignment, select
-	the Property and enter an Expression. Click the button with the dots (\dots) on it to open
-	another dialog helping you to enter and validate an expression using the VSDT Expression
-	Language VXL (see Appendix~\ref{sec:vxl}).
+	\item To assign a value to a Property, you have to create an Assignment.  Open
+	the properly sheet of some element in the process and click the Assignments
+	button.  Create a new Assignment, select the Property and enter an Expression.
+	Click the button with the dots (\dots) on it to open another dialog helping
+	you to enter and validate an expression using the VSDT Expression Language
+	VXL (see Appendix~\ref{sec:vxl}).
 	
-	\item Now that the Properties are declared and assigned a value, they can be used e.g.\ in
-	condition expressions. Select a Sequence Flow coming from a Gateway (a point where the flow of
-	control branches), set the Condition Type to \emph{Expression} and enter the Condition
-	Expression. Again, use the button with the three dots(\dots) to validate the Expression.
+	\item Now that the Properties are declared and assigned a value, they can be
+	used e.g.\ in condition expressions.  Select a Sequence Flow coming from a
+	Gateway (a point where the flow of control branches), set the Condition Type
+	to \emph{Expression} and enter the Condition Expression.  Again, use the
+	button with the three dots(\dots) to validate the Expression.
 	
-	\item Just like Processes and Activities, Messages can have Properties. Again, the dialog can be
-	accessed via the property sheet or the context menu. Add some properties to the newly created
-	Message(s), being the input and output parameters of the respective Web service.
+	\item Just like Processes and Activities, Messages can have Properties.
+	Again, the dialog can be accessed via the property sheet or the context menu.
+	Add some properties to the newly created Message(s), being the input and
+	output parameters of the respective Web service.
 	
-	\item To pass the parameter values to the Message, create one or more Assignments on the Flow
-	Object the Message is going in or out of. There are two ways for doing this:
+	\item To pass the parameter values to the Message, create one or more
+	Assignments on the Flow Object the Message is going in or out of.  There are
+	two ways for doing this:
 	\begin{itemize}
-		\item The easiest way is to use the \emph{Parameter Assignment Dialog}. Select the Activity
-		or Event sending or receiving the Message(s) and hit the respective button in its property
-		sheet. The dialog will show all of the messages' input and output Properties and offer
-		drop-down menus for selecting another Property or entering an individual Expression to be
+		\item The easiest way is to use the \emph{Parameter Assignment Dialog}.
+		Select the Activity or Event sending or receiving the Message(s) and hit
+		the respective button in its property sheet.  The dialog will show all of
+		the messages' input and output Properties and offer drop-down menus for
+		selecting another Property or entering an individual Expression to be
 		assigned to these parameters.
-		\item For more control over the parameter assignments, you can also open the \emph{Organize
-		Assignment Dialog} via the Flow Object's property sheet or context menu and manually create
-		the individual Assignments. Select a Property to assign the value to, e.g. one of the input
-		parameters of the Web service's input message, and enter a from expression.
+		
+		\item For more control over the parameter assignments, you can also open
+		the \emph{Organize Assignment Dialog} via the Flow Object's property sheet
+		or context menu and manually create the individual Assignments.  Select
+		a Property to assign the value to, e.g. one of the input parameters of
+		the Web service's input message, and enter a from expression.
 	\end{itemize}
-	 To refer to a Property in the expression, just type in the Property's name with a leading
-	 \verb|$|, e.g. \verb|$foo + 1|. Note the assign time value: if this is set to before, the
-	 assignment will be made before the Activity is executed, i.e. the Web service is invoked,
-	 otherwise the assignment will be made afterwards. Thus this value should be set to
-	 \emph{before}, when passing values from the process to a Web service's input parameter, and to
-	 \emph{after}, when passing values from the Web service's output parameter back to the process.
+	 To refer to a Property in the expression, just type in the Property's name
+	 with a leading \verb|$|, e.g. \verb|$foo + 1|.  Note the assign time value:
+	 if this is set to before, the assignment will be made before the Activity is
+	 executed, i.e. the Web service is invoked, otherwise the assignment will be
+	 made afterwards.  Thus this value should be set to \emph{before}, when
+	 passing values from the process to a Web service's input parameter, and to
+	 \emph{after}, when passing values from the Web service's output parameter
+	 back to the process.
 \end{enumerate}
 
 
 \section{Validation and Simulation}
 \label{sec:user_tut_validation}
 
-When your process is done -- or seems to be done -- you should validate it. There are several means
-for validation in the VSDT: First, you can validate the process diagram against the constraints
-given in the BPMN specification; second, you can check the structure of the process, which is
-important for most transformations to executable code; and third, you can run a simulation, testing
-the several Expressions, Conditions, and Assignments.
+When your process is done -- or seems to be done -- you should validate it.  There
+are several means for validation in the VSDT: First, you can validate the process
+diagram against the constraints given in the BPMN specification; second, you can
+check the structure of the process, which is important for most transformations
+to executable code; and third, you can run a simulation, testing the several
+Expressions, Conditions, and Assignments.
 
 \begin{enumerate}
 
-	\item To validate the diagram against the constraints from the BPMN specification, select
-	\emph{Diagram $\rightarrow$ Validate} from the menu, or by clicking the checkmark symbol in the
-	tool bar. You might notice some error or warning marks in your diagram or entries in the problem
-	view. You should fix these problems before exporting the diagram to executable code and validate
+	\item To validate the diagram against the constraints from the BPMN
+	specification, select \emph{Diagram $\rightarrow$ Validate} from the menu, or
+	by clicking the checkmark symbol in the tool bar.  You might notice some error
+	or warning marks in your diagram or entries in the problem view.  You should
+	fix these problems before exporting the diagram to executable code and validate
 	the diagram again.
 	
 	\item For checking the structure of the process, open the Structure View (see
-	Section~\ref{sec:user_perspective_strucView}) and click the \emph{Structurize} button. This will
-	trigger the same Structure Mapping used in the actual transformations and display the result,
-	i.e. a structured form of the process, featuring elements such as sequences and blocks. While
-	the structured model might be a bit cumbersome to read, it gives evidence of the structure that
-	will be recognized from the process, and if this is not the structure you intended you should
-	consider restructuring the process. Unfortunately, most executable languages are much more
-	restrictive than process notations such as BPMN, so this check is necessary.
+	Section~\ref{sec:user_perspective_strucView}) and click the \emph{Structurize}
+	button.  This will trigger the same Structure Mapping used in the actual
+	transformations and display the result, i.e. a structured form of the process,
+	featuring elements such as sequences and blocks.  While the structured model
+	might be a bit cumbersome to read, it gives evidence of the structure that
+	will be recognized from the process, and if this is not the structure you
+	intended you should consider restructuring the process.  Unfortunately, most
+	executable languages are much more restrictive than process notations such as
+	BPMN, so this check is necessary.
 	
-	\item For a more in-depth validation of the process you may consider running a simulation.
-	Currently there are two types of simulations implemented: a manual simulation and an
-	interpreting simulation (see Section~\ref{sec:user_features_sim}).
+	\item For a more in-depth validation of the process you may consider running
+	a simulation.  Currently there are two types of simulations implemented: a
+	manual simulation and an interpreting simulation (see
+	Section~\ref{sec:user_features_sim}).
 	\begin{itemize}
-		\item Use the manual simulation to get a feel of how the process behaves when taking a
-		certain path, and to identify possible deadlock situations
-		\item When using the VSDT Expression Language (VXL, see
-		Section~\ref{sec:user_features_exp}), the interpreting simulation will help you validating
-		the several condition and assignment expressions used throughout the process.
+		\item Use the manual simulation to get a feel of how the process behaves
+		when taking a certain path, and to identify possible deadlock situations
+		
+		\item When using the VSDT Expression Language (VXL, see Section
+		\ref{sec:user_features_exp}), the interpreting simulation will help you
+		validating the several condition and assignment expressions used throughout
+		the process.
 	\end{itemize}
 
 \end{enumerate}
@@ -236,26 +272,30 @@ the several Expressions, Conditions, and Assignments.
 \section{Code Generation}
 \label{sec:user_tut_export}
 	
-Once all three validations are successful, the diagram can be translated to executable code. Of
-course, there might still be semantic errors in the process the validation can not uncover, so you
-should think about thoroughly testing the resulting program code before deploying it to productive
-use.
+Once all three validations are successful, the diagram can be translated to
+executable code.  Of course, there might still be semantic errors in the process
+the validation can not uncover, so you should think about thoroughly testing the
+resulting program code before deploying it to productive use.
 	
 \begin{enumerate}
 
-	\item Once the diagram shows no more errors, it can be exported to executable code. Select
-	\emph{Export...} from the file menu or from the model file's context menu. Select the desired
-	target language from the \emph{BPMN Export} group and proceed through the dialog. Select the
-	model file(s) to be exported, adjust the target directory or the other options, if necessary,
-	and hit the \emph{Finish} button.
+	\item Once the diagram shows no more errors, it can be exported to executable
+	code.  Select \emph{Export...} from the file menu or from the model file's
+	context menu.  Select the desired target language from the \emph{BPMN Export}
+	group and proceed through the dialog.  Select the model file(s) to be exported,
+	adjust the target directory or the other options, if necessary, and hit the
+	\emph{Finish} button.
 	
-	\item The export might take some seconds. If the model is sound, the output files will be
-	created in a new directory in the specified target directory, named after the Business Process
-	Diagram. By default, also a log file will be created along with the model files in the directory
-	\emph{exportLogs} in the specified target directory.
+	\item The export might take some seconds.  If the model is sound, the output
+	files will be created in a new directory in the specified target directory,
+	named after the Business Process Diagram.  By default, also a log file will
+	be created along with the model files in the directory \emph{exportLogs} in
+	the specified target directory.
 	
-	\item If the process has been modelled accurately, the resulting program can be readily
-	executable. Still it is recommended to check the result with a native editor for the respective
-	language, to be sure the files are free from defects.
+	\item If the process has been modelled accurately, the resulting program can
+	be readily executable.  Still it is recommended to check the result with a
+	native editor for the respective language, to be sure the files are free from
+	defects.
 
 \end{enumerate}
+

@@ -1,81 +1,91 @@
 \chapter{FAQ}
 \label{sec:user_faq}
 
-This chapter will give valuable advice on how to solve several tasks, solve problems, and answer
-other questions related to the Visual Service Design Tool.
+This chapter will give valuable advice on how to solve several tasks, solve
+problems, and answer other questions related to the Visual Service Design Tool.
 
 
 \section{How to...}
 \label{sec:user_faq_howto}
 
 \paragraph*{\dots draw Flow Objects on the Canvas?}
-Although sometimes such diagrams can be seen, Flow Objects \emph{can not} be drawn on the canvas.
-Instead, each Flow Object has to be contained in a Lane, and the Lane has to be inside of a Pool.
-However, according to the specification one Pool per diagram may have an invisible border, which can
-be set using the property sheets.
+Although sometimes such diagrams can be seen, Flow Objects \emph{can not} be drawn
+on the canvas.  Instead, each Flow Object has to be contained in a Lane, and the
+Lane has to be inside of a Pool.  However, according to the specification one
+Pool per diagram may have an invisible border, which can be set using the property
+sheets.
 
 \paragraph*{\dots create an Embedded Sub Process?}
-First, create a basic Activity. Then, in the Activity's property sheet, set the activity type to
-\textsc{Embedded Sub Process}. Now you can resize the Activity/Sub Process to an appropriate size
-and create further Flow Objects inside of it.
+First, create a basic Activity.  Then, in the Activity's property sheet, set the
+activity type to \textsc{Embedded Sub Process}.  Now you can resize the Activity/Sub
+Process to an appropriate size and create further Flow Objects inside of it.
 
 \paragraph*{\dots create an Intermediate Event on an Activity's boundary?}
-For creating an Intermediate Event on an Activity's boundary, i.e. an event- or error handler, you
-should select the Event type from the palette and click the Activity's label or boundary, and
-\emph{not} the compartment. Alternatively, you can use the miniature palette that appears when
-hovering the mouse over the Activity's label or boundary. Once created, the Intermediate Event can
-be moved freely around the Activity's border.
+For creating an Intermediate Event on an Activity's boundary, i.e. an event- or
+error handler, you should select the Event type from the palette and click the
+Activity's label or boundary, and \emph{not} the compartment.  Alternatively, you
+can use the miniature palette that appears when hovering the mouse over the
+Activity's label or boundary.  Once created, the Intermediate Event can be moved
+freely around the Activity's border.
 
 \paragraph*{\dots draw Artifacts inside of a Pool?}
-Contrary to Flow Objects, Artifacts can not be created inside of a Pool. However, you can create the
-Artifact on the canvas and drag it over the Pool. But remember that the Artifact is \emph{over}, and
-not \emph{in}, the Pool, so it will not be moved together with the Pool.
+Contrary to Flow Objects, Artifacts can not be created inside of a Pool.  However,
+you can create the Artifact on the canvas and drag it over the Pool.  But remember
+that the Artifact is \emph{over}, and not \emph{in}, the Pool, so it will not be
+moved together with the Pool.
 
 \paragraph*{\dots make Assignments to Message Parameters?}
-The arguments and results of service invocations are being stored in the Properties of the input
-Message and the output Message. So if a service is to be called with the argument "Hello World",
-that value has to be assigned to the respective Property of the service's input Message using the
-\emph{Organize Assignments Dialog} of the Activity calling the service. Note, that Assignments to
-the input parameters have to be made \emph{before}, and Assignments storing the output parameters in
-local variables have to be made \emph{after} the Activities execution. The Assign Time can be
-specified in the Dialog, too. However, a more convenient way, and sufficient in most situations, is
-to use the \emph{Parameter Assignments Dialog}, which will take care of most of these details. Of
-course, the same applies to Message Events and Send and Receive Activities, as well.
+The arguments and results of service invocations are being stored in the Properties
+of the input Message and the output Message.  So if a service is to be called
+with the argument "Hello World", that value has to be assigned to the respective
+Property of the service's input Message using the \emph{Organize Assignments
+Dialog} of the Activity calling the service.  Note, that Assignments to the input
+parameters have to be made \emph{before}, and Assignments storing the output
+parameters in local variables have to be made \emph{after} the Activities
+execution.  The Assign Time can be specified in the Dialog, too.  However, a more
+convenient way, and sufficient in most situations, is to use the \emph{Parameter
+Assignments Dialog}, which will take care of most of these details.  Of course,
+the same applies to Message Events and Send and Receive Activities, as well.
 
-%\paragraph*{\dots enter a Time Date value?}
-%This value is expected in quite complex form, because it has to be processed by a parser. The value
-%has to be in the form "yyyy-MM-dd'T'HH:mm:ss.SSSZ", e.g. "2007-02-12T14:53:00.000+0100" for Monday,
-%the 12th of February 2007 at 14:53:00 CET.
+%	\paragraph*{\dots enter a Time Date value?}
+%	This value is expected in quite complex form, because it has to be processed by
+%	a parser.  The value has to be in the form "yyyy-MM-dd'T'HH:mm:ss.SSSZ", e.g.
+%	"2007-02-12T14:53:00.000+0100" for Monday, the 12th of February 2007 at 14:53:00
+%	CET.
 
 
 \section{Frequently Asked Questions}
 \label{sec:user_faq_faq}
 
 \paragraph*{My diagram is broken. How can I fix it?}
-In case the diagram is broken, it can be recreated from the model. In case you are using separate
-files for semantic model and notational model, delete the diagram file \texttt{vsdt_diagram} and
-create a new one by right-clicking the model file \texttt{vsdt} and selecting the respective menu
-item. In case you are using one file for both semantic and notational model, \texttt{vsdtd}, open
-the file in a text editor and remove the \texttt{notation:Diagram} elements (one for each diagram
-contained in the file). Now rename the file to \texttt{vsdt} and initialize the diagram file (in
-this case you can delete the model file afterwards, as the model has been copied to the diagram
-file). In both cases, you will have to recreate the diagram's layout.
+In case the diagram is broken, it can be recreated from the model.  In case you
+are using separate files for semantic model and notational model, delete the
+diagram file \texttt{vsdt_diagram} and create a new one by right-clicking the
+model file \texttt{vsdt} and selecting the respective menu item.  In case you are
+using one file for both semantic and notational model, \texttt{vsdtd}, open the
+file in a text editor and remove the \texttt{notation:Diagram} elements (one for
+each diagram contained in the file).  Now rename the file to \texttt{vsdt} and
+initialize the diagram file (in this case you can delete the model file afterwards,
+as the model has been copied to the diagram file).  In both cases, you will have
+to recreate the diagram's layout.
 
 
 \section{Troubleshooting}
 \label{sec:user_faq_trouble}
 
-\paragraph*{I've drawn a legal Business Process Diagram, but when I try to export it the resulting
-code is broken.}
-The diagram has to be in a certain form so it can successfully be transformed. The diagram has to be
-\emph{structured}. Primarily, there must not be blocks or loops with multiple entry or exit points.
-Although the VSDT can handle some forms of slight unstructuredness, for best results you should
-design your diagram in a way it can be mapped to a block-oriented language in a straight-forward
-manner.
+\paragraph*{I've drawn a legal Business Process Diagram, but when I try to export
+it the resulting code is broken.}
+The diagram has to be in a certain form so it can successfully be transformed.
+The diagram has to be \emph{structured}.  Primarily, there must not be blocks or
+loops with multiple entry or exit points.  Although the VSDT can handle some forms
+of slight unstructuredness, for best results you should design your diagram in a
+way it can be mapped to a block-oriented language in a straight-forward manner.
 
-\paragraph*{I've created a Business Process Diagram using element XYZ, but in the resulting code
-this element is missing.}
-Not each single feature of BPMN can be taken into account in all of the transformations yet. For
-those elements that can not be mapped, a no-operation element will be created in the target model,
-such as a \verb|empty| Activity in BPEL or a \verb|logwarn| in JIAC. Be sure to substitute these
-elements with a proper implementation after the transformation.
+\paragraph*{I've created a Business Process Diagram using element XYZ, but in the
+resulting code this element is missing.}
+Not each single feature of BPMN can be taken into account in all of the
+transformations yet.  For those elements that can not be mapped, a no-operation
+element will be created in the target model, such as a \verb|empty| Activity in
+BPEL or a \verb|logwarn| in JIAC.  Be sure to substitute these elements with a
+proper implementation after the transformation.
+
