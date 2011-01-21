@@ -306,19 +306,6 @@ available (or planned for the future):
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Structure-Based Layout}
-\label{sec:user_features_layout}
-
-The Structure Mapping can also be used for calculating the layout of the BPMN
-diagrams.  Compared to the layouting algorithm provided by GMF, this proves
-especially useful for diagrams containing upstream loops.  Still, since the
-structure-based layout is still in an early stage, the default layouting algorithm
-still is the one provided by GMF.  The structure-based layout can be reached via
-the Structure View (see Section~\ref{sec:user_perspective_strucView}).
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Import and Merging of Process Diagrams}
 \label{sec:user_features_merging}
 
@@ -340,4 +327,68 @@ merged, so these should not be changed in different revisions.  Also there are
 still some issues with conflicting changes, so one should always be sure to create
 a backup and possibly use a \texttt{diff} tool to check whether the changes to
 the file's XML source look plausible.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Structure-Based Layout}
+\label{sec:user_features_layout}
+
+The Structure Mapping can also be used for calculating the layout of the BPMN
+diagrams.  Compared to the layouting algorithm provided by GMF, this proves
+especially useful for diagrams containing upstream loops.  Still, since the
+structure-based layout is still in an early stage, the default layouting algorithm
+still is the one provided by GMF.  The structure-based layout can be reached via
+the Structure View (see Section~\ref{sec:user_perspective_strucView}).
+
+The recursive layout algorithm is sketched in algorithms~\ref{lst:layout1} and
+\ref{lst:layout2}.  First, the process diagram is transformed to a block structure.
+Then, the algorithm will step down into the structure and calculate the layout of
+the ``blocks'' in a bottom-up way, taking the positions of the nested elements
+into account.  The result of the algorithm is a map holding the bounding box for
+each element, which can then be used for laying out the elements in the diagram
+editor.
+
+While the structure-based layout yields good results for well-structured diagrams,
+i.e. diagrams that can be transformed to a block-structured form, the algorithms
+is not applicable for non-structured diagram.
+
+\begin{algorithm}
+	\caption{\textsc{CreateLayoutMap}($diagram$)}
+	\label{lst:layout1}
+	\begin{algorithmic}
+		\STATE $structuredDiagram \leftarrow \textsc{Structurize}(diagram)$
+		\STATE $layoutMap \leftarrow $ create empty map
+		\STATE $hint \leftarrow (0,~ 0)$
+		\FOR{$pool$ in $structuredDiagram$}
+			\STATE $box \leftarrow \textsc{CalculateBox}(pool,~ hint,~ layoutMap)$
+			\STATE $hint \leftarrow (0,~ box.bottom)$
+		\ENDFOR
+		\RETURN $layoutMap$
+	\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+	\caption{\textsc{CalculateBox}($element,~ topLeft,~ layoutMap$)}
+	\label{lst:layout2}
+	\begin{algorithmic}
+		\STATE $hint \leftarrow topLeft$		
+		\IF{$element$ is atomic}
+			\STATE $box \leftarrow (topLeft.x,~topLeft.y,~\textsc{Width}(element),~\textsc{Height}(element))$
+		\ELSE
+			\IF{$element$ is sequence}
+				\STATE $height \leftarrow 0$
+				\FOR{$child$ in $element$}
+					\STATE $box \leftarrow \textsc{CalculateBox}(child,~ hint,~ layoutMap)$
+					\STATE $hint \leftarrow (box.left,~ box.top)$
+					\STATE $height \leftarrow \textsc{Max}(height,~ box.height$
+				\ENDFOR
+				\STATE $box \leftarrow (topLeft.x,~ topLeft.y,~ hint.x - topLeft.x,~ height)$
+			\ENDIF
+			\STATE // similar for block, loop, subprocess, event handler, etc.
+		\ENDIF
+		\STATE insert $(element,~ box)$ into $layoutMap$
+		\RETURN $box$
+	\end{algorithmic}
+\end{algorithm}
 
