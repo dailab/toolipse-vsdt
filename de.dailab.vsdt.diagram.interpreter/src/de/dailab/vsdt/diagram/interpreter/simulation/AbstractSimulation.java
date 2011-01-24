@@ -554,18 +554,25 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * 
 	 * @author kuester
 	 */
-	protected class FlowObjectMarkerDecorator implements IFigureDecorator {
+	protected static class FlowObjectMarkerDecorator implements IFigureDecorator {
+		
+		static final Color butter = new Color(null, 252, 233, 79); // tango butter 1
+		static final Color sky = new Color(null, 114, 159, 207);//tango sky blue 1
+		static final Color chameleon = new Color(null, 138, 226, 52);//tango chameleon 1
+		static final Color scarlet = new Color(null, 239, 41, 41);//tango scarlet red 1
+		
 		State state= null;
+
 		public void decorateFigure(IFigure figure, Graphics g) {
 			if (state == null || state == State.IDLE) return;
 			Point p= figure.getBounds().getTopLeft();
 			Color color= ColorConstants.white;
-			if (state == State.READY) color= ColorConstants.yellow;
-			if (state == State.LOOPING_READY) color= ColorConstants.yellow;
-			if (state == State.ACTIVE_WAITING) color= new Color(null, 64, 192, 255);
-			if (state == State.ACTIVE_READY) color= new Color(null, 64, 192, 255);
-			if (state == State.DONE) color= ColorConstants.green;
-			if (state == State.FAILED) color= ColorConstants.red;
+			if (state == State.READY) color= butter;
+			if (state == State.LOOPING_READY) color= butter;
+			if (state == State.ACTIVE_WAITING) color= sky;
+			if (state == State.ACTIVE_READY) color= sky;
+			if (state == State.DONE) color= chameleon;
+			if (state == State.FAILED) color= scarlet;
 			g.setForegroundColor(ColorConstants.black);
 			g.setBackgroundColor(color);
 			g.setLineWidth(1);
@@ -574,7 +581,7 @@ public abstract class AbstractSimulation implements ISimulation {
 			g.drawOval(p.x, p.y, w, w);
 			if (state == State.ACTIVE_WAITING) {
 				// draw pause symbol
-				g.setBackgroundColor(ColorConstants.yellow);
+				g.setBackgroundColor(butter);
 				g.fillRectangle(p.x+2*w/5, p.y+w/2, w/5, w/2);
 				g.fillRectangle(p.x+4*w/5, p.y+w/2, w/5, w/2);
 				g.drawRectangle(p.x+2*w/5, p.y+w/2, w/5, w/2);
@@ -582,7 +589,7 @@ public abstract class AbstractSimulation implements ISimulation {
 			}
 			if (state == State.ACTIVE_READY) {
 				// draw play symbol
-				g.setBackgroundColor(ColorConstants.darkGreen);
+				g.setBackgroundColor(chameleon);
 				g.fillPolygon(new int[] {p.x+w/2, p.y+w/2, p.x+w, p.y+3*w/4, p.x+w/2, p.y+w});
 				g.drawPolygon(new int[] {p.x+w/2, p.y+w/2, p.x+w, p.y+3*w/4, p.x+w/2, p.y+w});
 			}

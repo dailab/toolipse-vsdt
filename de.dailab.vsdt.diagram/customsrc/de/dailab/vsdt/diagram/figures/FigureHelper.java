@@ -25,18 +25,19 @@ public class FigureHelper {
 	public static final Color DEFAULT_FOREGROUND= ColorConstants.black; 
 	public static final Color DEFAULT_BACKGROUND= ColorConstants.white;
 	
-	public static final Color DEFAULT_COLOR_ACTIVITY=     new Color(null, 250, 250, 250);
-	public static final Color DEFAULT_COLOR_ACTIVITY_ALT= new Color(null, 240, 240, 240);
-	public static final Color DEFAULT_COLOR_START=        new Color(null, 220, 255, 220);
-	public static final Color DEFAULT_COLOR_INTERMEDIATE= new Color(null, 255, 255, 200);
-	public static final Color DEFAULT_COLOR_END=          new Color(null, 255, 200, 200);
-	public static final Color DEFAULT_COLOR_GATEWAY=      new Color(null, 255, 210, 160);
-	public static final Color DEFAULT_COLOR_POOL=         new Color(null, 230, 240, 255);
-	public static final Color DEFAULT_COLOR_LANE=         new Color(null, 230, 240, 255);
+	// tango colors (twice as bright values)
+	public static final Color DEFAULT_COLOR_ACTIVITY=     new Color(null, 250, 250, 248);
+	public static final Color DEFAULT_COLOR_ACTIVITY_ALT= new Color(null, 238, 238, 236);
+	public static final Color DEFAULT_COLOR_START=        new Color(null, 196, 240, 153);
+	public static final Color DEFAULT_COLOR_INTERMEDIATE= new Color(null, 253, 244, 167);
+	public static final Color DEFAULT_COLOR_END=          new Color(null, 247, 148, 148);
+	public static final Color DEFAULT_COLOR_GATEWAY=      new Color(null, 253, 215, 158);
+	public static final Color DEFAULT_COLOR_POOL=         new Color(null, 219, 231, 243);
+	public static final Color DEFAULT_COLOR_LANE=         new Color(null, 219, 231, 243);
 	public static final Color DEFAULT_COLOR_SEQUENCE=     ColorConstants.black;
 	public static final Color DEFAULT_COLOR_MESSAGE=      ColorConstants.gray;
 	public static final Color DEFAULT_COLOR_ASSOCIATION=  ColorConstants.lightBlue;
-	public static final Color DEFAULT_COLOR_DATA=         new Color(null, 255, 255, 200);
+	public static final Color DEFAULT_COLOR_DATA=         new Color(null, 253, 244, 167);
 	public static final Color DEFAULT_COLOR_GROUP=        ColorConstants.gray;
 	public static final Color DEFAULT_COLOR_TEXT=         ColorConstants.black;
 	
