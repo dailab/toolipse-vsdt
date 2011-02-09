@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.draw2d.geometry.Rectangle;
-import org.eclipse.gef.EditPart;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.common.core.service.IOperation;
@@ -53,10 +52,10 @@ public class VsdtLayoutProvider extends AbstractLayoutEditPartProvider {
 	@Override
 	public Command layoutEditParts(GraphicalEditPart containerEditPart,
 			IAdaptable layoutHint) {
-		List<EditPart> editParts= containerEditPart.getChildren();
-		return layoutEditParts(editParts, layoutHint);
+		return layoutEditParts(containerEditPart.getChildren(), layoutHint);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Command layoutEditParts(List selectedObjects, IAdaptable layoutHint) {
     	// calculate new Layout

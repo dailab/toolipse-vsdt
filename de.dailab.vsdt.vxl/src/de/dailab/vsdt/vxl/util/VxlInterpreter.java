@@ -238,6 +238,7 @@ public class VxlInterpreter {
 	 * @param tail		the tail term (to the right)
 	 * @return			result of the operation, applied to the given terms
 	 */
+	@SuppressWarnings("unchecked")
 	private Object evaluateOperation(Operator operator, Object head, Object tail) {
 		switch (operator) {
 		case CONCAT:
@@ -281,6 +282,7 @@ public class VxlInterpreter {
 	 * @param tail		the tail term (to the right)
 	 * @return			terms match operator?
 	 */
+	@SuppressWarnings("unchecked")
 	private boolean checkType(Operator operator, Object head, Object tail) {
 		try {
 			switch (operator) {

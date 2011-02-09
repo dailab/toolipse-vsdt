@@ -113,6 +113,7 @@ public class StructureView extends AbstractStructuredViewerView implements ISele
 		updateActionEnablement();
 		
 		contributeToMenu(new Action("Structure Based Layout (Experimental)", null) {
+			@SuppressWarnings("unchecked")
 			@Override
 			public void run() {
 				if (isVsdtDiagram()) {
@@ -120,7 +121,8 @@ public class StructureView extends AbstractStructuredViewerView implements ISele
 					VsdtDiagramEditor editor= (VsdtDiagramEditor) workbenchPage.getActiveEditor();
 					StructureLayout layout= new StructureLayout();
 					Map<FlowObject, Rectangle> layoutMap= layout.createLayoutMap(editor);
-					Command cmd= layout.getLayoutCommand(editor.getDiagramEditPart().getChildren(), true, layoutMap);
+					List<AbstractGraphicalEditPart> editParts = editor.getDiagramEditPart().getChildren();
+					Command cmd= layout.getLayoutCommand(editParts, true, layoutMap);
 					editor.getDiagramEditDomain().getDiagramCommandStack().execute(cmd);
 				}
 			}

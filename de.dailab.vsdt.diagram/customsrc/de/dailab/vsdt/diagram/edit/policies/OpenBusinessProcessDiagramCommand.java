@@ -107,8 +107,8 @@ public class OpenBusinessProcessDiagramCommand  extends AbstractTransactionalCom
 			new WorkspaceModifyOperation() {
 				protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
 					try {
-						for (Iterator it = bpd.eResource().getResourceSet().getResources().iterator(); it.hasNext();) {
-							Resource nextResource = (Resource) it.next();
+						for (Iterator<Resource> it = bpd.eResource().getResourceSet().getResources().iterator(); it.hasNext();) {
+							Resource nextResource = it.next();
 							if (nextResource.isLoaded() && !getEditingDomain().isReadOnly(nextResource)) {
 								nextResource.save(VsdtDiagramEditorUtil.getSaveOptions());
 							}

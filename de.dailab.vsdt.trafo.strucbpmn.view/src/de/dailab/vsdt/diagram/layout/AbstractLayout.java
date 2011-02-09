@@ -79,6 +79,7 @@ public abstract class AbstractLayout {
 	 * @param layoutMap			List holding the layout information for the nodes
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public Command getLayoutCommand(List<AbstractGraphicalEditPart> editPartList, boolean layoutChildren, Map<FlowObject, Rectangle> layoutMap) {
 		Queue<AbstractGraphicalEditPart> editParts= new LinkedList<AbstractGraphicalEditPart>();
 		editParts.addAll(editPartList);

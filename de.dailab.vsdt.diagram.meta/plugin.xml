@@ -468,7 +468,7 @@
       <?gmfgen generated="true"?>
       <decoratorProvider class="de.dailab.vsdt.meta.diagram.providers.VsdtValidationDecoratorProvider">
          <Priority name="Low"/>
-         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart" id="PRIMARY_VIEW"/>
          <context decoratorTargets="PRIMARY_VIEW"/>
       </decoratorProvider>
    </extension>
