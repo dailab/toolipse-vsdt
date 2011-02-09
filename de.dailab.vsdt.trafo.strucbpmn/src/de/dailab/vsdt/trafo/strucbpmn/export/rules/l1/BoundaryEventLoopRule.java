@@ -18,8 +18,8 @@ import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerCase;
 import de.dailab.vsdt.trafo.strucbpmn.StrucBpmnFactory;
+import de.dailab.vsdt.trafo.strucbpmn.export.AbstractVsdtRule;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InsertEmptyRule;
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 import de.dailab.vsdt.util.VsdtElementFactory;
 
 /**

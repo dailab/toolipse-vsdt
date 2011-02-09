@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.EObject;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.trafo.base.util.Util;
+import de.dailab.vsdt.trafo.strucbpmn.export.AbstractVsdtRule;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InsertEmptyRule;
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
  * Remove Empty Rule

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
+import de.dailab.vsdt.trafo.strucbpmn.export.AbstractVsdtRule;
 
 /**
  * Add To Block Rule

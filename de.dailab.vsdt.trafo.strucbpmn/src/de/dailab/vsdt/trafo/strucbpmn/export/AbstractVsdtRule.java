@@ -1,4 +1,4 @@
-package de.dailab.vsdt.trafo.strucbpmn.util;
+package de.dailab.vsdt.trafo.strucbpmn.export;
 
 import java.util.List;
 

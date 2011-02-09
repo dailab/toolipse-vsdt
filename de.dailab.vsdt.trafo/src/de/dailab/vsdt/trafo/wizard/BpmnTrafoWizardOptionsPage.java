@@ -171,6 +171,7 @@ public abstract class BpmnTrafoWizardOptionsPage extends WizardExportResourcesPa
 	/**
 	 * same as super, but public and using a typed list
 	 */
+	@SuppressWarnings("unchecked")
 	public List<IFile> getSelectedResources() {
 		return super.getSelectedResources();
 	}

@@ -36,7 +36,7 @@ public class ReferenceConstraint extends Constraint {
 	public boolean checkVariableValue(EObject self, EObject other) {
 		Object value = self.eGet(reference);
 		if (reference.isMany()) {
-			return ((List) value).contains(other);
+			return ((List<?>) value).contains(other);
 		} else {
 			return value == other;
 		}
@@ -49,7 +49,7 @@ public class ReferenceConstraint extends Constraint {
 	public void constrainTargetValues(EObject self, List<EObject> otherDomain) {
 		Object value = self.eGet(reference);
 		if (reference.isMany()) {
-			otherDomain.retainAll((List) value);
+			otherDomain.retainAll((List<?>) value);
 		} else {
 			otherDomain.retainAll(Collections.singletonList(value));
 		}

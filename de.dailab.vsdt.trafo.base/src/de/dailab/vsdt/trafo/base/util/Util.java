@@ -43,7 +43,7 @@ public class Util {
 			EObject container = eObject.eContainer();
 			EReference contains = (EReference)eObject.eContainingFeature();
 			if(contains.isMany()){
-				((EList) container.eGet(contains)).remove(eObject);
+				((EList<?>) container.eGet(contains)).remove(eObject);
 			}
 			else{
 				container.eUnset(contains);

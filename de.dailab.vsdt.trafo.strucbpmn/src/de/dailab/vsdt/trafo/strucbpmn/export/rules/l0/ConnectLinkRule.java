@@ -9,7 +9,7 @@ import de.dailab.vsdt.Event;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
+import de.dailab.vsdt.trafo.strucbpmn.export.AbstractVsdtRule;
 
 /**
  * Connect Link Rule

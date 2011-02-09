@@ -88,7 +88,7 @@ public abstract class MappingResultSaver {
 	 * @param resourceFactory	ResourceFactory (optional)
 	 * @throws IOException
 	 */
-	protected void saveAsXmlResource(File file, EObject eObject, Map options, Factory resourceFactory) throws IOException {
+	protected void saveAsXmlResource(File file, EObject eObject, Map<?, ?> options, Factory resourceFactory) throws IOException {
 		URI uri= URI.createFileURI(file.getAbsolutePath());
 		Resource res= resourceFactory != null
 				? resourceFactory.createResource(uri)
