@@ -33,7 +33,7 @@ import de.dailab.vsdt.VsdtPackage;
  */
 public class MessageChannelImpl extends ImplementationImpl implements MessageChannel {
 	/**
-	 * The cached value of the '{@link #getChannel() <em>Channel</em>}' reference.
+	 * The cached value of the '{@link #getChannel() <em>Channel</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getChannel()
@@ -77,14 +77,6 @@ public class MessageChannelImpl extends ImplementationImpl implements MessageCha
 	 * @generated
 	 */
 	public Expression getChannel() {
-		if (channel != null && channel.eIsProxy()) {
-			InternalEObject oldChannel = (InternalEObject)channel;
-			channel = (Expression)eResolveProxy(oldChannel);
-			if (channel != oldChannel) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VsdtPackage.MESSAGE_CHANNEL__CHANNEL, oldChannel, channel));
-			}
-		}
 		return channel;
 	}
 
@@ -93,8 +85,14 @@ public class MessageChannelImpl extends ImplementationImpl implements MessageCha
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression basicGetChannel() {
-		return channel;
+	public NotificationChain basicSetChannel(Expression newChannel, NotificationChain msgs) {
+		Expression oldChannel = channel;
+		channel = newChannel;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VsdtPackage.MESSAGE_CHANNEL__CHANNEL, oldChannel, newChannel);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -103,10 +101,17 @@ public class MessageChannelImpl extends ImplementationImpl implements MessageCha
 	 * @generated
 	 */
 	public void setChannel(Expression newChannel) {
-		Expression oldChannel = channel;
-		channel = newChannel;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.MESSAGE_CHANNEL__CHANNEL, oldChannel, channel));
+		if (newChannel != channel) {
+			NotificationChain msgs = null;
+			if (channel != null)
+				msgs = ((InternalEObject)channel).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VsdtPackage.MESSAGE_CHANNEL__CHANNEL, null, msgs);
+			if (newChannel != null)
+				msgs = ((InternalEObject)newChannel).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VsdtPackage.MESSAGE_CHANNEL__CHANNEL, null, msgs);
+			msgs = basicSetChannel(newChannel, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.MESSAGE_CHANNEL__CHANNEL, newChannel, newChannel));
 	}
 
 	/**
@@ -160,6 +165,8 @@ public class MessageChannelImpl extends ImplementationImpl implements MessageCha
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case VsdtPackage.MESSAGE_CHANNEL__CHANNEL:
+				return basicSetChannel(null, msgs);
 			case VsdtPackage.MESSAGE_CHANNEL__PAYLOAD:
 				return basicSetPayload(null, msgs);
 		}
@@ -175,8 +182,7 @@ public class MessageChannelImpl extends ImplementationImpl implements MessageCha
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case VsdtPackage.MESSAGE_CHANNEL__CHANNEL:
-				if (resolve) return getChannel();
-				return basicGetChannel();
+				return getChannel();
 			case VsdtPackage.MESSAGE_CHANNEL__PAYLOAD:
 				return getPayload();
 		}

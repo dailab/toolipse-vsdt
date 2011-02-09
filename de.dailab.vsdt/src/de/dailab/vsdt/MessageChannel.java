@@ -26,26 +26,26 @@ package de.dailab.vsdt;
  */
 public interface MessageChannel extends Implementation {
 	/**
-	 * Returns the value of the '<em><b>Channel</b></em>' reference.
+	 * Returns the value of the '<em><b>Channel</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Channel</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Channel</em>' reference.
+	 * @return the value of the '<em>Channel</em>' containment reference.
 	 * @see #setChannel(Expression)
 	 * @see de.dailab.vsdt.VsdtPackage#getMessageChannel_Channel()
-	 * @model required="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	Expression getChannel();
 
 	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.MessageChannel#getChannel <em>Channel</em>}' reference.
+	 * Sets the value of the '{@link de.dailab.vsdt.MessageChannel#getChannel <em>Channel</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Channel</em>' reference.
+	 * @param value the new value of the '<em>Channel</em>' containment reference.
 	 * @see #getChannel()
 	 * @generated
 	 */

@@ -1,5 +1,8 @@
 package de.dailab.vsdt.diagram.dialogs;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
@@ -141,10 +144,11 @@ public class OrganizeDataTypesDialog extends AbstractOrganizeElementsDialog<Data
 	
 
 	@Override
-	protected void contributeToButtonsGroup(Composite buttonsGroup) {
+	protected Collection<Button> contributeToButtonsGroup(Composite buttonsGroup) {
 		Button button= new Button(buttonsGroup,SWT.NONE);
 		button.setText(BUTTON_DEF);
 		button.addSelectionListener(this);
+		return Arrays.asList(button);
 	}
 	
 	@Override

@@ -30,7 +30,8 @@ public class BpmnPropertiesViewLabelProvider extends LabelProvider implements IT
 			if (BpmnPropertiesView.OWNER_COLUMN == BpmnPropertiesView.COLUMN_NAMES[index]) {
 				if (bpmnProperty.eContainer() instanceof MessageChannel) {
 					MessageChannel message = (MessageChannel) bpmnProperty.eContainer();
-					label= "Message @ " + message.getChannel().getExpression();
+					String channel = message.getChannel() != null ? message.getChannel().getExpression() : "unknown";
+					label= "Message @ " + channel;
 				}
 				if (bpmnProperty.eContainer() instanceof Service) {
 					Service service= (Service) bpmnProperty.eContainer();

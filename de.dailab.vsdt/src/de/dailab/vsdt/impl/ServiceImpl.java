@@ -51,7 +51,7 @@ public class ServiceImpl extends ImplementationImpl implements Service {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String TYPE_EDEFAULT = "WebService";
+	protected static final String TYPE_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.

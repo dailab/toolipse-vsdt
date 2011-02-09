@@ -1,6 +1,7 @@
 package de.dailab.vsdt.diagram.interpreter.dialogs;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
@@ -17,7 +18,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import de.dailab.vsdt.Message;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.diagram.ui.ExpressionComposite;
 import de.dailab.vsdt.vxl.util.VxlInterpreter;
@@ -42,7 +42,7 @@ public class MessageParameterDialog extends TitleAreaDialog {
 			"parameters left. Exit anyway?";
 	
 	/** The message being sent*/
-	protected final Message message;
+	protected final List<Property> properties;
 	
 	/** Incoming or Outgoing message? (used only for a label) */
 	protected final boolean incoming;
@@ -67,20 +67,20 @@ public class MessageParameterDialog extends TitleAreaDialog {
 	 * then read the new values using {@link #getNewPropertyValue(Property)}.
 	 * 
 	 * @param parentShell	The Shell
-	 * @param message		The Message which's Properties to show (and set)
+	 * @param message		The Properties to show (and set)
 	 * @param incoming		Incoming or outgoing message? Only used for a label
 	 * @param valuesMap		Map holding the Properties' values
 	 */
-	public MessageParameterDialog(Shell parentShell, Message message, boolean incoming, Map<Property, Object> valuesMap) {
+	public MessageParameterDialog(Shell parentShell, List<Property> properties, boolean incoming, Map<Property, Object> valuesMap) {
 		super(parentShell);
 		setTitle(TITLE);
 		setShellStyle(getShellStyle() | SWT.RESIZE);
 		
-		if (message == null) throw new IllegalArgumentException("Message must not be null");
-		this.message= message;
-		this.incoming= incoming;
-		this.valuesMap= valuesMap;
-		this.propertyTextMap= new HashMap<Property, Text>();
+		if (properties == null) throw new IllegalArgumentException("Properties must not be null");
+		this.properties = properties;
+		this.incoming = incoming;
+		this.valuesMap = valuesMap;
+		this.propertyTextMap = new HashMap<Property, Text>();
 	}
 
 	/*
@@ -92,10 +92,7 @@ public class MessageParameterDialog extends TitleAreaDialog {
 		Control superContent = super.createContents(parent);
 		parent.getShell().setSize(400, 320);
 		parent.getShell().setText( TITLE );
-		StringBuffer buffer= new StringBuffer();
-		buffer.append(incoming ? "Receiving" : "Sending");
-		buffer.append(" message ").append(message.getName());
-		setMessage( buffer.toString());
+		setMessage( incoming ? "Receiving" : "Sending");
 		setErrorMessage(errorMessage);
 		if (errorMessage != null) {
 			getButton(IDialogConstants.OK_ID).setEnabled( false );
@@ -118,9 +115,9 @@ public class MessageParameterDialog extends TitleAreaDialog {
 		
 		final Group group= new Group(scrolledComposite, SWT.NONE);
 		scrolledComposite.setContent(group);
-		group.setText(message.getName());
+		group.setText("Properties");
 		group.setLayout(new GridLayout(2, false));
-		for (Property property : message.getProperties()) {
+		for (Property property : properties) {
 			// create Label
 			Label label= new Label(group, SWT.NONE);
 			label.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false));

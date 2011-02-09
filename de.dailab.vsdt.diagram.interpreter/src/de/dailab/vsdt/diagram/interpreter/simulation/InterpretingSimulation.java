@@ -1,6 +1,7 @@
 package de.dailab.vsdt.diagram.interpreter.simulation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
 import de.dailab.vsdt.Activity;
+import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.BusinessProcessDiagram;
@@ -23,10 +25,12 @@ import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.GatewayType;
-import de.dailab.vsdt.Message;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.MultiLoopAttSet;
+import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.diagram.dialogs.EditExpressionDialog;
 import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
@@ -133,27 +137,70 @@ public class InterpretingSimulation extends ManualSimulation implements ISimulat
 	 * @param incoming		Select Incoming or Outgoing message?
 	 */
 	public void openMessageParameterDialog(FlowObject flowObject, boolean incoming) {
-		Message message= null;
+		List<Property> properties = null;
 		if (flowObject instanceof Activity) {
 			Activity activity= (Activity) flowObject;
-			message= incoming ? activity.getOutMessage() : activity.getInMessage();
+			if (activity.getImplementation() instanceof Service) {
+				Service service = (Service) activity.getImplementation();
+				properties = getParameters(service, activity.getPool().getParticipant(), incoming);
+			}
+			if (activity.getImplementation() instanceof MessageChannel) {
+				MessageChannel channel = (MessageChannel) activity.getImplementation();
+				if ((activity.getActivityType() == ActivityType.SEND && ! incoming) || 
+						activity.getActivityType() == ActivityType.RECEIVE && incoming) {
+					if (channel.getPayload() != null) {
+						properties = Arrays.asList(channel.getPayload());
+					}
+				}
+			}
 		}
-		if (flowObject instanceof Event && ((Event) flowObject).isThrowing() != incoming) {
-			message= ((Event) flowObject).getMessage();
+		if (flowObject instanceof Event) {
+			Event event = (Event) flowObject;
+			if (event.isThrowing() != incoming) {
+				if (event.getImplementation() instanceof Service) {
+					Service service = (Service) event.getImplementation();
+					properties = getParameters(service, event.getPool().getParticipant(), incoming);
+				}
+				if (event.getImplementation() instanceof MessageChannel) {
+					MessageChannel channel = (MessageChannel) event.getImplementation();
+					if (channel.getPayload() != null) {
+						properties = Arrays.asList(channel.getPayload());
+					}
+				}
+			}
 		}
-		if (message != null) {
+		if (properties != null) {
 			Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 			Map<Property, Object> valueMap= new HashMap<Property, Object>();
-			for (Property property : message.getProperties()) {
+			for (Property property : properties) {
 				valueMap.put(property, propertyValueMap.get(property));
 			}
-			MessageParameterDialog dialog= new MessageParameterDialog(shell, message, incoming, propertyValueMap);
+			MessageParameterDialog dialog= new MessageParameterDialog(shell, properties, incoming, propertyValueMap);
 			if (dialog.open() == Dialog.OK) {
-				for (Property property : message.getProperties()) {
+				for (Property property : properties) {
 					propertyValueMap.put(property, dialog.getNewPropertyValue(property));
 				}
 			}
 		}
+	}
+
+	/**
+	 * Return the right set of parameters (input or output).
+	 * 
+	 * @param service			some Service
+	 * @param myParticipant		participant for whom to retrieve the parameters
+	 * @param incoming			incoming or outgoing message?
+	 * @return					right set of parameters, i.e. input or output
+	 */
+	private List<Property> getParameters(Service service, Participant myParticipant, boolean incoming) {
+		// WARNING: This works only if the service provider is
+		// not the same participant as the service requester!
+		//   inc,   same -> input
+		//   inc, ! same -> output
+		// ! inc,   same -> output
+		// ! inc, ! same -> input
+		boolean isSameParticipant = myParticipant == service.getParticipant();
+		return incoming == isSameParticipant ? service.getInput() : service.getOutput();
 	}
 	
 	/**

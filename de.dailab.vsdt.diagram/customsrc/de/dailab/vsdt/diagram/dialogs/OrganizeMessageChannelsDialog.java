@@ -1,6 +1,7 @@
 package de.dailab.vsdt.diagram.dialogs;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.osgi.framework.internal.core.Msg;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -25,8 +26,10 @@ import de.dailab.vsdt.util.VsdtElementFactory;
  * 
  * @author kuester
  */
-public class OrganizeMessagesDialog extends AbstractOrganizeElementsDialog<MessageChannel> {
+public class OrganizeMessageChannelsDialog extends AbstractOrganizeElementsDialog<MessageChannel> {
 
+	// TODO use the same combo boxes for types as in OrganizePropertiesDialog
+	
 	public static final String LABEL_CHANNEL= "Channel";
 	public static final String LABEL_PAYLOAD_NAME= "Name";
 	public static final String LABEL_PAYLOAD_TYPE= "Type";
@@ -58,7 +61,7 @@ public class OrganizeMessagesDialog extends AbstractOrganizeElementsDialog<Messa
 	 * 
 	 * @param parentShell	the parent shell (will be blocked)
 	 */
-	public OrganizeMessagesDialog(Shell parentShell, EObject parentElement) {
+	public OrganizeMessageChannelsDialog(Shell parentShell, EObject parentElement) {
 		super(parentShell, parentElement, true, 4);
 
 		BusinessProcessSystem bps= null;
@@ -154,7 +157,7 @@ public class OrganizeMessagesDialog extends AbstractOrganizeElementsDialog<Messa
 	@Override
 	protected String getString(MessageChannel message) {
 		if (message != null) {
-			String nameString= message.getChannel().getExpression();
+			String nameString= message.getChannel() != null ? message.getChannel().getExpression() : "<unknown>";
 			StringBuffer buffer= new StringBuffer();
 			buffer.append(nameString != null ? nameString : "<null>"); //$NON-NLS-1$
 			buffer.append(" ( ");

@@ -1,6 +1,8 @@
 package de.dailab.vsdt.diagram.dialogs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
@@ -180,7 +182,7 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 	
 
 	@Override
-	protected void contributeToButtonsGroup(Composite buttonsGroup) {
+	protected Collection<Button> contributeToButtonsGroup(Composite buttonsGroup) {
 		inputButton = new Button(buttonsGroup, SWT.NONE);
 		inputButton.setText(BUTTON_INPUT);
 		inputButton.addSelectionListener(this);
@@ -188,6 +190,8 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 		outputButton = new Button(buttonsGroup, SWT.NONE);
 		outputButton.setText(BUTTON_OUTPUT);
 		outputButton.addSelectionListener(this);
+		
+		return Arrays.asList(inputButton, outputButton);
 	}
 	
 	@Override

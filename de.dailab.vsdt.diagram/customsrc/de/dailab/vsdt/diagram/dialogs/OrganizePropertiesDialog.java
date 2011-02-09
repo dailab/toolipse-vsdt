@@ -1,5 +1,7 @@
 package de.dailab.vsdt.diagram.dialogs;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -152,10 +154,11 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 	}
 	
 	@Override
-	protected void contributeToButtonsGroup(Composite buttonsGroup) {
+	protected Collection<Button> contributeToButtonsGroup(Composite buttonsGroup) {
 		Button button= new Button(buttonsGroup,SWT.NONE);
 		button.setText(BUTTON_DATATYPES);
 		button.addSelectionListener(this);
+		return Arrays.asList(button);
 	}
 	
 	@Override

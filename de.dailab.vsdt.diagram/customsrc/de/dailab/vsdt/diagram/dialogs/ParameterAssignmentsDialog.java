@@ -28,6 +28,7 @@ import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.Event;
 import de.dailab.vsdt.FlowObject;
+import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.Service;
@@ -105,11 +106,14 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 		setTitle(TITLE);
 		setShellStyle(getShellStyle() | SWT.RESIZE);
 
+		Implementation implementation = null;
+		
 		// set input and output according to parent element
 		if (parentElement instanceof Activity) {
 			Activity activity = (Activity) parentElement;
-			if (activity.getImplementation() instanceof MessageChannel) {
-				MessageChannel channel = (MessageChannel) activity.getImplementation();
+			implementation = activity.getImplementation();
+			if (implementation instanceof MessageChannel) {
+				MessageChannel channel = (MessageChannel) implementation;
 				if (channel.getPayload() != null) {
 					if (activity.getActivityType() == ActivityType.SEND) {
 						input= Arrays.asList(channel.getPayload());
@@ -118,8 +122,8 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 					}
 				}
 			}
-			if (activity.getImplementation() instanceof Service) {
-				Service service = (Service) activity.getImplementation();
+			if (implementation instanceof Service) {
+				Service service = (Service) implementation;
 				boolean notSameParticipant = activity.getPool().getParticipant() != service.getParticipant();
 				switch (activity.getActivityType()) {
 				case SEND:
@@ -139,8 +143,9 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 			}
 		} else if (parentElement instanceof Event) {
 			Event event = (Event) parentElement;
-			if (event.getImplementation() instanceof MessageChannel) {
-				MessageChannel channel = (MessageChannel) event.getImplementation();
+			implementation = event.getImplementation();
+			if (implementation instanceof MessageChannel) {
+				MessageChannel channel = (MessageChannel) implementation;
 				if (channel.getPayload() != null) {
 					if (event.isThrowing()) {
 						input= Arrays.asList(channel.getPayload());
@@ -149,8 +154,8 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 					}
 				}
 			}
-			if (event.getImplementation() instanceof Service) {
-				Service service = (Service) event.getImplementation();
+			if (implementation instanceof Service) {
+				Service service = (Service) implementation;
 				boolean notSameParticipant = event.getPool().getParticipant() != service.getParticipant();
 				if (event.isThrowing()) {
 					input= notSameParticipant ? service.getInput() : service.getOutput();
@@ -170,11 +175,10 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 		availableProperties= new ArrayList<Property>();
 		if (parentElement != null) {
 			availableProperties.addAll(VsdtHelper.getVisibleProperties(parentElement));
-			if (input != null) {
-				availableProperties.removeAll(input);
-			}
-			if (output != null) {
-				availableProperties.removeAll(output);
+			// remove the message's / service's own properties
+			if (implementation != null) {
+				List<Property> params = VsdtHelper.getVisibleProperties(implementation);
+				availableProperties.removeAll(params);
 			}
 		}
 		inputParameterMap= new HashMap<Property, Combo>();

@@ -34,7 +34,6 @@ import org.eclipse.emf.common.util.EList;
 public interface Service extends Implementation {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.
-	 * The default value is <code>"WebService"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
@@ -44,7 +43,7 @@ public interface Service extends Implementation {
 	 * @return the value of the '<em>Type</em>' attribute.
 	 * @see #setType(String)
 	 * @see de.dailab.vsdt.VsdtPackage#getService_Type()
-	 * @model default="WebService" required="true"
+	 * @model required="true"
 	 * @generated
 	 */
 	String getType();

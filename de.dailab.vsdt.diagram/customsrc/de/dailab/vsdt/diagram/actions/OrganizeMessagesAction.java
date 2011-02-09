@@ -7,7 +7,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import de.dailab.common.gmf.action.AbstractGmfAction;
 import de.dailab.common.gmf.command.AbstractDialogWrapperCommand;
-import de.dailab.vsdt.diagram.dialogs.OrganizeMessagesDialog;
+import de.dailab.vsdt.diagram.dialogs.OrganizeMessageChannelsDialog;
 
 public class OrganizeMessagesAction extends AbstractGmfAction {
 	
@@ -24,7 +24,7 @@ public class OrganizeMessagesAction extends AbstractGmfAction {
 		
 		@Override
 		protected Dialog getDialog(Shell shell) {
-			return new OrganizeMessagesDialog(shell, modelElement);
+			return new OrganizeMessageChannelsDialog(shell, modelElement);
 		}
 		
 	}

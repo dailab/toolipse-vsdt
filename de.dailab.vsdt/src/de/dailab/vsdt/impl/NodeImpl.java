@@ -22,6 +22,7 @@ import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.Node;
+import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.VsdtPackage;
@@ -102,6 +103,17 @@ public abstract class NodeImpl extends GraphicalObjectImpl implements Node {
 			incomingMsg = new EObjectWithInverseEList<MessageFlow>(MessageFlow.class, this, VsdtPackage.NODE__INCOMING_MSG, VsdtPackage.MESSAGE_FLOW__TARGET);
 		}
 		return incomingMsg;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Pool getPool() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**

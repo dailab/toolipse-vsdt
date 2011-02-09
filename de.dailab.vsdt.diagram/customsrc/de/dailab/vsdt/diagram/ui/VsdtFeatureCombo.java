@@ -28,7 +28,9 @@ public class VsdtFeatureCombo<T extends Object> extends FeatureCombo<T> {
 	protected String getLabel(T o) {
 		String result= null;
 		if (o instanceof MessageChannel) {
-			result= ((MessageChannel) o).getChannel().getExpression();
+			if (((MessageChannel) o).getChannel() != null) {
+				result= ((MessageChannel) o).getChannel().getExpression();
+			}
 		}
 		if (o instanceof IdObject) {
 			result=  ((IdObject)o).getNameOrId();

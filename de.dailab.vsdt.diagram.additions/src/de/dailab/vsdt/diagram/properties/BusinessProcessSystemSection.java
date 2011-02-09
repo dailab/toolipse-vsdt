@@ -106,8 +106,10 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
         CLabel label;
 
         // executable
-        executableButton= FormLayoutUtil.addButton(composite, DISPLAY_EXECUTABLE, SWT.CHECK, 0, 0, null);
+        executableButton= FormLayoutUtil.addButton(composite, DISPLAY_EXECUTABLE, SWT.CHECK, lastControl, 0, null);
         executableButton.addSelectionListener(this);
+        
+        lastControl = executableButton;
 
         // organize buttons
         orgImplButton = addButton(DISPLAY_ORG_IMPL);
