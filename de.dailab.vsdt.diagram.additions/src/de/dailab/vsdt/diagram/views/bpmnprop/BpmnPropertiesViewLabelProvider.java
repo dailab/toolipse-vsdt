@@ -5,8 +5,9 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
 import de.dailab.vsdt.IdObject;
-import de.dailab.vsdt.Message;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Property;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.diagram.providers.VsdtAdditionsPlugin;
 
 /**
@@ -27,9 +28,13 @@ public class BpmnPropertiesViewLabelProvider extends LabelProvider implements IT
 				label= bpmnProperty.getType();
 			}
 			if (BpmnPropertiesView.OWNER_COLUMN == BpmnPropertiesView.COLUMN_NAMES[index]) {
-				if (bpmnProperty.eContainer() instanceof Message) {
-					Message message = (Message) bpmnProperty.eContainer();
-					label= message.getName();
+				if (bpmnProperty.eContainer() instanceof MessageChannel) {
+					MessageChannel message = (MessageChannel) bpmnProperty.eContainer();
+					label= "Message @ " + message.getChannel().getExpression();
+				}
+				if (bpmnProperty.eContainer() instanceof Service) {
+					Service service= (Service) bpmnProperty.eContainer();
+					label= service.getOperation();
 				}
 				if (bpmnProperty.eContainer() instanceof IdObject) {
 					IdObject idObject = (IdObject) bpmnProperty.eContainer();

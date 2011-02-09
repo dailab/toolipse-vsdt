@@ -99,8 +99,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//BusinessProcessSystem/executable"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessSystem/businessProcesses"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessSystem/participants"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessSystem/messages"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessSystem/implementations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessSystem/messageChannels"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessSystem/services"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//BusinessProcessSystem/dataTypes"/>
     </genClasses>
     <genClasses ecoreClass="vsdt.ecore#//BusinessProcessDiagram">
@@ -143,9 +143,9 @@
       <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
           ecoreFeature="ecore:EReference vsdt.ecore#//Node/incomingMsg"/>
       <genOperations ecoreOperation="vsdt.ecore#//Node/getPool"/>
-      <genOperations ecoreOperation="vsdt.ecore#//Node/adaptToMessage">
-        <genParameters ecoreParameter="vsdt.ecore#//Node/adaptToMessage/message"/>
-        <genParameters ecoreParameter="vsdt.ecore#//Node/adaptToMessage/incoming"/>
+      <genOperations ecoreOperation="vsdt.ecore#//Node/adaptToImplementation">
+        <genParameters ecoreParameter="vsdt.ecore#//Node/adaptToImplementation/implementation"/>
+        <genParameters ecoreParameter="vsdt.ecore#//Node/adaptToImplementation/incoming"/>
       </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="vsdt.ecore#//FlowObject">
@@ -162,8 +162,6 @@
     <genClasses image="false" ecoreClass="vsdt.ecore#//Event">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Event/nonInterrupting"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Event/trigger"/>
-      <genFeatures notify="false" createChild="false" propertyCategory="Trigger Attributes"
-          propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Event/message"/>
       <genFeatures notify="false" createChild="false" propertyCategory="Trigger Attributes"
           propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Event/implementation"/>
       <genFeatures property="Readonly" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Event/timeExpression"/>
@@ -193,8 +191,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/boundaryEvents"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/eventedSubprocess"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/activityType"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/inMessage"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/outMessage"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Activity/implementation"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/performers"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Activity/script"/>
@@ -264,8 +260,6 @@
           ecoreFeature="ecore:EReference vsdt.ecore#//SequenceFlow/target"/>
     </genClasses>
     <genClasses ecoreClass="vsdt.ecore#//MessageFlow">
-      <genFeatures notify="false" createChild="false" propertyCategory="Connection"
-          propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//MessageFlow/message"/>
       <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
           ecoreFeature="ecore:EReference vsdt.ecore#//MessageFlow/source"/>
       <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
@@ -285,19 +279,20 @@
           ecoreFeature="ecore:EReference vsdt.ecore#//Participant/associatedProcesses"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Participant/associatedPools"/>
     </genClasses>
-    <genClasses ecoreClass="vsdt.ecore#//Message">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Message/name"/>
-      <genFeatures property="Readonly" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Message/properties"/>
+    <genClasses image="false" ecoreClass="vsdt.ecore#//Implementation"/>
+    <genClasses ecoreClass="vsdt.ecore#//MessageChannel">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//MessageChannel/channel"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//MessageChannel/payload"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="vsdt.ecore#//Implementation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Implementation/type"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Implementation/participant"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Implementation/interface"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Implementation/operation"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Implementation/description"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Implementation/location"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Implementation/inputMessage"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Implementation/outputMessage"/>
+    <genClasses ecoreClass="vsdt.ecore#//Service">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Service/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Service/participant"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Service/interface"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Service/operation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Service/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Service/location"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Service/input"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference vsdt.ecore#//Service/output"/>
     </genClasses>
     <genClasses ecoreClass="vsdt.ecore#//Assignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference vsdt.ecore#//Assignment/to"/>

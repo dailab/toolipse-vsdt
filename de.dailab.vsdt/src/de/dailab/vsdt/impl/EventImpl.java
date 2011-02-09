@@ -20,7 +20,6 @@ import de.dailab.vsdt.Event;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Intermediate;
-import de.dailab.vsdt.Message;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.VsdtPackage;
@@ -34,7 +33,6 @@ import de.dailab.vsdt.VsdtPackage;
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#isNonInterrupting <em>Non Interrupting</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getTrigger <em>Trigger</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.EventImpl#getMessage <em>Message</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getImplementation <em>Implementation</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getTimeExpression <em>Time Expression</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#isAsDuration <em>As Duration</em>}</li>
@@ -85,15 +83,6 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 	 * @ordered
 	 */
 	protected TriggerType trigger = TRIGGER_EDEFAULT;
-	/**
-	 * The cached value of the '{@link #getMessage() <em>Message</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMessage()
-	 * @generated
-	 * @ordered
-	 */
-	protected Message message;
 	/**
 	 * The cached value of the '{@link #getImplementation() <em>Implementation</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -256,44 +245,6 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 		trigger = newTrigger == null ? TRIGGER_EDEFAULT : newTrigger;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.EVENT__TRIGGER, oldTrigger, trigger));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Message getMessage() {
-		if (message != null && message.eIsProxy()) {
-			InternalEObject oldMessage = (InternalEObject)message;
-			message = (Message)eResolveProxy(oldMessage);
-			if (message != oldMessage) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VsdtPackage.EVENT__MESSAGE, oldMessage, message));
-			}
-		}
-		return message;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Message basicGetMessage() {
-		return message;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setMessage(Message newMessage) {
-		Message oldMessage = message;
-		message = newMessage;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.EVENT__MESSAGE, oldMessage, message));
 	}
 
 	/**
@@ -707,9 +658,6 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 				return isNonInterrupting();
 			case VsdtPackage.EVENT__TRIGGER:
 				return getTrigger();
-			case VsdtPackage.EVENT__MESSAGE:
-				if (resolve) return getMessage();
-				return basicGetMessage();
 			case VsdtPackage.EVENT__IMPLEMENTATION:
 				if (resolve) return getImplementation();
 				return basicGetImplementation();
@@ -746,9 +694,6 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 				return;
 			case VsdtPackage.EVENT__TRIGGER:
 				setTrigger((TriggerType)newValue);
-				return;
-			case VsdtPackage.EVENT__MESSAGE:
-				setMessage((Message)newValue);
 				return;
 			case VsdtPackage.EVENT__IMPLEMENTATION:
 				setImplementation((Implementation)newValue);
@@ -792,9 +737,6 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 			case VsdtPackage.EVENT__TRIGGER:
 				setTrigger(TRIGGER_EDEFAULT);
 				return;
-			case VsdtPackage.EVENT__MESSAGE:
-				setMessage((Message)null);
-				return;
 			case VsdtPackage.EVENT__IMPLEMENTATION:
 				setImplementation((Implementation)null);
 				return;
@@ -835,8 +777,6 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 				return nonInterrupting != NON_INTERRUPTING_EDEFAULT;
 			case VsdtPackage.EVENT__TRIGGER:
 				return trigger != TRIGGER_EDEFAULT;
-			case VsdtPackage.EVENT__MESSAGE:
-				return message != null;
 			case VsdtPackage.EVENT__IMPLEMENTATION:
 				return implementation != null;
 			case VsdtPackage.EVENT__TIME_EXPRESSION:

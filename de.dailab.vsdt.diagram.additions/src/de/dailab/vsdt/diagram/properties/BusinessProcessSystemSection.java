@@ -35,8 +35,8 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
 							   DISPLAY_CREATE_DATE= "Creation Date",
 							   DISPLAY_MOD_DATE= "Modification Date",
 							   DISPLAY_MODIFIED_NOW= "Now",
-							   DISPLAY_ORG_IMPL= "Implementations...",
-							   DISPLAY_ORG_MSG= "Messages...",
+							   DISPLAY_ORG_IMPL= "Services...",
+							   DISPLAY_ORG_MSG= "Message Channels...",
 							   DISPLAY_ORG_DATA= "Data Types...";
 	
     protected BusinessProcessSystem bps;

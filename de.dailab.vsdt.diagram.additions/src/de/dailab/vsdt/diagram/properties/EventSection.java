@@ -30,7 +30,6 @@ import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.Event;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Implementation;
-import de.dailab.vsdt.Message;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.VsdtPackage;
@@ -44,7 +43,7 @@ public class EventSection extends FlowObjectSection {
 	public static final String DISPLAY_TRIGGER= "Trigger",
 							   DISPLAY_INTERRUPTING= "Non-Interrupting",
 							   DISPLAY_GROUP= "Event Trigger Attributes",
-							   DISPLAY_MESSAGE= "Message",
+//							   DISPLAY_MESSAGE= "Message",
 							   DISPLAY_IMPL= "Implementation",
 							   DISPLAY_TIME_EXPRESSION= "Time Expr.",
 							   DISPLAY_TIME_IS_DURATION= "As Duration?",
@@ -63,7 +62,7 @@ public class EventSection extends FlowObjectSection {
     private Combo eventTypeCombo;
     
     private Group triggerGroup;
-    private VsdtFeatureCombo<Message> messageCombo;
+//    private VsdtFeatureCombo<Message> messageCombo;
     private VsdtFeatureCombo<Implementation> implementationCombo;
     private ExpressionComposite timeExpressionComp;
     private Button asDurationButton;
@@ -99,8 +98,10 @@ public class EventSection extends FlowObjectSection {
     	if (firstrun) {
     		BusinessProcessDiagram bpd= event.getPool().getParent();
     		BusinessProcessSystem bps= bpd.getParent();
-    		messageCombo.fillCombo(bps.getMessages());
-    		implementationCombo.fillCombo(bps.getImplementations());
+    		List<Implementation> allImplementations = new ArrayList<Implementation>();
+    		allImplementations.addAll(bps.getServices());
+    		allImplementations.addAll(bps.getMessageChannels());
+    		implementationCombo.fillCombo(allImplementations);
     		List<Event> events= new ArrayList<Event>();
     		for (FlowObject flowObject : event.getAbstractProcess().getGraphicalElements()) {
     			if (flowObject instanceof Event) {
@@ -130,7 +131,7 @@ public class EventSection extends FlowObjectSection {
 		nonInterruptingButton.setSelection(event.isNonInterrupting());
         nonInterruptingButton.setEnabled(event.isOnBoundary() || ((event instanceof Start) && event.isInEventedSubprocess()));
 
-		messageCombo.setSelected(event.getMessage());
+//		messageCombo.setSelected(event.getMessage());
     	implementationCombo.setSelected(event.getImplementation());
     	timeExpressionComp.setText(getExpression(event.getTimeExpression()));
     	asDurationButton.setSelection(event.isAsDuration());
@@ -146,8 +147,8 @@ public class EventSection extends FlowObjectSection {
     		TriggerType trigger = TriggerType.get(eventTypeCombo.getItem(eventTypeCombo.getSelectionIndex()));
     		List<TriggerType> validTriggerTypes= event.getValidTriggerTypes();
     		boolean isMulti= TriggerType.MULTIPLE == trigger;
-        	messageCombo.getCombo().setEnabled(TriggerType.MESSAGE == trigger || isMulti && validTriggerTypes.contains(TriggerType.MESSAGE));
-        	implementationCombo.getCombo().setEnabled(messageCombo.getCombo().isEnabled());
+    		implementationCombo.getCombo().setEnabled(TriggerType.MESSAGE == trigger || isMulti && validTriggerTypes.contains(TriggerType.MESSAGE));
+//        	messageCombo.getCombo().setEnabled(messageCombo.getCombo().isEnabled());
         	errorCodeText.setEnabled(TriggerType.ERROR== trigger || isMulti && validTriggerTypes.contains(TriggerType.ERROR));
         	timeExpressionComp.setEnabled(TriggerType.TIMER == trigger || isMulti && validTriggerTypes.contains(TriggerType.TIMER));
         	asDurationButton.setEnabled(timeExpressionComp.isEnabled());
@@ -183,15 +184,15 @@ public class EventSection extends FlowObjectSection {
     	implementationCombo= new VsdtFeatureCombo<Implementation>(FormLayoutUtil.addCombo(triggerGroup, SWT.READ_ONLY, 0, label, 50));
 		implementationCombo.getCombo().addSelectionListener(this);
 		
-        label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_MESSAGE, implementationCombo.getCombo(), 0);
-    	messageCombo= new VsdtFeatureCombo<Message>(FormLayoutUtil.addCombo(triggerGroup, SWT.READ_ONLY, implementationCombo.getCombo(), label, 50));
-    	messageCombo.getCombo().addSelectionListener(this);
+//        label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_MESSAGE, implementationCombo.getCombo(), 0);
+//    	messageCombo= new VsdtFeatureCombo<Message>(FormLayoutUtil.addCombo(triggerGroup, SWT.READ_ONLY, implementationCombo.getCombo(), label, 50));
+//    	messageCombo.getCombo().addSelectionListener(this);
 		
 		//timer trigger
-        asDurationButton= FormLayoutUtil.addButton(triggerGroup, DISPLAY_TIME_IS_DURATION, SWT.CHECK, messageCombo.getCombo(), null, 50);
+        asDurationButton= FormLayoutUtil.addButton(triggerGroup, DISPLAY_TIME_IS_DURATION, SWT.CHECK, implementationCombo.getCombo(), null, 50);
         asDurationButton.addSelectionListener(this);
-		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_TIME_EXPRESSION, messageCombo.getCombo(), 0);
-		timeExpressionComp= addExpressionComposite(triggerGroup, messageCombo.getCombo(), label, asDurationButton);
+		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_TIME_EXPRESSION, implementationCombo.getCombo(), 0);
+		timeExpressionComp= addExpressionComposite(triggerGroup, implementationCombo.getCombo(), label, asDurationButton);
 		
 		//error trigger
 		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_ERROR, timeExpressionComp, 0);
@@ -242,19 +243,19 @@ public class EventSection extends FlowObjectSection {
     	if (src.equals(eventTypeCombo)) {
 			setPropertyValue(event, pack.getEvent_Trigger(), TriggerType.get(eventTypeCombo.getText()));
     	}
-    	if (src.equals(messageCombo.getCombo())) {
-    		setPropertyValue(event, pack.getEvent_Message(), messageCombo.getSelected());
-    	}
+//    	if (src.equals(messageCombo.getCombo())) {
+//    		setPropertyValue(event, pack.getEvent_Message(), messageCombo.getSelected());
+//    	}
     	if (src.equals(implementationCombo.getCombo())) {
     		Implementation implementation= implementationCombo.getSelected();
     		setPropertyValue(event, pack.getEvent_Implementation(), implementation);
-    		if (implementation != null) {
-	    		if (event.isThrowing() ^ implementation.getParticipant() == event.getPool().getParticipant()) {
-    				setPropertyValue(event, pack.getEvent_Message(), implementation.getInputMessage());
-	    		} else {
-    				setPropertyValue(event, pack.getEvent_Message(), implementation.getOutputMessage());
-	    		}
-    		}
+//    		if (implementation != null) {
+//	    		if (event.isThrowing() ^ implementation.getParticipant() == event.getPool().getParticipant()) {
+//    				setPropertyValue(event, pack.getEvent_Message(), implementation.getInputMessage());
+//	    		} else {
+//    				setPropertyValue(event, pack.getEvent_Message(), implementation.getOutputMessage());
+//	    		}
+//    		}
     	}
     	if (src.equals(linkedToCombo.getCombo())) {
     		Event otherEvent= linkedToCombo.getSelected();

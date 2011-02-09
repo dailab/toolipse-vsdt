@@ -1,6 +1,7 @@
 package de.dailab.vsdt.diagram.dialogs;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,12 +23,14 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
 import de.dailab.vsdt.Activity;
+import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.Event;
 import de.dailab.vsdt.FlowObject;
-import de.dailab.vsdt.Message;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Property;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.diagram.ui.VsdtFeatureCombo;
 import de.dailab.vsdt.util.VsdtElementFactory;
@@ -58,11 +61,11 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 	/** The parent element (Activity or Event) */
 	protected final FlowObject parentElement;
 	
-	/** The message going in to this activity or event */
-	protected Message inMessage= null;
+	/** The input properties for this activity or event */
+	protected List<Property> input= null;
 	
-	/** The message going out of this activity or event */
-	protected Message outMessage= null;
+	/** The output properties for this activity or event */
+	protected List<Property> output= null;
 	
 	/** Properties available for being assigned to the parameters */
 	protected final List<Property> availableProperties;
@@ -102,21 +105,64 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 		setTitle(TITLE);
 		setShellStyle(getShellStyle() | SWT.RESIZE);
 
-		if (parentElement instanceof Activity && ((Activity)parentElement).getImplementation() != null) {
+		// set input and output according to parent element
+		if (parentElement instanceof Activity) {
 			Activity activity = (Activity) parentElement;
-			inMessage= activity.getInMessage();
-			outMessage= activity.getOutMessage();
-		} else if (parentElement instanceof Event && ((Event)parentElement).getImplementation() != null) {
+			if (activity.getImplementation() instanceof MessageChannel) {
+				MessageChannel channel = (MessageChannel) activity.getImplementation();
+				if (channel.getPayload() != null) {
+					if (activity.getActivityType() == ActivityType.SEND) {
+						input= Arrays.asList(channel.getPayload());
+					} else if (activity.getActivityType() == ActivityType.RECEIVE) {
+						output= Arrays.asList(channel.getPayload());
+					}
+				}
+			}
+			if (activity.getImplementation() instanceof Service) {
+				Service service = (Service) activity.getImplementation();
+				boolean notSameParticipant = activity.getPool().getParticipant() != service.getParticipant();
+				switch (activity.getActivityType()) {
+				case SEND:
+					// send can be service invocation or reply
+					input = notSameParticipant ? service.getInput() : service.getOutput(); 
+					break;
+				case RECEIVE:
+					// receive can be reply or service invocation
+					output = notSameParticipant ? service.getOutput() : service.getInput();
+					break;
+				case SERVICE:
+				case USER:
+					input = service.getInput();
+					output = service.getOutput();
+					break;
+				}
+			}
+		} else if (parentElement instanceof Event) {
 			Event event = (Event) parentElement;
-			if (event.isThrowing()) {
-				inMessage= event.getMessage();	
-			} else {
-				outMessage= event.getMessage();
+			if (event.getImplementation() instanceof MessageChannel) {
+				MessageChannel channel = (MessageChannel) event.getImplementation();
+				if (channel.getPayload() != null) {
+					if (event.isThrowing()) {
+						input= Arrays.asList(channel.getPayload());
+					} else {
+						output= Arrays.asList(channel.getPayload());
+					}
+				}
+			}
+			if (event.getImplementation() instanceof Service) {
+				Service service = (Service) event.getImplementation();
+				boolean notSameParticipant = event.getPool().getParticipant() != service.getParticipant();
+				if (event.isThrowing()) {
+					input= notSameParticipant ? service.getInput() : service.getOutput();
+				} else {
+					output= notSameParticipant ? service.getOutput() : service.getInput();
+				}
 			}
 		} else {
 			throw new IllegalArgumentException("Expecting an Activity or Event with Implementation != null");
 		}
 		this.parentElement= (FlowObject) parentElement;
+
 		/*
 		 * Available Properties are the Properties of the element and its parent 
 		 * elements, but not the Properties of the input and output Messages.
@@ -124,17 +170,18 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 		availableProperties= new ArrayList<Property>();
 		if (parentElement != null) {
 			availableProperties.addAll(VsdtHelper.getVisibleProperties(parentElement));
-			if (inMessage != null) {
-				availableProperties.removeAll(inMessage.getProperties());
+			if (input != null) {
+				availableProperties.removeAll(input);
 			}
-			if (outMessage != null) {
-				availableProperties.removeAll(outMessage.getProperties());
+			if (output != null) {
+				availableProperties.removeAll(output);
 			}
 		}
 		inputParameterMap= new HashMap<Property, Combo>();
 		outputParameterMap= new HashMap<Property, VsdtFeatureCombo<Property>>();
 		parameterAssignmentsMap= new HashMap<Property, Assignment>();
 	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -187,9 +234,9 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 		Group inputGroup= new Group(composite, SWT.NONE);
 		inputGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		inputGroup.setLayout(new GridLayout(2, false));
-		if (inMessage != null) {
-			inputGroup.setText("Outgoing Message: " + inMessage.getName());
-			for (Property property : inMessage.getProperties()) {
+		if (input != null) {
+			inputGroup.setText("Output");
+			for (Property property : input) {
 				// create ComboBox
 				Combo combo= new Combo(inputGroup, SWT.NONE);
 				combo.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
@@ -213,16 +260,16 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 				label.setText("\u2192 " + property.getName()); // unicode rightward arrow
 			}
 		} else {
-			inputGroup.setText("No Outgoing Message");
+			inputGroup.setText("Output");
 		}
 		
 		// add output parameter group
 		Group outputGroup= new Group(composite, SWT.NONE);
 		outputGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		outputGroup.setLayout(new GridLayout(2, false));
-		if (outMessage != null) {
-			outputGroup.setText("Incoming Message: " + outMessage.getName());
-			for (Property property : outMessage.getProperties()) {
+		if (output != null) {
+			outputGroup.setText("Input");
+			for (Property property : output) {
 				// create Label
 				Label label= new Label(outputGroup, SWT.NONE);
 				label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false));
@@ -247,7 +294,7 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 				outputParameterMap.put(property, combo);
 			}
 		} else {
-			outputGroup.setText("No Incoming Message");
+			outputGroup.setText("No Input");
 		}
 		scrolledComposite.setContent(composite);
 		scrolledComposite.setExpandHorizontal(true);
@@ -266,9 +313,9 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected void okPressed() {
-		// check for unassigned input paramters
-		if (inMessage != null) {
-			for (Property property : inMessage.getProperties()) {
+		// check for unassigned input parameters
+		if (input != null) {
+			for (Property property : input) {
 				Combo combo= inputParameterMap.get(property);
 				String text= combo.getText().trim();
 				if (text.isEmpty()) {
@@ -285,8 +332,8 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 		}
 		
 		// handle input message parameters
-		if (inMessage != null) {
-			for (Property property : inMessage.getProperties()) {
+		if (input != null) {
+			for (Property property : input) {
 				Combo combo= inputParameterMap.get(property);
 				String text= combo.getText().trim();
 				// test whether an assignment exists for that property
@@ -314,8 +361,8 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 			}
 		}
 		// handle output message parameters
-		if (outMessage != null) {
-			for (Property property : outMessage.getProperties()) {
+		if (output != null) {
+			for (Property property : output) {
 				VsdtFeatureCombo<Property> combo= outputParameterMap.get(property);
 				Property selected= combo.getSelected();
 				// test whether an assignment exists for that property

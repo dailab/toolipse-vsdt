@@ -22,9 +22,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.DataType;
-import de.dailab.vsdt.Implementation;
-import de.dailab.vsdt.Message;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Participant;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.VsdtPackage;
 
 /**
@@ -44,8 +44,8 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#isExecutable <em>Executable</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getBusinessProcesses <em>Business Processes</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getParticipants <em>Participants</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getMessages <em>Messages</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getImplementations <em>Implementations</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getMessageChannels <em>Message Channels</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getServices <em>Services</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getDataTypes <em>Data Types</em>}</li>
  * </ul>
  * </p>
@@ -234,24 +234,24 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 	protected EList<Participant> participants;
 
 	/**
-	 * The cached value of the '{@link #getMessages() <em>Messages</em>}' containment reference list.
+	 * The cached value of the '{@link #getMessageChannels() <em>Message Channels</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMessages()
+	 * @see #getMessageChannels()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Message> messages;
+	protected EList<MessageChannel> messageChannels;
 
 	/**
-	 * The cached value of the '{@link #getImplementations() <em>Implementations</em>}' containment reference list.
+	 * The cached value of the '{@link #getServices() <em>Services</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getImplementations()
+	 * @see #getServices()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Implementation> implementations;
+	protected EList<Service> services;
 
 	/**
 	 * The cached value of the '{@link #getDataTypes() <em>Data Types</em>}' containment reference list.
@@ -483,11 +483,11 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Message> getMessages() {
-		if (messages == null) {
-			messages = new EObjectContainmentEList<Message>(Message.class, this, VsdtPackage.BUSINESS_PROCESS_SYSTEM__MESSAGES);
+	public EList<MessageChannel> getMessageChannels() {
+		if (messageChannels == null) {
+			messageChannels = new EObjectContainmentEList<MessageChannel>(MessageChannel.class, this, VsdtPackage.BUSINESS_PROCESS_SYSTEM__MESSAGE_CHANNELS);
 		}
-		return messages;
+		return messageChannels;
 	}
 
 	/**
@@ -495,11 +495,11 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Implementation> getImplementations() {
-		if (implementations == null) {
-			implementations = new EObjectContainmentEList<Implementation>(Implementation.class, this, VsdtPackage.BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS);
+	public EList<Service> getServices() {
+		if (services == null) {
+			services = new EObjectContainmentEList<Service>(Service.class, this, VsdtPackage.BUSINESS_PROCESS_SYSTEM__SERVICES);
 		}
-		return implementations;
+		return services;
 	}
 
 	/**
@@ -541,10 +541,10 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 				return ((InternalEList<?>)getBusinessProcesses()).basicRemove(otherEnd, msgs);
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__PARTICIPANTS:
 				return ((InternalEList<?>)getParticipants()).basicRemove(otherEnd, msgs);
-			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MESSAGES:
-				return ((InternalEList<?>)getMessages()).basicRemove(otherEnd, msgs);
-			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS:
-				return ((InternalEList<?>)getImplementations()).basicRemove(otherEnd, msgs);
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MESSAGE_CHANNELS:
+				return ((InternalEList<?>)getMessageChannels()).basicRemove(otherEnd, msgs);
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__SERVICES:
+				return ((InternalEList<?>)getServices()).basicRemove(otherEnd, msgs);
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__DATA_TYPES:
 				return ((InternalEList<?>)getDataTypes()).basicRemove(otherEnd, msgs);
 		}
@@ -579,10 +579,10 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 				return getBusinessProcesses();
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__PARTICIPANTS:
 				return getParticipants();
-			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MESSAGES:
-				return getMessages();
-			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS:
-				return getImplementations();
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MESSAGE_CHANNELS:
+				return getMessageChannels();
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__SERVICES:
+				return getServices();
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__DATA_TYPES:
 				return getDataTypes();
 		}
@@ -630,13 +630,13 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 				getParticipants().clear();
 				getParticipants().addAll((Collection<? extends Participant>)newValue);
 				return;
-			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MESSAGES:
-				getMessages().clear();
-				getMessages().addAll((Collection<? extends Message>)newValue);
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MESSAGE_CHANNELS:
+				getMessageChannels().clear();
+				getMessageChannels().addAll((Collection<? extends MessageChannel>)newValue);
 				return;
-			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS:
-				getImplementations().clear();
-				getImplementations().addAll((Collection<? extends Implementation>)newValue);
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__SERVICES:
+				getServices().clear();
+				getServices().addAll((Collection<? extends Service>)newValue);
 				return;
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__DATA_TYPES:
 				getDataTypes().clear();
@@ -684,11 +684,11 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__PARTICIPANTS:
 				getParticipants().clear();
 				return;
-			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MESSAGES:
-				getMessages().clear();
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MESSAGE_CHANNELS:
+				getMessageChannels().clear();
 				return;
-			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS:
-				getImplementations().clear();
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__SERVICES:
+				getServices().clear();
 				return;
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__DATA_TYPES:
 				getDataTypes().clear();
@@ -725,10 +725,10 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 				return businessProcesses != null && !businessProcesses.isEmpty();
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__PARTICIPANTS:
 				return participants != null && !participants.isEmpty();
-			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MESSAGES:
-				return messages != null && !messages.isEmpty();
-			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS:
-				return implementations != null && !implementations.isEmpty();
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MESSAGE_CHANNELS:
+				return messageChannels != null && !messageChannels.isEmpty();
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__SERVICES:
+				return services != null && !services.isEmpty();
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__DATA_TYPES:
 				return dataTypes != null && !dataTypes.isEmpty();
 		}

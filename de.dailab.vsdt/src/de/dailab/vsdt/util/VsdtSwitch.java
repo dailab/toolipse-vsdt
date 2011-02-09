@@ -35,7 +35,7 @@ import de.dailab.vsdt.InputSet;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.Lane;
 import de.dailab.vsdt.LoopAttributeSet;
-import de.dailab.vsdt.Message;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.MultiLoopAttSet;
 import de.dailab.vsdt.Node;
@@ -44,6 +44,7 @@ import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.TextAnnotation;
@@ -379,15 +380,23 @@ public class VsdtSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case VsdtPackage.MESSAGE: {
-				Message message = (Message)theEObject;
-				T result = caseMessage(message);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case VsdtPackage.IMPLEMENTATION: {
 				Implementation implementation = (Implementation)theEObject;
 				T result = caseImplementation(implementation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case VsdtPackage.MESSAGE_CHANNEL: {
+				MessageChannel messageChannel = (MessageChannel)theEObject;
+				T result = caseMessageChannel(messageChannel);
+				if (result == null) result = caseImplementation(messageChannel);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case VsdtPackage.SERVICE: {
+				Service service = (Service)theEObject;
+				T result = caseService(service);
+				if (result == null) result = caseImplementation(service);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -855,21 +864,6 @@ public class VsdtSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Message</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Message</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMessage(Message object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Implementation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -881,6 +875,36 @@ public class VsdtSwitch<T> {
 	 * @generated
 	 */
 	public T caseImplementation(Implementation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Message Channel</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Message Channel</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMessageChannel(MessageChannel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Service</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Service</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseService(Service object) {
 		return null;
 	}
 

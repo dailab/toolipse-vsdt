@@ -35,7 +35,7 @@ import de.dailab.vsdt.InputSet;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.Lane;
 import de.dailab.vsdt.LoopAttributeSet;
-import de.dailab.vsdt.Message;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.MultiLoopAttSet;
 import de.dailab.vsdt.Node;
@@ -44,6 +44,7 @@ import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.TextAnnotation;
@@ -231,12 +232,16 @@ public class VsdtAdapterFactory extends AdapterFactoryImpl {
 				return createParticipantAdapter();
 			}
 			@Override
-			public Adapter caseMessage(Message object) {
-				return createMessageAdapter();
-			}
-			@Override
 			public Adapter caseImplementation(Implementation object) {
 				return createImplementationAdapter();
+			}
+			@Override
+			public Adapter caseMessageChannel(MessageChannel object) {
+				return createMessageChannelAdapter();
+			}
+			@Override
+			public Adapter caseService(Service object) {
+				return createServiceAdapter();
 			}
 			@Override
 			public Adapter caseAssignment(Assignment object) {
@@ -681,20 +686,6 @@ public class VsdtAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link de.dailab.vsdt.Message <em>Message</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see de.dailab.vsdt.Message
-	 * @generated
-	 */
-	public Adapter createMessageAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link de.dailab.vsdt.Implementation <em>Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -705,6 +696,34 @@ public class VsdtAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createImplementationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.dailab.vsdt.MessageChannel <em>Message Channel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.dailab.vsdt.MessageChannel
+	 * @generated
+	 */
+	public Adapter createMessageChannelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link de.dailab.vsdt.Service <em>Service</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see de.dailab.vsdt.Service
+	 * @generated
+	 */
+	public Adapter createServiceAdapter() {
 		return null;
 	}
 

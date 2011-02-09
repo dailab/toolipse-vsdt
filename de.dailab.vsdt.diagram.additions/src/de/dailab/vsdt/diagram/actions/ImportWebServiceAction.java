@@ -3,9 +3,7 @@ package de.dailab.vsdt.diagram.actions;
 import java.util.Collections;
 import java.util.List;
 
-import javax.wsdl.Input;
 import javax.wsdl.Operation;
-import javax.wsdl.Output;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
@@ -43,16 +41,12 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
-import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
-import de.dailab.vsdt.Event;
-import de.dailab.vsdt.Implementation;
-import de.dailab.vsdt.Message;
-import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.Node;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Pool;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.diagram.edit.parts.PoolEditPart;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
 import de.dailab.vsdt.diagram.providers.VsdtAdditionsPlugin;
@@ -84,10 +78,10 @@ public class ImportWebServiceAction extends Action {
 	private final Viewer viewer;
 	
 	protected BusinessProcessSystem bps= null;
-	protected Message message= null;
-	protected Message inMessage= null;
-	protected Message outMessage= null;
-	protected Implementation implementation= null;
+//	protected Message message= null;
+//	protected Message inMessage= null;
+//	protected Message outMessage= null;
+	protected Service service= null;
 	
 	public ImportWebServiceAction(Viewer viewer) {
 		this.viewer= viewer;
@@ -106,25 +100,25 @@ public class ImportWebServiceAction extends Action {
 		WebSeviceAccessor accessor= (WebSeviceAccessor) viewer.getInput();
 		// Get Selected Element
 		Object viewerSelection= ((StructuredSelection) viewer.getSelection()).getFirstElement();
-		if (viewerSelection instanceof javax.wsdl.Message) {
-			message= accessor.createBpmnElement((javax.wsdl.Message) viewerSelection);
-		}
+//		if (viewerSelection instanceof javax.wsdl.Message) {
+//			message= accessor.createBpmnElement((javax.wsdl.Message) viewerSelection);
+//		}
 		if (viewerSelection instanceof javax.wsdl.Operation) {
 			Operation operation= (Operation) viewerSelection;
-			implementation= accessor.createBpmnElement(operation);
-			inMessage= accessor.createBpmnElement(operation.getInput().getMessage());
-			outMessage= accessor.createBpmnElement(operation.getOutput().getMessage());
-			implementation.setInputMessage(inMessage);
-			implementation.setOutputMessage(outMessage);
+			service = accessor.createBpmnElement(operation);
+//			inMessage= accessor.createBpmnElement(operation.getInput().getMessage());
+//			outMessage= accessor.createBpmnElement(operation.getOutput().getMessage());
+//			implementation.setInputMessage(inMessage);
+//			implementation.setOutputMessage(outMessage);
 		}
-		if (viewerSelection instanceof Input) {
-			Input input= (Input) viewerSelection;
-			inMessage= accessor.createBpmnElement(input.getMessage());
-		}
-		if (viewerSelection instanceof Output) {
-			Output output= (Output) viewerSelection;
-			outMessage= accessor.createBpmnElement(output.getMessage());
-		}
+//		if (viewerSelection instanceof Input) {
+//			Input input= (Input) viewerSelection;
+//			inMessage= accessor.createBpmnElement(input.getMessage());
+//		}
+//		if (viewerSelection instanceof Output) {
+//			Output output= (Output) viewerSelection;
+//			outMessage= accessor.createBpmnElement(output.getMessage());
+//		}
 		return true;
 	}
 	
@@ -161,16 +155,16 @@ public class ImportWebServiceAction extends Action {
 				if (MessageDialog.openConfirm(window.getShell(), TITLE, DIALOG_IMPORT_MESSAGE)) {
 	
 					// clear
-					message= null;
-					inMessage= null;
-					outMessage= null;
-					implementation= null;
+//					message= null;
+//					inMessage= null;
+//					outMessage= null;
+					service = null;
 					if (! getElementsToImport(viewer)) {
 						throw new Exception();
 					}
 					cc.add(new ICommandProxy(new ImportBpmnElementCommand()));
 					
-					if (implementation != null) {
+					if (service != null) {
 					
 						// Create Pool for the new Implementation ?
 						IAdaptable poolViewAdapter= null;
@@ -249,7 +243,7 @@ public class ImportWebServiceAction extends Action {
 										cc.add(new ICommandProxy(createMessageFlowCmd));
 				
 										//set message flow properties and create messages
-										cc.add(new ICommandProxy(new UseWebserviceForMessageFlowCommand(diagramEditPart, poolViewAdapter)));
+//										cc.add(new ICommandProxy(new UseWebserviceForMessageFlowCommand(diagramEditPart, poolViewAdapter)));
 		
 									}
 								}
@@ -286,18 +280,18 @@ public class ImportWebServiceAction extends Action {
 		@Override
 		protected CommandResult doExecuteWithResult(IProgressMonitor arg0, IAdaptable arg1) throws ExecutionException {
 			if (bps != null) {
-				if (implementation != null) {
-					bps.getImplementations().add(implementation);
+				if (service != null) {
+					bps.getServices().add(service);
 				}
-				if (inMessage != null) {
-					bps.getMessages().add(inMessage);
-				}
-				if (outMessage != null) {
-					bps.getMessages().add(outMessage);
-				}
-				if (message != null) {
-					bps.getMessages().add(message);
-				}
+//				if (inMessage != null) {
+//					bps.getMessages().add(inMessage);
+//				}
+//				if (outMessage != null) {
+//					bps.getMessages().add(outMessage);
+//				}
+//				if (message != null) {
+//					bps.getMessages().add(message);
+//				}
 				return CommandResult.newOKCommandResult(bps);
 			}
 			return null;
@@ -324,11 +318,11 @@ public class ImportWebServiceAction extends Action {
 			if (elementPart instanceof PoolEditPart) {
 				PoolEditPart poolEditPart = (PoolEditPart) elementPart;
 				Pool pool= poolEditPart.getCastedModel();
-				if (pool != null && implementation != null) {
-					pool.setName(implementation.getInterface() + "_Pool");//$NON-NLS-1$
+				if (pool != null && service != null) {
+					pool.setName(service.getInterface() + "_Pool");//$NON-NLS-1$
 					Participant participant= pool.getParticipant();
 					//set implementation's and messages' participants
-					implementation.setParticipant(participant);
+					service.setParticipant(participant);
 //					inMessage.setTo(participant);
 //					outMessage.setFrom(participant);
 					return CommandResult.newOKCommandResult();
@@ -338,41 +332,41 @@ public class ImportWebServiceAction extends Action {
 		}
 	}
 
-	/**
-	 * - gets the newly created Message Flows from the newly created Pool
-	 * - sets the Message Flows' Messages to be the imported messages 
-	 * 
-	 * @author kuester
-	 */
-	protected class UseWebserviceForMessageFlowCommand extends MyAbstractTransactionalCommand {
-		private DiagramEditPart diagramEditPart;
-		private IAdaptable poolViewAdapter;
-		public UseWebserviceForMessageFlowCommand(DiagramEditPart diagramEditPart, IAdaptable adaptable) {
-			this.diagramEditPart= diagramEditPart;
-			this.poolViewAdapter= adaptable;
-		}
-		@Override
-		protected CommandResult doExecuteWithResult(IProgressMonitor arg0, IAdaptable arg1) throws ExecutionException {
-			final EditPartViewer viewer = diagramEditPart.getViewer();
-			EditPart elementPart = (EditPart) viewer.getEditPartRegistry().get(poolViewAdapter.getAdapter(View.class));
-			if (elementPart instanceof PoolEditPart) {
-				PoolEditPart poolEditPart = (PoolEditPart) elementPart;
-				Pool pool= poolEditPart.getCastedModel();
-				if (pool != null) {
-					if (pool.getIncomingMsg().size() == 1 && pool.getOutgoingMsg().size() == 1) {
-						//set the input message flow's message
-						MessageFlow incomingMsgFlow= pool.getIncomingMsg().get(0);
-						incomingMsgFlow.setMessage(inMessage);
-						//set the output message flow's message
-						MessageFlow outgoingMsgFlow= pool.getOutgoingMsg().get(0);
-						outgoingMsgFlow.setMessage(outMessage);
-					}
-					return CommandResult.newOKCommandResult();
-				}
-			}
-			return null;
-		}
-	}
+//	/**
+//	 * - gets the newly created Message Flows from the newly created Pool
+//	 * - sets the Message Flows' Messages to be the imported messages 
+//	 * 
+//	 * @author kuester
+//	 */
+//	protected class UseWebserviceForMessageFlowCommand extends MyAbstractTransactionalCommand {
+//		private DiagramEditPart diagramEditPart;
+//		private IAdaptable poolViewAdapter;
+//		public UseWebserviceForMessageFlowCommand(DiagramEditPart diagramEditPart, IAdaptable adaptable) {
+//			this.diagramEditPart= diagramEditPart;
+//			this.poolViewAdapter= adaptable;
+//		}
+//		@Override
+//		protected CommandResult doExecuteWithResult(IProgressMonitor arg0, IAdaptable arg1) throws ExecutionException {
+//			final EditPartViewer viewer = diagramEditPart.getViewer();
+//			EditPart elementPart = (EditPart) viewer.getEditPartRegistry().get(poolViewAdapter.getAdapter(View.class));
+//			if (elementPart instanceof PoolEditPart) {
+//				PoolEditPart poolEditPart = (PoolEditPart) elementPart;
+//				Pool pool= poolEditPart.getCastedModel();
+//				if (pool != null) {
+//					if (pool.getIncomingMsg().size() == 1 && pool.getOutgoingMsg().size() == 1) {
+//						//set the input message flow's message
+//						MessageFlow incomingMsgFlow= pool.getIncomingMsg().get(0);
+//						incomingMsgFlow.setMessage(inMessage);
+//						//set the output message flow's message
+//						MessageFlow outgoingMsgFlow= pool.getOutgoingMsg().get(0);
+//						outgoingMsgFlow.setMessage(outMessage);
+//					}
+//					return CommandResult.newOKCommandResult();
+//				}
+//			}
+//			return null;
+//		}
+//	}
 	
 	/**
 	 * - adapts the selected Node to the imported Implementation and Messages
@@ -390,15 +384,14 @@ public class ImportWebServiceAction extends Action {
 		@Override
 		protected CommandResult doExecuteWithResult(IProgressMonitor arg0, IAdaptable arg1) throws ExecutionException {
 			// set message (implicitly setting the type, too)
-			node.adaptToMessage(inMessage, false);
-			node.adaptToMessage(outMessage, true);
+			node.adaptToImplementation(service, false);
 			// set implementation
-			if (node instanceof Activity) {
-				((Activity)node).setImplementation(implementation);
-			}
-			if (node instanceof Event) {
-				((Event)node).setImplementation(implementation);
-			}
+//			if (node instanceof Activity) {
+//				((Activity)node).setImplementation(implementation);
+//			}
+//			if (node instanceof Event) {
+//				((Event)node).setImplementation(implementation);
+//			}
 			//set messages' participants
 //			inMessage.setFrom(node.getPool().getParticipant());
 //			outMessage.setTo(node.getPool().getParticipant());

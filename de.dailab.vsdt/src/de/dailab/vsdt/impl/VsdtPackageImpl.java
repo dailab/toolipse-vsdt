@@ -47,7 +47,7 @@ import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.Lane;
 import de.dailab.vsdt.LoopAttributeSet;
 import de.dailab.vsdt.LoopType;
-import de.dailab.vsdt.Message;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.MultiLoopAttSet;
 import de.dailab.vsdt.Node;
@@ -58,6 +58,7 @@ import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.ProcessType;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.TextAnnotation;
@@ -282,14 +283,21 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass messageEClass = null;
+	private EClass implementationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass implementationEClass = null;
+	private EClass messageChannelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass serviceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -713,7 +721,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEvent_Message() {
+	public EReference getEvent_Implementation() {
 		return (EReference)eventEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -722,7 +730,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEvent_Implementation() {
+	public EReference getEvent_TimeExpression() {
 		return (EReference)eventEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -731,17 +739,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEvent_TimeExpression() {
-		return (EReference)eventEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getEvent_AsDuration() {
-		return (EAttribute)eventEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)eventEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -750,7 +749,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getEvent_RuleExpression() {
-		return (EReference)eventEClass.getEStructuralFeatures().get(6);
+		return (EReference)eventEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -759,7 +758,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EAttribute getEvent_ErrorCode() {
-		return (EAttribute)eventEClass.getEStructuralFeatures().get(7);
+		return (EAttribute)eventEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -768,7 +767,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getEvent_Activity() {
-		return (EReference)eventEClass.getEStructuralFeatures().get(8);
+		return (EReference)eventEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -777,7 +776,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EAttribute getEvent_Signal() {
-		return (EAttribute)eventEClass.getEStructuralFeatures().get(9);
+		return (EAttribute)eventEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -786,7 +785,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getEvent_LinkedTo() {
-		return (EReference)eventEClass.getEStructuralFeatures().get(10);
+		return (EReference)eventEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -902,7 +901,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getActivity_InMessage() {
+	public EReference getActivity_Implementation() {
 		return (EReference)activityEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -911,26 +910,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getActivity_OutMessage() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getActivity_Implementation() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getActivity_Performers() {
-		return (EAttribute)activityEClass.getEStructuralFeatures().get(10);
+		return (EAttribute)activityEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -939,7 +920,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EAttribute getActivity_Script() {
-		return (EAttribute)activityEClass.getEStructuralFeatures().get(11);
+		return (EAttribute)activityEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -948,7 +929,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_Transaction() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(12);
+		return (EReference)activityEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -957,7 +938,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_CalledElement() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(13);
+		return (EReference)activityEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -966,7 +947,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_InputPropertyMaps() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(14);
+		return (EReference)activityEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -975,7 +956,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * @generated
 	 */
 	public EReference getActivity_OutputPropertyMaps() {
-		return (EReference)activityEClass.getEStructuralFeatures().get(15);
+		return (EReference)activityEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -1424,7 +1405,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMessageFlow_Message() {
+	public EReference getMessageFlow_Source() {
 		return (EReference)messageFlowEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1433,17 +1414,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMessageFlow_Source() {
-		return (EReference)messageFlowEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getMessageFlow_Target() {
-		return (EReference)messageFlowEClass.getEStructuralFeatures().get(2);
+		return (EReference)messageFlowEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1523,33 +1495,6 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getMessage() {
-		return messageEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getMessage_Name() {
-		return (EAttribute)messageEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getMessage_Properties() {
-		return (EReference)messageEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getImplementation() {
 		return implementationEClass;
 	}
@@ -1559,8 +1504,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getImplementation_Type() {
-		return (EAttribute)implementationEClass.getEStructuralFeatures().get(0);
+	public EClass getMessageChannel() {
+		return messageChannelEClass;
 	}
 
 	/**
@@ -1568,8 +1513,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getImplementation_Participant() {
-		return (EReference)implementationEClass.getEStructuralFeatures().get(1);
+	public EReference getMessageChannel_Channel() {
+		return (EReference)messageChannelEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1577,8 +1522,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getImplementation_Interface() {
-		return (EAttribute)implementationEClass.getEStructuralFeatures().get(2);
+	public EReference getMessageChannel_Payload() {
+		return (EReference)messageChannelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1586,8 +1531,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getImplementation_Operation() {
-		return (EAttribute)implementationEClass.getEStructuralFeatures().get(3);
+	public EClass getService() {
+		return serviceEClass;
 	}
 
 	/**
@@ -1595,8 +1540,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getImplementation_Description() {
-		return (EAttribute)implementationEClass.getEStructuralFeatures().get(4);
+	public EAttribute getService_Type() {
+		return (EAttribute)serviceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1604,8 +1549,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getImplementation_Location() {
-		return (EAttribute)implementationEClass.getEStructuralFeatures().get(5);
+	public EReference getService_Participant() {
+		return (EReference)serviceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1613,8 +1558,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getImplementation_InputMessage() {
-		return (EReference)implementationEClass.getEStructuralFeatures().get(6);
+	public EAttribute getService_Interface() {
+		return (EAttribute)serviceEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1622,8 +1567,44 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getImplementation_OutputMessage() {
-		return (EReference)implementationEClass.getEStructuralFeatures().get(7);
+	public EAttribute getService_Operation() {
+		return (EAttribute)serviceEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getService_Description() {
+		return (EAttribute)serviceEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getService_Location() {
+		return (EAttribute)serviceEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getService_Input() {
+		return (EReference)serviceEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getService_Output() {
+		return (EReference)serviceEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1946,7 +1927,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBusinessProcessSystem_Messages() {
+	public EReference getBusinessProcessSystem_MessageChannels() {
 		return (EReference)businessProcessSystemEClass.getEStructuralFeatures().get(10);
 	}
 
@@ -1955,7 +1936,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBusinessProcessSystem_Implementations() {
+	public EReference getBusinessProcessSystem_Services() {
 		return (EReference)businessProcessSystemEClass.getEStructuralFeatures().get(11);
 	}
 
@@ -2112,8 +2093,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		createEAttribute(businessProcessSystemEClass, BUSINESS_PROCESS_SYSTEM__EXECUTABLE);
 		createEReference(businessProcessSystemEClass, BUSINESS_PROCESS_SYSTEM__BUSINESS_PROCESSES);
 		createEReference(businessProcessSystemEClass, BUSINESS_PROCESS_SYSTEM__PARTICIPANTS);
-		createEReference(businessProcessSystemEClass, BUSINESS_PROCESS_SYSTEM__MESSAGES);
-		createEReference(businessProcessSystemEClass, BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS);
+		createEReference(businessProcessSystemEClass, BUSINESS_PROCESS_SYSTEM__MESSAGE_CHANNELS);
+		createEReference(businessProcessSystemEClass, BUSINESS_PROCESS_SYSTEM__SERVICES);
 		createEReference(businessProcessSystemEClass, BUSINESS_PROCESS_SYSTEM__DATA_TYPES);
 
 		businessProcessDiagramEClass = createEClass(BUSINESS_PROCESS_DIAGRAM);
@@ -2158,7 +2139,6 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		eventEClass = createEClass(EVENT);
 		createEAttribute(eventEClass, EVENT__NON_INTERRUPTING);
 		createEAttribute(eventEClass, EVENT__TRIGGER);
-		createEReference(eventEClass, EVENT__MESSAGE);
 		createEReference(eventEClass, EVENT__IMPLEMENTATION);
 		createEReference(eventEClass, EVENT__TIME_EXPRESSION);
 		createEAttribute(eventEClass, EVENT__AS_DURATION);
@@ -2183,8 +2163,6 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		createEReference(activityEClass, ACTIVITY__BOUNDARY_EVENTS);
 		createEAttribute(activityEClass, ACTIVITY__EVENTED_SUBPROCESS);
 		createEAttribute(activityEClass, ACTIVITY__ACTIVITY_TYPE);
-		createEReference(activityEClass, ACTIVITY__IN_MESSAGE);
-		createEReference(activityEClass, ACTIVITY__OUT_MESSAGE);
 		createEReference(activityEClass, ACTIVITY__IMPLEMENTATION);
 		createEAttribute(activityEClass, ACTIVITY__PERFORMERS);
 		createEAttribute(activityEClass, ACTIVITY__SCRIPT);
@@ -2247,7 +2225,6 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		createEReference(sequenceFlowEClass, SEQUENCE_FLOW__TARGET);
 
 		messageFlowEClass = createEClass(MESSAGE_FLOW);
-		createEReference(messageFlowEClass, MESSAGE_FLOW__MESSAGE);
 		createEReference(messageFlowEClass, MESSAGE_FLOW__SOURCE);
 		createEReference(messageFlowEClass, MESSAGE_FLOW__TARGET);
 
@@ -2261,19 +2238,21 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		createEReference(participantEClass, PARTICIPANT__ASSOCIATED_PROCESSES);
 		createEReference(participantEClass, PARTICIPANT__ASSOCIATED_POOLS);
 
-		messageEClass = createEClass(MESSAGE);
-		createEAttribute(messageEClass, MESSAGE__NAME);
-		createEReference(messageEClass, MESSAGE__PROPERTIES);
-
 		implementationEClass = createEClass(IMPLEMENTATION);
-		createEAttribute(implementationEClass, IMPLEMENTATION__TYPE);
-		createEReference(implementationEClass, IMPLEMENTATION__PARTICIPANT);
-		createEAttribute(implementationEClass, IMPLEMENTATION__INTERFACE);
-		createEAttribute(implementationEClass, IMPLEMENTATION__OPERATION);
-		createEAttribute(implementationEClass, IMPLEMENTATION__DESCRIPTION);
-		createEAttribute(implementationEClass, IMPLEMENTATION__LOCATION);
-		createEReference(implementationEClass, IMPLEMENTATION__INPUT_MESSAGE);
-		createEReference(implementationEClass, IMPLEMENTATION__OUTPUT_MESSAGE);
+
+		messageChannelEClass = createEClass(MESSAGE_CHANNEL);
+		createEReference(messageChannelEClass, MESSAGE_CHANNEL__CHANNEL);
+		createEReference(messageChannelEClass, MESSAGE_CHANNEL__PAYLOAD);
+
+		serviceEClass = createEClass(SERVICE);
+		createEAttribute(serviceEClass, SERVICE__TYPE);
+		createEReference(serviceEClass, SERVICE__PARTICIPANT);
+		createEAttribute(serviceEClass, SERVICE__INTERFACE);
+		createEAttribute(serviceEClass, SERVICE__OPERATION);
+		createEAttribute(serviceEClass, SERVICE__DESCRIPTION);
+		createEAttribute(serviceEClass, SERVICE__LOCATION);
+		createEReference(serviceEClass, SERVICE__INPUT);
+		createEReference(serviceEClass, SERVICE__OUTPUT);
 
 		assignmentEClass = createEClass(ASSIGNMENT);
 		createEReference(assignmentEClass, ASSIGNMENT__TO);
@@ -2371,6 +2350,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		messageFlowEClass.getESuperTypes().add(this.getConnectingObject());
 		associationEClass.getESuperTypes().add(this.getConnectingObject());
 		participantEClass.getESuperTypes().add(this.getIdObject());
+		messageChannelEClass.getESuperTypes().add(this.getImplementation());
+		serviceEClass.getESuperTypes().add(this.getImplementation());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(idObjectEClass, IdObject.class, "IdObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2392,8 +2373,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		initEAttribute(getBusinessProcessSystem_Executable(), ecorePackage.getEBoolean(), "executable", null, 0, 1, BusinessProcessSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBusinessProcessSystem_BusinessProcesses(), this.getBusinessProcessDiagram(), this.getBusinessProcessDiagram_Parent(), "businessProcesses", null, 0, -1, BusinessProcessSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBusinessProcessSystem_Participants(), this.getParticipant(), null, "participants", null, 0, -1, BusinessProcessSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBusinessProcessSystem_Messages(), this.getMessage(), null, "messages", null, 0, -1, BusinessProcessSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBusinessProcessSystem_Implementations(), this.getImplementation(), null, "implementations", null, 0, -1, BusinessProcessSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBusinessProcessSystem_MessageChannels(), this.getMessageChannel(), null, "messageChannels", null, 0, -1, BusinessProcessSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBusinessProcessSystem_Services(), this.getService(), null, "services", null, 0, -1, BusinessProcessSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBusinessProcessSystem_DataTypes(), this.getDataType(), null, "dataTypes", null, 0, -1, BusinessProcessSystem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(businessProcessDiagramEClass, BusinessProcessDiagram.class, "BusinessProcessDiagram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2437,8 +2418,8 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 
 		addEOperation(nodeEClass, this.getPool(), "getPool", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = addEOperation(nodeEClass, null, "adaptToMessage", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getMessage(), "message", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(nodeEClass, null, "adaptToImplementation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getImplementation(), "implementation", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEBoolean(), "incoming", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(flowObjectEClass, FlowObject.class, "FlowObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2456,7 +2437,6 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		initEClass(eventEClass, Event.class, "Event", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEvent_NonInterrupting(), ecorePackage.getEBoolean(), "nonInterrupting", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_Trigger(), this.getTriggerType(), "trigger", null, 1, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEvent_Message(), this.getMessage(), null, "message", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEvent_Implementation(), this.getImplementation(), null, "implementation", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEvent_TimeExpression(), this.getExpression(), null, "timeExpression", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_AsDuration(), ecorePackage.getEBoolean(), "asDuration", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2489,8 +2469,6 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		initEReference(getActivity_BoundaryEvents(), this.getIntermediate(), this.getIntermediate_AttachedTo(), "boundaryEvents", null, 0, -1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActivity_EventedSubprocess(), ecorePackage.getEBoolean(), "eventedSubprocess", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActivity_ActivityType(), this.getActivityType(), "activityType", null, 1, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getActivity_InMessage(), this.getMessage(), null, "inMessage", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getActivity_OutMessage(), this.getMessage(), null, "outMessage", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getActivity_Implementation(), this.getImplementation(), null, "implementation", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActivity_Performers(), ecorePackage.getEString(), "performers", null, 0, -1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getActivity_Script(), ecorePackage.getEString(), "script", null, 0, 1, Activity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2559,7 +2537,6 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		initEReference(getSequenceFlow_Target(), this.getFlowObject(), this.getFlowObject_IncomingSeq(), "target", null, 1, 1, SequenceFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(messageFlowEClass, MessageFlow.class, "MessageFlow", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMessageFlow_Message(), this.getMessage(), null, "message", null, 0, 1, MessageFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMessageFlow_Source(), this.getNode(), this.getNode_OutgoingMsg(), "source", null, 1, 1, MessageFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMessageFlow_Target(), this.getNode(), this.getNode_IncomingMsg(), "target", null, 1, 1, MessageFlow.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2575,19 +2552,21 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		initEReference(getParticipant_AssociatedProcesses(), this.getBusinessProcessDiagram(), this.getBusinessProcessDiagram_Participants(), "associatedProcesses", null, 0, -1, Participant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getParticipant_AssociatedPools(), this.getPool(), this.getPool_Participant(), "associatedPools", null, 0, -1, Participant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(messageEClass, Message.class, "Message", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMessage_Name(), ecorePackage.getEString(), "name", null, 1, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMessage_Properties(), this.getProperty(), null, "properties", null, 0, -1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(implementationEClass, Implementation.class, "Implementation", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(implementationEClass, Implementation.class, "Implementation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getImplementation_Type(), ecorePackage.getEString(), "type", "WebService", 1, 1, Implementation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getImplementation_Participant(), this.getParticipant(), null, "participant", null, 1, 1, Implementation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getImplementation_Interface(), ecorePackage.getEString(), "interface", null, 1, 1, Implementation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getImplementation_Operation(), ecorePackage.getEString(), "operation", null, 1, 1, Implementation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getImplementation_Description(), ecorePackage.getEString(), "description", null, 0, 1, Implementation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getImplementation_Location(), ecorePackage.getEString(), "location", null, 0, 1, Implementation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getImplementation_InputMessage(), this.getMessage(), null, "inputMessage", null, 0, 1, Implementation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getImplementation_OutputMessage(), this.getMessage(), null, "outputMessage", null, 0, 1, Implementation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(messageChannelEClass, MessageChannel.class, "MessageChannel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMessageChannel_Channel(), this.getExpression(), null, "channel", null, 1, 1, MessageChannel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMessageChannel_Payload(), this.getProperty(), null, "payload", null, 0, 1, MessageChannel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(serviceEClass, Service.class, "Service", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getService_Type(), ecorePackage.getEString(), "type", "WebService", 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getService_Participant(), this.getParticipant(), null, "participant", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getService_Interface(), ecorePackage.getEString(), "interface", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getService_Operation(), ecorePackage.getEString(), "operation", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getService_Description(), ecorePackage.getEString(), "description", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getService_Location(), ecorePackage.getEString(), "location", null, 0, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getService_Input(), this.getProperty(), null, "input", null, 0, -1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getService_Output(), this.getProperty(), null, "output", null, 0, -1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(assignmentEClass, Assignment.class, "Assignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAssignment_To(), this.getProperty(), this.getProperty_Assignments(), "to", null, 1, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

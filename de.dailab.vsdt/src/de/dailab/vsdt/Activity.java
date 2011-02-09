@@ -23,8 +23,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.Activity#getBoundaryEvents <em>Boundary Events</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#isEventedSubprocess <em>Evented Subprocess</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getActivityType <em>Activity Type</em>}</li>
- *   <li>{@link de.dailab.vsdt.Activity#getInMessage <em>In Message</em>}</li>
- *   <li>{@link de.dailab.vsdt.Activity#getOutMessage <em>Out Message</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getImplementation <em>Implementation</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getPerformers <em>Performers</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getScript <em>Script</em>}</li>
@@ -188,58 +186,6 @@ public interface Activity extends FlowObject, AbstractProcess, FlowObjectContain
 	 * @generated
 	 */
 	void setActivityType(ActivityType value);
-
-	/**
-	 * Returns the value of the '<em><b>In Message</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>In Message</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>In Message</em>' reference.
-	 * @see #setInMessage(Message)
-	 * @see de.dailab.vsdt.VsdtPackage#getActivity_InMessage()
-	 * @model
-	 * @generated
-	 */
-	Message getInMessage();
-
-	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Activity#getInMessage <em>In Message</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>In Message</em>' reference.
-	 * @see #getInMessage()
-	 * @generated
-	 */
-	void setInMessage(Message value);
-
-	/**
-	 * Returns the value of the '<em><b>Out Message</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Out Message</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Out Message</em>' reference.
-	 * @see #setOutMessage(Message)
-	 * @see de.dailab.vsdt.VsdtPackage#getActivity_OutMessage()
-	 * @model
-	 * @generated
-	 */
-	Message getOutMessage();
-
-	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Activity#getOutMessage <em>Out Message</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Out Message</em>' reference.
-	 * @see #getOutMessage()
-	 * @generated
-	 */
-	void setOutMessage(Message value);
 
 	/**
 	 * Returns the value of the '<em><b>Implementation</b></em>' reference.

@@ -1,6 +1,7 @@
 package de.dailab.vsdt.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -25,12 +26,13 @@ import de.dailab.vsdt.IdObject;
 import de.dailab.vsdt.Lane;
 import de.dailab.vsdt.LoopAttributeSet;
 import de.dailab.vsdt.LoopType;
-import de.dailab.vsdt.Message;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.MultiLoopAttSet;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.StandardLoopAttSet;
 
 
@@ -150,12 +152,19 @@ public class VsdtHelper {
 		if (object instanceof DataObject) {
 			return ((DataObject) object).getProperties();
 		}
-		if (object instanceof Message) {
-			return ((Message) object).getProperties();
+		if (object instanceof MessageChannel) {
+			return Arrays.asList(((MessageChannel) object).getPayload());
 		}
-		if (object instanceof MessageFlow) {
-			return getVisibleProperties(((MessageFlow) object).getMessage());
+		if (object instanceof Service) {
+			Service service = (Service) object;
+			List<Property> properties = new ArrayList<Property>();
+			properties.addAll(service.getInput());
+			properties.addAll(service.getOutput());
+			return properties;
 		}
+//		if (object instanceof MessageFlow) {
+//			return getVisibleProperties(((MessageFlow) object).getMessage());
+//		}
 		if (object instanceof SequenceFlow) {
 			return getVisibleProperties(((SequenceFlow) object).getSource());
 		}
@@ -171,17 +180,14 @@ public class VsdtHelper {
 			if (object instanceof Activity) {
 				Activity activity= (Activity) object;
 				properties.addAll(activity.getProperties());
-				if (activity.getInMessage() != null) {
-					properties.addAll(activity.getInMessage().getProperties());
-				}
-				if (activity.getOutMessage() != null) {
-					properties.addAll(activity.getOutMessage().getProperties());
+				if (activity.getImplementation() != null) {
+					properties.addAll(getVisibleProperties(activity.getImplementation()));
 				}
 			}
 			if (object instanceof Event) {
 				Event event= (Event) object;
-				if (event.getMessage() != null) {
-					properties.addAll(event.getMessage().getProperties());
+				if (event.getImplementation() != null) {
+					properties.addAll(getVisibleProperties(event.getImplementation()));
 				}
 			}
 			properties.addAll(getVisibleProperties(flowObject.getAbstractProcess()));
@@ -208,8 +214,11 @@ public class VsdtHelper {
 		if (container instanceof IdObject) {
 			name= ((IdObject) container).getName();
 		}
-		if (container instanceof Message) {
-			name= ((Message) container).getName();
+		if (container instanceof Service) {
+			name= ((Service) container).getOperation();
+		}
+		if (container instanceof MessageChannel) {
+			name= ((MessageChannel) container).getChannel().getExpression();
 		}
 		if (name != null) {
 			buff.append(name);

@@ -25,13 +25,14 @@ import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.Lane;
 import de.dailab.vsdt.LoopAttributeSet;
-import de.dailab.vsdt.Message;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.MultiLoopAttSet;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.VsdtPackage;
@@ -220,14 +221,14 @@ public class DefaultBpmnValidation extends MappingStage {
 			isOK&= testChild(visitBusinessProcessDiagram(bpd), bps, vsdt.getBusinessProcessSystem_BusinessProcesses());
 		}
 		
-		for (Message message : bps.getMessages()) {
-			isOK&= testChild(visitMessage(message),bps,vsdt.getBusinessProcessSystem_Messages());
+		for (MessageChannel messageChannel : bps.getMessageChannels()) {
+			isOK&= testChild(visitMessageChannel(messageChannel),bps,vsdt.getBusinessProcessSystem_MessageChannels());
 		}
 		for (Participant participant : bps.getParticipants()) {
 			isOK&= testChild(visitParticipant(participant),bps,vsdt.getBusinessProcessSystem_Participants());
 		}
-		for (Implementation webService : bps.getImplementations()) {
-			isOK&= testChild(visitImplementation(webService),bps,vsdt.getBusinessProcessSystem_Implementations());
+		for (Service service : bps.getServices()) {
+			isOK&= testChild(visitService(service),bps,vsdt.getBusinessProcessSystem_Services());
 		}
 		for (DataType dataType : bps.getDataTypes()) {
 			isOK&= testChild(visitDataType(dataType),bps,vsdt.getBusinessProcessSystem_DataTypes());
@@ -343,8 +344,8 @@ public class DefaultBpmnValidation extends MappingStage {
 		boolean isOK= true;
 		
 		if (event.getTrigger() == TriggerType.MESSAGE) {
-			isOK&= testChild(visitMessage(event.getMessage()),event,vsdt.getEvent_Message());
-			isOK&= testChild(visitImplementation(event.getImplementation()),event,vsdt.getEvent_Message());
+//			isOK&= testChild(visitMessageChannel(event.getMessage()),event,vsdt.getEvent_Message());
+			isOK&= testChild(visitImplementation(event.getImplementation()),event,vsdt.getEvent_Implementation());
 		}
 		if (event.getTrigger() == TriggerType.RULE) {
 //			event.setRuleName(norm(event.getRuleName(), NORM_NAME_ELEMENT));
@@ -391,23 +392,32 @@ public class DefaultBpmnValidation extends MappingStage {
 
 		switch (activity.getActivityType().getValue()) {
 		case ActivityType.SERVICE_VALUE:
-			isOK&= testChild(visitMessage(activity.getInMessage()),activity,vsdt.getActivity_InMessage());
-			isOK&= testChild(visitMessage(activity.getOutMessage()),activity,vsdt.getActivity_OutMessage());
-			isOK&= testChild(visitImplementation(activity.getImplementation()),activity,vsdt.getActivity_Implementation());
-			break;
 		case ActivityType.SEND_VALUE:	
-			isOK&= testChild(visitMessage(activity.getInMessage()),activity,vsdt.getActivity_InMessage());
-			isOK&= testChild(visitImplementation(activity.getImplementation()),activity,vsdt.getActivity_Implementation());
-			break;
 		case ActivityType.RECEIVE_VALUE:	
-			isOK&= testChild(visitMessage(activity.getOutMessage()),activity,vsdt.getActivity_OutMessage());
-			isOK&= testChild(visitImplementation(activity.getImplementation()),activity,vsdt.getActivity_Implementation());
-			break;
 		case ActivityType.USER_VALUE:
-			isOK&= testChild(visitMessage(activity.getInMessage()),activity,vsdt.getActivity_InMessage());
-			isOK&= testChild(visitMessage(activity.getOutMessage()),activity,vsdt.getActivity_OutMessage());
 			isOK&= testChild(visitImplementation(activity.getImplementation()),activity,vsdt.getActivity_Implementation());
 			break;
+		
+		// old messages and implementations
+//		case ActivityType.SERVICE_VALUE:
+//			isOK&= testChild(visitMessageChannel(activity.getInMessage()),activity,vsdt.getActivity_InMessage());
+//			isOK&= testChild(visitMessageChannel(activity.getOutMessage()),activity,vsdt.getActivity_OutMessage());
+//			isOK&= testChild(visitService(activity.getImplementation()),activity,vsdt.getActivity_Implementation());
+//			break;
+//		case ActivityType.SEND_VALUE:	
+//			isOK&= testChild(visitMessageChannel(activity.getInMessage()),activity,vsdt.getActivity_InMessage());
+//			isOK&= testChild(visitService(activity.getImplementation()),activity,vsdt.getActivity_Implementation());
+//			break;
+//		case ActivityType.RECEIVE_VALUE:	
+//			isOK&= testChild(visitMessageChannel(activity.getOutMessage()),activity,vsdt.getActivity_OutMessage());
+//			isOK&= testChild(visitService(activity.getImplementation()),activity,vsdt.getActivity_Implementation());
+//			break;
+//		case ActivityType.USER_VALUE:
+//			isOK&= testChild(visitMessageChannel(activity.getInMessage()),activity,vsdt.getActivity_InMessage());
+//			isOK&= testChild(visitMessageChannel(activity.getOutMessage()),activity,vsdt.getActivity_OutMessage());
+//			isOK&= testChild(visitService(activity.getImplementation()),activity,vsdt.getActivity_Implementation());
+//			break;
+
 		case ActivityType.CALL_VALUE:
 			isOK&= test(activity.getCalledElement() != null,"Activity Reference Must not be null");
 			isOK&= test(activity.getCalledElement() != activity,"A Call Activity may not call itself");
@@ -559,17 +569,30 @@ public class DefaultBpmnValidation extends MappingStage {
 	}
 	
 	/**
-	 * normalize name, visit properties, visit participants
+	 * delegate to sub classes.
 	 */
-	protected boolean visitMessage(Message message) {
-		if (testIsNull(message)) return false;
+	protected final boolean visitImplementation(Implementation implementation) {
+		if (implementation instanceof Service) {
+			Service service = (Service) implementation;
+			return visitService(service);
+		}
+		if (implementation instanceof MessageChannel) {
+			MessageChannel messageChannel = (MessageChannel) implementation;
+			return visitMessageChannel(messageChannel);
+		}
+		return false;
+	}
+	
+	/**
+	 * visit channel and properties
+	 */
+	protected boolean visitMessageChannel(MessageChannel messageChannel) {
+		if (testIsNull(messageChannel)) return false;
 		boolean isOK= true;
 		
-		message.setName(normUnique(message.getName(), NORM_NAME_MESSAGE, message));
+		isOK&= testChild(visitExpression(messageChannel.getChannel()),messageChannel,vsdt.getMessageChannel_Channel());
 		
-		for (Property property : message.getProperties()) {
-			isOK&= testChild(visitProperty(property),message,vsdt.getMessage_Properties());
-		}
+		isOK&= testChild(visitProperty(messageChannel.getPayload()),messageChannel,vsdt.getMessageChannel_Payload());
 		
 		return isOK;
 	}
@@ -592,14 +615,14 @@ public class DefaultBpmnValidation extends MappingStage {
 	 * delegate.
 	 * XXX this method should be overwritten if the target language supports other implementation types
 	 */
-	protected boolean visitImplementation(Implementation implementation) {
-		if (testIsNull(implementation)) return false;
+	protected boolean visitService(Service service) {
+		if (testIsNull(service)) return false;
 		boolean isOK= true;
 
-		isOK&= test(implementation.getType() != null, "Type must not be null");
-		isOK&= test(implementation.getOperation() != null,"Operation must not be null");
-		isOK&= test(implementation.getInterface() != null,"Interface must not be null");
-		isOK&= test(implementation.getParticipant() != null,"Participant must not be null");
+		isOK&= test(service.getType() != null, "Type must not be null");
+		isOK&= test(service.getOperation() != null,"Operation must not be null");
+		isOK&= test(service.getInterface() != null,"Interface must not be null");
+		isOK&= test(service.getParticipant() != null,"Participant must not be null");
 		
 		return isOK;
 	}

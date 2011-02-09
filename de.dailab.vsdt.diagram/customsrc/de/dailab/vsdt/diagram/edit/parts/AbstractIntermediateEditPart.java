@@ -42,7 +42,7 @@ public abstract class AbstractIntermediateEditPart extends AbstractVsdtBorderedS
 		case VsdtPackage.FLOW_OBJECT__OUTGOING_SEQ:
 		case VsdtPackage.FLOW_OBJECT__INCOMING_MSG:
 		case VsdtPackage.FLOW_OBJECT__OUTGOING_MSG:
-		case VsdtPackage.EVENT__MESSAGE:
+		case VsdtPackage.EVENT__IMPLEMENTATION:
 			getPrimaryShape().setThrowing(getCastedModel().isThrowing());
 			refreshVisuals();
 			break;

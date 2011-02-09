@@ -30,12 +30,11 @@ import de.dailab.vsdt.FlowConditionTypes;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.GatewayType;
 import de.dailab.vsdt.Group;
-import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.InputSet;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.Lane;
 import de.dailab.vsdt.LoopType;
-import de.dailab.vsdt.Message;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.MultiLoopAttSet;
 import de.dailab.vsdt.OutputSet;
@@ -45,6 +44,7 @@ import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.ProcessType;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.TextAnnotation;
@@ -119,8 +119,8 @@ public class VsdtFactoryImpl extends EFactoryImpl implements VsdtFactory {
 			case VsdtPackage.MESSAGE_FLOW: return createMessageFlow();
 			case VsdtPackage.ASSOCIATION: return createAssociation();
 			case VsdtPackage.PARTICIPANT: return createParticipant();
-			case VsdtPackage.MESSAGE: return createMessage();
-			case VsdtPackage.IMPLEMENTATION: return createImplementation();
+			case VsdtPackage.MESSAGE_CHANNEL: return createMessageChannel();
+			case VsdtPackage.SERVICE: return createService();
 			case VsdtPackage.ASSIGNMENT: return createAssignment();
 			case VsdtPackage.PROPERTY: return createProperty();
 			case VsdtPackage.EXPRESSION: return createExpression();
@@ -415,9 +415,9 @@ public class VsdtFactoryImpl extends EFactoryImpl implements VsdtFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Message createMessage() {
-		MessageImpl message = new MessageImpl();
-		return message;
+	public MessageChannel createMessageChannel() {
+		MessageChannelImpl messageChannel = new MessageChannelImpl();
+		return messageChannel;
 	}
 
 	/**
@@ -425,9 +425,9 @@ public class VsdtFactoryImpl extends EFactoryImpl implements VsdtFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Implementation createImplementation() {
-		ImplementationImpl implementation = new ImplementationImpl();
-		return implementation;
+	public Service createService() {
+		ServiceImpl service = new ServiceImpl();
+		return service;
 	}
 
 	/**

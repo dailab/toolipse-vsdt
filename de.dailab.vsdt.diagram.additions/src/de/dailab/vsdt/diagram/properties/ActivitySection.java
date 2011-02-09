@@ -32,7 +32,6 @@ import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.LoopAttributeSet;
 import de.dailab.vsdt.LoopType;
-import de.dailab.vsdt.Message;
 import de.dailab.vsdt.MultiLoopAttSet;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.StandardLoopAttSet;
@@ -70,8 +69,8 @@ implements FocusListener, SelectionListener {
 							   DISPLAY_MULTI_COMPLEX= "Complex Flow Condition",
 							   
 							   DISPLAY_TASK_IMPL= "Implementation",
-							   DISPLAY_TASK_INMESSAGE= "In Message",
-							   DISPLAY_TASK_OUTMESSAGE= "Out Message",
+//							   DISPLAY_TASK_INMESSAGE= "In Message",
+//							   DISPLAY_TASK_OUTMESSAGE= "Out Message",
 							   DISPLAY_TASK_INSTANTIATE= "Instantiate",
 							   DISPLAY_TASK_SCRIPT= "Script",
 							   
@@ -107,8 +106,8 @@ implements FocusListener, SelectionListener {
     
     private Group taskAttGroup;
     private VsdtFeatureCombo<Implementation> implCombo;
-    private VsdtFeatureCombo<Message> inMessageCombo;
-    private VsdtFeatureCombo<Message> outMessageCombo;
+//    private VsdtFeatureCombo<Message> inMessageCombo;
+//    private VsdtFeatureCombo<Message> outMessageCombo;
     private Text scriptText;
     
     private Group subprocessAttGroup;
@@ -143,9 +142,13 @@ implements FocusListener, SelectionListener {
     	if (firstRun) {
     		BusinessProcessDiagram bpd= activity.getPool().getParent();
     		BusinessProcessSystem bps= bpd.getParent();
-    		implCombo.fillCombo(bps.getImplementations());
-    		inMessageCombo.fillCombo(bps.getMessages());
-    		outMessageCombo.fillCombo(bps.getMessages());
+    		
+    		List<Implementation> allImplementations = new ArrayList<Implementation>();
+    		allImplementations.addAll(bps.getServices());
+    		allImplementations.addAll(bps.getMessageChannels());
+    		implCombo.fillCombo(allImplementations);
+//    		inMessageCombo.fillCombo(bps.getMessages());
+//    		outMessageCombo.fillCombo(bps.getMessages());
     		
     		//fill combo of callable elements - a bit more complicated
     		List<AbstractProcess> callableElements = new ArrayList<AbstractProcess>();
@@ -168,8 +171,8 @@ implements FocusListener, SelectionListener {
     	//visibility and enablement
     	ActivityType at= activity.getActivityType();
     	taskAttGroup.setVisible(at.getValue() > ActivityType.NONE_VALUE && at.getValue() < ActivityType.EMBEDDED_VALUE);
-    	inMessageCombo.getCombo().setEnabled(at == ActivityType.SEND || at == ActivityType.SERVICE || at == ActivityType.USER);
-    	outMessageCombo.getCombo().setEnabled(at == ActivityType.RECEIVE || at == ActivityType.SERVICE || at == ActivityType.USER);
+//    	inMessageCombo.getCombo().setEnabled(at == ActivityType.SEND || at == ActivityType.SERVICE || at == ActivityType.USER);
+//    	outMessageCombo.getCombo().setEnabled(at == ActivityType.RECEIVE || at == ActivityType.SERVICE || at == ActivityType.USER);
     	implCombo.getCombo().setEnabled(at == ActivityType.RECEIVE || at == ActivityType.SEND || at == ActivityType.SERVICE || at == ActivityType.USER);
     	scriptText.setEnabled(at == ActivityType.SCRIPT);
     	
@@ -191,8 +194,8 @@ implements FocusListener, SelectionListener {
     	loopTypeMultiGroup.setVisible(activity.getLoopAttributes() instanceof MultiLoopAttSet);
     	
     	// refresh task attributes
-    	inMessageCombo.setSelected(activity.getInMessage());
-    	outMessageCombo.setSelected(activity.getOutMessage());
+//    	inMessageCombo.setSelected(activity.getInMessage());
+//    	outMessageCombo.setSelected(activity.getOutMessage());
     	implCombo.setSelected(activity.getImplementation());
     	scriptText.setText(nonNull(activity.getScript()));
     	
@@ -298,41 +301,41 @@ implements FocusListener, SelectionListener {
     		}
     		setPropertyValue(activity, pack.getActivity_LoopAttributes(), attSeq);
     	}
-    	if (src.equals(inMessageCombo.getCombo())) {
-    		setPropertyValue(activity, pack.getActivity_InMessage(), inMessageCombo.getSelected());
-    	}
-    	if (src.equals(outMessageCombo.getCombo())) {
-    		setPropertyValue(activity, pack.getActivity_OutMessage(), outMessageCombo.getSelected());
-    	}
+//    	if (src.equals(inMessageCombo.getCombo())) {
+//    		setPropertyValue(activity, pack.getActivity_InMessage(), inMessageCombo.getSelected());
+//    	}
+//    	if (src.equals(outMessageCombo.getCombo())) {
+//    		setPropertyValue(activity, pack.getActivity_OutMessage(), outMessageCombo.getSelected());
+//    	}
     	if (src.equals(implCombo.getCombo())) {
     		Implementation implementation= implCombo.getSelected();
     		setPropertyValue(activity, pack.getActivity_Implementation(), implCombo.getSelected());
     		
     		// set input and/or output message according to implementation
-    		if (implementation != null) {
-	    		switch (activity.getActivityType()) {
-	    		case SERVICE:
-	    		case USER:
-	    			// here the case is clear: set input and output as set in the implementation
-	    			setPropertyValue(activity, pack.getActivity_InMessage(), implementation.getInputMessage());
-	    			setPropertyValue(activity, pack.getActivity_OutMessage(), implementation.getOutputMessage());
-	    			break;
-	    		case SEND:
-	    			if (implementation.getParticipant() == activity.getPool().getParticipant()) {
-	    				setPropertyValue(activity, pack.getActivity_InMessage(), implementation.getOutputMessage());
-		    		} else {
-		    			setPropertyValue(activity, pack.getActivity_InMessage(), implementation.getInputMessage());
-		    		}
-	    			break;
-	    		case RECEIVE:
-	    			if (implementation.getParticipant() == activity.getPool().getParticipant()) {
-	    				setPropertyValue(activity, pack.getActivity_OutMessage(), implementation.getInputMessage());
-		    		} else {
-		    			setPropertyValue(activity, pack.getActivity_OutMessage(), implementation.getOutputMessage());
-		    		}
-	    			break;
-	    		}
-    		}
+//    		if (implementation != null) {
+//	    		switch (activity.getActivityType()) {
+//	    		case SERVICE:
+//	    		case USER:
+//	    			// here the case is clear: set input and output as set in the implementation
+//	    			setPropertyValue(activity, pack.getActivity_InMessage(), implementation.getInputMessage());
+//	    			setPropertyValue(activity, pack.getActivity_OutMessage(), implementation.getOutputMessage());
+//	    			break;
+//	    		case SEND:
+//	    			if (implementation.getParticipant() == activity.getPool().getParticipant()) {
+//	    				setPropertyValue(activity, pack.getActivity_InMessage(), implementation.getOutputMessage());
+//		    		} else {
+//		    			setPropertyValue(activity, pack.getActivity_InMessage(), implementation.getInputMessage());
+//		    		}
+//	    			break;
+//	    		case RECEIVE:
+//	    			if (implementation.getParticipant() == activity.getPool().getParticipant()) {
+//	    				setPropertyValue(activity, pack.getActivity_OutMessage(), implementation.getInputMessage());
+//		    		} else {
+//		    			setPropertyValue(activity, pack.getActivity_OutMessage(), implementation.getOutputMessage());
+//		    		}
+//	    			break;
+//	    		}
+//    		}
     	}
     	if (src.equals(transactionButton)) {
     		setPropertyValue(activity, pack.getActivity_Transaction(), transactionButton.getSelection() ? VsdtFactory.eINSTANCE.createTransaction() : null);
@@ -409,16 +412,16 @@ implements FocusListener, SelectionListener {
 		implCombo= new VsdtFeatureCombo<Implementation>(FormLayoutUtil.addCombo(group, SWT.READ_ONLY, 0, label, 100));
 		implCombo.getCombo().addSelectionListener(this);
 		
-		label= FormLayoutUtil.addLabel(group, DISPLAY_TASK_INMESSAGE, implCombo.getCombo(), 0);
-		inMessageCombo= new VsdtFeatureCombo<Message>(FormLayoutUtil.addCombo(group, SWT.READ_ONLY, implCombo.getCombo(), label, 100));
-		inMessageCombo.getCombo().addSelectionListener(this);
+//		label= FormLayoutUtil.addLabel(group, DISPLAY_TASK_INMESSAGE, implCombo.getCombo(), 0);
+//		inMessageCombo= new VsdtFeatureCombo<Message>(FormLayoutUtil.addCombo(group, SWT.READ_ONLY, implCombo.getCombo(), label, 100));
+//		inMessageCombo.getCombo().addSelectionListener(this);
+//		
+//		label= FormLayoutUtil.addLabel(group, DISPLAY_TASK_OUTMESSAGE, inMessageCombo.getCombo(), 0);
+//		outMessageCombo= new VsdtFeatureCombo<Message>(FormLayoutUtil.addCombo(group, SWT.READ_ONLY, inMessageCombo.getCombo(), label, 100));
+//		outMessageCombo.getCombo().addSelectionListener(this);
 		
-		label= FormLayoutUtil.addLabel(group, DISPLAY_TASK_OUTMESSAGE, inMessageCombo.getCombo(), 0);
-		outMessageCombo= new VsdtFeatureCombo<Message>(FormLayoutUtil.addCombo(group, SWT.READ_ONLY, inMessageCombo.getCombo(), label, 100));
-		outMessageCombo.getCombo().addSelectionListener(this);
-		
-		label= FormLayoutUtil.addLabel(group, DISPLAY_TASK_SCRIPT, outMessageCombo.getCombo(), 0);
-		scriptText= FormLayoutUtil.addText(group, outMessageCombo.getCombo(), label, 100, SWT.MULTI | SWT.V_SCROLL);
+		label= FormLayoutUtil.addLabel(group, DISPLAY_TASK_SCRIPT, implCombo.getCombo(), 0);
+		scriptText= FormLayoutUtil.addText(group, implCombo.getCombo(), label, 100, SWT.MULTI | SWT.V_SCROLL);
 		((FormData) scriptText.getLayoutData()).height= 50;
 		scriptText.addFocusListener(this);
     }

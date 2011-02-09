@@ -18,11 +18,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.End;
+import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Intermediate;
-import de.dailab.vsdt.Message;
 import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.Node;
-import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.VsdtPackage;
@@ -107,22 +106,11 @@ public abstract class NodeImpl extends GraphicalObjectImpl implements Node {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Pool getPool() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
 	 * used in import web service action
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public void adaptToMessage(Message message, boolean incoming) {
+	public void adaptToImplementation(Implementation implementation, boolean incoming) {
 		if (this instanceof Start) {
 			Start start = (Start) this;
 			if (start.getTrigger() == TriggerType.NONE || start.getTrigger() == TriggerType.MESSAGE) {
@@ -130,7 +118,7 @@ public abstract class NodeImpl extends GraphicalObjectImpl implements Node {
 			} else {
 				start.setTrigger(TriggerType.MULTIPLE);
 			}
-			start.setMessage(message);
+			start.setImplementation(implementation);
 		} 
 		if (this instanceof Intermediate) {
 			Intermediate intermediate = (Intermediate) this;
@@ -139,7 +127,7 @@ public abstract class NodeImpl extends GraphicalObjectImpl implements Node {
 			} else {
 				intermediate.setTrigger(TriggerType.MULTIPLE);
 			}
-			intermediate.setMessage(message);
+			intermediate.setImplementation(implementation);
 		} 
 		if (this instanceof End) {
 			End end = (End) this;
@@ -148,27 +136,27 @@ public abstract class NodeImpl extends GraphicalObjectImpl implements Node {
 			} else {
 				end.setTrigger(TriggerType.MULTIPLE);
 			}
-			end.setMessage(message);
+			end.setImplementation(implementation);
 		}
 		if (this instanceof Activity) {
 			Activity activity = (Activity) this;
 			if (incoming) {
 				if (activity.getActivityType() == ActivityType.NONE || activity.getActivityType() == ActivityType.RECEIVE) {
 					activity.setActivityType(ActivityType.RECEIVE);
-					activity.setOutMessage(message);
+					activity.setImplementation(implementation);
 				}
 				if (activity.getActivityType() == ActivityType.SEND) {
 					activity.setActivityType(ActivityType.SERVICE);
-					activity.setOutMessage(message);
+					activity.setImplementation(implementation);
 				}
 			} else {
 				if (activity.getActivityType() == ActivityType.NONE || activity.getActivityType() == ActivityType.SEND) {
 					activity.setActivityType(ActivityType.SEND);
-					activity.setInMessage(message);
+					activity.setImplementation(implementation);
 				}
 				if (activity.getActivityType() == ActivityType.RECEIVE) {
 					activity.setActivityType(ActivityType.SERVICE);
-					activity.setInMessage(message);
+					activity.setImplementation(implementation);
 				}	
 			}
 		}

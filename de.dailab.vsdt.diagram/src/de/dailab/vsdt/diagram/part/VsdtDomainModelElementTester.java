@@ -114,10 +114,10 @@ public class VsdtDomainModelElementTester extends PropertyTester {
 		if (eClass == VsdtPackage.eINSTANCE.getParticipant()) {
 			return true;
 		}
-		if (eClass == VsdtPackage.eINSTANCE.getMessage()) {
+		if (eClass == VsdtPackage.eINSTANCE.getMessageChannel()) {
 			return true;
 		}
-		if (eClass == VsdtPackage.eINSTANCE.getImplementation()) {
+		if (eClass == VsdtPackage.eINSTANCE.getService()) {
 			return true;
 		}
 		if (eClass == VsdtPackage.eINSTANCE.getAssignment()) {

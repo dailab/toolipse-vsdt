@@ -558,49 +558,49 @@ public class VsdtItemProviderAdapterFactory extends VsdtAdapterFactory implement
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.dailab.vsdt.Message} instances.
+	 * This keeps track of the one adapter used for all {@link de.dailab.vsdt.MessageChannel} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected MessageItemProvider messageItemProvider;
+	protected MessageChannelItemProvider messageChannelItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link de.dailab.vsdt.Message}.
+	 * This creates an adapter for a {@link de.dailab.vsdt.MessageChannel}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createMessageAdapter() {
-		if (messageItemProvider == null) {
-			messageItemProvider = new MessageItemProvider(this);
+	public Adapter createMessageChannelAdapter() {
+		if (messageChannelItemProvider == null) {
+			messageChannelItemProvider = new MessageChannelItemProvider(this);
 		}
 
-		return messageItemProvider;
+		return messageChannelItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link de.dailab.vsdt.Implementation} instances.
+	 * This keeps track of the one adapter used for all {@link de.dailab.vsdt.Service} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ImplementationItemProvider implementationItemProvider;
+	protected ServiceItemProvider serviceItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link de.dailab.vsdt.Implementation}.
+	 * This creates an adapter for a {@link de.dailab.vsdt.Service}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createImplementationAdapter() {
-		if (implementationItemProvider == null) {
-			implementationItemProvider = new ImplementationItemProvider(this);
+	public Adapter createServiceAdapter() {
+		if (serviceItemProvider == null) {
+			serviceItemProvider = new ServiceItemProvider(this);
 		}
 
-		return implementationItemProvider;
+		return serviceItemProvider;
 	}
 
 	/**
@@ -815,8 +815,8 @@ public class VsdtItemProviderAdapterFactory extends VsdtAdapterFactory implement
 		if (messageFlowItemProvider != null) messageFlowItemProvider.dispose();
 		if (associationItemProvider != null) associationItemProvider.dispose();
 		if (participantItemProvider != null) participantItemProvider.dispose();
-		if (messageItemProvider != null) messageItemProvider.dispose();
-		if (implementationItemProvider != null) implementationItemProvider.dispose();
+		if (messageChannelItemProvider != null) messageChannelItemProvider.dispose();
+		if (serviceItemProvider != null) serviceItemProvider.dispose();
 		if (assignmentItemProvider != null) assignmentItemProvider.dispose();
 		if (propertyItemProvider != null) propertyItemProvider.dispose();
 		if (expressionItemProvider != null) expressionItemProvider.dispose();

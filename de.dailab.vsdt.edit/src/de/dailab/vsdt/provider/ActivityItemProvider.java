@@ -67,8 +67,6 @@ public class ActivityItemProvider
 			addLoopAttributesPropertyDescriptor(object);
 			addEventedSubprocessPropertyDescriptor(object);
 			addActivityTypePropertyDescriptor(object);
-			addInMessagePropertyDescriptor(object);
-			addOutMessagePropertyDescriptor(object);
 			addImplementationPropertyDescriptor(object);
 			addPerformersPropertyDescriptor(object);
 			addScriptPropertyDescriptor(object);
@@ -184,50 +182,6 @@ public class ActivityItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the In Message feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addInMessagePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Activity_inMessage_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_inMessage_feature", "_UI_Activity_type"),
-				 VsdtPackage.Literals.ACTIVITY__IN_MESSAGE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Out Message feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addOutMessagePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Activity_outMessage_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Activity_outMessage_feature", "_UI_Activity_type"),
-				 VsdtPackage.Literals.ACTIVITY__OUT_MESSAGE,
-				 true,
-				 false,
-				 true,
-				 null,
 				 null,
 				 null));
 	}

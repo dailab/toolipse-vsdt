@@ -4,8 +4,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -16,47 +16,41 @@ import de.dailab.common.gmf.Util;
 import de.dailab.common.swt.dialogs.AbstractOrganizeElementsDialog;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
-import de.dailab.vsdt.Message;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.diagram.actions.OrganizePropertiesAction;
+import de.dailab.vsdt.util.VsdtElementFactory;
 
 /**
  * A dialog used for organizing messages of a BPMN model elements
  * 
  * @author kuester
  */
-public class OrganizeMessagesDialog extends AbstractOrganizeElementsDialog<Message> {
+public class OrganizeMessagesDialog extends AbstractOrganizeElementsDialog<MessageChannel> {
 
-//	public static final String LABEL_TO= "To";
-//	public static final String LABEL_FROM= "From";
-	public static final String LABEL_NAME= "Name";
+	public static final String LABEL_CHANNEL= "Channel";
+	public static final String LABEL_PAYLOAD_NAME= "Name";
+	public static final String LABEL_PAYLOAD_TYPE= "Type";
 
-	public static final String BUTTON_PROP= "Properties...";
+	public static final String BUTTON_HAS_PAYLOAD= "Has Payload";
 	
-//	/**message.to input field*/
-//	private Combo toPartCombo;
-//	
-//	/**message.from input field*/
-//	private Combo fromPartCombo;
+	/** messagechannel.channel input field */
+	private Text channelText;
 	
-	/**message.name input field*/
-	private Text nameText;
-	
-	/**button for opening the organize properties dialog for the selected message*/
-	private Button propButton;
-	
-//	/**the list of possible participants*/
-//	private java.util.List<Participant> participants= new ArrayList<Participant>();
+	/** button for opening the organize properties dialog for the selected message */
+	private Button hasPayloadButton;
 
-//	/**
-//	 * These tables hold the relationship between participants and entries in the ComboBox. 
-//	 */
-//	private Hashtable<Participant, Integer> partToIndexTable= new Hashtable<Participant, Integer>();
-//	private Hashtable<Integer, Participant> indexToPartTable= new Hashtable<Integer, Participant>();
+	/** group holding information on payload, similar to PropertiesDialog */
+	private Group payloadGroup;
+	
+	/** messagechannel.payload.name input field */
+	private Text payloadNameText;
+
+	/** messagechannel.payload.type input field */
+	private Text payloadTypeText;
 
 	@Override
 	public String getElementName() {
-		return "Message";
+		return "MessageChannel";
 	}
 	
 	/**
@@ -74,8 +68,7 @@ public class OrganizeMessagesDialog extends AbstractOrganizeElementsDialog<Messa
 			bps= (BusinessProcessSystem) ((BusinessProcessDiagram) parentElement).getParent();
 		}
 		if (bps != null) {
-			elements= ((BusinessProcessSystem) parentElement).getMessages();
-//			participants= ((BusinessProcessSystem) parentElement).getParticipants();
+			elements= ((BusinessProcessSystem) parentElement).getMessageChannels();
 		} else {
 			throw new IllegalArgumentException("Parent element must be of type BusinessProcessSystem");
 		}
@@ -84,145 +77,109 @@ public class OrganizeMessagesDialog extends AbstractOrganizeElementsDialog<Messa
 	@Override
 	protected void createEditGroupControls(Group editGroup) {
 		//input lines
-		new Label(editGroup,SWT.NONE).setText(LABEL_NAME);
-		nameText= new Text(editGroup, SWT.BORDER);
-		nameText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 3, 1));
-		nameText.addModifyListener(this);
+		new Label(editGroup, SWT.NONE).setText(LABEL_CHANNEL);
+		channelText= new Text(editGroup, SWT.BORDER);
+		channelText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
+		channelText.addModifyListener(this);
 		
-//		new Label(editGroup,SWT.NONE).setText(LABEL_FROM);
-//		fromPartCombo= new Combo(editGroup,SWT.READ_ONLY);
-//		fromPartCombo.addSelectionListener(this);
-//
-//		new Label(editGroup,SWT.NONE).setText(LABEL_TO);
-//		toPartCombo= new Combo(editGroup,SWT.READ_ONLY);
-//		toPartCombo.addSelectionListener(this);
-//		
-//		//populate combo boxes
-//		//null-entry (this has to be synchronized with the refreshEditGroup-method!)
-//		toPartCombo.add("");
-//		fromPartCombo.add("");
-//		int index= 1;
-//		for (Participant participant : participants) {
-//			String label= participant.getName();
-//			toPartCombo.add(label);
-//			fromPartCombo.add(label);
-//			partToIndexTable.put(participant, index);
-//			indexToPartTable.put(index, participant);
-//			index++;
-//		}
+		hasPayloadButton = new Button(editGroup, SWT.CHECK);
+		hasPayloadButton.setText(BUTTON_HAS_PAYLOAD);
+		hasPayloadButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		hasPayloadButton.addSelectionListener(this);
+		
+		payloadGroup = new Group(editGroup, SWT.NONE);
+		payloadGroup.setText("Payload");
+		payloadGroup.setLayout(new GridLayout(4, false));
+		payloadGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 4, 1));
+		
+		new Label(payloadGroup, SWT.NONE).setText(LABEL_PAYLOAD_NAME);
+		payloadNameText= new Text(payloadGroup, SWT.BORDER);
+		payloadNameText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		payloadNameText.addModifyListener(this);
+		
+		new Label(payloadGroup, SWT.NONE).setText(LABEL_PAYLOAD_TYPE);
+		payloadTypeText= new Text(payloadGroup, SWT.BORDER);
+		payloadTypeText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		payloadTypeText.addModifyListener(this);
+		
+		enableGroupControls(payloadGroup, false);
 	}
 	
 	@Override
-	protected Message createNewElement() {
-		Message message= VsdtFactory.eINSTANCE.createMessage();
-		return message;
+	protected MessageChannel createNewElement() {
+		return VsdtElementFactory.createMessageChannel("new channel", null);
 	}
 	
 	@Override
 	protected Control getElementToFocus() {
-		return nameText;
+		return channelText;
 	}
 
 	@Override
-	protected void refreshButtons() {
-		super.refreshButtons();
-		propButton.setEnabled(elementList.getSelectionCount()==1);
-	}
-	
-	@Override
-	protected void updateElementFromEditGroup(Message message) {
-		if (message != null) {
-//			int selectedPart= toPartCombo.getSelectionIndex();
-//			Participant participant= indexToPartTable.get(selectedPart);
-//			message.setTo(participant);
-//			
-//			selectedPart= fromPartCombo.getSelectionIndex();
-//			participant= indexToPartTable.get(selectedPart);
-//			message.setFrom(participant);
+	protected void updateElementFromEditGroup(MessageChannel message) {
+		if (message != null) {			
+			// update channel
+			String channelString= Util.nullIfEmpty(channelText.getText());
+			message.getChannel().setExpression(channelString);
 			
-			String nameString= Util.nullIfEmpty(nameText.getText());
-			message.setName(nameString);
+			// update payload
+			if (message.getPayload() != null) {
+				String payloadNameString= Util.nullIfEmpty(payloadNameText.getText());
+				message.getPayload().setName(payloadNameString);
+				
+				String payloadTypeString= Util.nullIfEmpty(payloadTypeText.getText());
+				message.getPayload().setType(payloadTypeString);
+			}
 		}
 	}
 	
 	@Override
 	protected void refreshEditGroup() {
-		Message message= getSelectedElement();
+		MessageChannel message= getSelectedElement();
 		if (message != null) {
-			//select participant from Combo box 
-//			Participant participant= message.getTo();
-//			if (participant != null) {
-//				toPartCombo.select(partToIndexTable.get(participant));
-//			} else {
-//				//select first entry, which is the null entry
-//				toPartCombo.select(0);
-//			}
-//			participant= message.getFrom();
-//			if (participant != null) {
-//				fromPartCombo.select(partToIndexTable.get(participant));
-//			} else {
-//				//select first entry, which is the null entry
-//				fromPartCombo.select(0);
-//			}
-			
-			String nameString= Util.nonNull(message.getName());
-			nameText.setText(nameString);
+			String channelString= Util.nonNull(message.getChannel().getExpression());
+			channelText.setText(channelString);
+			boolean hasPayload = message.getPayload() != null;
+			hasPayloadButton.setSelection(hasPayload);
+			enableGroupControls(payloadGroup, hasPayload);
+			if (hasPayload) {
+				String payloadNameString= Util.nonNull(message.getPayload().getName());
+				payloadNameText.setText(payloadNameString);
+				String payloadTypeString= Util.nonNull(message.getPayload().getType());
+				payloadTypeText.setText(payloadTypeString);
+			}
 		}
-//		toPartCombo.setEnabled(message != null);
-//		fromPartCombo.setEnabled(message != null);
-		nameText.setEnabled(message != null);
 	}
 	
 	@Override
-	protected String getString(Message message) {
+	protected String getString(MessageChannel message) {
 		if (message != null) {
-			String nameString= message.getName();
+			String nameString= message.getChannel().getExpression();
 			StringBuffer buffer= new StringBuffer();
-			buffer.append(nameString != null ? nameString : "<unnamed>"); //$NON-NLS-1$
-//			buffer.append(" ( ");
-//			buffer.append(getParticipantName(message.getFrom()));
-//			buffer.append(" -> ");
-//			buffer.append(getParticipantName(message.getTo()));
-//			buffer.append(" )");
+			buffer.append(nameString != null ? nameString : "<null>"); //$NON-NLS-1$
+			buffer.append(" ( ");
+			if (message.getPayload() != null) {
+				buffer.append(message.getPayload().getName());
+				buffer.append(": ");
+				buffer.append(message.getPayload().getType());
+			}
+			buffer.append(" )");
 			return buffer.toString();	
 		}
 		return super.getString(message);
 	}
 	
-//	private String getParticipantName(Participant participant) {
-//		final String unknown= "<unknown>";
-//		if (participant == null || participant.getName() == null || participant.getName().isEmpty()) {
-//			return unknown;
-//		}
-//		return participant.getName();
-//	}
-	
-	@Override
-	protected void contributeToButtonsGroup(Composite buttonsGroup) {
-		propButton= new Button(buttonsGroup,SWT.NONE);
-		propButton.setText(BUTTON_PROP);
-		propButton.addSelectionListener(this);
-	}
-	
-	@Override
-	protected void handleDoubleClick(Message selected) {
-		displayPropertiesDialog();
-	}
-	
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		super.widgetSelected(e);
-		if (e.getSource() instanceof Button	) {
-			Button button = (Button) e.getSource();
-			String cmd= button.getText();
-			if (BUTTON_PROP.equals(cmd)) {
-				displayPropertiesDialog();
+		if (e.getSource() == hasPayloadButton) {
+			MessageChannel message = getSelectedElement();
+			if (hasPayloadButton.getSelection()) {
+				message.setPayload(VsdtFactory.eINSTANCE.createProperty());
+			} else {
+				message.setPayload(null);
 			}
 		}
+		super.widgetSelected(e);
 	}
 	
-	private void displayPropertiesDialog() {
-		Message message= (Message) getSelectedElement();
-		new OrganizePropertiesAction().run(message);
-	}
 }

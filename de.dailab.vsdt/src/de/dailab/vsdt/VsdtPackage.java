@@ -252,22 +252,22 @@ public interface VsdtPackage extends EPackage {
 	int BUSINESS_PROCESS_SYSTEM__PARTICIPANTS = ID_OBJECT_FEATURE_COUNT + 9;
 
 	/**
-	 * The feature id for the '<em><b>Messages</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Message Channels</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUSINESS_PROCESS_SYSTEM__MESSAGES = ID_OBJECT_FEATURE_COUNT + 10;
+	int BUSINESS_PROCESS_SYSTEM__MESSAGE_CHANNELS = ID_OBJECT_FEATURE_COUNT + 10;
 
 	/**
-	 * The feature id for the '<em><b>Implementations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Services</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS = ID_OBJECT_FEATURE_COUNT + 11;
+	int BUSINESS_PROCESS_SYSTEM__SERVICES = ID_OBJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Data Types</b></em>' containment reference list.
@@ -1253,22 +1253,13 @@ public interface VsdtPackage extends EPackage {
 	int EVENT__TRIGGER = FLOW_OBJECT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Message</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT__MESSAGE = FLOW_OBJECT_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Implementation</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__IMPLEMENTATION = FLOW_OBJECT_FEATURE_COUNT + 3;
+	int EVENT__IMPLEMENTATION = FLOW_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Time Expression</b></em>' containment reference.
@@ -1277,7 +1268,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__TIME_EXPRESSION = FLOW_OBJECT_FEATURE_COUNT + 4;
+	int EVENT__TIME_EXPRESSION = FLOW_OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>As Duration</b></em>' attribute.
@@ -1286,7 +1277,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__AS_DURATION = FLOW_OBJECT_FEATURE_COUNT + 5;
+	int EVENT__AS_DURATION = FLOW_OBJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Rule Expression</b></em>' containment reference.
@@ -1295,7 +1286,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__RULE_EXPRESSION = FLOW_OBJECT_FEATURE_COUNT + 6;
+	int EVENT__RULE_EXPRESSION = FLOW_OBJECT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Error Code</b></em>' attribute.
@@ -1304,7 +1295,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__ERROR_CODE = FLOW_OBJECT_FEATURE_COUNT + 7;
+	int EVENT__ERROR_CODE = FLOW_OBJECT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Activity</b></em>' reference.
@@ -1313,7 +1304,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__ACTIVITY = FLOW_OBJECT_FEATURE_COUNT + 8;
+	int EVENT__ACTIVITY = FLOW_OBJECT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Signal</b></em>' attribute.
@@ -1322,7 +1313,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__SIGNAL = FLOW_OBJECT_FEATURE_COUNT + 9;
+	int EVENT__SIGNAL = FLOW_OBJECT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Linked To</b></em>' reference.
@@ -1331,7 +1322,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__LINKED_TO = FLOW_OBJECT_FEATURE_COUNT + 10;
+	int EVENT__LINKED_TO = FLOW_OBJECT_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>Event</em>' class.
@@ -1340,7 +1331,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 11;
+	int EVENT_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1467,15 +1458,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int START__TRIGGER = EVENT__TRIGGER;
-
-	/**
-	 * The feature id for the '<em><b>Message</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int START__MESSAGE = EVENT__MESSAGE;
 
 	/**
 	 * The feature id for the '<em><b>Implementation</b></em>' reference.
@@ -1683,15 +1665,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int INTERMEDIATE__TRIGGER = EVENT__TRIGGER;
-
-	/**
-	 * The feature id for the '<em><b>Message</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTERMEDIATE__MESSAGE = EVENT__MESSAGE;
 
 	/**
 	 * The feature id for the '<em><b>Implementation</b></em>' reference.
@@ -1908,15 +1881,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int END__TRIGGER = EVENT__TRIGGER;
-
-	/**
-	 * The feature id for the '<em><b>Message</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int END__MESSAGE = EVENT__MESSAGE;
 
 	/**
 	 * The feature id for the '<em><b>Implementation</b></em>' reference.
@@ -2207,31 +2171,13 @@ public interface VsdtPackage extends EPackage {
 	int ACTIVITY__ACTIVITY_TYPE = FLOW_OBJECT_FEATURE_COUNT + 10;
 
 	/**
-	 * The feature id for the '<em><b>In Message</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTIVITY__IN_MESSAGE = FLOW_OBJECT_FEATURE_COUNT + 11;
-
-	/**
-	 * The feature id for the '<em><b>Out Message</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTIVITY__OUT_MESSAGE = FLOW_OBJECT_FEATURE_COUNT + 12;
-
-	/**
 	 * The feature id for the '<em><b>Implementation</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__IMPLEMENTATION = FLOW_OBJECT_FEATURE_COUNT + 13;
+	int ACTIVITY__IMPLEMENTATION = FLOW_OBJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Performers</b></em>' attribute list.
@@ -2240,7 +2186,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__PERFORMERS = FLOW_OBJECT_FEATURE_COUNT + 14;
+	int ACTIVITY__PERFORMERS = FLOW_OBJECT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Script</b></em>' attribute.
@@ -2249,7 +2195,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__SCRIPT = FLOW_OBJECT_FEATURE_COUNT + 15;
+	int ACTIVITY__SCRIPT = FLOW_OBJECT_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Transaction</b></em>' containment reference.
@@ -2258,7 +2204,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__TRANSACTION = FLOW_OBJECT_FEATURE_COUNT + 16;
+	int ACTIVITY__TRANSACTION = FLOW_OBJECT_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Called Element</b></em>' reference.
@@ -2267,7 +2213,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__CALLED_ELEMENT = FLOW_OBJECT_FEATURE_COUNT + 17;
+	int ACTIVITY__CALLED_ELEMENT = FLOW_OBJECT_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Input Property Maps</b></em>' containment reference list.
@@ -2276,7 +2222,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__INPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 18;
+	int ACTIVITY__INPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Output Property Maps</b></em>' containment reference list.
@@ -2285,7 +2231,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY__OUTPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 19;
+	int ACTIVITY__OUTPUT_PROPERTY_MAPS = FLOW_OBJECT_FEATURE_COUNT + 17;
 
 	/**
 	 * The number of structural features of the '<em>Activity</em>' class.
@@ -2294,7 +2240,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACTIVITY_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 20;
+	int ACTIVITY_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -3303,22 +3249,13 @@ public interface VsdtPackage extends EPackage {
 	int MESSAGE_FLOW__PARENT = CONNECTING_OBJECT__PARENT;
 
 	/**
-	 * The feature id for the '<em><b>Message</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MESSAGE_FLOW__MESSAGE = CONNECTING_OBJECT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Source</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_FLOW__SOURCE = CONNECTING_OBJECT_FEATURE_COUNT + 1;
+	int MESSAGE_FLOW__SOURCE = CONNECTING_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -3327,7 +3264,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_FLOW__TARGET = CONNECTING_OBJECT_FEATURE_COUNT + 2;
+	int MESSAGE_FLOW__TARGET = CONNECTING_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Message Flow</em>' class.
@@ -3336,7 +3273,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_FLOW_FEATURE_COUNT = CONNECTING_OBJECT_FEATURE_COUNT + 3;
+	int MESSAGE_FLOW_FEATURE_COUNT = CONNECTING_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.AssociationImpl <em>Association</em>}' class.
@@ -3530,43 +3467,6 @@ public interface VsdtPackage extends EPackage {
 	int PARTICIPANT_FEATURE_COUNT = ID_OBJECT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link de.dailab.vsdt.impl.MessageImpl <em>Message</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see de.dailab.vsdt.impl.MessageImpl
-	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getMessage()
-	 * @generated
-	 */
-	int MESSAGE = 31;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MESSAGE__NAME = 0;
-
-	/**
-	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MESSAGE__PROPERTIES = 1;
-
-	/**
-	 * The number of structural features of the '<em>Message</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MESSAGE_FEATURE_COUNT = 2;
-
-	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.ImplementationImpl <em>Implementation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3574,79 +3474,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getImplementation()
 	 * @generated
 	 */
-	int IMPLEMENTATION = 32;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPLEMENTATION__TYPE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Participant</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPLEMENTATION__PARTICIPANT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Interface</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPLEMENTATION__INTERFACE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Operation</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPLEMENTATION__OPERATION = 3;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPLEMENTATION__DESCRIPTION = 4;
-
-	/**
-	 * The feature id for the '<em><b>Location</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPLEMENTATION__LOCATION = 5;
-
-	/**
-	 * The feature id for the '<em><b>Input Message</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPLEMENTATION__INPUT_MESSAGE = 6;
-
-	/**
-	 * The feature id for the '<em><b>Output Message</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPLEMENTATION__OUTPUT_MESSAGE = 7;
+	int IMPLEMENTATION = 31;
 
 	/**
 	 * The number of structural features of the '<em>Implementation</em>' class.
@@ -3655,7 +3483,135 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPLEMENTATION_FEATURE_COUNT = 8;
+	int IMPLEMENTATION_FEATURE_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.MessageChannelImpl <em>Message Channel</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.MessageChannelImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getMessageChannel()
+	 * @generated
+	 */
+	int MESSAGE_CHANNEL = 32;
+
+	/**
+	 * The feature id for the '<em><b>Channel</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_CHANNEL__CHANNEL = IMPLEMENTATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Payload</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_CHANNEL__PAYLOAD = IMPLEMENTATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Message Channel</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_CHANNEL_FEATURE_COUNT = IMPLEMENTATION_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.ServiceImpl <em>Service</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.ServiceImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getService()
+	 * @generated
+	 */
+	int SERVICE = 33;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__TYPE = IMPLEMENTATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Participant</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__PARTICIPANT = IMPLEMENTATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Interface</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__INTERFACE = IMPLEMENTATION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__OPERATION = IMPLEMENTATION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__DESCRIPTION = IMPLEMENTATION_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__LOCATION = IMPLEMENTATION_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Input</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__INPUT = IMPLEMENTATION_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Output</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__OUTPUT = IMPLEMENTATION_FEATURE_COUNT + 7;
+
+	/**
+	 * The number of structural features of the '<em>Service</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE_FEATURE_COUNT = IMPLEMENTATION_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.AssignmentImpl <em>Assignment</em>}' class.
@@ -3665,7 +3621,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getAssignment()
 	 * @generated
 	 */
-	int ASSIGNMENT = 33;
+	int ASSIGNMENT = 34;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' reference.
@@ -3720,7 +3676,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getProperty()
 	 * @generated
 	 */
-	int PROPERTY = 34;
+	int PROPERTY = 35;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3766,7 +3722,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getExpression()
 	 * @generated
 	 */
-	int EXPRESSION = 35;
+	int EXPRESSION = 36;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' attribute.
@@ -3803,7 +3759,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 36;
+	int DATA_TYPE = 37;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3876,7 +3832,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getProcessType()
 	 * @generated
 	 */
-	int PROCESS_TYPE = 37;
+	int PROCESS_TYPE = 38;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.TriggerType <em>Trigger Type</em>}' enum.
@@ -3886,7 +3842,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getTriggerType()
 	 * @generated
 	 */
-	int TRIGGER_TYPE = 38;
+	int TRIGGER_TYPE = 39;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.FlowConditionTypes <em>Flow Condition Types</em>}' enum.
@@ -3896,7 +3852,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getFlowConditionTypes()
 	 * @generated
 	 */
-	int FLOW_CONDITION_TYPES = 41;
+	int FLOW_CONDITION_TYPES = 42;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.ActivityType <em>Activity Type</em>}' enum.
@@ -3906,7 +3862,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getActivityType()
 	 * @generated
 	 */
-	int ACTIVITY_TYPE = 39;
+	int ACTIVITY_TYPE = 40;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.LoopType <em>Loop Type</em>}' enum.
@@ -3916,7 +3872,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getLoopType()
 	 * @generated
 	 */
-	int LOOP_TYPE = 40;
+	int LOOP_TYPE = 41;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.TransactionMethodType <em>Transaction Method Type</em>}' enum.
@@ -3926,7 +3882,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getTransactionMethodType()
 	 * @generated
 	 */
-	int TRANSACTION_METHOD_TYPE = 42;
+	int TRANSACTION_METHOD_TYPE = 43;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.GatewayType <em>Gateway Type</em>}' enum.
@@ -3936,7 +3892,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getGatewayType()
 	 * @generated
 	 */
-	int GATEWAY_TYPE = 43;
+	int GATEWAY_TYPE = 44;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.ConditionType <em>Condition Type</em>}' enum.
@@ -3946,7 +3902,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getConditionType()
 	 * @generated
 	 */
-	int CONDITION_TYPE = 44;
+	int CONDITION_TYPE = 45;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.DirectionType <em>Direction Type</em>}' enum.
@@ -3956,7 +3912,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getDirectionType()
 	 * @generated
 	 */
-	int DIRECTION_TYPE = 45;
+	int DIRECTION_TYPE = 46;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.ParticipantType <em>Participant Type</em>}' enum.
@@ -3966,7 +3922,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getParticipantType()
 	 * @generated
 	 */
-	int PARTICIPANT_TYPE = 46;
+	int PARTICIPANT_TYPE = 47;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.AssignTimeType <em>Assign Time Type</em>}' enum.
@@ -3976,7 +3932,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getAssignTimeType()
 	 * @generated
 	 */
-	int ASSIGN_TIME_TYPE = 47;
+	int ASSIGN_TIME_TYPE = 48;
 
 	/**
 	 * Returns the meta object for class '{@link de.dailab.vsdt.BusinessProcessDiagram <em>Business Process Diagram</em>}'.
@@ -4258,17 +4214,6 @@ public interface VsdtPackage extends EPackage {
 	EAttribute getEvent_Trigger();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.dailab.vsdt.Event#getMessage <em>Message</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Message</em>'.
-	 * @see de.dailab.vsdt.Event#getMessage()
-	 * @see #getEvent()
-	 * @generated
-	 */
-	EReference getEvent_Message();
-
-	/**
 	 * Returns the meta object for the reference '{@link de.dailab.vsdt.Event#getImplementation <em>Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4483,28 +4428,6 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getActivity_ActivityType();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.dailab.vsdt.Activity#getInMessage <em>In Message</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>In Message</em>'.
-	 * @see de.dailab.vsdt.Activity#getInMessage()
-	 * @see #getActivity()
-	 * @generated
-	 */
-	EReference getActivity_InMessage();
-
-	/**
-	 * Returns the meta object for the reference '{@link de.dailab.vsdt.Activity#getOutMessage <em>Out Message</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Out Message</em>'.
-	 * @see de.dailab.vsdt.Activity#getOutMessage()
-	 * @see #getActivity()
-	 * @generated
-	 */
-	EReference getActivity_OutMessage();
 
 	/**
 	 * Returns the meta object for the reference '{@link de.dailab.vsdt.Activity#getImplementation <em>Implementation</em>}'.
@@ -5107,17 +5030,6 @@ public interface VsdtPackage extends EPackage {
 	EClass getMessageFlow();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.dailab.vsdt.MessageFlow#getMessage <em>Message</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Message</em>'.
-	 * @see de.dailab.vsdt.MessageFlow#getMessage()
-	 * @see #getMessageFlow()
-	 * @generated
-	 */
-	EReference getMessageFlow_Message();
-
-	/**
 	 * Returns the meta object for the reference '{@link de.dailab.vsdt.MessageFlow#getSource <em>Source</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5226,38 +5138,6 @@ public interface VsdtPackage extends EPackage {
 	EAttribute getParticipant_Type();
 
 	/**
-	 * Returns the meta object for class '{@link de.dailab.vsdt.Message <em>Message</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Message</em>'.
-	 * @see de.dailab.vsdt.Message
-	 * @generated
-	 */
-	EClass getMessage();
-
-	/**
-	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Message#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see de.dailab.vsdt.Message#getName()
-	 * @see #getMessage()
-	 * @generated
-	 */
-	EAttribute getMessage_Name();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.Message#getProperties <em>Properties</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Properties</em>'.
-	 * @see de.dailab.vsdt.Message#getProperties()
-	 * @see #getMessage()
-	 * @generated
-	 */
-	EReference getMessage_Properties();
-
-	/**
 	 * Returns the meta object for class '{@link de.dailab.vsdt.Implementation <em>Implementation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5268,92 +5148,134 @@ public interface VsdtPackage extends EPackage {
 	EClass getImplementation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Implementation#getType <em>Type</em>}'.
+	 * Returns the meta object for class '{@link de.dailab.vsdt.MessageChannel <em>Message Channel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Message Channel</em>'.
+	 * @see de.dailab.vsdt.MessageChannel
+	 * @generated
+	 */
+	EClass getMessageChannel();
+
+	/**
+	 * Returns the meta object for the reference '{@link de.dailab.vsdt.MessageChannel#getChannel <em>Channel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Channel</em>'.
+	 * @see de.dailab.vsdt.MessageChannel#getChannel()
+	 * @see #getMessageChannel()
+	 * @generated
+	 */
+	EReference getMessageChannel_Channel();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.dailab.vsdt.MessageChannel#getPayload <em>Payload</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Payload</em>'.
+	 * @see de.dailab.vsdt.MessageChannel#getPayload()
+	 * @see #getMessageChannel()
+	 * @generated
+	 */
+	EReference getMessageChannel_Payload();
+
+	/**
+	 * Returns the meta object for class '{@link de.dailab.vsdt.Service <em>Service</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Service</em>'.
+	 * @see de.dailab.vsdt.Service
+	 * @generated
+	 */
+	EClass getService();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Service#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see de.dailab.vsdt.Implementation#getType()
-	 * @see #getImplementation()
+	 * @see de.dailab.vsdt.Service#getType()
+	 * @see #getService()
 	 * @generated
 	 */
-	EAttribute getImplementation_Type();
+	EAttribute getService_Type();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.dailab.vsdt.Implementation#getParticipant <em>Participant</em>}'.
+	 * Returns the meta object for the reference '{@link de.dailab.vsdt.Service#getParticipant <em>Participant</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Participant</em>'.
-	 * @see de.dailab.vsdt.Implementation#getParticipant()
-	 * @see #getImplementation()
+	 * @see de.dailab.vsdt.Service#getParticipant()
+	 * @see #getService()
 	 * @generated
 	 */
-	EReference getImplementation_Participant();
+	EReference getService_Participant();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Implementation#getInterface <em>Interface</em>}'.
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Service#getInterface <em>Interface</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Interface</em>'.
-	 * @see de.dailab.vsdt.Implementation#getInterface()
-	 * @see #getImplementation()
+	 * @see de.dailab.vsdt.Service#getInterface()
+	 * @see #getService()
 	 * @generated
 	 */
-	EAttribute getImplementation_Interface();
+	EAttribute getService_Interface();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Implementation#getOperation <em>Operation</em>}'.
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Service#getOperation <em>Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Operation</em>'.
-	 * @see de.dailab.vsdt.Implementation#getOperation()
-	 * @see #getImplementation()
+	 * @see de.dailab.vsdt.Service#getOperation()
+	 * @see #getService()
 	 * @generated
 	 */
-	EAttribute getImplementation_Operation();
+	EAttribute getService_Operation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Implementation#getDescription <em>Description</em>}'.
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Service#getDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Description</em>'.
-	 * @see de.dailab.vsdt.Implementation#getDescription()
-	 * @see #getImplementation()
+	 * @see de.dailab.vsdt.Service#getDescription()
+	 * @see #getService()
 	 * @generated
 	 */
-	EAttribute getImplementation_Description();
+	EAttribute getService_Description();
 
 	/**
-	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Implementation#getLocation <em>Location</em>}'.
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Service#getLocation <em>Location</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Location</em>'.
-	 * @see de.dailab.vsdt.Implementation#getLocation()
-	 * @see #getImplementation()
+	 * @see de.dailab.vsdt.Service#getLocation()
+	 * @see #getService()
 	 * @generated
 	 */
-	EAttribute getImplementation_Location();
+	EAttribute getService_Location();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.dailab.vsdt.Implementation#getInputMessage <em>Input Message</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.Service#getInput <em>Input</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Input Message</em>'.
-	 * @see de.dailab.vsdt.Implementation#getInputMessage()
-	 * @see #getImplementation()
+	 * @return the meta object for the containment reference list '<em>Input</em>'.
+	 * @see de.dailab.vsdt.Service#getInput()
+	 * @see #getService()
 	 * @generated
 	 */
-	EReference getImplementation_InputMessage();
+	EReference getService_Input();
 
 	/**
-	 * Returns the meta object for the reference '{@link de.dailab.vsdt.Implementation#getOutputMessage <em>Output Message</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.Service#getOutput <em>Output</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Output Message</em>'.
-	 * @see de.dailab.vsdt.Implementation#getOutputMessage()
-	 * @see #getImplementation()
+	 * @return the meta object for the containment reference list '<em>Output</em>'.
+	 * @see de.dailab.vsdt.Service#getOutput()
+	 * @see #getService()
 	 * @generated
 	 */
-	EReference getImplementation_OutputMessage();
+	EReference getService_Output();
 
 	/**
 	 * Returns the meta object for class '{@link de.dailab.vsdt.Assignment <em>Assignment</em>}'.
@@ -5735,26 +5657,26 @@ public interface VsdtPackage extends EPackage {
 	EReference getBusinessProcessSystem_Participants();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.BusinessProcessSystem#getMessages <em>Messages</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.BusinessProcessSystem#getMessageChannels <em>Message Channels</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Messages</em>'.
-	 * @see de.dailab.vsdt.BusinessProcessSystem#getMessages()
+	 * @return the meta object for the containment reference list '<em>Message Channels</em>'.
+	 * @see de.dailab.vsdt.BusinessProcessSystem#getMessageChannels()
 	 * @see #getBusinessProcessSystem()
 	 * @generated
 	 */
-	EReference getBusinessProcessSystem_Messages();
+	EReference getBusinessProcessSystem_MessageChannels();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.BusinessProcessSystem#getImplementations <em>Implementations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.BusinessProcessSystem#getServices <em>Services</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Implementations</em>'.
-	 * @see de.dailab.vsdt.BusinessProcessSystem#getImplementations()
+	 * @return the meta object for the containment reference list '<em>Services</em>'.
+	 * @see de.dailab.vsdt.BusinessProcessSystem#getServices()
 	 * @see #getBusinessProcessSystem()
 	 * @generated
 	 */
-	EReference getBusinessProcessSystem_Implementations();
+	EReference getBusinessProcessSystem_Services();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.BusinessProcessSystem#getDataTypes <em>Data Types</em>}'.
@@ -6122,14 +6044,6 @@ public interface VsdtPackage extends EPackage {
 		EAttribute EVENT__TRIGGER = eINSTANCE.getEvent_Trigger();
 
 		/**
-		 * The meta object literal for the '<em><b>Message</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EVENT__MESSAGE = eINSTANCE.getEvent_Message();
-
-		/**
 		 * The meta object literal for the '<em><b>Implementation</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6296,22 +6210,6 @@ public interface VsdtPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ACTIVITY__ACTIVITY_TYPE = eINSTANCE.getActivity_ActivityType();
-
-		/**
-		 * The meta object literal for the '<em><b>In Message</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACTIVITY__IN_MESSAGE = eINSTANCE.getActivity_InMessage();
-
-		/**
-		 * The meta object literal for the '<em><b>Out Message</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ACTIVITY__OUT_MESSAGE = eINSTANCE.getActivity_OutMessage();
 
 		/**
 		 * The meta object literal for the '<em><b>Implementation</b></em>' reference feature.
@@ -6794,14 +6692,6 @@ public interface VsdtPackage extends EPackage {
 		EClass MESSAGE_FLOW = eINSTANCE.getMessageFlow();
 
 		/**
-		 * The meta object literal for the '<em><b>Message</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MESSAGE_FLOW__MESSAGE = eINSTANCE.getMessageFlow_Message();
-
-		/**
 		 * The meta object literal for the '<em><b>Source</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6886,32 +6776,6 @@ public interface VsdtPackage extends EPackage {
 		EAttribute PARTICIPANT__TYPE = eINSTANCE.getParticipant_Type();
 
 		/**
-		 * The meta object literal for the '{@link de.dailab.vsdt.impl.MessageImpl <em>Message</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see de.dailab.vsdt.impl.MessageImpl
-		 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getMessage()
-		 * @generated
-		 */
-		EClass MESSAGE = eINSTANCE.getMessage();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MESSAGE__NAME = eINSTANCE.getMessage_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Properties</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MESSAGE__PROPERTIES = eINSTANCE.getMessage_Properties();
-
-		/**
 		 * The meta object literal for the '{@link de.dailab.vsdt.impl.ImplementationImpl <em>Implementation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6922,12 +6786,48 @@ public interface VsdtPackage extends EPackage {
 		EClass IMPLEMENTATION = eINSTANCE.getImplementation();
 
 		/**
+		 * The meta object literal for the '{@link de.dailab.vsdt.impl.MessageChannelImpl <em>Message Channel</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.dailab.vsdt.impl.MessageChannelImpl
+		 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getMessageChannel()
+		 * @generated
+		 */
+		EClass MESSAGE_CHANNEL = eINSTANCE.getMessageChannel();
+
+		/**
+		 * The meta object literal for the '<em><b>Channel</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MESSAGE_CHANNEL__CHANNEL = eINSTANCE.getMessageChannel_Channel();
+
+		/**
+		 * The meta object literal for the '<em><b>Payload</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MESSAGE_CHANNEL__PAYLOAD = eINSTANCE.getMessageChannel_Payload();
+
+		/**
+		 * The meta object literal for the '{@link de.dailab.vsdt.impl.ServiceImpl <em>Service</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.dailab.vsdt.impl.ServiceImpl
+		 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getService()
+		 * @generated
+		 */
+		EClass SERVICE = eINSTANCE.getService();
+
+		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute IMPLEMENTATION__TYPE = eINSTANCE.getImplementation_Type();
+		EAttribute SERVICE__TYPE = eINSTANCE.getService_Type();
 
 		/**
 		 * The meta object literal for the '<em><b>Participant</b></em>' reference feature.
@@ -6935,7 +6835,7 @@ public interface VsdtPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IMPLEMENTATION__PARTICIPANT = eINSTANCE.getImplementation_Participant();
+		EReference SERVICE__PARTICIPANT = eINSTANCE.getService_Participant();
 
 		/**
 		 * The meta object literal for the '<em><b>Interface</b></em>' attribute feature.
@@ -6943,7 +6843,7 @@ public interface VsdtPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute IMPLEMENTATION__INTERFACE = eINSTANCE.getImplementation_Interface();
+		EAttribute SERVICE__INTERFACE = eINSTANCE.getService_Interface();
 
 		/**
 		 * The meta object literal for the '<em><b>Operation</b></em>' attribute feature.
@@ -6951,7 +6851,7 @@ public interface VsdtPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute IMPLEMENTATION__OPERATION = eINSTANCE.getImplementation_Operation();
+		EAttribute SERVICE__OPERATION = eINSTANCE.getService_Operation();
 
 		/**
 		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
@@ -6959,7 +6859,7 @@ public interface VsdtPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute IMPLEMENTATION__DESCRIPTION = eINSTANCE.getImplementation_Description();
+		EAttribute SERVICE__DESCRIPTION = eINSTANCE.getService_Description();
 
 		/**
 		 * The meta object literal for the '<em><b>Location</b></em>' attribute feature.
@@ -6967,23 +6867,23 @@ public interface VsdtPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute IMPLEMENTATION__LOCATION = eINSTANCE.getImplementation_Location();
+		EAttribute SERVICE__LOCATION = eINSTANCE.getService_Location();
 
 		/**
-		 * The meta object literal for the '<em><b>Input Message</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Input</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IMPLEMENTATION__INPUT_MESSAGE = eINSTANCE.getImplementation_InputMessage();
+		EReference SERVICE__INPUT = eINSTANCE.getService_Input();
 
 		/**
-		 * The meta object literal for the '<em><b>Output Message</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Output</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IMPLEMENTATION__OUTPUT_MESSAGE = eINSTANCE.getImplementation_OutputMessage();
+		EReference SERVICE__OUTPUT = eINSTANCE.getService_Output();
 
 		/**
 		 * The meta object literal for the '{@link de.dailab.vsdt.impl.AssignmentImpl <em>Assignment</em>}' class.
@@ -7278,20 +7178,20 @@ public interface VsdtPackage extends EPackage {
 		EReference BUSINESS_PROCESS_SYSTEM__PARTICIPANTS = eINSTANCE.getBusinessProcessSystem_Participants();
 
 		/**
-		 * The meta object literal for the '<em><b>Messages</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Message Channels</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BUSINESS_PROCESS_SYSTEM__MESSAGES = eINSTANCE.getBusinessProcessSystem_Messages();
+		EReference BUSINESS_PROCESS_SYSTEM__MESSAGE_CHANNELS = eINSTANCE.getBusinessProcessSystem_MessageChannels();
 
 		/**
-		 * The meta object literal for the '<em><b>Implementations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Services</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS = eINSTANCE.getBusinessProcessSystem_Implementations();
+		EReference BUSINESS_PROCESS_SYSTEM__SERVICES = eINSTANCE.getBusinessProcessSystem_Services();
 
 		/**
 		 * The meta object literal for the '<em><b>Data Types</b></em>' containment reference list feature.

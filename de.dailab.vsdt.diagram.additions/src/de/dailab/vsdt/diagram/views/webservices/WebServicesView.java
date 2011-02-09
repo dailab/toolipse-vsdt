@@ -1,10 +1,7 @@
 package de.dailab.vsdt.diagram.views.webservices;
 
 import javax.wsdl.Definition;
-import javax.wsdl.Input;
-import javax.wsdl.Message;
 import javax.wsdl.Operation;
-import javax.wsdl.Output;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -76,10 +73,10 @@ public class WebServicesView extends AbstractStructuredViewerView {
 	protected void updateActionEnablement() {
 		Object selection= getSelectedElement(viewer);
 		boolean importEnabled= 
-			selection instanceof Message || 
-			selection instanceof Operation ||
-			selection instanceof Input || 
-			selection instanceof Output;
+//			selection instanceof Message || 
+//			selection instanceof Input || 
+//			selection instanceof Output||
+			selection instanceof Operation ;
 		importAction.setEnabled(importEnabled);
 		boolean removeEnabled=
 			selection instanceof Definition;

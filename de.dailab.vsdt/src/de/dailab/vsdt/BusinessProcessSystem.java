@@ -28,8 +28,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#isExecutable <em>Executable</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getBusinessProcesses <em>Business Processes</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getParticipants <em>Participants</em>}</li>
- *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getMessages <em>Messages</em>}</li>
- *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getImplementations <em>Implementations</em>}</li>
+ *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getMessageChannels <em>Message Channels</em>}</li>
+ *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getServices <em>Services</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getDataTypes <em>Data Types</em>}</li>
  * </ul>
  * </p>
@@ -282,36 +282,36 @@ public interface BusinessProcessSystem extends IdObject {
 	EList<Participant> getParticipants();
 
 	/**
-	 * Returns the value of the '<em><b>Messages</b></em>' containment reference list.
-	 * The list contents are of type {@link de.dailab.vsdt.Message}.
+	 * Returns the value of the '<em><b>Message Channels</b></em>' containment reference list.
+	 * The list contents are of type {@link de.dailab.vsdt.MessageChannel}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Messages</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Message Channels</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Messages</em>' containment reference list.
-	 * @see de.dailab.vsdt.VsdtPackage#getBusinessProcessSystem_Messages()
+	 * @return the value of the '<em>Message Channels</em>' containment reference list.
+	 * @see de.dailab.vsdt.VsdtPackage#getBusinessProcessSystem_MessageChannels()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Message> getMessages();
+	EList<MessageChannel> getMessageChannels();
 
 	/**
-	 * Returns the value of the '<em><b>Implementations</b></em>' containment reference list.
-	 * The list contents are of type {@link de.dailab.vsdt.Implementation}.
+	 * Returns the value of the '<em><b>Services</b></em>' containment reference list.
+	 * The list contents are of type {@link de.dailab.vsdt.Service}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Implementations</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Services</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Implementations</em>' containment reference list.
-	 * @see de.dailab.vsdt.VsdtPackage#getBusinessProcessSystem_Implementations()
+	 * @return the value of the '<em>Services</em>' containment reference list.
+	 * @see de.dailab.vsdt.VsdtPackage#getBusinessProcessSystem_Services()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Implementation> getImplementations();
+	EList<Service> getServices();
 
 	/**
 	 * Returns the value of the '<em><b>Data Types</b></em>' containment reference list.

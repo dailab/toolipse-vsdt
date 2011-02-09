@@ -33,7 +33,6 @@ import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.InputSet;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.LoopAttributeSet;
-import de.dailab.vsdt.Message;
 import de.dailab.vsdt.OutputSet;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.Transaction;
@@ -60,8 +59,6 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getBoundaryEvents <em>Boundary Events</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#isEventedSubprocess <em>Evented Subprocess</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getActivityType <em>Activity Type</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getInMessage <em>In Message</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getOutMessage <em>Out Message</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getImplementation <em>Implementation</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getPerformers <em>Performers</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getScript <em>Script</em>}</li>
@@ -214,26 +211,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 	 * @ordered
 	 */
 	protected ActivityType activityType = ACTIVITY_TYPE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getInMessage() <em>In Message</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getInMessage()
-	 * @generated
-	 * @ordered
-	 */
-	protected Message inMessage;
-
-	/**
-	 * The cached value of the '{@link #getOutMessage() <em>Out Message</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOutMessage()
-	 * @generated
-	 * @ordered
-	 */
-	protected Message outMessage;
 
 	/**
 	 * The cached value of the '{@link #getImplementation() <em>Implementation</em>}' reference.
@@ -554,82 +531,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 		activityType = newActivityType == null ? ACTIVITY_TYPE_EDEFAULT : newActivityType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ACTIVITY__ACTIVITY_TYPE, oldActivityType, activityType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Message getInMessage() {
-		if (inMessage != null && inMessage.eIsProxy()) {
-			InternalEObject oldInMessage = (InternalEObject)inMessage;
-			inMessage = (Message)eResolveProxy(oldInMessage);
-			if (inMessage != oldInMessage) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VsdtPackage.ACTIVITY__IN_MESSAGE, oldInMessage, inMessage));
-			}
-		}
-		return inMessage;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Message basicGetInMessage() {
-		return inMessage;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setInMessage(Message newInMessage) {
-		Message oldInMessage = inMessage;
-		inMessage = newInMessage;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ACTIVITY__IN_MESSAGE, oldInMessage, inMessage));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Message getOutMessage() {
-		if (outMessage != null && outMessage.eIsProxy()) {
-			InternalEObject oldOutMessage = (InternalEObject)outMessage;
-			outMessage = (Message)eResolveProxy(oldOutMessage);
-			if (outMessage != oldOutMessage) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VsdtPackage.ACTIVITY__OUT_MESSAGE, oldOutMessage, outMessage));
-			}
-		}
-		return outMessage;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Message basicGetOutMessage() {
-		return outMessage;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setOutMessage(Message newOutMessage) {
-		Message oldOutMessage = outMessage;
-		outMessage = newOutMessage;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ACTIVITY__OUT_MESSAGE, oldOutMessage, outMessage));
 	}
 
 	/**
@@ -980,12 +881,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				return isEventedSubprocess();
 			case VsdtPackage.ACTIVITY__ACTIVITY_TYPE:
 				return getActivityType();
-			case VsdtPackage.ACTIVITY__IN_MESSAGE:
-				if (resolve) return getInMessage();
-				return basicGetInMessage();
-			case VsdtPackage.ACTIVITY__OUT_MESSAGE:
-				if (resolve) return getOutMessage();
-				return basicGetOutMessage();
 			case VsdtPackage.ACTIVITY__IMPLEMENTATION:
 				if (resolve) return getImplementation();
 				return basicGetImplementation();
@@ -1053,12 +948,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				return;
 			case VsdtPackage.ACTIVITY__ACTIVITY_TYPE:
 				setActivityType((ActivityType)newValue);
-				return;
-			case VsdtPackage.ACTIVITY__IN_MESSAGE:
-				setInMessage((Message)newValue);
-				return;
-			case VsdtPackage.ACTIVITY__OUT_MESSAGE:
-				setOutMessage((Message)newValue);
 				return;
 			case VsdtPackage.ACTIVITY__IMPLEMENTATION:
 				setImplementation((Implementation)newValue);
@@ -1129,12 +1018,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 			case VsdtPackage.ACTIVITY__ACTIVITY_TYPE:
 				setActivityType(ACTIVITY_TYPE_EDEFAULT);
 				return;
-			case VsdtPackage.ACTIVITY__IN_MESSAGE:
-				setInMessage((Message)null);
-				return;
-			case VsdtPackage.ACTIVITY__OUT_MESSAGE:
-				setOutMessage((Message)null);
-				return;
 			case VsdtPackage.ACTIVITY__IMPLEMENTATION:
 				setImplementation((Implementation)null);
 				return;
@@ -1190,10 +1073,6 @@ public class ActivityImpl extends FlowObjectImpl implements Activity {
 				return eventedSubprocess != EVENTED_SUBPROCESS_EDEFAULT;
 			case VsdtPackage.ACTIVITY__ACTIVITY_TYPE:
 				return activityType != ACTIVITY_TYPE_EDEFAULT;
-			case VsdtPackage.ACTIVITY__IN_MESSAGE:
-				return inMessage != null;
-			case VsdtPackage.ACTIVITY__OUT_MESSAGE:
-				return outMessage != null;
 			case VsdtPackage.ACTIVITY__IMPLEMENTATION:
 				return implementation != null;
 			case VsdtPackage.ACTIVITY__PERFORMERS:

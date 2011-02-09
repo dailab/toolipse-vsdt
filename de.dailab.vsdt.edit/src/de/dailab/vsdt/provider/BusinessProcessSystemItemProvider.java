@@ -264,8 +264,8 @@ public class BusinessProcessSystemItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__BUSINESS_PROCESSES);
 			childrenFeatures.add(VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__PARTICIPANTS);
-			childrenFeatures.add(VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__MESSAGES);
-			childrenFeatures.add(VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS);
+			childrenFeatures.add(VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__MESSAGE_CHANNELS);
+			childrenFeatures.add(VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__SERVICES);
 			childrenFeatures.add(VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__DATA_TYPES);
 		}
 		return childrenFeatures;
@@ -333,8 +333,8 @@ public class BusinessProcessSystemItemProvider
 				return;
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__BUSINESS_PROCESSES:
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__PARTICIPANTS:
-			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MESSAGES:
-			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS:
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__MESSAGE_CHANNELS:
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__SERVICES:
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__DATA_TYPES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -365,13 +365,13 @@ public class BusinessProcessSystemItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__MESSAGES,
-				 VsdtFactory.eINSTANCE.createMessage()));
+				(VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__MESSAGE_CHANNELS,
+				 VsdtFactory.eINSTANCE.createMessageChannel()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__IMPLEMENTATIONS,
-				 VsdtFactory.eINSTANCE.createImplementation()));
+				(VsdtPackage.Literals.BUSINESS_PROCESS_SYSTEM__SERVICES,
+				 VsdtFactory.eINSTANCE.createService()));
 
 		newChildDescriptors.add
 			(createChildParameter

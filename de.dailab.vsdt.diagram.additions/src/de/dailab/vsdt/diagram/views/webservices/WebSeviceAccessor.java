@@ -11,8 +11,8 @@ import javax.wsdl.PortType;
 import javax.wsdl.WSDLException;
 import javax.wsdl.factory.WSDLFactory;
 
-import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Property;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.VsdtFactory;
 
 /**
@@ -55,21 +55,23 @@ public class WebSeviceAccessor {
 	 * @param operation		Some WSDL Operation
 	 * @return				Respective BPMN Implementation
 	 */
-	public Implementation createBpmnElement(Operation operation) {
-		Implementation implementation= VsdtFactory.eINSTANCE.createImplementation();
-		implementation.setOperation(operation.getName());
-		implementation.setType(IMPLEMENTATION_TYPE);
+	public Service createBpmnElement(Operation operation) {
+		Service service = VsdtFactory.eINSTANCE.createService();
+		service.setOperation(operation.getName());
+		service.setType(IMPLEMENTATION_TYPE);
 		for (Definition definition : definitions) {
 			for (Object object : definition.getPortTypes().values()) {
 				PortType portType= (PortType) object;
 				if (portType.getOperations().contains(operation)) {
-					implementation.setInterface(portType.getQName().getLocalPart());
-					implementation.setLocation(definition.getDocumentBaseURI());
+					service.setInterface(portType.getQName().getLocalPart());
+					service.setLocation(definition.getDocumentBaseURI());
 					break;
 				}
 			}
 		}
-		return implementation;
+		service.getInput().addAll(createBpmnElement(operation.getInput().getMessage()));
+		service.getOutput().addAll(createBpmnElement(operation.getOutput().getMessage()));
+		return service;
 	}
 	
 	/**
@@ -80,13 +82,14 @@ public class WebSeviceAccessor {
 	 * @return				Respective BPMN Message
 	 * @see createBpmnElement(Part part)
 	 */
-	public de.dailab.vsdt.Message createBpmnElement(Message message) {
-		de.dailab.vsdt.Message bpmnMessage= VsdtFactory.eINSTANCE.createMessage();
-		bpmnMessage.setName(message.getQName().getLocalPart());
+	public List<Property> createBpmnElement(Message message) {
+//		de.dailab.vsdt.Message bpmnMessage= VsdtFactory.eINSTANCE.createMessage();
+//		bpmnMessage.setName(message.getQName().getLocalPart());
+		List<Property> properties = new ArrayList<Property>();
 		for (Object part : message.getOrderedParts(null)) {
-			bpmnMessage.getProperties().add(createBpmnElement((Part) part));
+			properties.add(createBpmnElement((Part) part));
 		}
-		return bpmnMessage;
+		return properties;
 	}
 	
 	/**

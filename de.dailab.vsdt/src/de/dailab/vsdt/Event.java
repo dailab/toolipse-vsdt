@@ -20,7 +20,6 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link de.dailab.vsdt.Event#isNonInterrupting <em>Non Interrupting</em>}</li>
  *   <li>{@link de.dailab.vsdt.Event#getTrigger <em>Trigger</em>}</li>
- *   <li>{@link de.dailab.vsdt.Event#getMessage <em>Message</em>}</li>
  *   <li>{@link de.dailab.vsdt.Event#getImplementation <em>Implementation</em>}</li>
  *   <li>{@link de.dailab.vsdt.Event#getTimeExpression <em>Time Expression</em>}</li>
  *   <li>{@link de.dailab.vsdt.Event#isAsDuration <em>As Duration</em>}</li>
@@ -91,32 +90,6 @@ public interface Event extends FlowObject {
 	 * @generated
 	 */
 	void setTrigger(TriggerType value);
-
-	/**
-	 * Returns the value of the '<em><b>Message</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Message</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Message</em>' reference.
-	 * @see #setMessage(Message)
-	 * @see de.dailab.vsdt.VsdtPackage#getEvent_Message()
-	 * @model
-	 * @generated
-	 */
-	Message getMessage();
-
-	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.Event#getMessage <em>Message</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Message</em>' reference.
-	 * @see #getMessage()
-	 * @generated
-	 */
-	void setMessage(Message value);
 
 	/**
 	 * Returns the value of the '<em><b>Implementation</b></em>' reference.

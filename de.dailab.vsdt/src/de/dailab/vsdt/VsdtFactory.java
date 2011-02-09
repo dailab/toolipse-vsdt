@@ -215,22 +215,22 @@ public interface VsdtFactory extends EFactory {
 	Participant createParticipant();
 
 	/**
-	 * Returns a new object of class '<em>Message</em>'.
+	 * Returns a new object of class '<em>Message Channel</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Message</em>'.
+	 * @return a new object of class '<em>Message Channel</em>'.
 	 * @generated
 	 */
-	Message createMessage();
+	MessageChannel createMessageChannel();
 
 	/**
-	 * Returns a new object of class '<em>Implementation</em>'.
+	 * Returns a new object of class '<em>Service</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Implementation</em>'.
+	 * @return a new object of class '<em>Service</em>'.
 	 * @generated
 	 */
-	Implementation createImplementation();
+	Service createService();
 
 	/**
 	 * Returns a new object of class '<em>Assignment</em>'.

@@ -17,8 +17,8 @@ import de.dailab.vsdt.diagram.actions.OrganizeMessagesAction;
 
 public class BusinessProcessDiagramSection extends AbstractVsdtPropertySection {
 
-	public static final String DISPLAY_ORG_IMPL="Implementations...",
-							   DISPLAY_ORG_MSG= "Messages...",
+	public static final String DISPLAY_ORG_IMPL="Services...",
+							   DISPLAY_ORG_MSG= "Message Channels...",
 							   DISPLAY_ORG_DATA= "Data Types...";;
 	
     protected BusinessProcessDiagram bpd;

@@ -1,17 +1,15 @@
 package de.dailab.vsdt.util;
 
-import java.util.List;
-
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.GatewayType;
-import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Intermediate;
-import de.dailab.vsdt.Message;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Property;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.VsdtFactory;
 
@@ -75,24 +73,20 @@ public class VsdtElementFactory {
 		}
 	}
 
-	public static Implementation createImplementation(String type, String interfce, String operation, Participant participant) {
-		Implementation implementation= fac.createImplementation();
-		implementation.setInterface(interfce);
-		implementation.setOperation(operation);
-		implementation.setParticipant(participant);
-		implementation.setType(type);
-		return implementation;
+	public static Service createService(String type, String interfce, String operation, Participant participant) {
+		Service service = fac.createService();
+		service.setInterface(interfce);
+		service.setOperation(operation);
+		service.setParticipant(participant);
+		service.setType(type);
+		return service;
 	}
 	
-	public static Message createMessage(String name, /* Participant from, Participant to, */ List<Property> properties) {
-		Message message= fac.createMessage();
-		message.setName(name);
-//		message.setFrom(from);
-//		message.setTo(to);
-		if (properties != null) {
-			message.getProperties().addAll(properties);
-		}
-		return message;
+	public static MessageChannel createMessageChannel(String channel, Property payload) {
+		MessageChannel messageChannel= fac.createMessageChannel();
+		messageChannel.setChannel(createExpression(channel));
+		messageChannel.setPayload(payload);
+		return messageChannel;
 	}
 	
 	public static Property createProperty(String name, String type) {

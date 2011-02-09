@@ -22,10 +22,9 @@ import de.dailab.vsdt.AbstractProcess;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.DataObject;
 import de.dailab.vsdt.DataType;
-import de.dailab.vsdt.Message;
-import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.diagram.actions.OrganizeDataTypesAction;
 import de.dailab.vsdt.util.VsdtHelper;
@@ -70,7 +69,7 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 	 * @param parentShell	the parent shell (will be blocked)
 	 * @param parentElement
 	 */
-	public OrganizePropertiesDialog(Shell parentShell, EObject parentElement) {
+	public OrganizePropertiesDialog(Shell parentShell, EObject parentElement, int hint) {
 		super(parentShell, parentElement, true, 4);
 		if (parentElement instanceof AbstractProcess) {
 			elements= ((AbstractProcess) parentElement).getProperties();
@@ -78,16 +77,11 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 		if (parentElement instanceof DataObject) {
 			elements= ((DataObject) parentElement).getProperties();
 		}
-		if (parentElement instanceof Message) {
-			elements= ((Message) parentElement).getProperties();
-		}
-		if (parentElement instanceof MessageFlow) {
-			Message message= ((MessageFlow) parentElement).getMessage();
-			if (message != null) {
-				elements= message.getProperties();
-			} else {
-				errorMessage= ERROR__NO_MESSAGE;
-				disable= true;
+		if (parentElement instanceof Service) {
+			if (hint == 0) {
+				elements= ((Service) parentElement).getInput();
+			} else if (hint == 1) {
+				elements= ((Service) parentElement).getOutput();
 			}
 		}
 		if (parentElement instanceof Pool) {

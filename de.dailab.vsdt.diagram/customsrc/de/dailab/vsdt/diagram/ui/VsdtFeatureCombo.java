@@ -4,10 +4,10 @@ import org.eclipse.swt.widgets.Combo;
 
 import de.dailab.common.swt.FeatureCombo;
 import de.dailab.vsdt.IdObject;
-import de.dailab.vsdt.Implementation;
-import de.dailab.vsdt.Message;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Property;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.util.VsdtHelper;
 
 public class VsdtFeatureCombo<T extends Object> extends FeatureCombo<T> {
@@ -27,14 +27,14 @@ public class VsdtFeatureCombo<T extends Object> extends FeatureCombo<T> {
 	@Override
 	protected String getLabel(T o) {
 		String result= null;
-		if (o instanceof Message) {
-			result= ((Message)o).getName();
+		if (o instanceof MessageChannel) {
+			result= ((MessageChannel) o).getChannel().getExpression();
 		}
 		if (o instanceof IdObject) {
 			result=  ((IdObject)o).getNameOrId();
 		}
-		if (o instanceof Implementation) {
-			result=  ((Implementation)o).getInterface() + "." + ((Implementation)o).getOperation();
+		if (o instanceof Service) {
+			result=  ((Service) o).getInterface() + "." + ((Service) o).getOperation();
 		}
 		if (o instanceof Participant) {
 			result=  ((Participant)o).getName();

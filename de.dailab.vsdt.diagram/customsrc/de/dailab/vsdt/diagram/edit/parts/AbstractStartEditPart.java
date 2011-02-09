@@ -40,7 +40,7 @@ public abstract class AbstractStartEditPart extends AbstractVsdtBorderedShapeEdi
 			break;
 		case VsdtPackage.FLOW_OBJECT__INCOMING_SEQ:
 		case VsdtPackage.FLOW_OBJECT__OUTGOING_SEQ:
-		case VsdtPackage.EVENT__MESSAGE:
+		case VsdtPackage.EVENT__IMPLEMENTATION:
 			getPrimaryShape().setThrowing(getCastedModel().isThrowing());
 			refreshVisuals();
 			break;

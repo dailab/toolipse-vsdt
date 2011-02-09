@@ -66,7 +66,6 @@ public class EventItemProvider
 
 			addNonInterruptingPropertyDescriptor(object);
 			addTriggerPropertyDescriptor(object);
-			addMessagePropertyDescriptor(object);
 			addImplementationPropertyDescriptor(object);
 			addTimeExpressionPropertyDescriptor(object);
 			addAsDurationPropertyDescriptor(object);
@@ -120,28 +119,6 @@ public class EventItemProvider
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Message feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addMessagePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Event_message_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Event_message_feature", "_UI_Event_type"),
-				 VsdtPackage.Literals.EVENT__MESSAGE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 getString("_UI_TriggerAttributesPropertyCategory"),
 				 null));
 	}
 

@@ -478,7 +478,7 @@ public class MyJavaAudits {
 				return true;
 			}
 			if (self.getTrigger() == TriggerType.MULTIPLE) {
-				return self.getMessage() != null && self.getImplementation() != null;
+				return /*self.getMessage() != null &&*/ self.getImplementation() != null;
 			}
 			return false;
 		}
@@ -782,7 +782,7 @@ public class MyJavaAudits {
 		switch (type) {
 		case MESSAGE:
 			// message, implementation
-			ok&= self.getMessage() != null;
+//			ok&= self.getMessage() != null;
 			ok&= self.getImplementation() != null;
 			break;
 		case TIMER:
@@ -840,18 +840,18 @@ public class MyJavaAudits {
 		case ActivityType.SERVICE_VALUE:
 		case ActivityType.USER_VALUE:
 			//in message, out message, implementation, (performers *)
-			ok&= self.getInMessage() != null;
-			ok&= self.getOutMessage() != null;
+//			ok&= self.getInMessage() != null;
+//			ok&= self.getOutMessage() != null;
 			ok&= self.getImplementation() != null;
 			break;
 		case ActivityType.RECEIVE_VALUE:
 			//out message, implementation, (instantiate)
-			ok&= self.getOutMessage() != null;
+//			ok&= self.getOutMessage() != null;
 			ok&= self.getImplementation() != null;
 			break;
 		case ActivityType.SEND_VALUE:
 			//in message, implementation
-			ok&= self.getInMessage() != null;
+//			ok&= self.getInMessage() != null;
 			ok&= self.getImplementation() != null;
 			break;
 		case ActivityType.SCRIPT_VALUE:

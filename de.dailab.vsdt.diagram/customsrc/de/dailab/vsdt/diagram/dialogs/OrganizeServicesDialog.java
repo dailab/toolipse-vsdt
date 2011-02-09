@@ -19,11 +19,10 @@ import de.dailab.common.gmf.Util;
 import de.dailab.common.swt.dialogs.AbstractOrganizeElementsDialog;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
-import de.dailab.vsdt.Implementation;
-import de.dailab.vsdt.Message;
 import de.dailab.vsdt.Participant;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.diagram.actions.OrganizeMessagesAction;
+import de.dailab.vsdt.diagram.actions.OrganizePropertiesAction;
 import de.dailab.vsdt.diagram.ui.VsdtFeatureCombo;
 
 /**
@@ -31,7 +30,7 @@ import de.dailab.vsdt.diagram.ui.VsdtFeatureCombo;
  * 
  * @author kuester
  */
-public class OrganizeImplementationsDialog extends AbstractOrganizeElementsDialog<Implementation> {
+public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Service> {
 
 	public static final String LABEL_PARTICIPANT= "Participant";
 	public static final String LABEL_INTERFACE= "Interface";
@@ -41,7 +40,8 @@ public class OrganizeImplementationsDialog extends AbstractOrganizeElementsDialo
 	public static final String LABEL_INPUT= "Input Message";
 	public static final String LABEL_OUTPUT= "Output Message";
 	
-	public static final String BUTTON_MSG= "Messages...";
+	public static final String BUTTON_INPUT = "Input...";
+	public static final String BUTTON_OUTPUT= "Output...";
 	
 	/**implementation.interface input field*/
 	private Text interfaceText;
@@ -61,21 +61,15 @@ public class OrganizeImplementationsDialog extends AbstractOrganizeElementsDialo
 	/**implementation.participant input field*/
 	private VsdtFeatureCombo<Participant> partCombo;
 	
-	/**the list of possible messages*/
-	private java.util.List<Message> messages= new ArrayList<Message>();
+	/**button for opening the organize input properties dialog*/
+	private Button inputButton;
 	
-	/**implementation.inputMessage input field*/
-	private VsdtFeatureCombo<Message> inputCombo;
-	
-	/**implementation.outputMessage input field*/
-	private VsdtFeatureCombo<Message> outputCombo;
-	
-	/**button for opening the organize messages dialog*/
-	private Button msgButton;
+	/**button for opening the organize output properties dialog*/
+	private Button outputButton;
 	
 	@Override
 	public String getElementName() {
-		return "Implementation";
+		return "Service";
 	}
 	
 	@Override
@@ -84,11 +78,11 @@ public class OrganizeImplementationsDialog extends AbstractOrganizeElementsDialo
 	}
 	
 	/**
-	 * create a new Organize Assignments Dialog
+	 * create a new Organize Services Dialog
 	 * 
 	 * @param parentShell	the parent shell (will be blocked)
 	 */
-	public OrganizeImplementationsDialog(Shell parentShell, EObject parentElement) {
+	public OrganizeServicesDialog(Shell parentShell, EObject parentElement) {
 		super(parentShell, parentElement, true, 4);
 
 		BusinessProcessSystem bps= null;
@@ -98,9 +92,8 @@ public class OrganizeImplementationsDialog extends AbstractOrganizeElementsDialo
 			bps= (BusinessProcessSystem) ((BusinessProcessDiagram) parentElement).getParent();
 		}
 		if (bps != null) {
-			elements= ((BusinessProcessSystem) parentElement).getImplementations();
+			elements= ((BusinessProcessSystem) parentElement).getServices();
 			participants= ((BusinessProcessSystem) parentElement).getParticipants();
-			messages= ((BusinessProcessSystem) parentElement).getMessages();
 		} else {
 			throw new IllegalArgumentException("Parent element must be of type BusinessProcessSystem");
 		}
@@ -135,24 +128,12 @@ public class OrganizeImplementationsDialog extends AbstractOrganizeElementsDialo
 		locationText= new Text(editGroup,SWT.BORDER);
 		locationText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 3, 1));
 		locationText.addModifyListener(this);
-		
-		new Label(editGroup,SWT.NONE).setText(LABEL_INPUT);
-		inputCombo= new VsdtFeatureCombo<Message>(new Combo(editGroup,SWT.READ_ONLY));
-		inputCombo.getCombo().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		inputCombo.getCombo().addSelectionListener(this);
-		inputCombo.fillCombo(messages);
-		
-		new Label(editGroup,SWT.NONE).setText(LABEL_OUTPUT);
-		outputCombo= new VsdtFeatureCombo<Message>(new Combo(editGroup,SWT.READ_ONLY));
-		outputCombo.getCombo().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		outputCombo.getCombo().addSelectionListener(this);
-		outputCombo.fillCombo(messages);
 	}
 
 	@Override
-	protected Implementation createNewElement() {
-		Implementation implementation= VsdtFactory.eINSTANCE.createImplementation();
-		return implementation;
+	protected Service createNewElement() {
+		Service service= VsdtFactory.eINSTANCE.createService();
+		return service;
 	}
 	
 	@Override
@@ -161,86 +142,87 @@ public class OrganizeImplementationsDialog extends AbstractOrganizeElementsDialo
 	}
 
 	@Override
-	protected void updateElementFromEditGroup(Implementation implementation) {
-		if (implementation != null) {
-			implementation.setParticipant(partCombo.getSelected());
-			implementation.setOperation(Util.nullIfEmpty(operationText.getText()));
-			implementation.setInterface(Util.nullIfEmpty(interfaceText.getText()));
-			implementation.setType(Util.nullIfEmpty(typeText.getText()));
-			implementation.setLocation(Util.nullIfEmpty(locationText.getText()));
-			implementation.setInputMessage(inputCombo.getSelected());
-			implementation.setOutputMessage(outputCombo.getSelected());
+	protected void updateElementFromEditGroup(Service service) {
+		if (service!= null) {
+			service.setParticipant(partCombo.getSelected());
+			service.setOperation(Util.nullIfEmpty(operationText.getText()));
+			service.setInterface(Util.nullIfEmpty(interfaceText.getText()));
+			service.setType(Util.nullIfEmpty(typeText.getText()));
+			service.setLocation(Util.nullIfEmpty(locationText.getText()));
 		}
 	}
 	
 	@Override
 	protected void refreshEditGroup() {
-		Implementation implementation= getSelectedElement();
-		if (implementation != null) {
+		Service service = getSelectedElement();
+		if (service != null) {
 			//set interface
-			String ifString= Util.nonNull(implementation.getInterface());
+			String ifString= Util.nonNull(service.getInterface());
 			interfaceText.setText(ifString);
 			//set operation
-			String opString= Util.nonNull(implementation.getOperation());
+			String opString= Util.nonNull(service.getOperation());
 			operationText.setText(opString);
 			//set type
-			String typeString= Util.nonNull(implementation.getType());
+			String typeString= Util.nonNull(service.getType());
 			typeText.setText(typeString);
 			//set location
-			String locString= Util.nonNull(implementation.getLocation());
+			String locString= Util.nonNull(service.getLocation());
 			locationText.setText(locString);
 			//set participant, input / output message
-			partCombo.setSelected(implementation.getParticipant());
-			inputCombo.setSelected(implementation.getInputMessage());
-			outputCombo.setSelected(implementation.getOutputMessage());
+			partCombo.setSelected(service.getParticipant());
 		}
-		partCombo.getCombo().setEnabled(implementation != null);
-		interfaceText.setEnabled(implementation != null);
-		operationText.setEnabled(implementation != null);
+		partCombo.getCombo().setEnabled(service != null);
+		interfaceText.setEnabled(service != null);
+		operationText.setEnabled(service != null);
+		inputButton.setEnabled(service != null);
+		outputButton.setEnabled(service != null);
 	}
 	
 
 	@Override
 	protected void contributeToButtonsGroup(Composite buttonsGroup) {
-		msgButton= new Button(buttonsGroup,SWT.NONE);
-		msgButton.setText(BUTTON_MSG);
-		msgButton.addSelectionListener(this);
+		inputButton = new Button(buttonsGroup, SWT.NONE);
+		inputButton.setText(BUTTON_INPUT);
+		inputButton.addSelectionListener(this);
+		
+		outputButton = new Button(buttonsGroup, SWT.NONE);
+		outputButton.setText(BUTTON_OUTPUT);
+		outputButton.addSelectionListener(this);
 	}
 	
 	@Override
 	public void widgetSelected(SelectionEvent e) {
 		super.widgetSelected(e);
-		if (e.getSource() instanceof Button	) {
-			Button button = (Button) e.getSource();
-			String cmd= button.getText();
-			if (BUTTON_MSG.equals(cmd)) {
-				new OrganizeMessagesAction().run(parentElement);
-				// update message combos
-				inputCombo.fillCombo(messages);
-				outputCombo.fillCombo(messages);
+		Service service = getSelectedElement();
+		if (service != null) {
+			if (e.getSource() == inputButton) {
+				new OrganizePropertiesAction().run(service, 0);
+			}
+			if (e.getSource() == outputButton) {
+				new OrganizePropertiesAction().run(service, 1);
 			}
 		}
 	}
 	
 	@Override
-	protected String getString(Implementation implementation) {
-		if (implementation != null) {
-			String ifString= implementation.getInterface();
-			String opString= implementation.getOperation();
-			String typeString= implementation.getType();
+	protected String getString(Service service) {
+		if (service != null) {
+			String ifString= service.getInterface();
+			String opString= service.getOperation();
+			String typeString= service.getType();
 			StringBuffer buffer= new StringBuffer();
 			buffer.append(ifString != null ? ifString : "<unknown>"); //$NON-NLS-1$
 			buffer.append(".");
 			buffer.append(opString != null ? opString : "<unknown>"); //$NON-NLS-1$
-			if (implementation.getParticipant() != null) {
+			if (service.getParticipant() != null) {
 				buffer.append(" @ "); //$NON-NLS-1$
-				buffer.append(implementation.getParticipant().getName());
+				buffer.append(service.getParticipant().getName());
 			}
 			buffer.append(" (");
 			buffer.append(typeString != null ? typeString : "unknown type"); //$NON-NLS-1$
 			buffer.append(")");
 			return buffer.toString();
 		}
-		return super.getString(implementation);
+		return super.getString(service);
 	}
 }

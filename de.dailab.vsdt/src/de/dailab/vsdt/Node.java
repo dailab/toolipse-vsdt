@@ -76,6 +76,6 @@ public interface Node extends GraphicalObject {
 	 * @model
 	 * @generated
 	 */
-	void adaptToMessage(Message message, boolean incoming);
+	void adaptToImplementation(Implementation implementation, boolean incoming);
 
 } // Node

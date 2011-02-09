@@ -15,7 +15,6 @@ package de.dailab.vsdt;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.dailab.vsdt.MessageFlow#getMessage <em>Message</em>}</li>
  *   <li>{@link de.dailab.vsdt.MessageFlow#getSource <em>Source</em>}</li>
  *   <li>{@link de.dailab.vsdt.MessageFlow#getTarget <em>Target</em>}</li>
  * </ul>
@@ -26,32 +25,6 @@ package de.dailab.vsdt;
  * @generated
  */
 public interface MessageFlow extends ConnectingObject {
-	/**
-	 * Returns the value of the '<em><b>Message</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Message</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Message</em>' reference.
-	 * @see #setMessage(Message)
-	 * @see de.dailab.vsdt.VsdtPackage#getMessageFlow_Message()
-	 * @model
-	 * @generated
-	 */
-	Message getMessage();
-
-	/**
-	 * Sets the value of the '{@link de.dailab.vsdt.MessageFlow#getMessage <em>Message</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Message</em>' reference.
-	 * @see #getMessage()
-	 * @generated
-	 */
-	void setMessage(Message value);
-
 	/**
 	 * Returns the value of the '<em><b>Source</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.Node#getOutgoingMsg <em>Outgoing Msg</em>}'.

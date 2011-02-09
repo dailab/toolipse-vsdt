@@ -10,9 +10,9 @@ import de.dailab.common.gmf.imprt.DiagramImporter;
 import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.IdObject;
-import de.dailab.vsdt.Implementation;
-import de.dailab.vsdt.Message;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Property;
+import de.dailab.vsdt.Service;
 
 /**
  * Specialized version of DiagramImporter with overwritten canMerge test to
@@ -54,14 +54,15 @@ public class VsdtDiagramImporter extends DiagramImporter {
 				return testEquals(idObject1.getName(), idObject2.getName());
 			}
 		}
-		if (first instanceof Message) {
-			Message msg1 = (Message) first;
-			Message msg2 = (Message) second;
-			return testEquals(msg1.getName(), msg2.getName());
+		if (first instanceof MessageChannel) {
+			MessageChannel msg1 = (MessageChannel) first;
+			MessageChannel msg2 = (MessageChannel) second;
+			return testEquals(msg1.getChannel(), msg2.getChannel()) &&
+			       testEquals(msg1.getPayload(), msg2.getPayload());
 		}
-		if (first instanceof Implementation) {
-			Implementation impl1 = (Implementation) first;
-			Implementation impl2 = (Implementation) second;
+		if (first instanceof Service) {
+			Service impl1 = (Service) first;
+			Service impl2 = (Service) second;
 			return testEquals(impl1.getInterface(), impl2.getInterface()) &&
 			       testEquals(impl1.getOperation(), impl2.getOperation());
 		}

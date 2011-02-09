@@ -12,10 +12,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import de.dailab.vsdt.Message;
 import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.Node;
-import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.VsdtPackage;
 
 
@@ -26,7 +24,6 @@ import de.dailab.vsdt.VsdtPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.dailab.vsdt.impl.MessageFlowImpl#getMessage <em>Message</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.MessageFlowImpl#getSource <em>Source</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.MessageFlowImpl#getTarget <em>Target</em>}</li>
  * </ul>
@@ -35,16 +32,6 @@ import de.dailab.vsdt.VsdtPackage;
  * @generated
  */
 public class MessageFlowImpl extends ConnectingObjectImpl implements MessageFlow {
-	/**
-	 * The cached value of the '{@link #getMessage() <em>Message</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMessage()
-	 * @generated
-	 * @ordered
-	 */
-	protected Message message;
-
 	/**
 	 * The cached value of the '{@link #getSource() <em>Source</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -82,44 +69,6 @@ public class MessageFlowImpl extends ConnectingObjectImpl implements MessageFlow
 	@Override
 	protected EClass eStaticClass() {
 		return VsdtPackage.Literals.MESSAGE_FLOW;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Message getMessage() {
-		if (message != null && message.eIsProxy()) {
-			InternalEObject oldMessage = (InternalEObject)message;
-			message = (Message)eResolveProxy(oldMessage);
-			if (message != oldMessage) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VsdtPackage.MESSAGE_FLOW__MESSAGE, oldMessage, message));
-			}
-		}
-		return message;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Message basicGetMessage() {
-		return message;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setMessage(Message newMessage) {
-		Message oldMessage = message;
-		message = newMessage;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.MESSAGE_FLOW__MESSAGE, oldMessage, message));
 	}
 
 	/**
@@ -209,7 +158,7 @@ public class MessageFlowImpl extends ConnectingObjectImpl implements MessageFlow
 	}
 
 	/**
-	 * initialize message attribute of the message flow. a message object for
+	 * initialize message attribute of the message flow. A message object for
 	 * the message flow is created and associated to the message flow if the
 	 * message flow is connected to appropriate flow objects, e.g. activities or
 	 * events, and the type is not set yet, the type is set to send / receive /
@@ -220,24 +169,26 @@ public class MessageFlowImpl extends ConnectingObjectImpl implements MessageFlow
 	 * @generated NOT
 	 */
 	public void initializeMessage() {
-		// CREATE MESSAGE
-		Message message= VsdtFactory.eINSTANCE.createMessage();
-		this.getParent().getParent().getMessages().add(message);
-		
-		// ADAPT SOURCE AND TARGET NODES
-		getSource().adaptToMessage(message, false);
-		getTarget().adaptToMessage(message, true);
-		
-		// COMPOSE MESSAGE FEATURES
-		String sourceName= getSource().getName();
-		String targetName= getTarget().getName();
-		String name= (sourceName!=null?"from "+sourceName : "")
-				+ (targetName!=null ? " to "+ targetName : "");
-		message.setName(name);
-		// SET OWN NAME ACCORDING TO THE MESSAGES NAME
-		this.setName(name);
-
-		this.setMessage(message);
+//		// CREATE MESSAGE
+//		Message message= VsdtFactory.eINSTANCE.createMessage();
+//		this.getParent().getParent().getMessages().add(message);
+//		
+//		// ADAPT SOURCE AND TARGET NODES
+//		getSource().adaptToMessage(message, false);
+//		getTarget().adaptToMessage(message, true);
+//		
+//		// COMPOSE MESSAGE FEATURES
+//		String sourceName= getSource().getName();
+//		String targetName= getTarget().getName();
+//		String name= (sourceName!=null?"from "+sourceName : "")
+//				+ (targetName!=null ? " to "+ targetName : "");
+//		message.setName(name);
+//		// SET OWN NAME ACCORDING TO THE MESSAGES NAME
+//		this.setName(name);
+//
+//		this.setMessage(message);
+		// obsolete since new message concept
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -284,9 +235,6 @@ public class MessageFlowImpl extends ConnectingObjectImpl implements MessageFlow
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case VsdtPackage.MESSAGE_FLOW__MESSAGE:
-				if (resolve) return getMessage();
-				return basicGetMessage();
 			case VsdtPackage.MESSAGE_FLOW__SOURCE:
 				return getSource();
 			case VsdtPackage.MESSAGE_FLOW__TARGET:
@@ -303,9 +251,6 @@ public class MessageFlowImpl extends ConnectingObjectImpl implements MessageFlow
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case VsdtPackage.MESSAGE_FLOW__MESSAGE:
-				setMessage((Message)newValue);
-				return;
 			case VsdtPackage.MESSAGE_FLOW__SOURCE:
 				setSource((Node)newValue);
 				return;
@@ -324,9 +269,6 @@ public class MessageFlowImpl extends ConnectingObjectImpl implements MessageFlow
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case VsdtPackage.MESSAGE_FLOW__MESSAGE:
-				setMessage((Message)null);
-				return;
 			case VsdtPackage.MESSAGE_FLOW__SOURCE:
 				setSource((Node)null);
 				return;
@@ -345,8 +287,6 @@ public class MessageFlowImpl extends ConnectingObjectImpl implements MessageFlow
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case VsdtPackage.MESSAGE_FLOW__MESSAGE:
-				return message != null;
 			case VsdtPackage.MESSAGE_FLOW__SOURCE:
 				return source != null;
 			case VsdtPackage.MESSAGE_FLOW__TARGET:
