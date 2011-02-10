@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.xml.namespace.QName;
 
+import org.eclipse.emf.ecore.EObject;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TActivity;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TEventHandlers;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TFaultHandlers;
@@ -18,10 +19,11 @@ import org.xmlsoap.schemas.wsdl.TPortType;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.Expression;
-import de.dailab.vsdt.Message;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
+import de.dailab.vsdt.Service;
+import de.dailab.vsdt.VsdtPackage;
 import de.dailab.vsdt.trafo.strucbpmn.DisjunctiveExpression;
 
 
@@ -180,22 +182,40 @@ public class BpelStaticHelper implements BpelVisitorConstants {
 	 * @param object	some Activity, Process, or Message
 	 * @return			[object.name]_[object.class]Data
 	 */
-	public static String getVarNameFor(Object object) {
-		if (object instanceof Message) {
-			Message message = (Message) object;
-			return message.getName() + ( useSuffixes ? "_MessageData" : "" );
+	public static String getVarNameFor(Object object, int hint) {
+		if (object instanceof Service) {
+			Service service = (Service) object;
+			return service.getInterface() + service.getOperation() + 
+					(hint == 0 ? "Request" : "Response") +
+					(useSuffixes ? "_MessageData" : "");
 		}
 		if (object instanceof Activity) {
 			Activity activity = (Activity) object;
-			return activity.getName() + ( useSuffixes ? "_ActivityData" : "" );
+			return activity.getName() + (useSuffixes ? "_ActivityData" : "");
 		}
 		if (object instanceof Pool) {
 			Pool process = (Pool) object;
-			return process.getName() + ( useSuffixes ? "_ProcessData" : "" );
+			return process.getName() + (useSuffixes ? "_ProcessData" : "");
 		}
 		return null;
 	}
-	
+
+	/**
+	 * Get variable name for property
+	 * 
+	 * @param property
+	 * @return
+	 */
+	public static String getVarNameForProperty(Property property) {
+		int hint = 0;
+		EObject container = property.eContainer();
+		if (container instanceof Service) {
+			if (property.eContainingFeature() == VsdtPackage.eINSTANCE.getService_Output()) {
+				hint = 1;
+			}
+		}
+		return getVarNameFor(container, hint);
+	}
 	
 	/**
 	 * returns a uniformly formatted name for a WSDL message for a given variable name (for those
@@ -267,7 +287,7 @@ public class BpelStaticHelper implements BpelVisitorConstants {
 	 * @return			the variable getter
 	 */
 	public static String getFullVarName(Property property, String query) {
-		return getVarData(getVarNameFor(property.eContainer()), property.getName(), query);
+		return getVarData(getVarNameForProperty(property), property.getName(), query);
 	}
 	
 	

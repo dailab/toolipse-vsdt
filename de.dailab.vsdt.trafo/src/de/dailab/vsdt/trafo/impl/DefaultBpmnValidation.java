@@ -590,9 +590,9 @@ public class DefaultBpmnValidation extends MappingStage {
 		if (testIsNull(messageChannel)) return false;
 		boolean isOK= true;
 		
-		isOK&= testChild(visitExpression(messageChannel.getChannel()),messageChannel,vsdt.getMessageChannel_Channel());
+		isOK&= testChild(visitExpression(messageChannel.getChannel()), messageChannel, vsdt.getMessageChannel_Channel());
 		
-		isOK&= testChild(visitProperty(messageChannel.getPayload()),messageChannel,vsdt.getMessageChannel_Payload());
+		isOK&= testChild(visitProperty(messageChannel.getPayload()), messageChannel, vsdt.getMessageChannel_Payload());
 		
 		return isOK;
 	}
@@ -623,6 +623,13 @@ public class DefaultBpmnValidation extends MappingStage {
 		isOK&= test(service.getOperation() != null,"Operation must not be null");
 		isOK&= test(service.getInterface() != null,"Interface must not be null");
 		isOK&= test(service.getParticipant() != null,"Participant must not be null");
+		
+		for (Property property : service.getInput()) {
+			isOK &= testChild(visitProperty(property), service, vsdt.getService_Input());
+		}
+		for (Property property : service.getOutput()) {
+			isOK &= testChild(visitProperty(property), service, vsdt.getService_Output());
+		}
 		
 		return isOK;
 	}

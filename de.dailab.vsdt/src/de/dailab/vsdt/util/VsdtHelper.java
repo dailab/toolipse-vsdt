@@ -174,6 +174,10 @@ public class VsdtHelper {
 		if (object instanceof Assignment) {
 			return getVisibleProperties(object.eContainer());			
 		}
+		if (object instanceof LoopAttributeSet) {
+			LoopAttributeSet loopAttributes = (LoopAttributeSet) object;
+			return getVisibleProperties(loopAttributes.getParent());
+		}
 		if (object instanceof FlowObject) {
 			List<Property> properties = new ArrayList<Property>();
 			FlowObject flowObject = (FlowObject) object;

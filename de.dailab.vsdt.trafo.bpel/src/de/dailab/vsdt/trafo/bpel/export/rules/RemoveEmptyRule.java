@@ -8,7 +8,7 @@ import org.xmlsoap.schemas.ws._2003._03.business.process.ProcessPackage;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TEmpty;
 
 import de.dailab.vsdt.trafo.base.util.Util;
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
+import de.dailab.vsdt.trafo.strucbpmn.export.AbstractVsdtRule;
 
 /**
  * Remove Empty Rule

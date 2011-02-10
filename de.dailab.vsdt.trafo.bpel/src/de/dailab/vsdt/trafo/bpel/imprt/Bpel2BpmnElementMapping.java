@@ -44,14 +44,13 @@ import de.dailab.vsdt.End;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.GatewayType;
-import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.Lane;
-import de.dailab.vsdt.Message;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.ProcessType;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.VsdtFactory;
@@ -334,10 +333,10 @@ public class Bpel2BpmnElementMapping extends MappingStage {
 		TrafoLog.nyi("Mapping of catch, catchAll and compensatioHandler");
 		Activity activity= vsdtFac.createActivity();
 		activity.setImplementation(getImplementation(tInvoke.getPortType().toString(), tInvoke.getOperation()));
-		activity.setInMessage(getMessage(tInvoke.getInputVariable()));
+//		activity.setInMessage(getMessage(tInvoke.getInputVariable()));
 		if (tInvoke.getOutputVariable() != null) {
 			activity.setActivityType(ActivityType.SERVICE);
-			activity.setOutMessage(getMessage(tInvoke.getOutputVariable()));
+//			activity.setOutMessage(getMessage(tInvoke.getOutputVariable()));
 		} else {
 			activity.setActivityType(ActivityType.SEND);
 		}
@@ -354,7 +353,7 @@ public class Bpel2BpmnElementMapping extends MappingStage {
 			Intermediate event= vsdtFac.createIntermediate();
 			event.setTrigger(TriggerType.MESSAGE);
 			event.setImplementation(getImplementation(onMessage.getPortType().toString(), onMessage.getOperation()));
-			event.setMessage(getMessage(onMessage.getVariable()));
+//			event.setMessage(getMessage(onMessage.getVariable()));
 			
 			TActivity tActivity= BpelUtil.getActivity(onMessage);
 			FlowObject flowObject= visitActivity(tActivity);
@@ -399,7 +398,7 @@ public class Bpel2BpmnElementMapping extends MappingStage {
 		Activity activity= vsdtFac.createActivity();
 		activity.setActivityType(ActivityType.RECEIVE);
 		activity.setImplementation(getImplementation(tReceive.getPortType().toString(), tReceive.getOperation()));
-		activity.setOutMessage(getMessage(tReceive.getVariable()));
+//		activity.setOutMessage(getMessage(tReceive.getVariable()));
 		return activity;
 	}
 
@@ -411,7 +410,7 @@ public class Bpel2BpmnElementMapping extends MappingStage {
 		Activity activity= vsdtFac.createActivity();
 		activity.setActivityType(ActivityType.SEND);
 		activity.setImplementation(getImplementation(tReply.getPortType().toString(), tReply.getOperation()));
-		activity.setInMessage(getMessage(tReply.getVariable()));
+//		activity.setInMessage(getMessage(tReply.getVariable()));
 		return activity;
 	}
 
@@ -481,7 +480,7 @@ public class Bpel2BpmnElementMapping extends MappingStage {
 			for (TOnMessage onMessage : ehb.getEventHandlers().getOnMessage()) {
 				Intermediate intermediate= VsdtElementFactory.createIntermediate(null, TriggerType.MESSAGE);
 				intermediate.setImplementation(getImplementation(onMessage.getPortType().toString(), onMessage.getOperation()));
-				intermediate.setMessage(getMessage(onMessage.getVariable()));
+//				intermediate.setMessage(getMessage(onMessage.getVariable()));
 				FlowObject flowObject= visitActivity(BpelUtil.getActivity(onMessage));
 				block.getEventHandlerCases().add(StrucBpmnElementFactory.createEventHandlerCase(intermediate, flowObject, null, null));
 			}
@@ -650,11 +649,11 @@ public class Bpel2BpmnElementMapping extends MappingStage {
 	/** this map is holding already created properties */
 	private Map<String, Property> _propertyMap= new HashMap<String, Property>();
 
-	/** this map is holding already created messages */
-	private Map<String, Message> _messageMap= new HashMap<String, Message>();
+//	/** this map is holding already created messages */
+//	private Map<String, Message> _messageMap= new HashMap<String, Message>();
 
-	/** this map is holding already created implementations */
-	private Map<String, Implementation> _implementationMap= new HashMap<String, Implementation>();
+	/** this map is holding already created Services */
+	private Map<String, Service> _serviceMap= new HashMap<String, Service>();
 
 	private Property getProperty(String name) {
 		Property property= _propertyMap.get(name);
@@ -668,29 +667,29 @@ public class Bpel2BpmnElementMapping extends MappingStage {
 		return property;
 	}
 
-	private Message getMessage(String varName) {
-		Message message= _messageMap.get(varName);
-		if (message == null) {
-//			 TODO properties
-			message= VsdtElementFactory.createMessage(varName, /* null, null, */ null);
-			TrafoLog.debug("Creating Message " + message.toString());
-			bpd.getParent().getMessages().add(message);
-			_messageMap.put(varName, message);
-		}
-		return message;
-	}
+//	private Message getMessage(String varName) {
+//		Message message= _messageMap.get(varName);
+//		if (message == null) {
+////			 TODO properties
+//			message= VsdtElementFactory.createMessage(varName, /* null, null, */ null);
+//			TrafoLog.debug("Creating Message " + message.toString());
+//			bpd.getParent().getMessages().add(message);
+//			_messageMap.put(varName, message);
+//		}
+//		return message;
+//	}
 	
-	private Implementation getImplementation(String portType, String operation) {
+	private Service getImplementation(String portType, String operation) {
 		String key= portType+":"+operation;
-		Implementation implementation= _implementationMap.get(key);
-		if (implementation == null) {
+		Service service= _serviceMap.get(key);
+		if (service == null) {
 			// TODO partner link
-			implementation= VsdtElementFactory.createImplementation("WebService", portType, operation, null);
-			TrafoLog.debug("Creating Implementation " + implementation.toString());
-			bpd.getParent().getImplementations().add(implementation);
-			_implementationMap.put(key, implementation);
+			service = VsdtElementFactory.createService("WebService", portType, operation, null);
+			TrafoLog.debug("Creating Service " + service.toString());
+			bpd.getParent().getServices().add(service);
+			_serviceMap.put(key, service);
 		}
-		return implementation;
+		return service;
 	}
 	
 }

@@ -63,15 +63,14 @@ import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowConditionTypes;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
-import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Intermediate;
-import de.dailab.vsdt.Message;
 import de.dailab.vsdt.MultiLoopAttSet;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.ProcessType;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.TriggerType;
@@ -191,6 +190,11 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 			TrafoLog.warn(pool.getName() + ": A mapping for AdHoc Processes is not defined. Skipping.");
 			return null;
 		}
+		// check whether to translate this process
+		if (process.getProcessType() == ProcessType.NONE || pool.getLanes().isEmpty()) {
+			TrafoLog.info(pool.getName() + ": Skipping Pool with no Lanes or Process Type NONE.");
+			return null;
+		}
 		
 		//create process with WSDL definitions and assign it to the currently used process
 		_current= new BpelProcessSet(createProcess(process), null);
@@ -202,7 +206,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 		//visit children: graphical elements, properties, assignments
 		TActivity tActivity= visitFlowObjects(process.getGraphicalElements());
 		
-		visitProperties(process.getProperties(),process);
+		visitProperties(process.getProperties(),process, 0);
 		
 		//visit assignments: the start-time-assigns have to be inserted after the initializing receive/pick!
 //		if (! process.getAssignments().isEmpty()) {
@@ -415,7 +419,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 //				if (event.getMessage().getTo() == event.getPool().getParticipant()) {
 					TProcess process= (TProcess) wrapper.getMapping(event.getPool());
 					TScope scope= BpelStaticHelper.getScope(process);
-					TOnMessage onMessage= createOnMessage(event.getMessage(), event.getImplementation());
+					TOnMessage onMessage= createOnMessage((Service) event.getImplementation());
 					BpelStaticHelper.getEventHandlers(scope).getOnMessage().add(onMessage);
 //				} else {
 //					TrafoLog.error("Intermediate Event '" + event.getName() + "': 'to' must be the same Participant as that of the Intermediate's Pool");
@@ -423,17 +427,17 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 			} else {
 				if (event.isThrowing()) {
 					//create Invoke or Reply, depending on whether there is a receive earlier
-					Implementation webService= (Implementation) event.getImplementation();
+					Service webService= (Service) event.getImplementation();
 					if (existsUpstreamReceive(event, webService.getInterface(), webService.getOperation())) {
 						//create reply with variable = message
-						mapping= createReply(event.getMessage(), webService);
+						mapping= createReply(webService);
 					} else {
 						//create invoke with outputVariable = message
-						mapping= createInvoke(event.getMessage(),null, webService);
+						mapping= createInvoke(webService);
 					}
 				} else {
 					//create Receive
-					mapping= createReceive(event.getMessage(), event.getImplementation(), event instanceof Start);	
+					mapping= createReceive((Service) event.getImplementation(), event instanceof Start);	
 				}
 			}
 			break;
@@ -487,7 +491,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 		if (event.getTrigger() == TriggerType.MULTIPLE && multiType == null) {
 			
 			List<TActivity> children= new ArrayList<TActivity>();
-			if (event.getMessage() != null && event.getImplementation() != null) {
+			if (event.getImplementation() != null) {
 				children.add(visitEvent(event, TriggerType.MESSAGE));
 			}
 			if (event.getTimeExpression() != null && event.getRuleExpression().getExpression() != null) {
@@ -584,24 +588,24 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 		case RECEIVE:
 			//create Receive
 //			mapping= createReceive(activity.getOutMessage(),activity.getImplementation(), activity.isInstantiate());
-			mapping= createReceive(activity.getOutMessage(),activity.getImplementation(), false);
+			mapping= createReceive((Service) activity.getImplementation(), false);
 			break;
 		case SEND:
 			//create Reply/Invoke
-			Implementation webService= (Implementation) activity.getImplementation();
+			Service webService= (Service) activity.getImplementation();
 			if (existsUpstreamReceive(activity, webService.getInterface(), webService.getOperation())) {
 				//create reply with variable = message
-				mapping= createReply(activity.getInMessage(),webService);
+				mapping= createReply(webService);
 			} else {
 				//create invoke with inputVariable = message
-				mapping= createInvoke(activity.getInMessage(),null,webService);
+				mapping= createInvoke(webService);
 			}
 			break;
 		case SERVICE:
 		case USER:
 			//create Invoke
 			// TODO distinguish mapping of USER and SERVICE task
-			mapping= createInvoke(activity.getInMessage(),activity.getOutMessage(),activity.getImplementation());
+			mapping= createInvoke((Service) activity.getImplementation());
 			break;
 		case SCRIPT:
 			// TODO: Implement missing mappings: SCRIPT
@@ -613,7 +617,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 		// StartAss - Act - (Looping? StartAss - Act)* - EndAss
 		
 		//map properties
-		visitProperties(activity.getProperties(), activity);
+		visitProperties(activity.getProperties(), activity, 0);
 
 		// Note: The mapping of Loops is done is visitFlowObject, as some other things have to be done first
 		
@@ -638,10 +642,10 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 		switch (trigger) {
 		case MESSAGE: {
 			//create onMessage + Throw + Catch
-			Message message= intermediate.getMessage();
-			QName faultName= new QName(message.getName() + "_Exit");
+			Service service = (Service) intermediate.getImplementation();
+			QName faultName= new QName(service.getInterface() + service.getOperation() + "_Exit");
 			
-			TOnMessage onMessage= createOnMessage(message, intermediate.getImplementation());
+			TOnMessage onMessage= createOnMessage(service);
 			TThrow tThrow= bpelFac.createTThrow();
 			tThrow.setFaultName(faultName);
 			onMessage.setThrow(tThrow);
@@ -695,7 +699,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 		}
 		if (intermediate.getTrigger() == TriggerType.MULTIPLE) {
 			//iterate over child triggers. Results will be added to Event Handlers within the execution of the method
-			if (intermediate.getMessage() != null && intermediate.getImplementation() != null) {
+			if (intermediate.getImplementation() != null) {
 				visitIntermediateOnBoundary(intermediate, TriggerType.MESSAGE, scope);
 			}
 			if (intermediate.getErrorCode() != null) {
@@ -1249,22 +1253,22 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 	/**
 	 * creates a new tReceive and visit the message's properties
 	 * 
-	 * @param inMessage			message, mapping to variable
-	 * @param impl				implementation (see visitWebService)
+	 * @param service			implementation (see visitWebService)
 	 * @param createInstance	create instance?
 	 * @return					new tReceive
 	 */
-	private TReceive createReceive(Message inMessage, Implementation impl, boolean createInstance) {
+	private TReceive createReceive(Service service, boolean createInstance) {
 		TReceive tReceive= bpelFac.createTReceive();
-		if (inMessage != null) {
-			tReceive.setVariable(BpelStaticHelper.getVarNameFor(inMessage));
-			visitProperties(inMessage.getProperties(), inMessage);
-		}
+
+		// request
+		tReceive.setVariable(BpelStaticHelper.getVarNameFor(service, 0));
+		visitProperties(service.getInput(), service, 0);
+
 		tReceive.setCreateInstance(TBoolean.get(createInstance));
-		tReceive.setPartnerLink(BpelStaticHelper.getPartnerLinkName(impl.getParticipant()));
-		tReceive.setPortType(new QName(NS_THIS + ":" + impl.getInterface()));
-		tReceive.setOperation(impl.getOperation());
-		addPartnerLinkAndOperation(impl, inMessage, null, true, false);
+		tReceive.setPartnerLink(BpelStaticHelper.getPartnerLinkName(service.getParticipant()));
+		tReceive.setPortType(new QName(NS_THIS + ":" + service.getInterface()));
+		tReceive.setOperation(service.getOperation());
+		addPartnerLinkAndOperation(service, true, false);
 		return tReceive;
 	}
 	
@@ -1272,20 +1276,20 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 	/**
 	 * creates a tReply and visit the message's properties
 	 * 
-	 * @param outMessage	message, mapping to variable
-	 * @param impl			implementation (see visitWebService)
+	 * @param service		implementation (see visitWebService)
 	 * @return				new tReply
 	 */
-	private TReply createReply(Message outMessage, Implementation impl) {
+	private TReply createReply(Service service) {
 		TReply tReply= bpelFac.createTReply();
-		if (outMessage != null) {
-			tReply.setVariable(BpelStaticHelper.getVarNameFor(outMessage));	
-			visitProperties(outMessage.getProperties(), outMessage);		
-		}
-		tReply.setPartnerLink(BpelStaticHelper.getPartnerLinkName(impl.getParticipant()));
-		tReply.setPortType(new QName(NS_THIS + ":" + impl.getInterface()));
-		tReply.setOperation(impl.getOperation());
-		addPartnerLinkAndOperation(impl, null, outMessage, false, true); //TODO self or partner?
+
+		// response
+		tReply.setVariable(BpelStaticHelper.getVarNameFor(service, 1));	
+		visitProperties(service.getOutput(), service, 1);		
+
+		tReply.setPartnerLink(BpelStaticHelper.getPartnerLinkName(service.getParticipant()));
+		tReply.setPortType(new QName(NS_THIS + ":" + service.getInterface()));
+		tReply.setOperation(service.getOperation());
+		addPartnerLinkAndOperation(service, false, true); //TODO self or partner?
 		return tReply;
 	}
 	
@@ -1293,25 +1297,24 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 	/**
 	 * create a new tInvoke and visit the message's properties
 	 * 
-	 * @param inMessage		inMessage, mapping to input variable
-	 * @param outMessage	outMessage, mapping to output variable
-	 * @param impl			implementation (see visitWebService)
+	 * @param service		web service (see visitWebService)
 	 * @return				new tInvoke
 	 */
-	private TInvoke createInvoke(Message inMessage, Message outMessage, Implementation impl) {
+	private TInvoke createInvoke(Service service) {
 		TInvoke tInvoke= bpelFac.createTInvoke();
-		if (inMessage != null) {
-			tInvoke.setInputVariable(BpelStaticHelper.getVarNameFor(inMessage));
-			visitProperties(inMessage.getProperties(), inMessage);	
-		}
-		if (outMessage != null) {
-			tInvoke.setOutputVariable(BpelStaticHelper.getVarNameFor(outMessage));
-			visitProperties(outMessage.getProperties(), outMessage);	
-		}
-		tInvoke.setPartnerLink(BpelStaticHelper.getPartnerLinkName(impl.getParticipant()));
-		tInvoke.setPortType(new QName(NS_THIS + ":" + impl.getInterface()));
-		tInvoke.setOperation(impl.getOperation());
-		addPartnerLinkAndOperation(impl, inMessage, outMessage, false, true);
+
+		// request
+		tInvoke.setInputVariable(BpelStaticHelper.getVarNameFor(service, 0));
+		visitProperties(service.getInput(), service, 0);	
+
+		// response
+		tInvoke.setOutputVariable(BpelStaticHelper.getVarNameFor(service, 1));
+		visitProperties(service.getOutput(), service, 1);	
+
+		tInvoke.setPartnerLink(BpelStaticHelper.getPartnerLinkName(service.getParticipant()));
+		tInvoke.setPortType(new QName(NS_THIS + ":" + service.getInterface()));
+		tInvoke.setOperation(service.getOperation());
+		addPartnerLinkAndOperation(service, false, true);
 		return tInvoke;
 	}
 	
@@ -1319,21 +1322,20 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 	/**
 	 * creates a new tOnMessage and visit the message's properties
 	 * 
-	 * @param inMessage			message, mapping to variable
 	 * @param impl				implementation (see visitWebService)
 	 * @param process			process (for the WSDL definition)
 	 * @return					new tReceive
 	 */
-	private TOnMessage createOnMessage(Message inMessage, Implementation impl) {
+	private TOnMessage createOnMessage(Service service) {
 		TOnMessage tOnMessage= bpelFac.createTOnMessage();
-		if (inMessage != null) {
-			tOnMessage.setVariable(BpelStaticHelper.getVarNameFor(inMessage));
-			visitProperties(inMessage.getProperties(), inMessage);
+		if (service.getInput() != null) {
+			tOnMessage.setVariable(BpelStaticHelper.getVarNameFor(service, 0));
+			visitProperties(service.getInput(), service, 0);
 		}
-		tOnMessage.setPartnerLink(BpelStaticHelper.getPartnerLinkName(impl.getParticipant()));
-		tOnMessage.setPortType(new QName(NS_THIS + ":" + impl.getInterface()));
-		tOnMessage.setOperation(impl.getOperation());
-		addPartnerLinkAndOperation(impl, inMessage, null, true, false);
+		tOnMessage.setPartnerLink(BpelStaticHelper.getPartnerLinkName(service.getParticipant()));
+		tOnMessage.setPortType(new QName(NS_THIS + ":" + service.getInterface()));
+		tOnMessage.setOperation(service.getOperation());
+		addPartnerLinkAndOperation(service, true, false);
 		return tOnMessage;
 	}
 	
@@ -1392,7 +1394,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 				ToType toType= bpelFac.createToType();
 				Property to= assignment.getTo();
 				toType.setPart(to.getName());
-				toType.setVariable(BpelStaticHelper.getVarNameFor(to.eContainer()));
+				toType.setVariable(BpelStaticHelper.getVarNameForProperty(to));
 				toType.setQuery(assignment.getToQuery());
 				tCopy.setTo(toType);
 				tAssign.getCopy().add(tCopy);
@@ -1410,12 +1412,12 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 	 * @param properties	list of BPMN properties
 	 * @param owner			owner of the properties (influencing the resulting variable names)
 	 */
-	private void visitProperties(List<Property> properties, EObject owner) {
+	private void visitProperties(List<Property> properties, EObject owner, int hint) {
 		final boolean noDuplicates= true;
 		//always create variable for a message, even when empty (because it will be used in the invoke/receive)
-		if (! properties.isEmpty() || owner instanceof Message) {
+		if (! properties.isEmpty() || owner instanceof Service) {
 			//get the original element's process and derive names
-			String varName= BpelStaticHelper.getVarNameFor(owner);
+			String varName= BpelStaticHelper.getVarNameFor(owner, hint);
 			String msgName= BpelStaticHelper.getMessageName(varName);
 			//get process and WSDL definitions from process
 			
@@ -1498,14 +1500,12 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 	 * 
 	 * @param process		the BPMN process for which the PL, PLT, PT and OP shall be created. Used to access BPEL process and WSDL definition
 	 * @param webservice	the BPMN web service, providing names for port type and operation and access to the participant (for the partner link)
-	 * @param inMessage		the in message (or null)
-	 * @param outMessage	the out message (or null)
 	 * @param isSelf		set myRole?
 	 * @param isPartner		set partnerRole?
 	 */
-	private void addPartnerLinkAndOperation(Implementation webservice, Message inMessage, Message outMessage, boolean isSelf, boolean isPartner) {
+	private void addPartnerLinkAndOperation(Service webservice, boolean isSelf, boolean isPartner) {
 		addPartnerLink(webservice, isSelf, isPartner);
-		addOperation(webservice, inMessage, outMessage);
+		addOperation(webservice);
 	}
 	
 
@@ -1517,7 +1517,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 	 * @param isSelf		set myRole?
 	 * @param isPartner		set partnerRole?
 	 */
-	private void addPartnerLink(Implementation webservice, boolean isSelf, boolean isPartner) {
+	private void addPartnerLink(Service webservice, boolean isSelf, boolean isPartner) {
 		if (webservice==null || webservice.getParticipant()==null) {
 			return;
 		}
@@ -1613,7 +1613,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 	 * @param outMessage	outgoing message for the operation (can be of type Message, Activity or Process)
 	 * @return				the newly created TOperation
 	 */
-	private TOperation addOperation(Implementation webservice, EObject inMessage, EObject outMessage) {
+	private TOperation addOperation(Service webservice) {
 		if (webservice==null) {
 			return null;
 		}
@@ -1647,17 +1647,15 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 			operation= wsdlFac.createTOperation();
 			operation.setName(opName);
 			portType.getOperation().add(operation);
-		}
-		
-		//create input/output messages
-		if (operation.getInput() == null && inMessage != null) {
+			
+			// create request
 			TParam param= wsdlFac.createTParam();
-			param.setMessage(new QName(NS_TNS + ":" + BpelStaticHelper.getMessageName(BpelStaticHelper.getVarNameFor(inMessage))));
+			param.setMessage(new QName(NS_TNS + ":" + BpelStaticHelper.getMessageName(BpelStaticHelper.getVarNameFor(webservice, 0))));
 			operation.setInput(param);
-		}
-		if (operation.getOutput() == null && outMessage != null) {
-			TParam param= wsdlFac.createTParam();
-			param.setMessage(new QName(NS_TNS + ":" + BpelStaticHelper.getMessageName(BpelStaticHelper.getVarNameFor(outMessage))));
+
+			// create response
+			param= wsdlFac.createTParam();
+			param.setMessage(new QName(NS_TNS + ":" + BpelStaticHelper.getMessageName(BpelStaticHelper.getVarNameFor(webservice, 1))));
 			operation.setOutput(param);
 		}
 		return operation;
@@ -1707,7 +1705,7 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 		MultiLoopAttSet attSet= (MultiLoopAttSet) activity.getLoopAttributes();
 		String actName= activity.getName();
 		Pool process= activity.getPool();
-		String procVarName= process.getProperties().isEmpty() ? null : BpelStaticHelper.getVarNameFor(process);
+		String procVarName= process.getProperties().isEmpty() ? null : BpelStaticHelper.getVarNameFor(process, 0);
 		String plInternal= BpelStaticHelper.getPartnerLinkName(activity.getPool().getParticipant());
 		String ptSpawnedProcess= NS_THIS + ":" + actName + "_SpawnedProcessPT";
 		String spawnOperation= "spawnProcess";
@@ -1819,12 +1817,13 @@ public class Bpmn2BpelElementMapping extends BpmnElementMapping implements BpelV
 			 * Create PartnerLinks, PartnerLinkType, PortType and Operation
 			 */
 			// using pseudo web service as wrapper
-			Implementation webservice= VsdtFactory.eINSTANCE.createImplementation();
+			Service webservice= VsdtFactory.eINSTANCE.createService();
 			webservice.setInterface(ptSpawnedProcess);
 			webservice.setOperation(spawnOperation);
-			addOperation(webservice, process.getProperties().isEmpty()? null : process, null);
+			webservice.getInput().addAll(new ArrayList<Property>());
+			addOperation(webservice);
 			webservice.setOperation(joinOperation);
-			addOperation(webservice, process.getProperties().isEmpty()? null : process, null);
+			addOperation(webservice);
 			
 			webservice.setParticipant(activity.getPool().getParticipant());
 			addPartnerLink(webservice, true, true);

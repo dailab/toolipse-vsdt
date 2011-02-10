@@ -4,8 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.dailab.vsdt.BusinessProcessSystem;
-import de.dailab.vsdt.Implementation;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Property;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.trafo.impl.DefaultBpmnValidation;
 import de.dailab.vsdt.vxl.util.Util;
 
@@ -47,15 +48,20 @@ public class Bpmn2BpelValidation extends DefaultBpmnValidation {
 	 * when transforming to BPEL, each Implementation has to be a WebService
 	 */
 	@Override
-	protected boolean visitImplementation(Implementation implementation) {
-		boolean isOK= super.visitImplementation(implementation);
+	protected boolean visitService(Service service) {
+		boolean isOK= super.visitService(service);
 
-		isOK&= test(implementation.getType().equalsIgnoreCase("webservice"),"Implementation must by of type 'WebService'");
-		isOK&= test(implementation.getInterface() != null,"Each Web Service must provide an Interface");			
-		isOK&= test(implementation.getOperation() != null,"Each Web Service must provide an Operation");
-		isOK&= test(implementation.getParticipant() != null,"Each Web Service must provide a Participant");
+		isOK&= test(service.getType().equalsIgnoreCase("webservice"),"Implementation must by of type 'WebService'");
+		isOK&= test(service.getInterface() != null,"Each Web Service must provide an Interface");			
+		isOK&= test(service.getOperation() != null,"Each Web Service must provide an Operation");
+		isOK&= test(service.getParticipant() != null,"Each Web Service must provide a Participant");
 		
 		return isOK;
+	}
+	
+	@Override
+	protected boolean visitMessageChannel(MessageChannel messageChannel) {
+		return test(false, "Message Channel not allowed for BPEL");
 	}
 	
 //	@Override

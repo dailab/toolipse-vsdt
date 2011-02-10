@@ -330,7 +330,7 @@ public interface TFlow extends TActivity {
 	 * @return			the list for the given activity
 	 * @generated NOT
 	 */
-	public List getActivityList(TActivity tActivity);
+	public List<TActivity> getActivityList(TActivity tActivity);
 	
 	/**
 	 * @param tActivity	some concrete activity

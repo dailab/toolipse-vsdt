@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.xmlsoap.schemas.ws._2003._03.business.process.ProcessPackage;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TSequence;
 
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
+import de.dailab.vsdt.trafo.strucbpmn.export.AbstractVsdtRule;
 
 /**
  * Flatten Sequence Rule

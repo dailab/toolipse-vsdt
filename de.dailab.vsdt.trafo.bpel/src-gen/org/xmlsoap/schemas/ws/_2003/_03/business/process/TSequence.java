@@ -302,7 +302,7 @@ public interface TSequence extends TActivity {
 	 * @return			the list for the given activity
 	 * @generated NOT
 	 */
-	List getActivityList(TActivity tActivity);
+	List<TActivity> getActivityList(TActivity tActivity);
 	
 	/**
 	 * @param tActivity	add the given Activity to the respective list

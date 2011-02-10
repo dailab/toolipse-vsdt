@@ -9,7 +9,7 @@ import org.xmlsoap.schemas.ws._2003._03.business.process.TAssign;
 import org.xmlsoap.schemas.ws._2003._03.business.process.TSequence;
 
 import de.dailab.vsdt.trafo.base.util.Util;
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
+import de.dailab.vsdt.trafo.strucbpmn.export.AbstractVsdtRule;
 
 /**
  * Merge Consecutive Assigns Rule
