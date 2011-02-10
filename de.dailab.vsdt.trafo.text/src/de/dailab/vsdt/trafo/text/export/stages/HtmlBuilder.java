@@ -162,7 +162,7 @@ public class HtmlBuilder extends TextBuilder {
 	}
 	
 	@Override
-	public String type(Enum e) {
+	public String type(Enum<?> e) {
 		return createSpan(e.name().toLowerCase(), "gen_type");
 	}
 	

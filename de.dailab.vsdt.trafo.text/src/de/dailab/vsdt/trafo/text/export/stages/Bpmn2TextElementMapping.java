@@ -24,9 +24,11 @@ import de.dailab.vsdt.IdObject;
 import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.Lane;
-import de.dailab.vsdt.Message;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.MultiLoopAttSet;
+import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Pool;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.trafo.MappingStage;
@@ -39,10 +41,10 @@ import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerCase;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnLoopBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnSequence;
+import de.dailab.vsdt.trafo.strucbpmn.export.AbstractVsdtRule;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.FinalGatewayRule;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InitialGatewayRule;
 import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InsertEmptyRule;
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
 
 /**
  * BPMN to Text visitor. This visitor is performing a top-down pass of the BPMN 
@@ -184,12 +186,12 @@ public class Bpmn2TextElementMapping extends MappingStage {
 					if (activity.getPool().getParticipant() != null) {
 						builder.appendTableLine("Participant:", activity.getPool().getParticipant().getName());
 					}
-					if (activity.getInMessage() != null) {
-						builder.appendTableLine("Sending Message:", activity.getInMessage().getName());
-					}
-					if (activity.getOutMessage() != null) {
-						builder.appendTableLine("Receiving Message:", activity.getOutMessage().getName());
-					}
+//					if (activity.getInMessage() != null) {
+//						builder.appendTableLine("Sending Message:", activity.getInMessage().getName());
+//					}
+//					if (activity.getOutMessage() != null) {
+//						builder.appendTableLine("Receiving Message:", activity.getOutMessage().getName());
+//					}
 					// TODO input, output
 					builder.endTable();
 				}
@@ -348,21 +350,11 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			builder.append("nothing special happens");
 			break;
 		case MESSAGE:
-			Message msg= event.getMessage();
 			Implementation impl= event.getImplementation();
-			builder.append(getString(msg));
-			if (event.getImplementation() != null) {
-				builder.append(" of " + getString(impl));
-			}
+			builder.append(getMessageString(impl, event.getPool().getParticipant(), ! throwing));
 			builder.append(" is " + (throwing ? "sent" : "received"));
-//			if (msg != null && msg.getFrom() != null && msg.getTo() != null) {
-//				builder.append(" " + (throwing ? " to Participant " + highlight(msg.getTo().getName())
-//						: " from Participant " + highlight(msg.getFrom().getName())));
-//			}
 			break;
 		case TIMER:
-//			boolean cyclic= event.getTimeCycle() != null;
-//			Expression timeExpression= (cyclic ? event.getTimeCycle() : event.getTimeDate());
 			String time= event.getTimeExpression() == null? "an unspecified time"
 					: code(event.getTimeExpression().getExpression()); 
 			if (! boundary) {
@@ -412,7 +404,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 					(throwing ? "is" : "will be") + " compensated");
 		case MULTIPLE:
 			boolean isNotFirst= false;
-			if (event.getMessage() != null && event.getImplementation() != null) {
+			if (event.getImplementation() != null) {
 				if (isNotFirst) builder.append(" and ");
 				isNotFirst= true;
 				visitEvent(event, TriggerType.MESSAGE, boundary);
@@ -503,29 +495,26 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			break;
 		case SERVICE:
 		case USER:
-			builder.append(", invoking " + getString(activity.getImplementation()));
-			if (activity.getInMessage() != null || activity.getOutMessage() != null) {
-				builder.append(" with ");
-				if (activity.getInMessage() != null) {
-					builder.append("the input Message " + name(activity.getInMessage().getName()));
-					builder.append(activity.getOutMessage() != null ? " and " : "");
-				}
-				if (activity.getOutMessage() != null) {
-					builder.append("the output Message " + name(activity.getOutMessage().getName()));
-				}
-			}
+			Service service = activity.getImplementation() instanceof Service ?
+					(Service) activity.getImplementation() : null; 
+			builder.append(", invoking " + getString(service));
+//			if (activity.getInMessage() != null || activity.getOutMessage() != null) {
+//				builder.append(" with ");
+//				if (activity.getInMessage() != null) {
+//					builder.append("the input Message " + name(activity.getInMessage().getName()));
+//					builder.append(activity.getOutMessage() != null ? " and " : "");
+//				}
+//				if (activity.getOutMessage() != null) {
+//					builder.append("the output Message " + name(activity.getOutMessage().getName()));
+//				}
+//			}
 			builder.append(". ");
 			break;
 		case SEND:
 		case RECEIVE:
-			if (type == ActivityType.SEND) {
-				builder.append(", sending " + getString(activity.getInMessage()));
-			} else {
-				builder.append(", receiving " + getString(activity.getOutMessage()));
-			}
-			if (activity.getImplementation() != null) {
-				builder.append(" which belongs to " + getString(activity.getImplementation()));
-			}
+			boolean incoming = type == ActivityType.RECEIVE;
+			builder.append(", " + (incoming ? "receiving" : "sending") + " ");
+			builder.append(getMessageString(activity.getImplementation(), activity.getPool().getParticipant(), incoming));
 			builder.append(". ");
 			break;
 		case CALL:
@@ -837,17 +826,41 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 * // HELPER METHODS  
 	 * ///////////////////
 	 */
+	
+	private String getMessageString(Implementation implementation, Participant self, boolean incoming) {
+		if (implementation instanceof Service) {
+			Service service = (Service) implementation;
+			boolean isRequest = isRequest(service, self, incoming);
+			return "a " + (isRequest ? "request" : "response") + " for " + getString(service);
+		} else
+		if (implementation instanceof MessageChannel) {
+			MessageChannel channel = (MessageChannel) implementation;
+			return getString(channel);
+		} else {
+			return "some message";
+		}
+	}
+	
+	/**
+	 * Check whether the given service is being requested, or if a response to
+	 * the service is sent. Assuming that requester and provider are not the
+	 * same participant.
+	 */
+	private boolean isRequest(Service service, Participant self, boolean incoming) {
+		boolean isSameParticipant = service.getParticipant() == self;
+		return incoming == isSameParticipant;
+	}
 
 	/**
 	 * Shortcut for getting a uniformly formatted representation for an
 	 * Implementation, or null, in which case just "a Service" will be returned.
 	 */
-	private String getString(Implementation impl) {
-		if (impl == null) {
-			return "a Service";
+	private String getString(Service service) {
+		if (service != null) {
+			return "the Service '" + name(service.getInterface() + "." + 
+					service.getOperation()) + "'";
 		} else {
-			return "the Service '" + name(impl.getInterface() + "." + 
-					impl.getOperation()) + "'";
+			return "a Service";
 		}
 	}
 	
@@ -855,11 +868,11 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 * Shortcut for getting a uniformly formatted representation for an
 	 * Message, or null, in which case just "a Message" will be returned.
 	 */
-	private String getString(Message msg) {
-		if (msg == null) {
-			return "a Message";
+	private String getString(MessageChannel channel) {
+		if (channel != null && channel.getChannel() != null) {
+			return "the MessageChannel '" + name(channel.getChannel().getExpression()) + "'";
 		} else {
-			return "the Message '" + name(msg.getName()) + "'";
+			return "a MessageChannel";
 		}
 	}
 
@@ -868,15 +881,16 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 * 			e.g. "Afterwards", "Next", etc.
 	 */
 	private String getRandomSequentialTerm() {
-		switch (random.nextInt(7)) {
-		case 0: return "Afterwards, ";
-		case 1: return "Thereafter, ";
-		case 2: return "After that, ";
-		case 3: return "Hereupon, ";
-		case 4: return "Hereafter, ";
-		case 5: return "Following that, ";
-		default: return "Next, ";
-		}
+		String[] terms = new String[] {
+				"Afterwards, ",
+				"Thereafter, ",
+				"After that, ",
+				"Hereupon, ",
+				"Hereafter, ",
+				"Following that, ",
+				"Next, "
+		};
+		return terms[random.nextInt(terms.length)];
 	}
 	
 	/**
@@ -884,15 +898,16 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 * 			e.g. "Besides", "Furthermore", etc.
 	 */
 	private String getRandomParallelTerm() {
-		switch (random.nextInt(7)) {
-		case 0: return "Besides, ";
-		case 1: return "Further, ";
-		case 2: return "Aside from that, ";
-		case 3: return "More over, ";
-		case 4: return "Alongside, ";
-		case 5: return "Furthermore, ";
-		default: return "In addition, ";
-		}
+		String[] terms = new String[] {
+				"Besides, ",
+				"Further, ",
+				"Aside from that, ",
+				"More over, ",
+				"Alongside, ",
+				"Furthermore, ",
+				"In addition, "
+		};
+		return terms[random.nextInt(terms.length)];
 	}
 	
 	/**
@@ -900,14 +915,15 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 * 			e.g. "executed", "performed", etc.
 	 */
 	private String getRandomExecutedTerm() {
-		switch (random.nextInt(6)) {
-		case 0: return "executed";
-		case 1: return "accomplished";
-		case 2: return "carried out";
-		case 3: return "processed";
-		case 4: return "conducted";
-		default: return "performed";
-		}
+		String[] terms = new String[] {
+				"executed",
+				"accomplished",
+				"carried out", 
+				"processed",
+				"conducted",
+				"performed"
+		};
+		return terms[random.nextInt(terms.length)];
 	}
 	
 	/**
@@ -934,7 +950,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	/**
 	 * @see TextBuilder#type(Enum)
 	 */
-	private String type(Enum e) {
+	private String type(Enum<?> e) {
 		return e != null ? builder.type(e) : "";
 	}
 

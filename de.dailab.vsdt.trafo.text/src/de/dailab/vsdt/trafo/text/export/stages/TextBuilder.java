@@ -12,9 +12,9 @@ import java.io.IOException;
  * some basic text files, with a bit Wiki-like mark-up, subclasses might e.g.
  * implement these methods so they produce HTML or TeX mark-up.
  * 
- *  While this class shares some methods and principles with StringBuilder it
- *  does not inherit from this class to restrict the user on some of the methods
- *  and to provide a more compact interface.
+ * While this class shares some methods and principles with StringBuilder it
+ * does not inherit from this class to restrict the user on some of the methods
+ * and to provide a more compact interface.
  *  
  * @author kuester
  */
@@ -233,7 +233,7 @@ public class TextBuilder {
 	/**
 	 * Return the string wrapped in some enum-literal-mark-up
 	 */
-	public String type(Enum e) {
+	public String type(Enum<?> e) {
 		return e.name();
 	}
 	

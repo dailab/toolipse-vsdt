@@ -5,7 +5,8 @@ package de.dailab.vsdt.trafo.text.export.stages;
  * files will have a simple yet expressive Latex mark-up.  This particular
  * transformation is a bit tricky due to the many escape characters.
  * 
- * TODO indentation
+ * TODO indentation of block structure
+ * TODO fix umlauts
  * 
  * @author kuester
  */
@@ -92,7 +93,7 @@ public class LatexBuilder extends TextBuilder {
 	}
 	
 	@Override
-	public String type(Enum e) {
+	public String type(Enum<?> e) {
 		return "\\textsc{" + e.name().toLowerCase() + "}";
 	}
 	
