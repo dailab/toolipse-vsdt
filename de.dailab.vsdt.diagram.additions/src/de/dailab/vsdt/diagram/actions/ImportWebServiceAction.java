@@ -192,7 +192,7 @@ public class ImportWebServiceAction extends Action {
 							poolRequest.setSize(new Dimension(width,100));
 		
 							Command createPoolCmd = diagramEditPart.getCommand(poolRequest);
-							poolViewAdapter = (IAdaptable) ((List) poolRequest.getNewObject()).get(0);
+							poolViewAdapter = (IAdaptable) ((List<?>) poolRequest.getNewObject()).get(0);
 		
 							// create pool and set pool properties
 							cc.add(createPoolCmd);

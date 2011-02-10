@@ -1,7 +1,5 @@
 package de.dailab.vsdt.diagram.actions.structuring;
 
-import java.util.List;
-
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -56,7 +54,7 @@ public class InsertLinkEventsAction extends InsertPatternAction {
 				compEditPart.getDiagramPreferencesHint());
 		event1Request.setLocation(p.getCopy().translate(- b.width/4, 0));
 		cc.add(compEditPart.getCommand(event1Request));
-		adapterForFirstNode = (IAdaptable) ((List) event1Request.getNewObject()).get(0);
+		adapterForFirstNode = getCreatedObject(event1Request);
 		
 		// Create Second Event Command
 		CreateViewRequest event2Request = CreateViewRequestFactory.getCreateShapeRequest(
@@ -64,7 +62,7 @@ public class InsertLinkEventsAction extends InsertPatternAction {
 				compEditPart.getDiagramPreferencesHint());
 		event2Request.setLocation(p.getCopy().translate(b.width/4, 0));
 		cc.add(compEditPart.getCommand(event2Request));
-		adapterForLastNode = (IAdaptable) ((List) event2Request.getNewObject()).get(0);
+		adapterForLastNode = getCreatedObject(event2Request);
 		
 		cc.add(new ICommandProxy(new SetLinkTargetsCommand(linkName)));
 		

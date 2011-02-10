@@ -1,7 +1,6 @@
 package de.dailab.vsdt.diagram.views.pools;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
@@ -76,7 +75,7 @@ public class PoolVisibilityViewContentProvider extends AbstractTreeContentProvid
 	}
 
 	public Object[] getChildren(Object parentElement) {
-		Collection children= new ArrayList();
+//		Collection children= new ArrayList();
 //		if (parentElement instanceof GraphicalEditPart) {
 //			for (Object o : ((GraphicalEditPart) parentElement).getChildren()) {
 //				if (o instanceof LabelEditPart) {
@@ -89,7 +88,8 @@ public class PoolVisibilityViewContentProvider extends AbstractTreeContentProvid
 //				children.add(o);
 //			}
 //		}
-		return children.toArray();
+//		return children.toArray();
+		return new Object[] {};
 	}
 	
 }

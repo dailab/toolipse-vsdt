@@ -309,7 +309,7 @@ implements FocusListener, SelectionListener {
 //    	}
     	if (src.equals(implCombo.getCombo())) {
     		Implementation implementation= implCombo.getSelected();
-    		setPropertyValue(activity, pack.getActivity_Implementation(), implCombo.getSelected());
+    		setPropertyValue(activity, pack.getActivity_Implementation(), implementation);
     		
     		// set input and/or output message according to implementation
 //    		if (implementation != null) {

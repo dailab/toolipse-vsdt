@@ -1,8 +1,5 @@
 package de.dailab.vsdt.diagram.actions.structuring;
 
-import java.util.List;
-
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
@@ -50,7 +47,7 @@ public abstract class InsertNodeAction extends InsertPatternAction {
 		Command creatNodeCmd = compEditPart.getCommand(nodeRequest);
 		cc.add(creatNodeCmd);
 		
-		adapterForFirstNode = (IAdaptable) ((List) nodeRequest.getNewObject()).get(0);
+		adapterForFirstNode = getCreatedObject(nodeRequest);
 		adapterForLastNode = adapterForFirstNode;
 		adapterForNodeToBeEdited= adapterForFirstNode;
 		

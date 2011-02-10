@@ -51,7 +51,7 @@ public class ConnectToSequenceAction implements IActionDelegate {
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
 			
-			for (Iterator iter= structuredSelection.iterator(); iter.hasNext(); ) {
+			for (Iterator<?> iter= structuredSelection.iterator(); iter.hasNext(); ) {
 				Object next= iter.next();
 				if (next instanceof ShapeNodeEditPart) {
 					ShapeNodeEditPart editPart= (ShapeNodeEditPart) next;

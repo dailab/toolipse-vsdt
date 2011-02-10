@@ -110,7 +110,7 @@ public abstract class AppendNodeAction implements IActionDelegate {
 		Command creatNodeCmd = compEditPart.getCommand(nodeRequest);
 		cc.add(creatNodeCmd);
 		
-		adapterForNewNode = (IAdaptable) ((List) nodeRequest.getNewObject()).get(0);
+		adapterForNewNode = (IAdaptable) ((List<?>) nodeRequest.getNewObject()).get(0);
 		
 		// Create Sequence Flow Command
 		CreateConnectionViewAndElementRequest seqFlowRequest= new CreateConnectionViewAndElementRequest(

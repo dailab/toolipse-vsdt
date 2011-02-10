@@ -91,7 +91,7 @@ public class VsdtPositionalGeneralViewPasteOperation extends OverridePasteChildO
 
     	@Override
         public PasteChildOperation getPostPasteOperation() {
-            List operations = getAlwaysCopyObjectPasteOperations();
+            List<?> operations = getAlwaysCopyObjectPasteOperations();
             return new PostPasteChildOperation(this, operations);
         }
 

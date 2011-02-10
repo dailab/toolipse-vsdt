@@ -86,7 +86,7 @@ public class InitializePoolsAction implements IObjectActionDelegate {
 				cc.add(bpdEditPart.getCommand(nodeRequest)); // FIXME sometimes NPE
 				
 				// Set Pool attributes according to Participant
-				IAdaptable poolAdapter= (IAdaptable) ((List) nodeRequest.getNewObject()).get(0);
+				IAdaptable poolAdapter= (IAdaptable) ((List<?>) nodeRequest.getNewObject()).get(0);
 				SetPoolAttributesCommand setCommand= new SetPoolAttributesCommand(poolAdapter, participant);
 				cc.add(new ICommandProxy(setCommand));
 				

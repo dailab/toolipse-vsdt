@@ -1,6 +1,7 @@
 package de.dailab.vsdt.diagram.actions.structuring;
 
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
@@ -20,6 +21,7 @@ import org.eclipse.gmf.runtime.diagram.ui.commands.DeferredCreateConnectionViewA
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateConnectionViewAndElementRequest;
+import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.emf.type.core.IHintedType;
@@ -176,7 +178,14 @@ public abstract class InsertPatternAction implements IObjectActionDelegate {
 			}
 		}
 	}
-	
+
+	/**
+	 * @param request		some create view request
+	 * @return				the newly created object
+	 */
+	protected IAdaptable getCreatedObject(CreateViewRequest request) {
+		return (IAdaptable) ((List<?>) request.getNewObject()).get(0);
+	}
 
 	/**
 	 * This command copies the Attributes from the existing Sequence Flow to the

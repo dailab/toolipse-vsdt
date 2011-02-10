@@ -29,6 +29,7 @@ public class WebServiceViewContentProvider implements ITreeContentProvider {
 		return getChildren(inputElement);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Object[] getChildren(Object parentElement) {
 		Collection children= new ArrayList();
 		if (parentElement instanceof WebSeviceAccessor) {

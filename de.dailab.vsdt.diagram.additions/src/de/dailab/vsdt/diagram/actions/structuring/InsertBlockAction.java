@@ -1,8 +1,5 @@
 package de.dailab.vsdt.diagram.actions.structuring;
 
-import java.util.List;
-
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.commands.CompoundCommand;
@@ -40,7 +37,7 @@ public class InsertBlockAction extends InsertPatternAction {
 				compEditPart.getDiagramPreferencesHint());
 		gateway1Request.setLocation(p.getCopy().translate(- b.width/4, 0));
 		cc.add(compEditPart.getCommand(gateway1Request));
-		adapterForFirstNode = (IAdaptable) ((List) gateway1Request.getNewObject()).get(0);
+		adapterForFirstNode = getCreatedObject(gateway1Request);
 		
 		// Create Second Gateway Command
 		CreateViewRequest gateway2Request = CreateViewRequestFactory.getCreateShapeRequest(
@@ -48,7 +45,7 @@ public class InsertBlockAction extends InsertPatternAction {
 				compEditPart.getDiagramPreferencesHint());
 		gateway2Request.setLocation(p.getCopy().translate(b.width/4, 0));
 		cc.add(compEditPart.getCommand(gateway2Request));
-		adapterForLastNode = (IAdaptable) ((List) gateway2Request.getNewObject()).get(0);
+		adapterForLastNode = getCreatedObject(gateway2Request);
 		
 		// Create first Sequence Flow
 		CreateConnectionViewAndElementRequest seqFlowRequest= new CreateConnectionViewAndElementRequest(
