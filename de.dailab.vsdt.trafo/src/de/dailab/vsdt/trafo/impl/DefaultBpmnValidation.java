@@ -592,7 +592,9 @@ public class DefaultBpmnValidation extends MappingStage {
 		
 		isOK&= testChild(visitExpression(messageChannel.getChannel()), messageChannel, vsdt.getMessageChannel_Channel());
 		
-		isOK&= testChild(visitProperty(messageChannel.getPayload()), messageChannel, vsdt.getMessageChannel_Payload());
+		if (messageChannel.getPayload() != null) {
+			isOK&= testChild(visitProperty(messageChannel.getPayload()), messageChannel, vsdt.getMessageChannel_Payload());
+		}
 		
 		return isOK;
 	}

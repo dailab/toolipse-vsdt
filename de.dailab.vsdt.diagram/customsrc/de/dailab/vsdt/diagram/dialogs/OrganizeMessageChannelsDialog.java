@@ -1,7 +1,6 @@
 package de.dailab.vsdt.diagram.dialogs;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.osgi.framework.internal.core.Msg;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -160,13 +159,13 @@ public class OrganizeMessageChannelsDialog extends AbstractOrganizeElementsDialo
 			String nameString= message.getChannel() != null ? message.getChannel().getExpression() : "<unknown>";
 			StringBuffer buffer= new StringBuffer();
 			buffer.append(nameString != null ? nameString : "<null>"); //$NON-NLS-1$
-			buffer.append(" ( ");
+			buffer.append("(");
 			if (message.getPayload() != null) {
 				buffer.append(message.getPayload().getName());
 				buffer.append(": ");
 				buffer.append(message.getPayload().getType());
 			}
-			buffer.append(" )");
+			buffer.append(")");
 			return buffer.toString();	
 		}
 		return super.getString(message);

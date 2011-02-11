@@ -55,7 +55,7 @@ import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Intermediate;
-import de.dailab.vsdt.Message;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.MultiLoopAttSet;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Pool;
@@ -224,7 +224,6 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		return model;
 	}
 	
-	
 	/**
 	 * Map the given flow objects by iterating the list and visiting each single 
 	 * flow object. If the list contains only one flowObject, the mapping for 
@@ -343,48 +342,66 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			_currentService.setName(_currentService.getName() + "_" + event.getName());
 		}
 		
-		// create Start Rule
-		if (event instanceof Start) {
-			JiacVStarterRule startRule= new JiacVStarterRule(event, _currentService);
-			((JiacVExportWrapper) wrapper).addStarterRule(event.getPool().getParticipant(), startRule);
-		}
-		
 		switch (trigger) {
 		case MESSAGE:
-			Message message= event.getMessage();
 			Implementation implementation= event.getImplementation();
-			if (message != null) {
-				if (event instanceof Start || event instanceof End) {
-					// start/end: map message properties to service signature
-					List<HeaderDeclaration> parameters= event instanceof Start
-							? _currentService.getInputs()
-							: _currentService.getOutputs();
-					for (HeaderDeclaration declaration : jef.createHeaderDeclarations(message.getProperties())) {
-						boolean alreadyDeclared= false;
-						for (HeaderDeclaration param : parameters) {
-							alreadyDeclared |= declaration.getName().equals(param.getName());
-						}
-						if (! alreadyDeclared) {
-							parameters.add(declaration);
-						}
+			if (event instanceof Start && event.getImplementation() instanceof MessageChannel) {
+				// add starter rule for this case
+				addStarterRule(event);
+			}
+			// get parameters for this event
+			List<Property> parameters = new ArrayList<Property>();
+			if (implementation instanceof MessageChannel) {
+				MessageChannel channel = (MessageChannel) implementation;
+				parameters.add(channel.getPayload());
+			}
+			if (implementation instanceof de.dailab.vsdt.Service) {
+				de.dailab.vsdt.Service service = (de.dailab.vsdt.Service) implementation;
+				parameters.addAll((event instanceof Start) ? service.getInput() : service.getOutput());
+			}
+			if (event instanceof Start || event instanceof End) {
+				// start/end: map message properties to service signature
+				List<HeaderDeclaration> serviceParameters= event instanceof Start
+						? _currentService.getInputs()
+						: _currentService.getOutputs();
+				for (HeaderDeclaration declaration : jef.createHeaderDeclarations(parameters)) {
+					boolean alreadyDeclared= false;
+					for (HeaderDeclaration param : serviceParameters) {
+						alreadyDeclared |= declaration.getName().equals(param.getName());
 					}
-				} else {
-					// message intermediate event: send/receive
-					if (event.isThrowing()) {
-						mapping= buildSend(event.getMessage(), implementation != null ? implementation.getParticipant() : null);
-					} else {
-						mapping= buildReceive(event.getMessage(), event.getPool().getParticipant());
+					if (! alreadyDeclared) {
+						serviceParameters.add(declaration);
 					}
-					// add message properties to properties
-					properties.addAll(event.getMessage().getProperties());
 				}
+			} else {
+				// message intermediate event: send/receive, or service invocation
+				if (implementation instanceof MessageChannel) {
+					MessageChannel channel = (MessageChannel) implementation;
+					if (event.isThrowing()) {
+						mapping= buildSend(channel);
+					} else {
+						mapping= buildReceive(channel);
+					}
+				}
+				if (implementation instanceof de.dailab.vsdt.Service) {
+					if (event.isThrowing()) {
+						// TODO asynchronous service invocation
+						TrafoLog.nyi("Message Event with Service");
+					} else {
+						// TODO receive result of asynchronous service invocation
+						TrafoLog.nyi("Message Event with Service");
+					}
+				}
+				// add message properties to properties
+				properties.addAll(parameters);
 			}
 			break;
 		case NONE:
 			break;
 		case TIMER:
 			if (event instanceof Start) {
-				// timer start event is handled by starter rule	
+				// timer start event is handled by starter rule
+				addStarterRule(event);
 			}
 			if (event instanceof Intermediate) {
 				Case timerCase= jadlFac.createCase();
@@ -412,6 +429,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			String rule = event.getRuleExpression().getExpression();
 			if (event instanceof Start) {
 				// starter rule will be created holding the rule expression
+				addStarterRule(event);
 				// create service parameters according to properties used in rule
 				for (Property property : event.getPool().getProperties()) {
 					if (rule.contains(property.getName())) {
@@ -440,7 +458,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		case MULTIPLE:
 			//create Par, holding the child triggers
 			List<Script> children= new ArrayList<Script>();
-			if (event.getMessage() != null && event.getImplementation() != null) {
+			if (event.getImplementation() != null) {
 				children.add(visitEvent(event, TriggerType.MESSAGE));
 			}
 			if (event.getErrorCode() != null) {
@@ -471,7 +489,6 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		return mapping;
 	}
 	
-	
 	/**
 	 * Maps the given Activity to various BPEL elements, depending on the 
 	 * activity's types and attributes.
@@ -501,28 +518,33 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			break;
 		case SERVICE:
 			// TODO add import according to service location?
-			// invoke another plan
-			Invoke invoke= jadlFac.createInvoke();
-			// set name of action to be invoked according to the implementation
-			invoke.setAction(activity.getImplementation().getOperation());
-//			invoke.setNamespace(activity.getImplementation().getInterface());
-			// set input and output variables according to message variables
-			for (Property property : activity.getInMessage().getProperties()) {
-				if (useMAMSspecials) {
-					invoke.getParameters().add(jef.createInputForMAMS(property.getName(), property.getName()));
-				} else {
-					invoke.getParameters().add(jef.createVariable(property.getName()));
+			if (activity.getImplementation() instanceof de.dailab.vsdt.Service) {
+				de.dailab.vsdt.Service service = (de.dailab.vsdt.Service) activity.getImplementation();
+				// invoke another plan
+				Invoke invoke= jadlFac.createInvoke();
+				// set name of action to be invoked according to the implementation
+				invoke.setAction(service.getOperation());
+//				invoke.setNamespace(service.getInterface());
+				// set input and output variables according to message variables
+				for (Property property : service.getInput()) {
+					if (useMAMSspecials) {
+						invoke.getParameters().add(jef.createInputForMAMS(property.getName(), property.getName()));
+					} else {
+						invoke.getParameters().add(jef.createVariable(property.getName()));
+					}
 				}
+				for (Property property : service.getOutput()) {
+					invoke.getReturnVariables().add(jef.createVariable(property.getName()).getName());
+				}
+				// move copy of message variables to the activity itself, so they are added to the scope
+				properties.addAll(service.getInput());
+				properties.addAll(service.getOutput());
+				mapping= invoke;
 			}
-			for (Property property : activity.getOutMessage().getProperties()) {
-				invoke.getReturnVariables().add(jef.createVariable(property.getName()).getName());
+			if (activity.getImplementation() instanceof MessageChannel) {
+				// TODO asynchronous service invocation
+				TrafoLog.nyi("Service Task with MessageChannel");
 			}
-			// move copy of message variables to the activity itself, so they are added to the scope
-//			activity.getProperties().addAll(EcoreUtil.copyAll(activity.getInMessage().getProperties()));
-//			activity.getProperties().addAll(EcoreUtil.copyAll(activity.getOutMessage().getProperties()));
-			properties.addAll(activity.getInMessage().getProperties());
-			properties.addAll(activity.getOutMessage().getProperties());
-			mapping= invoke;
 			break;
 		case EMBEDDED:
 			// do not create a new plan; just put contents in a seq or par
@@ -539,16 +561,29 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			break;
 		case SEND:
 			// send element
-			Message message= activity.getInMessage();
-			Implementation implementation= activity.getImplementation();
-			properties.addAll(message.getProperties());
-			mapping= buildSend(message, implementation != null ? implementation.getParticipant() : null);
+			if (activity.getImplementation() instanceof de.dailab.vsdt.Service) {
+				// TODO asynchronous service invocation
+				TrafoLog.nyi("Send Task with Service");
+			}
+			if (activity.getImplementation() instanceof MessageChannel) {
+				MessageChannel channel = (MessageChannel) activity.getImplementation();
+				properties.add(channel.getPayload());
+				mapping= buildSend(channel);
+			}
 			break;
 		case RECEIVE:
 			// receive element
-			message= activity.getOutMessage();
-			properties.addAll(message.getProperties());
-			mapping= buildReceive(message, activity.getPool().getParticipant());
+			if (activity.getImplementation() instanceof Service) {
+				// TODO receive result of asynchronous service invocation
+				TrafoLog.nyi("Send Task with Service");
+			}
+			if (activity.getImplementation() instanceof MessageChannel) {
+				MessageChannel channel = (MessageChannel) activity.getImplementation();
+				if (channel.getPayload() != null) {
+					properties.add(channel.getPayload());
+				}
+				mapping= buildReceive(channel);
+			}
 			break;
 		case MANUAL:
 		case USER:
@@ -578,7 +613,6 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		return mapping;
 	}
 	
-
 	/**
 	 * gateways themselves have no mapping. If they are part of a block-structure, 
 	 * they will determine the mapping of the block-structure. If they have 
@@ -794,7 +828,6 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		}
 		return mapping;
 	}
-	
 
 	/**
 	 * Create a new Service element. The Service is automatically mapped to the 
@@ -890,8 +923,6 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		return service;
 	}
 	
-	
-	
 	/**
 	 * - compose loop condition from given loopCondition and exitCondition
 	 * - assemble the loop body from firstElement and/or secondElement
@@ -943,7 +974,6 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			return seq;
 		}
 	}
-	
 	
 	/*
 	 * //////////////////////////////////////
@@ -1190,23 +1220,13 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	 * the Message's Properties an individual Send element is created.  If more
 	 * than one Send needs to be created, they are wrapped in a Seq element.
 	 * 
-	 * @param message		the message to be sent
-	 * @param participant	whom to send the message
+	 * @param channel		the message to be sent
 	 * @return				Send element, or multiple Send elements in a Seq element
 	 */
-	private Script buildSend(Message message, Participant participant) {
-		Expression address = jef.createAddress(message, participant);
-		if (message.getProperties().size() == 1) {
-			Send send= jef.createSend(address, message.getProperties().get(0));
-			return send;
-		} else {
-			Seq seq= jadlFac.createSeq();
-			for (Property property : message.getProperties()) {
-				Send send= jef.createSend(address, property);
-				seq.getScripts().add(send);
-			}
-			return seq;
-		}
+	private Send buildSend(MessageChannel channel) {
+		Expression address = jef.createAddress(channel);
+		Send send= jef.createSend(address, channel.getPayload());
+		return send;
 	}
 
 	/**
@@ -1214,29 +1234,20 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	 * the Message's Properties an individual Receive element is created.  If more 
 	 * than one Receive needs to be created, they are wrapped in a Seq element.
 	 * 
-	 * @param message		the message to be received
+	 * @param message		the channel from where to receive
 	 * @param participant	to whom the message is directed (e.g. a group)
 	 * @return				Receive element, or multiple Receive elements in a Seq element
 	 */
-	private Script buildReceive(Message message, Participant participant) {
-		Expression address = jef.createAddress(message, participant);
+	private Receive buildReceive(MessageChannel channel) {
+		Expression address = jef.createAddress(channel);
 		int timeout= 10000;
-		if (message.getProperties().size() == 1) {
-			Property property= message.getProperties().get(0);
-			Receive receive= jef.createReceive(address, Util.getType(property), property.getName(), timeout);
-			wrapper.map(receive, property); // put type in map, for later retrieval when creating onMessage
-			// this is necessary as the receive itself only known the name of the variable, but not the type
-			// however, one could use another map for this association, too
-			return receive;
-		} else {
-			Seq seq= jadlFac.createSeq();
-			for (Property property : message.getProperties()) {
-				Receive receive= jef.createReceive(address, Util.getType(property), property.getName(), timeout);
-				seq.getScripts().add(receive);
-				wrapper.map(receive, property); // put type in map, for later retrieval when creating onMessage
-			}
-			return seq;
-		}			
+		Property property= channel.getPayload();
+		Receive receive= jef.createReceive(address, property, timeout);
+		wrapper.map(receive, property); // put type in map, for later retrieval
+		// when creating onMessage this is necessary as the receive itself
+		// only known the name of the variable, but not the type however,
+		// one could use another map for this association, too
+		return receive;
 	}
 	
 	/**
@@ -1281,4 +1292,21 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		}
 		return par;
 	}
+	
+
+	/**
+	 * Create Starter Rule for given event and add it to the list of starter rules.
+	 * Starter Rules currently make sense only for a limited set of Events, i.e.
+	 * Rule Events, Timer Events, and Message Events (with MessageChannels)
+	 * 
+	 * @param event		some (start) event
+	 */
+	private void addStarterRule(Event event) {
+		// create Start Rule
+		if (event instanceof Start) {
+			JiacVStarterRule startRule= new JiacVStarterRule(event, _currentService);
+			((JiacVExportWrapper) wrapper).addStarterRule(event.getPool().getParticipant(), startRule);
+		}
+	}
+	
 }

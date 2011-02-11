@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.dailab.jiactng.jadl.JadlPackage;
 import de.dailab.jiactng.jadl.Seq;
-import de.dailab.vsdt.trafo.strucbpmn.util.AbstractVsdtRule;
+import de.dailab.vsdt.trafo.strucbpmn.export.AbstractVsdtRule;
 
 /**
  * Flatten Sequence Rule

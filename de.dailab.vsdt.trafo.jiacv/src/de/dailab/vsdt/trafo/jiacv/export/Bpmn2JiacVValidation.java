@@ -3,10 +3,14 @@ package de.dailab.vsdt.trafo.jiacv.export;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.DataType;
-import de.dailab.vsdt.Implementation;
+import de.dailab.vsdt.Event;
+import de.dailab.vsdt.Intermediate;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Property;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.trafo.impl.DefaultBpmnValidation;
 import de.dailab.vsdt.vxl.util.Util;
 
@@ -67,26 +71,55 @@ public class Bpmn2JiacVValidation extends DefaultBpmnValidation {
 		}
 		return ok;
 	}
-	
-	
-	/**
-	 * TODO when transforming to JADL, each Implementation has to be a ???
-	 */
+
 	@Override
-	protected boolean visitImplementation(Implementation implementation) {
-		return super.visitImplementation(implementation);
+	protected boolean visitEvent(Event event) {
+		boolean ok= super.visitEvent(event);
+		
+		switch (event.getTrigger()) {
+		case MESSAGE:
+			if (event instanceof Intermediate) {
+				ok &= test(event.getImplementation() instanceof MessageChannel, 
+						"For an Intermediate Message Event, the Implementation must be a MessageChannel");
+			}
+			break;
+		}
+		
+		return ok;
 	}
+
 	
-//	@Override
-//	protected boolean visitActivity(
-//			Activity activity) {
-//		boolean ok= super.visitActivity(activity);
-//		
+	@Override
+	protected boolean visitActivity(Activity activity) {
+		boolean ok= super.visitActivity(activity);
+		
+		switch (activity.getActivityType()) {
+		case SERVICE:
+		case USER:
+			ok &= test(activity.getImplementation() instanceof Service, 
+					"Implementation must be Service for Service or User Task.");
+			break;
+		case SEND:
+		case RECEIVE:
+			ok &= test(activity.getImplementation() instanceof MessageChannel, 
+					"Implementation must be MessageChannel for Send and Receive Task");
+			break;
+		}
+		
 //		if (activity.getActivityType() == ActivityType.REFERENCE) {
 //			ok&= test(! BpmnMappingHelper.isParentOrEqual(activity.getActivityRef(),activity),
 //					"An Activity may not reference a (transitive) parent of itself.");
 //		}
-//		return ok;
-//	}
+		return ok;
+	}
+	
+	@Override
+	protected boolean visitMessageChannel(MessageChannel messageChannel) {
+		boolean ok= super.visitMessageChannel(messageChannel);
+		
+		ok &= test(messageChannel.getPayload() != null, "Payload must not be null");
+		
+		return ok;
+	}
 
 }

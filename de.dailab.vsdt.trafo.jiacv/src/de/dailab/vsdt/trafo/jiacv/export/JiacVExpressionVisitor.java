@@ -1,5 +1,7 @@
 package de.dailab.vsdt.trafo.jiacv.export;
 
+import de.dailab.vsdt.Expression;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.util.VsdtExpressionVisitor;
 import de.dailab.vsdt.vxl.vxl.Negation;
 import de.dailab.vsdt.vxl.vxl.Operator;
@@ -9,6 +11,11 @@ public class JiacVExpressionVisitor extends VsdtExpressionVisitor {
 
 	public JiacVExpressionVisitor(boolean translateExpression, boolean replaceVariableNames) {
 		super(translateExpression, replaceVariableNames);
+	}
+	
+	@Override
+	protected boolean excludeFromTranslation(Expression expression) {
+		return expression.eContainer() instanceof MessageChannel;
 	}
 
 	@Override

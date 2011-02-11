@@ -153,7 +153,9 @@ public class VsdtHelper {
 			return ((DataObject) object).getProperties();
 		}
 		if (object instanceof MessageChannel) {
-			return Arrays.asList(((MessageChannel) object).getPayload());
+			MessageChannel channel = (MessageChannel) object;
+			return channel.getPayload() == null ? new ArrayList<Property>() : 
+					Arrays.asList(channel.getPayload());
 		}
 		if (object instanceof Service) {
 			Service service = (Service) object;

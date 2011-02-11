@@ -134,7 +134,9 @@ public class VsdtExpressionVisitor {
 		// translate expression?
 		String originalExpression= expression.getExpression();
 		String lang= expression.getExpressionLanguageToBeUsed();
-		if (translateExpressions && Util.languageIsVxl(lang)) {
+		if (translateExpressions && 
+				Util.languageIsVxl(lang) &&
+				! excludeFromTranslation(expression)) {
 			// parse expression
 			VxlParser parser= VxlParser.getInstance();
 			try {
@@ -153,6 +155,17 @@ public class VsdtExpressionVisitor {
 			return replaceVarNames(originalExpression);
 		}
 		return originalExpression;
+	}
+	
+	/**
+	 * Overwrite this method if you want to exclude some expressions from being
+	 * translated.
+	 * 
+	 * @param expression	some expression
+	 * @return				exclude this expression from being translated?
+	 */
+	protected boolean excludeFromTranslation(Expression expression) {
+		return false;
 	}
 	
 	// TERM SERIALIZATION

@@ -2,7 +2,7 @@ package de.dailab.vsdt.trafo.jiacv.export;
 
 import de.dailab.jiactng.jadl.Service;
 import de.dailab.vsdt.Event;
-import de.dailab.vsdt.Message;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.trafo.jiacv.util.JadlElementFactory;
 import de.dailab.vsdt.trafo.jiacv.util.Util;
@@ -54,16 +54,18 @@ public class JiacVStarterRule {
 		// type specific conditions
 		switch (startEvent.getTrigger()) {
 		case MESSAGE:
-			Message message = startEvent.getMessage();
-			String address = JadlElementFactory.INSTANCE.createAddressString(message, startEvent.getPool().getParticipant());
-			buffer.append(TAB + "jiacMessage : IJiacMessage()" + NL);
-			buffer.append(TAB + "eval(\"" + address + "\".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))" + NL);
-			if (message.getProperties().size() > 0) {
-				Property payload = message.getProperties().get(0);
-				parameter = payload.getName();
-				buffer.append(TAB + parameter + " : "  + Util.getType(payload) + "() from jiacMessage.payload" + NL);
+			if (startEvent.getImplementation() instanceof MessageChannel) {
+				MessageChannel channel = (MessageChannel) startEvent.getImplementation();
+				String address = JadlElementFactory.INSTANCE.createAddressString(channel);
+				buffer.append(TAB + "jiacMessage : IJiacMessage()" + NL);
+				buffer.append(TAB + "eval(\"" + address + "\".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))" + NL);
+				if (channel.getPayload() != null) {
+					Property payload = channel.getPayload();
+					parameter = payload.getName();
+					buffer.append(TAB + parameter + " : "  + Util.getType(payload) + "() from jiacMessage.payload" + NL);
+				}
+				break;
 			}
-			break;
 		case RULE:
 			// condition for RULE event
 			// copy rule expression to WHEN part

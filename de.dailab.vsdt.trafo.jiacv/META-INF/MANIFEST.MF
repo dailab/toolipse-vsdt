@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VSDT - JIAC V Transformation
 Bundle-SymbolicName: de.dailab.vsdt.trafo.jiacv;singleton:=true
-Bundle-Version: 1.4.0.20101006
+Bundle-Version: 1.4.0.20110211
 Bundle-Vendor: DAI-Labor, TU Berlin
 Require-Bundle: org.eclipse.xtext,
  de.dailab.agentWorldEditor,
