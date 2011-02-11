@@ -26,7 +26,6 @@ import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.Lane;
 import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.MultiLoopAttSet;
-import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Service;
 import de.dailab.vsdt.StandardLoopAttSet;
@@ -351,7 +350,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			break;
 		case MESSAGE:
 			Implementation impl= event.getImplementation();
-			builder.append(getMessageString(impl, event.getPool().getParticipant(), ! throwing));
+			builder.append(getMessageString(impl, event.getPool(), ! throwing));
 			builder.append(" is " + (throwing ? "sent" : "received"));
 			break;
 		case TIMER:
@@ -514,7 +513,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		case RECEIVE:
 			boolean incoming = type == ActivityType.RECEIVE;
 			builder.append(", " + (incoming ? "receiving" : "sending") + " ");
-			builder.append(getMessageString(activity.getImplementation(), activity.getPool().getParticipant(), incoming));
+			builder.append(getMessageString(activity.getImplementation(), activity.getPool(), incoming));
 			builder.append(". ");
 			break;
 		case CALL:
@@ -827,15 +826,20 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 * ///////////////////
 	 */
 	
-	private String getMessageString(Implementation implementation, Participant self, boolean incoming) {
+	/**
+	 * Build message string for given implementation, i.e. either the request or
+	 * response for some service or a message to a certain message channel,
+	 * taking the sender/receiver's own pool (and thus participant) into account,
+	 * and whether the message is incoming or outgoind.
+	 */
+	private String getMessageString(Implementation implementation, Pool self, boolean incoming) {
 		if (implementation instanceof Service) {
 			Service service = (Service) implementation;
 			boolean isRequest = isRequest(service, self, incoming);
 			return "a " + (isRequest ? "request" : "response") + " for " + getString(service);
 		} else
 		if (implementation instanceof MessageChannel) {
-			MessageChannel channel = (MessageChannel) implementation;
-			return getString(channel);
+			return getString((MessageChannel) implementation);
 		} else {
 			return "some message";
 		}
@@ -846,8 +850,8 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 * the service is sent. Assuming that requester and provider are not the
 	 * same participant.
 	 */
-	private boolean isRequest(Service service, Participant self, boolean incoming) {
-		boolean isSameParticipant = service.getParticipant() == self;
+	private boolean isRequest(Service service, Pool self, boolean incoming) {
+		boolean isSameParticipant = self != null ? service.getParticipant() == self.getParticipant() : false;
 		return incoming == isSameParticipant;
 	}
 
