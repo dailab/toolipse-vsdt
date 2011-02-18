@@ -61,7 +61,9 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	public static final String FORMAT_PLAIN= "Plain Text";
 	public static final String FORMAT_HTML= "HTML";
 	public static final String FORMAT_LATEX= "Latex";
-	
+
+	public static final ImageFileFormat IMAGE_FORMAT= ImageFileFormat.PNG;
+
 	/** text format to use, determining the {@link #builder}, and other options */
 	public static String textFormat= FORMAT_HTML;
 	public static boolean longDocumentation= true;
@@ -75,9 +77,12 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	
 	@Override
 	public void initialize() {
-		// initialize random number generator with fixed seed, so the numbers are random but the 
-		// same each time the transformation is performed, so the results are easier to compare.
+		// initialize random number generator with fixed seed, so the numbers
+		// are random but the same each time the transformation is performed,
+		// so the results are easier to compare.
 		random= new Random(0);
+		
+		// create appropriate Text Builder
 		if (FORMAT_PLAIN.equals(textFormat)) {
 			builder= new TextBuilder();
 		}
@@ -95,12 +100,22 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		builder.setName(bps.getName());
 		wrapper.getTargetModels().add(builder);
 		visitBusinessProcessSystem(bps);
+		/*
+		 * The screen shots are captured after everything else is cared for;
+		 * otherwise some nasty Missing-Write-Transaction-Error will occur.  
+		 */
+		if (integrateScreenshot) {
+			integrateScreenshot(bps);
+			for (BusinessProcessDiagram bpd : bps.getBusinessProcesses()) {
+				integrateScreenshot(bpd);
+			}
+		}
 		return true;
 	}
 
-	//////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////
 	// VISITOR LOGIC
-	//////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////
 
 	/**
 	 * Start the visitor's pass at the top-level business process system. Print 
@@ -127,7 +142,8 @@ public class Bpmn2TextElementMapping extends MappingStage {
 
 		// screen shot of meta diagram
 		if (integrateScreenshot) {
-			integrateScreenshot(bps);
+			String label= "Business Process System" + " '" + bps.getName() + "'";
+			builder.appendImage(getImagePath(bps), label);
 		}
 		
 		// TODO short summary of Meta diagram: relation of participants and processes
@@ -157,7 +173,8 @@ public class Bpmn2TextElementMapping extends MappingStage {
 
 		// screen shot of BPMN diagram
 		if (integrateScreenshot) {
-			integrateScreenshot(bpd);
+			String label= "Business Process Diagram" + " '" + bpd.getName() + "'";
+			builder.appendImage(getImagePath(bpd), label);
 		}
 
 		// create Structured Text for each Pool
@@ -231,9 +248,9 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		
 		builder.append("The Process is" + (pool.isAdHoc() ? 
 				" ad-hoc and is" : "") + " of type " + type(pool.getProcessType()) + ".");
-		/*
-		 * process properties and assignments
-		 */
+		
+		// XXX process properties?
+
 		if (! pool.getGraphicalElements().isEmpty()) {
 			String beginning= " In this Process, ";
 			for (FlowObject flowObject : pool.getGraphicalElements()) {
@@ -312,9 +329,9 @@ public class Bpmn2TextElementMapping extends MappingStage {
 				BpmnElementToSkip bpmnElementToSkip = (BpmnElementToSkip) flowObject;
 				visitBpmnElementToSkip(bpmnElementToSkip);
 			}
-			/*
-			 * assignments
-			 */
+			
+			// XXX assignments?
+			
 			return true;
 		} else {
 			// dismiss / close sentence
@@ -611,11 +628,9 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		builder.append(". ");
 	}
 	
-	/*
-	 * //////////////////////////////////////////////////////
-	 * // VISITOR METHODS FOR SPECIAL STRUCTURED BPMN OBJECTS
-	 * //////////////////////////////////////////////////////
-	 */
+	////////////////////////////////////////////////////////////////////////////
+	// VISITOR METHODS FOR SPECIAL STRUCTURED BPMN OBJECTS
+	////////////////////////////////////////////////////////////////////////////
 	
 	/**
 	 * Print that a number of elements are executed in sequence and print the
@@ -818,13 +833,10 @@ public class Bpmn2TextElementMapping extends MappingStage {
 				(intm.getName() != null? "'" + name(intm.getName())+ 
 				"' " : "") + "has not been triggered. ");
 	}
-	
 
-	/*
-	 * ///////////////////
-	 * // HELPER METHODS  
-	 * ///////////////////
-	 */
+	////////////////////////////////////////////////////////////////////////////
+	// HELPER METHODS
+	////////////////////////////////////////////////////////////////////////////
 	
 	/**
 	 * Build message string for given implementation, i.e. either the request or
@@ -986,25 +998,30 @@ public class Bpmn2TextElementMapping extends MappingStage {
 					TrafoLog.info("Generating picture for diagram " + diagramElement.getName());
 					
 					// create image from diagram
-					ImageFileFormat format= ImageFileFormat.PNG;
-					String path= diagramElement.getName() + "." + format.getName().toLowerCase();
+					String path= getImagePath(diagramElement);
 					
 					TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(resource.getResourceSet());
 					try {
 						byte[] imageData= new CopyToImageUtil().copyToImageByteArray(
-								(Diagram) o, -1, -1, format, new NullProgressMonitor(), 
+								(Diagram) o, -1, -1, IMAGE_FORMAT, new NullProgressMonitor(), 
 								new PreferencesHint("de.dailab.vsdt.diagram"), true);
 						((TextExportWrapper) Bpmn2TextElementMapping.this.wrapper).addImage(path, imageData);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					String label= diagramElement.eClass().getName() + " '" + diagramElement.getName() + "'";
-					builder.appendImage(path, label);
 					return true;
 				}
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * @param diagramElement	some diagram element (BPS or BPD)
+	 * @return					uniformly formatted image path for that element
+	 */
+	private String getImagePath(IdObject diagramElement) {
+		return diagramElement.getName() + "." + IMAGE_FORMAT.getName().toLowerCase();
 	}
 	
 	/**
