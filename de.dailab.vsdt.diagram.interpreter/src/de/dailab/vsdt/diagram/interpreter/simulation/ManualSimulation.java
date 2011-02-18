@@ -19,7 +19,7 @@ import de.dailab.vsdt.util.VsdtHelper;
  * 
  * @author kuester
  */
-public class ManualSimulation extends BasicSimulation implements ISimulation {
+public class ManualSimulation extends BasicSimulation {
 	
 	/**
 	 * If the Activity has Loop attributes, simply show a dialogue to the user,

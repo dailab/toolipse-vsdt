@@ -33,7 +33,6 @@ import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.Service;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.diagram.dialogs.EditExpressionDialog;
-import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
 import de.dailab.vsdt.diagram.interpreter.dialogs.MessageParameterDialog;
 import de.dailab.vsdt.util.VsdtHelper;
 import de.dailab.vsdt.vxl.util.Util;
@@ -51,7 +50,7 @@ import de.dailab.vsdt.vxl.vxl.Term;
  * 
  * @author kuester
  */
-public class InterpretingSimulation extends ManualSimulation implements ISimulation {
+public class InterpretingSimulation extends ManualSimulation {
 
 	/*
 	 * TODO 
@@ -74,18 +73,17 @@ public class InterpretingSimulation extends ManualSimulation implements ISimulat
 	 *   then finding an error in the next to last assignment. 
 	 */
 	@Override
-	public List<FlowObject> start(BusinessProcessDiagramEditPart diagramEditPart) {
-		BusinessProcessDiagram bpd= diagramEditPart.getCastedModel();
-		boolean hasParseError = false;
-		for (TreeIterator<EObject> iter= bpd.eAllContents(); iter.hasNext(); ) {
+	protected boolean checkDiagram(BusinessProcessDiagram diagram) {
+		boolean isOk = true;
+		for (TreeIterator<EObject> iter= diagram.eAllContents(); iter.hasNext(); ) {
 			EObject next= iter.next();
 			if (next instanceof Expression) {
 				// test-parse the expression, exit if result is null
 				Term result = parseExpression(getExpression((Expression) next));
-				hasParseError |= result == null;
+				isOk &= result != null;
 			}
 		}
-		return hasParseError ? null : super.start(diagramEditPart);
+		return isOk;
 	}
 	
 	/**
@@ -236,9 +234,6 @@ public class InterpretingSimulation extends ManualSimulation implements ISimulat
 		if (eObject instanceof FlowObject) {
 			assignments= ((FlowObject) eObject).getAssignments();
 		}
-//		if (eObject instanceof BpmnProcess) {
-//			assignments= ((BpmnProcess) eObject).getAssignments();
-//		}
 		// evaluate assignment expression
 		if (assignments != null) {
 			for (Assignment assignment : assignments) {

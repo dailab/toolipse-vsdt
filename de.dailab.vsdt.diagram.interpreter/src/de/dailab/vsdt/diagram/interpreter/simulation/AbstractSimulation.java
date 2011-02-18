@@ -73,47 +73,56 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * Initialize fields
 	 */
 	public AbstractSimulation() {
-		stateMap= new HashMap<FlowObject, State>();
-		tokenMap= new HashMap<ConnectingObject, Integer>();
-		stepMap= new HashMap<EObject, Integer>();
-		step= -1;
+		stateMap = new HashMap<FlowObject, State>();
+		tokenMap = new HashMap<ConnectingObject, Integer>();
+		stepMap = new HashMap<EObject, Integer>();
+		diagramEditPart = null;
+		step = -1;
 	}
+
+	////////////////////////////////////////////////////////////////////////////
+	// Interface methods (all final)
+	////////////////////////////////////////////////////////////////////////////
 	
 	/**
 	 * - initialize step counter
 	 * - initialize token and state maps
 	 */
-	public List<FlowObject> start(BusinessProcessDiagram diagram) {
+	public final List<FlowObject> start(BusinessProcessDiagram diagram) {
 		System.out.println("Starting Simulation");
-		List<FlowObject> result= new ArrayList<FlowObject>();
 		BusinessProcessDiagram bpd= diagram;
-		step= 0;
-		// initialize some tables holding the currently activated elements
-		tokenMap.clear();
-		for (ConnectingObject connection : bpd.getConnections()) {
-			if (connection instanceof SequenceFlow || connection instanceof MessageFlow) {
-				tokenMap.put(connection, 0);
-			}
-		}
-		stateMap.clear();
-		for (Pool pool : bpd.getPools()) {
-			for (FlowObject flowObject : VsdtHelper.getAllGraphicalElements(pool)) {
-				stateMap.put(flowObject, State.IDLE);
-				if (updateState(flowObject)) {
-					result.add(flowObject);
+		// check diagram
+		if (checkDiagram(bpd)) {
+			List<FlowObject> result= new ArrayList<FlowObject>();
+			// initialize some tables holding the currently activated elements
+			step= 0;
+			tokenMap.clear();
+			for (ConnectingObject connection : bpd.getConnections()) {
+				if (connection instanceof SequenceFlow || connection instanceof MessageFlow) {
+					tokenMap.put(connection, 0);
 				}
 			}
+			stateMap.clear();
+			for (Pool pool : bpd.getPools()) {
+				for (FlowObject flowObject : VsdtHelper.getAllGraphicalElements(pool)) {
+					stateMap.put(flowObject, State.IDLE);
+					if (updateState(flowObject)) {
+						result.add(flowObject);
+					}
+				}
+			}
+			refreshViewer();
+			return result;
+		} else {
+			return null;
 		}
-		refreshViewer();
-		return result;
-
 	}
 
 	/**
 	 * - set edit part reference
 	 * - see above
 	 */
-	public List<FlowObject> start(BusinessProcessDiagramEditPart diagramEditPart) {
+	public final List<FlowObject> start(BusinessProcessDiagramEditPart diagramEditPart) {
 		this.diagramEditPart= diagramEditPart;
 		return start(diagramEditPart.getCastedModel());
 	}
@@ -138,7 +147,7 @@ public abstract class AbstractSimulation implements ISimulation {
 		return step != -1;
 	}
 	
-	public List<FlowObject> stepOver(FlowObject flowObject) {
+	public final List<FlowObject> stepOver(FlowObject flowObject) {
 		stepInto(flowObject);
 		return stepOut(flowObject);
 	}
@@ -149,7 +158,7 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * - set state to ACTIVE
 	 * - handle start assignments
 	 */
-	public List<FlowObject> stepInto(FlowObject flowObject) {
+	public final List<FlowObject> stepInto(FlowObject flowObject) {
 		System.out.println("Stepping Into " + flowObject);
 		List<FlowObject> result= new ArrayList<FlowObject>();
 		if (isInState(flowObject, State.READY, State.LOOPING_READY)) {
@@ -195,7 +204,7 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * - place tokens on outgoing flows
 	 * - update states of succeeding flow objects
 	 */
-	public List<FlowObject> stepOut(FlowObject flowObject) {
+	public final List<FlowObject> stepOut(FlowObject flowObject) {
 		System.out.println("Stepping out of " + flowObject);
 		List<FlowObject> result= new ArrayList<FlowObject>();
 		if (isInState(flowObject, State.ACTIVE_READY)) {
@@ -241,6 +250,14 @@ public abstract class AbstractSimulation implements ISimulation {
 	////////////////////////////////////////////////////////////////////////////
 	// Life Cycle methods
 	////////////////////////////////////////////////////////////////////////////
+	
+	/**
+	 * Perform some pre-simulation checks when the simulation is to be started.
+	 * 
+	 * @param diagram		The Business Process Diagram to be simulated
+	 * @return				Whether there are any Problems with the diagrams
+	 */
+	protected abstract boolean checkDiagram(BusinessProcessDiagram diagram);
 	
 	/**
 	 * This method is executed at the end of the {@link #stepInto(FlowObject)}
@@ -457,7 +474,7 @@ public abstract class AbstractSimulation implements ISimulation {
 	////////////////////////////////////////////////////////////////////////////
 	
 	/** Map holding the association of EObjects to EditParts */
-	protected Map<EObject, IFigure > figureMap= new HashMap<EObject, IFigure>();
+	protected final Map<EObject, IFigure > figureMap= new HashMap<EObject, IFigure>();
 	
 	/**
 	 * Sets the Viewer for controlling this Simulation
@@ -557,9 +574,9 @@ public abstract class AbstractSimulation implements ISimulation {
 	protected static class FlowObjectMarkerDecorator implements IFigureDecorator {
 		
 		static final Color butter = new Color(null, 252, 233, 79); // tango butter 1
-		static final Color sky = new Color(null, 114, 159, 207);//tango sky blue 1
-		static final Color chameleon = new Color(null, 138, 226, 52);//tango chameleon 1
-		static final Color scarlet = new Color(null, 239, 41, 41);//tango scarlet red 1
+		static final Color sky = new Color(null, 114, 159, 207);// tango sky blue 1
+		static final Color chameleon = new Color(null, 138, 226, 52);// tango chameleon 1
+		static final Color scarlet = new Color(null, 239, 41, 41);// tango scarlet red 1
 		
 		State state= null;
 

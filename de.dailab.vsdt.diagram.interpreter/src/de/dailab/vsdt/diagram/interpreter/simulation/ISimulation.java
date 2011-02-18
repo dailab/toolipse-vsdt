@@ -23,7 +23,7 @@ public interface ISimulation {
 	 * using the Interpreter View.
 	 * 
 	 * @param diagram			BusinessProcessDiagram to simulate
-	 * @return List of newly readied FlowObjects
+	 * @return					List of newly readied FlowObjects
 	 */
 	List<FlowObject> start(BusinessProcessDiagram diagram);
 
@@ -32,7 +32,7 @@ public interface ISimulation {
 	 * this constructor if you are using the Interpreter View.
 	 * 
 	 * @param diagramEditPart	Edit Part of the BusinessProcessDiagram to simulate
-	 * @return List of newly readied FlowObjects
+	 * @return					List of newly readied FlowObjects
 	 */
 	List<FlowObject> start(BusinessProcessDiagramEditPart diagramEditPart);
 	
@@ -45,8 +45,8 @@ public interface ISimulation {
 	 * Step over the given FlowObject.  Typically, this equals stepping
 	 * into and right afterwards stepping out of the selected element.
 	 * 
-	 * @param flowObject	Some FlowObject being in State READY
-	 * @return List of newly readied FlowObjects
+	 * @param flowObject		Some FlowObject being in State READY
+	 * @return					List of newly readied FlowObjects
 	 */
 	List<FlowObject> stepOver(FlowObject flowObject);
 	
@@ -55,8 +55,8 @@ public interface ISimulation {
 	 * flows and nested FlowObjects have can be put in the State READY.  The 
 	 * Flow Object itself is put into State ACTIVE.
 	 * 
-	 * @param flowObject	Some FlowObject being in State READY
-	 * @return List of newly readied FlowObjects
+	 * @param flowObject		Some FlowObject being in State READY
+	 * @return					List of newly readied FlowObjects
 	 */
 	List<FlowObject> stepInto(FlowObject flowObject);
 
@@ -65,19 +65,19 @@ public interface ISimulation {
 	 * outgoing flows and nested FlowObjects are terminated (put in state IDLE, 
 	 * DONE, or FAILED). The Flow Object itself is put into state DONE.
 	 * 
-	 * @param flowObject	Some FlowObject currently being in State ACTIVE
-	 * @return List of newly readied FlowObjects
+	 * @param flowObject		Some FlowObject currently being in State ACTIVE
+	 * @return					List of newly readied FlowObjects
 	 */
 	List<FlowObject> stepOut(FlowObject flowObject);
 	
 	/**
-	 * @return		Whether a Simulation is running, or not 
+	 * @return					Whether a Simulation is running, or not 
 	 */
 	boolean isRunning();
 	
 	/**
-	 * @param flowObject	Some FlowObject being part of the Simulation
-	 * @return				The State the FlowObject currently is in
+	 * @param flowObject		Some FlowObject being part of the Simulation
+	 * @return					The State the FlowObject currently is in
 	 */
 	State getState(FlowObject flowObject);
 

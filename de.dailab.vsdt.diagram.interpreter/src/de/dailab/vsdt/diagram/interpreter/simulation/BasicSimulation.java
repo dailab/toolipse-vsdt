@@ -23,7 +23,7 @@ import de.dailab.vsdt.TriggerType;
  * 
  * @author kuester
  */
-public class BasicSimulation extends AbstractSimulation implements ISimulation {
+public class BasicSimulation extends AbstractSimulation {
 
 	/*
 	 * TODO
@@ -33,7 +33,12 @@ public class BasicSimulation extends AbstractSimulation implements ISimulation {
 	 * - independent subprocess: jump to diagram (and keep simulation status)
 	 * - what to do if subprocess (or other) is ready again while still being active?
 	 */
-	
+
+	@Override
+	protected boolean checkDiagram(de.dailab.vsdt.BusinessProcessDiagram diagram) {
+		return true;
+	}
+
 	@Override
 	protected boolean calculateIsReady(FlowObject flowObject) {
 		if (! isInState(flowObject, State.IDLE, State.READY, State.DONE, State.FAILED, null)) return false;
