@@ -12,6 +12,11 @@ public class StrucBpmnResultSaver extends MappingResultSaver {
 	//file extensions
 	public static final String EXT_XML= ".strucbpmn";
 
+	@Override
+	protected String getDirectorySuffix() {
+		return "strucbpmn";
+	}
+	
 	/**
 	 * Save the result to a StrucBPMN file.
 	 * Additionally the content of the log list can be saved to a text file.

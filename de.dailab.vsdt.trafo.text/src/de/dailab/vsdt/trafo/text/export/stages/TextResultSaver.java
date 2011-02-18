@@ -14,6 +14,11 @@ import de.dailab.vsdt.trafo.MappingResultSaver;
  */
 public class TextResultSaver extends MappingResultSaver {
 
+	@Override
+	protected String getDirectorySuffix() {
+		return "text";
+	}
+	
 	/**
 	 * @param folder	folder where to save the stuff
 	 * @return			successfully saved?

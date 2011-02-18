@@ -43,6 +43,11 @@ public class JiacVResultSaver extends MappingResultSaver {
 
 	/** group services by use case, of by participant? */
 	public static boolean groupByUsecase= true;
+
+	@Override
+	protected String getDirectorySuffix() {
+		return "jiacv";
+	}
 	
 	/**
 	 * @param folder	folder where to save the stuff

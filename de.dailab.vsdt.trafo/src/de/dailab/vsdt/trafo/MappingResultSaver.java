@@ -58,10 +58,13 @@ public abstract class MappingResultSaver {
 		}
 		boolean ok= false;
 		try {
-			if (! directory.exists()) {
-				directory.mkdirs();
+			File dirPlusSuffix = new File(directory, getDirectorySuffix());
+			
+			if (! dirPlusSuffix.exists()) {
+				dirPlusSuffix.mkdirs();
 			}
-			ok= internalSave(directory);
+			
+			ok= internalSave(dirPlusSuffix);
 		} catch (IOException e) {
 			TrafoLog.error(e.getMessage());
 		}
@@ -72,6 +75,15 @@ public abstract class MappingResultSaver {
 			return false;
 		}
 	}
+
+	/**
+	 * This method should return some suffix used for this transformation, e.g.
+	 * "bpel", "text" or "jiacv", so files created by one export features are
+	 * separated from those created by another one. 
+	 * 
+	 * @return		some suffix to be inserted into the save path
+	 */
+	protected abstract String getDirectorySuffix();
 	
 	/**
 	 * @see save()

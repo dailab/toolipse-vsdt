@@ -50,6 +50,11 @@ public class BpmnResultSaver extends MappingResultSaver {
 	 * other BPMN editors
 	 */
 	private String suffix= "";
+	
+	@Override
+	protected String getDirectorySuffix() {
+		return "bpmn";
+	}
 
 	/**
 	 * Save the result to a couple of BPEL and WSDL files for each pool/process 

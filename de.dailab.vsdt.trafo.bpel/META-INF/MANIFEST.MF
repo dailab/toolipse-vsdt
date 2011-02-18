@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VSDT - BPEL Transformation
 Bundle-SymbolicName: de.dailab.vsdt.trafo.bpel;singleton:=true
-Bundle-Version: 1.4.0.20110210
+Bundle-Version: 1.4.0.20110218
 Bundle-ClassPath: .
 Bundle-Vendor: DAI-Labor, TU Berlin
 Require-Bundle: de.dailab.vsdt.trafo.strucbpmn;visibility:=reexport

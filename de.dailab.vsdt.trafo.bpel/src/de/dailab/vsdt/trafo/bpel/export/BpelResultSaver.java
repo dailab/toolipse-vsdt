@@ -19,6 +19,11 @@ public class BpelResultSaver extends MappingResultSaver {
 	public static final String EXT_BPEL= ".bpel";
 	public static final String EXT_WSDL= ".wsdl";
 
+	@Override
+	protected String getDirectorySuffix() {
+		return "bpel";
+	}
+	
 	/**
 	 * Save the result to a couple of BPEL and WSDL files for each pool/process in the diagram.
 	 * Additionally the content of the log list can be saved to a text file.
