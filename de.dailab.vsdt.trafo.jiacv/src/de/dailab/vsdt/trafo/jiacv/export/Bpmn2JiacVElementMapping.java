@@ -421,6 +421,8 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 					timerCase.setEventedCase(timer);
 				}
 				if (timerCase.getEventedCase() != null) {
+					Seq seq = jef.createSequence(jef.createPrint("done waiting"));
+					timerCase.setBody(seq);
 					mapping= timerCase;
 				}
 			}
