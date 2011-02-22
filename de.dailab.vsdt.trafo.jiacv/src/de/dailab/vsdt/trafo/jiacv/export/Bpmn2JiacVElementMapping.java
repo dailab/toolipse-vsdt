@@ -857,6 +857,9 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		wrapper.map(source, service);
 		messageListeners.put(service, new HashSet<Expression>());
 		
+		// TODO max execution time
+		// prop logLevel = DEBUG , maxExecutionTime = 5000
+		
 		service.setName(name);
 		if (useMAMSspecials) {
 			service.setAccessLevel(AccessLevel.GLOBAL);
