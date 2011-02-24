@@ -27,7 +27,7 @@ public class Bpmn2JiacVValidation extends DefaultBpmnValidation {
 		basicDataTypeMap.put(Util.TYPE_STRING, "string");
 		basicDataTypeMap.put(Util.TYPE_FLOAT, "float");
 		basicDataTypeMap.put(Util.TYPE_DOUBLE, "double");
-		basicDataTypeMap.put(Util.TYPE_LONG, "long");
+		basicDataTypeMap.put(Util.TYPE_LONG, "int");
 	}
 	
 	/**
