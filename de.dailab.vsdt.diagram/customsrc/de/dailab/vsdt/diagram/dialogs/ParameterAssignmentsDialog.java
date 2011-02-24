@@ -238,8 +238,8 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 		Group inputGroup= new Group(composite, SWT.NONE);
 		inputGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		inputGroup.setLayout(new GridLayout(2, false));
+		inputGroup.setText("Sending");
 		if (input != null) {
-			inputGroup.setText("Output");
 			for (Property property : input) {
 				// create ComboBox
 				Combo combo= new Combo(inputGroup, SWT.NONE);
@@ -263,16 +263,14 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 				label.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false));
 				label.setText("\u2192 " + property.getName()); // unicode rightward arrow
 			}
-		} else {
-			inputGroup.setText("Output");
 		}
 		
 		// add output parameter group
 		Group outputGroup= new Group(composite, SWT.NONE);
 		outputGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		outputGroup.setLayout(new GridLayout(2, false));
+		outputGroup.setText("Receiving");
 		if (output != null) {
-			outputGroup.setText("Input");
 			for (Property property : output) {
 				// create Label
 				Label label= new Label(outputGroup, SWT.NONE);
@@ -297,8 +295,6 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 				}
 				outputParameterMap.put(property, combo);
 			}
-		} else {
-			outputGroup.setText("No Input");
 		}
 		scrolledComposite.setContent(composite);
 		scrolledComposite.setExpandHorizontal(true);

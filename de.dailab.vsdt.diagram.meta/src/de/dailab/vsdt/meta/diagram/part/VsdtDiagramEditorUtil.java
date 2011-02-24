@@ -186,6 +186,7 @@ public class VsdtDiagramEditorUtil {
 								.getExpressionLanguage());
 				model.setQueryLanguage(optionsPage.getQueryLanguage());
 				model.setDocumentation(optionsPage.getDocumentation());
+				model.setExecutable(optionsPage.isExecutable());
 				model.setVersion("0.1");
 				// END @generated NOT
 

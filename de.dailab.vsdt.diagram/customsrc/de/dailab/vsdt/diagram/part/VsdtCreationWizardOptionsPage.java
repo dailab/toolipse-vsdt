@@ -4,6 +4,7 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
@@ -27,6 +28,7 @@ public class VsdtCreationWizardOptionsPage extends WizardPage {
 	private Text langText;
 	private Text expLangText;
 	private Text queLangText;
+	private Button executableButton;
 	
 	public VsdtCreationWizardOptionsPage() {
 		super("Options");
@@ -66,6 +68,9 @@ public class VsdtCreationWizardOptionsPage extends WizardPage {
 		label= FormLayoutUtil.addLabel(composite, "Query Language", lastControl, 0);
 		queLangText= FormLayoutUtil.addText(composite, lastControl, label, 100, SWT.BORDER);
 		lastControl= queLangText;
+		
+		executableButton = FormLayoutUtil.addButton(composite, "Business Process System is Executable", SWT.CHECK, lastControl, 0, null);
+		lastControl = executableButton;
 		
 		// initial values
 		String author = DiagramGeneralPreferencePage.getAuthor();
@@ -131,6 +136,13 @@ public class VsdtCreationWizardOptionsPage extends WizardPage {
 	 */
 	public String getQueryLanguage() {
 		return Util.nullIfEmpty(queLangText.getText());
+	}
+	
+	/**
+	 * @return	Whether the diagram is to be executable
+	 */
+	public boolean isExecutable() {
+		return executableButton.getSelection();
 	}
 
 }
