@@ -109,7 +109,7 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean AS_DURATION_EDEFAULT = false;
+	protected static final boolean AS_DURATION_EDEFAULT = true;
 	/**
 	 * The cached value of the '{@link #isAsDuration() <em>As Duration</em>}' attribute.
 	 * <!-- begin-user-doc -->

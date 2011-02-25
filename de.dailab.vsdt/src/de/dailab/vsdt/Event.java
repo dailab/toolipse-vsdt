@@ -145,6 +145,7 @@ public interface Event extends FlowObject {
 
 	/**
 	 * Returns the value of the '<em><b>As Duration</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>As Duration</em>' attribute isn't clear,
@@ -154,7 +155,7 @@ public interface Event extends FlowObject {
 	 * @return the value of the '<em>As Duration</em>' attribute.
 	 * @see #setAsDuration(boolean)
 	 * @see de.dailab.vsdt.VsdtPackage#getEvent_AsDuration()
-	 * @model
+	 * @model default="true"
 	 * @generated
 	 */
 	boolean isAsDuration();
