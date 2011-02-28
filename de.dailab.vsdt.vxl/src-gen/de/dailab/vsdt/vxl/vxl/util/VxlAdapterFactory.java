@@ -78,84 +78,94 @@ public class VxlAdapterFactory extends AdapterFactoryImpl
     new VxlSwitch<Adapter>()
     {
       @Override
-      public Adapter caseTerm(Term object)
+      public Adapter caseVxlTerm(VxlTerm object)
       {
-        return createTermAdapter();
+        return createVxlTermAdapter();
       }
       @Override
-      public Adapter caseHead(Head object)
+      public Adapter caseVxlHead(VxlHead object)
       {
-        return createHeadAdapter();
+        return createVxlHeadAdapter();
       }
       @Override
-      public Adapter caseTail(Tail object)
+      public Adapter caseVxlTail(VxlTail object)
       {
-        return createTailAdapter();
+        return createVxlTailAdapter();
       }
       @Override
-      public Adapter caseBracketTerm(BracketTerm object)
+      public Adapter caseVxlBracketTerm(VxlBracketTerm object)
       {
-        return createBracketTermAdapter();
+        return createVxlBracketTermAdapter();
       }
       @Override
-      public Adapter caseNegation(Negation object)
+      public Adapter caseVxlNegation(VxlNegation object)
       {
-        return createNegationAdapter();
+        return createVxlNegationAdapter();
       }
       @Override
-      public Adapter caseMinus(Minus object)
+      public Adapter caseVxlMinus(VxlMinus object)
       {
-        return createMinusAdapter();
+        return createVxlMinusAdapter();
       }
       @Override
-      public Adapter caseAtom(Atom object)
+      public Adapter caseVxlAtom(VxlAtom object)
       {
-        return createAtomAdapter();
+        return createVxlAtomAdapter();
       }
       @Override
-      public Adapter caseVariable(Variable object)
+      public Adapter caseVxlVariable(VxlVariable object)
       {
-        return createVariableAdapter();
+        return createVxlVariableAdapter();
       }
       @Override
-      public Adapter caseAccessor(Accessor object)
+      public Adapter caseVxlAccessor(VxlAccessor object)
       {
-        return createAccessorAdapter();
+        return createVxlAccessorAdapter();
       }
       @Override
-      public Adapter caseArrayAccessor(ArrayAccessor object)
+      public Adapter caseVxlArrayAccessor(VxlArrayAccessor object)
       {
-        return createArrayAccessorAdapter();
+        return createVxlArrayAccessorAdapter();
       }
       @Override
-      public Adapter caseFieldAccessor(FieldAccessor object)
+      public Adapter caseVxlFieldAccessor(VxlFieldAccessor object)
       {
-        return createFieldAccessorAdapter();
+        return createVxlFieldAccessorAdapter();
       }
       @Override
-      public Adapter caseValue(Value object)
+      public Adapter caseVxlList(VxlList object)
       {
-        return createValueAdapter();
+        return createVxlListAdapter();
       }
       @Override
-      public Adapter caseStringConst(StringConst object)
+      public Adapter caseVxlListElement(VxlListElement object)
       {
-        return createStringConstAdapter();
+        return createVxlListElementAdapter();
       }
       @Override
-      public Adapter caseNumericConst(NumericConst object)
+      public Adapter caseVxlValue(VxlValue object)
       {
-        return createNumericConstAdapter();
+        return createVxlValueAdapter();
       }
       @Override
-      public Adapter caseBooleanConst(BooleanConst object)
+      public Adapter caseVxlStringConst(VxlStringConst object)
       {
-        return createBooleanConstAdapter();
+        return createVxlStringConstAdapter();
       }
       @Override
-      public Adapter caseNullConst(NullConst object)
+      public Adapter caseVxlNumericConst(VxlNumericConst object)
       {
-        return createNullConstAdapter();
+        return createVxlNumericConstAdapter();
+      }
+      @Override
+      public Adapter caseVxlBooleanConst(VxlBooleanConst object)
+      {
+        return createVxlBooleanConstAdapter();
+      }
+      @Override
+      public Adapter caseVxlNullConst(VxlNullConst object)
+      {
+        return createVxlNullConstAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -180,241 +190,271 @@ public class VxlAdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.Term <em>Term</em>}'.
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlTerm <em>Term</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.dailab.vsdt.vxl.vxl.Term
+   * @see de.dailab.vsdt.vxl.vxl.VxlTerm
    * @generated
    */
-  public Adapter createTermAdapter()
+  public Adapter createVxlTermAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.Head <em>Head</em>}'.
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlHead <em>Head</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.dailab.vsdt.vxl.vxl.Head
+   * @see de.dailab.vsdt.vxl.vxl.VxlHead
    * @generated
    */
-  public Adapter createHeadAdapter()
+  public Adapter createVxlHeadAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.Tail <em>Tail</em>}'.
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlTail <em>Tail</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.dailab.vsdt.vxl.vxl.Tail
+   * @see de.dailab.vsdt.vxl.vxl.VxlTail
    * @generated
    */
-  public Adapter createTailAdapter()
+  public Adapter createVxlTailAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.BracketTerm <em>Bracket Term</em>}'.
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlBracketTerm <em>Bracket Term</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.dailab.vsdt.vxl.vxl.BracketTerm
+   * @see de.dailab.vsdt.vxl.vxl.VxlBracketTerm
    * @generated
    */
-  public Adapter createBracketTermAdapter()
+  public Adapter createVxlBracketTermAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.Negation <em>Negation</em>}'.
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlNegation <em>Negation</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.dailab.vsdt.vxl.vxl.Negation
+   * @see de.dailab.vsdt.vxl.vxl.VxlNegation
    * @generated
    */
-  public Adapter createNegationAdapter()
+  public Adapter createVxlNegationAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.Minus <em>Minus</em>}'.
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlMinus <em>Minus</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.dailab.vsdt.vxl.vxl.Minus
+   * @see de.dailab.vsdt.vxl.vxl.VxlMinus
    * @generated
    */
-  public Adapter createMinusAdapter()
+  public Adapter createVxlMinusAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.Atom <em>Atom</em>}'.
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlAtom <em>Atom</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.dailab.vsdt.vxl.vxl.Atom
+   * @see de.dailab.vsdt.vxl.vxl.VxlAtom
    * @generated
    */
-  public Adapter createAtomAdapter()
+  public Adapter createVxlAtomAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.Variable <em>Variable</em>}'.
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlVariable <em>Variable</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.dailab.vsdt.vxl.vxl.Variable
+   * @see de.dailab.vsdt.vxl.vxl.VxlVariable
    * @generated
    */
-  public Adapter createVariableAdapter()
+  public Adapter createVxlVariableAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.Accessor <em>Accessor</em>}'.
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlAccessor <em>Accessor</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.dailab.vsdt.vxl.vxl.Accessor
+   * @see de.dailab.vsdt.vxl.vxl.VxlAccessor
    * @generated
    */
-  public Adapter createAccessorAdapter()
+  public Adapter createVxlAccessorAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.ArrayAccessor <em>Array Accessor</em>}'.
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlArrayAccessor <em>Array Accessor</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.dailab.vsdt.vxl.vxl.ArrayAccessor
+   * @see de.dailab.vsdt.vxl.vxl.VxlArrayAccessor
    * @generated
    */
-  public Adapter createArrayAccessorAdapter()
+  public Adapter createVxlArrayAccessorAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.FieldAccessor <em>Field Accessor</em>}'.
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlFieldAccessor <em>Field Accessor</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.dailab.vsdt.vxl.vxl.FieldAccessor
+   * @see de.dailab.vsdt.vxl.vxl.VxlFieldAccessor
    * @generated
    */
-  public Adapter createFieldAccessorAdapter()
+  public Adapter createVxlFieldAccessorAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.Value <em>Value</em>}'.
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlList <em>List</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.dailab.vsdt.vxl.vxl.Value
+   * @see de.dailab.vsdt.vxl.vxl.VxlList
    * @generated
    */
-  public Adapter createValueAdapter()
+  public Adapter createVxlListAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.StringConst <em>String Const</em>}'.
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlListElement <em>List Element</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.dailab.vsdt.vxl.vxl.StringConst
+   * @see de.dailab.vsdt.vxl.vxl.VxlListElement
    * @generated
    */
-  public Adapter createStringConstAdapter()
+  public Adapter createVxlListElementAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.NumericConst <em>Numeric Const</em>}'.
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlValue <em>Value</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.dailab.vsdt.vxl.vxl.NumericConst
+   * @see de.dailab.vsdt.vxl.vxl.VxlValue
    * @generated
    */
-  public Adapter createNumericConstAdapter()
+  public Adapter createVxlValueAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.BooleanConst <em>Boolean Const</em>}'.
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlStringConst <em>String Const</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.dailab.vsdt.vxl.vxl.BooleanConst
+   * @see de.dailab.vsdt.vxl.vxl.VxlStringConst
    * @generated
    */
-  public Adapter createBooleanConstAdapter()
+  public Adapter createVxlStringConstAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.NullConst <em>Null Const</em>}'.
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlNumericConst <em>Numeric Const</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see de.dailab.vsdt.vxl.vxl.NullConst
+   * @see de.dailab.vsdt.vxl.vxl.VxlNumericConst
    * @generated
    */
-  public Adapter createNullConstAdapter()
+  public Adapter createVxlNumericConstAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlBooleanConst <em>Boolean Const</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.dailab.vsdt.vxl.vxl.VxlBooleanConst
+   * @generated
+   */
+  public Adapter createVxlBooleanConstAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlNullConst <em>Null Const</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.dailab.vsdt.vxl.vxl.VxlNullConst
+   * @generated
+   */
+  public Adapter createVxlNullConstAdapter()
   {
     return null;
   }

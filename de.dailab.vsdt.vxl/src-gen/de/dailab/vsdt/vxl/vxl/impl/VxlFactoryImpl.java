@@ -68,22 +68,24 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
   {
     switch (eClass.getClassifierID())
     {
-      case VxlPackage.TERM: return createTerm();
-      case VxlPackage.HEAD: return createHead();
-      case VxlPackage.TAIL: return createTail();
-      case VxlPackage.BRACKET_TERM: return createBracketTerm();
-      case VxlPackage.NEGATION: return createNegation();
-      case VxlPackage.MINUS: return createMinus();
-      case VxlPackage.ATOM: return createAtom();
-      case VxlPackage.VARIABLE: return createVariable();
-      case VxlPackage.ACCESSOR: return createAccessor();
-      case VxlPackage.ARRAY_ACCESSOR: return createArrayAccessor();
-      case VxlPackage.FIELD_ACCESSOR: return createFieldAccessor();
-      case VxlPackage.VALUE: return createValue();
-      case VxlPackage.STRING_CONST: return createStringConst();
-      case VxlPackage.NUMERIC_CONST: return createNumericConst();
-      case VxlPackage.BOOLEAN_CONST: return createBooleanConst();
-      case VxlPackage.NULL_CONST: return createNullConst();
+      case VxlPackage.VXL_TERM: return createVxlTerm();
+      case VxlPackage.VXL_HEAD: return createVxlHead();
+      case VxlPackage.VXL_TAIL: return createVxlTail();
+      case VxlPackage.VXL_BRACKET_TERM: return createVxlBracketTerm();
+      case VxlPackage.VXL_NEGATION: return createVxlNegation();
+      case VxlPackage.VXL_MINUS: return createVxlMinus();
+      case VxlPackage.VXL_ATOM: return createVxlAtom();
+      case VxlPackage.VXL_VARIABLE: return createVxlVariable();
+      case VxlPackage.VXL_ACCESSOR: return createVxlAccessor();
+      case VxlPackage.VXL_ARRAY_ACCESSOR: return createVxlArrayAccessor();
+      case VxlPackage.VXL_FIELD_ACCESSOR: return createVxlFieldAccessor();
+      case VxlPackage.VXL_LIST: return createVxlList();
+      case VxlPackage.VXL_LIST_ELEMENT: return createVxlListElement();
+      case VxlPackage.VXL_VALUE: return createVxlValue();
+      case VxlPackage.VXL_STRING_CONST: return createVxlStringConst();
+      case VxlPackage.VXL_NUMERIC_CONST: return createVxlNumericConst();
+      case VxlPackage.VXL_BOOLEAN_CONST: return createVxlBooleanConst();
+      case VxlPackage.VXL_NULL_CONST: return createVxlNullConst();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -99,8 +101,8 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
   {
     switch (eDataType.getClassifierID())
     {
-      case VxlPackage.OPERATOR:
-        return createOperatorFromString(eDataType, initialValue);
+      case VxlPackage.VXL_OPERATOR:
+        return createVxlOperatorFromString(eDataType, initialValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -116,8 +118,8 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
   {
     switch (eDataType.getClassifierID())
     {
-      case VxlPackage.OPERATOR:
-        return convertOperatorToString(eDataType, instanceValue);
+      case VxlPackage.VXL_OPERATOR:
+        return convertVxlOperatorToString(eDataType, instanceValue);
       default:
         throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
@@ -128,10 +130,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Term createTerm()
+  public VxlTerm createVxlTerm()
   {
-    TermImpl term = new TermImpl();
-    return term;
+    VxlTermImpl vxlTerm = new VxlTermImpl();
+    return vxlTerm;
   }
 
   /**
@@ -139,10 +141,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Head createHead()
+  public VxlHead createVxlHead()
   {
-    HeadImpl head = new HeadImpl();
-    return head;
+    VxlHeadImpl vxlHead = new VxlHeadImpl();
+    return vxlHead;
   }
 
   /**
@@ -150,10 +152,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Tail createTail()
+  public VxlTail createVxlTail()
   {
-    TailImpl tail = new TailImpl();
-    return tail;
+    VxlTailImpl vxlTail = new VxlTailImpl();
+    return vxlTail;
   }
 
   /**
@@ -161,10 +163,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public BracketTerm createBracketTerm()
+  public VxlBracketTerm createVxlBracketTerm()
   {
-    BracketTermImpl bracketTerm = new BracketTermImpl();
-    return bracketTerm;
+    VxlBracketTermImpl vxlBracketTerm = new VxlBracketTermImpl();
+    return vxlBracketTerm;
   }
 
   /**
@@ -172,10 +174,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Negation createNegation()
+  public VxlNegation createVxlNegation()
   {
-    NegationImpl negation = new NegationImpl();
-    return negation;
+    VxlNegationImpl vxlNegation = new VxlNegationImpl();
+    return vxlNegation;
   }
 
   /**
@@ -183,10 +185,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Minus createMinus()
+  public VxlMinus createVxlMinus()
   {
-    MinusImpl minus = new MinusImpl();
-    return minus;
+    VxlMinusImpl vxlMinus = new VxlMinusImpl();
+    return vxlMinus;
   }
 
   /**
@@ -194,10 +196,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Atom createAtom()
+  public VxlAtom createVxlAtom()
   {
-    AtomImpl atom = new AtomImpl();
-    return atom;
+    VxlAtomImpl vxlAtom = new VxlAtomImpl();
+    return vxlAtom;
   }
 
   /**
@@ -205,10 +207,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Variable createVariable()
+  public VxlVariable createVxlVariable()
   {
-    VariableImpl variable = new VariableImpl();
-    return variable;
+    VxlVariableImpl vxlVariable = new VxlVariableImpl();
+    return vxlVariable;
   }
 
   /**
@@ -216,10 +218,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Accessor createAccessor()
+  public VxlAccessor createVxlAccessor()
   {
-    AccessorImpl accessor = new AccessorImpl();
-    return accessor;
+    VxlAccessorImpl vxlAccessor = new VxlAccessorImpl();
+    return vxlAccessor;
   }
 
   /**
@@ -227,10 +229,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ArrayAccessor createArrayAccessor()
+  public VxlArrayAccessor createVxlArrayAccessor()
   {
-    ArrayAccessorImpl arrayAccessor = new ArrayAccessorImpl();
-    return arrayAccessor;
+    VxlArrayAccessorImpl vxlArrayAccessor = new VxlArrayAccessorImpl();
+    return vxlArrayAccessor;
   }
 
   /**
@@ -238,10 +240,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FieldAccessor createFieldAccessor()
+  public VxlFieldAccessor createVxlFieldAccessor()
   {
-    FieldAccessorImpl fieldAccessor = new FieldAccessorImpl();
-    return fieldAccessor;
+    VxlFieldAccessorImpl vxlFieldAccessor = new VxlFieldAccessorImpl();
+    return vxlFieldAccessor;
   }
 
   /**
@@ -249,10 +251,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Value createValue()
+  public VxlList createVxlList()
   {
-    ValueImpl value = new ValueImpl();
-    return value;
+    VxlListImpl vxlList = new VxlListImpl();
+    return vxlList;
   }
 
   /**
@@ -260,10 +262,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public StringConst createStringConst()
+  public VxlListElement createVxlListElement()
   {
-    StringConstImpl stringConst = new StringConstImpl();
-    return stringConst;
+    VxlListElementImpl vxlListElement = new VxlListElementImpl();
+    return vxlListElement;
   }
 
   /**
@@ -271,10 +273,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public NumericConst createNumericConst()
+  public VxlValue createVxlValue()
   {
-    NumericConstImpl numericConst = new NumericConstImpl();
-    return numericConst;
+    VxlValueImpl vxlValue = new VxlValueImpl();
+    return vxlValue;
   }
 
   /**
@@ -282,10 +284,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public BooleanConst createBooleanConst()
+  public VxlStringConst createVxlStringConst()
   {
-    BooleanConstImpl booleanConst = new BooleanConstImpl();
-    return booleanConst;
+    VxlStringConstImpl vxlStringConst = new VxlStringConstImpl();
+    return vxlStringConst;
   }
 
   /**
@@ -293,10 +295,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public NullConst createNullConst()
+  public VxlNumericConst createVxlNumericConst()
   {
-    NullConstImpl nullConst = new NullConstImpl();
-    return nullConst;
+    VxlNumericConstImpl vxlNumericConst = new VxlNumericConstImpl();
+    return vxlNumericConst;
   }
 
   /**
@@ -304,9 +306,31 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Operator createOperatorFromString(EDataType eDataType, String initialValue)
+  public VxlBooleanConst createVxlBooleanConst()
   {
-    Operator result = Operator.get(initialValue);
+    VxlBooleanConstImpl vxlBooleanConst = new VxlBooleanConstImpl();
+    return vxlBooleanConst;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VxlNullConst createVxlNullConst()
+  {
+    VxlNullConstImpl vxlNullConst = new VxlNullConstImpl();
+    return vxlNullConst;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VxlOperator createVxlOperatorFromString(EDataType eDataType, String initialValue)
+  {
+    VxlOperator result = VxlOperator.get(initialValue);
     if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
     return result;
   }
@@ -316,7 +340,7 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public String convertOperatorToString(EDataType eDataType, Object instanceValue)
+  public String convertVxlOperatorToString(EDataType eDataType, Object instanceValue)
   {
     return instanceValue == null ? null : instanceValue.toString();
   }

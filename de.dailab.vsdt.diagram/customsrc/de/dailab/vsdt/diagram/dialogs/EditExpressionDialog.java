@@ -24,7 +24,7 @@ import de.dailab.vsdt.Property;
 import de.dailab.vsdt.diagram.ui.VsdtFeatureCombo;
 import de.dailab.vsdt.vxl.util.VxlParseException;
 import de.dailab.vsdt.vxl.util.VxlParser;
-import de.dailab.vsdt.vxl.vxl.Variable;
+import de.dailab.vsdt.vxl.vxl.VxlVariable;
 
 /**
  * This dialog an be used for editing a given expression. The expression is assumed to follow the
@@ -189,7 +189,7 @@ public class EditExpressionDialog extends TitleAreaDialog {
 				for (Property prop : properties) {
 					varNames.add(prop.getName());
 				}
-				List<Variable> unknownVars= parser.getUnknownVariables(varNames);
+				List<VxlVariable> unknownVars= parser.getUnknownVariables(varNames);
 				if (! unknownVars.isEmpty()) {
 					setErrorMessage("Variable '" + unknownVars.get(0).getName() + "' cannot be resolved");
 					return false;

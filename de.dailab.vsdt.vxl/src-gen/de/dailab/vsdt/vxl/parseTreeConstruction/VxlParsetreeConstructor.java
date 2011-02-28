@@ -32,76 +32,78 @@ protected class ThisRootNode extends RootToken {
 	
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Term_Group(this, this, 0, inst);
-			case 1: return new Head_Alternatives(this, this, 1, inst);
-			case 2: return new Tail_Group(this, this, 2, inst);
-			case 3: return new BracketTerm_Group(this, this, 3, inst);
-			case 4: return new Negation_Group(this, this, 4, inst);
-			case 5: return new Minus_Group(this, this, 5, inst);
-			case 6: return new Atom_Alternatives(this, this, 6, inst);
-			case 7: return new Variable_Group(this, this, 7, inst);
-			case 8: return new Accessor_Alternatives(this, this, 8, inst);
-			case 9: return new ArrayAccessor_Group(this, this, 9, inst);
-			case 10: return new FieldAccessor_Group(this, this, 10, inst);
-			case 11: return new Value_Alternatives(this, this, 11, inst);
-			case 12: return new StringConst_ConstAssignment(this, this, 12, inst);
-			case 13: return new NumericConst_ConstAssignment(this, this, 13, inst);
-			case 14: return new BooleanConst_ConstAssignment(this, this, 14, inst);
-			case 15: return new NullConst_ConstAssignment(this, this, 15, inst);
+			case 0: return new VxlTerm_Group(this, this, 0, inst);
+			case 1: return new VxlHead_Alternatives(this, this, 1, inst);
+			case 2: return new VxlTail_Group(this, this, 2, inst);
+			case 3: return new VxlBracketTerm_Group(this, this, 3, inst);
+			case 4: return new VxlNegation_Group(this, this, 4, inst);
+			case 5: return new VxlMinus_Group(this, this, 5, inst);
+			case 6: return new VxlAtom_Alternatives(this, this, 6, inst);
+			case 7: return new VxlVariable_Group(this, this, 7, inst);
+			case 8: return new VxlAccessor_Alternatives(this, this, 8, inst);
+			case 9: return new VxlArrayAccessor_Group(this, this, 9, inst);
+			case 10: return new VxlFieldAccessor_Group(this, this, 10, inst);
+			case 11: return new VxlList_Group(this, this, 11, inst);
+			case 12: return new VxlListElement_Group(this, this, 12, inst);
+			case 13: return new VxlValue_Alternatives(this, this, 13, inst);
+			case 14: return new VxlStringConst_ConstAssignment(this, this, 14, inst);
+			case 15: return new VxlNumericConst_ConstAssignment(this, this, 15, inst);
+			case 16: return new VxlBooleanConst_ConstAssignment(this, this, 16, inst);
+			case 17: return new VxlNullConst_ConstAssignment(this, this, 17, inst);
 			default: return null;
 		}	
 	}	
 }
 	
 
-/************ begin Rule Term ****************
+/************ begin Rule VxlTerm ****************
  *
- * Term:
- *   head=Head tail=Tail?; 
+ * VxlTerm:
+ *   head=VxlHead tail=VxlTail?; 
  * 
  * // COMPLEX TERMS
  *
  **/
 
-// head=Head tail=Tail?
-protected class Term_Group extends GroupToken {
+// head=VxlHead tail=VxlTail?
+protected class VxlTerm_Group extends GroupToken {
 	
-	public Term_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlTerm_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Group getGrammarElement() {
-		return grammarAccess.getTermAccess().getGroup();
+		return grammarAccess.getVxlTermAccess().getGroup();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Term_TailAssignment_1(parent, this, 0, inst);
-			case 1: return new Term_HeadAssignment_0(parent, this, 1, inst);
+			case 0: return new VxlTerm_TailAssignment_1(parent, this, 0, inst);
+			case 1: return new VxlTerm_HeadAssignment_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlTermRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
 }
 
-// head=Head
-protected class Term_HeadAssignment_0 extends AssignmentToken  {
+// head=VxlHead
+protected class VxlTerm_HeadAssignment_0 extends AssignmentToken  {
 	
-	public Term_HeadAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlTerm_HeadAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTermAccess().getHeadAssignment_0();
+		return grammarAccess.getVxlTermAccess().getHeadAssignment_0();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Head_Alternatives(this, this, 0, inst);
+			case 0: return new VxlHead_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -111,9 +113,9 @@ protected class Term_HeadAssignment_0 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("head");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getHeadRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getVxlHeadRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getTermAccess().getHeadHeadParserRuleCall_0_0(); 
+				element = grammarAccess.getVxlTermAccess().getHeadVxlHeadParserRuleCall_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -129,20 +131,20 @@ protected class Term_HeadAssignment_0 extends AssignmentToken  {
 	}	
 }
 
-// tail=Tail?
-protected class Term_TailAssignment_1 extends AssignmentToken  {
+// tail=VxlTail?
+protected class VxlTerm_TailAssignment_1 extends AssignmentToken  {
 	
-	public Term_TailAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlTerm_TailAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTermAccess().getTailAssignment_1();
+		return grammarAccess.getVxlTermAccess().getTailAssignment_1();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Tail_Group(this, this, 0, inst);
+			case 0: return new VxlTail_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -152,9 +154,9 @@ protected class Term_TailAssignment_1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("tail");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getTailRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getVxlTailRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getTermAccess().getTailTailParserRuleCall_1_0(); 
+				element = grammarAccess.getVxlTermAccess().getTailVxlTailParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -165,71 +167,71 @@ protected class Term_TailAssignment_1 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Term_HeadAssignment_0(parent, next, actIndex, consumed);
+			case 0: return new VxlTerm_HeadAssignment_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-/************ end Rule Term ****************/
+/************ end Rule VxlTerm ****************/
 
 
-/************ begin Rule Head ****************
+/************ begin Rule VxlHead ****************
  *
- * Head:
- *   BracketTerm|Negation|Minus|Atom;
+ * VxlHead:
+ *   VxlBracketTerm|VxlNegation|VxlMinus|VxlAtom;
  *
  **/
 
-// BracketTerm|Negation|Minus|Atom
-protected class Head_Alternatives extends AlternativesToken {
+// VxlBracketTerm|VxlNegation|VxlMinus|VxlAtom
+protected class VxlHead_Alternatives extends AlternativesToken {
 
-	public Head_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlHead_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Alternatives getGrammarElement() {
-		return grammarAccess.getHeadAccess().getAlternatives();
+		return grammarAccess.getVxlHeadAccess().getAlternatives();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Head_BracketTermParserRuleCall_0(parent, this, 0, inst);
-			case 1: return new Head_NegationParserRuleCall_1(parent, this, 1, inst);
-			case 2: return new Head_MinusParserRuleCall_2(parent, this, 2, inst);
-			case 3: return new Head_AtomParserRuleCall_3(parent, this, 3, inst);
+			case 0: return new VxlHead_VxlBracketTermParserRuleCall_0(parent, this, 0, inst);
+			case 1: return new VxlHead_VxlNegationParserRuleCall_1(parent, this, 1, inst);
+			case 2: return new VxlHead_VxlMinusParserRuleCall_2(parent, this, 2, inst);
+			case 3: return new VxlHead_VxlAtomParserRuleCall_3(parent, this, 3, inst);
 			default: return null;
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getHeadRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlHeadRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
 }
 
-// BracketTerm
-protected class Head_BracketTermParserRuleCall_0 extends RuleCallToken {
+// VxlBracketTerm
+protected class VxlHead_VxlBracketTermParserRuleCall_0 extends RuleCallToken {
 	
-	public Head_BracketTermParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlHead_VxlBracketTermParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getHeadAccess().getBracketTermParserRuleCall_0();
+		return grammarAccess.getVxlHeadAccess().getVxlBracketTermParserRuleCall_0();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new BracketTerm_Group(this, this, 0, inst);
+			case 0: return new VxlBracketTerm_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(BracketTerm_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getBracketTermRule().getType().getClassifier())) return null;
+		if(checkForRecursion(VxlBracketTerm_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlBracketTermRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -240,27 +242,27 @@ protected class Head_BracketTermParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// Negation
-protected class Head_NegationParserRuleCall_1 extends RuleCallToken {
+// VxlNegation
+protected class VxlHead_VxlNegationParserRuleCall_1 extends RuleCallToken {
 	
-	public Head_NegationParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlHead_VxlNegationParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getHeadAccess().getNegationParserRuleCall_1();
+		return grammarAccess.getVxlHeadAccess().getVxlNegationParserRuleCall_1();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Negation_Group(this, this, 0, inst);
+			case 0: return new VxlNegation_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Negation_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getNegationRule().getType().getClassifier())) return null;
+		if(checkForRecursion(VxlNegation_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlNegationRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -271,27 +273,27 @@ protected class Head_NegationParserRuleCall_1 extends RuleCallToken {
 	}	
 }
 
-// Minus
-protected class Head_MinusParserRuleCall_2 extends RuleCallToken {
+// VxlMinus
+protected class VxlHead_VxlMinusParserRuleCall_2 extends RuleCallToken {
 	
-	public Head_MinusParserRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlHead_VxlMinusParserRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getHeadAccess().getMinusParserRuleCall_2();
+		return grammarAccess.getVxlHeadAccess().getVxlMinusParserRuleCall_2();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Minus_Group(this, this, 0, inst);
+			case 0: return new VxlMinus_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Minus_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getMinusRule().getType().getClassifier())) return null;
+		if(checkForRecursion(VxlMinus_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlMinusRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -302,27 +304,27 @@ protected class Head_MinusParserRuleCall_2 extends RuleCallToken {
 	}	
 }
 
-// Atom
-protected class Head_AtomParserRuleCall_3 extends RuleCallToken {
+// VxlAtom
+protected class VxlHead_VxlAtomParserRuleCall_3 extends RuleCallToken {
 	
-	public Head_AtomParserRuleCall_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlHead_VxlAtomParserRuleCall_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getHeadAccess().getAtomParserRuleCall_3();
+		return grammarAccess.getVxlHeadAccess().getVxlAtomParserRuleCall_3();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Atom_Alternatives(this, this, 0, inst);
+			case 0: return new VxlAtom_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Atom_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getAtomRule().getType().getClassifier())) return null;
+		if(checkForRecursion(VxlAtom_Alternatives.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlAtomRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -334,49 +336,49 @@ protected class Head_AtomParserRuleCall_3 extends RuleCallToken {
 }
 
 
-/************ end Rule Head ****************/
+/************ end Rule VxlHead ****************/
 
 
-/************ begin Rule Tail ****************
+/************ begin Rule VxlTail ****************
  *
- * Tail:
- *   operator=Operator term=Term;
+ * VxlTail:
+ *   operator=VxlOperator term=VxlTerm;
  *
  **/
 
-// operator=Operator term=Term
-protected class Tail_Group extends GroupToken {
+// operator=VxlOperator term=VxlTerm
+protected class VxlTail_Group extends GroupToken {
 	
-	public Tail_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlTail_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Group getGrammarElement() {
-		return grammarAccess.getTailAccess().getGroup();
+		return grammarAccess.getVxlTailAccess().getGroup();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Tail_TermAssignment_1(parent, this, 0, inst);
+			case 0: return new VxlTail_TermAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getTailRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlTailRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
 }
 
-// operator=Operator
-protected class Tail_OperatorAssignment_0 extends AssignmentToken  {
+// operator=VxlOperator
+protected class VxlTail_OperatorAssignment_0 extends AssignmentToken  {
 	
-	public Tail_OperatorAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlTail_OperatorAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTailAccess().getOperatorAssignment_0();
+		return grammarAccess.getVxlTailAccess().getOperatorAssignment_0();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -390,7 +392,7 @@ protected class Tail_OperatorAssignment_0 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("operator");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
 			type = AssignmentType.ERC;
-			element = grammarAccess.getTailAccess().getOperatorOperatorEnumRuleCall_0_0();
+			element = grammarAccess.getVxlTailAccess().getOperatorVxlOperatorEnumRuleCall_0_0();
 			return obj;
 		}
 		return null;
@@ -398,20 +400,20 @@ protected class Tail_OperatorAssignment_0 extends AssignmentToken  {
 
 }
 
-// term=Term
-protected class Tail_TermAssignment_1 extends AssignmentToken  {
+// term=VxlTerm
+protected class VxlTail_TermAssignment_1 extends AssignmentToken  {
 	
-	public Tail_TermAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlTail_TermAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTailAccess().getTermAssignment_1();
+		return grammarAccess.getVxlTailAccess().getTermAssignment_1();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Term_Group(this, this, 0, inst);
+			case 0: return new VxlTerm_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -421,9 +423,9 @@ protected class Tail_TermAssignment_1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("term");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getVxlTermRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getTailAccess().getTermTermParserRuleCall_1_0(); 
+				element = grammarAccess.getVxlTailAccess().getTermVxlTermParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -434,56 +436,56 @@ protected class Tail_TermAssignment_1 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Tail_OperatorAssignment_0(parent, next, actIndex, consumed);
+			case 0: return new VxlTail_OperatorAssignment_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-/************ end Rule Tail ****************/
+/************ end Rule VxlTail ****************/
 
 
-/************ begin Rule BracketTerm ****************
+/************ begin Rule VxlBracketTerm ****************
  *
- * BracketTerm:
- *   "(" term=Term ")";
+ * VxlBracketTerm:
+ *   "(" term=VxlTerm ")";
  *
  **/
 
-// "(" term=Term ")"
-protected class BracketTerm_Group extends GroupToken {
+// "(" term=VxlTerm ")"
+protected class VxlBracketTerm_Group extends GroupToken {
 	
-	public BracketTerm_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlBracketTerm_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Group getGrammarElement() {
-		return grammarAccess.getBracketTermAccess().getGroup();
+		return grammarAccess.getVxlBracketTermAccess().getGroup();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new BracketTerm_RightParenthesisKeyword_2(parent, this, 0, inst);
+			case 0: return new VxlBracketTerm_RightParenthesisKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getBracketTermRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlBracketTermRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
 }
 
 // "("
-protected class BracketTerm_LeftParenthesisKeyword_0 extends KeywordToken  {
+protected class VxlBracketTerm_LeftParenthesisKeyword_0 extends KeywordToken  {
 	
-	public BracketTerm_LeftParenthesisKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlBracketTerm_LeftParenthesisKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getBracketTermAccess().getLeftParenthesisKeyword_0();
+		return grammarAccess.getVxlBracketTermAccess().getLeftParenthesisKeyword_0();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -494,20 +496,20 @@ protected class BracketTerm_LeftParenthesisKeyword_0 extends KeywordToken  {
 		
 }
 
-// term=Term
-protected class BracketTerm_TermAssignment_1 extends AssignmentToken  {
+// term=VxlTerm
+protected class VxlBracketTerm_TermAssignment_1 extends AssignmentToken  {
 	
-	public BracketTerm_TermAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlBracketTerm_TermAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getBracketTermAccess().getTermAssignment_1();
+		return grammarAccess.getVxlBracketTermAccess().getTermAssignment_1();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Term_Group(this, this, 0, inst);
+			case 0: return new VxlTerm_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -517,9 +519,9 @@ protected class BracketTerm_TermAssignment_1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("term");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getVxlTermRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getBracketTermAccess().getTermTermParserRuleCall_1_0(); 
+				element = grammarAccess.getVxlBracketTermAccess().getTermVxlTermParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -530,26 +532,26 @@ protected class BracketTerm_TermAssignment_1 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new BracketTerm_LeftParenthesisKeyword_0(parent, next, actIndex, consumed);
+			case 0: return new VxlBracketTerm_LeftParenthesisKeyword_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // ")"
-protected class BracketTerm_RightParenthesisKeyword_2 extends KeywordToken  {
+protected class VxlBracketTerm_RightParenthesisKeyword_2 extends KeywordToken  {
 	
-	public BracketTerm_RightParenthesisKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlBracketTerm_RightParenthesisKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getBracketTermAccess().getRightParenthesisKeyword_2();
+		return grammarAccess.getVxlBracketTermAccess().getRightParenthesisKeyword_2();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new BracketTerm_TermAssignment_1(parent, this, 0, inst);
+			case 0: return new VxlBracketTerm_TermAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -557,49 +559,49 @@ protected class BracketTerm_RightParenthesisKeyword_2 extends KeywordToken  {
 }
 
 
-/************ end Rule BracketTerm ****************/
+/************ end Rule VxlBracketTerm ****************/
 
 
-/************ begin Rule Negation ****************
+/************ begin Rule VxlNegation ****************
  *
- * Negation:
- *   "not" head=Head;
+ * VxlNegation:
+ *   "not" head=VxlHead;
  *
  **/
 
-// "not" head=Head
-protected class Negation_Group extends GroupToken {
+// "not" head=VxlHead
+protected class VxlNegation_Group extends GroupToken {
 	
-	public Negation_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlNegation_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Group getGrammarElement() {
-		return grammarAccess.getNegationAccess().getGroup();
+		return grammarAccess.getVxlNegationAccess().getGroup();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Negation_HeadAssignment_1(parent, this, 0, inst);
+			case 0: return new VxlNegation_HeadAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getNegationRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlNegationRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
 }
 
 // "not"
-protected class Negation_NotKeyword_0 extends KeywordToken  {
+protected class VxlNegation_NotKeyword_0 extends KeywordToken  {
 	
-	public Negation_NotKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlNegation_NotKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getNegationAccess().getNotKeyword_0();
+		return grammarAccess.getVxlNegationAccess().getNotKeyword_0();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -610,20 +612,20 @@ protected class Negation_NotKeyword_0 extends KeywordToken  {
 		
 }
 
-// head=Head
-protected class Negation_HeadAssignment_1 extends AssignmentToken  {
+// head=VxlHead
+protected class VxlNegation_HeadAssignment_1 extends AssignmentToken  {
 	
-	public Negation_HeadAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlNegation_HeadAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getNegationAccess().getHeadAssignment_1();
+		return grammarAccess.getVxlNegationAccess().getHeadAssignment_1();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Head_Alternatives(this, this, 0, inst);
+			case 0: return new VxlHead_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -633,9 +635,9 @@ protected class Negation_HeadAssignment_1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("head");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getHeadRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getVxlHeadRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getNegationAccess().getHeadHeadParserRuleCall_1_0(); 
+				element = grammarAccess.getVxlNegationAccess().getHeadVxlHeadParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -646,56 +648,56 @@ protected class Negation_HeadAssignment_1 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Negation_NotKeyword_0(parent, next, actIndex, consumed);
+			case 0: return new VxlNegation_NotKeyword_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-/************ end Rule Negation ****************/
+/************ end Rule VxlNegation ****************/
 
 
-/************ begin Rule Minus ****************
+/************ begin Rule VxlMinus ****************
  *
- * Minus:
- *   "-" head=Head;
+ * VxlMinus:
+ *   "-" head=VxlHead;
  *
  **/
 
-// "-" head=Head
-protected class Minus_Group extends GroupToken {
+// "-" head=VxlHead
+protected class VxlMinus_Group extends GroupToken {
 	
-	public Minus_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlMinus_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Group getGrammarElement() {
-		return grammarAccess.getMinusAccess().getGroup();
+		return grammarAccess.getVxlMinusAccess().getGroup();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Minus_HeadAssignment_1(parent, this, 0, inst);
+			case 0: return new VxlMinus_HeadAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getMinusRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlMinusRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
 }
 
 // "-"
-protected class Minus_HyphenMinusKeyword_0 extends KeywordToken  {
+protected class VxlMinus_HyphenMinusKeyword_0 extends KeywordToken  {
 	
-	public Minus_HyphenMinusKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlMinus_HyphenMinusKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getMinusAccess().getHyphenMinusKeyword_0();
+		return grammarAccess.getVxlMinusAccess().getHyphenMinusKeyword_0();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -706,20 +708,20 @@ protected class Minus_HyphenMinusKeyword_0 extends KeywordToken  {
 		
 }
 
-// head=Head
-protected class Minus_HeadAssignment_1 extends AssignmentToken  {
+// head=VxlHead
+protected class VxlMinus_HeadAssignment_1 extends AssignmentToken  {
 	
-	public Minus_HeadAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlMinus_HeadAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getMinusAccess().getHeadAssignment_1();
+		return grammarAccess.getVxlMinusAccess().getHeadAssignment_1();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Head_Alternatives(this, this, 0, inst);
+			case 0: return new VxlHead_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -729,9 +731,9 @@ protected class Minus_HeadAssignment_1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("head");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getHeadRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getVxlHeadRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getMinusAccess().getHeadHeadParserRuleCall_1_0(); 
+				element = grammarAccess.getVxlMinusAccess().getHeadVxlHeadParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -742,75 +744,76 @@ protected class Minus_HeadAssignment_1 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Minus_HyphenMinusKeyword_0(parent, next, actIndex, consumed);
+			case 0: return new VxlMinus_HyphenMinusKeyword_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-/************ end Rule Minus ****************/
+/************ end Rule VxlMinus ****************/
 
 
-/************ begin Rule Atom ****************
+/************ begin Rule VxlAtom ****************
  *
- * Atom:
- *   Value|Variable; 
- * 			     
+ * VxlAtom:
+ *   VxlValue|VxlVariable|VxlList; 
+ * 			         
  * 
  * // VARIABLES & ACCESSORS
  *
  **/
 
-// Value|Variable 
-// 			     
+// VxlValue|VxlVariable|VxlList 
+// 			         
 // 
 // // VARIABLES & ACCESSORS
-protected class Atom_Alternatives extends AlternativesToken {
+protected class VxlAtom_Alternatives extends AlternativesToken {
 
-	public Atom_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlAtom_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Alternatives getGrammarElement() {
-		return grammarAccess.getAtomAccess().getAlternatives();
+		return grammarAccess.getVxlAtomAccess().getAlternatives();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Atom_ValueParserRuleCall_0(parent, this, 0, inst);
-			case 1: return new Atom_VariableParserRuleCall_1(parent, this, 1, inst);
+			case 0: return new VxlAtom_VxlValueParserRuleCall_0(parent, this, 0, inst);
+			case 1: return new VxlAtom_VxlVariableParserRuleCall_1(parent, this, 1, inst);
+			case 2: return new VxlAtom_VxlListParserRuleCall_2(parent, this, 2, inst);
 			default: return null;
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAtomRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlAtomRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
 }
 
-// Value
-protected class Atom_ValueParserRuleCall_0 extends RuleCallToken {
+// VxlValue
+protected class VxlAtom_VxlValueParserRuleCall_0 extends RuleCallToken {
 	
-	public Atom_ValueParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlAtom_VxlValueParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getAtomAccess().getValueParserRuleCall_0();
+		return grammarAccess.getVxlAtomAccess().getVxlValueParserRuleCall_0();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Value_Alternatives(this, this, 0, inst);
+			case 0: return new VxlValue_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Value_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getValueRule().getType().getClassifier())) return null;
+		if(checkForRecursion(VxlValue_Alternatives.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlValueRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -821,27 +824,58 @@ protected class Atom_ValueParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// Variable
-protected class Atom_VariableParserRuleCall_1 extends RuleCallToken {
+// VxlVariable
+protected class VxlAtom_VxlVariableParserRuleCall_1 extends RuleCallToken {
 	
-	public Atom_VariableParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlAtom_VxlVariableParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getAtomAccess().getVariableParserRuleCall_1();
+		return grammarAccess.getVxlAtomAccess().getVxlVariableParserRuleCall_1();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Variable_Group(this, this, 0, inst);
+			case 0: return new VxlVariable_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Variable_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getVariableRule().getType().getClassifier())) return null;
+		if(checkForRecursion(VxlVariable_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlVariableRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// VxlList
+protected class VxlAtom_VxlListParserRuleCall_2 extends RuleCallToken {
+	
+	public VxlAtom_VxlListParserRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getVxlAtomAccess().getVxlListParserRuleCall_2();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new VxlList_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(VxlList_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlListRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -853,52 +887,52 @@ protected class Atom_VariableParserRuleCall_1 extends RuleCallToken {
 }
 
 
-/************ end Rule Atom ****************/
+/************ end Rule VxlAtom ****************/
 
 
-/************ begin Rule Variable ****************
+/************ begin Rule VxlVariable ****************
  *
- * Variable:
- *   name=ID accessor=Accessor?; 
+ * VxlVariable:
+ *   name=ID accessor=VxlAccessor?; 
  * 
  * // VARIABLES & ACCESSORS
  *
  **/
 
-// name=ID accessor=Accessor?
-protected class Variable_Group extends GroupToken {
+// name=ID accessor=VxlAccessor?
+protected class VxlVariable_Group extends GroupToken {
 	
-	public Variable_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlVariable_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Group getGrammarElement() {
-		return grammarAccess.getVariableAccess().getGroup();
+		return grammarAccess.getVxlVariableAccess().getGroup();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Variable_AccessorAssignment_1(parent, this, 0, inst);
-			case 1: return new Variable_NameAssignment_0(parent, this, 1, inst);
+			case 0: return new VxlVariable_AccessorAssignment_1(parent, this, 0, inst);
+			case 1: return new VxlVariable_NameAssignment_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getVariableRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlVariableRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
 }
 
 // name=ID
-protected class Variable_NameAssignment_0 extends AssignmentToken  {
+protected class VxlVariable_NameAssignment_0 extends AssignmentToken  {
 	
-	public Variable_NameAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlVariable_NameAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getVariableAccess().getNameAssignment_0();
+		return grammarAccess.getVxlVariableAccess().getNameAssignment_0();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -912,7 +946,7 @@ protected class Variable_NameAssignment_0 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.getVariableAccess().getNameIDTerminalRuleCall_0_0();
+			element = grammarAccess.getVxlVariableAccess().getNameIDTerminalRuleCall_0_0();
 			return obj;
 		}
 		return null;
@@ -920,20 +954,20 @@ protected class Variable_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// accessor=Accessor?
-protected class Variable_AccessorAssignment_1 extends AssignmentToken  {
+// accessor=VxlAccessor?
+protected class VxlVariable_AccessorAssignment_1 extends AssignmentToken  {
 	
-	public Variable_AccessorAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlVariable_AccessorAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getVariableAccess().getAccessorAssignment_1();
+		return grammarAccess.getVxlVariableAccess().getAccessorAssignment_1();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Accessor_Alternatives(this, this, 0, inst);
+			case 0: return new VxlAccessor_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -943,9 +977,9 @@ protected class Variable_AccessorAssignment_1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("accessor");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getAccessorRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getVxlAccessorRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getVariableAccess().getAccessorAccessorParserRuleCall_1_0(); 
+				element = grammarAccess.getVxlVariableAccess().getAccessorVxlAccessorParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -956,69 +990,69 @@ protected class Variable_AccessorAssignment_1 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Variable_NameAssignment_0(parent, next, actIndex, consumed);
+			case 0: return new VxlVariable_NameAssignment_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-/************ end Rule Variable ****************/
+/************ end Rule VxlVariable ****************/
 
 
-/************ begin Rule Accessor ****************
+/************ begin Rule VxlAccessor ****************
  *
- * Accessor:
- *   ArrayAccessor|FieldAccessor;
+ * VxlAccessor:
+ *   VxlArrayAccessor|VxlFieldAccessor;
  *
  **/
 
-// ArrayAccessor|FieldAccessor
-protected class Accessor_Alternatives extends AlternativesToken {
+// VxlArrayAccessor|VxlFieldAccessor
+protected class VxlAccessor_Alternatives extends AlternativesToken {
 
-	public Accessor_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlAccessor_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Alternatives getGrammarElement() {
-		return grammarAccess.getAccessorAccess().getAlternatives();
+		return grammarAccess.getVxlAccessorAccess().getAlternatives();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Accessor_ArrayAccessorParserRuleCall_0(parent, this, 0, inst);
-			case 1: return new Accessor_FieldAccessorParserRuleCall_1(parent, this, 1, inst);
+			case 0: return new VxlAccessor_VxlArrayAccessorParserRuleCall_0(parent, this, 0, inst);
+			case 1: return new VxlAccessor_VxlFieldAccessorParserRuleCall_1(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getAccessorRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlAccessorRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
 }
 
-// ArrayAccessor
-protected class Accessor_ArrayAccessorParserRuleCall_0 extends RuleCallToken {
+// VxlArrayAccessor
+protected class VxlAccessor_VxlArrayAccessorParserRuleCall_0 extends RuleCallToken {
 	
-	public Accessor_ArrayAccessorParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlAccessor_VxlArrayAccessorParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getAccessorAccess().getArrayAccessorParserRuleCall_0();
+		return grammarAccess.getVxlAccessorAccess().getVxlArrayAccessorParserRuleCall_0();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new ArrayAccessor_Group(this, this, 0, inst);
+			case 0: return new VxlArrayAccessor_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(ArrayAccessor_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getArrayAccessorRule().getType().getClassifier())) return null;
+		if(checkForRecursion(VxlArrayAccessor_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlArrayAccessorRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -1029,27 +1063,27 @@ protected class Accessor_ArrayAccessorParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// FieldAccessor
-protected class Accessor_FieldAccessorParserRuleCall_1 extends RuleCallToken {
+// VxlFieldAccessor
+protected class VxlAccessor_VxlFieldAccessorParserRuleCall_1 extends RuleCallToken {
 	
-	public Accessor_FieldAccessorParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlAccessor_VxlFieldAccessorParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getAccessorAccess().getFieldAccessorParserRuleCall_1();
+		return grammarAccess.getVxlAccessorAccess().getVxlFieldAccessorParserRuleCall_1();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new FieldAccessor_Group(this, this, 0, inst);
+			case 0: return new VxlFieldAccessor_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(FieldAccessor_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getFieldAccessorRule().getType().getClassifier())) return null;
+		if(checkForRecursion(VxlFieldAccessor_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlFieldAccessorRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -1061,50 +1095,50 @@ protected class Accessor_FieldAccessorParserRuleCall_1 extends RuleCallToken {
 }
 
 
-/************ end Rule Accessor ****************/
+/************ end Rule VxlAccessor ****************/
 
 
-/************ begin Rule ArrayAccessor ****************
+/************ begin Rule VxlArrayAccessor ****************
  *
- * ArrayAccessor:
- *   "[" index=Term "]" accessor=Accessor?;
+ * VxlArrayAccessor:
+ *   "[" index=VxlTerm "]" accessor=VxlAccessor?;
  *
  **/
 
-// "[" index=Term "]" accessor=Accessor?
-protected class ArrayAccessor_Group extends GroupToken {
+// "[" index=VxlTerm "]" accessor=VxlAccessor?
+protected class VxlArrayAccessor_Group extends GroupToken {
 	
-	public ArrayAccessor_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlArrayAccessor_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Group getGrammarElement() {
-		return grammarAccess.getArrayAccessorAccess().getGroup();
+		return grammarAccess.getVxlArrayAccessorAccess().getGroup();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new ArrayAccessor_AccessorAssignment_3(parent, this, 0, inst);
-			case 1: return new ArrayAccessor_RightSquareBracketKeyword_2(parent, this, 1, inst);
+			case 0: return new VxlArrayAccessor_AccessorAssignment_3(parent, this, 0, inst);
+			case 1: return new VxlArrayAccessor_RightSquareBracketKeyword_2(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getArrayAccessorRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlArrayAccessorRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
 }
 
 // "["
-protected class ArrayAccessor_LeftSquareBracketKeyword_0 extends KeywordToken  {
+protected class VxlArrayAccessor_LeftSquareBracketKeyword_0 extends KeywordToken  {
 	
-	public ArrayAccessor_LeftSquareBracketKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlArrayAccessor_LeftSquareBracketKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getArrayAccessorAccess().getLeftSquareBracketKeyword_0();
+		return grammarAccess.getVxlArrayAccessorAccess().getLeftSquareBracketKeyword_0();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -1115,20 +1149,20 @@ protected class ArrayAccessor_LeftSquareBracketKeyword_0 extends KeywordToken  {
 		
 }
 
-// index=Term
-protected class ArrayAccessor_IndexAssignment_1 extends AssignmentToken  {
+// index=VxlTerm
+protected class VxlArrayAccessor_IndexAssignment_1 extends AssignmentToken  {
 	
-	public ArrayAccessor_IndexAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlArrayAccessor_IndexAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getArrayAccessorAccess().getIndexAssignment_1();
+		return grammarAccess.getVxlArrayAccessorAccess().getIndexAssignment_1();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Term_Group(this, this, 0, inst);
+			case 0: return new VxlTerm_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -1138,9 +1172,9 @@ protected class ArrayAccessor_IndexAssignment_1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("index");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getTermRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getVxlTermRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getArrayAccessorAccess().getIndexTermParserRuleCall_1_0(); 
+				element = grammarAccess.getVxlArrayAccessorAccess().getIndexVxlTermParserRuleCall_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1151,46 +1185,46 @@ protected class ArrayAccessor_IndexAssignment_1 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new ArrayAccessor_LeftSquareBracketKeyword_0(parent, next, actIndex, consumed);
+			case 0: return new VxlArrayAccessor_LeftSquareBracketKeyword_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // "]"
-protected class ArrayAccessor_RightSquareBracketKeyword_2 extends KeywordToken  {
+protected class VxlArrayAccessor_RightSquareBracketKeyword_2 extends KeywordToken  {
 	
-	public ArrayAccessor_RightSquareBracketKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlArrayAccessor_RightSquareBracketKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getArrayAccessorAccess().getRightSquareBracketKeyword_2();
+		return grammarAccess.getVxlArrayAccessorAccess().getRightSquareBracketKeyword_2();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new ArrayAccessor_IndexAssignment_1(parent, this, 0, inst);
+			case 0: return new VxlArrayAccessor_IndexAssignment_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 }
 
-// accessor=Accessor?
-protected class ArrayAccessor_AccessorAssignment_3 extends AssignmentToken  {
+// accessor=VxlAccessor?
+protected class VxlArrayAccessor_AccessorAssignment_3 extends AssignmentToken  {
 	
-	public ArrayAccessor_AccessorAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlArrayAccessor_AccessorAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getArrayAccessorAccess().getAccessorAssignment_3();
+		return grammarAccess.getVxlArrayAccessorAccess().getAccessorAssignment_3();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Accessor_Alternatives(this, this, 0, inst);
+			case 0: return new VxlAccessor_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -1200,9 +1234,9 @@ protected class ArrayAccessor_AccessorAssignment_3 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("accessor");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getAccessorRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getVxlAccessorRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getArrayAccessorAccess().getAccessorAccessorParserRuleCall_3_0(); 
+				element = grammarAccess.getVxlArrayAccessorAccess().getAccessorVxlAccessorParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1213,60 +1247,60 @@ protected class ArrayAccessor_AccessorAssignment_3 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new ArrayAccessor_RightSquareBracketKeyword_2(parent, next, actIndex, consumed);
+			case 0: return new VxlArrayAccessor_RightSquareBracketKeyword_2(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-/************ end Rule ArrayAccessor ****************/
+/************ end Rule VxlArrayAccessor ****************/
 
 
-/************ begin Rule FieldAccessor ****************
+/************ begin Rule VxlFieldAccessor ****************
  *
- * FieldAccessor:
- *   "." name=ID accessor=Accessor?; 
+ * VxlFieldAccessor:
+ *   "." name=ID accessor=VxlAccessor?; 
  * 	             
  * 
- * // CONSTANTS
+ * // LISTS
  *
  **/
 
-// "." name=ID accessor=Accessor?
-protected class FieldAccessor_Group extends GroupToken {
+// "." name=ID accessor=VxlAccessor?
+protected class VxlFieldAccessor_Group extends GroupToken {
 	
-	public FieldAccessor_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlFieldAccessor_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Group getGrammarElement() {
-		return grammarAccess.getFieldAccessorAccess().getGroup();
+		return grammarAccess.getVxlFieldAccessorAccess().getGroup();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new FieldAccessor_AccessorAssignment_2(parent, this, 0, inst);
-			case 1: return new FieldAccessor_NameAssignment_1(parent, this, 1, inst);
+			case 0: return new VxlFieldAccessor_AccessorAssignment_2(parent, this, 0, inst);
+			case 1: return new VxlFieldAccessor_NameAssignment_1(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getFieldAccessorRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlFieldAccessorRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
 }
 
 // "."
-protected class FieldAccessor_FullStopKeyword_0 extends KeywordToken  {
+protected class VxlFieldAccessor_FullStopKeyword_0 extends KeywordToken  {
 	
-	public FieldAccessor_FullStopKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlFieldAccessor_FullStopKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getFieldAccessorAccess().getFullStopKeyword_0();
+		return grammarAccess.getVxlFieldAccessorAccess().getFullStopKeyword_0();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -1278,19 +1312,19 @@ protected class FieldAccessor_FullStopKeyword_0 extends KeywordToken  {
 }
 
 // name=ID
-protected class FieldAccessor_NameAssignment_1 extends AssignmentToken  {
+protected class VxlFieldAccessor_NameAssignment_1 extends AssignmentToken  {
 	
-	public FieldAccessor_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlFieldAccessor_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getFieldAccessorAccess().getNameAssignment_1();
+		return grammarAccess.getVxlFieldAccessorAccess().getNameAssignment_1();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new FieldAccessor_FullStopKeyword_0(parent, this, 0, inst);
+			case 0: return new VxlFieldAccessor_FullStopKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -1300,7 +1334,7 @@ protected class FieldAccessor_NameAssignment_1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.getFieldAccessorAccess().getNameIDTerminalRuleCall_1_0();
+			element = grammarAccess.getVxlFieldAccessorAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
 		}
 		return null;
@@ -1308,20 +1342,20 @@ protected class FieldAccessor_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// accessor=Accessor?
-protected class FieldAccessor_AccessorAssignment_2 extends AssignmentToken  {
+// accessor=VxlAccessor?
+protected class VxlFieldAccessor_AccessorAssignment_2 extends AssignmentToken  {
 	
-	public FieldAccessor_AccessorAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlFieldAccessor_AccessorAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getFieldAccessorAccess().getAccessorAssignment_2();
+		return grammarAccess.getVxlFieldAccessorAccess().getAccessorAssignment_2();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Accessor_Alternatives(this, this, 0, inst);
+			case 0: return new VxlAccessor_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -1331,9 +1365,9 @@ protected class FieldAccessor_AccessorAssignment_2 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("accessor");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getAccessorRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getVxlAccessorRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getFieldAccessorAccess().getAccessorAccessorParserRuleCall_2_0(); 
+				element = grammarAccess.getVxlFieldAccessorAccess().getAccessorVxlAccessorParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1344,200 +1378,482 @@ protected class FieldAccessor_AccessorAssignment_2 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new FieldAccessor_NameAssignment_1(parent, next, actIndex, consumed);
+			case 0: return new VxlFieldAccessor_NameAssignment_1(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-/************ end Rule FieldAccessor ****************/
+/************ end Rule VxlFieldAccessor ****************/
 
 
-/************ begin Rule Value ****************
+/************ begin Rule VxlList ****************
  *
- * Value:
- *   StringConst|BooleanConst|NumericConst|NullConst; 
+ * VxlList:
+ *   "[" body=VxlListElement? "]"; 
  * 
- * // CONSTANTS
+ * // LISTS
  *
  **/
 
-// StringConst|BooleanConst|NumericConst|NullConst 
-// 
-// // CONSTANTS
-protected class Value_Alternatives extends AlternativesToken {
-
-	public Value_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+// "[" body=VxlListElement? "]"
+protected class VxlList_Group extends GroupToken {
+	
+	public VxlList_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
-	public Alternatives getGrammarElement() {
-		return grammarAccess.getValueAccess().getAlternatives();
+	public Group getGrammarElement() {
+		return grammarAccess.getVxlListAccess().getGroup();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Value_StringConstParserRuleCall_0(parent, this, 0, inst);
-			case 1: return new Value_BooleanConstParserRuleCall_1(parent, this, 1, inst);
-			case 2: return new Value_NumericConstParserRuleCall_2(parent, this, 2, inst);
-			case 3: return new Value_NullConstParserRuleCall_3(parent, this, 3, inst);
+			case 0: return new VxlList_RightSquareBracketKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getValueRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlListRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
 }
 
-// StringConst
-protected class Value_StringConstParserRuleCall_0 extends RuleCallToken {
+// "["
+protected class VxlList_LeftSquareBracketKeyword_0 extends KeywordToken  {
 	
-	public Value_StringConstParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlList_LeftSquareBracketKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getValueAccess().getStringConstParserRuleCall_0();
+	public Keyword getGrammarElement() {
+		return grammarAccess.getVxlListAccess().getLeftSquareBracketKeyword_0();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new StringConst_ConstAssignment(this, this, 0, inst);
-			default: return null;
+			default: return parent.createParentFollower(this, index, index, inst);
 		}	
 	}	
 		
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(StringConst_ConstAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getStringConstRule().getType().getClassifier())) return null;
-		return current;
-	}
-	
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
-		}	
-	}	
 }
 
-// BooleanConst
-protected class Value_BooleanConstParserRuleCall_1 extends RuleCallToken {
+// body=VxlListElement?
+protected class VxlList_BodyAssignment_1 extends AssignmentToken  {
 	
-	public Value_BooleanConstParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getValueAccess().getBooleanConstParserRuleCall_1();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new BooleanConst_ConstAssignment(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(BooleanConst_ConstAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getBooleanConstRule().getType().getClassifier())) return null;
-		return current;
-	}
-	
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
-		}	
-	}	
-}
-
-// NumericConst
-protected class Value_NumericConstParserRuleCall_2 extends RuleCallToken {
-	
-	public Value_NumericConstParserRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getValueAccess().getNumericConstParserRuleCall_2();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new NumericConst_ConstAssignment(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(NumericConst_ConstAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getNumericConstRule().getType().getClassifier())) return null;
-		return current;
-	}
-	
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
-		}	
-	}	
-}
-
-// NullConst
-protected class Value_NullConstParserRuleCall_3 extends RuleCallToken {
-	
-	public Value_NullConstParserRuleCall_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getValueAccess().getNullConstParserRuleCall_3();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new NullConst_ConstAssignment(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(NullConst_ConstAssignment.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getNullConstRule().getType().getClassifier())) return null;
-		return current;
-	}
-	
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
-		}	
-	}	
-}
-
-
-/************ end Rule Value ****************/
-
-
-/************ begin Rule StringConst ****************
- *
- * StringConst:
- *   const=STRING; 
- * 	     
- * //NumericConst:	const = INT; // keine kommazahlen
- *
- **/
-
-// const=STRING
-protected class StringConst_ConstAssignment extends AssignmentToken  {
-	
-	public StringConst_ConstAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlList_BodyAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStringConstAccess().getConstAssignment();
+		return grammarAccess.getVxlListAccess().getBodyAssignment_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new VxlListElement_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("body",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("body");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getVxlListElementRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getVxlListAccess().getBodyVxlListElementParserRuleCall_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new VxlList_LeftSquareBracketKeyword_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// "]"
+protected class VxlList_RightSquareBracketKeyword_2 extends KeywordToken  {
+	
+	public VxlList_RightSquareBracketKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getVxlListAccess().getRightSquareBracketKeyword_2();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new VxlList_BodyAssignment_1(parent, this, 0, inst);
+			case 1: return new VxlList_LeftSquareBracketKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+/************ end Rule VxlList ****************/
+
+
+/************ begin Rule VxlListElement ****************
+ *
+ * VxlListElement:
+ *   first=VxlTerm ("," rest=VxlListElement)?;  
+ * 		             
+ * 
+ * // CONSTANTS
+ *
+ **/
+
+// first=VxlTerm ("," rest=VxlListElement)?
+protected class VxlListElement_Group extends GroupToken {
+	
+	public VxlListElement_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getVxlListElementAccess().getGroup();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new VxlListElement_Group_1(parent, this, 0, inst);
+			case 1: return new VxlListElement_FirstAssignment_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getVxlListElementRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// first=VxlTerm
+protected class VxlListElement_FirstAssignment_0 extends AssignmentToken  {
+	
+	public VxlListElement_FirstAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getVxlListElementAccess().getFirstAssignment_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new VxlTerm_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("first",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("first");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getVxlTermRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getVxlListElementAccess().getFirstVxlTermParserRuleCall_0_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// ("," rest=VxlListElement)?
+protected class VxlListElement_Group_1 extends GroupToken {
+	
+	public VxlListElement_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getVxlListElementAccess().getGroup_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new VxlListElement_RestAssignment_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// ","
+protected class VxlListElement_CommaKeyword_1_0 extends KeywordToken  {
+	
+	public VxlListElement_CommaKeyword_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Keyword getGrammarElement() {
+		return grammarAccess.getVxlListElementAccess().getCommaKeyword_1_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new VxlListElement_FirstAssignment_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// rest=VxlListElement
+protected class VxlListElement_RestAssignment_1_1 extends AssignmentToken  {
+	
+	public VxlListElement_RestAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getVxlListElementAccess().getRestAssignment_1_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new VxlListElement_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("rest",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("rest");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getVxlListElementRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getVxlListElementAccess().getRestVxlListElementParserRuleCall_1_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new VxlListElement_CommaKeyword_1_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+
+/************ end Rule VxlListElement ****************/
+
+
+/************ begin Rule VxlValue ****************
+ *
+ * VxlValue:
+ *   VxlStringConst|VxlBooleanConst|VxlNumericConst|VxlNullConst; 
+ * 
+ * // CONSTANTS
+ *
+ **/
+
+// VxlStringConst|VxlBooleanConst|VxlNumericConst|VxlNullConst 
+// 
+// // CONSTANTS
+protected class VxlValue_Alternatives extends AlternativesToken {
+
+	public VxlValue_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getVxlValueAccess().getAlternatives();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new VxlValue_VxlStringConstParserRuleCall_0(parent, this, 0, inst);
+			case 1: return new VxlValue_VxlBooleanConstParserRuleCall_1(parent, this, 1, inst);
+			case 2: return new VxlValue_VxlNumericConstParserRuleCall_2(parent, this, 2, inst);
+			case 3: return new VxlValue_VxlNullConstParserRuleCall_3(parent, this, 3, inst);
+			default: return null;
+		}	
+	}	
+		
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getVxlValueRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// VxlStringConst
+protected class VxlValue_VxlStringConstParserRuleCall_0 extends RuleCallToken {
+	
+	public VxlValue_VxlStringConstParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getVxlValueAccess().getVxlStringConstParserRuleCall_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new VxlStringConst_ConstAssignment(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(VxlStringConst_ConstAssignment.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlStringConstRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// VxlBooleanConst
+protected class VxlValue_VxlBooleanConstParserRuleCall_1 extends RuleCallToken {
+	
+	public VxlValue_VxlBooleanConstParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getVxlValueAccess().getVxlBooleanConstParserRuleCall_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new VxlBooleanConst_ConstAssignment(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(VxlBooleanConst_ConstAssignment.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlBooleanConstRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// VxlNumericConst
+protected class VxlValue_VxlNumericConstParserRuleCall_2 extends RuleCallToken {
+	
+	public VxlValue_VxlNumericConstParserRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getVxlValueAccess().getVxlNumericConstParserRuleCall_2();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new VxlNumericConst_ConstAssignment(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(VxlNumericConst_ConstAssignment.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlNumericConstRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// VxlNullConst
+protected class VxlValue_VxlNullConstParserRuleCall_3 extends RuleCallToken {
+	
+	public VxlValue_VxlNullConstParserRuleCall_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getVxlValueAccess().getVxlNullConstParserRuleCall_3();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new VxlNullConst_ConstAssignment(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(VxlNullConst_ConstAssignment.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlNullConstRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+
+/************ end Rule VxlValue ****************/
+
+
+/************ begin Rule VxlStringConst ****************
+ *
+ * VxlStringConst:
+ *   const=STRING; 
+ * 		     
+ * //NumericConst:		const = INT; // keine kommazahlen
+ *
+ **/
+
+// const=STRING
+protected class VxlStringConst_ConstAssignment extends AssignmentToken  {
+	
+	public VxlStringConst_ConstAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getVxlStringConstAccess().getConstAssignment();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -1547,7 +1863,7 @@ protected class StringConst_ConstAssignment extends AssignmentToken  {
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getStringConstRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlStringConstRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -1555,7 +1871,7 @@ protected class StringConst_ConstAssignment extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("const");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
 			type = AssignmentType.LRC;
-			element = grammarAccess.getStringConstAccess().getConstSTRINGTerminalRuleCall_0();
+			element = grammarAccess.getVxlStringConstAccess().getConstSTRINGTerminalRuleCall_0();
 			return obj;
 		}
 		return null;
@@ -1563,28 +1879,28 @@ protected class StringConst_ConstAssignment extends AssignmentToken  {
 
 }
 
-/************ end Rule StringConst ****************/
+/************ end Rule VxlStringConst ****************/
 
 
-/************ begin Rule NumericConst ****************
+/************ begin Rule VxlNumericConst ****************
  *
- * NumericConst:
+ * VxlNumericConst:
  *   const=NUMERIC; 
- * //NumericConst:	const = INT; // keine kommazahlen 
+ * //NumericConst:		const = INT; // keine kommazahlen 
  * 	     
  * // BooleanConst:	isTrue ?= "true" | "false";
  *
  **/
 
 // const=NUMERIC
-protected class NumericConst_ConstAssignment extends AssignmentToken  {
+protected class VxlNumericConst_ConstAssignment extends AssignmentToken  {
 	
-	public NumericConst_ConstAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlNumericConst_ConstAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getNumericConstAccess().getConstAssignment();
+		return grammarAccess.getVxlNumericConstAccess().getConstAssignment();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -1594,7 +1910,7 @@ protected class NumericConst_ConstAssignment extends AssignmentToken  {
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getNumericConstRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlNumericConstRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -1602,7 +1918,7 @@ protected class NumericConst_ConstAssignment extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("const");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
 			type = AssignmentType.DRC;
-			element = grammarAccess.getNumericConstAccess().getConstNUMERICParserRuleCall_0();
+			element = grammarAccess.getVxlNumericConstAccess().getConstNUMERICParserRuleCall_0();
 			return obj;
 		}
 		return null;
@@ -1610,26 +1926,26 @@ protected class NumericConst_ConstAssignment extends AssignmentToken  {
 
 }
 
-/************ end Rule NumericConst ****************/
+/************ end Rule VxlNumericConst ****************/
 
 
-/************ begin Rule BooleanConst ****************
+/************ begin Rule VxlBooleanConst ****************
  *
- * BooleanConst:
+ * VxlBooleanConst:
  *   const=( "true" | "false" ); 
  * // BooleanConst:	isTrue ?= "true" | "false";
  *
  **/
 
 // const=( "true" | "false" )
-protected class BooleanConst_ConstAssignment extends AssignmentToken  {
+protected class VxlBooleanConst_ConstAssignment extends AssignmentToken  {
 	
-	public BooleanConst_ConstAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlBooleanConst_ConstAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getBooleanConstAccess().getConstAssignment();
+		return grammarAccess.getVxlBooleanConstAccess().getConstAssignment();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -1639,7 +1955,7 @@ protected class BooleanConst_ConstAssignment extends AssignmentToken  {
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getBooleanConstRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlBooleanConstRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -1647,12 +1963,12 @@ protected class BooleanConst_ConstAssignment extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("const");
 		if("true".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getBooleanConstAccess().getConstTrueKeyword_0_0();
+			element = grammarAccess.getVxlBooleanConstAccess().getConstTrueKeyword_0_0();
 			return obj;
 		}
 		if("false".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getBooleanConstAccess().getConstFalseKeyword_0_1();
+			element = grammarAccess.getVxlBooleanConstAccess().getConstFalseKeyword_0_1();
 			return obj;
 		}
 		return null;
@@ -1660,12 +1976,12 @@ protected class BooleanConst_ConstAssignment extends AssignmentToken  {
 
 }
 
-/************ end Rule BooleanConst ****************/
+/************ end Rule VxlBooleanConst ****************/
 
 
-/************ begin Rule NullConst ****************
+/************ begin Rule VxlNullConst ****************
  *
- * NullConst:
+ * VxlNullConst:
  *   const="null"; 
  * 		     
  * 
@@ -1674,14 +1990,14 @@ protected class BooleanConst_ConstAssignment extends AssignmentToken  {
  **/
 
 // const="null"
-protected class NullConst_ConstAssignment extends AssignmentToken  {
+protected class VxlNullConst_ConstAssignment extends AssignmentToken  {
 	
-	public NullConst_ConstAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlNullConst_ConstAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getNullConstAccess().getConstAssignment();
+		return grammarAccess.getVxlNullConstAccess().getConstAssignment();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -1691,7 +2007,7 @@ protected class NullConst_ConstAssignment extends AssignmentToken  {
 	}	
 		
 	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getNullConstRule().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getVxlNullConstRule().getType().getClassifier())) return null;
 		return tryConsumeVal();
 	}
 	protected IInstanceDescription tryConsumeVal() {
@@ -1699,7 +2015,7 @@ protected class NullConst_ConstAssignment extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("const");
 		if("null".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getNullConstAccess().getConstNullKeyword_0();
+			element = grammarAccess.getVxlNullConstAccess().getConstNullKeyword_0();
 			return obj;
 		}
 		return null;
@@ -1707,7 +2023,7 @@ protected class NullConst_ConstAssignment extends AssignmentToken  {
 
 }
 
-/************ end Rule NullConst ****************/
+/************ end Rule VxlNullConst ****************/
 
 
 }

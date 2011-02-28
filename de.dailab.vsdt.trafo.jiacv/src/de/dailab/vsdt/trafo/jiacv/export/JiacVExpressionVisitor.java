@@ -3,9 +3,9 @@ package de.dailab.vsdt.trafo.jiacv.export;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.util.VsdtExpressionVisitor;
-import de.dailab.vsdt.vxl.vxl.Negation;
-import de.dailab.vsdt.vxl.vxl.Operator;
-import de.dailab.vsdt.vxl.vxl.Variable;
+import de.dailab.vsdt.vxl.vxl.VxlNegation;
+import de.dailab.vsdt.vxl.vxl.VxlOperator;
+import de.dailab.vsdt.vxl.vxl.VxlVariable;
 
 public class JiacVExpressionVisitor extends VsdtExpressionVisitor {
 
@@ -19,19 +19,19 @@ public class JiacVExpressionVisitor extends VsdtExpressionVisitor {
 	}
 
 	@Override
-	protected void visit(Variable variable) {
+	protected void visit(VxlVariable variable) {
 		buffer.append("$");
 		super.visit(variable);
 	}
 	
 	@Override
-	protected void visit(Negation negation) {
+	protected void visit(VxlNegation negation) {
 		buffer.append("! ");
 		visit(negation.getHead());
 	}
 	
 	@Override
-	protected void visit(Operator operator) {
+	protected void visit(VxlOperator operator) {
 		switch (operator) {
 		case CONCAT:
 			buffer.append("+");

@@ -32,7 +32,7 @@ public interface VxlFactory extends EFactory
    * @return a new object of class '<em>Term</em>'.
    * @generated
    */
-  Term createTerm();
+  VxlTerm createVxlTerm();
 
   /**
    * Returns a new object of class '<em>Head</em>'.
@@ -41,7 +41,7 @@ public interface VxlFactory extends EFactory
    * @return a new object of class '<em>Head</em>'.
    * @generated
    */
-  Head createHead();
+  VxlHead createVxlHead();
 
   /**
    * Returns a new object of class '<em>Tail</em>'.
@@ -50,7 +50,7 @@ public interface VxlFactory extends EFactory
    * @return a new object of class '<em>Tail</em>'.
    * @generated
    */
-  Tail createTail();
+  VxlTail createVxlTail();
 
   /**
    * Returns a new object of class '<em>Bracket Term</em>'.
@@ -59,7 +59,7 @@ public interface VxlFactory extends EFactory
    * @return a new object of class '<em>Bracket Term</em>'.
    * @generated
    */
-  BracketTerm createBracketTerm();
+  VxlBracketTerm createVxlBracketTerm();
 
   /**
    * Returns a new object of class '<em>Negation</em>'.
@@ -68,7 +68,7 @@ public interface VxlFactory extends EFactory
    * @return a new object of class '<em>Negation</em>'.
    * @generated
    */
-  Negation createNegation();
+  VxlNegation createVxlNegation();
 
   /**
    * Returns a new object of class '<em>Minus</em>'.
@@ -77,7 +77,7 @@ public interface VxlFactory extends EFactory
    * @return a new object of class '<em>Minus</em>'.
    * @generated
    */
-  Minus createMinus();
+  VxlMinus createVxlMinus();
 
   /**
    * Returns a new object of class '<em>Atom</em>'.
@@ -86,7 +86,7 @@ public interface VxlFactory extends EFactory
    * @return a new object of class '<em>Atom</em>'.
    * @generated
    */
-  Atom createAtom();
+  VxlAtom createVxlAtom();
 
   /**
    * Returns a new object of class '<em>Variable</em>'.
@@ -95,7 +95,7 @@ public interface VxlFactory extends EFactory
    * @return a new object of class '<em>Variable</em>'.
    * @generated
    */
-  Variable createVariable();
+  VxlVariable createVxlVariable();
 
   /**
    * Returns a new object of class '<em>Accessor</em>'.
@@ -104,7 +104,7 @@ public interface VxlFactory extends EFactory
    * @return a new object of class '<em>Accessor</em>'.
    * @generated
    */
-  Accessor createAccessor();
+  VxlAccessor createVxlAccessor();
 
   /**
    * Returns a new object of class '<em>Array Accessor</em>'.
@@ -113,7 +113,7 @@ public interface VxlFactory extends EFactory
    * @return a new object of class '<em>Array Accessor</em>'.
    * @generated
    */
-  ArrayAccessor createArrayAccessor();
+  VxlArrayAccessor createVxlArrayAccessor();
 
   /**
    * Returns a new object of class '<em>Field Accessor</em>'.
@@ -122,7 +122,25 @@ public interface VxlFactory extends EFactory
    * @return a new object of class '<em>Field Accessor</em>'.
    * @generated
    */
-  FieldAccessor createFieldAccessor();
+  VxlFieldAccessor createVxlFieldAccessor();
+
+  /**
+   * Returns a new object of class '<em>List</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>List</em>'.
+   * @generated
+   */
+  VxlList createVxlList();
+
+  /**
+   * Returns a new object of class '<em>List Element</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>List Element</em>'.
+   * @generated
+   */
+  VxlListElement createVxlListElement();
 
   /**
    * Returns a new object of class '<em>Value</em>'.
@@ -131,7 +149,7 @@ public interface VxlFactory extends EFactory
    * @return a new object of class '<em>Value</em>'.
    * @generated
    */
-  Value createValue();
+  VxlValue createVxlValue();
 
   /**
    * Returns a new object of class '<em>String Const</em>'.
@@ -140,7 +158,7 @@ public interface VxlFactory extends EFactory
    * @return a new object of class '<em>String Const</em>'.
    * @generated
    */
-  StringConst createStringConst();
+  VxlStringConst createVxlStringConst();
 
   /**
    * Returns a new object of class '<em>Numeric Const</em>'.
@@ -149,7 +167,7 @@ public interface VxlFactory extends EFactory
    * @return a new object of class '<em>Numeric Const</em>'.
    * @generated
    */
-  NumericConst createNumericConst();
+  VxlNumericConst createVxlNumericConst();
 
   /**
    * Returns a new object of class '<em>Boolean Const</em>'.
@@ -158,7 +176,7 @@ public interface VxlFactory extends EFactory
    * @return a new object of class '<em>Boolean Const</em>'.
    * @generated
    */
-  BooleanConst createBooleanConst();
+  VxlBooleanConst createVxlBooleanConst();
 
   /**
    * Returns a new object of class '<em>Null Const</em>'.
@@ -167,7 +185,7 @@ public interface VxlFactory extends EFactory
    * @return a new object of class '<em>Null Const</em>'.
    * @generated
    */
-  NullConst createNullConst();
+  VxlNullConst createVxlNullConst();
 
   /**
    * Returns the package supported by this factory.

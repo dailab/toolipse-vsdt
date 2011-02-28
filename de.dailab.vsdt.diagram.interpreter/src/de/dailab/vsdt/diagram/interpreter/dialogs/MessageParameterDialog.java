@@ -24,7 +24,7 @@ import de.dailab.vsdt.diagram.ui.ExpressionComposite;
 import de.dailab.vsdt.vxl.util.VxlInterpreter;
 import de.dailab.vsdt.vxl.util.VxlParseException;
 import de.dailab.vsdt.vxl.util.VxlParser;
-import de.dailab.vsdt.vxl.vxl.Term;
+import de.dailab.vsdt.vxl.vxl.VxlTerm;
 
 /**
  * This dialog is used for (a) inspecting and (b) setting the values passed from 
@@ -155,7 +155,7 @@ public class MessageParameterDialog extends TitleAreaDialog {
 			} else {
 				VxlParser parser= VxlParser.getInstance();
 				try {
-					Term term= parser.parse(expression);
+					VxlTerm term= parser.parse(expression);
 					// evaluate term
 					VxlInterpreter interpreter= new VxlInterpreter();
 					Serializable result= interpreter.evaluateTerm(term, null);

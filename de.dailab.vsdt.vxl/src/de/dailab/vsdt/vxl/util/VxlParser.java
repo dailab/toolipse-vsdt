@@ -17,8 +17,8 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import com.google.inject.Injector;
 
 import de.dailab.vsdt.vxl.VxlStandaloneSetup;
-import de.dailab.vsdt.vxl.vxl.Term;
-import de.dailab.vsdt.vxl.vxl.Variable;
+import de.dailab.vsdt.vxl.vxl.VxlTerm;
+import de.dailab.vsdt.vxl.vxl.VxlVariable;
 
 /**
  * This is a simple implementation for parsing JADL++ code. This parser is using EMF Resource and 
@@ -60,7 +60,7 @@ public class VxlParser {
 	 * @return
 	 * @throws VxlParseException
 	 */
-	public Term parse(String code) throws VxlParseException {
+	public VxlTerm parse(String code) throws VxlParseException {
 		VxlParseException jpe = new VxlParseException();
 		try {
 			// create and load dummy resource using XText
@@ -80,7 +80,7 @@ public class VxlParser {
 		if (resource.getErrors().size() > 0) {
 			throw jpe; 
 		}
-		return (Term) resource.getContents().get(0);
+		return (VxlTerm) resource.getContents().get(0);
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class VxlParser {
 	 * @return
 	 * @throws VxlParseException
 	 */
-	public String serialize(Term term) throws VxlParseException {
+	public String serialize(VxlTerm term) throws VxlParseException {
 		VxlParseException jpe = new VxlParseException();
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		resource = xtextResourceSet.getResource(term.eResource().getURI(), true);
@@ -134,9 +134,9 @@ public class VxlParser {
 	 * @param allowedVariableNames	List of allowed variable names (no patterns but actual names)
 	 * @return						List of variables which's names are not in the List 
 	 */
-	public List<Variable> getUnknownVariables(List<String> allowedVariableNames) {
-		List<Variable> unknownVars= new ArrayList<Variable>();
-		for (Variable var : getVariables()) {
+	public List<VxlVariable> getUnknownVariables(List<String> allowedVariableNames) {
+		List<VxlVariable> unknownVars= new ArrayList<VxlVariable>();
+		for (VxlVariable var : getVariables()) {
 			boolean valid= false;
 			for (String s : allowedVariableNames) {
 				valid |= var.getName() != null && var.getName().equals(s);
@@ -151,9 +151,9 @@ public class VxlParser {
 	/**
 	 * @return		All Variables contained in the parsed Expression.
 	 */
-	public List<Variable> getVariables() {
+	public List<VxlVariable> getVariables() {
 		try {
-			Term term= (Term) resource.getContents().get(0);
+			VxlTerm term= (VxlTerm) resource.getContents().get(0);
 			return getVariables(term);
 		} catch (Exception e) {
 			return null;
@@ -163,10 +163,10 @@ public class VxlParser {
 	/**
 	 * @return		All Variables contained in the given Object
 	 */
-	private List<Variable> getVariables(EObject object) {
-		List<Variable> variables= new ArrayList<Variable>();
-		if (object instanceof Variable) {
-			variables.add((Variable) object);
+	private List<VxlVariable> getVariables(EObject object) {
+		List<VxlVariable> variables= new ArrayList<VxlVariable>();
+		if (object instanceof VxlVariable) {
+			variables.add((VxlVariable) object);
 		} else {
 			for (TreeIterator<EObject> i= object.eAllContents(); i.hasNext(); ) {
 				variables.addAll(getVariables(i.next()));

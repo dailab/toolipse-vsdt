@@ -3,49 +3,65 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="vxl"
     nsURI="http://www.dailab.de/vsdt/vxl/Vxl" nsPrefix="vxl">
-  <eClassifiers xsi:type="ecore:EClass" name="Term">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="#//Head" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tail" eType="#//Tail" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="#//VxlHead"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tail" eType="#//VxlTail"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Head"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Tail">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//Operator"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="term" eType="#//Term" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlHead"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlTail">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//VxlOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="term" eType="#//VxlTerm"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BracketTerm" eSuperTypes="#//Head">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="term" eType="#//Term" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlBracketTerm" eSuperTypes="#//VxlHead">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="term" eType="#//VxlTerm"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Negation" eSuperTypes="#//Head">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="#//Head" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlNegation" eSuperTypes="#//VxlHead">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="#//VxlHead"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="#//Head">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="#//Head" containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlMinus" eSuperTypes="#//VxlHead">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="#//VxlHead"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Atom" eSuperTypes="#//Head"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//Atom">
+  <eClassifiers xsi:type="ecore:EClass" name="VxlAtom" eSuperTypes="#//VxlHead"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlVariable" eSuperTypes="#//VxlAtom">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="accessor" eType="#//Accessor"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessor" eType="#//VxlAccessor"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Accessor">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="accessor" eType="#//Accessor"
+  <eClassifiers xsi:type="ecore:EClass" name="VxlAccessor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessor" eType="#//VxlAccessor"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ArrayAccessor" eSuperTypes="#//Accessor">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//Term"
+  <eClassifiers xsi:type="ecore:EClass" name="VxlArrayAccessor" eSuperTypes="#//VxlAccessor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//VxlTerm"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FieldAccessor" eSuperTypes="#//Accessor">
+  <eClassifiers xsi:type="ecore:EClass" name="VxlFieldAccessor" eSuperTypes="#//VxlAccessor">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Value" eSuperTypes="#//Atom">
+  <eClassifiers xsi:type="ecore:EClass" name="VxlList" eSuperTypes="#//VxlAtom">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//VxlListElement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlListElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="first" eType="#//VxlTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rest" eType="#//VxlListElement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlValue" eSuperTypes="#//VxlAtom">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="const" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StringConst" eSuperTypes="#//Value"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NumericConst" eSuperTypes="#//Value"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BooleanConst" eSuperTypes="#//Value"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NullConst" eSuperTypes="#//Value"/>
-  <eClassifiers xsi:type="ecore:EEnum" name="Operator">
+  <eClassifiers xsi:type="ecore:EClass" name="VxlStringConst" eSuperTypes="#//VxlValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlNumericConst" eSuperTypes="#//VxlValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlBooleanConst" eSuperTypes="#//VxlValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlNullConst" eSuperTypes="#//VxlValue"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="VxlOperator">
     <eLiterals name="LT" literal="&lt;"/>
     <eLiterals name="LE" value="1" literal="&lt;="/>
     <eLiterals name="EQ" value="2" literal="=="/>

@@ -5,25 +5,27 @@
  */
 package de.dailab.vsdt.vxl.vxl.impl;
 
-import de.dailab.vsdt.vxl.vxl.Accessor;
-import de.dailab.vsdt.vxl.vxl.ArrayAccessor;
-import de.dailab.vsdt.vxl.vxl.Atom;
-import de.dailab.vsdt.vxl.vxl.BooleanConst;
-import de.dailab.vsdt.vxl.vxl.BracketTerm;
-import de.dailab.vsdt.vxl.vxl.FieldAccessor;
-import de.dailab.vsdt.vxl.vxl.Head;
-import de.dailab.vsdt.vxl.vxl.Minus;
-import de.dailab.vsdt.vxl.vxl.Negation;
-import de.dailab.vsdt.vxl.vxl.NullConst;
-import de.dailab.vsdt.vxl.vxl.NumericConst;
-import de.dailab.vsdt.vxl.vxl.Operator;
-import de.dailab.vsdt.vxl.vxl.StringConst;
-import de.dailab.vsdt.vxl.vxl.Tail;
-import de.dailab.vsdt.vxl.vxl.Term;
-import de.dailab.vsdt.vxl.vxl.Value;
-import de.dailab.vsdt.vxl.vxl.Variable;
+import de.dailab.vsdt.vxl.vxl.VxlAccessor;
+import de.dailab.vsdt.vxl.vxl.VxlArrayAccessor;
+import de.dailab.vsdt.vxl.vxl.VxlAtom;
+import de.dailab.vsdt.vxl.vxl.VxlBooleanConst;
+import de.dailab.vsdt.vxl.vxl.VxlBracketTerm;
 import de.dailab.vsdt.vxl.vxl.VxlFactory;
+import de.dailab.vsdt.vxl.vxl.VxlFieldAccessor;
+import de.dailab.vsdt.vxl.vxl.VxlHead;
+import de.dailab.vsdt.vxl.vxl.VxlList;
+import de.dailab.vsdt.vxl.vxl.VxlListElement;
+import de.dailab.vsdt.vxl.vxl.VxlMinus;
+import de.dailab.vsdt.vxl.vxl.VxlNegation;
+import de.dailab.vsdt.vxl.vxl.VxlNullConst;
+import de.dailab.vsdt.vxl.vxl.VxlNumericConst;
+import de.dailab.vsdt.vxl.vxl.VxlOperator;
 import de.dailab.vsdt.vxl.vxl.VxlPackage;
+import de.dailab.vsdt.vxl.vxl.VxlStringConst;
+import de.dailab.vsdt.vxl.vxl.VxlTail;
+import de.dailab.vsdt.vxl.vxl.VxlTerm;
+import de.dailab.vsdt.vxl.vxl.VxlValue;
+import de.dailab.vsdt.vxl.vxl.VxlVariable;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -46,119 +48,133 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass termEClass = null;
+  private EClass vxlTermEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass headEClass = null;
+  private EClass vxlHeadEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass tailEClass = null;
+  private EClass vxlTailEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass bracketTermEClass = null;
+  private EClass vxlBracketTermEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass negationEClass = null;
+  private EClass vxlNegationEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass minusEClass = null;
+  private EClass vxlMinusEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass atomEClass = null;
+  private EClass vxlAtomEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass variableEClass = null;
+  private EClass vxlVariableEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass accessorEClass = null;
+  private EClass vxlAccessorEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass arrayAccessorEClass = null;
+  private EClass vxlArrayAccessorEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass fieldAccessorEClass = null;
+  private EClass vxlFieldAccessorEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass valueEClass = null;
+  private EClass vxlListEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass stringConstEClass = null;
+  private EClass vxlListElementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass numericConstEClass = null;
+  private EClass vxlValueEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass booleanConstEClass = null;
+  private EClass vxlStringConstEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass nullConstEClass = null;
+  private EClass vxlNumericConstEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EEnum operatorEEnum = null;
+  private EClass vxlBooleanConstEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass vxlNullConstEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum vxlOperatorEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -228,9 +244,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTerm()
+  public EClass getVxlTerm()
   {
-    return termEClass;
+    return vxlTermEClass;
   }
 
   /**
@@ -238,9 +254,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTerm_Head()
+  public EReference getVxlTerm_Head()
   {
-    return (EReference)termEClass.getEStructuralFeatures().get(0);
+    return (EReference)vxlTermEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -248,9 +264,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTerm_Tail()
+  public EReference getVxlTerm_Tail()
   {
-    return (EReference)termEClass.getEStructuralFeatures().get(1);
+    return (EReference)vxlTermEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -258,9 +274,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getHead()
+  public EClass getVxlHead()
   {
-    return headEClass;
+    return vxlHeadEClass;
   }
 
   /**
@@ -268,9 +284,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTail()
+  public EClass getVxlTail()
   {
-    return tailEClass;
+    return vxlTailEClass;
   }
 
   /**
@@ -278,9 +294,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTail_Operator()
+  public EAttribute getVxlTail_Operator()
   {
-    return (EAttribute)tailEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)vxlTailEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -288,9 +304,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTail_Term()
+  public EReference getVxlTail_Term()
   {
-    return (EReference)tailEClass.getEStructuralFeatures().get(1);
+    return (EReference)vxlTailEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -298,9 +314,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getBracketTerm()
+  public EClass getVxlBracketTerm()
   {
-    return bracketTermEClass;
+    return vxlBracketTermEClass;
   }
 
   /**
@@ -308,9 +324,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getBracketTerm_Term()
+  public EReference getVxlBracketTerm_Term()
   {
-    return (EReference)bracketTermEClass.getEStructuralFeatures().get(0);
+    return (EReference)vxlBracketTermEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -318,9 +334,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getNegation()
+  public EClass getVxlNegation()
   {
-    return negationEClass;
+    return vxlNegationEClass;
   }
 
   /**
@@ -328,9 +344,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getNegation_Head()
+  public EReference getVxlNegation_Head()
   {
-    return (EReference)negationEClass.getEStructuralFeatures().get(0);
+    return (EReference)vxlNegationEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -338,9 +354,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getMinus()
+  public EClass getVxlMinus()
   {
-    return minusEClass;
+    return vxlMinusEClass;
   }
 
   /**
@@ -348,9 +364,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getMinus_Head()
+  public EReference getVxlMinus_Head()
   {
-    return (EReference)minusEClass.getEStructuralFeatures().get(0);
+    return (EReference)vxlMinusEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -358,9 +374,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAtom()
+  public EClass getVxlAtom()
   {
-    return atomEClass;
+    return vxlAtomEClass;
   }
 
   /**
@@ -368,9 +384,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getVariable()
+  public EClass getVxlVariable()
   {
-    return variableEClass;
+    return vxlVariableEClass;
   }
 
   /**
@@ -378,9 +394,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getVariable_Name()
+  public EAttribute getVxlVariable_Name()
   {
-    return (EAttribute)variableEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)vxlVariableEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -388,9 +404,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getVariable_Accessor()
+  public EReference getVxlVariable_Accessor()
   {
-    return (EReference)variableEClass.getEStructuralFeatures().get(1);
+    return (EReference)vxlVariableEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -398,9 +414,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getAccessor()
+  public EClass getVxlAccessor()
   {
-    return accessorEClass;
+    return vxlAccessorEClass;
   }
 
   /**
@@ -408,9 +424,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAccessor_Accessor()
+  public EReference getVxlAccessor_Accessor()
   {
-    return (EReference)accessorEClass.getEStructuralFeatures().get(0);
+    return (EReference)vxlAccessorEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -418,9 +434,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getArrayAccessor()
+  public EClass getVxlArrayAccessor()
   {
-    return arrayAccessorEClass;
+    return vxlArrayAccessorEClass;
   }
 
   /**
@@ -428,9 +444,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getArrayAccessor_Index()
+  public EReference getVxlArrayAccessor_Index()
   {
-    return (EReference)arrayAccessorEClass.getEStructuralFeatures().get(0);
+    return (EReference)vxlArrayAccessorEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -438,9 +454,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getFieldAccessor()
+  public EClass getVxlFieldAccessor()
   {
-    return fieldAccessorEClass;
+    return vxlFieldAccessorEClass;
   }
 
   /**
@@ -448,9 +464,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getFieldAccessor_Name()
+  public EAttribute getVxlFieldAccessor_Name()
   {
-    return (EAttribute)fieldAccessorEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)vxlFieldAccessorEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -458,9 +474,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getValue()
+  public EClass getVxlList()
   {
-    return valueEClass;
+    return vxlListEClass;
   }
 
   /**
@@ -468,9 +484,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getValue_Const()
+  public EReference getVxlList_Body()
   {
-    return (EAttribute)valueEClass.getEStructuralFeatures().get(0);
+    return (EReference)vxlListEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -478,9 +494,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getStringConst()
+  public EClass getVxlListElement()
   {
-    return stringConstEClass;
+    return vxlListElementEClass;
   }
 
   /**
@@ -488,9 +504,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getNumericConst()
+  public EReference getVxlListElement_First()
   {
-    return numericConstEClass;
+    return (EReference)vxlListElementEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -498,9 +514,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getBooleanConst()
+  public EReference getVxlListElement_Rest()
   {
-    return booleanConstEClass;
+    return (EReference)vxlListElementEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -508,9 +524,9 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getNullConst()
+  public EClass getVxlValue()
   {
-    return nullConstEClass;
+    return vxlValueEClass;
   }
 
   /**
@@ -518,9 +534,59 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EEnum getOperator()
+  public EAttribute getVxlValue_Const()
   {
-    return operatorEEnum;
+    return (EAttribute)vxlValueEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getVxlStringConst()
+  {
+    return vxlStringConstEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getVxlNumericConst()
+  {
+    return vxlNumericConstEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getVxlBooleanConst()
+  {
+    return vxlBooleanConstEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getVxlNullConst()
+  {
+    return vxlNullConstEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EEnum getVxlOperator()
+  {
+    return vxlOperatorEEnum;
   }
 
   /**
@@ -553,53 +619,60 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
     isCreated = true;
 
     // Create classes and their features
-    termEClass = createEClass(TERM);
-    createEReference(termEClass, TERM__HEAD);
-    createEReference(termEClass, TERM__TAIL);
+    vxlTermEClass = createEClass(VXL_TERM);
+    createEReference(vxlTermEClass, VXL_TERM__HEAD);
+    createEReference(vxlTermEClass, VXL_TERM__TAIL);
 
-    headEClass = createEClass(HEAD);
+    vxlHeadEClass = createEClass(VXL_HEAD);
 
-    tailEClass = createEClass(TAIL);
-    createEAttribute(tailEClass, TAIL__OPERATOR);
-    createEReference(tailEClass, TAIL__TERM);
+    vxlTailEClass = createEClass(VXL_TAIL);
+    createEAttribute(vxlTailEClass, VXL_TAIL__OPERATOR);
+    createEReference(vxlTailEClass, VXL_TAIL__TERM);
 
-    bracketTermEClass = createEClass(BRACKET_TERM);
-    createEReference(bracketTermEClass, BRACKET_TERM__TERM);
+    vxlBracketTermEClass = createEClass(VXL_BRACKET_TERM);
+    createEReference(vxlBracketTermEClass, VXL_BRACKET_TERM__TERM);
 
-    negationEClass = createEClass(NEGATION);
-    createEReference(negationEClass, NEGATION__HEAD);
+    vxlNegationEClass = createEClass(VXL_NEGATION);
+    createEReference(vxlNegationEClass, VXL_NEGATION__HEAD);
 
-    minusEClass = createEClass(MINUS);
-    createEReference(minusEClass, MINUS__HEAD);
+    vxlMinusEClass = createEClass(VXL_MINUS);
+    createEReference(vxlMinusEClass, VXL_MINUS__HEAD);
 
-    atomEClass = createEClass(ATOM);
+    vxlAtomEClass = createEClass(VXL_ATOM);
 
-    variableEClass = createEClass(VARIABLE);
-    createEAttribute(variableEClass, VARIABLE__NAME);
-    createEReference(variableEClass, VARIABLE__ACCESSOR);
+    vxlVariableEClass = createEClass(VXL_VARIABLE);
+    createEAttribute(vxlVariableEClass, VXL_VARIABLE__NAME);
+    createEReference(vxlVariableEClass, VXL_VARIABLE__ACCESSOR);
 
-    accessorEClass = createEClass(ACCESSOR);
-    createEReference(accessorEClass, ACCESSOR__ACCESSOR);
+    vxlAccessorEClass = createEClass(VXL_ACCESSOR);
+    createEReference(vxlAccessorEClass, VXL_ACCESSOR__ACCESSOR);
 
-    arrayAccessorEClass = createEClass(ARRAY_ACCESSOR);
-    createEReference(arrayAccessorEClass, ARRAY_ACCESSOR__INDEX);
+    vxlArrayAccessorEClass = createEClass(VXL_ARRAY_ACCESSOR);
+    createEReference(vxlArrayAccessorEClass, VXL_ARRAY_ACCESSOR__INDEX);
 
-    fieldAccessorEClass = createEClass(FIELD_ACCESSOR);
-    createEAttribute(fieldAccessorEClass, FIELD_ACCESSOR__NAME);
+    vxlFieldAccessorEClass = createEClass(VXL_FIELD_ACCESSOR);
+    createEAttribute(vxlFieldAccessorEClass, VXL_FIELD_ACCESSOR__NAME);
 
-    valueEClass = createEClass(VALUE);
-    createEAttribute(valueEClass, VALUE__CONST);
+    vxlListEClass = createEClass(VXL_LIST);
+    createEReference(vxlListEClass, VXL_LIST__BODY);
 
-    stringConstEClass = createEClass(STRING_CONST);
+    vxlListElementEClass = createEClass(VXL_LIST_ELEMENT);
+    createEReference(vxlListElementEClass, VXL_LIST_ELEMENT__FIRST);
+    createEReference(vxlListElementEClass, VXL_LIST_ELEMENT__REST);
 
-    numericConstEClass = createEClass(NUMERIC_CONST);
+    vxlValueEClass = createEClass(VXL_VALUE);
+    createEAttribute(vxlValueEClass, VXL_VALUE__CONST);
 
-    booleanConstEClass = createEClass(BOOLEAN_CONST);
+    vxlStringConstEClass = createEClass(VXL_STRING_CONST);
 
-    nullConstEClass = createEClass(NULL_CONST);
+    vxlNumericConstEClass = createEClass(VXL_NUMERIC_CONST);
+
+    vxlBooleanConstEClass = createEClass(VXL_BOOLEAN_CONST);
+
+    vxlNullConstEClass = createEClass(VXL_NULL_CONST);
 
     // Create enums
-    operatorEEnum = createEEnum(OPERATOR);
+    vxlOperatorEEnum = createEEnum(VXL_OPERATOR);
   }
 
   /**
@@ -631,81 +704,89 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
-    bracketTermEClass.getESuperTypes().add(this.getHead());
-    negationEClass.getESuperTypes().add(this.getHead());
-    minusEClass.getESuperTypes().add(this.getHead());
-    atomEClass.getESuperTypes().add(this.getHead());
-    variableEClass.getESuperTypes().add(this.getAtom());
-    arrayAccessorEClass.getESuperTypes().add(this.getAccessor());
-    fieldAccessorEClass.getESuperTypes().add(this.getAccessor());
-    valueEClass.getESuperTypes().add(this.getAtom());
-    stringConstEClass.getESuperTypes().add(this.getValue());
-    numericConstEClass.getESuperTypes().add(this.getValue());
-    booleanConstEClass.getESuperTypes().add(this.getValue());
-    nullConstEClass.getESuperTypes().add(this.getValue());
+    vxlBracketTermEClass.getESuperTypes().add(this.getVxlHead());
+    vxlNegationEClass.getESuperTypes().add(this.getVxlHead());
+    vxlMinusEClass.getESuperTypes().add(this.getVxlHead());
+    vxlAtomEClass.getESuperTypes().add(this.getVxlHead());
+    vxlVariableEClass.getESuperTypes().add(this.getVxlAtom());
+    vxlArrayAccessorEClass.getESuperTypes().add(this.getVxlAccessor());
+    vxlFieldAccessorEClass.getESuperTypes().add(this.getVxlAccessor());
+    vxlListEClass.getESuperTypes().add(this.getVxlAtom());
+    vxlValueEClass.getESuperTypes().add(this.getVxlAtom());
+    vxlStringConstEClass.getESuperTypes().add(this.getVxlValue());
+    vxlNumericConstEClass.getESuperTypes().add(this.getVxlValue());
+    vxlBooleanConstEClass.getESuperTypes().add(this.getVxlValue());
+    vxlNullConstEClass.getESuperTypes().add(this.getVxlValue());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(termEClass, Term.class, "Term", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTerm_Head(), this.getHead(), null, "head", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTerm_Tail(), this.getTail(), null, "tail", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(vxlTermEClass, VxlTerm.class, "VxlTerm", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getVxlTerm_Head(), this.getVxlHead(), null, "head", null, 0, 1, VxlTerm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getVxlTerm_Tail(), this.getVxlTail(), null, "tail", null, 0, 1, VxlTerm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(headEClass, Head.class, "Head", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(vxlHeadEClass, VxlHead.class, "VxlHead", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(tailEClass, Tail.class, "Tail", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTail_Operator(), this.getOperator(), "operator", null, 0, 1, Tail.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTail_Term(), this.getTerm(), null, "term", null, 0, 1, Tail.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(vxlTailEClass, VxlTail.class, "VxlTail", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getVxlTail_Operator(), this.getVxlOperator(), "operator", null, 0, 1, VxlTail.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getVxlTail_Term(), this.getVxlTerm(), null, "term", null, 0, 1, VxlTail.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(bracketTermEClass, BracketTerm.class, "BracketTerm", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getBracketTerm_Term(), this.getTerm(), null, "term", null, 0, 1, BracketTerm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(vxlBracketTermEClass, VxlBracketTerm.class, "VxlBracketTerm", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getVxlBracketTerm_Term(), this.getVxlTerm(), null, "term", null, 0, 1, VxlBracketTerm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(negationEClass, Negation.class, "Negation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getNegation_Head(), this.getHead(), null, "head", null, 0, 1, Negation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(vxlNegationEClass, VxlNegation.class, "VxlNegation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getVxlNegation_Head(), this.getVxlHead(), null, "head", null, 0, 1, VxlNegation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(minusEClass, Minus.class, "Minus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getMinus_Head(), this.getHead(), null, "head", null, 0, 1, Minus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(vxlMinusEClass, VxlMinus.class, "VxlMinus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getVxlMinus_Head(), this.getVxlHead(), null, "head", null, 0, 1, VxlMinus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(atomEClass, Atom.class, "Atom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(vxlAtomEClass, VxlAtom.class, "VxlAtom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getVariable_Accessor(), this.getAccessor(), null, "accessor", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(vxlVariableEClass, VxlVariable.class, "VxlVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getVxlVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, VxlVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getVxlVariable_Accessor(), this.getVxlAccessor(), null, "accessor", null, 0, 1, VxlVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(accessorEClass, Accessor.class, "Accessor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getAccessor_Accessor(), this.getAccessor(), null, "accessor", null, 0, 1, Accessor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(vxlAccessorEClass, VxlAccessor.class, "VxlAccessor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getVxlAccessor_Accessor(), this.getVxlAccessor(), null, "accessor", null, 0, 1, VxlAccessor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(arrayAccessorEClass, ArrayAccessor.class, "ArrayAccessor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getArrayAccessor_Index(), this.getTerm(), null, "index", null, 0, 1, ArrayAccessor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(vxlArrayAccessorEClass, VxlArrayAccessor.class, "VxlArrayAccessor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getVxlArrayAccessor_Index(), this.getVxlTerm(), null, "index", null, 0, 1, VxlArrayAccessor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(fieldAccessorEClass, FieldAccessor.class, "FieldAccessor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFieldAccessor_Name(), ecorePackage.getEString(), "name", null, 0, 1, FieldAccessor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(vxlFieldAccessorEClass, VxlFieldAccessor.class, "VxlFieldAccessor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getVxlFieldAccessor_Name(), ecorePackage.getEString(), "name", null, 0, 1, VxlFieldAccessor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(valueEClass, Value.class, "Value", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getValue_Const(), ecorePackage.getEString(), "const", null, 0, 1, Value.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(vxlListEClass, VxlList.class, "VxlList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getVxlList_Body(), this.getVxlListElement(), null, "body", null, 0, 1, VxlList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(stringConstEClass, StringConst.class, "StringConst", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(vxlListElementEClass, VxlListElement.class, "VxlListElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getVxlListElement_First(), this.getVxlTerm(), null, "first", null, 0, 1, VxlListElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getVxlListElement_Rest(), this.getVxlListElement(), null, "rest", null, 0, 1, VxlListElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(numericConstEClass, NumericConst.class, "NumericConst", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(vxlValueEClass, VxlValue.class, "VxlValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getVxlValue_Const(), ecorePackage.getEString(), "const", null, 0, 1, VxlValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(booleanConstEClass, BooleanConst.class, "BooleanConst", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(vxlStringConstEClass, VxlStringConst.class, "VxlStringConst", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(nullConstEClass, NullConst.class, "NullConst", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(vxlNumericConstEClass, VxlNumericConst.class, "VxlNumericConst", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(vxlBooleanConstEClass, VxlBooleanConst.class, "VxlBooleanConst", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(vxlNullConstEClass, VxlNullConst.class, "VxlNullConst", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Initialize enums and add enum literals
-    initEEnum(operatorEEnum, Operator.class, "Operator");
-    addEEnumLiteral(operatorEEnum, Operator.LT);
-    addEEnumLiteral(operatorEEnum, Operator.LE);
-    addEEnumLiteral(operatorEEnum, Operator.EQ);
-    addEEnumLiteral(operatorEEnum, Operator.NEQ);
-    addEEnumLiteral(operatorEEnum, Operator.GT);
-    addEEnumLiteral(operatorEEnum, Operator.GE);
-    addEEnumLiteral(operatorEEnum, Operator.ADD);
-    addEEnumLiteral(operatorEEnum, Operator.SUB);
-    addEEnumLiteral(operatorEEnum, Operator.MULT);
-    addEEnumLiteral(operatorEEnum, Operator.DIV);
-    addEEnumLiteral(operatorEEnum, Operator.MOD);
-    addEEnumLiteral(operatorEEnum, Operator.AND);
-    addEEnumLiteral(operatorEEnum, Operator.OR);
-    addEEnumLiteral(operatorEEnum, Operator.CONCAT);
+    initEEnum(vxlOperatorEEnum, VxlOperator.class, "VxlOperator");
+    addEEnumLiteral(vxlOperatorEEnum, VxlOperator.LT);
+    addEEnumLiteral(vxlOperatorEEnum, VxlOperator.LE);
+    addEEnumLiteral(vxlOperatorEEnum, VxlOperator.EQ);
+    addEEnumLiteral(vxlOperatorEEnum, VxlOperator.NEQ);
+    addEEnumLiteral(vxlOperatorEEnum, VxlOperator.GT);
+    addEEnumLiteral(vxlOperatorEEnum, VxlOperator.GE);
+    addEEnumLiteral(vxlOperatorEEnum, VxlOperator.ADD);
+    addEEnumLiteral(vxlOperatorEEnum, VxlOperator.SUB);
+    addEEnumLiteral(vxlOperatorEEnum, VxlOperator.MULT);
+    addEEnumLiteral(vxlOperatorEEnum, VxlOperator.DIV);
+    addEEnumLiteral(vxlOperatorEEnum, VxlOperator.MOD);
+    addEEnumLiteral(vxlOperatorEEnum, VxlOperator.AND);
+    addEEnumLiteral(vxlOperatorEEnum, VxlOperator.OR);
+    addEEnumLiteral(vxlOperatorEEnum, VxlOperator.CONCAT);
 
     // Create resource
     createResource(eNS_URI);

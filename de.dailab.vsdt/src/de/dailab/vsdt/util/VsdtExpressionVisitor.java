@@ -10,23 +10,25 @@ import de.dailab.vsdt.Property;
 import de.dailab.vsdt.vxl.util.Util;
 import de.dailab.vsdt.vxl.util.VxlParseException;
 import de.dailab.vsdt.vxl.util.VxlParser;
-import de.dailab.vsdt.vxl.vxl.Accessor;
-import de.dailab.vsdt.vxl.vxl.ArrayAccessor;
-import de.dailab.vsdt.vxl.vxl.Atom;
-import de.dailab.vsdt.vxl.vxl.BooleanConst;
-import de.dailab.vsdt.vxl.vxl.BracketTerm;
-import de.dailab.vsdt.vxl.vxl.FieldAccessor;
-import de.dailab.vsdt.vxl.vxl.Head;
-import de.dailab.vsdt.vxl.vxl.Minus;
-import de.dailab.vsdt.vxl.vxl.Negation;
-import de.dailab.vsdt.vxl.vxl.NullConst;
-import de.dailab.vsdt.vxl.vxl.NumericConst;
-import de.dailab.vsdt.vxl.vxl.Operator;
-import de.dailab.vsdt.vxl.vxl.StringConst;
-import de.dailab.vsdt.vxl.vxl.Tail;
-import de.dailab.vsdt.vxl.vxl.Term;
-import de.dailab.vsdt.vxl.vxl.Value;
-import de.dailab.vsdt.vxl.vxl.Variable;
+import de.dailab.vsdt.vxl.vxl.VxlAccessor;
+import de.dailab.vsdt.vxl.vxl.VxlArrayAccessor;
+import de.dailab.vsdt.vxl.vxl.VxlAtom;
+import de.dailab.vsdt.vxl.vxl.VxlBooleanConst;
+import de.dailab.vsdt.vxl.vxl.VxlBracketTerm;
+import de.dailab.vsdt.vxl.vxl.VxlFieldAccessor;
+import de.dailab.vsdt.vxl.vxl.VxlHead;
+import de.dailab.vsdt.vxl.vxl.VxlList;
+import de.dailab.vsdt.vxl.vxl.VxlListElement;
+import de.dailab.vsdt.vxl.vxl.VxlMinus;
+import de.dailab.vsdt.vxl.vxl.VxlNegation;
+import de.dailab.vsdt.vxl.vxl.VxlNullConst;
+import de.dailab.vsdt.vxl.vxl.VxlNumericConst;
+import de.dailab.vsdt.vxl.vxl.VxlOperator;
+import de.dailab.vsdt.vxl.vxl.VxlStringConst;
+import de.dailab.vsdt.vxl.vxl.VxlTail;
+import de.dailab.vsdt.vxl.vxl.VxlTerm;
+import de.dailab.vsdt.vxl.vxl.VxlValue;
+import de.dailab.vsdt.vxl.vxl.VxlVariable;
 
 /**
  * This class is used for printing out Terms in the "VSDT Expression Language".
@@ -141,7 +143,7 @@ public class VsdtExpressionVisitor {
 			VxlParser parser= VxlParser.getInstance();
 			try {
 				// parse the term
-				Term term= parser.parse(originalExpression);
+				VxlTerm term= parser.parse(originalExpression);
 				// serialize the term to the target language
 				visit(term);
 				return buffer.toString();
@@ -173,7 +175,7 @@ public class VsdtExpressionVisitor {
 	/**
 	 * Term:			head = Head (tail = Tail)?;
 	 */
-	protected void visit(Term term) {
+	protected void visit(VxlTerm term) {
 		visit(term.getHead());
 		if (term.getTail() != null) {
 			buffer.append(" ");
@@ -184,22 +186,22 @@ public class VsdtExpressionVisitor {
 	/**
 	 * Head:			BracketTerm | Negation | Atom;
 	 */
-	protected void visit(Head head) {
-		if (head instanceof BracketTerm) {
-			visit((BracketTerm) head);
+	protected void visit(VxlHead head) {
+		if (head instanceof VxlBracketTerm) {
+			visit((VxlBracketTerm) head);
 		}
-		if (head instanceof Negation) {
-			visit((Negation) head);
+		if (head instanceof VxlNegation) {
+			visit((VxlNegation) head);
 		}
-		if (head instanceof Atom) {
-			visit((Atom) head);
+		if (head instanceof VxlAtom) {
+			visit((VxlAtom) head);
 		}
 	}
 
 	/**
 	 * Tail:			operator = Operator term = Term;
 	 */
-	protected void visit(Tail tail) {
+	protected void visit(VxlTail tail) {
 		visit(tail.getOperator());
 		buffer.append(" ");
 		visit(tail.getTerm());
@@ -208,7 +210,7 @@ public class VsdtExpressionVisitor {
 	/**
 	 * BracketTerm:		"(" term = Term ")";
 	 */
-	protected void visit(BracketTerm bracketTerm) {
+	protected void visit(VxlBracketTerm bracketTerm) {
 		buffer.append(" (");
 		visit(bracketTerm.getTerm());
 		buffer.append(") ");
@@ -217,7 +219,7 @@ public class VsdtExpressionVisitor {
 	/**
 	 * Negation:		"!" head = Head;
 	 */
-	protected void visit(Negation negation) {
+	protected void visit(VxlNegation negation) {
 		buffer.append("not ");
 		visit(negation.getHead());
 	}
@@ -225,7 +227,7 @@ public class VsdtExpressionVisitor {
 	/**
 	 * Minus:		"-" head= Head;
 	 */
-	protected void visit(Minus minus) {
+	protected void visit(VxlMinus minus) {
 		buffer.append("- ");
 		visit(minus.getHead());
 	}
@@ -234,19 +236,45 @@ public class VsdtExpressionVisitor {
 	/**
 	 * Atom:			Variable | Value;
 	 */
-	protected void visit(Atom atom) {
-		if (atom instanceof Variable) {
-			visit((Variable) atom);
+	protected void visit(VxlAtom atom) {
+		if (atom instanceof VxlVariable) {
+			visit((VxlVariable) atom);
 		}
-		if (atom instanceof Value) {
-			visit((Value) atom);
+		if (atom instanceof VxlValue) {
+			visit((VxlValue) atom);
+		}
+		if (atom instanceof VxlList) {
+			visit((VxlList) atom);
+			
 		}
 	}
 
 	/**
+	 * List:			"[" (body = VxlListElement)? "]"; 
+	 */
+	protected void visit(VxlList list) {
+		buffer.append("[");
+		if (list.getBody() != null) {
+			visit(list.getBody());
+		}
+		buffer.append("]");
+	}
+	
+	/**
+	 * ListElement:		first = VxlTerm ("," rest = VxlListElement)?;
+	 */
+	protected void visit(VxlListElement listElement) {
+		visit(listElement.getFirst());
+		if (listElement.getRest() != null) {
+			buffer.append(", ");
+			visit(listElement.getRest());
+		}
+	}
+	
+	/**
 	 * Variable:		"$" name = ID (accessor = Accessor)?;
 	 */
-	protected void visit(Variable variable) {
+	protected void visit(VxlVariable variable) {
 //		buffer.append("$");
 		buffer.append(variable.getName());
 		if (variable.getAccessor() != null) {
@@ -257,19 +285,19 @@ public class VsdtExpressionVisitor {
 	/**
 	 * Accessor:		ArrayAccessor | FieldAccessor;
 	 */
-	protected void visit(Accessor accessor) {
-		if (accessor instanceof ArrayAccessor) {
-			visit((ArrayAccessor) accessor);
+	protected void visit(VxlAccessor accessor) {
+		if (accessor instanceof VxlArrayAccessor) {
+			visit((VxlArrayAccessor) accessor);
 		}
-		if (accessor instanceof FieldAccessor) {
-			visit((FieldAccessor) accessor);
+		if (accessor instanceof VxlFieldAccessor) {
+			visit((VxlFieldAccessor) accessor);
 		}
 	}
 
 	/**
 	 * ArrayAccessor:	"[" index = Term "]" (accessor = Accessor)?;
 	 */
-	protected void visit(ArrayAccessor accessor) {
+	protected void visit(VxlArrayAccessor accessor) {
 		buffer.append("[");
 		visit(accessor.getIndex());
 		buffer.append("]");
@@ -281,7 +309,7 @@ public class VsdtExpressionVisitor {
 	/**
 	 * FieldAccessor:	"." name = ID (accessor = Accessor)?;
 	 */
-	protected void visit(FieldAccessor accessor) {
+	protected void visit(VxlFieldAccessor accessor) {
 		buffer.append(".");
 		buffer.append(accessor.getName());
 		if (accessor.getAccessor() != null) {
@@ -292,25 +320,25 @@ public class VsdtExpressionVisitor {
 	/**
 	 * Value:			StringConst | BooleanConst | NumericConst | Null;
 	 */
-	protected void visit(Value value) {
-		if (value instanceof StringConst) {
-			visit((StringConst) value);
+	protected void visit(VxlValue value) {
+		if (value instanceof VxlStringConst) {
+			visit((VxlStringConst) value);
 		}
-		if (value instanceof BooleanConst) {
-			visit((BooleanConst) value);
+		if (value instanceof VxlBooleanConst) {
+			visit((VxlBooleanConst) value);
 		}
-		if (value instanceof NumericConst) {
-			visit((NumericConst) value);
+		if (value instanceof VxlNumericConst) {
+			visit((VxlNumericConst) value);
 		}
-		if (value instanceof NullConst) {
-			visit((NullConst) value);
+		if (value instanceof VxlNullConst) {
+			visit((VxlNullConst) value);
 		}
 	}
 	
 	/**
 	 * StringConst:		const = STRING;
 	 */
-	protected void visit(StringConst stringConst) {
+	protected void visit(VxlStringConst stringConst) {
 		buffer.append("\"");
 		buffer.append(stringConst.getConst());
 		buffer.append("\"");
@@ -319,21 +347,21 @@ public class VsdtExpressionVisitor {
 	/**
 	 * BooleanConst:	isTrue ?= "true" | "false";
 	 */
-	protected void visit(BooleanConst booleanConst) {
+	protected void visit(VxlBooleanConst booleanConst) {
 		buffer.append(booleanConst.getConst());
 	}
 	
 	/**
 	 * Null:			"null";
 	 */
-	protected void visit(NullConst nll) {
+	protected void visit(VxlNullConst nll) {
 		buffer.append("null");
 	}
 
 	/**
 	 * NumericConst:	const = Numeric;
 	 */
-	protected void visit(NumericConst numericConst) {
+	protected void visit(VxlNumericConst numericConst) {
 		buffer.append(numericConst.getConst());
 	}
 
@@ -344,7 +372,7 @@ public class VsdtExpressionVisitor {
 	 * 	AND = "and" | OR = "or" |
 	 * 	CONCAT = "++"; 	
 	 */
-	protected void visit(Operator operator) {
+	protected void visit(VxlOperator operator) {
 		buffer.append(operator.getLiteral());
 	}
 

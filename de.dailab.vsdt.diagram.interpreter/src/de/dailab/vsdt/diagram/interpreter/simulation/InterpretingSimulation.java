@@ -40,7 +40,7 @@ import de.dailab.vsdt.vxl.util.Util;
 import de.dailab.vsdt.vxl.util.VxlInterpreter;
 import de.dailab.vsdt.vxl.util.VxlParseException;
 import de.dailab.vsdt.vxl.util.VxlParser;
-import de.dailab.vsdt.vxl.vxl.Term;
+import de.dailab.vsdt.vxl.vxl.VxlTerm;
 
 /**
  * This Simulation requires fewer interaction with the user than the Manual
@@ -96,7 +96,7 @@ public class InterpretingSimulation extends ManualSimulation {
 			EObject next= iter.next();
 			if (next instanceof Expression) {
 				// test-parse the expression, exit if result is null
-				Term result = parseExpression(getExpression((Expression) next));
+				VxlTerm result = parseExpression(getExpression((Expression) next));
 				isOk &= result != null;
 			}
 		}
@@ -455,11 +455,11 @@ public class InterpretingSimulation extends ManualSimulation {
 	 * @param expression	Some VXL Expression (as string)
 	 * @return				Result of the parsing, or null in case of error
 	 */
-	public static Term parseExpression(String expression) {
+	public static VxlTerm parseExpression(String expression) {
 		if (expression == null) return null;
 		VxlParser parser= VxlParser.getInstance();
 		try {
-			Term term= parser.parse(expression);
+			VxlTerm term= parser.parse(expression);
 			return term;
 		} catch (VxlParseException e) {
 			String title= "Parsing failed";
@@ -487,7 +487,7 @@ public class InterpretingSimulation extends ManualSimulation {
 	 * @param context		Map of Property names and values
 	 * @return				Result of the evaluation, or null in case of error
 	 */
-	public static Serializable evaluateTerm(Term term, Map<String, Serializable> context) {
+	public static Serializable evaluateTerm(VxlTerm term, Map<String, Serializable> context) {
 		if (term == null) return null;
 		VxlInterpreter interpreter= new VxlInterpreter();
 		Serializable result= interpreter.evaluateTerm(term, context);

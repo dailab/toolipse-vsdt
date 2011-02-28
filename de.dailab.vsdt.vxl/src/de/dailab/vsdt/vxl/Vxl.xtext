@@ -3,35 +3,35 @@ grammar de.dailab.vsdt.vxl.Vxl with org.eclipse.xtext.common.Terminals
 generate vxl "http://www.dailab.de/vsdt/vxl/Vxl"
 
 // COMPLEX TERMS
-Term:			head = Head (tail = Tail)?;
-Head:			BracketTerm | Negation | Minus | Atom;
-Tail:			operator = Operator term = Term;
-BracketTerm:	"(" term = Term ")";
-Negation:		"not" head = Head;
-Minus:			"-" head = Head;
-Atom:			Value | Variable | List;
+VxlTerm:			head = VxlHead (tail = VxlTail)?;
+VxlHead:			VxlBracketTerm | VxlNegation | VxlMinus | VxlAtom;
+VxlTail:			operator = VxlOperator term = VxlTerm;
+VxlBracketTerm:		"(" term = VxlTerm ")";
+VxlNegation:		"not" head = VxlHead;
+VxlMinus:			"-" head = VxlHead;
+VxlAtom:			VxlValue | VxlVariable | VxlList;
 
 // VARIABLES & ACCESSORS
-Variable:		name = ID (accessor = Accessor)?;
-Accessor:		ArrayAccessor | FieldAccessor;
-ArrayAccessor:	"[" index = Term "]" (accessor = Accessor)?;
-FieldAccessor:	"." name = ID (accessor = Accessor)?;
+VxlVariable:		name = ID (accessor = VxlAccessor)?;
+VxlAccessor:		VxlArrayAccessor | VxlFieldAccessor;
+VxlArrayAccessor:	"[" index = VxlTerm "]" (accessor = VxlAccessor)?;
+VxlFieldAccessor:	"." name = ID (accessor = VxlAccessor)?;
 
 // LISTS
-List:			"[" (body = ListElement)? "]"; 
-ListElement:	first = Term ("," rest = ListElement)?;
+VxlList:			"[" (body = VxlListElement)? "]"; 
+VxlListElement:		first = VxlTerm ("," rest = VxlListElement)?;
 
 // CONSTANTS
-Value:			StringConst | BooleanConst | NumericConst | NullConst;
-StringConst:	const = STRING;
-//NumericConst:	const = INT; // keine kommazahlen 
-NumericConst:	const = NUMERIC;
+VxlValue:			VxlStringConst | VxlBooleanConst | VxlNumericConst | VxlNullConst;
+VxlStringConst:		const = STRING;
+//NumericConst:		const = INT; // keine kommazahlen 
+VxlNumericConst:	const = NUMERIC;
 // BooleanConst:	isTrue ?= "true" | "false";
-BooleanConst:	const = ('true' | 'false');
-NullConst:		const = "null";
+VxlBooleanConst:	const = ('true' | 'false');
+VxlNullConst:		const = "null";
 
 // OPERATIONS
-enum Operator: 
+enum VxlOperator: 
 	LT = "<" | LE = "<=" | EQ = "==" | NEQ = "!=" | GT = ">" | GE = ">=" |	// Term ** Term -> Bool
 	ADD = "+" | SUB = "-" | MULT = "*" | DIV = "/" | MOD = "%" |			// Num ** Num -> Num
 	AND = "and" | OR = "or" |												// Bool ** Bool -> Bool

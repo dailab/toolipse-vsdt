@@ -3,14 +3,14 @@ package de.dailab.vsdt.trafo.bpel.export;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.trafo.bpel.util.BpelStaticHelper;
 import de.dailab.vsdt.util.VsdtExpressionVisitor;
-import de.dailab.vsdt.vxl.vxl.BooleanConst;
-import de.dailab.vsdt.vxl.vxl.FieldAccessor;
-import de.dailab.vsdt.vxl.vxl.Negation;
-import de.dailab.vsdt.vxl.vxl.NullConst;
-import de.dailab.vsdt.vxl.vxl.Operator;
-import de.dailab.vsdt.vxl.vxl.StringConst;
-import de.dailab.vsdt.vxl.vxl.Term;
-import de.dailab.vsdt.vxl.vxl.Variable;
+import de.dailab.vsdt.vxl.vxl.VxlBooleanConst;
+import de.dailab.vsdt.vxl.vxl.VxlFieldAccessor;
+import de.dailab.vsdt.vxl.vxl.VxlNegation;
+import de.dailab.vsdt.vxl.vxl.VxlNullConst;
+import de.dailab.vsdt.vxl.vxl.VxlOperator;
+import de.dailab.vsdt.vxl.vxl.VxlStringConst;
+import de.dailab.vsdt.vxl.vxl.VxlTerm;
+import de.dailab.vsdt.vxl.vxl.VxlVariable;
 
 public class BpelExpressionVisitor extends VsdtExpressionVisitor {
 
@@ -19,8 +19,8 @@ public class BpelExpressionVisitor extends VsdtExpressionVisitor {
 	}
 	
 	@Override
-	protected void visit(Term term) {
-		if (term.getTail() != null && term.getTail().getOperator() == Operator.CONCAT) {
+	protected void visit(VxlTerm term) {
+		if (term.getTail() != null && term.getTail().getOperator() == VxlOperator.CONCAT) {
 			buffer.append("concat(");
 			visit(term.getHead());
 			buffer.append(",");
@@ -32,41 +32,41 @@ public class BpelExpressionVisitor extends VsdtExpressionVisitor {
 	}
 
 	@Override
-	protected void visit(Negation negation) {
+	protected void visit(VxlNegation negation) {
 		buffer.append("not(");
 		visit(negation.getHead());
 		buffer.append(")");
 	}
 
 	@Override
-	protected void visit(Variable variable) {
+	protected void visit(VxlVariable variable) {
 		String query= null;
-		if (variable.getAccessor() instanceof FieldAccessor) {
-			query= ((FieldAccessor) variable.getAccessor()).getName();
+		if (variable.getAccessor() instanceof VxlFieldAccessor) {
+			query= ((VxlFieldAccessor) variable.getAccessor()).getName();
 		}
 		buffer.append(getFullVarName(variable.getName(), query));
 	}
 	
 	@Override
-	protected void visit(BooleanConst booleanConst) {
+	protected void visit(VxlBooleanConst booleanConst) {
 		buffer.append(booleanConst.getConst() + "()");
 	}
 	
 	@Override
-	protected void visit(StringConst stringConst) {
+	protected void visit(VxlStringConst stringConst) {
 		buffer.append("'");
 		buffer.append(stringConst.getConst());
 		buffer.append("'");
 	}
 	
 	@Override
-	protected void visit(NullConst nll) {
+	protected void visit(VxlNullConst nll) {
 		// XXX null in BPEL?
 		buffer.append("null");
 	}
 
 	@Override
-	protected void visit(Operator operator) {
+	protected void visit(VxlOperator operator) {
 		switch (operator) {
 		case EQ:
 			buffer.append("=");

@@ -40,7 +40,7 @@ public class VxlParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParse
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "Term";
+		return "VxlTerm";
 	}
 	
 	public VxlGrammarAccess getGrammarAccess() {

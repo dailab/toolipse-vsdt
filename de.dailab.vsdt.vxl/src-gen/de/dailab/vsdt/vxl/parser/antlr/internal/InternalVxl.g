@@ -55,7 +55,7 @@ import de.dailab.vsdt.vxl.services.VxlGrammarAccess;
     
     @Override
     protected String getFirstRuleName() {
-    	return "Term";	
+    	return "VxlTerm";	
    	} 
 }
 
@@ -69,16 +69,16 @@ import de.dailab.vsdt.vxl.services.VxlGrammarAccess;
 
 
 
-// Entry rule entryRuleTerm
-entryRuleTerm returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getTermRule(), currentNode); }
-	 iv_ruleTerm=ruleTerm 
-	 { $current=$iv_ruleTerm.current; } 
+// Entry rule entryRuleVxlTerm
+entryRuleVxlTerm returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlTermRule(), currentNode); }
+	 iv_ruleVxlTerm=ruleVxlTerm 
+	 { $current=$iv_ruleVxlTerm.current; } 
 	 EOF 
 ;
 
-// Rule Term
-ruleTerm returns [EObject current=null] 
+// Rule VxlTerm
+ruleVxlTerm returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -88,17 +88,17 @@ ruleTerm returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.getTermAccess().getHeadHeadParserRuleCall_0_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getVxlTermAccess().getHeadVxlHeadParserRuleCall_0_0(), currentNode); 
 	    }
-	    lv_head_0=ruleHead 
+	    lv_head_0=ruleVxlHead 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTermRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getVxlTermRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	       		set($current, "head", lv_head_0, "Head", currentNode);
+	       		set($current, "head", lv_head_0, "VxlHead", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -109,17 +109,17 @@ ruleTerm returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.getTermAccess().getTailTailParserRuleCall_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getVxlTermAccess().getTailVxlTailParserRuleCall_1_0(), currentNode); 
 	    }
-	    lv_tail_1=ruleTail 
+	    lv_tail_1=ruleVxlTail 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTermRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getVxlTermRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	       		set($current, "tail", lv_tail_1, "Tail", currentNode);
+	       		set($current, "tail", lv_tail_1, "VxlTail", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -132,16 +132,16 @@ ruleTerm returns [EObject current=null]
 
 
 
-// Entry rule entryRuleHead
-entryRuleHead returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getHeadRule(), currentNode); }
-	 iv_ruleHead=ruleHead 
-	 { $current=$iv_ruleHead.current; } 
+// Entry rule entryRuleVxlHead
+entryRuleVxlHead returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlHeadRule(), currentNode); }
+	 iv_ruleVxlHead=ruleVxlHead 
+	 { $current=$iv_ruleVxlHead.current; } 
 	 EOF 
 ;
 
-// Rule Head
-ruleHead returns [EObject current=null] 
+// Rule VxlHead
+ruleVxlHead returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -149,41 +149,41 @@ ruleHead returns [EObject current=null]
     }:
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.getHeadAccess().getBracketTermParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getVxlHeadAccess().getVxlBracketTermParserRuleCall_0(), currentNode); 
     }
-    this_BracketTerm_0=ruleBracketTerm
+    this_VxlBracketTerm_0=ruleVxlBracketTerm
     { 
-        $current = $this_BracketTerm_0.current; 
+        $current = $this_VxlBracketTerm_0.current; 
         currentNode = currentNode.getParent();
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getHeadAccess().getNegationParserRuleCall_1(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getVxlHeadAccess().getVxlNegationParserRuleCall_1(), currentNode); 
     }
-    this_Negation_1=ruleNegation
+    this_VxlNegation_1=ruleVxlNegation
     { 
-        $current = $this_Negation_1.current; 
+        $current = $this_VxlNegation_1.current; 
         currentNode = currentNode.getParent();
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getHeadAccess().getMinusParserRuleCall_2(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getVxlHeadAccess().getVxlMinusParserRuleCall_2(), currentNode); 
     }
-    this_Minus_2=ruleMinus
+    this_VxlMinus_2=ruleVxlMinus
     { 
-        $current = $this_Minus_2.current; 
+        $current = $this_VxlMinus_2.current; 
         currentNode = currentNode.getParent();
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getHeadAccess().getAtomParserRuleCall_3(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getVxlHeadAccess().getVxlAtomParserRuleCall_3(), currentNode); 
     }
-    this_Atom_3=ruleAtom
+    this_VxlAtom_3=ruleVxlAtom
     { 
-        $current = $this_Atom_3.current; 
+        $current = $this_VxlAtom_3.current; 
         currentNode = currentNode.getParent();
     }
 );
@@ -192,16 +192,16 @@ ruleHead returns [EObject current=null]
 
 
 
-// Entry rule entryRuleTail
-entryRuleTail returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getTailRule(), currentNode); }
-	 iv_ruleTail=ruleTail 
-	 { $current=$iv_ruleTail.current; } 
+// Entry rule entryRuleVxlTail
+entryRuleVxlTail returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlTailRule(), currentNode); }
+	 iv_ruleVxlTail=ruleVxlTail 
+	 { $current=$iv_ruleVxlTail.current; } 
 	 EOF 
 ;
 
-// Rule Tail
-ruleTail returns [EObject current=null] 
+// Rule VxlTail
+ruleVxlTail returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -211,17 +211,17 @@ ruleTail returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.getTailAccess().getOperatorOperatorEnumRuleCall_0_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getVxlTailAccess().getOperatorVxlOperatorEnumRuleCall_0_0(), currentNode); 
 	    }
-	    lv_operator_0=ruleOperator 
+	    lv_operator_0=ruleVxlOperator 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTailRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getVxlTailRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	       		set($current, "operator", lv_operator_0, "Operator", lastConsumedNode);
+	       		set($current, "operator", lv_operator_0, "VxlOperator", lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -232,17 +232,17 @@ ruleTail returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.getTailAccess().getTermTermParserRuleCall_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getVxlTailAccess().getTermVxlTermParserRuleCall_1_0(), currentNode); 
 	    }
-	    lv_term_1=ruleTerm 
+	    lv_term_1=ruleVxlTerm 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getTailRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getVxlTailRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	       		set($current, "term", lv_term_1, "Term", currentNode);
+	       		set($current, "term", lv_term_1, "VxlTerm", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -255,16 +255,16 @@ ruleTail returns [EObject current=null]
 
 
 
-// Entry rule entryRuleBracketTerm
-entryRuleBracketTerm returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getBracketTermRule(), currentNode); }
-	 iv_ruleBracketTerm=ruleBracketTerm 
-	 { $current=$iv_ruleBracketTerm.current; } 
+// Entry rule entryRuleVxlBracketTerm
+entryRuleVxlBracketTerm returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlBracketTermRule(), currentNode); }
+	 iv_ruleVxlBracketTerm=ruleVxlBracketTerm 
+	 { $current=$iv_ruleVxlBracketTerm.current; } 
 	 EOF 
 ;
 
-// Rule BracketTerm
-ruleBracketTerm returns [EObject current=null] 
+// Rule VxlBracketTerm
+ruleVxlBracketTerm returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -272,23 +272,23 @@ ruleBracketTerm returns [EObject current=null]
     }:
 ('(' 
     {
-        createLeafNode(grammarAccess.getBracketTermAccess().getLeftParenthesisKeyword_0(), null); 
+        createLeafNode(grammarAccess.getVxlBracketTermAccess().getLeftParenthesisKeyword_0(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.getBracketTermAccess().getTermTermParserRuleCall_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getVxlBracketTermAccess().getTermVxlTermParserRuleCall_1_0(), currentNode); 
 	    }
-	    lv_term_1=ruleTerm 
+	    lv_term_1=ruleVxlTerm 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getBracketTermRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getVxlBracketTermRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	       		set($current, "term", lv_term_1, "Term", currentNode);
+	       		set($current, "term", lv_term_1, "VxlTerm", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -297,7 +297,7 @@ ruleBracketTerm returns [EObject current=null]
 	
 )')' 
     {
-        createLeafNode(grammarAccess.getBracketTermAccess().getRightParenthesisKeyword_2(), null); 
+        createLeafNode(grammarAccess.getVxlBracketTermAccess().getRightParenthesisKeyword_2(), null); 
     }
 );
 
@@ -305,16 +305,16 @@ ruleBracketTerm returns [EObject current=null]
 
 
 
-// Entry rule entryRuleNegation
-entryRuleNegation returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getNegationRule(), currentNode); }
-	 iv_ruleNegation=ruleNegation 
-	 { $current=$iv_ruleNegation.current; } 
+// Entry rule entryRuleVxlNegation
+entryRuleVxlNegation returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlNegationRule(), currentNode); }
+	 iv_ruleVxlNegation=ruleVxlNegation 
+	 { $current=$iv_ruleVxlNegation.current; } 
 	 EOF 
 ;
 
-// Rule Negation
-ruleNegation returns [EObject current=null] 
+// Rule VxlNegation
+ruleVxlNegation returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -322,23 +322,23 @@ ruleNegation returns [EObject current=null]
     }:
 ('not' 
     {
-        createLeafNode(grammarAccess.getNegationAccess().getNotKeyword_0(), null); 
+        createLeafNode(grammarAccess.getVxlNegationAccess().getNotKeyword_0(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.getNegationAccess().getHeadHeadParserRuleCall_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getVxlNegationAccess().getHeadVxlHeadParserRuleCall_1_0(), currentNode); 
 	    }
-	    lv_head_1=ruleHead 
+	    lv_head_1=ruleVxlHead 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getNegationRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getVxlNegationRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	       		set($current, "head", lv_head_1, "Head", currentNode);
+	       		set($current, "head", lv_head_1, "VxlHead", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -351,16 +351,16 @@ ruleNegation returns [EObject current=null]
 
 
 
-// Entry rule entryRuleMinus
-entryRuleMinus returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getMinusRule(), currentNode); }
-	 iv_ruleMinus=ruleMinus 
-	 { $current=$iv_ruleMinus.current; } 
+// Entry rule entryRuleVxlMinus
+entryRuleVxlMinus returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlMinusRule(), currentNode); }
+	 iv_ruleVxlMinus=ruleVxlMinus 
+	 { $current=$iv_ruleVxlMinus.current; } 
 	 EOF 
 ;
 
-// Rule Minus
-ruleMinus returns [EObject current=null] 
+// Rule VxlMinus
+ruleVxlMinus returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -368,23 +368,23 @@ ruleMinus returns [EObject current=null]
     }:
 ('-' 
     {
-        createLeafNode(grammarAccess.getMinusAccess().getHyphenMinusKeyword_0(), null); 
+        createLeafNode(grammarAccess.getVxlMinusAccess().getHyphenMinusKeyword_0(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.getMinusAccess().getHeadHeadParserRuleCall_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getVxlMinusAccess().getHeadVxlHeadParserRuleCall_1_0(), currentNode); 
 	    }
-	    lv_head_1=ruleHead 
+	    lv_head_1=ruleVxlHead 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getMinusRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getVxlMinusRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	       		set($current, "head", lv_head_1, "Head", currentNode);
+	       		set($current, "head", lv_head_1, "VxlHead", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -397,16 +397,16 @@ ruleMinus returns [EObject current=null]
 
 
 
-// Entry rule entryRuleAtom
-entryRuleAtom returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getAtomRule(), currentNode); }
-	 iv_ruleAtom=ruleAtom 
-	 { $current=$iv_ruleAtom.current; } 
+// Entry rule entryRuleVxlAtom
+entryRuleVxlAtom returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlAtomRule(), currentNode); }
+	 iv_ruleVxlAtom=ruleVxlAtom 
+	 { $current=$iv_ruleVxlAtom.current; } 
 	 EOF 
 ;
 
-// Rule Atom
-ruleAtom returns [EObject current=null] 
+// Rule VxlAtom
+ruleVxlAtom returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -414,21 +414,31 @@ ruleAtom returns [EObject current=null]
     }:
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.getAtomAccess().getValueParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getVxlAtomAccess().getVxlValueParserRuleCall_0(), currentNode); 
     }
-    this_Value_0=ruleValue
+    this_VxlValue_0=ruleVxlValue
     { 
-        $current = $this_Value_0.current; 
+        $current = $this_VxlValue_0.current; 
         currentNode = currentNode.getParent();
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getAtomAccess().getVariableParserRuleCall_1(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getVxlAtomAccess().getVxlVariableParserRuleCall_1(), currentNode); 
     }
-    this_Variable_1=ruleVariable
+    this_VxlVariable_1=ruleVxlVariable
     { 
-        $current = $this_Variable_1.current; 
+        $current = $this_VxlVariable_1.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getVxlAtomAccess().getVxlListParserRuleCall_2(), currentNode); 
+    }
+    this_VxlList_2=ruleVxlList
+    { 
+        $current = $this_VxlList_2.current; 
         currentNode = currentNode.getParent();
     }
 );
@@ -437,16 +447,16 @@ ruleAtom returns [EObject current=null]
 
 
 
-// Entry rule entryRuleVariable
-entryRuleVariable returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getVariableRule(), currentNode); }
-	 iv_ruleVariable=ruleVariable 
-	 { $current=$iv_ruleVariable.current; } 
+// Entry rule entryRuleVxlVariable
+entryRuleVxlVariable returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlVariableRule(), currentNode); }
+	 iv_ruleVxlVariable=ruleVxlVariable 
+	 { $current=$iv_ruleVxlVariable.current; } 
 	 EOF 
 ;
 
-// Rule Variable
-ruleVariable returns [EObject current=null] 
+// Rule VxlVariable
+ruleVxlVariable returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -456,12 +466,12 @@ ruleVariable returns [EObject current=null]
 	
 	    lv_name_0=	RULE_ID
 	{
-		createLeafNode(grammarAccess.getVariableAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
+		createLeafNode(grammarAccess.getVxlVariableAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getVariableRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getVxlVariableRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -476,17 +486,17 @@ ruleVariable returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.getVariableAccess().getAccessorAccessorParserRuleCall_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getVxlVariableAccess().getAccessorVxlAccessorParserRuleCall_1_0(), currentNode); 
 	    }
-	    lv_accessor_1=ruleAccessor 
+	    lv_accessor_1=ruleVxlAccessor 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getVariableRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getVxlVariableRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	       		set($current, "accessor", lv_accessor_1, "Accessor", currentNode);
+	       		set($current, "accessor", lv_accessor_1, "VxlAccessor", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -499,16 +509,16 @@ ruleVariable returns [EObject current=null]
 
 
 
-// Entry rule entryRuleAccessor
-entryRuleAccessor returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getAccessorRule(), currentNode); }
-	 iv_ruleAccessor=ruleAccessor 
-	 { $current=$iv_ruleAccessor.current; } 
+// Entry rule entryRuleVxlAccessor
+entryRuleVxlAccessor returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlAccessorRule(), currentNode); }
+	 iv_ruleVxlAccessor=ruleVxlAccessor 
+	 { $current=$iv_ruleVxlAccessor.current; } 
 	 EOF 
 ;
 
-// Rule Accessor
-ruleAccessor returns [EObject current=null] 
+// Rule VxlAccessor
+ruleVxlAccessor returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -516,21 +526,21 @@ ruleAccessor returns [EObject current=null]
     }:
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.getAccessorAccess().getArrayAccessorParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getVxlAccessorAccess().getVxlArrayAccessorParserRuleCall_0(), currentNode); 
     }
-    this_ArrayAccessor_0=ruleArrayAccessor
+    this_VxlArrayAccessor_0=ruleVxlArrayAccessor
     { 
-        $current = $this_ArrayAccessor_0.current; 
+        $current = $this_VxlArrayAccessor_0.current; 
         currentNode = currentNode.getParent();
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getAccessorAccess().getFieldAccessorParserRuleCall_1(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getVxlAccessorAccess().getVxlFieldAccessorParserRuleCall_1(), currentNode); 
     }
-    this_FieldAccessor_1=ruleFieldAccessor
+    this_VxlFieldAccessor_1=ruleVxlFieldAccessor
     { 
-        $current = $this_FieldAccessor_1.current; 
+        $current = $this_VxlFieldAccessor_1.current; 
         currentNode = currentNode.getParent();
     }
 );
@@ -539,16 +549,16 @@ ruleAccessor returns [EObject current=null]
 
 
 
-// Entry rule entryRuleArrayAccessor
-entryRuleArrayAccessor returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getArrayAccessorRule(), currentNode); }
-	 iv_ruleArrayAccessor=ruleArrayAccessor 
-	 { $current=$iv_ruleArrayAccessor.current; } 
+// Entry rule entryRuleVxlArrayAccessor
+entryRuleVxlArrayAccessor returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlArrayAccessorRule(), currentNode); }
+	 iv_ruleVxlArrayAccessor=ruleVxlArrayAccessor 
+	 { $current=$iv_ruleVxlArrayAccessor.current; } 
 	 EOF 
 ;
 
-// Rule ArrayAccessor
-ruleArrayAccessor returns [EObject current=null] 
+// Rule VxlArrayAccessor
+ruleVxlArrayAccessor returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -556,23 +566,23 @@ ruleArrayAccessor returns [EObject current=null]
     }:
 ('[' 
     {
-        createLeafNode(grammarAccess.getArrayAccessorAccess().getLeftSquareBracketKeyword_0(), null); 
+        createLeafNode(grammarAccess.getVxlArrayAccessorAccess().getLeftSquareBracketKeyword_0(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.getArrayAccessorAccess().getIndexTermParserRuleCall_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getVxlArrayAccessorAccess().getIndexVxlTermParserRuleCall_1_0(), currentNode); 
 	    }
-	    lv_index_1=ruleTerm 
+	    lv_index_1=ruleVxlTerm 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getArrayAccessorRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getVxlArrayAccessorRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	       		set($current, "index", lv_index_1, "Term", currentNode);
+	       		set($current, "index", lv_index_1, "VxlTerm", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -581,23 +591,23 @@ ruleArrayAccessor returns [EObject current=null]
 	
 )']' 
     {
-        createLeafNode(grammarAccess.getArrayAccessorAccess().getRightSquareBracketKeyword_2(), null); 
+        createLeafNode(grammarAccess.getVxlArrayAccessorAccess().getRightSquareBracketKeyword_2(), null); 
     }
 (	
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.getArrayAccessorAccess().getAccessorAccessorParserRuleCall_3_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getVxlArrayAccessorAccess().getAccessorVxlAccessorParserRuleCall_3_0(), currentNode); 
 	    }
-	    lv_accessor_3=ruleAccessor 
+	    lv_accessor_3=ruleVxlAccessor 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getArrayAccessorRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getVxlArrayAccessorRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	       		set($current, "accessor", lv_accessor_3, "Accessor", currentNode);
+	       		set($current, "accessor", lv_accessor_3, "VxlAccessor", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -610,16 +620,16 @@ ruleArrayAccessor returns [EObject current=null]
 
 
 
-// Entry rule entryRuleFieldAccessor
-entryRuleFieldAccessor returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getFieldAccessorRule(), currentNode); }
-	 iv_ruleFieldAccessor=ruleFieldAccessor 
-	 { $current=$iv_ruleFieldAccessor.current; } 
+// Entry rule entryRuleVxlFieldAccessor
+entryRuleVxlFieldAccessor returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlFieldAccessorRule(), currentNode); }
+	 iv_ruleVxlFieldAccessor=ruleVxlFieldAccessor 
+	 { $current=$iv_ruleVxlFieldAccessor.current; } 
 	 EOF 
 ;
 
-// Rule FieldAccessor
-ruleFieldAccessor returns [EObject current=null] 
+// Rule VxlFieldAccessor
+ruleVxlFieldAccessor returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -627,18 +637,18 @@ ruleFieldAccessor returns [EObject current=null]
     }:
 ('.' 
     {
-        createLeafNode(grammarAccess.getFieldAccessorAccess().getFullStopKeyword_0(), null); 
+        createLeafNode(grammarAccess.getVxlFieldAccessorAccess().getFullStopKeyword_0(), null); 
     }
 (	
 	
 	    lv_name_1=	RULE_ID
 	{
-		createLeafNode(grammarAccess.getFieldAccessorAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+		createLeafNode(grammarAccess.getVxlFieldAccessorAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getFieldAccessorRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getVxlFieldAccessorRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -653,17 +663,17 @@ ruleFieldAccessor returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.getFieldAccessorAccess().getAccessorAccessorParserRuleCall_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getVxlFieldAccessorAccess().getAccessorVxlAccessorParserRuleCall_2_0(), currentNode); 
 	    }
-	    lv_accessor_2=ruleAccessor 
+	    lv_accessor_2=ruleVxlAccessor 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getFieldAccessorRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getVxlFieldAccessorRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
 	        try {
-	       		set($current, "accessor", lv_accessor_2, "Accessor", currentNode);
+	       		set($current, "accessor", lv_accessor_2, "VxlAccessor", currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -676,16 +686,133 @@ ruleFieldAccessor returns [EObject current=null]
 
 
 
-// Entry rule entryRuleValue
-entryRuleValue returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getValueRule(), currentNode); }
-	 iv_ruleValue=ruleValue 
-	 { $current=$iv_ruleValue.current; } 
+// Entry rule entryRuleVxlList
+entryRuleVxlList returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlListRule(), currentNode); }
+	 iv_ruleVxlList=ruleVxlList 
+	 { $current=$iv_ruleVxlList.current; } 
 	 EOF 
 ;
 
-// Rule Value
-ruleValue returns [EObject current=null] 
+// Rule VxlList
+ruleVxlList returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+('[' 
+    {
+        createLeafNode(grammarAccess.getVxlListAccess().getLeftSquareBracketKeyword_0(), null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getVxlListAccess().getBodyVxlListElementParserRuleCall_1_0(), currentNode); 
+	    }
+	    lv_body_1=ruleVxlListElement 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getVxlListRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		set($current, "body", lv_body_1, "VxlListElement", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+)?']' 
+    {
+        createLeafNode(grammarAccess.getVxlListAccess().getRightSquareBracketKeyword_2(), null); 
+    }
+);
+
+
+
+
+
+// Entry rule entryRuleVxlListElement
+entryRuleVxlListElement returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlListElementRule(), currentNode); }
+	 iv_ruleVxlListElement=ruleVxlListElement 
+	 { $current=$iv_ruleVxlListElement.current; } 
+	 EOF 
+;
+
+// Rule VxlListElement
+ruleVxlListElement returns [EObject current=null] 
+    @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+((	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getVxlListElementAccess().getFirstVxlTermParserRuleCall_0_0(), currentNode); 
+	    }
+	    lv_first_0=ruleVxlTerm 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getVxlListElementRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		set($current, "first", lv_first_0, "VxlTerm", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+)(',' 
+    {
+        createLeafNode(grammarAccess.getVxlListElementAccess().getCommaKeyword_1_0(), null); 
+    }
+(	
+	
+	    
+	    { 
+	        currentNode=createCompositeNode(grammarAccess.getVxlListElementAccess().getRestVxlListElementParserRuleCall_1_1_0(), currentNode); 
+	    }
+	    lv_rest_2=ruleVxlListElement 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getVxlListElementRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        
+	        try {
+	       		set($current, "rest", lv_rest_2, "VxlListElement", currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+	
+))?);
+
+
+
+
+
+// Entry rule entryRuleVxlValue
+entryRuleVxlValue returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlValueRule(), currentNode); }
+	 iv_ruleVxlValue=ruleVxlValue 
+	 { $current=$iv_ruleVxlValue.current; } 
+	 EOF 
+;
+
+// Rule VxlValue
+ruleVxlValue returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -693,41 +820,41 @@ ruleValue returns [EObject current=null]
     }:
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.getValueAccess().getStringConstParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getVxlValueAccess().getVxlStringConstParserRuleCall_0(), currentNode); 
     }
-    this_StringConst_0=ruleStringConst
+    this_VxlStringConst_0=ruleVxlStringConst
     { 
-        $current = $this_StringConst_0.current; 
+        $current = $this_VxlStringConst_0.current; 
         currentNode = currentNode.getParent();
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getValueAccess().getBooleanConstParserRuleCall_1(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getVxlValueAccess().getVxlBooleanConstParserRuleCall_1(), currentNode); 
     }
-    this_BooleanConst_1=ruleBooleanConst
+    this_VxlBooleanConst_1=ruleVxlBooleanConst
     { 
-        $current = $this_BooleanConst_1.current; 
+        $current = $this_VxlBooleanConst_1.current; 
         currentNode = currentNode.getParent();
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getValueAccess().getNumericConstParserRuleCall_2(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getVxlValueAccess().getVxlNumericConstParserRuleCall_2(), currentNode); 
     }
-    this_NumericConst_2=ruleNumericConst
+    this_VxlNumericConst_2=ruleVxlNumericConst
     { 
-        $current = $this_NumericConst_2.current; 
+        $current = $this_VxlNumericConst_2.current; 
         currentNode = currentNode.getParent();
     }
 
     |
     { 
-        currentNode=createCompositeNode(grammarAccess.getValueAccess().getNullConstParserRuleCall_3(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getVxlValueAccess().getVxlNullConstParserRuleCall_3(), currentNode); 
     }
-    this_NullConst_3=ruleNullConst
+    this_VxlNullConst_3=ruleVxlNullConst
     { 
-        $current = $this_NullConst_3.current; 
+        $current = $this_VxlNullConst_3.current; 
         currentNode = currentNode.getParent();
     }
 );
@@ -736,16 +863,16 @@ ruleValue returns [EObject current=null]
 
 
 
-// Entry rule entryRuleStringConst
-entryRuleStringConst returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getStringConstRule(), currentNode); }
-	 iv_ruleStringConst=ruleStringConst 
-	 { $current=$iv_ruleStringConst.current; } 
+// Entry rule entryRuleVxlStringConst
+entryRuleVxlStringConst returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlStringConstRule(), currentNode); }
+	 iv_ruleVxlStringConst=ruleVxlStringConst 
+	 { $current=$iv_ruleVxlStringConst.current; } 
 	 EOF 
 ;
 
-// Rule StringConst
-ruleStringConst returns [EObject current=null] 
+// Rule VxlStringConst
+ruleVxlStringConst returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -755,12 +882,12 @@ ruleStringConst returns [EObject current=null]
 	
 	    lv_const_0=	RULE_STRING
 	{
-		createLeafNode(grammarAccess.getStringConstAccess().getConstSTRINGTerminalRuleCall_0(), "const"); 
+		createLeafNode(grammarAccess.getVxlStringConstAccess().getConstSTRINGTerminalRuleCall_0(), "const"); 
 	}
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getStringConstRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getVxlStringConstRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -777,16 +904,16 @@ ruleStringConst returns [EObject current=null]
 
 
 
-// Entry rule entryRuleNumericConst
-entryRuleNumericConst returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getNumericConstRule(), currentNode); }
-	 iv_ruleNumericConst=ruleNumericConst 
-	 { $current=$iv_ruleNumericConst.current; } 
+// Entry rule entryRuleVxlNumericConst
+entryRuleVxlNumericConst returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlNumericConstRule(), currentNode); }
+	 iv_ruleVxlNumericConst=ruleVxlNumericConst 
+	 { $current=$iv_ruleVxlNumericConst.current; } 
 	 EOF 
 ;
 
-// Rule NumericConst
-ruleNumericConst returns [EObject current=null] 
+// Rule VxlNumericConst
+ruleVxlNumericConst returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -796,12 +923,12 @@ ruleNumericConst returns [EObject current=null]
 	
 	    
 	    { 
-	        currentNode=createCompositeNode(grammarAccess.getNumericConstAccess().getConstNUMERICParserRuleCall_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getVxlNumericConstAccess().getConstNUMERICParserRuleCall_0(), currentNode); 
 	    }
 	    lv_const_0=ruleNUMERIC 
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getNumericConstRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getVxlNumericConstRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        
@@ -819,16 +946,16 @@ ruleNumericConst returns [EObject current=null]
 
 
 
-// Entry rule entryRuleBooleanConst
-entryRuleBooleanConst returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getBooleanConstRule(), currentNode); }
-	 iv_ruleBooleanConst=ruleBooleanConst 
-	 { $current=$iv_ruleBooleanConst.current; } 
+// Entry rule entryRuleVxlBooleanConst
+entryRuleVxlBooleanConst returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlBooleanConstRule(), currentNode); }
+	 iv_ruleVxlBooleanConst=ruleVxlBooleanConst 
+	 { $current=$iv_ruleVxlBooleanConst.current; } 
 	 EOF 
 ;
 
-// Rule BooleanConst
-ruleBooleanConst returns [EObject current=null] 
+// Rule VxlBooleanConst
+ruleVxlBooleanConst returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -838,20 +965,20 @@ ruleBooleanConst returns [EObject current=null]
 	
 	    lv_const_0=('true' 
     {
-        createLeafNode(grammarAccess.getBooleanConstAccess().getConstTrueKeyword_0_0(), "const"); 
+        createLeafNode(grammarAccess.getVxlBooleanConstAccess().getConstTrueKeyword_0_0(), "const"); 
     }
 
 
     |'false' 
     {
-        createLeafNode(grammarAccess.getBooleanConstAccess().getConstFalseKeyword_0_1(), "const"); 
+        createLeafNode(grammarAccess.getVxlBooleanConstAccess().getConstFalseKeyword_0_1(), "const"); 
     }
 
 )
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getBooleanConstRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getVxlBooleanConstRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -868,16 +995,16 @@ ruleBooleanConst returns [EObject current=null]
 
 
 
-// Entry rule entryRuleNullConst
-entryRuleNullConst returns [EObject current=null] :
-	{ currentNode = createCompositeNode(grammarAccess.getNullConstRule(), currentNode); }
-	 iv_ruleNullConst=ruleNullConst 
-	 { $current=$iv_ruleNullConst.current; } 
+// Entry rule entryRuleVxlNullConst
+entryRuleVxlNullConst returns [EObject current=null] :
+	{ currentNode = createCompositeNode(grammarAccess.getVxlNullConstRule(), currentNode); }
+	 iv_ruleVxlNullConst=ruleVxlNullConst 
+	 { $current=$iv_ruleVxlNullConst.current; } 
 	 EOF 
 ;
 
-// Rule NullConst
-ruleNullConst returns [EObject current=null] 
+// Rule VxlNullConst
+ruleVxlNullConst returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
     }
     @after { resetLookahead(); 
@@ -887,13 +1014,13 @@ ruleNullConst returns [EObject current=null]
 	
 	    lv_const_0='null' 
     {
-        createLeafNode(grammarAccess.getNullConstAccess().getConstNullKeyword_0(), "const"); 
+        createLeafNode(grammarAccess.getVxlNullConstAccess().getConstNullKeyword_0(), "const"); 
     }
 
  
 	    {
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getNullConstRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getVxlNullConstRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
@@ -953,94 +1080,94 @@ ruleNUMERIC returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
 
 
 
-// Rule Operator
-ruleOperator returns [Enumerator current=null] 
+// Rule VxlOperator
+ruleVxlOperator returns [Enumerator current=null] 
     @init { setCurrentLookahead(); resetLookahead(); }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
     }:
 ((	'<' 
 	{
-        $current = grammarAccess.getOperatorAccess().getLTEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getOperatorAccess().getLTEnumLiteralDeclaration_0(), null); 
+        $current = grammarAccess.getVxlOperatorAccess().getLTEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getVxlOperatorAccess().getLTEnumLiteralDeclaration_0(), null); 
     }
 )
     |(	'<=' 
 	{
-        $current = grammarAccess.getOperatorAccess().getLEEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getOperatorAccess().getLEEnumLiteralDeclaration_1(), null); 
+        $current = grammarAccess.getVxlOperatorAccess().getLEEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getVxlOperatorAccess().getLEEnumLiteralDeclaration_1(), null); 
     }
 )
     |(	'==' 
 	{
-        $current = grammarAccess.getOperatorAccess().getEQEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getOperatorAccess().getEQEnumLiteralDeclaration_2(), null); 
+        $current = grammarAccess.getVxlOperatorAccess().getEQEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getVxlOperatorAccess().getEQEnumLiteralDeclaration_2(), null); 
     }
 )
     |(	'!=' 
 	{
-        $current = grammarAccess.getOperatorAccess().getNEQEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getOperatorAccess().getNEQEnumLiteralDeclaration_3(), null); 
+        $current = grammarAccess.getVxlOperatorAccess().getNEQEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getVxlOperatorAccess().getNEQEnumLiteralDeclaration_3(), null); 
     }
 )
     |(	'>' 
 	{
-        $current = grammarAccess.getOperatorAccess().getGTEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getOperatorAccess().getGTEnumLiteralDeclaration_4(), null); 
+        $current = grammarAccess.getVxlOperatorAccess().getGTEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getVxlOperatorAccess().getGTEnumLiteralDeclaration_4(), null); 
     }
 )
     |(	'>=' 
 	{
-        $current = grammarAccess.getOperatorAccess().getGEEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getOperatorAccess().getGEEnumLiteralDeclaration_5(), null); 
+        $current = grammarAccess.getVxlOperatorAccess().getGEEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getVxlOperatorAccess().getGEEnumLiteralDeclaration_5(), null); 
     }
 )
     |(	'+' 
 	{
-        $current = grammarAccess.getOperatorAccess().getADDEnumLiteralDeclaration_6().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getOperatorAccess().getADDEnumLiteralDeclaration_6(), null); 
+        $current = grammarAccess.getVxlOperatorAccess().getADDEnumLiteralDeclaration_6().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getVxlOperatorAccess().getADDEnumLiteralDeclaration_6(), null); 
     }
 )
     |(	'-' 
 	{
-        $current = grammarAccess.getOperatorAccess().getSUBEnumLiteralDeclaration_7().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getOperatorAccess().getSUBEnumLiteralDeclaration_7(), null); 
+        $current = grammarAccess.getVxlOperatorAccess().getSUBEnumLiteralDeclaration_7().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getVxlOperatorAccess().getSUBEnumLiteralDeclaration_7(), null); 
     }
 )
     |(	'*' 
 	{
-        $current = grammarAccess.getOperatorAccess().getMULTEnumLiteralDeclaration_8().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getOperatorAccess().getMULTEnumLiteralDeclaration_8(), null); 
+        $current = grammarAccess.getVxlOperatorAccess().getMULTEnumLiteralDeclaration_8().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getVxlOperatorAccess().getMULTEnumLiteralDeclaration_8(), null); 
     }
 )
     |(	'/' 
 	{
-        $current = grammarAccess.getOperatorAccess().getDIVEnumLiteralDeclaration_9().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getOperatorAccess().getDIVEnumLiteralDeclaration_9(), null); 
+        $current = grammarAccess.getVxlOperatorAccess().getDIVEnumLiteralDeclaration_9().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getVxlOperatorAccess().getDIVEnumLiteralDeclaration_9(), null); 
     }
 )
     |(	'%' 
 	{
-        $current = grammarAccess.getOperatorAccess().getMODEnumLiteralDeclaration_10().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getOperatorAccess().getMODEnumLiteralDeclaration_10(), null); 
+        $current = grammarAccess.getVxlOperatorAccess().getMODEnumLiteralDeclaration_10().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getVxlOperatorAccess().getMODEnumLiteralDeclaration_10(), null); 
     }
 )
     |(	'and' 
 	{
-        $current = grammarAccess.getOperatorAccess().getANDEnumLiteralDeclaration_11().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getOperatorAccess().getANDEnumLiteralDeclaration_11(), null); 
+        $current = grammarAccess.getVxlOperatorAccess().getANDEnumLiteralDeclaration_11().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getVxlOperatorAccess().getANDEnumLiteralDeclaration_11(), null); 
     }
 )
     |(	'or' 
 	{
-        $current = grammarAccess.getOperatorAccess().getOREnumLiteralDeclaration_12().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getOperatorAccess().getOREnumLiteralDeclaration_12(), null); 
+        $current = grammarAccess.getVxlOperatorAccess().getOREnumLiteralDeclaration_12().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getVxlOperatorAccess().getOREnumLiteralDeclaration_12(), null); 
     }
 )
     |(	'++' 
 	{
-        $current = grammarAccess.getOperatorAccess().getCONCATEnumLiteralDeclaration_13().getEnumLiteral().getInstance();
-        createLeafNode(grammarAccess.getOperatorAccess().getCONCATEnumLiteralDeclaration_13(), null); 
+        $current = grammarAccess.getVxlOperatorAccess().getCONCATEnumLiteralDeclaration_13().getEnumLiteral().getInstance();
+        createLeafNode(grammarAccess.getVxlOperatorAccess().getCONCATEnumLiteralDeclaration_13(), null); 
     }
 ));
 

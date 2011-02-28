@@ -3,9 +3,9 @@ package de.dailab.vsdt.vxl.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.dailab.vsdt.vxl.vxl.Head;
-import de.dailab.vsdt.vxl.vxl.Operator;
-import de.dailab.vsdt.vxl.vxl.Term;
+import de.dailab.vsdt.vxl.vxl.VxlHead;
+import de.dailab.vsdt.vxl.vxl.VxlOperator;
+import de.dailab.vsdt.vxl.vxl.VxlTerm;
 
 /**
  * This helper class is for ordering Terms w.r.t. the operators. Right after
@@ -21,31 +21,31 @@ import de.dailab.vsdt.vxl.vxl.Term;
 public class TermOrdering {
 
 	/** this list holds the order of the operators */
-	static Map<Operator, Integer> priorityMap;
+	static Map<VxlOperator, Integer> priorityMap;
 	
 	/** initialize priority map */
 	static {
-		priorityMap= new HashMap<Operator, Integer>();
+		priorityMap= new HashMap<VxlOperator, Integer>();
 		// modulo has highest priority / strongest binding
-		priorityMap.put(Operator.MOD, 5);
+		priorityMap.put(VxlOperator.MOD, 5);
 		// next goes multiplication, division, and power
-		priorityMap.put(Operator.MULT, 4);
-		priorityMap.put(Operator.DIV, 4);
+		priorityMap.put(VxlOperator.MULT, 4);
+		priorityMap.put(VxlOperator.DIV, 4);
 		// then addition, subtraction, and concatenation (on strings)
-		priorityMap.put(Operator.CONCAT, 3);
-		priorityMap.put(Operator.ADD, 3);
-		priorityMap.put(Operator.SUB, 3);
+		priorityMap.put(VxlOperator.CONCAT, 3);
+		priorityMap.put(VxlOperator.ADD, 3);
+		priorityMap.put(VxlOperator.SUB, 3);
 		// now all kinds of comparisons and equations
-		priorityMap.put(Operator.GT, 2);
-		priorityMap.put(Operator.GE, 2);
-		priorityMap.put(Operator.LT, 2);
-		priorityMap.put(Operator.LE, 2);
-		priorityMap.put(Operator.EQ, 2);
-		priorityMap.put(Operator.NEQ, 2);
+		priorityMap.put(VxlOperator.GT, 2);
+		priorityMap.put(VxlOperator.GE, 2);
+		priorityMap.put(VxlOperator.LT, 2);
+		priorityMap.put(VxlOperator.LE, 2);
+		priorityMap.put(VxlOperator.EQ, 2);
+		priorityMap.put(VxlOperator.NEQ, 2);
 		// disjunction
-		priorityMap.put(Operator.AND, 1);
+		priorityMap.put(VxlOperator.AND, 1);
 		// and finally conjunction
-		priorityMap.put(Operator.OR, 0);
+		priorityMap.put(VxlOperator.OR, 0);
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class TermOrdering {
 	 * @param operator2		Second Operator
 	 * @return				true, if operator 1 has priority over operator 2
 	 */
-	protected static boolean hasPriorityOver(Operator operator1, Operator operator2) {
+	protected static boolean hasPriorityOver(VxlOperator operator1, VxlOperator operator2) {
 		return priorityMap.get(operator1) > priorityMap.get(operator2);
 	}
 	
@@ -69,7 +69,7 @@ public class TermOrdering {
 	 * @param term	some VXL Term
 	 * @return		ordered TermTree version of the Term
 	 */
-	public static TermTree createOrderedTermTree(Term term) {
+	public static TermTree createOrderedTermTree(VxlTerm term) {
 		TermTree termTree= TermOrdering.transcribe(term);
 		termTree= TermOrdering.combLeft(termTree);
 		termTree= TermOrdering.order(termTree);
@@ -85,13 +85,13 @@ public class TermOrdering {
 	 * @param term	some VXL Term
 	 * @return		right-combed TermTree
 	 */
-	protected static TermTree transcribe(Term term) {
+	protected static TermTree transcribe(VxlTerm term) {
 		if (term.getTail() == null) {
 			// wrap Head in a TermLeaf
 			return new TermLeaf(term.getHead());
 		} else {
 			// wrap Term in a TermNode
-			Operator operator= term.getTail().getOperator();
+			VxlOperator operator= term.getTail().getOperator();
 			TermLeaf head= new TermLeaf(term.getHead());
 			TermTree tail= transcribe(term.getTail().getTerm());
 			return new TermNode(head, operator, tail);
@@ -217,8 +217,8 @@ public class TermOrdering {
 	 * @author kuester
 	 */
 	public static class TermLeaf implements TermTree {
-		Head term;
-		public TermLeaf(Head term) {
+		VxlHead term;
+		public TermLeaf(VxlHead term) {
 			this.term= term;
 		}
 	}
@@ -230,10 +230,10 @@ public class TermOrdering {
 	 * @author kuester
 	 */
 	public static class TermNode implements TermTree {
-		Operator operator;
+		VxlOperator operator;
 		TermTree left;
 		TermTree right;
-		public TermNode(TermTree left, Operator operator, TermTree right) {
+		public TermNode(TermTree left, VxlOperator operator, TermTree right) {
 			this.left= left;
 			this.right= right;
 			this.operator= operator;
