@@ -1,14 +1,19 @@
 package de.dailab.vsdt.vxl.util;
 
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import de.dailab.vsdt.vxl.util.TermOrdering.TermLeaf;
 import de.dailab.vsdt.vxl.util.TermOrdering.TermNode;
 import de.dailab.vsdt.vxl.util.TermOrdering.TermTree;
+import de.dailab.vsdt.vxl.vxl.Accessor;
+import de.dailab.vsdt.vxl.vxl.ArrayAccessor;
 import de.dailab.vsdt.vxl.vxl.Atom;
 import de.dailab.vsdt.vxl.vxl.BooleanConst;
 import de.dailab.vsdt.vxl.vxl.BracketTerm;
+import de.dailab.vsdt.vxl.vxl.FieldAccessor;
 import de.dailab.vsdt.vxl.vxl.Head;
 import de.dailab.vsdt.vxl.vxl.Minus;
 import de.dailab.vsdt.vxl.vxl.Negation;
@@ -31,7 +36,7 @@ public class VxlInterpreter {
 	protected Map<Object, String> errors= null;
 	
 	/** the context, e.g. the association of variables to actual values */
-	protected Map<String, Object> context= null;
+	protected Map<String, Serializable> context= null;
 	
 	public Map<Object, String> getErrors() {
 		return errors;
@@ -43,7 +48,7 @@ public class VxlInterpreter {
 	 * @param term		Some Term
 	 * @return			Result, e.g. a String, Number, or Boolean, or whatever else
 	 */
-	public Object evaluateTerm(Term term, Map<String, Object> context) {
+	public Serializable evaluateTerm(Term term, Map<String, Serializable> context) {
 		this.errors= new HashMap<Object, String>();
 		this.context= context;
 		return eval(term);
@@ -53,7 +58,7 @@ public class VxlInterpreter {
 	 * Term:			head = Head (tail = Tail)?;
 	 * The term is transcribed to an ordered TermTree and evaluated.
 	 */
-	protected Object eval(Term term) {
+	protected Serializable eval(Term term) {
 		TermTree orderedTermTree= TermOrdering.createOrderedTermTree(term);
 //		TermOrdering.print(orderedTermTree, 0);
 		return eval(orderedTermTree);
@@ -66,7 +71,7 @@ public class VxlInterpreter {
 	 * @param term	Some ordered TermTree
 	 * @return		Evaluation result (e.g. a Sting, Number, or Boolean)
 	 */
-	protected Object eval(TermTree term) {
+	protected Serializable eval(TermTree term) {
 		if (term instanceof TermLeaf) {
 			TermLeaf leaf= (TermLeaf) term;
 			return eval(leaf.term);
@@ -91,7 +96,7 @@ public class VxlInterpreter {
 	/**
 	 * Head:			BracketTerm | Negation | Atom;
 	 */
-	protected Object eval(Head head) {
+	protected Serializable eval(Head head) {
 		if (head instanceof BracketTerm) {
 			return eval(((BracketTerm) head).getTerm());
 		}
@@ -111,8 +116,8 @@ public class VxlInterpreter {
 	/**
 	 * Negation:		"!" head = Head;
 	 */
-	protected Object eval(Negation negation) {
-		Object result= eval(negation.getHead());
+	protected Serializable eval(Negation negation) {
+		Serializable result= eval(negation.getHead());
 		if (result instanceof Boolean) {
 			return ! (Boolean) result;
 		} else {
@@ -124,8 +129,8 @@ public class VxlInterpreter {
 	/**
 	 * Minus:		"-" head = Head;
 	 */
-	protected Object eval(Minus minus) {
-		Object result= eval(minus.getHead());
+	protected Serializable eval(Minus minus) {
+		Serializable result= eval(minus.getHead());
 		if (result instanceof Number) {
 			return - ((Number) result).doubleValue();
 		} else {
@@ -137,7 +142,7 @@ public class VxlInterpreter {
 	/**
 	 * Atom:			Variable | Value;
 	 */
-	protected Object eval(Atom atom) {
+	protected Serializable eval(Atom atom) {
 		if (atom instanceof Variable) {
 			return eval((Variable) atom);
 		}
@@ -150,12 +155,12 @@ public class VxlInterpreter {
 	/**
 	 * Variable:		"$" name = ID (accessor = Accessor)?;
 	 */
-	protected Object eval(Variable variable) {
+	protected Serializable eval(Variable variable) {
 		// get value from context
 		if (context != null) {
-			Object value= context.get(variable.getName());
+			Serializable value= context.get(variable.getName());
 			//XXX why does context.get not work here?
-			for (Object key : context.keySet()) {
+			for (String key : context.keySet()) {
 				if (key.equals(variable.getName())) {
 					value= context.get(key);
 					if (value==null) {
@@ -164,7 +169,7 @@ public class VxlInterpreter {
 				}
 			}
 			if (variable.getAccessor() != null) {
-	//			visit(variable.getAccessor());
+				value = eval(variable.getAccessor(), value);
 			}
 			return value;
 		} else {
@@ -174,47 +179,73 @@ public class VxlInterpreter {
 	}
 	
 	/**
-	 * TODO
 	 * Accessor:		ArrayAccessor | FieldAccessor;
 	 */
-//	protected Object eval(Accessor accessor) {
-//		if (accessor instanceof ArrayAccessor) {
-//			visit((ArrayAccessor) accessor);
-//		}
-//		if (accessor instanceof FieldAccessor) {
-//			visit((FieldAccessor) accessor);
-//		}
-//	}
+	protected Serializable eval(Accessor accessor, Serializable value) {
+		if (accessor instanceof ArrayAccessor) {
+			return eval((ArrayAccessor) accessor, value);
+		}
+		if (accessor instanceof FieldAccessor) {
+			return eval((FieldAccessor) accessor, value);
+		}
+		return null;
+	}
 
 	/**
-	 * TODO
+	 * TODO test
 	 * ArrayAccessor:	"[" index = Term "]" (accessor = Accessor)?;
 	 */
-//	protected Object eval(ArrayAccessor accessor) {
-//		buffer.append("[");
-//		visit(accessor.getIndex());
-//		buffer.append("]");
-//		if (accessor.getAccessor() != null) {
-//			visit(accessor.getAccessor());
-//		}
-//	}
+	@SuppressWarnings("unchecked")
+	protected Serializable eval(ArrayAccessor accessor, Serializable value) {
+		// evaluate index
+		Serializable index = eval(accessor.getIndex());
+		if (index instanceof Integer) {
+			int i = (Integer) index;
+			
+			// access element
+			if (value instanceof Serializable[]) {
+				Serializable[] asArray = (Serializable[]) value;
+				if (asArray.length >= i) {
+					value = asArray[i];
+				} else {
+					errors.put(accessor, "Array Index out of range");
+				}
+			} else
+			if (value instanceof List) {
+				List<Serializable> asList = (List<Serializable>) value;
+				if (asList.size() >= i) {
+					value = asList.get(i);
+				} else {
+					errors.put(accessor, "List Index out of range");
+				}
+			}
+			
+			// another accessor?
+			if (accessor.getAccessor() != null) {
+				value = eval(accessor.getAccessor(), value);
+			}
+		}
+		return value;
+	}
 	
 	/**
 	 * TODO
 	 * FieldAccessor:	"." name = ID (accessor = Accessor)?;
 	 */
-//	protected Object visit(FieldAccessor accessor) {
-//		buffer.append(".");
-//		buffer.append(accessor.getName());
+	protected Serializable eval(FieldAccessor accessor, Serializable value) {
+		throw new UnsupportedOperationException();
+		
+		// another accessor?
 //		if (accessor.getAccessor() != null) {
-//			visit(accessor.getAccessor());
+//			value = eval(accessor.getAccessor(), value);
 //		}
-//	}
+//		return value;
+	}
 
 	/**
 	 * Value:			StringConst | BooleanConst | NumericConst | Null;
 	 */
-	protected Object eval(Value value) {
+	protected Serializable eval(Value value) {
 		if (value instanceof StringConst) {
 			return ((StringConst) value).getConst();
 		}
@@ -239,7 +270,7 @@ public class VxlInterpreter {
 	 * @return			result of the operation, applied to the given terms
 	 */
 	@SuppressWarnings("unchecked")
-	private Object evaluateOperation(Operator operator, Object head, Object tail) {
+	private Serializable evaluateOperation(Operator operator, Object head, Object tail) {
 		switch (operator) {
 		case CONCAT:
 			return new StringBuffer().append(head).append(tail).toString();

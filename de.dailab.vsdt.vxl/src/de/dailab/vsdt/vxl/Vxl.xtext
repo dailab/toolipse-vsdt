@@ -9,13 +9,17 @@ Tail:			operator = Operator term = Term;
 BracketTerm:	"(" term = Term ")";
 Negation:		"not" head = Head;
 Minus:			"-" head = Head;
-Atom:			Value | Variable;
+Atom:			Value | Variable | List;
 
 // VARIABLES & ACCESSORS
 Variable:		name = ID (accessor = Accessor)?;
 Accessor:		ArrayAccessor | FieldAccessor;
 ArrayAccessor:	"[" index = Term "]" (accessor = Accessor)?;
 FieldAccessor:	"." name = ID (accessor = Accessor)?;
+
+// LISTS
+List:			"[" (body = ListElement)? "]"; 
+ListElement:	first = Term ("," rest = ListElement)?;
 
 // CONSTANTS
 Value:			StringConst | BooleanConst | NumericConst | NullConst;
