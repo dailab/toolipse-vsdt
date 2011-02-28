@@ -1,5 +1,6 @@
 package de.dailab.vsdt.diagram.interpreter.simulation;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -52,6 +53,22 @@ import de.dailab.vsdt.vxl.vxl.Term;
  */
 public class InterpretingSimulation extends ManualSimulation {
 
+	@Override
+	public String getName() {
+		return "Interpreting Simulation";
+	}
+	
+	@Override
+	public boolean isApplicable(BusinessProcessDiagram bpd) throws Exception {
+		if (! bpd.getParent().isExecutable()) {
+			String message = "The current Process Diagram is not executable. " +
+					"If you want to interpret this Process, please set the " +
+					"Business Process System's executable flag to True.";
+			throw new Exception(message);
+		}
+		return super.isApplicable(bpd);
+	}
+	
 	/*
 	 * TODO 
 	 * - support for complex types and arrays
@@ -62,10 +79,10 @@ public class InterpretingSimulation extends ManualSimulation {
 	 */
 	
 	/** This Map holds the association of Properties to values */
-	protected Map<Property, Object> propertyValueMap= new HashMap<Property, Object>();
+	private Map<Property, Serializable> propertyValueMap= new HashMap<Property, Serializable>();
 	
 	/** This Map holds the current loop counter for the several activities  currently looping*/
-	protected Map<Activity, Integer> loopCounterMap= new HashMap<Activity, Integer>();
+	private Map<Activity, Integer> loopCounterMap= new HashMap<Activity, Integer>();
 	
 	/**
 	 * - Before starting the Interpreting Simulation, assert that all expressions
@@ -85,6 +102,16 @@ public class InterpretingSimulation extends ManualSimulation {
 		}
 		return isOk;
 	}
+
+	/**
+	 * reset property maps
+	 */
+	@Override
+	protected void initialize(BusinessProcessDiagram bpd) {
+		propertyValueMap.clear();
+		loopCounterMap.clear();
+		super.initialize(bpd);
+	}
 	
 	/**
 	 * Returns the currently stored Value for the given Property
@@ -92,11 +119,23 @@ public class InterpretingSimulation extends ManualSimulation {
 	 * @param property		Some Property
 	 * @return				Current Value in this Simulation instance
 	 */
-	public Object getPropertyValue(Property property) {
+	public Serializable getPropertyValue(Property property) {
 		if (property != null) {
 			return propertyValueMap.get(property);
 		}
 		return null;
+	}
+	
+	/**
+	 * Set the given value for the property in the properties values map.
+	 * 
+	 * @param property		Some Property
+	 * @param value			New value to be assigned to this property
+	 */
+	protected void setPropertyValue(Property property, Serializable value) {
+		if (property != null) {
+			propertyValueMap.put(property, value);
+		}
 	}
 
 	/**
@@ -116,9 +155,9 @@ public class InterpretingSimulation extends ManualSimulation {
 		dialog.setProperties(properties);
 		if (dialog.open() == EditExpressionDialog.OK) {
 			String newExpression= dialog.getExpression();
-			Map<String, Object> context= createContext(property.eContainer());
-			Object newValue= evaluateTerm(parseExpression(newExpression), context);
-			propertyValueMap.put(property, newValue);
+			Map<String, Serializable> context= createContext(property.eContainer());
+			Serializable newValue= evaluateTerm(parseExpression(newExpression), context);
+			setPropertyValue(property, newValue);
 		}
 	}
 
@@ -176,7 +215,7 @@ public class InterpretingSimulation extends ManualSimulation {
 			MessageParameterDialog dialog= new MessageParameterDialog(shell, properties, incoming, propertyValueMap);
 			if (dialog.open() == Dialog.OK) {
 				for (Property property : properties) {
-					propertyValueMap.put(property, dialog.getNewPropertyValue(property));
+					setPropertyValue(property, dialog.getNewPropertyValue(property));
 				}
 			}
 		}
@@ -218,9 +257,9 @@ public class InterpretingSimulation extends ManualSimulation {
 	 */
 	@Override
 	protected void executeEnd(FlowObject flowObject) {
-		super.executeEnd(flowObject);
 		// open a dialog asking the user with which results the service shall return 
 		openMessageParameterDialog(flowObject, true);
+		super.executeEnd(flowObject);
 	}
 	
 	/**
@@ -238,8 +277,8 @@ public class InterpretingSimulation extends ManualSimulation {
 		if (assignments != null) {
 			for (Assignment assignment : assignments) {
 				if (assignment.getAssignTime() == assignTime && assignment.getFrom() != null) {
-					Object value= parseAndEvaluate(assignment.getFrom(), createContext(eObject));
-					propertyValueMap.put(assignment.getTo(), value);
+					Serializable value= parseAndEvaluate(assignment.getFrom(), createContext(eObject));
+					setPropertyValue(assignment.getTo(), value);
 					System.out.println(assignment.getTo().getName() + " <- " + value);
 				}
 			}
@@ -334,8 +373,8 @@ public class InterpretingSimulation extends ManualSimulation {
 	 * @param eObject	Some (Flow) Object
 	 * @return				Map of names of Properties in the scope to their values
 	 */
-	protected Map<String, Object> createContext(EObject eObject) { 
-		Map<String, Object> context= new HashMap<String, Object>();
+	protected Map<String, Serializable> createContext(EObject eObject) { 
+		Map<String, Serializable> context= new HashMap<String, Serializable>();
 		for (Property property : VsdtHelper.getVisibleProperties(eObject)) {
 			context.put(property.getName(), propertyValueMap.get(property));
 		}
@@ -352,9 +391,9 @@ public class InterpretingSimulation extends ManualSimulation {
 	 * @param context		Map of Property names and values
 	 * @return				Result of the evaluation, or false in case of error
 	 */
-	public static boolean evaluateCondition(Expression expression, Map<String, Object> context) {
+	public static boolean evaluateCondition(Expression expression, Map<String, Serializable> context) {
 		if (expression != null) {
-			Object value= parseAndEvaluate(expression, context);
+			Serializable value= parseAndEvaluate(expression, context);
 			if (value instanceof Boolean) {
 				return (Boolean) value;
 			} else {
@@ -384,7 +423,7 @@ public class InterpretingSimulation extends ManualSimulation {
 	 * @param context		Map of Property names and values
 	 * @return				Result of the evaluation, or null in case of error
 	 */
-	public static Object parseAndEvaluate(Expression expression, Map<String, Object> context) {
+	public static Serializable parseAndEvaluate(Expression expression, Map<String, Serializable> context) {
 		return evaluateTerm(parseExpression(getExpression(expression)), context);
 	}
 	
@@ -448,10 +487,10 @@ public class InterpretingSimulation extends ManualSimulation {
 	 * @param context		Map of Property names and values
 	 * @return				Result of the evaluation, or null in case of error
 	 */
-	public static Object evaluateTerm(Term term, Map<String, Object> context) {
+	public static Serializable evaluateTerm(Term term, Map<String, Serializable> context) {
 		if (term == null) return null;
 		VxlInterpreter interpreter= new VxlInterpreter();
-		Object result= interpreter.evaluateTerm(term, context);
+		Serializable result= interpreter.evaluateTerm(term, context);
 		Map<Object, String> errors= interpreter.getErrors();
 		if (! errors.isEmpty()) {
 			String title= "Evaluation failed";

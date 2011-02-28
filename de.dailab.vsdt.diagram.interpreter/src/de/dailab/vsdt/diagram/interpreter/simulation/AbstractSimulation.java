@@ -92,6 +92,7 @@ public abstract class AbstractSimulation implements ISimulation {
 		System.out.println("Starting Simulation");
 		BusinessProcessDiagram bpd= diagram;
 		// check diagram
+		initialize(bpd);
 		if (checkDiagram(bpd)) {
 			List<FlowObject> result= new ArrayList<FlowObject>();
 			// initialize some tables holding the currently activated elements
@@ -253,11 +254,21 @@ public abstract class AbstractSimulation implements ISimulation {
 	
 	/**
 	 * Perform some pre-simulation checks when the simulation is to be started.
+	 * CheckDiagram can be thought of as a more rigorous version of isApplicable,
+	 * checking not only whether the type of simulation is in principle applicable
+	 * to that diagram, but e.g. also whether there are errors in the diagram.
 	 * 
 	 * @param diagram		The Business Process Diagram to be simulated
 	 * @return				Whether there are any Problems with the diagrams
 	 */
 	protected abstract boolean checkDiagram(BusinessProcessDiagram diagram);
+	
+	/**
+	 * Do initialization stuff, reset cached property values, etc.
+	 * 
+	 * @param bpd			The Business Process Diagram to be simulated
+	 */
+	protected abstract void initialize(BusinessProcessDiagram bpd);
 	
 	/**
 	 * This method is executed at the end of the {@link #stepInto(FlowObject)}

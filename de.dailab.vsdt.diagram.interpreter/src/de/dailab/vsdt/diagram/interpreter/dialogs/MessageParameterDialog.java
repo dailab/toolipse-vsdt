@@ -1,5 +1,6 @@
 package de.dailab.vsdt.diagram.interpreter.dialogs;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,7 @@ public class MessageParameterDialog extends TitleAreaDialog {
 	protected final Map<Property, Text> propertyTextMap;
 	
 	/** Mapping of Properties to their values */
-	protected final Map<Property, Object> valuesMap;
+	protected final Map<Property, Serializable> valuesMap;
 	
 	/** error message to be displayed, or null */
 	protected String errorMessage= null;
@@ -71,7 +72,7 @@ public class MessageParameterDialog extends TitleAreaDialog {
 	 * @param incoming		Incoming or outgoing message? Only used for a label
 	 * @param valuesMap		Map holding the Properties' values
 	 */
-	public MessageParameterDialog(Shell parentShell, List<Property> properties, boolean incoming, Map<Property, Object> valuesMap) {
+	public MessageParameterDialog(Shell parentShell, List<Property> properties, boolean incoming, Map<Property, Serializable> valuesMap) {
 		super(parentShell);
 		setTitle(TITLE);
 		setShellStyle(getShellStyle() | SWT.RESIZE);
@@ -145,7 +146,7 @@ public class MessageParameterDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected void okPressed() {
-		Map<Property, Object> newValues= new HashMap<Property, Object>();
+		Map<Property, Serializable> newValues= new HashMap<Property, Serializable>();
 		// test-parse each value
 		for (Property property : propertyTextMap.keySet()) {
 			String expression= propertyTextMap.get(property).getText().trim();
@@ -157,7 +158,7 @@ public class MessageParameterDialog extends TitleAreaDialog {
 					Term term= parser.parse(expression);
 					// evaluate term
 					VxlInterpreter interpreter= new VxlInterpreter();
-					Object result= interpreter.evaluateTerm(term, null);
+					Serializable result= interpreter.evaluateTerm(term, null);
 					Map<Object, String> errors= interpreter.getErrors();
 					if (! errors.isEmpty()) {
 						StringBuffer message= new StringBuffer();
@@ -195,7 +196,7 @@ public class MessageParameterDialog extends TitleAreaDialog {
 	 * @param property	One of the message's Properties
 	 * @return			The Property's (new) value
 	 */
-	public Object getNewPropertyValue(Property property) {
+	public Serializable getNewPropertyValue(Property property) {
 		if (property != null) {
 			return valuesMap.get(property);
 		} else {

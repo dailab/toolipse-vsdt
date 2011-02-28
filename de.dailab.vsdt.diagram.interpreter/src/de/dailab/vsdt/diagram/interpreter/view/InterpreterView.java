@@ -2,8 +2,10 @@ package de.dailab.vsdt.diagram.interpreter.view;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 import org.eclipse.gef.EditPart;
@@ -57,15 +59,19 @@ public class InterpreterView extends AbstractStructuredViewerView {
 	 * - lock / unlock editor
 	 */
 
-	private static final String SIMULATIONTYPE_MANUAL= "Manual Simulation";
-	private static final String SIMULATIONTYPE_INTERPRETER= "Interpreter Simulation";
+	public static List<AbstractSimulation> simulations = new ArrayList<AbstractSimulation>();
+	static {
+		simulations.add(new ManualSimulation());
+		simulations.add(new InterpretingSimulation());
+	}
 	
 	private Action startAction;
 	private Action stopAction;
 	private Action stepOverAction;
 	private Action stepIntoAction;
 	private Action stepOutAction;
-	private List<Action> simulationTypeSelectActions;
+	
+	private Map<Action, AbstractSimulation> simulationTypeActions;
 	
 	private SimulationViewer viewer;
 	
@@ -73,7 +79,7 @@ public class InterpreterView extends AbstractStructuredViewerView {
 	
 	
 	public InterpreterView() {
-		simulationTypeSelectActions= new ArrayList<Action>();
+		simulationTypeActions = new HashMap<Action, AbstractSimulation>();
 	}
 	
 	@Override
@@ -121,8 +127,9 @@ public class InterpreterView extends AbstractStructuredViewerView {
 		updateActionEnablement();
 		
 		// select simulator menu
-		addSimulationTypeSelectAction(SIMULATIONTYPE_INTERPRETER);
-		addSimulationTypeSelectAction(SIMULATIONTYPE_MANUAL);
+		for (AbstractSimulation simulation : simulations) {
+			addSimulationType(simulation);
+		}
 	}
 
 	protected void updateActionEnablement() {
@@ -133,7 +140,7 @@ public class InterpreterView extends AbstractStructuredViewerView {
 		stepIntoAction.setEnabled(false);
 		stepOutAction.setEnabled(false);
 		// interpreter type selection actions only enabled when not running
-		for (Action selectAction : simulationTypeSelectActions) {
+		for (Action selectAction : simulationTypeActions.keySet()) {
 			selectAction.setEnabled(! isRunning());
 		}
 		if (isVsdtDiagram()) {
@@ -196,13 +203,15 @@ public class InterpreterView extends AbstractStructuredViewerView {
 	 * Create action for selecting a Simulation type and add it to the menu.
 	 * The first action will also be initially selected.
 	 * 
-	 * @param type		Action name (should be one of the constants defined in this class)
+	 * @param simulation		instance of some of the AbstractSimulation classes
 	 */
-	private void addSimulationTypeSelectAction(String type) {
-		Action selectAction= new Action(type, IAction.AS_RADIO_BUTTON) {};
-		selectAction.setChecked(simulationTypeSelectActions.isEmpty());
-		simulationTypeSelectActions.add(selectAction);
-		getViewSite().getActionBars().getMenuManager().add(selectAction);
+	protected void addSimulationType(AbstractSimulation simulation) {
+		if (simulation != null) {
+			Action selectAction= new Action(simulation.getName(), IAction.AS_RADIO_BUTTON) {};
+			selectAction.setChecked(simulationTypeActions.isEmpty());
+			simulationTypeActions.put(selectAction, simulation);
+			getViewSite().getActionBars().getMenuManager().add(selectAction);
+		}
 	}
 	
 	/**
@@ -211,34 +220,34 @@ public class InterpreterView extends AbstractStructuredViewerView {
 	public void start() {
 		if (isVsdtDiagram()) {
 			IEditorPart editor= ((IWorkbenchPage) viewer.getInput()).getActiveEditor();
-			for (Action selectAction : simulationTypeSelectActions) {
+			BusinessProcessDiagramEditPart editPart = (BusinessProcessDiagramEditPart) ((VsdtDiagramEditor) editor).getDiagramEditPart();
+			BusinessProcessDiagram bpd = editPart.getCastedModel();
+			
+			// get selected simulation type
+			simulation = null;
+			for (Action selectAction : simulationTypeActions.keySet()) {
 				if (selectAction.isChecked()) {
-					BusinessProcessDiagramEditPart editPart = (BusinessProcessDiagramEditPart) 
-					((VsdtDiagramEditor) editor).getDiagramEditPart();
-					if (selectAction.getText() == SIMULATIONTYPE_INTERPRETER) {
-						BusinessProcessDiagram bpd = editPart.getCastedModel();
-						if (bpd.getParent().isExecutable()) {
-							simulation= new InterpretingSimulation();
-						} else {
-							String title= "Process Not Executable";
-							String message = "The opened Process Diagram is not " +
-									"executable. If you want to interpret this " +
-									"Process, please set the Business Process " +
-									"System's executable flag to True.";
-							MessageDialog.openInformation(viewer.getControl().getShell(), title, message);
-							break;
+					AbstractSimulation selectedSimulation = simulationTypeActions.get(selectAction);
+					
+					// check applicability
+					try {
+						if (selectedSimulation.isApplicable(bpd)) {
+							simulation = selectedSimulation;
 						}
-					} else if (selectAction.getText() == SIMULATIONTYPE_MANUAL) {
-						simulation= new ManualSimulation();
-					} else {
-						simulation= new ManualSimulation(); // default
+					} catch (Exception e) {
+						MessageDialog.openInformation(viewer.getControl().getShell(),
+								"Simulation not Applicable", e.getMessage());
 					}
-					simulation.setViewer(viewer);
-					List<FlowObject> result= simulation.start(editPart);
-					setSelection(result);
-					updateActionEnablement();
 					break;
 				}
+			} // end for
+
+			// link simulation with viewer, start simulaiton
+			if (simulation != null) {
+				simulation.setViewer(viewer);
+				List<FlowObject> result= simulation.start(editPart);
+				setSelection(result);
+				updateActionEnablement();
 			}
 		}
 	}

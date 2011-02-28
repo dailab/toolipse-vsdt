@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VSDT - Interpreter
 Bundle-SymbolicName: de.dailab.vsdt.diagram.interpreter;singleton:=true
-Bundle-Version: 1.4.0.20101021
+Bundle-Version: 1.4.0.20110228
 Bundle-Vendor: DAI-Labor, TU Berlin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,
@@ -15,3 +15,7 @@ Require-Bundle: org.eclipse.core.runtime,
  de.dailab.vsdt.diagram
 Bundle-Activator: de.dailab.vsdt.diagram.interpreter.VsdtInterpreterPlugin
 Bundle-ActivationPolicy: lazy
+Export-Package: de.dailab.vsdt.diagram.interpreter,
+ de.dailab.vsdt.diagram.interpreter.dialogs,
+ de.dailab.vsdt.diagram.interpreter.simulation,
+ de.dailab.vsdt.diagram.interpreter.view

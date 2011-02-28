@@ -16,7 +16,24 @@ import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
  * @author kuester
  */
 public interface ISimulation {
+	
+	/**
+	 * Get the name of this type of Simulation. To be used in the Viewer
+	 * 
+	 * @return		name of the type of simulation (e.g. the class name)
+	 */
+	String getName();
 
+	/**
+	 * Check whether this type of Simulation is applicable to the given process
+	 * diagram.
+	 * 
+	 * @param bpd			some business process diagram
+	 * @return				applicable or not?
+	 * @throws Exception	generic Exception holding some meaningful error message
+	 */
+	boolean isApplicable(BusinessProcessDiagram bpd) throws Exception;
+	
 	/**
 	 * Start a new simulation for the given BusinessProcessDiagram. Use this
 	 * constructor, if you want to simulate a Business Process Diagram without

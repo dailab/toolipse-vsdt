@@ -2,11 +2,14 @@ package de.dailab.vsdt.diagram.interpreter.simulation;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
 import de.dailab.vsdt.Activity;
+import de.dailab.vsdt.AssignTimeType;
+import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.StandardLoopAttSet;
@@ -20,6 +23,35 @@ import de.dailab.vsdt.util.VsdtHelper;
  * @author kuester
  */
 public class ManualSimulation extends BasicSimulation {
+	
+	@Override
+	public String getName() {
+		return "Manual Simulation";
+	}
+	
+	/**
+	 * manual simulation is always applicable
+	 */
+	@Override
+	public boolean isApplicable(BusinessProcessDiagram bpd) throws Exception {
+		return true;
+	}
+	
+	/**
+	 * manual simulation is always applicable
+	 */
+	@Override
+	protected boolean checkDiagram(BusinessProcessDiagram diagram) {
+		return true;
+	}
+	
+	/**
+	 * no initialization needed
+	 */
+	@Override
+	protected void initialize(BusinessProcessDiagram bpd) {
+		// do nothing
+	}
 	
 	/**
 	 * If the Activity has Loop attributes, simply show a dialogue to the user,
@@ -56,6 +88,14 @@ public class ManualSimulation extends BasicSimulation {
 		} else {
 			return null;
 		}
+	}
+	
+	/**
+	 * no assignments handling in manual simulation
+	 */
+	@Override
+	protected void handleAssignments(EObject eObject, AssignTimeType assignTime) {
+		// do nothing
 	}
 	
 }

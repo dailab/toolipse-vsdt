@@ -1,12 +1,7 @@
 package de.dailab.vsdt.diagram.interpreter.simulation;
 
-import java.util.List;
-
-import org.eclipse.emf.ecore.EObject;
-
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
-import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.GatewayType;
@@ -17,13 +12,13 @@ import de.dailab.vsdt.Start;
 import de.dailab.vsdt.TriggerType;
 
 /**
- * The Basic Simulation provides implementations for all the abstract methods of
- * the Abstract Simulation, some of which are already very elaborate while others
- * are very simple (or even empty).
+ * The Basic Simulation provides implementations for most of the abstract methods
+ * of the Abstract Simulation, some of which are already very elaborate while
+ * others are very simple (or even empty).
  * 
  * @author kuester
  */
-public class BasicSimulation extends AbstractSimulation {
+public abstract class BasicSimulation extends AbstractSimulation {
 
 	/*
 	 * TODO
@@ -33,11 +28,6 @@ public class BasicSimulation extends AbstractSimulation {
 	 * - independent subprocess: jump to diagram (and keep simulation status)
 	 * - what to do if subprocess (or other) is ready again while still being active?
 	 */
-
-	@Override
-	protected boolean checkDiagram(de.dailab.vsdt.BusinessProcessDiagram diagram) {
-		return true;
-	}
 
 	@Override
 	protected boolean calculateIsReady(FlowObject flowObject) {
@@ -109,21 +99,6 @@ public class BasicSimulation extends AbstractSimulation {
 		for (MessageFlow msgFlow : flowObject.getIncomingMsg()) {
 			changeToken(msgFlow, -1);
 		}
-	}
-
-	@Override
-	protected void handleAssignments(EObject eObject, AssignTimeType assignTime) {
-		// do nothing
-	}
-
-	@Override
-	protected boolean isLooping(Activity activity) {
-		return false;
-	}
-
-	@Override
-	protected List<SequenceFlow> selectOutgoingSequenceFlows(FlowObject flowObject) {
-		return flowObject.getOutgoingSeq();
 	}
 
 	@Override
