@@ -1,26 +1,20 @@
 package de.dailab.vsdt.vxl.parser.antlr.internal; 
 
 import java.io.InputStream;
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.parser.*;
-import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.EObject;
+
+import org.antlr.runtime.BitSet;
+import org.antlr.runtime.NoViableAltException;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.Token;
+import org.antlr.runtime.TokenStream;
 import org.eclipse.emf.common.util.Enumerator;
-import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
-import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.parser.IAstFactory;
+import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
+import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
+
 import de.dailab.vsdt.vxl.services.VxlGrammarAccess;
-
-
-
-import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
 
 public class InternalVxlParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -114,7 +108,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject lv_tail_2 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:86:6: ( ( (lv_head_0= ruleVxlElement ) ( (lv_operator_1= ruleVxlOperator ) (lv_tail_2= ruleVxlTerm ) )? ) )
@@ -295,7 +289,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject this_VxlCardinality_6 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:170:6: ( (this_VxlBracketTerm_0= ruleVxlBracketTerm | this_VxlNegation_1= ruleVxlNegation | this_VxlMinus_2= ruleVxlMinus | this_VxlValue_3= ruleVxlValue | this_VxlVariable_4= ruleVxlVariable | this_VxlList_5= ruleVxlList | this_VxlCardinality_6= ruleVxlCardinality ) )
@@ -535,7 +529,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject lv_term_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:260:6: ( ( '(' (lv_term_1= ruleVxlTerm ) ')' ) )
@@ -643,7 +637,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject lv_element_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:310:6: ( ( 'not' (lv_element_1= ruleVxlElement ) ) )
@@ -747,7 +741,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject lv_element_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:356:6: ( ( '-' (lv_element_1= ruleVxlElement ) ) )
@@ -851,7 +845,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject lv_element_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:402:6: ( ( '#' (lv_element_1= ruleVxlElement ) ) )
@@ -956,7 +950,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject lv_accessor_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:448:6: ( ( (lv_name_0= RULE_ID ) (lv_accessor_1= ruleVxlAccessor )? ) )
@@ -1092,7 +1086,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject this_VxlFieldAccessor_1 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:510:6: ( (this_VxlArrayAccessor_0= ruleVxlArrayAccessor | this_VxlFieldAccessor_1= ruleVxlFieldAccessor ) )
@@ -1216,7 +1210,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject lv_accessor_3 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:550:6: ( ( '[' (lv_index_1= ruleVxlTerm ) ']' (lv_accessor_3= ruleVxlAccessor )? ) )
@@ -1362,7 +1356,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject lv_accessor_2 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:621:6: ( ( '.' (lv_name_1= RULE_ID ) (lv_accessor_2= ruleVxlAccessor )? ) )
@@ -1497,11 +1491,10 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
     public final EObject ruleVxlList() throws RecognitionException {
         EObject current = null;
 
-        Token lv_empty_1=null;
         EObject lv_body_2 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:687:6: ( ( '[' ( (lv_empty_1= ']' ) | ( (lv_body_2= ruleVxlListElement ) ']' ) ) ) )
@@ -1537,7 +1530,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
                     // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:692:2: (lv_empty_1= ']' )
                     // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:694:6: lv_empty_1= ']'
                     {
-                    lv_empty_1=(Token)input.LT(1);
+                    input.LT(1);
                     match(input,17,FOLLOW_17_in_ruleVxlList1606); 
 
                             createLeafNode(grammarAccess.getVxlListAccess().getEmptyRightSquareBracketKeyword_1_0_0(), "empty"); 
@@ -1672,7 +1665,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject lv_rest_2 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:759:6: ( ( (lv_first_0= ruleVxlTerm ) ( ',' (lv_rest_2= ruleVxlListElement ) )? ) )
@@ -1825,7 +1818,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         EObject this_VxlStringConst_3 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:826:6: ( (this_VxlNullConst_0= ruleVxlNullConst | this_VxlBooleanConst_1= ruleVxlBooleanConst | this_VxlNumericConst_2= ruleVxlNumericConst | this_VxlStringConst_3= ruleVxlStringConst ) )
@@ -1993,9 +1986,8 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
     public final EObject ruleVxlBooleanConst() throws RecognitionException {
         EObject current = null;
 
-        Token lv_const_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:886:6: ( (lv_const_0= ( 'true' | 'false' ) ) )
@@ -2118,9 +2110,8 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
     public final EObject ruleVxlNullConst() throws RecognitionException {
         EObject current = null;
 
-        Token lv_const_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:935:6: ( (lv_const_0= 'null' ) )
@@ -2129,7 +2120,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:936:1: (lv_const_0= 'null' )
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:938:6: lv_const_0= 'null'
             {
-            lv_const_0=(Token)input.LT(1);
+            input.LT(1);
             match(input,22,FOLLOW_22_in_ruleVxlNullConst2208); 
 
                     createLeafNode(grammarAccess.getVxlNullConstAccess().getConstNullKeyword_0(), "const"); 
@@ -2211,7 +2202,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
         AntlrDatatypeRuleToken lv_const_0 = null;
 
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:977:6: ( (lv_const_0= ruleNUMERIC ) )
@@ -2304,7 +2295,7 @@ public class InternalVxlParser extends AbstractInternalAntlrParser {
 
         Token lv_const_0=null;
 
-         EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+          setCurrentLookahead(); resetLookahead(); 
             
         try {
             // ../de.dailab.vsdt.vxl/src-gen/de/dailab/vsdt/vxl/parser/antlr/internal/InternalVxl.g:1019:6: ( (lv_const_0= RULE_STRING ) )
