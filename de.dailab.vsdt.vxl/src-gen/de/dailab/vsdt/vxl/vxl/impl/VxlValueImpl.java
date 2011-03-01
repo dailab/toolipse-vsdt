@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class VxlValueImpl extends VxlAtomImpl implements VxlValue
+public class VxlValueImpl extends VxlElementImpl implements VxlValue
 {
   /**
    * The default value of the '{@link #getConst() <em>Const</em>}' attribute.

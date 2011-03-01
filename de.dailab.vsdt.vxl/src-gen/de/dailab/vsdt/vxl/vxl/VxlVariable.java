@@ -23,7 +23,7 @@ package de.dailab.vsdt.vxl.vxl;
  * @model
  * @generated
  */
-public interface VxlVariable extends VxlAtom
+public interface VxlVariable extends VxlElement
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

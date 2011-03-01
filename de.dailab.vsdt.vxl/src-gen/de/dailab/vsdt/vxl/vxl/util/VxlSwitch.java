@@ -102,17 +102,17 @@ public class VxlSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VxlPackage.VXL_HEAD:
+      case VxlPackage.VX_LTAIL:
       {
-        VxlHead vxlHead = (VxlHead)theEObject;
-        T result = caseVxlHead(vxlHead);
+        VxLTail vxLTail = (VxLTail)theEObject;
+        T result = caseVxLTail(vxLTail);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VxlPackage.VXL_TAIL:
+      case VxlPackage.VXL_ELEMENT:
       {
-        VxlTail vxlTail = (VxlTail)theEObject;
-        T result = caseVxlTail(vxlTail);
+        VxlElement vxlElement = (VxlElement)theEObject;
+        T result = caseVxlElement(vxlElement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -120,7 +120,7 @@ public class VxlSwitch<T>
       {
         VxlBracketTerm vxlBracketTerm = (VxlBracketTerm)theEObject;
         T result = caseVxlBracketTerm(vxlBracketTerm);
-        if (result == null) result = caseVxlHead(vxlBracketTerm);
+        if (result == null) result = caseVxlElement(vxlBracketTerm);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -128,7 +128,7 @@ public class VxlSwitch<T>
       {
         VxlNegation vxlNegation = (VxlNegation)theEObject;
         T result = caseVxlNegation(vxlNegation);
-        if (result == null) result = caseVxlHead(vxlNegation);
+        if (result == null) result = caseVxlElement(vxlNegation);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -136,15 +136,15 @@ public class VxlSwitch<T>
       {
         VxlMinus vxlMinus = (VxlMinus)theEObject;
         T result = caseVxlMinus(vxlMinus);
-        if (result == null) result = caseVxlHead(vxlMinus);
+        if (result == null) result = caseVxlElement(vxlMinus);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VxlPackage.VXL_ATOM:
+      case VxlPackage.VXL_CARDINALITY:
       {
-        VxlAtom vxlAtom = (VxlAtom)theEObject;
-        T result = caseVxlAtom(vxlAtom);
-        if (result == null) result = caseVxlHead(vxlAtom);
+        VxlCardinality vxlCardinality = (VxlCardinality)theEObject;
+        T result = caseVxlCardinality(vxlCardinality);
+        if (result == null) result = caseVxlElement(vxlCardinality);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -152,8 +152,7 @@ public class VxlSwitch<T>
       {
         VxlVariable vxlVariable = (VxlVariable)theEObject;
         T result = caseVxlVariable(vxlVariable);
-        if (result == null) result = caseVxlAtom(vxlVariable);
-        if (result == null) result = caseVxlHead(vxlVariable);
+        if (result == null) result = caseVxlElement(vxlVariable);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -184,8 +183,7 @@ public class VxlSwitch<T>
       {
         VxlList vxlList = (VxlList)theEObject;
         T result = caseVxlList(vxlList);
-        if (result == null) result = caseVxlAtom(vxlList);
-        if (result == null) result = caseVxlHead(vxlList);
+        if (result == null) result = caseVxlElement(vxlList);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -200,28 +198,7 @@ public class VxlSwitch<T>
       {
         VxlValue vxlValue = (VxlValue)theEObject;
         T result = caseVxlValue(vxlValue);
-        if (result == null) result = caseVxlAtom(vxlValue);
-        if (result == null) result = caseVxlHead(vxlValue);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case VxlPackage.VXL_STRING_CONST:
-      {
-        VxlStringConst vxlStringConst = (VxlStringConst)theEObject;
-        T result = caseVxlStringConst(vxlStringConst);
-        if (result == null) result = caseVxlValue(vxlStringConst);
-        if (result == null) result = caseVxlAtom(vxlStringConst);
-        if (result == null) result = caseVxlHead(vxlStringConst);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case VxlPackage.VXL_NUMERIC_CONST:
-      {
-        VxlNumericConst vxlNumericConst = (VxlNumericConst)theEObject;
-        T result = caseVxlNumericConst(vxlNumericConst);
-        if (result == null) result = caseVxlValue(vxlNumericConst);
-        if (result == null) result = caseVxlAtom(vxlNumericConst);
-        if (result == null) result = caseVxlHead(vxlNumericConst);
+        if (result == null) result = caseVxlElement(vxlValue);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -230,8 +207,7 @@ public class VxlSwitch<T>
         VxlBooleanConst vxlBooleanConst = (VxlBooleanConst)theEObject;
         T result = caseVxlBooleanConst(vxlBooleanConst);
         if (result == null) result = caseVxlValue(vxlBooleanConst);
-        if (result == null) result = caseVxlAtom(vxlBooleanConst);
-        if (result == null) result = caseVxlHead(vxlBooleanConst);
+        if (result == null) result = caseVxlElement(vxlBooleanConst);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -240,8 +216,25 @@ public class VxlSwitch<T>
         VxlNullConst vxlNullConst = (VxlNullConst)theEObject;
         T result = caseVxlNullConst(vxlNullConst);
         if (result == null) result = caseVxlValue(vxlNullConst);
-        if (result == null) result = caseVxlAtom(vxlNullConst);
-        if (result == null) result = caseVxlHead(vxlNullConst);
+        if (result == null) result = caseVxlElement(vxlNullConst);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VxlPackage.VXL_NUMERIC_CONST:
+      {
+        VxlNumericConst vxlNumericConst = (VxlNumericConst)theEObject;
+        T result = caseVxlNumericConst(vxlNumericConst);
+        if (result == null) result = caseVxlValue(vxlNumericConst);
+        if (result == null) result = caseVxlElement(vxlNumericConst);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VxlPackage.VXL_STRING_CONST:
+      {
+        VxlStringConst vxlStringConst = (VxlStringConst)theEObject;
+        T result = caseVxlStringConst(vxlStringConst);
+        if (result == null) result = caseVxlValue(vxlStringConst);
+        if (result == null) result = caseVxlElement(vxlStringConst);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -266,33 +259,33 @@ public class VxlSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Head</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Vx LTail</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Head</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Vx LTail</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseVxlHead(VxlHead object)
+  public T caseVxLTail(VxLTail object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Tail</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Element</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Tail</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Element</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseVxlTail(VxlTail object)
+  public T caseVxlElement(VxlElement object)
   {
     return null;
   }
@@ -346,17 +339,17 @@ public class VxlSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Atom</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Cardinality</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Atom</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Cardinality</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseVxlAtom(VxlAtom object)
+  public T caseVxlCardinality(VxlCardinality object)
   {
     return null;
   }
@@ -474,38 +467,6 @@ public class VxlSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>String Const</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>String Const</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVxlStringConst(VxlStringConst object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Numeric Const</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Numeric Const</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVxlNumericConst(VxlNumericConst object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Boolean Const</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -533,6 +494,38 @@ public class VxlSwitch<T>
    * @generated
    */
   public T caseVxlNullConst(VxlNullConst object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Numeric Const</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Numeric Const</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVxlNumericConst(VxlNumericConst object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>String Const</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>String Const</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVxlStringConst(VxlStringConst object)
   {
     return null;
   }

@@ -98,33 +98,14 @@ public interface VxlPackage extends EPackage
   int VXL_TERM_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlHeadImpl <em>Head</em>}' class.
+   * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxLTailImpl <em>Vx LTail</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see de.dailab.vsdt.vxl.vxl.impl.VxlHeadImpl
-   * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlHead()
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxLTailImpl
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxLTail()
    * @generated
    */
-  int VXL_HEAD = 1;
-
-  /**
-   * The number of structural features of the '<em>Head</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VXL_HEAD_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlTailImpl <em>Tail</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see de.dailab.vsdt.vxl.vxl.impl.VxlTailImpl
-   * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlTail()
-   * @generated
-   */
-  int VXL_TAIL = 2;
+  int VX_LTAIL = 1;
 
   /**
    * The feature id for the '<em><b>Operator</b></em>' attribute.
@@ -133,25 +114,44 @@ public interface VxlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VXL_TAIL__OPERATOR = 0;
+  int VX_LTAIL__OPERATOR = 0;
 
   /**
-   * The feature id for the '<em><b>Term</b></em>' containment reference.
+   * The feature id for the '<em><b>Tail</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VXL_TAIL__TERM = 1;
+  int VX_LTAIL__TAIL = 1;
 
   /**
-   * The number of structural features of the '<em>Tail</em>' class.
+   * The number of structural features of the '<em>Vx LTail</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VXL_TAIL_FEATURE_COUNT = 2;
+  int VX_LTAIL_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlElementImpl <em>Element</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlElementImpl
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlElement()
+   * @generated
+   */
+  int VXL_ELEMENT = 2;
+
+  /**
+   * The number of structural features of the '<em>Element</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_ELEMENT_FEATURE_COUNT = 0;
 
   /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlBracketTermImpl <em>Bracket Term</em>}' class.
@@ -170,7 +170,7 @@ public interface VxlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VXL_BRACKET_TERM__TERM = VXL_HEAD_FEATURE_COUNT + 0;
+  int VXL_BRACKET_TERM__TERM = VXL_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Bracket Term</em>' class.
@@ -179,7 +179,7 @@ public interface VxlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VXL_BRACKET_TERM_FEATURE_COUNT = VXL_HEAD_FEATURE_COUNT + 1;
+  int VXL_BRACKET_TERM_FEATURE_COUNT = VXL_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlNegationImpl <em>Negation</em>}' class.
@@ -192,13 +192,13 @@ public interface VxlPackage extends EPackage
   int VXL_NEGATION = 4;
 
   /**
-   * The feature id for the '<em><b>Head</b></em>' containment reference.
+   * The feature id for the '<em><b>Element</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VXL_NEGATION__HEAD = VXL_HEAD_FEATURE_COUNT + 0;
+  int VXL_NEGATION__ELEMENT = VXL_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Negation</em>' class.
@@ -207,7 +207,7 @@ public interface VxlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VXL_NEGATION_FEATURE_COUNT = VXL_HEAD_FEATURE_COUNT + 1;
+  int VXL_NEGATION_FEATURE_COUNT = VXL_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlMinusImpl <em>Minus</em>}' class.
@@ -220,13 +220,13 @@ public interface VxlPackage extends EPackage
   int VXL_MINUS = 5;
 
   /**
-   * The feature id for the '<em><b>Head</b></em>' containment reference.
+   * The feature id for the '<em><b>Element</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VXL_MINUS__HEAD = VXL_HEAD_FEATURE_COUNT + 0;
+  int VXL_MINUS__ELEMENT = VXL_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Minus</em>' class.
@@ -235,26 +235,35 @@ public interface VxlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VXL_MINUS_FEATURE_COUNT = VXL_HEAD_FEATURE_COUNT + 1;
+  int VXL_MINUS_FEATURE_COUNT = VXL_ELEMENT_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlAtomImpl <em>Atom</em>}' class.
+   * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlCardinalityImpl <em>Cardinality</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see de.dailab.vsdt.vxl.vxl.impl.VxlAtomImpl
-   * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlAtom()
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlCardinalityImpl
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlCardinality()
    * @generated
    */
-  int VXL_ATOM = 6;
+  int VXL_CARDINALITY = 6;
 
   /**
-   * The number of structural features of the '<em>Atom</em>' class.
+   * The feature id for the '<em><b>Element</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VXL_ATOM_FEATURE_COUNT = VXL_HEAD_FEATURE_COUNT + 0;
+  int VXL_CARDINALITY__ELEMENT = VXL_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Cardinality</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_CARDINALITY_FEATURE_COUNT = VXL_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlVariableImpl <em>Variable</em>}' class.
@@ -273,7 +282,7 @@ public interface VxlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VXL_VARIABLE__NAME = VXL_ATOM_FEATURE_COUNT + 0;
+  int VXL_VARIABLE__NAME = VXL_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Accessor</b></em>' containment reference.
@@ -282,7 +291,7 @@ public interface VxlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VXL_VARIABLE__ACCESSOR = VXL_ATOM_FEATURE_COUNT + 1;
+  int VXL_VARIABLE__ACCESSOR = VXL_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Variable</em>' class.
@@ -291,7 +300,7 @@ public interface VxlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VXL_VARIABLE_FEATURE_COUNT = VXL_ATOM_FEATURE_COUNT + 2;
+  int VXL_VARIABLE_FEATURE_COUNT = VXL_ELEMENT_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlAccessorImpl <em>Accessor</em>}' class.
@@ -412,7 +421,7 @@ public interface VxlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VXL_LIST__BODY = VXL_ATOM_FEATURE_COUNT + 0;
+  int VXL_LIST__BODY = VXL_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>List</em>' class.
@@ -421,7 +430,7 @@ public interface VxlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VXL_LIST_FEATURE_COUNT = VXL_ATOM_FEATURE_COUNT + 1;
+  int VXL_LIST_FEATURE_COUNT = VXL_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlListElementImpl <em>List Element</em>}' class.
@@ -477,7 +486,7 @@ public interface VxlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VXL_VALUE__CONST = VXL_ATOM_FEATURE_COUNT + 0;
+  int VXL_VALUE__CONST = VXL_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Value</em>' class.
@@ -486,63 +495,7 @@ public interface VxlPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VXL_VALUE_FEATURE_COUNT = VXL_ATOM_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlStringConstImpl <em>String Const</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see de.dailab.vsdt.vxl.vxl.impl.VxlStringConstImpl
-   * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlStringConst()
-   * @generated
-   */
-  int VXL_STRING_CONST = 14;
-
-  /**
-   * The feature id for the '<em><b>Const</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VXL_STRING_CONST__CONST = VXL_VALUE__CONST;
-
-  /**
-   * The number of structural features of the '<em>String Const</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VXL_STRING_CONST_FEATURE_COUNT = VXL_VALUE_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlNumericConstImpl <em>Numeric Const</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see de.dailab.vsdt.vxl.vxl.impl.VxlNumericConstImpl
-   * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlNumericConst()
-   * @generated
-   */
-  int VXL_NUMERIC_CONST = 15;
-
-  /**
-   * The feature id for the '<em><b>Const</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VXL_NUMERIC_CONST__CONST = VXL_VALUE__CONST;
-
-  /**
-   * The number of structural features of the '<em>Numeric Const</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VXL_NUMERIC_CONST_FEATURE_COUNT = VXL_VALUE_FEATURE_COUNT + 0;
+  int VXL_VALUE_FEATURE_COUNT = VXL_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlBooleanConstImpl <em>Boolean Const</em>}' class.
@@ -552,7 +505,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlBooleanConst()
    * @generated
    */
-  int VXL_BOOLEAN_CONST = 16;
+  int VXL_BOOLEAN_CONST = 14;
 
   /**
    * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -580,7 +533,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlNullConst()
    * @generated
    */
-  int VXL_NULL_CONST = 17;
+  int VXL_NULL_CONST = 15;
 
   /**
    * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -599,6 +552,62 @@ public interface VxlPackage extends EPackage
    * @ordered
    */
   int VXL_NULL_CONST_FEATURE_COUNT = VXL_VALUE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlNumericConstImpl <em>Numeric Const</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlNumericConstImpl
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlNumericConst()
+   * @generated
+   */
+  int VXL_NUMERIC_CONST = 16;
+
+  /**
+   * The feature id for the '<em><b>Const</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_NUMERIC_CONST__CONST = VXL_VALUE__CONST;
+
+  /**
+   * The number of structural features of the '<em>Numeric Const</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_NUMERIC_CONST_FEATURE_COUNT = VXL_VALUE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlStringConstImpl <em>String Const</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlStringConstImpl
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlStringConst()
+   * @generated
+   */
+  int VXL_STRING_CONST = 17;
+
+  /**
+   * The feature id for the '<em><b>Const</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_STRING_CONST__CONST = VXL_VALUE__CONST;
+
+  /**
+   * The number of structural features of the '<em>String Const</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_STRING_CONST_FEATURE_COUNT = VXL_VALUE_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.VxlOperator <em>Operator</em>}' enum.
@@ -644,46 +653,46 @@ public interface VxlPackage extends EPackage
   EReference getVxlTerm_Tail();
 
   /**
-   * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlHead <em>Head</em>}'.
+   * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxLTail <em>Vx LTail</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Head</em>'.
-   * @see de.dailab.vsdt.vxl.vxl.VxlHead
+   * @return the meta object for class '<em>Vx LTail</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxLTail
    * @generated
    */
-  EClass getVxlHead();
+  EClass getVxLTail();
 
   /**
-   * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlTail <em>Tail</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Tail</em>'.
-   * @see de.dailab.vsdt.vxl.vxl.VxlTail
-   * @generated
-   */
-  EClass getVxlTail();
-
-  /**
-   * Returns the meta object for the attribute '{@link de.dailab.vsdt.vxl.vxl.VxlTail#getOperator <em>Operator</em>}'.
+   * Returns the meta object for the attribute '{@link de.dailab.vsdt.vxl.vxl.VxLTail#getOperator <em>Operator</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Operator</em>'.
-   * @see de.dailab.vsdt.vxl.vxl.VxlTail#getOperator()
-   * @see #getVxlTail()
+   * @see de.dailab.vsdt.vxl.vxl.VxLTail#getOperator()
+   * @see #getVxLTail()
    * @generated
    */
-  EAttribute getVxlTail_Operator();
+  EAttribute getVxLTail_Operator();
 
   /**
-   * Returns the meta object for the containment reference '{@link de.dailab.vsdt.vxl.vxl.VxlTail#getTerm <em>Term</em>}'.
+   * Returns the meta object for the containment reference '{@link de.dailab.vsdt.vxl.vxl.VxLTail#getTail <em>Tail</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Term</em>'.
-   * @see de.dailab.vsdt.vxl.vxl.VxlTail#getTerm()
-   * @see #getVxlTail()
+   * @return the meta object for the containment reference '<em>Tail</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxLTail#getTail()
+   * @see #getVxLTail()
    * @generated
    */
-  EReference getVxlTail_Term();
+  EReference getVxLTail_Tail();
+
+  /**
+   * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlElement <em>Element</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Element</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlElement
+   * @generated
+   */
+  EClass getVxlElement();
 
   /**
    * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlBracketTerm <em>Bracket Term</em>}'.
@@ -717,15 +726,15 @@ public interface VxlPackage extends EPackage
   EClass getVxlNegation();
 
   /**
-   * Returns the meta object for the containment reference '{@link de.dailab.vsdt.vxl.vxl.VxlNegation#getHead <em>Head</em>}'.
+   * Returns the meta object for the containment reference '{@link de.dailab.vsdt.vxl.vxl.VxlNegation#getElement <em>Element</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Head</em>'.
-   * @see de.dailab.vsdt.vxl.vxl.VxlNegation#getHead()
+   * @return the meta object for the containment reference '<em>Element</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlNegation#getElement()
    * @see #getVxlNegation()
    * @generated
    */
-  EReference getVxlNegation_Head();
+  EReference getVxlNegation_Element();
 
   /**
    * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlMinus <em>Minus</em>}'.
@@ -738,25 +747,36 @@ public interface VxlPackage extends EPackage
   EClass getVxlMinus();
 
   /**
-   * Returns the meta object for the containment reference '{@link de.dailab.vsdt.vxl.vxl.VxlMinus#getHead <em>Head</em>}'.
+   * Returns the meta object for the containment reference '{@link de.dailab.vsdt.vxl.vxl.VxlMinus#getElement <em>Element</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Head</em>'.
-   * @see de.dailab.vsdt.vxl.vxl.VxlMinus#getHead()
+   * @return the meta object for the containment reference '<em>Element</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlMinus#getElement()
    * @see #getVxlMinus()
    * @generated
    */
-  EReference getVxlMinus_Head();
+  EReference getVxlMinus_Element();
 
   /**
-   * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlAtom <em>Atom</em>}'.
+   * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlCardinality <em>Cardinality</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Atom</em>'.
-   * @see de.dailab.vsdt.vxl.vxl.VxlAtom
+   * @return the meta object for class '<em>Cardinality</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlCardinality
    * @generated
    */
-  EClass getVxlAtom();
+  EClass getVxlCardinality();
+
+  /**
+   * Returns the meta object for the containment reference '{@link de.dailab.vsdt.vxl.vxl.VxlCardinality#getElement <em>Element</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Element</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlCardinality#getElement()
+   * @see #getVxlCardinality()
+   * @generated
+   */
+  EReference getVxlCardinality_Element();
 
   /**
    * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlVariable <em>Variable</em>}'.
@@ -928,26 +948,6 @@ public interface VxlPackage extends EPackage
   EAttribute getVxlValue_Const();
 
   /**
-   * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlStringConst <em>String Const</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>String Const</em>'.
-   * @see de.dailab.vsdt.vxl.vxl.VxlStringConst
-   * @generated
-   */
-  EClass getVxlStringConst();
-
-  /**
-   * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlNumericConst <em>Numeric Const</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Numeric Const</em>'.
-   * @see de.dailab.vsdt.vxl.vxl.VxlNumericConst
-   * @generated
-   */
-  EClass getVxlNumericConst();
-
-  /**
    * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlBooleanConst <em>Boolean Const</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -966,6 +966,26 @@ public interface VxlPackage extends EPackage
    * @generated
    */
   EClass getVxlNullConst();
+
+  /**
+   * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlNumericConst <em>Numeric Const</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Numeric Const</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlNumericConst
+   * @generated
+   */
+  EClass getVxlNumericConst();
+
+  /**
+   * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlStringConst <em>String Const</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>String Const</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlStringConst
+   * @generated
+   */
+  EClass getVxlStringConst();
 
   /**
    * Returns the meta object for enum '{@link de.dailab.vsdt.vxl.vxl.VxlOperator <em>Operator</em>}'.
@@ -1027,24 +1047,14 @@ public interface VxlPackage extends EPackage
     EReference VXL_TERM__TAIL = eINSTANCE.getVxlTerm_Tail();
 
     /**
-     * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlHeadImpl <em>Head</em>}' class.
+     * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxLTailImpl <em>Vx LTail</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.dailab.vsdt.vxl.vxl.impl.VxlHeadImpl
-     * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlHead()
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxLTailImpl
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxLTail()
      * @generated
      */
-    EClass VXL_HEAD = eINSTANCE.getVxlHead();
-
-    /**
-     * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlTailImpl <em>Tail</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see de.dailab.vsdt.vxl.vxl.impl.VxlTailImpl
-     * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlTail()
-     * @generated
-     */
-    EClass VXL_TAIL = eINSTANCE.getVxlTail();
+    EClass VX_LTAIL = eINSTANCE.getVxLTail();
 
     /**
      * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
@@ -1052,15 +1062,25 @@ public interface VxlPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute VXL_TAIL__OPERATOR = eINSTANCE.getVxlTail_Operator();
+    EAttribute VX_LTAIL__OPERATOR = eINSTANCE.getVxLTail_Operator();
 
     /**
-     * The meta object literal for the '<em><b>Term</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Tail</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference VXL_TAIL__TERM = eINSTANCE.getVxlTail_Term();
+    EReference VX_LTAIL__TAIL = eINSTANCE.getVxLTail_Tail();
+
+    /**
+     * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlElementImpl <em>Element</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlElementImpl
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlElement()
+     * @generated
+     */
+    EClass VXL_ELEMENT = eINSTANCE.getVxlElement();
 
     /**
      * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlBracketTermImpl <em>Bracket Term</em>}' class.
@@ -1091,12 +1111,12 @@ public interface VxlPackage extends EPackage
     EClass VXL_NEGATION = eINSTANCE.getVxlNegation();
 
     /**
-     * The meta object literal for the '<em><b>Head</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Element</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference VXL_NEGATION__HEAD = eINSTANCE.getVxlNegation_Head();
+    EReference VXL_NEGATION__ELEMENT = eINSTANCE.getVxlNegation_Element();
 
     /**
      * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlMinusImpl <em>Minus</em>}' class.
@@ -1109,22 +1129,30 @@ public interface VxlPackage extends EPackage
     EClass VXL_MINUS = eINSTANCE.getVxlMinus();
 
     /**
-     * The meta object literal for the '<em><b>Head</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Element</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference VXL_MINUS__HEAD = eINSTANCE.getVxlMinus_Head();
+    EReference VXL_MINUS__ELEMENT = eINSTANCE.getVxlMinus_Element();
 
     /**
-     * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlAtomImpl <em>Atom</em>}' class.
+     * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlCardinalityImpl <em>Cardinality</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see de.dailab.vsdt.vxl.vxl.impl.VxlAtomImpl
-     * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlAtom()
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlCardinalityImpl
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlCardinality()
      * @generated
      */
-    EClass VXL_ATOM = eINSTANCE.getVxlAtom();
+    EClass VXL_CARDINALITY = eINSTANCE.getVxlCardinality();
+
+    /**
+     * The meta object literal for the '<em><b>Element</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VXL_CARDINALITY__ELEMENT = eINSTANCE.getVxlCardinality_Element();
 
     /**
      * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlVariableImpl <em>Variable</em>}' class.
@@ -1269,26 +1297,6 @@ public interface VxlPackage extends EPackage
     EAttribute VXL_VALUE__CONST = eINSTANCE.getVxlValue_Const();
 
     /**
-     * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlStringConstImpl <em>String Const</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see de.dailab.vsdt.vxl.vxl.impl.VxlStringConstImpl
-     * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlStringConst()
-     * @generated
-     */
-    EClass VXL_STRING_CONST = eINSTANCE.getVxlStringConst();
-
-    /**
-     * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlNumericConstImpl <em>Numeric Const</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see de.dailab.vsdt.vxl.vxl.impl.VxlNumericConstImpl
-     * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlNumericConst()
-     * @generated
-     */
-    EClass VXL_NUMERIC_CONST = eINSTANCE.getVxlNumericConst();
-
-    /**
      * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlBooleanConstImpl <em>Boolean Const</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1307,6 +1315,26 @@ public interface VxlPackage extends EPackage
      * @generated
      */
     EClass VXL_NULL_CONST = eINSTANCE.getVxlNullConst();
+
+    /**
+     * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlNumericConstImpl <em>Numeric Const</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlNumericConstImpl
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlNumericConst()
+     * @generated
+     */
+    EClass VXL_NUMERIC_CONST = eINSTANCE.getVxlNumericConst();
+
+    /**
+     * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlStringConstImpl <em>String Const</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlStringConstImpl
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlStringConst()
+     * @generated
+     */
+    EClass VXL_STRING_CONST = eINSTANCE.getVxlStringConst();
 
     /**
      * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.VxlOperator <em>Operator</em>}' enum.

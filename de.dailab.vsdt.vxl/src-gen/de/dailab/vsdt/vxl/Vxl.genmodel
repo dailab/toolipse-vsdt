@@ -28,21 +28,23 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlTerm/head"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlTerm/tail"/>
     </genClasses>
-    <genClasses ecoreClass="Vxl.ecore#//VxlHead"/>
-    <genClasses ecoreClass="Vxl.ecore#//VxlTail">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlTail/operator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlTail/term"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxLTail">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxLTail/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxLTail/tail"/>
     </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//VxlElement"/>
     <genClasses ecoreClass="Vxl.ecore#//VxlBracketTerm">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlBracketTerm/term"/>
     </genClasses>
     <genClasses ecoreClass="Vxl.ecore#//VxlNegation">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlNegation/head"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlNegation/element"/>
     </genClasses>
     <genClasses ecoreClass="Vxl.ecore#//VxlMinus">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlMinus/head"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlMinus/element"/>
     </genClasses>
-    <genClasses ecoreClass="Vxl.ecore#//VxlAtom"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlCardinality">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlCardinality/element"/>
+    </genClasses>
     <genClasses ecoreClass="Vxl.ecore#//VxlVariable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlVariable/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlVariable/accessor"/>
@@ -66,9 +68,9 @@
     <genClasses ecoreClass="Vxl.ecore#//VxlValue">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlValue/const"/>
     </genClasses>
-    <genClasses ecoreClass="Vxl.ecore#//VxlStringConst"/>
-    <genClasses ecoreClass="Vxl.ecore#//VxlNumericConst"/>
     <genClasses ecoreClass="Vxl.ecore#//VxlBooleanConst"/>
     <genClasses ecoreClass="Vxl.ecore#//VxlNullConst"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlNumericConst"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlStringConst"/>
   </genPackages>
 </genmodel:GenModel>

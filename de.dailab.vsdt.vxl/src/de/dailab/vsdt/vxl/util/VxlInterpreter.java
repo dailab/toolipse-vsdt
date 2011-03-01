@@ -11,11 +11,11 @@ import de.dailab.vsdt.vxl.util.TermOrdering.TermNode;
 import de.dailab.vsdt.vxl.util.TermOrdering.TermTree;
 import de.dailab.vsdt.vxl.vxl.VxlAccessor;
 import de.dailab.vsdt.vxl.vxl.VxlArrayAccessor;
-import de.dailab.vsdt.vxl.vxl.VxlAtom;
 import de.dailab.vsdt.vxl.vxl.VxlBooleanConst;
 import de.dailab.vsdt.vxl.vxl.VxlBracketTerm;
+import de.dailab.vsdt.vxl.vxl.VxlCardinality;
+import de.dailab.vsdt.vxl.vxl.VxlElement;
 import de.dailab.vsdt.vxl.vxl.VxlFieldAccessor;
-import de.dailab.vsdt.vxl.vxl.VxlHead;
 import de.dailab.vsdt.vxl.vxl.VxlList;
 import de.dailab.vsdt.vxl.vxl.VxlListElement;
 import de.dailab.vsdt.vxl.vxl.VxlMinus;
@@ -54,17 +54,17 @@ public class VxlInterpreter {
 	public Serializable evaluateTerm(VxlTerm term, Map<String, Serializable> context) {
 		this.errors= new HashMap<Object, String>();
 		this.context= context;
-		return eval(term);
+		return evalTerm(term);
 	}
 	
 	/**
 	 * Term:			head = Head (tail = Tail)?;
 	 * The term is transcribed to an ordered TermTree and evaluated.
 	 */
-	protected Serializable eval(VxlTerm term) {
+	protected Serializable evalTerm(VxlTerm term) {
 		TermTree orderedTermTree= TermOrdering.createOrderedTermTree(term);
 //		TermOrdering.print(orderedTermTree, 0);
-		return eval(orderedTermTree);
+		return evalTermTree(orderedTermTree);
 	}
 	
 	/**
@@ -74,16 +74,16 @@ public class VxlInterpreter {
 	 * @param term	Some ordered TermTree
 	 * @return		Evaluation result (e.g. a Sting, Number, or Boolean)
 	 */
-	protected Serializable eval(TermTree term) {
+	protected Serializable evalTermTree(TermTree term) {
 		if (term instanceof TermLeaf) {
 			TermLeaf leaf= (TermLeaf) term;
-			return eval(leaf.term);
+			return evalElement(leaf.term);
 		}
 		if (term instanceof TermNode) {
 			TermNode node= (TermNode) term;
 			
-			Object head= eval(node.left);
-			Object tail= eval(node.right);
+			Object head= evalTermTree(node.left);
+			Object tail= evalTermTree(node.right);
 			VxlOperator op= node.operator;
 			
 			if (checkType(op, head, tail)) {
@@ -97,29 +97,38 @@ public class VxlInterpreter {
 	}
 	
 	/**
-	 * Head:			BracketTerm | Negation | Atom;
+	 * Head:			BracketTerm | Negation | Minus | Value | Variable | List | Cardinality;
 	 */
-	protected Serializable eval(VxlHead head) {
+	protected Serializable evalElement(VxlElement head) {
 		if (head instanceof VxlBracketTerm) {
-			return eval(((VxlBracketTerm) head).getTerm());
+			return evalTerm(((VxlBracketTerm) head).getTerm());
 		}
 		if (head instanceof VxlNegation) {
-			return eval((VxlNegation) head);
+			return evalNegation((VxlNegation) head);
 		}
 		if (head instanceof VxlMinus) {
-			return eval((VxlMinus) head);
+			return evalMinus((VxlMinus) head);
 		}
-		if (head instanceof VxlAtom) {
-			return eval((VxlAtom) head);
+		if (head instanceof VxlVariable) {
+			return evalVariable((VxlVariable) head);
+		}
+		if (head instanceof VxlValue) {
+			return evalValue((VxlValue) head);
+		}
+		if (head instanceof VxlList) {
+			return evalList((VxlList) head);
+		}
+		if (head instanceof VxlCardinality) {
+			return evalCardinality((VxlCardinality) head);
 		}
 		return null;
 	}
 
 	/**
-	 * Negation:		"!" head = Head;
+	 * Negation:		"!" term = Element;
 	 */
-	protected Serializable eval(VxlNegation negation) {
-		Serializable result= eval(negation.getHead());
+	protected Serializable evalNegation(VxlNegation negation) {
+		Serializable result= evalElement(negation.getElement());
 		if (result instanceof Boolean) {
 			return ! (Boolean) result;
 		} else {
@@ -129,10 +138,10 @@ public class VxlInterpreter {
 	}
 
 	/**
-	 * Minus:		"-" head = Head;
+	 * Minus:		"-" term = Element;
 	 */
-	protected Serializable eval(VxlMinus minus) {
-		Serializable result= eval(minus.getHead());
+	protected Serializable evalMinus(VxlMinus minus) {
+		Serializable result= evalElement(minus.getElement());
 		if (result instanceof Number) {
 			return - ((Number) result).doubleValue();
 		} else {
@@ -142,25 +151,29 @@ public class VxlInterpreter {
 	}
 	
 	/**
-	 * Atom:			Variable | Value;
+	 * Cardinality:		"#" term = Element
 	 */
-	protected Serializable eval(VxlAtom atom) {
-		if (atom instanceof VxlVariable) {
-			return eval((VxlVariable) atom);
+	protected Double evalCardinality(VxlCardinality cardinality) {
+		Serializable value = evalElement(cardinality.getElement());
+		if (value instanceof Double) {
+			return Math.abs((Double) value);
 		}
-		if (atom instanceof VxlValue) {
-			return eval((VxlValue) atom);
+		if (value instanceof List<?>) {
+			return (double) ((List<?>) value).size();
 		}
-		if (atom instanceof VxlList) {
-			return eval((VxlList) atom);
+		if (value instanceof Boolean) {
+			return ((Boolean) value) ? 1. : 0.;
+		}
+		if (value instanceof String) {
+			return (double) ((String) value).length();
 		}
 		return null;
 	}
-
+	
 	/**
-	 * Variable:		"$" name = ID (accessor = Accessor)?;
+	 * Variable:		name = ID (accessor = Accessor)?;
 	 */
-	protected Serializable eval(VxlVariable variable) {
+	protected Serializable evalVariable(VxlVariable variable) {
 		// get value from context
 		if (context != null) {
 			Serializable value= context.get(variable.getName());
@@ -174,7 +187,7 @@ public class VxlInterpreter {
 				}
 			}
 			if (variable.getAccessor() != null) {
-				value = eval(variable.getAccessor(), value);
+				value = evalAccessor(variable.getAccessor(), value);
 			}
 			return value;
 		} else {
@@ -186,12 +199,12 @@ public class VxlInterpreter {
 	/**
 	 * Accessor:		ArrayAccessor | FieldAccessor;
 	 */
-	protected Serializable eval(VxlAccessor accessor, Serializable value) {
+	protected Serializable evalAccessor(VxlAccessor accessor, Serializable value) {
 		if (accessor instanceof VxlArrayAccessor) {
-			return eval((VxlArrayAccessor) accessor, value);
+			return evalArrayAccessor((VxlArrayAccessor) accessor, value);
 		}
 		if (accessor instanceof VxlFieldAccessor) {
-			return eval((VxlFieldAccessor) accessor, value);
+			return evalFieldAccessor((VxlFieldAccessor) accessor, value);
 		}
 		return null;
 	}
@@ -201,9 +214,9 @@ public class VxlInterpreter {
 	 * ArrayAccessor:	"[" index = Term "]" (accessor = Accessor)?;
 	 */
 	@SuppressWarnings("unchecked")
-	protected Serializable eval(VxlArrayAccessor accessor, Serializable value) {
+	protected Serializable evalArrayAccessor(VxlArrayAccessor accessor, Serializable value) {
 		// evaluate index
-		Serializable index = eval(accessor.getIndex());
+		Serializable index = evalTerm(accessor.getIndex());
 		if (index instanceof Number) {
 			int i = ((Number) index).intValue();
 			
@@ -227,7 +240,7 @@ public class VxlInterpreter {
 			
 			// another accessor?
 			if (accessor.getAccessor() != null) {
-				value = eval(accessor.getAccessor(), value);
+				value = evalAccessor(accessor.getAccessor(), value);
 			}
 		}
 		return value;
@@ -237,7 +250,7 @@ public class VxlInterpreter {
 	 * TODO
 	 * FieldAccessor:	"." name = ID (accessor = Accessor)?;
 	 */
-	protected Serializable eval(VxlFieldAccessor accessor, Serializable value) {
+	protected Serializable evalFieldAccessor(VxlFieldAccessor accessor, Serializable value) {
 		throw new UnsupportedOperationException();
 		
 		// another accessor?
@@ -250,7 +263,7 @@ public class VxlInterpreter {
 	/**
 	 * Value:			StringConst | BooleanConst | NumericConst | Null;
 	 */
-	protected Serializable eval(VxlValue value) {
+	protected Serializable evalValue(VxlValue value) {
 		if (value instanceof VxlStringConst) {
 			return ((VxlStringConst) value).getConst();
 		}
@@ -269,9 +282,9 @@ public class VxlInterpreter {
 	/**
 	 * List:			"[" (body = VxlListElement)? "]";
 	 */
-	protected Serializable eval(VxlList list) {
+	protected Vector<Serializable> evalList(VxlList list) {
 		if (list.getBody() != null) {
-			return eval(list.getBody());
+			return evalListElement(list.getBody());
 		} else {
 			return new Vector<Serializable>();
 		}
@@ -280,11 +293,11 @@ public class VxlInterpreter {
 	/**
 	 * ListElement:		first = VxlTerm ("," rest = VxlListElement)?;
 	 */
-	protected Vector<Serializable> eval(VxlListElement listElement) {
+	protected Vector<Serializable> evalListElement(VxlListElement listElement) {
 		Vector<Serializable> list = new Vector<Serializable>();
-		list.add(eval(listElement.getFirst()));
+		list.add(evalTerm(listElement.getFirst()));
 		if (listElement.getRest() != null) {
-			list.addAll(eval(listElement.getRest()));
+			list.addAll(evalListElement(listElement.getRest()));
 		}
 		return list;
 	}
@@ -301,13 +314,41 @@ public class VxlInterpreter {
 	private Serializable evaluateOperation(VxlOperator operator, Object head, Object tail) {
 		switch (operator) {
 		case CONCAT:
-			return new StringBuffer().append(head).append(tail).toString();
+			if (head instanceof List && tail instanceof List) {
+				Vector result = new Vector((List) head);
+				result.addAll((Vector) tail);
+				return result;
+			} else if (head instanceof String || tail instanceof String) {
+				return new StringBuffer().append(head).append(tail).toString();
+			}
 		case ADD:
-			return (Double) head + (Double) tail;
+			if (head instanceof List) {
+				Vector result = new Vector((List) head);
+				result.add(tail);
+				return result;
+			} else if (head instanceof Number && tail instanceof Number) {
+				return (Double) head + (Double) tail;
+			}
+		case MULT:
+			if (head instanceof List && tail instanceof Number) {
+				Vector result = new Vector();
+				double t = (Double) tail;
+				for (int i=0; i < t; i++) {
+					result.addAll((Vector) head);
+				}
+				return result;
+			} else if (head instanceof String && tail instanceof Number) {
+				StringBuffer result = new StringBuffer();
+				double t = (Double) tail;
+				for (int i=0; i < t; i++) {
+					result.append((String) head);
+				}
+				return result.toString();
+			} else if (head instanceof Number && tail instanceof Number) {
+				return (Double) head * (Double) tail;
+			}
 		case SUB:
 			return (Double) head - (Double) tail;
-		case MULT:
-			return (Double) head * (Double) tail;
 		case DIV:
 			return (Double) head / (Double) tail;
 		case MOD:
@@ -346,10 +387,15 @@ public class VxlInterpreter {
 		try {
 			switch (operator) {
 			case CONCAT:
-				return true; // everything can be concatenated somehow
+				return (head instanceof List && tail instanceof List) || 
+						(head instanceof String || tail instanceof String);
 			case ADD:
-			case SUB:
+				return head instanceof List || 
+						(head instanceof Number && tail instanceof Number);
 			case MULT:
+				return ((head instanceof List || head instanceof String) && tail instanceof Number) || 
+						(head instanceof Number && tail instanceof Number);
+			case SUB:
 			case DIV:
 			case MOD:
 				return head instanceof Number && tail instanceof Number;

@@ -5,9 +5,9 @@
  */
 package de.dailab.vsdt.vxl.vxl.impl;
 
+import de.dailab.vsdt.vxl.vxl.VxLTail;
 import de.dailab.vsdt.vxl.vxl.VxlOperator;
 import de.dailab.vsdt.vxl.vxl.VxlPackage;
-import de.dailab.vsdt.vxl.vxl.VxlTail;
 import de.dailab.vsdt.vxl.vxl.VxlTerm;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -21,19 +21,19 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Tail</b></em>'.
+ * An implementation of the model object '<em><b>Vx LTail</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlTailImpl#getOperator <em>Operator</em>}</li>
- *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlTailImpl#getTerm <em>Term</em>}</li>
+ *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxLTailImpl#getOperator <em>Operator</em>}</li>
+ *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxLTailImpl#getTail <em>Tail</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class VxlTailImpl extends MinimalEObjectImpl.Container implements VxlTail
+public class VxLTailImpl extends MinimalEObjectImpl.Container implements VxLTail
 {
   /**
    * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
@@ -56,21 +56,21 @@ public class VxlTailImpl extends MinimalEObjectImpl.Container implements VxlTail
   protected VxlOperator operator = OPERATOR_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getTerm() <em>Term</em>}' containment reference.
+   * The cached value of the '{@link #getTail() <em>Tail</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTerm()
+   * @see #getTail()
    * @generated
    * @ordered
    */
-  protected VxlTerm term;
+  protected VxlTerm tail;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected VxlTailImpl()
+  protected VxLTailImpl()
   {
     super();
   }
@@ -83,7 +83,7 @@ public class VxlTailImpl extends MinimalEObjectImpl.Container implements VxlTail
   @Override
   protected EClass eStaticClass()
   {
-    return VxlPackage.Literals.VXL_TAIL;
+    return VxlPackage.Literals.VX_LTAIL;
   }
 
   /**
@@ -106,7 +106,7 @@ public class VxlTailImpl extends MinimalEObjectImpl.Container implements VxlTail
     VxlOperator oldOperator = operator;
     operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_TAIL__OPERATOR, oldOperator, operator));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VX_LTAIL__OPERATOR, oldOperator, operator));
   }
 
   /**
@@ -114,9 +114,9 @@ public class VxlTailImpl extends MinimalEObjectImpl.Container implements VxlTail
    * <!-- end-user-doc -->
    * @generated
    */
-  public VxlTerm getTerm()
+  public VxlTerm getTail()
   {
-    return term;
+    return tail;
   }
 
   /**
@@ -124,13 +124,13 @@ public class VxlTailImpl extends MinimalEObjectImpl.Container implements VxlTail
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTerm(VxlTerm newTerm, NotificationChain msgs)
+  public NotificationChain basicSetTail(VxlTerm newTail, NotificationChain msgs)
   {
-    VxlTerm oldTerm = term;
-    term = newTerm;
+    VxlTerm oldTail = tail;
+    tail = newTail;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_TAIL__TERM, oldTerm, newTerm);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.VX_LTAIL__TAIL, oldTail, newTail);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -141,20 +141,20 @@ public class VxlTailImpl extends MinimalEObjectImpl.Container implements VxlTail
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTerm(VxlTerm newTerm)
+  public void setTail(VxlTerm newTail)
   {
-    if (newTerm != term)
+    if (newTail != tail)
     {
       NotificationChain msgs = null;
-      if (term != null)
-        msgs = ((InternalEObject)term).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_TAIL__TERM, null, msgs);
-      if (newTerm != null)
-        msgs = ((InternalEObject)newTerm).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_TAIL__TERM, null, msgs);
-      msgs = basicSetTerm(newTerm, msgs);
+      if (tail != null)
+        msgs = ((InternalEObject)tail).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VX_LTAIL__TAIL, null, msgs);
+      if (newTail != null)
+        msgs = ((InternalEObject)newTail).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VX_LTAIL__TAIL, null, msgs);
+      msgs = basicSetTail(newTail, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_TAIL__TERM, newTerm, newTerm));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VX_LTAIL__TAIL, newTail, newTail));
   }
 
   /**
@@ -167,8 +167,8 @@ public class VxlTailImpl extends MinimalEObjectImpl.Container implements VxlTail
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_TAIL__TERM:
-        return basicSetTerm(null, msgs);
+      case VxlPackage.VX_LTAIL__TAIL:
+        return basicSetTail(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -183,10 +183,10 @@ public class VxlTailImpl extends MinimalEObjectImpl.Container implements VxlTail
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_TAIL__OPERATOR:
+      case VxlPackage.VX_LTAIL__OPERATOR:
         return getOperator();
-      case VxlPackage.VXL_TAIL__TERM:
-        return getTerm();
+      case VxlPackage.VX_LTAIL__TAIL:
+        return getTail();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -201,11 +201,11 @@ public class VxlTailImpl extends MinimalEObjectImpl.Container implements VxlTail
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_TAIL__OPERATOR:
+      case VxlPackage.VX_LTAIL__OPERATOR:
         setOperator((VxlOperator)newValue);
         return;
-      case VxlPackage.VXL_TAIL__TERM:
-        setTerm((VxlTerm)newValue);
+      case VxlPackage.VX_LTAIL__TAIL:
+        setTail((VxlTerm)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -221,11 +221,11 @@ public class VxlTailImpl extends MinimalEObjectImpl.Container implements VxlTail
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_TAIL__OPERATOR:
+      case VxlPackage.VX_LTAIL__OPERATOR:
         setOperator(OPERATOR_EDEFAULT);
         return;
-      case VxlPackage.VXL_TAIL__TERM:
-        setTerm((VxlTerm)null);
+      case VxlPackage.VX_LTAIL__TAIL:
+        setTail((VxlTerm)null);
         return;
     }
     super.eUnset(featureID);
@@ -241,10 +241,10 @@ public class VxlTailImpl extends MinimalEObjectImpl.Container implements VxlTail
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_TAIL__OPERATOR:
+      case VxlPackage.VX_LTAIL__OPERATOR:
         return operator != OPERATOR_EDEFAULT;
-      case VxlPackage.VXL_TAIL__TERM:
-        return term != null;
+      case VxlPackage.VX_LTAIL__TAIL:
+        return tail != null;
     }
     return super.eIsSet(featureID);
   }
@@ -266,4 +266,4 @@ public class VxlTailImpl extends MinimalEObjectImpl.Container implements VxlTail
     return result.toString();
   }
 
-} //VxlTailImpl
+} //VxLTailImpl

@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class VxlBracketTermImpl extends VxlHeadImpl implements VxlBracketTerm
+public class VxlBracketTermImpl extends VxlElementImpl implements VxlBracketTerm
 {
   /**
    * The cached value of the '{@link #getTerm() <em>Term</em>}' containment reference.

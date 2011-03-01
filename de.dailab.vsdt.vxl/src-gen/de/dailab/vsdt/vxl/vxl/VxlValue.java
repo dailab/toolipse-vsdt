@@ -22,7 +22,7 @@ package de.dailab.vsdt.vxl.vxl;
  * @model
  * @generated
  */
-public interface VxlValue extends VxlAtom
+public interface VxlValue extends VxlElement
 {
   /**
    * Returns the value of the '<em><b>Const</b></em>' attribute.

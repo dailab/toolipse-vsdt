@@ -22,7 +22,7 @@ package de.dailab.vsdt.vxl.vxl;
  * @model
  * @generated
  */
-public interface VxlBracketTerm extends VxlHead
+public interface VxlBracketTerm extends VxlElement
 {
   /**
    * Returns the value of the '<em><b>Term</b></em>' containment reference.

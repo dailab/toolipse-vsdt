@@ -14,7 +14,7 @@ package de.dailab.vsdt.vxl.vxl;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.dailab.vsdt.vxl.vxl.VxlMinus#getHead <em>Head</em>}</li>
+ *   <li>{@link de.dailab.vsdt.vxl.vxl.VxlMinus#getElement <em>Element</em>}</li>
  * </ul>
  * </p>
  *
@@ -22,32 +22,32 @@ package de.dailab.vsdt.vxl.vxl;
  * @model
  * @generated
  */
-public interface VxlMinus extends VxlHead
+public interface VxlMinus extends VxlElement
 {
   /**
-   * Returns the value of the '<em><b>Head</b></em>' containment reference.
+   * Returns the value of the '<em><b>Element</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Head</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Element</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Head</em>' containment reference.
-   * @see #setHead(VxlHead)
-   * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlMinus_Head()
+   * @return the value of the '<em>Element</em>' containment reference.
+   * @see #setElement(VxlElement)
+   * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlMinus_Element()
    * @model containment="true"
    * @generated
    */
-  VxlHead getHead();
+  VxlElement getElement();
 
   /**
-   * Sets the value of the '{@link de.dailab.vsdt.vxl.vxl.VxlMinus#getHead <em>Head</em>}' containment reference.
+   * Sets the value of the '{@link de.dailab.vsdt.vxl.vxl.VxlMinus#getElement <em>Element</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Head</em>' containment reference.
-   * @see #getHead()
+   * @param value the new value of the '<em>Element</em>' containment reference.
+   * @see #getElement()
    * @generated
    */
-  void setHead(VxlHead value);
+  void setElement(VxlElement value);
 
 } // VxlMinus

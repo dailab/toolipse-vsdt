@@ -19,27 +19,27 @@ public class BpelExpressionVisitor extends VsdtExpressionVisitor {
 	}
 	
 	@Override
-	protected void visit(VxlTerm term) {
+	protected void visitTerm(VxlTerm term) {
 		if (term.getTail() != null && term.getTail().getOperator() == VxlOperator.CONCAT) {
 			buffer.append("concat(");
-			visit(term.getHead());
+			visitElement(term.getHead());
 			buffer.append(",");
-			visit(term.getTail().getTerm());
+			visitTerm(term.getTail().getTail());
 			buffer.append(")");
 		} else {
-			super.visit(term);
+			super.visitTerm(term);
 		}
 	}
 
 	@Override
-	protected void visit(VxlNegation negation) {
+	protected void visitNegation(VxlNegation negation) {
 		buffer.append("not(");
-		visit(negation.getHead());
+		visitElement(negation.getElement());
 		buffer.append(")");
 	}
 
 	@Override
-	protected void visit(VxlVariable variable) {
+	protected void visitVariable(VxlVariable variable) {
 		String query= null;
 		if (variable.getAccessor() instanceof VxlFieldAccessor) {
 			query= ((VxlFieldAccessor) variable.getAccessor()).getName();
@@ -48,25 +48,25 @@ public class BpelExpressionVisitor extends VsdtExpressionVisitor {
 	}
 	
 	@Override
-	protected void visit(VxlBooleanConst booleanConst) {
+	protected void visitBooleanConst(VxlBooleanConst booleanConst) {
 		buffer.append(booleanConst.getConst() + "()");
 	}
 	
 	@Override
-	protected void visit(VxlStringConst stringConst) {
+	protected void visitStringConst(VxlStringConst stringConst) {
 		buffer.append("'");
 		buffer.append(stringConst.getConst());
 		buffer.append("'");
 	}
 	
 	@Override
-	protected void visit(VxlNullConst nll) {
+	protected void visitNullConst(VxlNullConst nll) {
 		// XXX null in BPEL?
 		buffer.append("null");
 	}
 
 	@Override
-	protected void visit(VxlOperator operator) {
+	protected void visitOperator(VxlOperator operator) {
 		switch (operator) {
 		case EQ:
 			buffer.append("=");
@@ -88,7 +88,7 @@ public class BpelExpressionVisitor extends VsdtExpressionVisitor {
 			// in BPEL, concatenation is a special case, being a built-in function, no binary operator
 			break;
 		default:
-			super.visit(operator);
+			super.visitOperator(operator);
 		}
 	}
 

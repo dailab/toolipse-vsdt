@@ -8,21 +8,21 @@ package de.dailab.vsdt.vxl.vxl;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Negation</b></em>'.
+ * A representation of the model object '<em><b>Cardinality</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.dailab.vsdt.vxl.vxl.VxlNegation#getElement <em>Element</em>}</li>
+ *   <li>{@link de.dailab.vsdt.vxl.vxl.VxlCardinality#getElement <em>Element</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlNegation()
+ * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlCardinality()
  * @model
  * @generated
  */
-public interface VxlNegation extends VxlElement
+public interface VxlCardinality extends VxlElement
 {
   /**
    * Returns the value of the '<em><b>Element</b></em>' containment reference.
@@ -34,14 +34,14 @@ public interface VxlNegation extends VxlElement
    * <!-- end-user-doc -->
    * @return the value of the '<em>Element</em>' containment reference.
    * @see #setElement(VxlElement)
-   * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlNegation_Element()
+   * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlCardinality_Element()
    * @model containment="true"
    * @generated
    */
   VxlElement getElement();
 
   /**
-   * Sets the value of the '{@link de.dailab.vsdt.vxl.vxl.VxlNegation#getElement <em>Element</em>}' containment reference.
+   * Sets the value of the '{@link de.dailab.vsdt.vxl.vxl.VxlCardinality#getElement <em>Element</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Element</em>' containment reference.
@@ -50,4 +50,4 @@ public interface VxlNegation extends VxlElement
    */
   void setElement(VxlElement value);
 
-} // VxlNegation
+} // VxlCardinality

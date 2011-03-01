@@ -9,22 +9,22 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Tail</b></em>'.
+ * A representation of the model object '<em><b>Vx LTail</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link de.dailab.vsdt.vxl.vxl.VxlTail#getOperator <em>Operator</em>}</li>
- *   <li>{@link de.dailab.vsdt.vxl.vxl.VxlTail#getTerm <em>Term</em>}</li>
+ *   <li>{@link de.dailab.vsdt.vxl.vxl.VxLTail#getOperator <em>Operator</em>}</li>
+ *   <li>{@link de.dailab.vsdt.vxl.vxl.VxLTail#getTail <em>Tail</em>}</li>
  * </ul>
  * </p>
  *
- * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlTail()
+ * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxLTail()
  * @model
  * @generated
  */
-public interface VxlTail extends EObject
+public interface VxLTail extends EObject
 {
   /**
    * Returns the value of the '<em><b>Operator</b></em>' attribute.
@@ -38,14 +38,14 @@ public interface VxlTail extends EObject
    * @return the value of the '<em>Operator</em>' attribute.
    * @see de.dailab.vsdt.vxl.vxl.VxlOperator
    * @see #setOperator(VxlOperator)
-   * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlTail_Operator()
+   * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxLTail_Operator()
    * @model
    * @generated
    */
   VxlOperator getOperator();
 
   /**
-   * Sets the value of the '{@link de.dailab.vsdt.vxl.vxl.VxlTail#getOperator <em>Operator</em>}' attribute.
+   * Sets the value of the '{@link de.dailab.vsdt.vxl.vxl.VxLTail#getOperator <em>Operator</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Operator</em>' attribute.
@@ -56,29 +56,29 @@ public interface VxlTail extends EObject
   void setOperator(VxlOperator value);
 
   /**
-   * Returns the value of the '<em><b>Term</b></em>' containment reference.
+   * Returns the value of the '<em><b>Tail</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Term</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Tail</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Term</em>' containment reference.
-   * @see #setTerm(VxlTerm)
-   * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlTail_Term()
+   * @return the value of the '<em>Tail</em>' containment reference.
+   * @see #setTail(VxlTerm)
+   * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxLTail_Tail()
    * @model containment="true"
    * @generated
    */
-  VxlTerm getTerm();
+  VxlTerm getTail();
 
   /**
-   * Sets the value of the '{@link de.dailab.vsdt.vxl.vxl.VxlTail#getTerm <em>Term</em>}' containment reference.
+   * Sets the value of the '{@link de.dailab.vsdt.vxl.vxl.VxLTail#getTail <em>Tail</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Term</em>' containment reference.
-   * @see #getTerm()
+   * @param value the new value of the '<em>Tail</em>' containment reference.
+   * @see #getTail()
    * @generated
    */
-  void setTerm(VxlTerm value);
+  void setTail(VxlTerm value);
 
-} // VxlTail
+} // VxLTail

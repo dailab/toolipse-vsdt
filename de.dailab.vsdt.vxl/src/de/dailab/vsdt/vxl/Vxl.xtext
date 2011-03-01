@@ -3,13 +3,16 @@ grammar de.dailab.vsdt.vxl.Vxl with org.eclipse.xtext.common.Terminals
 generate vxl "http://www.dailab.de/vsdt/vxl/Vxl"
 
 // COMPLEX TERMS
-VxlTerm:			head = VxlHead (tail = VxlTail)?;
-VxlHead:			VxlBracketTerm | VxlNegation | VxlMinus | VxlAtom;
-VxlTail:			operator = VxlOperator term = VxlTerm;
+VxlTerm:			head = VxlElement (tail = VxLTail)?;
+VxLTail:			operator = VxlOperator tail = VxlTerm;
+VxlElement:			VxlBracketTerm | VxlNegation | VxlMinus | VxlValue |
+                    VxlVariable | VxlList | VxlCardinality;
+
+// SPECIAL TERMS, UNARY OPERATORS
 VxlBracketTerm:		"(" term = VxlTerm ")";
-VxlNegation:		"not" head = VxlHead;
-VxlMinus:			"-" head = VxlHead;
-VxlAtom:			VxlValue | VxlVariable | VxlList;
+VxlNegation:		"not" element = VxlElement;
+VxlMinus:			"-" element = VxlElement;
+VxlCardinality:		"#" element = VxlElement;
 
 // VARIABLES & ACCESSORS
 VxlVariable:		name = ID (accessor = VxlAccessor)?;
@@ -21,16 +24,14 @@ VxlFieldAccessor:	"." name = ID (accessor = VxlAccessor)?;
 VxlList:			"[" (body = VxlListElement)? "]"; 
 VxlListElement:		first = VxlTerm ("," rest = VxlListElement)?;
 
-// CONSTANTS
-VxlValue:			VxlStringConst | VxlBooleanConst | VxlNumericConst | VxlNullConst;
-VxlStringConst:		const = STRING;
-//NumericConst:		const = INT; // keine kommazahlen 
-VxlNumericConst:	const = NUMERIC;
-// BooleanConst:	isTrue ?= "true" | "false";
+// CONSTANT VALUES
+VxlValue:			VxlNullConst | VxlBooleanConst | VxlNumericConst | VxlStringConst;
 VxlBooleanConst:	const = ('true' | 'false');
 VxlNullConst:		const = "null";
+VxlNumericConst:	const = NUMERIC;
+VxlStringConst:		const = STRING;
 
-// OPERATIONS
+// BINARY OPERATIONS
 enum VxlOperator: 
 	LT = "<" | LE = "<=" | EQ = "==" | NEQ = "!=" | GT = ">" | GE = ">=" |	// Term ** Term -> Bool
 	ADD = "+" | SUB = "-" | MULT = "*" | DIV = "/" | MOD = "%" |			// Num ** Num -> Num
@@ -38,5 +39,9 @@ enum VxlOperator:
 	CONCAT = "++"; 															// String ** String -> String
 
 // NATIVES
-//terminal Numeric: "('0'..'9')+('.' ('0'..'9')+)?";
 NUMERIC : INT ('.' INT)? ;
+
+// ALTERNATIVES
+//terminal Numeric: "('0'..'9')+('.' ('0'..'9')+)?";
+//NumericConst:		const = INT; // keine kommazahlen 
+//BooleanConst:	isTrue ?= "true" | "false";

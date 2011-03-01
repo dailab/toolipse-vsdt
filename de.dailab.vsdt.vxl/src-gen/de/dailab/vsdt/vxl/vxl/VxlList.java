@@ -22,7 +22,7 @@ package de.dailab.vsdt.vxl.vxl;
  * @model
  * @generated
  */
-public interface VxlList extends VxlAtom
+public interface VxlList extends VxlElement
 {
   /**
    * Returns the value of the '<em><b>Body</b></em>' containment reference.

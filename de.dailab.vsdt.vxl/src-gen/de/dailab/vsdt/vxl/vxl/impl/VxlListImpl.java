@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class VxlListImpl extends VxlAtomImpl implements VxlList
+public class VxlListImpl extends VxlElementImpl implements VxlList
 {
   /**
    * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.

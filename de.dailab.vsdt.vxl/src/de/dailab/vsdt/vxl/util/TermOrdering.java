@@ -3,7 +3,7 @@ package de.dailab.vsdt.vxl.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.dailab.vsdt.vxl.vxl.VxlHead;
+import de.dailab.vsdt.vxl.vxl.VxlElement;
 import de.dailab.vsdt.vxl.vxl.VxlOperator;
 import de.dailab.vsdt.vxl.vxl.VxlTerm;
 
@@ -93,7 +93,7 @@ public class TermOrdering {
 			// wrap Term in a TermNode
 			VxlOperator operator= term.getTail().getOperator();
 			TermLeaf head= new TermLeaf(term.getHead());
-			TermTree tail= transcribe(term.getTail().getTerm());
+			TermTree tail= transcribe(term.getTail().getTail());
 			return new TermNode(head, operator, tail);
 		}
 	}
@@ -217,8 +217,8 @@ public class TermOrdering {
 	 * @author kuester
 	 */
 	public static class TermLeaf implements TermTree {
-		VxlHead term;
-		public TermLeaf(VxlHead term) {
+		VxlElement term;
+		public TermLeaf(VxlElement term) {
 			this.term= term;
 		}
 	}

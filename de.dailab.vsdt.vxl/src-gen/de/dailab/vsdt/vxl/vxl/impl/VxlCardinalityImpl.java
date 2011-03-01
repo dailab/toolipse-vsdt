@@ -5,8 +5,8 @@
  */
 package de.dailab.vsdt.vxl.vxl.impl;
 
+import de.dailab.vsdt.vxl.vxl.VxlCardinality;
 import de.dailab.vsdt.vxl.vxl.VxlElement;
-import de.dailab.vsdt.vxl.vxl.VxlMinus;
 import de.dailab.vsdt.vxl.vxl.VxlPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -19,18 +19,18 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Minus</b></em>'.
+ * An implementation of the model object '<em><b>Cardinality</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlMinusImpl#getElement <em>Element</em>}</li>
+ *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlCardinalityImpl#getElement <em>Element</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class VxlMinusImpl extends VxlElementImpl implements VxlMinus
+public class VxlCardinalityImpl extends VxlElementImpl implements VxlCardinality
 {
   /**
    * The cached value of the '{@link #getElement() <em>Element</em>}' containment reference.
@@ -47,7 +47,7 @@ public class VxlMinusImpl extends VxlElementImpl implements VxlMinus
    * <!-- end-user-doc -->
    * @generated
    */
-  protected VxlMinusImpl()
+  protected VxlCardinalityImpl()
   {
     super();
   }
@@ -60,7 +60,7 @@ public class VxlMinusImpl extends VxlElementImpl implements VxlMinus
   @Override
   protected EClass eStaticClass()
   {
-    return VxlPackage.Literals.VXL_MINUS;
+    return VxlPackage.Literals.VXL_CARDINALITY;
   }
 
   /**
@@ -84,7 +84,7 @@ public class VxlMinusImpl extends VxlElementImpl implements VxlMinus
     element = newElement;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_MINUS__ELEMENT, oldElement, newElement);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_CARDINALITY__ELEMENT, oldElement, newElement);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -101,14 +101,14 @@ public class VxlMinusImpl extends VxlElementImpl implements VxlMinus
     {
       NotificationChain msgs = null;
       if (element != null)
-        msgs = ((InternalEObject)element).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_MINUS__ELEMENT, null, msgs);
+        msgs = ((InternalEObject)element).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_CARDINALITY__ELEMENT, null, msgs);
       if (newElement != null)
-        msgs = ((InternalEObject)newElement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_MINUS__ELEMENT, null, msgs);
+        msgs = ((InternalEObject)newElement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_CARDINALITY__ELEMENT, null, msgs);
       msgs = basicSetElement(newElement, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_MINUS__ELEMENT, newElement, newElement));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_CARDINALITY__ELEMENT, newElement, newElement));
   }
 
   /**
@@ -121,7 +121,7 @@ public class VxlMinusImpl extends VxlElementImpl implements VxlMinus
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_MINUS__ELEMENT:
+      case VxlPackage.VXL_CARDINALITY__ELEMENT:
         return basicSetElement(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -137,7 +137,7 @@ public class VxlMinusImpl extends VxlElementImpl implements VxlMinus
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_MINUS__ELEMENT:
+      case VxlPackage.VXL_CARDINALITY__ELEMENT:
         return getElement();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -153,7 +153,7 @@ public class VxlMinusImpl extends VxlElementImpl implements VxlMinus
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_MINUS__ELEMENT:
+      case VxlPackage.VXL_CARDINALITY__ELEMENT:
         setElement((VxlElement)newValue);
         return;
     }
@@ -170,7 +170,7 @@ public class VxlMinusImpl extends VxlElementImpl implements VxlMinus
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_MINUS__ELEMENT:
+      case VxlPackage.VXL_CARDINALITY__ELEMENT:
         setElement((VxlElement)null);
         return;
     }
@@ -187,10 +187,10 @@ public class VxlMinusImpl extends VxlElementImpl implements VxlMinus
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_MINUS__ELEMENT:
+      case VxlPackage.VXL_CARDINALITY__ELEMENT:
         return element != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //VxlMinusImpl
+} //VxlCardinalityImpl

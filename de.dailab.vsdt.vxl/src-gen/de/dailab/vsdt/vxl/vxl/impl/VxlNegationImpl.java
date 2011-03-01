@@ -5,7 +5,7 @@
  */
 package de.dailab.vsdt.vxl.vxl.impl;
 
-import de.dailab.vsdt.vxl.vxl.VxlHead;
+import de.dailab.vsdt.vxl.vxl.VxlElement;
 import de.dailab.vsdt.vxl.vxl.VxlNegation;
 import de.dailab.vsdt.vxl.vxl.VxlPackage;
 
@@ -24,23 +24,23 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlNegationImpl#getHead <em>Head</em>}</li>
+ *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlNegationImpl#getElement <em>Element</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class VxlNegationImpl extends VxlHeadImpl implements VxlNegation
+public class VxlNegationImpl extends VxlElementImpl implements VxlNegation
 {
   /**
-   * The cached value of the '{@link #getHead() <em>Head</em>}' containment reference.
+   * The cached value of the '{@link #getElement() <em>Element</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getHead()
+   * @see #getElement()
    * @generated
    * @ordered
    */
-  protected VxlHead head;
+  protected VxlElement element;
 
   /**
    * <!-- begin-user-doc -->
@@ -68,9 +68,9 @@ public class VxlNegationImpl extends VxlHeadImpl implements VxlNegation
    * <!-- end-user-doc -->
    * @generated
    */
-  public VxlHead getHead()
+  public VxlElement getElement()
   {
-    return head;
+    return element;
   }
 
   /**
@@ -78,13 +78,13 @@ public class VxlNegationImpl extends VxlHeadImpl implements VxlNegation
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetHead(VxlHead newHead, NotificationChain msgs)
+  public NotificationChain basicSetElement(VxlElement newElement, NotificationChain msgs)
   {
-    VxlHead oldHead = head;
-    head = newHead;
+    VxlElement oldElement = element;
+    element = newElement;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_NEGATION__HEAD, oldHead, newHead);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_NEGATION__ELEMENT, oldElement, newElement);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -95,20 +95,20 @@ public class VxlNegationImpl extends VxlHeadImpl implements VxlNegation
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setHead(VxlHead newHead)
+  public void setElement(VxlElement newElement)
   {
-    if (newHead != head)
+    if (newElement != element)
     {
       NotificationChain msgs = null;
-      if (head != null)
-        msgs = ((InternalEObject)head).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_NEGATION__HEAD, null, msgs);
-      if (newHead != null)
-        msgs = ((InternalEObject)newHead).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_NEGATION__HEAD, null, msgs);
-      msgs = basicSetHead(newHead, msgs);
+      if (element != null)
+        msgs = ((InternalEObject)element).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_NEGATION__ELEMENT, null, msgs);
+      if (newElement != null)
+        msgs = ((InternalEObject)newElement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_NEGATION__ELEMENT, null, msgs);
+      msgs = basicSetElement(newElement, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_NEGATION__HEAD, newHead, newHead));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_NEGATION__ELEMENT, newElement, newElement));
   }
 
   /**
@@ -121,8 +121,8 @@ public class VxlNegationImpl extends VxlHeadImpl implements VxlNegation
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_NEGATION__HEAD:
-        return basicSetHead(null, msgs);
+      case VxlPackage.VXL_NEGATION__ELEMENT:
+        return basicSetElement(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -137,8 +137,8 @@ public class VxlNegationImpl extends VxlHeadImpl implements VxlNegation
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_NEGATION__HEAD:
-        return getHead();
+      case VxlPackage.VXL_NEGATION__ELEMENT:
+        return getElement();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -153,8 +153,8 @@ public class VxlNegationImpl extends VxlHeadImpl implements VxlNegation
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_NEGATION__HEAD:
-        setHead((VxlHead)newValue);
+      case VxlPackage.VXL_NEGATION__ELEMENT:
+        setElement((VxlElement)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -170,8 +170,8 @@ public class VxlNegationImpl extends VxlHeadImpl implements VxlNegation
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_NEGATION__HEAD:
-        setHead((VxlHead)null);
+      case VxlPackage.VXL_NEGATION__ELEMENT:
+        setElement((VxlElement)null);
         return;
     }
     super.eUnset(featureID);
@@ -187,8 +187,8 @@ public class VxlNegationImpl extends VxlHeadImpl implements VxlNegation
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_NEGATION__HEAD:
-        return head != null;
+      case VxlPackage.VXL_NEGATION__ELEMENT:
+        return element != null;
     }
     return super.eIsSet(featureID);
   }

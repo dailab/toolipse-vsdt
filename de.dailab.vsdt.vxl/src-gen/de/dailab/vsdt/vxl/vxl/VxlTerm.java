@@ -35,12 +35,12 @@ public interface VxlTerm extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Head</em>' containment reference.
-   * @see #setHead(VxlHead)
+   * @see #setHead(VxlElement)
    * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlTerm_Head()
    * @model containment="true"
    * @generated
    */
-  VxlHead getHead();
+  VxlElement getHead();
 
   /**
    * Sets the value of the '{@link de.dailab.vsdt.vxl.vxl.VxlTerm#getHead <em>Head</em>}' containment reference.
@@ -50,7 +50,7 @@ public interface VxlTerm extends EObject
    * @see #getHead()
    * @generated
    */
-  void setHead(VxlHead value);
+  void setHead(VxlElement value);
 
   /**
    * Returns the value of the '<em><b>Tail</b></em>' containment reference.
@@ -61,12 +61,12 @@ public interface VxlTerm extends EObject
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Tail</em>' containment reference.
-   * @see #setTail(VxlTail)
+   * @see #setTail(VxLTail)
    * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlTerm_Tail()
    * @model containment="true"
    * @generated
    */
-  VxlTail getTail();
+  VxLTail getTail();
 
   /**
    * Sets the value of the '{@link de.dailab.vsdt.vxl.vxl.VxlTerm#getTail <em>Tail</em>}' containment reference.
@@ -76,6 +76,6 @@ public interface VxlTerm extends EObject
    * @see #getTail()
    * @generated
    */
-  void setTail(VxlTail value);
+  void setTail(VxLTail value);
 
 } // VxlTerm

@@ -31,5 +31,15 @@ public class Util {
 		return LANG_NAME.equalsIgnoreCase(expLang) || LANG_NAME_SHORT.equalsIgnoreCase(expLang);
 	}
 	
+	public static int asInteger(Number number) {
+		if (number instanceof Double) {
+			double d= (Double) number;
+			return (int) d;
+		}
+		if (number instanceof Integer) {
+			return (Integer) number;
+		}
+		return 0;
+	}
 	
 }

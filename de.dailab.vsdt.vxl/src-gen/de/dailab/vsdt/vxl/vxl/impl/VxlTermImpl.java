@@ -5,9 +5,9 @@
  */
 package de.dailab.vsdt.vxl.vxl.impl;
 
-import de.dailab.vsdt.vxl.vxl.VxlHead;
+import de.dailab.vsdt.vxl.vxl.VxLTail;
+import de.dailab.vsdt.vxl.vxl.VxlElement;
 import de.dailab.vsdt.vxl.vxl.VxlPackage;
-import de.dailab.vsdt.vxl.vxl.VxlTail;
 import de.dailab.vsdt.vxl.vxl.VxlTerm;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -43,7 +43,7 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
    * @generated
    * @ordered
    */
-  protected VxlHead head;
+  protected VxlElement head;
 
   /**
    * The cached value of the '{@link #getTail() <em>Tail</em>}' containment reference.
@@ -53,7 +53,7 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
    * @generated
    * @ordered
    */
-  protected VxlTail tail;
+  protected VxLTail tail;
 
   /**
    * <!-- begin-user-doc -->
@@ -81,7 +81,7 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
    * <!-- end-user-doc -->
    * @generated
    */
-  public VxlHead getHead()
+  public VxlElement getHead()
   {
     return head;
   }
@@ -91,9 +91,9 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetHead(VxlHead newHead, NotificationChain msgs)
+  public NotificationChain basicSetHead(VxlElement newHead, NotificationChain msgs)
   {
-    VxlHead oldHead = head;
+    VxlElement oldHead = head;
     head = newHead;
     if (eNotificationRequired())
     {
@@ -108,7 +108,7 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setHead(VxlHead newHead)
+  public void setHead(VxlElement newHead)
   {
     if (newHead != head)
     {
@@ -129,7 +129,7 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
    * <!-- end-user-doc -->
    * @generated
    */
-  public VxlTail getTail()
+  public VxLTail getTail()
   {
     return tail;
   }
@@ -139,9 +139,9 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTail(VxlTail newTail, NotificationChain msgs)
+  public NotificationChain basicSetTail(VxLTail newTail, NotificationChain msgs)
   {
-    VxlTail oldTail = tail;
+    VxLTail oldTail = tail;
     tail = newTail;
     if (eNotificationRequired())
     {
@@ -156,7 +156,7 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTail(VxlTail newTail)
+  public void setTail(VxLTail newTail)
   {
     if (newTail != tail)
     {
@@ -219,10 +219,10 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
     switch (featureID)
     {
       case VxlPackage.VXL_TERM__HEAD:
-        setHead((VxlHead)newValue);
+        setHead((VxlElement)newValue);
         return;
       case VxlPackage.VXL_TERM__TAIL:
-        setTail((VxlTail)newValue);
+        setTail((VxLTail)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -239,10 +239,10 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
     switch (featureID)
     {
       case VxlPackage.VXL_TERM__HEAD:
-        setHead((VxlHead)null);
+        setHead((VxlElement)null);
         return;
       case VxlPackage.VXL_TERM__TAIL:
-        setTail((VxlTail)null);
+        setTail((VxLTail)null);
         return;
     }
     super.eUnset(featureID);

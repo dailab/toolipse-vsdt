@@ -19,19 +19,19 @@ public class JiacVExpressionVisitor extends VsdtExpressionVisitor {
 	}
 
 	@Override
-	protected void visit(VxlVariable variable) {
+	protected void visitVariable(VxlVariable variable) {
 		buffer.append("$");
-		super.visit(variable);
+		super.visitVariable(variable);
 	}
 	
 	@Override
-	protected void visit(VxlNegation negation) {
+	protected void visitNegation(VxlNegation negation) {
 		buffer.append("! ");
-		visit(negation.getHead());
+		visitElement(negation.getElement());
 	}
 	
 	@Override
-	protected void visit(VxlOperator operator) {
+	protected void visitOperator(VxlOperator operator) {
 		switch (operator) {
 		case CONCAT:
 			buffer.append("+");
@@ -43,7 +43,7 @@ public class JiacVExpressionVisitor extends VsdtExpressionVisitor {
 			buffer.append("||");
 			break;
 		default:
-			super.visit(operator);
+			super.visitOperator(operator);
 		}
 	}
 

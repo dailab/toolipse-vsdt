@@ -69,12 +69,12 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
     switch (eClass.getClassifierID())
     {
       case VxlPackage.VXL_TERM: return createVxlTerm();
-      case VxlPackage.VXL_HEAD: return createVxlHead();
-      case VxlPackage.VXL_TAIL: return createVxlTail();
+      case VxlPackage.VX_LTAIL: return createVxLTail();
+      case VxlPackage.VXL_ELEMENT: return createVxlElement();
       case VxlPackage.VXL_BRACKET_TERM: return createVxlBracketTerm();
       case VxlPackage.VXL_NEGATION: return createVxlNegation();
       case VxlPackage.VXL_MINUS: return createVxlMinus();
-      case VxlPackage.VXL_ATOM: return createVxlAtom();
+      case VxlPackage.VXL_CARDINALITY: return createVxlCardinality();
       case VxlPackage.VXL_VARIABLE: return createVxlVariable();
       case VxlPackage.VXL_ACCESSOR: return createVxlAccessor();
       case VxlPackage.VXL_ARRAY_ACCESSOR: return createVxlArrayAccessor();
@@ -82,10 +82,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
       case VxlPackage.VXL_LIST: return createVxlList();
       case VxlPackage.VXL_LIST_ELEMENT: return createVxlListElement();
       case VxlPackage.VXL_VALUE: return createVxlValue();
-      case VxlPackage.VXL_STRING_CONST: return createVxlStringConst();
-      case VxlPackage.VXL_NUMERIC_CONST: return createVxlNumericConst();
       case VxlPackage.VXL_BOOLEAN_CONST: return createVxlBooleanConst();
       case VxlPackage.VXL_NULL_CONST: return createVxlNullConst();
+      case VxlPackage.VXL_NUMERIC_CONST: return createVxlNumericConst();
+      case VxlPackage.VXL_STRING_CONST: return createVxlStringConst();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -141,10 +141,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public VxlHead createVxlHead()
+  public VxLTail createVxLTail()
   {
-    VxlHeadImpl vxlHead = new VxlHeadImpl();
-    return vxlHead;
+    VxLTailImpl vxLTail = new VxLTailImpl();
+    return vxLTail;
   }
 
   /**
@@ -152,10 +152,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public VxlTail createVxlTail()
+  public VxlElement createVxlElement()
   {
-    VxlTailImpl vxlTail = new VxlTailImpl();
-    return vxlTail;
+    VxlElementImpl vxlElement = new VxlElementImpl();
+    return vxlElement;
   }
 
   /**
@@ -196,10 +196,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public VxlAtom createVxlAtom()
+  public VxlCardinality createVxlCardinality()
   {
-    VxlAtomImpl vxlAtom = new VxlAtomImpl();
-    return vxlAtom;
+    VxlCardinalityImpl vxlCardinality = new VxlCardinalityImpl();
+    return vxlCardinality;
   }
 
   /**
@@ -284,10 +284,21 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public VxlStringConst createVxlStringConst()
+  public VxlBooleanConst createVxlBooleanConst()
   {
-    VxlStringConstImpl vxlStringConst = new VxlStringConstImpl();
-    return vxlStringConst;
+    VxlBooleanConstImpl vxlBooleanConst = new VxlBooleanConstImpl();
+    return vxlBooleanConst;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VxlNullConst createVxlNullConst()
+  {
+    VxlNullConstImpl vxlNullConst = new VxlNullConstImpl();
+    return vxlNullConst;
   }
 
   /**
@@ -306,21 +317,10 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public VxlBooleanConst createVxlBooleanConst()
+  public VxlStringConst createVxlStringConst()
   {
-    VxlBooleanConstImpl vxlBooleanConst = new VxlBooleanConstImpl();
-    return vxlBooleanConst;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VxlNullConst createVxlNullConst()
-  {
-    VxlNullConstImpl vxlNullConst = new VxlNullConstImpl();
-    return vxlNullConst;
+    VxlStringConstImpl vxlStringConst = new VxlStringConstImpl();
+    return vxlStringConst;
   }
 
   /**

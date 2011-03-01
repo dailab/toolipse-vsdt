@@ -21,45 +21,84 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VxlTerm");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cHeadAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cHeadVxlHeadParserRuleCall_0_0 = (RuleCall)cHeadAssignment_0.eContents().get(0);
+		private final RuleCall cHeadVxlElementParserRuleCall_0_0 = (RuleCall)cHeadAssignment_0.eContents().get(0);
 		private final Assignment cTailAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cTailVxlTailParserRuleCall_1_0 = (RuleCall)cTailAssignment_1.eContents().get(0);
+		private final RuleCall cTailVxLTailParserRuleCall_1_0 = (RuleCall)cTailAssignment_1.eContents().get(0);
 		
 		//VxlTerm:
-		//  head=VxlHead tail=VxlTail?; 
+		//  head=VxlElement tail=VxLTail?; 
 		//
 		//// COMPLEX TERMS
 		public ParserRule getRule() { return rule; }
 
-		//head=VxlHead tail=VxlTail?
+		//head=VxlElement tail=VxLTail?
 		public Group getGroup() { return cGroup; }
 
-		//head=VxlHead
+		//head=VxlElement
 		public Assignment getHeadAssignment_0() { return cHeadAssignment_0; }
 
-		//VxlHead
-		public RuleCall getHeadVxlHeadParserRuleCall_0_0() { return cHeadVxlHeadParserRuleCall_0_0; }
+		//VxlElement
+		public RuleCall getHeadVxlElementParserRuleCall_0_0() { return cHeadVxlElementParserRuleCall_0_0; }
 
-		//tail=VxlTail?
+		//tail=VxLTail?
 		public Assignment getTailAssignment_1() { return cTailAssignment_1; }
 
-		//VxlTail
-		public RuleCall getTailVxlTailParserRuleCall_1_0() { return cTailVxlTailParserRuleCall_1_0; }
+		//VxLTail
+		public RuleCall getTailVxLTailParserRuleCall_1_0() { return cTailVxLTailParserRuleCall_1_0; }
 	}
 
-	public class VxlHeadElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VxlHead");
+	public class VxLTailElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VxLTail");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cOperatorAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cOperatorVxlOperatorEnumRuleCall_0_0 = (RuleCall)cOperatorAssignment_0.eContents().get(0);
+		private final Assignment cTailAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTailVxlTermParserRuleCall_1_0 = (RuleCall)cTailAssignment_1.eContents().get(0);
+		
+		//VxLTail:
+		//  operator=VxlOperator tail=VxlTerm;
+		public ParserRule getRule() { return rule; }
+
+		//operator=VxlOperator tail=VxlTerm
+		public Group getGroup() { return cGroup; }
+
+		//operator=VxlOperator
+		public Assignment getOperatorAssignment_0() { return cOperatorAssignment_0; }
+
+		//VxlOperator
+		public RuleCall getOperatorVxlOperatorEnumRuleCall_0_0() { return cOperatorVxlOperatorEnumRuleCall_0_0; }
+
+		//tail=VxlTerm
+		public Assignment getTailAssignment_1() { return cTailAssignment_1; }
+
+		//VxlTerm
+		public RuleCall getTailVxlTermParserRuleCall_1_0() { return cTailVxlTermParserRuleCall_1_0; }
+	}
+
+	public class VxlElementElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VxlElement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cVxlBracketTermParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cVxlNegationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cVxlMinusParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cVxlAtomParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cVxlValueParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cVxlVariableParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cVxlListParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cVxlCardinalityParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
 		
-		//VxlHead:
-		//  VxlBracketTerm|VxlNegation|VxlMinus|VxlAtom;
+		//VxlElement:
+		//  VxlBracketTerm|VxlNegation|VxlMinus|VxlValue|VxlVariable|VxlList|VxlCardinality; 
+		//			               
+		//                            
+		//
+		//// SPECIAL TERMS, UNARY OPERATORS
 		public ParserRule getRule() { return rule; }
 
-		//VxlBracketTerm|VxlNegation|VxlMinus|VxlAtom
+		//VxlBracketTerm|VxlNegation|VxlMinus|VxlValue|VxlVariable|VxlList|VxlCardinality 
+		//			               
+		//                            
+		//
+		//// SPECIAL TERMS, UNARY OPERATORS
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//VxlBracketTerm
@@ -71,36 +110,17 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		//VxlMinus
 		public RuleCall getVxlMinusParserRuleCall_2() { return cVxlMinusParserRuleCall_2; }
 
-		//VxlAtom
-		public RuleCall getVxlAtomParserRuleCall_3() { return cVxlAtomParserRuleCall_3; }
-	}
+		//VxlValue
+		public RuleCall getVxlValueParserRuleCall_3() { return cVxlValueParserRuleCall_3; }
 
-	public class VxlTailElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VxlTail");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cOperatorAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cOperatorVxlOperatorEnumRuleCall_0_0 = (RuleCall)cOperatorAssignment_0.eContents().get(0);
-		private final Assignment cTermAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cTermVxlTermParserRuleCall_1_0 = (RuleCall)cTermAssignment_1.eContents().get(0);
-		
-		//VxlTail:
-		//  operator=VxlOperator term=VxlTerm;
-		public ParserRule getRule() { return rule; }
+		//VxlVariable
+		public RuleCall getVxlVariableParserRuleCall_4() { return cVxlVariableParserRuleCall_4; }
 
-		//operator=VxlOperator term=VxlTerm
-		public Group getGroup() { return cGroup; }
+		//VxlList
+		public RuleCall getVxlListParserRuleCall_5() { return cVxlListParserRuleCall_5; }
 
-		//operator=VxlOperator
-		public Assignment getOperatorAssignment_0() { return cOperatorAssignment_0; }
-
-		//VxlOperator
-		public RuleCall getOperatorVxlOperatorEnumRuleCall_0_0() { return cOperatorVxlOperatorEnumRuleCall_0_0; }
-
-		//term=VxlTerm
-		public Assignment getTermAssignment_1() { return cTermAssignment_1; }
-
-		//VxlTerm
-		public RuleCall getTermVxlTermParserRuleCall_1_0() { return cTermVxlTermParserRuleCall_1_0; }
+		//VxlCardinality
+		public RuleCall getVxlCardinalityParserRuleCall_6() { return cVxlCardinalityParserRuleCall_6; }
 	}
 
 	public class VxlBracketTermElements implements IParserRuleAccess {
@@ -112,7 +132,9 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//VxlBracketTerm:
-		//  "(" term=VxlTerm ")";
+		//  "(" term=VxlTerm ")"; 
+		//
+		//// SPECIAL TERMS, UNARY OPERATORS
 		public ParserRule getRule() { return rule; }
 
 		//"(" term=VxlTerm ")"
@@ -135,78 +157,75 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VxlNegation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNotKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cHeadAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cHeadVxlHeadParserRuleCall_1_0 = (RuleCall)cHeadAssignment_1.eContents().get(0);
+		private final Assignment cElementAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cElementVxlElementParserRuleCall_1_0 = (RuleCall)cElementAssignment_1.eContents().get(0);
 		
 		//VxlNegation:
-		//  "not" head=VxlHead;
+		//  "not" element=VxlElement;
 		public ParserRule getRule() { return rule; }
 
-		//"not" head=VxlHead
+		//"not" element=VxlElement
 		public Group getGroup() { return cGroup; }
 
 		//"not"
 		public Keyword getNotKeyword_0() { return cNotKeyword_0; }
 
-		//head=VxlHead
-		public Assignment getHeadAssignment_1() { return cHeadAssignment_1; }
+		//element=VxlElement
+		public Assignment getElementAssignment_1() { return cElementAssignment_1; }
 
-		//VxlHead
-		public RuleCall getHeadVxlHeadParserRuleCall_1_0() { return cHeadVxlHeadParserRuleCall_1_0; }
+		//VxlElement
+		public RuleCall getElementVxlElementParserRuleCall_1_0() { return cElementVxlElementParserRuleCall_1_0; }
 	}
 
 	public class VxlMinusElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VxlMinus");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cHeadAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cHeadVxlHeadParserRuleCall_1_0 = (RuleCall)cHeadAssignment_1.eContents().get(0);
+		private final Assignment cElementAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cElementVxlElementParserRuleCall_1_0 = (RuleCall)cElementAssignment_1.eContents().get(0);
 		
 		//VxlMinus:
-		//  "-" head=VxlHead;
+		//  "-" element=VxlElement;
 		public ParserRule getRule() { return rule; }
 
-		//"-" head=VxlHead
+		//"-" element=VxlElement
 		public Group getGroup() { return cGroup; }
 
 		//"-"
 		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
 
-		//head=VxlHead
-		public Assignment getHeadAssignment_1() { return cHeadAssignment_1; }
+		//element=VxlElement
+		public Assignment getElementAssignment_1() { return cElementAssignment_1; }
 
-		//VxlHead
-		public RuleCall getHeadVxlHeadParserRuleCall_1_0() { return cHeadVxlHeadParserRuleCall_1_0; }
+		//VxlElement
+		public RuleCall getElementVxlElementParserRuleCall_1_0() { return cElementVxlElementParserRuleCall_1_0; }
 	}
 
-	public class VxlAtomElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VxlAtom");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cVxlValueParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cVxlVariableParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cVxlListParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+	public class VxlCardinalityElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VxlCardinality");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cElementAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cElementVxlElementParserRuleCall_1_0 = (RuleCall)cElementAssignment_1.eContents().get(0);
 		
-		//VxlAtom:
-		//  VxlValue|VxlVariable|VxlList; 
-		//			         
+		//VxlCardinality:
+		//  "#" element=VxlElement; 
+		//		       
 		//
 		//// VARIABLES & ACCESSORS
 		public ParserRule getRule() { return rule; }
 
-		//VxlValue|VxlVariable|VxlList 
-		//			         
-		//
-		//// VARIABLES & ACCESSORS
-		public Alternatives getAlternatives() { return cAlternatives; }
+		//"#" element=VxlElement
+		public Group getGroup() { return cGroup; }
 
-		//VxlValue
-		public RuleCall getVxlValueParserRuleCall_0() { return cVxlValueParserRuleCall_0; }
+		//"#"
+		public Keyword getNumberSignKeyword_0() { return cNumberSignKeyword_0; }
 
-		//VxlVariable
-		public RuleCall getVxlVariableParserRuleCall_1() { return cVxlVariableParserRuleCall_1; }
+		//element=VxlElement
+		public Assignment getElementAssignment_1() { return cElementAssignment_1; }
 
-		//VxlList
-		public RuleCall getVxlListParserRuleCall_2() { return cVxlListParserRuleCall_2; }
+		//VxlElement
+		public RuleCall getElementVxlElementParserRuleCall_1_0() { return cElementVxlElementParserRuleCall_1_0; }
 	}
 
 	public class VxlVariableElements implements IParserRuleAccess {
@@ -374,7 +393,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		//  first=VxlTerm ("," rest=VxlListElement)?;  
 		//		             
 		//
-		//// CONSTANTS
+		//// CONSTANT VALUES
 		public ParserRule getRule() { return rule; }
 
 		//first=VxlTerm ("," rest=VxlListElement)?
@@ -402,24 +421,24 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	public class VxlValueElements implements IParserRuleAccess {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VxlValue");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cVxlStringConstParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cVxlNullConstParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cVxlBooleanConstParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cVxlNumericConstParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cVxlNullConstParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cVxlStringConstParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//VxlValue:
-		//  VxlStringConst|VxlBooleanConst|VxlNumericConst|VxlNullConst; 
+		//  VxlNullConst|VxlBooleanConst|VxlNumericConst|VxlStringConst; 
 		//
-		//// CONSTANTS
+		//// CONSTANT VALUES
 		public ParserRule getRule() { return rule; }
 
-		//VxlStringConst|VxlBooleanConst|VxlNumericConst|VxlNullConst 
+		//VxlNullConst|VxlBooleanConst|VxlNumericConst|VxlStringConst 
 		//
-		//// CONSTANTS
+		//// CONSTANT VALUES
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//VxlStringConst
-		public RuleCall getVxlStringConstParserRuleCall_0() { return cVxlStringConstParserRuleCall_0; }
+		//VxlNullConst
+		public RuleCall getVxlNullConstParserRuleCall_0() { return cVxlNullConstParserRuleCall_0; }
 
 		//VxlBooleanConst
 		public RuleCall getVxlBooleanConstParserRuleCall_1() { return cVxlBooleanConstParserRuleCall_1; }
@@ -427,45 +446,8 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		//VxlNumericConst
 		public RuleCall getVxlNumericConstParserRuleCall_2() { return cVxlNumericConstParserRuleCall_2; }
 
-		//VxlNullConst
-		public RuleCall getVxlNullConstParserRuleCall_3() { return cVxlNullConstParserRuleCall_3; }
-	}
-
-	public class VxlStringConstElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VxlStringConst");
-		private final Assignment cConstAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cConstSTRINGTerminalRuleCall_0 = (RuleCall)cConstAssignment.eContents().get(0);
-		
-		//VxlStringConst:
-		//  const=STRING; 
-		//		     
-		////NumericConst:		const = INT; // keine kommazahlen
-		public ParserRule getRule() { return rule; }
-
-		//const=STRING
-		public Assignment getConstAssignment() { return cConstAssignment; }
-
-		//STRING
-		public RuleCall getConstSTRINGTerminalRuleCall_0() { return cConstSTRINGTerminalRuleCall_0; }
-	}
-
-	public class VxlNumericConstElements implements IParserRuleAccess {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VxlNumericConst");
-		private final Assignment cConstAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cConstNUMERICParserRuleCall_0 = (RuleCall)cConstAssignment.eContents().get(0);
-		
-		//VxlNumericConst:
-		//  const=NUMERIC; 
-		////NumericConst:		const = INT; // keine kommazahlen 
-		//	     
-		//// BooleanConst:	isTrue ?= "true" | "false";
-		public ParserRule getRule() { return rule; }
-
-		//const=NUMERIC
-		public Assignment getConstAssignment() { return cConstAssignment; }
-
-		//NUMERIC
-		public RuleCall getConstNUMERICParserRuleCall_0() { return cConstNUMERICParserRuleCall_0; }
+		//VxlStringConst
+		public RuleCall getVxlStringConstParserRuleCall_3() { return cVxlStringConstParserRuleCall_3; }
 	}
 
 	public class VxlBooleanConstElements implements IParserRuleAccess {
@@ -476,8 +458,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		private final Keyword cConstFalseKeyword_0_1 = (Keyword)cConstAlternatives_0.eContents().get(1);
 		
 		//VxlBooleanConst:
-		//  const=( "true" | "false" ); 
-		//// BooleanConst:	isTrue ?= "true" | "false";
+		//  const=( "true" | "false" );
 		public ParserRule getRule() { return rule; }
 
 		//const=( "true" | "false" )
@@ -499,10 +480,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		private final Keyword cConstNullKeyword_0 = (Keyword)cConstAssignment.eContents().get(0);
 		
 		//VxlNullConst:
-		//  const="null"; 
-		//		     
-		//
-		//// OPERATIONS
+		//  const="null";
 		public ParserRule getRule() { return rule; }
 
 		//const="null"
@@ -510,6 +488,41 @@ public class VxlGrammarAccess implements IGrammarAccess {
 
 		//"null"
 		public Keyword getConstNullKeyword_0() { return cConstNullKeyword_0; }
+	}
+
+	public class VxlNumericConstElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VxlNumericConst");
+		private final Assignment cConstAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cConstNUMERICParserRuleCall_0 = (RuleCall)cConstAssignment.eContents().get(0);
+		
+		//VxlNumericConst:
+		//  const=NUMERIC;
+		public ParserRule getRule() { return rule; }
+
+		//const=NUMERIC
+		public Assignment getConstAssignment() { return cConstAssignment; }
+
+		//NUMERIC
+		public RuleCall getConstNUMERICParserRuleCall_0() { return cConstNUMERICParserRuleCall_0; }
+	}
+
+	public class VxlStringConstElements implements IParserRuleAccess {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VxlStringConst");
+		private final Assignment cConstAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cConstSTRINGTerminalRuleCall_0 = (RuleCall)cConstAssignment.eContents().get(0);
+		
+		//VxlStringConst:
+		//  const=STRING; 
+		//		     
+		//
+		//// BINARY OPERATIONS
+		public ParserRule getRule() { return rule; }
+
+		//const=STRING
+		public Assignment getConstAssignment() { return cConstAssignment; }
+
+		//STRING
+		public RuleCall getConstSTRINGTerminalRuleCall_0() { return cConstSTRINGTerminalRuleCall_0; }
 	}
 
 	public class NUMERICElements implements IParserRuleAccess {
@@ -524,7 +537,12 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		//  INT ("." INT)?;  															 // String ** String -> String
 		//
 		//// NATIVES
+		//          
+		//
+		//// ALTERNATIVES
 		////terminal Numeric: "('0'..'9')+('.' ('0'..'9')+)?";
+		////NumericConst:		const = INT; // keine kommazahlen 
+		////BooleanConst:	isTrue ?= "true" | "false";
 		public ParserRule getRule() { return rule; }
 
 		//INT ("." INT)?
@@ -580,7 +598,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		//  LT="<" | LE="<=" | EQ="==" | NEQ="!=" | GT=">" | GE=">=" | ADD="+" | SUB="-" | MULT="*" | DIV="/" |
 		//  MOD="%" | AND="and" | OR="or" | CONCAT="++"; 
 		//
-		//// OPERATIONS
+		//// BINARY OPERATIONS
 		//   
 		//	                                              	 // Term ** Term -> Bool
 		//	                                       			 // Num ** Num -> Num
@@ -588,13 +606,12 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		//	      															 // String ** String -> String
 		//
 		//// NATIVES
-		////terminal Numeric: "('0'..'9')+('.' ('0'..'9')+)?";
 		public EnumRule getRule() { return rule; }
 
 		//LT="<" | LE="<=" | EQ="==" | NEQ="!=" | GT=">" | GE=">=" | ADD="+" | SUB="-" | MULT="*" | DIV="/" |
 		//MOD="%" | AND="and" | OR="or" | CONCAT="++" 
 		//
-		//// OPERATIONS
+		//// BINARY OPERATIONS
 		//   
 		//	                                              	 // Term ** Term -> Bool
 		//	                                       			 // Num ** Num -> Num
@@ -602,7 +619,6 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		//	      															 // String ** String -> String
 		//
 		//// NATIVES
-		////terminal Numeric: "('0'..'9')+('.' ('0'..'9')+)?";
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//LT="<"
@@ -730,12 +746,12 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	}
 	
 	private VxlTermElements pVxlTerm;
-	private VxlHeadElements pVxlHead;
-	private VxlTailElements pVxlTail;
+	private VxLTailElements pVxLTail;
+	private VxlElementElements pVxlElement;
 	private VxlBracketTermElements pVxlBracketTerm;
 	private VxlNegationElements pVxlNegation;
 	private VxlMinusElements pVxlMinus;
-	private VxlAtomElements pVxlAtom;
+	private VxlCardinalityElements pVxlCardinality;
 	private VxlVariableElements pVxlVariable;
 	private VxlAccessorElements pVxlAccessor;
 	private VxlArrayAccessorElements pVxlArrayAccessor;
@@ -743,10 +759,10 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	private VxlListElements pVxlList;
 	private VxlListElementElements pVxlListElement;
 	private VxlValueElements pVxlValue;
-	private VxlStringConstElements pVxlStringConst;
-	private VxlNumericConstElements pVxlNumericConst;
 	private VxlBooleanConstElements pVxlBooleanConst;
 	private VxlNullConstElements pVxlNullConst;
+	private VxlNumericConstElements pVxlNumericConst;
+	private VxlStringConstElements pVxlStringConst;
 	private VxlOperatorElements unknownRuleVxlOperator;
 	private NUMERICElements pNUMERIC;
 	
@@ -772,7 +788,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 
 	
 	//VxlTerm:
-	//  head=VxlHead tail=VxlTail?; 
+	//  head=VxlElement tail=VxLTail?; 
 	//
 	//// COMPLEX TERMS
 	public VxlTermElements getVxlTermAccess() {
@@ -783,28 +799,34 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		return getVxlTermAccess().getRule();
 	}
 
-	//VxlHead:
-	//  VxlBracketTerm|VxlNegation|VxlMinus|VxlAtom;
-	public VxlHeadElements getVxlHeadAccess() {
-		return (pVxlHead != null) ? pVxlHead : (pVxlHead = new VxlHeadElements());
+	//VxLTail:
+	//  operator=VxlOperator tail=VxlTerm;
+	public VxLTailElements getVxLTailAccess() {
+		return (pVxLTail != null) ? pVxLTail : (pVxLTail = new VxLTailElements());
 	}
 	
-	public ParserRule getVxlHeadRule() {
-		return getVxlHeadAccess().getRule();
+	public ParserRule getVxLTailRule() {
+		return getVxLTailAccess().getRule();
 	}
 
-	//VxlTail:
-	//  operator=VxlOperator term=VxlTerm;
-	public VxlTailElements getVxlTailAccess() {
-		return (pVxlTail != null) ? pVxlTail : (pVxlTail = new VxlTailElements());
+	//VxlElement:
+	//  VxlBracketTerm|VxlNegation|VxlMinus|VxlValue|VxlVariable|VxlList|VxlCardinality; 
+	//			               
+	//                            
+	//
+	//// SPECIAL TERMS, UNARY OPERATORS
+	public VxlElementElements getVxlElementAccess() {
+		return (pVxlElement != null) ? pVxlElement : (pVxlElement = new VxlElementElements());
 	}
 	
-	public ParserRule getVxlTailRule() {
-		return getVxlTailAccess().getRule();
+	public ParserRule getVxlElementRule() {
+		return getVxlElementAccess().getRule();
 	}
 
 	//VxlBracketTerm:
-	//  "(" term=VxlTerm ")";
+	//  "(" term=VxlTerm ")"; 
+	//
+	//// SPECIAL TERMS, UNARY OPERATORS
 	public VxlBracketTermElements getVxlBracketTermAccess() {
 		return (pVxlBracketTerm != null) ? pVxlBracketTerm : (pVxlBracketTerm = new VxlBracketTermElements());
 	}
@@ -814,7 +836,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	}
 
 	//VxlNegation:
-	//  "not" head=VxlHead;
+	//  "not" element=VxlElement;
 	public VxlNegationElements getVxlNegationAccess() {
 		return (pVxlNegation != null) ? pVxlNegation : (pVxlNegation = new VxlNegationElements());
 	}
@@ -824,7 +846,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	}
 
 	//VxlMinus:
-	//  "-" head=VxlHead;
+	//  "-" element=VxlElement;
 	public VxlMinusElements getVxlMinusAccess() {
 		return (pVxlMinus != null) ? pVxlMinus : (pVxlMinus = new VxlMinusElements());
 	}
@@ -833,17 +855,17 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		return getVxlMinusAccess().getRule();
 	}
 
-	//VxlAtom:
-	//  VxlValue|VxlVariable|VxlList; 
-	//			         
+	//VxlCardinality:
+	//  "#" element=VxlElement; 
+	//		       
 	//
 	//// VARIABLES & ACCESSORS
-	public VxlAtomElements getVxlAtomAccess() {
-		return (pVxlAtom != null) ? pVxlAtom : (pVxlAtom = new VxlAtomElements());
+	public VxlCardinalityElements getVxlCardinalityAccess() {
+		return (pVxlCardinality != null) ? pVxlCardinality : (pVxlCardinality = new VxlCardinalityElements());
 	}
 	
-	public ParserRule getVxlAtomRule() {
-		return getVxlAtomAccess().getRule();
+	public ParserRule getVxlCardinalityRule() {
+		return getVxlCardinalityAccess().getRule();
 	}
 
 	//VxlVariable:
@@ -907,7 +929,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	//  first=VxlTerm ("," rest=VxlListElement)?;  
 	//		             
 	//
-	//// CONSTANTS
+	//// CONSTANT VALUES
 	public VxlListElementElements getVxlListElementAccess() {
 		return (pVxlListElement != null) ? pVxlListElement : (pVxlListElement = new VxlListElementElements());
 	}
@@ -917,9 +939,9 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	}
 
 	//VxlValue:
-	//  VxlStringConst|VxlBooleanConst|VxlNumericConst|VxlNullConst; 
+	//  VxlNullConst|VxlBooleanConst|VxlNumericConst|VxlStringConst; 
 	//
-	//// CONSTANTS
+	//// CONSTANT VALUES
 	public VxlValueElements getVxlValueAccess() {
 		return (pVxlValue != null) ? pVxlValue : (pVxlValue = new VxlValueElements());
 	}
@@ -928,34 +950,8 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		return getVxlValueAccess().getRule();
 	}
 
-	//VxlStringConst:
-	//  const=STRING; 
-	//		     
-	////NumericConst:		const = INT; // keine kommazahlen
-	public VxlStringConstElements getVxlStringConstAccess() {
-		return (pVxlStringConst != null) ? pVxlStringConst : (pVxlStringConst = new VxlStringConstElements());
-	}
-	
-	public ParserRule getVxlStringConstRule() {
-		return getVxlStringConstAccess().getRule();
-	}
-
-	//VxlNumericConst:
-	//  const=NUMERIC; 
-	////NumericConst:		const = INT; // keine kommazahlen 
-	//	     
-	//// BooleanConst:	isTrue ?= "true" | "false";
-	public VxlNumericConstElements getVxlNumericConstAccess() {
-		return (pVxlNumericConst != null) ? pVxlNumericConst : (pVxlNumericConst = new VxlNumericConstElements());
-	}
-	
-	public ParserRule getVxlNumericConstRule() {
-		return getVxlNumericConstAccess().getRule();
-	}
-
 	//VxlBooleanConst:
-	//  const=( "true" | "false" ); 
-	//// BooleanConst:	isTrue ?= "true" | "false";
+	//  const=( "true" | "false" );
 	public VxlBooleanConstElements getVxlBooleanConstAccess() {
 		return (pVxlBooleanConst != null) ? pVxlBooleanConst : (pVxlBooleanConst = new VxlBooleanConstElements());
 	}
@@ -965,10 +961,7 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	}
 
 	//VxlNullConst:
-	//  const="null"; 
-	//		     
-	//
-	//// OPERATIONS
+	//  const="null";
 	public VxlNullConstElements getVxlNullConstAccess() {
 		return (pVxlNullConst != null) ? pVxlNullConst : (pVxlNullConst = new VxlNullConstElements());
 	}
@@ -977,11 +970,34 @@ public class VxlGrammarAccess implements IGrammarAccess {
 		return getVxlNullConstAccess().getRule();
 	}
 
+	//VxlNumericConst:
+	//  const=NUMERIC;
+	public VxlNumericConstElements getVxlNumericConstAccess() {
+		return (pVxlNumericConst != null) ? pVxlNumericConst : (pVxlNumericConst = new VxlNumericConstElements());
+	}
+	
+	public ParserRule getVxlNumericConstRule() {
+		return getVxlNumericConstAccess().getRule();
+	}
+
+	//VxlStringConst:
+	//  const=STRING; 
+	//		     
+	//
+	//// BINARY OPERATIONS
+	public VxlStringConstElements getVxlStringConstAccess() {
+		return (pVxlStringConst != null) ? pVxlStringConst : (pVxlStringConst = new VxlStringConstElements());
+	}
+	
+	public ParserRule getVxlStringConstRule() {
+		return getVxlStringConstAccess().getRule();
+	}
+
 	//enum VxlOperator:
 	//  LT="<" | LE="<=" | EQ="==" | NEQ="!=" | GT=">" | GE=">=" | ADD="+" | SUB="-" | MULT="*" | DIV="/" |
 	//  MOD="%" | AND="and" | OR="or" | CONCAT="++"; 
 	//
-	//// OPERATIONS
+	//// BINARY OPERATIONS
 	//   
 	//	                                              	 // Term ** Term -> Bool
 	//	                                       			 // Num ** Num -> Num
@@ -989,7 +1005,6 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	//	      															 // String ** String -> String
 	//
 	//// NATIVES
-	////terminal Numeric: "('0'..'9')+('.' ('0'..'9')+)?";
 	public VxlOperatorElements getVxlOperatorAccess() {
 		return (unknownRuleVxlOperator != null) ? unknownRuleVxlOperator : (unknownRuleVxlOperator = new VxlOperatorElements());
 	}
@@ -1002,7 +1017,12 @@ public class VxlGrammarAccess implements IGrammarAccess {
 	//  INT ("." INT)?;  															 // String ** String -> String
 	//
 	//// NATIVES
+	//          
+	//
+	//// ALTERNATIVES
 	////terminal Numeric: "('0'..'9')+('.' ('0'..'9')+)?";
+	////NumericConst:		const = INT; // keine kommazahlen 
+	////BooleanConst:	isTrue ?= "true" | "false";
 	public NUMERICElements getNUMERICAccess() {
 		return (pNUMERIC != null) ? pNUMERIC : (pNUMERIC = new NUMERICElements());
 	}

@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class VxlVariableImpl extends VxlAtomImpl implements VxlVariable
+public class VxlVariableImpl extends VxlElementImpl implements VxlVariable
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.

@@ -266,6 +266,7 @@ public class InterpretingSimulation extends ManualSimulation {
 	 * - evaluate assignment expressions
 	 * - store value in {@link #propertyValueMap}
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void handleAssignments(EObject eObject, AssignTimeType assignTime) {
 		super.handleAssignments(eObject, assignTime);
@@ -278,8 +279,22 @@ public class InterpretingSimulation extends ManualSimulation {
 			for (Assignment assignment : assignments) {
 				if (assignment.getAssignTime() == assignTime && assignment.getFrom() != null) {
 					Serializable value= parseAndEvaluate(assignment.getFrom(), createContext(eObject));
-					setPropertyValue(assignment.getTo(), value);
-					System.out.println(assignment.getTo().getName() + " <- " + value);
+					if (assignment.getToQuery() != null) {
+						// try to assign to array index
+						VxlTerm term = parseExpression(assignment.getToQuery());
+						Serializable query = evaluateTerm(term, createContext(eObject));
+						if (query instanceof Number) {
+							Number number = (Number) query;
+							Serializable propVal = getPropertyValue(assignment.getTo());
+							if (propVal instanceof List) {
+								List<Serializable> list = (List) propVal;
+								list.set(Util.asInteger(number), value); 
+							}
+						}
+					} else {
+						setPropertyValue(assignment.getTo(), value);
+						System.out.println(assignment.getTo().getName() + " <- " + value);
+					}
 				}
 			}
 		}
