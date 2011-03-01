@@ -35,15 +35,6 @@ public interface VxlFactory extends EFactory
   VxlTerm createVxlTerm();
 
   /**
-   * Returns a new object of class '<em>Vx LTail</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Vx LTail</em>'.
-   * @generated
-   */
-  VxLTail createVxLTail();
-
-  /**
    * Returns a new object of class '<em>Element</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

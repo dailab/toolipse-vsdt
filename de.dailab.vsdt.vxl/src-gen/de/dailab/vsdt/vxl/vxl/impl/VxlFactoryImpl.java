@@ -69,7 +69,6 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
     switch (eClass.getClassifierID())
     {
       case VxlPackage.VXL_TERM: return createVxlTerm();
-      case VxlPackage.VX_LTAIL: return createVxLTail();
       case VxlPackage.VXL_ELEMENT: return createVxlElement();
       case VxlPackage.VXL_BRACKET_TERM: return createVxlBracketTerm();
       case VxlPackage.VXL_NEGATION: return createVxlNegation();
@@ -134,17 +133,6 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
   {
     VxlTermImpl vxlTerm = new VxlTermImpl();
     return vxlTerm;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VxLTail createVxLTail()
-  {
-    VxLTailImpl vxLTail = new VxLTailImpl();
-    return vxLTail;
   }
 
   /**

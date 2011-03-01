@@ -6,10 +6,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="VxlTerm">
     <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="#//VxlElement"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tail" eType="#//VxLTail"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VxLTail">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//VxlOperator"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tail" eType="#//VxlTerm"
         containment="true"/>
@@ -48,6 +44,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VxlList" eSuperTypes="#//VxlElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="empty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//VxlListElement"
         containment="true"/>
   </eClassifiers>

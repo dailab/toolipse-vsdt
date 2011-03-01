@@ -3,8 +3,7 @@ grammar de.dailab.vsdt.vxl.Vxl with org.eclipse.xtext.common.Terminals
 generate vxl "http://www.dailab.de/vsdt/vxl/Vxl"
 
 // COMPLEX TERMS
-VxlTerm:			head = VxlElement (tail = VxLTail)?;
-VxLTail:			operator = VxlOperator tail = VxlTerm;
+VxlTerm:			head = VxlElement (operator = VxlOperator tail = VxlTerm)?;
 VxlElement:			VxlBracketTerm | VxlNegation | VxlMinus | VxlValue |
                     VxlVariable | VxlList | VxlCardinality;
 
@@ -21,7 +20,7 @@ VxlArrayAccessor:	"[" index = VxlTerm "]" (accessor = VxlAccessor)?;
 VxlFieldAccessor:	"." name = ID (accessor = VxlAccessor)?;
 
 // LISTS
-VxlList:			"[" (body = VxlListElement)? "]"; 
+VxlList:			"[" ((empty ?= "]") | (body = VxlListElement "]" ));
 VxlListElement:		first = VxlTerm ("," rest = VxlListElement)?;
 
 // CONSTANT VALUES

@@ -10,23 +10,15 @@
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Assignment" feature="head" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
-        </tokens>
-        <tokens xsi:type="xtext:Assignment" cardinality="?" feature="tail" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
         </tokens>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="VxLTail">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.dailab.de/vsdt/vxl/Vxl#//VxLTail"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Assignment" feature="operator" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
-        </tokens>
-        <tokens xsi:type="xtext:Assignment" feature="tail" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+        <tokens xsi:type="xtext:Group" cardinality="?">
+          <tokens xsi:type="xtext:Assignment" feature="operator" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
+          </tokens>
+          <tokens xsi:type="xtext:Assignment" feature="tail" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.0"/>
+          </tokens>
         </tokens>
       </alternatives>
     </rules>
@@ -35,13 +27,13 @@
         <classifier xsi:type="ecore:EClass" href="http://www.dailab.de/vsdt/vxl/Vxl#//VxlElement"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
-        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
-        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
-        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
-        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="VxlBracketTerm">
@@ -63,7 +55,7 @@
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="not"/>
         <tokens xsi:type="xtext:Assignment" feature="element" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
         </tokens>
       </alternatives>
     </rules>
@@ -74,7 +66,7 @@
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="-"/>
         <tokens xsi:type="xtext:Assignment" feature="element" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
         </tokens>
       </alternatives>
     </rules>
@@ -85,7 +77,7 @@
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="#"/>
         <tokens xsi:type="xtext:Assignment" feature="element" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
         </tokens>
       </alternatives>
     </rules>
@@ -98,7 +90,7 @@
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </tokens>
         <tokens xsi:type="xtext:Assignment" cardinality="?" feature="accessor" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
         </tokens>
       </alternatives>
     </rules>
@@ -107,8 +99,8 @@
         <classifier xsi:type="ecore:EClass" href="http://www.dailab.de/vsdt/vxl/Vxl#//VxlAccessor"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
-        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="VxlArrayAccessor">
@@ -122,7 +114,7 @@
         </tokens>
         <tokens xsi:type="xtext:Keyword" value="]"/>
         <tokens xsi:type="xtext:Assignment" cardinality="?" feature="accessor" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
         </tokens>
       </alternatives>
     </rules>
@@ -136,7 +128,7 @@
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </tokens>
         <tokens xsi:type="xtext:Assignment" cardinality="?" feature="accessor" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
         </tokens>
       </alternatives>
     </rules>
@@ -146,10 +138,17 @@
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="["/>
-        <tokens xsi:type="xtext:Assignment" cardinality="?" feature="body" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
+        <tokens xsi:type="xtext:Alternatives">
+          <groups xsi:type="xtext:Assignment" feature="empty" operator="?=">
+            <terminal xsi:type="xtext:Keyword" value="]"/>
+          </groups>
+          <groups xsi:type="xtext:Group">
+            <tokens xsi:type="xtext:Assignment" feature="body" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
+            </tokens>
+            <tokens xsi:type="xtext:Keyword" value="]"/>
+          </groups>
         </tokens>
-        <tokens xsi:type="xtext:Keyword" value="]"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="VxlListElement">
@@ -163,7 +162,7 @@
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Keyword" value=","/>
           <tokens xsi:type="xtext:Assignment" feature="rest" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
           </tokens>
         </tokens>
       </alternatives>
@@ -173,10 +172,10 @@
         <classifier xsi:type="ecore:EClass" href="http://www.dailab.de/vsdt/vxl/Vxl#//VxlValue"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
+        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
         <groups xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
-        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="VxlBooleanConst">
@@ -203,7 +202,7 @@
         <classifier xsi:type="ecore:EClass" href="http://www.dailab.de/vsdt/vxl/Vxl#//VxlNumericConst"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" feature="const" operator="=">
-        <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.19"/>
+        <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="VxlStringConst">

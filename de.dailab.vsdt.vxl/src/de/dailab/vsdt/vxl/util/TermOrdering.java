@@ -91,9 +91,9 @@ public class TermOrdering {
 			return new TermLeaf(term.getHead());
 		} else {
 			// wrap Term in a TermNode
-			VxlOperator operator= term.getTail().getOperator();
+			VxlOperator operator= term.getOperator();
 			TermLeaf head= new TermLeaf(term.getHead());
-			TermTree tail= transcribe(term.getTail().getTail());
+			TermTree tail= transcribe(term.getTail());
 			return new TermNode(head, operator, tail);
 		}
 	}

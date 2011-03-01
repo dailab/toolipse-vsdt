@@ -33,23 +33,22 @@ protected class ThisRootNode extends RootToken {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new VxlTerm_Group(this, this, 0, inst);
-			case 1: return new VxLTail_Group(this, this, 1, inst);
-			case 2: return new VxlElement_Alternatives(this, this, 2, inst);
-			case 3: return new VxlBracketTerm_Group(this, this, 3, inst);
-			case 4: return new VxlNegation_Group(this, this, 4, inst);
-			case 5: return new VxlMinus_Group(this, this, 5, inst);
-			case 6: return new VxlCardinality_Group(this, this, 6, inst);
-			case 7: return new VxlVariable_Group(this, this, 7, inst);
-			case 8: return new VxlAccessor_Alternatives(this, this, 8, inst);
-			case 9: return new VxlArrayAccessor_Group(this, this, 9, inst);
-			case 10: return new VxlFieldAccessor_Group(this, this, 10, inst);
-			case 11: return new VxlList_Group(this, this, 11, inst);
-			case 12: return new VxlListElement_Group(this, this, 12, inst);
-			case 13: return new VxlValue_Alternatives(this, this, 13, inst);
-			case 14: return new VxlBooleanConst_ConstAssignment(this, this, 14, inst);
-			case 15: return new VxlNullConst_ConstAssignment(this, this, 15, inst);
-			case 16: return new VxlNumericConst_ConstAssignment(this, this, 16, inst);
-			case 17: return new VxlStringConst_ConstAssignment(this, this, 17, inst);
+			case 1: return new VxlElement_Alternatives(this, this, 1, inst);
+			case 2: return new VxlBracketTerm_Group(this, this, 2, inst);
+			case 3: return new VxlNegation_Group(this, this, 3, inst);
+			case 4: return new VxlMinus_Group(this, this, 4, inst);
+			case 5: return new VxlCardinality_Group(this, this, 5, inst);
+			case 6: return new VxlVariable_Group(this, this, 6, inst);
+			case 7: return new VxlAccessor_Alternatives(this, this, 7, inst);
+			case 8: return new VxlArrayAccessor_Group(this, this, 8, inst);
+			case 9: return new VxlFieldAccessor_Group(this, this, 9, inst);
+			case 10: return new VxlList_Group(this, this, 10, inst);
+			case 11: return new VxlListElement_Group(this, this, 11, inst);
+			case 12: return new VxlValue_Alternatives(this, this, 12, inst);
+			case 13: return new VxlBooleanConst_ConstAssignment(this, this, 13, inst);
+			case 14: return new VxlNullConst_ConstAssignment(this, this, 14, inst);
+			case 15: return new VxlNumericConst_ConstAssignment(this, this, 15, inst);
+			case 16: return new VxlStringConst_ConstAssignment(this, this, 16, inst);
 			default: return null;
 		}	
 	}	
@@ -59,13 +58,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule VxlTerm ****************
  *
  * VxlTerm:
- *   head=VxlElement tail=VxLTail?; 
+ *   head=VxlElement (operator=VxlOperator tail=VxlTerm)?; 
  * 
  * // COMPLEX TERMS
  *
  **/
 
-// head=VxlElement tail=VxLTail?
+// head=VxlElement (operator=VxlOperator tail=VxlTerm)?
 protected class VxlTerm_Group extends GroupToken {
 	
 	public VxlTerm_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -78,7 +77,7 @@ protected class VxlTerm_Group extends GroupToken {
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new VxlTerm_TailAssignment_1(parent, this, 0, inst);
+			case 0: return new VxlTerm_Group_1(parent, this, 0, inst);
 			case 1: return new VxlTerm_HeadAssignment_0(parent, this, 1, inst);
 			default: return null;
 		}	
@@ -131,97 +130,41 @@ protected class VxlTerm_HeadAssignment_0 extends AssignmentToken  {
 	}	
 }
 
-// tail=VxLTail?
-protected class VxlTerm_TailAssignment_1 extends AssignmentToken  {
+// (operator=VxlOperator tail=VxlTerm)?
+protected class VxlTerm_Group_1 extends GroupToken {
 	
-	public VxlTerm_TailAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	public Assignment getGrammarElement() {
-		return grammarAccess.getVxlTermAccess().getTailAssignment_1();
-	}
-
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new VxLTail_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("tail",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("tail");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getVxLTailRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
-				element = grammarAccess.getVxlTermAccess().getTailVxLTailParserRuleCall_1_0(); 
-				consumed = obj;
-				return param;
-			}
-		}
-		return null;
-	}
-
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
-		switch(index) {
-			case 0: return new VxlTerm_HeadAssignment_0(parent, next, actIndex, consumed);
-			default: return null;
-		}	
-	}	
-}
-
-
-/************ end Rule VxlTerm ****************/
-
-
-/************ begin Rule VxLTail ****************
- *
- * VxLTail:
- *   operator=VxlOperator tail=VxlTerm;
- *
- **/
-
-// operator=VxlOperator tail=VxlTerm
-protected class VxLTail_Group extends GroupToken {
-	
-	public VxLTail_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlTerm_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Group getGrammarElement() {
-		return grammarAccess.getVxLTailAccess().getGroup();
+		return grammarAccess.getVxlTermAccess().getGroup_1();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new VxLTail_TailAssignment_1(parent, this, 0, inst);
+			case 0: return new VxlTerm_TailAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getVxLTailRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
-	}
 }
 
 // operator=VxlOperator
-protected class VxLTail_OperatorAssignment_0 extends AssignmentToken  {
+protected class VxlTerm_OperatorAssignment_1_0 extends AssignmentToken  {
 	
-	public VxLTail_OperatorAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlTerm_OperatorAssignment_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getVxLTailAccess().getOperatorAssignment_0();
+		return grammarAccess.getVxlTermAccess().getOperatorAssignment_1_0();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
+			case 0: return new VxlTerm_HeadAssignment_0(parent, this, 0, inst);
+			default: return null;
 		}	
 	}	
 		
@@ -230,7 +173,7 @@ protected class VxLTail_OperatorAssignment_0 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("operator");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
 			type = AssignmentType.ERC;
-			element = grammarAccess.getVxLTailAccess().getOperatorVxlOperatorEnumRuleCall_0_0();
+			element = grammarAccess.getVxlTermAccess().getOperatorVxlOperatorEnumRuleCall_1_0_0();
 			return obj;
 		}
 		return null;
@@ -239,14 +182,14 @@ protected class VxLTail_OperatorAssignment_0 extends AssignmentToken  {
 }
 
 // tail=VxlTerm
-protected class VxLTail_TailAssignment_1 extends AssignmentToken  {
+protected class VxlTerm_TailAssignment_1_1 extends AssignmentToken  {
 	
-	public VxLTail_TailAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlTerm_TailAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getVxLTailAccess().getTailAssignment_1();
+		return grammarAccess.getVxlTermAccess().getTailAssignment_1_1();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -263,7 +206,7 @@ protected class VxLTail_TailAssignment_1 extends AssignmentToken  {
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getVxlTermRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getVxLTailAccess().getTailVxlTermParserRuleCall_1_0(); 
+				element = grammarAccess.getVxlTermAccess().getTailVxlTermParserRuleCall_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -274,14 +217,15 @@ protected class VxLTail_TailAssignment_1 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new VxLTail_OperatorAssignment_0(parent, next, actIndex, consumed);
+			case 0: return new VxlTerm_OperatorAssignment_1_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-/************ end Rule VxLTail ****************/
+
+/************ end Rule VxlTerm ****************/
 
 
 /************ begin Rule VxlElement ****************
@@ -1460,13 +1404,13 @@ protected class VxlFieldAccessor_AccessorAssignment_2 extends AssignmentToken  {
 /************ begin Rule VxlList ****************
  *
  * VxlList:
- *   "[" body=VxlListElement? "]"; 
+ *   "[" (empty?="]"|body=VxlListElement "]"); 
  * 
  * // LISTS
  *
  **/
 
-// "[" body=VxlListElement? "]"
+// "[" (empty?="]"|body=VxlListElement "]")
 protected class VxlList_Group extends GroupToken {
 	
 	public VxlList_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1479,7 +1423,7 @@ protected class VxlList_Group extends GroupToken {
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new VxlList_RightSquareBracketKeyword_2(parent, this, 0, inst);
+			case 0: return new VxlList_Alternatives_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -1509,15 +1453,87 @@ protected class VxlList_LeftSquareBracketKeyword_0 extends KeywordToken  {
 		
 }
 
-// body=VxlListElement?
-protected class VxlList_BodyAssignment_1 extends AssignmentToken  {
+// empty?="]"|body=VxlListElement "]"
+protected class VxlList_Alternatives_1 extends AlternativesToken {
+
+	public VxlList_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
 	
-	public VxlList_BodyAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getVxlListAccess().getAlternatives_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new VxlList_EmptyAssignment_1_0(parent, this, 0, inst);
+			case 1: return new VxlList_Group_1_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// empty?="]"
+protected class VxlList_EmptyAssignment_1_0 extends AssignmentToken  {
+	
+	public VxlList_EmptyAssignment_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Assignment getGrammarElement() {
-		return grammarAccess.getVxlListAccess().getBodyAssignment_1();
+		return grammarAccess.getVxlListAccess().getEmptyAssignment_1_0();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new VxlList_LeftSquareBracketKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("empty",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("empty");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getVxlListAccess().getEmptyRightSquareBracketKeyword_1_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// body=VxlListElement "]"
+protected class VxlList_Group_1_1 extends GroupToken {
+	
+	public VxlList_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Group getGrammarElement() {
+		return grammarAccess.getVxlListAccess().getGroup_1_1();
+	}
+
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new VxlList_RightSquareBracketKeyword_1_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// body=VxlListElement
+protected class VxlList_BodyAssignment_1_1_0 extends AssignmentToken  {
+	
+	public VxlList_BodyAssignment_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	public Assignment getGrammarElement() {
+		return grammarAccess.getVxlListAccess().getBodyAssignment_1_1_0();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
@@ -1528,13 +1544,13 @@ protected class VxlList_BodyAssignment_1 extends AssignmentToken  {
 	}	
 		
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("body",false)) == null) return null;
+		if((value = current.getConsumable("body",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("body");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getVxlListElementRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getVxlListAccess().getBodyVxlListElementParserRuleCall_1_0(); 
+				element = grammarAccess.getVxlListAccess().getBodyVxlListElementParserRuleCall_1_1_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1552,25 +1568,26 @@ protected class VxlList_BodyAssignment_1 extends AssignmentToken  {
 }
 
 // "]"
-protected class VxlList_RightSquareBracketKeyword_2 extends KeywordToken  {
+protected class VxlList_RightSquareBracketKeyword_1_1_1 extends KeywordToken  {
 	
-	public VxlList_RightSquareBracketKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public VxlList_RightSquareBracketKeyword_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	public Keyword getGrammarElement() {
-		return grammarAccess.getVxlListAccess().getRightSquareBracketKeyword_2();
+		return grammarAccess.getVxlListAccess().getRightSquareBracketKeyword_1_1_1();
 	}
 
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new VxlList_BodyAssignment_1(parent, this, 0, inst);
-			case 1: return new VxlList_LeftSquareBracketKeyword_0(parent, this, 1, inst);
+			case 0: return new VxlList_BodyAssignment_1_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 }
+
+
 
 
 /************ end Rule VxlList ****************/
@@ -1579,7 +1596,7 @@ protected class VxlList_RightSquareBracketKeyword_2 extends KeywordToken  {
 /************ begin Rule VxlListElement ****************
  *
  * VxlListElement:
- *   first=VxlTerm ("," rest=VxlListElement)?;  
+ *   first=VxlTerm ("," rest=VxlListElement)?; 
  * 		             
  * 
  * // CONSTANT VALUES

@@ -178,9 +178,9 @@ public class VsdtExpressionVisitor {
 		visitElement(term.getHead());
 		if (term.getTail() != null) {
 			buffer.append(" ");
-			visitOperator(term.getTail().getOperator());
+			visitOperator(term.getOperator());
 			buffer.append(" ");
-			visitTerm(term.getTail().getTail());
+			visitTerm(term.getTail());
 		}
 	}
 

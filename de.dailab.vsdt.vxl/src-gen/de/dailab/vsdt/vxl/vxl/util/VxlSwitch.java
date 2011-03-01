@@ -102,13 +102,6 @@ public class VxlSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case VxlPackage.VX_LTAIL:
-      {
-        VxLTail vxLTail = (VxLTail)theEObject;
-        T result = caseVxLTail(vxLTail);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case VxlPackage.VXL_ELEMENT:
       {
         VxlElement vxlElement = (VxlElement)theEObject;
@@ -254,22 +247,6 @@ public class VxlSwitch<T>
    * @generated
    */
   public T caseVxlTerm(VxlTerm object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Vx LTail</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Vx LTail</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVxLTail(VxLTail object)
   {
     return null;
   }

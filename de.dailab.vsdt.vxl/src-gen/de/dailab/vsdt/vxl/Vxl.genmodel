@@ -26,11 +26,8 @@
     </genEnums>
     <genClasses ecoreClass="Vxl.ecore#//VxlTerm">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlTerm/head"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlTerm/operator"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlTerm/tail"/>
-    </genClasses>
-    <genClasses ecoreClass="Vxl.ecore#//VxLTail">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxLTail/operator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxLTail/tail"/>
     </genClasses>
     <genClasses ecoreClass="Vxl.ecore#//VxlElement"/>
     <genClasses ecoreClass="Vxl.ecore#//VxlBracketTerm">
@@ -59,6 +56,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlFieldAccessor/name"/>
     </genClasses>
     <genClasses ecoreClass="Vxl.ecore#//VxlList">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlList/empty"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlList/body"/>
     </genClasses>
     <genClasses ecoreClass="Vxl.ecore#//VxlListElement">

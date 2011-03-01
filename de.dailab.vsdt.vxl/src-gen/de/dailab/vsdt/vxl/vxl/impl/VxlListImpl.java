@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlListImpl#isEmpty <em>Empty</em>}</li>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlListImpl#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
@@ -32,6 +33,26 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class VxlListImpl extends VxlElementImpl implements VxlList
 {
+  /**
+   * The default value of the '{@link #isEmpty() <em>Empty</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isEmpty()
+   * @generated
+   * @ordered
+   */
+  protected static final boolean EMPTY_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isEmpty() <em>Empty</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isEmpty()
+   * @generated
+   * @ordered
+   */
+  protected boolean empty = EMPTY_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -61,6 +82,29 @@ public class VxlListImpl extends VxlElementImpl implements VxlList
   protected EClass eStaticClass()
   {
     return VxlPackage.Literals.VXL_LIST;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public boolean isEmpty()
+  {
+    return empty;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setEmpty(boolean newEmpty)
+  {
+    boolean oldEmpty = empty;
+    empty = newEmpty;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_LIST__EMPTY, oldEmpty, empty));
   }
 
   /**
@@ -137,6 +181,8 @@ public class VxlListImpl extends VxlElementImpl implements VxlList
   {
     switch (featureID)
     {
+      case VxlPackage.VXL_LIST__EMPTY:
+        return isEmpty();
       case VxlPackage.VXL_LIST__BODY:
         return getBody();
     }
@@ -153,6 +199,9 @@ public class VxlListImpl extends VxlElementImpl implements VxlList
   {
     switch (featureID)
     {
+      case VxlPackage.VXL_LIST__EMPTY:
+        setEmpty((Boolean)newValue);
+        return;
       case VxlPackage.VXL_LIST__BODY:
         setBody((VxlListElement)newValue);
         return;
@@ -170,6 +219,9 @@ public class VxlListImpl extends VxlElementImpl implements VxlList
   {
     switch (featureID)
     {
+      case VxlPackage.VXL_LIST__EMPTY:
+        setEmpty(EMPTY_EDEFAULT);
+        return;
       case VxlPackage.VXL_LIST__BODY:
         setBody((VxlListElement)null);
         return;
@@ -187,10 +239,29 @@ public class VxlListImpl extends VxlElementImpl implements VxlList
   {
     switch (featureID)
     {
+      case VxlPackage.VXL_LIST__EMPTY:
+        return empty != EMPTY_EDEFAULT;
       case VxlPackage.VXL_LIST__BODY:
         return body != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (empty: ");
+    result.append(empty);
+    result.append(')');
+    return result.toString();
   }
 
 } //VxlListImpl

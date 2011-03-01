@@ -5,7 +5,6 @@
  */
 package de.dailab.vsdt.vxl.vxl.impl;
 
-import de.dailab.vsdt.vxl.vxl.VxLTail;
 import de.dailab.vsdt.vxl.vxl.VxlAccessor;
 import de.dailab.vsdt.vxl.vxl.VxlArrayAccessor;
 import de.dailab.vsdt.vxl.vxl.VxlBooleanConst;
@@ -49,13 +48,6 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * @generated
    */
   private EClass vxlTermEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass vxLTailEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -264,39 +256,19 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getVxlTerm_Operator()
+  {
+    return (EAttribute)vxlTermEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getVxlTerm_Tail()
   {
-    return (EReference)vxlTermEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getVxLTail()
-  {
-    return vxLTailEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getVxLTail_Operator()
-  {
-    return (EAttribute)vxLTailEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getVxLTail_Tail()
-  {
-    return (EReference)vxLTailEClass.getEStructuralFeatures().get(1);
+    return (EReference)vxlTermEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -494,9 +466,19 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getVxlList_Empty()
+  {
+    return (EAttribute)vxlListEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getVxlList_Body()
   {
-    return (EReference)vxlListEClass.getEStructuralFeatures().get(0);
+    return (EReference)vxlListEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -631,11 +613,8 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
     // Create classes and their features
     vxlTermEClass = createEClass(VXL_TERM);
     createEReference(vxlTermEClass, VXL_TERM__HEAD);
+    createEAttribute(vxlTermEClass, VXL_TERM__OPERATOR);
     createEReference(vxlTermEClass, VXL_TERM__TAIL);
-
-    vxLTailEClass = createEClass(VX_LTAIL);
-    createEAttribute(vxLTailEClass, VX_LTAIL__OPERATOR);
-    createEReference(vxLTailEClass, VX_LTAIL__TAIL);
 
     vxlElementEClass = createEClass(VXL_ELEMENT);
 
@@ -665,6 +644,7 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
     createEAttribute(vxlFieldAccessorEClass, VXL_FIELD_ACCESSOR__NAME);
 
     vxlListEClass = createEClass(VXL_LIST);
+    createEAttribute(vxlListEClass, VXL_LIST__EMPTY);
     createEReference(vxlListEClass, VXL_LIST__BODY);
 
     vxlListElementEClass = createEClass(VXL_LIST_ELEMENT);
@@ -732,11 +712,8 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
     // Initialize classes and features; add operations and parameters
     initEClass(vxlTermEClass, VxlTerm.class, "VxlTerm", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getVxlTerm_Head(), this.getVxlElement(), null, "head", null, 0, 1, VxlTerm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getVxlTerm_Tail(), this.getVxLTail(), null, "tail", null, 0, 1, VxlTerm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(vxLTailEClass, VxLTail.class, "VxLTail", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getVxLTail_Operator(), this.getVxlOperator(), "operator", null, 0, 1, VxLTail.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getVxLTail_Tail(), this.getVxlTerm(), null, "tail", null, 0, 1, VxLTail.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getVxlTerm_Operator(), this.getVxlOperator(), "operator", null, 0, 1, VxlTerm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getVxlTerm_Tail(), this.getVxlTerm(), null, "tail", null, 0, 1, VxlTerm.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(vxlElementEClass, VxlElement.class, "VxlElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -766,6 +743,7 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
     initEAttribute(getVxlFieldAccessor_Name(), ecorePackage.getEString(), "name", null, 0, 1, VxlFieldAccessor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(vxlListEClass, VxlList.class, "VxlList", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getVxlList_Empty(), ecorePackage.getEBoolean(), "empty", null, 0, 1, VxlList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getVxlList_Body(), this.getVxlListElement(), null, "body", null, 0, 1, VxlList.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(vxlListElementEClass, VxlListElement.class, "VxlListElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

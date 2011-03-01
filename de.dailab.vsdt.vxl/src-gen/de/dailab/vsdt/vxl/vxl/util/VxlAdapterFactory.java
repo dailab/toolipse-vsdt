@@ -83,11 +83,6 @@ public class VxlAdapterFactory extends AdapterFactoryImpl
         return createVxlTermAdapter();
       }
       @Override
-      public Adapter caseVxLTail(VxLTail object)
-      {
-        return createVxLTailAdapter();
-      }
-      @Override
       public Adapter caseVxlElement(VxlElement object)
       {
         return createVxlElementAdapter();
@@ -200,21 +195,6 @@ public class VxlAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVxlTermAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxLTail <em>Vx LTail</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see de.dailab.vsdt.vxl.vxl.VxLTail
-   * @generated
-   */
-  public Adapter createVxLTailAdapter()
   {
     return null;
   }

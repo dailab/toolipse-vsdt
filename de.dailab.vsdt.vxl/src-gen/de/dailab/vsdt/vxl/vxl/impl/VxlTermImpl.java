@@ -5,8 +5,8 @@
  */
 package de.dailab.vsdt.vxl.vxl.impl;
 
-import de.dailab.vsdt.vxl.vxl.VxLTail;
 import de.dailab.vsdt.vxl.vxl.VxlElement;
+import de.dailab.vsdt.vxl.vxl.VxlOperator;
 import de.dailab.vsdt.vxl.vxl.VxlPackage;
 import de.dailab.vsdt.vxl.vxl.VxlTerm;
 
@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlTermImpl#getHead <em>Head</em>}</li>
+ *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlTermImpl#getOperator <em>Operator</em>}</li>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlTermImpl#getTail <em>Tail</em>}</li>
  * </ul>
  * </p>
@@ -46,6 +47,26 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
   protected VxlElement head;
 
   /**
+   * The default value of the '{@link #getOperator() <em>Operator</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOperator()
+   * @generated
+   * @ordered
+   */
+  protected static final VxlOperator OPERATOR_EDEFAULT = VxlOperator.LT;
+
+  /**
+   * The cached value of the '{@link #getOperator() <em>Operator</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getOperator()
+   * @generated
+   * @ordered
+   */
+  protected VxlOperator operator = OPERATOR_EDEFAULT;
+
+  /**
    * The cached value of the '{@link #getTail() <em>Tail</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -53,7 +74,7 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
    * @generated
    * @ordered
    */
-  protected VxLTail tail;
+  protected VxlTerm tail;
 
   /**
    * <!-- begin-user-doc -->
@@ -129,7 +150,30 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
    * <!-- end-user-doc -->
    * @generated
    */
-  public VxLTail getTail()
+  public VxlOperator getOperator()
+  {
+    return operator;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setOperator(VxlOperator newOperator)
+  {
+    VxlOperator oldOperator = operator;
+    operator = newOperator == null ? OPERATOR_EDEFAULT : newOperator;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_TERM__OPERATOR, oldOperator, operator));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VxlTerm getTail()
   {
     return tail;
   }
@@ -139,9 +183,9 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTail(VxLTail newTail, NotificationChain msgs)
+  public NotificationChain basicSetTail(VxlTerm newTail, NotificationChain msgs)
   {
-    VxLTail oldTail = tail;
+    VxlTerm oldTail = tail;
     tail = newTail;
     if (eNotificationRequired())
     {
@@ -156,7 +200,7 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTail(VxLTail newTail)
+  public void setTail(VxlTerm newTail)
   {
     if (newTail != tail)
     {
@@ -202,6 +246,8 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
     {
       case VxlPackage.VXL_TERM__HEAD:
         return getHead();
+      case VxlPackage.VXL_TERM__OPERATOR:
+        return getOperator();
       case VxlPackage.VXL_TERM__TAIL:
         return getTail();
     }
@@ -221,8 +267,11 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
       case VxlPackage.VXL_TERM__HEAD:
         setHead((VxlElement)newValue);
         return;
+      case VxlPackage.VXL_TERM__OPERATOR:
+        setOperator((VxlOperator)newValue);
+        return;
       case VxlPackage.VXL_TERM__TAIL:
-        setTail((VxLTail)newValue);
+        setTail((VxlTerm)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -241,8 +290,11 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
       case VxlPackage.VXL_TERM__HEAD:
         setHead((VxlElement)null);
         return;
+      case VxlPackage.VXL_TERM__OPERATOR:
+        setOperator(OPERATOR_EDEFAULT);
+        return;
       case VxlPackage.VXL_TERM__TAIL:
-        setTail((VxLTail)null);
+        setTail((VxlTerm)null);
         return;
     }
     super.eUnset(featureID);
@@ -260,10 +312,29 @@ public class VxlTermImpl extends MinimalEObjectImpl.Container implements VxlTerm
     {
       case VxlPackage.VXL_TERM__HEAD:
         return head != null;
+      case VxlPackage.VXL_TERM__OPERATOR:
+        return operator != OPERATOR_EDEFAULT;
       case VxlPackage.VXL_TERM__TAIL:
         return tail != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (operator: ");
+    result.append(operator);
+    result.append(')');
+    return result.toString();
   }
 
 } //VxlTermImpl
