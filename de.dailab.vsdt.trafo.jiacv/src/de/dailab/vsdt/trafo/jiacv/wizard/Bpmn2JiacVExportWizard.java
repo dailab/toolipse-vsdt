@@ -58,4 +58,9 @@ public class Bpmn2JiacVExportWizard extends BpmnExportWizard {
 //			Bpmn2JadlElementMapping.oneFilePerPool= specificOptPage.isOneFileForAll();
 		}
 	}
+	
+	@Override
+	public JiacVResultSaver getResultSaver() {
+		return (JiacVResultSaver) resultSaver;
+	}
 }

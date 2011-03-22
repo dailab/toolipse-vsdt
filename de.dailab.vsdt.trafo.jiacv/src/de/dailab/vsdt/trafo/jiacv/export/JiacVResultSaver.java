@@ -3,6 +3,7 @@ package de.dailab.vsdt.trafo.jiacv.export;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -75,6 +76,30 @@ public class JiacVResultSaver extends MappingResultSaver {
 			saveAgentWorldDiagram(new File(baseDirectory, fileName), agentWorld);
 		}
 		return true;
+	}
+	
+	/**
+	 * Serialize the Services without saving them.
+	 * 
+	 * @return				List holding the serialized JADL services
+	 * @throws JadlParseException
+	 */
+	public List<String> getServiceSources() throws JadlParseException {
+		JiacVExportWrapper wrapper= (JiacVExportWrapper) this.wrapper;
+		List<String> serviceSources = new ArrayList<String>();
+		for (Agent model : wrapper.getJadlFiles()) {
+			String source= SimpleJadlParser.getInstance().serializeShort(model);
+			serviceSources.add(source);
+		}
+		return serviceSources;
+	}
+	
+	/**
+	 * @return				Starter Rules generated for all the Participants
+	 */
+	public Map<Participant, List<JiacVStarterRule>> getStarterRules() {
+		JiacVExportWrapper wrapper= (JiacVExportWrapper) this.wrapper;
+		return wrapper.getStarterRules();
 	}
 	
 	/**

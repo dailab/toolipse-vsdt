@@ -197,7 +197,7 @@ public abstract class BpmnTrafoWizard extends Wizard {
 	 * {@link MappingResultSaver}.
 	 * 
 	 * @param source			source object for which to perform the transformation
-	 * @param targetDirectory	target directory (absolute)
+	 * @param targetDirectory	target directory (absolute), or null (for not saving)
 	 * @return					transformation successful?
 	 */
 	public boolean performTransformation(Object source, String targetDirectory) {
@@ -208,11 +208,11 @@ public abstract class BpmnTrafoWizard extends Wizard {
 		// preparing transformation
 		TrafoLog.reset();
 		TrafoLog.setLogLevel(optionsPage != null ? optionsPage.getLogLevel() : Level.INFO.toString());
-		File baseDir= new File(targetDirectory);
-		if (optionsPage != null && optionsPage.getCreateLog()) {
+		if (targetDirectory != null && optionsPage != null && optionsPage.getCreateLog()) {
 			String logFile= getModelName(source) + ".log";
-			TrafoLog.addFileAppender(new File(baseDir,logFile).getAbsolutePath());
+			TrafoLog.addFileAppender(new File(targetDirectory, logFile).getAbsolutePath());
 		}
+		
 		MappingWrapper wrapper= createMappingWrapper(source);
 
 		// starting transformation
@@ -228,11 +228,13 @@ public abstract class BpmnTrafoWizard extends Wizard {
 				break;
 			}
 		}
+		if (resultSaver != null) {
+			resultSaver.setWrapper(wrapper);
+		}
 		
 		// save result
-		if (ok && resultSaver != null) {
-			resultSaver.setDirectory(baseDir);
-			resultSaver.setWrapper(wrapper);
+		if (ok && resultSaver != null && targetDirectory != null) {
+			resultSaver.setDirectory(new File(targetDirectory));
 			ok= resultSaver.save();
 		}
 		
@@ -262,5 +264,15 @@ public abstract class BpmnTrafoWizard extends Wizard {
 	 */
 	protected String getModelName(Object model) {
 		return "_unnamed_";
+	}
+	
+	/**
+	 * Return the object responsible for saving the results of the transformation.
+	 * This can be used for making the results directly available.
+	 *  
+	 * @return			object saving the results of the transformation
+	 */
+	public MappingResultSaver getResultSaver() {
+		return resultSaver;
 	}
 }
