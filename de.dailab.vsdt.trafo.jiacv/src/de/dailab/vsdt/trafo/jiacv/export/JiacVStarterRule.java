@@ -33,6 +33,14 @@ public class JiacVStarterRule {
 		this.startEvent= startEvent;
 		this.serviceToStart= serviceToStart;
 	}
+	
+	public Service getServiceToStart() {
+		return serviceToStart;
+	}
+	
+	public Event getStartEvent() {
+		return startEvent;
+	}
 
 	/**
 	 * Create a Drools Rule corresponding to this Starter Rule.
