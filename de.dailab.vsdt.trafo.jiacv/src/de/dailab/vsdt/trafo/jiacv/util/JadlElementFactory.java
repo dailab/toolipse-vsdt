@@ -190,20 +190,8 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 	 * @return
 	 */
 	public Expression createAddress(MessageChannel channel) {
-		return createExpression(createAddressString(channel));
+		return createExpression(Util.createAddressString(channel));
 	}
-	
-	/**
-	 * Create an Address String based on the given Message and Participant.
-	 * 
-	 * @param message		some Message
-	 * @return				communication address channel.channel"
-	 */
-	public String createAddressString(MessageChannel channel) {
-		String address= channel.getChannel() != null ? channel.getChannel().getExpression() : "unknown";
-		return address.toLowerCase();
-	}
-	
 	
 	/**
 	 * Create Receive element
@@ -390,7 +378,7 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 		String suffix= " }";
 		Agent model= parseModel(prefix + string + suffix, originalString);
 		if (model != null) {
-			Service service= Util.getFirstService(model);
+			Service service= getFirstService(model);
 			Seq seq= service.getBody();
 			if (seq.getScripts().size() == 1) {
 				return (Script) seq.getScripts().get(0);
@@ -401,6 +389,17 @@ public class JadlElementFactory implements Bpmn2JiacConstants {
 		return null;
 	}
 
+	/**
+	 * @param model		some JADL file model
+	 * @return			first service in the file, if any, or null
+	 */
+	private Service getFirstService(Agent model) {
+		for (Service service : model.getServices()) {
+			return service;
+		}
+		return null;
+	}
+	
 	/**
 	 * Parse Model from given string
 	 * @param string			some string holding a complete model

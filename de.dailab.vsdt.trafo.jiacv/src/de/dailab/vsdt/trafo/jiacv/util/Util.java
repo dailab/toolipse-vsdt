@@ -1,7 +1,6 @@
 package de.dailab.vsdt.trafo.jiacv.util;
 
-import de.dailab.jiactng.jadl.Agent;
-import de.dailab.jiactng.jadl.Service;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Property;
 
 /**
@@ -17,17 +16,6 @@ public class Util {
 	public static final String EXT_AWE_MODEL=	".agentworld";
 	public static final String EXT_AWE_DIAGRAM=	".awe";
 	public static final String FILE_SEP= System.getProperty("file.separator");
-	
-	/**
-	 * @param model		some JADL file model
-	 * @return			first service in the file, if any, or null
-	 */
-	public static Service getFirstService(Agent model) {
-		for (Service service : model.getServices()) {
-			return service;
-		}
-		return null;
-	}
 
 	/**
 	 * If the type is a fully qualified complex type, trim the package part.
@@ -43,5 +31,15 @@ public class Util {
 		}
 		return type;
 	}
-	
+
+	/**
+	 * Create an Address String based on the given Message and Participant.
+	 * 
+	 * @param message		some Message
+	 * @return				communication address channel.channel"
+	 */
+	public static String createAddressString(MessageChannel channel) {
+		String address= channel.getChannel() != null ? channel.getChannel().getExpression() : "unknown";
+		return address.toLowerCase();
+	}
 }
