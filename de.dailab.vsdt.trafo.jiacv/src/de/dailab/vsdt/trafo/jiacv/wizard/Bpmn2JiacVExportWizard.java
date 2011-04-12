@@ -59,8 +59,8 @@ public class Bpmn2JiacVExportWizard extends BpmnExportWizard {
 		}
 	}
 	
-//	@Override
-//	public JiacVResultSaver getResultSaver() {
-//		return (JiacVResultSaver) resultSaver;
-//	}
+	@Override
+	public JiacVResultSaver getResultSaver() {
+		return (JiacVResultSaver) resultSaver;
+	}
 }

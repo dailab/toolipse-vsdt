@@ -88,7 +88,7 @@ public class JiacVResultSaver extends MappingResultSaver {
 	 * @return				List holding the serialized JADL services
 	 * @throws JadlParseException
 	 */
-	public List<String> getServiceSources() throws JadlParseException {
+	public List<String> getServiceSources() throws Exception {
 		JiacVExportWrapper wrapper= (JiacVExportWrapper) this.wrapper;
 		List<String> serviceSources = new ArrayList<String>();
 		for (Agent model : wrapper.getJadlFiles()) {
