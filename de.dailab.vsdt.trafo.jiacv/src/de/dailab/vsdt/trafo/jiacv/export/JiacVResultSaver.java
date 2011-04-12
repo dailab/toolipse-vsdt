@@ -3,8 +3,10 @@ package de.dailab.vsdt.trafo.jiacv.export;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +38,8 @@ import de.dailab.jiactng.jadl.Agent;
 import de.dailab.jiactng.jadl.ontology.JadlParseException;
 import de.dailab.jiactng.jadl.util.SimpleJadlParser;
 import de.dailab.vsdt.DataType;
+import de.dailab.vsdt.Event;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.trafo.MappingResultSaver;
 import de.dailab.vsdt.trafo.base.util.TrafoLog;
@@ -100,6 +104,36 @@ public class JiacVResultSaver extends MappingResultSaver {
 	public Map<Participant, List<JiacVStarterRule>> getStarterRules() {
 		JiacVExportWrapper wrapper= (JiacVExportWrapper) this.wrapper;
 		return wrapper.getStarterRules();
+	}
+	
+	/**
+	 * Get Starter Rules in simple form: Service Name -> Hint (e.g. Time, or Channel)
+	 * @return
+	 */
+	public Map<String, Serializable> getStarterRulesSimple() {
+		Map<String, Serializable> simpleRules = new HashMap<String, Serializable>();
+		Map<Participant, List<JiacVStarterRule>> rules = getStarterRules();
+		for (Participant participant : rules.keySet()) {
+			for (JiacVStarterRule rule : rules.get(participant)) {
+				Serializable object= null;
+				Event event = rule.getStartEvent();
+				switch (event.getTrigger()) {
+				case MESSAGE:
+					if (event.getImplementation() instanceof MessageChannel) {
+						object = ((MessageChannel) event.getImplementation()).getChannel().getExpression();
+					}
+					break;
+				case TIMER:
+					// TODO support timer events
+					break;
+				}
+				if (object != null) {
+					simpleRules.put(rule.getServiceToStart().getName(), object);	
+				}
+			}
+		}
+		return simpleRules;
+		
 	}
 	
 	/**

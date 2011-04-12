@@ -4,7 +4,6 @@ import de.dailab.jiactng.jadl.Service;
 import de.dailab.vsdt.Event;
 import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Property;
-import de.dailab.vsdt.trafo.jiacv.util.JadlElementFactory;
 import de.dailab.vsdt.trafo.jiacv.util.Util;
 
 
@@ -21,7 +20,7 @@ public class JiacVStarterRule {
 	protected Event startEvent;
 	
 	/** the service to start with this rule */
-	protected Service serviceToStart;
+	protected Service service;
 	
 	/**
 	 * Create new Starter Rule
@@ -29,13 +28,13 @@ public class JiacVStarterRule {
 	 * @param startEvent		the start event for which to create the rule
 	 * @param serviceToStart	the service to start with this rule
 	 */
-	public JiacVStarterRule(Event startEvent, Service serviceToStart) {
+	public JiacVStarterRule(Event startEvent, Service service) {
 		this.startEvent= startEvent;
-		this.serviceToStart= serviceToStart;
+		this.service= service;
 	}
 	
 	public Service getServiceToStart() {
-		return serviceToStart;
+		return service;
 	}
 	
 	public Event getStartEvent() {
@@ -50,21 +49,21 @@ public class JiacVStarterRule {
 	public String toDroolsRule() {
 		final String NL = System.getProperty("line.separator");
 		final String TAB = "\t";
-		final String serviceName = serviceToStart.getName();
+		final String serviceName = service.getName();
 		String parameter = "";
 		StringBuffer buffer= new StringBuffer();
 
 		// write head and condition: service is known
 		buffer.append("rule \"" + serviceName + "\"" + NL);
 		buffer.append("when" + NL);
-		buffer.append(TAB + "action : Action( name == \"" + serviceName+ "\")" + NL);
+		buffer.append(TAB + "action : Action( name == \"" + serviceName + "\")" + NL);
 
 		// type specific conditions
 		switch (startEvent.getTrigger()) {
 		case MESSAGE:
 			if (startEvent.getImplementation() instanceof MessageChannel) {
 				MessageChannel channel = (MessageChannel) startEvent.getImplementation();
-				String address = JadlElementFactory.INSTANCE.createAddressString(channel);
+				String address = Util.createAddressString(channel);
 				buffer.append(TAB + "jiacMessage : IJiacMessage()" + NL);
 				buffer.append(TAB + "eval(\"" + address + "\".equals(jiacMessage.getHeader(IJiacMessage.Header.SEND_TO)))" + NL);
 				if (channel.getPayload() != null) {
@@ -116,5 +115,5 @@ public class JiacVStarterRule {
 		
 		return buffer.toString();
 	}
-	
+
 }
