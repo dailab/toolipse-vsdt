@@ -2,9 +2,8 @@
 \label{sec:user_trafo}
 
 The core of the Visual Service Design Tool clearly is the transformation to
-executable code.  While by now the transformation to BPEL is the only one that
-can be conveniently used in practice, there are currently several other
-transformations under development.
+executable code.  Currently, both the transformations to BPEL and to JIAC agent
+services can conveniently be used in practice.
 
 For directions on how to invoke the transformation please refer to
 Section~\ref{sec:user_tut_export}.
@@ -13,7 +12,6 @@ Section~\ref{sec:user_tut_export}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Understanding the Transformation Framework}
-\label{sec:user_trafo_intro}
 
 This section will provide a brief introduction in the basics of the transformation
 framework.  The transformation framework has been designed from the very beginning
@@ -24,9 +22,9 @@ sequentially applied to the input model:
 	\item In the \emph{Validation} stage, all identifiers are validated to contain
 	only characters that are legal with respect to the given target language.
 	Further, the validation will check if each element needed is in place and
-	providing clear error messages in case something is missing.
+	provide clear error messages in case something is missing.
 	
-	\item The intent of the \emph{Normalisation} stage is to put the process
+	\item The intent of the \emph{Normalization} stage is to put the process
 	diagram in a uniform form, and to transform it to a semantically equivalent
 	representation of the diagram following more strict constraints than those
 	given in the BPMN specification.
@@ -39,21 +37,21 @@ sequentially applied to the input model:
 	structural flaws.
 	
 	\item In the \emph{Element Mapping} stage, the several BPMN elements are
-	mapped to their counterparts in the target language, e.g.  BPEL or JIAC
-	(Section~\ref{sec:user_trafo_bpel} and~\ref{sec:user_trafo_jiac}).
+	mapped to their counterparts in the target language, e.g. BPEL or JIAC. How
+	this stage is realized for the individual target languages will be explained
+	in the next sections.
 	
 	\item In the \emph{Clean Up} stage, a set of rules is applied on the newly
-	created target model, improving the readability of the generated code and
-	removing redundancies.
+	created target model, improving the readability of the generated code.
 \end{enumerate}
 
-A simple example of the consecutive execution of normalisation and structure
+A simple example of the consecutive execution of normalization and structure
 mapping can be seen in Figure~\ref{fig:norm_struc}.
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\textwidth]{figures/trafo/norm_struc.pdf}
-	\caption{Simple example of normalisation and structure mapping.}
+	\caption{Simple example of normalization and structure mapping.}
 	\label{fig:norm_struc}
 \end{figure}
 
@@ -62,11 +60,10 @@ mapping can be seen in Figure~\ref{fig:norm_struc}.
 
 Besides the actual workflow, Expressions that are used in assignments and
 conditions have to be translated, too.  This can be done only if the Expression
-Language is set to ``VSDT Expression Language'' or ``VXL''.\footnote{The Expression
-Language can be set either globally in the Diagram properties or individually for
-each Expression.} If then the \emph{Translate Expression} option is checked in
-the Export Wizard (see Figure~\ref{fig:trafo_wiz}) these expressions will be
-parsed and, if possible, translated to the respective target language.
+Language is set to ``VSDT Expression Language'' or ``VXL''.  If then the
+\emph{Translate Expressions} option is checked in the Export Wizard (see
+Figure~\ref{fig:trafo_wiz}) these expressions will be parsed and, if possible,
+translated to the respective target language.
 
 \begin{figure}[ht]
 	\centering
@@ -77,18 +74,18 @@ parsed and, if possible, translated to the respective target language.
 
 Still there may be cases when VXL does not have enough expressive power.  In this
 case the option can be disabled (or the Expression Language can be changed) and
-the \emph{Replace Property Accessors} option can be checked.  In this case, the
-Expressions will only be scanned for Property Accessors using VXL (e.g.
-\texttt{\$foo.bar}) which will then be translated to the syntax of the target
-language.  Thus, the simple VXL variables can be embedded in expressions of
-another language.  For instance, in the case of BPEL, an expression like
-\texttt{\$foo.bar + 1}, might be changed to \texttt{bpws:getVariableData(
-'Proc\_ProcessData','foo','bar')+1}.  Thus the user does not have to care about
-the way Properties are aggregated to variables in the transformation to that
-language but can simply use a Property's name.
+the \emph{Replace Property Accessors} option can be checked.  Now the Expressions
+will only be scanned for Property Accessors in the Form \texttt{\$foo.bar}, which
+will then be translated to the syntax of the target language.  Thus, these simple
+variable accessors can be embedded in expressions of another language.  For instance,
+in the case of BPEL, an expression like \texttt{\$foo.bar + 1}, might be changed
+to \texttt{bpws:getVariableData( 'Proc\_ProcessData','foo','bar')+1}.  Thus the
+user does not have to care about the way Properties are converted to variables
+and how these variables are to be accessed in the transformation to that language
+but can simply use a Property's name.
 
 Finally, when Properties are given one of VXL's predefined basic data types (e.g.
-\texttt{string}, \texttt{boolean}, etc.), where will be translated to the
+\texttt{string}, \texttt{boolean}, etc.), these will be translated to the
 respective basic types of the target language, e.g. \texttt{xsd:string} and
 \texttt{xsd:boolean}.
 
@@ -96,14 +93,12 @@ respective basic types of the target language, e.g. \texttt{xsd:string} and
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Transformation Implementations}
-\label{sec:user_trafo_impl}
 
 The following sections describe in short the various transformations that have
 already been implemented.
 
 
 \subsection{Transformation to Text}
-\label{sec:user_trafo_text}
 
 See Section~\ref{sec:user_features_text}.
 
@@ -111,10 +106,9 @@ See Section~\ref{sec:user_features_text}.
 \subsection{Transformation to BPEL}
 \label{sec:user_trafo_bpel}
 
-The transformation to BPEL presented in this work covers nearly the entire mapping
-as given in the BPMN specification~\cite[Appendix A]{omg2009bpmn}, including event
-handlers, inclusive \textsc{or} and event-based \textsc{xor} Gateways, just to
-name a few.
+The transformation to BPEL covers nearly the entire mapping as given in the BPMN
+specification~\cite[Appendix A]{omg2009bpmn}, including event handlers, inclusive
+\textsc{or} and event-based \textsc{xor} Gateways, just to name a few.
 
 \paragraph{Export}
 Nevertheless there are some elements for which the mapping is not given very
@@ -129,9 +123,9 @@ blocks and necessary schema types, if any, can not be generated automatically
 yet, due to insufficient information in the source model.
 
 In the validation, all identifiers are tested to contain only characters that are
-legal with respect to BPEL, and all expressions used e.g.\ in Assignments and
+legal with respect to BPEL, and all expressions used e.g.\ in assignments and
 loop conditions are translated to XPath, if possible.  Properties are aggregated
-to one variable per Process or Message, for instance, if a Process \texttt{Proc}
+to one variable per Process or Message; for instance, if a Process \texttt{Proc}
 has a Property \texttt{foo}, \texttt{foo} will be a Part of Variable
 \texttt{Proc\_ProcessData}.
 
@@ -147,27 +141,28 @@ semantically equivalent.
 \subsection{Transformation to JIAC}
 \label{sec:user_trafo_jiac}
 
-Concerning our goal of transforming BPMN diagrams to multi-agent systems (MAS)
-the work is still at an early stage.  First, a \emph{normal form} for BPMN diagrams
-has been investigated, to facilitate the mapping~\cite{endert2007towards}.  Later,
-the first steps of the actual mapping have been developed, basically mapping Pools
-to agents, Processes and Flow Objects to the agents' plans and the control flow,
-and Message Flow to the exchange of messages between the agents~\cite{endert2007mapping}.
+One of the mayor goals behind the development of the VSDT is the generation of
+JIAC multi-agent systems, and specifically JADL services~\cite{kuester2010integrating}.
+Note that this work is not yet finished, and thus the mapping of the several
+concepts of BPMN and JIAC is still transitional and subject to change.
 
 \paragraph{Export}
 A prototypic transformation targeting the agent framework JIAC V has already been
 implemented.  In this transformation, the Participants diagram is translated to
-an Agent World diagram, and the individual Business Processes are translated to
-several JADL services.  As the theoretical part of the mapping is not yet fully
-matured, there is still some work to do.  However, with the given transformation
-framework every addition to the mapping can quickly be adopted.
+an Agent World Diagram~\cite{lutzenberger2009unifying}, and the individual Business
+Processes are translated to several JADL services~\cite{hirsch2010programming}.
+
+What's special about the transformation to JIAC is that apart from the JADL
+services and the agent configuration, also a set of service starter rules is
+generated, which can be deployed to a Drools rule engine integrated into the JIAC
+agent and which will trigger the different services accordingly to the start
+events given in the business process diagrams.
 
 The \emph{BPMN to JIAC Transformation} feature requires the \emph{JIAC Agent World
 Editor} feature.
 
 
 \subsection{Transformation to STP-BPMN}
-\label{sec:user_trafo_stp}
 
 Since BPMN does not provide a standardized interchange format, transferring a
 diagram from one editor to another is difficult.  For that reason the VSDT provides
@@ -181,14 +176,14 @@ The export to STP is nearly complete.  The only elements that are not mapped are
 Lanes, which is because the STP editor is encountering problems when initializing
 the diagram files containing Lanes.  Alas, the same also applies to Embedded
 Subprocesses, as there are problems opening those diagrams.  However, this is a
-problem with the STP editor that will get fixed soon.
+problem with the STP editor that will hopefully get fixed soon.
 
 \paragraph{Import}
 The import from STP works very well, with the exception that, again, Lanes will
 not be mapped. \emph{Note} that the transformation to STP will only create the
 BPMN model files, but not the diagram files; those files, holding the graphical
-information, have to be generated anew from the model file.  Thus, the transformation
-does not preserve the layout of the diagrams.
+information, have to be generated anew from the model file.  Consequently, the
+transformation does not preserve the layout of the diagrams.
 
 The \emph{BPMN to STP-BPMN Transformation} feature requires the \emph{Eclipse SOA
 Tools Project BPMN Editor} feature.
@@ -197,15 +192,14 @@ Tools Project BPMN Editor} feature.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Limitations}
-\label{sec:user_trafo_limits}
 
 Although the transformation framework is quite powerful, it is important to
-understand that there are still some limitations, both in the mapping of structures
-and elements.
+understand that there are still some limitations, both in the mapping of
+structures and of elements.
 
 \begin{itemize}
-	\item Given a well-structured workflow, the transformation will yield very
-	good results.  However, as BPMN is more powerful that block-oriented languages,
+	\item Given a well-structured workflow, the transformation yields very good
+	results.  However, as BPMN is more expressive that block-oriented languages,
 	such as BPEL and JIAC, there will always be graph structures that can not be
 	transformed to an equivalent program of the target language.  In that case
 	the diagram should be manually restructured \emph{before} being exported.
@@ -216,8 +210,9 @@ and elements.
 	the specification in almost every detail, but regarding these elements a small
 	amount of manual refinement may be necessary.
 	
-	\item The mapping to JIAC is still at an early stage.  JIAC models created
-	with this transformation will require a large amount of manual work.
+	\item The mapping to JIAC is still at an early stage.  For a subset of both
+	BPMN and JADL, the transformation yields good results and can be used for
+	creating meaningful, executable scripts, but there are still some open issues.
 \end{itemize}
 
 We are constantly investigating ways of extending both the quality of the element
