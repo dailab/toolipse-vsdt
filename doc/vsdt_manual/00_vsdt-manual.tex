@@ -1,31 +1,29 @@
-\documentclass{scrreprt}
+\documentclass[a4paper, 12pt, toc=bibliography, headsepline]{scrbook}
 
-\usepackage{amssymb}
-\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks]{hyperref}
 \usepackage{graphicx}
+\usepackage{amssymb}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 
-\newcommand{\version}{1.3.1}
-\newcommand{\updatesite}{\url{http://repositories.dai-labor.de/sites/vsdt/}}
-\newcommand{\downloadsites}{\url{http://energy.dai-labor.de/}\\\url{http://www.jiac.de}}
+\newcommand{\version}{1.4.0}
+\newcommand{\downloadsites}{\url{http://www.jiac.de}}
 
-\title{\huge The Visual Service Design Tool \\
-       \vspace{1cm} 
-       \LARGE Version \version \\
-       \LARGE Manual}
+\subject{Manual}
+\title{The Visual Service Design Tool}
+\subtitle{Version \version}
+\author{Tobias K\"uster}
 \date{2010 / 07}
-\author{Tobias K\"uster\\
-        DAI-Labor, TU Berlin\\
-        \texttt{tobias.kuester@dai-labor.de}}
-\bibliographystyle{plain}
+\publishers{DAI-Labor,\\ Technische Universit\"at Berlin}
 
 \begin{document}
 
-	\maketitle
-
+	\frontmatter
+%	\maketitle
 	\tableofcontents
 
+	\mainmatter
 	\input{01_intro}
 
 %	\part{User's Guide}
@@ -33,9 +31,14 @@
 	\input{22_perspective}
 	\input{23_tutorial}
 	\input{24_features}
+	% TODO aktualisieren
 	\input{25_preferences}
 	\input{26_transformation}
-%	\input{27_faq}
+	% TODO service starter ruless
+	\input{27_jiacnode}
+	\input{28_faq}
+	% TODO development process
+	% TODO ILIAS Simulation
 
 %	\part{Developer Notes}
 	% plugins-ordnung
@@ -45,12 +48,13 @@
 	% how to write a new trafo
 
 %	\part{Appendices}
-	\begin{appendix}
-		\input{41_bpmn}
-		\input{42_vxl}
-		\input{43_changelog}
-	\end{appendix}
+	
+	\appendix
+%	\input{41_bpmn}
+%	\input{42_vxl}
+%	\input{43_changelog}
 
+	\bibliographystyle{plain}
 	\bibliography{bibliography}
 
 \end{document}

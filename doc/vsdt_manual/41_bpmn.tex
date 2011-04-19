@@ -4,10 +4,10 @@
 %%% aus meiner Diplomarbeit
 
 % introduction
-The \emph{Business Process Modelling Notation}~\cite{omg2009bpmn} was first
-published by the BPMI and has later been adopted by the OMG.  The goal of the
-development of BPMN was to create a standardized modelling notation for business
-processes and by that to reduce the confusion created by dozens of proprietary
+The \emph{Business Process Modelling Notation(BPMN)} was first published by the
+BPMI and has then been adopted by the OMG (Object Management Group)~\cite{omg2009bpmn}.
+The goal of the development of BPMN was to create a standardized modeling notation
+for business processes, thus reducing the confusion created by dozens of proprietary
 business process notations.  A brief introduction to BPMN is given for instance
 in~\cite{white2004introduction}.
 
@@ -24,21 +24,20 @@ Groups and Annotations).
 	\label{fig:bpmn_example}
 \end{figure}
 
-Figure \ref{fig:bpmn_example} shows a simple example for an e-mail client
-periodically looking for new mail.  The elements are quite self-descriptive and
-most of them are already known from other notations, so the basics of the BPMN
-are readily understandable for all business analysts, architects and developers
-and even for non-experts.  At the same time BPMN provides a large variety of
-subtypes for each of the Flow Objects and every element type is enriched with
-many non-graphical attributes, making the models sufficiently detailed for being
-exported to executable languages while keeping the visual notation concise and
-understandable.
+Figure \ref{fig:bpmn_example} shows a simple example diagram.  The elements are
+quite self-descriptive and most of them are already known from other notations,
+so the basics of the BPMN are readily understandable for all business analysts,
+architects and developers and even for non-experts.  At the same time BPMN provides
+a large variety of subtypes for each of the Flow Objects and every element type
+is enriched with many non-graphical attributes, making the models sufficiently
+detailed for being exported to executable languages while keeping the visual
+notation concise and understandable.
 
 A problem with BPMN is that it is mainly a \emph{notation}.  Although the
 specification describes many non-graphical attributes and a mapping to a formal
 language, it neither states an exchange format, like an XSD, nor clear semantics
-for all of the elements.  Still the Business Process Modelling Notation can be
-used throughout the whole software engineering lifecycle, from a simplified model
+for all of the elements.  Still the Business Process Modeling Notation can be
+used throughout the entire software engineering life-cycle, from a simplified model
 at the requirements analysis up to a highly detailed model that can be used for
 generating code for an executable language.
 
@@ -67,7 +66,7 @@ held in Lanes (see below).
 \textbf{Events} are things that \emph{happen}, like a message arriving, an alarm,
 or an error, and often they mark the beginning and the end of the process.  The
 graphical notation is a circle.  They are subdivided into \emph{Start Events},
-\emph{Intermediate Events} and \emph{End Events}, which will determine the circle's
+\emph{Intermediate Events} and \emph{End Events}, which determines the circle's
 border (see figure \ref{fig:events}).
 
 \begin{figure}[ht]
@@ -80,7 +79,7 @@ border (see figure \ref{fig:events}).
 
 Further all three Event types have a variety of subtypes which will determine
 e.g. a Start Event's \emph{trigger} and an end Event's \emph{result}.  Each of
-these subtypes can be distinguished by a different icon in the centre of the Event
+these subtypes can be distinguished by a different icon in the center of the Event
 figure (see figure \ref{fig:triggers}) and results in a number of attributes to
 be set for the Event.
 
@@ -109,33 +108,32 @@ with a small $ \boxplus $ sign on the bottom line (see figure \ref{fig:activitie
 
 Like Events, Activities also have some specializations, each one with special
 attributes: They can be for instance a \emph{Send} or a \emph{Receive} Task, stand
-for some \emph{Manual} work to be done, execute a \emph{Script} or, in case of
-the \emph{Independent} Sub Process, represent a whole business process, just to
-name a few.  All of these subtypes have the same graphical representation, but
-modellers and modelling tools are free to extend the diagrams with additional
-markers for the subtypes.
+for some \emph{Manual} work to be done, execute a \emph{Script} or represent the
+call to a whole other business process, just to name a few.  All of these subtypes
+have the same graphical representation, but modelers and modeling tools are
+free to extend the diagrams with additional markers for the subtypes.
 
 What makes Activities stand out from the other Flow Objects is that they can
 \emph{loop}.  Although in BPMN loops also can be defined by simply connecting a
 Sequence Flow to an upstream Flow Object, which might be easier to understand by
-non-experts, it's seen as better style to use looping Sub Processes.  A looping
-Activity is marked with a small counter-clockwise arrow on its bottom line.
+non-experts, it's seen as better style to use looping Activities, where
+applicable.  A looping Activity is marked with a small counter-clockwise arrow on
+its bottom line.
 
-\textbf{Gateways} provide wide capabilities in modelling all kinds of splitting
-and merging behaviour.  Figure \ref{fig:gateways} shows the different kinds of
+\textbf{Gateways} provide wide capabilities in modeling all kinds of splitting
+and merging behavior.  Figure \ref{fig:gateways} shows the different kinds of
 Gateways.  Depending on whether the Gateway has multiple incoming or outgoing
-Sequence Flows -- or even both -- it has different semantics, like forking and/or
-joining the flows.  However, Gateways are not the only way for modelling forking
-and joining of flows.  In some cases the same semantics can be reached by omitting
-the Gateway and connecting multiple Sequence Flows directly to an
-Activity\footnote{this is not allowed for Events}.
+Sequence Flows --- or even both --- it has different semantics, like forking
+and/or joining the flows.  However, Gateways are not the only way for modeling
+forking and joining of flows: In some cases the same semantics can be reached
+by omitting the Gateway and connecting multiple Sequence Flows directly to an
+Activity (but not Events).  However, this should also be considered bad style.
 
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=.75\textwidth]{figures/bpmn/gateways.png}
-	\caption[BPMN Gateway types]{BPMN Gateway types.  From left to right: Data
-	based XOR (with and without marker), Event based XOR, Inclusive OR, Complex,
-	AND}
+	\caption[BPMN Gateway types]{BPMN Gateway types.  From left to right: Data-based
+	XOR (with and without marker), Event-based XOR, Inclusive OR, Complex, AND}
 	\label{fig:gateways}
 \end{figure}
 
@@ -144,9 +142,9 @@ Activity\footnote{this is not allowed for Events}.
 
 The most important connections are \emph{Sequence Flows} and \emph{Message Flows}.
 Sequence Flows represent the flow of control and connect Flow Objects within a
-Pool in the order of execution.  Message Flow represents messages -- not necessarily
-data -- being exchanged exclusively between Pools.  See figure \ref{fig:connections}
-for the connections' graphical notation.
+Pool in the order of execution.  Message Flow represents messages --- not
+necessarily data --- being exchanged exclusively between Pools.  See figure
+\ref{fig:connections} for the connections' graphical notation.
 
 \begin{figure}[ht]
 	\centering
@@ -157,7 +155,7 @@ for the connections' graphical notation.
 \end{figure}
 
 The third connection, the \emph{Association}, is mainly used for documentation
-reason, for instance to connect a Text Annotation to a Flow Object that needs
+purposes, for instance to connect a Text Annotation to a Flow Object that needs
 further explanation.  Still there is an exception to this rule: For connecting a
 compensating Activity to a compensation Event an Association is used instead of
 a Sequence Flow.  An Association's arrow heads are optional.
@@ -168,11 +166,12 @@ a Sequence Flow.  An Association's arrow heads are optional.
 Swimlanes can be \emph{Pools} and \emph{Lanes}.  Each Pool represents one
 Participant in the business process, while Lanes are used to partition a Pool.
 Doing so each of a company's departments could be represented by a Lane while the
-Pool stands for the company itself.  Typically Pools and Lanes are oriented
-horizontally, but they may be oriented vertically, too.  Further, Lanes may cross
-or contain other Lanes, but those techniques are poorly documented and usually
-not used.  Figure \ref{fig:swimlanes} shows a small horizontally oriented Pool
-containing two empty Lanes.
+Pool stands for the company itself.  However, the semantics of both Pools and
+Lanes is not entirely fixed.  Typically Swimlanes are oriented horizontally,
+but may be oriented vertically, too.  Further, Lanes may cross or contain other
+Lanes, but those techniques are poorly documented and seldom used.  Figure
+\ref{fig:swimlanes} shows a small horizontally oriented Pool containing two empty
+Lanes.
 
 \begin{figure}[ht]
 	\centering
@@ -187,9 +186,9 @@ containing two empty Lanes.
 The main purpose of \emph{Artifacts} is documentation.  However, like Associations,
 in some situations they can have semantics, e.g. when a \emph{Data Object} is
 referenced by an Activity as input.  Data Objects represent everything that can
-be input or output of some Activity.  In most cases this will be a file, but since
-Activities can be \emph{Manual Tasks}, too, a Data Object could also stand for
-something physical.
+be input or output of some Activity.  In most cases this will be a file, or some
+piece of data, but since Activities can be \emph{Manual Tasks}, too, a Data Object
+could also stand for something physical.
 
 The other two Artifacts, \emph{Group} and \emph{Text Annotation}, are solely used
 for documentation.  See figure \ref{fig:artifacts} for their graphical notation.
@@ -257,7 +256,7 @@ element.
 \label{sec:bpmn_export}
 
 One of the main purposes of the Business Process Modelling Notation is to provide
-a graphical notation that can be used to generate executable code from it.
+a graphical process notation that can be used to generate executable code from it.
 
 A mapping to WS-BPEL is given in the BPMN Specification.  As a matter of fact,
 BPMN has been tailored for the mapping to WS-BPEL, which can be seen in many
@@ -274,7 +273,7 @@ diagram to conform to block structure.  However, not every diagram can be
 refactored like that.
 
 While the basic elements such as Flow Objects should neither be altered nor
-extended by new elements the BPMN Specification encourages the introduction of
+extended by new elements, the BPMN Specification encourages the introduction of
 new, domain-specific Artifacts to be used in mappings to executable languages
 other than BPEL.  These elements can be associated with the original BPMN elements
 and represent concepts that were not considered in the original BPMN specification.
