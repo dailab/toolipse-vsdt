@@ -33,18 +33,18 @@ them.
 \begin{verbatim}
 Term:           Element (Operator Term)?;
 Element:        BracketTerm | Negation | Minus | Card |
-                Value | List | Variable;
+                List | Variable | Value;
 BracketTerm:    "(" Term ")";
-Negation:       "not" Head;
-Minus:          "-" Head;
-Card:           "#" Head;
-Value:          STRING | INT | FLOAT| "true" | "false" | "null";
-List:           "[" ListElement? "]";
-ListElement:    first = Term ("," ListElement)?;
+Negation:       "not" Element;
+Minus:          "-" Element;
+Card:           "#" Element;
+List:           "[" (ListElement)? "]";
+ListElement:    Term ("," ListElement)?;
 Variable:       ID (Accessor)?;
 Accessor:       ArrayAccessor | FieldAccessor;
 ArrayAccessor:  "[" Term "]" (Accessor)?;
 FieldAccessor:  "." ID (Accessor)?;
+Value:          STRING | INT | FLOAT| "true" | "false" | "null";
 Operator:      "<" | "<=" | "==" | "!=" | ">" | ">=" | 
                 "+" | "-" | "*" | "/" | "%" | "and" | "or" | "++";
 \end{verbatim}
