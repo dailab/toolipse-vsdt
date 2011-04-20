@@ -7,6 +7,9 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 
+\clubpenalty = 1000
+\widowpenalty = 1000
+
 \newcommand{\version}{1.4.0}
 \newcommand{\downloadsites}{\url{http://www.jiac.de}}
 
@@ -21,23 +24,22 @@
 \begin{document}
 
 	\frontmatter
-%	\maketitle
+	\maketitle
 	\tableofcontents
 
 	\mainmatter
-%	\input{01_intro}
+	\input{01_intro}
 
 %	\part{User's Guide}
-%	\input{11_setup}
+	\input{11_setup}
 	\input{12_perspective}
 	\input{13_tutorial}
 	\input{14_features}
-	% TODO aktualisieren
-%	\input{15_preferences}
-%	\input{16_transformation}
-	% TODO service starter ruless
+	\input{15_preferences}
+	\input{16_transformation}
+	% TODO service starter rules
 	\input{17_jiacnode}
-%	\input{18_faq}
+	\input{18_faq}
 	% TODO development process
 	% TODO ILIAS Simulation
 
@@ -50,9 +52,9 @@
 
 %	\part{Appendices}
 	\appendix
-%	\input{31_bpmn}
-%	\input{32_vxl}
-%	\input{33_changelog}
+	\input{31_changelog}
+	\input{32_bpmn}
+	\input{33_vxl}
 
 	\bibliography{bibliography}
 

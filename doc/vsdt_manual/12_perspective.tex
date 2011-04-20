@@ -3,8 +3,8 @@
 
 This section will briefly introduce those parts of the Eclipse GUI that are
 relevant for the work with the Visual Service Design Tool.  These views are
-aggregated in the Easy Service Creation perspective, which an be selected via the
-Menu \emph{Window $\rightarrow$ Perspective}.  Figure~\ref{fig:screen}
+aggregated in the Easy Service Creation perspective, which can be selected via
+the Menu \emph{Window $\rightarrow$ Perspective}.  Figure~\ref{fig:screen}
 (page~\pageref{fig:screen}) is showing a screenshot of the Visual Service Design
 Tool featuring most of the relevant views.  In the following each of the views
 will be introduced briefly.
@@ -13,21 +13,19 @@ will be introduced briefly.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{VSDT Editor Views}
-\label{sec:user_perspective_editor}
 
-The editor window is shown automatically when opening a file in the Navigator
-view.  Depending on the PlugIns currently installed this can be a plain text
-editor, a browser, an elaborate code editor or some sort of graphical editor.
-For the Visual Service Design Tool there are two editors available: A visual
-editor showing the BPMN graph and a tree editor reflecting the internal structure.
+The editor window is the central view, shown when a file is opened in Eclipse.
+Depending on the file type this can be a plain text editor, a browser, an elaborate
+code editor or some sort of graphical editor.  For the Visual Service Design Tool
+there are two editors available: A visual editor showing the BPMN graph and a
+tree editor reflecting the internal structure.
 
 \paragraph*{The Graphical Editors}
-These are the primary editors when working with the VSDT (see
-Figure~\ref{fig:screen_meta}):
+These are the primary editors when working with the VSDT (see Figure~\ref{fig:screen_meta}):
 
 \begin{figure}
 	\centering
-	\includegraphics[height=.4\textheight]{figures/vsdt_1-3-0_uc.png}
+	\includegraphics[height=.4\textheight]{figures/vsdt_1-4-0_meta.png}
 	\caption{Business Process System and BPMN editor shown side-by-side.}
 	\label{fig:screen_meta}
 \end{figure}
@@ -40,7 +38,7 @@ Figure~\ref{fig:screen_meta}):
 	
 	\item The \emph{Business Process Diagram} editor is opened when double-clicking
 	one of the Business Process Diagram nodes in the Business Process System
-	editor.  This editor is the actual BPMN editor used for modelling the
+	editor.  This editor is the actual BPMN editor used for modeling the
 	individual Business Processes.
 \end{itemize}
 
@@ -51,33 +49,36 @@ drawing connections, click on the first node, draw the connection to the second
 node and release the mouse button.  Note that nodes and connections can not be
 drawn arbitrarily, but have to follow the BPMN syntax, e.g. a Task can only be
 drawn inside a Pool and a Sequence Flow can only connect Flow Object within the
-same Pool.
+same Pool, etc.
 
 \paragraph*{The Tree Editor}
 The tree editor can be useful for managing and editing those parts of the Business
 Process Diagram that do not have a graphical representation.\footnote{Although in
 general it is not necessary to use the tree editor, as the graphical editor
 provides means for editing non-graphical elements, too.} Note that the tree editor
-is more powerful than the graphical editor, and the diagram might be invalidated
-when doing certain operations in the tree editor.  Especially, the tree editor
-should \emph{not} be used for creating any elements that \emph{do} have a graphical
-representation in the diagram, as this representation will not be created along
-with the element.
+has fewer restrictions than the graphical editor, and the diagram might be
+invalidated when doing certain operations in the tree editor.  Especially, the
+tree editor should \emph{not} be used for creating any elements that \emph{do}
+have a graphical representation in the diagram, as this representation will not
+be created along with the element.
 
 \paragraph*{The Text Editor}
-Both the diagram and the model file can be opened with any text editor and edited
-as XML.  While this can be helpful for adapting existing models to changes in the
-metamodel of a newer version of the VSDT, you should in general avoid editing the
-files XML sources, as this can render them unreadable for the other editors.
+Of course, VSDT's files can also be opened with any text editor and edited as
+XML.  While this can be helpful for adapting existing models to changes in the
+meta-model of a newer version of the VSDT, you should in general avoid editing the
+files' XML sources, as this can render them unreadable for the other editors.
 
+These are the three possibilities to edit a VSDT file.  However, unless needed
+(e.g. because the file is broken an can not be opened in the graphical editor),
+and unless you \emph{really} know what you are doing, you should use only the
+graphical editor and avoid the others.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{General-purpose Eclipse Views}
-\label{sec:user_perspective_general}
 
-In the following those standard views of the Eclipse IDE will be introduced, that
-are relevant for the work with the VSDT.
+In the following some standard views of the Eclipse IDE will be introduced, that
+are relevant or otherwise useful for the work with the VSDT.
 
 \paragraph*{The Project Explorer}
 Here the user can manage his projects and create and delete files.  Note that
@@ -92,10 +93,10 @@ where all the attributes relevant to the user can be inspected and edited.  Of
 course, each change done in the properties view can be undone and redone and the
 editor will be immediately updated.  There are two tabs available in the properties
 view: The \emph{Core} tab provides a table showing the attributes in categories
-and in alphabetic order.  The \emph{Overview} tab provides a clearer look, grouping
-the attributes and arranging them by relevance in two columns.  Additionally, the
-Outline tab features a number of buttons, providing access to additional dialogs
-for managing e.g.\ an Activity's Properties and Assignments.
+and in alphabetic order, while the \emph{Overview} tab provides a clearer look,
+grouping the attributes and arranging them by relevance in two columns.  Further,
+the \emph{Overview} tab features a number of buttons, providing access to
+additional dialogs for managing e.g.\ an Activity's Properties and Assignments.
 
 \paragraph*{The Outline}
 This view provides a short outline of the current editor's content.  In case of
@@ -110,19 +111,18 @@ Problem View, select \emph{Diagram | Validate} from the menu).
 
 \paragraph*{The Error Log}
 Other than the Problem View, the Error Log will log problems with the editor
-itself.  So if you encounter strange behaviour or in case the editor should crash
+itself.  So if you encounter strange behavior or in case the editor should crash
 you can check here for the reason and send in an error report.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Additional Views for the VSDT}
-\label{sec:user_perspective_custom}
+\label{sec:user_perspective_vsdtviews}
 
 The following are views that have been crafted especially for the VSDT.
 
 \paragraph*{The BPMN-Properties View}
-\label{sec:user_perspective_propView}
 
 The BPMN-Properties View (see Figure~\ref{fig:customViews}, to the left) provides
 an easy way to inspect the Properties in the scope of the currently selected
@@ -151,11 +151,11 @@ parent element.
 
 \paragraph*{The Pool Visibility View}
 
-In the Pool Visibility View, which is seen in the centre of Figure~\ref{fig:customViews},
+In the Pool Visibility View, which is seen in the center of Figure~\ref{fig:customViews},
 all the Pools in the diagram are displayed.  If the check box in front of an entry
 is unchecked, the corresponding Pool and all incoming and outgoing connections,
 e.g.\ Message Flows, will be hidden.  This feature can be of some use in diagrams
-holding many Pools: When modelling three or more interconnected Pools, Message
+holding many Pools: When modeling three or more interconnected Pools, Message
 Flows going from the first to the third Pool might cross the second Pool, which
 can be confusing when editing that Pool.  In this case, the first or the third
 Pool may be hidden, so the Message Flows (which are then hidden, too) do not
@@ -185,17 +185,16 @@ all Pools will be visible again.
 %	view, the Web Service view does not need the RSD but will directly connect to a
 %	given Web service URL.
 The Web Service View (see Figure~\ref{fig:customViews}, to the right) provides
-access to Web Services, which can be inspected and imported into the currently
-opened diagram.  Web Services can be added to the list by clicking the Open button
-and entering the exact URL of the WSDL definitions file.  The Web Service is
-displayed as a tree, including the various Messages and their types, nad the Port
-Types, their Operations, and their In- and Output Messages.  By clicking the Info
-button, the complete WSDL definition is shown in plain XML.  Most importantly,
-Messages and Operations can be imported from the Web service description into the
-Business Process Diagrams, so they can be reused in a Web service invocation.
+access to Web Services, which can be inspected and imported into the current
+diagram.  Web Services can be added to the list by clicking the Open button and
+entering the exact URL of the WSDL definitions file.  The Web Service is displayed
+as a tree, including the various Messages and their types, and the Port Types,
+their Operations, and their In- and Output Messages.  By clicking the Info button,
+the complete WSDL definition is shown in plain XML.  Most importantly, Messages
+and Operations can be imported from the Web service description into the Business
+Process Diagrams, so they can be reused in a Web service invocation.
 
 \paragraph*{The Interpreter View}
-\label{sec:user_perspective_simView}
 BPMN diagrams created with the VSDT can be simulated and interpreted using the
 built-in process interpreter (see Figure~\ref{fig:customViews2} and
 Section~\ref{sec:user_features_sim}).  For starting a simulation, first switch to
@@ -209,9 +208,8 @@ Into} or \emph{Step Out}.  Hit the Stop button for ending the simulation and
 removing the markers from the diagram editor view.
 
 \paragraph*{The Structure View}
-\label{sec:user_perspective_strucView}
-This view allows to apply the Structure Mapping (see~\ref{sec:user_trafo_intro})
-at modelling time, displaying the results in a tree.  By clicking on an element,
+This view allows to apply the Structure Mapping (Section ~\ref{sec:user_trafo_intro})
+at modeling time, displaying the results in a tree.  By clicking on an element,
 the corresponding node in the diagram is highlighted.  Further, the user is
 notified if there seem to be structural conflicts in the process, which is
 determined from the number of left-over Sequence Flows.  This view should prove
