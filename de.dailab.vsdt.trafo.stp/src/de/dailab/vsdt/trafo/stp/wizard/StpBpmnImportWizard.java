@@ -2,7 +2,6 @@ package de.dailab.vsdt.trafo.stp.wizard;
 
 import java.util.ArrayList;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.stp.bpmn.BpmnDiagram;
 
@@ -44,27 +43,27 @@ public class StpBpmnImportWizard extends BpmnImportWizard {
 		return super.getModelName(model);
 	}
 	
-	@Override
-	protected Object getSouceObject(URI fileURI) {
-		// TODO Auto-generated method stub
-//		
-//		ResourceSet resourceSet = new ResourceSetImpl();
-//		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("bpmn", new BpmnResourceFactoryImpl());
-//		
-//		Resource resource= resourceSet.createResource(fileURI);
-////		Resource resource = resourceSet.getResource(fileURI, true);
-//		try {
-//			resource.load(null);
-//
-//			EObject source= resource.getContents().get(0);
-//			EcoreUtil.resolveAll(source);
-//			
-//			return source;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-		return super.getSouceObject(fileURI);
-	}
+//	@Override
+//	public Object getSouceObject(URI fileURI) {
+//		// TODO Auto-generated method stub
+////		
+////		ResourceSet resourceSet = new ResourceSetImpl();
+////		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("bpmn", new BpmnResourceFactoryImpl());
+////		
+////		Resource resource= resourceSet.createResource(fileURI);
+//////		Resource resource = resourceSet.getResource(fileURI, true);
+////		try {
+////			resource.load(null);
+////
+////			EObject source= resource.getContents().get(0);
+////			EcoreUtil.resolveAll(source);
+////			
+////			return source;
+////		} catch (Exception e) {
+////			e.printStackTrace();
+////			return null;
+////		}
+//		return super.getSouceObject(fileURI);
+//	}
 
 }

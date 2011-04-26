@@ -46,4 +46,8 @@ public class StpBpmnResultSaver extends MappingResultSaver {
 		return true;
 	}
 
+	@Override
+	protected String getDirectorySuffix() {
+		return "stp";
+	}
 }

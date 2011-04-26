@@ -76,5 +76,9 @@ public class JiacResultSaver extends MappingResultSaver implements JiacVisitorCo
 		return ok;
 	}
 	
+	@Override
+	protected String getDirectorySuffix() {
+		return "jiaciv";
+	}
 	
 }
