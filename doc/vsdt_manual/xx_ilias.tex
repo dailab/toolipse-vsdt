@@ -1,0 +1,76 @@
+\chapter{Using the VSDT in ILIas}
+
+% TODO am Ende noch andere Teile voruebergehend auskommentieren, die fuer ILIas
+% weniger relevant sind (kommt da ueberhaupt wesentlich was zusammen?)
+% - BPEL- und STP-Trafo-Zeugs (oder Trafo-Zeugs allgemein?)
+% - JIAC-Node-Plugin?
+% - Layout-Algorithmus (kann evtl. generell weg, oder in nen Anhang)
+
+% Intro VSDT in ILIas (von Silvan, aus dem Meilenstein 2)
+In order to create processes for managing the smart grid environment, a
+corresponding development environment is adopted for better process creation and
+-improvement.  One part of this environment is the process oriented development
+of services for the SmaGriM system.  The main elements for this are services that
+are provided as well defined functionalities by a service provider, in order to
+allow service consumers to use those functionalities.  Such services can be
+combined into processes that define concrete combinations of service calls, thus
+realizing more complex functionalities.  Such processes are also called service
+compositions and provide an easy to read yet powerful modeling approach for the
+required grid management functionalities.
+
+% Intro Prozess-Simulation (von Silvan, aus dem Meilenstein 2)
+The ILIas system allows for extensive testing of services and processes developed
+for the SmaGriM platform.  Simulations that are used to predict the behavior of
+the grid to specific actions can also be used to test the effects of new or changed
+implementations in what-if simulation scenarios.  Such scenarios are realized as
+extended test cases by defining a test grid with known behavior, simulating new
+services and processes in this scenario and comparing the simulation results to
+the expected behavior of the grid.  This allows assessing the effects of changes
+in a very concise procedure reducing overall testing efforts.
+
+% Outline dieses Kapitels
+Using the Visual Service Design Tool (VSDT), those processes can be modeled,
+simulated (tested) using the SmaGriM simulation and finally be deployed to the
+system.  In the following Sections, we will describe the general process of using
+the VSDT in the ILIas project and then provide details about how to simulate the
+process models prior to deploying them to the live system.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  The ILIas Development Process                                             %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The ILIas Development Process}
+
+% TODO Development Process
+% verschiedene Rollen und Entwicklungsphasen beschreiben
+% Dienst-Provider: Basisdienste bereitstellen
+% Prozess-Entwickler: Steuerungsprozesse erstellen und in Repository einchecken
+% SmaGrim-Maintainer: Steuerungsprozess aus Repository auschecken, ggf. an eigene
+%     Beduerfnisse anpassen, in Simulation durchspielen und auf Produktivsystem
+%     deployen
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Testing Processes in the ILIas Simulation                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Testing Processes in the ILIas Simulation}
+
+% TODO ILIAS Simulation
+
+\subsection{The ILIas Simulation View}
+% Beschreibung der eigentlichen View, der einzelnen Buttons, etc.
+
+\subsection{Simulating Processes}
+% Klick-Weg zum Simulieren eines Prozesses:
+% Welche Bedingungen muessen erfuellt sein, was muss alles eingestellt werden, etc.
+
+\subsection{Deploying and Executing Processes}
+% Nach der Simulation: Deployment auf 'Produktiv-Umgebung' (geht das auch ueber
+% die Simulation View, oder verwendet man hierfuer wieder die Deployment View?)
+
+
+
