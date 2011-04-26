@@ -9,7 +9,7 @@ Require-Bundle: org.eclipse.xtext,
  de.dailab.vsdt.trafo.strucbpmn;visibility:=reexport,
  de.dailab.agentWorldEditor.diagram,
  org.eclipse.gmf.runtime.diagram.ui,
- de.dailab.jiactng.jadlpp;visibility:=reexport
+ de.dailab.jiactng.jadlpp
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: .
