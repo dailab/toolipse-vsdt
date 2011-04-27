@@ -27,6 +27,7 @@ import de.dailab.vsdt.Lane;
 import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.MultiLoopAttSet;
 import de.dailab.vsdt.Pool;
+import de.dailab.vsdt.ProcessType;
 import de.dailab.vsdt.Service;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.TriggerType;
@@ -179,7 +180,9 @@ public class Bpmn2TextElementMapping extends MappingStage {
 
 		// create Structured Text for each Pool
 		for (Pool pool : bpd.getPools()) {
-			visitPool(pool);
+			if (pool.getProcessType() != ProcessType.NONE) {
+				visitPool(pool);
+			}
 		}
 
 		// Paragraphs for Individual Activities
@@ -783,7 +786,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		}
 		builder.append(beginning);
 		builder.append((isUntil ? " Until" : " While" ) + " the condition " + 
-				code(condition) + " holds true, the loop will continue");
+				code(condition) + " holds true, the loop will be repeated");
 		visitFlowObject(bpmnLoopBlock.getSecondBranch().getElement(), " and ", true);
 		builder.endBlock();
 	}

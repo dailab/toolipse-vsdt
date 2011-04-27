@@ -97,6 +97,16 @@ public class TextBuilder {
 	}
 	
 	/**
+	 * Simply add some unformatted text followed by a new line
+	 * @see StringBuilder#append(String)
+	 */
+	public final TextBuilder appendLine(String s) {
+		append(s);
+		newLine();
+		return this;
+	}
+	
+	/**
 	 * Insert a Line Break and restore indentation. Change indentation by delta_indent.
 	 */
 	public final TextBuilder newLine(int delta_indent) {

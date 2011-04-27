@@ -19,18 +19,16 @@ public class LatexBuilder extends TextBuilder {
 	
 	@Override
 	public TextBuilder appendHeader(String title) {
-		buffer.append("\\documentclass{article}");
-		newLine();
-		buffer.append("\\usepackage[utf8]{inputenc}");
-		newLine();
-		buffer.append("\\begin{document}");
-		newLine();
+		appendLine("\\documentclass{article}");
+		appendLine("\\usepackage[utf8]{inputenc}");
+		appendLine("\\usepackage{graphicx}");
+		appendLine("\\begin{document}");
 		return this;
 	}
 	
 	@Override
 	public TextBuilder appendFooter() {
-		buffer.append("\\end{document}");
+		appendLine("\\end{document}");
 		return this;
 	}
 	
@@ -39,24 +37,25 @@ public class LatexBuilder extends TextBuilder {
 		newLine();
 		switch (level) {
 		case 0:
-			buffer.append("\\title{" + title + "}");
-			buffer.append("\\maketitle");
+			appendLine("\\title{" + title + "}");
+			appendLine("\\maketitle");
 			break;
 		case 1:
-			buffer.append("\\section*{" + title + "}");
+			appendLine("\\section*{" + title + "}");
 			break;
 		case 2:
-			buffer.append("\\subsection*{" + title + "}");
+			appendLine("\\subsection*{" + title + "}");
 			break;
 		case 3:
-			buffer.append("\\subsubsection*{" + title + "}");
+			appendLine("\\subsubsection*{" + title + "}");
 		default:
-			buffer.append("\\paragraph*{" + title + "}");
+			appendLine("\\paragraph*{" + title + "}");
 		}
 		if (anchor != null) {
-			buffer.append("\\label{" + anchor+ "}");
+			// FIXME problem with underscores ('_')
+//			buffer.append("\\label{" + anchor + "}");
+//			newLine();
 		}
-		newLine();
 		return this;
 	}
 	
@@ -69,8 +68,7 @@ public class LatexBuilder extends TextBuilder {
 
 	@Override
 	public TextBuilder appendItem(String s) {
-		buffer.append("\\item ").append(s);
-		newLine();
+		appendLine("\\item " + s);
 		return this;
 	}
 	
@@ -106,6 +104,15 @@ public class LatexBuilder extends TextBuilder {
 	public String ref(String s, String anchor) {
 		// TODO Auto-generated method stub
 		return super.ref(s, anchor);
+	}
+	
+	@Override
+	public TextBuilder appendImage(String path, String label) {
+		appendLine("\\begin{figure}");
+		appendLine("\t\\includegraphics[width=\\textwidth]{" + path + "}");
+		appendLine("\t\\caption{" + label + "}");
+		appendLine("\\end{figure}");
+		return this;
 	}
 	
 	@Override
