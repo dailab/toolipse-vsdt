@@ -43,7 +43,7 @@ process models prior to deploying them to the live system.
 \section{The ILIas Development Process}
 
 % verschiedene Rollen und Entwicklungsphasen beschreiben
-Two main roles can be identified in the ILIas development process.  First, there
+Two main roles can be identified in the ILIas development process:  First, there
 is the \emph{process engineer}, whose role is (a) developing and providing
 different basic services to be orchestrated to complex processes in the process
 diagram, and (b) creating such orchestrations for handling individual emergency
@@ -74,7 +74,6 @@ and \emph{Process Usage}.
 The use case of \emph{Process Creation} is laid out in Figure~\ref{fig:ilias-proc-creation}.
 
 \begin{figure}[ht]
-	\centering
 	\includegraphics[width=\textwidth]{ilias/bpmn_ilias-2.png}
 	\caption{ILIas Use Case \emph{Process Creation}}
 	\label{fig:ilias-proc-creation}
@@ -88,16 +87,17 @@ carried out using the generic process modeling assistants provided by the VSDT.
 Once the functionality of the process itself has been tested, the process is
 deployed on the simulation environment for testing how the process integrates
 into the ILIas environment.\footnote{For this purpose, the developer uses a
-separate simulation, and not the one used for testing compensatory processes in
-case of an emergency.} Next, the process has to be certified, to ensure that only
-thoroughly tested and simulated processes, which do not do harm to the system,
-are deployed.  If either the simulation or the certification fail, the process
-engineer has to go back to the drawing board and has to rework the process.
+separate simulation, and not the one used by the SmaGriM Operator for testing
+compensatory processes in case of an emergency.} Next, the process has to be
+certified, to ensure that only thoroughly tested and simulated processes, which
+do not do harm to the system, are deployed.  If either the simulation or the
+certification fail, the process engineer has to go back to the drawing board
+and rework the process.
 
 Finally, certified processes can be deployed.  There are two possibilities:
 Either, the process is deployed as a basic service, which means that it can be
 reused as part of another process; in this case the process is deployed to the
-runtime, so it can be executed on demand.  Or the process is deployed as an
+runtime, so it can be invoked on demand.  Or the process is deployed as an
 emergency process, for use only in special emergency situations; in this case the
 process is deployed to the process repository, from where it can be retrieved
 when needed.
@@ -110,7 +110,6 @@ when needed.
 The use case of \emph{Process Usage} is depicted in Figure~\ref{fig:ilias-proc-usage}.
 
 \begin{figure}[ht]
-	\centering
 	\includegraphics[width=1\textwidth]{ilias/bpmn_ilias-3.png}
 	\caption{ILIas Use Case \emph{Process Usage}}
 	\label{fig:ilias-proc-usage}
@@ -122,7 +121,7 @@ an adequate compensatory process for handling this kind of event in the process
 repository.  In case the process has parameters, those are adapted to the current
 situation (e.g. some sort of threshold, or IDs).
 
-Afterwards, the process (with the selected parameter configuration) are tested in
+Afterwards, the process (with the selected parameter configuration) is tested in
 a simulation precisely mirroring the current state of the grid.\footnote{It is
 also possible that the process does not require to be simulated, which may be
 necessary for emergencies demanding for very short response times.  Determining
@@ -138,7 +137,11 @@ runtime for countering the emergency situation.
 
 \section{Testing Processes in the ILIas Simulation}
 
-% TODO ILIAS Simulation
+In the following we will provide a detailled description of those components of
+the VSDT which have been created especially for the ILIas project, foremost the
+\emph{Simulation View}, providing the connection to the agents running the
+simulation.
+
 
 \subsection{The ILIas Simulation View}
 
@@ -152,7 +155,7 @@ starting and stopping the simulation and for viewing the status of the simulatio
 % TODO richtiges Bild erstellen und einbinden
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=.6\textwidth]{figures/features/deployment-view.png}
+	\includegraphics[width=.6\textwidth]{ilias/simulation-view_nyi.png}
 	\caption{ILIas Simulation View}
 	\label{fig:ilias-simview}
 \end{figure}
@@ -161,12 +164,12 @@ starting and stopping the simulation and for viewing the status of the simulatio
 The Simulation View is based on the \emph{JIAC Node Plugin} (see Section
 \ref{sec:user_jiac-node}), and the deployment mechanism is similar to that of the
 \emph{Deployment View}, the only difference being that the processes can not be
-deployed to arbitrary JIAC agents, but only to to ILIas Simulation Agent.
+deployed to arbitrary JIAC agents, but only to an ILIas Simulation Agent.
 
 % Funktionsweise: JADL-Services und Service-Starter-Rules
 Like for the regular deployment view, the processes are transformed to executable
 JADL services and then deployed to an agent equipped with a JADL interpreter
-running on the SmaGriM node.  Additionally, besides the services also a number of
+running on the simulation node.  Additionally, besides the services also a number of
 service starter rules are deployed to that agent, so that the individual JADL
 services are started just in the way stated by the processes' start events.
 
