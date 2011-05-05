@@ -23,6 +23,7 @@ import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.DataType;
 import de.dailab.vsdt.MessageChannel;
+import de.dailab.vsdt.Parameter;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Service;
 import de.dailab.vsdt.VsdtPackage;
@@ -47,6 +48,7 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getMessageChannels <em>Message Channels</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getServices <em>Services</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getDataTypes <em>Data Types</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
  *
@@ -262,6 +264,16 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 	 * @ordered
 	 */
 	protected EList<DataType> dataTypes;
+
+	/**
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Parameter> parameters;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -519,6 +531,18 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Parameter> getParameters() {
+		if (parameters == null) {
+			parameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, VsdtPackage.BUSINESS_PROCESS_SYSTEM__PARAMETERS);
+		}
+		return parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -547,6 +571,8 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 				return ((InternalEList<?>)getServices()).basicRemove(otherEnd, msgs);
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__DATA_TYPES:
 				return ((InternalEList<?>)getDataTypes()).basicRemove(otherEnd, msgs);
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -585,6 +611,8 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 				return getServices();
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__DATA_TYPES:
 				return getDataTypes();
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__PARAMETERS:
+				return getParameters();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -642,6 +670,10 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 				getDataTypes().clear();
 				getDataTypes().addAll((Collection<? extends DataType>)newValue);
 				return;
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__PARAMETERS:
+				getParameters().clear();
+				getParameters().addAll((Collection<? extends Parameter>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -693,6 +725,9 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__DATA_TYPES:
 				getDataTypes().clear();
 				return;
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__PARAMETERS:
+				getParameters().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -731,6 +766,8 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 				return services != null && !services.isEmpty();
 			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__DATA_TYPES:
 				return dataTypes != null && !dataTypes.isEmpty();
+			case VsdtPackage.BUSINESS_PROCESS_SYSTEM__PARAMETERS:
+				return parameters != null && !parameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

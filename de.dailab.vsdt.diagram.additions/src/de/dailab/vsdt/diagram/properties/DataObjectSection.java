@@ -16,7 +16,7 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.DataObject;
 import de.dailab.vsdt.VsdtPackage;
-import de.dailab.vsdt.diagram.actions.OrganizePropertiesAction;
+import de.dailab.vsdt.diagram.actions.OrganizeElementsAction;
 
 
 public class DataObjectSection extends AbstractVsdtPropertySection {
@@ -88,7 +88,7 @@ public class DataObjectSection extends AbstractVsdtPropertySection {
     	super.widgetSelected(e);
     	Object src= e.getSource();
     	if (src.equals(orgPropButton)) {
-			new OrganizePropertiesAction().run(dataObject);
+			OrganizeElementsAction.getPropertiesAction(-1).run(dataObject);
     	}
     	if (src.equals(requiredButton)) {
     		setPropertyValue(dataObject, pack.getDataObject_RequiredForStart(), requiredButton.getSelection());

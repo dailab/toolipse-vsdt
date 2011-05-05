@@ -10,7 +10,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.Pool;
-import de.dailab.vsdt.diagram.actions.OrganizePropertiesAction;
+import de.dailab.vsdt.diagram.actions.OrganizeElementsAction;
 
 public class DoubleClickOrgPropEditPolicy extends OpenEditPolicy{
 
@@ -26,7 +26,7 @@ public class DoubleClickOrgPropEditPolicy extends OpenEditPolicy{
 			if ((element instanceof FlowObject) || 
 					(element instanceof MessageFlow) ||
 					(element instanceof Pool) ) {
-				return new ICommandProxy(new OrganizePropertiesAction().new OrganizePropertiesCommand(element));
+				return new ICommandProxy(OrganizeElementsAction.getPropertiesAction(-1).getCommand());
 			}
 		}
 		return null;

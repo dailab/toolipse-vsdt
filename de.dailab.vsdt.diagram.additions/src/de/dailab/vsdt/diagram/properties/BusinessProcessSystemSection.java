@@ -19,9 +19,7 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.VsdtPackage;
-import de.dailab.vsdt.diagram.actions.OrganizeDataTypesAction;
-import de.dailab.vsdt.diagram.actions.OrganizeImplementationsAction;
-import de.dailab.vsdt.diagram.actions.OrganizeMessagesAction;
+import de.dailab.vsdt.diagram.actions.OrganizeElementsAction;
 
 
 public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
@@ -35,9 +33,11 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
 							   DISPLAY_CREATE_DATE= "Creation Date",
 							   DISPLAY_MOD_DATE= "Modification Date",
 							   DISPLAY_MODIFIED_NOW= "Now",
+							   
 							   DISPLAY_ORG_IMPL= "Services...",
 							   DISPLAY_ORG_MSG= "Message Channels...",
-							   DISPLAY_ORG_DATA= "Data Types...";
+							   DISPLAY_ORG_DATA= "Data Types...",
+							   DISPLAY_ORG_PARAM= "Parameters...";
 	
     protected BusinessProcessSystem bps;
 
@@ -47,9 +47,11 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
     private Text expLangText;
     private Text queryLangText;
     private Button setModifiedTimeButton;
+    
     private Button orgImplButton;
     private Button orgMsgButton;
     private Button orgDataButton;
+    private Button orgParamButton;
     
     private Button executableButton;
     
@@ -115,6 +117,7 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
         orgImplButton = addButton(DISPLAY_ORG_IMPL);
         orgMsgButton = addButton(DISPLAY_ORG_MSG);
         orgDataButton = addButton(DISPLAY_ORG_DATA);
+        orgParamButton = addButton(DISPLAY_ORG_PARAM);
         
         // author
         label = FormLayoutUtil.addLabel(composite, DISPLAY_AUTHOR, lastControl, 0);
@@ -211,13 +214,16 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
     		refresh();
     	}
     	if (src.equals(orgImplButton)) {
-    		new OrganizeImplementationsAction().run(bps);
+    		OrganizeElementsAction.getServicesAction().run(bps);
     	}
     	if (src.equals(orgMsgButton)) {
-			new OrganizeMessagesAction().run(bps);
+			OrganizeElementsAction.getMessageChannelAction().run(bps);
     	}
     	if (src.equals(orgDataButton)) {
-			new OrganizeDataTypesAction().run(bps);
+			OrganizeElementsAction.getDataTypesAction().run(bps);
+    	}
+    	if (src.equals(orgParamButton)) {
+			OrganizeElementsAction.getParametersAction().run(bps);
     	}
     	if (src.equals(executableButton)) {
     		setPropertyValue(bps, pack.getBusinessProcessSystem_Executable(), executableButton.getSelection());

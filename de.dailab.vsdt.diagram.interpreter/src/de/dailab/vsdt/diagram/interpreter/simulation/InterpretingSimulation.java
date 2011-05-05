@@ -388,7 +388,8 @@ public class InterpretingSimulation extends ManualSimulation {
 	 * @param eObject	Some (Flow) Object
 	 * @return				Map of names of Properties in the scope to their values
 	 */
-	protected Map<String, Serializable> createContext(EObject eObject) { 
+	protected Map<String, Serializable> createContext(EObject eObject) {
+		// get local properties
 		Map<String, Serializable> context= new HashMap<String, Serializable>();
 		for (Property property : VsdtHelper.getVisibleProperties(eObject)) {
 			context.put(property.getName(), propertyValueMap.get(property));
@@ -454,7 +455,8 @@ public class InterpretingSimulation extends ManualSimulation {
 		// check expression language
 		String lang= expression.getExpressionLanguageToBeUsed();
 		if (Util.languageIsVxl(lang)) {
-			return expression.getExpression();
+//			return expression.getExpression();
+			return VsdtHelper.getExpressionWithParameters(expression);
 		} else {
 			Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 			String message= "Expressions must be given using the VSDT Expression Language (VXL).";

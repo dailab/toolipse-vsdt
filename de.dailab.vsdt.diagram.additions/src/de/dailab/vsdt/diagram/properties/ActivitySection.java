@@ -37,7 +37,7 @@ import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.VsdtPackage;
-import de.dailab.vsdt.diagram.actions.OrganizePropertiesAction;
+import de.dailab.vsdt.diagram.actions.OrganizeElementsAction;
 import de.dailab.vsdt.diagram.actions.ParameterAssignmentsAction;
 import de.dailab.vsdt.diagram.ui.ExpressionComposite;
 import de.dailab.vsdt.diagram.ui.VsdtFeatureCombo;
@@ -283,7 +283,7 @@ implements FocusListener, SelectionListener {
     	super.widgetSelected(e);
     	Object src= e.getSource();
     	if (src.equals(orgPropButton)) {
-			new OrganizePropertiesAction().run(activity);
+			OrganizeElementsAction.getPropertiesAction(-1).run(activity);
     	}
     	if (src.equals(parAssignButton)) {
 			new ParameterAssignmentsAction().run(activity);

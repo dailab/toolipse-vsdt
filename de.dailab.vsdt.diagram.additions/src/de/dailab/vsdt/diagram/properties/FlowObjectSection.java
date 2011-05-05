@@ -8,7 +8,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import de.dailab.vsdt.FlowObject;
-import de.dailab.vsdt.diagram.actions.OrganizeAssignmentsAction;
+import de.dailab.vsdt.diagram.actions.OrganizeElementsAction;
 
 public abstract class FlowObjectSection extends AbstractVsdtPropertySection {
 
@@ -39,7 +39,7 @@ public abstract class FlowObjectSection extends AbstractVsdtPropertySection {
     	super.widgetSelected(e);
     	Object src= e.getSource();
     	if (src.equals(orgAssButton)) {
-			new OrganizeAssignmentsAction().run(flowObject);
+			OrganizeElementsAction.getAssignmentsAction().run(flowObject);
     	}
     }
 }

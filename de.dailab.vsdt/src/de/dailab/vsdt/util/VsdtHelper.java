@@ -14,6 +14,7 @@ import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.Association;
+import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.ConnectingObject;
 import de.dailab.vsdt.DataObject;
 import de.dailab.vsdt.Event;
@@ -29,6 +30,7 @@ import de.dailab.vsdt.LoopType;
 import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.MultiLoopAttSet;
+import de.dailab.vsdt.Parameter;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
@@ -46,6 +48,8 @@ import de.dailab.vsdt.StandardLoopAttSet;
  */
 public class VsdtHelper {
 
+	public static final String ESCAPE_PARAMETER = "@";
+	
 	/**
 	 * create and initialize a new id object for the given
 	 * idObject and bind it to the idObject
@@ -393,4 +397,25 @@ public class VsdtHelper {
 		}
 		return list;
 	}
+	
+	/**
+	 * Return the Expression's expression string with Parameters being replaced
+	 * by their respective values (pre-processor-like).
+	 * 
+	 * @see BusinessProcessSystem#getParameters()
+	 * 
+	 * @param expression	some Expression
+	 * @return				Expression's expressions with parameters substituted
+	 */
+	public static String getExpressionWithParameters(Expression expression) {
+		String theExpression = expression.getExpression();
+		BusinessProcessSystem bps = (BusinessProcessSystem) getRootElement(expression);
+		if (bps != null) {
+			for (Parameter parameter : bps.getParameters()) {
+				theExpression = theExpression.replaceAll(ESCAPE_PARAMETER + parameter.getKey(), parameter.getValue());
+			}
+		}
+		return theExpression;
+	}
+	
 }

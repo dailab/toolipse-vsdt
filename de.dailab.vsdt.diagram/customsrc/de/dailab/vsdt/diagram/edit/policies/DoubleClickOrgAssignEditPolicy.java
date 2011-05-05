@@ -9,7 +9,7 @@ import org.eclipse.gmf.runtime.notation.View;
 
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.SequenceFlow;
-import de.dailab.vsdt.diagram.actions.OrganizeAssignmentsAction;
+import de.dailab.vsdt.diagram.actions.OrganizeElementsAction;
 
 public class DoubleClickOrgAssignEditPolicy extends OpenEditPolicy{
 
@@ -24,7 +24,7 @@ public class DoubleClickOrgAssignEditPolicy extends OpenEditPolicy{
 			EObject element= view.getElement();
 			if ((element instanceof FlowObject) || 
 					(element instanceof SequenceFlow) ) {
-				return new ICommandProxy(new OrganizeAssignmentsAction().new OrganizeAssignmentsCommand(element));
+				return new ICommandProxy(OrganizeElementsAction.getPropertiesAction(-1).getCommand());
 			}
 		}
 		return null;

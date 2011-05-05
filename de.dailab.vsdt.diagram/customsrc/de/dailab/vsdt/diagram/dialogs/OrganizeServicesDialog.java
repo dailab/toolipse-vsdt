@@ -24,7 +24,7 @@ import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Service;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.diagram.actions.OrganizePropertiesAction;
+import de.dailab.vsdt.diagram.actions.OrganizeElementsAction;
 import de.dailab.vsdt.diagram.ui.VsdtFeatureCombo;
 
 /**
@@ -200,10 +200,10 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 		Service service = getSelectedElement();
 		if (service != null) {
 			if (e.getSource() == inputButton) {
-				new OrganizePropertiesAction().run(service, 0);
+				OrganizeElementsAction.getPropertiesAction(0).run(service);
 			}
 			if (e.getSource() == outputButton) {
-				new OrganizePropertiesAction().run(service, 1);
+				OrganizeElementsAction.getPropertiesAction(1).run(service);
 			}
 		}
 	}

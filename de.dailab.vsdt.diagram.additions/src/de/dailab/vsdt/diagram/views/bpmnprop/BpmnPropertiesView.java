@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.TableColumn;
 
 import de.dailab.common.swt.views.AbstractStructuredViewerView;
 import de.dailab.vsdt.Property;
-import de.dailab.vsdt.diagram.actions.OrganizePropertiesAction;
+import de.dailab.vsdt.diagram.actions.OrganizeElementsAction;
 
 /**
  * This view provides insight in the Properties in the scope of the BPMN
@@ -68,7 +68,7 @@ public class BpmnPropertiesView extends AbstractStructuredViewerView {
 				Object selected= getSelectedElement(viewer);
 				if (selected instanceof Property) {
 					Property property= (Property) selected;
-					new OrganizePropertiesAction().run(property.eContainer());
+					OrganizeElementsAction.getPropertiesAction(-1).run(property.eContainer());
 				}	
 			}
 		});

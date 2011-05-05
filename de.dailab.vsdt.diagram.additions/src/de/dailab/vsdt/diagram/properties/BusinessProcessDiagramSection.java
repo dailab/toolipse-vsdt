@@ -10,22 +10,22 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.VsdtPackage;
-import de.dailab.vsdt.diagram.actions.OrganizeDataTypesAction;
-import de.dailab.vsdt.diagram.actions.OrganizeImplementationsAction;
-import de.dailab.vsdt.diagram.actions.OrganizeMessagesAction;
+import de.dailab.vsdt.diagram.actions.OrganizeElementsAction;
 
 
 public class BusinessProcessDiagramSection extends AbstractVsdtPropertySection {
 
 	public static final String DISPLAY_ORG_IMPL="Services...",
 							   DISPLAY_ORG_MSG= "Message Channels...",
-							   DISPLAY_ORG_DATA= "Data Types...";;
+							   DISPLAY_ORG_DATA= "Data Types...",
+							   DISPLAY_ORG_PARAM= "Parameters...";
 	
     protected BusinessProcessDiagram bpd;
 
     private Button orgImplButton;
     private Button orgMsgButton;
     private Button orgDataButton;
+    private Button orgParamButton;
     
     @Override
     protected EClass getObjectClass() {
@@ -48,19 +48,23 @@ public class BusinessProcessDiagramSection extends AbstractVsdtPropertySection {
         orgImplButton = addButton(DISPLAY_ORG_IMPL);
         orgMsgButton = addButton(DISPLAY_ORG_MSG);
         orgDataButton = addButton(DISPLAY_ORG_DATA);
+        orgParamButton = addButton(DISPLAY_ORG_PARAM);
     }
     
     public void widgetSelected(SelectionEvent e) {
     	super.widgetSelected(e);
     	Object src= e.getSource();
     	if (src.equals(orgImplButton)) {
-			new OrganizeImplementationsAction().run(bpd.getParent());
+			OrganizeElementsAction.getServicesAction().run(bpd.getParent());
     	}
     	if (src.equals(orgMsgButton)) {
-			new OrganizeMessagesAction().run(bpd.getParent());
+			OrganizeElementsAction.getMessageChannelAction().run(bpd.getParent());
     	}
     	if (src.equals(orgDataButton)) {
-			new OrganizeDataTypesAction().run(bpd.getParent());
+			OrganizeElementsAction.getDataTypesAction().run(bpd.getParent());
+    	}
+    	if (src.equals(orgParamButton)) {
+			OrganizeElementsAction.getParametersAction().run(bpd.getParent());
     	}
     }
 

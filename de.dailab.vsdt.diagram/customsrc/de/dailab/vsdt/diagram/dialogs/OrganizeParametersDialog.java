@@ -1,0 +1,117 @@
+package de.dailab.vsdt.diagram.dialogs;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+
+import de.dailab.common.gmf.Util;
+import de.dailab.common.swt.dialogs.AbstractOrganizeElementsDialog;
+import de.dailab.vsdt.BusinessProcessDiagram;
+import de.dailab.vsdt.BusinessProcessSystem;
+import de.dailab.vsdt.Parameter;
+import de.dailab.vsdt.VsdtFactory;
+
+/**
+ * A dialog used for organizing Parameters of a BPMN model.
+ * 
+ * Parameters are similar to Properties, with the difference that their scope is
+ * the entire VSDT diagram (with all embedded BPMN diagrams) and that it can not
+ * be set with an assignment but only in this dialog itself.
+ * 
+ * @author kuester
+ */
+public class OrganizeParametersDialog extends AbstractOrganizeElementsDialog<Parameter> {
+
+	public static final String LABEL_KEY= "Key";
+	public static final String LABEL_VALUE= "Value";
+	
+	/** key input field */
+	private Text keyText;
+	
+	/** value input field */
+	private Text valueText;
+	
+	
+	@Override
+	public String getElementName() {
+		return "Parameter";
+	}
+	
+	/**
+	 * create a new Dialog Instance
+	 * 
+	 * @param parentShell	the parent shell (will be blocked)
+	 */
+	public OrganizeParametersDialog(Shell parentShell, EObject parentElement) {
+		super(parentShell, parentElement, true, 4);
+
+		BusinessProcessSystem bps= null;
+		if (parentElement instanceof BusinessProcessSystem) {
+			bps= (BusinessProcessSystem) parentElement;
+		} else if (parentElement instanceof BusinessProcessDiagram) {
+			bps= (BusinessProcessSystem) ((BusinessProcessDiagram) parentElement).getParent();
+		}
+		if (bps != null) {
+			elements= ((BusinessProcessSystem) parentElement).getParameters();
+		} else {
+			throw new IllegalArgumentException("Parent element must be of type BusinessProcessSystem");
+		}
+	}
+	
+	@Override
+	protected void createEditGroupControls(Group editGroup) {
+
+		new Label(editGroup,SWT.NONE).setText(LABEL_KEY);
+		keyText= new Text(editGroup,SWT.BORDER);
+		keyText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		keyText.addModifyListener(this);
+
+		new Label(editGroup,SWT.NONE).setText(LABEL_VALUE);
+		valueText= new Text(editGroup,SWT.BORDER);
+		valueText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		valueText.addModifyListener(this);
+	}
+
+	@Override
+	protected Parameter createNewElement() {
+		Parameter parameter = VsdtFactory.eINSTANCE.createParameter();
+		return parameter;
+	}
+	
+	@Override
+	protected Control getElementToFocus() {
+		return keyText;
+	}
+
+	@Override
+	protected void updateElementFromEditGroup(Parameter parameter) {
+		if (parameter != null) {
+			parameter.setKey(Util.nullIfEmpty(keyText.getText()));
+			parameter.setValue(Util.nullIfEmpty(valueText.getText()));
+		}
+	}
+	
+	@Override
+	protected void refreshEditGroup() {
+		Parameter parameter = getSelectedElement();
+		if (parameter != null) {
+			keyText.setText(Util.nonNull(parameter.getKey()));
+			valueText.setText(Util.nonNull(parameter.getValue()));
+		}
+	}
+		
+	@Override
+	protected String getString(Parameter parameter) {
+		if (parameter != null) {
+			String keyString= Util.nonNull(parameter.getKey());
+			String valueString= Util.nonNull(parameter.getValue());
+			return keyString + " = " + valueString;
+		}
+		return super.getString(parameter);
+	}
+}

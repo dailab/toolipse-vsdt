@@ -279,13 +279,22 @@ public interface VsdtPackage extends EPackage {
 	int BUSINESS_PROCESS_SYSTEM__DATA_TYPES = ID_OBJECT_FEATURE_COUNT + 12;
 
 	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUSINESS_PROCESS_SYSTEM__PARAMETERS = ID_OBJECT_FEATURE_COUNT + 13;
+
+	/**
 	 * The number of structural features of the '<em>Business Process System</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUSINESS_PROCESS_SYSTEM_FEATURE_COUNT = ID_OBJECT_FEATURE_COUNT + 13;
+	int BUSINESS_PROCESS_SYSTEM_FEATURE_COUNT = ID_OBJECT_FEATURE_COUNT + 14;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.BusinessProcessDiagramImpl <em>Business Process Diagram</em>}' class.
@@ -3715,6 +3724,43 @@ public interface VsdtPackage extends EPackage {
 	int PROPERTY_FEATURE_COUNT = 3;
 
 	/**
+	 * The meta object id for the '{@link de.dailab.vsdt.impl.ParameterImpl <em>Parameter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see de.dailab.vsdt.impl.ParameterImpl
+	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getParameter()
+	 * @generated
+	 */
+	int PARAMETER = 36;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.ExpressionImpl <em>Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3722,7 +3768,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getExpression()
 	 * @generated
 	 */
-	int EXPRESSION = 36;
+	int EXPRESSION = 37;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' attribute.
@@ -3759,7 +3805,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 37;
+	int DATA_TYPE = 38;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3832,7 +3878,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getProcessType()
 	 * @generated
 	 */
-	int PROCESS_TYPE = 38;
+	int PROCESS_TYPE = 39;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.TriggerType <em>Trigger Type</em>}' enum.
@@ -3842,7 +3888,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getTriggerType()
 	 * @generated
 	 */
-	int TRIGGER_TYPE = 39;
+	int TRIGGER_TYPE = 40;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.FlowConditionTypes <em>Flow Condition Types</em>}' enum.
@@ -3852,7 +3898,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getFlowConditionTypes()
 	 * @generated
 	 */
-	int FLOW_CONDITION_TYPES = 42;
+	int FLOW_CONDITION_TYPES = 43;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.ActivityType <em>Activity Type</em>}' enum.
@@ -3862,7 +3908,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getActivityType()
 	 * @generated
 	 */
-	int ACTIVITY_TYPE = 40;
+	int ACTIVITY_TYPE = 41;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.LoopType <em>Loop Type</em>}' enum.
@@ -3872,7 +3918,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getLoopType()
 	 * @generated
 	 */
-	int LOOP_TYPE = 41;
+	int LOOP_TYPE = 42;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.TransactionMethodType <em>Transaction Method Type</em>}' enum.
@@ -3882,7 +3928,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getTransactionMethodType()
 	 * @generated
 	 */
-	int TRANSACTION_METHOD_TYPE = 43;
+	int TRANSACTION_METHOD_TYPE = 44;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.GatewayType <em>Gateway Type</em>}' enum.
@@ -3892,7 +3938,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getGatewayType()
 	 * @generated
 	 */
-	int GATEWAY_TYPE = 44;
+	int GATEWAY_TYPE = 45;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.ConditionType <em>Condition Type</em>}' enum.
@@ -3902,7 +3948,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getConditionType()
 	 * @generated
 	 */
-	int CONDITION_TYPE = 45;
+	int CONDITION_TYPE = 46;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.DirectionType <em>Direction Type</em>}' enum.
@@ -3912,7 +3958,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getDirectionType()
 	 * @generated
 	 */
-	int DIRECTION_TYPE = 46;
+	int DIRECTION_TYPE = 47;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.ParticipantType <em>Participant Type</em>}' enum.
@@ -3922,7 +3968,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getParticipantType()
 	 * @generated
 	 */
-	int PARTICIPANT_TYPE = 47;
+	int PARTICIPANT_TYPE = 48;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.AssignTimeType <em>Assign Time Type</em>}' enum.
@@ -3932,7 +3978,7 @@ public interface VsdtPackage extends EPackage {
 	 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getAssignTimeType()
 	 * @generated
 	 */
-	int ASSIGN_TIME_TYPE = 48;
+	int ASSIGN_TIME_TYPE = 49;
 
 	/**
 	 * Returns the meta object for class '{@link de.dailab.vsdt.BusinessProcessDiagram <em>Business Process Diagram</em>}'.
@@ -5375,6 +5421,38 @@ public interface VsdtPackage extends EPackage {
 	EReference getProperty_Assignments();
 
 	/**
+	 * Returns the meta object for class '{@link de.dailab.vsdt.Parameter <em>Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Parameter</em>'.
+	 * @see de.dailab.vsdt.Parameter
+	 * @generated
+	 */
+	EClass getParameter();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Parameter#getKey <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see de.dailab.vsdt.Parameter#getKey()
+	 * @see #getParameter()
+	 * @generated
+	 */
+	EAttribute getParameter_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Parameter#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see de.dailab.vsdt.Parameter#getValue()
+	 * @see #getParameter()
+	 * @generated
+	 */
+	EAttribute getParameter_Value();
+
+	/**
 	 * Returns the meta object for class '{@link de.dailab.vsdt.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5688,6 +5766,17 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBusinessProcessSystem_DataTypes();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.BusinessProcessSystem#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
+	 * @see de.dailab.vsdt.BusinessProcessSystem#getParameters()
+	 * @see #getBusinessProcessSystem()
+	 * @generated
+	 */
+	EReference getBusinessProcessSystem_Parameters();
 
 	/**
 	 * Returns the meta object for enum '{@link de.dailab.vsdt.ProcessType <em>Process Type</em>}'.
@@ -6962,6 +7051,32 @@ public interface VsdtPackage extends EPackage {
 		EReference PROPERTY__ASSIGNMENTS = eINSTANCE.getProperty_Assignments();
 
 		/**
+		 * The meta object literal for the '{@link de.dailab.vsdt.impl.ParameterImpl <em>Parameter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see de.dailab.vsdt.impl.ParameterImpl
+		 * @see de.dailab.vsdt.impl.VsdtPackageImpl#getParameter()
+		 * @generated
+		 */
+		EClass PARAMETER = eINSTANCE.getParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAMETER__KEY = eINSTANCE.getParameter_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAMETER__VALUE = eINSTANCE.getParameter_Value();
+
+		/**
 		 * The meta object literal for the '{@link de.dailab.vsdt.impl.ExpressionImpl <em>Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7200,6 +7315,14 @@ public interface VsdtPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BUSINESS_PROCESS_SYSTEM__DATA_TYPES = eINSTANCE.getBusinessProcessSystem_DataTypes();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BUSINESS_PROCESS_SYSTEM__PARAMETERS = eINSTANCE.getBusinessProcessSystem_Parameters();
 
 		/**
 		 * The meta object literal for the '{@link de.dailab.vsdt.ProcessType <em>Process Type</em>}' enum.

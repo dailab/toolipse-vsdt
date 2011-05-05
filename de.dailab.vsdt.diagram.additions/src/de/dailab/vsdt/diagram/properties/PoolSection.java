@@ -16,7 +16,7 @@ import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.ProcessType;
 import de.dailab.vsdt.VsdtPackage;
-import de.dailab.vsdt.diagram.actions.OrganizePropertiesAction;
+import de.dailab.vsdt.diagram.actions.OrganizeElementsAction;
 import de.dailab.vsdt.diagram.ui.ExpressionComposite;
 import de.dailab.vsdt.diagram.ui.VsdtFeatureCombo;
 
@@ -122,7 +122,7 @@ public class PoolSection extends AbstractVsdtPropertySection {
     	super.widgetSelected(e);
     	Object src= e.getSource();
     	if (src.equals(orgPropButton)) {
-			new OrganizePropertiesAction().run(pool);
+			OrganizeElementsAction.getPropertiesAction(-1).run(pool);
     	}
 		if (src.equals(participantCombo.getCombo())) {
     		setPropertyValue(pool, pack.getPool_Participant(), participantCombo.getSelected());

@@ -133,7 +133,7 @@ public class VsdtExpressionVisitor {
 		this.visibleProperties= null;
 		
 		// translate expression?
-		String originalExpression= expression.getExpression();
+		String originalExpression= VsdtHelper.getExpressionWithParameters(expression);
 		String lang= expression.getExpressionLanguageToBeUsed();
 		if (translateExpressions && 
 				Util.languageIsVxl(lang) &&

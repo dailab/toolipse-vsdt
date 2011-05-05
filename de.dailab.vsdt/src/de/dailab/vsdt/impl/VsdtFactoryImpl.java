@@ -6,6 +6,7 @@
  */
 package de.dailab.vsdt.impl;
 
+import de.dailab.vsdt.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -123,6 +124,7 @@ public class VsdtFactoryImpl extends EFactoryImpl implements VsdtFactory {
 			case VsdtPackage.SERVICE: return createService();
 			case VsdtPackage.ASSIGNMENT: return createAssignment();
 			case VsdtPackage.PROPERTY: return createProperty();
+			case VsdtPackage.PARAMETER: return createParameter();
 			case VsdtPackage.EXPRESSION: return createExpression();
 			case VsdtPackage.DATA_TYPE: return createDataType();
 			default:
@@ -448,6 +450,16 @@ public class VsdtFactoryImpl extends EFactoryImpl implements VsdtFactory {
 	public Property createProperty() {
 		PropertyImpl property = new PropertyImpl();
 		return property;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Parameter createParameter() {
+		ParameterImpl parameter = new ParameterImpl();
+		return parameter;
 	}
 
 	/**

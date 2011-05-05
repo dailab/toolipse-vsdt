@@ -28,7 +28,7 @@ import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.Service;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.diagram.actions.OrganizeDataTypesAction;
+import de.dailab.vsdt.diagram.actions.OrganizeElementsAction;
 import de.dailab.vsdt.util.VsdtHelper;
 
 /**
@@ -166,7 +166,7 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 		super.widgetSelected(e);
 		if (e.getSource() instanceof Button	) {
 			if (BUTTON_DATATYPES.equals(((Button) e.getSource()).getText())) {
-				new OrganizeDataTypesAction().run(VsdtHelper.getRootElement(parentElement));
+				OrganizeElementsAction.getDataTypesAction().run(VsdtHelper.getRootElement(parentElement));
 				// update data types combo
 				updateDataTypes();
 			}
