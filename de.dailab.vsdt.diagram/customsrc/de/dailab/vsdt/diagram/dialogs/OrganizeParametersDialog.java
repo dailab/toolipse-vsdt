@@ -29,12 +29,16 @@ public class OrganizeParametersDialog extends AbstractOrganizeElementsDialog<Par
 
 	public static final String LABEL_KEY= "Key";
 	public static final String LABEL_VALUE= "Value";
+	public static final String LABEL_DESCRIPTION= "Description";
 	
 	/** key input field */
 	private Text keyText;
 	
 	/** value input field */
 	private Text valueText;
+	
+	/** description input field */
+	private Text descriptionText;
 	
 	
 	@Override
@@ -75,6 +79,11 @@ public class OrganizeParametersDialog extends AbstractOrganizeElementsDialog<Par
 		valueText= new Text(editGroup,SWT.BORDER);
 		valueText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		valueText.addModifyListener(this);
+		
+		new Label(editGroup,SWT.NONE).setText(LABEL_DESCRIPTION);
+		descriptionText= new Text(editGroup,SWT.BORDER);
+		descriptionText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 3, 1));
+		descriptionText.addModifyListener(this);
 	}
 
 	@Override
@@ -93,6 +102,7 @@ public class OrganizeParametersDialog extends AbstractOrganizeElementsDialog<Par
 		if (parameter != null) {
 			parameter.setKey(Util.nullIfEmpty(keyText.getText()));
 			parameter.setValue(Util.nullIfEmpty(valueText.getText()));
+			parameter.setDescription(Util.nullIfEmpty(descriptionText.getText()));
 		}
 	}
 	
@@ -102,6 +112,7 @@ public class OrganizeParametersDialog extends AbstractOrganizeElementsDialog<Par
 		if (parameter != null) {
 			keyText.setText(Util.nonNull(parameter.getKey()));
 			valueText.setText(Util.nonNull(parameter.getValue()));
+			descriptionText.setText(Util.nonNull(parameter.getDescription()));
 		}
 	}
 		

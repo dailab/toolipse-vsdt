@@ -6,7 +6,6 @@
  */
 package de.dailab.vsdt.impl;
 
-import de.dailab.vsdt.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -39,6 +38,7 @@ import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.MultiLoopAttSet;
 import de.dailab.vsdt.OutputSet;
+import de.dailab.vsdt.Parameter;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.ParticipantType;
 import de.dailab.vsdt.Pool;

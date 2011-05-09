@@ -6,15 +6,13 @@
  */
 package de.dailab.vsdt.impl;
 
-import de.dailab.vsdt.Parameter;
-import de.dailab.vsdt.VsdtPackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import de.dailab.vsdt.Parameter;
+import de.dailab.vsdt.VsdtPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,6 +23,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.ParameterImpl#getKey <em>Key</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ParameterImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.ParameterImpl#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -70,6 +69,26 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * @ordered
 	 */
 	protected String value = VALUE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DESCRIPTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -137,6 +156,27 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.PARAMETER__DESCRIPTION, oldDescription, description));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -144,6 +184,8 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 				return getKey();
 			case VsdtPackage.PARAMETER__VALUE:
 				return getValue();
+			case VsdtPackage.PARAMETER__DESCRIPTION:
+				return getDescription();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -161,6 +203,9 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 				return;
 			case VsdtPackage.PARAMETER__VALUE:
 				setValue((String)newValue);
+				return;
+			case VsdtPackage.PARAMETER__DESCRIPTION:
+				setDescription((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -180,6 +225,9 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 			case VsdtPackage.PARAMETER__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
+			case VsdtPackage.PARAMETER__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -196,6 +244,8 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 				return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
 			case VsdtPackage.PARAMETER__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case VsdtPackage.PARAMETER__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -214,6 +264,8 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 		result.append(key);
 		result.append(", value: ");
 		result.append(value);
+		result.append(", description: ");
+		result.append(description);
 		result.append(')');
 		return result.toString();
 	}

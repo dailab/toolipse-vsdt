@@ -310,6 +310,7 @@
     <genClasses ecoreClass="vsdt.ecore#//Parameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Parameter/key"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Parameter/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Parameter/description"/>
     </genClasses>
     <genClasses ecoreClass="vsdt.ecore#//Expression">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute vsdt.ecore#//Expression/expression"/>

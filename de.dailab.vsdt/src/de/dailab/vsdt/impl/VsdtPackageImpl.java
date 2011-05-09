@@ -1728,6 +1728,15 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getParameter_Description() {
+		return (EAttribute)parameterEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getExpression() {
 		return expressionEClass;
 	}
@@ -2313,6 +2322,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		parameterEClass = createEClass(PARAMETER);
 		createEAttribute(parameterEClass, PARAMETER__KEY);
 		createEAttribute(parameterEClass, PARAMETER__VALUE);
+		createEAttribute(parameterEClass, PARAMETER__DESCRIPTION);
 
 		expressionEClass = createEClass(EXPRESSION);
 		createEAttribute(expressionEClass, EXPRESSION__EXPRESSION);
@@ -2632,6 +2642,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParameter_Key(), ecorePackage.getEString(), "key", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParameter_Value(), ecorePackage.getEString(), "value", null, 1, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getParameter_Description(), ecorePackage.getEString(), "description", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExpression_Expression(), ecorePackage.getEString(), "expression", null, 1, 1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

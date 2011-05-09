@@ -3752,13 +3752,22 @@ public interface VsdtPackage extends EPackage {
 	int PARAMETER__VALUE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__DESCRIPTION = 2;
+
+	/**
 	 * The number of structural features of the '<em>Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_FEATURE_COUNT = 2;
+	int PARAMETER_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.ExpressionImpl <em>Expression</em>}' class.
@@ -5453,6 +5462,17 @@ public interface VsdtPackage extends EPackage {
 	EAttribute getParameter_Value();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Parameter#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see de.dailab.vsdt.Parameter#getDescription()
+	 * @see #getParameter()
+	 * @generated
+	 */
+	EAttribute getParameter_Description();
+
+	/**
 	 * Returns the meta object for class '{@link de.dailab.vsdt.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7075,6 +7095,14 @@ public interface VsdtPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PARAMETER__VALUE = eINSTANCE.getParameter_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAMETER__DESCRIPTION = eINSTANCE.getParameter_Description();
 
 		/**
 		 * The meta object literal for the '{@link de.dailab.vsdt.impl.ExpressionImpl <em>Expression</em>}' class.
