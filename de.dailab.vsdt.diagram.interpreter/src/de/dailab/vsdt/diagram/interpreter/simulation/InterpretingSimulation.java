@@ -149,10 +149,13 @@ public class InterpretingSimulation extends ManualSimulation {
 	public void openEditPropertyDialog(Property property) {
 		Object value= getPropertyValue(property);
 		String expression= value instanceof String ? "\"" + value + "\"" : String.valueOf(value);
+
 		List<Property> properties= VsdtHelper.getVisibleProperties(property.eContainer());
+		
 		Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		EditExpressionDialog dialog= new EditExpressionDialog(shell, expression, true);
 		dialog.setProperties(properties);
+		
 		if (dialog.open() == EditExpressionDialog.OK) {
 			String newExpression= dialog.getExpression();
 			Map<String, Serializable> context= createContext(property.eContainer());

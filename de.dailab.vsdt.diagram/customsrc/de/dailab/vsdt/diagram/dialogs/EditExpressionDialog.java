@@ -13,6 +13,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
@@ -20,8 +21,10 @@ import org.eclipse.swt.widgets.Text;
 
 import de.dailab.common.gmf.Util;
 import de.dailab.common.swt.FormLayoutUtil;
+import de.dailab.vsdt.Parameter;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.diagram.ui.VsdtFeatureCombo;
+import de.dailab.vsdt.util.VsdtHelper;
 import de.dailab.vsdt.vxl.util.VxlParseException;
 import de.dailab.vsdt.vxl.util.VxlParser;
 import de.dailab.vsdt.vxl.vxl.VxlVariable;
@@ -44,7 +47,7 @@ public class EditExpressionDialog extends TitleAreaDialog {
 	public static final String NL= System.getProperty("line.separator");
 	
 	public static final int WIDTH= 550;
-	public static final int HEIGHT= 300;
+	public static final int HEIGHT= 330;
 	
 	public static final String TITLE= "Edit Expression";
 	public static final String MESSAGE= "Compose and validate expressions according to the " +
@@ -58,10 +61,14 @@ public class EditExpressionDialog extends TitleAreaDialog {
 	protected Button checkButton;
 	protected Button isVxlButton;
 	
-	protected List<Property> properties= null;
+	protected List<Property> properties = null;
 	protected VsdtFeatureCombo<Property> propertiesCombo;
 	protected Button insertPropertyButton;
-
+	
+	protected List<Parameter> parameters = null;
+	protected VsdtFeatureCombo<Parameter> parametersCombo;
+	protected Button insertParameterButton;
+	
 	/**
 	 * Constructor.
 	 * 
@@ -137,15 +144,42 @@ public class EditExpressionDialog extends TitleAreaDialog {
 		insertPropertyButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				insertProperty();
+				if (propertiesCombo.getSelected() != null)
+					insert(propertiesCombo.getSelected().getName());
 			}
 		});
 		
 		label= FormLayoutUtil.addLabel(composite, "Properties", isVxlButton, 0);
-		propertiesCombo= new VsdtFeatureCombo<Property>(FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, isVxlButton, label, insertPropertyButton));
+		Combo theCombo = FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, isVxlButton, label, insertPropertyButton);
+		propertiesCombo= new VsdtFeatureCombo<Property>(theCombo);
 		propertiesCombo.getCombo().setEnabled(properties != null);
 		if (properties != null) {
 			propertiesCombo.fillCombo(properties);
+		}
+	
+		if (parameters != null) {
+			// Parameters
+			insertParameterButton= FormLayoutUtil.addButton(composite, "Insert Parameter", SWT.NONE, checkButton, null, checkButton);
+			insertParameterButton.setEnabled(properties != null);
+			insertParameterButton.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					if (parametersCombo.getSelected() != null)
+						insert(VsdtHelper.ESCAPE_PARAMETER + parametersCombo.getSelected().getKey());
+				}
+			});
+			
+			label= FormLayoutUtil.addLabel(composite, "Parameters", insertPropertyButton, 0);
+			theCombo = FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, insertPropertyButton, label, insertParameterButton);
+			parametersCombo= new VsdtFeatureCombo<Parameter>(theCombo) {
+				protected String getLabel(Parameter o) {
+					return VsdtHelper.ESCAPE_PARAMETER + o.getKey() + " = " + o.getValue();
+				}
+			};
+			parametersCombo.getCombo().setEnabled(parameters != null);
+			if (parameters != null) {
+				parametersCombo.fillCombo(parameters);
+			}
 		}
 		
 		return superComposite;
@@ -166,7 +200,16 @@ public class EditExpressionDialog extends TitleAreaDialog {
 	 * @param properties	Properties in the scope of the Expression to be edited
 	 */
 	public void setProperties(List<Property> properties) {
-		this.properties= properties;
+		this.properties = properties;
+	}
+	
+	/**
+	 * Pass the process' Parameters to this dialog.
+	 * 
+	 * @param parameters	Parameters of the Process
+	 */
+	public void setParameters(List<Parameter> parameters) {
+		this.parameters = parameters;
 	}
 	
 	/**
@@ -184,17 +227,24 @@ public class EditExpressionDialog extends TitleAreaDialog {
 			parser.parse(expression);
 			setMessage("Expression is valid.");
 			
+			// check variable names
+			List<String> varNames= new ArrayList<String>();
 			if (properties != null) {
-				List<String> varNames= new ArrayList<String>();
 				for (Property prop : properties) {
 					varNames.add(prop.getName());
 				}
-				List<VxlVariable> unknownVars= parser.getUnknownVariables(varNames);
-				if (! unknownVars.isEmpty()) {
-					setErrorMessage("Variable '" + unknownVars.get(0).getName() + "' cannot be resolved");
-					return false;
+			}
+			if (parameters != null) {
+				for (Parameter par : parameters) {
+					varNames.add(VsdtHelper.ESCAPE_PARAMETER + par.getKey());
 				}
 			}
+			List<VxlVariable> unknownVars= parser.getUnknownVariables(varNames);
+			if (! unknownVars.isEmpty()) {
+				setErrorMessage("Variable '" + unknownVars.get(0).getName() + "' cannot be resolved");
+				return false;
+			}
+			
 		} catch (VxlParseException e) {
 			if (! parser.getErrors().isEmpty()) {
 				setErrorMessage(parser.getErrors().get(0).getMessage());
@@ -208,23 +258,15 @@ public class EditExpressionDialog extends TitleAreaDialog {
 		return true;
 	}
 	
-	/**
-	 * Get the currently selected entry from the properties combo 
-	 * and insert it at the caret position. 
-	 */
-	private void insertProperty() {
-		if (propertiesCombo != null) {
-			Property selected= propertiesCombo.getSelected();
+	private void insert(String propertyName) {
+		if (propertyName != null) {
 			int caret= expressionText.getCaretPosition();
-			if (selected != null) {
-				StringBuffer buffer= new StringBuffer();
-				buffer.append(expression.substring(0, caret));
-//				buffer.append("$" + selected.getName());
-				buffer.append(selected.getName());
-				buffer.append(expression.substring(caret));
-				expression= buffer.toString();
-				expressionText.setText(expression);
-			}
+			StringBuffer buffer= new StringBuffer();
+			buffer.append(expression.substring(0, caret));
+			buffer.append(propertyName);
+			buffer.append(expression.substring(caret));
+			expression= buffer.toString();
+			expressionText.setText(expression);
 		}
 	}
 	

@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 
 import de.dailab.common.gmf.command.SetPropertyValueCommand;
+import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.diagram.dialogs.EditExpressionDialog;
 import de.dailab.vsdt.util.VsdtElementFactory;
@@ -154,7 +155,9 @@ public class ExpressionComposite extends Composite {
 			String expression= expressionText.getText(); 
 			EditExpressionDialog dialog= new EditExpressionDialog(shell, expression, false);
 			if (owner != null) {
+				BusinessProcessSystem bps = (BusinessProcessSystem) VsdtHelper.getRootElement(owner);
 				dialog.setProperties(VsdtHelper.getVisibleProperties(owner));
+				dialog.setParameters(bps.getParameters());
 			}
 			if (dialog.open() == Dialog.OK) {
 				expressionText.setText(dialog.getExpression());

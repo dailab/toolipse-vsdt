@@ -15,6 +15,7 @@ import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.Parameter;
 import de.dailab.vsdt.VsdtFactory;
+import de.dailab.vsdt.util.VsdtHelper;
 
 /**
  * A dialog used for organizing Parameters of a BPMN model.
@@ -121,7 +122,7 @@ public class OrganizeParametersDialog extends AbstractOrganizeElementsDialog<Par
 		if (parameter != null) {
 			String keyString= Util.nonNull(parameter.getKey());
 			String valueString= Util.nonNull(parameter.getValue());
-			return keyString + " = " + valueString;
+			return VsdtHelper.ESCAPE_PARAMETER + keyString + " = " + valueString;
 		}
 		return super.getString(parameter);
 	}
