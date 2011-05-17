@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -117,15 +118,26 @@ public class JiacVResultSaver extends MappingResultSaver {
 			for (JiacVStarterRule rule : rules.get(participant)) {
 				Serializable object= null;
 				Event event = rule.getStartEvent();
-				switch (event.getTrigger()) {
-				case MESSAGE:
-					if (event.getImplementation() instanceof MessageChannel) {
-						object = ((MessageChannel) event.getImplementation()).getChannel().getExpression();
+				try {
+					switch (event.getTrigger()) {
+					case MESSAGE:
+						if (event.getImplementation() instanceof MessageChannel) {
+							object = ((MessageChannel) event.getImplementation()).getChannel().getExpression();
+						}
+						break;
+					case TIMER:
+						String expression = event.getTimeExpression().getExpression();
+						if (event.isAsDuration()) {
+							// duration -> Long
+							object = new Long(expression);
+						} else {
+							// date -> Date
+							object = DateFormat.getInstance().parse(expression);
+						}
+						break;
 					}
-					break;
-				case TIMER:
-					// TODO support timer events
-					break;
+				} catch (Exception e) {
+					System.err.println("Could not create starter for Event " + event);
 				}
 				if (object != null) {
 					simpleRules.put(rule.getServiceToStart().getName(), object);	
