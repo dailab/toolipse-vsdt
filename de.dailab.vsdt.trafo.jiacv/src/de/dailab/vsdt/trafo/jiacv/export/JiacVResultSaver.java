@@ -6,35 +6,10 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.commands.operations.OperationHistoryFactory;
-import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.gmf.runtime.common.core.command.CommandResult;
-import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
-import org.eclipse.gmf.runtime.diagram.ui.services.layout.LayoutService;
-import org.eclipse.gmf.runtime.diagram.ui.services.layout.LayoutType;
-import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
-import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
-import org.eclipse.gmf.runtime.notation.Diagram;
-
-import de.dailab.agentworld.AgentWorld;
-import de.dailab.agentworld.diagram.edit.parts.AgentWorldEditPart;
-import de.dailab.agentworld.diagram.part.AgentworldDiagramContentInitializer;
-import de.dailab.agentworld.diagram.part.AgentworldDiagramEditorPlugin;
-import de.dailab.agentworld.diagram.part.Messages;
-import de.dailab.agentworldeditor.util.imprt.AweDiagramImporter;
-import de.dailab.common.gmf.imprt.DiagramImporter;
 import de.dailab.jiactng.jadl.Agent;
 import de.dailab.jiactng.jadl.ontology.JadlParseException;
 import de.dailab.jiactng.jadl.util.SimpleJadlParser;
@@ -75,11 +50,11 @@ public class JiacVResultSaver extends MappingResultSaver {
 			saveRules(new File(baseDirectory, fileName), rules);
 		}
 		// save AWE diagram
-		AgentWorld agentWorld= wrapper.getAgentWorld();
-		if (agentWorld != null) {
-			String fileName= wrapper.getAweFileName(agentWorld, true);
-			saveAgentWorldDiagram(new File(baseDirectory, fileName), agentWorld);
-		}
+//		AgentWorld agentWorld= wrapper.getAgentWorld();
+//		if (agentWorld != null) {
+//			String fileName= wrapper.getAweFileName(agentWorld, true);
+//			saveAgentWorldDiagram(new File(baseDirectory, fileName), agentWorld);
+//		}
 		return true;
 	}
 	
@@ -219,6 +194,7 @@ public class JiacVResultSaver extends MappingResultSaver {
 		writer.close();
 	}
 	
+	
 	/**
 	 * Save Agent World Model to diagram file and automatically do the layout
 	 * 
@@ -227,6 +203,7 @@ public class JiacVResultSaver extends MappingResultSaver {
 	 * @return				saving successful? otherwise the model can still be saved to XML
 	 * @throws IOException
 	 */
+	/* CREATION OF AGENT WORD DIAGRAM (deprecated)
 	private boolean saveAgentWorldDiagram(File file, AgentWorld agentWorld) throws IOException {
 		
 		TransactionalEditingDomain editingDomain= GMFEditingDomainFactory.INSTANCE.createEditingDomain();
@@ -246,11 +223,9 @@ public class JiacVResultSaver extends MappingResultSaver {
 			OperationHistoryFactory.getOperationHistory().execute(command,
 					new NullProgressMonitor(), null);
 		} catch (ExecutionException e) {
-			/*
-			 * XXX For no apparent reason, an exception is thrown, saying that
-			 * the transaction is already closing. However, this seems not to be
-			 * doing any harm, so we'll just continue... 
-			 */
+			 // XXX For no apparent reason, an exception is thrown, saying that
+			 // the transaction is already closing. However, this seems not to be
+			 // doing any harm, so we'll just continue... 
 		}
 		
 		if (existingResource != null) {
@@ -260,6 +235,7 @@ public class JiacVResultSaver extends MappingResultSaver {
 		}
 		return true;
 	}
+	CREATION OF AGENT WORD DIAGRAM (deprecated) */
 	
 	/**
 	 * Command for creating Agent World Diagram from Model and merging it with 
@@ -267,6 +243,7 @@ public class JiacVResultSaver extends MappingResultSaver {
 	 * 
 	 * @author kuester
 	 */
+	/* CREATION OF AGENT WORD DIAGRAM (deprecated)
 	class CreateAgentworldDiagramCommand extends AbstractTransactionalCommand {
 		private final AgentWorld model;
 		private final Resource created;
@@ -298,7 +275,6 @@ public class JiacVResultSaver extends MappingResultSaver {
 			}
 			return CommandResult.newOKCommandResult();
 		}
-	
 	}
-	
+	CREATION OF AGENT WORD DIAGRAM (deprecated) */
 }

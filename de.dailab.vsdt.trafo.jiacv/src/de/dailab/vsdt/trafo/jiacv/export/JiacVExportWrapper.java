@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import de.dailab.agentworld.AgentWorld;
 import de.dailab.jiactng.jadl.Agent;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.Participant;
@@ -26,7 +25,7 @@ public class JiacVExportWrapper extends BpmnExportWrapper {
 	
 	private final List<Agent> jadlFiles;
 	
-	private AgentWorld agentWorld;
+//	private AgentWorld agentWorld;
 	
 	public JiacVExportWrapper(BusinessProcessSystem bps) {
 		super(bps);
@@ -47,11 +46,11 @@ public class JiacVExportWrapper extends BpmnExportWrapper {
 		return model != null ? modelPoolMap.get(model) : null;
 	}
 	
-	public void setAgentWorld(AgentWorld agentWorld) {
-		getTargetModels().add(agentWorld);
-		map(getSourceModel(), agentWorld);
-		this.agentWorld = agentWorld;
-	}
+//	public void setAgentWorld(AgentWorld agentWorld) {
+//		getTargetModels().add(agentWorld);
+//		map(getSourceModel(), agentWorld);
+//		this.agentWorld = agentWorld;
+//	}
 	
 	public void addJadlFile(Agent agent, Pool pool) {
 		map(pool, agent);
@@ -64,9 +63,9 @@ public class JiacVExportWrapper extends BpmnExportWrapper {
 		return jadlFiles;
 	}
 	
-	public AgentWorld getAgentWorld() {
-		return agentWorld;
-	}
+//	public AgentWorld getAgentWorld() {
+//		return agentWorld;
+//	}
 	
 	public Map<Participant, List<JiacVStarterRule>> getStarterRules() {
 		return starterRules;
@@ -118,11 +117,11 @@ public class JiacVExportWrapper extends BpmnExportWrapper {
 		return null;
 	}
 	
-	public String getAweFileName(AgentWorld agentWorld, boolean diagramFile) {
-		if (agentWorld != null) {
-			return agentWorld.getName() + (diagramFile ? Util.EXT_AWE_DIAGRAM : Util.EXT_AWE_MODEL);
-		} else {
-			return null;
-		}
-	}
+//	public String getAweFileName(AgentWorld agentWorld, boolean diagramFile) {
+//		if (agentWorld != null) {
+//			return agentWorld.getName() + (diagramFile ? Util.EXT_AWE_DIAGRAM : Util.EXT_AWE_MODEL);
+//		} else {
+//			return null;
+//		}
+//	}
 }

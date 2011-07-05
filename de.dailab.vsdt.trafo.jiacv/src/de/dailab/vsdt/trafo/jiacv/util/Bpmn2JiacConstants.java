@@ -1,12 +1,11 @@
 package de.dailab.vsdt.trafo.jiacv.util;
 
-import de.dailab.agentworld.AgentworldFactory;
 import de.dailab.jiactng.jadl.JadlFactory;
 
 public interface Bpmn2JiacConstants {
 
 //	public static final BeansFactory beanFac=	BeansFactory.eINSTANCE;
-	public static final AgentworldFactory aweFac= AgentworldFactory.eINSTANCE;
+//	public static final AgentworldFactory aweFac= AgentworldFactory.eINSTANCE;
 	public static final JadlFactory jadlFac=	JadlFactory.eINSTANCE;
 	public static final JadlElementFactory jef= JadlElementFactory.INSTANCE;
 	

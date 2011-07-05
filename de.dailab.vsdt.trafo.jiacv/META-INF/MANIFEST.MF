@@ -5,9 +5,7 @@ Bundle-SymbolicName: de.dailab.vsdt.trafo.jiacv;singleton:=true
 Bundle-Version: 1.4.1.20110517
 Bundle-Vendor: DAI-Labor, TU Berlin
 Require-Bundle: org.eclipse.xtext,
- de.dailab.agentWorldEditor,
  de.dailab.vsdt.trafo.strucbpmn;visibility:=reexport,
- de.dailab.agentWorldEditor.diagram,
  org.eclipse.gmf.runtime.diagram.ui,
  de.dailab.jiactng.jadlpp
 Bundle-ActivationPolicy: lazy

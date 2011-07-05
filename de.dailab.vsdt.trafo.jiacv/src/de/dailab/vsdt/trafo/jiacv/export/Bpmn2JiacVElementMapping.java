@@ -12,10 +12,6 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import de.dailab.agentworld.AgentWorld;
-import de.dailab.agentworld.Component;
-import de.dailab.agentworld.ComponentLink;
-import de.dailab.agentworld.Role;
 import de.dailab.jiactng.jadl.AccessLevel;
 import de.dailab.jiactng.jadl.Agent;
 import de.dailab.jiactng.jadl.Assign;
@@ -57,7 +53,6 @@ import de.dailab.vsdt.Implementation;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.MultiLoopAttSet;
-import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.StandardLoopAttSet;
@@ -132,6 +127,8 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			visitBusinessProcessDiagram(bpd);
 		}
 		
+		/* CREATION OF AGENT WORD DIAGRAM (deprecated)
+		
 		// create AgentWorldDiagram
 		AgentWorld agentWorld= aweFac.createAgentWorld();
 		agentWorld.setAuthor(bps.getAuthor());
@@ -169,6 +166,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 				}
 			}
 		}
+		CREATION OF AGENT WORD DIAGRAM (deprecated) */
 	}
 	
 	/**
