@@ -12,7 +12,7 @@ Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport,
  de.dailab.vsdt;visibility:=reexport,
  de.dailab.vsdt.trafo.base;visibility:=reexport,
- org.eclipse.gmf.runtime.diagram.ui,
+ org.eclipse.gmf.runtime.diagram.ui;visibility:=reexport,
  de.dailab.vsdt.diagram.meta
 Bundle-ActivationPolicy: lazy
 Export-Package: de.dailab.vsdt.trafo,
