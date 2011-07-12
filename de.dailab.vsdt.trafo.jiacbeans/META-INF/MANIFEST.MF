@@ -1,10 +1,13 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Jiacbeans
-Bundle-SymbolicName: de.dailab.vsdt.trafo.jiacbeans
+Bundle-Name: VSDT - Jiac AgentBeans Transformation
+Bundle-SymbolicName: de.dailab.vsdt.trafo.jiacbeans;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: de.dailab.vsdt.trafo.jiacbeans.Activator
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.xtext;bundle-version="0.7.2",
+ de.dailab.vsdt.trafo.strucbpmn;bundle-version="1.4.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: DAI-Labor, TU Berlin

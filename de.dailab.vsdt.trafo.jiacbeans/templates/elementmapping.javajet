@@ -1,0 +1,7 @@
+<%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="ElementMappingTemplate" imports = "de.dailab.vsdt.*"%>
+<% BusinessProcessSystem bps = (BusinessProcessSystem) argument; %>
+<% 
+	for(BusinessProcessDiagram bpd : bps.getBusinessProcesses()){
+		bpd.toString();
+	}
+%>
