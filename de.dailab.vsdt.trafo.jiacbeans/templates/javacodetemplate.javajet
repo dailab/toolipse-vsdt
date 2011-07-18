@@ -1,0 +1,26 @@
+<%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="JavaCodeGenerator" imports = "de.dailab.vsdt.trafo.jiacbeans.export.* de.dailab.vsdt.trafo.jiacbeans.util.* java.util.*"%>
+<% JavaCode jc = (JavaCode)argument; 
+   String packageName = jc.getPackageName();
+   String superClass = jc.getSuperClass();
+   Set<String> interfaces = jc.getInterfaces();
+   String packageDeclaration = "";
+   if(packageName.length()!=0){packageDeclaration = "package "+jc.getPackageName()+";";}
+   String classDeclaration = "public class "+jc.getClassName();
+   if(superClass!=null)classDeclaration += " extends "+superClass;
+   if(interfaces.size()!=0){
+   		boolean first = true;
+   		classDeclaration+=" implements ";
+   		for(String  s : interfaces){
+   			if(!first) classDeclaration += ", ";
+   			classDeclaration += s;
+   		}
+   }
+%>
+<%=packageDeclaration%>
+
+<% for(String className : jc.getImports()){%>
+import <%=className%>;
+<%}%>
+
+<%=classDeclaration%>{
+}

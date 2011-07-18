@@ -14,7 +14,7 @@ public class ElementMappingTemplate
   }
 
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-  protected final String TEXT_1 = "";
+  protected final String TEXT_1 = "Hello World";
 
   public String generate(Object argument)
   {
