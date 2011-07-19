@@ -15,6 +15,7 @@
    			classDeclaration += s;
    		}
    }
+   Set<Method> methods = jc.getMethods();
 %>
 <%=packageDeclaration%>
 
@@ -23,4 +24,9 @@ import <%=className%>;
 <%}%>
 
 <%=classDeclaration%>{
+
+//Methods
+<% for(Method method : methods){%>
+	<%= method.toString()%> 
+<%}%>
 }
