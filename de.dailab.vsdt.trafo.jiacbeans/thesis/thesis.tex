@@ -1,0 +1,50 @@
+\documentclass{daidoc}
+
+% hier nach Bedarf noch weitere Packages einfuegen...
+\usepackage[utf8]{inputenc}
+\usepackage{ngerman}
+
+% TODO diese Kommandos werden an verschiedenen Stellen referenziert
+% und sollten entsprechend gesetzt werden
+\newcommand{\ARTDERARBEIT}{Diplomarbeit}
+\newcommand{\TITEL}{Automated Generation of JIAC AgentBeans from BPMN Diagrams}
+\newcommand{\AUTOR}{Petrus Setiawan Tan}
+\newcommand{\ADRESSE}{Stettiner Str. 9 \\ 10243 Berlin}
+\newcommand{\MATRIKEL}{213933}
+\newcommand{\BETREUER}{Dipl.-Inform. Tobias Küster}
+
+
+\title{\TITLE}
+\author{\AUTOR}
+
+\begin{document}
+
+	% Nummerierung mit roemischen Zahlen
+	\frontmatter
+	
+	% Titel, Zusammenfassung, etc.
+	\input{frontmatter}
+
+	% Inhaltsverzeichnis
+	\tableofcontents
+
+	% ab hier Nummerierung mit arabischen Zahlen
+	\mainmatter
+
+	\input{chapter/introduction}
+	% TODO weitere Kapitel
+	\input{chapter/mapping}
+	\input{chapter/implementation}
+	\input{chapter/conclusion}
+	
+	\begin{appendix}
+		% Kapitel in diesem Bereicht erscheinen als AnhÃ¤nge
+	\end{appendix}
+	
+	\newpage
+	\bibliographystyle{plain}
+	\bibliography{bibliography}
+	\addcontentsline{toc}{chapter}{\bibname}
+	
+\end{document}
+
