@@ -63,6 +63,16 @@ public class JavaCode {
 		return copy;
 	}
 	
+	public Set<Method> getMethods(){
+		TreeSet<Method> copy = new TreeSet<Method>();
+		copy.addAll(methods);
+		return copy;
+	}
+	
+	public void addMethod(Method m){
+		methods.add(m);
+	}
+	
 	public static void main(String[] args){
 		JavaCode jc = new JavaCode("test.TestApplet");
 		System.out.println(jc.getPackageName());

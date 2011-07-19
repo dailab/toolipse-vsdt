@@ -22,7 +22,10 @@ public class JavaCodeGenerator
   protected final String TEXT_4 = ";";
   protected final String TEXT_5 = NL;
   protected final String TEXT_6 = NL;
-  protected final String TEXT_7 = "{" + NL + "}";
+  protected final String TEXT_7 = "{" + NL + "" + NL + "//Methods";
+  protected final String TEXT_8 = NL + "\t";
+  protected final String TEXT_9 = " ";
+  protected final String TEXT_10 = NL + "}";
 
   public String generate(Object argument)
   {
@@ -43,6 +46,7 @@ public class JavaCodeGenerator
    			classDeclaration += s;
    		}
    }
+   Set<Method> methods = jc.getMethods();
 
     stringBuffer.append(TEXT_1);
     stringBuffer.append(packageDeclaration);
@@ -56,6 +60,12 @@ public class JavaCodeGenerator
     stringBuffer.append(TEXT_6);
     stringBuffer.append(classDeclaration);
     stringBuffer.append(TEXT_7);
+     for(Method method : methods){
+    stringBuffer.append(TEXT_8);
+    stringBuffer.append( method.toString());
+    stringBuffer.append(TEXT_9);
+    }
+    stringBuffer.append(TEXT_10);
     return stringBuffer.toString();
   }
 }

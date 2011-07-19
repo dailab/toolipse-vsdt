@@ -23,8 +23,12 @@ public class JiacBeansResultSaver extends MappingResultSaver {
 		wrapper.setBaseDirectory(baseDirectory);
 		JavaCodeGenerator generator = new JavaCodeGenerator();
 		for(JavaCode jc : wrapper.getJavaFiles()){
-			String fileName = jc.getPackageName()+jc.getClassName();
-			fileName.replaceAll(".","/");
+			String[] paths = jc.getPackageName().split(".");
+			String path = "";
+			for(String s : paths){
+				path+= s +"/" ;
+			}
+			String fileName = path+jc.getClassName();
 			File f = new File(baseDirectory+"/"+fileName+".java");
 			FileWriter writer = new FileWriter(f);
 			writer.write(generator.generate(jc));
