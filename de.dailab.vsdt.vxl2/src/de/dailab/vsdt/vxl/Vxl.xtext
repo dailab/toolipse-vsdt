@@ -1,0 +1,46 @@
+grammar de.dailab.vsdt.vxl.Vxl with org.eclipse.xtext.common.Terminals
+
+generate vxl "http://www.dailab.de/vsdt/vxl/Vxl"
+
+// COMPLEX TERMS
+VxlTerm:			head = VxlElement (operator = VxlOperator tail = VxlTerm)?;
+VxlElement:			VxlBracketTerm | VxlNegation | VxlMinus | VxlValue |
+                    VxlVariable | VxlList | VxlCardinality;
+
+// SPECIAL TERMS, UNARY OPERATORS
+VxlBracketTerm:		"(" term = VxlTerm ")";
+VxlNegation:		"not" element = VxlElement;
+VxlMinus:			"-" element = VxlElement;
+VxlCardinality:		"#" element = VxlElement;
+
+// VARIABLES & ACCESSORS
+VxlVariable:		name = ID (accessor = VxlAccessor)?;
+VxlAccessor:		VxlArrayAccessor | VxlFieldAccessor;
+VxlArrayAccessor:	"[" index = VxlTerm "]" (accessor = VxlAccessor)?;
+VxlFieldAccessor:	"." name = ID (accessor = VxlAccessor)?;
+
+// LISTS
+VxlList:			"[" ((empty ?= "]") | (body = VxlListElement "]" ));
+VxlListElement:		first = VxlTerm ("," rest = VxlListElement)?;
+
+// CONSTANT VALUES
+VxlValue:			VxlNullConst | VxlBooleanConst | VxlNumericConst | VxlStringConst;
+VxlBooleanConst:	const = ('true' | 'false');
+VxlNullConst:		const = "null";
+VxlNumericConst:	const = NUMERIC;
+VxlStringConst:		const = STRING;
+
+// BINARY OPERATIONS
+enum VxlOperator: 
+	LT = "<" | LE = "<=" | EQ = "==" | NEQ = "!=" | GT = ">" | GE = ">=" |	// Term ** Term -> Bool
+	ADD = "+" | SUB = "-" | MULT = "*" | DIV = "/" | MOD = "%" |			// Num ** Num -> Num
+	AND = "and" | OR = "or" |												// Bool ** Bool -> Bool
+	CONCAT = "++"; 															// String ** String -> String
+
+// NATIVES
+NUMERIC : INT ('.' INT)? ;
+
+// ALTERNATIVES
+//terminal Numeric: "('0'..'9')+('.' ('0'..'9')+)?";
+//NumericConst:		const = INT; // keine kommazahlen 
+//BooleanConst:	isTrue ?= "true" | "false";

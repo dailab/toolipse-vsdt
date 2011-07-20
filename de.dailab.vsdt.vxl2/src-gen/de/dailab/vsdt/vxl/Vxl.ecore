@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="vxl"
+    nsURI="http://www.dailab.de/vsdt/vxl/Vxl" nsPrefix="vxl">
+  <eClassifiers xsi:type="ecore:EClass" name="VxlTerm">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="#//VxlElement"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//VxlOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tail" eType="#//VxlTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlBracketTerm" eSuperTypes="#//VxlElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="term" eType="#//VxlTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlNegation" eSuperTypes="#//VxlElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="#//VxlElement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlMinus" eSuperTypes="#//VxlElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="#//VxlElement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlCardinality" eSuperTypes="#//VxlElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="#//VxlElement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlVariable" eSuperTypes="#//VxlElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessor" eType="#//VxlAccessor"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlAccessor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessor" eType="#//VxlAccessor"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlArrayAccessor" eSuperTypes="#//VxlAccessor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//VxlTerm"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlFieldAccessor" eSuperTypes="#//VxlAccessor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlList" eSuperTypes="#//VxlElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="empty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//VxlListElement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlListElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="first" eType="#//VxlTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rest" eType="#//VxlListElement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlValue" eSuperTypes="#//VxlElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="const" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlBooleanConst" eSuperTypes="#//VxlValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlNullConst" eSuperTypes="#//VxlValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlNumericConst" eSuperTypes="#//VxlValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlStringConst" eSuperTypes="#//VxlValue"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="VxlOperator">
+    <eLiterals name="LT" literal="&lt;"/>
+    <eLiterals name="LE" value="1" literal="&lt;="/>
+    <eLiterals name="EQ" value="2" literal="=="/>
+    <eLiterals name="NEQ" value="3" literal="!="/>
+    <eLiterals name="GT" value="4" literal=">"/>
+    <eLiterals name="GE" value="5" literal=">="/>
+    <eLiterals name="ADD" value="6" literal="+"/>
+    <eLiterals name="SUB" value="7" literal="-"/>
+    <eLiterals name="MULT" value="8" literal="*"/>
+    <eLiterals name="DIV" value="9" literal="/"/>
+    <eLiterals name="MOD" value="10" literal="%"/>
+    <eLiterals name="AND" value="11" literal="and"/>
+    <eLiterals name="OR" value="12" literal="or"/>
+    <eLiterals name="CONCAT" value="13" literal="++"/>
+  </eClassifiers>
+</ecore:EPackage>
