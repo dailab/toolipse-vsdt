@@ -849,7 +849,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	private Service buildService(String name, EObject source, List<FlowObject> flowObjects, List<Property> properties) {
 		// create service model
 		Service service= jadlFac.createService();
-		service.setAccessLevel(AccessLevel.NODE);
+		service.setAccessLevel(AccessLevel.GLOBAL);
 		_currentService= service;
 		_currentModel.getServices().add(service);
 		wrapper.map(source, service);
@@ -859,9 +859,9 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 		// prop logLevel = DEBUG , maxExecutionTime = 5000
 		
 		service.setName(name);
-		if (useMAMSspecials) {
-			service.setAccessLevel(AccessLevel.GLOBAL);
-		}
+//		if (useMAMSspecials) {
+//			service.setAccessLevel(AccessLevel.GLOBAL);
+//		}
 		
 		// visit FlowObjects  
 		Script script= visitFlowObjects(flowObjects);

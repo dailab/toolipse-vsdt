@@ -68,7 +68,7 @@ public class JiacVResultSaver extends MappingResultSaver {
 		JiacVExportWrapper wrapper= (JiacVExportWrapper) this.wrapper;
 		List<String> serviceSources = new ArrayList<String>();
 		for (Agent model : wrapper.getJadlFiles()) {
-			String source= SimpleJadlParser.getInstance().serializeShort(model);
+			String source= SimpleJadlParser.getInstance().serialize(model);
 			serviceSources.add(source);
 		}
 		return serviceSources;
@@ -133,7 +133,7 @@ public class JiacVResultSaver extends MappingResultSaver {
 	private void saveJadl(File file, Agent model) throws IOException {
 		String source= null;
 		try {
-			source= SimpleJadlParser.getInstance().serializeShort(model);
+			source= SimpleJadlParser.getInstance().serialize(model);
 		} catch (JadlParseException e) {
 			TrafoLog.warn(e.getLocalizedMessage());
 		}
