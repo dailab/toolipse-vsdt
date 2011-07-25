@@ -8,9 +8,7 @@ import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.trafo.MappingStage;
 import de.dailab.vsdt.trafo.MappingWrapper;
 import de.dailab.vsdt.trafo.impl.DefaultBpmnValidation;
-import de.dailab.vsdt.trafo.jiacbeans.export.Bpmn2JiacBeansCleanUp;
 import de.dailab.vsdt.trafo.jiacbeans.export.Bpmn2JiacBeansElementMapping;
-import de.dailab.vsdt.trafo.jiacbeans.export.Bpmn2JiacBeansValidation;
 import de.dailab.vsdt.trafo.jiacbeans.export.JiacBeansExportWrapper;
 import de.dailab.vsdt.trafo.jiacbeans.export.JiacBeansResultSaver;
 import de.dailab.vsdt.trafo.strucbpmn.export.Bpmn2StrucBpmnTransformation;
@@ -30,7 +28,6 @@ public class Bpmn2JiacBeansExportWizard extends BpmnExportWizard {
 		mappingStages.add(new DefaultBpmnValidation());
 		mappingStages.add(new Bpmn2StrucBpmnTransformation());
 		mappingStages.add(new Bpmn2JiacBeansElementMapping());
-		mappingStages.add(new Bpmn2JiacBeansCleanUp());
 		
 		resultSaver= new JiacBeansResultSaver();
 	}

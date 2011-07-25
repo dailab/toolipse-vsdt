@@ -28,8 +28,10 @@ public class JiacBeansResultSaver extends MappingResultSaver {
 			for(String s : paths){
 				path+= s +"/" ;
 			}
+			File folder = new File(baseDirectory+"/"+path);
+			if(!folder.exists())folder.mkdirs();
 			String fileName = path+jc.getClassName();
-			File f = new File(baseDirectory+"/"+fileName+".java");
+			File f = new File(folder+"/"+fileName+".java");
 			FileWriter writer = new FileWriter(f);
 			writer.write(generator.generate(jc));
 			writer.flush();
