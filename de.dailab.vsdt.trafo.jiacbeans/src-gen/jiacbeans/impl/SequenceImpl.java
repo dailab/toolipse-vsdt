@@ -132,5 +132,12 @@ public class SequenceImpl extends ScriptImpl implements Sequence {
 		}
 		return super.eIsSet(featureID);
 	}
-
+	
+	public String toString(){
+		String result = "";
+		for(Script s : scripts){
+			result += s.toString()+"\n";
+		}
+		return result;
+	}
 } //SequenceImpl
