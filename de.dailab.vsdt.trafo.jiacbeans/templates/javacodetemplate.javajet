@@ -1,27 +1,14 @@
-<%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="JavaCodeGenerator" imports = "de.dailab.vsdt.trafo.jiacbeans.export.* de.dailab.vsdt.trafo.jiacbeans.util.* java.util.*"%>
-<% JavaCode jc = (JavaCode)argument; 
-   String packageName = jc.getPackageName();
-   String superClass = jc.getSuperClass();
-   Set<String> interfaces = jc.getInterfaces();
+<%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="JavaCodeGenerator" imports = "de.dailab.vsdt.trafo.jiacbeans.export.* jiacbeans.* java.util.*"%>
+
+<% AgentBean bean = (AgentBean)argument; 
+   String packageName = bean.getPackageName();
    String packageDeclaration = "";
-   if(packageName.length()!=0){packageDeclaration = "package "+jc.getPackageName()+";";}
-   String classDeclaration = "public class "+jc.getClassName();
-   if(superClass!=null)classDeclaration += " extends "+superClass;
-   if(interfaces.size()!=0){
-   		boolean first = true;
-   		classDeclaration+=" implements ";
-   		for(String  s : interfaces){
-   			if(!first) classDeclaration += ", ";
-   			classDeclaration += s;
-   		}
-   }
-   Set<Method> methods = jc.getMethods();
+   if(packageName.length()!=0){packageDeclaration = "package "+bean.getPackageName()+";";}
+   String classDeclaration = "public class "+bean.getName()+" extends AbstractAgentBean";
+   List<Method> methods = bean.getMethods();
 %>
 <%=packageDeclaration%>
 
-<% for(String className : jc.getImports()){%>
-import <%=className%>;
-<%}%>
 
 <%=classDeclaration%>{
 
