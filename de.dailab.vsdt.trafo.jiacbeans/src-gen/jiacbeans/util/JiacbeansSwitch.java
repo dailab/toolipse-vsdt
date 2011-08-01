@@ -113,6 +113,58 @@ public class JiacbeansSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case JiacbeansPackage.VARIABLE: {
+				Variable variable = (Variable)theEObject;
+				T result = caseVariable(variable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case JiacbeansPackage.ACTION: {
+				Action action = (Action)theEObject;
+				T result = caseAction(action);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case JiacbeansPackage.TRIGGER: {
+				Trigger trigger = (Trigger)theEObject;
+				T result = caseTrigger(trigger);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case JiacbeansPackage.SCRIPT: {
+				Script script = (Script)theEObject;
+				T result = caseScript(script);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case JiacbeansPackage.SEQUENCE: {
+				sequence sequence = (sequence)theEObject;
+				T result = casesequence(sequence);
+				if (result == null) result = caseScript(sequence);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case JiacbeansPackage.IF_THEN_ELSE: {
+				IfThenElse ifThenElse = (IfThenElse)theEObject;
+				T result = caseIfThenElse(ifThenElse);
+				if (result == null) result = caseScript(ifThenElse);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case JiacbeansPackage.FOR_EACH: {
+				ForEach forEach = (ForEach)theEObject;
+				T result = caseForEach(forEach);
+				if (result == null) result = caseScript(forEach);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case JiacbeansPackage.WHILE: {
+				While while_ = (While)theEObject;
+				T result = caseWhile(while_);
+				if (result == null) result = caseScript(while_);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -174,6 +226,126 @@ public class JiacbeansSwitch<T> {
 	 * @generated
 	 */
 	public T caseActivityMethod(ActivityMethod object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVariable(Variable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Action</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Action</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAction(Action object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Trigger</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Trigger</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTrigger(Trigger object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Script</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Script</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScript(Script object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>sequence</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>sequence</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casesequence(sequence object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>If Then Else</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>If Then Else</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIfThenElse(IfThenElse object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>For Each</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>For Each</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseForEach(ForEach object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>While</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>While</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWhile(While object) {
 		return null;
 	}
 

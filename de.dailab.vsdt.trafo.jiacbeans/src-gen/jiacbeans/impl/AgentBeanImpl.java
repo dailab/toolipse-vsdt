@@ -7,10 +7,12 @@
 package jiacbeans.impl;
 
 import java.util.Collection;
+import jiacbeans.Action;
 import jiacbeans.AgentBean;
 import jiacbeans.JiacbeansPackage;
 
 import jiacbeans.Method;
+import jiacbeans.Variable;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -29,6 +31,8 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link jiacbeans.impl.AgentBeanImpl#getMethods <em>Methods</em>}</li>
  *   <li>{@link jiacbeans.impl.AgentBeanImpl#getName <em>Name</em>}</li>
  *   <li>{@link jiacbeans.impl.AgentBeanImpl#getPackageName <em>Package Name</em>}</li>
+ *   <li>{@link jiacbeans.impl.AgentBeanImpl#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link jiacbeans.impl.AgentBeanImpl#getActions <em>Actions</em>}</li>
  * </ul>
  * </p>
  *
@@ -81,6 +85,26 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 	 * @ordered
 	 */
 	protected String packageName = PACKAGE_NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAttributes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Variable> attributes;
+
+	/**
+	 * The cached value of the '{@link #getActions() <em>Actions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> actions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -160,6 +184,39 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Variable> getAttributes() {
+		if (attributes == null) {
+			attributes = new EObjectResolvingEList<Variable>(Variable.class, this, JiacbeansPackage.AGENT_BEAN__ATTRIBUTES);
+		}
+		return attributes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Action> getActions() {
+		if (actions == null) {
+			actions = new EObjectResolvingEList<Action>(Action.class, this, JiacbeansPackage.AGENT_BEAN__ACTIONS);
+		}
+		return actions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public void addMethod(Method m) {
+		getMethods().add(m);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -169,6 +226,10 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 				return getName();
 			case JiacbeansPackage.AGENT_BEAN__PACKAGE_NAME:
 				return getPackageName();
+			case JiacbeansPackage.AGENT_BEAN__ATTRIBUTES:
+				return getAttributes();
+			case JiacbeansPackage.AGENT_BEAN__ACTIONS:
+				return getActions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -192,6 +253,14 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 			case JiacbeansPackage.AGENT_BEAN__PACKAGE_NAME:
 				setPackageName((String)newValue);
 				return;
+			case JiacbeansPackage.AGENT_BEAN__ATTRIBUTES:
+				getAttributes().clear();
+				getAttributes().addAll((Collection<? extends Variable>)newValue);
+				return;
+			case JiacbeansPackage.AGENT_BEAN__ACTIONS:
+				getActions().clear();
+				getActions().addAll((Collection<? extends Action>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -213,6 +282,12 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 			case JiacbeansPackage.AGENT_BEAN__PACKAGE_NAME:
 				setPackageName(PACKAGE_NAME_EDEFAULT);
 				return;
+			case JiacbeansPackage.AGENT_BEAN__ATTRIBUTES:
+				getAttributes().clear();
+				return;
+			case JiacbeansPackage.AGENT_BEAN__ACTIONS:
+				getActions().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -231,6 +306,10 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case JiacbeansPackage.AGENT_BEAN__PACKAGE_NAME:
 				return PACKAGE_NAME_EDEFAULT == null ? packageName != null : !PACKAGE_NAME_EDEFAULT.equals(packageName);
+			case JiacbeansPackage.AGENT_BEAN__ATTRIBUTES:
+				return attributes != null && !attributes.isEmpty();
+			case JiacbeansPackage.AGENT_BEAN__ACTIONS:
+				return actions != null && !actions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -238,7 +317,7 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {

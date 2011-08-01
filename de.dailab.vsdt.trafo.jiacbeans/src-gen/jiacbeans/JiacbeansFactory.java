@@ -62,6 +62,78 @@ public interface JiacbeansFactory extends EFactory {
 	ActivityMethod createActivityMethod();
 
 	/**
+	 * Returns a new object of class '<em>Variable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Variable</em>'.
+	 * @generated
+	 */
+	Variable createVariable();
+
+	/**
+	 * Returns a new object of class '<em>Action</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Action</em>'.
+	 * @generated
+	 */
+	Action createAction();
+
+	/**
+	 * Returns a new object of class '<em>Trigger</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Trigger</em>'.
+	 * @generated
+	 */
+	Trigger createTrigger();
+
+	/**
+	 * Returns a new object of class '<em>Script</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Script</em>'.
+	 * @generated
+	 */
+	Script createScript();
+
+	/**
+	 * Returns a new object of class '<em>sequence</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>sequence</em>'.
+	 * @generated
+	 */
+	sequence createsequence();
+
+	/**
+	 * Returns a new object of class '<em>If Then Else</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>If Then Else</em>'.
+	 * @generated
+	 */
+	IfThenElse createIfThenElse();
+
+	/**
+	 * Returns a new object of class '<em>For Each</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>For Each</em>'.
+	 * @generated
+	 */
+	ForEach createForEach();
+
+	/**
+	 * Returns a new object of class '<em>While</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>While</em>'.
+	 * @generated
+	 */
+	While createWhile();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

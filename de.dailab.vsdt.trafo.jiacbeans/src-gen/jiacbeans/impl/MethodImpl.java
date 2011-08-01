@@ -6,17 +6,22 @@
  */
 package jiacbeans.impl;
 
+import java.util.Collection;
 import jiacbeans.AgentBean;
 import jiacbeans.JiacbeansPackage;
 import jiacbeans.Method;
 
+import jiacbeans.Script;
+import jiacbeans.Variable;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,32 +30,31 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link jiacbeans.impl.MethodImpl#getContent <em>Content</em>}</li>
  *   <li>{@link jiacbeans.impl.MethodImpl#getReturnType <em>Return Type</em>}</li>
+ *   <li>{@link jiacbeans.impl.MethodImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link jiacbeans.impl.MethodImpl#getName <em>Name</em>}</li>
+ *   <li>{@link jiacbeans.impl.MethodImpl#isIsStatic <em>Is Static</em>}</li>
+ *   <li>{@link jiacbeans.impl.MethodImpl#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link jiacbeans.impl.MethodImpl#getContent <em>Content</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class MethodImpl extends EObjectImpl implements Method {
+	public static final int PRIVATE = 0;
+	public static final int PROTECTED = 1;
+	public static final int PUBLIC = 2;
+	public static final String[] VISIBILITIES = new String[]{"private","protected","public"};
 	/**
-	 * The default value of the '{@link #getContent() <em>Content</em>}' attribute.
+	 * The default value of the '{@link #getReturnType() <em>Return Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getContent()
+	 * @see #getReturnType()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String CONTENT_EDEFAULT = null;
-	/**
-	 * The cached value of the '{@link #getContent() <em>Content</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getContent()
-	 * @generated
-	 * @ordered
-	 */
-	protected String content = CONTENT_EDEFAULT;
+	protected static final String RETURN_TYPE_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -59,7 +63,80 @@ public class MethodImpl extends EObjectImpl implements Method {
 	 * @generated
 	 * @ordered
 	 */
-	protected Class<?> returnType;
+	protected String returnType = RETURN_TYPE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Variable> parameters;
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+	/**
+	 * The default value of the '{@link #isIsStatic() <em>Is Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsStatic()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_STATIC_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isIsStatic() <em>Is Static</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsStatic()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isStatic = IS_STATIC_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int VISIBILITY_EDEFAULT = 0;
+	/**
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected int visibility = VISIBILITY_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getContent() <em>Content</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContent()
+	 * @generated
+	 * @ordered
+	 */
+	protected Script content;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -85,7 +162,15 @@ public class MethodImpl extends EObjectImpl implements Method {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getContent() {
+	public Script getContent() {
+		if (content != null && content.eIsProxy()) {
+			InternalEObject oldContent = (InternalEObject)content;
+			content = (Script)eResolveProxy(oldContent);
+			if (content != oldContent) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, JiacbeansPackage.METHOD__CONTENT, oldContent, content));
+			}
+		}
 		return content;
 	}
 
@@ -94,8 +179,17 @@ public class MethodImpl extends EObjectImpl implements Method {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setContent(String newContent) {
-		String oldContent = content;
+	public Script basicGetContent() {
+		return content;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setContent(Script newContent) {
+		Script oldContent = content;
 		content = newContent;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.METHOD__CONTENT, oldContent, content));
@@ -106,7 +200,7 @@ public class MethodImpl extends EObjectImpl implements Method {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Class<?> getReturnType() {
+	public String getReturnType() {
 		return returnType;
 	}
 
@@ -115,8 +209,8 @@ public class MethodImpl extends EObjectImpl implements Method {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReturnType(Class<?> newReturnType) {
-		Class<?> oldReturnType = returnType;
+	public void setReturnType(String newReturnType) {
+		String oldReturnType = returnType;
 		returnType = newReturnType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.METHOD__RETURN_TYPE, oldReturnType, returnType));
@@ -127,13 +221,97 @@ public class MethodImpl extends EObjectImpl implements Method {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Variable> getParameters() {
+		if (parameters == null) {
+			parameters = new EObjectResolvingEList<Variable>(Variable.class, this, JiacbeansPackage.METHOD__PARAMETERS);
+		}
+		return parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.METHOD__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isIsStatic() {
+		return isStatic;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsStatic(boolean newIsStatic) {
+		boolean oldIsStatic = isStatic;
+		isStatic = newIsStatic;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.METHOD__IS_STATIC, oldIsStatic, isStatic));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getVisibility() {
+		return visibility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVisibility(int newVisibility) {
+		int oldVisibility = visibility;
+		visibility = newVisibility;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.METHOD__VISIBILITY, oldVisibility, visibility));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case JiacbeansPackage.METHOD__CONTENT:
-				return getContent();
 			case JiacbeansPackage.METHOD__RETURN_TYPE:
 				return getReturnType();
+			case JiacbeansPackage.METHOD__PARAMETERS:
+				return getParameters();
+			case JiacbeansPackage.METHOD__NAME:
+				return getName();
+			case JiacbeansPackage.METHOD__IS_STATIC:
+				return isIsStatic();
+			case JiacbeansPackage.METHOD__VISIBILITY:
+				return getVisibility();
+			case JiacbeansPackage.METHOD__CONTENT:
+				if (resolve) return getContent();
+				return basicGetContent();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -143,14 +321,28 @@ public class MethodImpl extends EObjectImpl implements Method {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case JiacbeansPackage.METHOD__CONTENT:
-				setContent((String)newValue);
-				return;
 			case JiacbeansPackage.METHOD__RETURN_TYPE:
-				setReturnType((Class<?>)newValue);
+				setReturnType((String)newValue);
+				return;
+			case JiacbeansPackage.METHOD__PARAMETERS:
+				getParameters().clear();
+				getParameters().addAll((Collection<? extends Variable>)newValue);
+				return;
+			case JiacbeansPackage.METHOD__NAME:
+				setName((String)newValue);
+				return;
+			case JiacbeansPackage.METHOD__IS_STATIC:
+				setIsStatic((Boolean)newValue);
+				return;
+			case JiacbeansPackage.METHOD__VISIBILITY:
+				setVisibility((Integer)newValue);
+				return;
+			case JiacbeansPackage.METHOD__CONTENT:
+				setContent((Script)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -164,11 +356,23 @@ public class MethodImpl extends EObjectImpl implements Method {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case JiacbeansPackage.METHOD__CONTENT:
-				setContent(CONTENT_EDEFAULT);
-				return;
 			case JiacbeansPackage.METHOD__RETURN_TYPE:
-				setReturnType((Class<?>)null);
+				setReturnType(RETURN_TYPE_EDEFAULT);
+				return;
+			case JiacbeansPackage.METHOD__PARAMETERS:
+				getParameters().clear();
+				return;
+			case JiacbeansPackage.METHOD__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case JiacbeansPackage.METHOD__IS_STATIC:
+				setIsStatic(IS_STATIC_EDEFAULT);
+				return;
+			case JiacbeansPackage.METHOD__VISIBILITY:
+				setVisibility(VISIBILITY_EDEFAULT);
+				return;
+			case JiacbeansPackage.METHOD__CONTENT:
+				setContent((Script)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -182,10 +386,18 @@ public class MethodImpl extends EObjectImpl implements Method {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case JiacbeansPackage.METHOD__CONTENT:
-				return CONTENT_EDEFAULT == null ? content != null : !CONTENT_EDEFAULT.equals(content);
 			case JiacbeansPackage.METHOD__RETURN_TYPE:
-				return returnType != null;
+				return RETURN_TYPE_EDEFAULT == null ? returnType != null : !RETURN_TYPE_EDEFAULT.equals(returnType);
+			case JiacbeansPackage.METHOD__PARAMETERS:
+				return parameters != null && !parameters.isEmpty();
+			case JiacbeansPackage.METHOD__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case JiacbeansPackage.METHOD__IS_STATIC:
+				return isStatic != IS_STATIC_EDEFAULT;
+			case JiacbeansPackage.METHOD__VISIBILITY:
+				return visibility != VISIBILITY_EDEFAULT;
+			case JiacbeansPackage.METHOD__CONTENT:
+				return content != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -200,10 +412,14 @@ public class MethodImpl extends EObjectImpl implements Method {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (content: ");
-		result.append(content);
-		result.append(", returnType: ");
+		result.append(" (returnType: ");
 		result.append(returnType);
+		result.append(", name: ");
+		result.append(name);
+		result.append(", isStatic: ");
+		result.append(isStatic);
+		result.append(", visibility: ");
+		result.append(visibility);
 		result.append(')');
 		return result.toString();
 	}

@@ -88,6 +88,38 @@ public class JiacbeansAdapterFactory extends AdapterFactoryImpl {
 				return createActivityMethodAdapter();
 			}
 			@Override
+			public Adapter caseVariable(Variable object) {
+				return createVariableAdapter();
+			}
+			@Override
+			public Adapter caseAction(Action object) {
+				return createActionAdapter();
+			}
+			@Override
+			public Adapter caseTrigger(Trigger object) {
+				return createTriggerAdapter();
+			}
+			@Override
+			public Adapter caseScript(Script object) {
+				return createScriptAdapter();
+			}
+			@Override
+			public Adapter casesequence(sequence object) {
+				return createsequenceAdapter();
+			}
+			@Override
+			public Adapter caseIfThenElse(IfThenElse object) {
+				return createIfThenElseAdapter();
+			}
+			@Override
+			public Adapter caseForEach(ForEach object) {
+				return createForEachAdapter();
+			}
+			@Override
+			public Adapter caseWhile(While object) {
+				return createWhileAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -160,6 +192,118 @@ public class JiacbeansAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createActivityMethodAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link jiacbeans.Variable <em>Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see jiacbeans.Variable
+	 * @generated
+	 */
+	public Adapter createVariableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link jiacbeans.Action <em>Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see jiacbeans.Action
+	 * @generated
+	 */
+	public Adapter createActionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link jiacbeans.Trigger <em>Trigger</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see jiacbeans.Trigger
+	 * @generated
+	 */
+	public Adapter createTriggerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link jiacbeans.Script <em>Script</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see jiacbeans.Script
+	 * @generated
+	 */
+	public Adapter createScriptAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link jiacbeans.sequence <em>sequence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see jiacbeans.sequence
+	 * @generated
+	 */
+	public Adapter createsequenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link jiacbeans.IfThenElse <em>If Then Else</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see jiacbeans.IfThenElse
+	 * @generated
+	 */
+	public Adapter createIfThenElseAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link jiacbeans.ForEach <em>For Each</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see jiacbeans.ForEach
+	 * @generated
+	 */
+	public Adapter createForEachAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link jiacbeans.While <em>While</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see jiacbeans.While
+	 * @generated
+	 */
+	public Adapter createWhileAdapter() {
 		return null;
 	}
 

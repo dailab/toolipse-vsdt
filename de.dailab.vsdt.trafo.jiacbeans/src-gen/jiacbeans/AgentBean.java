@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link jiacbeans.AgentBean#getMethods <em>Methods</em>}</li>
  *   <li>{@link jiacbeans.AgentBean#getName <em>Name</em>}</li>
  *   <li>{@link jiacbeans.AgentBean#getPackageName <em>Package Name</em>}</li>
+ *   <li>{@link jiacbeans.AgentBean#getAttributes <em>Attributes</em>}</li>
+ *   <li>{@link jiacbeans.AgentBean#getActions <em>Actions</em>}</li>
  * </ul>
  * </p>
  *
@@ -96,4 +98,44 @@ public interface AgentBean extends EObject {
 	 * @generated
 	 */
 	void setPackageName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Attributes</b></em>' reference list.
+	 * The list contents are of type {@link jiacbeans.Variable}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Attributes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Attributes</em>' reference list.
+	 * @see jiacbeans.JiacbeansPackage#getAgentBean_Attributes()
+	 * @model
+	 * @generated
+	 */
+	EList<Variable> getAttributes();
+
+	/**
+	 * Returns the value of the '<em><b>Actions</b></em>' reference list.
+	 * The list contents are of type {@link jiacbeans.Action}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Actions</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Actions</em>' reference list.
+	 * @see jiacbeans.JiacbeansPackage#getAgentBean_Actions()
+	 * @model
+	 * @generated
+	 */
+	EList<Action> getActions();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void addMethod(Method m);
 } // AgentBean

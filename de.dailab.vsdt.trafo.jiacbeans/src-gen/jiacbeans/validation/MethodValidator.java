@@ -6,6 +6,9 @@
  */
 package jiacbeans.validation;
 
+import jiacbeans.Script;
+import jiacbeans.Variable;
+import org.eclipse.emf.common.util.EList;
 import jiacbeans.AgentBean;
 
 /**
@@ -18,6 +21,18 @@ public interface MethodValidator {
 	boolean validate();
 
 	boolean validateContent(String value);
+
+	boolean validateReturnType(String value);
+
+	boolean validateParameters(EList<Variable> value);
+
+	boolean validateName(String value);
+
+	boolean validateIsStatic(boolean value);
+
+	boolean validateVisibility(int value);
+
+	boolean validateContent(Script value);
 
 	boolean validateReturnType(Class<?> value);
 

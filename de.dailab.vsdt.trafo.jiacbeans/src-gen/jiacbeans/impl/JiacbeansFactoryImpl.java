@@ -64,6 +64,14 @@ public class JiacbeansFactoryImpl extends EFactoryImpl implements JiacbeansFacto
 			case JiacbeansPackage.METHOD: return createMethod();
 			case JiacbeansPackage.WORKFLOW_METHOD: return createWorkflowMethod();
 			case JiacbeansPackage.ACTIVITY_METHOD: return createActivityMethod();
+			case JiacbeansPackage.VARIABLE: return createVariable();
+			case JiacbeansPackage.ACTION: return createAction();
+			case JiacbeansPackage.TRIGGER: return createTrigger();
+			case JiacbeansPackage.SCRIPT: return createScript();
+			case JiacbeansPackage.SEQUENCE: return createsequence();
+			case JiacbeansPackage.IF_THEN_ELSE: return createIfThenElse();
+			case JiacbeansPackage.FOR_EACH: return createForEach();
+			case JiacbeansPackage.WHILE: return createWhile();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -107,6 +115,86 @@ public class JiacbeansFactoryImpl extends EFactoryImpl implements JiacbeansFacto
 	public ActivityMethod createActivityMethod() {
 		ActivityMethodImpl activityMethod = new ActivityMethodImpl();
 		return activityMethod;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Variable createVariable() {
+		VariableImpl variable = new VariableImpl();
+		return variable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Action createAction() {
+		ActionImpl action = new ActionImpl();
+		return action;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Trigger createTrigger() {
+		TriggerImpl trigger = new TriggerImpl();
+		return trigger;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Script createScript() {
+		ScriptImpl script = new ScriptImpl();
+		return script;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public sequence createsequence() {
+		sequenceImpl sequence = new sequenceImpl();
+		return sequence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IfThenElse createIfThenElse() {
+		IfThenElseImpl ifThenElse = new IfThenElseImpl();
+		return ifThenElse;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ForEach createForEach() {
+		ForEachImpl forEach = new ForEachImpl();
+		return forEach;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public While createWhile() {
+		WhileImpl while_ = new WhileImpl();
+		return while_;
 	}
 
 	/**
