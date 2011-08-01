@@ -12,8 +12,8 @@
 
 <%=classDeclaration%>{
 
-//Methods
 <% for(Method method : methods){%>
-	<%= method.toString()%> 
+	<%= method.toString()+"\n"%> 
 <%}%>
+
 }

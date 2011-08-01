@@ -219,6 +219,10 @@
   <children xmi:type="notation:Node" xmi:id="_Jg4ioLwkEeCXj_kWAFRSgw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_Jg5JsLwkEeCXj_kWAFRSgw" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_Jg5JsbwkEeCXj_kWAFRSgw" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_OqbykLx1EeCXj_kWAFRSgw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jiacbeans.ecore#//While/condition"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Oqbykbx1EeCXj_kWAFRSgw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_Jg5JsrwkEeCXj_kWAFRSgw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_Jg5Js7wkEeCXj_kWAFRSgw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_Jg5JtLwkEeCXj_kWAFRSgw"/>
@@ -231,6 +235,22 @@
     <styles xmi:type="notation:ShapeStyle" xmi:id="_Jg4iobwkEeCXj_kWAFRSgw" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="jiacbeans.ecore#//While"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Jg4iorwkEeCXj_kWAFRSgw" x="105" y="650"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_hrOnILxuEeCXj_kWAFRSgw" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_hrQcULxuEeCXj_kWAFRSgw" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_hrQcUbxuEeCXj_kWAFRSgw" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_hrQcUrxuEeCXj_kWAFRSgw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_hrQcU7xuEeCXj_kWAFRSgw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_hrQcVLxuEeCXj_kWAFRSgw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_hrQcVbxuEeCXj_kWAFRSgw" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_hrQcVrxuEeCXj_kWAFRSgw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_hrQcV7xuEeCXj_kWAFRSgw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_hrQcWLxuEeCXj_kWAFRSgw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_hrOnIbxuEeCXj_kWAFRSgw" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="jiacbeans.ecore#//Expression"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hrOnIrxuEeCXj_kWAFRSgw" x="550" y="460"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_Be2w4bbJEeCi6fY6154VIg"/>
   <element xmi:type="ecore:EPackage" href="jiacbeans.ecore#/"/>

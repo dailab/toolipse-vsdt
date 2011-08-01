@@ -605,13 +605,42 @@ public interface JiacbeansPackage extends EPackage {
 	int WHILE__CONTENT = SCRIPT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Condition</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHILE__CONDITION = SCRIPT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>While</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WHILE_FEATURE_COUNT = SCRIPT_FEATURE_COUNT + 1;
+	int WHILE_FEATURE_COUNT = SCRIPT_FEATURE_COUNT + 2;
+
+
+	/**
+	 * The meta object id for the '{@link jiacbeans.impl.ExpressionImpl <em>Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see jiacbeans.impl.ExpressionImpl
+	 * @see jiacbeans.impl.JiacbeansPackageImpl#getExpression()
+	 * @generated
+	 */
+	int EXPRESSION = 12;
+
+	/**
+	 * The number of structural features of the '<em>Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_FEATURE_COUNT = 0;
 
 
 	/**
@@ -955,6 +984,27 @@ public interface JiacbeansPackage extends EPackage {
 	EReference getWhile_Content();
 
 	/**
+	 * Returns the meta object for the attribute '{@link jiacbeans.While#getCondition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Condition</em>'.
+	 * @see jiacbeans.While#getCondition()
+	 * @see #getWhile()
+	 * @generated
+	 */
+	EAttribute getWhile_Condition();
+
+	/**
+	 * Returns the meta object for class '{@link jiacbeans.Expression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expression</em>'.
+	 * @see jiacbeans.Expression
+	 * @generated
+	 */
+	EClass getExpression();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1255,6 +1305,24 @@ public interface JiacbeansPackage extends EPackage {
 		 * @generated
 		 */
 		EReference WHILE__CONTENT = eINSTANCE.getWhile_Content();
+
+		/**
+		 * The meta object literal for the '<em><b>Condition</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WHILE__CONDITION = eINSTANCE.getWhile_Condition();
+
+		/**
+		 * The meta object literal for the '{@link jiacbeans.impl.ExpressionImpl <em>Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see jiacbeans.impl.ExpressionImpl
+		 * @see jiacbeans.impl.JiacbeansPackageImpl#getExpression()
+		 * @generated
+		 */
+		EClass EXPRESSION = eINSTANCE.getExpression();
 
 	}
 

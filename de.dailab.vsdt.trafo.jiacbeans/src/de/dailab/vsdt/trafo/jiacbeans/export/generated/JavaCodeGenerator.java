@@ -20,10 +20,10 @@ public class JavaCodeGenerator
   protected final String TEXT_2 = NL;
   protected final String TEXT_3 = NL + NL;
   protected final String TEXT_4 = NL;
-  protected final String TEXT_5 = "{" + NL + "" + NL + "//Methods";
+  protected final String TEXT_5 = "{" + NL;
   protected final String TEXT_6 = NL + "\t";
   protected final String TEXT_7 = " ";
-  protected final String TEXT_8 = NL + "}";
+  protected final String TEXT_8 = NL + NL + "}";
 
   public String generate(Object argument)
   {
@@ -44,7 +44,7 @@ public class JavaCodeGenerator
     stringBuffer.append(TEXT_5);
      for(Method method : methods){
     stringBuffer.append(TEXT_6);
-    stringBuffer.append( method.toString());
+    stringBuffer.append( method.toString()+"\n");
     stringBuffer.append(TEXT_7);
     }
     stringBuffer.append(TEXT_8);

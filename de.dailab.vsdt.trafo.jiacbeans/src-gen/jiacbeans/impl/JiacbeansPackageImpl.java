@@ -9,6 +9,7 @@ package jiacbeans.impl;
 import jiacbeans.Action;
 import jiacbeans.ActivityMethod;
 import jiacbeans.AgentBean;
+import jiacbeans.Expression;
 import jiacbeans.ForEach;
 import jiacbeans.IfThenElse;
 import jiacbeans.JiacbeansFactory;
@@ -119,6 +120,13 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * @generated
 	 */
 	private EClass whileEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass expressionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -474,6 +482,24 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getWhile_Condition() {
+		return (EAttribute)whileEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getExpression() {
+		return expressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public JiacbeansFactory getJiacbeansFactory() {
 		return (JiacbeansFactory)getEFactoryInstance();
 	}
@@ -540,6 +566,9 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 
 		whileEClass = createEClass(WHILE);
 		createEReference(whileEClass, WHILE__CONTENT);
+		createEAttribute(whileEClass, WHILE__CONDITION);
+
+		expressionEClass = createEClass(EXPRESSION);
 	}
 
 	/**
@@ -624,6 +653,9 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 
 		initEClass(whileEClass, While.class, "While", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getWhile_Content(), this.getScript(), null, "content", null, 1, 1, While.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getWhile_Condition(), ecorePackage.getEString(), "condition", null, 0, 1, While.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

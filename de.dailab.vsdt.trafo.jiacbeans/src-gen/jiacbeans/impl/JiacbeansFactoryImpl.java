@@ -72,6 +72,7 @@ public class JiacbeansFactoryImpl extends EFactoryImpl implements JiacbeansFacto
 			case JiacbeansPackage.IF_THEN_ELSE: return createIfThenElse();
 			case JiacbeansPackage.FOR_EACH: return createForEach();
 			case JiacbeansPackage.WHILE: return createWhile();
+			case JiacbeansPackage.EXPRESSION: return createExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -195,6 +196,16 @@ public class JiacbeansFactoryImpl extends EFactoryImpl implements JiacbeansFacto
 	public While createWhile() {
 		WhileImpl while_ = new WhileImpl();
 		return while_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Expression createExpression() {
+		ExpressionImpl expression = new ExpressionImpl();
+		return expression;
 	}
 
 	/**

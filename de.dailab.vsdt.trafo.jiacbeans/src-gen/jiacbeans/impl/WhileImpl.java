@@ -6,6 +6,10 @@
  */
 package jiacbeans.impl;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
+
 import jiacbeans.JiacbeansPackage;
 import jiacbeans.Script;
 import jiacbeans.While;
@@ -25,6 +29,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link jiacbeans.impl.WhileImpl#getContent <em>Content</em>}</li>
+ *   <li>{@link jiacbeans.impl.WhileImpl#getCondition <em>Condition</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,6 +45,25 @@ public class WhileImpl extends ScriptImpl implements While {
 	 * @ordered
 	 */
 	protected Script content;
+
+	/**
+	 * The default value of the '{@link #getCondition() <em>Condition</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCondition()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CONDITION_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCondition()
+	 * @generated
+	 * @ordered
+	 */
+	protected String condition = CONDITION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -103,12 +127,35 @@ public class WhileImpl extends ScriptImpl implements While {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getCondition() {
+		return condition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCondition(String newCondition) {
+		String oldCondition = condition;
+		condition = newCondition;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.WHILE__CONDITION, oldCondition, condition));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case JiacbeansPackage.WHILE__CONTENT:
 				if (resolve) return getContent();
 				return basicGetContent();
+			case JiacbeansPackage.WHILE__CONDITION:
+				return getCondition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -123,6 +170,9 @@ public class WhileImpl extends ScriptImpl implements While {
 		switch (featureID) {
 			case JiacbeansPackage.WHILE__CONTENT:
 				setContent((Script)newValue);
+				return;
+			case JiacbeansPackage.WHILE__CONDITION:
+				setCondition((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -139,6 +189,9 @@ public class WhileImpl extends ScriptImpl implements While {
 			case JiacbeansPackage.WHILE__CONTENT:
 				setContent((Script)null);
 				return;
+			case JiacbeansPackage.WHILE__CONDITION:
+				setCondition(CONDITION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -153,8 +206,35 @@ public class WhileImpl extends ScriptImpl implements While {
 		switch (featureID) {
 			case JiacbeansPackage.WHILE__CONTENT:
 				return content != null;
+			case JiacbeansPackage.WHILE__CONDITION:
+				return CONDITION_EDEFAULT == null ? condition != null : !CONDITION_EDEFAULT.equals(condition);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if(condition==null)condition="false";
+		String result = "while("+condition+"){\n";
+		if(content!=null){
+			BufferedReader reader = new BufferedReader(new StringReader(content.toString()));
+			try{
+				String line = reader.readLine();
+				while(line!=null){
+					if(!line.equals("")) result += "\t"+line+"\n";
+					line = reader.readLine();
+				}
+			}catch(IOException e){
+				result += "\t//Error occured while reading loop body\n";
+			}
+		}
+		result +="}";
+		return result;
 	}
 
 } //WhileImpl

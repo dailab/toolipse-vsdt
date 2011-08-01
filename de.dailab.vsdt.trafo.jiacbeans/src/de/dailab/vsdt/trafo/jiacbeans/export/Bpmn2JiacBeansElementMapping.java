@@ -2,12 +2,15 @@ package de.dailab.vsdt.trafo.jiacbeans.export;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 import jiacbeans.ActivityMethod;
 import jiacbeans.AgentBean;
 import jiacbeans.JiacbeansFactory;
 import jiacbeans.Method;
 import jiacbeans.Script;
 import jiacbeans.Sequence;
+import jiacbeans.While;
 import jiacbeans.WorkflowMethod;
 import jiacbeans.impl.JiacbeansFactoryImpl;
 import jiacbeans.impl.MethodImpl;
@@ -125,8 +128,22 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	}
 	
 	private Script visitBpmnBlock(BpmnBlock block){
-		Sequence seq = beansFac.createSequence();
 		TrafoLog.trace("Visiting BpmnBlock");
+		Gateway fork = block.getFirstGateway();
+		Sequence seq = beansFac.createSequence();
+//		
+//		switch (fork.getGatewayType()) {
+//			case AND:
+//				break;
+//			case OR:
+//				break;
+//			case XOR_DATA:
+//				break;
+//			case XOR_EVENT:
+//				break;
+//			case COMPLEX:
+//				break;
+//		}
 		for(BpmnBranch branch : block.getElements()){
 			seq.getScripts().add(visitFlowObject((FlowObject)branch.getElement()));
 		}
@@ -134,10 +151,46 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	}
 	
 	private Script visitBpmnLoopBlock(BpmnLoopBlock block){
-		//TODO implement this
-		Script script = beansFac.createScript();
-		script.setCode("");//empty
-		return script;
+		TrafoLog.trace("Visiting BpmnLoopBlock");
+		Script untilPart= visitFlowObject(block.getFirstBranch().getElement());
+		Script whilePart= visitFlowObject(block.getSecondBranch().getElement());
+		
+		String condition = "";
+		// compose and parse loop condition expression
+		if (block.getSecondBranch().getCondition() != null) {
+			condition = block.getSecondBranch().getCondition().getExpression();
+		} else {
+			//use negated exit condition
+			condition = "! (" + block.getExitBranch().getCondition().getExpression() + ")";
+		}
+		
+		condition.replaceAll("and", "&&");
+		condition.replaceAll("or", "||");
+		
+		// assemble loop body
+		Sequence loopBody= beansFac.createSequence();
+		if (whilePart != null) {
+			loopBody.getScripts().add(whilePart);
+		}
+		if (untilPart != null) {
+			loopBody.getScripts().add(untilPart);
+		}
+		
+		While loop = beansFac.createWhile();
+		loop.setCondition(condition);
+		loop.setContent(loopBody);
+		
+		// IV. ASSEMBLE SEQUENCE HOLDING THE LOOP (and return it)
+		if (untilPart == null) {
+			// only the loop
+			return loop;
+		} else {
+			// a sequence holding a copy of activity 1 and the loop
+			Sequence sequence = beansFac.createSequence();
+			sequence.getScripts().add((Script) EcoreUtil.copy(untilPart));
+			sequence.getScripts().add(loop);
+			return sequence;
+		}
 	}
 	
 	private Script visitBpmnSequence(BpmnSequence bpmnSequence) {
@@ -150,6 +203,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	}
 	
 	private Script visitEvent(Event e){
+		TrafoLog.trace("Visiting Event '" + e.getName() + "'");
 		//TODO implement this
 		Script script = beansFac.createScript();
 		script.setCode("");//empty
