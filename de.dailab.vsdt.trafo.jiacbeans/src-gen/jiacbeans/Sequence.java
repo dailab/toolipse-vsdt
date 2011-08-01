@@ -10,21 +10,21 @@ import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>sequence</b></em>'.
+ * A representation of the model object '<em><b>Sequence</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link jiacbeans.sequence#getScripts <em>Scripts</em>}</li>
+ *   <li>{@link jiacbeans.Sequence#getScripts <em>Scripts</em>}</li>
  * </ul>
  * </p>
  *
- * @see jiacbeans.JiacbeansPackage#getsequence()
+ * @see jiacbeans.JiacbeansPackage#getSequence()
  * @model
  * @generated
  */
-public interface sequence extends Script {
+public interface Sequence extends Script {
 	/**
 	 * Returns the value of the '<em><b>Scripts</b></em>' reference list.
 	 * The list contents are of type {@link jiacbeans.Script}.
@@ -35,10 +35,10 @@ public interface sequence extends Script {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Scripts</em>' reference list.
-	 * @see jiacbeans.JiacbeansPackage#getsequence_Scripts()
+	 * @see jiacbeans.JiacbeansPackage#getSequence_Scripts()
 	 * @model
 	 * @generated
 	 */
 	EList<Script> getScripts();
 
-} // sequence
+} // Sequence

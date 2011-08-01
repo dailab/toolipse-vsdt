@@ -98,13 +98,13 @@ public interface JiacbeansFactory extends EFactory {
 	Script createScript();
 
 	/**
-	 * Returns a new object of class '<em>sequence</em>'.
+	 * Returns a new object of class '<em>Sequence</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>sequence</em>'.
+	 * @return a new object of class '<em>Sequence</em>'.
 	 * @generated
 	 */
-	sequence createsequence();
+	Sequence createSequence();
 
 	/**
 	 * Returns a new object of class '<em>If Then Else</em>'.

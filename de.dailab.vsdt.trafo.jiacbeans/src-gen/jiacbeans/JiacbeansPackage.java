@@ -457,11 +457,11 @@ public interface JiacbeansPackage extends EPackage {
 	int SCRIPT_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link jiacbeans.impl.sequenceImpl <em>sequence</em>}' class.
+	 * The meta object id for the '{@link jiacbeans.impl.SequenceImpl <em>Sequence</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see jiacbeans.impl.sequenceImpl
-	 * @see jiacbeans.impl.JiacbeansPackageImpl#getsequence()
+	 * @see jiacbeans.impl.SequenceImpl
+	 * @see jiacbeans.impl.JiacbeansPackageImpl#getSequence()
 	 * @generated
 	 */
 	int SEQUENCE = 8;
@@ -485,7 +485,7 @@ public interface JiacbeansPackage extends EPackage {
 	int SEQUENCE__SCRIPTS = SCRIPT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>sequence</em>' class.
+	 * The number of structural features of the '<em>Sequence</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -860,25 +860,25 @@ public interface JiacbeansPackage extends EPackage {
 	EAttribute getScript_Code();
 
 	/**
-	 * Returns the meta object for class '{@link jiacbeans.sequence <em>sequence</em>}'.
+	 * Returns the meta object for class '{@link jiacbeans.Sequence <em>Sequence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>sequence</em>'.
-	 * @see jiacbeans.sequence
+	 * @return the meta object for class '<em>Sequence</em>'.
+	 * @see jiacbeans.Sequence
 	 * @generated
 	 */
-	EClass getsequence();
+	EClass getSequence();
 
 	/**
-	 * Returns the meta object for the reference list '{@link jiacbeans.sequence#getScripts <em>Scripts</em>}'.
+	 * Returns the meta object for the reference list '{@link jiacbeans.Sequence#getScripts <em>Scripts</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Scripts</em>'.
-	 * @see jiacbeans.sequence#getScripts()
-	 * @see #getsequence()
+	 * @see jiacbeans.Sequence#getScripts()
+	 * @see #getSequence()
 	 * @generated
 	 */
-	EReference getsequence_Scripts();
+	EReference getSequence_Scripts();
 
 	/**
 	 * Returns the meta object for class '{@link jiacbeans.IfThenElse <em>If Then Else</em>}'.
@@ -1177,14 +1177,14 @@ public interface JiacbeansPackage extends EPackage {
 		EAttribute SCRIPT__CODE = eINSTANCE.getScript_Code();
 
 		/**
-		 * The meta object literal for the '{@link jiacbeans.impl.sequenceImpl <em>sequence</em>}' class.
+		 * The meta object literal for the '{@link jiacbeans.impl.SequenceImpl <em>Sequence</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see jiacbeans.impl.sequenceImpl
-		 * @see jiacbeans.impl.JiacbeansPackageImpl#getsequence()
+		 * @see jiacbeans.impl.SequenceImpl
+		 * @see jiacbeans.impl.JiacbeansPackageImpl#getSequence()
 		 * @generated
 		 */
-		EClass SEQUENCE = eINSTANCE.getsequence();
+		EClass SEQUENCE = eINSTANCE.getSequence();
 
 		/**
 		 * The meta object literal for the '<em><b>Scripts</b></em>' reference list feature.
@@ -1192,7 +1192,7 @@ public interface JiacbeansPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SEQUENCE__SCRIPTS = eINSTANCE.getsequence_Scripts();
+		EReference SEQUENCE__SCRIPTS = eINSTANCE.getSequence_Scripts();
 
 		/**
 		 * The meta object literal for the '{@link jiacbeans.impl.IfThenElseImpl <em>If Then Else</em>}' class.

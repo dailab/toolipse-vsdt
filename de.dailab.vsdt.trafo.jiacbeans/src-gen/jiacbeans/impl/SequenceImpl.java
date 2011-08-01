@@ -10,7 +10,7 @@ import java.util.Collection;
 
 import jiacbeans.JiacbeansPackage;
 import jiacbeans.Script;
-import jiacbeans.sequence;
+import jiacbeans.Sequence;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -20,18 +20,18 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>sequence</b></em>'.
+ * An implementation of the model object '<em><b>Sequence</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link jiacbeans.impl.sequenceImpl#getScripts <em>Scripts</em>}</li>
+ *   <li>{@link jiacbeans.impl.SequenceImpl#getScripts <em>Scripts</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class sequenceImpl extends ScriptImpl implements sequence {
+public class SequenceImpl extends ScriptImpl implements Sequence {
 	/**
 	 * The cached value of the '{@link #getScripts() <em>Scripts</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -47,7 +47,7 @@ public class sequenceImpl extends ScriptImpl implements sequence {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected sequenceImpl() {
+	protected SequenceImpl() {
 		super();
 	}
 
@@ -133,4 +133,4 @@ public class sequenceImpl extends ScriptImpl implements sequence {
 		return super.eIsSet(featureID);
 	}
 
-} //sequenceImpl
+} //SequenceImpl

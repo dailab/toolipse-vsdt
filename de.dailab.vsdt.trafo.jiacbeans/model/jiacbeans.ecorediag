@@ -181,7 +181,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_aLo3d7weEeCXj_kWAFRSgw"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_aLnpUbweEeCXj_kWAFRSgw" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="jiacbeans.ecore#//sequence"/>
+    <element xmi:type="ecore:EClass" href="jiacbeans.ecore#//Sequence"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_aLnpUrweEeCXj_kWAFRSgw" x="330" y="555"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_9TUL0LweEeCXj_kWAFRSgw" type="1001">
@@ -344,7 +344,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_grTCgbweEeCXj_kWAFRSgw" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_grTCgrweEeCXj_kWAFRSgw" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="jiacbeans.ecore#//sequence/scripts"/>
+    <element xmi:type="ecore:EReference" href="jiacbeans.ecore#//Sequence/scripts"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_grTCg7weEeCXj_kWAFRSgw" points="[3, 0, 107, 100]$[47, 0, 151, 100]$[47, -100, 151, 0]$[-101, -100, 3, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_grWF0LweEeCXj_kWAFRSgw" id="(0.9705882352941176,0.627906976744186)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_grWF0bweEeCXj_kWAFRSgw" id="(0.9803921568627451,0.4146341463414634)"/>

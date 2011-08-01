@@ -68,7 +68,7 @@ public class JiacbeansFactoryImpl extends EFactoryImpl implements JiacbeansFacto
 			case JiacbeansPackage.ACTION: return createAction();
 			case JiacbeansPackage.TRIGGER: return createTrigger();
 			case JiacbeansPackage.SCRIPT: return createScript();
-			case JiacbeansPackage.SEQUENCE: return createsequence();
+			case JiacbeansPackage.SEQUENCE: return createSequence();
 			case JiacbeansPackage.IF_THEN_ELSE: return createIfThenElse();
 			case JiacbeansPackage.FOR_EACH: return createForEach();
 			case JiacbeansPackage.WHILE: return createWhile();
@@ -162,8 +162,8 @@ public class JiacbeansFactoryImpl extends EFactoryImpl implements JiacbeansFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public sequence createsequence() {
-		sequenceImpl sequence = new sequenceImpl();
+	public Sequence createSequence() {
+		SequenceImpl sequence = new SequenceImpl();
 		return sequence;
 	}
 

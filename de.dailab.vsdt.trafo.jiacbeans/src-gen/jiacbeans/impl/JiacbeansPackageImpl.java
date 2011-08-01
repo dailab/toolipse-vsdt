@@ -15,16 +15,15 @@ import jiacbeans.JiacbeansFactory;
 import jiacbeans.JiacbeansPackage;
 import jiacbeans.Method;
 import jiacbeans.Script;
+import jiacbeans.Sequence;
 import jiacbeans.Trigger;
 import jiacbeans.Variable;
 import jiacbeans.While;
 import jiacbeans.WorkflowMethod;
 
-import jiacbeans.sequence;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -394,7 +393,7 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getsequence() {
+	public EClass getSequence() {
 		return sequenceEClass;
 	}
 
@@ -403,7 +402,7 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getsequence_Scripts() {
+	public EReference getSequence_Scripts() {
 		return (EReference)sequenceEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -613,8 +612,8 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		initEClass(scriptEClass, Script.class, "Script", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getScript_Code(), ecorePackage.getEString(), "code", "\"\"", 0, 1, Script.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(sequenceEClass, sequence.class, "sequence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getsequence_Scripts(), this.getScript(), null, "scripts", null, 0, -1, sequence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(sequenceEClass, Sequence.class, "Sequence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSequence_Scripts(), this.getScript(), null, "scripts", null, 0, -1, Sequence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(ifThenElseEClass, IfThenElse.class, "IfThenElse", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getIfThenElse_Then(), this.getScript(), null, "then", null, 0, 1, IfThenElse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

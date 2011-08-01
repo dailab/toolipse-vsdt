@@ -104,8 +104,8 @@ public class JiacbeansAdapterFactory extends AdapterFactoryImpl {
 				return createScriptAdapter();
 			}
 			@Override
-			public Adapter casesequence(sequence object) {
-				return createsequenceAdapter();
+			public Adapter caseSequence(Sequence object) {
+				return createSequenceAdapter();
 			}
 			@Override
 			public Adapter caseIfThenElse(IfThenElse object) {
@@ -252,16 +252,16 @@ public class JiacbeansAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link jiacbeans.sequence <em>sequence</em>}'.
+	 * Creates a new adapter for an object of class '{@link jiacbeans.Sequence <em>Sequence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see jiacbeans.sequence
+	 * @see jiacbeans.Sequence
 	 * @generated
 	 */
-	public Adapter createsequenceAdapter() {
+	public Adapter createSequenceAdapter() {
 		return null;
 	}
 

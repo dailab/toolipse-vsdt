@@ -138,8 +138,8 @@ public class JiacbeansSwitch<T> {
 				return result;
 			}
 			case JiacbeansPackage.SEQUENCE: {
-				sequence sequence = (sequence)theEObject;
-				T result = casesequence(sequence);
+				Sequence sequence = (Sequence)theEObject;
+				T result = caseSequence(sequence);
 				if (result == null) result = caseScript(sequence);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -290,17 +290,17 @@ public class JiacbeansSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>sequence</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Sequence</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>sequence</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Sequence</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casesequence(sequence object) {
+	public T caseSequence(Sequence object) {
 		return null;
 	}
 

@@ -39,7 +39,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="&quot;&quot;"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="sequence" eSuperTypes="#//Script">
+  <eClassifiers xsi:type="ecore:EClass" name="Sequence" eSuperTypes="#//Script">
     <eStructuralFeatures xsi:type="ecore:EReference" name="scripts" upperBound="-1"
         eType="#//Script"/>
   </eClassifiers>
