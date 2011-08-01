@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import jiacbeans.AgentBean;
+
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.trafo.impl.BpmnExportWrapper;
@@ -18,16 +20,16 @@ import de.dailab.vsdt.trafo.jiacbeans.util.JavaCode;
  */
 public class JiacBeansExportWrapper extends BpmnExportWrapper {
 	
-	private final Map<JavaCode, Pool> modelPoolMap;
+	private final Map<AgentBean, Pool> modelPoolMap;
 	
-	private final List<JavaCode> javaFiles;
+	private final List<AgentBean> beans;
 	
 	private File baseDirectory;
 	
 	public JiacBeansExportWrapper(BusinessProcessSystem bps) {
 		super(bps);
-		javaFiles = new ArrayList<JavaCode>();
-		modelPoolMap = new TreeMap<JavaCode, Pool>();
+		beans = new ArrayList<AgentBean>();
+		modelPoolMap = new TreeMap<AgentBean, Pool>();
 	}
 	
 	public void setBaseDirectory(File base){
@@ -36,8 +38,8 @@ public class JiacBeansExportWrapper extends BpmnExportWrapper {
 	
 	public void map(Object key, Object value) {
 		super.map(key, value);
-		if (key instanceof Pool && value instanceof JavaCode) {
-			modelPoolMap.put((JavaCode) value, (Pool) key);
+		if (key instanceof Pool && value instanceof AgentBean) {
+			modelPoolMap.put((AgentBean) value, (Pool) key);
 		}
 	}
 	
@@ -45,8 +47,8 @@ public class JiacBeansExportWrapper extends BpmnExportWrapper {
 		return model != null ? modelPoolMap.get(model) : null;
 	}
 	
-	public List<JavaCode> getJavaFiles() {
-		return javaFiles;
+	public List<AgentBean> getBeans() {
+		return beans;
 	}
 	
 }	
