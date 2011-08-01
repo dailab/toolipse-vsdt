@@ -151,17 +151,12 @@ public class ScriptImpl extends EObjectImpl implements Script {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (code: ");
-		result.append(code);
-		result.append(')');
-		return result.toString();
+		if(code == null) return "";
+		return code;
 	}
 
 } //ScriptImpl

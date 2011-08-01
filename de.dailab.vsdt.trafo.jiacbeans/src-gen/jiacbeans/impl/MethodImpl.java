@@ -6,6 +6,9 @@
  */
 package jiacbeans.impl;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.Collection;
 import jiacbeans.AgentBean;
 import jiacbeans.JiacbeansPackage;
@@ -51,10 +54,9 @@ public class MethodImpl extends EObjectImpl implements Method {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getReturnType()
-	 * @generated
 	 * @ordered
 	 */
-	protected static final String RETURN_TYPE_EDEFAULT = null;
+	protected static final String RETURN_TYPE_EDEFAULT = "void";
 	/**
 	 * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -82,7 +84,7 @@ public class MethodImpl extends EObjectImpl implements Method {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
+	protected static final String NAME_EDEFAULT = "";
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -405,23 +407,29 @@ public class MethodImpl extends EObjectImpl implements Method {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (returnType: ");
-		result.append(returnType);
-		result.append(", name: ");
-		result.append(name);
-		result.append(", isStatic: ");
-		result.append(isStatic);
-		result.append(", visibility: ");
-		result.append(visibility);
-		result.append(')');
-		return result.toString();
+		String result = "";
+		result += VISIBILITIES[visibility]+" ";
+		if(isStatic) result += "static"+" ";
+		result += returnType +" "+name+"(){\n";
+		if(content!=null){
+			String cS = content.toString();
+			if(cS!=null && !cS.equals("")){
+				BufferedReader reader = new BufferedReader(new StringReader(content.toString()));
+				try{
+					String line = reader.readLine();
+					while(line!=null){
+						if(!line.equals(""))result+="\t\t"+line+"\n";
+						line = reader.readLine();
+					}
+				}catch(IOException e){
+					result +="//Error occured while reading content";
+				}
+			}
+		}
+		result+="\t}";
+		return result;
 	}
-
 } //MethodImpl
