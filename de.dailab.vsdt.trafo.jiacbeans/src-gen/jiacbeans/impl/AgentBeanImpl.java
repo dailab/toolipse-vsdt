@@ -9,16 +9,17 @@ package jiacbeans.impl;
 import java.util.Collection;
 import jiacbeans.Action;
 import jiacbeans.AgentBean;
+import jiacbeans.JavaVariable;
 import jiacbeans.JiacbeansPackage;
 
 import jiacbeans.Method;
-import jiacbeans.Variable;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
@@ -33,6 +34,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link jiacbeans.impl.AgentBeanImpl#getPackageName <em>Package Name</em>}</li>
  *   <li>{@link jiacbeans.impl.AgentBeanImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link jiacbeans.impl.AgentBeanImpl#getActions <em>Actions</em>}</li>
+ *   <li>{@link jiacbeans.impl.AgentBeanImpl#getImports <em>Imports</em>}</li>
  * </ul>
  * </p>
  *
@@ -94,7 +96,7 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Variable> attributes;
+	protected EList<JavaVariable> attributes;
 
 	/**
 	 * The cached value of the '{@link #getActions() <em>Actions</em>}' reference list.
@@ -105,6 +107,16 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 	 * @ordered
 	 */
 	protected EList<Action> actions;
+
+	/**
+	 * The cached value of the '{@link #getImports() <em>Imports</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImports()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> imports;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -184,9 +196,9 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Variable> getAttributes() {
+	public EList<JavaVariable> getAttributes() {
 		if (attributes == null) {
-			attributes = new EObjectResolvingEList<Variable>(Variable.class, this, JiacbeansPackage.AGENT_BEAN__ATTRIBUTES);
+			attributes = new EObjectResolvingEList<JavaVariable>(JavaVariable.class, this, JiacbeansPackage.AGENT_BEAN__ATTRIBUTES);
 		}
 		return attributes;
 	}
@@ -201,6 +213,18 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 			actions = new EObjectResolvingEList<Action>(Action.class, this, JiacbeansPackage.AGENT_BEAN__ACTIONS);
 		}
 		return actions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getImports() {
+		if (imports == null) {
+			imports = new EDataTypeUniqueEList<String>(String.class, this, JiacbeansPackage.AGENT_BEAN__IMPORTS);
+		}
+		return imports;
 	}
 
 	/**
@@ -230,6 +254,8 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 				return getAttributes();
 			case JiacbeansPackage.AGENT_BEAN__ACTIONS:
 				return getActions();
+			case JiacbeansPackage.AGENT_BEAN__IMPORTS:
+				return getImports();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -255,11 +281,15 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 				return;
 			case JiacbeansPackage.AGENT_BEAN__ATTRIBUTES:
 				getAttributes().clear();
-				getAttributes().addAll((Collection<? extends Variable>)newValue);
+				getAttributes().addAll((Collection<? extends JavaVariable>)newValue);
 				return;
 			case JiacbeansPackage.AGENT_BEAN__ACTIONS:
 				getActions().clear();
 				getActions().addAll((Collection<? extends Action>)newValue);
+				return;
+			case JiacbeansPackage.AGENT_BEAN__IMPORTS:
+				getImports().clear();
+				getImports().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -288,6 +318,9 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 			case JiacbeansPackage.AGENT_BEAN__ACTIONS:
 				getActions().clear();
 				return;
+			case JiacbeansPackage.AGENT_BEAN__IMPORTS:
+				getImports().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -310,6 +343,8 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 				return attributes != null && !attributes.isEmpty();
 			case JiacbeansPackage.AGENT_BEAN__ACTIONS:
 				return actions != null && !actions.isEmpty();
+			case JiacbeansPackage.AGENT_BEAN__IMPORTS:
+				return imports != null && !imports.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

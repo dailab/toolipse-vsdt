@@ -62,13 +62,13 @@ public interface JiacbeansFactory extends EFactory {
 	ActivityMethod createActivityMethod();
 
 	/**
-	 * Returns a new object of class '<em>Variable</em>'.
+	 * Returns a new object of class '<em>Java Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Variable</em>'.
+	 * @return a new object of class '<em>Java Variable</em>'.
 	 * @generated
 	 */
-	Variable createVariable();
+	JavaVariable createJavaVariable();
 
 	/**
 	 * Returns a new object of class '<em>Action</em>'.
@@ -134,13 +134,31 @@ public interface JiacbeansFactory extends EFactory {
 	While createWhile();
 
 	/**
-	 * Returns a new object of class '<em>Expression</em>'.
+	 * Returns a new object of class '<em>Code Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Expression</em>'.
+	 * @return a new object of class '<em>Code Element</em>'.
 	 * @generated
 	 */
-	Expression createExpression();
+	CodeElement createCodeElement();
+
+	/**
+	 * Returns a new object of class '<em>Try Catch</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Try Catch</em>'.
+	 * @generated
+	 */
+	TryCatch createTryCatch();
+
+	/**
+	 * Returns a new object of class '<em>Paralel</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Paralel</em>'.
+	 * @generated
+	 */
+	Paralel createParalel();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -64,7 +64,7 @@ public class JiacbeansFactoryImpl extends EFactoryImpl implements JiacbeansFacto
 			case JiacbeansPackage.METHOD: return createMethod();
 			case JiacbeansPackage.WORKFLOW_METHOD: return createWorkflowMethod();
 			case JiacbeansPackage.ACTIVITY_METHOD: return createActivityMethod();
-			case JiacbeansPackage.VARIABLE: return createVariable();
+			case JiacbeansPackage.JAVA_VARIABLE: return createJavaVariable();
 			case JiacbeansPackage.ACTION: return createAction();
 			case JiacbeansPackage.TRIGGER: return createTrigger();
 			case JiacbeansPackage.SCRIPT: return createScript();
@@ -72,7 +72,9 @@ public class JiacbeansFactoryImpl extends EFactoryImpl implements JiacbeansFacto
 			case JiacbeansPackage.IF_THEN_ELSE: return createIfThenElse();
 			case JiacbeansPackage.FOR_EACH: return createForEach();
 			case JiacbeansPackage.WHILE: return createWhile();
-			case JiacbeansPackage.EXPRESSION: return createExpression();
+			case JiacbeansPackage.CODE_ELEMENT: return createCodeElement();
+			case JiacbeansPackage.TRY_CATCH: return createTryCatch();
+			case JiacbeansPackage.PARALEL: return createParalel();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -123,9 +125,9 @@ public class JiacbeansFactoryImpl extends EFactoryImpl implements JiacbeansFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Variable createVariable() {
-		VariableImpl variable = new VariableImpl();
-		return variable;
+	public JavaVariable createJavaVariable() {
+		JavaVariableImpl javaVariable = new JavaVariableImpl();
+		return javaVariable;
 	}
 
 	/**
@@ -203,9 +205,29 @@ public class JiacbeansFactoryImpl extends EFactoryImpl implements JiacbeansFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression createExpression() {
-		ExpressionImpl expression = new ExpressionImpl();
-		return expression;
+	public CodeElement createCodeElement() {
+		CodeElementImpl codeElement = new CodeElementImpl();
+		return codeElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TryCatch createTryCatch() {
+		TryCatchImpl tryCatch = new TryCatchImpl();
+		return tryCatch;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Paralel createParalel() {
+		ParalelImpl paralel = new ParalelImpl();
+		return paralel;
 	}
 
 	/**

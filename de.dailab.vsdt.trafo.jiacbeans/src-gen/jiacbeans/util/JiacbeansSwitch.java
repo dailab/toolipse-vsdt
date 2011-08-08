@@ -113,9 +113,9 @@ public class JiacbeansSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case JiacbeansPackage.VARIABLE: {
-				Variable variable = (Variable)theEObject;
-				T result = caseVariable(variable);
+			case JiacbeansPackage.JAVA_VARIABLE: {
+				JavaVariable javaVariable = (JavaVariable)theEObject;
+				T result = caseJavaVariable(javaVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -165,9 +165,24 @@ public class JiacbeansSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case JiacbeansPackage.EXPRESSION: {
-				Expression expression = (Expression)theEObject;
-				T result = caseExpression(expression);
+			case JiacbeansPackage.CODE_ELEMENT: {
+				CodeElement codeElement = (CodeElement)theEObject;
+				T result = caseCodeElement(codeElement);
+				if (result == null) result = caseScript(codeElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case JiacbeansPackage.TRY_CATCH: {
+				TryCatch tryCatch = (TryCatch)theEObject;
+				T result = caseTryCatch(tryCatch);
+				if (result == null) result = caseScript(tryCatch);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case JiacbeansPackage.PARALEL: {
+				Paralel paralel = (Paralel)theEObject;
+				T result = caseParalel(paralel);
+				if (result == null) result = caseScript(paralel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -236,17 +251,17 @@ public class JiacbeansSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Variable</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Java Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Variable</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Java Variable</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseVariable(Variable object) {
+	public T caseJavaVariable(JavaVariable object) {
 		return null;
 	}
 
@@ -356,17 +371,47 @@ public class JiacbeansSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Code Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Code Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseExpression(Expression object) {
+	public T caseCodeElement(CodeElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Try Catch</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Try Catch</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTryCatch(TryCatch object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Paralel</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Paralel</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParalel(Paralel object) {
 		return null;
 	}
 

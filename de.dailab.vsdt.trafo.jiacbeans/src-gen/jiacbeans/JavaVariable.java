@@ -10,22 +10,22 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Variable</b></em>'.
+ * A representation of the model object '<em><b>Java Variable</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link jiacbeans.Variable#getName <em>Name</em>}</li>
- *   <li>{@link jiacbeans.Variable#getType <em>Type</em>}</li>
+ *   <li>{@link jiacbeans.JavaVariable#getName <em>Name</em>}</li>
+ *   <li>{@link jiacbeans.JavaVariable#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
- * @see jiacbeans.JiacbeansPackage#getVariable()
+ * @see jiacbeans.JiacbeansPackage#getJavaVariable()
  * @model
  * @generated
  */
-public interface Variable extends EObject {
+public interface JavaVariable extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -36,14 +36,14 @@ public interface Variable extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see jiacbeans.JiacbeansPackage#getVariable_Name()
+	 * @see jiacbeans.JiacbeansPackage#getJavaVariable_Name()
 	 * @model
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link jiacbeans.Variable#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link jiacbeans.JavaVariable#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -62,14 +62,14 @@ public interface Variable extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' attribute.
 	 * @see #setType(String)
-	 * @see jiacbeans.JiacbeansPackage#getVariable_Type()
+	 * @see jiacbeans.JiacbeansPackage#getJavaVariable_Type()
 	 * @model
 	 * @generated
 	 */
 	String getType();
 
 	/**
-	 * Sets the value of the '{@link jiacbeans.Variable#getType <em>Type</em>}' attribute.
+	 * Sets the value of the '{@link jiacbeans.JavaVariable#getType <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Type</em>' attribute.
@@ -78,4 +78,4 @@ public interface Variable extends EObject {
 	 */
 	void setType(String value);
 
-} // Variable
+} // JavaVariable

@@ -7,8 +7,8 @@
 package jiacbeans.validation;
 
 import jiacbeans.Action;
+import jiacbeans.JavaVariable;
 import jiacbeans.Method;
-import jiacbeans.Variable;
 import org.eclipse.emf.common.util.EList;
 
 
@@ -27,8 +27,10 @@ public interface AgentBeanValidator {
 
 	boolean validatePackageName(String value);
 
-	boolean validateAttributes(EList<Variable> value);
+	boolean validateAttributes(EList<JavaVariable> value);
 
 	boolean validateActions(EList<Action> value);
+
+	boolean validateImports(EList<String> value);
 
 }

@@ -6,6 +6,10 @@
  */
 package jiacbeans.impl;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
+
 import jiacbeans.IfThenElse;
 import jiacbeans.JiacbeansPackage;
 import jiacbeans.Script;
@@ -24,8 +28,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link jiacbeans.impl.IfThenElseImpl#getThen <em>Then</em>}</li>
- *   <li>{@link jiacbeans.impl.IfThenElseImpl#getElse <em>Else</em>}</li>
+ *   <li>{@link jiacbeans.impl.IfThenElseImpl#getThenBranch <em>Then Branch</em>}</li>
+ *   <li>{@link jiacbeans.impl.IfThenElseImpl#getElseBranch <em>Else Branch</em>}</li>
+ *   <li>{@link jiacbeans.impl.IfThenElseImpl#getCondition <em>Condition</em>}</li>
  * </ul>
  * </p>
  *
@@ -33,24 +38,42 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class IfThenElseImpl extends ScriptImpl implements IfThenElse {
 	/**
-	 * The cached value of the '{@link #getThen() <em>Then</em>}' reference.
+	 * The cached value of the '{@link #getThenBranch() <em>Then Branch</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getThen()
+	 * @see #getThenBranch()
 	 * @generated
 	 * @ordered
 	 */
-	protected Script then;
+	protected Script thenBranch;
 
 	/**
-	 * The cached value of the '{@link #getElse() <em>Else</em>}' reference.
+	 * The cached value of the '{@link #getElseBranch() <em>Else Branch</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getElse()
+	 * @see #getElseBranch()
 	 * @generated
 	 * @ordered
 	 */
-	protected Script else_;
+	protected Script elseBranch;
+
+	/**
+	 * The default value of the '{@link #getCondition() <em>Condition</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCondition()
+	 */
+	protected static final String CONDITION_EDEFAULT = "true";
+
+	/**
+	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCondition()
+	 * @generated
+	 * @ordered
+	 */
+	protected String condition = CONDITION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -76,16 +99,16 @@ public class IfThenElseImpl extends ScriptImpl implements IfThenElse {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Script getThen() {
-		if (then != null && then.eIsProxy()) {
-			InternalEObject oldThen = (InternalEObject)then;
-			then = (Script)eResolveProxy(oldThen);
-			if (then != oldThen) {
+	public Script getThenBranch() {
+		if (thenBranch != null && thenBranch.eIsProxy()) {
+			InternalEObject oldThenBranch = (InternalEObject)thenBranch;
+			thenBranch = (Script)eResolveProxy(oldThenBranch);
+			if (thenBranch != oldThenBranch) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, JiacbeansPackage.IF_THEN_ELSE__THEN, oldThen, then));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, JiacbeansPackage.IF_THEN_ELSE__THEN_BRANCH, oldThenBranch, thenBranch));
 			}
 		}
-		return then;
+		return thenBranch;
 	}
 
 	/**
@@ -93,8 +116,8 @@ public class IfThenElseImpl extends ScriptImpl implements IfThenElse {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Script basicGetThen() {
-		return then;
+	public Script basicGetThenBranch() {
+		return thenBranch;
 	}
 
 	/**
@@ -102,11 +125,11 @@ public class IfThenElseImpl extends ScriptImpl implements IfThenElse {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setThen(Script newThen) {
-		Script oldThen = then;
-		then = newThen;
+	public void setThenBranch(Script newThenBranch) {
+		Script oldThenBranch = thenBranch;
+		thenBranch = newThenBranch;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.IF_THEN_ELSE__THEN, oldThen, then));
+			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.IF_THEN_ELSE__THEN_BRANCH, oldThenBranch, thenBranch));
 	}
 
 	/**
@@ -114,16 +137,16 @@ public class IfThenElseImpl extends ScriptImpl implements IfThenElse {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Script getElse() {
-		if (else_ != null && else_.eIsProxy()) {
-			InternalEObject oldElse = (InternalEObject)else_;
-			else_ = (Script)eResolveProxy(oldElse);
-			if (else_ != oldElse) {
+	public Script getElseBranch() {
+		if (elseBranch != null && elseBranch.eIsProxy()) {
+			InternalEObject oldElseBranch = (InternalEObject)elseBranch;
+			elseBranch = (Script)eResolveProxy(oldElseBranch);
+			if (elseBranch != oldElseBranch) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, JiacbeansPackage.IF_THEN_ELSE__ELSE, oldElse, else_));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, JiacbeansPackage.IF_THEN_ELSE__ELSE_BRANCH, oldElseBranch, elseBranch));
 			}
 		}
-		return else_;
+		return elseBranch;
 	}
 
 	/**
@@ -131,8 +154,8 @@ public class IfThenElseImpl extends ScriptImpl implements IfThenElse {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Script basicGetElse() {
-		return else_;
+	public Script basicGetElseBranch() {
+		return elseBranch;
 	}
 
 	/**
@@ -140,11 +163,32 @@ public class IfThenElseImpl extends ScriptImpl implements IfThenElse {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setElse(Script newElse) {
-		Script oldElse = else_;
-		else_ = newElse;
+	public void setElseBranch(Script newElseBranch) {
+		Script oldElseBranch = elseBranch;
+		elseBranch = newElseBranch;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.IF_THEN_ELSE__ELSE, oldElse, else_));
+			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.IF_THEN_ELSE__ELSE_BRANCH, oldElseBranch, elseBranch));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getCondition() {
+		return condition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCondition(String newCondition) {
+		String oldCondition = condition;
+		condition = newCondition;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.IF_THEN_ELSE__CONDITION, oldCondition, condition));
 	}
 
 	/**
@@ -155,12 +199,14 @@ public class IfThenElseImpl extends ScriptImpl implements IfThenElse {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case JiacbeansPackage.IF_THEN_ELSE__THEN:
-				if (resolve) return getThen();
-				return basicGetThen();
-			case JiacbeansPackage.IF_THEN_ELSE__ELSE:
-				if (resolve) return getElse();
-				return basicGetElse();
+			case JiacbeansPackage.IF_THEN_ELSE__THEN_BRANCH:
+				if (resolve) return getThenBranch();
+				return basicGetThenBranch();
+			case JiacbeansPackage.IF_THEN_ELSE__ELSE_BRANCH:
+				if (resolve) return getElseBranch();
+				return basicGetElseBranch();
+			case JiacbeansPackage.IF_THEN_ELSE__CONDITION:
+				return getCondition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -173,11 +219,14 @@ public class IfThenElseImpl extends ScriptImpl implements IfThenElse {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case JiacbeansPackage.IF_THEN_ELSE__THEN:
-				setThen((Script)newValue);
+			case JiacbeansPackage.IF_THEN_ELSE__THEN_BRANCH:
+				setThenBranch((Script)newValue);
 				return;
-			case JiacbeansPackage.IF_THEN_ELSE__ELSE:
-				setElse((Script)newValue);
+			case JiacbeansPackage.IF_THEN_ELSE__ELSE_BRANCH:
+				setElseBranch((Script)newValue);
+				return;
+			case JiacbeansPackage.IF_THEN_ELSE__CONDITION:
+				setCondition((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -191,11 +240,14 @@ public class IfThenElseImpl extends ScriptImpl implements IfThenElse {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case JiacbeansPackage.IF_THEN_ELSE__THEN:
-				setThen((Script)null);
+			case JiacbeansPackage.IF_THEN_ELSE__THEN_BRANCH:
+				setThenBranch((Script)null);
 				return;
-			case JiacbeansPackage.IF_THEN_ELSE__ELSE:
-				setElse((Script)null);
+			case JiacbeansPackage.IF_THEN_ELSE__ELSE_BRANCH:
+				setElseBranch((Script)null);
+				return;
+			case JiacbeansPackage.IF_THEN_ELSE__CONDITION:
+				setCondition(CONDITION_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -209,12 +261,51 @@ public class IfThenElseImpl extends ScriptImpl implements IfThenElse {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case JiacbeansPackage.IF_THEN_ELSE__THEN:
-				return then != null;
-			case JiacbeansPackage.IF_THEN_ELSE__ELSE:
-				return else_ != null;
+			case JiacbeansPackage.IF_THEN_ELSE__THEN_BRANCH:
+				return thenBranch != null;
+			case JiacbeansPackage.IF_THEN_ELSE__ELSE_BRANCH:
+				return elseBranch != null;
+			case JiacbeansPackage.IF_THEN_ELSE__CONDITION:
+				return CONDITION_EDEFAULT == null ? condition != null : !CONDITION_EDEFAULT.equals(condition);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * prints itself as a Java Code
+	 */
+	@Override
+	public String toString() {
+		String code = "";
+		code += "if("+condition+"){\n";
+		if(thenBranch!=null){
+			BufferedReader reader = new BufferedReader(new StringReader(thenBranch.toString()));
+			try{
+				String line = reader.readLine();
+				while(line!=null){
+					if(!line.equals("")) code += "\t"+line+"\n";
+					line = reader.readLine();
+				}
+			}catch(IOException e){
+				code += "\t//Error occured while reading loop body\n";
+			}
+		}
+		code+="}";
+		if(elseBranch!=null){
+			code+="else{\n";
+			BufferedReader reader = new BufferedReader(new StringReader(elseBranch.toString()));
+			try{
+				String line = reader.readLine();
+				while(line!=null){
+					if(!line.equals("")) code += "\t"+line+"\n";
+					line = reader.readLine();
+				}
+			}catch(IOException e){
+				code += "\t//Error occured while reading loop body\n";
+			}
+			code+="}";
+		}
+		return code;
 	}
 
 } //IfThenElseImpl

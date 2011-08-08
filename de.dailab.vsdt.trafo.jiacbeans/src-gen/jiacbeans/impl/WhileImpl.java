@@ -215,7 +215,6 @@ public class WhileImpl extends ScriptImpl implements While {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public String toString() {

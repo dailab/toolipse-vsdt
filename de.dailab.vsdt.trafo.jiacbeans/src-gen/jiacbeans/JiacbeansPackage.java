@@ -115,13 +115,22 @@ public interface JiacbeansPackage extends EPackage {
 	int AGENT_BEAN__ACTIONS = 4;
 
 	/**
+	 * The feature id for the '<em><b>Imports</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AGENT_BEAN__IMPORTS = 5;
+
+	/**
 	 * The number of structural features of the '<em>Agent Bean</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AGENT_BEAN_FEATURE_COUNT = 5;
+	int AGENT_BEAN_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link jiacbeans.impl.MethodImpl <em>Method</em>}' class.
@@ -188,13 +197,22 @@ public interface JiacbeansPackage extends EPackage {
 	int METHOD__CONTENT = 5;
 
 	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__ATTRIBUTES = 6;
+
+	/**
 	 * The number of structural features of the '<em>Method</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int METHOD_FEATURE_COUNT = 6;
+	int METHOD_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link jiacbeans.impl.WorkflowMethodImpl <em>Workflow Method</em>}' class.
@@ -259,6 +277,15 @@ public interface JiacbeansPackage extends EPackage {
 	 * @ordered
 	 */
 	int WORKFLOW_METHOD__CONTENT = METHOD__CONTENT;
+
+	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WORKFLOW_METHOD__ATTRIBUTES = METHOD__ATTRIBUTES;
 
 	/**
 	 * The number of structural features of the '<em>Workflow Method</em>' class.
@@ -334,6 +361,15 @@ public interface JiacbeansPackage extends EPackage {
 	int ACTIVITY_METHOD__CONTENT = METHOD__CONTENT;
 
 	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTIVITY_METHOD__ATTRIBUTES = METHOD__ATTRIBUTES;
+
+	/**
 	 * The number of structural features of the '<em>Activity Method</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -344,14 +380,14 @@ public interface JiacbeansPackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '{@link jiacbeans.impl.VariableImpl <em>Variable</em>}' class.
+	 * The meta object id for the '{@link jiacbeans.impl.JavaVariableImpl <em>Java Variable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see jiacbeans.impl.VariableImpl
-	 * @see jiacbeans.impl.JiacbeansPackageImpl#getVariable()
+	 * @see jiacbeans.impl.JavaVariableImpl
+	 * @see jiacbeans.impl.JiacbeansPackageImpl#getJavaVariable()
 	 * @generated
 	 */
-	int VARIABLE = 4;
+	int JAVA_VARIABLE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -360,7 +396,7 @@ public interface JiacbeansPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE__NAME = 0;
+	int JAVA_VARIABLE__NAME = 0;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -369,16 +405,16 @@ public interface JiacbeansPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE__TYPE = 1;
+	int JAVA_VARIABLE__TYPE = 1;
 
 	/**
-	 * The number of structural features of the '<em>Variable</em>' class.
+	 * The number of structural features of the '<em>Java Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_FEATURE_COUNT = 2;
+	int JAVA_VARIABLE_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link jiacbeans.impl.ActionImpl <em>Action</em>}' class.
@@ -439,22 +475,13 @@ public interface JiacbeansPackage extends EPackage {
 	int SCRIPT = 7;
 
 	/**
-	 * The feature id for the '<em><b>Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCRIPT__CODE = 0;
-
-	/**
 	 * The number of structural features of the '<em>Script</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCRIPT_FEATURE_COUNT = 1;
+	int SCRIPT_FEATURE_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link jiacbeans.impl.SequenceImpl <em>Sequence</em>}' class.
@@ -465,15 +492,6 @@ public interface JiacbeansPackage extends EPackage {
 	 * @generated
 	 */
 	int SEQUENCE = 8;
-
-	/**
-	 * The feature id for the '<em><b>Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEQUENCE__CODE = SCRIPT__CODE;
 
 	/**
 	 * The feature id for the '<em><b>Scripts</b></em>' reference list.
@@ -504,31 +522,31 @@ public interface JiacbeansPackage extends EPackage {
 	int IF_THEN_ELSE = 9;
 
 	/**
-	 * The feature id for the '<em><b>Code</b></em>' attribute.
+	 * The feature id for the '<em><b>Then Branch</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IF_THEN_ELSE__CODE = SCRIPT__CODE;
+	int IF_THEN_ELSE__THEN_BRANCH = SCRIPT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Then</b></em>' reference.
+	 * The feature id for the '<em><b>Else Branch</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IF_THEN_ELSE__THEN = SCRIPT_FEATURE_COUNT + 0;
+	int IF_THEN_ELSE__ELSE_BRANCH = SCRIPT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Else</b></em>' reference.
+	 * The feature id for the '<em><b>Condition</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IF_THEN_ELSE__ELSE = SCRIPT_FEATURE_COUNT + 1;
+	int IF_THEN_ELSE__CONDITION = SCRIPT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>If Then Else</em>' class.
@@ -537,7 +555,7 @@ public interface JiacbeansPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IF_THEN_ELSE_FEATURE_COUNT = SCRIPT_FEATURE_COUNT + 2;
+	int IF_THEN_ELSE_FEATURE_COUNT = SCRIPT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link jiacbeans.impl.ForEachImpl <em>For Each</em>}' class.
@@ -548,15 +566,6 @@ public interface JiacbeansPackage extends EPackage {
 	 * @generated
 	 */
 	int FOR_EACH = 10;
-
-	/**
-	 * The feature id for the '<em><b>Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FOR_EACH__CODE = SCRIPT__CODE;
 
 	/**
 	 * The feature id for the '<em><b>Content</b></em>' reference.
@@ -587,15 +596,6 @@ public interface JiacbeansPackage extends EPackage {
 	int WHILE = 11;
 
 	/**
-	 * The feature id for the '<em><b>Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WHILE__CODE = SCRIPT__CODE;
-
-	/**
 	 * The feature id for the '<em><b>Content</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -624,24 +624,115 @@ public interface JiacbeansPackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '{@link jiacbeans.impl.ExpressionImpl <em>Expression</em>}' class.
+	 * The meta object id for the '{@link jiacbeans.impl.CodeElementImpl <em>Code Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see jiacbeans.impl.ExpressionImpl
-	 * @see jiacbeans.impl.JiacbeansPackageImpl#getExpression()
+	 * @see jiacbeans.impl.CodeElementImpl
+	 * @see jiacbeans.impl.JiacbeansPackageImpl#getCodeElement()
 	 * @generated
 	 */
-	int EXPRESSION = 12;
+	int CODE_ELEMENT = 12;
 
 	/**
-	 * The number of structural features of the '<em>Expression</em>' class.
+	 * The feature id for the '<em><b>Code</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_FEATURE_COUNT = 0;
+	int CODE_ELEMENT__CODE = SCRIPT_FEATURE_COUNT + 0;
 
+	/**
+	 * The number of structural features of the '<em>Code Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CODE_ELEMENT_FEATURE_COUNT = SCRIPT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link jiacbeans.impl.TryCatchImpl <em>Try Catch</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see jiacbeans.impl.TryCatchImpl
+	 * @see jiacbeans.impl.JiacbeansPackageImpl#getTryCatch()
+	 * @generated
+	 */
+	int TRY_CATCH = 13;
+
+	/**
+	 * The feature id for the '<em><b>Try</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRY_CATCH__TRY = SCRIPT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Catches</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRY_CATCH__CATCHES = SCRIPT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Finally</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRY_CATCH__FINALLY = SCRIPT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Try Catch</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRY_CATCH_FEATURE_COUNT = SCRIPT_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link jiacbeans.impl.ParalelImpl <em>Paralel</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see jiacbeans.impl.ParalelImpl
+	 * @see jiacbeans.impl.JiacbeansPackageImpl#getParalel()
+	 * @generated
+	 */
+	int PARALEL = 14;
+
+	/**
+	 * The feature id for the '<em><b>Branches</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARALEL__BRANCHES = SCRIPT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Sign Index</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARALEL__SIGN_INDEX = SCRIPT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Paralel</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARALEL_FEATURE_COUNT = SCRIPT_FEATURE_COUNT + 2;
 
 	/**
 	 * Returns the meta object for class '{@link jiacbeans.AgentBean <em>Agent Bean</em>}'.
@@ -709,6 +800,17 @@ public interface JiacbeansPackage extends EPackage {
 	EReference getAgentBean_Actions();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link jiacbeans.AgentBean#getImports <em>Imports</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Imports</em>'.
+	 * @see jiacbeans.AgentBean#getImports()
+	 * @see #getAgentBean()
+	 * @generated
+	 */
+	EAttribute getAgentBean_Imports();
+
+	/**
 	 * Returns the meta object for class '{@link jiacbeans.Method <em>Method</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -728,6 +830,17 @@ public interface JiacbeansPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMethod_Content();
+
+	/**
+	 * Returns the meta object for the reference list '{@link jiacbeans.Method#getAttributes <em>Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Attributes</em>'.
+	 * @see jiacbeans.Method#getAttributes()
+	 * @see #getMethod()
+	 * @generated
+	 */
+	EReference getMethod_Attributes();
 
 	/**
 	 * Returns the meta object for the attribute '{@link jiacbeans.Method#getReturnType <em>Return Type</em>}'.
@@ -805,36 +918,36 @@ public interface JiacbeansPackage extends EPackage {
 	EClass getActivityMethod();
 
 	/**
-	 * Returns the meta object for class '{@link jiacbeans.Variable <em>Variable</em>}'.
+	 * Returns the meta object for class '{@link jiacbeans.JavaVariable <em>Java Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Variable</em>'.
-	 * @see jiacbeans.Variable
+	 * @return the meta object for class '<em>Java Variable</em>'.
+	 * @see jiacbeans.JavaVariable
 	 * @generated
 	 */
-	EClass getVariable();
+	EClass getJavaVariable();
 
 	/**
-	 * Returns the meta object for the attribute '{@link jiacbeans.Variable#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link jiacbeans.JavaVariable#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see jiacbeans.Variable#getName()
-	 * @see #getVariable()
+	 * @see jiacbeans.JavaVariable#getName()
+	 * @see #getJavaVariable()
 	 * @generated
 	 */
-	EAttribute getVariable_Name();
+	EAttribute getJavaVariable_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link jiacbeans.Variable#getType <em>Type</em>}'.
+	 * Returns the meta object for the attribute '{@link jiacbeans.JavaVariable#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see jiacbeans.Variable#getType()
-	 * @see #getVariable()
+	 * @see jiacbeans.JavaVariable#getType()
+	 * @see #getJavaVariable()
 	 * @generated
 	 */
-	EAttribute getVariable_Type();
+	EAttribute getJavaVariable_Type();
 
 	/**
 	 * Returns the meta object for class '{@link jiacbeans.Action <em>Action</em>}'.
@@ -878,17 +991,6 @@ public interface JiacbeansPackage extends EPackage {
 	EClass getScript();
 
 	/**
-	 * Returns the meta object for the attribute '{@link jiacbeans.Script#getCode <em>Code</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Code</em>'.
-	 * @see jiacbeans.Script#getCode()
-	 * @see #getScript()
-	 * @generated
-	 */
-	EAttribute getScript_Code();
-
-	/**
 	 * Returns the meta object for class '{@link jiacbeans.Sequence <em>Sequence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -920,26 +1022,37 @@ public interface JiacbeansPackage extends EPackage {
 	EClass getIfThenElse();
 
 	/**
-	 * Returns the meta object for the reference '{@link jiacbeans.IfThenElse#getThen <em>Then</em>}'.
+	 * Returns the meta object for the reference '{@link jiacbeans.IfThenElse#getThenBranch <em>Then Branch</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Then</em>'.
-	 * @see jiacbeans.IfThenElse#getThen()
+	 * @return the meta object for the reference '<em>Then Branch</em>'.
+	 * @see jiacbeans.IfThenElse#getThenBranch()
 	 * @see #getIfThenElse()
 	 * @generated
 	 */
-	EReference getIfThenElse_Then();
+	EReference getIfThenElse_ThenBranch();
 
 	/**
-	 * Returns the meta object for the reference '{@link jiacbeans.IfThenElse#getElse <em>Else</em>}'.
+	 * Returns the meta object for the reference '{@link jiacbeans.IfThenElse#getElseBranch <em>Else Branch</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Else</em>'.
-	 * @see jiacbeans.IfThenElse#getElse()
+	 * @return the meta object for the reference '<em>Else Branch</em>'.
+	 * @see jiacbeans.IfThenElse#getElseBranch()
 	 * @see #getIfThenElse()
 	 * @generated
 	 */
-	EReference getIfThenElse_Else();
+	EReference getIfThenElse_ElseBranch();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jiacbeans.IfThenElse#getCondition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Condition</em>'.
+	 * @see jiacbeans.IfThenElse#getCondition()
+	 * @see #getIfThenElse()
+	 * @generated
+	 */
+	EAttribute getIfThenElse_Condition();
 
 	/**
 	 * Returns the meta object for class '{@link jiacbeans.ForEach <em>For Each</em>}'.
@@ -995,14 +1108,100 @@ public interface JiacbeansPackage extends EPackage {
 	EAttribute getWhile_Condition();
 
 	/**
-	 * Returns the meta object for class '{@link jiacbeans.Expression <em>Expression</em>}'.
+	 * Returns the meta object for class '{@link jiacbeans.CodeElement <em>Code Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Expression</em>'.
-	 * @see jiacbeans.Expression
+	 * @return the meta object for class '<em>Code Element</em>'.
+	 * @see jiacbeans.CodeElement
 	 * @generated
 	 */
-	EClass getExpression();
+	EClass getCodeElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jiacbeans.CodeElement#getCode <em>Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Code</em>'.
+	 * @see jiacbeans.CodeElement#getCode()
+	 * @see #getCodeElement()
+	 * @generated
+	 */
+	EAttribute getCodeElement_Code();
+
+	/**
+	 * Returns the meta object for class '{@link jiacbeans.TryCatch <em>Try Catch</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Try Catch</em>'.
+	 * @see jiacbeans.TryCatch
+	 * @generated
+	 */
+	EClass getTryCatch();
+
+	/**
+	 * Returns the meta object for the reference '{@link jiacbeans.TryCatch#getTry <em>Try</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Try</em>'.
+	 * @see jiacbeans.TryCatch#getTry()
+	 * @see #getTryCatch()
+	 * @generated
+	 */
+	EReference getTryCatch_Try();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jiacbeans.TryCatch#getCatches <em>Catches</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Catches</em>'.
+	 * @see jiacbeans.TryCatch#getCatches()
+	 * @see #getTryCatch()
+	 * @generated
+	 */
+	EAttribute getTryCatch_Catches();
+
+	/**
+	 * Returns the meta object for the reference '{@link jiacbeans.TryCatch#getFinally <em>Finally</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Finally</em>'.
+	 * @see jiacbeans.TryCatch#getFinally()
+	 * @see #getTryCatch()
+	 * @generated
+	 */
+	EReference getTryCatch_Finally();
+
+	/**
+	 * Returns the meta object for class '{@link jiacbeans.Paralel <em>Paralel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Paralel</em>'.
+	 * @see jiacbeans.Paralel
+	 * @generated
+	 */
+	EClass getParalel();
+
+	/**
+	 * Returns the meta object for the reference list '{@link jiacbeans.Paralel#getBranches <em>Branches</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Branches</em>'.
+	 * @see jiacbeans.Paralel#getBranches()
+	 * @see #getParalel()
+	 * @generated
+	 */
+	EReference getParalel_Branches();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jiacbeans.Paralel#getSignIndex <em>Sign Index</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sign Index</em>'.
+	 * @see jiacbeans.Paralel#getSignIndex()
+	 * @see #getParalel()
+	 * @generated
+	 */
+	EAttribute getParalel_SignIndex();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1077,6 +1276,14 @@ public interface JiacbeansPackage extends EPackage {
 		EReference AGENT_BEAN__ACTIONS = eINSTANCE.getAgentBean_Actions();
 
 		/**
+		 * The meta object literal for the '<em><b>Imports</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AGENT_BEAN__IMPORTS = eINSTANCE.getAgentBean_Imports();
+
+		/**
 		 * The meta object literal for the '{@link jiacbeans.impl.MethodImpl <em>Method</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1093,6 +1300,14 @@ public interface JiacbeansPackage extends EPackage {
 		 * @generated
 		 */
 		EReference METHOD__CONTENT = eINSTANCE.getMethod_Content();
+
+		/**
+		 * The meta object literal for the '<em><b>Attributes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference METHOD__ATTRIBUTES = eINSTANCE.getMethod_Attributes();
 
 		/**
 		 * The meta object literal for the '<em><b>Return Type</b></em>' attribute feature.
@@ -1155,14 +1370,14 @@ public interface JiacbeansPackage extends EPackage {
 		EClass ACTIVITY_METHOD = eINSTANCE.getActivityMethod();
 
 		/**
-		 * The meta object literal for the '{@link jiacbeans.impl.VariableImpl <em>Variable</em>}' class.
+		 * The meta object literal for the '{@link jiacbeans.impl.JavaVariableImpl <em>Java Variable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see jiacbeans.impl.VariableImpl
-		 * @see jiacbeans.impl.JiacbeansPackageImpl#getVariable()
+		 * @see jiacbeans.impl.JavaVariableImpl
+		 * @see jiacbeans.impl.JiacbeansPackageImpl#getJavaVariable()
 		 * @generated
 		 */
-		EClass VARIABLE = eINSTANCE.getVariable();
+		EClass JAVA_VARIABLE = eINSTANCE.getJavaVariable();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1170,7 +1385,7 @@ public interface JiacbeansPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute VARIABLE__NAME = eINSTANCE.getVariable_Name();
+		EAttribute JAVA_VARIABLE__NAME = eINSTANCE.getJavaVariable_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
@@ -1178,7 +1393,7 @@ public interface JiacbeansPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute VARIABLE__TYPE = eINSTANCE.getVariable_Type();
+		EAttribute JAVA_VARIABLE__TYPE = eINSTANCE.getJavaVariable_Type();
 
 		/**
 		 * The meta object literal for the '{@link jiacbeans.impl.ActionImpl <em>Action</em>}' class.
@@ -1219,14 +1434,6 @@ public interface JiacbeansPackage extends EPackage {
 		EClass SCRIPT = eINSTANCE.getScript();
 
 		/**
-		 * The meta object literal for the '<em><b>Code</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SCRIPT__CODE = eINSTANCE.getScript_Code();
-
-		/**
 		 * The meta object literal for the '{@link jiacbeans.impl.SequenceImpl <em>Sequence</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1255,20 +1462,28 @@ public interface JiacbeansPackage extends EPackage {
 		EClass IF_THEN_ELSE = eINSTANCE.getIfThenElse();
 
 		/**
-		 * The meta object literal for the '<em><b>Then</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Then Branch</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IF_THEN_ELSE__THEN = eINSTANCE.getIfThenElse_Then();
+		EReference IF_THEN_ELSE__THEN_BRANCH = eINSTANCE.getIfThenElse_ThenBranch();
 
 		/**
-		 * The meta object literal for the '<em><b>Else</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Else Branch</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference IF_THEN_ELSE__ELSE = eINSTANCE.getIfThenElse_Else();
+		EReference IF_THEN_ELSE__ELSE_BRANCH = eINSTANCE.getIfThenElse_ElseBranch();
+
+		/**
+		 * The meta object literal for the '<em><b>Condition</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IF_THEN_ELSE__CONDITION = eINSTANCE.getIfThenElse_Condition();
 
 		/**
 		 * The meta object literal for the '{@link jiacbeans.impl.ForEachImpl <em>For Each</em>}' class.
@@ -1315,14 +1530,82 @@ public interface JiacbeansPackage extends EPackage {
 		EAttribute WHILE__CONDITION = eINSTANCE.getWhile_Condition();
 
 		/**
-		 * The meta object literal for the '{@link jiacbeans.impl.ExpressionImpl <em>Expression</em>}' class.
+		 * The meta object literal for the '{@link jiacbeans.impl.CodeElementImpl <em>Code Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see jiacbeans.impl.ExpressionImpl
-		 * @see jiacbeans.impl.JiacbeansPackageImpl#getExpression()
+		 * @see jiacbeans.impl.CodeElementImpl
+		 * @see jiacbeans.impl.JiacbeansPackageImpl#getCodeElement()
 		 * @generated
 		 */
-		EClass EXPRESSION = eINSTANCE.getExpression();
+		EClass CODE_ELEMENT = eINSTANCE.getCodeElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CODE_ELEMENT__CODE = eINSTANCE.getCodeElement_Code();
+
+		/**
+		 * The meta object literal for the '{@link jiacbeans.impl.TryCatchImpl <em>Try Catch</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see jiacbeans.impl.TryCatchImpl
+		 * @see jiacbeans.impl.JiacbeansPackageImpl#getTryCatch()
+		 * @generated
+		 */
+		EClass TRY_CATCH = eINSTANCE.getTryCatch();
+
+		/**
+		 * The meta object literal for the '<em><b>Try</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRY_CATCH__TRY = eINSTANCE.getTryCatch_Try();
+
+		/**
+		 * The meta object literal for the '<em><b>Catches</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRY_CATCH__CATCHES = eINSTANCE.getTryCatch_Catches();
+
+		/**
+		 * The meta object literal for the '<em><b>Finally</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRY_CATCH__FINALLY = eINSTANCE.getTryCatch_Finally();
+
+		/**
+		 * The meta object literal for the '{@link jiacbeans.impl.ParalelImpl <em>Paralel</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see jiacbeans.impl.ParalelImpl
+		 * @see jiacbeans.impl.JiacbeansPackageImpl#getParalel()
+		 * @generated
+		 */
+		EClass PARALEL = eINSTANCE.getParalel();
+
+		/**
+		 * The meta object literal for the '<em><b>Branches</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARALEL__BRANCHES = eINSTANCE.getParalel_Branches();
+
+		/**
+		 * The meta object literal for the '<em><b>Sign Index</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARALEL__SIGN_INDEX = eINSTANCE.getParalel_SignIndex();
 
 	}
 

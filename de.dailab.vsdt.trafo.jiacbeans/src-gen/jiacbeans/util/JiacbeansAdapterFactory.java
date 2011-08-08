@@ -88,8 +88,8 @@ public class JiacbeansAdapterFactory extends AdapterFactoryImpl {
 				return createActivityMethodAdapter();
 			}
 			@Override
-			public Adapter caseVariable(Variable object) {
-				return createVariableAdapter();
+			public Adapter caseJavaVariable(JavaVariable object) {
+				return createJavaVariableAdapter();
 			}
 			@Override
 			public Adapter caseAction(Action object) {
@@ -120,8 +120,16 @@ public class JiacbeansAdapterFactory extends AdapterFactoryImpl {
 				return createWhileAdapter();
 			}
 			@Override
-			public Adapter caseExpression(Expression object) {
-				return createExpressionAdapter();
+			public Adapter caseCodeElement(CodeElement object) {
+				return createCodeElementAdapter();
+			}
+			@Override
+			public Adapter caseTryCatch(TryCatch object) {
+				return createTryCatchAdapter();
+			}
+			@Override
+			public Adapter caseParalel(Paralel object) {
+				return createParalelAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -200,16 +208,16 @@ public class JiacbeansAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link jiacbeans.Variable <em>Variable</em>}'.
+	 * Creates a new adapter for an object of class '{@link jiacbeans.JavaVariable <em>Java Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see jiacbeans.Variable
+	 * @see jiacbeans.JavaVariable
 	 * @generated
 	 */
-	public Adapter createVariableAdapter() {
+	public Adapter createJavaVariableAdapter() {
 		return null;
 	}
 
@@ -312,16 +320,44 @@ public class JiacbeansAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link jiacbeans.Expression <em>Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link jiacbeans.CodeElement <em>Code Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see jiacbeans.Expression
+	 * @see jiacbeans.CodeElement
 	 * @generated
 	 */
-	public Adapter createExpressionAdapter() {
+	public Adapter createCodeElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link jiacbeans.TryCatch <em>Try Catch</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see jiacbeans.TryCatch
+	 * @generated
+	 */
+	public Adapter createTryCatchAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link jiacbeans.Paralel <em>Paralel</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see jiacbeans.Paralel
+	 * @generated
+	 */
+	public Adapter createParalelAdapter() {
 		return null;
 	}
 

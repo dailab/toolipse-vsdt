@@ -15,8 +15,9 @@ package jiacbeans;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link jiacbeans.IfThenElse#getThen <em>Then</em>}</li>
- *   <li>{@link jiacbeans.IfThenElse#getElse <em>Else</em>}</li>
+ *   <li>{@link jiacbeans.IfThenElse#getThenBranch <em>Then Branch</em>}</li>
+ *   <li>{@link jiacbeans.IfThenElse#getElseBranch <em>Else Branch</em>}</li>
+ *   <li>{@link jiacbeans.IfThenElse#getCondition <em>Condition</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,55 +27,81 @@ package jiacbeans;
  */
 public interface IfThenElse extends Script {
 	/**
-	 * Returns the value of the '<em><b>Then</b></em>' reference.
+	 * Returns the value of the '<em><b>Then Branch</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Then</em>' reference isn't clear,
+	 * If the meaning of the '<em>Then Branch</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Then</em>' reference.
-	 * @see #setThen(Script)
-	 * @see jiacbeans.JiacbeansPackage#getIfThenElse_Then()
+	 * @return the value of the '<em>Then Branch</em>' reference.
+	 * @see #setThenBranch(Script)
+	 * @see jiacbeans.JiacbeansPackage#getIfThenElse_ThenBranch()
 	 * @model
 	 * @generated
 	 */
-	Script getThen();
+	Script getThenBranch();
 
 	/**
-	 * Sets the value of the '{@link jiacbeans.IfThenElse#getThen <em>Then</em>}' reference.
+	 * Sets the value of the '{@link jiacbeans.IfThenElse#getThenBranch <em>Then Branch</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Then</em>' reference.
-	 * @see #getThen()
+	 * @param value the new value of the '<em>Then Branch</em>' reference.
+	 * @see #getThenBranch()
 	 * @generated
 	 */
-	void setThen(Script value);
+	void setThenBranch(Script value);
 
 	/**
-	 * Returns the value of the '<em><b>Else</b></em>' reference.
+	 * Returns the value of the '<em><b>Else Branch</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Else</em>' reference isn't clear,
+	 * If the meaning of the '<em>Else Branch</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Else</em>' reference.
-	 * @see #setElse(Script)
-	 * @see jiacbeans.JiacbeansPackage#getIfThenElse_Else()
+	 * @return the value of the '<em>Else Branch</em>' reference.
+	 * @see #setElseBranch(Script)
+	 * @see jiacbeans.JiacbeansPackage#getIfThenElse_ElseBranch()
 	 * @model
 	 * @generated
 	 */
-	Script getElse();
+	Script getElseBranch();
 
 	/**
-	 * Sets the value of the '{@link jiacbeans.IfThenElse#getElse <em>Else</em>}' reference.
+	 * Sets the value of the '{@link jiacbeans.IfThenElse#getElseBranch <em>Else Branch</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Else</em>' reference.
-	 * @see #getElse()
+	 * @param value the new value of the '<em>Else Branch</em>' reference.
+	 * @see #getElseBranch()
 	 * @generated
 	 */
-	void setElse(Script value);
+	void setElseBranch(Script value);
+
+	/**
+	 * Returns the value of the '<em><b>Condition</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Condition</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Condition</em>' attribute.
+	 * @see #setCondition(String)
+	 * @see jiacbeans.JiacbeansPackage#getIfThenElse_Condition()
+	 * @model
+	 * @generated
+	 */
+	String getCondition();
+
+	/**
+	 * Sets the value of the '{@link jiacbeans.IfThenElse#getCondition <em>Condition</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Condition</em>' attribute.
+	 * @see #getCondition()
+	 * @generated
+	 */
+	void setCondition(String value);
 
 } // IfThenElse

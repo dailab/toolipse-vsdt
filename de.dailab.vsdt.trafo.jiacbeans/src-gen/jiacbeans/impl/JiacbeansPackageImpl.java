@@ -9,21 +9,25 @@ package jiacbeans.impl;
 import jiacbeans.Action;
 import jiacbeans.ActivityMethod;
 import jiacbeans.AgentBean;
+import jiacbeans.CodeElement;
 import jiacbeans.Expression;
 import jiacbeans.ForEach;
 import jiacbeans.IfThenElse;
+import jiacbeans.JavaVariable;
 import jiacbeans.JiacbeansFactory;
 import jiacbeans.JiacbeansPackage;
 import jiacbeans.Method;
+import jiacbeans.Paralel;
 import jiacbeans.Script;
 import jiacbeans.Sequence;
 import jiacbeans.Trigger;
-import jiacbeans.Variable;
+import jiacbeans.TryCatch;
 import jiacbeans.While;
 import jiacbeans.WorkflowMethod;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -70,7 +74,7 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass variableEClass = null;
+	private EClass javaVariableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -126,7 +130,21 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass expressionEClass = null;
+	private EClass codeElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass tryCatchEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass paralelEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -248,6 +266,15 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAgentBean_Imports() {
+		return (EAttribute)agentBeanEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMethod() {
 		return methodEClass;
 	}
@@ -259,6 +286,15 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 */
 	public EReference getMethod_Content() {
 		return (EReference)methodEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMethod_Attributes() {
+		return (EReference)methodEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -329,8 +365,8 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getVariable() {
-		return variableEClass;
+	public EClass getJavaVariable() {
+		return javaVariableEClass;
 	}
 
 	/**
@@ -338,8 +374,8 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVariable_Name() {
-		return (EAttribute)variableEClass.getEStructuralFeatures().get(0);
+	public EAttribute getJavaVariable_Name() {
+		return (EAttribute)javaVariableEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -347,8 +383,8 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVariable_Type() {
-		return (EAttribute)variableEClass.getEStructuralFeatures().get(1);
+	public EAttribute getJavaVariable_Type() {
+		return (EAttribute)javaVariableEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -392,15 +428,6 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getScript_Code() {
-		return (EAttribute)scriptEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getSequence() {
 		return sequenceEClass;
 	}
@@ -428,7 +455,7 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIfThenElse_Then() {
+	public EReference getIfThenElse_ThenBranch() {
 		return (EReference)ifThenElseEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -437,8 +464,17 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getIfThenElse_Else() {
+	public EReference getIfThenElse_ElseBranch() {
 		return (EReference)ifThenElseEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIfThenElse_Condition() {
+		return (EAttribute)ifThenElseEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -491,8 +527,80 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getExpression() {
-		return expressionEClass;
+	public EClass getCodeElement() {
+		return codeElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCodeElement_Code() {
+		return (EAttribute)codeElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTryCatch() {
+		return tryCatchEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTryCatch_Try() {
+		return (EReference)tryCatchEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTryCatch_Catches() {
+		return (EAttribute)tryCatchEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTryCatch_Finally() {
+		return (EReference)tryCatchEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getParalel() {
+		return paralelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParalel_Branches() {
+		return (EReference)paralelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getParalel_SignIndex() {
+		return (EAttribute)paralelEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -529,6 +637,7 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		createEAttribute(agentBeanEClass, AGENT_BEAN__PACKAGE_NAME);
 		createEReference(agentBeanEClass, AGENT_BEAN__ATTRIBUTES);
 		createEReference(agentBeanEClass, AGENT_BEAN__ACTIONS);
+		createEAttribute(agentBeanEClass, AGENT_BEAN__IMPORTS);
 
 		methodEClass = createEClass(METHOD);
 		createEAttribute(methodEClass, METHOD__RETURN_TYPE);
@@ -537,14 +646,15 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		createEAttribute(methodEClass, METHOD__IS_STATIC);
 		createEAttribute(methodEClass, METHOD__VISIBILITY);
 		createEReference(methodEClass, METHOD__CONTENT);
+		createEReference(methodEClass, METHOD__ATTRIBUTES);
 
 		workflowMethodEClass = createEClass(WORKFLOW_METHOD);
 
 		activityMethodEClass = createEClass(ACTIVITY_METHOD);
 
-		variableEClass = createEClass(VARIABLE);
-		createEAttribute(variableEClass, VARIABLE__NAME);
-		createEAttribute(variableEClass, VARIABLE__TYPE);
+		javaVariableEClass = createEClass(JAVA_VARIABLE);
+		createEAttribute(javaVariableEClass, JAVA_VARIABLE__NAME);
+		createEAttribute(javaVariableEClass, JAVA_VARIABLE__TYPE);
 
 		actionEClass = createEClass(ACTION);
 		createEReference(actionEClass, ACTION__TRIGGER);
@@ -552,14 +662,14 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		triggerEClass = createEClass(TRIGGER);
 
 		scriptEClass = createEClass(SCRIPT);
-		createEAttribute(scriptEClass, SCRIPT__CODE);
 
 		sequenceEClass = createEClass(SEQUENCE);
 		createEReference(sequenceEClass, SEQUENCE__SCRIPTS);
 
 		ifThenElseEClass = createEClass(IF_THEN_ELSE);
-		createEReference(ifThenElseEClass, IF_THEN_ELSE__THEN);
-		createEReference(ifThenElseEClass, IF_THEN_ELSE__ELSE);
+		createEReference(ifThenElseEClass, IF_THEN_ELSE__THEN_BRANCH);
+		createEReference(ifThenElseEClass, IF_THEN_ELSE__ELSE_BRANCH);
+		createEAttribute(ifThenElseEClass, IF_THEN_ELSE__CONDITION);
 
 		forEachEClass = createEClass(FOR_EACH);
 		createEReference(forEachEClass, FOR_EACH__CONTENT);
@@ -568,7 +678,17 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		createEReference(whileEClass, WHILE__CONTENT);
 		createEAttribute(whileEClass, WHILE__CONDITION);
 
-		expressionEClass = createEClass(EXPRESSION);
+		codeElementEClass = createEClass(CODE_ELEMENT);
+		createEAttribute(codeElementEClass, CODE_ELEMENT__CODE);
+
+		tryCatchEClass = createEClass(TRY_CATCH);
+		createEReference(tryCatchEClass, TRY_CATCH__TRY);
+		createEAttribute(tryCatchEClass, TRY_CATCH__CATCHES);
+		createEReference(tryCatchEClass, TRY_CATCH__FINALLY);
+
+		paralelEClass = createEClass(PARALEL);
+		createEReference(paralelEClass, PARALEL__BRANCHES);
+		createEAttribute(paralelEClass, PARALEL__SIGN_INDEX);
 	}
 
 	/**
@@ -605,33 +725,38 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		ifThenElseEClass.getESuperTypes().add(this.getScript());
 		forEachEClass.getESuperTypes().add(this.getScript());
 		whileEClass.getESuperTypes().add(this.getScript());
+		codeElementEClass.getESuperTypes().add(this.getScript());
+		tryCatchEClass.getESuperTypes().add(this.getScript());
+		paralelEClass.getESuperTypes().add(this.getScript());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(agentBeanEClass, AgentBean.class, "AgentBean", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAgentBean_Methods(), this.getMethod(), null, "methods", null, 0, -1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAgentBean_Name(), ecorePackage.getEString(), "name", null, 0, 1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAgentBean_PackageName(), ecorePackage.getEString(), "packageName", null, 0, 1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAgentBean_Attributes(), this.getVariable(), null, "attributes", null, 0, -1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAgentBean_Attributes(), this.getJavaVariable(), null, "attributes", null, 0, -1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAgentBean_Actions(), this.getAction(), null, "actions", null, 0, -1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAgentBean_Imports(), ecorePackage.getEString(), "imports", null, 0, -1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(agentBeanEClass, null, "addMethod", 0, 1, IS_UNIQUE, !IS_ORDERED);
 		addEParameter(op, this.getMethod(), "m", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(methodEClass, Method.class, "Method", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMethod_ReturnType(), ecorePackage.getEString(), "returnType", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMethod_Parameters(), this.getVariable(), null, "parameters", null, 0, -1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMethod_Parameters(), this.getJavaVariable(), null, "parameters", null, 0, -1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMethod_Name(), ecorePackage.getEString(), "name", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMethod_IsStatic(), ecorePackage.getEBoolean(), "isStatic", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMethod_Visibility(), ecorePackage.getEInt(), "visibility", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMethod_Content(), this.getScript(), null, "content", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMethod_Attributes(), this.getJavaVariable(), null, "attributes", null, 0, -1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(workflowMethodEClass, WorkflowMethod.class, "WorkflowMethod", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(activityMethodEClass, ActivityMethod.class, "ActivityMethod", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getVariable_Type(), ecorePackage.getEString(), "type", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(javaVariableEClass, JavaVariable.class, "JavaVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getJavaVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, JavaVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJavaVariable_Type(), ecorePackage.getEString(), "type", null, 0, 1, JavaVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(actionEClass, Action.class, "Action", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAction_Trigger(), this.getTrigger(), null, "trigger", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -639,14 +764,14 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		initEClass(triggerEClass, Trigger.class, "Trigger", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(scriptEClass, Script.class, "Script", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getScript_Code(), ecorePackage.getEString(), "code", "\"\"", 0, 1, Script.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sequenceEClass, Sequence.class, "Sequence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSequence_Scripts(), this.getScript(), null, "scripts", null, 0, -1, Sequence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(ifThenElseEClass, IfThenElse.class, "IfThenElse", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getIfThenElse_Then(), this.getScript(), null, "then", null, 0, 1, IfThenElse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getIfThenElse_Else(), this.getScript(), null, "else", null, 0, 1, IfThenElse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIfThenElse_ThenBranch(), this.getScript(), null, "thenBranch", null, 0, 1, IfThenElse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getIfThenElse_ElseBranch(), this.getScript(), null, "elseBranch", null, 0, 1, IfThenElse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getIfThenElse_Condition(), ecorePackage.getEString(), "condition", null, 0, 1, IfThenElse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(forEachEClass, ForEach.class, "ForEach", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getForEach_Content(), this.getScript(), null, "content", null, 0, 1, ForEach.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -655,10 +780,46 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		initEReference(getWhile_Content(), this.getScript(), null, "content", null, 1, 1, While.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getWhile_Condition(), ecorePackage.getEString(), "condition", null, 0, 1, While.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(codeElementEClass, CodeElement.class, "CodeElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCodeElement_Code(), ecorePackage.getEString(), "code", null, 0, 1, CodeElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(tryCatchEClass, TryCatch.class, "TryCatch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTryCatch_Try(), this.getScript(), null, "try", null, 0, 1, TryCatch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		EGenericType g1 = createEGenericType(ecorePackage.getEMap());
+		EGenericType g2 = createEGenericType(ecorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(this.getScript());
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getTryCatch_Catches(), g1, "catches", "", 1, 1, TryCatch.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTryCatch_Finally(), this.getScript(), null, "finally", null, 0, 1, TryCatch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(paralelEClass, Paralel.class, "Paralel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getParalel_Branches(), this.getScript(), null, "branches", null, 0, -1, Paralel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getParalel_SignIndex(), ecorePackage.getEInt(), "signIndex", "1", 0, 1, Paralel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http:///org/eclipse/emf/ecore/util/ExtendedMetaData
+		createExtendedMetaDataAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http:///org/eclipse/emf/ecore/util/ExtendedMetaData</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createExtendedMetaDataAnnotations() {
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
+		addAnnotation
+		  (getTryCatch_Catches(), 
+		   source, 
+		   new String[] {
+			 "wildcards", "",
+			 "name", ""
+		   });
 	}
 
 } //JiacbeansPackageImpl

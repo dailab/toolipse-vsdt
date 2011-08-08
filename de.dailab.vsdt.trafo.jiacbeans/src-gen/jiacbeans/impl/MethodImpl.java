@@ -10,12 +10,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Collection;
+import jiacbeans.JavaVariable;
 import jiacbeans.AgentBean;
 import jiacbeans.JiacbeansPackage;
 import jiacbeans.Method;
 
 import jiacbeans.Script;
-import jiacbeans.Variable;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.EList;
@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link jiacbeans.impl.MethodImpl#isIsStatic <em>Is Static</em>}</li>
  *   <li>{@link jiacbeans.impl.MethodImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link jiacbeans.impl.MethodImpl#getContent <em>Content</em>}</li>
+ *   <li>{@link jiacbeans.impl.MethodImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,7 +76,7 @@ public class MethodImpl extends EObjectImpl implements Method {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Variable> parameters;
+	protected EList<JavaVariable> parameters;
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -141,6 +142,16 @@ public class MethodImpl extends EObjectImpl implements Method {
 	protected Script content;
 
 	/**
+	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAttributes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<JavaVariable> attributes;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -202,6 +213,18 @@ public class MethodImpl extends EObjectImpl implements Method {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<JavaVariable> getAttributes() {
+		if (attributes == null) {
+			attributes = new EObjectResolvingEList<JavaVariable>(JavaVariable.class, this, JiacbeansPackage.METHOD__ATTRIBUTES);
+		}
+		return attributes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getReturnType() {
 		return returnType;
 	}
@@ -223,9 +246,9 @@ public class MethodImpl extends EObjectImpl implements Method {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Variable> getParameters() {
+	public EList<JavaVariable> getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectResolvingEList<Variable>(Variable.class, this, JiacbeansPackage.METHOD__PARAMETERS);
+			parameters = new EObjectResolvingEList<JavaVariable>(JavaVariable.class, this, JiacbeansPackage.METHOD__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -314,6 +337,8 @@ public class MethodImpl extends EObjectImpl implements Method {
 			case JiacbeansPackage.METHOD__CONTENT:
 				if (resolve) return getContent();
 				return basicGetContent();
+			case JiacbeansPackage.METHOD__ATTRIBUTES:
+				return getAttributes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -332,7 +357,7 @@ public class MethodImpl extends EObjectImpl implements Method {
 				return;
 			case JiacbeansPackage.METHOD__PARAMETERS:
 				getParameters().clear();
-				getParameters().addAll((Collection<? extends Variable>)newValue);
+				getParameters().addAll((Collection<? extends JavaVariable>)newValue);
 				return;
 			case JiacbeansPackage.METHOD__NAME:
 				setName((String)newValue);
@@ -345,6 +370,10 @@ public class MethodImpl extends EObjectImpl implements Method {
 				return;
 			case JiacbeansPackage.METHOD__CONTENT:
 				setContent((Script)newValue);
+				return;
+			case JiacbeansPackage.METHOD__ATTRIBUTES:
+				getAttributes().clear();
+				getAttributes().addAll((Collection<? extends JavaVariable>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -376,6 +405,9 @@ public class MethodImpl extends EObjectImpl implements Method {
 			case JiacbeansPackage.METHOD__CONTENT:
 				setContent((Script)null);
 				return;
+			case JiacbeansPackage.METHOD__ATTRIBUTES:
+				getAttributes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -400,13 +432,14 @@ public class MethodImpl extends EObjectImpl implements Method {
 				return visibility != VISIBILITY_EDEFAULT;
 			case JiacbeansPackage.METHOD__CONTENT:
 				return content != null;
+			case JiacbeansPackage.METHOD__ATTRIBUTES:
+				return attributes != null && !attributes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Prints itself out as a Java Method
 	 */
 	@Override
 	public String toString() {

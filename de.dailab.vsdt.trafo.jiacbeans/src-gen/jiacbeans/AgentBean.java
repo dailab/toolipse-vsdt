@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link jiacbeans.AgentBean#getPackageName <em>Package Name</em>}</li>
  *   <li>{@link jiacbeans.AgentBean#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link jiacbeans.AgentBean#getActions <em>Actions</em>}</li>
+ *   <li>{@link jiacbeans.AgentBean#getImports <em>Imports</em>}</li>
  * </ul>
  * </p>
  *
@@ -101,7 +102,7 @@ public interface AgentBean extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' reference list.
-	 * The list contents are of type {@link jiacbeans.Variable}.
+	 * The list contents are of type {@link jiacbeans.JavaVariable}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Attributes</em>' reference list isn't clear,
@@ -113,7 +114,7 @@ public interface AgentBean extends EObject {
 	 * @model
 	 * @generated
 	 */
-	EList<Variable> getAttributes();
+	EList<JavaVariable> getAttributes();
 
 	/**
 	 * Returns the value of the '<em><b>Actions</b></em>' reference list.
@@ -130,6 +131,22 @@ public interface AgentBean extends EObject {
 	 * @generated
 	 */
 	EList<Action> getActions();
+
+	/**
+	 * Returns the value of the '<em><b>Imports</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Imports</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Imports</em>' attribute list.
+	 * @see jiacbeans.JiacbeansPackage#getAgentBean_Imports()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getImports();
 
 	/**
 	 * <!-- begin-user-doc -->

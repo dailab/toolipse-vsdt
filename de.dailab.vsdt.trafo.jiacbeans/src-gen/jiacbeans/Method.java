@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link jiacbeans.Method#isIsStatic <em>Is Static</em>}</li>
  *   <li>{@link jiacbeans.Method#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link jiacbeans.Method#getContent <em>Content</em>}</li>
+ *   <li>{@link jiacbeans.Method#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
  *
@@ -59,6 +60,22 @@ public interface Method extends EObject {
 	void setContent(Script value);
 
 	/**
+	 * Returns the value of the '<em><b>Attributes</b></em>' reference list.
+	 * The list contents are of type {@link jiacbeans.JavaVariable}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Attributes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Attributes</em>' reference list.
+	 * @see jiacbeans.JiacbeansPackage#getMethod_Attributes()
+	 * @model
+	 * @generated
+	 */
+	EList<JavaVariable> getAttributes();
+
+	/**
 	 * Returns the value of the '<em><b>Return Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -86,7 +103,7 @@ public interface Method extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' reference list.
-	 * The list contents are of type {@link jiacbeans.Variable}.
+	 * The list contents are of type {@link jiacbeans.JavaVariable}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parameters</em>' reference list isn't clear,
@@ -98,7 +115,7 @@ public interface Method extends EObject {
 	 * @model
 	 * @generated
 	 */
-	EList<Variable> getParameters();
+	EList<JavaVariable> getParameters();
 
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
