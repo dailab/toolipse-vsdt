@@ -19,12 +19,6 @@ public class JiacBeansExpressionVisitor extends VsdtExpressionVisitor {
 	}
 
 	@Override
-	protected void visitVariable(VxlVariable variable) {
-		buffer.append("$");
-		super.visitVariable(variable);
-	}
-	
-	@Override
 	protected void visitNegation(VxlNegation negation) {
 		buffer.append("! ");
 		visitElement(negation.getElement());

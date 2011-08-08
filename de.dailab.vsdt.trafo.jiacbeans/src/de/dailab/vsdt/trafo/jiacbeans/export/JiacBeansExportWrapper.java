@@ -11,7 +11,6 @@ import jiacbeans.AgentBean;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.trafo.impl.BpmnExportWrapper;
-import de.dailab.vsdt.trafo.jiacbeans.util.JavaCode;
 
 /**
  * Maintains a mapping from resulting models back to the original pools.
@@ -43,7 +42,7 @@ public class JiacBeansExportWrapper extends BpmnExportWrapper {
 		}
 	}
 	
-	public Pool getPool(JavaCode model) {
+	public Pool getPool(AgentBean model) {
 		return model != null ? modelPoolMap.get(model) : null;
 	}
 	
