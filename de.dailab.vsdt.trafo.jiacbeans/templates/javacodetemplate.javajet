@@ -13,10 +13,6 @@
 import de.dailab.jiactng.agentcore.AbstractAgentBean;
 
 <%=classDeclaration%>{
-int d = 0; 
-int eps = 0;
-int n = 10;
-int dd = 20;
 <% for(JavaVariable var: attributes){%>
 	<%= var.toString()+"\n"%> 
 <%}%>
