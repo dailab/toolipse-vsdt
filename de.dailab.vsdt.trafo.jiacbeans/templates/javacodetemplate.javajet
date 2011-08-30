@@ -7,14 +7,18 @@
    String classDeclaration = "public class "+bean.getName()+" extends AbstractAgentBean";
    List<Method> methods = bean.getMethods();
    List<JavaVariable> attributes = bean.getAttributes();
+   List<Action> actions = bean.getActions();
 %>
 <%=packageDeclaration%>
 
 import de.dailab.jiactng.agentcore.AbstractAgentBean;
 
 <%=classDeclaration%>{
+<% for(Action act: actions){%>
+	private String <%= act.getName().toUpperCase()%> = <%= act.getLocation()%> 
+<%}%>
 <% for(JavaVariable var: attributes){%>
-	<%= var.toString()+"\n"%> 
+	<%= var.toString()%>;
 <%}%>
 <% for(Method method : methods){%>
 	/**
