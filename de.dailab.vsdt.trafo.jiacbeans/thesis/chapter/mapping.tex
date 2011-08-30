@@ -1,28 +1,56 @@
 \chapter{Mapping BPMN to Jiac AgentBeans}
 
-The element mapping from BPMN to Jiac AgentBeans is created based on the existing mapping to JiacV - JADL script. This chapter will provide a tabular overview of the mapping. 
+The element mapping from BPMN to Jiac AgentBeans is created based on the existing mapping to JiacV - JADL script. In comparation to a JADL script, an AgentBean is written completely in Java, enabling more possibilities in mapping concepts such as intermediate Event handling. This chapter will provide a tabular overview of the mapping. 
 
-\textbf{Business Process Diagram}
+\textbf{\large{Business Process Diagram}}
 
-\begin{table*}[hp]
-	\centering
-		\begin{tabular}{|l|l|}\hline\hline
+		\begin{tabularx}{\linewidth}{|l|X|}\hline\hline
 			\multicolumn{2}{|c|}{\textbf{Business Process Diagram}} \\\hline\hline
 			 Pool & A pool is currently mapped to a Java-File containing a Jiac AgentBean.\\\hline
-			 Process & ...\\\hline
+			 Process & The process content in a pool is mapped to a Workflow Method in the generated AgentBean. Depending on the type of the StartEvent, an Action might be exposed, enabling this method to be invoked as a service. This method will contain a Script which is generated from the flowObjects contained in the process.\\\hline
 			 Lane & Lanes will not be mapped in this mapping\\\hline \hline
-		\end{tabular}
-\end{table*}\\\\
+		\end{tabularx}\\\\
 
-\textbf{Events}
-\begin{table*}[hp]
-	\centering
-		\begin{tabular}{|l|l|}\hline\hline
+\textbf{\Large{Events}}\\\\
+For intermediate Events, an EventHandlerThread will be generated and started. If the intermediate Event is attached to an activity, the activity will also be started as a Thread. 
+
+		\begin{tabularx}{\linewidth}{|l|X|}\hline\hline
 			\multicolumn{2}{|c|}{\textbf{Start Events}} \\\hline\hline
 			 Timer & The generated process will be started in the execute() method of the JIAC AgentBean\\\hline
 			 Message & If the implementation is a Service, an action will be created, and the process can be started through a service call (invoke). If the implementation is a Message Channel, a Space Observer will be attached to the agents memory, and the process will start as soon as a message is recieved.\\\hline
 			 Rule & Rule start events are not regarded in the current mapping\\\hline
 			 Link & \\\hline
 			 Multiple & If a pool has multiple start events, each start event will be mapped according to it's respective trigger\\\hline\hline
-		\end{tabular}
+			 
+			 \multicolumn{2}{|c|}{\textbf{Intermediate Events}} \\\hline\hline
+			 Rule & not regarded in the current mapping\\\hline
+			 Timer & A TimerEventHandler will be created and started.\\\hline
+			 Message & A MessageEventHandler will be created and started. \\\hline
+			 Link & ...\\\hline
+			 Multiple & each event will be mapped according to it's respective trigger\\\hline
+			 Cancel & ... \\\hline
+			 Compensate & ... \\\hline
+			 Error & If attached to an activity, the method generated from the activity will be called in a try-catch block \\\hline\hline
+			 
+			 \multicolumn{2}{|c|}{\textbf{End Events}} \\\hline\hline
+			 Message & If implementation is Message Channel, a message with the payload will be written to the channel \\\hline
+			 Link & \\\hline
+			 Multiple & \\\hline
+			 Cancel & \\\hline
+			 Compensate & \\\hline
+			 Error & The generated service will throw an exception\\\hline
+			 Terminate & \\\hline
+		\end{tabularx}\\\\
+
+\textbf{\large{Activities}}\\\\
+Basically, an Activity-method will be created for each activity.  
+
+\begin{table*}[h]
+	\centering
+		\begin{tabularx}{\linewidth}{|l|X|}\hline\hline
+			\multicolumn{2}{|c|}{\textbf{Activity}} \\\hline\hline
+			 Standard Loop & ... \\\hline
+			 Multi Instance Loop & ... \\\hline
+			 With Event Handler & the method generated will be started parallel to an EventHandlerThread. When the activity is completed, the EventHandlerThread will be terminated. In contrary, if the Event is trigerred before the activity is completed, the Thread performing the activity will be interrupted. \\\hline
+		\end{tabularx}
 \end{table*}\\\\

@@ -9,15 +9,16 @@ connectivity and others. Further it provides high security (Common Criteria EAL3
 certified by the Federal Office for Information Security of Germany, BSI) and advanced
 accounting mechanisms, making it suitable for the use in industrial and
 commercial applications. The JIAC framework comes with a runtime environment
-and a toolsuite for the creation of agents. \\\\ A typical JIAC Application consists of \textit{AgentNodes}, \textit{Agents}, and \textit{AgentBeans} (see also Figure 1).
+and a toolsuite for the creation of agents. \\\\ 
+
+A typical JIAC Application consists of \textit{AgentNodes}, \textit{Agents}, and \textit{AgentBeans} (see also Figure \ref{fig:jiac_basic}).
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.25\textwidth]{images/jiac_basic.png}
 		\caption{Jiac Basic concepts and their structural relationships \cite{JIACMAN10}}
 	\label{fig:jiac_basic}
 \end{figure}
-An \textit{AgentNode} is a Java VM providing the runtime infrastructure for agents, such
-as discovery services, white and yellow pages services, communication infrastructure. A
+An \textit{AgentNode} is a Java VM providing the runtime infrastructure for agents, which consists of discovery services, white and yellow pages services, as well as communication infrastructure. A
 JIAC application consists of one or more AgentNodes. Normally, there is one AgentNode
 per physical machine. The AgentNode comes ready-to-run, but can be adapted to the
 needs of the target environment and can also be extended by additional components,
@@ -30,7 +31,7 @@ Skills and abilities of the agent can be extended by so-called AgentBeans.\\
 and provide services (so-called Actions) to other agents. AgentBeans have a lifecycle.
 
 \section{BPMN(Business Process Modelling Notation)}
-BPMN \cite{6} is a standard Notation for modelling business processes, initially published by the BPMI which is later adopted by the OMG(Object Management Group). A business process diagramm (as seen in Figure 2) can be compared to UML's activity diagram.
+BPMN \cite{BPMN2} is a standard Notation for modelling business processes, initially published by the BPMI which is later adopted by the OMG(Object Management Group). A business process diagramm (as seen in Figure 2) can be compared to UML's activity diagram.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.90\textwidth]{images/bpmn_sampl.png}
@@ -73,4 +74,5 @@ public String generate(Object argument)\{
 \}
 
 In the updated version of JET, also called JET2, some workspace and java related "'tag-libraries"' are provided, enabling us to do the transformation without using the Java and Eclipse API. Unfortunately, in this Version the model has to be an xml-File.
-To directly transform the BPMN directly from it's xml-Nature will be harder and the template will be confusing, therefore we decided to implement the mapping using the existing transformation framework where an intermediate model class of the AgentBean will be created, and then use the older version of JET to transform this intermediate model into Java code. More details on the implementation will be discussed in chapter \ref{chap:implementation}
+To directly transform the BPMN directly from it's xml-Nature will be harder and the template will be confusing, therefore a decision has been made to implement the mapping using the existing transformation framework where an intermediate model class of the AgentBean will be created, and then this intermediate model into Java code using the older version of the JET Transformation.
+More details on the implementation will be discussed in chapter \ref{chap:implementation}.
