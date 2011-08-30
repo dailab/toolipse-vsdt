@@ -24,6 +24,7 @@ import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
+import de.dailab.vsdt.DataType;
 import de.dailab.vsdt.End;
 import de.dailab.vsdt.Event;
 import de.dailab.vsdt.FlowObject;
@@ -47,19 +48,20 @@ import de.dailab.vsdt.trafo.strucbpmn.BpmnSequence;
 import de.dailab.vsdt.trafo.strucbpmn.DisjunctiveExpression;
 
 /**
- * BPMN to JIAC TNG JADL visitor. This visitor is performing a top-down pass of 
+ * BPMN to JIAC AgentBeans visitor. This visitor is performing a top-down pass of 
  * the BPMN model. This way it creates the element mapping for all the elements 
  * passed on the way.
  * 
- * @author tkuester
+ * @author pstan
  */
 public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	
 	final JiacbeansFactory beansFac = JiacbeansFactory.eINSTANCE;
 	
 	String _currentService;
+	WorkflowMethod _currentWorkflow;
 	AgentBean _currentBean;
-	int __PARCOUNTER = 1;
+	int __PARCOUNTER;
 	
 	public JiacBeansExportWrapper getWrapper(){
 		return (JiacBeansExportWrapper)super.wrapper;
@@ -86,28 +88,56 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		for (Pool pool : bpd.getPools()) {
 			AgentBean bean = visitPool(pool);
 //			wrapper.map(pool, jc);
-			getWrapper().getBeans().add(bean);
+//			getWrapper().getBeans().add(bean);
 		}
 	}
 	
 	private AgentBean visitPool(Pool pool) {
-		TrafoLog.trace("Visiting Pool '" + pool.getName() + "'"); 
-//		_currentBean = new JavaCode(pool.getName()+"."+_currentService+"_"+pool.getName());
-//		_currentBean.setSuperClass("de.dailab.jiactng.agentcore.AbstractAgentBean");
-		_currentBean = beansFac.createAgentBean();
+		TrafoLog.trace("Visiting Pool '" + pool.getName() + "'");
+		
+		//check adHoc
+		if (pool.isAdHoc()) {
+			TrafoLog.warn(pool.getName() + ": A mapping for AdHoc Processes is not defined. Skipping.");
+			return null;
+		}
+		// create AgentBean file model and map it to the Pool
+		AgentBean bean = beansFac.createAgentBean();
+		_currentBean= bean;
 		_currentBean.setPackageName(pool.getName());
-		_currentBean.setName(_currentService+"_"+pool.getName());
+		_currentBean.setName(pool.getName()+"_"+_currentService);
+		getWrapper().addAgentBean(bean, pool);
+		// add imports for all Data Types
+		for (DataType dataType : pool.getParent().getParent().getDataTypes()) {
+			String clazz = dataType.getPackage() + "." + dataType.getName();
+			bean.getImports().add(clazz);
+		}
+		// build service (will automatically be added to the Agent model)
+//		buildService(pool.getParent().getName() + "_" + pool.getName(), 
+//				pool, 
+//				pool.getGraphicalElements(), 
+//				pool.getProperties());
+//		
+//		return model;
 		
 		WorkflowMethod workflow = beansFac.createWorkflowMethod();
 		workflow.setName(pool.getParent().getName());
+		_currentWorkflow = workflow;
 		_currentBean.addMethod(workflow);
-		writeWorkflowSequence(workflow, pool.getGraphicalElements());
+		//Variable declarations
+		for(Property prop : pool.getProperties()){
+			JavaVariable var = beansFac.createJavaVariable();
+			var.setType(prop.getType());
+			var.setName(prop.getName());
+			_currentBean.getAttributes().add(var);
+		}
+		writeWorkflowSequence(pool, workflow, pool.getGraphicalElements());
 		return _currentBean;
 	}
 	
-	private void writeWorkflowSequence(WorkflowMethod workflow, List<FlowObject> flowObjects){
+	private void writeWorkflowSequence(Pool pool, WorkflowMethod workflow, List<FlowObject> flowObjects){
 		Sequence seq = beansFac.createSequence();
 		workflow.setContent(seq);
+		
 		for(FlowObject obj : flowObjects){
 			seq.getScripts().add(visitFlowObject(obj));
 		}
@@ -122,16 +152,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			return visitEvent(event, null);
 		}
 		if (flowObject instanceof Activity) {
-			Activity activity=(Activity) flowObject;
-			ActivityMethod method = beansFac.createActivityMethod();
-			method.setName(activity.getName());
-			method.setIsStatic(false);
-			method.setVisibility(MethodImpl.PRIVATE);
-			method.setContent(visitActivity(activity));
-			_currentBean.addMethod(method);
-			CodeElement code = beansFac.createCodeElement();
-			code.setCode(activity.getName()+"();");
-			return code;
+			Activity act = (Activity)flowObject;
+			return visitActivity(act);
 		}
 		if (flowObject instanceof Gateway) {
 			Gateway gateway= (Gateway) flowObject;
@@ -376,23 +398,38 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		
 		switch (trigger) {
 		case MESSAGE:
-//			Implementation implementation= event.getImplementation();
-//			if (event instanceof Start && event.getImplementation() instanceof MessageChannel) {
-//				// add starter rule for this case
-//				addStarterRule(event);
-//			}
-//			// get parameters for this event
-//			List<Property> parameters = new ArrayList<Property>();
-//			if (implementation instanceof MessageChannel) {
-//				MessageChannel channel = (MessageChannel) implementation;
-//				parameters.add(channel.getPayload());
-//			}
-//			if (implementation instanceof de.dailab.vsdt.Service) {
-//				de.dailab.vsdt.Service service = (de.dailab.vsdt.Service) implementation;
-//				parameters.addAll((event instanceof Start) ? service.getInput() : service.getOutput());
-//			}
-//			if (event instanceof Start || event instanceof End) {
-//				// start/end: map message properties to service signature
+			Implementation implementation= event.getImplementation();
+			if (event instanceof Start && event.getImplementation() instanceof MessageChannel) {
+				//create Space Observer and join the message channel in doStart()
+			}
+			// get parameters for this event
+			List<Property> parameters = new ArrayList<Property>();
+			if (implementation instanceof MessageChannel) {
+				MessageChannel channel = (MessageChannel) implementation;
+				parameters.add(channel.getPayload());
+			}
+			if (implementation instanceof de.dailab.vsdt.Service) {
+				de.dailab.vsdt.Service service = (de.dailab.vsdt.Service) implementation;
+				if(event instanceof Start){
+					List<Property> inputs = service.getInput();
+					for (Property property : inputs) {
+						JavaVariable var = beansFac.createJavaVariable();
+						var.setType(property.getType());
+						var.setName(property.getName());
+						_currentWorkflow.getParameters().add(var);
+					}
+				}
+				if(event instanceof End){
+					List<Property> output = service.getOutput();
+					if(output.size()==1){
+						_currentWorkflow.setReturnType(output.get(0).getType());
+					}
+					//TODO handle multiple output
+				}
+				parameters.addAll((event instanceof Start) ? service.getInput() : service.getOutput());
+			}
+			if (event instanceof Start || event instanceof End) {
+				// start/end: map message properties to service signature
 //				List<HeaderDeclaration> serviceParameters= event instanceof Start
 //						? _currentService.getInputs()
 //						: _currentService.getOutputs();
@@ -425,16 +462,21 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 //					}
 //				}
 //				// add message properties to properties
-//				properties.addAll(parameters);
-//			}
+				properties.addAll(parameters);
+			}
 			break;
 		case NONE:
 			break;
 		case TIMER:
-//			if (event instanceof Start) {
-//				// timer start event is handled by starter rule
-//				addStarterRule(event);
-//			}
+			if (event instanceof Start) {
+				//start _currentWorkflow in execute() 
+				CodeElement methodCall = beansFac.createCodeElement();
+				methodCall.setCode(_currentWorkflow.getName()+"();");
+				Method execute = beansFac.createMethod();
+				execute.setName("execute");
+				execute.setContent(methodCall);
+				_currentBean.addMethod(execute);
+			}
 //			if (event instanceof Intermediate) {
 //				Case timerCase= jadlFac.createCase();
 //				timerCase.setBody(jadlFac.createSeq()); // empty case body
@@ -524,6 +566,9 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	}
 	
 	private Script visitActivity(Activity activity){
+		if(activity.getName().equals("__DO_NOTHING__")){
+			return beansFac.createCodeElement();
+		}
 //		TrafoLog.trace("Visiting Activity '" + a.getName() + "'");
 //		ActivityMethod method = beansFac.createActivityMethod();
 //		method.setName(a.getName());
@@ -575,6 +620,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					if(parameter.length()>0) parameter +=",";
 					parameter += property.getName();
 				}
+				CodeElement invokeCall = beansFac.createCodeElement();
+				invokeCall.setCode("invoke("+varName+", new Serializeable[]{"+parameter+"});");
 				for (Property property : service.getOutput()) {
 					//TODO implement the return variables 
 //					invoke.getReturnVariables().add(jef.createVariable(property.getName()).getName());
@@ -638,10 +685,6 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		}
 
 		if (mapping == null) {
-			System.out.println(activity.getActivityType());
-			CodeElement print = beansFac.createCodeElement();
-			print.setCode("System.out.println(\"executing "+activity.getName()+"\");");
-			mapping= print;
 		}
 		
 		// create loop mappings: basic mapping is embedded in loop structure
@@ -656,8 +699,15 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		
 		//build activity sequence: properties, assignments, mapping, more assignments
 		mapping= buildSequence(mapping, properties, activity.getAssignments());
-		
-		return mapping;
+		ActivityMethod method = beansFac.createActivityMethod();
+		method.setName(activity.getName());
+		method.setIsStatic(false);
+		method.setVisibility(MethodImpl.PRIVATE);
+		method.setContent(mapping);
+		_currentBean.addMethod(method);
+		CodeElement code = beansFac.createCodeElement();
+		code.setCode(activity.getName()+"();");
+		return code;
 	}
 	
 	/**
@@ -797,17 +847,13 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		int current = __PARCOUNTER;
 		__PARCOUNTER++;
 		CodeElement callCode = beansFac.createCodeElement();
-		callCode.setCode("__PARMETHOD"+current+"();");
+		callCode.setCode("__par"+current+"();");
 		Method parMethod = beansFac.createMethod();
 		Paralel par = beansFac.createParalel();
 		par.getBranches().addAll(branches);
-		par.setSignIndex(current);
 		parMethod.setContent(par);
-		JavaVariable signvar = beansFac.createJavaVariable();
-		signvar.setName("__sign"+current);
-		signvar.setType("int");
+		parMethod.setName("__par"+current);
 		_currentBean.addMethod(parMethod);
-		_currentBean.getAttributes().add(signvar);
 		return callCode;
 	}
 	

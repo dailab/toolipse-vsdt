@@ -18,4 +18,8 @@ public interface ActionValidator {
 	boolean validate();
 
 	boolean validateTrigger(Trigger value);
+
+	boolean validateName(String value);
+
+	boolean validateLocation(String value);
 }

@@ -19,12 +19,15 @@ public class JavaCodeGenerator
   protected final String TEXT_1 = "";
   protected final String TEXT_2 = NL + NL + "import de.dailab.jiactng.agentcore.AbstractAgentBean;" + NL;
   protected final String TEXT_3 = NL;
-  protected final String TEXT_4 = "{" + NL + "int d = 0; " + NL + "int eps = 0;" + NL + "int n = 10;" + NL + "int dd = 20;";
-  protected final String TEXT_5 = NL + "\t";
-  protected final String TEXT_6 = " ";
-  protected final String TEXT_7 = NL + "\t/**" + NL + "\t *  delete the generated tag after you edited this method" + NL + "\t *  @generated" + NL + "\t */" + NL + "\t";
-  protected final String TEXT_8 = " ";
-  protected final String TEXT_9 = NL + NL + "}";
+  protected final String TEXT_4 = "{";
+  protected final String TEXT_5 = NL + "\tprivate String ";
+  protected final String TEXT_6 = " = ";
+  protected final String TEXT_7 = " ";
+  protected final String TEXT_8 = NL + "\t";
+  protected final String TEXT_9 = ";";
+  protected final String TEXT_10 = NL + "\t/**" + NL + "\t *  delete the generated tag after you edited this method" + NL + "\t *  @generated" + NL + "\t */" + NL + "\t";
+  protected final String TEXT_11 = " ";
+  protected final String TEXT_12 = NL + NL + "}";
 
   public String generate(Object argument)
   {
@@ -36,6 +39,7 @@ public class JavaCodeGenerator
    String classDeclaration = "public class "+bean.getName()+" extends AbstractAgentBean";
    List<Method> methods = bean.getMethods();
    List<JavaVariable> attributes = bean.getAttributes();
+   List<Action> actions = bean.getActions();
 
     stringBuffer.append(TEXT_1);
     stringBuffer.append(packageDeclaration);
@@ -43,17 +47,24 @@ public class JavaCodeGenerator
     stringBuffer.append(TEXT_3);
     stringBuffer.append(classDeclaration);
     stringBuffer.append(TEXT_4);
-     for(JavaVariable var: attributes){
+     for(Action act: actions){
     stringBuffer.append(TEXT_5);
-    stringBuffer.append( var.toString()+"\n");
+    stringBuffer.append( act.getName().toUpperCase());
     stringBuffer.append(TEXT_6);
+    stringBuffer.append( act.getLocation());
+    stringBuffer.append(TEXT_7);
+    }
+     for(JavaVariable var: attributes){
+    stringBuffer.append(TEXT_8);
+    stringBuffer.append( var.toString());
+    stringBuffer.append(TEXT_9);
     }
      for(Method method : methods){
-    stringBuffer.append(TEXT_7);
+    stringBuffer.append(TEXT_10);
     stringBuffer.append( method.toString()+"\n");
-    stringBuffer.append(TEXT_8);
+    stringBuffer.append(TEXT_11);
     }
-    stringBuffer.append(TEXT_9);
+    stringBuffer.append(TEXT_12);
     return stringBuffer.toString();
   }
 }

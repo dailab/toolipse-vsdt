@@ -446,7 +446,15 @@ public class MethodImpl extends EObjectImpl implements Method {
 		String result = "";
 		result += VISIBILITIES[visibility]+" ";
 		if(isStatic) result += "static"+" ";
-		result += returnType +" "+name+"(){\n";
+		result += returnType +" "+name+"(";
+		String params = "";
+		boolean first = true;
+		for (JavaVariable var : getParameters()) {
+			if(!first)params+=", ";
+			else first = false;
+			params+= var.getType()+" "+var.getName();
+		}
+		result += params+"){\n";
 		if(content!=null){
 			String cS = content.toString();
 			if(cS!=null && !cS.equals("")){

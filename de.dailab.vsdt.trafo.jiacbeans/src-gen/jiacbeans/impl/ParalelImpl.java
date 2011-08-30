@@ -208,20 +208,21 @@ public class ParalelImpl extends ScriptImpl implements Paralel {
 					result += "\t//Error occured while reading branch body\n";
 				}
 			}
-			result += "__sign"+signIndex+"++;" ;
 			result += "\t}\n";
 			result += "};\n";
 		}
 		int started = 0;
-		result += "__sign"+signIndex+" = 0;";
 		while(started <= counter){
 			started++;
-			result+="t"+started+".start()";
+			result+="t"+started+".start();\n";
 		}
-		result += "while(__sign"+signIndex+"<"+counter+"){\n";
-		result += "\ttry{\n";
-		result += "\t\tThread.sleep(10)//wait until all branches are completed";
-		result += "\t}catch(Exception e){//Do nothing}";
+		started = 0;
+		result+="try{\n";
+		while(started <= counter){
+			started++;
+			result+="\tt"+started+".join();\n";
+		}
+		result+="}catch(InterruptedException e){}";
 		return result;
 	}
 

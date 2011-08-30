@@ -26,6 +26,8 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link jiacbeans.impl.ActionImpl#getTrigger <em>Trigger</em>}</li>
+ *   <li>{@link jiacbeans.impl.ActionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link jiacbeans.impl.ActionImpl#getLocation <em>Location</em>}</li>
  * </ul>
  * </p>
  *
@@ -41,6 +43,43 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * @ordered
 	 */
 	protected Trigger trigger;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getLocation() <em>Location</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocation()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LOCATION_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getLocation() <em>Location</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLocation()
+	 * @generated
+	 * @ordered
+	 */
+	protected String location = LOCATION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -104,12 +143,58 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.ACTION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLocation() {
+		return location;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLocation(String newLocation) {
+		String oldLocation = location;
+		location = newLocation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.ACTION__LOCATION, oldLocation, location));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case JiacbeansPackage.ACTION__TRIGGER:
 				if (resolve) return getTrigger();
 				return basicGetTrigger();
+			case JiacbeansPackage.ACTION__NAME:
+				return getName();
+			case JiacbeansPackage.ACTION__LOCATION:
+				return getLocation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -124,6 +209,12 @@ public class ActionImpl extends EObjectImpl implements Action {
 		switch (featureID) {
 			case JiacbeansPackage.ACTION__TRIGGER:
 				setTrigger((Trigger)newValue);
+				return;
+			case JiacbeansPackage.ACTION__NAME:
+				setName((String)newValue);
+				return;
+			case JiacbeansPackage.ACTION__LOCATION:
+				setLocation((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -140,6 +231,12 @@ public class ActionImpl extends EObjectImpl implements Action {
 			case JiacbeansPackage.ACTION__TRIGGER:
 				setTrigger((Trigger)null);
 				return;
+			case JiacbeansPackage.ACTION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case JiacbeansPackage.ACTION__LOCATION:
+				setLocation(LOCATION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -154,8 +251,30 @@ public class ActionImpl extends EObjectImpl implements Action {
 		switch (featureID) {
 			case JiacbeansPackage.ACTION__TRIGGER:
 				return trigger != null;
+			case JiacbeansPackage.ACTION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case JiacbeansPackage.ACTION__LOCATION:
+				return LOCATION_EDEFAULT == null ? location != null : !LOCATION_EDEFAULT.equals(location);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", location: ");
+		result.append(location);
+		result.append(')');
+		return result.toString();
 	}
 
 } //ActionImpl
