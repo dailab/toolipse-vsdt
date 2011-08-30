@@ -1,8 +1,9 @@
 \chapter{Background}
 
 In this chapter, we will discuss the backgrounds of the transformation that should be developed. We will start with JIAC (the target of the transformation), BPMN (the model that is being used), followed by VSDT (the existing modeling and transformation framework to JIAC that should be extended), and JET (the technology that will help us to implement the transformation).
+
 \section{JIAC(Java-based Intelligent Agent Componentware)}
-JIAC \cite{11,15,4,1} is a Java-based agent architecture and framework that was developed to simplify the development of software agents. The framework supports the entire software development process of a software agent system, from the design, implementation, and deployment of the system.The JIAC framework provides features such as FIPA compliant communication,
+JIAC is a Java-based agent architecture and framework that was developed to simplify the development of software agents. The framework supports the entire software development process of a software agent system, from the design, implementation, and deployment of the system. The JIAC framework provides features such as FIPA compliant communication,
 Believe-Desire-Intention (BDI) reasoning, strong migration, web-service
 connectivity and others. Further it provides high security (Common Criteria EAL3,
 certified by the Federal Office for Information Security of Germany, BSI) and advanced
@@ -12,7 +13,7 @@ and a toolsuite for the creation of agents. \\\\ A typical JIAC Application cons
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.25\textwidth]{images/jiac_basic.png}
-		\caption{Jiac Basic concepts and their structural relationships \cite{11}}
+		\caption{Jiac Basic concepts and their structural relationships \cite{JIACMAN10}}
 	\label{fig:jiac_basic}
 \end{figure}
 An \textit{AgentNode} is a Java VM providing the runtime infrastructure for agents, such
@@ -41,6 +42,7 @@ BPMN was made to provide a notation that is understandable by all business users
 To provide a rough overview on how Agent technology can support the implementation of Business Processes let us take a look on this mapping example of BPMN elements to Agents. A Pool in a Business Process Diagram can represent an Agent, which are able to communicate with other agents (another pool) through messages (represented with the BPMN MessageFlows). Agents can react to Events. To fully implement the transformation a detailed mapping is needed and will be developed in the scope of this work. 
 
 \section{VSDT(Visual Service Design Tool)}
+\label{sec:vsdt}
 The VSDT \cite{5,2,3,1} is a well-equipped BPMN editor that is independent of any specific target language. Thus, while the usual transformation to BPEL, as well as other transformations, is included, the VSDT can easily be extended with additional export functionality targeting other languages. It was developed in early 2007 as a Diploma Thesis at the TU Berlin and since then it has been continuously extended. Since it's initial development, VSDT's transformation framework is designed to be extensible and reuseable. This allows the development of a new transformation to be easier. For this purpose the transformation process is subdivided into several stages: 
 \begin{enumerate}
 	\item \textit{Validation}: Validate the input model.
@@ -50,7 +52,7 @@ The VSDT \cite{5,2,3,1} is a well-equipped BPMN editor that is independent of an
 	\item \textit{Clean Up}: Remove redundancies, improve readability, etc.
 \end{enumerate}
 
-The Validation and Normalisation and Structure Mapping are mostly independent from the target language. In most cases the standard mapping provided for these stages are reuseable, which makes it possible to implement a new transformation by specifying the element mapping only. Figure 3 shows the UML Class Diagram of the transformation famework with the example transformation to BPEL.
+Due to the fact that the validation, normalisation and structure mapping are mostly independent from the target language, the standard mapping provided for these stages are reuseable, which makes it possible to implement a new transformation by specifying the element mapping only. Figure 3 shows the UML Class Diagram of the transformation famework with the example transformation to BPEL.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.90\textwidth]{images/transformation.png}
@@ -61,4 +63,14 @@ The Validation and Normalisation and Structure Mapping are mostly independent fr
 
 \section{JET(Java Emitter Templates)}
 \textit{JET}\cite{13} is a code generating framework, developed as a part of the Eclipse Modelling Project \cite{14}. JET uses templates to transform the model into any kinds of code artifacts such as java, html, xml or even plain text. \\\\
-\textit{JET templates} uses a JSP-like syntax which makes it easy to write and understand. A set of JET templates is called transformation. It is possible to build this transformation with a main template which acts as a visitor and runs through the model, and this main template will then use other templates which handle a specific element of the model. For example, in UML to Java transformation you can have special templates that handles the package, class, variables and methods.
+\textit{JET templates} uses a JSP-like syntax which makes it easy to write and understand. A set of JET templates is called transformation. It is possible to build this transformation with a main template which acts as a visitor and runs through the model, and this main template will then use other templates which handle a specific element of the model. For example, in UML to Java transformation you can have special templates that handles the package, class, variables and methods.\\\\
+
+\textbf{2 different JET-Versions}\\\\
+There are currently 2 different JET-Versions in the Eclipse Modelling Project. The older Version allows us to generate text with an Object as argument. In the template, one can type cast the argument variable into the class of our model. \\
+The translated JET-Template will have the method \\
+public String generate(Object argument)\{
+...
+\}
+
+In the updated version of JET, also called JET2, some workspace and java related "'tag-libraries"' are provided, enabling us to do the transformation without using the Java and Eclipse API. Unfortunately, in this Version the model has to be an xml-File.
+To directly transform the BPMN directly from it's xml-Nature will be harder and the template will be confusing, therefore we decided to implement the mapping using the existing transformation framework where an intermediate model class of the AgentBean will be created, and then use the older version of JET to transform this intermediate model into Java code. More details on the implementation will be discussed in chapter \ref{chap:implementation}

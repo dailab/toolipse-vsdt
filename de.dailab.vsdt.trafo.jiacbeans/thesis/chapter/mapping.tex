@@ -1,1 +1,28 @@
 \chapter{Mapping BPMN to Jiac AgentBeans}
+
+The element mapping from BPMN to Jiac AgentBeans is created based on the existing mapping to JiacV - JADL script. This chapter will provide a tabular overview of the mapping. 
+
+\textbf{Business Process Diagram}
+
+\begin{table*}[hp]
+	\centering
+		\begin{tabular}{|l|l|}\hline\hline
+			\multicolumn{2}{|c|}{\textbf{Business Process Diagram}} \\\hline\hline
+			 Pool & A pool is currently mapped to a Java-File containing a Jiac AgentBean.\\\hline
+			 Process & ...\\\hline
+			 Lane & Lanes will not be mapped in this mapping\\\hline \hline
+		\end{tabular}
+\end{table*}\\\\
+
+\textbf{Events}
+\begin{table*}[hp]
+	\centering
+		\begin{tabular}{|l|l|}\hline\hline
+			\multicolumn{2}{|c|}{\textbf{Start Events}} \\\hline\hline
+			 Timer & The generated process will be started in the execute() method of the JIAC AgentBean\\\hline
+			 Message & If the implementation is a Service, an action will be created, and the process can be started through a service call (invoke). If the implementation is a Message Channel, a Space Observer will be attached to the agents memory, and the process will start as soon as a message is recieved.\\\hline
+			 Rule & Rule start events are not regarded in the current mapping\\\hline
+			 Link & \\\hline
+			 Multiple & If a pool has multiple start events, each start event will be mapped according to it's respective trigger\\\hline\hline
+		\end{tabular}
+\end{table*}\\\\

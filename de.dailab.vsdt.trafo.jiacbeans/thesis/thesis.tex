@@ -3,6 +3,7 @@
 % hier nach Bedarf noch weitere Packages einfuegen...
 \usepackage[utf8]{inputenc}
 \usepackage{ngerman}
+\renewcommand{\figurename}{Figure}
 
 % TODO diese Kommandos werden an verschiedenen Stellen referenziert
 % und sollten entsprechend gesetzt werden
@@ -34,6 +35,7 @@
 	\input{chapter/introduction}
 	% TODO weitere Kapitel
 	\input{chapter/background}
+	\input{chapter/sota}
 	\input{chapter/mapping}
 	\input{chapter/implementation}
 	\input{chapter/conclusion}
@@ -41,7 +43,7 @@
 	\begin{appendix}
 		% Kapitel in diesem Bereicht erscheinen als Anhänge
 	\end{appendix}
-	
+	\nocite{*}
 	\newpage
 	\bibliographystyle{plain}
 	\bibliography{bibliography}
