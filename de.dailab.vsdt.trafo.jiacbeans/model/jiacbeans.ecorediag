@@ -78,7 +78,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_L3TycbbJEeCi6fY6154VIg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="jiacbeans.ecore#//WorkflowMethod"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_L3TycrbJEeCi6fY6154VIg" x="540" y="255"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_L3TycrbJEeCi6fY6154VIg" x="440" y="255"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_N0Wt8LbJEeCi6fY6154VIg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_N0XVALbJEeCi6fY6154VIg" type="4001"/>
@@ -94,7 +94,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_N0Wt8bbJEeCi6fY6154VIg" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="jiacbeans.ecore#//ActivityMethod"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_N0Wt8rbJEeCi6fY6154VIg" x="730" y="255"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_N0Wt8rbJEeCi6fY6154VIg" x="585" y="255"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_Srio4LbVEeCi6fY6154VIg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_Srj3ALbVEeCi6fY6154VIg" type="4001"/>
@@ -123,6 +123,14 @@
   <children xmi:type="notation:Node" xmi:id="_9KfXgLuQEeCIlfddbEileQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_9KhzwLuQEeCIlfddbEileQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_9KjB4LuQEeCIlfddbEileQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_njluMcr_EeCSwaAcSGzIJw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jiacbeans.ecore#//Action/name"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_njluMsr_EeCSwaAcSGzIJw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_rcocUMr_EeCSwaAcSGzIJw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="jiacbeans.ecore#//Action/location"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_rcocUcr_EeCSwaAcSGzIJw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_9KjB4buQEeCIlfddbEileQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_9KjB4ruQEeCIlfddbEileQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_9KjB47uQEeCIlfddbEileQ"/>
@@ -134,7 +142,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_9KfXgbuQEeCIlfddbEileQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="jiacbeans.ecore#//Action"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9KfXgruQEeCIlfddbEileQ" x="445" y="45"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_9KfXgruQEeCIlfddbEileQ" x="440" y="40"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_--UsoLuQEeCIlfddbEileQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_--V6wLuQEeCIlfddbEileQ" type="4001"/>
@@ -150,7 +158,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_--UsobuQEeCIlfddbEileQ" fontColor="4210752" fontName="Segoe UI" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="jiacbeans.ecore#//Trigger"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_--UsoruQEeCIlfddbEileQ" x="440" y="175"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_--UsoruQEeCIlfddbEileQ" x="450" y="170"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_LPck8LweEeCXj_kWAFRSgw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_LPfoQLweEeCXj_kWAFRSgw" type="4001"/>
@@ -371,7 +379,7 @@
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_KE-4ALuREeCIlfddbEileQ" type="3002" source="_9KfXgLuQEeCIlfddbEileQ" target="_--UsoLuQEeCIlfddbEileQ">
     <children xmi:type="notation:Node" xmi:id="_KFAGILuREeCIlfddbEileQ" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_KFAGIbuREeCIlfddbEileQ" x="-54" y="25"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_KFAGIbuREeCIlfddbEileQ" x="-42" y="25"/>
     </children>
     <children xmi:type="notation:Node" xmi:id="_KFAGIruREeCIlfddbEileQ" type="4012">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_KFAGI7uREeCIlfddbEileQ" x="-1" y="17"/>
