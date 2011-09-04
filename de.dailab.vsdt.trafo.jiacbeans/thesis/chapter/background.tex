@@ -5,29 +5,26 @@ In this chapter, we will discuss the backgrounds of the transformation that shou
 \section{JIAC(Java-based Intelligent Agent Componentware)}
 JIAC is a Java-based agent architecture and framework that was developed to simplify the development of software agents. The framework supports the entire software development process of a software agent system, from the design, implementation, and deployment of the system. The JIAC framework provides features such as FIPA compliant communication,
 Believe-Desire-Intention (BDI) reasoning, strong migration, web-service
-connectivity and others. Further it provides high security (Common Criteria EAL3,
+connectivity and others. It also provides high security (Common Criteria EAL3,
 certified by the Federal Office for Information Security of Germany, BSI) and advanced
 accounting mechanisms, making it suitable for the use in industrial and
 commercial applications. The JIAC framework comes with a runtime environment
 and a toolsuite for the creation of agents. \\\\ 
 
-A typical JIAC Application consists of \textit{AgentNodes}, \textit{Agents}, and \textit{AgentBeans} (see also Figure \ref{fig:jiac_basic}).
+In Figure \ref{fig:jiac_basic}, we can see the typical structure of a JIAC Application, which consists of AgentNodes, Agents, AgentBeans.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.25\textwidth]{images/jiac_basic.png}
 		\caption{Jiac Basic concepts and their structural relationships \cite{JIACMAN10}}
 	\label{fig:jiac_basic}
 \end{figure}
-An \textit{AgentNode} is a Java VM providing the runtime infrastructure for agents, which consists of discovery services, white and yellow pages services, as well as communication infrastructure. A
-JIAC application consists of one or more AgentNodes. Normally, there is one AgentNode
-per physical machine. The AgentNode comes ready-to-run, but can be adapted to the
-needs of the target environment and can also be extended by additional components,
-so-called AgentNodeBeans.\\
+An \textit{AgentNode} is a Java VM where the runtime infrastructure for agents, such as discovery services, white and yellow pages services, as well as communication infrastructure, are provided. A JIAC application might consists of multiple AgentNodes (distributed application). With the so-called AgentNodeBeans, one can extend the AgentNode with additional components.\\
+
 Each AgentNode may run several \textit{Agents}. Agents provide services to other agents
 and comprise lifecycle, execution cycle and a memory. An agent can use infrastructure
 services in order to find other agents, to communicate to them and to use their services.
 Skills and abilities of the agent can be extended by so-called AgentBeans.\\
-\textit{AgentBeans} is the mean to implement the functionality. They are plugged into agents
+\textit{AgentBeans} is the mean to implement the functionality, in other words, the abilities of an Agent are defined in the AgentBeans attached to it. They are plugged into agents
 and provide services (so-called Actions) to other agents. AgentBeans have a lifecycle.
 
 \section{BPMN(Business Process Modelling Notation)}
