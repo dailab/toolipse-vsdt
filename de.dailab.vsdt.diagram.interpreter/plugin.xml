@@ -4,21 +4,19 @@
 
 	<!-- Additonal Views -->
 	<extension point="org.eclipse.ui.views">
-		<view name="Process Interpreter" icon="icons/ProcessSimulation.gif"
-			category="de.dailab.vsdt.diagram.views"
-			class="de.dailab.vsdt.diagram.interpreter.view.InterpreterView"
-			id="de.dailab.vsdt.diagram.interpreter.view.InterpreterView">
-		</view>
+		<view id="de.dailab.vsdt.diagram.interpreter.view.InterpreterView"
+			  class="de.dailab.vsdt.diagram.interpreter.view.InterpreterView"
+		      name="Process Interpreter"
+			  category="de.dailab.vsdt.diagram.views"
+		      icon="icons/ProcessSimulation.gif" />
 	</extension>
 	
 	<!-- Perspective Extensions -->
 	<extension point="org.eclipse.ui.perspectiveExtensions">
-		<perspectiveExtension
-			targetID="de.dailab.vsdt.perspective">
-			<viewShortcut id="de.dailab.vsdt.diagram.interpreter.view.InterpreterView" />
+		<perspectiveExtension targetID="de.dailab.vsdt.perspective">
 			<view id="de.dailab.vsdt.diagram.interpreter.view.InterpreterView"
-				relationship="stack" relative="org.eclipse.ui.views.ContentOutline">
-			</view>
+			      relative="org.eclipse.ui.views.ContentOutline"
+			      relationship="stack" />
 		</perspectiveExtension>
 	</extension>
 
