@@ -753,6 +753,43 @@ public interface JiacbeansPackage extends EPackage {
 	int PARALEL_FEATURE_COUNT = SCRIPT_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link jiacbeans.impl.SubProcessImpl <em>Sub Process</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see jiacbeans.impl.SubProcessImpl
+	 * @see jiacbeans.impl.JiacbeansPackageImpl#getSubProcess()
+	 * @generated
+	 */
+	int SUB_PROCESS = 15;
+
+	/**
+	 * The feature id for the '<em><b>Run Content</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUB_PROCESS__RUN_CONTENT = SCRIPT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUB_PROCESS__NAME = SCRIPT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Sub Process</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUB_PROCESS_FEATURE_COUNT = SCRIPT_FEATURE_COUNT + 2;
+
+	/**
 	 * Returns the meta object for class '{@link jiacbeans.AgentBean <em>Agent Bean</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1244,6 +1281,38 @@ public interface JiacbeansPackage extends EPackage {
 	EAttribute getParalel_SignIndex();
 
 	/**
+	 * Returns the meta object for class '{@link jiacbeans.SubProcess <em>Sub Process</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Sub Process</em>'.
+	 * @see jiacbeans.SubProcess
+	 * @generated
+	 */
+	EClass getSubProcess();
+
+	/**
+	 * Returns the meta object for the reference '{@link jiacbeans.SubProcess#getRunContent <em>Run Content</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Run Content</em>'.
+	 * @see jiacbeans.SubProcess#getRunContent()
+	 * @see #getSubProcess()
+	 * @generated
+	 */
+	EReference getSubProcess_RunContent();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jiacbeans.SubProcess#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see jiacbeans.SubProcess#getName()
+	 * @see #getSubProcess()
+	 * @generated
+	 */
+	EAttribute getSubProcess_Name();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1662,6 +1731,32 @@ public interface JiacbeansPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PARALEL__SIGN_INDEX = eINSTANCE.getParalel_SignIndex();
+
+		/**
+		 * The meta object literal for the '{@link jiacbeans.impl.SubProcessImpl <em>Sub Process</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see jiacbeans.impl.SubProcessImpl
+		 * @see jiacbeans.impl.JiacbeansPackageImpl#getSubProcess()
+		 * @generated
+		 */
+		EClass SUB_PROCESS = eINSTANCE.getSubProcess();
+
+		/**
+		 * The meta object literal for the '<em><b>Run Content</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SUB_PROCESS__RUN_CONTENT = eINSTANCE.getSubProcess_RunContent();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SUB_PROCESS__NAME = eINSTANCE.getSubProcess_Name();
 
 	}
 

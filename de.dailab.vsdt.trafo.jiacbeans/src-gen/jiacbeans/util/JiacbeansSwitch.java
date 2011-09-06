@@ -186,6 +186,13 @@ public class JiacbeansSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case JiacbeansPackage.SUB_PROCESS: {
+				SubProcess subProcess = (SubProcess)theEObject;
+				T result = caseSubProcess(subProcess);
+				if (result == null) result = caseScript(subProcess);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -412,6 +419,21 @@ public class JiacbeansSwitch<T> {
 	 * @generated
 	 */
 	public T caseParalel(Paralel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sub Process</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sub Process</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSubProcess(SubProcess object) {
 		return null;
 	}
 

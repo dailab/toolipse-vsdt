@@ -75,6 +75,7 @@ public class JiacbeansFactoryImpl extends EFactoryImpl implements JiacbeansFacto
 			case JiacbeansPackage.CODE_ELEMENT: return createCodeElement();
 			case JiacbeansPackage.TRY_CATCH: return createTryCatch();
 			case JiacbeansPackage.PARALEL: return createParalel();
+			case JiacbeansPackage.SUB_PROCESS: return createSubProcess();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -228,6 +229,16 @@ public class JiacbeansFactoryImpl extends EFactoryImpl implements JiacbeansFacto
 	public Paralel createParalel() {
 		ParalelImpl paralel = new ParalelImpl();
 		return paralel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SubProcess createSubProcess() {
+		SubProcessImpl subProcess = new SubProcessImpl();
+		return subProcess;
 	}
 
 	/**

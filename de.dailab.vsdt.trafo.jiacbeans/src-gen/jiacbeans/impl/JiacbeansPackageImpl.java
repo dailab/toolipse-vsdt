@@ -20,6 +20,7 @@ import jiacbeans.Method;
 import jiacbeans.Paralel;
 import jiacbeans.Script;
 import jiacbeans.Sequence;
+import jiacbeans.SubProcess;
 import jiacbeans.Trigger;
 import jiacbeans.TryCatch;
 import jiacbeans.While;
@@ -145,6 +146,13 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * @generated
 	 */
 	private EClass paralelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass subProcessEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -626,6 +634,33 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getSubProcess() {
+		return subProcessEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSubProcess_RunContent() {
+		return (EReference)subProcessEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSubProcess_Name() {
+		return (EAttribute)subProcessEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public JiacbeansFactory getJiacbeansFactory() {
 		return (JiacbeansFactory)getEFactoryInstance();
 	}
@@ -709,6 +744,10 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		paralelEClass = createEClass(PARALEL);
 		createEReference(paralelEClass, PARALEL__BRANCHES);
 		createEAttribute(paralelEClass, PARALEL__SIGN_INDEX);
+
+		subProcessEClass = createEClass(SUB_PROCESS);
+		createEReference(subProcessEClass, SUB_PROCESS__RUN_CONTENT);
+		createEAttribute(subProcessEClass, SUB_PROCESS__NAME);
 	}
 
 	/**
@@ -748,6 +787,7 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		codeElementEClass.getESuperTypes().add(this.getScript());
 		tryCatchEClass.getESuperTypes().add(this.getScript());
 		paralelEClass.getESuperTypes().add(this.getScript());
+		subProcessEClass.getESuperTypes().add(this.getScript());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(agentBeanEClass, AgentBean.class, "AgentBean", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -818,6 +858,10 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		initEClass(paralelEClass, Paralel.class, "Paralel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParalel_Branches(), this.getScript(), null, "branches", null, 0, -1, Paralel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParalel_SignIndex(), ecorePackage.getEInt(), "signIndex", "1", 0, 1, Paralel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(subProcessEClass, SubProcess.class, "SubProcess", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSubProcess_RunContent(), this.getScript(), null, "runContent", null, 0, 1, SubProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSubProcess_Name(), ecorePackage.getEString(), "name", null, 0, 1, SubProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

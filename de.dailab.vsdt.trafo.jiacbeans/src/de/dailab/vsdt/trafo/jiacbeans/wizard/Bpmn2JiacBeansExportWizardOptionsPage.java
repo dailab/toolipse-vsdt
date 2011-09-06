@@ -65,6 +65,7 @@ public class Bpmn2JiacBeansExportWizardOptionsPage extends BpmnExportWizardOptio
 				groupByUsecase= usecase.getSelection();
 			}
 		});
+		
 	}
 	
 	public boolean isUseMAMSSpecials() {

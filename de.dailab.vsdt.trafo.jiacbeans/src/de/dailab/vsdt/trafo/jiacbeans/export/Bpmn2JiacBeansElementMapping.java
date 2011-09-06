@@ -16,6 +16,8 @@ import jiacbeans.Method;
 import jiacbeans.Paralel;
 import jiacbeans.Script;
 import jiacbeans.Sequence;
+import jiacbeans.SubProcess;
+import jiacbeans.TryCatch;
 import jiacbeans.While;
 import jiacbeans.WorkflowMethod;
 import jiacbeans.impl.MethodImpl;
@@ -43,6 +45,10 @@ import de.dailab.vsdt.trafo.impl.BpmnElementMapping;
 import de.dailab.vsdt.trafo.jiacbeans.util.Util;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBranch;
+import de.dailab.vsdt.trafo.strucbpmn.BpmnDerivedProcess;
+import de.dailab.vsdt.trafo.strucbpmn.BpmnElementToSkip;
+import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerBlock;
+import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerCase;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnLoopBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnSequence;
 import de.dailab.vsdt.trafo.strucbpmn.DisjunctiveExpression;
@@ -94,7 +100,6 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	
 	private AgentBean visitPool(Pool pool) {
 		TrafoLog.trace("Visiting Pool '" + pool.getName() + "'");
-		
 		//check adHoc
 		if (pool.isAdHoc()) {
 			TrafoLog.warn(pool.getName() + ": A mapping for AdHoc Processes is not defined. Skipping.");
@@ -103,7 +108,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		// create AgentBean file model and map it to the Pool
 		AgentBean bean = beansFac.createAgentBean();
 		_currentBean= bean;
-		_currentBean.setPackageName(pool.getName());
+		//group the beans with the same pool name in a package
+		_currentBean.setPackageName(pool.getName().toLowerCase());
 		_currentBean.setName(pool.getName()+"_"+_currentService);
 		getWrapper().addAgentBean(bean, pool);
 		// add imports for all Data Types
@@ -123,7 +129,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		workflow.setName(pool.getParent().getName());
 		_currentWorkflow = workflow;
 		_currentBean.addMethod(workflow);
-		//Variable declarations
+		//add a variable declaration for every pool property
 		for(Property prop : pool.getProperties()){
 			JavaVariable var = beansFac.createJavaVariable();
 			var.setType(prop.getType());
@@ -144,7 +150,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	}
 	
 	private Script visitFlowObject(FlowObject flowObject){
-		Script script = beansFac.createScript();
+		Script script = beansFac.createCodeElement();
 		//delegate to specialized methods
 		System.out.println(flowObject.getClass());
 		if (flowObject instanceof Event) {
@@ -172,9 +178,83 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			BpmnLoopBlock bpmnLoopBlock = (BpmnLoopBlock) flowObject;
 			return visitBpmnLoopBlock(bpmnLoopBlock);
 		}
+		if (flowObject instanceof BpmnEventHandlerBlock) {
+			BpmnEventHandlerBlock eventHandlerBlock = (BpmnEventHandlerBlock) flowObject;
+			return visitBpmnEventHandlerBlock(eventHandlerBlock);
+		}
+		if (flowObject instanceof BpmnElementToSkip) {
+			BpmnElementToSkip bpmnElementToSkip = (BpmnElementToSkip) flowObject;
+			return visitBpmnElementToSkip(bpmnElementToSkip);
+		}
+		
+		// TODO implement missing mappings
+		if (flowObject instanceof BpmnDerivedProcess) {
+			TrafoLog.nyi("Mapping for BpmnDerivedProcess element");
+//			BpmnDerivedProcess bpmnDerivedProcess = (BpmnDerivedProcess) flowObject;
+//			script= visitBpmnDerivedProcess(bpmnDerivedProcess);
+		}
 		return script;
 	}
 	
+	private Script visitBpmnEventHandlerBlock(BpmnEventHandlerBlock block){
+		Sequence mapping = beansFac.createSequence();
+		List<Script> starter = new ArrayList<Script>();
+		List<Script> stopper = new ArrayList<Script>();
+		//Create Subprocess for Activity
+		SubProcess sp = beansFac.createSubProcess();
+		sp.setName(block.getId());
+		sp.setRunContent(visitActivity(block.getActivity()));
+		mapping.getScripts().add(sp);
+		CodeElement spStart = beansFac.createCodeElement();
+		spStart.setCode(block.getId()+".start()");
+		CodeElement spJoin = beansFac.createCodeElement();
+		spJoin.setCode(block.getId()+".join()");
+		starter.add(spStart);
+		stopper.add(spJoin);
+		//Event Handler Cases
+		List<BpmnEventHandlerCase> cases = block.getEventHandlerCases();
+		for (BpmnEventHandlerCase c : cases) {
+			Event e = c.getIntermediate();
+			switch (c.getIntermediate().getTrigger()) {
+			case TIMER:
+				if(e.isAsDuration()){
+					CodeElement create = beansFac.createCodeElement();
+					create.setCode("TimeEventHandler "+e.getId()+" = new TimeEventHandler("+e.getTimeExpression()+","+block.getId()+");");
+					mapping.getScripts().add(create);
+					CodeElement start = beansFac.createCodeElement();
+					start.setCode(e.getId()+".start()");
+					CodeElement stop = beansFac.createCodeElement();
+					start.setCode(e.getId()+".stop()");
+					starter.add(start);
+					stopper.add(stop);
+				}
+				break;
+			case MESSAGE:
+				
+				break;
+			default:
+				break;
+			}
+		}
+		//add all starter
+		mapping.getScripts().addAll(starter);
+		//join subprocess, wrapped in try-catch block
+		Sequence tcs = beansFac.createSequence();
+		tcs.getScripts().addAll(stopper);
+		TryCatch tc = beansFac.createTryCatch();
+		tc.setTry(tcs);
+		tc.getCatches().put("InterruptedException", beansFac.createCodeElement());
+		mapping.getScripts().add(tcs);
+		return mapping;
+	}
+	
+	private Script visitBpmnElementToSkip(BpmnElementToSkip block){
+		Script toSkip = visitFlowObject(block.getElement());
+		IfThenElse skipCondition = beansFac.createIfThenElse();
+		skipCondition.setCondition(block.getEventHandlerCase().getId()+".hasBeenTriggered()");
+		skipCondition.setThenBranch(toSkip);
+		return skipCondition;
+	}
 	private Script visitBpmnBlock(BpmnBlock block){
 		TrafoLog.trace("Visiting BpmnBlock");
 		Gateway fork = block.getFirstGateway();
@@ -396,6 +476,10 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			_currentService += "_" + event.getName();
 		}
 		
+		//create doStart Method
+		Method doStart = beansFac.createMethod();
+		doStart.setName("doStart");
+		doStart.setVisibility(MethodImpl.PUBLIC);
 		switch (trigger) {
 		case MESSAGE:
 			Implementation implementation= event.getImplementation();
@@ -475,6 +559,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				Method execute = beansFac.createMethod();
 				execute.setName("execute");
 				execute.setContent(methodCall);
+				execute.setVisibility(MethodImpl.PUBLIC);
 				_currentBean.addMethod(execute);
 			}
 //			if (event instanceof Intermediate) {
@@ -569,15 +654,6 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		if(activity.getName().equals("__DO_NOTHING__")){
 			return beansFac.createCodeElement();
 		}
-//		TrafoLog.trace("Visiting Activity '" + a.getName() + "'");
-//		ActivityMethod method = beansFac.createActivityMethod();
-//		method.setName(a.getName());
-//		a.get
-//		method.setIsStatic(false);
-//		method.setVisibility(MethodImpl.PRIVATE);
-//		_currentBean.addMethod(method);
-//		CodeElement code = beansFac.createCodeElement();
-//		return code;
 		TrafoLog.trace("Visiting Activity '" + activity.getName() + "'");
 		Script mapping= null;
 		//checks
@@ -608,7 +684,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				CodeElement actionVarDeclaration = beansFac.createCodeElement();
 				actionVarDeclaration.setCode("Action "+varName+" = retrieveAction("+service.getInterface()+"."+service.getOperation()+");");
 				CodeElement exception = beansFac.createCodeElement();
-				exception.setCode("throw new throw new RuntimeException(\"send action not found!\");");
+				exception.setCode("throw new RuntimeException(\"send action not found!\");");
 				IfThenElse actionCheck = beansFac.createIfThenElse();
 				actionCheck.setCondition(varName+" == null");
 				actionCheck.setThenBranch(exception);
@@ -746,14 +822,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				if (property.getType().contains(".")) {
 					// ...only if it is a complex type
 					//TODO implement this
-//					Assign assign= jadlFac.createAssign();
-//					assign.setVariable(jef.createVariable(varName));
-//					assign.setNew(true);
-//					ComplexType type = jadlFac.createComplexType();
-//					type.setClazz(typeName);
-//					ComplexValue complex = jadlFac.createComplexValue();
-//					complex.setType(type);
-//					assign.setInstance(complex);
+//					CodeElement assign = beansFac.createCodeElement();
+//					assign.setCode(varName+" = new "+typeName+"()");
 //					declarations.add(assign);
 				}
 			}
@@ -768,7 +838,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	}
 	private Script visitGateway(Gateway g){
 		//TODO implement this
-		Script script = beansFac.createScript();
+		Script script = beansFac.createCodeElement();
+		((CodeElement)script).setCode("//TODO implement visitGateway");
 		return script;
 	}
 	@Override

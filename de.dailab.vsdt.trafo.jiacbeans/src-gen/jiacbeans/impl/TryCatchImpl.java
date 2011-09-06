@@ -6,6 +6,9 @@
  */
 package jiacbeans.impl;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -266,17 +269,54 @@ public class TryCatchImpl extends ScriptImpl implements TryCatch {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (catches: ");
-		result.append(catches);
-		result.append(')');
-		return result.toString();
+		String result = "try{\n";
+		if(try_!=null){
+			BufferedReader reader = new BufferedReader(new StringReader(try_.toString()));
+			try{
+				String line = reader.readLine();
+				while(line!=null){
+					if(!line.equals("")) result += "\t"+line+"\n";
+					line = reader.readLine();
+				}
+			}catch(IOException e){
+				result += "\t//Error occured while reading try body\n";
+			}
+		}
+		for (Map.Entry<String, Script> entry : catches.entrySet()) {
+			result+="}catch("+entry.getKey()+" e){\n";
+			Script content = entry.getValue();
+			if(content!= null){
+				BufferedReader reader = new BufferedReader(new StringReader(content.toString()));
+				try{
+					String line = reader.readLine();
+					while(line!=null){
+						if(!line.equals("")) result += "\t"+line+"\n";
+						line = reader.readLine();
+					}
+				}catch(IOException e){
+					result += "\t//Error occured while reading catch body\n";
+				}
+			}
+		}
+		result+="}";
+		if(finally_!=null){
+			result+="finally{\n";
+			BufferedReader reader = new BufferedReader(new StringReader(finally_.toString()));
+			try{
+				String line = reader.readLine();
+				while(line!=null){
+					if(!line.equals("")) result += "\t"+line+"\n";
+					line = reader.readLine();
+				}
+			}catch(IOException e){
+				result += "\t//Error occured while reading finally\n";
+			}
+			result+="}";
+		}
+		return result;
 	}
 
 } //TryCatchImpl

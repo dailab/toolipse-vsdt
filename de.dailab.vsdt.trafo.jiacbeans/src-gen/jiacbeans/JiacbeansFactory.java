@@ -161,6 +161,15 @@ public interface JiacbeansFactory extends EFactory {
 	Paralel createParalel();
 
 	/**
+	 * Returns a new object of class '<em>Sub Process</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Sub Process</em>'.
+	 * @generated
+	 */
+	SubProcess createSubProcess();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
