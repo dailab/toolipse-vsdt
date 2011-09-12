@@ -86,36 +86,39 @@ public class JiacVResultSaver extends MappingResultSaver {
 	 * Get Starter Rules in simple form: Service Name -> Hint (e.g. Time, or Channel)
 	 * @return
 	 */
-	public Map<String, Serializable> getStarterRulesSimple() {
-		Map<String, Serializable> simpleRules = new HashMap<String, Serializable>();
+	public Map<String, Serializable[]> getStarterRulesSimple() {
+		Map<String, Serializable[]> simpleRules = new HashMap<String, Serializable[]>();
 		Map<Participant, List<JiacVStarterRule>> rules = getStarterRules();
 		for (Participant participant : rules.keySet()) {
 			for (JiacVStarterRule rule : rules.get(participant)) {
-				Serializable object= null;
+				Serializable[] objects= null;
 				Event event = rule.getStartEvent();
 				try {
 					switch (event.getTrigger()) {
 					case MESSAGE:
 						if (event.getImplementation() instanceof MessageChannel) {
-							object = ((MessageChannel) event.getImplementation()).getChannel().getExpression();
+							objects = new Serializable[] {
+									((MessageChannel) event.getImplementation()).getChannel().getExpression(),
+									((MessageChannel) event.getImplementation()).getPayload().getType()
+							};
 						}
 						break;
 					case TIMER:
 						String expression = event.getTimeExpression().getExpression();
 						if (event.isAsDuration()) {
 							// duration -> Long
-							object = new Long(expression);
+							objects = new Serializable[] {new Long(expression)};
 						} else {
 							// date -> Date
-							object = DateFormat.getInstance().parse(expression);
+							objects = new Serializable[] {DateFormat.getInstance().parse(expression)};
 						}
 						break;
 					}
 				} catch (Exception e) {
 					System.err.println("Could not create starter for Event " + event);
 				}
-				if (object != null) {
-					simpleRules.put(rule.getServiceToStart().getName(), object);	
+				if (objects != null) {
+					simpleRules.put(rule.getServiceToStart().getName(), objects);	
 				}
 			}
 		}

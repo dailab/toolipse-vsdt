@@ -87,6 +87,8 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 	 * actual parameters in an invoke: invoke foobar("parName" $foo) ( )
 	 */
 	public static boolean useMAMSspecials= Bpmn2JiacVExportWizardOptionsPage.DEFAULT_MAMS_SPECIALS;
+	
+	public static boolean createNewComplex = false;
 
 	/** service currently under construction */
 	private Service _currentService;
@@ -998,7 +1000,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 				final String typeName = Util.getType(property);
 				declarations.add(jef.createVariableDeclaration(varName, typeName));
 				// initialize variables...
-				if (property.getType().contains(".")) {
+				if (createNewComplex && property.getType().contains(".")) {
 					// ...only if it is a complex type
 					Assign assign= jadlFac.createAssign();
 					assign.setVariable(jef.createVariable(varName));
