@@ -493,7 +493,21 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		case MESSAGE:
 			Implementation implementation= event.getImplementation();
 			if (event instanceof Start && event.getImplementation() instanceof MessageChannel) {
+				_currentBean.getImports().add("de.dailab.jiactng.agentcore.action.Action");
+				_currentBean.getImports().add("java.io.Serializable");
+				Sequence seq = beansFac.createSequence();
+				MessageChannel channel = (MessageChannel)event.getImplementation();
+				String address = channel.getChannel().getExpression();
+				//register to channel
+				CodeElement code = beansFac.createCodeElement();
+				code.setCode("Action joinAction = retrieveAction(ICommunicationBean.ACTION_JOIN_GROUP);");
+				seq.getScripts().add(code);
+//				code = beansFac.createCodeElement();
+				code = beansFac.createCodeElement();
+				code.setCode("invoke(joinAction,)");
 				//create Space Observer and join the message channel in doStart()
+				//add the sequence to doStart();
+				doStart.setContent(seq);
 			}
 			// get parameters for this event
 			List<Property> parameters = new ArrayList<Property>();
@@ -1154,10 +1168,11 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	 * @return				Send element, or multiple Send elements in a Seq element
 	 */
 	//TODO implement this
-//	private Send buildSend(MessageChannel channel) {
+	private Script buildSend(MessageChannel channel) {
 //		Expression address = jef.createAddress(channel);
 //		Send send= jef.createSend(address, channel.getPayload());
 //		return send;
-//	}
+		return null;
+	}
 	
 }
