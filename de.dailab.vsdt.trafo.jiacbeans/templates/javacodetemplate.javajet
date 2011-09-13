@@ -4,27 +4,43 @@
    String packageName = bean.getPackageName();
    String packageDeclaration = "";
    if(packageName.length()!=0){packageDeclaration = "package "+bean.getPackageName()+";";}
-   String classDeclaration = "public class "+bean.getName()+" extends AbstractAgentBean";
+   String classDeclaration = "public class "+bean.getName()+" extends AbstractMethodExposingBean";
    List<Method> methods = bean.getMethods();
    List<JavaVariable> attributes = bean.getAttributes();
    List<Action> actions = bean.getActions();
+   List<String> imports = bean.getImports();
+   Map<String,Action> actionMap = new HashMap<String,Action>();
+   for(Action act : actions){
+   		String methodName = act.getLocation().split("#")[1];
+   		actionMap.put(methodName,act);
+   }
 %>
 <%=packageDeclaration%>
 
-import de.dailab.jiactng.agentcore.AbstractAgentBean;
+import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;
+import de.dailab.jiactng.agentcore.action.scope.ActionScope;
+<% for(String i : imports){%>
+import <%=i%>;
+<%}%>
 
 <%=classDeclaration%>{
 <% for(Action act: actions){%>
-	private String <%= act.getName().toUpperCase()%> = <%= act.getLocation()%> 
+	public final static String <%= act.getName().toUpperCase()%> = "<%= act.getLocation()%>"; 
 <%}%>
+
 <% for(JavaVariable var: attributes){%>
 	<%= var.toString()%>;
 <%}%>
+
 <% for(Method method : methods){%>
 	/**
 	 *  delete the generated tag after you edited this method
 	 *  @generated
 	 */
+	<%Action act = actionMap.get(method.getName());
+	if(act!=null){%>
+	@Expose(name = <%=act.getName()%>, scope = ActionScope.GLOBAL)
+	<%}%>
 	<%= method.toString()+"\n"%> 
 <%}%>
 
