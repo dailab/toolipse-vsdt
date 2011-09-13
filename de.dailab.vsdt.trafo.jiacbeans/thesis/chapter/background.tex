@@ -40,7 +40,20 @@ To provide a rough overview on how Agent technology can support the implementati
 
 \section{VSDT(Visual Service Design Tool)}
 \label{sec:vsdt}
-The VSDT \cite{5,2,3,1} is a well-equipped BPMN editor that is independent of any specific target language. Thus, while the usual transformation to BPEL, as well as other transformations, is included, the VSDT can easily be extended with additional export functionality targeting other languages. It was developed in early 2007 as a Diploma Thesis at the TU Berlin and since then it has been continuously extended. Since it's initial development, VSDT's transformation framework is designed to be extensible and reuseable. This allows the development of a new transformation to be easier. For this purpose the transformation process is subdivided into several stages: 
+The VSDT is a CASE Tool, developed to support the idea of Process Oriented Agent Engineering, where Agents are designed by defining use cases and processes described with the BPMN. It's features include the BPMN editor, process structure view, model validation, import of existing web services, transformations to BPEL, and JIAC and many more. 
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.90\textwidth]{images/vsdt_snapshot.png}
+	\caption{VSDT - Editor View}
+	\label{fig:VSDT}
+\end{figure}\\
+
+\subsection{BPMN Editor}
+The BPMN Editor in VSDT was created using eclipse's GMF (Graphical Modeling Framework)
+%well-equipped BPMN editor that is independent of any specific target language. Thus, while the usual transformation to BPEL, as well as other transformations, is included, the VSDT can easily be extended with additional export functionality targeting other languages. It was developed in early 2007 as a Diploma Thesis at the TU Berlin and since then it has been continuously extended. 
+
+\subsection{Transformation Framework}
+Since it's initial development, VSDT's transformation framework is designed to be extensible and reuseable. This allows the development of a new transformation to be easier. For this purpose the transformation process is subdivided into several stages: 
 \begin{enumerate}
 	\item \textit{Validation}: Validate the input model.
 	\item \textit{Normalisation}: Prepare the input model for transformation.
@@ -49,11 +62,11 @@ The VSDT \cite{5,2,3,1} is a well-equipped BPMN editor that is independent of an
 	\item \textit{Clean Up}: Remove redundancies, improve readability, etc.
 \end{enumerate}
 
-Due to the fact that the validation, normalisation and structure mapping are mostly independent from the target language, the standard mapping provided for these stages are reuseable, which makes it possible to implement a new transformation by specifying the element mapping only. Figure 3 shows the UML Class Diagram of the transformation famework with the example transformation to BPEL.
+Due to the fact that the validation, normalisation and structure mapping are mostly independent from the target language, the standard mapping provided for these stages are reuseable, which makes it possible to implement a new transformation by specifying the element mapping only. Figure \ref{fig:transform} shows the UML Class Diagram of the transformation famework with the example transformation to BPEL.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.90\textwidth]{images/transformation.png}
-	\caption{Essential classes of the transformation framework, including the BPEL case.\cite{3}}
+	\caption{Essential classes of the transformation framework, including the BPEL case.\cite{TK07}}
 	\label{fig:transform}
 \end{figure}\\
 
