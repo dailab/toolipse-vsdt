@@ -1,11 +1,13 @@
 package de.dailab.vsdt.trafo.jiacbeans.export;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import jiacbeans.Action;
 import jiacbeans.ActivityMethod;
 import jiacbeans.AgentBean;
 import jiacbeans.CodeElement;
@@ -129,10 +131,15 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		workflow.setName(pool.getParent().getName());
 		_currentWorkflow = workflow;
 		_currentBean.addMethod(workflow);
+		//create action to be exposed by the bean
+		Action action = beansFac.createAction();
+		action.setName("ACTION_"+_currentService.toUpperCase());
+		action.setLocation(_currentBean.getPackageName()+"."+_currentBean.getName()+"#"+_currentService);
+		_currentBean.getActions().add(action);
 		//add a variable declaration for every pool property
 		for(Property prop : pool.getProperties()){
 			JavaVariable var = beansFac.createJavaVariable();
-			var.setType(prop.getType());
+			var.setType(Util.getType(prop));
 			var.setName(prop.getName());
 			_currentBean.getAttributes().add(var);
 		}
@@ -205,26 +212,28 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		sp.setName(block.getId());
 		sp.setRunContent(visitActivity(block.getActivity()));
 		mapping.getScripts().add(sp);
+		String blockName = Util.toJavaName(block.getId());
 		CodeElement spStart = beansFac.createCodeElement();
-		spStart.setCode(block.getId()+".start()");
+		spStart.setCode(blockName+".start();");
 		CodeElement spJoin = beansFac.createCodeElement();
-		spJoin.setCode(block.getId()+".join()");
+		spJoin.setCode(blockName+".join();");
 		starter.add(spStart);
 		stopper.add(spJoin);
 		//Event Handler Cases
 		List<BpmnEventHandlerCase> cases = block.getEventHandlerCases();
 		for (BpmnEventHandlerCase c : cases) {
 			Event e = c.getIntermediate();
+			String eName = Util.toJavaName(e.getId());
 			switch (c.getIntermediate().getTrigger()) {
 			case TIMER:
 				if(e.isAsDuration()){
 					CodeElement create = beansFac.createCodeElement();
-					create.setCode("TimeEventHandler "+e.getId()+" = new TimeEventHandler("+e.getTimeExpression()+","+block.getId()+");");
+					create.setCode("TimeEventHandler "+eName+" = new TimeEventHandler("+e.getTimeExpression().getExpression()+","+block.getId()+");");
 					mapping.getScripts().add(create);
 					CodeElement start = beansFac.createCodeElement();
-					start.setCode(e.getId()+".start()");
+					start.setCode(eName+".start();");
 					CodeElement stop = beansFac.createCodeElement();
-					start.setCode(e.getId()+".stop()");
+					start.setCode(eName+".stop();");
 					starter.add(start);
 					stopper.add(stop);
 				}
@@ -498,7 +507,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					List<Property> inputs = service.getInput();
 					for (Property property : inputs) {
 						JavaVariable var = beansFac.createJavaVariable();
-						var.setType(property.getType());
+						var.setType(Util.getType(property));
 						var.setName(property.getName());
 						_currentWorkflow.getParameters().add(var);
 					}
@@ -506,11 +515,39 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				if(event instanceof End){
 					List<Property> output = service.getOutput();
 					if(output.size()==1){
-						_currentWorkflow.setReturnType(output.get(0).getType());
+						if(output.get(0).getType().contains(".")){
+							_currentBean.getImports().add(output.get(0).getType());
+						}
+						_currentWorkflow.setReturnType(Util.getType(output.get(0)));
+						CodeElement returnCode = beansFac.createCodeElement();
+						returnCode.setCode("return "+output.get(0).getName()+";");
+						mapping = returnCode;
+					}else{
+						//TODO handle multiple output
+//						_currentWorkflow.setReturnType(output.get(0).getType());
+//						CodeElement returnCode = beansFac.createCodeElement();
+//						returnCode.setCode("return "+output.get(0).getName()+";");
+//						mapping = returnCode;
+						//alternative
+						String outputs = "";
+						for (Property property : output) {
+							if(!outputs.equals(""))outputs+= ",";
+							outputs+= property.getName();
+						}
+						_currentBean.getImports().add("java.io.Serializable");
+						_currentBean.getImports().add("java.io.Serializable");
+						_currentWorkflow.setReturnType("Serializable[]");
+						CodeElement returnCode = beansFac.createCodeElement();
+						returnCode.setCode("return new Serializable[]{"+outputs+"};");
+						mapping = returnCode;
 					}
-					//TODO handle multiple output
 				}
-				parameters.addAll((event instanceof Start) ? service.getInput() : service.getOutput());
+				/*
+				 * add output parameter declaration
+				 * input are already declared as method parameters, 
+				 * so they shouldn't be declared again.
+				 */
+				if(event instanceof Start) parameters.addAll(service.getOutput());
 			}
 			if (event instanceof Start || event instanceof End) {
 				// start/end: map message properties to service signature
@@ -553,14 +590,37 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			break;
 		case TIMER:
 			if (event instanceof Start) {
-				//start _currentWorkflow in execute() 
-				CodeElement methodCall = beansFac.createCodeElement();
-				methodCall.setCode(_currentWorkflow.getName()+"();");
 				Method execute = beansFac.createMethod();
 				execute.setName("execute");
-				execute.setContent(methodCall);
 				execute.setVisibility(MethodImpl.PUBLIC);
 				_currentBean.addMethod(execute);
+				//create methodCall
+				CodeElement methodCall = beansFac.createCodeElement();
+				methodCall.setCode(_currentWorkflow.getName()+"();");
+				if(event.isAsDuration()){
+					int duration;
+					try{
+						duration = Integer.parseInt(event.getTimeExpression().getExpression());
+					}catch(NumberFormatException e){
+						duration = -1;//default
+					}
+					//create loop
+					While execLoop = beansFac.createWhile();
+					execLoop.setCondition("true");
+					CodeElement sleep = beansFac.createCodeElement();
+					sleep.setCode("Thread.sleep("+duration+");");
+					TryCatch tryToSleep = beansFac.createTryCatch();
+					tryToSleep.setTry(sleep);
+					tryToSleep.getCatches().put("InterruptedException", beansFac.createCodeElement());
+					Sequence seq = beansFac.createSequence();
+					seq.getScripts().add(methodCall);
+					seq.getScripts().add(tryToSleep);
+					execLoop.setContent(seq);
+					execute.setContent(execLoop);
+				}else{
+					//start when the time has come
+				
+				}
 			}
 //			if (event instanceof Intermediate) {
 //				Case timerCase= jadlFac.createCase();
@@ -763,18 +823,16 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		if (mapping == null) {
 		}
 		
-		// create loop mappings: basic mapping is embedded in loop structure
-		if (activity.getLoopAttributes() instanceof StandardLoopAttSet) {
-			//TODO pstan
-//			mapping= createStandardLoop(activity, mapping);
-		}
-		if (activity.getLoopAttributes() instanceof MultiLoopAttSet) {
-			//TODO pstan
-//			mapping= createMultiInstanceLoop(activity, mapping);
-		}
 		
 		//build activity sequence: properties, assignments, mapping, more assignments
 		mapping= buildSequence(mapping, properties, activity.getAssignments());
+		// create loop mappings: basic mapping is embedded in loop structure
+		if (activity.getLoopAttributes() instanceof StandardLoopAttSet) {
+			mapping= createStandardLoop(activity, mapping);
+		}
+		if (activity.getLoopAttributes() instanceof MultiLoopAttSet) {
+			mapping= createMultiInstanceLoop(activity, mapping);
+		}
 		ActivityMethod method = beansFac.createActivityMethod();
 		method.setName(activity.getName());
 		method.setIsStatic(false);
@@ -784,67 +842,6 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		CodeElement code = beansFac.createCodeElement();
 		code.setCode(activity.getName()+"();");
 		return code;
-	}
-	
-	/**
-	 * Builds a sequence holding variable declarations, start time assignments, 
-	 * a script, and end time assignments.
-	 * 
-	 * @param script		already mapped script
-	 * @param properties	List of BPMN properties to be mapped to variable declarations
-	 * @param assignments	List of BPMN assignments to be mapped to assigns
-	 */
-	private Sequence buildSequence(Script script, List<Property> properties, List<Assignment> assignments) {
-		Sequence seq= beansFac.createSequence();
-		seq.getScripts().addAll(visitProperties(properties));
-		seq.getScripts().addAll(visitAssignments(assignments, AssignTimeType.START).getScripts());
-		if (script != null) {
-			seq.getScripts().add(script);	
-		}
-		seq.getScripts().addAll(visitAssignments(assignments, AssignTimeType.END).getScripts());
-		return seq;
-	}
-	
-	/**
-	 * map some BPMN element's properties set. For the whole set of properties 
-	 * a number of VariableDeclarations are created and returned in a list.
-	 * 
-	 * @param properties	list of BPMN properties
-	 */
-	private List<CodeElement> visitProperties(List<Property> properties) {
-		List<CodeElement> declarations= new ArrayList<CodeElement>();
-		if (properties != null) {
-			for (Property property : properties) {
-				final String varName = property.getName();
-				final String typeName = Util.getType(property);
-				declarations.add(createVariableDeclaration(varName, typeName));
-				// initialize variables...
-				if (property.getType().contains(".")) {
-					// ...only if it is a complex type
-					//TODO implement this
-//					CodeElement assign = beansFac.createCodeElement();
-//					assign.setCode(varName+" = new "+typeName+"()");
-//					declarations.add(assign);
-				}
-			}
-		}
-		return declarations;
-	}
-	
-	private CodeElement createVariableDeclaration(String varName, String typeName){
-		CodeElement code = beansFac.createCodeElement();
-		code.setCode(typeName + " " + varName+";");
-		return code;
-	}
-	private Script visitGateway(Gateway g){
-		//TODO implement this
-		Script script = beansFac.createCodeElement();
-		((CodeElement)script).setCode("//TODO implement visitGateway");
-		return script;
-	}
-	@Override
-	public void initialize() {
-		expressionVisitor = new JiacBeansExpressionVisitor(true, true);
 	}
 	
 	
@@ -886,6 +883,174 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	}
 	
 	/**
+	 * map some BPMN element's properties set. For the whole set of properties 
+	 * a number of VariableDeclarations are created and returned in a list.
+	 * 
+	 * @param properties	list of BPMN properties
+	 */
+	private List<CodeElement> visitProperties(List<Property> properties) {
+		List<CodeElement> declarations= new ArrayList<CodeElement>();
+		if (properties != null) {
+			for (Property property : properties) {
+				final String varName = property.getName();
+				final String typeName = Util.getType(property);
+				declarations.add(createVariableDeclaration(varName, typeName));
+				// initialize variables...
+				if (property.getType().contains(".")) {
+					// ...only if it is a complex type
+					//TODO implement this
+//					CodeElement assign = beansFac.createCodeElement();
+//					assign.setCode(varName+" = new "+typeName+"()");
+//					declarations.add(assign);
+				}
+			}
+		}
+		return declarations;
+	}
+	
+	private Script visitGateway(Gateway g){
+		//TODO implement this
+		Script script = beansFac.createCodeElement();
+		((CodeElement)script).setCode("//TODO implement visitGateway");
+		return script;
+	}
+	
+	/*
+	 * ////////////////////////////////////////////
+	 * // ACTIVITY LOOPING (for upstream looping see above)
+	 * ////////////////////////////////////////////
+	 * 
+	 * The below methods are used by the activity loop mapping only, and not for loops
+	 * that were created with upstream connections.
+	 */
+	
+	/**
+	 * In the Standard Loop Mapping the Activity being result to the mapping is 
+	 * wrapped in a sequence, in which a loop counter variable is defined and 
+	 * initialized. Then, in a tWhile, the condition is checked, the activity 
+	 * gets executed and the counter is incremented.
+	 * 
+	 * @param activity		the original activity holding the loop attributes
+	 * @param script		the activity's mapping to be embedded in the loop
+	 * @return				sequence with loop
+	 */
+	private Script createStandardLoop(Activity activity, Script script) {
+		StandardLoopAttSet attSet= (StandardLoopAttSet) activity.getLoopAttributes();
+		Script loop= createLoopSequence(
+				activity, 
+				script, 
+				attSet.getLoopCondition() != null ? attSet.getLoopCondition().getExpression() : null, 
+				attSet.getLoopMaximum(), 
+				attSet.isTestBefore()); 
+		return loop;
+	}
+	
+	
+	/**
+	 * This method will create the complex Activity being result of the mapping 
+	 * of a multi instance loop. If the ordering type is SEQUENTIAL, this methods 
+	 * does mostly the same as createStandardLoop. If the ordering type is PARALLEL, 
+	 * the procedure is much more complex, including the creation of a spawned 
+	 * process, invoking and joining the instances of this process in loops, and 
+	 * the creation of partner links, port types and stuff for calling the process.
+	 *  
+	 *  TODO MI-Loops
+	 *  
+	 * @param activity		the original activity holding the loop attributes
+	 * @param script		the activity's mapping to be embedded in the loop
+	 * @return				sequence with MI loop
+	 */
+	private Script createMultiInstanceLoop(Activity activity, Script script) {
+		TrafoLog.nyi("Mapping for Multi Instance Loop");
+		return null;
+	}
+	
+
+	/**
+	 * Create and return a loop based on a given FlowObject with LoopType==Standard 
+	 * or MultiInstance with sequential ordering. This method will also create 
+	 * the assignments initializing the loop variable(s).
+	 * 
+	 * @param flowObject	the source object
+	 * @param script		the target object
+	 * @param condition		the condition expression
+	 * @param maximum		the loop maximum (in case of Standard Loop)
+	 * @param testBefore	the test time, depending on which the condition will be extended
+	 * @return				a TSequence holding initializing TAssigns followed by a TWhile for the loop (using createLoop)
+	 */
+	private Script createLoopSequence(FlowObject activity, Script script, String condition, int maximum, boolean testBefore) {
+		String actName= activity.getName();
+		String varName= actName.toLowerCase() + "_loopCounter";
+		boolean useLoopCounter= maximum > 0;
+		
+		// counter variable and assigns
+		CodeElement declaration= createVariableDeclaration(varName, "int");
+		CodeElement initAssign= createAssign("0", varName, null);
+		CodeElement incAssign= createAssign(varName+"+1", varName, null);
+
+		// this sequence is the whole loop structure, including variable initialization
+		Sequence outerSeq= beansFac.createSequence();
+		if (useLoopCounter) {
+			outerSeq.getScripts().add(declaration);
+			outerSeq.getScripts().add(initAssign);
+		}
+		// create loop body holding the mapped activity and the increment for the loop counter
+		Sequence innerSeq= beansFac.createSequence();
+		if (useLoopCounter) {
+			innerSeq.getScripts().add(incAssign);
+		}
+		if(script!=null)innerSeq.getScripts().add(script);
+
+		// build and parse loop expression
+		String cond= condition;
+		//append additional condition for loop maximum
+		if (useLoopCounter) {
+			String cond2= varName + " < " + maximum;
+			cond= cond != null && cond.length()>0 ? "("+ cond +") && (" + cond2 + ")" : cond2;
+		}
+		//for testTime=after: instead of inserting a copy of the activity here, which could be quite long, an additional test is appended
+		if (! testBefore) {
+			String cond2= varName + " < 1";
+			cond= cond != null && cond.length()>0 ? "("+ cond +") || (" + cond2 + ")" : cond2;
+		}
+
+		//create the loop element, holding the sequence and the condition
+		While loop= beansFac.createWhile();
+		loop.setContent(innerSeq);
+		loop.setCondition(cond);
+		
+		outerSeq.getScripts().add(loop);
+		
+		return outerSeq;
+	}
+	
+	/**
+	 * Builds a sequence holding variable declarations, start time assignments, 
+	 * a script, and end time assignments.
+	 * 
+	 * @param script		already mapped script
+	 * @param properties	List of BPMN properties to be mapped to variable declarations
+	 * @param assignments	List of BPMN assignments to be mapped to assigns
+	 */
+	private Sequence buildSequence(Script script, List<Property> properties, List<Assignment> assignments) {
+		Sequence seq= beansFac.createSequence();
+		seq.getScripts().addAll(visitProperties(properties));
+		seq.getScripts().addAll(visitAssignments(assignments, AssignTimeType.START).getScripts());
+		if (script != null) {
+			seq.getScripts().add(script);	
+		}
+		seq.getScripts().addAll(visitAssignments(assignments, AssignTimeType.END).getScripts());
+		return seq;
+	}
+	
+	@Override
+	public void initialize() {
+		expressionVisitor = new JiacBeansExpressionVisitor(true, true);
+	}
+	
+	
+	
+	/**
 	 * Create a new code element for the given assignment.
 	 * 
 	 * @param from			the from-expression
@@ -909,6 +1074,12 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		return assign;
 	}
 	
+	
+	private CodeElement createVariableDeclaration(String varName, String typeName){
+		CodeElement code = beansFac.createCodeElement();
+		code.setCode(typeName + " " + varName+";");
+		return code;
+	}
 	/**
 	 * Wrap the branches in a Paralel Method call.
 	 * @param branches   contains Script of each Paralel branches
@@ -973,20 +1144,20 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		return ifThenElse;
 	}
 	
+	
 	/**
-	 * Create Starter Rule for given event and add it to the list of starter rules.
-	 * Starter Rules currently make sense only for a limited set of Events, i.e.
-	 * Rule Events, Timer Events, and Message Events (with MessageChannels)
+	 * Creates one or more Send elements form the given message.  For each of
+	 * the Message's Properties an individual Send element is created.  If more
+	 * than one Send needs to be created, they are wrapped in a Seq element.
 	 * 
-	 * @param event		some (start) event
+	 * @param channel		the message to be sent
+	 * @return				Send element, or multiple Send elements in a Seq element
 	 */
-	private void addStarterRule(Event event) {
-		//TODO
-		// create Start Rule
-		if (event instanceof Start) {
-//			JiacVStarterRule startRule= new JiacVStarterRule(event, _currentService);
-//			((JiacVExportWrapper) wrapper).addStarterRule(event.getPool().getParticipant(), startRule);
-		}
-	}
+	//TODO implement this
+//	private Send buildSend(MessageChannel channel) {
+//		Expression address = jef.createAddress(channel);
+//		Send send= jef.createSend(address, channel.getPayload());
+//		return send;
+//	}
 	
 }

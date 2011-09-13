@@ -135,7 +135,7 @@ public class SequenceImpl extends ScriptImpl implements Sequence {
 	
 	public String toString(){
 		String result = "";
-		for(Script s : scripts){
+		for(Script s : getScripts()){
 			result += s.toString()+"\n";
 		}
 		return result;

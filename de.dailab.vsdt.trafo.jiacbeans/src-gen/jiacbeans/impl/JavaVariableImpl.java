@@ -125,7 +125,6 @@ public class JavaVariableImpl extends EObjectImpl implements JavaVariable {
 	 * <!-- end-user-doc -->
 	 */
 	public void setType(String newType) {
-		newType = replacePrimitiveType(newType);
 		String oldType = type;
 		type = newType;
 		if (eNotificationRequired())
@@ -213,12 +212,4 @@ public class JavaVariableImpl extends EObjectImpl implements JavaVariable {
 		return typeString +" "+getName();
 	}
 	
-	public String replacePrimitiveType(String type){
-		//TODO complete this
-		if(type.equals("integer"))return "int";
-		if(type.equals("bool"))return "boolean";
-		if(type.equals("double"))return "double";
-		//nicht primitiv -> first character to UpperCase
-		return type.substring(0, 1).toUpperCase()+type.substring(1);
-	}
 } //JavaVariableImpl

@@ -221,6 +221,7 @@ public class WhileImpl extends ScriptImpl implements While {
 		if(condition==null)condition="false";
 		String result = "while("+condition+"){\n";
 		if(content!=null){
+			String cs = content.toString();
 			BufferedReader reader = new BufferedReader(new StringReader(content.toString()));
 			try{
 				String line = reader.readLine();
