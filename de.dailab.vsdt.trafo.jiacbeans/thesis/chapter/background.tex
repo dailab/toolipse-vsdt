@@ -2,6 +2,9 @@
 
 In this chapter, we will discuss the backgrounds of the transformation that should be developed. We will start with JIAC (the target of the transformation), BPMN (the model that is being used), followed by VSDT (the existing modeling and transformation framework to JIAC that should be extended), and JET (the technology that will help us to implement the transformation).
 
+%======================================%
+%                JIAC                  %
+%======================================%
 \section{JIAC(Java-based Intelligent Agent Componentware)}
 JIAC is a Java-based agent architecture and framework that was developed to simplify the development of software agents. The framework supports the entire software development process of a software agent system, from the design, implementation, and deployment of the system. The JIAC framework provides features such as FIPA compliant communication,
 Believe-Desire-Intention (BDI) reasoning, strong migration, web-service
@@ -26,6 +29,9 @@ services in order to find other agents, to communicate to them and to use their 
 Skills and abilities of the agent can be extended by so-called AgentBeans.\\
 \textit{AgentBean} is the mean to implement the functionality of an Agent, in other words, the abilities of an Agent are defined in the AgentBeans attached to it. They are plugged into agents and provide services (so-called Actions) to other agents. 
 
+%======================================%
+%                BPMN                  %
+%======================================%
 \section{BPMN(Business Process Modelling Notation)}
 BPMN \cite{BPMN2} is a standard Notation for modelling business processes, initially published by the BPMI which is later adopted by the OMG(Object Management Group). A business process diagramm (as seen in Figure 2) can be compared to UML's activity diagram.
 \begin{figure}[h]
@@ -36,8 +42,63 @@ BPMN \cite{BPMN2} is a standard Notation for modelling business processes, initi
 \end{figure}\\
 BPMN was made to provide a notation that is understandable by all business users, creating a brige for the gap between the business process design and the process implementation. With the mapping of BPMN to Agents, we hope to be able to increase the spreading of the multi agent systems in the business world.
 
+BPMN elements can be categorized in five basic elements\cite{7} :
+\begin{itemize}
+	\item Flow Objects
+	\item Data
+	\item Connecting Objects
+	\item Swimlanes
+	\item Artifacts
+\end{itemize}
+\textit{Flow Objects} includes Events, Activities and Gateways. These elements are the most important in BPMN, and they are held in a lane.\\
+An \textit{Event} describes something that happens during the course of a process. It is divided into Start Event, Intermediate Event and End Event (see Figure 2).
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.25\textwidth]{images/events.png}
+	\caption{BPMN Event types. From left to right: Start Event, Intermediate Event, End Event}
+	\label{fig:events}
+\end{figure}
+\\
+According to the type of the event's trigger(for start and intermediate events) or result(for end events), these event-types are further divided into sub-types. The event figure(see add figure) are drawn with different icon in the middle, according to it's subtype.
+%=============Add figure===============%
+ 
+An \textit{Activity} describes something that is done during a process. It is divided into \textit{Tasks} (Atomic Activities) and \textit{Sub Processes} (Composite Activities).\\
+\textit{Gateways} are used to define all kinds of splitting and merging behavior. It's semantics depends on the dimension of it's incoming and outgoing Sequence Flows.
+\\\\
+Data is representated by the four elements:
+\begin{itemize}
+	\item Data Objects
+	\item Data Inputs
+	\item Data Outputs
+	\item Data Stores
+\end{itemize}
+\textit{Data Object} describes information that is needed by an activity or what they produce. It can represent a singular object or a collection of objects. \textit{Data Inputs} and \textit{Data Outputs} describe the same information for Processes. \textit{Data Stores} describe the location where information, that persists beyond the scope of a process are stored.\\\\
+With \textit{ConnectingObjects}, FlowingObjects can be connected to each other or with other informations. There are 3 different kinds of Connecting Objects:
+\begin{itemize}
+	\item \textit{Sequence Flows} - represent Flow Control, used for connecting FlowObjects within a Pool in the order of execution.
+	\item \textit{Message Flows} - represent Messages being exchanged exclusively between Pools.
+	\item \textit{Associations} -  mainly used for documentation, in example between Flow Objects and a Text annotation.
+\end{itemize}
+\textit{Swimlanes} are divided into \textit{Pools} and \textit{Lanes}. Each Pool represents one Participant in the business process, while Lanes are used to partition a Pool, in example to model different Departments of an Institution. Figure 3 shows an empty Pool with 2 Lanes.
+\begin{figure}[h]
+	\centering
+		\includegraphics{images/swimlane.png}
+	\caption{Empty Pool with 2 Lanes}
+	\label{fig:swimlane}
+\end{figure}\\\\\\
+\textit{Artifacts} are additional Information about the Process. It is mainly used for documentation purpose. The Current set of Artifacts includes:
+\begin{itemize}
+	\item Text Annotation
+	\item Group
+\end{itemize}
+
+
 To provide a rough overview on how Agent technology can support the implementation of Business Processes let us take a look on this mapping example of BPMN elements to Agents. A Pool in a Business Process Diagram can represent an Agent, which are able to communicate with other agents (another pool) through messages (represented with the BPMN MessageFlows). Agents can react to Events. To fully implement the transformation a detailed mapping is needed and will be developed in the scope of this work. 
 
+
+%======================================%
+%                VSDT                  %
+%======================================%
 \section{VSDT(Visual Service Design Tool)}
 \label{sec:vsdt}
 The VSDT is a CASE Tool, developed to support the idea of Process Oriented Agent Engineering, where Agents are designed by defining use cases and processes described with the BPMN. It's features include the BPMN editor, process structure view, model validation, import of existing web services, transformations to BPEL, and JIAC and many more. 
@@ -48,10 +109,12 @@ The VSDT is a CASE Tool, developed to support the idea of Process Oriented Agent
 	\label{fig:VSDT}
 \end{figure}\\
 
+%========= The Editor =========%
 \subsection{BPMN Editor}
 The BPMN Editor in VSDT was created using eclipse's GMF (Graphical Modeling Framework)
 %well-equipped BPMN editor that is independent of any specific target language. Thus, while the usual transformation to BPEL, as well as other transformations, is included, the VSDT can easily be extended with additional export functionality targeting other languages. It was developed in early 2007 as a Diploma Thesis at the TU Berlin and since then it has been continuously extended. 
 
+%========= Transformation Framework ===========%
 \subsection{Transformation Framework}
 Since it's initial development, VSDT's transformation framework is designed to be extensible and reuseable. This allows the development of a new transformation to be easier. For this purpose the transformation process is subdivided into several stages: 
 \begin{enumerate}
@@ -70,7 +133,23 @@ Due to the fact that the validation, normalisation and structure mapping are mos
 	\label{fig:transform}
 \end{figure}\\
 
+%============ Existing Transformation to Jiac ===============%
+\subsection{Existing Transformation to JiacV}
+At the moment, the VSDT is already equipped with a transformation of BPMN to JiacV, which generates the JADL(Jiac Agent Description Language).
+The transformation to Jiac AgentBeans will be an addition to the existing transformation, as the products of both transformation has their own advantages.
 
+\begin{tabularx}{\linewidth}{|l|X|}\hline\hline
+			\multicolumn{2}{|c|}{\textbf{Advantages of:}} \\\hline
+			\multicolumn{1}{|c|}{JADL} & \multicolumn{1}{c|}{AgentBeans}\\\hline
+			can be deployed to a running jiac application &  Written fully in Java, therefore developer friendly.\\
+																										&  Java is more powerful that JADL.\\
+			                           										&  Better performance because no parser are involved.\\\hline\hline
+\end{tabularx}
+
+
+%======================================%
+%                 JET                  %
+%======================================%
 \section{JET(Java Emitter Templates)}
 \textit{JET}\cite{13} is a code generating framework, developed as a part of the Eclipse Modelling Project \cite{14}. JET uses templates to transform the model into any kinds of code artifacts such as java, html, xml or even plain text. \\\\
 \textit{JET templates} uses a JSP-like syntax which makes it easy to write and understand. A set of JET templates is called transformation. It is possible to build this transformation with a main template which acts as a visitor and runs through the model, and this main template will then use other templates which handle a specific element of the model. For example, in UML to Java transformation you can have special templates that handles the package, class, variables and methods.\\\\
