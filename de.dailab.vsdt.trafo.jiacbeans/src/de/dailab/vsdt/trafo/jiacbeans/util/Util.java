@@ -34,7 +34,9 @@ public class Util {
 		//TODO complete this
 		//check the primitives first
 		if(type.equals("integer"))return "int";
+		if(type.equals("int"))return "int";
 		if(type.equals("bool"))return "boolean";
+		if(type.equals("boolean"))return "boolean";
 		if(type.equals("double"))return "double";
 		//nicht primitiv -> first character to UpperCase
 		return type.substring(0, 1).toUpperCase()+type.substring(1);
