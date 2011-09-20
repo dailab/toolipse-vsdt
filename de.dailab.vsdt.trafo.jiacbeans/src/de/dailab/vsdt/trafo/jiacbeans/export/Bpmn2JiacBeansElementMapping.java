@@ -1231,7 +1231,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		send.getScripts().add(code);
 		//Message
 		code = beansFac.createCodeElement();
-		code.setCode("JiacMessage message = new JiacMessage("+channel.getPayload().getName()+")");
+		code.setCode("JiacMessage message = new JiacMessage("+channel.getPayload().getName()+");");
 		send.getScripts().add(code);
 		//invoke
 		code = beansFac.createCodeElement();
