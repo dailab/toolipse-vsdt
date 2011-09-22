@@ -6,11 +6,84 @@
     containmentProxies="true" complianceLevel="6.0" copyrightFields="false">
   <foreignModel>jiacbeans.ecore</foreignModel>
   <genPackages prefix="Jiacbeans" disposableProviderFactory="true" ecorePackage="jiacbeans.ecore#/">
-    <genClasses ecoreClass="jiacbeans.ecore#//AgentBean"/>
+    <genClasses ecoreClass="jiacbeans.ecore#//AgentBean">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//AgentBean/methods"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//AgentBean/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//AgentBean/packageName"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//AgentBean/attributes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//AgentBean/actions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//AgentBean/imports"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//AgentBean/subprocesses"/>
+      <genOperations ecoreOperation="jiacbeans.ecore#//AgentBean/addMethod">
+        <genParameters ecoreParameter="jiacbeans.ecore#//AgentBean/addMethod/m"/>
+      </genOperations>
+    </genClasses>
     <genClasses ecoreClass="jiacbeans.ecore#//Method">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//Method/EReference0"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//Method/returnType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//Method/parameters"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//Method/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//Method/isStatic"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//Method/visibility"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//Method/content"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//Method/attributes"/>
     </genClasses>
     <genClasses ecoreClass="jiacbeans.ecore#//WorkflowMethod"/>
     <genClasses ecoreClass="jiacbeans.ecore#//ActivityMethod"/>
+    <genClasses ecoreClass="jiacbeans.ecore#//JavaVariable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//JavaVariable/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//JavaVariable/type"/>
+    </genClasses>
+    <genClasses ecoreClass="jiacbeans.ecore#//Action">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//Action/trigger"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//Action/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//Action/location"/>
+    </genClasses>
+    <genClasses ecoreClass="jiacbeans.ecore#//Trigger"/>
+    <genClasses ecoreClass="jiacbeans.ecore#//Script"/>
+    <genClasses ecoreClass="jiacbeans.ecore#//Sequence">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//Sequence/scripts"/>
+    </genClasses>
+    <genClasses ecoreClass="jiacbeans.ecore#//IfThenElse">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//IfThenElse/thenBranch"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//IfThenElse/elseBranch"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//IfThenElse/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="jiacbeans.ecore#//ForEach">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//ForEach/content"/>
+    </genClasses>
+    <genClasses ecoreClass="jiacbeans.ecore#//While">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//While/content"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//While/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="jiacbeans.ecore#//CodeElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//CodeElement/code"/>
+    </genClasses>
+    <genClasses ecoreClass="jiacbeans.ecore#//TryCatch">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//TryCatch/try"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//TryCatch/catches"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//TryCatch/finally"/>
+    </genClasses>
+    <genClasses ecoreClass="jiacbeans.ecore#//Paralel">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//Paralel/branches"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//Paralel/signIndex"/>
+    </genClasses>
+    <genClasses ecoreClass="jiacbeans.ecore#//Runnable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//Runnable/runContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//Runnable/name"/>
+    </genClasses>
+    <genClasses ecoreClass="jiacbeans.ecore#//Recieve">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//Recieve/address"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//Recieve/payload"/>
+    </genClasses>
+    <genClasses ecoreClass="jiacbeans.ecore#//SubProcess">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//SubProcess/subprocesses"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//SubProcess/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//SubProcess/methods"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//SubProcess/attibutes"/>
+    </genClasses>
+    <genClasses ecoreClass="jiacbeans.ecore#//Send">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference jiacbeans.ecore#//Send/payload"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//Send/address"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
