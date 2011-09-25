@@ -1,9 +1,11 @@
 package de.dailab.vsdt.trafo.jiacbeans.export;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 
 
 import jiacbeans.AgentBean;
@@ -53,6 +55,12 @@ public class JiacBeansResultSaver extends MappingResultSaver {
 					jMerger.setSourceCompilationUnit(jMerger.createCompilationUnitForContents(content));
 					jMerger.setTargetCompilationUnit(jMerger.createCompilationUnitForInputStream(new FileInputStream(f))); //target=last generated code
 					jMerger.merge(); 
+					// extract merged contents
+					String mergedContents = jMerger.getTargetCompilationUnit().getContents();
+					// overwrite the target with the merged contents
+					FileWriter writer = new FileWriter(f);
+					writer.write(mergedContents);
+					writer.flush();
 				}catch(WrappedException e){
 					//if something goes wrong overwrite the file
 					FileWriter writer = new FileWriter(f);
