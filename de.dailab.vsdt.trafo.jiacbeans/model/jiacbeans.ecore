@@ -17,6 +17,14 @@
         eType="#//Action"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="imports" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subprocesses" upperBound="-1"
+        eType="#//SubProcess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="handlingTimeoutEvent" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="handlingMessageEvent" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="handlingTimeEvent" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Method">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="returnType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -65,7 +73,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="TryCatch" eSuperTypes="#//Script">
     <eStructuralFeatures xsi:type="ecore:EReference" name="try" eType="#//Script"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="catches" lowerBound="1"
-        transient="true" defaultValueLiteral="">
+        transient="true">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="wildcards" value=""/>
         <details key="name" value=""/>
@@ -83,8 +91,27 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="signIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SubProcess" eSuperTypes="#//Script">
+  <eClassifiers xsi:type="ecore:EClass" name="Runnable" eSuperTypes="#//Script">
     <eStructuralFeatures xsi:type="ecore:EReference" name="runContent" eType="#//Script"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Recieve" eSuperTypes="#//Script">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="payload" lowerBound="1"
+        eType="#//JavaVariable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubProcess">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subprocesses" upperBound="-1"
+        eType="#//SubProcess"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1"
+        eType="#//Method"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//JavaVariable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Send" eSuperTypes="#//Script">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="payload" lowerBound="1"
+        eType="#//JavaVariable"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>
