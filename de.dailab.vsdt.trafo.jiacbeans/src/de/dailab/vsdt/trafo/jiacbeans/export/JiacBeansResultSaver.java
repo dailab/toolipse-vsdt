@@ -31,6 +31,8 @@ public class JiacBeansResultSaver extends MappingResultSaver {
 	protected boolean internalSave(File baseDirectory) throws IOException {
 		JControlModel model = new JControlModel(); 
 		ASTFacadeHelper astFacadeHelper = new ASTFacadeHelper();
+		model.setConvertToStandardBraceStyle(true);
+		model.setLeadingTabReplacement("\t");
 		model.initialize(astFacadeHelper, getClass().getResource("mergerules.xml").toString()); 
 		JMerger jMerger = new JMerger(model); 
 		JiacBeansExportWrapper wrapper = (JiacBeansExportWrapper) this.wrapper;
@@ -44,6 +46,7 @@ public class JiacBeansResultSaver extends MappingResultSaver {
 			String fileName = bean.getName();
 			File f = new File(folder,fileName+".java");
 			String content = generator.generate(bean);
+			System.out.println(content);
 			if(!f.exists()){
 				FileWriter writer = new FileWriter(f);
 				writer.write(content);
@@ -57,6 +60,7 @@ public class JiacBeansResultSaver extends MappingResultSaver {
 					jMerger.merge(); 
 					// extract merged contents
 					String mergedContents = jMerger.getTargetCompilationUnit().getContents();
+					System.out.println("merged =\n"+mergedContents);
 					// overwrite the target with the merged contents
 					FileWriter writer = new FileWriter(f);
 					writer.write(mergedContents);

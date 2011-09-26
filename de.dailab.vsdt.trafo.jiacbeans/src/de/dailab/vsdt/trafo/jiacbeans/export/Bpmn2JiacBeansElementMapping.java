@@ -3,6 +3,8 @@ package de.dailab.vsdt.trafo.jiacbeans.export;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.stream.MemoryCacheImageInputStream;
+
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import jiacbeans.Action;
 import jiacbeans.ActivityMethod;
@@ -13,7 +15,10 @@ import jiacbeans.JavaVariable;
 import jiacbeans.JiacbeansFactory;
 import jiacbeans.Method;
 import jiacbeans.Paralel;
+import jiacbeans.Recieve;
+import jiacbeans.Runnable;
 import jiacbeans.Script;
+import jiacbeans.Send;
 import jiacbeans.Sequence;
 import jiacbeans.SubProcess;
 import jiacbeans.TryCatch;
@@ -35,6 +40,7 @@ import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.MultiLoopAttSet;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.Start;
 import de.dailab.vsdt.TriggerType;
@@ -67,6 +73,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	Method _doStart;
 	Method _execute;
 	AgentBean _currentBean;
+	SubProcess _currentSubProcess;
 	int __PARCOUNTER;
 	
 	public JiacBeansExportWrapper getWrapper(){
@@ -90,10 +97,9 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	private void visitBusinessProcessDiagram(BusinessProcessDiagram bpd) {
 		TrafoLog.trace("Visiting Business Process Diagram '" + bpd.getName() + "'");
 		_currentService = bpd.getName();
-		// visit Pools and add resulting services to model
+		// visit Pools 
 		for (Pool pool : bpd.getPools()) {
 			AgentBean bean = visitPool(pool);
-			getWrapper().getBeans().add(bean);
 		}
 	}
 	
@@ -136,7 +142,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		for(Property prop : pool.getProperties()){
 			JavaVariable var = beansFac.createJavaVariable();
 			var.setType(Util.getType(prop));
-			var.setName(prop.getName());
+			var.setName(Util.toJavaName(prop.getName()));
 			_currentBean.getAttributes().add(var);
 		}
 		writeWorkflowSequence(pool, workflow, pool.getGraphicalElements());
@@ -148,12 +154,14 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		workflow.setContent(seq);
 		
 		for(FlowObject obj : flowObjects){
-			seq.getScripts().add(visitFlowObject(obj));
+			Script mapping = visitFlowObject(obj);
+			if(mapping!=null)seq.getScripts().add(mapping);
 		}
 	}
 	
 	private Script visitFlowObject(FlowObject flowObject){
 		Script script = beansFac.createCodeElement();
+		if(flowObject==null)return script;
 		//delegate to specialized methods
 		System.out.println(flowObject.getClass());
 		if (flowObject instanceof Event) {
@@ -205,7 +213,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		List<Script> stopper = new ArrayList<Script>();
 		//Create Subprocess for Activity
 		String activityName = Util.toJavaName(block.getActivity().getName());
-		SubProcess sp = beansFac.createSubProcess();
+		Runnable sp = beansFac.createRunnable();
 		sp.setName(activityName);
 		sp.setRunContent(visitActivity(block.getActivity()));
 		mapping.getScripts().add(sp);
@@ -223,8 +231,9 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			switch (c.getIntermediate().getTrigger()) {
 			case TIMER:
 				if(e.isAsDuration()){
+					_currentBean.setHandlingTimeoutEvent(true);
 					CodeElement create = beansFac.createCodeElement();
-					create.setCode("TimeEventHandler "+eName+" = new TimeEventHandler("+e.getTimeExpression().getExpression()+","+activityName+");");
+					create.setCode("TimeoutEventHandler "+eName+" = new TimeoutEventHandler("+e.getTimeExpression().getExpression()+","+activityName+");");
 					mapping.getScripts().add(create);
 					CodeElement start = beansFac.createCodeElement();
 					start.setCode(eName+".start();");
@@ -473,7 +482,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	
 	private Script visitEvent(Event event, TriggerType multiType){
 		TrafoLog.trace("Visiting Event '" + event.getName() + "'");
-		Script mapping= null;
+		Script mapping= beansFac.createCodeElement();
 		TriggerType trigger= multiType != null ? multiType : event.getTrigger();
 		
 		List<Property> properties= new ArrayList<Property>();
@@ -774,7 +783,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			return beansFac.createCodeElement();
 		}
 		TrafoLog.trace("Visiting Activity '" + activity.getName() + "'");
-		Script mapping= null;
+		Script mapping= beansFac.createCodeElement();
 		//checks
 		if (activity.getTransaction() != null) {
 			TrafoLog.warn("A mapping for transactions is not defined. Ignoring transaction attributes.");
@@ -804,7 +813,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				CodeElement actionVarDeclaration = beansFac.createCodeElement();
 				actionVarDeclaration.setCode("Action "+varName+" = retrieveAction("+service.getInterface()+"."+service.getOperation()+");");
 				CodeElement exception = beansFac.createCodeElement();
-				exception.setCode("throw new RuntimeException(\"send action not found!\");");
+				exception.setCode("throw new RuntimeException(\"action "+service.getOperation()+" not found!\");");
 				IfThenElse actionCheck = beansFac.createIfThenElse();
 				actionCheck.setCondition(varName+" == null");
 				actionCheck.setThenBranch(exception);
@@ -817,10 +826,17 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					parameter += property.getName();
 				}
 				CodeElement invokeCall = beansFac.createCodeElement();
-				invokeCall.setCode("invoke("+varName+", new Serializeable[]{"+parameter+"});");
+				invokeCall.setCode("Serializable[] results = invokeAndWaitForResult("+varName+", new Serializable[]{"+parameter+"}).getResults();");
+				invokeSeq.getScripts().add(invokeCall);
+				int i=0;
 				for (Property property : service.getOutput()) {
-					//TODO implement the return variables 
-//					invoke.getReturnVariables().add(jef.createVariable(property.getName()).getName());
+					//assign the results from the serializeable array
+					String type = Util.getType(property);
+					String name = Util.toJavaName(property.getName());
+					CodeElement res = beansFac.createCodeElement();
+					res.setCode(type+" "+name+" = ("+type+")results["+i+"];");
+					i++;
+					invokeSeq.getScripts().add(res);
 				}
 				// move copy of message variables to the activity itself, so they are added to the scope
 				properties.addAll(service.getInput());
@@ -834,8 +850,33 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			break;
 		case EMBEDDED:
 			// do not create a new plan; just put contents in a seq or par
-			mapping= visitFlowObjects(activity.getContainedFlowObjects());
-			break;
+			String className = Util.toJavaType(activity.getName())+"SubProcess";
+			SubProcess sp = beansFac.createSubProcess();
+			sp.setName(className);
+			SubProcess old = _currentSubProcess;
+			_currentSubProcess = sp;
+			_currentBean.getSubprocesses().add(sp);
+			Method run = beansFac.createMethod();
+			run.setName("run");
+			Script content = visitFlowObjects(activity.getContainedFlowObjects());
+			_currentSubProcess = old;
+			run.setContent(content);
+			sp.getMethods().add(run);
+			for(Property prop : activity.getProperties()){
+				JavaVariable var = beansFac.createJavaVariable();
+				var.setType(Util.getType(prop));
+				var.setName(Util.toJavaName(prop.getName()));
+				sp.getAttributes().add(var);
+			}
+			String varName = Util.toJavaName(activity.getName());
+			Sequence seq = beansFac.createSequence();
+			code = beansFac.createCodeElement();
+			code.setCode(className + " " + varName+" = new "+className+"();");
+			seq.getScripts().add(code);
+			code = beansFac.createCodeElement();
+			code.setCode(varName+".run();");
+			seq.getScripts().add(code);
+			return seq;
 		case CALL:
 			if (activity.getCalledElement() instanceof Activity) {
 				Activity calledAct = (Activity) activity.getCalledElement();
@@ -860,17 +901,14 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			break;
 		case RECEIVE:
 			// receive element
-//			if (activity.getImplementation() instanceof Service) {
-//				// TODO receive result of asynchronous service invocation
-//				TrafoLog.nyi("Send Task with Service");
-//			}
-//			if (activity.getImplementation() instanceof MessageChannel) {
-//				MessageChannel channel = (MessageChannel) activity.getImplementation();
-//				if (channel.getPayload() != null) {
-//					properties.add(channel.getPayload());
-//				}
-//				mapping= buildReceive(channel);
-//			}
+			if (activity.getImplementation() instanceof Service) {
+				// TODO receive result of asynchronous service invocation
+				TrafoLog.nyi("Send Task with Service");
+			}
+			if (activity.getImplementation() instanceof MessageChannel) {
+				MessageChannel channel = (MessageChannel) activity.getImplementation();
+				mapping= buildReceive(channel);
+			}
 			break;
 		case MANUAL:
 		case USER:
@@ -882,8 +920,6 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 
 		if (mapping == null) {
 		}
-		
-		
 		//build activity sequence: properties, assignments, mapping, more assignments
 		mapping= buildSequence(mapping, properties, activity.getAssignments());
 		// create loop mappings: basic mapping is embedded in loop structure
@@ -894,13 +930,17 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			mapping= createMultiInstanceLoop(activity, mapping);
 		}
 		ActivityMethod method = beansFac.createActivityMethod();
-		method.setName(activity.getName());
+		method.setName(Util.toJavaName(activity.getName()));
 		method.setIsStatic(false);
 		method.setVisibility(MethodImpl.PRIVATE);
 		method.setContent(mapping);
-		_currentBean.addMethod(method);
+		if(_currentSubProcess==null){
+			_currentBean.addMethod(method);
+		} else {
+			_currentSubProcess.getMethods().add(method);
+		}
 		CodeElement code = beansFac.createCodeElement();
-		code.setCode(activity.getName()+"();");
+		code.setCode(Util.toJavaName(activity.getName())+"();");
 		return code;
 	}
 	
@@ -1209,34 +1249,24 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	 * Creates a sendaction-invoke for the given message
 	 * 
 	 * @param channel		the message to be sent
-	 * @return				code sequence containing the invocation of 
+	 * @return send 		code sequence containing the invocation of 
 	 * 						ICommunicationBean.sendAction()
 	 */
 	private Script buildSend(MessageChannel channel) {
-		//imports
+		// add needed imports
 		_currentBean.getImports().add("de.dailab.jiactng.agentcore.action.Action");
 		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.ICommunicationBean");
 		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.IGroupAddress");
 		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.CommunicationAddressFactory");
 		_currentBean.getImports().add("java.io.Serializable");
 		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.message.JiacMessage;");
-		String address = channel.getChannel().getExpression();
-		Sequence send = beansFac.createSequence();
-		CodeElement retrieveAction = beansFac.createCodeElement();
-		retrieveAction.setCode("Action sendAction = retrieveAction(ICommunicationBean.ACTION_SEND);");
-		send.getScripts().add(retrieveAction);
-		//Adress
-		CodeElement code = beansFac.createCodeElement();
-		code.setCode("IGroupAddress groupAddress = CommunicationAddressFactory.createGroupAddress("+address+");");
-		send.getScripts().add(code);
-		//Message
-		code = beansFac.createCodeElement();
-		code.setCode("JiacMessage message = new JiacMessage("+channel.getPayload().getName()+");");
-		send.getScripts().add(code);
-		//invoke
-		code = beansFac.createCodeElement();
-		code.setCode("invoke(sendAction, new Serializable[]{message, groupAddress});");
-		send.getScripts().add(code);
+		//send
+		String type = Util.getType(channel.getPayload());
+		String name = Util.toJavaName(channel.getPayload().getName());
+		JavaVariable payload = beansFac.createJavaVariable();
+		payload.setName(name);
+		payload.setType(type);
+		Send send = beansFac.createSend();
 		return send;
 	}
 	
@@ -1248,10 +1278,24 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	 * 
 	 * @param message		the channel from where to receive
 	 * @param participant	to whom the message is directed (e.g. a group)
-	 * @return				Receive element, or multiple Receive elements in a Seq element
+	 * @return				Receive element
 	 */
 	private Script buildReceive(MessageChannel channel) {
-		Sequence recieve = beansFac.createSequence();
+		_currentBean.getImports().add("de.dailab.jiactng.agentcore.action.Action");
+		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.ICommunicationBean");
+		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.IGroupAddress");
+		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.CommunicationAddressFactory");
+		_currentBean.getImports().add("java.util.Set");
+		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.message.JiacMessage;");
+		//start assignments
+		String type = Util.getType(channel.getPayload());
+		String name = Util.toJavaName(channel.getPayload().getName());
+		JavaVariable payload = beansFac.createJavaVariable();
+		payload.setName(name);
+		payload.setType(type);
+		Recieve recieve = beansFac.createRecieve();
+		recieve.setAddress(channel.getChannel().getExpression());
+		recieve.setPayload(payload);
 		return recieve;
 	}
 }

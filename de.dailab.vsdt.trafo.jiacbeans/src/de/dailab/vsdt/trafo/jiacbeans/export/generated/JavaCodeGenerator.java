@@ -35,7 +35,11 @@ public class JavaCodeGenerator
   protected final String TEXT_17 = ", scope = ActionScope.GLOBAL)" + NL + "\t";
   protected final String TEXT_18 = NL + "\t";
   protected final String TEXT_19 = " ";
-  protected final String TEXT_20 = NL + NL + "}";
+  protected final String TEXT_20 = NL;
+  protected final String TEXT_21 = NL + "\t";
+  protected final String TEXT_22 = NL;
+  protected final String TEXT_23 = NL + "\t";
+  protected final String TEXT_24 = NL + "}";
 
   public String generate(Object argument)
   {
@@ -49,11 +53,13 @@ public class JavaCodeGenerator
    List<JavaVariable> attributes = bean.getAttributes();
    List<Action> actions = bean.getActions();
    List<String> imports = bean.getImports();
+   List<SubProcess> subprocesses = bean.getSubprocesses();
    Map<String,Action> actionMap = new HashMap<String,Action>();
    for(Action act : actions){
    		String methodName = act.getLocation().split("#")[1];
    		actionMap.put(methodName,act);
    }
+   SubProcessGenerator spg = new SubProcessGenerator();
 
     stringBuffer.append(TEXT_1);
     stringBuffer.append(packageDeclaration);
@@ -94,6 +100,16 @@ public class JavaCodeGenerator
     stringBuffer.append(TEXT_19);
     }
     stringBuffer.append(TEXT_20);
+     for(SubProcess sub : subprocesses){
+    stringBuffer.append(TEXT_21);
+    stringBuffer.append(spg.generate(sub));
+    }
+    stringBuffer.append(TEXT_22);
+     if(bean.isHandlingTimeoutEvent()){
+    stringBuffer.append(TEXT_23);
+    stringBuffer.append(new TimeoutEventHandlerGenerator().generate(null));
+    }
+    stringBuffer.append(TEXT_24);
     return stringBuffer.toString();
   }
 }
