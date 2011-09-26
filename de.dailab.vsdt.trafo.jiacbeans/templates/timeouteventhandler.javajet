@@ -1,0 +1,24 @@
+<%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="TimeoutEventHandlerGenerator"%>
+class TimeoutEventHandler extends Thread{
+	long timeout;
+	Thread toStop;
+	boolean triggered = false;
+	/**
+	 *  delete the generated tag after you edited this method
+	 *  @generated
+	 */
+	public TimeoutEventHandler(long timeout, Thread toStop){
+		this.timeout = timeout;
+		this.toStop = toStop;
+	}
+	public void run(){
+		try {
+			Thread.sleep(timeout);
+			triggered = true;
+			toStop.stop();
+		}catch(InterruptedException e ) { }
+	}
+	public boolean hasBeenTriggered(){
+		return triggered;
+	}
+}

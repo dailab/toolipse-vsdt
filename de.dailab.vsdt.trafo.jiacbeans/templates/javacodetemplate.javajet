@@ -9,11 +9,13 @@
    List<JavaVariable> attributes = bean.getAttributes();
    List<Action> actions = bean.getActions();
    List<String> imports = bean.getImports();
+   List<SubProcess> subprocesses = bean.getSubprocesses();
    Map<String,Action> actionMap = new HashMap<String,Action>();
    for(Action act : actions){
    		String methodName = act.getLocation().split("#")[1];
    		actionMap.put(methodName,act);
    }
+   SubProcessGenerator spg = new SubProcessGenerator();
 %>
 <%=packageDeclaration%>
 
@@ -44,4 +46,11 @@ import <%=i%>;
 	<%= method.toString()+"\n"%> 
 <%}%>
 
+<% for(SubProcess sub : subprocesses){%>
+	<%=spg.generate(sub)%>
+<%}%>
+
+<% if(bean.isHandlingTimeoutEvent()){%>
+	<%=new TimeoutEventHandlerGenerator().generate(null)%>
+<%}%>
 }

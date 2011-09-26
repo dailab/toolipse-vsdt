@@ -1,0 +1,25 @@
+<%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="SubProcessGenerator" imports = "de.dailab.vsdt.trafo.jiacbeans.export.* jiacbeans.* java.util.*"%>
+<% SubProcess process = (SubProcess)argument; 
+   String classDeclaration = "class "+process.getName();
+   List<Method> methods = process.getMethods();
+   List<JavaVariable> attributes = process.getAttributes();
+   List<SubProcess> subprocesses = process.getSubprocesses();
+%>
+<%=classDeclaration%>{
+
+	<% for(JavaVariable var: attributes){%>
+		<%= var.toString()%>;
+	<%}%>
+
+	<% for(Method method : methods){%>
+		/**
+	 	 *  delete the generated tag after you edited this method
+		 *  @generated
+		 */
+		<%= method.toString()+"\n"%> 
+	<%}%>
+
+	<% for(SubProcess sub : subprocesses){%>
+		<%=generate(sub)%>
+	<%}%>
+}
