@@ -124,13 +124,40 @@ public interface JiacbeansPackage extends EPackage {
 	int AGENT_BEAN__IMPORTS = 5;
 
 	/**
+	 * The feature id for the '<em><b>Subprocesses</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AGENT_BEAN__SUBPROCESSES = 6;
+
+	/**
+	 * The feature id for the '<em><b>Has Time Event Handler</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AGENT_BEAN__HAS_TIME_EVENT_HANDLER = 7;
+
+	/**
+	 * The feature id for the '<em><b>Has Message Event Handler</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AGENT_BEAN__HAS_MESSAGE_EVENT_HANDLER = 8;
+
+	/**
 	 * The number of structural features of the '<em>Agent Bean</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AGENT_BEAN_FEATURE_COUNT = 6;
+	int AGENT_BEAN_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '{@link jiacbeans.impl.MethodImpl <em>Method</em>}' class.
@@ -753,14 +780,14 @@ public interface JiacbeansPackage extends EPackage {
 	int PARALEL_FEATURE_COUNT = SCRIPT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link jiacbeans.impl.SubProcessImpl <em>Sub Process</em>}' class.
+	 * The meta object id for the '{@link jiacbeans.impl.RunnableImpl <em>Runnable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see jiacbeans.impl.SubProcessImpl
-	 * @see jiacbeans.impl.JiacbeansPackageImpl#getSubProcess()
+	 * @see jiacbeans.impl.RunnableImpl
+	 * @see jiacbeans.impl.JiacbeansPackageImpl#getRunnable()
 	 * @generated
 	 */
-	int SUB_PROCESS = 15;
+	int RUNNABLE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Run Content</b></em>' reference.
@@ -769,7 +796,7 @@ public interface JiacbeansPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUB_PROCESS__RUN_CONTENT = SCRIPT_FEATURE_COUNT + 0;
+	int RUNNABLE__RUN_CONTENT = SCRIPT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -778,7 +805,99 @@ public interface JiacbeansPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUB_PROCESS__NAME = SCRIPT_FEATURE_COUNT + 1;
+	int RUNNABLE__NAME = SCRIPT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Runnable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUNNABLE_FEATURE_COUNT = SCRIPT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link jiacbeans.impl.RecieveImpl <em>Recieve</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see jiacbeans.impl.RecieveImpl
+	 * @see jiacbeans.impl.JiacbeansPackageImpl#getRecieve()
+	 * @generated
+	 */
+	int RECIEVE = 16;
+
+	/**
+	 * The feature id for the '<em><b>Address</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECIEVE__ADDRESS = SCRIPT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Payload</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECIEVE__PAYLOAD = SCRIPT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Recieve</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECIEVE_FEATURE_COUNT = SCRIPT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link jiacbeans.impl.SubProcessImpl <em>Sub Process</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see jiacbeans.impl.SubProcessImpl
+	 * @see jiacbeans.impl.JiacbeansPackageImpl#getSubProcess()
+	 * @generated
+	 */
+	int SUB_PROCESS = 17;
+
+	/**
+	 * The feature id for the '<em><b>Subprocesses</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUB_PROCESS__SUBPROCESSES = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUB_PROCESS__NAME = 1;
+
+	/**
+	 * The feature id for the '<em><b>Methods</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUB_PROCESS__METHODS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Attributes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUB_PROCESS__ATTRIBUTES = 3;
 
 	/**
 	 * The number of structural features of the '<em>Sub Process</em>' class.
@@ -787,7 +906,44 @@ public interface JiacbeansPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SUB_PROCESS_FEATURE_COUNT = SCRIPT_FEATURE_COUNT + 2;
+	int SUB_PROCESS_FEATURE_COUNT = 4;
+
+	/**
+	 * The meta object id for the '{@link jiacbeans.impl.SendImpl <em>Send</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see jiacbeans.impl.SendImpl
+	 * @see jiacbeans.impl.JiacbeansPackageImpl#getSend()
+	 * @generated
+	 */
+	int SEND = 18;
+
+	/**
+	 * The feature id for the '<em><b>Payload</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEND__PAYLOAD = SCRIPT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Address</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEND__ADDRESS = SCRIPT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Send</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SEND_FEATURE_COUNT = SCRIPT_FEATURE_COUNT + 2;
 
 	/**
 	 * Returns the meta object for class '{@link jiacbeans.AgentBean <em>Agent Bean</em>}'.
@@ -864,6 +1020,39 @@ public interface JiacbeansPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAgentBean_Imports();
+
+	/**
+	 * Returns the meta object for the reference list '{@link jiacbeans.AgentBean#getSubprocesses <em>Subprocesses</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Subprocesses</em>'.
+	 * @see jiacbeans.AgentBean#getSubprocesses()
+	 * @see #getAgentBean()
+	 * @generated
+	 */
+	EReference getAgentBean_Subprocesses();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jiacbeans.AgentBean#isHasTimeEventHandler <em>Has Time Event Handler</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Has Time Event Handler</em>'.
+	 * @see jiacbeans.AgentBean#isHasTimeEventHandler()
+	 * @see #getAgentBean()
+	 * @generated
+	 */
+	EAttribute getAgentBean_HasTimeEventHandler();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jiacbeans.AgentBean#isHasMessageEventHandler <em>Has Message Event Handler</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Has Message Event Handler</em>'.
+	 * @see jiacbeans.AgentBean#isHasMessageEventHandler()
+	 * @see #getAgentBean()
+	 * @generated
+	 */
+	EAttribute getAgentBean_HasMessageEventHandler();
 
 	/**
 	 * Returns the meta object for class '{@link jiacbeans.Method <em>Method</em>}'.
@@ -1281,6 +1470,70 @@ public interface JiacbeansPackage extends EPackage {
 	EAttribute getParalel_SignIndex();
 
 	/**
+	 * Returns the meta object for class '{@link jiacbeans.Runnable <em>Runnable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Runnable</em>'.
+	 * @see jiacbeans.Runnable
+	 * @generated
+	 */
+	EClass getRunnable();
+
+	/**
+	 * Returns the meta object for the reference '{@link jiacbeans.Runnable#getRunContent <em>Run Content</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Run Content</em>'.
+	 * @see jiacbeans.Runnable#getRunContent()
+	 * @see #getRunnable()
+	 * @generated
+	 */
+	EReference getRunnable_RunContent();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jiacbeans.Runnable#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see jiacbeans.Runnable#getName()
+	 * @see #getRunnable()
+	 * @generated
+	 */
+	EAttribute getRunnable_Name();
+
+	/**
+	 * Returns the meta object for class '{@link jiacbeans.Recieve <em>Recieve</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Recieve</em>'.
+	 * @see jiacbeans.Recieve
+	 * @generated
+	 */
+	EClass getRecieve();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jiacbeans.Recieve#getAddress <em>Address</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Address</em>'.
+	 * @see jiacbeans.Recieve#getAddress()
+	 * @see #getRecieve()
+	 * @generated
+	 */
+	EAttribute getRecieve_Address();
+
+	/**
+	 * Returns the meta object for the reference '{@link jiacbeans.Recieve#getPayload <em>Payload</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Payload</em>'.
+	 * @see jiacbeans.Recieve#getPayload()
+	 * @see #getRecieve()
+	 * @generated
+	 */
+	EReference getRecieve_Payload();
+
+	/**
 	 * Returns the meta object for class '{@link jiacbeans.SubProcess <em>Sub Process</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1291,15 +1544,15 @@ public interface JiacbeansPackage extends EPackage {
 	EClass getSubProcess();
 
 	/**
-	 * Returns the meta object for the reference '{@link jiacbeans.SubProcess#getRunContent <em>Run Content</em>}'.
+	 * Returns the meta object for the reference list '{@link jiacbeans.SubProcess#getSubprocesses <em>Subprocesses</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Run Content</em>'.
-	 * @see jiacbeans.SubProcess#getRunContent()
+	 * @return the meta object for the reference list '<em>Subprocesses</em>'.
+	 * @see jiacbeans.SubProcess#getSubprocesses()
 	 * @see #getSubProcess()
 	 * @generated
 	 */
-	EReference getSubProcess_RunContent();
+	EReference getSubProcess_Subprocesses();
 
 	/**
 	 * Returns the meta object for the attribute '{@link jiacbeans.SubProcess#getName <em>Name</em>}'.
@@ -1311,6 +1564,60 @@ public interface JiacbeansPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSubProcess_Name();
+
+	/**
+	 * Returns the meta object for the reference list '{@link jiacbeans.SubProcess#getMethods <em>Methods</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Methods</em>'.
+	 * @see jiacbeans.SubProcess#getMethods()
+	 * @see #getSubProcess()
+	 * @generated
+	 */
+	EReference getSubProcess_Methods();
+
+	/**
+	 * Returns the meta object for the reference list '{@link jiacbeans.SubProcess#getAttributes <em>Attributes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Attributes</em>'.
+	 * @see jiacbeans.SubProcess#getAttributes()
+	 * @see #getSubProcess()
+	 * @generated
+	 */
+	EReference getSubProcess_Attributes();
+
+	/**
+	 * Returns the meta object for class '{@link jiacbeans.Send <em>Send</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Send</em>'.
+	 * @see jiacbeans.Send
+	 * @generated
+	 */
+	EClass getSend();
+
+	/**
+	 * Returns the meta object for the reference '{@link jiacbeans.Send#getPayload <em>Payload</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Payload</em>'.
+	 * @see jiacbeans.Send#getPayload()
+	 * @see #getSend()
+	 * @generated
+	 */
+	EReference getSend_Payload();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jiacbeans.Send#getAddress <em>Address</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Address</em>'.
+	 * @see jiacbeans.Send#getAddress()
+	 * @see #getSend()
+	 * @generated
+	 */
+	EAttribute getSend_Address();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1391,6 +1698,30 @@ public interface JiacbeansPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute AGENT_BEAN__IMPORTS = eINSTANCE.getAgentBean_Imports();
+
+		/**
+		 * The meta object literal for the '<em><b>Subprocesses</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AGENT_BEAN__SUBPROCESSES = eINSTANCE.getAgentBean_Subprocesses();
+
+		/**
+		 * The meta object literal for the '<em><b>Has Time Event Handler</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AGENT_BEAN__HAS_TIME_EVENT_HANDLER = eINSTANCE.getAgentBean_HasTimeEventHandler();
+
+		/**
+		 * The meta object literal for the '<em><b>Has Message Event Handler</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AGENT_BEAN__HAS_MESSAGE_EVENT_HANDLER = eINSTANCE.getAgentBean_HasMessageEventHandler();
 
 		/**
 		 * The meta object literal for the '{@link jiacbeans.impl.MethodImpl <em>Method</em>}' class.
@@ -1733,6 +2064,58 @@ public interface JiacbeansPackage extends EPackage {
 		EAttribute PARALEL__SIGN_INDEX = eINSTANCE.getParalel_SignIndex();
 
 		/**
+		 * The meta object literal for the '{@link jiacbeans.impl.RunnableImpl <em>Runnable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see jiacbeans.impl.RunnableImpl
+		 * @see jiacbeans.impl.JiacbeansPackageImpl#getRunnable()
+		 * @generated
+		 */
+		EClass RUNNABLE = eINSTANCE.getRunnable();
+
+		/**
+		 * The meta object literal for the '<em><b>Run Content</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RUNNABLE__RUN_CONTENT = eINSTANCE.getRunnable_RunContent();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RUNNABLE__NAME = eINSTANCE.getRunnable_Name();
+
+		/**
+		 * The meta object literal for the '{@link jiacbeans.impl.RecieveImpl <em>Recieve</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see jiacbeans.impl.RecieveImpl
+		 * @see jiacbeans.impl.JiacbeansPackageImpl#getRecieve()
+		 * @generated
+		 */
+		EClass RECIEVE = eINSTANCE.getRecieve();
+
+		/**
+		 * The meta object literal for the '<em><b>Address</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RECIEVE__ADDRESS = eINSTANCE.getRecieve_Address();
+
+		/**
+		 * The meta object literal for the '<em><b>Payload</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RECIEVE__PAYLOAD = eINSTANCE.getRecieve_Payload();
+
+		/**
 		 * The meta object literal for the '{@link jiacbeans.impl.SubProcessImpl <em>Sub Process</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1743,12 +2126,12 @@ public interface JiacbeansPackage extends EPackage {
 		EClass SUB_PROCESS = eINSTANCE.getSubProcess();
 
 		/**
-		 * The meta object literal for the '<em><b>Run Content</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Subprocesses</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SUB_PROCESS__RUN_CONTENT = eINSTANCE.getSubProcess_RunContent();
+		EReference SUB_PROCESS__SUBPROCESSES = eINSTANCE.getSubProcess_Subprocesses();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1757,6 +2140,48 @@ public interface JiacbeansPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SUB_PROCESS__NAME = eINSTANCE.getSubProcess_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Methods</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SUB_PROCESS__METHODS = eINSTANCE.getSubProcess_Methods();
+
+		/**
+		 * The meta object literal for the '<em><b>Attributes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SUB_PROCESS__ATTRIBUTES = eINSTANCE.getSubProcess_Attributes();
+
+		/**
+		 * The meta object literal for the '{@link jiacbeans.impl.SendImpl <em>Send</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see jiacbeans.impl.SendImpl
+		 * @see jiacbeans.impl.JiacbeansPackageImpl#getSend()
+		 * @generated
+		 */
+		EClass SEND = eINSTANCE.getSend();
+
+		/**
+		 * The meta object literal for the '<em><b>Payload</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SEND__PAYLOAD = eINSTANCE.getSend_Payload();
+
+		/**
+		 * The meta object literal for the '<em><b>Address</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SEND__ADDRESS = eINSTANCE.getSend_Address();
 
 	}
 

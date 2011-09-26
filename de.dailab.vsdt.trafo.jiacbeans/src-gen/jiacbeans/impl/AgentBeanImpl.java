@@ -13,6 +13,7 @@ import jiacbeans.JavaVariable;
 import jiacbeans.JiacbeansPackage;
 
 import jiacbeans.Method;
+import jiacbeans.SubProcess;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -35,6 +36,9 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link jiacbeans.impl.AgentBeanImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link jiacbeans.impl.AgentBeanImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link jiacbeans.impl.AgentBeanImpl#getImports <em>Imports</em>}</li>
+ *   <li>{@link jiacbeans.impl.AgentBeanImpl#getSubprocesses <em>Subprocesses</em>}</li>
+ *   <li>{@link jiacbeans.impl.AgentBeanImpl#isHasTimeEventHandler <em>Has Time Event Handler</em>}</li>
+ *   <li>{@link jiacbeans.impl.AgentBeanImpl#isHasMessageEventHandler <em>Has Message Event Handler</em>}</li>
  * </ul>
  * </p>
  *
@@ -117,6 +121,56 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 	 * @ordered
 	 */
 	protected EList<String> imports;
+
+	/**
+	 * The cached value of the '{@link #getSubprocesses() <em>Subprocesses</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSubprocesses()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<SubProcess> subprocesses;
+
+	/**
+	 * The default value of the '{@link #isHasTimeEventHandler() <em>Has Time Event Handler</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHasTimeEventHandler()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean HAS_TIME_EVENT_HANDLER_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isHasTimeEventHandler() <em>Has Time Event Handler</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHasTimeEventHandler()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean hasTimeEventHandler = HAS_TIME_EVENT_HANDLER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isHasMessageEventHandler() <em>Has Message Event Handler</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHasMessageEventHandler()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean HAS_MESSAGE_EVENT_HANDLER_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isHasMessageEventHandler() <em>Has Message Event Handler</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHasMessageEventHandler()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean hasMessageEventHandler = HAS_MESSAGE_EVENT_HANDLER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -230,6 +284,60 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<SubProcess> getSubprocesses() {
+		if (subprocesses == null) {
+			subprocesses = new EObjectResolvingEList<SubProcess>(SubProcess.class, this, JiacbeansPackage.AGENT_BEAN__SUBPROCESSES);
+		}
+		return subprocesses;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isHasTimeEventHandler() {
+		return hasTimeEventHandler;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHasTimeEventHandler(boolean newHasTimeEventHandler) {
+		boolean oldHasTimeEventHandler = hasTimeEventHandler;
+		hasTimeEventHandler = newHasTimeEventHandler;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.AGENT_BEAN__HAS_TIME_EVENT_HANDLER, oldHasTimeEventHandler, hasTimeEventHandler));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isHasMessageEventHandler() {
+		return hasMessageEventHandler;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHasMessageEventHandler(boolean newHasMessageEventHandler) {
+		boolean oldHasMessageEventHandler = hasMessageEventHandler;
+		hasMessageEventHandler = newHasMessageEventHandler;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.AGENT_BEAN__HAS_MESSAGE_EVENT_HANDLER, oldHasMessageEventHandler, hasMessageEventHandler));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public void addMethod(Method m) {
@@ -256,6 +364,12 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 				return getActions();
 			case JiacbeansPackage.AGENT_BEAN__IMPORTS:
 				return getImports();
+			case JiacbeansPackage.AGENT_BEAN__SUBPROCESSES:
+				return getSubprocesses();
+			case JiacbeansPackage.AGENT_BEAN__HAS_TIME_EVENT_HANDLER:
+				return isHasTimeEventHandler();
+			case JiacbeansPackage.AGENT_BEAN__HAS_MESSAGE_EVENT_HANDLER:
+				return isHasMessageEventHandler();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -291,6 +405,16 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 				getImports().clear();
 				getImports().addAll((Collection<? extends String>)newValue);
 				return;
+			case JiacbeansPackage.AGENT_BEAN__SUBPROCESSES:
+				getSubprocesses().clear();
+				getSubprocesses().addAll((Collection<? extends SubProcess>)newValue);
+				return;
+			case JiacbeansPackage.AGENT_BEAN__HAS_TIME_EVENT_HANDLER:
+				setHasTimeEventHandler((Boolean)newValue);
+				return;
+			case JiacbeansPackage.AGENT_BEAN__HAS_MESSAGE_EVENT_HANDLER:
+				setHasMessageEventHandler((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -321,6 +445,15 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 			case JiacbeansPackage.AGENT_BEAN__IMPORTS:
 				getImports().clear();
 				return;
+			case JiacbeansPackage.AGENT_BEAN__SUBPROCESSES:
+				getSubprocesses().clear();
+				return;
+			case JiacbeansPackage.AGENT_BEAN__HAS_TIME_EVENT_HANDLER:
+				setHasTimeEventHandler(HAS_TIME_EVENT_HANDLER_EDEFAULT);
+				return;
+			case JiacbeansPackage.AGENT_BEAN__HAS_MESSAGE_EVENT_HANDLER:
+				setHasMessageEventHandler(HAS_MESSAGE_EVENT_HANDLER_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -345,6 +478,12 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 				return actions != null && !actions.isEmpty();
 			case JiacbeansPackage.AGENT_BEAN__IMPORTS:
 				return imports != null && !imports.isEmpty();
+			case JiacbeansPackage.AGENT_BEAN__SUBPROCESSES:
+				return subprocesses != null && !subprocesses.isEmpty();
+			case JiacbeansPackage.AGENT_BEAN__HAS_TIME_EVENT_HANDLER:
+				return hasTimeEventHandler != HAS_TIME_EVENT_HANDLER_EDEFAULT;
+			case JiacbeansPackage.AGENT_BEAN__HAS_MESSAGE_EVENT_HANDLER:
+				return hasMessageEventHandler != HAS_MESSAGE_EVENT_HANDLER_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

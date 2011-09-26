@@ -39,5 +39,8 @@ public class WorkflowMethodImpl extends MethodImpl implements WorkflowMethod {
 	protected EClass eStaticClass() {
 		return JiacbeansPackage.Literals.WORKFLOW_METHOD;
 	}
-
+	
+	public int getVisibility(){
+		return MethodImpl.PUBLIC;
+	}
 } //WorkflowMethodImpl

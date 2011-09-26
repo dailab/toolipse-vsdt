@@ -194,8 +194,8 @@ public class ParalelImpl extends ScriptImpl implements Paralel {
 		String result  = "";
 		for (Script branch : branches) {
 			counter++;
-			result += "Thread t"+counter +" = new Thread(){\n";
-			result += "\t public void run(){\n";
+			result += "Thread t"+counter +" = new Thread() {\n";
+			result += "\t public void run() {\n";
 			if(branch!=null){
 				BufferedReader reader = new BufferedReader(new StringReader(branch.toString()));
 				try{
@@ -217,12 +217,12 @@ public class ParalelImpl extends ScriptImpl implements Paralel {
 			result+="t"+started+".start();\n";
 		}
 		started = 0;
-		result+="try{\n";
+		result+="try {\n";
 		while(started <= counter){
 			started++;
 			result+="\tt"+started+".join();\n";
 		}
-		result+="}catch(InterruptedException e){}";
+		result+="} catch(InterruptedException e) {}";
 		return result;
 	}
 

@@ -454,7 +454,7 @@ public class MethodImpl extends EObjectImpl implements Method {
 			else first = false;
 			params+= var.getType()+" "+var.getName();
 		}
-		result += params+"){\n";
+		result += params+") {\n";
 		if(content!=null){
 			String cS = content.toString();
 			if(cS!=null && !cS.equals("")){

@@ -18,7 +18,9 @@ import jiacbeans.JiacbeansFactory;
 import jiacbeans.JiacbeansPackage;
 import jiacbeans.Method;
 import jiacbeans.Paralel;
+import jiacbeans.Recieve;
 import jiacbeans.Script;
+import jiacbeans.Send;
 import jiacbeans.Sequence;
 import jiacbeans.SubProcess;
 import jiacbeans.Trigger;
@@ -152,7 +154,28 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass runnableEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass recieveEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass subProcessEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sendEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -276,6 +299,33 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 */
 	public EAttribute getAgentBean_Imports() {
 		return (EAttribute)agentBeanEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAgentBean_Subprocesses() {
+		return (EReference)agentBeanEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAgentBean_HasTimeEventHandler() {
+		return (EAttribute)agentBeanEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAgentBean_HasMessageEventHandler() {
+		return (EAttribute)agentBeanEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -634,6 +684,60 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getRunnable() {
+		return runnableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRunnable_RunContent() {
+		return (EReference)runnableEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRunnable_Name() {
+		return (EAttribute)runnableEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRecieve() {
+		return recieveEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRecieve_Address() {
+		return (EAttribute)recieveEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRecieve_Payload() {
+		return (EReference)recieveEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSubProcess() {
 		return subProcessEClass;
 	}
@@ -643,7 +747,7 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSubProcess_RunContent() {
+	public EReference getSubProcess_Subprocesses() {
 		return (EReference)subProcessEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -654,6 +758,51 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 */
 	public EAttribute getSubProcess_Name() {
 		return (EAttribute)subProcessEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSubProcess_Methods() {
+		return (EReference)subProcessEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSubProcess_Attributes() {
+		return (EReference)subProcessEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSend() {
+		return sendEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSend_Payload() {
+		return (EReference)sendEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSend_Address() {
+		return (EAttribute)sendEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -691,6 +840,9 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		createEReference(agentBeanEClass, AGENT_BEAN__ATTRIBUTES);
 		createEReference(agentBeanEClass, AGENT_BEAN__ACTIONS);
 		createEAttribute(agentBeanEClass, AGENT_BEAN__IMPORTS);
+		createEReference(agentBeanEClass, AGENT_BEAN__SUBPROCESSES);
+		createEAttribute(agentBeanEClass, AGENT_BEAN__HAS_TIME_EVENT_HANDLER);
+		createEAttribute(agentBeanEClass, AGENT_BEAN__HAS_MESSAGE_EVENT_HANDLER);
 
 		methodEClass = createEClass(METHOD);
 		createEAttribute(methodEClass, METHOD__RETURN_TYPE);
@@ -745,9 +897,23 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		createEReference(paralelEClass, PARALEL__BRANCHES);
 		createEAttribute(paralelEClass, PARALEL__SIGN_INDEX);
 
+		runnableEClass = createEClass(RUNNABLE);
+		createEReference(runnableEClass, RUNNABLE__RUN_CONTENT);
+		createEAttribute(runnableEClass, RUNNABLE__NAME);
+
+		recieveEClass = createEClass(RECIEVE);
+		createEAttribute(recieveEClass, RECIEVE__ADDRESS);
+		createEReference(recieveEClass, RECIEVE__PAYLOAD);
+
 		subProcessEClass = createEClass(SUB_PROCESS);
-		createEReference(subProcessEClass, SUB_PROCESS__RUN_CONTENT);
+		createEReference(subProcessEClass, SUB_PROCESS__SUBPROCESSES);
 		createEAttribute(subProcessEClass, SUB_PROCESS__NAME);
+		createEReference(subProcessEClass, SUB_PROCESS__METHODS);
+		createEReference(subProcessEClass, SUB_PROCESS__ATTRIBUTES);
+
+		sendEClass = createEClass(SEND);
+		createEReference(sendEClass, SEND__PAYLOAD);
+		createEAttribute(sendEClass, SEND__ADDRESS);
 	}
 
 	/**
@@ -787,7 +953,9 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		codeElementEClass.getESuperTypes().add(this.getScript());
 		tryCatchEClass.getESuperTypes().add(this.getScript());
 		paralelEClass.getESuperTypes().add(this.getScript());
-		subProcessEClass.getESuperTypes().add(this.getScript());
+		runnableEClass.getESuperTypes().add(this.getScript());
+		recieveEClass.getESuperTypes().add(this.getScript());
+		sendEClass.getESuperTypes().add(this.getScript());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(agentBeanEClass, AgentBean.class, "AgentBean", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -797,6 +965,9 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		initEReference(getAgentBean_Attributes(), this.getJavaVariable(), null, "attributes", null, 0, -1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAgentBean_Actions(), this.getAction(), null, "actions", null, 0, -1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAgentBean_Imports(), ecorePackage.getEString(), "imports", null, 0, -1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAgentBean_Subprocesses(), this.getSubProcess(), null, "subprocesses", null, 0, -1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAgentBean_HasTimeEventHandler(), ecorePackage.getEBoolean(), "hasTimeEventHandler", null, 1, 1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAgentBean_HasMessageEventHandler(), ecorePackage.getEBoolean(), "hasMessageEventHandler", null, 1, 1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(agentBeanEClass, null, "addMethod", 0, 1, IS_UNIQUE, !IS_ORDERED);
 		addEParameter(op, this.getMethod(), "m", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -852,16 +1023,30 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		g1.getETypeArguments().add(g2);
 		g2 = createEGenericType(this.getScript());
 		g1.getETypeArguments().add(g2);
-		initEAttribute(getTryCatch_Catches(), g1, "catches", "", 1, 1, TryCatch.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTryCatch_Catches(), g1, "catches", null, 1, 1, TryCatch.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTryCatch_Finally(), this.getScript(), null, "finally", null, 0, 1, TryCatch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(paralelEClass, Paralel.class, "Paralel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParalel_Branches(), this.getScript(), null, "branches", null, 0, -1, Paralel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParalel_SignIndex(), ecorePackage.getEInt(), "signIndex", "1", 0, 1, Paralel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(runnableEClass, jiacbeans.Runnable.class, "Runnable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRunnable_RunContent(), this.getScript(), null, "runContent", null, 0, 1, jiacbeans.Runnable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRunnable_Name(), ecorePackage.getEString(), "name", null, 0, 1, jiacbeans.Runnable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(recieveEClass, Recieve.class, "Recieve", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRecieve_Address(), ecorePackage.getEString(), "address", null, 0, 1, Recieve.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRecieve_Payload(), this.getJavaVariable(), null, "payload", null, 1, 1, Recieve.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(subProcessEClass, SubProcess.class, "SubProcess", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSubProcess_RunContent(), this.getScript(), null, "runContent", null, 0, 1, SubProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSubProcess_Subprocesses(), this.getSubProcess(), null, "subprocesses", null, 0, -1, SubProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSubProcess_Name(), ecorePackage.getEString(), "name", null, 0, 1, SubProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSubProcess_Methods(), this.getMethod(), null, "methods", null, 0, -1, SubProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSubProcess_Attributes(), this.getJavaVariable(), null, "attributes", null, 0, -1, SubProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(sendEClass, Send.class, "Send", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSend_Payload(), this.getJavaVariable(), null, "payload", null, 1, 1, Send.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSend_Address(), ecorePackage.getEString(), "address", null, 0, 1, Send.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -161,6 +161,24 @@ public interface JiacbeansFactory extends EFactory {
 	Paralel createParalel();
 
 	/**
+	 * Returns a new object of class '<em>Runnable</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Runnable</em>'.
+	 * @generated
+	 */
+	Runnable createRunnable();
+
+	/**
+	 * Returns a new object of class '<em>Recieve</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Recieve</em>'.
+	 * @generated
+	 */
+	Recieve createRecieve();
+
+	/**
 	 * Returns a new object of class '<em>Sub Process</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -168,6 +186,15 @@ public interface JiacbeansFactory extends EFactory {
 	 * @generated
 	 */
 	SubProcess createSubProcess();
+
+	/**
+	 * Returns a new object of class '<em>Send</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Send</em>'.
+	 * @generated
+	 */
+	Send createSend();
 
 	/**
 	 * Returns the package supported by this factory.

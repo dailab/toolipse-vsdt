@@ -23,6 +23,9 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link jiacbeans.AgentBean#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link jiacbeans.AgentBean#getActions <em>Actions</em>}</li>
  *   <li>{@link jiacbeans.AgentBean#getImports <em>Imports</em>}</li>
+ *   <li>{@link jiacbeans.AgentBean#getSubprocesses <em>Subprocesses</em>}</li>
+ *   <li>{@link jiacbeans.AgentBean#isHasTimeEventHandler <em>Has Time Event Handler</em>}</li>
+ *   <li>{@link jiacbeans.AgentBean#isHasMessageEventHandler <em>Has Message Event Handler</em>}</li>
  * </ul>
  * </p>
  *
@@ -147,6 +150,74 @@ public interface AgentBean extends EObject {
 	 * @generated
 	 */
 	EList<String> getImports();
+
+	/**
+	 * Returns the value of the '<em><b>Subprocesses</b></em>' reference list.
+	 * The list contents are of type {@link jiacbeans.SubProcess}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Subprocesses</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Subprocesses</em>' reference list.
+	 * @see jiacbeans.JiacbeansPackage#getAgentBean_Subprocesses()
+	 * @model
+	 * @generated
+	 */
+	EList<SubProcess> getSubprocesses();
+
+	/**
+	 * Returns the value of the '<em><b>Has Time Event Handler</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Has Time Event Handler</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Has Time Event Handler</em>' attribute.
+	 * @see #setHasTimeEventHandler(boolean)
+	 * @see jiacbeans.JiacbeansPackage#getAgentBean_HasTimeEventHandler()
+	 * @model required="true"
+	 * @generated
+	 */
+	boolean isHasTimeEventHandler();
+
+	/**
+	 * Sets the value of the '{@link jiacbeans.AgentBean#isHasTimeEventHandler <em>Has Time Event Handler</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Has Time Event Handler</em>' attribute.
+	 * @see #isHasTimeEventHandler()
+	 * @generated
+	 */
+	void setHasTimeEventHandler(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Has Message Event Handler</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Has Message Event Handler</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Has Message Event Handler</em>' attribute.
+	 * @see #setHasMessageEventHandler(boolean)
+	 * @see jiacbeans.JiacbeansPackage#getAgentBean_HasMessageEventHandler()
+	 * @model required="true"
+	 * @generated
+	 */
+	boolean isHasMessageEventHandler();
+
+	/**
+	 * Sets the value of the '{@link jiacbeans.AgentBean#isHasMessageEventHandler <em>Has Message Event Handler</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Has Message Event Handler</em>' attribute.
+	 * @see #isHasMessageEventHandler()
+	 * @generated
+	 */
+	void setHasMessageEventHandler(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->

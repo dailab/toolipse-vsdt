@@ -8,6 +8,25 @@ package jiacbeans.util;
 
 import java.util.List;
 
+import jiacbeans.Action;
+import jiacbeans.ActivityMethod;
+import jiacbeans.AgentBean;
+import jiacbeans.CodeElement;
+import jiacbeans.ForEach;
+import jiacbeans.IfThenElse;
+import jiacbeans.JavaVariable;
+import jiacbeans.JiacbeansPackage;
+import jiacbeans.Method;
+import jiacbeans.Paralel;
+import jiacbeans.Recieve;
+import jiacbeans.Script;
+import jiacbeans.Send;
+import jiacbeans.Sequence;
+import jiacbeans.SubProcess;
+import jiacbeans.Trigger;
+import jiacbeans.TryCatch;
+import jiacbeans.While;
+import jiacbeans.WorkflowMethod;
 import jiacbeans.*;
 
 import org.eclipse.emf.ecore.EClass;
@@ -186,10 +205,30 @@ public class JiacbeansSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case JiacbeansPackage.RUNNABLE: {
+				jiacbeans.Runnable runnable = (jiacbeans.Runnable)theEObject;
+				T result = caseRunnable(runnable);
+				if (result == null) result = caseScript(runnable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case JiacbeansPackage.RECIEVE: {
+				Recieve recieve = (Recieve)theEObject;
+				T result = caseRecieve(recieve);
+				if (result == null) result = caseScript(recieve);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case JiacbeansPackage.SUB_PROCESS: {
 				SubProcess subProcess = (SubProcess)theEObject;
 				T result = caseSubProcess(subProcess);
-				if (result == null) result = caseScript(subProcess);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case JiacbeansPackage.SEND: {
+				Send send = (Send)theEObject;
+				T result = caseSend(send);
+				if (result == null) result = caseScript(send);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -423,6 +462,36 @@ public class JiacbeansSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Runnable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Runnable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRunnable(jiacbeans.Runnable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Recieve</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Recieve</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRecieve(Recieve object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Sub Process</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -434,6 +503,21 @@ public class JiacbeansSwitch<T> {
 	 * @generated
 	 */
 	public T caseSubProcess(SubProcess object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Send</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Send</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSend(Send object) {
 		return null;
 	}
 

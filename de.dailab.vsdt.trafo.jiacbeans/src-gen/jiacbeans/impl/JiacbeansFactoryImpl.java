@@ -6,6 +6,26 @@
  */
 package jiacbeans.impl;
 
+import jiacbeans.Action;
+import jiacbeans.ActivityMethod;
+import jiacbeans.AgentBean;
+import jiacbeans.CodeElement;
+import jiacbeans.ForEach;
+import jiacbeans.IfThenElse;
+import jiacbeans.JavaVariable;
+import jiacbeans.JiacbeansFactory;
+import jiacbeans.JiacbeansPackage;
+import jiacbeans.Method;
+import jiacbeans.Paralel;
+import jiacbeans.Recieve;
+import jiacbeans.Script;
+import jiacbeans.Send;
+import jiacbeans.Sequence;
+import jiacbeans.SubProcess;
+import jiacbeans.Trigger;
+import jiacbeans.TryCatch;
+import jiacbeans.While;
+import jiacbeans.WorkflowMethod;
 import jiacbeans.*;
 
 import org.eclipse.emf.ecore.EClass;
@@ -75,7 +95,10 @@ public class JiacbeansFactoryImpl extends EFactoryImpl implements JiacbeansFacto
 			case JiacbeansPackage.CODE_ELEMENT: return createCodeElement();
 			case JiacbeansPackage.TRY_CATCH: return createTryCatch();
 			case JiacbeansPackage.PARALEL: return createParalel();
+			case JiacbeansPackage.RUNNABLE: return createRunnable();
+			case JiacbeansPackage.RECIEVE: return createRecieve();
 			case JiacbeansPackage.SUB_PROCESS: return createSubProcess();
+			case JiacbeansPackage.SEND: return createSend();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -236,9 +259,39 @@ public class JiacbeansFactoryImpl extends EFactoryImpl implements JiacbeansFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public jiacbeans.Runnable createRunnable() {
+		RunnableImpl runnable = new RunnableImpl();
+		return runnable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Recieve createRecieve() {
+		RecieveImpl recieve = new RecieveImpl();
+		return recieve;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SubProcess createSubProcess() {
 		SubProcessImpl subProcess = new SubProcessImpl();
 		return subProcess;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Send createSend() {
+		SendImpl send = new SendImpl();
+		return send;
 	}
 
 	/**

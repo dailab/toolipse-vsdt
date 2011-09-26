@@ -6,6 +6,25 @@
  */
 package jiacbeans.util;
 
+import jiacbeans.Action;
+import jiacbeans.ActivityMethod;
+import jiacbeans.AgentBean;
+import jiacbeans.CodeElement;
+import jiacbeans.ForEach;
+import jiacbeans.IfThenElse;
+import jiacbeans.JavaVariable;
+import jiacbeans.JiacbeansPackage;
+import jiacbeans.Method;
+import jiacbeans.Paralel;
+import jiacbeans.Recieve;
+import jiacbeans.Script;
+import jiacbeans.Send;
+import jiacbeans.Sequence;
+import jiacbeans.SubProcess;
+import jiacbeans.Trigger;
+import jiacbeans.TryCatch;
+import jiacbeans.While;
+import jiacbeans.WorkflowMethod;
 import jiacbeans.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -132,8 +151,20 @@ public class JiacbeansAdapterFactory extends AdapterFactoryImpl {
 				return createParalelAdapter();
 			}
 			@Override
+			public Adapter caseRunnable(jiacbeans.Runnable object) {
+				return createRunnableAdapter();
+			}
+			@Override
+			public Adapter caseRecieve(Recieve object) {
+				return createRecieveAdapter();
+			}
+			@Override
 			public Adapter caseSubProcess(SubProcess object) {
 				return createSubProcessAdapter();
+			}
+			@Override
+			public Adapter caseSend(Send object) {
+				return createSendAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -366,6 +397,34 @@ public class JiacbeansAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link jiacbeans.Runnable <em>Runnable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see jiacbeans.Runnable
+	 * @generated
+	 */
+	public Adapter createRunnableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link jiacbeans.Recieve <em>Recieve</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see jiacbeans.Recieve
+	 * @generated
+	 */
+	public Adapter createRecieveAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link jiacbeans.SubProcess <em>Sub Process</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -376,6 +435,20 @@ public class JiacbeansAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSubProcessAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link jiacbeans.Send <em>Send</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see jiacbeans.Send
+	 * @generated
+	 */
+	public Adapter createSendAdapter() {
 		return null;
 	}
 

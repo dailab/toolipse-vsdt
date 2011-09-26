@@ -57,7 +57,6 @@ public interface TryCatch extends Script {
 
 	/**
 	 * Returns the value of the '<em><b>Catches</b></em>' attribute.
-	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Catches</em>' attribute list isn't clear,
@@ -67,7 +66,7 @@ public interface TryCatch extends Script {
 	 * @return the value of the '<em>Catches</em>' attribute.
 	 * @see #setCatches(Map)
 	 * @see jiacbeans.JiacbeansPackage#getTryCatch_Catches()
-	 * @model default="" required="true" transient="true"
+	 * @model required="true" transient="true"
 	 *        extendedMetaData="wildcards='' name=''"
 	 * @generated
 	 */

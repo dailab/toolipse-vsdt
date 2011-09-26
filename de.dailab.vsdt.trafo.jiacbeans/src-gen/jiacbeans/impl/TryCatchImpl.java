@@ -272,7 +272,7 @@ public class TryCatchImpl extends ScriptImpl implements TryCatch {
 	 */
 	@Override
 	public String toString() {
-		String result = "try{\n";
+		String result = "try {\n";
 		if(try_!=null){
 			BufferedReader reader = new BufferedReader(new StringReader(try_.toString()));
 			try{
@@ -286,7 +286,7 @@ public class TryCatchImpl extends ScriptImpl implements TryCatch {
 			}
 		}
 		for (Map.Entry<String, Script> entry : catches.entrySet()) {
-			result+="}catch("+entry.getKey()+" e){\n";
+			result+="} catch("+entry.getKey()+" e) {\n";
 			Script content = entry.getValue();
 			if(content!= null){
 				BufferedReader reader = new BufferedReader(new StringReader(content.toString()));
@@ -303,7 +303,7 @@ public class TryCatchImpl extends ScriptImpl implements TryCatch {
 		}
 		result+="}";
 		if(finally_!=null){
-			result+="finally{\n";
+			result+="finally {\n";
 			BufferedReader reader = new BufferedReader(new StringReader(finally_.toString()));
 			try{
 				String line = reader.readLine();
