@@ -1,4 +1,5 @@
 \chapter{Mapping BPMN to Jiac AgentBeans}
+\label{chap:mapping}
 
 The element mapping from BPMN to Jiac AgentBeans is created based on the existing mapping to JiacV - JADL script. In comparation to a JADL script, an AgentBean is written completely in Java, enabling more possibilities in mapping concepts such as intermediate Event handling. This chapter will provide a tabular overview of the mapping. 
 
@@ -6,11 +7,19 @@ The element mapping from BPMN to Jiac AgentBeans is created based on the existin
 
 		\begin{tabularx}{\linewidth}{|l|X|}\hline\hline
 			\multicolumn{2}{|c|}{\textbf{Business Process Diagram}} \\\hline\hline
-			 Pool & A pool is currently mapped to a Java-File containing a Jiac AgentBean.\\\hline
+			 Pool & A pool is currently mapped to an Agent Bean extending the AbstractMethodExposingBean. The name of the bean derived from the pool name and the name of the business process diagram it is contained in.\\\hline
 			 Process & The process content in a pool is mapped to a Workflow Method in the generated AgentBean. Depending on the type of the StartEvent, an Action might be exposed, enabling this method to be invoked as a service. This method will contain a Script which is generated from the flowObjects contained in the process.\\\hline
 			 Lane & Lanes will not be mapped in this mapping\\\hline \hline
 		\end{tabularx}\\\\
 
+				%\includegraphics{images/mapping/pool.png} \rightarrow
+				%\begin{lstlisting}[language=Java,	label=lst:bean]
+				%		public class Pool_Process extends AbstractMethodExposingBean{
+				%			...
+				%		}
+				%\end{lstlisting}\\\\
+				
+				
 \textbf{\Large{Events}}\\\\
 For intermediate Events, an EventHandlerThread will be generated and started. If the intermediate Event is attached to an activity, the activity will also be started as a Thread. 
 
@@ -43,7 +52,7 @@ For intermediate Events, an EventHandlerThread will be generated and started. If
 		\end{tabularx}\\\\
 
 \textbf{\large{Activities}}\\\\
-Basically, an Activity-method will be created for each activity.  
+Basically, an Activity-method will be created for each activity, and then a script calling this method will be added into the Workflow-method. This way, each activity can have their own scope of variables. 
 	
 		\begin{tabularx}{\linewidth}{|l|X|}\hline\hline
 			\multicolumn{2}{|c|}{\textbf{Activity}}\\\hline\hline

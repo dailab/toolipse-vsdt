@@ -346,4 +346,8 @@
 \newtheorem{definition}{Definition}[chapter]
 \newtheorem{satz}{Satz}[chapter]
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Code Listing                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% **** END OF CLASS ****
