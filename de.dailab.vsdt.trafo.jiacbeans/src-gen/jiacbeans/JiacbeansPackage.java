@@ -133,22 +133,31 @@ public interface JiacbeansPackage extends EPackage {
 	int AGENT_BEAN__SUBPROCESSES = 6;
 
 	/**
-	 * The feature id for the '<em><b>Has Time Event Handler</b></em>' attribute.
+	 * The feature id for the '<em><b>Handling Timeout Event</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AGENT_BEAN__HAS_TIME_EVENT_HANDLER = 7;
+	int AGENT_BEAN__HANDLING_TIMEOUT_EVENT = 7;
 
 	/**
-	 * The feature id for the '<em><b>Has Message Event Handler</b></em>' attribute.
+	 * The feature id for the '<em><b>Handling Message Event</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AGENT_BEAN__HAS_MESSAGE_EVENT_HANDLER = 8;
+	int AGENT_BEAN__HANDLING_MESSAGE_EVENT = 8;
+
+	/**
+	 * The feature id for the '<em><b>Handling Time Event</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AGENT_BEAN__HANDLING_TIME_EVENT = 9;
 
 	/**
 	 * The number of structural features of the '<em>Agent Bean</em>' class.
@@ -157,7 +166,7 @@ public interface JiacbeansPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AGENT_BEAN_FEATURE_COUNT = 9;
+	int AGENT_BEAN_FEATURE_COUNT = 10;
 
 	/**
 	 * The meta object id for the '{@link jiacbeans.impl.MethodImpl <em>Method</em>}' class.
@@ -1033,26 +1042,37 @@ public interface JiacbeansPackage extends EPackage {
 	EReference getAgentBean_Subprocesses();
 
 	/**
-	 * Returns the meta object for the attribute '{@link jiacbeans.AgentBean#isHasTimeEventHandler <em>Has Time Event Handler</em>}'.
+	 * Returns the meta object for the attribute '{@link jiacbeans.AgentBean#isHandlingTimeoutEvent <em>Handling Timeout Event</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Has Time Event Handler</em>'.
-	 * @see jiacbeans.AgentBean#isHasTimeEventHandler()
+	 * @return the meta object for the attribute '<em>Handling Timeout Event</em>'.
+	 * @see jiacbeans.AgentBean#isHandlingTimeoutEvent()
 	 * @see #getAgentBean()
 	 * @generated
 	 */
-	EAttribute getAgentBean_HasTimeEventHandler();
+	EAttribute getAgentBean_HandlingTimeoutEvent();
 
 	/**
-	 * Returns the meta object for the attribute '{@link jiacbeans.AgentBean#isHasMessageEventHandler <em>Has Message Event Handler</em>}'.
+	 * Returns the meta object for the attribute '{@link jiacbeans.AgentBean#isHandlingMessageEvent <em>Handling Message Event</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Has Message Event Handler</em>'.
-	 * @see jiacbeans.AgentBean#isHasMessageEventHandler()
+	 * @return the meta object for the attribute '<em>Handling Message Event</em>'.
+	 * @see jiacbeans.AgentBean#isHandlingMessageEvent()
 	 * @see #getAgentBean()
 	 * @generated
 	 */
-	EAttribute getAgentBean_HasMessageEventHandler();
+	EAttribute getAgentBean_HandlingMessageEvent();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jiacbeans.AgentBean#isHandlingTimeEvent <em>Handling Time Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Handling Time Event</em>'.
+	 * @see jiacbeans.AgentBean#isHandlingTimeEvent()
+	 * @see #getAgentBean()
+	 * @generated
+	 */
+	EAttribute getAgentBean_HandlingTimeEvent();
 
 	/**
 	 * Returns the meta object for class '{@link jiacbeans.Method <em>Method</em>}'.
@@ -1708,20 +1728,28 @@ public interface JiacbeansPackage extends EPackage {
 		EReference AGENT_BEAN__SUBPROCESSES = eINSTANCE.getAgentBean_Subprocesses();
 
 		/**
-		 * The meta object literal for the '<em><b>Has Time Event Handler</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Handling Timeout Event</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute AGENT_BEAN__HAS_TIME_EVENT_HANDLER = eINSTANCE.getAgentBean_HasTimeEventHandler();
+		EAttribute AGENT_BEAN__HANDLING_TIMEOUT_EVENT = eINSTANCE.getAgentBean_HandlingTimeoutEvent();
 
 		/**
-		 * The meta object literal for the '<em><b>Has Message Event Handler</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Handling Message Event</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute AGENT_BEAN__HAS_MESSAGE_EVENT_HANDLER = eINSTANCE.getAgentBean_HasMessageEventHandler();
+		EAttribute AGENT_BEAN__HANDLING_MESSAGE_EVENT = eINSTANCE.getAgentBean_HandlingMessageEvent();
+
+		/**
+		 * The meta object literal for the '<em><b>Handling Time Event</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AGENT_BEAN__HANDLING_TIME_EVENT = eINSTANCE.getAgentBean_HandlingTimeEvent();
 
 		/**
 		 * The meta object literal for the '{@link jiacbeans.impl.MethodImpl <em>Method</em>}' class.

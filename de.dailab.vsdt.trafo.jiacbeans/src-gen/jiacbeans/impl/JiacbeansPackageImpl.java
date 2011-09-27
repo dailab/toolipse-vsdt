@@ -315,7 +315,7 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAgentBean_HasTimeEventHandler() {
+	public EAttribute getAgentBean_HandlingTimeoutEvent() {
 		return (EAttribute)agentBeanEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -324,8 +324,17 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAgentBean_HasMessageEventHandler() {
+	public EAttribute getAgentBean_HandlingMessageEvent() {
 		return (EAttribute)agentBeanEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAgentBean_HandlingTimeEvent() {
+		return (EAttribute)agentBeanEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -841,8 +850,9 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		createEReference(agentBeanEClass, AGENT_BEAN__ACTIONS);
 		createEAttribute(agentBeanEClass, AGENT_BEAN__IMPORTS);
 		createEReference(agentBeanEClass, AGENT_BEAN__SUBPROCESSES);
-		createEAttribute(agentBeanEClass, AGENT_BEAN__HAS_TIME_EVENT_HANDLER);
-		createEAttribute(agentBeanEClass, AGENT_BEAN__HAS_MESSAGE_EVENT_HANDLER);
+		createEAttribute(agentBeanEClass, AGENT_BEAN__HANDLING_TIMEOUT_EVENT);
+		createEAttribute(agentBeanEClass, AGENT_BEAN__HANDLING_MESSAGE_EVENT);
+		createEAttribute(agentBeanEClass, AGENT_BEAN__HANDLING_TIME_EVENT);
 
 		methodEClass = createEClass(METHOD);
 		createEAttribute(methodEClass, METHOD__RETURN_TYPE);
@@ -966,8 +976,9 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		initEReference(getAgentBean_Actions(), this.getAction(), null, "actions", null, 0, -1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAgentBean_Imports(), ecorePackage.getEString(), "imports", null, 0, -1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAgentBean_Subprocesses(), this.getSubProcess(), null, "subprocesses", null, 0, -1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAgentBean_HasTimeEventHandler(), ecorePackage.getEBoolean(), "hasTimeEventHandler", null, 1, 1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAgentBean_HasMessageEventHandler(), ecorePackage.getEBoolean(), "hasMessageEventHandler", null, 1, 1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAgentBean_HandlingTimeoutEvent(), ecorePackage.getEBoolean(), "handlingTimeoutEvent", null, 1, 1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAgentBean_HandlingMessageEvent(), ecorePackage.getEBoolean(), "handlingMessageEvent", null, 1, 1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAgentBean_HandlingTimeEvent(), ecorePackage.getEBoolean(), "handlingTimeEvent", null, 1, 1, AgentBean.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(agentBeanEClass, null, "addMethod", 0, 1, IS_UNIQUE, !IS_ORDERED);
 		addEParameter(op, this.getMethod(), "m", 0, 1, IS_UNIQUE, IS_ORDERED);

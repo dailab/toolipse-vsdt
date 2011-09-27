@@ -37,10 +37,9 @@ public class RecieveImpl extends ScriptImpl implements Recieve {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getAddress()
-	 * @generated
 	 * @ordered
 	 */
-	protected static final String ADDRESS_EDEFAULT = null;
+	protected static final String ADDRESS_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getAddress() <em>Address</em>}' attribute.
@@ -222,7 +221,7 @@ public class RecieveImpl extends ScriptImpl implements Recieve {
 		//invoke join action
 		result += "invoke(joinAction,new Serializable[]{groupAddress});\n";
 		//read
-		result += payload.toString()+" = null;";//declare payload variable
+		result += payload.toString()+" = null;\n";//declare payload variable
 		//wait for message
 		result+="while("+payload.getName()+"==null) {\n";
 		//read message from memory
@@ -231,8 +230,8 @@ public class RecieveImpl extends ScriptImpl implements Recieve {
 		result+="\t\tif(fact instanceof JiacMessage) {\n";
 		result+="\t\t\tJiacMessage jiacMessage = (JiacMessage)fact;\n";
 		//check the payload and address
-		result+="\t\t\tif(jiacMessage.getPayload() instanceof "+payload.getType()+" && jiacMessage.getHeader(IJiacMessage.Header.SEND_TO).equals(address)) {\n";
-		result+="\t\t\t\tmemory.remove(jiacMessage);";
+		result+="\t\t\tif(jiacMessage.getPayload() instanceof "+payload.getType()+" && jiacMessage.getHeader(IJiacMessage.Header.SEND_TO).equals(groupAddress)) {\n";
+		result+="\t\t\t\tmemory.remove(jiacMessage);\n";
 		result+="\t\t\t\t"+payload.getName()+" = jiacMessage.getPayload();\n";
 		result+="\t\t\t\tbreak;\n";//message found leave foreach block
 		result+="\t\t\t}\n";//closing if

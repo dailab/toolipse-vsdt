@@ -37,8 +37,9 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link jiacbeans.impl.AgentBeanImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link jiacbeans.impl.AgentBeanImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link jiacbeans.impl.AgentBeanImpl#getSubprocesses <em>Subprocesses</em>}</li>
- *   <li>{@link jiacbeans.impl.AgentBeanImpl#isHasTimeEventHandler <em>Has Time Event Handler</em>}</li>
- *   <li>{@link jiacbeans.impl.AgentBeanImpl#isHasMessageEventHandler <em>Has Message Event Handler</em>}</li>
+ *   <li>{@link jiacbeans.impl.AgentBeanImpl#isHandlingTimeoutEvent <em>Handling Timeout Event</em>}</li>
+ *   <li>{@link jiacbeans.impl.AgentBeanImpl#isHandlingMessageEvent <em>Handling Message Event</em>}</li>
+ *   <li>{@link jiacbeans.impl.AgentBeanImpl#isHandlingTimeEvent <em>Handling Time Event</em>}</li>
  * </ul>
  * </p>
  *
@@ -133,44 +134,64 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 	protected EList<SubProcess> subprocesses;
 
 	/**
-	 * The default value of the '{@link #isHasTimeEventHandler() <em>Has Time Event Handler</em>}' attribute.
+	 * The default value of the '{@link #isHandlingTimeoutEvent() <em>Handling Timeout Event</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isHasTimeEventHandler()
+	 * @see #isHandlingTimeoutEvent()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean HAS_TIME_EVENT_HANDLER_EDEFAULT = false;
+	protected static final boolean HANDLING_TIMEOUT_EVENT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isHasTimeEventHandler() <em>Has Time Event Handler</em>}' attribute.
+	 * The cached value of the '{@link #isHandlingTimeoutEvent() <em>Handling Timeout Event</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isHasTimeEventHandler()
+	 * @see #isHandlingTimeoutEvent()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean hasTimeEventHandler = HAS_TIME_EVENT_HANDLER_EDEFAULT;
+	protected boolean handlingTimeoutEvent = HANDLING_TIMEOUT_EVENT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isHasMessageEventHandler() <em>Has Message Event Handler</em>}' attribute.
+	 * The default value of the '{@link #isHandlingMessageEvent() <em>Handling Message Event</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isHasMessageEventHandler()
+	 * @see #isHandlingMessageEvent()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean HAS_MESSAGE_EVENT_HANDLER_EDEFAULT = false;
+	protected static final boolean HANDLING_MESSAGE_EVENT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isHasMessageEventHandler() <em>Has Message Event Handler</em>}' attribute.
+	 * The cached value of the '{@link #isHandlingMessageEvent() <em>Handling Message Event</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isHasMessageEventHandler()
+	 * @see #isHandlingMessageEvent()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean hasMessageEventHandler = HAS_MESSAGE_EVENT_HANDLER_EDEFAULT;
+	protected boolean handlingMessageEvent = HANDLING_MESSAGE_EVENT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isHandlingTimeEvent() <em>Handling Time Event</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHandlingTimeEvent()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean HANDLING_TIME_EVENT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isHandlingTimeEvent() <em>Handling Time Event</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isHandlingTimeEvent()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean handlingTimeEvent = HANDLING_TIME_EVENT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -298,8 +319,8 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isHasTimeEventHandler() {
-		return hasTimeEventHandler;
+	public boolean isHandlingTimeoutEvent() {
+		return handlingTimeoutEvent;
 	}
 
 	/**
@@ -307,11 +328,11 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setHasTimeEventHandler(boolean newHasTimeEventHandler) {
-		boolean oldHasTimeEventHandler = hasTimeEventHandler;
-		hasTimeEventHandler = newHasTimeEventHandler;
+	public void setHandlingTimeoutEvent(boolean newHandlingTimeoutEvent) {
+		boolean oldHandlingTimeoutEvent = handlingTimeoutEvent;
+		handlingTimeoutEvent = newHandlingTimeoutEvent;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.AGENT_BEAN__HAS_TIME_EVENT_HANDLER, oldHasTimeEventHandler, hasTimeEventHandler));
+			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.AGENT_BEAN__HANDLING_TIMEOUT_EVENT, oldHandlingTimeoutEvent, handlingTimeoutEvent));
 	}
 
 	/**
@@ -319,8 +340,8 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isHasMessageEventHandler() {
-		return hasMessageEventHandler;
+	public boolean isHandlingMessageEvent() {
+		return handlingMessageEvent;
 	}
 
 	/**
@@ -328,11 +349,32 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setHasMessageEventHandler(boolean newHasMessageEventHandler) {
-		boolean oldHasMessageEventHandler = hasMessageEventHandler;
-		hasMessageEventHandler = newHasMessageEventHandler;
+	public void setHandlingMessageEvent(boolean newHandlingMessageEvent) {
+		boolean oldHandlingMessageEvent = handlingMessageEvent;
+		handlingMessageEvent = newHandlingMessageEvent;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.AGENT_BEAN__HAS_MESSAGE_EVENT_HANDLER, oldHasMessageEventHandler, hasMessageEventHandler));
+			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.AGENT_BEAN__HANDLING_MESSAGE_EVENT, oldHandlingMessageEvent, handlingMessageEvent));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isHandlingTimeEvent() {
+		return handlingTimeEvent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHandlingTimeEvent(boolean newHandlingTimeEvent) {
+		boolean oldHandlingTimeEvent = handlingTimeEvent;
+		handlingTimeEvent = newHandlingTimeEvent;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.AGENT_BEAN__HANDLING_TIME_EVENT, oldHandlingTimeEvent, handlingTimeEvent));
 	}
 
 	/**
@@ -366,10 +408,12 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 				return getImports();
 			case JiacbeansPackage.AGENT_BEAN__SUBPROCESSES:
 				return getSubprocesses();
-			case JiacbeansPackage.AGENT_BEAN__HAS_TIME_EVENT_HANDLER:
-				return isHasTimeEventHandler();
-			case JiacbeansPackage.AGENT_BEAN__HAS_MESSAGE_EVENT_HANDLER:
-				return isHasMessageEventHandler();
+			case JiacbeansPackage.AGENT_BEAN__HANDLING_TIMEOUT_EVENT:
+				return isHandlingTimeoutEvent();
+			case JiacbeansPackage.AGENT_BEAN__HANDLING_MESSAGE_EVENT:
+				return isHandlingMessageEvent();
+			case JiacbeansPackage.AGENT_BEAN__HANDLING_TIME_EVENT:
+				return isHandlingTimeEvent();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -409,11 +453,14 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 				getSubprocesses().clear();
 				getSubprocesses().addAll((Collection<? extends SubProcess>)newValue);
 				return;
-			case JiacbeansPackage.AGENT_BEAN__HAS_TIME_EVENT_HANDLER:
-				setHasTimeEventHandler((Boolean)newValue);
+			case JiacbeansPackage.AGENT_BEAN__HANDLING_TIMEOUT_EVENT:
+				setHandlingTimeoutEvent((Boolean)newValue);
 				return;
-			case JiacbeansPackage.AGENT_BEAN__HAS_MESSAGE_EVENT_HANDLER:
-				setHasMessageEventHandler((Boolean)newValue);
+			case JiacbeansPackage.AGENT_BEAN__HANDLING_MESSAGE_EVENT:
+				setHandlingMessageEvent((Boolean)newValue);
+				return;
+			case JiacbeansPackage.AGENT_BEAN__HANDLING_TIME_EVENT:
+				setHandlingTimeEvent((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -448,11 +495,14 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 			case JiacbeansPackage.AGENT_BEAN__SUBPROCESSES:
 				getSubprocesses().clear();
 				return;
-			case JiacbeansPackage.AGENT_BEAN__HAS_TIME_EVENT_HANDLER:
-				setHasTimeEventHandler(HAS_TIME_EVENT_HANDLER_EDEFAULT);
+			case JiacbeansPackage.AGENT_BEAN__HANDLING_TIMEOUT_EVENT:
+				setHandlingTimeoutEvent(HANDLING_TIMEOUT_EVENT_EDEFAULT);
 				return;
-			case JiacbeansPackage.AGENT_BEAN__HAS_MESSAGE_EVENT_HANDLER:
-				setHasMessageEventHandler(HAS_MESSAGE_EVENT_HANDLER_EDEFAULT);
+			case JiacbeansPackage.AGENT_BEAN__HANDLING_MESSAGE_EVENT:
+				setHandlingMessageEvent(HANDLING_MESSAGE_EVENT_EDEFAULT);
+				return;
+			case JiacbeansPackage.AGENT_BEAN__HANDLING_TIME_EVENT:
+				setHandlingTimeEvent(HANDLING_TIME_EVENT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -480,10 +530,12 @@ public class AgentBeanImpl extends EObjectImpl implements AgentBean {
 				return imports != null && !imports.isEmpty();
 			case JiacbeansPackage.AGENT_BEAN__SUBPROCESSES:
 				return subprocesses != null && !subprocesses.isEmpty();
-			case JiacbeansPackage.AGENT_BEAN__HAS_TIME_EVENT_HANDLER:
-				return hasTimeEventHandler != HAS_TIME_EVENT_HANDLER_EDEFAULT;
-			case JiacbeansPackage.AGENT_BEAN__HAS_MESSAGE_EVENT_HANDLER:
-				return hasMessageEventHandler != HAS_MESSAGE_EVENT_HANDLER_EDEFAULT;
+			case JiacbeansPackage.AGENT_BEAN__HANDLING_TIMEOUT_EVENT:
+				return handlingTimeoutEvent != HANDLING_TIMEOUT_EVENT_EDEFAULT;
+			case JiacbeansPackage.AGENT_BEAN__HANDLING_MESSAGE_EVENT:
+				return handlingMessageEvent != HANDLING_MESSAGE_EVENT_EDEFAULT;
+			case JiacbeansPackage.AGENT_BEAN__HANDLING_TIME_EVENT:
+				return handlingTimeEvent != HANDLING_TIME_EVENT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

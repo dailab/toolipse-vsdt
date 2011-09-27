@@ -24,8 +24,9 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link jiacbeans.AgentBean#getActions <em>Actions</em>}</li>
  *   <li>{@link jiacbeans.AgentBean#getImports <em>Imports</em>}</li>
  *   <li>{@link jiacbeans.AgentBean#getSubprocesses <em>Subprocesses</em>}</li>
- *   <li>{@link jiacbeans.AgentBean#isHasTimeEventHandler <em>Has Time Event Handler</em>}</li>
- *   <li>{@link jiacbeans.AgentBean#isHasMessageEventHandler <em>Has Message Event Handler</em>}</li>
+ *   <li>{@link jiacbeans.AgentBean#isHandlingTimeoutEvent <em>Handling Timeout Event</em>}</li>
+ *   <li>{@link jiacbeans.AgentBean#isHandlingMessageEvent <em>Handling Message Event</em>}</li>
+ *   <li>{@link jiacbeans.AgentBean#isHandlingTimeEvent <em>Handling Time Event</em>}</li>
  * </ul>
  * </p>
  *
@@ -168,56 +169,82 @@ public interface AgentBean extends EObject {
 	EList<SubProcess> getSubprocesses();
 
 	/**
-	 * Returns the value of the '<em><b>Has Time Event Handler</b></em>' attribute.
+	 * Returns the value of the '<em><b>Handling Timeout Event</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Has Time Event Handler</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Handling Timeout Event</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Has Time Event Handler</em>' attribute.
-	 * @see #setHasTimeEventHandler(boolean)
-	 * @see jiacbeans.JiacbeansPackage#getAgentBean_HasTimeEventHandler()
+	 * @return the value of the '<em>Handling Timeout Event</em>' attribute.
+	 * @see #setHandlingTimeoutEvent(boolean)
+	 * @see jiacbeans.JiacbeansPackage#getAgentBean_HandlingTimeoutEvent()
 	 * @model required="true"
 	 * @generated
 	 */
-	boolean isHasTimeEventHandler();
+	boolean isHandlingTimeoutEvent();
 
 	/**
-	 * Sets the value of the '{@link jiacbeans.AgentBean#isHasTimeEventHandler <em>Has Time Event Handler</em>}' attribute.
+	 * Sets the value of the '{@link jiacbeans.AgentBean#isHandlingTimeoutEvent <em>Handling Timeout Event</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Has Time Event Handler</em>' attribute.
-	 * @see #isHasTimeEventHandler()
+	 * @param value the new value of the '<em>Handling Timeout Event</em>' attribute.
+	 * @see #isHandlingTimeoutEvent()
 	 * @generated
 	 */
-	void setHasTimeEventHandler(boolean value);
+	void setHandlingTimeoutEvent(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Has Message Event Handler</b></em>' attribute.
+	 * Returns the value of the '<em><b>Handling Message Event</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Has Message Event Handler</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Handling Message Event</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Has Message Event Handler</em>' attribute.
-	 * @see #setHasMessageEventHandler(boolean)
-	 * @see jiacbeans.JiacbeansPackage#getAgentBean_HasMessageEventHandler()
+	 * @return the value of the '<em>Handling Message Event</em>' attribute.
+	 * @see #setHandlingMessageEvent(boolean)
+	 * @see jiacbeans.JiacbeansPackage#getAgentBean_HandlingMessageEvent()
 	 * @model required="true"
 	 * @generated
 	 */
-	boolean isHasMessageEventHandler();
+	boolean isHandlingMessageEvent();
 
 	/**
-	 * Sets the value of the '{@link jiacbeans.AgentBean#isHasMessageEventHandler <em>Has Message Event Handler</em>}' attribute.
+	 * Sets the value of the '{@link jiacbeans.AgentBean#isHandlingMessageEvent <em>Handling Message Event</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Has Message Event Handler</em>' attribute.
-	 * @see #isHasMessageEventHandler()
+	 * @param value the new value of the '<em>Handling Message Event</em>' attribute.
+	 * @see #isHandlingMessageEvent()
 	 * @generated
 	 */
-	void setHasMessageEventHandler(boolean value);
+	void setHandlingMessageEvent(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Handling Time Event</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Handling Time Event</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Handling Time Event</em>' attribute.
+	 * @see #setHandlingTimeEvent(boolean)
+	 * @see jiacbeans.JiacbeansPackage#getAgentBean_HandlingTimeEvent()
+	 * @model required="true"
+	 * @generated
+	 */
+	boolean isHandlingTimeEvent();
+
+	/**
+	 * Sets the value of the '{@link jiacbeans.AgentBean#isHandlingTimeEvent <em>Handling Time Event</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Handling Time Event</em>' attribute.
+	 * @see #isHandlingTimeEvent()
+	 * @generated
+	 */
+	void setHandlingTimeEvent(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->
