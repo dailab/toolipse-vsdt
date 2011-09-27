@@ -860,7 +860,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			run.setName("run");
 			Script content = visitFlowObjects(activity.getContainedFlowObjects());
 			_currentSubProcess = old;
-			run.setContent(content);
+			run.setContent(buildSequence(content, null, activity.getAssignments()));
 			sp.getMethods().add(run);
 			for(Property prop : activity.getProperties()){
 				JavaVariable var = beansFac.createJavaVariable();
