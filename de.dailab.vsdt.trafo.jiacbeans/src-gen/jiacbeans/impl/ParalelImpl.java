@@ -212,13 +212,13 @@ public class ParalelImpl extends ScriptImpl implements Paralel {
 			result += "};\n";
 		}
 		int started = 0;
-		while(started <= counter){
+		while(started < counter){
 			started++;
 			result+="t"+started+".start();\n";
 		}
 		started = 0;
 		result+="try {\n";
-		while(started <= counter){
+		while(started < counter){
 			started++;
 			result+="\tt"+started+".join();\n";
 		}
