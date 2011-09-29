@@ -1,9 +1,12 @@
 package de.dailab.vsdt.trafo.jiacbeans.export;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.imageio.stream.MemoryCacheImageInputStream;
+import javax.swing.text.DateFormatter;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import jiacbeans.Action;
@@ -36,6 +39,7 @@ import de.dailab.vsdt.Event;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.Implementation;
+import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.MultiLoopAttSet;
 import de.dailab.vsdt.Pool;
@@ -301,7 +305,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					if (hasDefault) {
 						// add assign to the tracking variable to the script
 						Sequence seq = beansFac.createSequence();
-						seq.getScripts().add(script);
+						if(script!=null)seq.getScripts().add(script);
 						seq.getScripts().add(createAssign("false", varName, null));
 						script= seq;
 					}
@@ -690,7 +694,29 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					//TODO start when the time has come
 				}
 			}
-//			if (event instanceof Intermediate) {
+			if (event instanceof Intermediate) {
+				Sequence seq = beansFac.createSequence();
+			 	if(event.isAsDuration()){
+					long timeout = 0;
+					try{
+						timeout = Long.parseLong(event.getTimeExpression().getExpression());
+					} catch(Exception e) {
+						CodeElement code = beansFac.createCodeElement();
+						code.setCode("//Cannot parse timeExpression");
+						seq.getScripts().add(code);
+					}
+					CodeElement wait = beansFac.createCodeElement();
+					wait.setCode("Thread.sleep("+timeout+");");
+					TryCatch tc = beansFac.createTryCatch();
+					tc.setTry(wait);
+					tc.getCatches().put("InterruptedException", beansFac.createCodeElement());
+					seq.getScripts().add(tc);
+				}else{
+//					Date 
+//					Date now = Date.
+				}
+			 	mapping = seq;
+			}
 //				Case timerCase= jadlFac.createCase();
 //				timerCase.setBody(jadlFac.createSeq()); // empty case body
 //				TimerEvent timer= jadlFac.createTimerEvent();
@@ -1180,23 +1206,16 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		code.setCode(typeName + " " + varName+";");
 		return code;
 	}
+	
 	/**
 	 * Wrap the branches in a Paralel Method call.
 	 * @param branches   contains Script of each Paralel branches
 	 * @return
 	 */
 	private Script wrapInPar(List<Script> branches){
-		int current = __PARCOUNTER;
-		__PARCOUNTER++;
-		CodeElement callCode = beansFac.createCodeElement();
-		callCode.setCode("__par"+current+"();");
-		Method parMethod = beansFac.createMethod();
 		Paralel par = beansFac.createParalel();
 		par.getBranches().addAll(branches);
-		parMethod.setContent(par);
-		parMethod.setName("__par"+current);
-		_currentBean.addMethod(parMethod);
-		return callCode;
+		return par;
 	}
 	
 	/**
@@ -1267,6 +1286,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		payload.setName(name);
 		payload.setType(type);
 		Send send = beansFac.createSend();
+		send.setAddress(channel.getChannel().getExpression());
+		send.setPayload(payload);
 		return send;
 	}
 	
