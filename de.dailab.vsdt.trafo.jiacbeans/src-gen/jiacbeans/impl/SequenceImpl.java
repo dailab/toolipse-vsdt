@@ -133,10 +133,13 @@ public class SequenceImpl extends ScriptImpl implements Sequence {
 		return super.eIsSet(featureID);
 	}
 	
-	public String toString(){
+	/**
+	 *  returns the Java Code representation
+	 */
+	public String toJavaCode(){
 		String result = "";
 		for(Script s : getScripts()){
-			result += s.toString()+"\n";
+			result += s.toJavaCode()+"\n";
 		}
 		return result;
 	}

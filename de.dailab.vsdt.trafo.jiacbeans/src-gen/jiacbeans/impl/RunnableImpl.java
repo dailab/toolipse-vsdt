@@ -216,10 +216,10 @@ public class RunnableImpl extends ScriptImpl implements jiacbeans.Runnable {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public String toString() {
+	public String toJavaCode() {
 		String content ="";
 		if(runContent!=null){
-			BufferedReader reader = new BufferedReader(new StringReader(runContent.toString()));
+			BufferedReader reader = new BufferedReader(new StringReader(runContent.toJavaCode()));
 			try{
 				String line = reader.readLine();
 				while(line!=null){

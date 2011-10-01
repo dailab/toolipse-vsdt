@@ -147,10 +147,10 @@ public class CodeElementImpl extends ScriptImpl implements CodeElement {
 	}
 
 	/**
-	 * prints out the code
+	 * returns the java code representation
 	 */
 	@Override
-	public String toString() {
+	public String toJavaCode() {
 		return code;
 	}
 

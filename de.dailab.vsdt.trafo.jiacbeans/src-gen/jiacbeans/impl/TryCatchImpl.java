@@ -271,10 +271,10 @@ public class TryCatchImpl extends ScriptImpl implements TryCatch {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public String toString() {
+	public String toJavaCode() {
 		String result = "try {\n";
 		if(try_!=null){
-			BufferedReader reader = new BufferedReader(new StringReader(try_.toString()));
+			BufferedReader reader = new BufferedReader(new StringReader(try_.toJavaCode()));
 			try{
 				String line = reader.readLine();
 				while(line!=null){
@@ -289,7 +289,7 @@ public class TryCatchImpl extends ScriptImpl implements TryCatch {
 			result+="} catch("+entry.getKey()+" e) {\n";
 			Script content = entry.getValue();
 			if(content!= null){
-				BufferedReader reader = new BufferedReader(new StringReader(content.toString()));
+				BufferedReader reader = new BufferedReader(new StringReader(content.toJavaCode()));
 				try{
 					String line = reader.readLine();
 					while(line!=null){
@@ -304,7 +304,7 @@ public class TryCatchImpl extends ScriptImpl implements TryCatch {
 		result+="}";
 		if(finally_!=null){
 			result+="finally {\n";
-			BufferedReader reader = new BufferedReader(new StringReader(finally_.toString()));
+			BufferedReader reader = new BufferedReader(new StringReader(finally_.toJavaCode()));
 			try{
 				String line = reader.readLine();
 				while(line!=null){

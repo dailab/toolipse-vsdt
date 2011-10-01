@@ -456,13 +456,13 @@ public class MethodImpl extends EObjectImpl implements Method {
 		}
 		result += params+") {\n";
 		if(content!=null){
-			String cS = content.toString();
+			String cS = content.toJavaCode();
 			if(cS!=null && !cS.equals("")){
-				BufferedReader reader = new BufferedReader(new StringReader(content.toString()));
+				BufferedReader reader = new BufferedReader(new StringReader(cS));
 				try{
 					String line = reader.readLine();
 					while(line!=null){
-						if(!line.equals(""))result+="\t\t"+line+"\n";
+						if(!line.equals(""))result+="\t"+line+"\n";
 						line = reader.readLine();
 					}
 				}catch(IOException e){
@@ -470,7 +470,7 @@ public class MethodImpl extends EObjectImpl implements Method {
 				}
 			}
 		}
-		result+="\t}";
+		result+="}";
 		return result;
 	}
 } //MethodImpl

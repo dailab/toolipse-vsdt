@@ -189,7 +189,7 @@ public class ParalelImpl extends ScriptImpl implements Paralel {
 		return super.eIsSet(featureID);
 	}
 	
-	public String toString(){
+	public String toJavaCode(){
 		int counter = 0;
 		String result  = "";
 		for (Script branch : branches) {
@@ -197,7 +197,7 @@ public class ParalelImpl extends ScriptImpl implements Paralel {
 			result += "Thread t"+counter +" = new Thread() {\n";
 			result += "\t public void run() {\n";
 			if(branch!=null){
-				BufferedReader reader = new BufferedReader(new StringReader(branch.toString()));
+				BufferedReader reader = new BufferedReader(new StringReader(branch.toJavaCode()));
 				try{
 					String line = reader.readLine();
 					while(line!=null){

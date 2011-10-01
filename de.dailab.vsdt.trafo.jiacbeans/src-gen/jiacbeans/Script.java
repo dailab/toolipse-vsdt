@@ -20,4 +20,12 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Script extends EObject {
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String toJavaCode();
+
 } // Script

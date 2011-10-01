@@ -45,5 +45,12 @@ public class ScriptImpl extends EObjectImpl implements Script {
 		return JiacbeansPackage.Literals.SCRIPT;
 	}
 
+	/**
+	 * returns the java code representation
+	 */
+	public String toJavaCode() {
+		return "";
+	}
+
 
 } //ScriptImpl

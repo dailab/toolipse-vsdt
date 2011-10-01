@@ -214,7 +214,7 @@ public class SendImpl extends ScriptImpl implements Send {
 	 * return the java code representation
 	 */
 	@Override
-	public String toString() {
+	public String toJavaCode() {
 		String result = "";
 		result += "Action sendAction = retrieveAction(ICommunicationBean.ACTION_SEND);\n";
 		//Adress

@@ -212,7 +212,7 @@ public class RecieveImpl extends ScriptImpl implements Recieve {
 	 * return the java code representation
 	 */
 	@Override
-	public String toString() {
+	public String toJavaCode() {
 		String result = "";
 		result += "Action joinAction = retrieveAction(ICommunicationBean.ACTION_JOIN_GROUP);\n";
 		result += "Action leaveAction = retrieveAction(ICommunicationBean.ACTION_LEAVE_GROUP);\n";

@@ -275,11 +275,11 @@ public class IfThenElseImpl extends ScriptImpl implements IfThenElse {
 	 * prints itself as a Java Code
 	 */
 	@Override
-	public String toString() {
+	public String toJavaCode() {
 		String code = "";
 		code += "if("+condition+"){\n";
 		if(thenBranch!=null){
-			BufferedReader reader = new BufferedReader(new StringReader(thenBranch.toString()));
+			BufferedReader reader = new BufferedReader(new StringReader(thenBranch.toJavaCode()));
 			try{
 				String line = reader.readLine();
 				while(line!=null){
@@ -293,7 +293,7 @@ public class IfThenElseImpl extends ScriptImpl implements IfThenElse {
 		code+="}";
 		if(elseBranch!=null){
 			code+="else{\n";
-			BufferedReader reader = new BufferedReader(new StringReader(elseBranch.toString()));
+			BufferedReader reader = new BufferedReader(new StringReader(elseBranch.toJavaCode()));
 			try{
 				String line = reader.readLine();
 				while(line!=null){
