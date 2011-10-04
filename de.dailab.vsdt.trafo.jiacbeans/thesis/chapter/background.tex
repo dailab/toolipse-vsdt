@@ -162,7 +162,7 @@ The transformation to Jiac AgentBeans is in no way a replacement to the existing
 %                 JET                  %
 %======================================%
 \section{JET(Java Emitter Templates)}
-\textit{JET}\cite{JETWEB} is a code generating framework, developed as a part of the Eclipse Modelling Project \cite{EMPWEB}. Using the so-called templates, one can transform a model into various type of text, from a simple plain text up to text containing html, xml or java code.\\\\
+\textit{JET}\cite{JETWEB} is a code generating framework, developed as a part of the Eclipse Modelling Project \cite{EMPWEB}. Using the so-called templates, one can transform a model into various type of text, from a simple plain text up to text containing html, xml or java code. A naming convention exists for the JET-Template file according to the type of the generated text. For example the name of a template file generating a java code should end with \textit{.javajet}\\\\
 The transformation process is done in two steps( see figure \ref{fig:jet_process} ). First, the JET-Builder will translate the template file into a Java class holding a generate method. Then we can create an instance of the template class and call it's generate method to get the result String which we can process further for example writing it into a file. 
 \begin{figure}[h]
   \label{fig:jet_process}
@@ -172,7 +172,23 @@ The transformation process is done in two steps( see figure \ref{fig:jet_process
 \end{figure}\\
 
 \subsection{JET-Templates}
-JET-Templates uses a JSP-like syntax which makes it easy to write and understand. The following listing shows a simple example of a JET-Template that generates an XML:
+JET-Templates uses a JSP-like syntax which makes it easy to write and understand. There are three types of expression in JET-Syntax:
+\begin{enumerate}
+	\item \textbf{Directives} <\%@ \textit{directive \{attribute = "value"\}*}\%>\\
+	      Directives contains information for the JET-Engine. 
+	      
+	\item \textbf{Scriptlets} <\% \textit{scriplet} \%>\\
+	      With Scriptlets we can use any java code fragment in the template. 
+	      For example we can type cast the argument object into List:\\ 
+	      \lstinline{<% List<String> studentlist = (List<String>) argument; %>} \\
+	      These code fragments are executed at invocation time of the generate Method.
+	      
+	\item \textbf{Expressions} <\%= \textit{expression} \%>\\
+	      An expression contains a java expression which will be executed at invocation time, and it's result will be added into the StringBuffer.
+\end{enumerate}
+
+A set of JET templates is called transformation. It is possible to build this transformation with a main template which acts as a visitor and runs through the model, and this main template will then use other templates which handle a specific element of the model. For example, in UML to Java transformation you can have special templates that handles the package, class, variables and methods.\\\\
+The following listing shows a simple example of a JET-Template that generates an XML:
 \begin{lstlisting}[caption = a simple JET-Template]
 <% @ jet package="generator" imports="java.util.*" class="StudentListGenerator" %> 
 <?xml version="1.0" encoding="UTF-8"?>
@@ -181,15 +197,13 @@ JET-Templates uses a JSP-like syntax which makes it easy to write and understand
 	 <% for (Iterator i = elementList.iterator(); i.hasNext(); ) { %>
      <student><%=i.next()%></student>
    <% } %>
-<class>
+</class>
 \end{lstlisting}
 A Jet-Template starts with the so called \textbf{jet-directive}. It contains informations for the JET-Builder, for example the name of the translated Java class(also called the template class), the package in which the template class should be placed into and a list of classes that should be imported by the template class.
 
-
-The JET-Builder will then translate this template into the Java Class generator.StudentListGenerator:
+In the first step, the JET-Builder will then translate this template into the Java Class generator.StudentListGenerator:
 \begin{lstlisting}[caption = the translated Java-Class, language = Java]
 package generator;
-
 import java.util.*;
 
 public class StudentListGenerator
@@ -202,14 +216,12 @@ public class StudentListGenerator
     nl = null;
     return result;
   }
-
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
   protected final String TEXT_1 = " " + NL + "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
   protected final String TEXT_2 = NL + "<class>" + NL + "\t ";
   protected final String TEXT_3 = NL + "     <student>";
   protected final String TEXT_4 = "</student>";
-  protected final String TEXT_5 = NL + "<class>";
-
+  protected final String TEXT_5 = NL + "</class>";
   public String generate(Object argument)
   {
     final StringBuffer stringBuffer = new StringBuffer();
@@ -227,21 +239,29 @@ public class StudentListGenerator
 }
 
 \end{lstlisting}
-
-
-A set of JET templates is called transformation. It is possible to build this transformation with a main template which acts as a visitor and runs through the model, and this main template will then use other templates which handle a specific element of the model. For example, in UML to Java transformation you can have special templates that handles the package, class, variables and methods.\\\\
-
-\subsection{2 different JET-Versions}\\\\
-There are currently 2 different JET-Versions in the Eclipse Modelling Project. The older Version allows us to generate text with an Object as argument. In the template, one can type cast the argument variable into the class of our model. \\
-The Java Class translated from the JET-Template will have the generate method: \\
-\begin{lstlisting}[language=Java, caption=generate method translated from the JET-Template,
-label=lst:jet_generate]
-public String generate(Object argument){
-	...
-}
+The most interesting part of the java template class is the generate method. To get the text that should be generated, an instance of this class should be created and then we pass a list to the generate method, for example with the following code:
+\begin{lstlisting}[caption = calling the generate method, language = Java]
+  ...
+  List<String> students = new ArrayList<String>();
+  students.add("`Peter"');
+  students.add("`John"');
+  students.add("`Caroline"');
+  
+  StudentListGenerator generator = new StudentListGenerator();
+  generator.generate(students);
 \end{lstlisting}
 
-This JET-Version is effective if the model we want to generate the text from is a Java object. We get a String as a result which we can write into a File using the Java-IO or even Eclipse API.\\\\
+, where the result of the transformation will be:
+\begin{lstlisting}[caption = Result String of the transformation, language = xml]
+	<class>
+		<student>Peter</student>
+		<student>John</student>
+		<student>Caroline</student>
+	</class>
+\end{lstlisting}
+
+\subsection{2 different JET-Versions}\\\\
+There are currently 2 different JET-Versions in the Eclipse Modelling Project. The syntax and examples mentioned above correlate to the older Version of JET, which allows us to generate text with an Object as argument. In the template, the argument variable can be type casted into the class of our model. This JET-Version is effective if the model we want to generate the text from is a Java object. We get a String as a result which we can write into a File using the Java-IO or even Eclipse API.\\\\
 
 In the updated version of JET, also called JET2, some workspace and java related "'tag-libraries"' are provided, enabling us to do the transformation without using the Java and Eclipse API. Unfortunately, in this Version the model has to be an xml-File.
 To directly transform the BPMN directly from it's xml-Representation will be harder and the template will be confusing, therefore a decision has been made to implement the mapping using the existing transformation framework where an intermediate model class of the AgentBean will be created, and then transform this intermediate model into Java code using the older version of the JET Transformation.

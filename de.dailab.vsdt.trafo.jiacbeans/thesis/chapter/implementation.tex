@@ -77,18 +77,50 @@ You might notice, that this method is also responsible for the text formatting b
 The benefits of Model Driven Engineering are also found during the implementation of the AgentBean model. As we can see in Figure \ref{fig:agentbean_metamodel}, it is created graphically using eclipse's Ecore Tools - Ecore Diagramm. With the help of the EMF Generator each element of the model can be easily generated into JavaCode including a Factory class that can be used to instantiate an object of each generated class. This way, we only have to implement the method toJavaCode() for each newly added script, everything else are generated automatically. 
 
 
-
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %								        JET-Transformation                     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{JET-Transformation}
+The JET-Transformation consists of 4 Templates( see also Figure \ref{fig:transformation_structure}): 
+\begin{enumerate}
+	\item agentbeantemplate.javajet
+	\item subprocesstemplate.javajet
+	\item timeouteventhandler.javajet
+	\item messageeventhandler.javajet
+\end{enumerate}
 
+\begin{figure}[h]
+	\centering\includegraphics[width=1.0\textwidth]{images/templates_structure.png}
+	\caption{JET-Transformation Structure}
+	\label{fig:transformation_structure}
+\end{figure}
 
+The agentbeantemplate is the main template of the implemented JET-Transformation. An instance of it's Java template class are created by the JiacBeansResultSaver and the generate method will be invoked for each AgentBean model generated in the element mapping stage. 
 
+The subprocesstemplate is invoked by the agentbeantemplate and recursively by the subprocesstemplate itself for each subprocess( if any exists ) contained it's argument( an agentbean model or a subprocess model ). 
+
+Both timeouteventhandler and messageeventhandler are static templates, which means the result of the generate method does not depend on the argument object. They simply add an inner class TimeoutEventHandler or MessageEventHandler to the AgentBean. They are invoked by the agentbeantemplate if the value of the flag handlingTimeoutEvent or handlingMessageEvent of the agent bean model is true.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %           Merging generated and manually edited code         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Merging generated and manually edited code}
-One of the challenge in generating java code is how to handle code that has been manually edited.
+One of the challenge in generating java code is how to handle code that has been manually edited. Fortunately, the EMF comes with a solution to this problem : \textbf{JMerge}\cite{JMERGEFAQ}
+
+\subsection{JMerge}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                         Open Issues                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Open Issues}
+implementation not complete
+
+
+using JET2
+
+
+better mergerules to mix manually edited and generated code within a method
+
+
+
