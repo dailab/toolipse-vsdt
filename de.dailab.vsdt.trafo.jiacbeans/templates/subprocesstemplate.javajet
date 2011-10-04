@@ -1,4 +1,4 @@
-<%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="SubProcessGenerator" imports = "de.dailab.vsdt.trafo.jiacbeans.export.* jiacbeans.* java.util.*"%>
+<%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="SubProcessGenerator" imports = "de.dailab.vsdt.trafo.jiacbeans.export.* jiacbeans.* java.util.* java.io.*"%>
 <% SubProcess process = (SubProcess)argument; 
    String classDeclaration = "class "+process.getName();
    List<Method> methods = process.getMethods();
@@ -7,19 +7,41 @@
 %>
 <%=classDeclaration%>{
 
-	<% for(JavaVariable var: attributes){%>
-		<%= var.toString()%>;
-	<%}%>
+<% for(JavaVariable var: attributes){%>
+	<%= var.toString()%>;
+<%}%>
 
-	<% for(Method method : methods){%>
-		/**
-	 	 *  delete the generated tag after you edited this method
-		 *  @generated
-		 */
-		<%= method.toString()+"\n"%> 
-	<%}%>
+<% for(Method method : methods){%>
+	/**
+ 	 *  delete the generated tag after you edited this method
+	 *  @generated
+	 */
+	<%String cS = method.toString();
+	  String result = "";
+	  BufferedReader reader = new BufferedReader(new StringReader(cS));
+	  try{
+	  	String line = reader.readLine();
+		while(line!=null){
+		  if(!line.equals(""))result+="\t"+line+"\n";
+		  line = reader.readLine();
+		}
+	  }catch(IOException e){}
+	%>
+<%= result+"\n"%> 
+<%}%>
 
-	<% for(SubProcess sub : subprocesses){%>
-		<%=generate(sub)%>
-	<%}%>
+<% for(SubProcess sub : subprocesses){%>
+	<%String cS = generate(sub);
+	  String result = "";
+	  BufferedReader reader = new BufferedReader(new StringReader(cS));
+	  try{
+	  	String line = reader.readLine();
+		while(line!=null){
+		  if(!line.equals(""))result+="\t"+line+"\n";
+		  line = reader.readLine();
+		}
+	  }catch(IOException e){}
+	%>
+<%= result+"\n"%>
+<%}%>
 }

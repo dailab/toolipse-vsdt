@@ -1,5 +1,4 @@
-
-<%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="JavaCodeGenerator" imports = "de.dailab.vsdt.trafo.jiacbeans.export.* jiacbeans.* java.util.*"%>
+<%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="JavaCodeGenerator" imports = "jiacbeans.* java.util.* java.io.BufferedReader java.io.StringReader java.io.IOException"%>
 <% AgentBean bean = (AgentBean)argument; 
    String packageName = bean.getPackageName();
    String packageDeclaration = "";
@@ -17,6 +16,7 @@
    }
    SubProcessGenerator spg = new SubProcessGenerator();
 %>
+
 <%=packageDeclaration%>
 
 import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;
@@ -43,14 +43,61 @@ import <%=i%>;
 	if(act!=null){%>
 	@Expose(name = <%=act.getName()%>, scope = ActionScope.GLOBAL)
 	<%}%>
-	<%= method.toString()+"\n"%> 
+	<%String cS = method.toString();
+	  String result = "";
+	  BufferedReader reader = new BufferedReader(new StringReader(cS));
+	  try{
+	  	String line = reader.readLine();
+		while(line!=null){
+		  if(!line.equals(""))result+="\t"+line+"\n";
+		  line = reader.readLine();
+		}
+	  }catch(IOException e){}
+	%>
+<%= result+"\n"%> 
 <%}%>
 
 <% for(SubProcess sub : subprocesses){%>
-	<%=spg.generate(sub)%>
+<%String cS = spg.generate(sub);
+	  String result = "";
+	  BufferedReader reader = new BufferedReader(new StringReader(cS));
+	  try{
+	  	String line = reader.readLine();
+		while(line!=null){
+		  if(!line.equals(""))result+="\t"+line+"\n";
+		  line = reader.readLine();
+		}
+	  }catch(IOException e){}
+	%>
+<%= result+"\n"%>
 <%}%>
 
 <% if(bean.isHandlingTimeoutEvent()){%>
-	<%=new TimeoutEventHandlerGenerator().generate(null)%>
+<%String cS = new TimeoutEventHandlerGenerator().generate(null);
+	  String result = "";
+	  BufferedReader reader = new BufferedReader(new StringReader(cS));
+	  try{
+	  	String line = reader.readLine();
+		while(line!=null){
+		  if(!line.equals(""))result+="\t"+line+"\n";
+		  line = reader.readLine();
+		}
+	  }catch(IOException e){}
+	%>
+<%= result+"\n"%>
+<%}%>
+<% if(bean.isHandlingMessageEvent()){%>
+<%String cS = new MessageEventHandlerGenerator().generate(null);
+	  String result = "";
+	  BufferedReader reader = new BufferedReader(new StringReader(cS));
+	  try{
+	  	String line = reader.readLine();
+		while(line!=null){
+		  if(!line.equals(""))result+="\t"+line+"\n";
+		  line = reader.readLine();
+		}
+	  }catch(IOException e){}
+	%>
+<%= result+"\n"%>
 <%}%>
 }
