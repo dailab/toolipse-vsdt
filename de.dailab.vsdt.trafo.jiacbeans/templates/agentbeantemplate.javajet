@@ -16,7 +16,6 @@
    }
    SubProcessGenerator spg = new SubProcessGenerator();
 %>
-
 <%=packageDeclaration%>
 
 import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;
