@@ -25,6 +25,12 @@ public class Util {
 		return toJavaType(type);
 	}
 	
+	public static String getNonPrimitiveType(String type){
+		if(type.equals("int"))return "Integer";
+		if(type.equals("bool"))return "Boolean";
+		if(type.equals("char"))return "Character";
+		return type.substring(0, 1).toUpperCase()+type.substring(1);
+	}
 	/**
 	 * convert the given type to be java conform 
 	 * @param type
