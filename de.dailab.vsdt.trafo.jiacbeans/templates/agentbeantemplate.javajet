@@ -1,4 +1,4 @@
-<%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="JavaCodeGenerator" imports = "jiacbeans.* java.util.* java.io.BufferedReader java.io.StringReader java.io.IOException"%>
+<%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="AgentBeanGenerator" imports = "jiacbeans.* java.util.* java.io.BufferedReader java.io.StringReader java.io.IOException"%>
 <% AgentBean bean = (AgentBean)argument; 
    String packageName = bean.getPackageName();
    String packageDeclaration = "";
