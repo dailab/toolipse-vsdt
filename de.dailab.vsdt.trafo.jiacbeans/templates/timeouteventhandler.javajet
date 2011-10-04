@@ -3,10 +3,7 @@ class TimeoutEventHandler extends Thread{
 	long timeout;
 	Thread toStop;
 	boolean triggered = false;
-	/**
-	 *  delete the generated tag after you edited this method
-	 *  @generated
-	 */
+	
 	public TimeoutEventHandler(long timeout, Thread toStop){
 		this.timeout = timeout;
 		this.toStop = toStop;
