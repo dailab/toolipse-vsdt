@@ -12,7 +12,7 @@ public class TimeoutEventHandlerGenerator
   }
 
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-  protected final String TEXT_1 = "class TimeoutEventHandler extends Thread{" + NL + "\tlong timeout;" + NL + "\tThread toStop;" + NL + "\tboolean triggered = false;" + NL + "\t" + NL + "\tpublic TimeoutEventHandler(long timeout, Thread toStop){" + NL + "\t\tthis.timeout = timeout;" + NL + "\t\tthis.toStop = toStop;" + NL + "\t}" + NL + "\tpublic void run(){" + NL + "\t\ttry {" + NL + "\t\t\tThread.sleep(timeout);" + NL + "\t\t\ttriggered = true;" + NL + "\t\t\ttoStop.stop();" + NL + "\t\t}catch(InterruptedException e ) { }" + NL + "\t}" + NL + "\tpublic boolean hasBeenTriggered(){" + NL + "\t\treturn triggered;" + NL + "\t}" + NL + "}";
+  protected final String TEXT_1 = "\tclass TimeoutEventHandler extends Thread{" + NL + "\t\tlong timeout;" + NL + "\t\tThread toStop;" + NL + "\t\tboolean triggered = false;" + NL + "\t\t" + NL + "\t\tpublic TimeoutEventHandler(long timeout, Thread toStop){" + NL + "\t\t\tthis.timeout = timeout;" + NL + "\t\t\tthis.toStop = toStop;" + NL + "\t\t}" + NL + "\t\tpublic void run(){" + NL + "\t\t\ttry {" + NL + "\t\t\t\tThread.sleep(timeout);" + NL + "\t\t\t\ttriggered = true;" + NL + "\t\t\t\ttoStop.stop();" + NL + "\t\t\t}catch(InterruptedException e ) { }" + NL + "\t\t}" + NL + "\t\tpublic boolean hasBeenTriggered(){" + NL + "\t\t\treturn triggered;" + NL + "\t\t}" + NL + "\t}";
 
   public String generate(Object argument)
   {

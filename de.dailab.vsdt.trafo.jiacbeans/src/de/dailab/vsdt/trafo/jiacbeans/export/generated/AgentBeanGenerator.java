@@ -133,34 +133,12 @@ public class AgentBeanGenerator
     }
     stringBuffer.append(TEXT_23);
      if(bean.isHandlingTimeoutEvent()){
-    String cS = new TimeoutEventHandlerGenerator().generate(null);
-	  String result = "";
-	  BufferedReader reader = new BufferedReader(new StringReader(cS));
-	  try{
-	  	String line = reader.readLine();
-		while(line!=null){
-		  if(!line.equals(""))result+="\t"+line+"\n";
-		  line = reader.readLine();
-		}
-	  }catch(IOException e){}
-	
     stringBuffer.append(TEXT_24);
-    stringBuffer.append( result+"\n");
+    stringBuffer.append( new TimeoutEventHandlerGenerator().generate(null));
     }
      if(bean.isHandlingMessageEvent()){
-    String cS = new MessageEventHandlerGenerator().generate(null);
-	  String result = "";
-	  BufferedReader reader = new BufferedReader(new StringReader(cS));
-	  try{
-	  	String line = reader.readLine();
-		while(line!=null){
-		  if(!line.equals(""))result+="\t"+line+"\n";
-		  line = reader.readLine();
-		}
-	  }catch(IOException e){}
-	
     stringBuffer.append(TEXT_25);
-    stringBuffer.append( result+"\n");
+    stringBuffer.append( new MessageEventHandlerGenerator().generate(null));
     }
     stringBuffer.append(TEXT_26);
     return stringBuffer.toString();
