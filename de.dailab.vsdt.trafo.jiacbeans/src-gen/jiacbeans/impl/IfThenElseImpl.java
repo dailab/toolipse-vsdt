@@ -287,12 +287,12 @@ public class IfThenElseImpl extends ScriptImpl implements IfThenElse {
 					line = reader.readLine();
 				}
 			}catch(IOException e){
-				code += "\t//Error occured while reading loop body\n";
+				code += "\t//Error occured while reading if branch\n";
 			}
 		}
 		code+="}";
 		if(elseBranch!=null){
-			code+="else{\n";
+			code+=" else {\n";
 			BufferedReader reader = new BufferedReader(new StringReader(elseBranch.toJavaCode()));
 			try{
 				String line = reader.readLine();
@@ -301,7 +301,7 @@ public class IfThenElseImpl extends ScriptImpl implements IfThenElse {
 					line = reader.readLine();
 				}
 			}catch(IOException e){
-				code += "\t//Error occured while reading loop body\n";
+				code += "\t//Error occured while reading else branch\n";
 			}
 			code+="}";
 		}
