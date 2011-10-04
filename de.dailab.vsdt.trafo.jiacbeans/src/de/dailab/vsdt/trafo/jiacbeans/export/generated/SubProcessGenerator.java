@@ -3,6 +3,7 @@ package de.dailab.vsdt.trafo.jiacbeans.export.generated;
 import de.dailab.vsdt.trafo.jiacbeans.export.*;
 import jiacbeans.*;
 import java.util.*;
+import java.io.*;
 
 public class SubProcessGenerator
 {
@@ -17,16 +18,17 @@ public class SubProcessGenerator
 
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
   protected final String TEXT_1 = "";
-  protected final String TEXT_2 = "{" + NL + "" + NL + "\t";
-  protected final String TEXT_3 = NL + "\t\t";
-  protected final String TEXT_4 = ";" + NL + "\t";
-  protected final String TEXT_5 = NL + NL + "\t";
-  protected final String TEXT_6 = NL + "\t\t/**" + NL + "\t \t *  delete the generated tag after you edited this method" + NL + "\t\t *  @generated" + NL + "\t\t */" + NL + "\t\t";
-  protected final String TEXT_7 = " " + NL + "\t";
-  protected final String TEXT_8 = NL + NL + "\t";
-  protected final String TEXT_9 = NL + "\t\t";
+  protected final String TEXT_2 = "{" + NL;
+  protected final String TEXT_3 = NL + "\t";
+  protected final String TEXT_4 = ";";
+  protected final String TEXT_5 = NL;
+  protected final String TEXT_6 = NL + "\t/**" + NL + " \t *  delete the generated tag after you edited this method" + NL + "\t *  @generated" + NL + "\t */" + NL + "\t";
+  protected final String TEXT_7 = NL;
+  protected final String TEXT_8 = " ";
+  protected final String TEXT_9 = NL;
   protected final String TEXT_10 = NL + "\t";
-  protected final String TEXT_11 = NL + "}";
+  protected final String TEXT_11 = NL;
+  protected final String TEXT_12 = NL + "}";
 
   public String generate(Object argument)
   {
@@ -48,16 +50,39 @@ public class SubProcessGenerator
     stringBuffer.append(TEXT_5);
      for(Method method : methods){
     stringBuffer.append(TEXT_6);
-    stringBuffer.append( method.toString()+"\n");
+    String cS = method.toString();
+	  String result = "";
+	  BufferedReader reader = new BufferedReader(new StringReader(cS));
+	  try{
+	  	String line = reader.readLine();
+		while(line!=null){
+		  if(!line.equals(""))result+="\t"+line+"\n";
+		  line = reader.readLine();
+		}
+	  }catch(IOException e){}
+	
     stringBuffer.append(TEXT_7);
-    }
+    stringBuffer.append( result+"\n");
     stringBuffer.append(TEXT_8);
-     for(SubProcess sub : subprocesses){
-    stringBuffer.append(TEXT_9);
-    stringBuffer.append(generate(sub));
-    stringBuffer.append(TEXT_10);
     }
+    stringBuffer.append(TEXT_9);
+     for(SubProcess sub : subprocesses){
+    stringBuffer.append(TEXT_10);
+    String cS = generate(sub);
+	  String result = "";
+	  BufferedReader reader = new BufferedReader(new StringReader(cS));
+	  try{
+	  	String line = reader.readLine();
+		while(line!=null){
+		  if(!line.equals(""))result+="\t"+line+"\n";
+		  line = reader.readLine();
+		}
+	  }catch(IOException e){}
+	
     stringBuffer.append(TEXT_11);
+    stringBuffer.append( result+"\n");
+    }
+    stringBuffer.append(TEXT_12);
     return stringBuffer.toString();
   }
 }
