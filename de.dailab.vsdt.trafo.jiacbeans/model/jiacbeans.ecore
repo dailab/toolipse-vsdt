@@ -49,7 +49,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Trigger"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Script"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Script">
+    <eOperations name="toJavaCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Sequence" eSuperTypes="#//Script">
     <eStructuralFeatures xsi:type="ecore:EReference" name="scripts" upperBound="-1"
         eType="#//Script"/>
