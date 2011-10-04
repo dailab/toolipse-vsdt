@@ -16,9 +16,10 @@ import org.eclipse.emf.codegen.merge.java.facade.ast.ASTFacadeHelper;
 import org.eclipse.emf.codegen.merge.java.facade.ast.ASTJCompilationUnit;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.jet.internal.compiler.templates.JET2JavaGenerator;
 
 import de.dailab.vsdt.trafo.MappingResultSaver;
-import de.dailab.vsdt.trafo.jiacbeans.export.generated.JavaCodeGenerator;
+import de.dailab.vsdt.trafo.jiacbeans.export.generated.AgentBeanGenerator;
 
 public class JiacBeansResultSaver extends MappingResultSaver {
 
@@ -33,11 +34,11 @@ public class JiacBeansResultSaver extends MappingResultSaver {
 		ASTFacadeHelper astFacadeHelper = new ASTFacadeHelper();
 		model.setConvertToStandardBraceStyle(true);
 		model.setLeadingTabReplacement("\t");
-		model.initialize(astFacadeHelper, getClass().getResource("mergerules.xml").toString()); 
+		model.initialize(astFacadeHelper, getClass().getResource("mergerules.xml").toString());
 		JMerger jMerger = new JMerger(model); 
 		JiacBeansExportWrapper wrapper = (JiacBeansExportWrapper) this.wrapper;
 		wrapper.setBaseDirectory(baseDirectory);
-		JavaCodeGenerator generator = new JavaCodeGenerator();
+		AgentBeanGenerator generator = new AgentBeanGenerator();
 		for(AgentBean bean : wrapper.getBeans()){
 			String packageName = bean.getPackageName();
 			packageName.replaceAll(".", "/");
@@ -65,7 +66,7 @@ public class JiacBeansResultSaver extends MappingResultSaver {
 					FileWriter writer = new FileWriter(f);
 					writer.write(mergedContents);
 					writer.flush();
-				}catch(WrappedException e){
+				}catch(Exception e){
 					//if something goes wrong overwrite the file
 					FileWriter writer = new FileWriter(f);
 					writer.write(content);
