@@ -72,9 +72,9 @@ import <%=i%>;
 <%}%>
 
 <% if(bean.isHandlingTimeoutEvent()){%>
-<%= new TimeoutEventHandlerGenerator().generate(null)+"\n"%>
+<%= new TimeoutEventHandlerGenerator().generate(null)%>
 <%}%>
 <% if(bean.isHandlingMessageEvent()){%>
-<%= new MessageEventHandlerGenerator().generate(null)+"\n"%>
+<%= new MessageEventHandlerGenerator().generate(null)%>
 <%}%>
 }
