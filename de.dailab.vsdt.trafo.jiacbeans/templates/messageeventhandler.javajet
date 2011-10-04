@@ -1,55 +1,55 @@
 <%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="MessageEventHandlerGenerator"%>
-class MessageEventHandler extends Thread{
-	Thread toStop;
-	boolean triggered = false;
-	String address;
-	Class payloadClass;
-	SpaceObserver<IFact> observer;
-	Action joinAction;
-	Action leaveAction;
-	IGroupAddress groupAddress;
-	
-	public MessageEventHandler(String channel, String payloadType, Thread toStop){
-		address = channel;
-		this.toStop = toStop;
-		joinAction = retrieveAction(ICommunicationBean.ACTION_JOIN_GROUP);
-		leaveAction = retrieveAction(ICommunicationBean.ACTION_LEAVE_GROUP);
-		groupAddress = CommunicationAddressFactory.createGroupAddress(address);
-		try {
-			payloadClass = ClassLoader.getSystemClassLoader().loadClass(payloadType);
-		} catch (ClassNotFoundException e) {
-			log.error("Class "+payloadType+" not Found!");
-			e.printStackTrace();
-		} 
-		observer = new SpaceObserver<IFact>(){
-			public void notify(SpaceEvent<? extends IFact> event) {
-				WriteCallEvent<IJiacMessage> wce = (WriteCallEvent<IJiacMessage>) event;
-				IJiacMessage msg = wce.getObject();
-				if(msg.getHeader(IJiacMessage.Header.SEND_TO).equals(address) &&
-				   payloadClass.isInstance(wce.getObject().getPayload())){
-					memory.remove(wce.getObject());
-					compensate();
+	class MessageEventHandler extends Thread{
+		Thread toStop;
+		boolean triggered = false;
+		String address;
+		Class payloadClass;
+		SpaceObserver<IFact> observer;
+		Action joinAction;
+		Action leaveAction;
+		IGroupAddress groupAddress;
+		
+		public MessageEventHandler(String channel, String payloadType, Thread toStop){
+			address = channel;
+			this.toStop = toStop;
+			joinAction = retrieveAction(ICommunicationBean.ACTION_JOIN_GROUP);
+			leaveAction = retrieveAction(ICommunicationBean.ACTION_LEAVE_GROUP);
+			groupAddress = CommunicationAddressFactory.createGroupAddress(address);
+			try {
+				payloadClass = ClassLoader.getSystemClassLoader().loadClass(payloadType);
+			} catch (ClassNotFoundException e) {
+				log.error("Class "+payloadType+" not Found!");
+				e.printStackTrace();
+			} 
+			observer = new SpaceObserver<IFact>(){
+				public void notify(SpaceEvent<? extends IFact> event) {
+					WriteCallEvent<IJiacMessage> wce = (WriteCallEvent<IJiacMessage>) event;
+					IJiacMessage msg = wce.getObject();
+					if(msg.getHeader(IJiacMessage.Header.SEND_TO).equals(address) &&
+					   payloadClass.isInstance(wce.getObject().getPayload())){
+						memory.remove(wce.getObject());
+						compensate();
+					}
 				}
-			}
-		};		
+			};		
+		}
+		
+		public void run(){
+			invoke(joinAction, new Serializable[]{groupAddress});
+			memory.attach(observer);
+		}
+		
+		public void compensate(){
+			triggered = true;
+			detach();
+		}
+		
+		public void detach(){
+			memory.detach(observer);
+			invoke(leaveAction, new Serializable[]{groupAddress});
+		}
+		
+		public boolean hasBeenTriggered(){
+			return triggered;
+		}
 	}
-	
-	public void run(){
-		invoke(joinAction, new Serializable[]{groupAddress});
-		memory.attach(observer);
-	}
-	
-	public void compensate(){
-		triggered = true;
-		detach();
-	}
-	
-	public void detach(){
-		memory.detach(observer);
-		invoke(leaveAction, new Serializable[]{groupAddress});
-	}
-	
-	public boolean hasBeenTriggered(){
-		return triggered;
-	}
-}

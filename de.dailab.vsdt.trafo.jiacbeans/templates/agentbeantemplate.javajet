@@ -72,31 +72,9 @@ import <%=i%>;
 <%}%>
 
 <% if(bean.isHandlingTimeoutEvent()){%>
-<%String cS = new TimeoutEventHandlerGenerator().generate(null);
-	  String result = "";
-	  BufferedReader reader = new BufferedReader(new StringReader(cS));
-	  try{
-	  	String line = reader.readLine();
-		while(line!=null){
-		  if(!line.equals(""))result+="\t"+line+"\n";
-		  line = reader.readLine();
-		}
-	  }catch(IOException e){}
-	%>
-<%= result+"\n"%>
+<%= new TimeoutEventHandlerGenerator().generate(null)+"\n"%>
 <%}%>
 <% if(bean.isHandlingMessageEvent()){%>
-<%String cS = new MessageEventHandlerGenerator().generate(null);
-	  String result = "";
-	  BufferedReader reader = new BufferedReader(new StringReader(cS));
-	  try{
-	  	String line = reader.readLine();
-		while(line!=null){
-		  if(!line.equals(""))result+="\t"+line+"\n";
-		  line = reader.readLine();
-		}
-	  }catch(IOException e){}
-	%>
-<%= result+"\n"%>
+<%= new MessageEventHandlerGenerator().generate(null)+"\n"%>
 <%}%>
 }
