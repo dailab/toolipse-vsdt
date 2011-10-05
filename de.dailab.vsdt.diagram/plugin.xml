@@ -248,7 +248,7 @@
             class="de.dailab.vsdt.diagram.sheet.VsdtPropertySection">
             <input type="org.eclipse.gmf.runtime.notation.View"/>
             <input type="org.eclipse.gef.EditPart"/>
-            <input type="de.dailab.vsdt.diagram.navigator.VsdtAbstractNavigatorItem"/>
+            <!--<input type="de.dailab.vsdt.diagram.navigator.VsdtAbstractNavigatorItem"/>-->
          </propertySection>
       </propertySections>
    </extension>
@@ -494,7 +494,7 @@
        </propertyTester>
    </extension>
 
-	   <extension point="org.eclipse.ui.navigator.viewer">
+	  <!-- <extension point="org.eclipse.ui.navigator.viewer">
       <?gmfgen generated="true"?>
       <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
          <includes>
@@ -508,7 +508,7 @@
             <actionExtension pattern="de.dailab.vsdt.diagram.navigatorActionProvider"/>
          </includes>
       </viewerActionBinding>
-   </extension>
+   </extension>-->
 
    <!--<extension point="org.eclipse.ui.navigator.navigatorContent">
       <?gmfgen generated="true"?>
@@ -586,7 +586,7 @@
       </actionProvider>
    </extension>-->
    
-	   <extension point="org.eclipse.ui.navigator.linkHelper">
+	<!--   <extension point="org.eclipse.ui.navigator.linkHelper">
       <?gmfgen generated="true"?>
       <linkHelper
             id="de.dailab.vsdt.diagram.navigatorLinkHelper"
@@ -602,6 +602,7 @@
          </selectionEnablement>
       </linkHelper>
    </extension>
+   -->
    <extension point="org.eclipse.emf.validation.constraintProviders">
       <?gmfgen generated="true"?>
             <category id="Audit_1" mandatory="false" name="VsdtAudits">
