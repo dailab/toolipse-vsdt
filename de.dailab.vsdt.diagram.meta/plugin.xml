@@ -188,7 +188,7 @@
             class="de.dailab.vsdt.meta.diagram.sheet.VsdtPropertySection">
             <input type="org.eclipse.gmf.runtime.notation.View"/>
             <input type="org.eclipse.gef.EditPart"/>
-            <input type="de.dailab.vsdt.meta.diagram.navigator.VsdtAbstractNavigatorItem"/>
+            <!--<input type="de.dailab.vsdt.meta.diagram.navigator.VsdtAbstractNavigatorItem"/>-->
          </propertySection>
       </propertySections>
    </extension>
@@ -312,7 +312,7 @@
            class="de.dailab.vsdt.meta.diagram.part.VsdtDomainModelElementTester">
        </propertyTester>
    </extension>
-
+<!--
 	   <extension point="org.eclipse.ui.navigator.viewer">
       <?gmfgen generated="true"?>
       <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
@@ -328,7 +328,7 @@
          </includes>
       </viewerActionBinding>
    </extension>
-
+   
    <extension point="org.eclipse.ui.navigator.navigatorContent">
       <?gmfgen generated="true"?>
       <navigatorContent
@@ -421,6 +421,7 @@
          </selectionEnablement>
       </linkHelper>
    </extension>
+   -->
    <extension point="org.eclipse.ui.commands">
       <?gmfgen generated="true"?>
       <command
