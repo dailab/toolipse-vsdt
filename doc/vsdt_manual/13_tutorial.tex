@@ -140,6 +140,11 @@ conditions, and service invocations.
 
 \begin{enumerate}
 
+	\item First of all, you have to make sure that the diagram is marked as being
+	\emph{executable}, which can be set in the Business Process System's properties
+	sheet.  This flag is used for distinguishing process models which are intended
+	for code generation from those intended for documentation only.
+
 	\item To define Services and/or Messages, select the \emph{Services...} and
 	\emph{Message Channels...} buttons from the Business Process Diagram's property
 	sheet.  Alternatively, Services can also be imported using the Web Service
@@ -161,12 +166,12 @@ conditions, and service invocations.
 	Business Process Diagram's properties sheet.  These data types can then be
 	used as types for Properties.
 	
-	\item To assign a value to a Property, you have to create an Assignment.  Open
-	the property sheet of some element in the process and click the \emph{Assignments...}
-	button.  Create a new Assignment, select the Property and enter an Expression.
-	Click the button with the dots (\dots) on it to open another dialog helping
-	you to enter and validate an expression using the VSDT Expression Language
-	VXL (see Appendix~\ref{sec:vxl}).
+	\item To assign a value to a Property, you have to create an Assignment.
+	Open the property sheet of some element in the process and click the
+	\emph{Assignments...} button.  Create a new Assignment, select the Property
+	and enter an Expression.  Click the button with the dots (\dots) on it to
+	open another dialog helping you to enter and validate an expression using
+	the VSDT Expression Language VXL (see Appendix~\ref{sec:vxl}).
 	
 	\item Now that the Properties are declared and have values assigned to them,
 	they can be used e.g.\ in condition expressions.  Select a Sequence Flow
@@ -246,7 +251,7 @@ Expressions, Conditions, and Assignments.
 		\item When using the VSDT Expression Language (VXL, see Section
 		\ref{sec:user_features_exp}), the interpreting simulation will help you
 		validating the several condition and assignment expressions used throughout
-		the process.
+		the process. Make sure that the process is marked as being exectuable.
 	\end{itemize}
 
 \end{enumerate}
@@ -261,6 +266,9 @@ Once all three validations are successful, the diagram can be translated to
 executable code.  Of course, there might still be semantic errors in the process
 the validation can not uncover, so you should think about thoroughly testing the
 resulting program code before deploying it to productive use.
+
+Before invoking the transformation to code, make sure that the diagram is marked
+as being executable in the Business Process Diagram's properties sheet.
 	
 \begin{enumerate}
 
