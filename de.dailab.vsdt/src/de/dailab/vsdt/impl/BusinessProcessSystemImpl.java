@@ -203,7 +203,7 @@ public class BusinessProcessSystemImpl extends IdObjectImpl implements BusinessP
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean EXECUTABLE_EDEFAULT = false;
+	protected static final boolean EXECUTABLE_EDEFAULT = true;
 
 	/**
 	 * The cached value of the '{@link #isExecutable() <em>Executable</em>}' attribute.

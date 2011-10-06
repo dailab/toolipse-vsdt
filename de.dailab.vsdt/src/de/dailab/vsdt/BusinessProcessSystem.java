@@ -224,6 +224,7 @@ public interface BusinessProcessSystem extends IdObject {
 
 	/**
 	 * Returns the value of the '<em><b>Executable</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Executable</em>' attribute isn't clear,
@@ -233,7 +234,7 @@ public interface BusinessProcessSystem extends IdObject {
 	 * @return the value of the '<em>Executable</em>' attribute.
 	 * @see #setExecutable(boolean)
 	 * @see de.dailab.vsdt.VsdtPackage#getBusinessProcessSystem_Executable()
-	 * @model
+	 * @model default="true"
 	 * @generated
 	 */
 	boolean isExecutable();
