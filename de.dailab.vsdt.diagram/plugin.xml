@@ -1474,7 +1474,7 @@
 					</or>
 				</enablement>
 			</action>-->
-			<action
+			<!--<action
 				class="de.dailab.vsdt.diagram.actions.OrganizePropertiesAction"
 				definitionId="de.dailab.vsdt.diagram.commands.orgProperties"
 				enablesFor="1" icon="icons/Property.gif"
@@ -1510,7 +1510,7 @@
 						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractPoolEditPart" />
 					</or>
 				</enablement>
-			</action>
+			</action>-->
 			
 		</objectContribution>
 	</extension>
