@@ -147,6 +147,22 @@ public class CodeElementImpl extends ScriptImpl implements CodeElement {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (code: ");
+		result.append(code);
+		result.append(')');
+		return result.toString();
+	}
+
+	/**
 	 * returns the java code representation
 	 */
 	@Override

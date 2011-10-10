@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link jiacbeans.impl.ParalelImpl#getBranches <em>Branches</em>}</li>
- *   <li>{@link jiacbeans.impl.ParalelImpl#getSignIndex <em>Sign Index</em>}</li>
+ *   <li>{@link jiacbeans.impl.ParalelImpl#getBranchPrefix <em>Branch Prefix</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,23 +49,24 @@ public class ParalelImpl extends ScriptImpl implements Paralel {
 	protected EList<Script> branches;
 
 	/**
-	 * The default value of the '{@link #getSignIndex() <em>Sign Index</em>}' attribute.
+	 * The default value of the '{@link #getBranchPrefix() <em>Branch Prefix</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSignIndex()
+	 * @see #getBranchPrefix()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final int SIGN_INDEX_EDEFAULT = 1;
+	protected static final String BRANCH_PREFIX_EDEFAULT = "";
+
 	/**
-	 * The cached value of the '{@link #getSignIndex() <em>Sign Index</em>}' attribute.
+	 * The cached value of the '{@link #getBranchPrefix() <em>Branch Prefix</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSignIndex()
+	 * @see #getBranchPrefix()
 	 * @generated
 	 * @ordered
 	 */
-	protected int signIndex = SIGN_INDEX_EDEFAULT;
+	protected String branchPrefix = BRANCH_PREFIX_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -103,8 +104,8 @@ public class ParalelImpl extends ScriptImpl implements Paralel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public int getSignIndex() {
-		return signIndex;
+	public String getBranchPrefix() {
+		return branchPrefix;
 	}
 
 	/**
@@ -112,11 +113,11 @@ public class ParalelImpl extends ScriptImpl implements Paralel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSignIndex(int newSignIndex) {
-		int oldSignIndex = signIndex;
-		signIndex = newSignIndex;
+	public void setBranchPrefix(String newBranchPrefix) {
+		String oldBranchPrefix = branchPrefix;
+		branchPrefix = newBranchPrefix;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.PARALEL__SIGN_INDEX, oldSignIndex, signIndex));
+			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.PARALEL__BRANCH_PREFIX, oldBranchPrefix, branchPrefix));
 	}
 
 	/**
@@ -129,8 +130,8 @@ public class ParalelImpl extends ScriptImpl implements Paralel {
 		switch (featureID) {
 			case JiacbeansPackage.PARALEL__BRANCHES:
 				return getBranches();
-			case JiacbeansPackage.PARALEL__SIGN_INDEX:
-				return getSignIndex();
+			case JiacbeansPackage.PARALEL__BRANCH_PREFIX:
+				return getBranchPrefix();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -148,8 +149,8 @@ public class ParalelImpl extends ScriptImpl implements Paralel {
 				getBranches().clear();
 				getBranches().addAll((Collection<? extends Script>)newValue);
 				return;
-			case JiacbeansPackage.PARALEL__SIGN_INDEX:
-				setSignIndex((Integer)newValue);
+			case JiacbeansPackage.PARALEL__BRANCH_PREFIX:
+				setBranchPrefix((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -166,8 +167,8 @@ public class ParalelImpl extends ScriptImpl implements Paralel {
 			case JiacbeansPackage.PARALEL__BRANCHES:
 				getBranches().clear();
 				return;
-			case JiacbeansPackage.PARALEL__SIGN_INDEX:
-				setSignIndex(SIGN_INDEX_EDEFAULT);
+			case JiacbeansPackage.PARALEL__BRANCH_PREFIX:
+				setBranchPrefix(BRANCH_PREFIX_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -183,18 +184,35 @@ public class ParalelImpl extends ScriptImpl implements Paralel {
 		switch (featureID) {
 			case JiacbeansPackage.PARALEL__BRANCHES:
 				return branches != null && !branches.isEmpty();
-			case JiacbeansPackage.PARALEL__SIGN_INDEX:
-				return signIndex != SIGN_INDEX_EDEFAULT;
+			case JiacbeansPackage.PARALEL__BRANCH_PREFIX:
+				return BRANCH_PREFIX_EDEFAULT == null ? branchPrefix != null : !BRANCH_PREFIX_EDEFAULT.equals(branchPrefix);
 		}
 		return super.eIsSet(featureID);
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (branchPrefix: ");
+		result.append(branchPrefix);
+		result.append(')');
+		return result.toString();
+	}
+
 	public String toJavaCode(){
 		int counter = 0;
 		String result  = "";
 		for (Script branch : branches) {
+			String branchName = branchPrefix+"_branch"+counter;
 			counter++;
-			result += "Thread t"+counter +" = new Thread() {\n";
+			result += "Thread " + branchName + " = new Thread() {\n";
 			result += "\t public void run() {\n";
 			if(branch!=null){
 				BufferedReader reader = new BufferedReader(new StringReader(branch.toJavaCode()));

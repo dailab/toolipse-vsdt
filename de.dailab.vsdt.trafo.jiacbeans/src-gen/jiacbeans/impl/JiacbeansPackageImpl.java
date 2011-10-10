@@ -684,7 +684,7 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getParalel_SignIndex() {
+	public EAttribute getParalel_BranchPrefix() {
 		return (EAttribute)paralelEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -905,7 +905,7 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 
 		paralelEClass = createEClass(PARALEL);
 		createEReference(paralelEClass, PARALEL__BRANCHES);
-		createEAttribute(paralelEClass, PARALEL__SIGN_INDEX);
+		createEAttribute(paralelEClass, PARALEL__BRANCH_PREFIX);
 
 		runnableEClass = createEClass(RUNNABLE);
 		createEReference(runnableEClass, RUNNABLE__RUN_CONTENT);
@@ -1041,7 +1041,7 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 
 		initEClass(paralelEClass, Paralel.class, "Paralel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParalel_Branches(), this.getScript(), null, "branches", null, 0, -1, Paralel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getParalel_SignIndex(), ecorePackage.getEInt(), "signIndex", "1", 0, 1, Paralel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getParalel_BranchPrefix(), ecorePackage.getEString(), "branchPrefix", "", 0, 1, Paralel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(runnableEClass, jiacbeans.Runnable.class, "Runnable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRunnable_RunContent(), this.getScript(), null, "runContent", null, 0, 1, jiacbeans.Runnable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

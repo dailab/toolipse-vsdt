@@ -272,6 +272,22 @@ public class IfThenElseImpl extends ScriptImpl implements IfThenElse {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (condition: ");
+		result.append(condition);
+		result.append(')');
+		return result.toString();
+	}
+
+	/**
 	 * prints itself as a Java Code
 	 */
 	@Override

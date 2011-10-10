@@ -771,13 +771,13 @@ public interface JiacbeansPackage extends EPackage {
 	int PARALEL__BRANCHES = SCRIPT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Sign Index</b></em>' attribute.
+	 * The feature id for the '<em><b>Branch Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARALEL__SIGN_INDEX = SCRIPT_FEATURE_COUNT + 1;
+	int PARALEL__BRANCH_PREFIX = SCRIPT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Paralel</em>' class.
@@ -1479,15 +1479,15 @@ public interface JiacbeansPackage extends EPackage {
 	EReference getParalel_Branches();
 
 	/**
-	 * Returns the meta object for the attribute '{@link jiacbeans.Paralel#getSignIndex <em>Sign Index</em>}'.
+	 * Returns the meta object for the attribute '{@link jiacbeans.Paralel#getBranchPrefix <em>Branch Prefix</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Sign Index</em>'.
-	 * @see jiacbeans.Paralel#getSignIndex()
+	 * @return the meta object for the attribute '<em>Branch Prefix</em>'.
+	 * @see jiacbeans.Paralel#getBranchPrefix()
 	 * @see #getParalel()
 	 * @generated
 	 */
-	EAttribute getParalel_SignIndex();
+	EAttribute getParalel_BranchPrefix();
 
 	/**
 	 * Returns the meta object for class '{@link jiacbeans.Runnable <em>Runnable</em>}'.
@@ -2084,12 +2084,12 @@ public interface JiacbeansPackage extends EPackage {
 		EReference PARALEL__BRANCHES = eINSTANCE.getParalel_Branches();
 
 		/**
-		 * The meta object literal for the '<em><b>Sign Index</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Branch Prefix</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PARALEL__SIGN_INDEX = eINSTANCE.getParalel_SignIndex();
+		EAttribute PARALEL__BRANCH_PREFIX = eINSTANCE.getParalel_BranchPrefix();
 
 		/**
 		 * The meta object literal for the '{@link jiacbeans.impl.RunnableImpl <em>Runnable</em>}' class.

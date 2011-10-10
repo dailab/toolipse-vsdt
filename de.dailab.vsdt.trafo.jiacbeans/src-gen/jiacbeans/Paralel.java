@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link jiacbeans.Paralel#getBranches <em>Branches</em>}</li>
- *   <li>{@link jiacbeans.Paralel#getSignIndex <em>Sign Index</em>}</li>
+ *   <li>{@link jiacbeans.Paralel#getBranchPrefix <em>Branch Prefix</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,30 +43,30 @@ public interface Paralel extends Script {
 	EList<Script> getBranches();
 
 	/**
-	 * Returns the value of the '<em><b>Sign Index</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
+	 * Returns the value of the '<em><b>Branch Prefix</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Sign Index</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Branch Prefix</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sign Index</em>' attribute.
-	 * @see #setSignIndex(int)
-	 * @see jiacbeans.JiacbeansPackage#getParalel_SignIndex()
-	 * @model default="1"
+	 * @return the value of the '<em>Branch Prefix</em>' attribute.
+	 * @see #setBranchPrefix(String)
+	 * @see jiacbeans.JiacbeansPackage#getParalel_BranchPrefix()
+	 * @model default=""
 	 * @generated
 	 */
-	int getSignIndex();
+	String getBranchPrefix();
 
 	/**
-	 * Sets the value of the '{@link jiacbeans.Paralel#getSignIndex <em>Sign Index</em>}' attribute.
+	 * Sets the value of the '{@link jiacbeans.Paralel#getBranchPrefix <em>Branch Prefix</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Sign Index</em>' attribute.
-	 * @see #getSignIndex()
+	 * @param value the new value of the '<em>Branch Prefix</em>' attribute.
+	 * @see #getBranchPrefix()
 	 * @generated
 	 */
-	void setSignIndex(int value);
+	void setBranchPrefix(String value);
 
 } // Paralel
