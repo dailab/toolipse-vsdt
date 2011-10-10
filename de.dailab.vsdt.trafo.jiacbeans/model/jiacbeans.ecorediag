@@ -308,7 +308,7 @@
     <children xmi:type="notation:Node" xmi:id="_wSwgwMEaEeCeoZmRo3bW5w" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_wSxH0MEaEeCeoZmRo3bW5w" type="5001">
       <children xmi:type="notation:Node" xmi:id="_E2KxoMGjEeCeoZmRo3bW5w" type="2001">
-        <element xmi:type="ecore:EAttribute" href="jiacbeans.ecore#//Paralel/signIndex"/>
+        <element xmi:type="ecore:EAttribute" href="jiacbeans.ecore#//Paralel/branchPrefix"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_E2KxocGjEeCeoZmRo3bW5w"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_wSxH0cEaEeCeoZmRo3bW5w"/>
@@ -650,7 +650,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_Mog1YcEbEeCeoZmRo3bW5w" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_Mog1YsEbEeCeoZmRo3bW5w" fontColor="4210752" fontName="Segoe UI" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="jiacbeans.ecore#//TryCatch/try"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Mog1Y8EbEeCeoZmRo3bW5w" points="[20, 0, 141, 226]$[159, 0, 280, 226]$[159, -220, 280, 6]$[-115, -220, 6, 6]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Mog1Y8EbEeCeoZmRo3bW5w" points="[20, 0, 141, 226]$[184, 0, 305, 226]$[184, -220, 305, 6]$[-115, -220, 6, 6]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_MomU8MEbEeCeoZmRo3bW5w" id="(0.9117647058823529,0.20930232558139536)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_MomU8cEbEeCeoZmRo3bW5w" id="(0.9646017699115044,0.5061728395061729)"/>
   </edges>
