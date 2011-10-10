@@ -210,8 +210,8 @@ public class ParalelImpl extends ScriptImpl implements Paralel {
 		int counter = 0;
 		String result  = "";
 		for (Script branch : branches) {
-			String branchName = branchPrefix+"_branch"+counter;
 			counter++;
+			String branchName = branchPrefix+"_branch"+counter;
 			result += "Thread " + branchName + " = new Thread() {\n";
 			result += "\t public void run() {\n";
 			if(branch!=null){
@@ -232,13 +232,13 @@ public class ParalelImpl extends ScriptImpl implements Paralel {
 		int started = 0;
 		while(started < counter){
 			started++;
-			result+="t"+started+".start();\n";
+			result+=branchPrefix+"_branch"+started+".start();\n";
 		}
 		started = 0;
 		result+="try {\n";
 		while(started < counter){
 			started++;
-			result+="\tt"+started+".join();\n";
+			result+="\t"+branchPrefix+"_branch"+started+".join();\n";
 		}
 		result+="} catch(InterruptedException e) {}";
 		return result;
