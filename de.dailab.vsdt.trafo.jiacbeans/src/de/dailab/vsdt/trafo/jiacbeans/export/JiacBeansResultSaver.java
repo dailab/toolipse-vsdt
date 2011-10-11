@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 import jiacbeans.AgentBean;
 
 import org.eclipse.emf.codegen.merge.java.JControlModel;
@@ -22,7 +21,12 @@ import de.dailab.vsdt.trafo.MappingResultSaver;
 import de.dailab.vsdt.trafo.jiacbeans.export.generated.AgentBeanGenerator;
 
 public class JiacBeansResultSaver extends MappingResultSaver {
-
+	
+	/**
+	 * no suffix is needed.
+	 * Normally we would like the result to be saved directly 
+	 * in a jiac project - source folder
+	 */
 	@Override
 	protected String getDirectorySuffix() {
 		return "";
@@ -30,12 +34,7 @@ public class JiacBeansResultSaver extends MappingResultSaver {
 
 	@Override
 	protected boolean internalSave(File baseDirectory) throws IOException {
-		JControlModel model = new JControlModel(); 
-		ASTFacadeHelper astFacadeHelper = new ASTFacadeHelper();
-		model.setConvertToStandardBraceStyle(true);
-		model.setLeadingTabReplacement("\t");
-		model.initialize(astFacadeHelper, getClass().getResource("mergerules.xml").toString());
-		JMerger jMerger = new JMerger(model); 
+		
 		JiacBeansExportWrapper wrapper = (JiacBeansExportWrapper) this.wrapper;
 		wrapper.setBaseDirectory(baseDirectory);
 		AgentBeanGenerator generator = new AgentBeanGenerator();
@@ -47,21 +46,26 @@ public class JiacBeansResultSaver extends MappingResultSaver {
 			String fileName = bean.getName();
 			File f = new File(folder,fileName+".java");
 			String content = generator.generate(bean);
-			System.out.println(content);
 			if(!f.exists()){
 				FileWriter writer = new FileWriter(f);
 				writer.write(content);
 				writer.flush();
 			}else{
-				//source=new generated code 
-				// set source
+				//code exists, initialize JMerger
+				JControlModel model = new JControlModel(); 
+				ASTFacadeHelper astFacadeHelper = new ASTFacadeHelper();
+				model.setConvertToStandardBraceStyle(true);
+				model.setLeadingTabReplacement("\t");
+				model.initialize(astFacadeHelper, getClass().getResource("mergerules.xml").toString());
+				JMerger jMerger = new JMerger(model); 
 				try{
+					//source = new generated code 
+					//target = existing code
 					jMerger.setSourceCompilationUnit(jMerger.createCompilationUnitForContents(content));
 					jMerger.setTargetCompilationUnit(jMerger.createCompilationUnitForInputStream(new FileInputStream(f))); //target=last generated code
 					jMerger.merge(); 
 					// extract merged contents
 					String mergedContents = jMerger.getTargetCompilationUnit().getContents();
-					System.out.println("merged =\n"+mergedContents);
 					// overwrite the target with the merged contents
 					FileWriter writer = new FileWriter(f);
 					writer.write(mergedContents);

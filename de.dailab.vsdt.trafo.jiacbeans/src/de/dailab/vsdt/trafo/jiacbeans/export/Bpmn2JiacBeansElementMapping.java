@@ -1,13 +1,7 @@
 package de.dailab.vsdt.trafo.jiacbeans.export;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-
-import javax.imageio.stream.MemoryCacheImageInputStream;
-import javax.swing.text.DateFormatter;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import jiacbeans.Action;
 import jiacbeans.ActivityMethod;
@@ -80,9 +74,16 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	SubProcess _currentSubProcess;
 	int __PARCOUNTER;
 	
+	@Override
+	public void initialize() {
+		expressionVisitor = new JiacBeansExpressionVisitor(true, true);
+	}
+	
+	
 	public JiacBeansExportWrapper getWrapper(){
 		return (JiacBeansExportWrapper)super.wrapper;
 	}
+	
 	@Override
 	protected void visitBusinessProcessSystem(BusinessProcessSystem bps) {
 		TrafoLog.trace("Visiting Business Process System '" + bps.getName() + "'");
@@ -127,7 +128,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			bean.getImports().add(clazz);
 		}
 		WorkflowMethod workflow = beansFac.createWorkflowMethod();
-		workflow.setName(pool.getParent().getName());
+		workflow.setName(Util.toJavaName(pool.getParent().getName()));
 		workflow.setVisibility(MethodImpl.PUBLIC);
 		_currentWorkflow = workflow;
 		_currentBean.addMethod(workflow);
@@ -229,6 +230,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		spJoin.setCode(activityName+".join();");
 		starter.add(spStart);
 		stopper.add(spJoin);
+		Sequence compensation = beansFac.createSequence();
 		//Event Handler Cases
 		List<BpmnEventHandlerCase> cases = block.getEventHandlerCases();
 		for (BpmnEventHandlerCase c : cases) {
@@ -248,6 +250,13 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					stop.setCode(eName+".stop();");
 					starter.add(start);
 					stopper.add(stop);
+					Script script = visitFlowObject(c.getCompensationElement());
+					if(script!=null && !script.toJavaCode().equals("")){
+						IfThenElse compensate = beansFac.createIfThenElse();
+						compensate.setCondition(eName+".hasBeenTriggered()");
+						compensate.setThenBranch(script);
+						compensation.getScripts().add(compensate);
+					}
 				}
 				break;
 			case MESSAGE:
@@ -276,10 +285,17 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					stop.setCode(eName+".stop();");
 					starter.add(start);
 					stopper.add(stop);
+					Script script = visitFlowObject(c.getCompensationElement());
+					if(script!=null && !script.toJavaCode().equals("")){
+						IfThenElse compensate = beansFac.createIfThenElse();
+						compensate.setCondition(eName+".hasBeenTriggered()");
+						compensate.setThenBranch(script);
+						compensation.getScripts().add(compensate);
+					}
 				}
 				break;
 			case ERROR:
-				String flagName = Util.toJavaName(e.getNameOrId())+"ErrorFlag";
+				String flagName = Util.toJavaName(e.getNameOrId())+"_ErrorFlag";
 				JavaVariable flag = beansFac.createJavaVariable();
 				flag.setName(flagName);
 				flag.setType("boolean");
@@ -291,6 +307,13 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				tc.setTry(runScript);
 				tc.getCatches().put("Exception", catchCode);
 				sp.setRunContent(tc);
+				Script script = visitFlowObject(c.getCompensationElement());
+				if(script!=null && !script.toJavaCode().equals("")){
+					IfThenElse compensate = beansFac.createIfThenElse();
+					compensate.setCondition(eName);
+					compensate.setThenBranch(script);
+					compensation.getScripts().add(compensate);
+				}
 				break;
 			default:
 				break;
@@ -303,14 +326,13 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		tcs.getScripts().addAll(stopper);
 		TryCatch tc = beansFac.createTryCatch();
 		tc.setTry(tcs);
-		tc.getCatches().put("InterruptedException", beansFac.createCodeElement());
+		tc.getCatches().put("InterruptedException", compensation);
 		mapping.getScripts().add(tc);
 		return mapping;
 	}
 	
 	private Script visitBpmnElementToSkip(BpmnElementToSkip block){
 		Script toSkip = visitFlowObject(block.getElement());
-		Script compensate = visitFlowObject(block.getEventHandlerCase().getCompensationElement());
 		IfThenElse skipCondition = beansFac.createIfThenElse();
 		String condition = "false";//default
 		Event e = block.getEventHandlerCase().getIntermediate();
@@ -320,15 +342,16 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			condition = "!"+eName+"_TimeoutHandler.hasBeenTriggered()";
 			break;
 		case ERROR:
-			condition = "!"+eName+"ErrorFlag";
+			condition = "!"+eName+"_ErrorFlag";
+			break;
 		case MESSAGE:
 			condition = "!"+eName+"_MessageHandler.hasBeenTriggered()";
+			break;
 		default:
 			break;
 		}
 		skipCondition.setCondition(condition);
 		skipCondition.setThenBranch(toSkip);
-		skipCondition.setElseBranch(compensate);
 		return skipCondition;
 	}
 	private Script visitBpmnBlock(BpmnBlock block){
@@ -346,7 +369,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 						scripts.add(script);
 					}
 				}
-				mapping= wrapInPar(scripts);
+				mapping= wrapInPar(scripts,Util.toJavaName(fork.getNameOrId()));
 				break;
 			case OR:
 				boolean hasDefault= block.getDefaultElement() != null;
@@ -372,10 +395,14 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 						scripts.add(ifThenElse);
 					}
 				}
-				Script par= wrapInPar(scripts);
+				Script par= wrapInPar(scripts,Util.toJavaName(fork.getNameOrId()));
 				if (hasDefault) {
 					// create tracking variable
-					CodeElement declaration= createVariableDeclaration(varName, "boolean");
+					JavaVariable var = beansFac.createJavaVariable();
+					var.setName(varName);
+					var.setType("boolean");
+					//add the tracking variable to the bean, otherwise it will not be visible in the thread
+					_currentBean.getAttributes().add(var);
 					CodeElement assign= createAssign("true", varName, null);
 					// create default case
 					FlowObject flowObject= block.getDefaultElement();
@@ -383,7 +410,6 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					IfThenElse ifThenElse= buildIfThenElse(varName, script, null);
 					// create sequence holding the par and the other stuff
 					Sequence seq= beansFac.createSequence();
-					seq.getScripts().add(declaration);
 					seq.getScripts().add(assign);
 					seq.getScripts().add(par);
 					seq.getScripts().add(ifThenElse);
@@ -822,7 +848,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			if (event.getRuleExpression() != null && event.getRuleExpression().getExpression() != null) {
 				children.add(visitEvent(event, TriggerType.RULE));
 			}
-			mapping= wrapInPar(children);
+			mapping= wrapInPar(children,"startEvent");
 			break;
 		default:
 			TrafoLog.warn("Could not find a Mapping for Event " + event.getNameOrId());
@@ -913,10 +939,11 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			_currentBean.getSubprocesses().add(sp);
 			Method run = beansFac.createMethod();
 			run.setName("run");
+			run.setVisibility(MethodImpl.PUBLIC);
+			_currentSubProcess.getMethods().add(run);
 			Script content = visitFlowObjects(activity.getContainedFlowObjects());
 			_currentSubProcess = old;
 			run.setContent(buildSequence(content, null, activity.getAssignments()));
-			sp.getMethods().add(run);
 			for(Property prop : activity.getProperties()){
 				JavaVariable var = beansFac.createJavaVariable();
 				var.setType(Util.getType(prop));
@@ -1198,12 +1225,6 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		return seq;
 	}
 	
-	@Override
-	public void initialize() {
-		expressionVisitor = new JiacBeansExpressionVisitor(true, true);
-	}
-	
-	
 	
 	/**
 	 * Create a new code element for the given assignment.
@@ -1241,9 +1262,10 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	 * @param branches   contains Script of each Paralel branches
 	 * @return
 	 */
-	private Script wrapInPar(List<Script> branches){
+	private Script wrapInPar(List<Script> branches, String prefix){
 		Paralel par = beansFac.createParalel();
 		par.getBranches().addAll(branches);
+		par.setBranchPrefix(prefix);
 		return par;
 	}
 	
@@ -1322,9 +1344,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	
 	/**
 	 * create recieve-sequence:
-	 * - join the group
-	 * - keep reading memory until the message arrive
-	 * - leave the group
+	 * see also jiacbeans.impl.RecieveImpl
 	 * 
 	 * @param message		the channel from where to receive
 	 * @param participant	to whom the message is directed (e.g. a group)
