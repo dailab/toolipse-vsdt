@@ -4,13 +4,31 @@
 %                     BPMN2BPEL                      %
 %====================================================%
 \section{BPMN to BPEL}
+In the BPMN Specification, the mapping from BPMN to BPEL has been included since the first version. In fact the development of BPMN was driven by the lack of standard notation for the WS-BPEL\cite{weidlich2008}. 
 
+
+For this Project the specified mapping from BPMN2BPEL are used to gain a better understanding of the notation's semantics.
 
 
 %====================================================%
 %                     BPMN2Agents                    %
 %====================================================%
-\section{BPMN to Agents}
+%======== Existing Transformation to Jiac ===========%
+\section{Existing Transformation to JiacV}
+At the moment, the VSDT is already equipped with a transformation of BPMN to JiacV, which generates the JADL(Jiac Agent Description Language).
+The transformation to Jiac AgentBeans is in no way a replacement to the existing transformation. Instead both transformations shall complement each other as the products of both transformations have their own advantages, some of which we can find in the following table:
+\begin{table}[htbp]
+	\centering
+		\begin{tabularx}{\linewidth}{|l|X|}\hline\hline
+			\multicolumn{2}{|c|}{\textbf{Advantages of:}} \\\hline
+			\multicolumn{1}{|c|}{JADL} & \multicolumn{1}{c|}{AgentBeans}\\\hline
+			can be deployed to a running jiac application &  Written fully in Java, therefore developer friendly.\\
+																										&  Java is more powerful that JADL.\\
+			                           										&  Better performance because no parser are involved.\\\hline\hline
+		\end{tabularx}
+\end{table}
+
+\section{WADE}
 A similar approach (designing agents behaviour with processes and transforming it into Java Code) has been developed by the Telecom Italia with their JADE-extension called WADE (Workflows and Agents Development Environment). While Jade was developed to simplify the implementation of Software Agents, WADE extended JADE with a workflow engine, making it possible to create Agents that executes tasks defined as workflows.
 
 \subsection{JADE (\textbf{J}ava \textbf{A}gent \textbf{DE}velopment Frameork)}

@@ -1,96 +1,255 @@
 \chapter{Mapping BPMN to Jiac AgentBeans}
 \label{chap:mapping}
-The element mapping from BPMN to Jiac AgentBeans is created based on the existing mapping to JiacV - JADL script. In comparation to a JADL script, an AgentBean is written completely in Java, enabling more possibilities in mapping concepts such as intermediate Event handling. This chapter will provide a tabular overview of the mapping.\\\\
-\textbf{\large{Business Process Diagram}}\\
-		\begin{tabularx}{\linewidth}{|l|X|}\hline\hline
-			\multicolumn{2}{|c|}{\textbf{Business Process Diagram}} \\\hline\hline
-			 Pool & A pool is currently mapped to an Agent Bean extending the AbstractMethodExposingBean. The name of the bean is derived from the pool name and the name of the business process diagram it is contained in.\\
-			 \includegraphics{images/mapping/pool.png}  & \includegraphics{images/mapping/poolcode.png}\\\hline
-			 \end{tabularx}\\\\
-			 
-			 
-		\begin{tabularx}{\linewidth}{|l|X|}\hline\hline
-			 Process & The process content in a pool is mapped to a Workflow Method in the generated AgentBean. Depending on the type of the StartEvent, an Action might be exposed, enabling this method to be invoked as a service. This method will contain a Script which is generated from the flowObjects contained in the process.\\
-			 \includegraphics[width=0.3\textwidth]{images/mapping/process.png}  & \includegraphics[width=0.7\textwidth]{images/mapping/processcode.png}\\\hline
-			 Lane & Lanes will not be mapped in this mapping\\\hline \hline
-		\end{tabularx}\\\\
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Events                          %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%				
-\textbf{\Large{Events}}\\\\
-For intermediate Events, an EventHandlerThread will be generated and started. If the intermediate Event is attached to an activity, the activity will also be started as a Thread. 
+The element mapping from BPMN to Jiac AgentBeans is created based on the existing mapping to JiacV - JADL script. In comparation to a JADL script, an AgentBean is written completely in Java, enabling more possibilities in mapping concepts such as intermediate Event handling. This chapter will provide a detailed overview of the mapping.\\\\
 
-		\begin{tabularx}{\linewidth}{|l|X|}\hline\hline
-			\multicolumn{2}{|c|}{\textbf{Start Events}} \\\hline\hline
-			 Timer & The generated process will be started in the execute() method of the JIAC AgentBean\\\hline
-			 Message & If the implementation is a Service, an action will be created, and the process can be started through a service call (invoke). If the implementation is a Message Channel, a Space Observer will be attached to the agents memory, and the process will start as soon as a message is recieved.\\\hline
-			 Rule & Rule start events are not regarded in the current mapping\\\hline
-			 Link & \\\hline
-			 Multiple & If a pool has multiple start events, each start event will be mapped according to it's respective trigger\\\hline\hline
-			 
-			 \multicolumn{2}{|c|}{\textbf{Intermediate Events}} \\\hline\hline
-			 Rule & not regarded in the current mapping\\\hline
-			 Timer & A TimerEventHandler will be created and started.\\\hline
-			 Message & A MessageEventHandler will be created and started. \\\hline
-			 Link & ...\\\hline
-			 Multiple & each event will be mapped according to it's respective trigger\\\hline
-			 Cancel & ... \\\hline
-			 Compensate & ... \\\hline
-			 Error & If attached to an activity, the method generated from the activity will be called in a try-catch block \\\hline\hline
-			 
-			 \multicolumn{2}{|c|}{\textbf{End Events}} \\\hline\hline
-			 Message & If implementation is Message Channel, a message with the payload will be written to the channel \\\hline
-			 Link & \\\hline
-			 Multiple & \\\hline
-			 Cancel & \\\hline
-			 Compensate & \\\hline
-			 Error & The generated service will throw an exception\\\hline
-			 Terminate & \\\hline
-		\end{tabularx}\\\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 4.1 Pools & Processes                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pools and Processes}
+Every pool in a process diagram will be mapped into an AgentBean. The name of the AgentBean will be derived from the Pool name, and the name of the process diagram it is contained in. If a Pool with the same name (e.g Mathematican) is contained in the business process diagrams ExtractRoot and Faculty, then the two agent beans \texttt{Mathematican\_ExtractRoot} and \texttt{Mathematican\_Faculty} will be created. Further, they are grouped in the package mathematican. 
 
-\textbf{\large{Activities}}\\\\
-Basically, an Activity-method will be created for each activity, and then a script calling this method will be added into the Workflow-method. This way, each activity can have their own scope of variables. 
+The process contained in a pool is mapped into a \textbf{workflow method}. Depending on the start event's type, this workflow method may be called in the execute method of the bean (for timer start event), it may be exposed as an action (for message start event with service implementation), or if the start event is a message start event with MessageChannel implementation, a SpaceObserver will be created and attached to the agent's memory, which will call the workflow method when a message with the payload and address as specified in the implementing message channel are written into the agent's memory.
+
+The mapping of a task contained in a process flow will be wrapped in the so called \textbf{activity method} which will be called by the workflow method. Special cases for tasks with event handler and subprocesses will be discussed in a later section.
+
+Lanes are currently ignored. A process of a lane will be handled as a process of the containing pool.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.80\textwidth]{images/mapping/pool_and_process.png}
+	\caption{Mapping example : Pool and Process}
+	\label{fig:pool+process}
+\end{figure}
+
+The Figure\ref{fig:pool+process} shows a simple example of a pool called Pool with the process doProcess. For the Pool, a Java class called Pool\_DoProcess will be created and it will have the workflow method called doProcess. In this example the message start event is implemented as a service, thus the workflow method is exposed as an Action as we can see in the following Listing \ref{list:pool+process}.  
+\begin{lstlisting}[language = Java, caption =  Mapped element: Pool and Process (Figure \ref{fig:pool+process}), label = list:pool+process]
+package pool;//derived from the pool name
+
+//some imports...
+
+public class Accounting_CalculatePrice extends AbstractMethodExposingBean{
 	
-		\begin{tabularx}{\linewidth}{|l|X|}\hline\hline
-			\multicolumn{2}{|c|}{\textbf{Activity}}\\\hline\hline
-			 Standard Loop & ... \\\hline
-			 Multi Instance Loop & ... \\\hline
-			 With Event Handler & the method generated will be started parallel to an EventHandlerThread. When the activity is completed, the EventHandlerThread will be terminated. In contrary, if the Event is trigerred before the activity is completed, the Thread performing the activity will be interrupted. \\\hline\hline	
-				\multicolumn{2}{|c|}{\textbf{Task}}\\\hline\hline
-					Manual & manual task will be ignored\\\hline
-			 		Recieve & ...\\\hline
-			 		Send & ...\\\hline
-			 		Service & service tasks will be mapped into a service call(invoke)\\\hline
-					Script & the given script will be added into the activity method. The script has to be written in java or the resulting code will have syntax error(not checked)\\\hline
-			 		Reference & ... \\\hline
-			 		User & ...\\\hline\hline
-			 \multicolumn{2}{|c|}{\textbf{Subprocess}} \\\hline\hline
-			 		Embedded & \\\hline
-			 		Reference & \\\hline
-					Independent & \\\hline
-					Transaction & \\\hline\hline
-		\end{tabularx}\\\\
-		
-	\textbf{\Large{Gateways}}\\\\
-		\begin{tabularx}{\linewidth}{|l|X|}\hline\hline
-		\multicolumn{2}{|c|}{\textbf{Gateway}}\\\hline\hline
-		XOR Data(Loop) & \\\hline
-		XOR Data(Block) & \\\hline
-		XOR Event & \\\hline
-		AND & Each branch will be wrapped in a paralel execution\\\hline
-		OR & \\\hline
-		COMPLEX & \\\hline\hline
-		\end{tabularx}\\\\
-		
-	\textbf{\Large{Other Elements}}\\\\
-		\begin{tabularx}{\linewidth}{|l|X|}\hline\hline
-		\multicolumn{2}{|c|}{\textbf{Connections}}\\\hline\hline
-		Sequence Flow & \\\hline
-		Message Flow& \\\hline
-		Association & \\\hline\hline
-		\multicolumn{2}{|c|}{\textbf{Artifact}}\\\hline\hline
-		Data Object & \\\hline
-		Text Annotation & text annotations can be added as a comment block in the code \\\hline
-		Group & \\\hline
-		Custom Artifact & \\\hline
-		\end{tabularx}\\\\
+	public final static String ACTION_DOPROCESS = "pool.Pool_DoProcess#doProcess"; 
+	
+	// process attribute would be declared here
+	[...]
+	@Expose(name = ACTION_DOPROCESS, scope = ActionScope.GLOBAL)
+	public double doProcess(double nettPrice, double taxRateInPercent) {
+		calculateTax();
+		addToNettPrice();
+		return totalPrice;
+	}
+	
+	private void calculateTax(){
+		[...]
+	}
+	
+	private void addToNettPrice(){
+		[...]
+	}
+}
+\end{lstlisting}
+
+
+\section{Workflow Structure}
+Workflow structure is mapped as the content of the workflow method. It defines the invocation structure of the flow objects contained in a process.
+
+\subsection{Sequence Flow}
+The mapping of a sequence flow is trivial. The mapped elements connected with a sequence flow will be invoked sequentially in the workflow method:
+
+\begin{tabularx}{\linewidth}{lcX}
+	\multirow{3}{*}{\includegraphics[width=0.4\textwidth]{images/mapping/sequence.png}} &  &	\texttt{	doA();}\\
+	& \textbf{\textcolor{blue}{=}}& \texttt{	doB();}\\
+	& & \texttt{	doC();}\\
+\end{tabularx}\\\\
+
+\subsection{Gateways}
+Branches of a gateway are wrapped according to the gateway's type. There are 5 different types of gateways:
+\begin{enumerate}
+	\item AND 
+	\item OR 
+	\item XOR\_Data 
+	\item XOR\_Event 
+	\item Complex 
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{AND-Gateway}\\
+In an AND-Gateway, all branch will be wrapped in parallel to one another. At runtime all branches are executed within a thread. 
+
+\begin{tabularx}{\linewidth}{lcX}
+	\multirow{18}{*}{\includegraphics[width=0.3\textwidth]{images/mapping/and-gateway.png}} &  & \texttt{[...]}\\
+	& & \texttt{Thread and\_branch1 = new Thread()\{}\\
+	& & \texttt{\hspace{10pt}public void run()\{}\\
+	& & \texttt{\hspace{20pt}doA();}\\
+	& & \texttt{\hspace{10pt}\}}\\
+	& & \texttt{\};}\\
+	& & \texttt{Thread and\_branch2 = new Thread()\{}\\
+	& & \texttt{\hspace{10pt}public void run()\{}\\
+	& \textbf{\textcolor{blue}{=}} & \texttt{\hspace{20pt}doB();}\\
+	& & \texttt{\hspace{10pt}\}}\\
+	& & \texttt{\};}\\
+	& & \texttt{and\_branch1.start();}\\
+	& & \texttt{and\_branch2.start();}\\
+	& & \texttt{try \{}\\
+	& & \texttt{\hspace{10pt}and\_branch1.join();}\\
+	& & \texttt{\hspace{10pt}and\_branch2.join();}\\
+	& & \texttt{\} catch(InterruptedException) \{ \}}\\
+	& & \texttt{[...]}\\
+\end{tabularx}\\\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textbf{(Inclusive)OR-Gateway}\\
+Branches of an OR-Gateway will also be executed in parallel to one another, but the content of a branch is additionally wrapped in an if-then block. At runtime, branches for which the condition is not hold will be skipped. However, if it has a branch with default condition, the default branch will only be executed if none of the other branches are executed.
+
+\begin{tabularx}{\linewidth}{lcX}
+	\multirow{22}{*}{\includegraphics[width=0.3\textwidth]{images/mapping/or-gateway.png}} &  & \texttt{[...]}\\
+	& & \texttt{Thread and\_branch1 = new Thread()\{}\\
+	& & \texttt{\hspace{10pt}public void run()\{}\\
+	& & \texttt{\hspace{20pt}if(cond1)\{}\\
+	& & \texttt{\hspace{30pt}doC();}\\
+	& & \texttt{\hspace{20pt}\}}\\
+	& & \texttt{\hspace{10pt}\}}\\
+	& & \texttt{\};}\\
+	& & \texttt{Thread and\_branch2 = new Thread()\{}\\
+	& & \texttt{\hspace{10pt}public void run()\{}\\
+	& & \texttt{\hspace{20pt}if(cond2)\{}\\
+	& \textbf{\textcolor{blue}{=}} & \texttt{\hspace{30pt}doB();}\\
+	& & \texttt{\hspace{20pt}\}}\\
+	& & \texttt{\hspace{10pt}\}}\\
+	& & \texttt{\};}\\
+	& & \texttt{and\_branch1.start();}\\
+	& & \texttt{and\_branch2.start();}\\
+	& & \texttt{try \{}\\
+	& & \texttt{\hspace{10pt}and\_branch1.join();}\\
+	& & \texttt{\hspace{10pt}and\_branch2.join();}\\
+	& & \texttt{\} catch(InterruptedException) \{ \}}\\
+	& & \texttt{[...]}\\
+\end{tabularx}\\\\
+
+
+\textbf{XOR\_Data-Gateway}\\
+Branches of an XOR\_Data are wrapped in an if-then-else block. Only one branch will actually be executed at runtime. \\
+
+\begin{tabularx}{\linewidth}{lcX}
+	\multirow{9}{*}{\includegraphics[width=0.3\textwidth]{images/mapping/xor-data.png}} &  & \texttt{[...]}\\
+	& & \texttt{if(cond1)\{}\\
+	& & \texttt{\hspace{10pt}doE();}\\
+	& & \texttt{\} else \{}\\
+	& \textbf{\textcolor{blue}{=}} & \texttt{\hspace{10pt}if(cond2)\{}\\
+	& & \texttt{\hspace{20pt}doF();}\\
+	& & \texttt{\hspace{10pt}\}}\\
+	& & \texttt{\}}\\
+	& & \texttt{[...]}\\
+\end{tabularx}\\\\
+
+\textbf{XOR\_Event-Gateway}\\
+For XOR\_Event, a waiting loop will be started in a Thread, and an EventHandler (an extension to java.lang.Thread) instance for each branch will be created and started, according to the event's trigger of each branch. If an event handler recieve an event, the waiting thread will be stopped, and the process continues with the elements of the branch, and other branches will be skipped. The event handler will be added as an inner class to the bean, and they will have a constructor with a Thread toStop argument (among other arguments). \\
+
+\begin{tabularx}{\linewidth}{lcX}
+	\multirow{26}{*}{\includegraphics[width=0.3\textwidth]{images/mapping/xor-event.png}} &  & \texttt{[...]}\\
+	& & \texttt{Thread xor\_event\_wait = new Thread()\{}\\
+	& & \texttt{\hspace{10pt}public void run()\{}\\
+	& & \texttt{\hspace{20pt}while(true)\{}\\
+	& & \texttt{\hspace{30pt}try\{}\\
+	& & \texttt{\hspace{40pt}Thread.sleep(100);}\\
+	& & \texttt{\hspace{30pt}\} catch(InterruptedException e) \{ \}}\\
+	& & \texttt{\hspace{20pt}\}}\\
+	& & \texttt{\hspace{10pt}\}}\\
+	& & \texttt{\};}\\
+	& & \texttt{MessageHandler messageHandler = new MessageHandler(xor\_event\_wait);}\\
+	& \textbf{\textcolor{blue}{=}} & \texttt{Timeout timeoutHandler = new TimeoutHandler(20000, xor\_event\_wait);}\\
+	& & \texttt{xor\_event\_wait.start();}\\
+	& & \texttt{messageHandler.start();}\\
+	& & \texttt{timeoutHandler.start();}\\
+	& & \texttt{try\{}\\
+	& & \texttt{\hspace{10pt}xor\_event\_wait.join();}\\
+	& & \texttt{\hspace{10pt}timeoutHandler.stop();}\\
+	& & \texttt{\hspace{10pt}messageHandler.stop();}\\
+	& & \texttt{\} catch(InterruptedException e) \{}\\
+	& & \texttt{\hspace{10pt}if(messageHandler.hasBeenTriggered())\{}\\
+	& & \texttt{\hspace{20pt}doA();}\\
+	& & \texttt{\hspace{10pt}\}}\\
+	& & \texttt{\hspace{10pt}if(timeoutHandler.hasBeenTriggered())\{}\\
+	& & \texttt{\hspace{20pt}doB();}\\
+	& & \texttt{\hspace{10pt}\}}\\
+	& & \texttt{\}}\\
+	& & \texttt{[...]}\\
+\end{tabularx}\\\\
+
+\textbf{Complex-Gateway}\\
+A mapping concept for Complex Gateways has not been developed in the current Version. 
+
+\subsection{Loop Blocks}
+Structured loop blocks are mapped as follows:\\
+\begin{tabularx}{\linewidth}{lcX}
+	\multirow{8}{*}{\includegraphics[width=0.3\textwidth]{images/mapping/loop_block.png}} &  &\\
+	& & \texttt{[...]}\\
+	& & \texttt{while(cond)\{}\\
+	& & \texttt{\hspace{10pt}doA();}\\
+	& \textbf{\textcolor{blue}{=}} & \texttt{\}}\\
+	& & \texttt{doB();}\\
+	& & \texttt{[...]}\\
+	& & \\
+\end{tabularx}\\\\
+While the condition applies, the content branch will be repeated. 
+
+\subsection{Event Handler}
+The mapping of an Event Handler attached to an activity is somewhat similar to the mapping of gateway event. Instead of the waiting thread, a thread calling the activity method will be created, and it will be stopped if the event handler is triggered. 
+\\
+\begin{tabularx}{\linewidth}{lcX}
+	\multirow{29}{*}{\includegraphics[width=0.4\textwidth]{images/mapping/event_handler.png}} &  & \texttt{[...]}\\
+	& & \texttt{Thread doA\_Thread = new Thread()\{}\\
+	& & \texttt{\hspace{10pt}public void run()\{}\\
+	& & \texttt{\hspace{20pt}doA();}\\
+	& & \texttt{\hspace{10pt}\}}\\
+	& & \texttt{\};}\\
+	& & \texttt{MessageHandler messageHandler = new MessageHandler(doA\_Thread);}\\
+	& & \texttt{TimeoutHandler timeoutHandler = new TimeoutHandler(20000, doA\_Thread);}\\
+	& & \texttt{doA\_Thread.start();}\\
+	& & \texttt{messageHandler.start();}\\
+	& \textbf{\textcolor{blue}{=}} & \texttt{timeoutHandler.start();}\\
+	& & \texttt{try\{}\\
+	& & \texttt{\hspace{10pt}doA\_Thread.join();}\\
+	& & \texttt{\hspace{10pt}timeoutHandler.stop();}\\
+	& & \texttt{\hspace{10pt}messageHandler.stop();}\\
+	& & \texttt{\} catch(InterruptedException e) \{}\\
+	& & \texttt{\hspace{10pt}if(messageHandler.hasBeenTriggered()\{}\\
+	& & \texttt{\hspace{20pt}doD();}\\
+	& & \texttt{\hspace{10pt}\}}\\
+	& & \texttt{\hspace{10pt}if(timeoutHandler.hasBeenTriggered()\{}\\
+	& & \texttt{\hspace{20pt}doC();}\\
+	& & \texttt{\hspace{10pt}\}}\\
+	& & \texttt{\}}\\
+	& & \texttt{if(!messageHandler.hasBeenTriggered())\{}\\
+	& & \texttt{\hspace{10pt}if(!timeoutHandler.hasBeenTriggered())\{}\\
+	& & \texttt{\hspace{20pt}doB();}\\
+	& & \texttt{\hspace{10pt}\}}\\
+	& & \texttt{\}}\\
+	& & \texttt{[...]}\\
+\end{tabularx}\\\\
+
+\section{Activites}
+Now we will discuss the activities in details. Activities are divided into tasks and subprocess. As mentioned before, task will be wrapped in an activity method. This enables each task to have their own scope of properties. The properties of subprocesses however, should be shared with all activities contained in it. Therefore wrapping subprocesses in a method is not enough. Instead a subprocess will be wrapped in an inner class.
+ 
+\subsection{Tasks}
+Basically, a task will be mapped as follows:\\
+
+\begin{tabularx}{\linewidth}{lcX}
+	\multirow{8}{*}{\includegraphics[width=0.25\textwidth]{images/mapping/task.png}} &  &\\
+	& & \texttt{public void doTask()\{}\\
+	& & \texttt{\hspace{10pt}[declaration of properties]}\\
+	& \textbf{\textcolor{blue}{=}} & \texttt{\hspace{10pt}[start assignments]}\\
+	& & \texttt{\hspace{10pt}[special mapping depending on task-type]}\\
+	& & \texttt{\hspace{10pt}[end assignments]}\\
+	& & \texttt{\}}\\
+	& & \\
+\end{tabularx}\\\\
+
+The method will start by declaring java variables, derived from the task's properties(if any exists). After the declaration, start assignments will take place, followed by the task's actual mapping (if any, depending on the task type). Now let's take a closer look on how specific task types are being mapped.
+
+\taskbf{Script-task}\\
+For Script-tasks, the script defined in the task's property will be directly added into the activity-method. This type of task is comparable to Wade's \textit{Code Activity}.
+
+\taskbf{}
+\section{Events}

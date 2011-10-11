@@ -5,15 +5,15 @@ In this chapter, we will discuss the backgrounds of the transformation that shou
 %======================================%
 %                JIAC                  %
 %======================================
-\section{JIAC(Java-based Intelligent Agent Componentware)}
-JIAC is a Java-based agent architecture and framework that was developed to simplify the development of software agents. The framework supports the entire software development process of a software agent system by providing features such as FIPA compliant communication, Believe-Desire-Intention (BDI) reasoning, strong migration, web-service
+\section{JIAC}
+JIAC (Java-based Intelligent Agent Componentware) is a Java-based agent architecture and framework that was developed to simplify the development of software agents\cite{JIACWEB}. The framework supports the entire software development process of a software agent system by providing features such as FIPA compliant communication, Believe-Desire-Intention (BDI) reasoning, strong migration, web-service
 connectivity and many others. It also provides high security (Common Criteria EAL3,
 certified by the Federal Office for Information Security of Germany, BSI) and advanced
 accounting mechanisms, making it suitable for the use in industrial and
 commercial applications.\\
 
 \textbf{JADL}\\
-With it's core component JADL(\textit{Jiac Agent Description Language}), Jiac also provide an agent programming language. With JADL, the agents \textit{plan elements, rules, ontologies} and \textit{services} can be described. JADL is based on three predicate logic which allows the values \textit{true, false and unknown}, which makes it suitable for open world problems in unknown environments.
+With it's core component JADL(\textit{Jiac Agent Description Language})\cite{jadl_basic}, Jiac also provide an agent programming language. With JADL, the agents \textit{plan elements, rules, ontologies} and \textit{services} can be described. JADL is based on three predicate logic which allows the values \textit{true, false and unknown}, which makes it suitable for open world problems in unknown environments.
 \\
 
 In Figure \ref{fig:jiac_basic}, we can see the typical structure of a JIAC Application, which consists of AgentNodes, Agents, AgentBeans.
@@ -29,8 +29,82 @@ Each AgentNode may run several \textit{Agents}. Agents provide services to other
 and comprise lifecycle, execution cycle and a memory. An agent can use infrastructure
 services in order to find other agents, to communicate to them and to use their services.
 Skills and abilities of the agent can be extended by so-called AgentBeans.\\
-\textit{AgentBean} is the mean to implement the functionality of an Agent, in other words, the abilities of an Agent are defined in the AgentBeans attached to it. They are plugged into agents and provide services (so-called Actions) to other agents. 
 
+
+\subsection{AgentBeans}
+Beside using JADL, another mean to implement the functionality of an agent by implementing an agent bean attachable to the agent.
+In most cases one can implement an agent bean simply by extending the class \texttt{AbstractAgentBean}. By doing this the new agent bean will have access to some useful fields such as :
+\begin{itemize}
+	\item \texttt{protected Log log} : a logger Instance that can be used to create log messages.
+	\item \texttt{protected IAgent thisAgent} : Reference to the Agent object that can be used to perform operations on the agent
+	\item \texttt{protected IMemory memory} : Reference to the Agents memory that can be used to store and retrieve data.
+\end{itemize}\\\\
+
+\textbf{Agent-Lifecycle}\\
+An agent bean implements the interface \texttt{ILifeCycle} which provides operations to control the bean's state in accordance to the agent's lifecycle(see Figure \ref{fig:lifecycle}) by declaring the methods \texttt{init()}, \texttt{start()}, \texttt{stop()}, and \texttt{cleanup()}. These mehtods are implemented by the class \texttt{AbstractLifeCycle}, a super class of \texttt{AbstractAgentBean} which also provides the methods \texttt{doInit()}, \texttt{doStart()}, \texttt{doStop()}, and \texttt{doCleanup()} where we can hook up code that should be executed when the Lifecycle state changes, for example looking up needed actions, attaching SpaceObeserver to the agent's memory, etc.
+\begin{figure}
+	\centering
+		\includegraphics[width=1.00\textwidth]{images/lifecycle.png}
+		\caption{Agent-Lifecycle \cite{JIACMAN10}}
+		\label{fig:lifecycle}
+\end{figure}\\
+
+\textbf{Execution-Cycle}\\
+By implementing the method \texttt{execute()}, we can tell the agent bean to do something periodically. This method is called by the agent's execution cycle, given that the execution intervall property is specified in the configuration file\footnote{Informations about the configuration file can be found in the jiac manual\cite{JIACMAN10}}, and while the agent is on the \textbf{started} state.\\
+
+\textbf{Actions}\\
+Agent beans can provide Actions. Actions are public methods that can be invoked by another bean and depending on the action's scope it can even be invoked by another agent. Therefore an action can be seen as a service. 
+Using an Action normally includes two or three steps(the third one is optional):
+\begin{enumerate}
+	\item find the Action
+	\item invoking the Action
+	\item get the results
+\end{enumerate}
+The following Listing shows an example on how to use the send action provided by the \texttt{ICommunicationBean}:
+\begin{lstlisting}[language = Java, caption = Using an Action]
+Action sendAction = retrieveAction(ICommunicationBean.ACTION_SEND);//find action
+[...]
+invoke(sendAction, new Serializable{message, reciever})//invoke
+\end{lstlisting}
+The methods \textbf{\texttt{retrieveAction()}} and \textbf{\texttt{invoke()}} used in the above Listing are provided  by the \texttt{AbstractAgentBean}.\\
+
+The simplest way to provide Actions is by extending the class \textbf{\texttt{AbstractMethodExposingBean}} (also an extension of \texttt{AbstractAgentBean}) and put the @Expose java annotation on the method that we want to expose as an action, as shown in the following listing:
+\begin{lstlisting}[language = Java, caption = Providing an Action]
+//static variable for the action name
+public static final String ACTION_DOACTION = packagename.BeanName#doAction;
+[...]
+@Expose(name=ACTION_DOACTION, scope = ActionScope.GLOBAL)
+public void doAction(){
+[...]
+}
+\end{lstlisting}
+
+\textbf{Memory and SpaceObserver}\\
+The default implementation of the agent's memory is a simple tuple space that can hold any Java objects implementing the \textbf{\texttt{IFact}} interface (an extension to java.io.Serializeable). The memory provides the 4 methods to work on the space:\textit{ read, write, remove} and \textit{update}.
+
+Each time a Bean calls an operation that modifies the memory, a SpaceEvent is fired. There are currently 4 different SpaceEvents that are fired:
+\begin{itemize}
+	\item \texttt{WriteCallEvent} - fired when a new object is written in the memory.
+	\item \texttt{UpdateCallEvent} - fired when an object has been updated in memory.
+	\item \texttt{RemoveCallEvent} - fired when an object is removed from the memory.
+	\item \texttt{RemoveAllCallEvent} - fired when all objects are removed from the memory.
+\end{itemize}
+
+By using SpaceObserver, we can listen to these SpaceEvents and gets notification whenever a space event is being fired.
+For example we can implement a space observer which will start a process when a message is being written in the memory (Listing \ref{list:SpaceObserver}). 
+\begin{lstlisting}[language = Java, caption = A SpaceObserver, label = list:SpaceObserver]
+SpaceObserver<IFact> observer = new SpaceObserver<IFact>(){
+	public void notify(SpaceEvent<? extends IFact> event){
+		if(event instanceof WriteCallEvent){
+			doProcess(); //start process
+		}
+	}
+};
+
+memory.attach(observer);
+\end{lstlisting}
+
+To start recieving the SpaceEvents, we should attach the observer into the agent's memory (see line 9 of Listing \ref{list:SpaceObserver}). To stop recieving notifications on the SpaceEvents we can similarly use the \texttt{detach()} method.
 
 %======================================%
 %                BPMN                  %
@@ -45,6 +119,16 @@ BPMN \cite{BPMN2} is a standard Notation for modelling business processes, initi
 \end{figure}\\
 BPMN was made to provide a notation that is understandable by all business users, creating a bridge for the gap between the business process design and the process implementation. Besides providing an easy to read graphical notations, each BPMN elements are also equipped with additional attributes (so called properties), which are hidden from the diagram and provides the informations needed for automated code generation. With the mapping of BPMN to Agents, we hope to be able to increase the spreading of the multi agent systems in the business world.
 
+\subsection{Levels of Abstraction}
+The BPMN can be seen as having at least three levels of Abstraction:
+\begin{enumerate}
+	\item Basic Types - The diagram are made up of easily recognized graphical elements
+	\item Subtypes - Each basic types can be further distinguished into subtypes with additional graphical elements such as icons that marks the type of an event's trigger.
+	\item Properties - Each element has additional detailed informations that are hidden from the diagram, but contain informations needed for the transformation.
+\end{enumerate}
+
+
+\subsection{BPMN Elements}
 BPMN elements can be categorized in five basic groups of elements\cite{BPMN2} :
 \begin{itemize}
 	\item Flow Objects
@@ -62,12 +146,12 @@ An \textit{Event} describes something that happens during the course of a proces
 	\label{fig:events}
 \end{figure}
 \\
-BPMN Events are further divided into subtypes according to the type of the event's trigger(for start and intermediate events) or result(for end events). The event figure(see Figure \ref{fig:event_subtypes}) are drawn with different icon in the middle, according to the trigger.
+BPMN Events are further divided into subtypes according to the type of the event's trigger (for start and intermediate events) or result (for end events). The event figure (see Figure \ref{fig:event_subtypes}) are drawn with different icon in the middle, according to the trigger.
 \begin{figure}[h]
 	\centering
-	\label{fig:event_subtypes}
 	\includegraphics{images/event_types.png}
 	\caption{Examples of event subtypes. From left to right: Multiple, Link, Message, Rule, Timer}
+	\label{fig:event_subtypes}
 \end{figure}
 %=============Add figure===============%
  
@@ -120,8 +204,8 @@ The VSDT is a CASE Tool, developed to support the idea of Process Oriented Agent
 
 %========= The Editor =========%
 \subsection{BPMN Editor}
-The BPMN Editor in VSDT was created using eclipse's GMF (Graphical Modeling Framework)
-%well-equipped BPMN editor that is independent of any specific target language. Thus, while the usual transformation to BPEL, as well as other transformations, is included, the VSDT can easily be extended with additional export functionality targeting other languages. It was developed in early 2007 as a Diploma Thesis at the TU Berlin and since then it has been continuously extended. 
+The BPMN Editor in VSDT was created using eclipse's GMF (Graphical Modeling Framework). The editor enables us to create and modify business processes graphically. It also provides a properties view, where we can see and edit the additional properties of an element selected in the diagram. 
+
 
 %========= Transformation Framework ===========%
 \subsection{Transformation Framework}
@@ -142,21 +226,7 @@ Due to the fact that the validation, normalisation and structure mapping are mos
 	\label{fig:transform}
 \end{figure}\\
 
-%============ Existing Transformation to Jiac ===============%
-\subsection{Existing Transformation to JiacV}
-At the moment, the VSDT is already equipped with a transformation of BPMN to JiacV, which generates the JADL(Jiac Agent Description Language).
-The transformation to Jiac AgentBeans is in no way a replacement to the existing transformation. Instead both transformations shall complement each other as the products of both transformations have their own advantages, some of which we can find in the following table:
-\begin{table}[htbp]
-	\centering
-		\begin{tabularx}{\linewidth}{|l|X|}\hline\hline
-			\multicolumn{2}{|c|}{\textbf{Advantages of:}} \\\hline
-			\multicolumn{1}{|c|}{JADL} & \multicolumn{1}{c|}{AgentBeans}\\\hline
-			can be deployed to a running jiac application &  Written fully in Java, therefore developer friendly.\\
-																										&  Java is more powerful that JADL.\\
-			                           										&  Better performance because no parser are involved.\\\hline\hline
-		\end{tabularx}
-\end{table}
-
+\newpage
 
 %======================================%
 %                 JET                  %
@@ -174,7 +244,7 @@ The transformation process is done in two steps( see figure \ref{fig:jet_process
 \subsection{JET-Templates}
 JET-Templates uses a JSP-like syntax which makes it easy to write and understand. There are three types of expression in JET-Syntax:
 \begin{enumerate}
-	\item \textbf{Directives} <\%@ \textit{directive \{attribute = "value"\}*}\%>\\
+	\item \textbf{Directives} <\%\@ \textit{directive \{attribute = "value"\}*}\%>\\
 	      Directives contains information for the JET-Engine. 
 	      
 	\item \textbf{Scriptlets} <\% \textit{scriplet} \%>\\
