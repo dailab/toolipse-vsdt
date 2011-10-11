@@ -246,10 +246,67 @@ Basically, a task will be mapped as follows:\\
 	& & \\
 \end{tabularx}\\\\
 
-The method will start by declaring java variables, derived from the task's properties(if any exists). After the declaration, start assignments will take place, followed by the task's actual mapping (if any, depending on the task type). Now let's take a closer look on how specific task types are being mapped.
+The method will start by declaring java variables, derived from the task's properties(if any exists). After the declaration, start assignments will take place, followed by the task's actual mapping (if any, depending on the task type). Now let's take a closer look on how specific task types are being mapped.\\
 
-\taskbf{Script-task}\\
-For Script-tasks, the script defined in the task's property will be directly added into the activity-method. This type of task is comparable to Wade's \textit{Code Activity}.
+\textbf{Script-task}\\
+For Script-tasks, the script defined in the task's property will be directly added into the activity-method. This type of task is comparable to Wade's \textit{Code Activity}.\\\\
 
-\taskbf{}
+\textbf{Service-task}\\
+\\\\
+
+\textbf{Send-task}\\
+\\\\
+
+\textbf{Recieve-task}\\
+\\\\
+
+\textbf{Other-tasks (currently not mapped)}
+\\\\
+
+\subsection{Subprocess}
+A subprocess will be mapped into an inner class of the containing Process or Subprocess. This way it's properties can be shared among all tasks contained in it. The inner subprocess will have the method \texttt{public void run()} containing the workflow (similar to the bean's workflow method). The following example shows the mapping of a subprocess:\\
+
+\begin{tabularx}{\linewidth}{lcX}
+	\multirow{16}{*}{\includegraphics[width=0.35\textwidth]{images/mapping/subprocess.png}} &  &public void doProcess\{//workflow-method\\
+	& & \texttt{\hspace{10pt}[...]}\\
+	& & \texttt{\hspace{10pt}SubProcess subProcess = new SubProcess();}\\
+	& & \texttt{\hspace{10pt}subProcess.run();}\\
+	& & \texttt{\hspace{10pt}[...]}\\
+	& & \texttt{\}}\\
+	& & \texttt{[...]}\\
+	& \textbf{\textcolor{blue}{=}} & \texttt{class SubProcess \{}\\
+	& & \texttt{\hspace{10pt}[declaration of properties]}\\
+	& & \texttt{\hspace{10pt}public void run()\{}\\
+	& & \texttt{\hspace{20pt}doA();}\\
+	& & \texttt{\hspace{20pt}doB();}\\
+	& & \texttt{\hspace{10pt}\}}\\
+	& & \texttt{\hspace{10pt}private void doA()\{ [...] \}}\\
+	& & \texttt{\hspace{10pt}private void doB()\{ [...] \}}\\
+	& & \texttt{\}}\\
+\end{tabularx}\\
+
+\subsection{Activity-Looping}
+
+\textbf{Standard-Loop}\\\\
+
+\textbf{Multi-Instance Loop}\\\\
+
+
 \section{Events}
+
+\subsection{Start-Events}
+
+\textbf{Timer}\\
+\\\\
+
+\textbf{Message}\\
+\\\\
+
+\subsection{Intermediate-Events}
+\textbf{Timer}\\
+\\\\
+
+\textbf{Message}\\
+\\\\
+
+\subsection{End-Events}
