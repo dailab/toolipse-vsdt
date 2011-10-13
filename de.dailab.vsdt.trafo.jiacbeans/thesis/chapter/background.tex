@@ -38,7 +38,7 @@ In most cases one can implement an agent bean simply by extending the class \tex
 	\item \texttt{protected Log log} : a logger Instance that can be used to create log messages.
 	\item \texttt{protected IAgent thisAgent} : Reference to the Agent object that can be used to perform operations on the agent
 	\item \texttt{protected IMemory memory} : Reference to the Agents memory that can be used to store and retrieve data.
-\end{itemize}\\\\
+\end{itemize}
 
 \textbf{Agent-Lifecycle}\\
 An agent bean implements the interface \texttt{ILifeCycle} which provides operations to control the bean's state in accordance to the agent's lifecycle(see Figure \ref{fig:lifecycle}) by declaring the methods \texttt{init()}, \texttt{start()}, \texttt{stop()}, and \texttt{cleanup()}. These mehtods are implemented by the class \texttt{AbstractLifeCycle}, a super class of \texttt{AbstractAgentBean} which also provides the methods \texttt{doInit()}, \texttt{doStart()}, \texttt{doStop()}, and \texttt{doCleanup()} where we can hook up code that should be executed when the Lifecycle state changes, for example looking up needed actions, attaching SpaceObeserver to the agent's memory, etc.
@@ -106,21 +106,24 @@ memory.attach(observer);
 
 To start recieving the SpaceEvents, we should attach the observer into the agent's memory (see line 9 of Listing \ref{list:SpaceObserver}). To stop recieving notifications on the SpaceEvents we can similarly use the \texttt{detach()} method.
 
+\newpage
 %======================================%
 %                BPMN                  %
 %======================================%
 \section{BPMN(Business Process Modelling Notation)}
-BPMN \cite{BPMN2} is a standard Notation for modelling business processes, initially published by the BPMI which is later adopted by the OMG(Object Management Group). A business process diagramm (as seen in Figure \ref{fig:bpmn_sampl}) can be compared to UML's activity diagram.
+BPMN \cite{BPMN2} is a standard Notation for modelling business processes, initially published by the BPMI which is later adopted by the OMG(Object Management Group). A business process diagramm (as seen in Figure \ref{fig:bpmn_sampl}) can be compared to UML's activity diagram.\\
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.90\textwidth]{images/bpmn_sampl.png}
 	\caption{A simple Business Process Diagramm}
 	\label{fig:bpmn_sampl}
-\end{figure}\\
-BPMN was made to provide a notation that is understandable by all business users, creating a bridge for the gap between the business process design and the process implementation. Besides providing an easy to read graphical notations, each BPMN elements are also equipped with additional attributes (so called properties), which are hidden from the diagram and provides the informations needed for automated code generation. With the mapping of BPMN to Agents, we hope to be able to increase the spreading of the multi agent systems in the business world.
+\end{figure}
+
+BPMN was made to provide a notation that is understandable by all business users, creating a bridge for the gap between the business process design and the process implementation. With the mapping of BPMN to Agents, we hope to be able to increase the spreading of the multi agent systems in the business world.
+
 
 \subsection{Levels of Abstraction}
-The BPMN can be seen as having at least three levels of Abstraction:
+Besides providing an easy to read graphical notations, each BPMN elements are also equipped with additional attributes (so called properties), which are hidden from the diagram and provides the informations needed for automated code generation. The BPMN can be seen as having at least three levels of Abstraction:
 \begin{enumerate}
 	\item Basic Types - The diagram are made up of easily recognized graphical elements
 	\item Subtypes - Each basic types can be further distinguished into subtypes with additional graphical elements such as icons that marks the type of an event's trigger.
@@ -138,26 +141,55 @@ BPMN elements can be categorized in five basic groups of elements\cite{BPMN2} :
 	\item Artifacts
 \end{itemize}
 \textit{Flow Objects} includes Events, Activities and Gateways. These elements are the most important in BPMN, and they are held in a lane.\\
-An \textit{Event} describes something that happens during the course of a process. It is divided into Start Event, Intermediate Event and End Event (see Figure \ref{fig:events}).
+
+An \textit{Event} describes something that happens during the course of a process. It is divided into Start Event, Intermediate Event and End Event (see Figure \ref{fig:events}).\\
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.25\textwidth]{images/events.png}
 	\caption{BPMN Event types. From left to right: Start Event, Intermediate Event, End Event}
 	\label{fig:events}
 \end{figure}
-\\
+
 BPMN Events are further divided into subtypes according to the type of the event's trigger (for start and intermediate events) or result (for end events). The event figure (see Figure \ref{fig:event_subtypes}) are drawn with different icon in the middle, according to the trigger.
-\begin{figure}[h]
+\begin{figure}[htbp]
 	\centering
 	\includegraphics{images/event_types.png}
 	\caption{Examples of event subtypes. From left to right: Multiple, Link, Message, Rule, Timer}
 	\label{fig:event_subtypes}
 \end{figure}
-%=============Add figure===============%
+
  
-An \textit{Activity} describes something that is done during a process. It is divided into \textit{Tasks} (Atomic Activities) and \textit{Sub Processes} (Composite Activities).\\
-\textit{Gateways} are used to define all kinds of splitting and merging behavior. It's semantics depends on the dimension of it's incoming and outgoing Sequence Flows.
-\\\\
+An \textit{Activity} describes something that is done during a process. It is divided into \textit{Tasks} which is an(Atomic Activities) and \textit{Sub Processes} (Composite Activities).\\
+\begin{figure}[h]
+\centering
+\begin{tabular}{cc}
+\includegraphics{images/mapping/task.png} & \includegraphics{images/mapping/subprocess.png}
+\end{tabular}
+\caption{Task(Left) and Subprocess}%
+\label{fig:task+subprocess}%
+\end{figure}
+
+%\newpage
+\textit{Gateways} are used to define all kinds of splitting and merging behavior. It's semantics depends on the dimension of it's incoming and outgoing Sequence Flows. Gateways are divided into the following types (also see Figure \ref{fig:gateways}):\\
+\begin{enumerate}
+	\item Exclusive
+	\item Event Based
+	\item Inclusive
+	\item Parallel
+	\item Complex
+\end{enumerate}
+
+\\
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics{images/gateways.png}
+	\caption{Gateways - From left ro right: Exclusive, Event Based, Inclusive, Parallel, Complex}
+	\label{fig:gateways}
+\end{figure}
+
+
+
 Data is representated by the four elements:
 \begin{itemize}
 	\item Data Objects
@@ -172,13 +204,14 @@ With \textit{ConnectingObjects}, FlowingObjects can be connected to each other o
 	\item \textit{Message Flows} - represent Messages being exchanged exclusively between Pools.
 	\item \textit{Associations} -  mainly used for documentation, in example between Flow Objects and a Text annotation.
 \end{itemize}
-\textit{Swimlanes} are divided into \textit{Pools} and \textit{Lanes}. Each Pool represents one Participant in the business process, while Lanes are used to partition a Pool, in example to model different Departments of an Institution. Figure 3 shows an empty Pool with 2 Lanes.
-\begin{figure}[h]
+\textit{Swimlanes} are divided into \textit{Pools} and \textit{Lanes}. Each Pool represents one Participant in the business process, while Lanes are used to partition a Pool, in example to model different Departments of an Institution. Figure \ref{fig:swimlane} shows a Pool with 2 Lanes.\\\\
+\begin{figure}[htbp]
 	\centering
 		\includegraphics{images/swimlane.png}
-	\caption{Empty Pool with 2 Lanes}
+	\caption{Pool with 2 Lanes}
 	\label{fig:swimlane}
-\end{figure}\\\\\\
+\end{figure}
+
 \textit{Artifacts} are additional Information about the Process. It is mainly used for documentation purpose. The Current set of Artifacts includes:
 \begin{itemize}
 	\item Text Annotation
@@ -188,7 +221,7 @@ With \textit{ConnectingObjects}, FlowingObjects can be connected to each other o
 
 To provide a rough overview on how Agent technology can support the implementation of Business Processes let us take a look on this mapping example of BPMN elements to Agents. A Pool in a Business Process Diagram can represent an Agent, which are able to communicate with other agents (another pool) through messages (represented with the BPMN MessageFlows). Agents can react to Events. A detailed mapping needed for implementing the transformation will be discussed in chapter \ref{chap:mapping}
 
-
+\newpage
 %======================================%
 %                VSDT                  %
 %======================================%
@@ -244,7 +277,7 @@ The transformation process is done in two steps( see figure \ref{fig:jet_process
 \subsection{JET-Templates}
 JET-Templates uses a JSP-like syntax which makes it easy to write and understand. There are three types of expression in JET-Syntax:
 \begin{enumerate}
-	\item \textbf{Directives} <\%\@ \textit{directive \{attribute = "value"\}*}\%>\\
+	\item \textbf{Directives} <\%\verb|@| \textit{directive \{attribute =  ''value''  \}*}\%>\\
 	      Directives contains information for the JET-Engine. 
 	      
 	\item \textbf{Scriptlets} <\% \textit{scriplet} \%>\\
@@ -330,9 +363,11 @@ The most interesting part of the java template class is the generate method. To 
 	</class>
 \end{lstlisting}
 
-\subsection{2 different JET-Versions}\\\\
-There are currently 2 different JET-Versions in the Eclipse Modelling Project. The syntax and examples mentioned above correlate to the older Version of JET, which allows us to generate text with an Object as argument. In the template, the argument variable can be type casted into the class of our model. This JET-Version is effective if the model we want to generate the text from is a Java object. We get a String as a result which we can write into a File using the Java-IO or even Eclipse API.\\\\
+\subsection{2 different JET-Versions}
+There are currently 2 different JET-Versions in the Eclipse Modelling Project. The syntax and examples mentioned above correlate to the older Version of JET, which allows us to generate text with an Object as argument. In the template, the argument variable can be type casted into the class of our model. This JET-Version is effective if the model we want to generate the text from is a Java object. We get a String as a result which we can write into a File using the Java-IO or even Eclipse API.\\
 
 In the updated version of JET, also called JET2, some workspace and java related "'tag-libraries"' are provided, enabling us to do the transformation without using the Java and Eclipse API. Unfortunately, in this Version the model has to be an xml-File.
 To directly transform the BPMN directly from it's xml-Representation will be harder and the template will be confusing, therefore a decision has been made to implement the mapping using the existing transformation framework where an intermediate model class of the AgentBean will be created, and then transform this intermediate model into Java code using the older version of the JET Transformation.
 More details on the implementation will be discussed in chapter \ref{chap:implementation}.
+
+\subsection{New JET2 elements}

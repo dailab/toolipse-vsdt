@@ -19,7 +19,18 @@ The Element mapping stage is implemented on the basis of the existing Bpmn2JiacV
 After all Pools in the business process is completely visited and transformed into AgentBean models, these models are passed over to the JET-Transformation where they will be transformed into a String which represents the content of a Java File. 
 
 %===============================%
+%      Structure Mapping        %
+%===============================%
+\section{Structure Mapping}
+In this transformation stage, nothing new was implemented. The default BPMN2StrucBPMN transformation of the VSDT is being reused. In this stage the structure of the process diagram (a directed graph) is being adapted to an equivalent block structure.  
+
+%===============================%
 %       Element Mapping         %
+%===============================%
+\section{Element Mapping}
+
+%===============================%
+%       AgentBean Model         %
 %===============================%
 \section{AgentBean Model}
 
@@ -31,7 +42,7 @@ For the content of a Method, a Script-Model was also developed. A script is basi
 	\caption{AgentBean - Metamodel}
 	\label{fig:agentbean_metamodel}
 \end{figure}
-\newpage
+
 Each script implements the method \lstinline[language=Java]{public String toJavaCode()} which returns the java code representation of the script.
 In the following listing we can see the implementation of the method in the IfThenElse class:
 \begin{lstlisting}[language = Java, caption = toJavaCode() implementation in the IfThenElse class]

@@ -22,14 +22,14 @@ The transformation to Jiac AgentBeans is in no way a replacement to the existing
 		\begin{tabularx}{\linewidth}{|l|X|}\hline\hline
 			\multicolumn{2}{|c|}{\textbf{Advantages of:}} \\\hline
 			\multicolumn{1}{|c|}{JADL} & \multicolumn{1}{c|}{AgentBeans}\\\hline
-			can be deployed to a running jiac application &  Written fully in Java, therefore developer friendly.\\
+			can be deployed to a running Jiac application &  Written fully in Java, therefore developer friendly.\\
 																										&  Java is more powerful that JADL.\\
 			                           										&  Better performance because no parser are involved.\\\hline\hline
 		\end{tabularx}
 \end{table}
 
 \section{WADE}
-A similar approach (designing agents behaviour with processes and transforming it into Java Code) has been developed by the Telecom Italia with their JADE-extension called WADE (Workflows and Agents Development Environment). While Jade was developed to simplify the implementation of Software Agents, WADE extended JADE with a workflow engine, making it possible to create Agents that executes tasks defined as workflows.
+A similar approach (designing agents behavior with processes and transforming it into Java Code) has been developed by the Telecom Italia with their JADE-extension called WADE (Workflows and Agents Development Environment). While Jade was developed to simplify the implementation of Software Agents, WADE extended JADE with a workflow engine, making it possible to create Agents that executes tasks defined as workflows.
 
 \subsection{JADE (\textbf{J}ava \textbf{A}gent \textbf{DE}velopment Frameork)}
 JADE is an application framework and a middleware written in Java, which support the development of software agents. The framework  provides distributed runtime environments, agent and behaviour abstractions as well as communications between agents and discovery mechanisms. We can say that it's role is very similar to JIAC.
@@ -37,11 +37,11 @@ JADE is an application framework and a middleware written in Java, which support
 \subsection{WADE (Workflows and Agents Development Environment)}
 WADE is an extension to JADE, which enrich the application framework with a workflow engine. The WorkflowEngineAgent extends the JADE basic Agent class with an ability to execute workflows represented in a WADE specific formalism.
 
-A WADE Workflow is actually a Java Class, thus it can be edited and managed as Java classes and can contain pieces of code which is needed to implement the process. With WOLF, a development environment that comes with WADE, developers can edit the Workflow graphically as well as textually. The code view and the graphical view of the workflow are kept in sync. 
+A WADE workflow is actually a Java Class, thus it can be edited and managed as Java classes and can contain pieces of code which is needed to implement the process. With WOLF, a development environment that comes with WADE, developers can edit the Workflow graphically as well as textually. The code view and the graphical view of the workflow are kept in sync. 
 
 
 \subsection{Wade-Workflow}
-A Process in Wade consists a set of Activities. A Process has exactly one \textbf{start activity},
+A Process in Wade consists a set of Activities. A Process is defined with exactly one \textbf{Start Activity}, and one or multiple \textbf{End Activities} 
 % explain the Wade-Workflow, add screnshots etc.
 \\\\
 Despite having all the advantages of a Java code, the WADE workflow is rather simple and not so expressive as the BPMN. Similarity to the agent technology such as events and communication flow are also missing in the workflow. 
