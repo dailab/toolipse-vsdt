@@ -1,0 +1,24 @@
+<%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="TimeEventHandlerGenerator"%>
+	class TimeEventHandler extends Thread{
+		Date whenToStop;
+		Thread toStop;
+		boolean triggered = false;
+		
+		public TimeoutEventHandler(Date then, Thread toStop){
+			whenToStop = then;
+			this.toStop = toStop;
+		}
+		public void run(){
+			long time = then.getTime();
+			while(time>System.currentTimeMilis()){
+				try {
+					Thread.sleep(100);
+				}catch(InterruptedException e ) { }
+			}
+			toStop.stop();
+			triggered = true;
+		}
+		public boolean hasBeenTriggered(){
+			return triggered;
+		}
+	}
