@@ -6,6 +6,13 @@
  */
 package jiacbeans.impl;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.text.DateFormatter;
+
 import jiacbeans.CodeElement;
 import jiacbeans.JavaVariable;
 import jiacbeans.JiacbeansPackage;
@@ -248,7 +255,7 @@ public class RecieveImpl extends ScriptImpl implements Recieve {
 		//check the payload and address
 		result+="\t\t\tif(jiacMessage.getPayload() instanceof "+payload.getType()+" && jiacMessage.getHeader(IJiacMessage.Header.SEND_TO).equals(groupAddress)) {\n";
 		result+="\t\t\t\tmemory.remove(jiacMessage);\n";
-		result+="\t\t\t\t"+payload.getName()+" = jiacMessage.getPayload();\n";
+		result+="\t\t\t\t"+payload.getName()+" = ("+payload.getType()+") jiacMessage.getPayload();\n";
 		result+="\t\t\t\tbreak;\n";//message found leave foreach block
 		result+="\t\t\t}\n";//closing if
 		//next
@@ -261,7 +268,6 @@ public class RecieveImpl extends ScriptImpl implements Recieve {
 		result+="}\n";//closing while
 		//leave group
 		result+="invoke(leaveAction, new Serializable[]{groupAddress});\n";
-		//assign to payload
 		return result;
 	}
 
