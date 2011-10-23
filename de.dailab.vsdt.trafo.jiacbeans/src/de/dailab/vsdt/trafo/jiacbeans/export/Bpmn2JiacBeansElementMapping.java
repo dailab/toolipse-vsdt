@@ -137,12 +137,12 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		_doStart.setName("doStart");
 		_doStart.setVisibility(MethodImpl.PUBLIC);
 		_execute = beansFac.createMethod();
-		_execute.setName("doStart");
+		_execute.setName("execute");
 		_execute.setVisibility(MethodImpl.PUBLIC);
 		//create action to be exposed by the bean
 		Action action = beansFac.createAction();
 		action.setName("ACTION_"+_currentService.toUpperCase());
-		action.setLocation(_currentBean.getPackageName()+"."+_currentBean.getName()+"#"+_currentService);
+		action.setLocation(_currentBean.getPackageName()+"."+_currentBean.getName()+"#"+Util.toJavaName(_currentService));
 		_currentBean.getActions().add(action);
 		//add a variable declaration for every pool property
 		for(Property prop : pool.getProperties()){
@@ -257,6 +257,26 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 						compensate.setThenBranch(script);
 						compensation.getScripts().add(compensate);
 					}
+				}else{
+					eName += "_TimeHandler";
+					_currentBean.setHandlingTimeEvent(true);
+					_currentBean.getImports().add("java.text.*");
+					CodeElement create = beansFac.createCodeElement();
+					create.setCode("TimeEventHandler "+eName+" = new TimeEventHandler("+e.getTimeExpression().getExpression()+","+activityName+");");
+					mapping.getScripts().add(create);
+					CodeElement start = beansFac.createCodeElement();
+					start.setCode(eName+".start();");
+					CodeElement stop = beansFac.createCodeElement();
+					stop.setCode(eName+".stop();");
+					starter.add(start);
+					stopper.add(stop);
+					Script script = visitFlowObject(c.getCompensationElement());
+					if(script!=null && !script.toJavaCode().equals("")){
+						IfThenElse compensate = beansFac.createIfThenElse();
+						compensate.setCondition(eName+".hasBeenTriggered()");
+						compensate.setThenBranch(script);
+						compensation.getScripts().add(compensate);
+					}
 				}
 				break;
 			case MESSAGE:
@@ -339,7 +359,9 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		String eName = Util.toJavaName(e.getNameOrId());
 		switch (e.getTrigger()) {
 		case TIMER:
-			condition = "!"+eName+"_TimeoutHandler.hasBeenTriggered()";
+			String postFix = "_TimeHandler";
+			if(e.isAsDuration())postFix = "_TimeoutHandler";
+			condition = "!"+eName+postFix+".hasBeenTriggered()";
 			break;
 		case ERROR:
 			condition = "!"+eName+"_ErrorFlag";
@@ -590,7 +612,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				_currentBean.getImports().add("org.sercho.masp.space.event.WriteCallEvent");
 				Sequence seq = beansFac.createSequence();
 				MessageChannel channel = (MessageChannel)event.getImplementation();
-				String adress = channel.getChannel().getExpression();
+				String Address = channel.getChannel().getExpression();
 				String payloadType = channel.getPayload().getType();
 				if(payloadType.contains("."))_currentBean.getImports().add(payloadType);
 				//register to channel
@@ -599,11 +621,11 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				seq.getScripts().add(code);
 				//create Groupaddress
 				code = beansFac.createCodeElement();
-				code.setCode("IGroupAddress groupAdress = CommunicationAddressFactory.createGroupAddress(\""+adress+"\");");
+				code.setCode("IGroupAddress groupAddress = CommunicationAddressFactory.createGroupAddress(\""+Address+"\");");
 				seq.getScripts().add(code);
 				//invoke join action
 				code = beansFac.createCodeElement();
-				code.setCode("invoke(joinAction,new Serializable[]{groupAdress});");
+				code.setCode("invoke(joinAction,new Serializable[]{groupAddress});");
 				seq.getScripts().add(code);
 				//create space Observer
 				String name = Util.toJavaName(event.getId())+"_observer";
@@ -627,13 +649,13 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				seq.getScripts().add(code);
 				code = beansFac.createCodeElement();
 				code.setCode("\t\t\tif(payload!=null && payload instanceof "+payloadType.substring(payloadType.lastIndexOf(".")+1)+
-						     "&& message.getHeader(IJiacMessage.Header.SEND_TO).equals(\""+adress+"\")){");
+						     "&& message.getHeader(IJiacMessage.Header.SEND_TO).equals(\""+Address+"\")){");
 				seq.getScripts().add(code);
 				code = beansFac.createCodeElement();
 				code.setCode("\t\t\t\tmemory.remove(message);");
 				seq.getScripts().add(code);
 				code = beansFac.createCodeElement();
-				code.setCode("\t\t\t\t"+_currentService+"(("+payloadType+")payload);");
+				code.setCode("\t\t\t\t"+Util.toJavaName(_currentService)+"(("+payloadType+")payload);");
 				seq.getScripts().add(code);
 				code = beansFac.createCodeElement();
 				code.setCode("\t\t\t}");
@@ -648,7 +670,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				code.setCode("};");
 				seq.getScripts().add(code);
 				code = beansFac.createCodeElement();
-				code.setCode("memory.attach(name);");
+				code.setCode("memory.attach("+name+");");
+				seq.getScripts().add(code);
 				//append the sequence to doStart();
 				Script existing = _doStart.getContent();
 				if(existing!=null)seq.getScripts().add(0, existing);
@@ -664,7 +687,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				JavaVariable var = beansFac.createJavaVariable();
 				var.setType(Util.getType(prop));
 				var.setName(Util.toJavaName(prop.getName()));
-				_currentWorkflow.getParameters().add(var);
+				if(event instanceof Start) _currentWorkflow.getParameters().add(var);
 			}
 			if (implementation instanceof de.dailab.vsdt.Service) {
 				de.dailab.vsdt.Service service = (de.dailab.vsdt.Service) implementation;
@@ -708,16 +731,30 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				 */
 				if(event instanceof End) parameters.addAll(service.getOutput());
 			}
-			if (event instanceof Start || event instanceof End) {
+			if (event instanceof End) {
 				properties.addAll(parameters);
 			}
 			
 			if(event instanceof Intermediate){
 				if(event.getImplementation() instanceof MessageChannel){
+					/*
+					 * create a recieve script and wrap it in an activity
+					 * to keep the workflow method readable 
+					 */
+					String methodName = Util.toJavaName(event.getNameOrId()+"_recieve");
+					Method wrapper = beansFac.createActivityMethod();
 					MessageChannel channel = (MessageChannel) implementation;
 					Property prop = channel.getPayload();
-					properties.add(prop);
-					mapping = buildReceive(channel);
+					wrapper.setName(methodName);
+					wrapper.setContent(buildReceive(channel));
+					if(_currentSubProcess==null){
+						_currentBean.addMethod(wrapper);
+					} else {
+						_currentSubProcess.getMethods().add(wrapper);
+					}
+					CodeElement code = beansFac.createCodeElement();
+					code.setCode(methodName+"();");
+					mapping = code;
 				}
 			}
 			break;
@@ -750,7 +787,33 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					execLoop.setContent(seq);
 					_execute.setContent(execLoop);
 				}else{
-					//TODO start when the time has come
+					_currentBean.getImports().add("java.text.ParseException");
+					Sequence seq = beansFac.createSequence();
+					CodeElement code = beansFac.createCodeElement();
+					code.setCode("Date then = DateFormat.parse("+event.getTimeExpression()+")");
+					seq.getScripts().add(code);
+					code = beansFac.createCodeElement();
+					code.setCode("long toSleep = then.getTime() - System.currentTimeMilis()");
+					seq.getScripts().add(code);
+					CodeElement wait = beansFac.createCodeElement();
+					wait.setCode("Thread.sleep(toSleep);");
+					Sequence thenSeq = beansFac.createSequence();
+					TryCatch tc = beansFac.createTryCatch();
+					tc.setTry(wait);
+					tc.getCatches().put("InterruptedException", beansFac.createCodeElement());
+					thenSeq.getScripts().add(tc);
+					thenSeq.getScripts().add(methodCall);
+					IfThenElse sleepNeeded = beansFac.createIfThenElse();
+					sleepNeeded.setCondition("toSleep>=0");
+					sleepNeeded.setThenBranch(thenSeq);
+					seq.getScripts().add(sleepNeeded);
+					//wrap everything in a try catch
+					CodeElement catchCode = beansFac.createCodeElement();
+					catchCode.setCode("ParseException: Time has to be in yyyy-MM-dd’T’HH:mm:ss.SSSZ form");
+					TryCatch parseTC = beansFac.createTryCatch();
+					parseTC.setTry(seq);
+					parseTC.getCatches().put("ParseException", catchCode);
+					_execute.setContent(parseTC);
 				}
 			}
 			if (event instanceof Intermediate) {
@@ -770,32 +833,33 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					tc.setTry(wait);
 					tc.getCatches().put("InterruptedException", beansFac.createCodeElement());
 					seq.getScripts().add(tc);
+					mapping = seq;
 				}else{
+					_currentBean.getImports().add("java.text.ParseException");
+					CodeElement code = beansFac.createCodeElement();
+					code.setCode("Date then = DateFormat.parse("+event.getTimeExpression()+")");
+					seq.getScripts().add(code);
+					code = beansFac.createCodeElement();
+					code.setCode("long toSleep = then.getTime() - System.currentTimeMilis()");
+					seq.getScripts().add(code);
+					CodeElement wait = beansFac.createCodeElement();
+					wait.setCode("Thread.sleep(toSleep);");
+					TryCatch tc = beansFac.createTryCatch();
+					tc.setTry(wait);
+					tc.getCatches().put("InterruptedException", beansFac.createCodeElement());
+					IfThenElse sleepNeeded = beansFac.createIfThenElse();
+					sleepNeeded.setCondition("toSleep>0");
+					sleepNeeded.setThenBranch(tc);
+					seq.getScripts().add(sleepNeeded);
+					//wrap everything in a try catch
+					CodeElement catchCode = beansFac.createCodeElement();
+					catchCode.setCode("ParseException: Time has to be in yyyy-MM-dd’T’HH:mm:ss.SSSZ form");
+					TryCatch parseTC = beansFac.createTryCatch();
+					parseTC.setTry(seq);
+					parseTC.getCatches().put("ParseException", catchCode);
+					mapping = parseTC;
 				}
-			 	mapping = seq;
 			}
-//				Case timerCase= jadlFac.createCase();
-//				timerCase.setBody(jadlFac.createSeq()); // empty case body
-//				TimerEvent timer= jadlFac.createTimerEvent();
-//				if (event.isAsDuration()) {
-//					try {
-//						timer.setTimeout(Integer.parseInt(event.getTimeExpression().getExpression()));
-//						timerCase.setEventedCase(timer);
-//					} catch (NumberFormatException e) {
-//						e.printStackTrace();
-//					}
-//				} else {
-//					TimeConst time= jadlFac.createTimeConst();
-//					time.setConst(event.getTimeExpression().getExpression());
-//					timer.setTime(time);
-//					timerCase.setEventedCase(timer);
-//				}
-//				if (timerCase.getEventedCase() != null) {
-//					Seq seq = jef.createSequence(jef.createPrint("done waiting"));
-//					timerCase.setBody(seq);
-//					mapping= timerCase;
-//				}
-//			}
 			break;
 		case RULE:
 //			String rule = event.getRuleExpression().getExpression();
@@ -962,7 +1026,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		case CALL:
 			if (activity.getCalledElement() instanceof Activity) {
 				Activity calledAct = (Activity) activity.getCalledElement();
-				mapping= (Script) EcoreUtil.copy(visitFlowObject(calledAct));
+				mapping = visitActivity(calledAct);
 			} else if (activity.getCalledElement() instanceof Pool) {
 				// TODO call another service, similar to invoke
 //				Pool calledPool = (Pool) activity.getCalledElement();
@@ -1329,16 +1393,21 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.IGroupAddress");
 		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.CommunicationAddressFactory");
 		_currentBean.getImports().add("java.io.Serializable");
-		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.message.JiacMessage;");
+		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.message.JiacMessage");
+		_currentBean.getImports().add("de.dailab.jiactng.agentcore.knowledge.IFact");
 		//send
-		String type = Util.getType(channel.getPayload());
-		String name = Util.toJavaName(channel.getPayload().getName());
-		JavaVariable payload = beansFac.createJavaVariable();
-		payload.setName(name);
-		payload.setType(type);
 		Send send = beansFac.createSend();
 		send.setAddress(channel.getChannel().getExpression());
-		send.setPayload(payload);
+		if(channel.getPayload()!=null){
+			String payloadType = channel.getPayload().getType();
+			_currentBean.getImports().add(channel.getPayload().getType());
+			String type = Util.getType(channel.getPayload());
+			String name = Util.toJavaName(channel.getPayload().getName());
+			JavaVariable payload = beansFac.createJavaVariable();
+			payload.setName(name);
+			payload.setType(type);
+			send.setPayload(payload);
+		}
 		return send;
 	}
 	
@@ -1356,7 +1425,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.IGroupAddress");
 		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.CommunicationAddressFactory");
 		_currentBean.getImports().add("java.util.Set");
-		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.message.JiacMessage;");
+		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.message.JiacMessage");
+		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.message.IJiacMessage");
 		//start assignments
 		String type = Util.getType(channel.getPayload());
 		String name = Util.toJavaName(channel.getPayload().getName());
