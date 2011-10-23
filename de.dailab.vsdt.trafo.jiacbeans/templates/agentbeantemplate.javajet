@@ -77,4 +77,7 @@ import <%=i%>;
 <% if(bean.isHandlingMessageEvent()){%>
 <%= new MessageEventHandlerGenerator().generate(null)%>
 <%}%>
+<% if(bean.isHandlingTimeEvent()){%>
+<%= new TimeEventHandlerGenerator().generate(null)%>
+<%}%>
 }
