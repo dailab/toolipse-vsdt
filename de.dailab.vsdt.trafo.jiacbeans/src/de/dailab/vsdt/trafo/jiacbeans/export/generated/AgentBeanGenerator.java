@@ -43,7 +43,8 @@ public class AgentBeanGenerator
   protected final String TEXT_23 = NL;
   protected final String TEXT_24 = NL;
   protected final String TEXT_25 = NL;
-  protected final String TEXT_26 = NL + "}";
+  protected final String TEXT_26 = NL;
+  protected final String TEXT_27 = NL + "}";
 
   public String generate(Object argument)
   {
@@ -140,7 +141,11 @@ public class AgentBeanGenerator
     stringBuffer.append(TEXT_25);
     stringBuffer.append( new MessageEventHandlerGenerator().generate(null));
     }
+     if(bean.isHandlingTimeEvent()){
     stringBuffer.append(TEXT_26);
+    stringBuffer.append( new TimeEventHandlerGenerator().generate(null));
+    }
+    stringBuffer.append(TEXT_27);
     return stringBuffer.toString();
   }
 }
