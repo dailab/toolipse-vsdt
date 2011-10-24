@@ -159,3 +159,71 @@ public void doProcess() {
 		[...]//end event assignments
 }
 \end{lstlisting}
+
+
+
+\begin{figure}[h]
+	\begin{minipage}{0.5\textwidth}
+		\centering
+		\includegraphics[\width=0.45\textwidth]{images/mapping/subprocess.png}
+	\end{minipage}
+	\begin{minipage}{0.5\textwidth}
+\begin{lstlisting}[language = Java, caption=""]
+public class AccountWithdrawal extends WorkflowBehaviour {
+
+	public static final String NOTENOUGHBALANCE_CONDITION = "notEnoughBalance";
+	public static final String REJECTWITHDRAWAL_ACTIVITY = "rejectWithdrawal";
+	public static final String PAYOUTANDUPDATEBALANCE_ACTIVITY = "payoutAndUpdateBalance";
+	public static final String CHECKBALANCE_ACTIVITY = "checkBalance";
+	public static final String DOATODOC_CONDITION = "doATodoC";
+	public static final String DOATODOB_CONDITION = "doATodoB";
+	private int e = -1;
+	
+	@FormalParameter(mode=FormalParameter.INPUT)
+	public double amountToBeWithdrawn;
+
+	private void defineActivities() {
+		CodeExecutionBehaviour checkBalanceActivity = new CodeExecutionBehaviour(
+				CHECKBALANCE_ACTIVITY, this);
+		registerActivity(checkBalanceActivity, INITIAL);
+		CodeExecutionBehaviour payoutAndUpdateBalanceActivity = new CodeExecutionBehaviour(
+				PAYOUTANDUPDATEBALANCE_ACTIVITY, this);
+		registerActivity(payoutAndUpdateBalanceActivity, FINAL);
+		CodeExecutionBehaviour rejectWithdrawalActivity = new CodeExecutionBehaviour(
+				REJECTWITHDRAWAL_ACTIVITY, this);
+		registerActivity(rejectWithdrawalActivity, FINAL);
+	}
+
+	protected boolean checkdoATodoB() throws Exception {
+		return true;
+	}
+
+	private void defineTransitions() {
+		registerTransition(new Transition(), CHECKBALANCE_ACTIVITY,
+				PAYOUTANDUPDATEBALANCE_ACTIVITY);
+		registerTransition(new Transition(NOTENOUGHBALANCE_CONDITION, this),
+				CHECKBALANCE_ACTIVITY, REJECTWITHDRAWAL_ACTIVITY);
+	}
+
+	protected boolean checkdoATodoC() throws Exception {
+		return true;
+	}
+
+	protected void executecheckBalance() throws Exception {
+	}
+
+	protected void executepayoutAndUpdateBalance() throws Exception {
+	}
+
+	protected void executerejectWithdrawal() throws Exception {
+	}
+
+	protected boolean checknotEnoughBalance() throws Exception {
+		return true;
+	}
+}
+\end{lstlisting}
+	\end{minipage}
+	\caption{Wade example: Account Withdrawal Process - left = graphical view, right = code view}
+	\label{fig:mapping_subprocess}
+\end{figure}

@@ -1,5 +1,5 @@
 \chapter{Background}
-
+\label{chap:background}
 In this chapter, we will discuss the backgrounds of the transformation that should be developed. We will start with JIAC (the target of the transformation), BPMN (the model that is being used), followed by VSDT (the existing modeling and transformation framework to JIAC that should be extended), and JET (the technology that will help us to implement the transformation).
 
 %======================================%
@@ -169,7 +169,7 @@ An \textit{Activity} describes something that is done during a process. It is di
 \label{fig:task+subprocess}%
 \end{figure}
 
-%\newpage
+\newpage
 \textit{Gateways} are used to define all kinds of splitting and merging behavior. It's semantics depends on the dimension of it's incoming and outgoing Sequence Flows. Gateways are divided into the following types (also see Figure \ref{fig:gateways}):\\
 \begin{enumerate}
 	\item Exclusive
@@ -238,6 +238,8 @@ The VSDT is a CASE Tool, developed to support the idea of Process Oriented Agent
 %========= The Editor =========%
 \subsection{BPMN Editor}
 The BPMN Editor in VSDT was created using eclipse's GMF (Graphical Modeling Framework). The editor enables us to create and modify business processes graphically. It also provides a properties view, where we can see and edit the additional properties of an element selected in the diagram. 
+
+The VSDT was designed to support pure BPMN that is independent from any execution language\cite{TKAH08}. This means the standard editor doesn't support language specific features such as the validation of expression to be conform with the syntax of a specific language (such a validation can be implemented in the transformation). However, the editor can be enriched with plugins that for example provides a view with language specific funtionality.  
 
 
 %========= Transformation Framework ===========%
@@ -367,7 +369,31 @@ The most interesting part of the java template class is the generate method. To 
 There are currently 2 different JET-Versions in the Eclipse Modelling Project. The syntax and examples mentioned above correlate to the older Version of JET, which allows us to generate text with an Object as argument. In the template, the argument variable can be type casted into the class of our model. This JET-Version is effective if the model we want to generate the text from is a Java object. We get a String as a result which we can write into a File using the Java-IO or even Eclipse API.\\
 
 In the updated version of JET, also called JET2, some workspace and java related "'tag-libraries"' are provided, enabling us to do the transformation without using the Java and Eclipse API. Unfortunately, in this Version the model has to be an xml-File.
-To directly transform the BPMN directly from it's xml-Representation will be harder and the template will be confusing, therefore a decision has been made to implement the mapping using the existing transformation framework where an intermediate model class of the AgentBean will be created, and then transform this intermediate model into Java code using the older version of the JET Transformation.
+Implementing the transformation of the BPMN directly from it's xml-Representation will be harder and the template will be confusing, therefore a decision has been made to implement the mapping using the existing transformation framework where an intermediate model class of the AgentBean will be created, and then transform this intermediate model into Java code using the older version of the JET Transformation.
 More details on the implementation will be discussed in chapter \ref{chap:implementation}.
 
 \subsection{New JET2 elements}
+The enhanced version of JET comes with some new syntax elements such as:
+\begin{itemize}
+	\item Comments <\verb|--| \textit{Comment} \verb|--|>\\
+	      Comments will be copied to the translated java class as a line comment, but they will have no influence on the transformation.
+	\item Java Declaration <\%! ... \%>\\
+	      Within the java declaration tag, the template may declare some java methods or variables.
+	\item The @taglib directive <\%@taglib id=''...'' prefix=''...''\%>\\
+	      With the @taglib directive, we can import an XML Tag Library or rename the taglibrary's namespace prefix.
+	\item Custom xml tag\\
+	   		JET2 templates may contain custom xml tags. JET2 comes with 4 standard tag libraries, and we can also define our own tag library.				
+\end{itemize}
+
+Out of the new elements, the custom XML tag is the most interesting since JET2 comes with 4 helpful standard tag libraries\cite{JET2TAGS}:
+\begin{enumerate}
+	\item Control tags\\
+		    Contains control flow and data management tags. These tags will help us in visiting the input model where we will need to evaluate expression, perform loops,  iterate through a certain set of elements and read or write some informations in the input. 
+	\item Workspace tags\\
+			  Contains a set of library that performs operations against the eclipse workspace (for example for creating a file in an existing eclipse Project). 
+	\item Java tags\\
+				Contains tags useful for generating java codes such as creating java packages and classes, managing imports etc.
+	\item Format tags\\
+		    Standard tags for formatting text. 
+\end{enumerate}
+

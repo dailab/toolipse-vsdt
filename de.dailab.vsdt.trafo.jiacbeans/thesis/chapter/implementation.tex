@@ -14,15 +14,21 @@ As mentioned before in section \ref{sec:vsdt}, the transformation process in the
 	\label{fig:implementation_stages}
 \end{figure}
 
-The Element mapping stage is implemented on the basis of the existing Bpmn2JiacV- ElementMapping. It takes a structured Bpmn as a model and transforms each pool contained in the model's business process diagram into a java object, which represent a model of a java file holding an AgentBean class. For this implementation, a Metamodel of the Jiac AgentBean(see Figure \ref{fig:agentbean_metamodel}) was developed as an intermediate product. 
+The Element mapping stage is implemented on the basis of the existing Bpmn2JiacV- ElementMapping. It takes a structured Bpmn as a model and transforms each pool contained in the model's business process diagram into a Java object, which represent a model of a java file holding an AgentBean class. For this implementation, a Metamodel of the Jiac AgentBean(see Figure \ref{fig:agentbean_metamodel}) was developed as an intermediate product. 
 
 After all Pools in the business process is completely visited and transformed into AgentBean models, these models are passed over to the JET-Transformation where they will be transformed into a String which represents the content of a Java File. 
+
+%===============================%
+%       Validation Stage        %
+%===============================%
+\section{Validation}
+The DefaultBPMNValidation is currently used for the validation stage. However, it might be useful that a new validation, that checks whether the expressions given in the model are conform with the Java syntax, to be implemented in the future.
 
 %===============================%
 %      Structure Mapping        %
 %===============================%
 \section{Structure Mapping}
-In this transformation stage, nothing new was implemented. The default BPMN2StrucBPMN transformation of the VSDT is being reused. In this stage the structure of the process diagram (a directed graph) is being adapted to an equivalent block structure.  
+Similar to the validation stage, nothing new was implemented for the structure mapping stage. The default BPMN2StrucBPMN transformation of the VSDT is being reused. In this stage the structure of the process diagram (a directed graph) is being adapted to an equivalent block structure.  
 
 %===============================%
 %       Element Mapping         %
@@ -88,7 +94,7 @@ You might notice, that this method is also responsible for the text formatting b
 The benefits of Model Driven Engineering are also found during the implementation of the AgentBean model. As we can see in Figure \ref{fig:agentbean_metamodel}, it is created graphically using eclipse's Ecore Tools - Ecore Diagramm. With the help of the EMF Generator each element of the model can be easily generated into JavaCode including a Factory class that can be used to instantiate an object of each generated class. This way, we only have to implement the method toJavaCode() for each newly added script, everything else are generated automatically. 
 
 
-\newpage
+%\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %								        JET-Transformation                     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
