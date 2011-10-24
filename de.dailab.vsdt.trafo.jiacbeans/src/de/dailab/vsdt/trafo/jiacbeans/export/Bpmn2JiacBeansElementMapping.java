@@ -146,10 +146,12 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		_currentBean.getActions().add(action);
 		//add a variable declaration for every pool property
 		for(Property prop : pool.getProperties()){
+			String type = prop.getType();
 			JavaVariable var = beansFac.createJavaVariable();
 			var.setType(Util.getType(prop));
 			var.setName(Util.toJavaName(prop.getName()));
 			_currentBean.getAttributes().add(var);
+			if(type.contains("."))_currentBean.getImports().add(type);
 		}
 		writeWorkflowSequence(pool, workflow, pool.getGraphicalElements());
 		return _currentBean;
@@ -261,6 +263,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					eName += "_TimeHandler";
 					_currentBean.setHandlingTimeEvent(true);
 					_currentBean.getImports().add("java.text.*");
+					_currentBean.getImports().add("java.util.Date");
 					CodeElement create = beansFac.createCodeElement();
 					create.setCode("TimeEventHandler "+eName+" = new TimeEventHandler("+e.getTimeExpression().getExpression()+","+activityName+");");
 					mapping.getScripts().add(create);
@@ -787,13 +790,15 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					execLoop.setContent(seq);
 					_execute.setContent(execLoop);
 				}else{
+					_currentBean.getImports().add("java.util.Date");
 					_currentBean.getImports().add("java.text.ParseException");
+					_currentBean.getImports().add("java.text.SimpleDateFormat");
 					Sequence seq = beansFac.createSequence();
 					CodeElement code = beansFac.createCodeElement();
-					code.setCode("Date then = DateFormat.parse("+event.getTimeExpression()+")");
+					code.setCode("Date then = new SimpleDateFormat(\"yyyy-MM-dd'T'HH:mm:ss.SSSZ\").parse(\""+event.getTimeExpression().getExpression()+"\");");
 					seq.getScripts().add(code);
 					code = beansFac.createCodeElement();
-					code.setCode("long toSleep = then.getTime() - System.currentTimeMilis()");
+					code.setCode("long toSleep = then.getTime() - System.currentTimeMillis();");
 					seq.getScripts().add(code);
 					CodeElement wait = beansFac.createCodeElement();
 					wait.setCode("Thread.sleep(toSleep);");
@@ -808,11 +813,16 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					sleepNeeded.setThenBranch(thenSeq);
 					seq.getScripts().add(sleepNeeded);
 					//wrap everything in a try catch
+					Sequence cseq = beansFac.createSequence();
 					CodeElement catchCode = beansFac.createCodeElement();
-					catchCode.setCode("ParseException: Time has to be in yyyy-MM-dd’T’HH:mm:ss.SSSZ form");
+					catchCode.setCode("System.out.println(\"ParseException: Time has to be in yyyy-MM-dd'T'HH:mm:ss.SSSZ form\");");
+					cseq.getScripts().add(catchCode);
+					catchCode = beansFac.createCodeElement();
+					catchCode.setCode("e.printStackTrace();");
+					cseq.getScripts().add(catchCode);
 					TryCatch parseTC = beansFac.createTryCatch();
 					parseTC.setTry(seq);
-					parseTC.getCatches().put("ParseException", catchCode);
+					parseTC.getCatches().put("ParseException", cseq);
 					_execute.setContent(parseTC);
 				}
 			}
@@ -835,12 +845,14 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					seq.getScripts().add(tc);
 					mapping = seq;
 				}else{
+					_currentBean.getImports().add("java.util.Date");
 					_currentBean.getImports().add("java.text.ParseException");
+					_currentBean.getImports().add("java.text.SimpleDateFormat");
 					CodeElement code = beansFac.createCodeElement();
-					code.setCode("Date then = DateFormat.parse("+event.getTimeExpression()+")");
+					code.setCode("Date then = new SimpleDateFormat(\"yyyy-MM-dd'T'HH:mm:ss.SSSZ\").parse(\""+event.getTimeExpression().getExpression()+"\");");
 					seq.getScripts().add(code);
 					code = beansFac.createCodeElement();
-					code.setCode("long toSleep = then.getTime() - System.currentTimeMilis()");
+					code.setCode("long toSleep = then.getTime() - System.currentTimeMillis();");
 					seq.getScripts().add(code);
 					CodeElement wait = beansFac.createCodeElement();
 					wait.setCode("Thread.sleep(toSleep);");
@@ -852,13 +864,26 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					sleepNeeded.setThenBranch(tc);
 					seq.getScripts().add(sleepNeeded);
 					//wrap everything in a try catch
+					Sequence cseq = beansFac.createSequence();
 					CodeElement catchCode = beansFac.createCodeElement();
-					catchCode.setCode("ParseException: Time has to be in yyyy-MM-dd’T’HH:mm:ss.SSSZ form");
+					catchCode.setCode("System.out.println(\"ParseException: Time has to be in yyyy-MM-dd'T'HH:mm:ss.SSSZ form\");");
+					cseq.getScripts().add(catchCode);
+					catchCode = beansFac.createCodeElement();
+					catchCode.setCode("e.printStackTrace();");
+					cseq.getScripts().add(catchCode);
 					TryCatch parseTC = beansFac.createTryCatch();
 					parseTC.setTry(seq);
-					parseTC.getCatches().put("ParseException", catchCode);
+					parseTC.getCatches().put("ParseException", cseq);
 					mapping = parseTC;
 				}
+			 	//wrap everything in a method
+			 	String methodName = Util.toJavaName(event.getNameOrId())+"_wait";
+			 	ActivityMethod method = beansFac.createActivityMethod();
+			 	method.setName(methodName);
+			 	method.setContent(mapping);
+			 	CodeElement call = beansFac.createCodeElement();
+			 	call.setCode(methodName+"();");
+			 	mapping = call;
 			}
 			break;
 		case RULE:
@@ -1066,8 +1091,6 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 
 		if (mapping == null) {
 		}
-		//build activity sequence: properties, assignments, mapping, more assignments
-		mapping= buildSequence(mapping, properties, activity.getAssignments());
 		// create loop mappings: basic mapping is embedded in loop structure
 		if (activity.getLoopAttributes() instanceof StandardLoopAttSet) {
 			mapping= createStandardLoop(activity, mapping);
@@ -1075,6 +1098,9 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		if (activity.getLoopAttributes() instanceof MultiLoopAttSet) {
 			mapping= createMultiInstanceLoop(activity, mapping);
 		}
+		//build activity sequence: properties, assignments, mapping, more assignments
+		mapping= buildSequence(mapping, properties, activity.getAssignments());
+		
 		ActivityMethod method = beansFac.createActivityMethod();
 		method.setName(Util.toJavaName(activity.getName()));
 		method.setIsStatic(false);
