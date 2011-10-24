@@ -691,6 +691,10 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				var.setType(Util.getType(prop));
 				var.setName(Util.toJavaName(prop.getName()));
 				if(event instanceof Start) _currentWorkflow.getParameters().add(var);
+				if(event instanceof End){
+					properties.add(channel.getPayload());
+					mapping = buildSend(channel);
+				}
 			}
 			if (implementation instanceof de.dailab.vsdt.Service) {
 				de.dailab.vsdt.Service service = (de.dailab.vsdt.Service) implementation;
@@ -749,7 +753,9 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					MessageChannel channel = (MessageChannel) implementation;
 					Property prop = channel.getPayload();
 					wrapper.setName(methodName);
-					wrapper.setContent(buildReceive(channel));
+					mapping = buildReceive(channel);
+					mapping = buildSequence(mapping, properties, event.getAssignments());
+					wrapper.setContent(mapping);
 					if(_currentSubProcess==null){
 						_currentBean.addMethod(wrapper);
 					} else {
@@ -876,14 +882,24 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					parseTC.getCatches().put("ParseException", cseq);
 					mapping = parseTC;
 				}
-			 	//wrap everything in a method
-			 	String methodName = Util.toJavaName(event.getNameOrId())+"_wait";
-			 	ActivityMethod method = beansFac.createActivityMethod();
-			 	method.setName(methodName);
-			 	method.setContent(mapping);
-			 	CodeElement call = beansFac.createCodeElement();
-			 	call.setCode(methodName+"();");
-			 	mapping = call;
+			 	
+			 	/*
+				 * wrap the mapping in an activity
+				 * to keep the workflow method readable 
+				 */
+			 	mapping= buildSequence(mapping, properties, event.getAssignments());
+			 	String methodName = Util.toJavaName(event.getNameOrId()+"_wait");
+				Method wrapper = beansFac.createActivityMethod();
+				wrapper.setName(methodName);
+				wrapper.setContent(mapping);
+				if(_currentSubProcess==null){
+					_currentBean.addMethod(wrapper);
+				} else {
+					_currentSubProcess.getMethods().add(wrapper);
+				}
+				CodeElement code = beansFac.createCodeElement();
+				code.setCode(methodName+"();");
+				mapping = code;
 			}
 			break;
 		case RULE:
@@ -942,9 +958,10 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		default:
 			TrafoLog.warn("Could not find a Mapping for Event " + event.getNameOrId());
 		}
-		if (! (event.getAssignments().isEmpty() && properties.isEmpty())) {
+		if (!(event instanceof Intermediate) && ! (event.getAssignments().isEmpty() && properties.isEmpty())) {
 			mapping= buildSequence(mapping, properties, event.getAssignments());
 		}
+		
 		return mapping;
 	}
 	
@@ -1050,8 +1067,10 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			return seq;
 		case CALL:
 			if (activity.getCalledElement() instanceof Activity) {
-				Activity calledAct = (Activity) activity.getCalledElement();
-				mapping = visitActivity(calledAct);
+				Activity calledAct = (Activity)activity.getCalledElement();
+				code = beansFac.createCodeElement();
+				code.setCode(Util.toJavaName(calledAct.getName())+"();");
+				mapping = code;
 			} else if (activity.getCalledElement() instanceof Pool) {
 				// TODO call another service, similar to invoke
 //				Pool calledPool = (Pool) activity.getCalledElement();
@@ -1282,8 +1301,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		}
 		//for testTime=after: instead of inserting a copy of the activity here, which could be quite long, an additional test is appended
 		if (! testBefore) {
-			String cond2= varName + " < 1";
-			cond= cond != null && cond.length()>0 ? "("+ cond +") || (" + cond2 + ")" : cond2;
+			String cond2= useLoopCounter? "|| ("+varName + " < 1)": "";
+			cond= cond != null && cond.length()>0 ? "("+ cond +") " + cond2  : "true";
 		}
 
 		//create the loop element, holding the sequence and the condition
