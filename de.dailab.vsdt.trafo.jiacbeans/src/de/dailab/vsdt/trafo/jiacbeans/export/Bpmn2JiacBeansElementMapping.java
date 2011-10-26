@@ -299,6 +299,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					MessageChannel channel = (MessageChannel)e.getImplementation();
 					String address = channel.getChannel().getExpression();
 					String payloadType = channel.getPayload().getType();
+					if(payloadType.contains("."))_currentBean.getImports().add(payloadType);
+					payloadType = Util.getType(channel.getPayload());
 					CodeElement create = beansFac.createCodeElement();
 					create.setCode("MessageEventHandler "+eName+" = new MessageEventHandler(\""+address+"\",\""+payloadType+"\","+activityName+");");
 					mapping.getScripts().add(create);
@@ -618,6 +620,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				String Address = channel.getChannel().getExpression();
 				String payloadType = channel.getPayload().getType();
 				if(payloadType.contains("."))_currentBean.getImports().add(payloadType);
+				payloadType = Util.getType(channel.getPayload());
 				//register to channel
 				CodeElement code = beansFac.createCodeElement();
 				code.setCode("Action joinAction = retrieveAction(ICommunicationBean.ACTION_JOIN_GROUP);");
@@ -642,23 +645,29 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				code.setCode("\t\tif(event instanceof WriteCallEvent<?>){ ");
 				seq.getScripts().add(code);
 				code = beansFac.createCodeElement();
-				code.setCode("\t\t\tWriteCallEvent<IJiacMessage> wce = (WriteCallEvent<IJiacMessage>) event;");
+				code.setCode("\t\t\tObject obj  = ((WriteCallEvent) event).getObject();");
 				seq.getScripts().add(code);
 				code = beansFac.createCodeElement();
-				code.setCode("\t\t\tIJiacMessage message = wce.getObject();");
+				code.setCode("\t\t\tif (obj instanceof IJiacMessage){");
 				seq.getScripts().add(code);
 				code = beansFac.createCodeElement();
-				code.setCode("\t\t\tIFact payload = message.getPayload();");
+				code.setCode("\t\t\t\tIJiacMessage message = (IJiacMessage)obj;");
 				seq.getScripts().add(code);
 				code = beansFac.createCodeElement();
-				code.setCode("\t\t\tif(payload!=null && payload instanceof "+payloadType.substring(payloadType.lastIndexOf(".")+1)+
+				code.setCode("\t\t\t\tIFact payload = message.getPayload();");
+				seq.getScripts().add(code);
+				code = beansFac.createCodeElement();
+				code.setCode("\t\t\t\tif(payload!=null && payload instanceof "+payloadType+
 						     "&& message.getHeader(IJiacMessage.Header.SEND_TO).equals(\""+Address+"\")){");
 				seq.getScripts().add(code);
 				code = beansFac.createCodeElement();
-				code.setCode("\t\t\t\tmemory.remove(message);");
+				code.setCode("\t\t\t\t\tmemory.remove(message);");
 				seq.getScripts().add(code);
 				code = beansFac.createCodeElement();
-				code.setCode("\t\t\t\t"+Util.toJavaName(_currentService)+"(("+payloadType+")payload);");
+				code.setCode("\t\t\t\t\t"+Util.toJavaName(_currentService)+"(("+payloadType+")payload);");
+				seq.getScripts().add(code);
+				code = beansFac.createCodeElement();
+				code.setCode("\t\t\t\t}");
 				seq.getScripts().add(code);
 				code = beansFac.createCodeElement();
 				code.setCode("\t\t\t}");
@@ -751,7 +760,6 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					String methodName = Util.toJavaName(event.getNameOrId()+"_recieve");
 					Method wrapper = beansFac.createActivityMethod();
 					MessageChannel channel = (MessageChannel) implementation;
-					Property prop = channel.getPayload();
 					wrapper.setName(methodName);
 					mapping = buildReceive(channel);
 					mapping = buildSequence(mapping, properties, event.getAssignments());
@@ -1445,7 +1453,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		send.setAddress(channel.getChannel().getExpression());
 		if(channel.getPayload()!=null){
 			String payloadType = channel.getPayload().getType();
-			_currentBean.getImports().add(channel.getPayload().getType());
+			if(payloadType.contains("."))_currentBean.getImports().add(channel.getPayload().getType());
 			String type = Util.getType(channel.getPayload());
 			String name = Util.toJavaName(channel.getPayload().getName());
 			JavaVariable payload = beansFac.createJavaVariable();
@@ -1473,6 +1481,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.message.JiacMessage");
 		_currentBean.getImports().add("de.dailab.jiactng.agentcore.comm.message.IJiacMessage");
 		//start assignments
+		String payloadType = channel.getPayload().getType();
+		if(payloadType.contains("."))_currentBean.getImports().add(channel.getPayload().getType());
 		String type = Util.getType(channel.getPayload());
 		String name = Util.toJavaName(channel.getPayload().getName());
 		JavaVariable payload = beansFac.createJavaVariable();
