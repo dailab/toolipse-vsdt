@@ -23,12 +23,16 @@
 			} 
 			observer = new SpaceObserver<IFact>(){
 				public void notify(SpaceEvent<? extends IFact> event) {
-					WriteCallEvent<IJiacMessage> wce = (WriteCallEvent<IJiacMessage>) event;
-					IJiacMessage msg = wce.getObject();
-					if(msg.getHeader(IJiacMessage.Header.SEND_TO).equals(address) &&
-					   payloadClass.isInstance(wce.getObject().getPayload())){
-						memory.remove(wce.getObject());
-						compensate();
+					if(event instanceof WriteCallEvent<?>){
+						Object obj = event.getObject();
+						if(obj instanceof IJiacMessage){
+							IJiacMessage msg = (IJiacMessage)obj;
+							if(msg.getHeader(IJiacMessage.Header.SEND_TO).equals(address) &&
+							   payloadClass.isInstance(msg.getPayload())){
+								memory.remove(obj);
+								compensate();
+							}
+						}
 					}
 				}
 			};		
