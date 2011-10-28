@@ -351,8 +351,9 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		tcs.getScripts().addAll(stopper);
 		TryCatch tc = beansFac.createTryCatch();
 		tc.setTry(tcs);
-		tc.getCatches().put("InterruptedException", compensation);
+		tc.getCatches().put("InterruptedException", beansFac.createCodeElement());
 		mapping.getScripts().add(tc);
+		mapping.getScripts().add(compensation);
 		return mapping;
 	}
 	
@@ -538,9 +539,6 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 //				}
 //				break;
 		}
-//		for(BpmnBranch branch : block.getElements()){
-//			seq.getScripts().add(visitFlowObject((FlowObject)branch.getElement()));
-//		}
 		return mapping;
 	}
 	
@@ -642,7 +640,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				code.setCode("\tpublic void notify(SpaceEvent<? extends IFact> event) { ");
 				seq.getScripts().add(code);
 				code = beansFac.createCodeElement();
-				code.setCode("\t\tif(event instanceof WriteCallEvent<?>){ ");
+				code.setCode("\t\tif(event instanceof WriteCallEvent){ ");
 				seq.getScripts().add(code);
 				code = beansFac.createCodeElement();
 				code.setCode("\t\t\tObject obj  = ((WriteCallEvent) event).getObject();");
@@ -658,7 +656,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				seq.getScripts().add(code);
 				code = beansFac.createCodeElement();
 				code.setCode("\t\t\t\tif(payload!=null && payload instanceof "+payloadType+
-						     "&& message.getHeader(IJiacMessage.Header.SEND_TO).equals(\""+Address+"\")){");
+						     "&& message.getHeader(IJiacMessage.Header.SEND_TO).equalsIgnoreCase(\""+Address+"\")){");
 				seq.getScripts().add(code);
 				code = beansFac.createCodeElement();
 				code.setCode("\t\t\t\t\tmemory.remove(message);");
@@ -1057,6 +1055,13 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			_currentSubProcess.getMethods().add(run);
 			Script content = visitFlowObjects(activity.getContainedFlowObjects());
 			_currentSubProcess = old;
+			//looping?
+			if (activity.getLoopAttributes() instanceof StandardLoopAttSet) {
+				content =  createStandardLoop(activity, content);
+			}
+			if (activity.getLoopAttributes() instanceof MultiLoopAttSet) {
+				content = createMultiInstanceLoop(activity, content);
+			}
 			run.setContent(buildSequence(content, null, activity.getAssignments()));
 			for(Property prop : activity.getProperties()){
 				JavaVariable var = beansFac.createJavaVariable();
