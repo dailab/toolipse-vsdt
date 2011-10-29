@@ -990,10 +990,17 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		case NONE:
 			break;
 		case SCRIPT:
-			// TODO check if script contains more than one line
-			CodeElement code = beansFac.createCodeElement();
-			code.setCode(activity.getScript());
-			mapping = code;
+			String script = activity.getScript();
+			if(script!=null){
+				String[] lines = script.split("\n");
+				Sequence seq = beansFac.createSequence();
+				for (String line : lines) {
+					CodeElement code = beansFac.createCodeElement();
+					code.setCode(line);
+					seq.getScripts().add(code);
+				}
+				mapping = seq;
+			}
 			break;
 		case SERVICE:
 			if (activity.getImplementation() instanceof de.dailab.vsdt.Service) {
@@ -1071,7 +1078,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			}
 			String varName = Util.toJavaName(activity.getName());
 			Sequence seq = beansFac.createSequence();
-			code = beansFac.createCodeElement();
+			CodeElement code = beansFac.createCodeElement();
 			code.setCode(className + " " + varName+" = new "+className+"();");
 			seq.getScripts().add(code);
 			code = beansFac.createCodeElement();
