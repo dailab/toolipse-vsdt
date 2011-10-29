@@ -245,7 +245,7 @@ public class RecieveImpl extends ScriptImpl implements Recieve {
 		result+="\t\tif(fact instanceof JiacMessage) {\n";
 		result+="\t\t\tJiacMessage jiacMessage = (JiacMessage)fact;\n";
 		//check the payload and address
-		result+="\t\t\tif(jiacMessage.getPayload() instanceof "+payload.getType()+" && jiacMessage.getHeader(IJiacMessage.Header.SEND_TO).equals(groupAddress)) {\n";
+		result+="\t\t\tif(jiacMessage.getPayload() instanceof "+payload.getType()+" && jiacMessage.getHeader(IJiacMessage.Header.SEND_TO).equals(\""+address+"\")) {\n";
 		result+="\t\t\t\tmemory.remove(jiacMessage);\n";
 		result+="\t\t\t\t"+payload.getName()+" = ("+payload.getType()+") jiacMessage.getPayload();\n";
 		result+="\t\t\t\tbreak;\n";//message found leave foreach block
