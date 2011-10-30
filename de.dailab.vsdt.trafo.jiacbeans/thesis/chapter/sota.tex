@@ -1,12 +1,12 @@
 \chapter{State of the art}
-
+\label{chap:sota}
 %====================================================%
 %                     BPMN2BPEL                      %
 %====================================================%
 \section{BPMN to BPEL Transformation}
 In the BPMN Specification, the mapping from BPMN to BPEL has been included since the first version. In fact the development of BPMN was driven by the lack of standard notation for the WS-BPEL\cite{weidlich2008}. The limitation of the mapping from BPMN to BPEL has also been discussed in various papers, focusing the issues resulting from the incompatibility of the graph structured BPMN and the block structured BPEL, and led to some more sophisticated mapping such as the one introduced by Ouyang et al. (\cite{Ouyang2006a},\cite{Ouyang2006b}).
 
-At the moment, there are some tools that supports the transformation from BPMN to BPEL 
+At the moment, there are some tools that supports the transformation from BPMN to BPEL.
 In the VSDT, a mapping from BPMN to BPEL based on the mapping given in the BPMN specification was developed, covering nearly every mapping given in the specification including event handlers, inclusive OR and event based XOR Gateways. 
 
 For this Project the mapping from BPMN to BPEL given in the BPMN specification are used to gain a better understanding of the notation's semantics.
@@ -25,25 +25,26 @@ The transformation to Jiac AgentBeans is in no way a replacement to the existing
 		\begin{tabularx}{\linewidth}{|l|X|}\hline\hline
 			\multicolumn{2}{|c|}{\textbf{Advantages of:}} \\\hline
 			\multicolumn{1}{|c|}{JADL} & \multicolumn{1}{c|}{AgentBeans}\\\hline
-			can be deployed to a running Jiac application &  Written fully in Java, therefore developer friendly.\\
-																										&  Java is more powerful that JADL.\\
-			                           										&  Better performance because no parser are involved.\\\hline\hline
+			can be deployed to a running Agent &  Written fully in Java, therefore developer friendly.\\
+																				 &  Java is more powerful (expressive) that JADL.\\
+			                           				 &  Better performance because no parser is involved.\\\hline\hline
 		\end{tabularx}
 \end{table}
-
+Because JADL files can be deployed to a running Agent, the mapping to JADL is suitable for creating dynamic behaviors and services that might be changed and deployed at runtime, while the mapping to JIAC Agent Beans (because of it's expressiveness and better performance) is a better choice for creating the core components of an agent. 
 \newpage
 \section{WADE}
+\label{sec:wade}
 A similar approach (designing agents behavior with processes and transforming it into Java Code) has been developed by the Telecom Italia with their JADE-extension called WADE (Workflows and Agents Development Environment). While Jade was developed to simplify the implementation of Software Agents, WADE extended JADE with a workflow engine, making it possible to create Agents that executes tasks defined as workflows.
 
-\subsection{JADE (\textbf{J}ava \textbf{A}gent \textbf{DE}velopment Frameork)}
-JADE (\cite{FBGCAPGR08},\cite{FBAPGR99}) is an application framework and a middleware written in Java, which support the development of software agents. The framework  provides distributed runtime environments, agent and behaviour abstractions as well as communications between agents and discovery mechanisms. We can say that it's role is very similar to JIAC.
+\subsection{JADE (\textbf{J}ava \textbf{A}gent \textbf{DE}velopment Framework)}
+JADE (\cite{FBGCAPGR08},\cite{FBAPGR99}) is an application framework and a middleware written in Java, which support the development of software agents. The framework  provides distributed runtime environments, agent and behavior abstractions as well as communications between agents and discovery mechanisms. We can say that it's role is very similar to JIAC.
 
 \subsection{WADE (Workflows and Agents Development Environment)}
 WADE is an extension to JADE, which enrich the application framework with a workflow engine. The WorkflowEngineAgent extends the JADE basic Agent class with an ability to execute workflows represented in a WADE specific formalism.
 
 A WADE workflow is actually a Java Class, thus it can be edited and managed as Java classes and can contain pieces of code which is needed to implement the process. With WOLF, a development environment that comes with WADE, developers can edit the Workflow graphically as well as textually. The code view and the graphical view of the workflow are kept in sync.
 
-Despite having all the advantages of a Java code, the WADE workflow is rather simple and not so expressive as the BPMN. Similarity to the agent technology such as event handling and communication flow are also missing in the workflow. In the following we will take a closer look on the workflow concept of Wade. 
+Despite having all the advantages of a Java code, the WADE workflow is rather simple and not so expressive as the BPMN. Similarity to the agent technology such as event handling and communication flow are also missing in the workflow. Further, because each workflow model is associated to a single java class, it is targeting a single agent and is not very suitable in designing multi agent systems. In the following we will take a closer look on the workflow concept of Wade. 
 
 
 \subsection{Workflow Metamodel (graphical view)}
@@ -68,7 +69,7 @@ Activities in Wade are divided into different types depending on the operations 
 	\item \textbf{\textit{Code Activities}}\\
 				Included operations are specified directly by a set of Java code. 
 	\item \textbf{\textit{Subflow Join}} \\
-	      Included operations consist of blocking the main workflow process and wait untill the previously launched asynchronous subflow completes, and getting the results.
+	      Included operations consist of blocking the main workflow process and wait until the previously launched asynchronous subflow completes, and getting the results.
 	\item \textbf{\textit{Route Activities}}\\
 				Route activities are empty. No operations is included. It can be used to simplify complex flows. 
 \end{itemize}
@@ -81,7 +82,7 @@ A Process has a set of \textbf{DataFields} which can be referenced anywhere in t
 \subsection{Workflow implementation (code view)}
 As mentioned before, workflow in wade is actually a (well structured) Java class. A workflow process is implemented by a Java class extending the \verb|WorkflowBehaviour| class, which provides the methods \verb|registerActivity()| and \verb|registerTransition()| for adding activities and transitions into the process. 
 
-The \verb|registerActivity()| method takes a behaviour object as argument. There are different behaviour classes corresponding to the different activity types discussed in the previous subsection. The actual operations included for the registered activity are wrapped in a void method of the workflow class. The method's name is derived from the activity's name added with the ''execute'' prefix e.g \verb|executecheckBalance()| for the activity ''checkBalance''.  
+The \verb|registerActivity()| method takes a behavior object as argument. There are different behavior classes corresponding to the different activity types discussed in the previous subsection. The actual operations included for the registered activity are wrapped in a void method of the workflow class. The method's name is derived from the activity's name added with the ''execute'' prefix e.g \verb|executecheckBalance()| for the activity ''checkBalance''.  
 
 The \verb|registerTransition()| method takes a Transition object as an argument. If the transition is associated with a condition, then a boolean method (with the prefix ''check'' added to the condition name) will be created.
 
@@ -98,7 +99,7 @@ In Figure \ref{fig:wade_graph} we can see an example process in its graphical vi
 //the layout information of the graphical view
 @WorkflowLayout(entryPoint = @MarkerLayout(position = "(260,31)", activityName = "checkBalance"), exitPoints = { }, transitions = {@TransitionLayout(to = "rejectWithdrawal", from = "checkBalance"), @TransitionLayout(to = "payoutAndUpdateBalance", from = "checkBalance") }, activities = {@ActivityLayout(position = "(357,175)", name = "rejectWithdrawal"), @ActivityLayout(position = "(116,171)", name = "payoutAndUpdateBalance"), @ActivityLayout(position = "(222,78)", name = "checkBalance") })
 
-public class AccountWithdrawal extends WorkflowBehaviour {
+public class AccountWithdrawal extends Workflowbehavior {
 	//Data fields
 	public static final String NOTENOUGHBALANCE_CONDITION = "notEnoughBalance";
 	public static final String REJECTWITHDRAWAL_ACTIVITY = "rejectWithdrawal";
@@ -112,13 +113,13 @@ public class AccountWithdrawal extends WorkflowBehaviour {
 	
 	// All activities should be registered in this method
 	private void defineActivities() {
-		CodeExecutionBehaviour checkBalanceActivity = new CodeExecutionBehaviour(
+		CodeExecutionbehavior checkBalanceActivity = new CodeExecutionbehavior(
 				CHECKBALANCE_ACTIVITY, this);
 		registerActivity(checkBalanceActivity, INITIAL);
-		CodeExecutionBehaviour payoutAndUpdateBalanceActivity = new CodeExecutionBehaviour(
+		CodeExecutionbehavior payoutAndUpdateBalanceActivity = new CodeExecutionbehavior(
 				PAYOUTANDUPDATEBALANCE_ACTIVITY, this);
 		registerActivity(payoutAndUpdateBalanceActivity, FINAL);
-		CodeExecutionBehaviour rejectWithdrawalActivity = new CodeExecutionBehaviour(
+		CodeExecutionbehavior rejectWithdrawalActivity = new CodeExecutionbehavior(
 				REJECTWITHDRAWAL_ACTIVITY, this);
 		registerActivity(rejectWithdrawalActivity, FINAL);
 	}
@@ -158,4 +159,4 @@ Although it is not strictly necessary, all activities and transitions should be 
 
 In line 38 to 47 we can see the activity methods that wraps the operations included in an activity. And finally we can see the boolean method  \verb|checknotEnoughBalance()| that checks for the condition of the transition from checkBalance to rejectWithdrawal. These methods are per default empty, leaving the operations to be added directly into the code by the developer.
 
-Wade's approach in implementing the workflow as Java code has inspired us for this project. Some of the concepts e.g wrapping the activity in a java method can also be found in our BPMN to AgentBean transformation. 
+Wade's approach in implementing the workflow as Java code has inspired us for this project. Some of the concepts e.g wrapping the activity in a Java method can also be found in our BPMN to AgentBean transformation. 

@@ -6,6 +6,8 @@
 \usepackage{tabularx}
 \usepackage{multirow}
 \renewcommand{\figurename}{Figure}
+\renewcommand{\contentsname}{Table of Contents}
+\renewcommand{\listfigurename}{List of Figures}
 
 % TODO diese Kommandos werden an verschiedenen Stellen referenziert
 % und sollten entsprechend gesetzt werden
@@ -19,6 +21,7 @@
 
 \usepackage{color}
 \usepackage{listings}
+\usepackage{rotating}
 
 \definecolor{listings}{RGB}{240, 240, 240}
 \lstset{ 
@@ -60,7 +63,6 @@
 	\input{chapter/introduction}
 	\input{chapter/background}
 	\input{chapter/sota}
-	%concept von wade nach bpmn2jiacbeans
 	\input{chapter/mapping}
 	\input{chapter/implementation}
 	\input{chapter/examples}
