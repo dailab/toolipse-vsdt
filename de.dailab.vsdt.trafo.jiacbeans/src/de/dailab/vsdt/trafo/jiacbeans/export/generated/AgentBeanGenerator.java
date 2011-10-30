@@ -30,7 +30,7 @@ public class AgentBeanGenerator
   protected final String TEXT_10 = " = \"";
   protected final String TEXT_11 = "\"; ";
   protected final String TEXT_12 = NL;
-  protected final String TEXT_13 = NL + "\t";
+  protected final String TEXT_13 = NL + "\t/**" + NL + "\t *  <!-- begin-user-doc -->" + NL + "\t *  <!-- end-user-doc -->" + NL + "\t *\tdelete the generated tag after you edited this method" + NL + "\t *  @generated" + NL + "\t */" + NL + "\t";
   protected final String TEXT_14 = ";";
   protected final String TEXT_15 = NL;
   protected final String TEXT_16 = NL + "\t/**" + NL + "\t *  <!-- begin-user-doc -->" + NL + "\t *  <!-- end-user-doc -->" + NL + "\t *\tdelete the generated tag after you edited this method" + NL + "\t *  @generated" + NL + "\t */" + NL + "\t";

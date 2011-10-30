@@ -265,7 +265,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					_currentBean.getImports().add("java.text.*");
 					_currentBean.getImports().add("java.util.Date");
 					CodeElement create = beansFac.createCodeElement();
-					create.setCode("TimeEventHandler "+eName+" = new TimeEventHandler("+e.getTimeExpression().getExpression()+","+activityName+");");
+					create.setCode("TimeEventHandler "+eName+" = new TimeEventHandler(\""+e.getTimeExpression().getExpression()+"\","+activityName+");");
 					mapping.getScripts().add(create);
 					CodeElement start = beansFac.createCodeElement();
 					start.setCode(eName+".start();");
