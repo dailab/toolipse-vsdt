@@ -31,6 +31,12 @@ import <%=i%>;
 <%}%>
 
 <% for(JavaVariable var: attributes){%>
+	/**
+	 *  <!-- begin-user-doc -->
+	 *  <!-- end-user-doc -->
+	 *	delete the generated tag after you edited this method
+	 *  @generated
+	 */
 	<%= var.toString()%>;
 <%}%>
 

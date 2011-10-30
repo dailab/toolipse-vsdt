@@ -1,4 +1,8 @@
 <%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="MessageEventHandlerGenerator"%>
+	/**
+	 *	delete the generated tag after you edited this method
+	 *  @generated
+	 */
 	class MessageEventHandler extends Thread{
 		Thread toStop;
 		boolean triggered = false;
@@ -9,6 +13,10 @@
 		Action leaveAction;
 		IGroupAddress groupAddress;
 		
+		/**
+		 *	delete the generated tag after you edited this method
+		 *  @generated
+		 */
 		public MessageEventHandler(String channel, String payloadType, Thread toStop){
 			address = channel;
 			this.toStop = toStop;
@@ -24,12 +32,12 @@
 			observer = new SpaceObserver<IFact>(){
 				public void notify(SpaceEvent<? extends IFact> event) {
 					if(event instanceof WriteCallEvent<?>){
-						Object obj = event.getObject();
+						Object obj = ((WriteCallEvent) event).getObject();
 						if(obj instanceof IJiacMessage){
 							IJiacMessage msg = (IJiacMessage)obj;
 							if(msg.getHeader(IJiacMessage.Header.SEND_TO).equals(address) &&
 							   payloadClass.isInstance(msg.getPayload())){
-								memory.remove(obj);
+								memory.remove(msg);
 								compensate();
 							}
 						}
@@ -38,21 +46,48 @@
 			};		
 		}
 		
+		/**
+		 *	delete the generated tag after you edited this method
+		 *  @generated
+		 */
 		public void run(){
 			invoke(joinAction, new Serializable[]{groupAddress});
 			memory.attach(observer);
 		}
 		
+		/**
+		 *	delete the generated tag after you edited this method
+		 *  @generated
+		 */
 		public void compensate(){
+			tostop.stop();
 			triggered = true;
 			detach();
 		}
 		
+		/**
+		 *	delete the generated tag after you edited this method
+		 *  @generated
+		 */
 		public void detach(){
 			memory.detach(observer);
 			invoke(leaveAction, new Serializable[]{groupAddress});
 		}
 		
+		/**
+		 *  the observer should be detached if this thread is stopped
+		 *	delete the generated tag after you edited this method
+		 *  @generated
+		 */
+		public void stop(){
+			detach();
+		}
+		
+		/**
+		 *  returns the triggered flag
+		 *	delete the generated tag after you edited this method
+		 *  @generated
+		 */
 		public boolean hasBeenTriggered(){
 			return triggered;
 		}
