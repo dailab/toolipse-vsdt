@@ -1,7 +1,12 @@
 \chapter{Conclusion}
 \label{chap:conclusion}
-% Benefits of MDD in product and in the implementation
+In this work, we combined to MDE approaches in the domain of multi-agent-systems and brought the benefits of the expressive model BPMN and the developer friendly java programming language together. As a result, a plugin to VSDT was developed that adds a transformation from BPMN to Jiac Agent Beans. 
 
+First, we presented some informations about the target framework JIAC, the used model BPMN, the existing model driven tool VSDT and about the code generating framework JET.  Further we presented the result of our research about the related state of the art approaches and existing transformation of BPMN to BPEL and JiacV. 
+
+Inspired by the BPMN to JiacV transformation and Wade, we then developed the mapping from BPMN to Jiac Agent Beans as a combination from both approaches. Similar to the presentation of the mapping from BPMN to BPEL that we found in the BPMN specification, we used examples that contain a figure of the process diagram and the associated code mapped from it to present the mapping from BPMN to Agent Beans. 
+
+The transformation was developed with benefits of the extensible transformation framework of the VSDT, where we could reuse the built in transformations for the validation, normalization and structure mapping stages. We have shown that VSDT's transformation framework can be extended easily by implementing a transformation for the element mapping stage. To simplify the transformation, an agent bean model was also developed as an intermediate product. During the development process of the agent bean model we have gained the benefits of MDE provided by eclipse's EMF where most of the Java code for the agent bean model was generated automatically.
 %%%%%%%%%%%%%%%%%%%%%%%
 %Future work          %
 %%%%%%%%%%%%%%%%%%%%%%%

@@ -4,7 +4,7 @@
 In this chapter we will introduce an example scenario of a process and how the resulting Code of the transformation look like.
 
 \section{The Model}
-The example process model is based on a scenario taken from the actual topic \textit{electromobility}. The scenario includes a choreography between a MobileApplication, started by a user wanting to reserve a taxi and a number of ETaxi-applications installed in electronic taxis. Figure \ref{fig:usecase} shows the usecase model of the \textbf{requestTaxi} process. 
+The example is based on a scenario taken from the actual topic \textit{electromobility}. The scenario includes a choreography between a MobileApplication, that will be used by a user to reserve a taxi and a number of ETaxi-applications installed in electronic taxis. Figure \ref{fig:usecase} shows the usecase model of the \textbf{requestTaxi} process. 
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.8\textwidth]{images/example/usecase.png}
@@ -17,17 +17,19 @@ In Figure \ref{fig:payloads} we can see some data types included in the process 
 	\centering
 		\includegraphics[width=0.8\textwidth]{images/example/payloads.png}
 	\label{fig:payloads}
-	\caption{Payloads included in the MessageChannel}
+	\caption{Payload data types included in the process diagram}
 \end{figure}
 
 \newpage
 \subsection{The scenario}
+Before we start with the transformation, we will describe the scenario that lies behind the process model shown in Figure \ref{fig:example} from the perspective of each pool. 
+
 \textbf{Mobile Application}\\
 The process starts with a user requesting a taxi with the service provided by the mobile application. The service will then send a request to all ETaxis by sending informations about the user's location, application ID and the destination. Within 30 seconds after sending the request, the mobile application will collect responses from available ETaxis containing informations about the taxi ID and the estimated time needed by the taxi to arrive at the guest's current location. While receiving these responses, the mobile application will save the best response according to the minimum estimated time. After 30 seconds it will check whether a taxi is available, in which case it will send a notification to all taxis about which taxi is selected and then the process will end, passing the selected taxi's ID to the user. If no responses are received, it will notify the user that no taxi is currenty available. 
 
 
 \textbf{ETaxi}\\
-
+From the ETaxi perspective, the process starts when a request from a mobile application is received. It will then evaluate the request and decide whether or not the request is interesting e.g according to the distance between the taxis location and the guest's location. If the request is interesting, it will then send a response back to the sending mobile application. After that it will wait for a notification from the mobile application and check the taxiID from the message's payload. If the taxiID belongs to the ETaxi, it will then tell the driver and navigate to the guest's location.
 
 \begin{sidewaysfigure}
 	\centering
