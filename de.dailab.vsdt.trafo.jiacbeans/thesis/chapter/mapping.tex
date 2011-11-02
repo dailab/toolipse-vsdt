@@ -1,12 +1,12 @@
-\chapter{Mapping BPMN to Jiac AgentBeans}
+\chapter{Mapping BPMN to Jiac Agent Beans}
 \label{chap:mapping}
-The element mapping from BPMN to Jiac AgentBeans is created based on the existing mapping to JiacV - JADL script. Compared to a JADL script, an AgentBean that is written completely in Java enables more possibilities in mapping concepts such as intermediate Event handling. Some concepts found in Wade's workflow implementation inspired us for the development of the mapping. This chapter will provide a detailed overview of the mapping.\\\\
+The element mapping from BPMN to Jiac Agent Beans is created based on the existing mapping to JiacV - JADL script. Compared to a JADL script, an AgentBean that is written completely in Java enables more possibilities in mapping concepts such as intermediate Event handling. Some concepts found in Wade's workflow implementation inspired us for the development of the mapping. This chapter will provide a detailed overview of the mapping.\\\\
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 4.1 Pools & Processes                               %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Pools and Processes}
-Every pool in a process diagram will be mapped into an AgentBean. The name of the AgentBean will be derived from the Pool name, and the name of the process diagram it is contained in. If a Pool with the same name (e.g Mathematican) is contained in the business process diagrams ExtractRoot and Faculty, then the two agent beans \texttt{Mathematican\_ExtractRoot} and \texttt{Mathematican\_Faculty} will be created. Further, they are grouped in the package mathematican. 
+Every pool in a process diagram will be mapped into an Agent Bean. The name of the Agent Bean will be derived from the Pool name, and the name of the process diagram it is contained in. If a Pool with the same name (e.g Mathematican) is contained in the business process diagrams ExtractRoot and Faculty, then the two agent beans \texttt{Mathematican\_ExtractRoot} and \texttt{Mathematican\_Faculty} will be created. Further, they are grouped in the package mathematican. 
 
 The process contained in a pool is mapped into a \textbf{workflow method}. Depending on the start event's type, this workflow method may be called in the execute method of the bean (for timer start event), it may be exposed as an action (for message start event with service implementation), or if the start event is a message start event with MessageChannel implementation, a SpaceObserver will be created and attached to the agent's memory, which will call the workflow method when a message with the payload and address as specified in the implementing message channel are written into the agent's memory.
 
@@ -239,7 +239,7 @@ try{
 \label{fig:mapping_xorEvent}%
 \end{figure}
 \newpage
-The event handler class will be added as an inner class to the bean, and they will have a constructor with a Thread toStop argument (among other arguments) and a boolean method \verb|hasBeenTrigerred()| to check whether the event handler has been activated by the expected event. The following Listing \ref{list:timeoutEventHandler} shows an implementation of the TimeoutEventHandler. This inner class will be included in every agent bean class that uses a TimeoutEventHandler.\\\\
+The event handler class will be included as an inner class of the bean, and they will have a constructor with a Thread toStop argument (among other arguments) and a boolean method \verb|hasBeenTrigerred()| to check whether the event handler has been activated by the expected event. The following Listing \ref{list:timeoutEventHandler} shows an implementation of the TimeoutEventHandler. This inner class will be included in every agent bean class that uses a TimeoutEventHandler.\\\\
 
 \begin{lstlisting}[language=Java, caption=TimeoutEventHandler implementation as an inner class, label=list:timeoutEventHandler]
 class TimeoutEventHandler extends Thread{
@@ -551,9 +551,9 @@ public void print1To10(){
 \caption{Mapping example : Activity-Looping (Standard Loop)}% 
 \label{fig:mapping_standardLoop}%
 \end{figure}
-
+\newpage
 \section{Events}
-Finally, we will now discuss the mapping of BPMN Events to Jiac AgentBeans. We will first discuss the Intermediate events and then we will handle Start and End Events. We need to group start and end events because the mapping will have influence on how the process will be started, and they will also determine the signature (input and output parameters) of the workflow method. 
+Finally, we will now discuss the mapping of BPMN Events to Jiac Agent Beans. We will first discuss the Intermediate events and then we will handle Start and End Events. We need to group start and end events because the mapping will have influence on how the process will be started, and they will also determine the signature (input and output parameters) of the workflow method. 
 
 \subsection{Intermediate-Events}
 Intermediate Events are something that happens during the process. It's mapping will be added into the workflow method. To keep the workflow method readable, we decided to wrap intermediate events in a method (similar to activities). The name will be derived from the events name (if specified) or id, added with an event-type specific postfix.
@@ -561,10 +561,7 @@ Intermediate Events are something that happens during the process. It's mapping 
 In this version only the mapping of Timer and Message intermediate events are included. 
 
 \textbf{Timer}\\
-A timer intermediate event will turn the process to sleep until the given time expression. If the given time expression is a duration (option as duration in the property sheet is selected), then the expression will be handled as a long integer that defines how long (in milliseconds) the process should be paused.\\
-
-If the given time is an exact time (e.g. Friday, November 4th 2011 10:00:00), then the expression should be parsed into a Java Date object and the process should be paused until the given date. However, it is not clear yet on how to handle incomplete date expressions (e.g. when we need to start a process every day at midnight). At the moment, the given date expression has to be in the form ''yyyy-MM-dd'T'HH:mm:ss.SSSZ'' (e.g. 2011-11-04T10:00:00.000+0100 for Friday, November 4th 2011 10:00:00). Figure \ref{fig:timer_intermediate}
-shows an example of the mapping for both variants.
+A timer intermediate event will turn the process to sleep until the given time expression. If the given time expression is a duration (option as duration in the property sheet is selected), then the expression will be handled as a long integer that defines how long (in milliseconds) the process should be paused.
 \begin{figure}[h]
 \begin{minipage}[c]{0.28\textwidth}
 \includegraphics{images/mapping/timer_intermediate.png}
@@ -601,7 +598,10 @@ if(toSleep>0){
 \caption{Mapping example : Timer Intermediate Event}%
 \label{fig:timer_intermediate}%
 \end{figure}
-\newpage
+
+If the given time is an exact time (e.g. Friday, November 4th 2011 10:00:00), then the expression should be parsed into a Java Date object and the process should be paused until the given date. However, it is not clear yet on how to handle incomplete date expressions (e.g. when we need to start a process every day at midnight). At the moment, the given date expression has to be in the form ''yyyy-MM-dd'T'HH:mm:ss.SSSZ'' (e.g. 2011-11-04T10:00:00.000+0100 for Friday, November 4th 2011 10:00:00). Figure \ref{fig:timer_intermediate}
+shows an example of the mapping for both variants.
+
 \textbf{Message}\\
 Message intermediate events will be mapped similarly to a receive task. The process read the memory and wait until the expected message is found in the memory. 
 
@@ -650,13 +650,13 @@ public void execute(){
 \caption{Mapping example : Timer Start Event}%
 \label{fig:timer_start}%
 \end{figure}
-\newpage
+
 
 \textbf{Message}\\
 Message Start and End events will influence the signature of the workflow method. The start event defines the parameters and the end event defines it's return type. We can divide message start and end events according to the event's implementation (Service or MessageChannel). 
 
 \textbf{Message with Service implementation}
-If the implementation is a Service, the workflow method will be exposed as an action(service). The process will be started by other AgentBean as a service by invoking the exposed action. The signature of the workflow method will be derived from the signature of the implementing service. 
+If the implementation is a Service, the workflow method will be exposed as an action(service). The process will be started by other Agent Bean as a service by invoking the exposed action. The signature of the workflow method will be derived from the signature of the implementing service. 
 Multiple return type are wrapped in a Serializable array. 
 
 In Figure \ref{fig:message_service} we can see an example mapping of message start and end events with service implementation. The generated workflow method are exposed as an Action with the @Expose code in Line 5. 
@@ -684,56 +684,10 @@ public class [Bean-name] extends AbstractMethodExposingBean{
 \label{fig:message_service}
 \end{figure}
 
-
-\newpage
 \textbf{Message with MessageChannel implementation}\\
 If the implementation is a MessageChannel, an observer will be created and attached to the agent's memory in the \verb|doStart()| method.
 The workflow method will get the MessageChannel's payload as a parameter, and it will have no return type (void) and the result will be sent as a message to the specified MessageChannel of the end event. Figure \ref{fig:channel_start} shows a mapping example of a message start event, and in Figure \ref{fig:channel_end}, we can see a mapping example of how a message end event will be mapped.
 \begin{figure}[h]
-\begin{minipage}[c]{0.28\textwidth}
-\includegraphics{images/mapping/message_start.png}
-\end{minipage}
-\begin{minipage}[c]{0.72\textwidth}
-\begin{lstlisting}[language = Java]
-public class [Bean-name] extends AbstractMethodExposingBean{
-	[...]
-	
-	public void doStart(){
-		[...]
-		Action joinAction = retrieveAction(ICommunicationBean.ACTION_JOIN_GROUP);
-		IGroupAddress groupAddress = CommunicationAddressFactory.createGroupAddress([channel]);
-		invoke(joinAction,new Serializable[]{groupAddress});
-		SpaceObserver<IFact> [event name or id]_observer = new SpaceObserver<IFact>(){
-			public void notify(SpaceEvent<? extends IFact> event) { 
-				if(event instanceof WriteCallEvent<?>){ 
-					WriteCallEvent<IJiacMessage> wce = (WriteCallEvent<IJiacMessage>) event;
-					IJiacMessage message = wce.getObject();
-					IFact payload = message.getPayload();
-					if(payload!=null && [payload name] instanceof [payload type]&& message.getHeader(IJiacMessage.Header.SEND_TO).equals([channel]){
-						memory.remove(message);
-						[workflow method](([payload type])payload);
-					}
-				}
-			}
-		};
-		memory.attach(_nO3bwPwdEeCOWB3dJOsUA_observer);
-		[...]
-	}
-	
-	public void [workflow method]([payload type] [payload name]){
-		[...]
-	}
-	
-	[...]
-}
-\end{lstlisting}
-\end{minipage}
-\caption{Mapping example : Message Start Event with MessageChannel Implementation}%
-\label{fig:channel_start}
-\end{figure}
-
-
-\begin{figure}[hbtp]
 \begin{minipage}[c]{0.28\textwidth}
 \includegraphics{images/mapping/message_end.png}
 \end{minipage}
@@ -757,7 +711,47 @@ public class [Bean-name] extends AbstractMethodExposingBean{
 \caption{Mapping example : Message End Event with MessageChannel Implementation}%
 \label{fig:channel_end}
 \end{figure}
+\begin{figure}[h]
+\begin{minipage}[c]{0.28\textwidth}
+\includegraphics{images/mapping/message_start.png}
+\end{minipage}
+\begin{minipage}[c]{0.72\textwidth}
+\begin{lstlisting}[language = Java]
+public class [Bean-name] extends AbstractMethodExposingBean{
+	[...]
+	public void doStart(){
+		Action joinAction = retrieveAction(ICommunicationBean.ACTION_JOIN_GROUP);
+		IGroupAddress groupAddress = CommunicationAddressFactory.createGroupAddress([channel]);
+		invoke(joinAction,new Serializable[]{groupAddress});
+		SpaceObserver<IFact> [event name or id]_observer = new SpaceObserver<IFact>(){
+			public void notify(SpaceEvent<? extends IFact> event) { 
+				if(event instanceof WriteCallEvent<?>){
+					Object obj = ((WriteCallEvent)event).getObject();
+					if(obj instanceof IJiacMessage){ 
+						IJiacMessage message = (IJiacMessage)obj;
+						IFact payload = message.getPayload();
+						if(payload!=null && [payload name] instanceof [payload type] &&  message.getHeader(IJiacMessage.Header.SEND_TO).equalsIgnoreCase([channel]){
+							memory.remove(message);
+							[workflow method](([payload type])payload);
+						}
+					}
+				}
+			}
+		};
+		memory.attach(_nO3bwPwdEeCOWB3dJOsUA_observer);
+	}
+	public void [workflow method]([payload type] [payload name]){
+		[...]
+	}	
+	[...]
+}
+\end{lstlisting}
+\end{minipage}
+\caption{Mapping example : Message Start Event with MessageChannel Implementation}%
+\label{fig:channel_start}
+\end{figure}
+
 \newpage
 \section{Open Issues}
 
-In this chapter, we presented the details of the mapping from BPMN to Jiac AgentBeans. As we can see in some sections, there are some elements that has not been mapped yet. In the future, we will need to study the semantics of the unmapped elements (e.g. multi instance loop, rule events etc.) further and develop their mapping.
+In this chapter, we presented the details of the mapping from BPMN to Jiac Agent Beans. As we can see in some sections, there are some elements that has not been mapped yet. In the future, we will need to study the semantics of the unmapped elements (e.g. multi instance loop, rule events etc.) further and develop their mapping.

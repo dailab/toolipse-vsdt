@@ -18,20 +18,25 @@ For this Project the mapping from BPMN to BPEL given in the BPMN specification a
 %======== Existing Transformation to Jiac ===========%
 \section{Existing Transformation to JiacV}
 At the moment, the VSDT is already equipped with a transformation of BPMN to JiacV, which generates the JADL(Jiac Agent Description Language).
-As mentioned in chapter \ref{chap:background}, both JADL and AgentBean are tools to implement the functionality of an Agent in Jiac. 
-The transformation to Jiac AgentBeans is in no way a replacement to the existing transformation. Instead both transformations shall complement each other as the products of both transformations have their own advantages, some of which we can find in the following table:
+As mentioned in chapter \ref{chap:background}, both JADL and Agent Bean are tools to implement the functionality of an Agent in Jiac. 
+The transformation to Jiac Agent Beans is in no way a replacement to the existing transformation. Instead both transformations shall complement each other as the products of both transformations have their own advantages, some of which we can find in the following table \ref{tab:benefits}
 \begin{table}[htbp]
 	\centering
 		\begin{tabularx}{\linewidth}{|l|X|}\hline\hline
 			\multicolumn{2}{|c|}{\textbf{Advantages of:}} \\\hline
-			\multicolumn{1}{|c|}{JADL} & \multicolumn{1}{c|}{AgentBeans}\\\hline
+			\multicolumn{1}{|c|}{JADL} & \multicolumn{1}{c|}{Agent Beans}\\\hline
 			can be deployed to a running Agent &  Written fully in Java, therefore developer friendly.\\
 																				 &  Java is more powerful (expressive) that JADL.\\
 			                           				 &  Better performance because no parser is involved.\\\hline\hline
 		\end{tabularx}
+		\caption{Advantages of JADL and Agent Beans}
+		\label{tab:benefits}
 \end{table}
-Because JADL files can be deployed to a running Agent, the mapping to JADL is suitable for creating dynamic behaviors and services that might be changed and deployed at runtime, while the mapping to JIAC Agent Beans (because of it's expressiveness and better performance) is a better choice for creating the core components of an agent. 
+
 \newpage
+Because JADL files can be deployed to a running Agent, the mapping to JADL is suitable for creating dynamic behaviors and services that might be changed and deployed at runtime, while the mapping to JIAC Agent Beans (because of it's expressiveness and better performance) is a better choice for creating the core components of an agent. 
+
+
 \section{WADE}
 \label{sec:wade}
 A similar approach (designing agents behavior with processes and transforming it into Java Code) has been developed by the Telecom Italia with their JADE-extension called WADE (Workflows and Agents Development Environment). While Jade was developed to simplify the implementation of Software Agents, WADE extended JADE with a workflow engine, making it possible to create Agents that executes tasks defined as workflows.
@@ -159,4 +164,4 @@ Although it is not strictly necessary, all activities and transitions should be 
 
 In line 38 to 47 we can see the activity methods that wraps the operations included in an activity. And finally we can see the boolean method  \verb|checknotEnoughBalance()| that checks for the condition of the transition from checkBalance to rejectWithdrawal. These methods are per default empty, leaving the operations to be added directly into the code by the developer.
 
-Wade's approach in implementing the workflow as Java code has inspired us for this project. Some of the concepts e.g wrapping the activity in a Java method can also be found in our BPMN to AgentBean transformation. 
+Wade's approach in implementing the workflow as Java code has inspired us for this project. Some of the concepts e.g wrapping the activity in a Java method can also be found in our BPMN to Agent Bean transformation. 
