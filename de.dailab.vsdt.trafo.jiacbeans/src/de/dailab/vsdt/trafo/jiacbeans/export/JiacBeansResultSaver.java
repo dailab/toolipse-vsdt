@@ -52,14 +52,14 @@ public class JiacBeansResultSaver extends MappingResultSaver {
 				writer.flush();
 			}else{
 				//code exists, initialize JMerger
-				JControlModel model = new JControlModel(); 
 				ASTFacadeHelper astFacadeHelper = new ASTFacadeHelper();
+				JControlModel model = new JControlModel(); 
 				model.setConvertToStandardBraceStyle(true);
 				model.setLeadingTabReplacement("\t");
 				model.initialize(astFacadeHelper, getClass().getResource("mergerules.xml").toString());
 				JMerger jMerger = new JMerger(model); 
 				try{
-					//source = new generated code 
+					//source = new generated code from JET
 					//target = existing code
 					jMerger.setSourceCompilationUnit(jMerger.createCompilationUnitForContents(content));
 					jMerger.setTargetCompilationUnit(jMerger.createCompilationUnitForInputStream(new FileInputStream(f))); //target=last generated code
