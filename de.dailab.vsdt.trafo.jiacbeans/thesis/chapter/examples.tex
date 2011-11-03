@@ -1,10 +1,10 @@
-\chapter{Examples}
+\chapter{Example}
 \label{chap:examples}
 
-In this chapter we will introduce an example scenario of a process and how the resulting Code of the transformation look like.
+In this chapter we will introduce an example scenario of a process and how the resulting code of the transformation looks like.
 
 \section{The Model}
-The example is based on a scenario taken from the actual topic \textit{electromobility}. The scenario includes a choreography between a MobileApplication, that will be used by a user to reserve a taxi and a number of ETaxi-applications installed in electronic taxis. Figure \ref{fig:usecase} shows the usecase model of the \textbf{requestTaxi} process. 
+The example is based on a scenario taken from an actual topic: \textit{electromobility}. The scenario includes a choreography between a MobileApplication, that will be used by a user to reserve a taxi and a number of ETaxi-applications installed in electronic taxis. Figure \ref{fig:usecase} shows the usecase model of the \textbf{requestTaxi} process. 
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.8\textwidth]{images/example/usecase.png}
@@ -12,7 +12,7 @@ The example is based on a scenario taken from the actual topic \textit{electromo
 	\caption{Use case model}
 \end{figure}
 
-In Figure \ref{fig:payloads} we can see some data types included in the process which represents the information exchanged in the communication between both Pools (the payload of the implementing MessageChannel). At the moment Data types can not be defined in the model. They can only be included, the transformation will assume that the classes exists and they will be imported by the generated agent bean. Because they will be wrapped in a JiacMessage, the payloads has to implement the IFact interface.
+In Figure \ref{fig:payloads} we can see some data types included in the process which represent the information exchanged in the communication between both Pools (the payload of the implementing MessageChannel). The transformation will assume that the classes exist and they will be imported by the generated agent bean. Further because payloads will be wrapped in a JiacMessage, they have to implement the IFact interface.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.8\textwidth]{images/example/payloads.png}
@@ -25,11 +25,12 @@ In Figure \ref{fig:payloads} we can see some data types included in the process 
 Before we start with the transformation, we will describe the scenario that lies behind the process model shown in Figure \ref{fig:example} from the perspective of each pool. 
 
 \textbf{Mobile Application}\\
-The process starts with a user requesting a taxi with the service provided by the mobile application. The service will then send a request to all ETaxis by sending informations about the user's location, application ID and the destination. Within 30 seconds after sending the request, the mobile application will collect responses from available ETaxis containing informations about the taxi ID and the estimated time needed by the taxi to arrive at the guest's current location. While receiving these responses, the mobile application will save the best response according to the minimum estimated time. After 30 seconds it will check whether a taxi is available, in which case it will send a notification to all taxis about which taxi is selected and then the process will end, passing the selected taxi's ID to the user. If no responses are received, it will notify the user that no taxi is currenty available. 
+The process starts with a user requesting a taxi by invoking the service provided by the mobile application. The service will then send a request to all ETaxis by sending informations about the user's location, application ID and the destination. Within 30 seconds after sending the request, the mobile application will collect responses from all available ETaxis. Each of these responses contains informations about the taxi ID and the estimated time needed by this taxi to arrive at the user's current location. If multiple responses are received, the mobile application will record the best response according to the minimum estimated time. After 30 seconds the application will check whether a response was received. If yes, it will send a notification to all taxis informing which taxi is selected. Then the process will end and the selected taxi's ID will be sent to the user. If no responses are received, it will notify the user that no taxi is currently available. 
 
 
 \textbf{ETaxi}\\
-From the ETaxi perspective, the process starts when a request from a mobile application is received. It will then evaluate the request and decide whether or not the request is interesting e.g according to the distance between the taxis location and the guest's location. If the request is interesting, it will then send a response back to the sending mobile application. After that it will wait for a notification from the mobile application and check the taxiID from the message's payload. If the taxiID belongs to the ETaxi, it will then tell the driver and navigate to the guest's location.
+From the ETaxi perspective, the process starts when a request from a mobile application is received. It will then evaluate the request and decide whether or not the request is interesting e.g according to the distance between the taxi's location and the user's location. If the request is interesting, the ETaxi will then send a response back to the requesting MobileApplication. After that it will wait for a notification from the MobileApplication and check the included taxiID. If the taxiID belongs to the ETaxi, it will then tell the driver and navigate to the user's location.
+
 
 \begin{sidewaysfigure}
 	\centering
@@ -38,80 +39,39 @@ From the ETaxi perspective, the process starts when a request from a mobile appl
 	\caption{Business Process Diagram - requestTaxi}
 \end{sidewaysfigure}
 
+
+\subsection{Problem With MessageChannel}
+As mentioned in the open issues of the mapping, with the MessageChannel implementation messages will be broadcasted to all subscribers of a communication group. This is a problem for our scenario since the response from the ETaxis should be sent only to the requesting MobileApplication. In order to keep the scenario as it is, we decided to make a workaround for this problem and create a channel (communication group) where the application ID (appID) is included in the address. This way each mobile application will have their own channel. 
+
 \newpage
+At the moment, the implemented element mapping will map the given channel into a String literal (the expression will be wrapped with two quotation marks \verb|"[expression]"|). Obviously we need to avoid the wrapping of the appID variable as a String literal. Therefore we constructed the channel expression as \verb|TaxiResponseTo"+appID+"|. This way the mapped expression will be \verb|"TaxiResponseTo"+appID+""|. Perhaps it would be better if we change the implementation in the future and skip the wrapping of the given expression. Instead we can simply assume that the given expression is a valid Java String literal or a String variable e.g \verb|"TaxiRequest"| or \verb|requestChannel|, where requestChannel is a String variable.
+
 \section{The generated Agent Beans}
+In this section we will present the Agent Beans generated from the above model. To save space and improve the readability, the generated code will be reduced as follows:
+\begin{itemize}
+	\item Imports are deleted
+	\item Javadoc elements used for JMerge are deleted
+	\item The inner class TimeoutEventHandler which we already presented in section \ref{sec:handler} is deleted
+	\item Some empty lines are deleted
+\end{itemize}
+Beside the mentioned reduction, no other changes were made to the generated code. All codes and comments are generated directly from the model.
+
 \textbf{1. MobileApplication\_requestTaxi}\\
 
 \begin{lstlisting}[language=java, caption= Generated Agent Bean - MobileApplication\_requestTaxi]
 package mobileapplication;
-
-import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;
-import de.dailab.jiactng.agentcore.action.scope.ActionScope;
-import input.TaxiResponse;
-import input.TaxiRequest;
-import input.SelectedTaxi;
-import de.dailab.jiactng.agentcore.action.Action;
-import de.dailab.jiactng.agentcore.comm.ICommunicationBean;
-import de.dailab.jiactng.agentcore.comm.IGroupAddress;
-import de.dailab.jiactng.agentcore.comm.CommunicationAddressFactory;
-import java.io.Serializable;
-import de.dailab.jiactng.agentcore.comm.message.JiacMessage;
-import de.dailab.jiactng.agentcore.knowledge.IFact;
-import java.util.Set;
-import de.dailab.jiactng.agentcore.comm.message.IJiacMessage;
-
+[imports]
 public class MobileApplication_requestTaxi extends AbstractMethodExposingBean{
 	public final static String ACTION_REQUESTTAXI = "mobileapplication.MobileApplication_requestTaxi#requestTaxi"; 
-
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
+	
 	TaxiResponse globalBest;
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
 	boolean noResponse;
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
 	String appID;
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
 	String location;
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
 	String destination;
-
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
 	
 	@Expose(name = ACTION_REQUESTTAXI, scope = ActionScope.GLOBAL)
-	
-	
 	public String requestTaxi(String currentLocation, String currentDestination) {
-		location= location;
-		destination= destination;
 		location= currentLocation;
 		destination= currentDestination;
 		sendRequest();
@@ -129,7 +89,7 @@ public class MobileApplication_requestTaxi extends AbstractMethodExposingBean{
 			wait30Seconds_TimeoutHandler.stop();
 		} catch(InterruptedException e) {
 		}
-		//TODO implement visitGateway
+		
 		if(noResponse){
 			String taxiID;
 			taxiID= "none available";
@@ -142,15 +102,6 @@ public class MobileApplication_requestTaxi extends AbstractMethodExposingBean{
 		}
 	}
 
- 
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
-	
-	
 	private void sendRequest() {
 		TaxiRequest request;
 		request= new TaxiRequest(location,appID,destination);
@@ -160,15 +111,6 @@ public class MobileApplication_requestTaxi extends AbstractMethodExposingBean{
 		invoke(sendAction, new Serializable[]{jiacMessage, groupAddress});
 	}
 
- 
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
-	
-	
 	private void notifyTaxis() {
 		SelectedTaxi selectedTaxi;
 		selectedTaxi= new SelectedTaxi(globalBest.getTaxiID());
@@ -178,26 +120,9 @@ public class MobileApplication_requestTaxi extends AbstractMethodExposingBean{
 		invoke(sendAction, new Serializable[]{jiacMessage, groupAddress});
 	}
 
- 
-
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
 	class WaitForRepliesSubProcess{
-		/**
-		 *  <!-- begin-user-doc -->
-		 *  <!-- end-user-doc -->
-		 *	delete the generated tag after you edited this method
-		 *  @generated
-		 */
+		
 		TaxiResponse currentResponse;
-		/**
-	 	 *  delete the generated tag after you edited this method
-		 *  @generated
-		 */
 		
 		public void run() {
 			noResponse= true;
@@ -211,11 +136,6 @@ public class MobileApplication_requestTaxi extends AbstractMethodExposingBean{
 			}
 		}
 	 
-		/**
-	 	 *  delete the generated tag after you edited this method
-		 *  @generated
-		 */
-		
 		private void receiveResponse() {
 			Action joinAction = retrieveAction(ICommunicationBean.ACTION_JOIN_GROUP);
 			Action leaveAction = retrieveAction(ICommunicationBean.ACTION_LEAVE_GROUP);
@@ -243,162 +163,36 @@ public class MobileApplication_requestTaxi extends AbstractMethodExposingBean{
 			currentResponse= response;
 		}
 	 
-		/**
-	 	 *  delete the generated tag after you edited this method
-		 *  @generated
-		 */
-		
 		private void doNothing() {
 		}
 	 
-		/**
-	 	 *  delete the generated tag after you edited this method
-		 *  @generated
-		 */
-		
 		private void updateGlobalBest() {
 			globalBest= currentResponse;
-		}
-	 
-	}
-
-
-
-	/**
-	 *  Inner class that handles timeout events
-	 *  @generated
-	 */
-	class TimeoutEventHandler extends Thread{
-		long timeout;
-		Thread toStop;
-		boolean triggered = false;
-		
-		/**
-		 *	delete the generated tag after you edited this method
-		 *  @generated
-		 */
-		public TimeoutEventHandler(long timeout, Thread toStop){
-			this.timeout = timeout;
-			this.toStop = toStop;
-		}
-		
-		/**
-		 *	delete the generated tag after you edited this method
-		 *  @generated
-		 */
-		public void run(){
-			try {
-				Thread.sleep(timeout);
-				triggered = true;
-				toStop.stop();
-			}catch(InterruptedException e ) { }
-		}
-		
-		/**
-		 *  returns the triggered flag
-		 *	delete the generated tag after you edited this method
-		 *  @generated
-		 */
-		public boolean hasBeenTriggered(){
-			return triggered;
-		}
+		} 
 	}
 }
 \end{lstlisting}
+
+In the MobileApplication\_requestTaxi Bean, almost every logic is generated from the model. The workflow method requestTaxi is exposed as an Action. All methods are filled with needed operations e.g. the decision whether the currentResponse is better than the globalBest is made by using the compareTo method of the TaxiResponse class. There is only one small yet fatal aspect missing in the generated code. You might notice that while other variables are initialized somewhere in the assignment of a method, the initialization of the appID variable can't be found in the generated code. To ensure that each instance of the MobileApplication\_requestTaxi has a unique ID, the initialization cannot be included in the model. We have to e.g. add a constructor and implement the initialization of the appID in it to make the code works completely. This problem also exists in the generated ETaxi\_requestTaxi code.
 
 \textbf{2. ETaxi\_requestTaxi}\\
 
 \begin{lstlisting}[language=java, caption= Generated Agent Bean - ETaxi\_requestTaxi]
 package etaxi;
-
-import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;
-import de.dailab.jiactng.agentcore.action.scope.ActionScope;
-import input.TaxiResponse;
-import input.TaxiRequest;
-import input.SelectedTaxi;
-import de.dailab.jiactng.agentcore.action.Action;
-import java.io.Serializable;
-import de.dailab.jiactng.agentcore.comm.CommunicationAddressFactory;
-import de.dailab.jiactng.agentcore.comm.IGroupAddress;
-import de.dailab.jiactng.agentcore.comm.ICommunicationBean;
-import de.dailab.jiactng.agentcore.comm.message.IJiacMessage;
-import de.dailab.jiactng.agentcore.knowledge.IFact;
-import org.sercho.masp.space.event.SpaceEvent;
-import org.sercho.masp.space.event.SpaceObserver;
-import org.sercho.masp.space.event.WriteCallEvent;
-import de.dailab.jiactng.agentcore.comm.message.JiacMessage;
-import java.util.Set;
-
+[imports]
 public class ETaxi_requestTaxi extends AbstractMethodExposingBean{
 	public final static String ACTION_REQUESTTAXI = "etaxi.ETaxi_requestTaxi#requestTaxi"; 
 
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
 	boolean requestInteresting;
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
 	String taxiID;
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
 	String globalLocation;
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
 	int estimatedTime;
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
 	String appID;
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
 	TaxiRequest currentRequest;
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
 	SelectedTaxi selection;
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
 	boolean available;
 
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
-	
 	@Expose(name = ACTION_REQUESTTAXI, scope = ActionScope.GLOBAL)
-	
-	
 	public void requestTaxi(TaxiRequest request) {
 		currentRequest= request;
 		evaluateRequest();
@@ -427,15 +221,6 @@ public class ETaxi_requestTaxi extends AbstractMethodExposingBean{
 		}
 	}
 
- 
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
-	
-	
 	public void doStart() {
 		Action joinAction = retrieveAction(ICommunicationBean.ACTION_JOIN_GROUP);
 		IGroupAddress groupAddress = CommunicationAddressFactory.createGroupAddress("TaxiRequest");
@@ -458,30 +243,12 @@ public class ETaxi_requestTaxi extends AbstractMethodExposingBean{
 		memory.attach(_B8QyYAF3EeGC8PuSIWxlmQ_observer);
 	}
 
- 
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
-	
-	
 	private void evaluateRequest() {
 		//script activity
 		//TODO implement code 
 		requestInteresting = true; //every request is interesting
 	}
 
- 
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
-	
-	
 	private void sendResponse() {
 		TaxiResponse response;
 		response= new TaxiResponse(taxiID, estimatedTime);
@@ -491,15 +258,6 @@ public class ETaxi_requestTaxi extends AbstractMethodExposingBean{
 		invoke(sendAction, new Serializable[]{jiacMessage, groupAddress});
 	}
 
- 
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
-	
-	
 	private void waitForNotification() {
 		Action joinAction = retrieveAction(ICommunicationBean.ACTION_JOIN_GROUP);
 		Action leaveAction = retrieveAction(ICommunicationBean.ACTION_LEAVE_GROUP);
@@ -526,62 +284,16 @@ public class ETaxi_requestTaxi extends AbstractMethodExposingBean{
 		selection= selectedTaxi;
 	}
 
- 
-	/**
-	 *  <!-- begin-user-doc -->
-	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
-	 *  @generated
-	 */
-	
-	
 	private void pickupAndDriveGuest() {
 		available= false;
 		// TODO add code to navigate to guest's location
 		available= true;
 	}
-
- 
-
-
-	/**
-	 *  Inner class that handles timeout events
-	 *  @generated
-	 */
-	class TimeoutEventHandler extends Thread{
-		long timeout;
-		Thread toStop;
-		boolean triggered = false;
-		
-		/**
-		 *	delete the generated tag after you edited this method
-		 *  @generated
-		 */
-		public TimeoutEventHandler(long timeout, Thread toStop){
-			this.timeout = timeout;
-			this.toStop = toStop;
-		}
-		
-		/**
-		 *	delete the generated tag after you edited this method
-		 *  @generated
-		 */
-		public void run(){
-			try {
-				Thread.sleep(timeout);
-				triggered = true;
-				toStop.stop();
-			}catch(InterruptedException e ) { }
-		}
-		
-		/**
-		 *  returns the triggered flag
-		 *	delete the generated tag after you edited this method
-		 *  @generated
-		 */
-		public boolean hasBeenTriggered(){
-			return triggered;
-		}
-	}
+	
 }
 \end{lstlisting}
+
+Similar to the MobileApplication\_requestTaxi Bean, the initialization of the taxiID is also missing in the generated code. Moreover, unlike the MobileApplication\_requestTaxi Bean, we did not include all the logic (e.g. for evaluating whether a request is interesting) in the model. By this we showed that the quantity of the generated code might vary depending on how we design the model.
+
+
+In this chapter we have presented an example of the transformation in which some problems regarding the current mapping and transformation are shown. We have also shown how Agents can be designed and created easily by modeling a business process. 

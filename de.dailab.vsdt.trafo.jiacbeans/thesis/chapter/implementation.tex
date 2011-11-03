@@ -3,12 +3,13 @@
 %===============================%
 %         Trafo stages          %
 %===============================%
-In this chapter, we will present the details of the transformation's implementation. We will start with the slightly modified overall transformation structure and then continue with the details of each transformation stages.
+In this chapter we will present the details of the transformation's implementation. We will start with the slightly modified overall transformation structure and then continue with the details of each transformation stages. Finally we will present our solution for merging generated and manually added code, followed by some open issues regarding the current implementation.
 
 \section{Transformation Structure}
-As mentioned before in section \ref{sec:vsdt}, the transformation process in the VSDT is divided into 5 stages. We also mentioned that the default validation and structure mapping provided by the transformation framework are reusable. For the implementation of the transformation to Agent Beans, the framework's DefaultBpmnValidator and BPMN2StrucBPMNTransformation are being reused. 
+As mentioned before in section \ref{sec:vsdt}, the transformation process in the VSDT is divided into 5 stages. We also mentioned that the default validation and structure mapping provided by the transformation framework are reusable. For the implementation of the transformation to Agent Beans, the framework's DefaultBpmnValidator and BPMN2StrucBPMNTransformation are being reused.
+
 \begin{figure}[h]
-	\centering	\includegraphics[width=0.45\textwidth]{images/implementation_stages.png}
+	\centering	\includegraphics[width=0.4\textwidth]{images/implementation_stages.png}
 	\caption{Transformation stages}
 	\label{fig:implementation_stages}
 \end{figure}
@@ -95,12 +96,12 @@ In the following listing we can see the implementation of the method in the IfTh
 	}
 \end{lstlisting}
 
-You might notice, that this method is also responsible for the text formatting because this method will be used by the JET-Transformation and the result will then be written into a *.java File. For this purpose a tab are added in front of each line in the then and else branch, as you can see in line 7-11 and 21-25.\\\\
+You might notice that this method is also responsible for the text formatting because this method will be used by the JET-Transformation and the result will then be written into a *.java File. For this purpose a tab are added in front of each line in the then and else branch, as you can see in line 7-11 and 21-25.\\\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Role of MDE             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \textbf{The role of MDE in the Implementation}\\\\
-The benefits of Model Driven Engineering are also found during the implementation of the AgentBean model. As we can see in Figure \ref{fig:agentbean_metamodel}, the model is created graphically using eclipse's Ecore Tools - Ecore Diagramm. With the help of the EMF Generator each element of the model can be easily generated into JavaCode including a Factory class that can be used to instantiate an object of each generated class. This way, we only have to implement the method toJavaCode() for each newly added script, everything else are generated automatically. 
+The benefits of Model Driven Engineering are also found during the implementation of the AgentBean model. As we can see in Figure \ref{fig:agentbean_metamodel}, the model is created graphically using eclipse's Ecore Tools - Ecore Diagram. With the help of the EMF Generator each element of the model can be easily generated into JavaCode including a Factory class that can be used to instantiate an object of each generated class. This way, we only have to implement the method toJavaCode() for each newly added script, everything else are generated automatically. 
 
 
 %\newpage
@@ -123,145 +124,18 @@ The JET-Transformation consists of 5 JET-Templates( see also Figure \ref{fig:tra
 	\label{fig:transformation_structure}
 \end{figure}
 
-The agentbeantemplate is the main template of the implemented JET-Transformation. An instance of it's Java template class are created by the JiacBeansResultSaver and the generate method will be invoked for each AgentBean model generated in the element mapping stage. 
+The agentbeantemplate is the main template of the implemented JET-Transformation. An instance of its Java template class are created by the JiacBeansResultSaver and the generate method will be invoked for each AgentBean model generated in the element mapping stage. 
 
 The subprocesstemplate is invoked by the agentbeantemplate and recursively by the subprocesstemplate itself for each subprocess contained in their argument (an agentbean model or a subprocess model). 
 
-The three handler templates timeouteventhandler, timeeventhandler and messageeventhandler are static templates, which means the result of the generate method does not depend on the argument object. They simply add an inner class TimeoutEventHandler, TimeEventHandler or MessageEventHandler to the AgentBean. They are invoked by the agentbeantemplate if the value of the flag handlingTimeoutEvent or handlingMessageEvent of the agent bean model is true.
-
-
-\subsection{Implementation of the Event Handlers}
-The Event handlers generated by the above mentioned templates are implemented as an inner class of the generated bean.
-They all have a thread as an argument that will be stopped as soon as the expected event is received. The following code listings shows the generated code of the event handlers:\\
-
-\begin{lstlisting}[language=Java , caption=MessageEventHandler implementation]
-class MessageEventHandler extends Thread{
-		Thread toStop;
-		boolean triggered = false;
-		String address;
-		Class payloadClass;
-		SpaceObserver<IFact> observer;
-		Action joinAction;
-		Action leaveAction;
-		IGroupAddress groupAddress;
-		
-		public MessageEventHandler(String channel, String payloadType, Thread toStop){
-			address = channel;
-			this.toStop = toStop;
-			joinAction = retrieveAction(ICommunicationBean.ACTION_JOIN_GROUP);
-			leaveAction = retrieveAction(ICommunicationBean.ACTION_LEAVE_GROUP);
-			groupAddress = CommunicationAddressFactory.createGroupAddress(address);
-			try {
-				payloadClass = ClassLoader.getSystemClassLoader().loadClass(payloadType);
-			} catch (ClassNotFoundException e) {
-				log.error("Class "+payloadType+" not Found!");
-				e.printStackTrace();
-			} 
-			observer = new SpaceObserver<IFact>(){
-				public void notify(SpaceEvent<? extends IFact> event) {
-					if(event instanceof WriteCallEvent<?>){
-						Object obj = ((WriteCallEvent) event).getObject();
-						if(obj instanceof IJiacMessage){
-							IJiacMessage msg = (IJiacMessage)obj;
-							if(msg.getHeader(IJiacMessage.Header.SEND_TO).equals(address) &&
-							   payloadClass.isInstance(msg.getPayload())){
-								memory.remove(msg);
-								compensate();
-							}
-						}
-					}
-				}
-			};		
-		}
-		
-		public void run(){
-			invoke(joinAction, new Serializable[]{groupAddress});
-			memory.attach(observer);
-		}
-		
-		public void compensate(){
-			triggered = true;
-			detach();
-		}
-		
-		public void detach(){
-			memory.detach(observer);
-			invoke(leaveAction, new Serializable[]{groupAddress});
-		}
-		
-		public boolean hasBeenTriggered(){
-			return triggered;
-		}
-}
-\end{lstlisting}
-                                 
-\begin{lstlisting}[language=Java , caption=TimeoutEventHandler implementation]
-class TimeoutEventHandler extends Thread{
-		long timeout;
-		Thread toStop;
-		boolean triggered = false;
-		
-		public TimeoutEventHandler(long timeout, Thread toStop){
-			this.timeout = timeout;
-			this.toStop = toStop;
-		}
-		
-		public void run(){
-			try {
-				Thread.sleep(timeout);
-				triggered = true;
-				toStop.stop();
-			}catch(InterruptedException e ) { }
-		}
-		
-		public boolean hasBeenTriggered(){
-			return triggered;
-		}
-}
-\end{lstlisting}
-\newpage
-\begin{lstlisting}[language=Java , caption=TimeEventHandler implementation]
-class TimeEventHandler extends Thread{
-		Date whenToStop;
-		Thread toStop;
-		boolean triggered = false;
-		
-		public TimeEventHandler(String timeExpression, Thread toStop){
-			try {
-				whenToStop = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(timeExpression);
-			} catch (ParseException e) {
-				System.out.println("ParseException: Time Expression has to be in yyyy-MM-dd'T'HH:mm:ss.SSSZ format!");
-				e.printStackTrace();
-			} 
-			this.toStop = toStop;
-		}
-		
-		public void run(){
-			long time = whenToStop.getTime();
-			while(time>System.currentTimeMillis()){
-				try {
-					Thread.sleep(100);
-				}catch(InterruptedException e ) { }
-			}
-			toStop.stop();
-			triggered = true;
-		}
-		
-		public boolean hasBeenTriggered(){
-			return triggered;
-		}
-}
-\end{lstlisting}
-
-
-Both TimeEventHandler and TimeoutEventHandler are used to handle time events attached to an activity. If the given time expression is a duration, then TimeoutEventHandler will be used. If the given time expression is an exact time, TimeEventHandler will be used. TimeEventHandler parses the given expression into java Date Object using the method \verb|SimpleDateFormat.parse()|, while the TimeoutEventHandler will get a long integer parsed from the time expression. 
+The three handler templates timeouteventhandler, timeeventhandler and messageeventhandler are static templates, which means the result of the generate method does not depend on the argument object. They are responsible for generating the event handler classes TimeoutEventHandler, TimeEventHandler and MessageEventHandler. They are invoked by the agentbeantemplate if the value of the flag handlingTimeoutEvent, handlingTimeEvent or handlingMessageEvent of the agent bean model is true.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %           Merging generated and manually edited code         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Merging generated and manually edited code}
-The main challenge in generating Java code is how to handle code that has been manually edited. Fortunately, the EMF comes with a solution to this problem : \textbf{JMerge}\cite{JMERGEFAQ}. With JMerge we can allow a regeneration of a model and protect user code manually added into the previously generated code. 
+\section{Merging Generated and Manually Edited Code}
+The main challenge in generating Java code is how to handle code that has been manually edited. Fortunately, the EMF comes with a solution to this problem : \textbf{JMerge}\cite{JMERGEFAQ}. With JMerge we can allow a regeneration of a model and protect manually added user code. 
 
 We can specify some rules in an xml-file that will be loaded by JMerge.  The following Listing \ref{list:mergerules} shows a very simple xml that can be used to differentiate generated elements from the the manually edited elements of a java code. 
 
@@ -277,7 +151,7 @@ We can specify some rules in an xml-file that will be loaded by JMerge.  The fol
    targetPut="Method/setBody"/>
 \end{lstlisting}
 
-In this case, the dictionary pattern will match elements that has the @generated annotations somewhere in it's comment. The string between the parentheses in the match attribute defines the identifier which will be used in the pull element. The pull element in the example defines that the generator will replace the content of every method that has @generated in it's comment.
+In this case, the dictionary pattern will match elements that has the @generated annotations somewhere in its comment. The string between the parentheses in the match attribute defines the identifier which will be used in the pull element. The pull element in the example defines that the generator will replace the content of every method that has @generated in its comment.
 
 The next thing to do is to add the comment with the @generated tags in our template for each generated elements (class, fields, methods). 
 If a user edit the content of a method or the default value of a field, the @generated annotation should be deleted from the comment. Without the @generated annotation, the edited element will be let alone by JMerge and will not be lost after the regeneration of the code.  
@@ -300,7 +174,16 @@ As seen in \cite{APJMERGE}, there is a possibility to allow fine grained customi
 \end{lstlisting}
 
 The first pull element will allow the user to put any comments between the \verb|<!-- begin-user-doc -->| and the \verb|<!-- end-user-doc -->| tags. %This is very useful since we know that the position of a javadoc comment is always before the element's declaration. 
-The second one will allow the user to customize a method by adding code between the  \verb|// begin-user-code| and \verb|// end-user-code| comments. Unfortunately, this does not seem to work if the above mentioned boundary tags and comments does not exist in the generated code. This means the position where the code may be customized should be identified in the template. For the javadoc there is no problem because the position does not matter, but for the content of a method the position cannot be predefined. 
+The second one will allow the user to customize a method by adding code between the  \verb|// begin-user-code| and \verb|// end-user-code| comments. Unfortunately, this does not seem to work if the above mentioned boundary tags and comments does not exist in the generated code. This means the position where the code may be customized should be identified in the template. For the javadoc there is no problem because the position does not matter, but for the content of a method the position cannot be predefined. Currently the javadoc comment shown in Listing \ref{list:gentag} will be added to each generated variable and method.
+
+\begin{lstlisting}[language=Java, caption = javadoc comment used for JMerge]
+/**
+ *  <!-- begin-user-doc -->
+ *  <!-- end-user-doc -->
+ *	delete the generated tag after you edited this [field/method]
+ *  @generated
+ */
+\end{lstlisting}
 
 \subsection{Using JMerge}
 In JET2 JMerge is included and can be included by using the <java:merge/> tag somewhere in the template. However, because we are using the older version of JET we have to include JMerge in the \verb|JiacBeansResultSaver| class. At the moment, JMerge can only be used in an eclipse plugin. Listing shows us the code needed to use JMerge.
@@ -335,7 +218,7 @@ In this chapter we presented some details of the implementation. At the moment t
 The implementation of the element mapping is not yet complete. Some concepts such as the mapping of event based gateway still has to be implemented. 
 
 \textbf{Mixing manually edited and generated code within a method}\\
-What we want is to let the user to edit only parts of the method's content by adding code within \verb|// begin-user-code| and \verb|// end-user-code|. For this purpose, either we should try to find a better mergerule or try to predefine the customizable position and use the rules shown in Figure \ref{fig:jmerge_fine}.
+What we want is to let the user to edit only parts of the method's content by adding code within \verb|// begin-user-code| and \verb|// end-user-code|. For this purpose, either we should try to find a better mergerule or try to predefine the customizable position and use the rules shown in Figure \ref{list:jmerge_fine}.
 
 \textbf{Find a better solution for JMerge exception}\\
 At the moment, the implementation will overwrite the existing code if JMerge fails to merge the code. To avoid losing manually edited code, this should be changed. One solution could be displaying a Dialog where the user can choose to whether to overwrite the code or ask the user to give another location for the new generated file. 

@@ -6,17 +6,17 @@ The element mapping from BPMN to Jiac Agent Beans is created based on the existi
 % 4.1 Pools & Processes                               %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Pools and Processes}
-Every pool in a process diagram will be mapped into an Agent Bean. The name of the Agent Bean will be derived from the Pool name, and the name of the process diagram it is contained in. If a Pool with the same name (e.g Mathematican) is contained in the business process diagrams ExtractRoot and Faculty, then the two agent beans \texttt{Mathematican\_ExtractRoot} and \texttt{Mathematican\_Faculty} will be created. Further, they are grouped in the package mathematican. 
+Every pool in a process diagram will be mapped into an Agent Bean. The name of the Agent Bean will be derived from the Pool name, and the name of the process diagram it is contained in. If a Pool with the same name (e.g Mathematican) is contained in the business process diagrams ExtractRoot and Faculty, then the two agent beans \texttt{Mathematican\_ExtractRoot} and \texttt{Mathematican\_Faculty} will be created. Because they were both generated from the pool Mathematican, they are grouped in the package mathematican. 
 
-The process contained in a pool is mapped into a \textbf{workflow method}. Depending on the start event's type, this workflow method may be called in the execute method of the bean (for timer start event), it may be exposed as an action (for message start event with service implementation), or if the start event is a message start event with MessageChannel implementation, a SpaceObserver will be created and attached to the agent's memory, which will call the workflow method when a message with the payload and address as specified in the implementing message channel are written into the agent's memory.
+The process contained in a pool is mapped into a \textbf{workflow method}. Depending on the start event's type, this workflow method may be called in the execute method of the bean (for timer start event), it may be exposed as an action (for message start event with service implementation). If the start event is a message start event with MessageChannel implementation, a SpaceObserver will be created and attached to the agent's memory. This SpaceObserver will call the workflow method when a message with the payload and address as specified in the implementing MessageChannel are written into the agent's memory.
 
-The mapping of a task contained in a process flow will be wrapped in the so called \textbf{activity method} which will be called by the workflow method. Special cases for tasks with event handler and subprocesses will be discussed in a later section.
+The mapping of a task contained in a process flow will be wrapped in the so called \textbf{activity method} which will be called by the workflow method. Special cases such as tasks with event handler and subprocesses will be discussed in a later section.
 
 Lanes are currently ignored. A process of a lane will be handled as a process of the containing pool.
 
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=0.80\textwidth]{images/mapping/pool_and_process.png}
+		\includegraphics[width=1.0\textwidth]{images/mapping/pool_and_process.png}
 	\caption{Mapping example : Pool and Process}
 	\label{fig:pool+process}
 \end{figure}
@@ -49,13 +49,11 @@ public class Accounting_CalculatePrice extends AbstractMethodExposingBean{
 	}
 }
 \end{lstlisting}
-
-
 \section{Workflow Structure}
-Workflow structure is mapped as the content of the workflow method. It defines the invocation structure of the flow objects contained in a process.
+Workflow structure is mapped to the content of the workflow method. It defines the invocation structure of the flow objects contained in a process.
 
 \subsection{Sequence Flow}
-The mapping of a sequence flow is trivial. The mapped elements connected with a sequence flow will be invoked sequentially in the workflow method (see Figure \ref{fig:mapping_sequence}).\\
+The mapping of a sequence flow is trivial. The mapped elements connected with a sequence flow will be invoked sequentially in the workflow method (see Figure \ref{fig:mapping_sequence}).
 
 \begin{figure}[h]
 \begin{minipage}[c]{0.5\textwidth}
@@ -238,35 +236,8 @@ try{
 \caption{Mapping example: XOR\_Event Gateway}%
 \label{fig:mapping_xorEvent}%
 \end{figure}
-\newpage
-The event handler class will be included as an inner class of the bean, and they will have a constructor with a Thread toStop argument (among other arguments) and a boolean method \verb|hasBeenTrigerred()| to check whether the event handler has been activated by the expected event. The following Listing \ref{list:timeoutEventHandler} shows an implementation of the TimeoutEventHandler. This inner class will be included in every agent bean class that uses a TimeoutEventHandler.\\\\
 
-\begin{lstlisting}[language=Java, caption=TimeoutEventHandler implementation as an inner class, label=list:timeoutEventHandler]
-class TimeoutEventHandler extends Thread{
-		
-		long timeout;
-		Thread toStop;
-		boolean triggered = false;
-		
-		public TimeoutEventHandler(long timeout, Thread toStop){
-			this.timeout = timeout;
-			this.toStop = toStop;
-		}
-		
-		public void run(){
-			try {
-				Thread.sleep(timeout);
-				triggered = true;
-				toStop.stop();
-			}catch(InterruptedException e ) { }
-		}
-		
-		public boolean hasBeenTriggered(){
-			return triggered;
-		}
-		
-}
-\end{lstlisting}
+The event handler class will be included as an inner class of the bean. We will present the event handler class later in section \ref{sec:handler}.
 
 \textbf{Complex-Gateway}\\
 A mapping concept for Complex Gateways has not been developed in the current Version. \\
@@ -293,6 +264,11 @@ while(cond){
 \end{figure}
 
 While the condition applies, the content branch will be repeated. 
+
+\newpage
+\subsection{Event Handler}
+\label{sec:handler}
+As we can see in Figure \ref{fig:mapping_eventhandler}, the mapping of an Event Handler attached to an activity is somewhat similar to the mapping of event based gateway. Instead of the waiting thread, a thread calling the activity method will be created, and it will be stopped if the event handler is triggered.\\
 
 \begin{figure}[h]
 \begin{minipage}[c]{0.45\textwidth}
@@ -349,12 +325,138 @@ if(!messageHandler.hasBeenTriggered()){
 \label{fig:mapping_eventhandler}%
 \end{figure}
 
-\subsection{Event Handler}
-As we can see in Figure \ref{fig:mapping_eventhandler}, the mapping of an Event Handler attached to an activity is somewhat similar to the mapping of gateway event. Instead of the waiting thread, a thread calling the activity method will be created, and it will be stopped if the event handler is triggered.\\
+Like we mentioned earlier in the mapping of event based gateway, the event handler will be mapped into an inner class of the agent bean. Currently we have three different event handler classes:
+\begin{enumerate}
+	\item MessageEventHandler - handles message events.
+	\item TimeoutEventHandler - handles time event where the given time expression is a duration.
+	\item TimeEventHandler    - handles time event where the given time expression is an exact time.   
+\end{enumerate}
+Each event handler class has a constructor with a Thread toStop argument that will be stopped if the expected event is received. Further they will also have a boolean method \verb|hasBeenTrigerred()| to check whether the event handler has been activated by the expected event. The following code listings shows the generated code of the event handlers:\\
+
+\begin{lstlisting}[language=Java , caption=MessageEventHandler implementation]
+class MessageEventHandler extends Thread{
+		Thread toStop;
+		boolean triggered = false;
+		String address;
+		Class payloadClass;
+		SpaceObserver<IFact> observer;
+		Action joinAction;
+		Action leaveAction;
+		IGroupAddress groupAddress;
+		
+		public MessageEventHandler(String channel, String payloadType, Thread toStop){
+			address = channel;
+			this.toStop = toStop;
+			joinAction = retrieveAction(ICommunicationBean.ACTION_JOIN_GROUP);
+			leaveAction = retrieveAction(ICommunicationBean.ACTION_LEAVE_GROUP);
+			groupAddress = CommunicationAddressFactory.createGroupAddress(address);
+			try {
+				payloadClass = ClassLoader.getSystemClassLoader().loadClass(payloadType);
+			} catch (ClassNotFoundException e) {
+				log.error("Class "+payloadType+" not Found!");
+				e.printStackTrace();
+			} 
+			observer = new SpaceObserver<IFact>(){
+				public void notify(SpaceEvent<? extends IFact> event) {
+					if(event instanceof WriteCallEvent<?>){
+						Object obj = ((WriteCallEvent) event).getObject();
+						if(obj instanceof IJiacMessage){
+							IJiacMessage msg = (IJiacMessage)obj;
+							if(msg.getHeader(IJiacMessage.Header.SEND_TO).equals(address) &&
+							   payloadClass.isInstance(msg.getPayload())){
+								memory.remove(msg);
+								compensate();
+							}
+						}
+					}
+				}
+			};		
+		}
+		
+		public void run(){
+			invoke(joinAction, new Serializable[]{groupAddress});
+			memory.attach(observer);
+		}
+		
+		public void compensate(){
+			triggered = true;
+			detach();
+		}
+		
+		public void detach(){
+			memory.detach(observer);
+			invoke(leaveAction, new Serializable[]{groupAddress});
+		}
+		
+		public boolean hasBeenTriggered(){
+			return triggered;
+		}
+}
+\end{lstlisting}
+                                 
+\begin{lstlisting}[language=Java , caption=TimeoutEventHandler implementation]
+class TimeoutEventHandler extends Thread{
+		long timeout;
+		Thread toStop;
+		boolean triggered = false;
+		
+		public TimeoutEventHandler(long timeout, Thread toStop){
+			this.timeout = timeout;
+			this.toStop = toStop;
+		}
+		
+		public void run(){
+			try {
+				Thread.sleep(timeout);
+				triggered = true;
+				toStop.stop();
+			}catch(InterruptedException e ) { }
+		}
+		
+		public boolean hasBeenTriggered(){
+			return triggered;
+		}
+}
+\end{lstlisting}
+%\newpage
+\begin{lstlisting}[language=Java , caption=TimeEventHandler implementation]
+class TimeEventHandler extends Thread{
+		Date whenToStop;
+		Thread toStop;
+		boolean triggered = false;
+		
+		public TimeEventHandler(String timeExpression, Thread toStop){
+			try {
+				whenToStop = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(timeExpression);
+			} catch (ParseException e) {
+				System.out.println("ParseException: Time Expression has to be in yyyy-MM-dd'T'HH:mm:ss.SSSZ format!");
+				e.printStackTrace();
+			} 
+			this.toStop = toStop;
+		}
+		
+		public void run(){
+			long time = whenToStop.getTime();
+			while(time>System.currentTimeMillis()){
+				try {
+					Thread.sleep(100);
+				}catch(InterruptedException e ) { }
+			}
+			toStop.stop();
+			triggered = true;
+		}
+		
+		public boolean hasBeenTriggered(){
+			return triggered;
+		}
+}
+\end{lstlisting}
+
+Both TimeEventHandler and TimeoutEventHandler are used to handle time events attached to an activity. If the given time expression is a duration, then Timeout-EventHandler will be used. If the given time expression is an exact time, Time-EventHandler will be used. TimeEventHandler parses the given expression into java Date Object using the method \verb|SimpleDateFormat.parse()|, while the TimeoutEventHandler will get a long integer parsed from the time expression. 
 
 \newpage
 \section{Activites}
-Now we will discuss the activities in details. Activities are divided into tasks and subprocess. As mentioned before, a task will be wrapped in an activity method. This enables each task to have their own scope of properties. The properties of subprocesses however, should be shared with all activities contained in it. Therefore wrapping subprocesses in a method is not enough. Instead a subprocess will be wrapped in an inner class.
+Now we will discuss the activities in details. Activities are divided into tasks and subprocess. As mentioned before, a task will be wrapped in an activity method. This enables each task to have their own scope of properties. The properties of subprocesses however, should be shared with all activities contained in it. Therefore wrapping subprocesses in a method is not enough. A subprocess will be wrapped in an inner class instead.
  
 \subsection{Tasks}
 Basically, the activity method generated from a task will look like what we can see in Figure \ref{fig:mapping_task}:
@@ -376,16 +478,14 @@ public void doTask(){
 \caption{Mapping example: Task}%
 \label{fig:mapping_task}%
 \end{figure}
-\newpage
-The method will start by declaring java variables, derived from the task's properties (if any exists). After the declaration, start assignments will take place, followed by the task's actual mapping (if any, depending on the task type). Finnaly, the code will be closed with the end assignments. The BPMN allows us to specify properties and assignments (including when the assignment should take place) in the task's property sheet. Thus, other than the workflow model in Wade, it is possible to generate the operations needed to execute the activity completely from the model. Now let's take a closer look on how specific task types are being mapped.\\
+%\newpage
+The method will start by declaring Java variables, derived from the task's properties (if any exists). After the declaration, start assignments will take place, followed by the task's actual mapping (if any, depending on the task type). Finally, the code will be closed with the end assignments. The BPMN allows us to specify properties and assignments (including when the assignment should take place) in the task's property sheet. Thus, other than the workflow model in WADE, it is possible to generate the operations needed to execute the activity completely from the model. Now let's take a closer look on how specific task types are being mapped.\\
 
 \textbf{Script-task}\\
-For Script-tasks, the script defined in the task's property will be directly added into the activity-method. This type of task is comparable to Wade's \textit{Code Activity}, but just like the properties and assignments, with BPMN the script can be specified in the property sheet of the task. For the transformation to agent beans, the given script should be a valid Java expression. \\\\
-
+For Script-tasks, the script defined in the task's property will be directly added into the activity-method. This type of task is comparable to WADE's \textit{Code Activity}, but just like the properties and assignments, with BPMN the script can be specified in the property sheet of the task. For the transformation to agent beans, the given script should be a valid Java expression. \\\\
 
 \textbf{Service-task}\\
-A service task is mapped into an invocation of an Action defined by other Bean.\\
-
+A service task is mapped into an invocation of an Action defined by other Bean.
 \begin{figure}[h]
 \begin{minipage}[c]{0.3\textwidth}
 \includegraphics[width=0.95\textwidth]{images/mapping/service_task.png}
@@ -402,31 +502,9 @@ Serializeable [] results = invokeAndWaitForResults([operation], new Serializeabl
 \caption{Mapping example: Service-task}%
 \label{fig:service_task}%
 \end{figure}
-Figure \ref{fig:service_task} shows how a service task would be mapped. First, the action has to be found. Then the service will be invoked and the result will be assign to the outputs defined in the task's implementing Service.\\\\
-
-\textbf{Send-task}\\
-A Send task will be mapped into an invocation of the ICommunicationBean's send action (see Figure \ref{fig:send_task}). The group address, to which the message should be sent, and the message itself will be derived from the given MessageChannel in the task's properties. \\\\
- 
-\begin{figure}[h]
-\begin{minipage}[c]{0.3\textwidth}
-\includegraphics[width=0.95\textwidth]{images/mapping/sendTask.png}
-\end{minipage}
-\begin{minipage}[c]{0.7\textwidth}
-\begin{lstlisting}[language=Java]
-[...]
-Action sendAction = retrieveAction(ICommunicationBean.ACTION_SEND);
-IGroupAddress groupAddress = CommunicationAddressFactory.createGroupAddress([address]);
-JiacMessage jiacMessage = new JiacMessage([payload]);
-invoke(sendAction, new Serializable[]{jiacMessage, groupAddress});
-[...]
-\end{lstlisting}
-\end{minipage}
-\caption{Mapping example: Send-task}%
-\label{fig:send_task}%
-\end{figure}
-
-
-\textbf{receive-task}\\
+Figure \ref{fig:service_task} shows how a service task would be mapped. First, the action has to be found. Then the service will be invoked and the result will be assign to the outputs defined in the task's implementing Service.
+\newpage
+\textbf{Receive-task}\\
 A receive-task will be mapped into a Java-Code that reads the memory and wait until the specified message defined by the given MessageChannel is found in the memory. \\
 
 \begin{figure}[h]
@@ -465,6 +543,28 @@ invoke(leaveAction, new Serializable[]{groupAddress});
 \label{fig:receive_task}%
 \end{figure}
 
+\textbf{Send-task}\\
+A Send task will be mapped into an invocation of the ICommunicationBean's send action (see Figure \ref{fig:send_task}). The group address, to which the message should be sent, and the message itself will be derived from the given MessageChannel in the task's properties. \\\\
+ 
+\begin{figure}[h]
+\begin{minipage}[c]{0.3\textwidth}
+\includegraphics[width=0.95\textwidth]{images/mapping/sendTask.png}
+\end{minipage}
+\begin{minipage}[c]{0.7\textwidth}
+\begin{lstlisting}[language=Java]
+[...]
+Action sendAction = retrieveAction(ICommunicationBean.ACTION_SEND);
+IGroupAddress groupAddress = CommunicationAddressFactory.createGroupAddress([address]);
+JiacMessage jiacMessage = new JiacMessage([payload]);
+invoke(sendAction, new Serializable[]{jiacMessage, groupAddress});
+[...]
+\end{lstlisting}
+\end{minipage}
+\caption{Mapping example: Send-task}%
+\label{fig:send_task}%
+\end{figure}
+
+
 \textbf{Call-task}\\
 A call task will be mapped to an invocation of the called element. If the called element is an activity, then the activity method will be called. 
 If the called element is a Pool, then the call task will be mapped into a service invocation. 
@@ -473,13 +573,13 @@ If the called element is a Pool, then the call task will be mapped into a servic
 The mapping of user tasks has not been completely developed yet. User tasks requires a User Interface module to get inputs from the user. To make it simple we can put a TODO flag in the code, and the developer should implement the UI manually. 
 
 \textbf{Manual task}\\
-Manual tasks won't be executed manually, therefore a mapping won't be needed.
+Manual tasks will be executed manually by a person. Therefore, there is no need to develop a mapping to JIAC Agent Beans for manual tasks.
 
 \textbf{BusinessRule-tasks}\\
-The mapping of business rule tasks doesn't exist in this Version.
+The mapping of business rule tasks does not exist yet in this Version.
 
 \subsection{Subprocess}
-A subprocess will be mapped into an inner class of the containing Process or Subprocess. This way it's properties can be shared among all tasks contained in it. The inner subprocess will have the method \texttt{public void run()} containing the workflow (similar to the bean's workflow method). The following example shows the mapping of a subprocess:\\
+A subprocess will be mapped into an inner class of the containing Process or Subprocess. This way its properties can be shared among all tasks contained in it. The inner subprocess will have the method \texttt{public void run()} containing the workflow (similar to the bean's workflow method). The following example shows the mapping of a subprocess:\\
 
 \begin{figure}[h]
 \begin{minipage}[c]{0.3\textwidth}
@@ -494,21 +594,17 @@ MySubProcess mySubProcess = new MySubProcess();
 mysubProcess.run();
 [...]
 }
-
 [...]
 // subprocess as Innerclass
 class MySubProcess {
-	[declaration of properties]
-		
+	[declaration of properties]		
 	public void run(){
 		doA();
 		doB();
 	}
-	
 	private void doA(){
 		[...] 
-	}
-	
+	}	
 	private void doB(){ 
 		[...] 
 	}
@@ -519,6 +615,7 @@ class MySubProcess {
 \label{fig:mapping_subprocess}%
 \end{figure}
 
+In Line 1-7 we can see that an instance of the subprocess class will be created in the Agent Bean's workflow method and afterwards, the run method will be called.
 \subsection{Activity-Looping}
 An activity can have a looping property. This will result in the wrapping of the task-specific mapping in a while-block. 
 There are two types of activity-looping in BPMN:
@@ -528,7 +625,7 @@ There are two types of activity-looping in BPMN:
 \end{enumerate}
 While the mapping of a standard-loop is trivial, the semantics of the multi instance loop is not very clear. Thus, a mapping of multi instance loop is not yet included in this version.
  
-\textbf{Standard-Loop}
+\textbf{Standard-Loop}\\
 In a standard loop, the task specific mapping will be wrapped in a while block. The other elements of the activity method (variable declarations and assignments) will not be wrapped.  In Figure \ref{fig:mapping_standardLoop} we can see an example of a script task with a standard loop.
 \begin{figure}[h]
 \begin{minipage}[c]{0.3\textwidth}
@@ -551,7 +648,7 @@ public void print1To10(){
 \caption{Mapping example : Activity-Looping (Standard Loop)}% 
 \label{fig:mapping_standardLoop}%
 \end{figure}
-\newpage
+%\newpage
 \section{Events}
 Finally, we will now discuss the mapping of BPMN Events to Jiac Agent Beans. We will first discuss the Intermediate events and then we will handle Start and End Events. We need to group start and end events because the mapping will have influence on how the process will be started, and they will also determine the signature (input and output parameters) of the workflow method. 
 
@@ -651,15 +748,16 @@ public void execute(){
 \label{fig:timer_start}%
 \end{figure}
 
-
+\newpage
 \textbf{Message}\\
-Message Start and End events will influence the signature of the workflow method. The start event defines the parameters and the end event defines it's return type. We can divide message start and end events according to the event's implementation (Service or MessageChannel). 
+Message Start and End events will influence the signature of the workflow method. The start event defines the parameters and the end event defines its return type. We can divide message start and end events according to the event's implementation. Currently, messages can be implemented by a service or a MessageChannel. If the implementation is a service, the communication describe a service call. Else if the implementation is a MessageChannel, the communication describe a broadcast which means a message will be sent to a communication group and all subscriber of the group will receive it. \\
 
-\textbf{Message with Service implementation}
+
+\textbf{Message with Service implementation}\\
 If the implementation is a Service, the workflow method will be exposed as an action(service). The process will be started by other Agent Bean as a service by invoking the exposed action. The signature of the workflow method will be derived from the signature of the implementing service. 
 Multiple return type are wrapped in a Serializable array. 
 
-In Figure \ref{fig:message_service} we can see an example mapping of message start and end events with service implementation. The generated workflow method are exposed as an Action with the @Expose code in Line 5. 
+In Figure \ref{fig:message_service} we can see an example mapping of message start and end events with service implementation. The generated workflow method are exposed as an Action with the @Expose code in Line 5. \\
 \begin{figure}[h]
 \begin{minipage}[c]{0.35\textwidth}
 \includegraphics[width=0.9\textwidth]{images/mapping/messageStart.png}
@@ -684,9 +782,10 @@ public class [Bean-name] extends AbstractMethodExposingBean{
 \label{fig:message_service}
 \end{figure}
 
+\newpage
 \textbf{Message with MessageChannel implementation}\\
 If the implementation is a MessageChannel, an observer will be created and attached to the agent's memory in the \verb|doStart()| method.
-The workflow method will get the MessageChannel's payload as a parameter, and it will have no return type (void) and the result will be sent as a message to the specified MessageChannel of the end event. Figure \ref{fig:channel_start} shows a mapping example of a message start event, and in Figure \ref{fig:channel_end}, we can see a mapping example of how a message end event will be mapped.
+The workflow method will get the MessageChannel's payload as a parameter, and it will have no return type (void) and the result will be sent as a message to the specified MessageChannel of the end event. Figure \ref{fig:channel_start} shows a mapping example of a message start event, and in Figure \ref{fig:channel_end}, we can see a mapping example of how a message end event will be mapped. 
 \begin{figure}[h]
 \begin{minipage}[c]{0.28\textwidth}
 \includegraphics{images/mapping/message_end.png}
@@ -755,3 +854,7 @@ public class [Bean-name] extends AbstractMethodExposingBean{
 \section{Open Issues}
 
 In this chapter, we presented the details of the mapping from BPMN to Jiac Agent Beans. As we can see in some sections, there are some elements that has not been mapped yet. In the future, we will need to study the semantics of the unmapped elements (e.g. multi instance loop, rule events etc.) further and develop their mapping.
+
+Further there are other issues that shows that BPMN is not sufficient to be applied in agent engineering. An example issue is the missing definition of data types. As mentioned in \cite{TKMLAH2010}, BPMN does not support the definition of data types although data types can be referenced in a process diagram. At the moment it is simply assumed that referenced data types exist.
+
+Another problem is identified in the MessageChannel implementation. The MessageChannel only supports broadcasting which means the message will be delivered to all subscribers of a communication group. In some scenarios e.g the one we will present in chapter \ref{chap:examples}, we might need a message to be sent to a single agent.  
