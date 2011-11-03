@@ -1,6 +1,8 @@
 <%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="MessageEventHandlerGenerator"%>
 	/**
-	 *	delete the generated tag after you edited this method
+	 *  Inner class that handles message events
+	 *  <!-- begin-user-doc -->
+	 *  <!-- end-user-doc -->
 	 *  @generated
 	 */
 	class MessageEventHandler extends Thread{
@@ -14,6 +16,8 @@
 		IGroupAddress groupAddress;
 		
 		/**
+		 *  <!-- begin-user-doc -->
+		 *  <!-- end-user-doc -->
 		 *	delete the generated tag after you edited this method
 		 *  @generated
 		 */
@@ -47,6 +51,8 @@
 		}
 		
 		/**
+		 *  <!-- begin-user-doc -->
+		 *  <!-- end-user-doc -->
 		 *	delete the generated tag after you edited this method
 		 *  @generated
 		 */
@@ -56,6 +62,8 @@
 		}
 		
 		/**
+		 *  <!-- begin-user-doc -->
+		 *  <!-- end-user-doc -->
 		 *	delete the generated tag after you edited this method
 		 *  @generated
 		 */
@@ -66,6 +74,9 @@
 		}
 		
 		/**
+		 *  detach the observer from the memory and leave group
+		 *  <!-- begin-user-doc -->
+		 *  <!-- end-user-doc -->
 		 *	delete the generated tag after you edited this method
 		 *  @generated
 		 */
@@ -75,7 +86,8 @@
 		}
 		
 		/**
-		 *  the observer should be detached if this thread is stopped
+		 *  <!-- begin-user-doc -->
+		 *  <!-- end-user-doc -->
 		 *	delete the generated tag after you edited this method
 		 *  @generated
 		 */
@@ -85,6 +97,8 @@
 		
 		/**
 		 *  returns the triggered flag
+		 *  <!-- begin-user-doc -->
+		 *  <!-- end-user-doc -->
 		 *	delete the generated tag after you edited this method
 		 *  @generated
 		 */

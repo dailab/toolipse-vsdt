@@ -1,9 +1,19 @@
 <%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="TimeEventHandlerGenerator"%>
+	/**
+	 *  Inner class that handles time events
+	 *  @generated
+	 */
 	class TimeEventHandler extends Thread{
 		Date whenToStop;
 		Thread toStop;
 		boolean triggered = false;
 		
+		/**
+		 *  <!-- begin-user-doc -->
+		 *  <!-- end-user-doc -->
+		 *	delete the generated tag after you edited this method
+		 *  @generated
+		 */
 		public TimeEventHandler(String timeExpression, Thread toStop){
 			try {
 				whenToStop = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(timeExpression);
@@ -14,6 +24,12 @@
 			this.toStop = toStop;
 		}
 		
+		/**
+		 *  <!-- begin-user-doc -->
+		 *  <!-- end-user-doc -->
+		 *	delete the generated tag after you edited this method
+		 *  @generated
+		 */
 		public void run(){
 			long time = whenToStop.getTime();
 			while(time>System.currentTimeMillis()){
@@ -25,6 +41,12 @@
 			triggered = true;
 		}
 		
+		/**
+		 *  <!-- begin-user-doc -->
+		 *  <!-- end-user-doc -->
+		 *	delete the generated tag after you edited this method
+		 *  @generated
+		 */
 		public boolean hasBeenTriggered(){
 			return triggered;
 		}

@@ -25,7 +25,9 @@
 
 <% for(Method method : methods){%>
 	/**
- 	 *  delete the generated tag after you edited this method
+	 *  <!-- begin-user-doc -->
+	 *  <!-- end-user-doc -->
+	 *	delete the generated tag after you edited this method
 	 *  @generated
 	 */
 	<%String cS = method.toString();

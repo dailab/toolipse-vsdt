@@ -1,6 +1,8 @@
 <%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="TimeoutEventHandlerGenerator"%>
 	/**
 	 *  Inner class that handles timeout events
+	 *  <!-- begin-user-doc -->
+	 *  <!-- end-user-doc -->
 	 *  @generated
 	 */
 	class TimeoutEventHandler extends Thread{
@@ -9,6 +11,8 @@
 		boolean triggered = false;
 		
 		/**
+		 *  <!-- begin-user-doc -->
+		 *  <!-- end-user-doc -->
 		 *	delete the generated tag after you edited this method
 		 *  @generated
 		 */
@@ -18,6 +22,8 @@
 		}
 		
 		/**
+		 *  <!-- begin-user-doc -->
+		 *  <!-- end-user-doc -->
 		 *	delete the generated tag after you edited this method
 		 *  @generated
 		 */
@@ -31,6 +37,9 @@
 		
 		/**
 		 *  returns the triggered flag
+		 *	delete the generated tag after you edited this method
+		 *  <!-- begin-user-doc -->
+		 *  <!-- end-user-doc -->
 		 *	delete the generated tag after you edited this method
 		 *  @generated
 		 */
