@@ -30,7 +30,7 @@ public class AgentBeanGenerator
   protected final String TEXT_10 = " = \"";
   protected final String TEXT_11 = "\"; ";
   protected final String TEXT_12 = NL;
-  protected final String TEXT_13 = NL + "\t/**" + NL + "\t *  <!-- begin-user-doc -->" + NL + "\t *  <!-- end-user-doc -->" + NL + "\t *\tdelete the generated tag after you edited this method" + NL + "\t *  @generated" + NL + "\t */" + NL + "\t";
+  protected final String TEXT_13 = NL + "\t/**" + NL + "\t *  <!-- begin-user-doc -->" + NL + "\t *  <!-- end-user-doc -->" + NL + "\t *\tdelete the generated tag after you edited this field" + NL + "\t *  @generated" + NL + "\t */" + NL + "\t";
   protected final String TEXT_14 = ";";
   protected final String TEXT_15 = NL;
   protected final String TEXT_16 = NL + "\t/**" + NL + "\t *  <!-- begin-user-doc -->" + NL + "\t *  <!-- end-user-doc -->" + NL + "\t *\tdelete the generated tag after you edited this method" + NL + "\t *  @generated" + NL + "\t */" + NL + "\t";
@@ -53,7 +53,9 @@ public class AgentBeanGenerator
      AgentBean bean = (AgentBean)argument; 
    String packageName = bean.getPackageName();
    String packageDeclaration = "";
-   if(packageName.length()!=0){packageDeclaration = "package "+bean.getPackageName()+";";}
+   if(packageName.length()!=0){
+   		packageDeclaration = "package "+bean.getPackageName()+";";
+   }
    List<Method> methods = bean.getMethods();
    List<JavaVariable> attributes = bean.getAttributes();
    List<Action> actions = bean.getActions();
