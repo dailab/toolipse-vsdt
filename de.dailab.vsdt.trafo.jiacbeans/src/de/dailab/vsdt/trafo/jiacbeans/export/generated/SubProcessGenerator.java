@@ -23,7 +23,7 @@ public class SubProcessGenerator
   protected final String TEXT_4 = NL + "\t/**" + NL + "\t *  <!-- begin-user-doc -->" + NL + "\t *  <!-- end-user-doc -->" + NL + "\t *\tdelete the generated tag after you edited this method" + NL + "\t *  @generated" + NL + "\t */" + NL + "\t";
   protected final String TEXT_5 = ";";
   protected final String TEXT_6 = NL;
-  protected final String TEXT_7 = NL + "\t/**" + NL + " \t *  delete the generated tag after you edited this method" + NL + "\t *  @generated" + NL + "\t */" + NL + "\t";
+  protected final String TEXT_7 = NL + "\t/**" + NL + "\t *  <!-- begin-user-doc -->" + NL + "\t *  <!-- end-user-doc -->" + NL + "\t *\tdelete the generated tag after you edited this method" + NL + "\t *  @generated" + NL + "\t */" + NL + "\t";
   protected final String TEXT_8 = NL;
   protected final String TEXT_9 = " ";
   protected final String TEXT_10 = NL;
