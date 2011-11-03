@@ -2,7 +2,9 @@
 <% AgentBean bean = (AgentBean)argument; 
    String packageName = bean.getPackageName();
    String packageDeclaration = "";
-   if(packageName.length()!=0){packageDeclaration = "package "+bean.getPackageName()+";";}
+   if(packageName.length()!=0){
+   		packageDeclaration = "package "+bean.getPackageName()+";";
+   }
    List<Method> methods = bean.getMethods();
    List<JavaVariable> attributes = bean.getAttributes();
    List<Action> actions = bean.getActions();
@@ -34,7 +36,7 @@ import <%=i%>;
 	/**
 	 *  <!-- begin-user-doc -->
 	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
+	 *	delete the generated tag after you edited this field
 	 *  @generated
 	 */
 	<%= var.toString()%>;

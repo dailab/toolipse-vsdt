@@ -5,19 +5,14 @@
    List<JavaVariable> attributes = process.getAttributes();
    List<SubProcess> subprocesses = process.getSubprocesses();
 %>
-/**
- *  <!-- begin-user-doc -->
- *  <!-- end-user-doc -->
- *	delete the generated tag after you edited this method
- *  @generated
- */
+
 <%=classDeclaration%>{
 
 <% for(JavaVariable var: attributes){%>
 	/**
 	 *  <!-- begin-user-doc -->
 	 *  <!-- end-user-doc -->
-	 *	delete the generated tag after you edited this method
+	 *	delete the generated tag after you edited this field
 	 *  @generated
 	 */
 	<%= var.toString()%>;
