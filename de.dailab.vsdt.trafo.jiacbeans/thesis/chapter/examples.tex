@@ -4,15 +4,15 @@
 In this chapter we will introduce an example scenario of a process and how the resulting code of the transformation looks like.
 
 \section{The Model}
-The example is based on a scenario taken from an actual topic: \textit{electromobility}. The scenario includes a choreography between a MobileApplication, that will be used by a user to reserve a taxi and a number of ETaxi-applications installed in electronic taxis. Figure \ref{fig:usecase} shows the usecase model of the \textbf{requestTaxi} process. 
+The example is based on a scenario taken from an actual topic: \textit{electromobility}. The scenario includes a choreography between a MobileApplication, that will be used by a user to reserve a taxi and a number of ETaxi-applications installed in electronic taxis. Figure \ref{fig:usecase} shows the use case model of the \textbf{requestTaxi} process. 
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.8\textwidth]{images/example/usecase.png}
 	\label{fig:usecase}
-	\caption{Use case model}
+	\caption{Use Case Model}
 \end{figure}
 
-In Figure \ref{fig:payloads} we can see some data types included in the process which represent the information exchanged in the communication between both Pools (the payload of the implementing MessageChannel). The transformation will assume that the classes exist and they will be imported by the generated agent bean. Further because payloads will be wrapped in a JiacMessage, they have to implement the IFact interface.
+In figure \ref{fig:payloads} we can see some data types included in the process which represent the information exchanged in the communication between both pools (the payload of the implementing MessageChannel). The transformation will assume that the classes exist and they will be imported by the generated Agent Bean. Further, because payloads will be wrapped in a JiacMessage, they have to implement the IFact interface.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.8\textwidth]{images/example/payloads.png}
@@ -22,14 +22,14 @@ In Figure \ref{fig:payloads} we can see some data types included in the process 
 
 \newpage
 \subsection{The scenario}
-Before we start with the transformation, we will describe the scenario that lies behind the process model shown in Figure \ref{fig:example} from the perspective of each pool. 
+Before we start with the transformation, we will describe the scenario that lies behind the process model shown in figure \ref{fig:example} from the perspective of each pool. 
 
 \textbf{Mobile Application}\\
-The process starts with a user requesting a taxi by invoking the service provided by the mobile application. The service will then send a request to all ETaxis by sending informations about the user's location, application ID and the destination. Within 30 seconds after sending the request, the mobile application will collect responses from all available ETaxis. Each of these responses contains informations about the taxi ID and the estimated time needed by this taxi to arrive at the user's current location. If multiple responses are received, the mobile application will record the best response according to the minimum estimated time. After 30 seconds the application will check whether a response was received. If yes, it will send a notification to all taxis informing which taxi is selected. Then the process will end and the selected taxi's ID will be sent to the user. If no responses are received, it will notify the user that no taxi is currently available. 
+The process starts with a user requesting a taxi by invoking the service provided by the mobile application. The service will then make a request to all ETaxis by sending information about the user's location, application ID and the destination. Within 30 seconds after sending the request, the mobile application will collect responses from all available ETaxis. Each of these responses contains information about the taxi ID and the estimated time needed by this taxi to arrive at the user's current location. If multiple responses are received, the mobile application will record the best response according to the minimum estimated time. After 30 seconds the application will check whether a response was received. If yes, it will send a notification to all taxis informing which taxi is selected. Then the process will end and the selected taxi's ID will be sent to the user. If no respons is received, it will notify the user that no taxi is currently available. 
 
 
 \textbf{ETaxi}\\
-From the ETaxi perspective, the process starts when a request from a mobile application is received. It will then evaluate the request and decide whether or not the request is interesting e.g according to the distance between the taxi's location and the user's location. If the request is interesting, the ETaxi will then send a response back to the requesting MobileApplication. After that it will wait for a notification from the MobileApplication and check the included taxiID. If the taxiID belongs to the ETaxi, it will then tell the driver and navigate to the user's location.
+From the ETaxi perspective, the process starts when a request from a mobile application is received. It will then evaluate the request and decide whether or not the request is interesting e.g according to the distance between the taxi's location and the user's location. If the request is interesting, the ETaxi will then send a response back to the requesting MobileApplication. After that it will wait for a notification from the MobileApplication and check the included taxiID. If the taxiID belongs to the ETaxi, the driver will be informed and the system will navigate to the user's location.
 
 
 \begin{sidewaysfigure}
@@ -41,12 +41,12 @@ From the ETaxi perspective, the process starts when a request from a mobile appl
 
 
 \subsection{Problem With MessageChannel}
-As mentioned in the open issues of the mapping, with the MessageChannel implementation messages will be broadcasted to all subscribers of a communication group. This is a problem for our scenario since the response from the ETaxis should be sent only to the requesting MobileApplication. In order to keep the scenario as it is, we decided to make a workaround for this problem and create a channel (communication group) where the application ID (appID) is included in the address. This way each mobile application will have their own channel. 
+As mentioned in the open issues of the mapping, with the MessageChannel implementation, a message will be broadcasted to all subscribers of a communication group. This is a problem for our scenario since the response from the ETaxis should be sent only to the requesting MobileApplication. In order to keep the scenario as it is, we decided to make a workaround for this problem and create a channel (communication group) where the application ID (appID) is included in the address. This way each mobile application will have its own channel. 
 
 \newpage
-At the moment, the implemented element mapping will map the given channel into a String literal (the expression will be wrapped with two quotation marks \verb|"[expression]"|). Obviously we need to avoid the wrapping of the appID variable as a String literal. Therefore we constructed the channel expression as \verb|TaxiResponseTo"+appID+"|. This way the mapped expression will be \verb|"TaxiResponseTo"+appID+""|. Perhaps it would be better if we change the implementation in the future and skip the wrapping of the given expression. Instead we can simply assume that the given expression is a valid Java String literal or a String variable e.g \verb|"TaxiRequest"| or \verb|requestChannel|, where requestChannel is a String variable.
+At the moment, the implemented element mapping will map the given channel into a String literal (the expression will be wrapped with two quotation marks \verb|"[expression]"|). Obviously we need to avoid the wrapping of the appID variable as a String literal. Therefore we constructed the channel expression as \verb|TaxiResponse-To"+appID+"|. This way the mapped expression will be \verb|"TaxiResponseTo"+appID+""|. Perhaps it would be better if we change the implementation in the future and skip the wrapping of the given expression. Instead we can simply assume that the given expression is a valid Java String literal or a String variable e.g \verb|"TaxiRequest"| or \verb|requestChannel|(requestChannel must be a String variable contained in the Agent Bean).
 
-\section{The generated Agent Beans}
+\section{The Generated Agent Beans}
 In this section we will present the Agent Beans generated from the above model. To save space and improve the readability, the generated code will be reduced as follows:
 \begin{itemize}
 	\item Imports are deleted
@@ -173,7 +173,7 @@ public class MobileApplication_requestTaxi extends AbstractMethodExposingBean{
 }
 \end{lstlisting}
 
-In the MobileApplication\_requestTaxi Bean, almost every logic is generated from the model. The workflow method requestTaxi is exposed as an Action. All methods are filled with needed operations e.g. the decision whether the currentResponse is better than the globalBest is made by using the compareTo method of the TaxiResponse class. There is only one small yet fatal aspect missing in the generated code. You might notice that while other variables are initialized somewhere in the assignment of a method, the initialization of the appID variable can't be found in the generated code. To ensure that each instance of the MobileApplication\_requestTaxi has a unique ID, the initialization cannot be included in the model. We have to e.g. add a constructor and implement the initialization of the appID in it to make the code works completely. This problem also exists in the generated ETaxi\_requestTaxi code.
+In the MobileApplication\_requestTaxi Bean, almost every logic is generated from the model. The workflow method requestTaxi is exposed as an action. All methods are filled with needed operations e.g. the decision whether the currentResponse is better than the globalBest is made by using the compareTo method of the TaxiResponse class. There is only one small yet fatal aspect missing in the generated code. You might notice that while other variables are initialized somewhere in the assignment of a method, the initialization of the appID variable can't be found in the generated code. To ensure that each instance of the MobileApplication\_requestTaxi has a unique ID, the initialization cannot be included in the model. We have to e.g. add a constructor and implement the initialization of the appID in it to make the code works completely. This problem also exists in the generated ETaxi\_requestTaxi code.
 
 \textbf{2. ETaxi\_requestTaxi}\\
 
@@ -293,7 +293,7 @@ public class ETaxi_requestTaxi extends AbstractMethodExposingBean{
 }
 \end{lstlisting}
 
-Similar to the MobileApplication\_requestTaxi Bean, the initialization of the taxiID is also missing in the generated code. Moreover, unlike the MobileApplication\_requestTaxi Bean, we did not include all the logic (e.g. for evaluating whether a request is interesting) in the model. By this we showed that the quantity of the generated code might vary depending on how we design the model.
+Similar to the MobileApplication\_requestTaxi Bean, the initialization of the taxiID is also missing in the generated code. Moreover, unlike the MobileApplication\_request-Taxi Agent Bean, we did not include all the logic in the model (e.g. for evaluating whether a request is interesting). By this we showed that the quantity of the generated code might vary depending on how we design the model.
 
 
-In this chapter we have presented an example of the transformation in which some problems regarding the current mapping and transformation are shown. We have also shown how Agents can be designed and created easily by modeling a business process. 
+In this chapter we have presented an example of the transformation in which some problems regarding the current mapping and transformation are shown. We have also shown how agents can be designed and created easily by modeling a business process. 

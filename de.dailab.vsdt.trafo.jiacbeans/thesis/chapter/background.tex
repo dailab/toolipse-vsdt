@@ -1,43 +1,43 @@
 \chapter{Background}
 \label{chap:background}
-In this chapter we will discuss the backgrounds of the transformation that should be developed. We will start with Java-based Intelligent Agent Componentware (JIAC), the agent framework which is the target of the transformation, followed by Business Process Modeling Notation (BPMN), the modeling notation that is being used. Afterwards, we will present the Visual Service Design Tool (VSDT), the existing modeling and transformation framework that should be extended, and finally we will present Java Emitter Templates (JET), the technology that will help us to implement the transformation.
+In this chapter we will discuss the some background topics regarding the transformation that should be developed. We will start with Java-based Intelligent Agent Componentware (JIAC), the agent framework which is the target of the transformation followed by Business Process Modeling Notation (BPMN), the modeling notation that is being used. Afterwards we will present the Visual Service Design Tool (VSDT), the existing modeling and transformation framework that should be extended, and finally we will present Java Emitter Templates (JET), the technology that will help us to implement the transformation.
 
 %======================================%
 %                JIAC                  %
 %======================================
 \section{JIAC}
 Java-based Intelligent Agent Componentware (JIAC) is a Java-based agent architecture and framework that was developed to simplify the development of software agents\cite{JIACWEB}. The framework provides features such as FIPA compliant communication, Believe-Desire-Intention (BDI) reasoning, strong migration, web-service
-connectivity and many others. It also provides high security and advanced accounting mechanisms which makes it suitable for the use in industrial and commercial applications.\\
+connectivity and many others. JIAC also provides high security and advanced accounting mechanisms which makes it suitable for the use in industrial and commercial applications.\\
 
 \textbf{JIAC Agent Description Language}\\
-With its core JIAC Agent Description Language (JADL) \cite{jadl_basic}, JIAC also provide an agent programming language. With JADL, the agents \textit{plan elements, rules, ontologies} and \textit{services} can be described. JADL is based on three predicate logic which allows the values \textit{true, false and unknown}, which makes it suitable for open world problems in unknown environments. The actual version of JADL is called \textit{JADL++} \cite{BHTKAH09}.\\
+With its core component called JIAC Agent Description Language (JADL) \cite{jadl_basic}, JIAC also provides an agent programming language. With JADL, the agent's \textit{plan elements, rules, ontologies} and \textit{services} can be described. JADL is based on a three-predicate-logic that allows the values \textit{true, false and unknown}, making it suitable for open world problems in unknown environments. The actual version of JADL is called \textit{JADL++} \cite{BHTKAH09}.\\
 
-In Figure \ref{fig:jiac_basic}, we can see the typical structure of a JIAC Application, which consists of Agent Nodes, Agents and Agent Beans.
+In Figure \ref{fig:jiac_basic} we can see the typical structure of a JIAC application, which consists of Agent Nodes, Agents and Agent Beans.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.25\textwidth]{images/jiac_basic.png}
 		\caption{JIAC Basic concepts and their structural relationships \cite{JIACMAN10}}
 	\label{fig:jiac_basic}
 \end{figure}
-An \textit{Agent Node} is a Java VM where the runtime infrastructure for agents, such as discovery services, white and yellow pages services, as well as communication infrastructure, are provided. A JIAC application might be made up of multiple Agent Nodes (distributed application). With the so-called Agent Node Beans, one can extend the Agent Node with additional components.
+An \textit{Agent Node} is a Java Virtual Machine where the runtime infrastructure for agents, such as discovery services, white and yellow pages services, as well as communication infrastructure, are provided. A JIAC application might be made up of multiple Agent Nodes (distributed application). With the so-called Agent Node Beans, one can extend the Agent Node with additional components.
 
-Each Agent Node may run several \textit{Agents}. Agents provide services to other agents
+Each Agent Node may run several \textit{agents}. Agents provide services to other agents
 and comprise life cycle, execution cycle and a memory. An agent can use infrastructure
-services in order to find other agents, to communicate to them and to use their services.
-Skills and abilities of the agent can be extended by so-called Agent Beans.
+services in order to find other agents, to communicate with them and to use their services.
+Skills and abilities of the agent can be extended by the so-called Agent Beans.
 
 
 \subsection{Agent Beans}
-Beside using JADL, another mean to implement the functionality of an agent by implementing an agent bean attachable to the agent.
-In most cases one can implement an agent bean simply by extending the class \texttt{AbstractAgentBean}. By doing this the new agent bean will have access to some useful fields such as :
+Beside using JADL, another mean to implement the functionality of an agent is by implementing an Agent Bean that is attachable to the agent.
+In most cases one can implement an Agent Bean simply by extending the class \texttt{AbstractAgentBean}. By doing this the new Agent Bean will have access to some useful fields such as :
 \begin{itemize}
 	\item \texttt{protected Log log} : a logger Instance that can be used to create log messages.
-	\item \texttt{protected IAgent thisAgent} : Reference to the Agent object that can be used to perform operations on the agent
-	\item \texttt{protected IMemory memory} : Reference to the Agents memory that can be used to store and retrieve data.
+	\item \texttt{protected IAgent thisAgent} : Reference to the agent object that can be used to perform operations on the agent
+	\item \texttt{protected IMemory memory} : Reference to the agent's memory that can be used to store and retrieve data.
 \end{itemize}
 
 \textbf{Agent-Lifecycle}\\
-An agent bean implements the interface \texttt{ILifeCycle} which provides operations to control the bean's state in accordance to the agent's lifecycle(see Figure \ref{fig:lifecycle}) by declaring the methods \texttt{init()}, \texttt{start()}, \texttt{stop()}, and \texttt{cleanup()}. These methods are implemented by the class \texttt{AbstractLifeCycle}, a super class of \texttt{Abstract-AgentBean} which also provides the methods \texttt{doInit()}, \texttt{doStart()}, \texttt{doStop()}, and \texttt{doCleanup()} where we can hook up code that should be executed when the Lifecycle state changes e.g. looking up needed actions, attaching SpaceObeserver to the agent's memory, etc.
+An Agent Bean implements the interface \texttt{ILifeCycle} which provides operations to control the bean's state in accordance to the agent's lifecycle (see Figure \ref{fig:lifecycle}) by declaring the methods \texttt{init()}, \texttt{start()}, \texttt{stop()}, and \texttt{cleanup()}. These methods are implemented by the class \texttt{AbstractLifeCycle}, a super class of \texttt{Abstract-AgentBean} which also provides the methods \texttt{doInit()}, \texttt{doStart()}, \texttt{doStop()}, and \texttt{doCleanup()}. By overriding these methods we can hook up code that should be executed when the Lifecycle state changes e.g. looking up needed actions, attaching SpaceObeserver to the agent's memory, etc.
 \begin{figure}
 	\centering
 		\includegraphics[width=1.00\textwidth]{images/lifecycle.png}
@@ -46,25 +46,25 @@ An agent bean implements the interface \texttt{ILifeCycle} which provides operat
 \end{figure}
 
 \textbf{Execution-Cycle}\\
-By implementing the method \texttt{execute()}, we can tell the agent bean to do something periodically. This method is called by the agent's execution cycle, given that the execution interval property is specified in the configuration file\footnote{Informations about the configuration file can be found in the jiac manual\cite{JIACMAN10}}, and while the agent is on the \textbf{started} state.\\
+By implementing the method \texttt{execute()}, we can tell the Agent Bean to do something periodically. This method is called by the agent's execution cycle, given that the execution interval property is specified in the configuration file\footnote{Information about the configuration file can be found in the jiac manual\cite{JIACMAN10}}, and while the agent is on the \textbf{started} state.\\
 
 \textbf{Actions}\\
-Agent beans can provide Actions. Actions are public methods that can be invoked by another bean and depending on the action's scope it can even be invoked by another agent. Therefore an action can be seen as a service. 
-Using an Action normally includes two or three steps(the third one is optional):
+Agent Beans can provide actions. Actions are public methods that can be invoked by another bean and depending on the action's scope it can even be invoked by another agent. Therefore, an action can be seen as a service. 
+Using an action normally includes two or three steps (the third one is optional):
 \begin{enumerate}
-	\item find the Action
-	\item invoking the Action
+	\item find the action
+	\item invoke the action
 	\item get the results
 \end{enumerate}
-The following Listing shows an example on how to use the send action provided by the \texttt{ICommunicationBean}:
+The following listing shows an example on how to use the send action provided by the \texttt{ICommunicationBean}:
 \begin{lstlisting}[language = Java, caption = Using an Action]
 Action sendAction = retrieveAction(ICommunicationBean.ACTION_SEND);//find action
 [...]
 invoke(sendAction, new Serializable{message, receiver})//invoke
 \end{lstlisting}
-The methods \textbf{\texttt{retrieveAction()}} and \textbf{\texttt{invoke()}} used in the above Listing are provided  by the \texttt{AbstractAgentBean}.\\
+The methods \textbf{\texttt{retrieveAction()}} and \textbf{\texttt{invoke()}} used in the above listing are provided  by the \texttt{AbstractAgentBean}.\\
 
-The simplest way to provide Actions is by extending the class \textbf{\texttt{AbstractMethodExposingBean}} (also an extension of \texttt{AbstractAgentBean}) and put the @Expose java annotation on the method that we want to expose as an action, as shown in the following listing:
+The simplest way to provide actions is by extending the class \textbf{\texttt{AbstractMethodExposingBean}} (also an extension of \texttt{AbstractAgentBean}) and put the @Expose Java annotation on the method that we want to expose as an action, as shown in the following listing:
 \begin{lstlisting}[language = Java, caption = Providing an Action]
 //static variable for the action name
 public static final String ACTION_DOACTION = packagename.BeanName#doAction;
@@ -76,9 +76,9 @@ public void doAction(){
 \end{lstlisting}
 
 \textbf{Memory and SpaceObserver}\\
-The default implementation of the agent's memory is a simple tuple space that can hold any Java objects implementing the \textbf{\texttt{IFact}} interface (an extension to java.io.Serializable). The memory provides the 4 methods to work on the space:\textit{ read, write, remove} and \textit{update}.
+The default implementation of the agent's memory is a simple tuple space that can hold any Java objects implementing the \textbf{\texttt{IFact}} interface (an extension to java.io.Se-rializable). The memory provides 4 methods to work on the space:\textit{ read, write, remove} and \textit{update}.
 
-Each time a Bean calls an operation that modifies the memory, a SpaceEvent is fired. There are currently 4 different SpaceEvents that are fired:
+Each time a bean calls an operation that modifies the memory, a SpaceEvent is fired. There are currently 4 different SpaceEvents:
 \begin{itemize}
 	\item \texttt{WriteCallEvent} - fired when a new object is written in the memory.
 	\item \texttt{UpdateCallEvent} - fired when an object has been updated in memory.
@@ -86,8 +86,8 @@ Each time a Bean calls an operation that modifies the memory, a SpaceEvent is fi
 	\item \texttt{RemoveAllCallEvent} - fired when all objects are removed from the memory.
 \end{itemize}
 
-By using SpaceObserver, we can listen to these SpaceEvents and gets notification whenever a space event is being fired.
-For example we can implement a space observer which will start a process when a message is being written in the memory (Listing \ref{list:SpaceObserver}). 
+By using SpaceObserver, we can listen to these SpaceEvents and get a notification whenever a space event is being fired.
+For example we can implement a space observer which will start a process when a message is being written in the memory (listing \ref{list:SpaceObserver}). 
 \begin{lstlisting}[language = Java, caption = A SpaceObserver, label = list:SpaceObserver]
 SpaceObserver<IFact> observer = new SpaceObserver<IFact>(){
 	public void notify(SpaceEvent<? extends IFact> event){
@@ -100,35 +100,35 @@ SpaceObserver<IFact> observer = new SpaceObserver<IFact>(){
 memory.attach(observer);
 \end{lstlisting}
 
-To start receiving the SpaceEvents, we should attach the observer into the agent's memory (see line 9 of Listing \ref{list:SpaceObserver}). To stop receiving notifications on the SpaceEvents we can similarly use the \texttt{detach()} method.
+To start receiving the SpaceEvents, we should attach the observer into the agent's memory (see line 9 of listing \ref{list:SpaceObserver}). To stop receiving notifications on the SpaceEvents we can similarly use the \texttt{detach()} method.
 
 %\newpage
 %======================================%
 %                BPMN                  %
 %======================================%
 \section{BPMN}
-Business Process Modeling Notation (BPMN) \cite{BPMN2} is a standard Notation for modeling business processes, initially published by the Business Process Modeling Initiative (BPMI) which is later adopted by the OMG (Object Management Group). A business process diagram (as seen in Figure \ref{fig:bpmn_sampl}) can be compared to UML's activity diagram.\\
+Business Process Modeling Notation (BPMN) \cite{BPMN2} is a standard notation for modeling business processes, initially published by the Business Process Modeling Initiative (BPMI) and was later adopted by the Object Management Group (OMG). A business process diagram (as seen in figure \ref{fig:bpmn_sampl}) can be compared to UML's activity diagram.\\
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.80\textwidth]{images/bpmn_sampl.png}
-	\caption{A simple Business Process Diagram}
+	\caption{A Simple Business Process Diagram}
 	\label{fig:bpmn_sampl}
 \end{figure}
 
-BPMN was made to provide a notation that is understandable by all business users, creating a bridge for the gap between the business process design and the process implementation. Moreover, BPMN share many concepts e.g. services with multi agent systems. With the mapping of BPMN to Agents, we hope to be able to increase the spreading of the multi agent systems in the business world.
+BPMN was made to provide a notation that is understandable by all business users, creating a bridge for the gap between the business process design and the process implementation. Moreover, BPMN shares many concepts e.g. services with multi agent systems. With the mapping of BPMN to agents, we hope to be able to increase the spreading of the multi agent systems in the business world.
 
 
 \subsection{Levels of Abstraction}
-Beside having an easy to read graphical notations, BPMN elements are also equipped with additional attributes (so called properties), which are hidden from the diagram and provide informations needed for automated code generation. The BPMN can be seen as having at least three levels of Abstraction:
+Beside having an easy to read graphical notations, BPMN elements are also equipped with additional attributes (so-called properties), which are hidden from the diagram and provide information needed for automated code generation. The BPMN can be seen as having at least three levels of abstraction:
 \begin{enumerate}
 	\item Basic Types - The diagram are made up of easily recognized graphical elements
-	\item Subtypes - Each basic types can be further distinguished into subtypes with additional graphical elements such as icons that marks the type of an event's trigger.
-	\item Properties - Each element has additional detailed informations that are hidden from the diagram, but contain informations needed for the transformation.
+	\item Subtypes - Each basic types can be further distinguished into subtypes with additional graphical elements such as icons that mark the type of an event's trigger.
+	\item Properties - Each element has additional detailed information that are hidden from the diagram, but needed for the transformation.
 \end{enumerate}
 
 
 \subsection{BPMN Elements}
-BPMN elements can be categorized in five basic groups of elements\cite{BPMN2} :
+BPMN elements can be categorized in five basic groups \cite{BPMN2}:
 \begin{itemize}
 	\item Flow Objects
 	\item Data
@@ -136,26 +136,26 @@ BPMN elements can be categorized in five basic groups of elements\cite{BPMN2} :
 	\item Swimlanes
 	\item Artifacts
 \end{itemize}
-\textit{Flow Objects} includes Events, Activities and Gateways. These elements are the most important in BPMN, and they are held in a lane.\\
+\textit{Flow Objects} include events, activities and gateways. These elements are the most important in BPMN and they are held in a lane.\\
 
-An \textit{Event} describes something that happens during the course of a process. It is divided into Start Event, Intermediate Event and End Event (see Figure \ref{fig:events}).\\
+An \textit{event} describes something that happens during the course of a process. It is divided into start event, intermediate event and end event (see figure \ref{fig:events}).\\
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\textwidth]{images/events.png}
-	\caption{BPMN Event types. From left to right: Start Event, Intermediate Event, End Event}
+	\caption{BPMN Event Types. From left to right: Start Event, Intermediate Event, End Event}
 	\label{fig:events}
 \end{figure}
 
-BPMN Events are further divided into subtypes according to the type of the event's trigger (for start and intermediate events) or result (for end events). The event figure (see Figure \ref{fig:event_subtypes}) are drawn with different icon in the middle, according to the trigger.
+BPMN Events are further divided into subtypes according to the type of the event's trigger (for start and intermediate events) or result (for end events). The event figures (see figure \ref{fig:event_subtypes}) are drawn with different icons in the middle, according to the trigger.
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.4\textwidth]{images/event_types.png}
-	\caption{Examples of event subtypes. From left to right: Multiple, Link, Message, Rule, Timer}
+	\caption{Examples of Event Subtypes. From left to right: Multiple, Link, Message, Rule, Timer}
 	\label{fig:event_subtypes}
 \end{figure}
 
  
-An \textit{Activity} describes something that is done during a process. It is divided into \textit{Tasks} (Atomic Activities) and \textit{Sub Processes} (Composite Activities).\\
+An \textit{activity} describes something that is done during a process. It is divided into \textit{tasks} (atomic activities) and \textit{sub  processes} (composite activities).\\
 \begin{figure}[h]
 \centering
 \begin{tabular}{cc}
@@ -166,7 +166,7 @@ An \textit{Activity} describes something that is done during a process. It is di
 \end{figure}
 
 %\newpage
-\textit{Gateways} are used to define all kinds of splitting and merging behavior. It's semantics depends on the dimension of its incoming and outgoing Sequence Flows. Gateways are divided into the following types (also see Figure \ref{fig:gateways}):\\
+\textit{Gateways} are used to define all kinds of splitting and merging behavior. Its semantics depends on the dimension of its incoming and outgoing sequence flows. Gateways are divided into the following types (also see figure \ref{fig:gateways}):\\
 \begin{enumerate}
 	\item Exclusive
 	\item Event Based
@@ -186,42 +186,42 @@ An \textit{Activity} describes something that is done during a process. It is di
 
 
 
-Data is representated by the four elements:
+\textit{Data} is representated by the following four elements:
 \begin{itemize}
 	\item Data Objects
 	\item Data Inputs
 	\item Data Outputs
 	\item Data Stores
 \end{itemize}
-\textit{Data Object} describes information that is needed by an activity or what they produce. It can represent a singular object or a collection of objects. \textit{Data Inputs} and \textit{Data Outputs} describe the same information for Processes. \textit{Data Stores} describe the location where information, that persists beyond the scope of a process are stored.\\\\
-With \textit{Connecting Objects}, Flow Objects can be connected to each other or to other informations. There are 3 different kinds of Connecting Objects:
+\textit{Data Object} describes information that is needed by an activity or what they produce. It can represent a singular object or a collection of objects. \textit{Data Inputs} and \textit{Data Outputs} describe the same information for processes. \textit{Data Stores} describe the location where information, that persists beyond the scope of a process are stored.\\\\
+With \textit{connecting objects}, flow objects can be connected to each other or to other information. There are 3 different kinds of connecting objects:
 \begin{itemize}
-	\item \textit{Sequence Flows} - represent Flow Control, used for connecting FlowObjects within a Pool in the order of execution.
-	\item \textit{Message Flows} - represent Messages being exchanged exclusively between Pools.
-	\item \textit{Associations} -  mainly used for documentation, in example between Flow Objects and a Text annotation.
+	\item \textit{Sequence Flows} - represent flow control, used for connecting flow objects within a pool in the order of execution.
+	\item \textit{Message Flows} - represent messages being exchanged exclusively between pools.
+	\item \textit{Associations} -  mainly used for documentation, e.g. between flow objects and a text annotation.
 \end{itemize}
-\textit{Swimlanes} are divided into \textit{Pools} and \textit{Lanes}. Each Pool represents one Participant in the business process, while Lanes are used to partition a Pool, in example to model different Departments of an Institution. Figure \ref{fig:swimlane} shows a Pool with 2 Lanes.\\\\
+\textit{Swimlanes} are divided into \textit{pools} and \textit{lanes}. Each pool represents one participant in the business process, while lanes are used to create partitions within a pool, for example to model different departments of an institution. Figure \ref{fig:swimlane} shows a pool with 2 lanes.\\\\
 \begin{figure}[htbp]
 	\centering
 		\includegraphics[width = 0.8\textwidth]{images/swimlane.png}
-	\caption{Pool with 2 Lanes}
+	\caption{Pool With 2 Lanes}
 	\label{fig:swimlane}
 \end{figure}
 
-\textit{Artifacts} are additional Information about the Process. It is mainly used for documentation purpose. The Current set of Artifacts includes:
+\textit{Artifacts} are additional information about the process. They are mainly used for documentation purpose. The current set of artifacts includes:
 \begin{itemize}
 	\item Text Annotation
 	\item Group
 \end{itemize}
 
 
-To provide a rough overview on how Agent technology can support the implementation of Business Processes let us take a look on this mapping example of BPMN elements to Agents. A Pool in a Business Process Diagram can represent an Agent, which are able to communicate with other agents (another pool) through messages (represented with the BPMN MessageFlows). Agents can react to Events. A detailed mapping needed for implementing the transformation will be discussed later in chapter \ref{chap:mapping}.
+To provide a rough overview on how the agent technology can support the implementation of business processes, let us take a look on this mapping example of BPMN elements to agents. A pool in a business process diagram can represent an agent, which is able to communicate with other agents (another pool) through messages (represented with the BPMN message flows). Agents can react to events. A detailed mapping needed for implementing the transformation will be discussed later in chapter \ref{chap:mapping}.
 %======================================%
 %                VSDT                  %
 %======================================%
 \section{VSDT}
 \label{sec:vsdt}
-The Visual Service Design Too (VSDT) \cite{VSDTWEB} is a CASE Tool, developed to support the idea of Process Oriented Agent Engineering \cite{TKMLAH2010}, where Agents are designed by defining use cases and processes described with the BPMN. Its features include the BPMN editor, process structure view, model validation, import of existing web services, transformations to BPEL, and JIAC and many more. 
+The Visual Service Design Tool (VSDT) \cite{VSDTWEB} is a CASE tool developed to support the idea of Process Oriented Agent Engineering \cite{TKMLAH2010}, where agents are designed by defining use cases and processes described by the BPMN. Its features include the BPMN editor, process structure view, model validation, import of existing web services, transformations to BPEL, and JIAC and many more. 
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.90\textwidth]{images/vsdt_snapshot.png}
@@ -231,14 +231,14 @@ The Visual Service Design Too (VSDT) \cite{VSDTWEB} is a CASE Tool, developed to
 
 %========= The Editor =========%
 \subsection{BPMN Editor}
-The BPMN Editor in VSDT was created using eclipse's GMF (Graphical Modeling Framework). The editor enables us to create and modify business processes graphically. It also provides a properties view, where we can see and edit the additional properties of an element selected in the diagram. 
+The BPMN Editor in VSDT was created using eclipse's Graphical Modeling Framework (GMF). The editor enables us to create and modify business processes graphically. It also provides a properties view, where we can see and edit the additional properties of an element selected in the diagram. 
 
-The VSDT was designed to support pure BPMN that is independent from any execution language\cite{TKAH08}. This means the standard editor doesn't support language specific features such as the validation of expression to be conform with the syntax of a specific language (such a validation can be implemented in the transformation). However, the editor can be enriched with plugins that for example provides a view with language specific functionality.  
+The VSDT was designed to support pure BPMN that is independent from any execution language \cite{TKAH08}. This means the standard editor does not support language specific features such as the validation of expression to be conform with the syntax of a specific language (such a validation can be implemented in the transformation). However, the editor can be enriched with plugins e.g one that provides a view with language specific functionality.  
 
 
 %========= Transformation Framework ===========%
 \subsection{Transformation Framework}
-Since its initial development, VSDT's transformation framework is designed to be extensible and reusable. This allows the development of a new transformation to be easier. For this purpose the transformation process is subdivided into several stages: 
+Since its initial development, VSDT's transformation framework is designed to be extensible and reusable. This makes the development of a new transformation easier. For this purpose the transformation process is subdivided into several stages: 
 \begin{enumerate}
 	\item \textit{Validation}: Validate the input model.
 	\item \textit{Normalization}: Prepare the input model for transformation.
@@ -247,7 +247,7 @@ Since its initial development, VSDT's transformation framework is designed to be
 	\item \textit{Clean Up}: Remove redundancies, improve readability, etc.
 \end{enumerate}
 
-Due to the fact that the validation, normalization and structure mapping are mostly independent from the target language, the standard mapping provided for these stages are reusable, which makes it possible to implement a new transformation by specifying the element mapping only. Figure \ref{fig:transform} shows the UML Class Diagram of the transformation framework with the example transformation to BPEL.
+Due to the fact that the validation, normalization and structure mapping are mostly independent from the target language, the standard mapping provided for these stages are reusable, which makes it possible to implement a new transformation by specifying the element mapping only. Figure \ref{fig:transform} shows the UML class diagram of the transformation framework with the example transformation to BPEL.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.90\textwidth]{images/transformation.png}
@@ -262,35 +262,35 @@ Due to the fact that the validation, normalization and structure mapping are mos
 %======================================%
 \newpage
 \section{JET}
-Java Emitter Templates (JET) \cite{JETWEB} is a code generating framework, developed as a part of the Eclipse Modeling Project \cite{EMPWEB}. Using the so-called templates, one can transform a model into various types of text, from a simple plain text up to text containing html, XML or java code. There is a naming convention for the JET-Template file according to the type of the generated text. For example the name of a template file generating a java code should end with \textit{.javajet}
+Java Emitter Templates (JET) \cite{JETWEB} is a code generating framework, developed as a part of the Eclipse Modeling Project \cite{EMPWEB}. Using the so-called templates, one can transform a model into various types of text, from a simple plain text up to text containing HTML, XML or Java code. There is a naming convention for the JET-Template file according to the type of the generated text. For example the name of a template file generating a Java code should end with \textit{.javajet}
 
 The transformation process is done in two steps (see figure \ref{fig:jet_process}). First, the JET-Builder will translate the template file into a Java class holding a generate method. Then we can create an instance of the template class and call its generate method to get the result String which we can process further e.g. writing it into a file. 
 \begin{figure}[h]
   \label{fig:jet_process}
 	\centering
 		\includegraphics[width=1.0\textwidth]{images/jet_process.png}
-	\caption{JET transformation steps.}
+	\caption{JET Transformation Steps.}
 \end{figure}\\
 
 \subsection{JET-Templates}
-JET-Templates uses a JSP-like syntax which makes it easy to write and understand. There are three types of expression in JET-Syntax:
+JET-Templates use a JSP-like syntax which makes it easy to write and understand. There are three types of expressions in JET-Syntax:
 \begin{enumerate}
 	\item \textbf{Directives} <\%\verb|@| \textit{directive \{attribute =  ''value''  \}*}\%>\\
-	      Directives contain informations for the JET-Engine. 
+	      Directives contain information for the JET-Engine. 
 	      
 	\item \textbf{Scriptlets} <\% \textit{scriplet} \%>\\
-	      With Scriptlets we can use any java code fragment in the template. 
+	      With Scriptlets we can use any Java code fragment in the template. 
 	      For example we can type cast the argument object into List:\\ 
 	      \verb|<% List<String> studentlist = (List<String>) argument; %>|\\
-	      These code fragments are executed at invocation time of the generate Method.
+	      These code fragments are executed at invocation time of the generate method.
 	      
 	\item \textbf{Expressions} <\%= \textit{expression} \%>\\
-	      An expression contains a java expression which will be executed at invocation time, and its result will be added into the StringBuffer.
+	      An expression contains a Java expression which will be executed at invocation time, and its result will be added into the StringBuffer.
 \end{enumerate}
 
-A set of JET templates is called a transformation. It is possible to build this transformation with a main template which acts as a visitor and runs through the model, and this main template will then use other templates which handle a specific element of the model. For example, in UML to Java transformation you can have special templates that handles the package, class, variables and methods.\\\\
+A set of JET templates is called a transformation. It is possible to build this transformation with a main template which acts as a visitor and runs through the model. This main template will then use other templates which handle a specific element of the model. For example, in UML to Java transformation you can have special templates that handle the package, class, variables and methods.\\\\
 The following listing shows a simple example of a JET-Template that generates an XML:
-\begin{lstlisting}[caption = a simple JET-Template]
+\begin{lstlisting}[caption = A Simple JET-Template]
 <% @ jet package="generator" imports="java.util.*" class="StudentListGenerator" %> 
 <?xml version="1.0" encoding="UTF-8"?>
 <% List<String> elementList = (List<String>) argument; %>
@@ -300,10 +300,10 @@ The following listing shows a simple example of a JET-Template that generates an
    <% } %>
 </class>
 \end{lstlisting}
-A Jet-Template starts with the so called \textbf{jet-directive}. It contains informations for the JET-Builder, for example the name of the translated Java class(also called the template class), the package in which the template class should be placed into and a list of classes that should be imported by the template class.
+A Jet-Template starts with the so-called \textbf{jet-directive}. It contains information for the JET-Builder, for example the name of the translated Java class (also called the template class), the package in which the template class should be placed into and a list of classes that should be imported by the template class.
 
-In the first step, the JET-Builder will then translate this template into the Java Class generator.StudentListGenerator:
-\begin{lstlisting}[caption = the translated Java-Class, language = Java]
+In the first step of the transformation process, the JET-Builder will then translate this template into the Java Class generator.StudentListGenerator:
+\begin{lstlisting}[caption = The Translated Java-Class, language = Java]
 package generator;
 import java.util.*;
 
@@ -340,20 +340,20 @@ public class StudentListGenerator
 }
 
 \end{lstlisting}
-The most interesting part of the java template class is the generate method. To get the text that should be generated, an instance of this class should be created and then we pass a list to the generate method, for example with the following code:
-\begin{lstlisting}[caption = calling the generate method, language = Java]
+The most interesting part of the Java template class is the generate method. To get the text that should be generated, an instance of this class should be created and then we pass a list to the generate method, for example with the following code:
+\begin{lstlisting}[caption = An example Java code calling the generate method, language = Java]
   ...
   List<String> students = new ArrayList<String>();
-  students.add("`Peter"');
-  students.add("`John"');
-  students.add("`Caroline"');
+  students.add("Peter");
+  students.add("John");
+  students.add("Caroline");
   
   StudentListGenerator generator = new StudentListGenerator();
   generator.generate(students);
 \end{lstlisting}
 
 , where the result of the transformation will be:
-\begin{lstlisting}[caption = Result String of the transformation, language = xml]
+\begin{lstlisting}[caption = Result String of the Transformation, language = xml]
 	<class>
 		<student>Peter</student>
 		<student>John</student>
@@ -362,13 +362,13 @@ The most interesting part of the java template class is the generate method. To 
 \end{lstlisting}
 
 \subsection{Two different JET-Versions}
-There are currently two different JET-Versions in the Eclipse Modeling Project. The syntax and examples mentioned above correlate to the older Version of JET, which allows us to generate text with an Object as argument. In the template, the argument variable can be type casted into the class of our model. This JET-Version is effective if the model we want to generate the text from is a Java object. We get a String as a result which we can write into a File using the Java-IO or even Eclipse API.\\
+There are currently two different JET-Versions in the Eclipse Modeling Project. The syntax and examples mentioned above correlate to the older version of JET, which allows us to generate text with an object as argument. In the template, the argument variable can be type-casted into the class of our model. This JET-Version is effective if the model we want to generate the text from is a Java object. We get a String as a result which we can write into a file using the Java-IO or even eclipse API.\\
 
-In the updated version of JET, also called JET2, some workspace and Java related "'tag-libraries"' are provided, enabling us to do the transformation without using the Java and Eclipse API. Unfortunately, in this version the model has to be an XML-File.
-Implementing the transformation of the BPMN directly from its XML-Representation will be harder and the template will be confusing, therefore a decision has been made to implement the mapping using the existing transformation framework where an intermediate model class of the Agent Bean will be created, and then transform this intermediate model into Java code using the older version of the JET Transformation.
+In the updated version of JET, also called JET2, some workspace and Java related "tag-libraries" are provided, enabling us to do the transformation without using the Java and Eclipse API. Unfortunately, in this version the model has to be an XML-file.
+Implementing the transformation of the BPMN directly from its XML-representation will be harder and the template will be confusing. Therefore, a decision has been made to implement the mapping similarly to the existing transformation to JIACV where an intermediate model class of the Agent Bean will be created. This intermediate model will then be transformed into Java code using the older version of JET.
 More details on the implementation will be discussed in chapter \ref{chap:implementation}.
 
-\subsection{New JET2 elements}
+\subsection{New JET2 Elements}
 The enhanced version of JET comes with some new syntax elements such as:
 \begin{itemize}
 	\item Comments <\verb|--| \textit{Comment} \verb|--|>\\
@@ -378,17 +378,17 @@ The enhanced version of JET comes with some new syntax elements such as:
 	\item The @taglib directive <\%@taglib id=''...'' prefix=''...''\%>\\
 	      With the @taglib directive, we can import an XML Tag Library or rename the tag library's namespace prefix.
 	\item Custom XML tag\\
-	   		JET2 templates may contain custom XML tags. JET2 comes with 4 standard tag libraries, and we can also define our own tag library.				
+	   		JET2 templates may contain custom XML tags. JET2 comes with four standard tag libraries, and we can also define our own tag library.				
 \end{itemize}
 
-Out of the new elements mentioned above, the custom XML tag is the most interesting since JET2 comes with 4 helpful standard tag libraries\cite{JET2TAGS}:
+Out of the new elements mentioned above, the custom XML tag is the most interesting since JET2 comes with four helpful standard tag libraries\cite{JET2TAGS}:
 \begin{enumerate}
 	\item Control tags\\
-		    Contains control flow and data management tags. These tags will help us in visiting the input model where we will need to evaluate expression, perform loops,  iterate through a certain set of elements and read or write some informations in the input. 
+		    Contain control flow and data management tags. These tags will help us in visiting the input model, evaluate expression, perform loops,  iterate through a certain set of elements and read or write some information in the input. 
 	\item Workspace tags\\
-			  Contains a set of library that performs operations against the eclipse workspace (for example for creating a file in an existing eclipse Project). 
+			  Contain a set of library that performs operations against the eclipse workspace (for example for creating a file in an existing eclipse project). 
 	\item Java tags\\
-				Contains tags useful for generating Java codes such as creating Java packages and classes, managing imports etc.
+				Contain tags that are useful for generating Java code and can be used for creating Java packages and classes, managing imports etc.
 	\item Format tags\\
 		    Standard tags for formatting text. 
 \end{enumerate}
