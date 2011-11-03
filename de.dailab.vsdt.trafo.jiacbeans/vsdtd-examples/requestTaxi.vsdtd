@@ -10,12 +10,6 @@
         <properties xmi:type="vsdt:Property" xmi:id="_FJtjAAG9EeGevqN25OkiLw" name="destination" type="string"/>
         <lanes xmi:type="vsdt:Lane" xmi:id="_uWmaYQF2EeGC8PuSIWxlmQ" id="_uWmaYAF2EeGC8PuSIWxlmQ">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_wD3NcQF2EeGC8PuSIWxlmQ" id="_wD3NcAF2EeGC8PuSIWxlmQ" trigger="MESSAGE" implementation="_ySvf0AF2EeGC8PuSIWxlmQ">
-            <assignments xmi:type="vsdt:Assignment" xmi:id="_MzlecAG9EeGevqN25OkiLw" to="_DWWvAAG9EeGevqN25OkiLw" assignTime="END">
-              <from xmi:type="vsdt:Expression" xmi:id="_MzlecQG9EeGevqN25OkiLw" expression="location"/>
-            </assignments>
-            <assignments xmi:type="vsdt:Assignment" xmi:id="_Mzn6sAG9EeGevqN25OkiLw" to="_FJtjAAG9EeGevqN25OkiLw" assignTime="END">
-              <from xmi:type="vsdt:Expression" xmi:id="_Mzn6sQG9EeGevqN25OkiLw" expression="destination"/>
-            </assignments>
             <assignments xmi:type="vsdt:Assignment" xmi:id="_ho45YAG9EeGevqN25OkiLw" to="_DWWvAAG9EeGevqN25OkiLw" assignTime="END">
               <from xmi:type="vsdt:Expression" xmi:id="_ho45YQG9EeGevqN25OkiLw" expression="currentLocation"/>
             </assignments>
