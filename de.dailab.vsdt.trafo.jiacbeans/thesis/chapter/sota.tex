@@ -1,10 +1,11 @@
 \chapter{State of the Art}
 \label{chap:sota}
+Now we are going to discuss some state of the art topics related to the transformation from BPMN to JIAC Agent Beans. We will start with the existing transformations from BPMN to BPEL and JADL followed by a similar approach that inspired us for this project.
 %====================================================%
 %                     BPMN2BPEL                      %
 %====================================================%
 \section{BPMN to BPEL Transformation}
-In the BPMN specification, the mapping from BPMN to BPEL has been included since the first version. In fac,t the development of BPMN was driven by the lack of standard notation for the WS-BPEL\cite{weidlich2008}. The limitation of the mapping from BPMN to BPEL has also been discussed in various papers, focusing the issues resulted from the incompatibility of the graph structured BPMN and the block structured BPEL, and led to some more sophisticated mapping such as the one introduced by Ouyang et al. (\cite{Ouyang2006a},\cite{Ouyang2006b}).
+In the BPMN specification \cite{BPMN2}, the mapping from BPMN to BPEL has been included since the first version. In fac,t the development of BPMN was driven by the lack of standard notation for the WS-BPEL\cite{weidlich2008}. The limitation of the mapping from BPMN to BPEL has also been discussed in various papers, focusing the issues resulted from the incompatibility of the graph structured BPMN and the block structured BPEL, and led to some more sophisticated mapping such as the one introduced by Ouyang et al. (\cite{Ouyang2006a},\cite{Ouyang2006b}).
 
 At the moment, there are some tools that support the transformation from BPMN to BPEL. 
 In the VSDT, a mapping from BPMN to BPEL based on the mapping given in the BPMN specification was also developed \cite{TK07}, covering nearly every mapping given in the specification including event handlers, inclusive OR and event based XOR Gateways. 
