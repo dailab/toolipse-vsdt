@@ -24,7 +24,7 @@ Some data types included in the process are shown in figure 6.2. The shown data 
 
 \newpage
 \subsection{The scenario}
-Before we start with the transformation, we will describe the scenario that lies behind the process model shown in figure \ref{fig:example} from the perspective of each pool. 
+Before we start with the transformation, we will describe the scenario that lies behind the process model shown in figure 6.3 from the perspective of each pool. 
 
 \textbf{Mobile Application}\\
 The process starts with a user requesting a taxi by invoking the service provided by the mobile application. The service will then make a request to all ETaxis by sending information about the user's location, application ID and the destination. Within 30 seconds after sending the request, the mobile application will collect responses from all available ETaxis. Each of these responses contains information about the taxi ID and the estimated time needed by this taxi to arrive at the user's current location. If multiple responses are received, the mobile application will record the best response according to the minimum estimated time. After 30 seconds the application will check whether a response was received. If yes, it will send a notification to all taxis informing which taxi is selected. Then the process will end and the selected taxi's ID will be sent to the user. If no respons is received, it will notify the user that no taxi is currently available. 
