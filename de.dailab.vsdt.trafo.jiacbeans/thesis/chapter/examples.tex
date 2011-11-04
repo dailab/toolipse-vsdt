@@ -4,7 +4,8 @@
 In this chapter we will introduce an example scenario of a process and how the resulting code of the transformation looks like.
 
 \section{The Model}
-The example is based on a scenario taken from an actual topic: \textit{electromobility}. The scenario includes a choreography between a MobileApplication, that will be used by a user to reserve a taxi and a number of ETaxi-applications installed in electronic taxis. Figure \ref{fig:usecase} shows the use case model of the \textbf{requestTaxi} process. 
+The example is based on a scenario taken from an actual topic: \textit{electromobility}. The scenario includes a choreography between a MobileApplication, that will be used by a user to reserve a taxi and a number of ETaxi-applications installed in electronic taxis. Figure \ref{fig:usecase} shows the use case model of the \textbf{requestTaxi} process.\\
+
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.8\textwidth]{images/example/usecase.png}
@@ -12,13 +13,14 @@ The example is based on a scenario taken from an actual topic: \textit{electromo
 	\caption{Use Case Model}
 \end{figure}
 
-In figure \ref{fig:payloads} we can see some data types included in the process which represent the information exchanged in the communication between both pools (the payload of the implementing MessageChannel). The transformation will assume that the classes exist and they will be imported by the generated Agent Bean. Further, because payloads will be wrapped in a JiacMessage, they have to implement the IFact interface.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=0.8\textwidth]{images/example/payloads.png}
-	\label{fig:payloads}
+	\label{fig:datatypes}
 	\caption{Payload data types included in the process diagram}
 \end{figure}
+
+Some data types included in the process are shown in figure 6.2. The shown data types represent the information exchanged in the communication between both pools (the payload of the implementing MessageChannel). The transformation will assume that these classes exist and they will be imported by the generated Agent Bean. Further, because payloads will be wrapped in a JiacMessage, they have to implement the IFact interface.
 
 \newpage
 \subsection{The scenario}
