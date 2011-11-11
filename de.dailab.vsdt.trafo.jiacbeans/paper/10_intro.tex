@@ -1,0 +1,63 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                            %%
+%%  INTRODUCTION                                                              %%
+%%                                                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% [x] Problem
+% [x] Motivation
+% [x] Solution
+% [x] Contribution
+% [x] Outline
+
+\section{Introduction}
+\label{sec:intro}
+
+% Problem
+In recent times, different approaches have been introduced, using business
+process diagrams or related notations for modelling agents and multi-agent
+systems~\cite{caire2008wade,kuester2010integrating}.  However, none of these
+approaches is really compelling.  Often, very simple workflow models are used, or
+if a more expressive process modelling notation, such as BPMN~\cite{omg2009bpmn}
+is used, only a limited subset of the language is covered.  Further, usually only
+single agents are targeted, while interactions between agents -- which could very
+well be modelled using e.g. BPMN -- are not regarded.
+
+% Motivation
+This is a pity, since process diagrams -- particularly complex notations such as
+the Business Process Modeling Notation (BPMN) -- share many concepts and abstractions
+with multi-agent systems.  Besides the actual workflow, those notations can be
+used for modelling several participants in a process, as well as their interactions
+and communication, or their reactions to external events, centring much more on
+the \emph{what} and less on the \emph{how}.  Thus, despite the shortcomings of
+existing approaches, BPMN and related notations appear to be very well suited for
+modelling agents and particularly multi-agent systems.
+
+% Solution
+In this paper we take a look at some of the existing approaches -- the WADE
+extension to the JADE agent framework, and the mapping from BPMN to JIAC's
+scripting language JADL -- and try to combine the strong sides of both into a new
+approach.  The result is a mapping from BPMN to JIAC Agent Beans, following the
+basic principles of WADE, but using a much more expressive process notation.
+
+% Contribution
+This way, JIAC Agent Beans, being the core components of the agents, can be
+generated easily from BPMN processes.  The resulting Java classes are similarly
+structured and extensible as the JADE classes of WADE, but reflect the whole BPMN
+process, including communication between agents and event-handling, both as part
+of the workflow and for triggering the process.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Outline
+The remainder of this paper is structured as follows: In Section~\ref{sec:background}
+we will give a short introduction to both, the BPMN process modelling language,
+and the JIAC multi-agent framework.  Then, in Section~\ref{sec:related} we will
+have a look at related work, most notably the WADE framework and the mapping from
+BPMN to JADL.  Thereafter, we will describe in detail how BPMN processes can be
+mapped to semantically equivalent JIAC Agent Beans (Section \ref{sec:mapping}),
+and how the transformation has been implemented (Section~\ref{sec:impl}).
+In Section~\ref{sec:example}, the mapping is illustrated using an example,
+before we finally discuss our results in Section~\ref{sec:conclusion}.
+

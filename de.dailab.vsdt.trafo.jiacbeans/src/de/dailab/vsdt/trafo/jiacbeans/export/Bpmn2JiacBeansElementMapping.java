@@ -168,6 +168,9 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	}
 	
 	private Script visitFlowObject(FlowObject flowObject){
+		if (flowObject == null) {
+			return null;
+		}
 		Script script = beansFac.createCodeElement();
 		if(flowObject==null)return script;
 		//delegate to specialized methods
@@ -586,7 +589,10 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		TrafoLog.trace("Visiting BpmnSequence");
 		Sequence seq = beansFac.createSequence();
 		for (FlowObject flowObject :  bpmnSequence.getElements()) {
-			seq.getScripts().add(visitFlowObject(flowObject));
+			Script script = visitFlowObject(flowObject);
+			if (script != null) {
+				seq.getScripts().add(script);
+			}
 		}
 		return seq;
 	}

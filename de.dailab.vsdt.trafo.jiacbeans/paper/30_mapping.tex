@@ -1,0 +1,175 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                            %%
+%%  MAPPING                                                                   %%
+%%                                                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% [x] Einleitung
+% [x] Workflow-Methode
+% [x] Properties und Assignments
+% [x] Activity-Methoden
+% [x] Start Events
+
+\section{Mapping BPMN to JIAC Agent Beans}
+\label{sec:mapping}
+
+% Mapping nach JADL schon rel. fortgeschritten, Diplomarbeit von P. S. Tan
+When the mapping from BPMN to JADL was already quite advanced, it became apparent
+that, while being well suited for modelling high-level behaviour or services,
+traditional JIAC Agent Beans are still advantageous -- and often necessary --
+for defining the better part of the agent's behaviour.  Consequently, work was
+startet on a mapping from BPMN to JIAC Agent Beans~\cite{tan2011dipl}.
+
+% konzeptionell ähnlich wie bei WADE, Methoden für Workflow und Aktivitäten
+The mapping from BPMN to JIAC Agent Beans is conceptually close to WADE
+\cite{caire2008wade}: Each Pool in the BPMN diagram is mapped to one Agent Bean
+class, with one method for the workflow, and one method for each individual
+activity of the process.\footnote{In the following, we will use the term
+``workflow'' for the order in which individual activities are executed in the
+process, and the term ``process'' for the whole ensemble of activities and their
+ordering, events, variables etc.} The \emph{workflow-method} acts as an entry
+point to executing the process, while the several \emph{activity-methods} are
+invoked by the workflow method in accordance with the ordering of the activities
+in the process.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Workflow Method}
+
+% Basics zur Workflow-Methode
+Basically, the workflow method is made up of calls to the several activity-methods,
+being arranged into sequences, if-else statements and loops.  While this requires
+the process to be structured properly (see Section~\ref{sec:impl}), the result is
+very readable and understandable, just like manually written code.
+
+% Erweiterungen im Vergleich zu WADE: Kommunikation, Subprozesse, Event Handler
+At the same time, BPMN allows for much more expressive workflows to be modelled
+than the rather minimalistic workflow notation used in WADE.  In particular, the
+following concepts of BPMN are covered by the mapping:
+
+\begin{itemize}
+	\item Parallel execution (BPMN's AND-Gateway) is mapped to multiple threads
+	being started and joined.
+	
+	\item Subprocesses (composite activities) are mapped to internal classes
+	following the same schema as the main class, with workflow- and activity-methods
+	for the activities embedded into the subprocess.
+
+	\item Event Handler (Intermediate Events attached to an Activity) are also
+	mapped to threads, running concurrently to the thread executing the Activity
+	itself, and interrupting this thread in case the respective event occurs (e.g.
+	a message or a timer).  The workflow is routed accordingly.
+	
+	\item The same pattern is applied to Event-based XOR-Gateways.  In this case
+	the main thread will wait until one of the events has been triggered.
+\end{itemize}
+
+An example for a complex workflow-method is given later in Section~\ref{sec:example}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Properties and Assignments}
+
+% Properties, Assignments, etc.
+BPMN specifies a number of non-visual attributes, such as properties (i.e.
+variables) and assignments.  Properties can be declared in the scope of whole
+Processes or individual activities (both atomic Tasks and composite Subprocesses).
+When declared in the scope of a process or subprocess, the property is visible to
+all elements (transitively) contained therein.
+
+% Mapping der Properties
+Accordingly, properties are mapped to variables in different scopes in the Agent
+Bean, reflecting their visibility in the BPMN diagram.  Properties of the process
+are mapped to variables in the scope of the Agent Bean class, properties of a
+subprocess to variables in the scope of the embedded subprocess class, and
+properties of an activity to local variables in the scope of the activity-method.
+
+% Mapping der Assignments
+Assignments are always bound to an activity or events, and are included in the
+respective activity-method.  In BPMN, assignments can have an \emph{assign-time}
+of either `before' or `after', determining whether the assignment has to be
+applied before or after the actual activity it is bound to is executed.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Activity Methods}
+
+% Activity-Methods
+The several activity-methods have neither parameters nor a return value and always
+follow the same schema:
+
+\begin{enumerate}
+	\item \emph{Properties}: First, the properties in the scope of the activity
+	are initialized, if any.  For each property, one Java variable is created,
+	using a corresponding data type, being visible only in the scope of this
+	activity.
+	
+	\item \emph{Start Assignments}: Then, assignments of the activity with
+	assign-time `before' are created, e.g. for assigning values to the input
+	parameters of a service call.
+	
+	\item \emph{Activity Behaviour}: Now, the code corresponding to the actual
+	activity is inserted, e.g. invoking a service, sending a message, or executing
+	a user-defined code-snippet.  If the Activity's \emph{loop} attribute is set,
+	this part is placed inside of a loop.
+	
+	\item \emph{End-Assignments}: Finally, assignments with assign-time `after'
+	are created, e.g. for binding the return value of a service call to a variable.
+\end{enumerate}
+
+% Einzelne Task-Types
+Similar to the mapping to JADL, we can make use of JIAC's communication
+infrastructure.  Likewise, Message Events and Send and Receive Tasks are mapped
+to sending and receiving JIAC messages, while Service Tasks are mapped to the
+invocation of a JIAC action (i.e. a service).  Script Tasks allow the developer
+to attach a custom snippet of Java code to the task.  Further, Timer Events can
+be mapped to a temporary suspension of the execution.
+
+There are more types of Tasks and Events in BPMN, for which no mapping has been
+devised yet, but these are the most common and important ones.
+
+%	Another task type, for which a mapping has not yet been implemented, is for instance
+%	the User Task.  Here it is planned to present a generic input dialogue to the user.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Start Events and Starter Rules}
+
+% JADL braucht Starter Rules, jetzt reichen die Agent Bean-Mechanismen
+Finally, the processes' Start Events have to be mapped to mechanisms for starting
+the process on the occurrence of the respective events.  In the mapping to JADL,
+a number of Drools rules are created for this purpose.  Using Agent Beans, these
+`starter rules' can be integrated directly into the code, making use of the
+mechanisms introduced in Section~\ref{sec:jiac}.
+
+\begin{itemize}
+	\item If the process has a Start Event with unspecified type, or \emph{None}
+	type, then the workflow-method is invoked in the Agent Bean's \verb_doStart()_
+	method (one of the \emph{life-cycle}-methods), being called when the agent is
+	started.
+
+	\item For a \emph{Timer} Start Event, the Agent Bean is given an \verb_execute()_
+	method, regularly checking the current time against the time the process was
+	last started, invoking the workflow-method at a given time or interval.
+
+	\item A \emph{Message} Start Event results in a message observer being attached
+	to the agent's memory when be Agent Bean is started, which will then invoke
+	the workflow-method every time a matching JIAC message is received.
+
+	\item Finally, in case of a \emph{Service} Star Event, the workflow-method is
+	marked with the \verb_@Expose_ annotation, exposing the workflow-method as a
+	JIAC action to be discovered and invoked by other agents.\footnote{There is,
+	as such, no Service Start Event in BPMN.  We use this term to distinguish
+	Message Start Events, where the message is in fact a service request.}
+\end{itemize}
+
+% Message Start/End Event -> Auswirkungen auf Paramter und Return Value
+Besides creating these mechanisms, a Service Start Event also results in the
+workflow-method's input parameters being updated to correspond to the specified
+service parameters.  Analogously, a Service End Event results in the workflow-method's
+return value being set accordingly.
+

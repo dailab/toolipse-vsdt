@@ -1,0 +1,68 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                            %%
+%%  CONCLUSION                                                                %%
+%%                                                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% [x] Zusammenfassung
+% [x] Diskussion
+% [x] Future Work
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+% kurze Zusammenfassung des Papers und des Mappings
+In this paper, we have presented a new approach of creating multi-agent systems from
+process models, combining the mapping from BPMN to JADL~\cite{kuester2010integrating}
+with ideas borrowed from WADE~\cite{caire2008wade}.  The result is a transformation
+from BPMN process diagrams to JIAC Agent Beans, comprising one method for the
+workflow as a whole, and one method for each individual activity, but also
+supporting beneficial aspects of BPMN such as messaging and event handling.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Discussion}
+
+% alles ausdrückbar, was man modellieren kann
+Using the domain-specific scripting language JADL, agent behaviours can be
+expressed in a very compact and readable way, but the overall expressiveness is
+limited.  JIAC Agent Beans, on the other hand, have the full expressiveness of
+the Java language at their disposal.  Thus, basically everything that can be
+modelled in a BPMN diagram can be mapped to an Agent Bean.
+
+% etwas schwer verständlich, erweiterbar
+While the resulting workflow-methods for complex processes can become somewhat
+bulky -- particularly if event handlers are used -- the separation into
+workflow-methods and activity-methods keeps the resulting code reasonably clear.
+Further, like in WADE, individual activity-methods can be altered or extended
+without risk of losing the changes after the code is generated anew.
+
+% Schlusssatz: Wofür eignen sich die AgentBeans, und wofür die JADL-Services?
+One drawback compared to the mapping to JADL scripts is that the generated Agent
+Beans -- being Java classes -- can not as easily be deployed to an agent at runtime.
+Regarding the high expressiveness of the generated Agent Beans and the good
+performance of compiled Java code compared to the interpreted JADL scripts, the
+mapping from BPMN to JIAC Agent Beans is suited best for modelling and generating
+core components of the agents, while the mapping to JADL is of much use for
+creating dynamic behaviours and services to be deployed and changed at runtime.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Future Work}
+
+While the mapping can already be used for generating useful agent behaviours,
+it is not yet completed.  First, there are still aspects of BPMN, which are not
+covered by the mapping, such as some of the less common event types.  Second,
+there are aspects of agents that can not yet be modelled adequately with BPMN.
+
+Among the latter are messages to individual agents.  Originally, BPMN knew only
+services and service calls.  In the course of our work, we extended our `dialect'
+of BPMN with broadcast message groups, but what's still missing are messages to
+individual agents, as identified by their agent ID.
+
+Another issue which we want to tackle in the future is the modelling of goals by
+means of BPMN.  One approach that appears to be promising is to use the
+\emph{ad-hoc} subprocess for this task, but this is still work in progress.
+

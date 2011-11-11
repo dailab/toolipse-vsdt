@@ -1,0 +1,133 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                            %%
+%%  RELATED WORK                                                              %%
+%%                                                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% [x] Intro
+% [x] BPMN -> BPEL
+% [x] BPMN -> JADL
+% [x] WADE
+% [x] GO-BPMN
+
+\section{Related Work}
+\label{sec:related}
+
+In the following we will discuss several works which are highly relevant to the
+approach described in this paper: The original mapping from BPMN to BPEL, a
+mapping from BPMN to JIAC's scripting language JADL, the WADE framework, mapping
+workflows to JADE behaviours, and GO-BPMN, a combination of BPMN and goal hierarchies.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Mapping BPMN to BPEL}
+
+One of the motivations for developing BPMN was to provide a standardised graphical
+notation for \emph{BPEL}, the Business Process Executable Language.  Consequently,
+a mapping from BPMN to BPEL is part of the BPMN specification~\cite[Appendix
+A]{omg2009bpmn}, and a number of alternative or extended mappings have been
+proposed by various other authors (see for example~\cite{ouyang2009business}).
+% , making heavy use of BPEL event handlers).
+
+In many aspects, the mapping is very straightforward, as it is evident that BPMN
+was created with the mapping to BPEL in mind: Each Pool is mapped to a BPEL
+process (which can be deployed as a Web service), and the several events and
+activities within are mapped to the workflow of the process.  The process is made
+up mostly of Web service calls, assignments and flow control, but can also contain
+e.g. event handling based on timing and incoming messages.  Given a sufficiently
+detailed BPMN diagram, the resulting BPEL process can be readily executable.
+
+Still, there are enough elements in BPMN for which no mapping to BPEL is given,
+i.e. BPMN is not just a visualization for BPEL but an individual language -- and
+in fact more expressive than BPEL itself.  Amongst the elements which are not
+mapped to BPEL are somewhat esoteric elements such as the \emph{ad-hoc} subprocess,
+or the complex gateway, but also many kinds of events and tasks.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Mapping BPMN to JADL}
+
+% erste Version des Mapping nach JADL gemacht, SOA+Agenten-Sprache
+In prior work of mapping BPMN to JIAC agents, JIAC's service-oriented scripting
+language \emph{JADL}~\cite{hirsch2010programming} was selected as the target of
+the transformation.
+
+% Behaviours werden in JADL beschrieben
+Being conceptually close to BPEL, the mapping is similar, and the process can be
+mapped very directly to different language elements of JADL -- for instance, like
+BPEL, JADL has dedicated language elements for complex actions such as invoking
+another service, or for sending and receiving messages, making the generated code
+compact and easy to comprehend.  Similar to the mapping to BPEL, each Pool in the
+BPMN process is mapped to a JADL service, and the service's input parameters and
+result types are derived from the Pool's start- and end
+events~\cite{kuester2010integrating}.
+
+% Starter-Regeln mit Drools
+Further, for each start event, a Drools rule is created, starting the respective
+JADL service on the occurrence of the given event (e.g. an incoming message, or
+a given time).
+
+% Agenten-Konfiguration
+Finally, for each Participant in the BPMN process, an XML-based agent configuration
+file is created, setting up the individual agents, each equipped with an Interpreter
+Bean and Rule Engine Bean, together with the generated JADL services and Drools
+rules.  Alternatively, the JADL services created from the BPMN processes can be
+deployed to a running JIAC agent, thus dynamically changing its behaviour.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{WADE: Workflows for JADE}
+
+% WADE: JADE + Workflows
+A different approach, from which some of the concepts in this work have been
+drawn, is \emph{WADE (Workflows and Agents Development Environment)}, which is
+an extension to the JADE multi-agent framework~\cite{bellifemine1999jade}.
+With WADE, certain aspects of the behaviour of a JADE agent can be modelled
+using a simple workflow notation~\cite{caire2008wade,caire2010wade}, based on
+which Java classes are generated.  The workflows basically consist of only two
+elements: Activities and Transitions.
+
+% generiert Java-Code, pro Aktivität ein Methodenrumpf, Workflow-Inheritance
+Using the \emph{Wolf} tool~\cite{caire2008wolf}, JADE behaviour classes can be
+generated from those workflow models.  In the generated Java classes, there is
+a clear distinction between the workflow (the order of the activities, together
+with conditions and guards, where required) and the several activities, each of
+which is mapped to an individual Java method, which can either refer to existing
+functionalities or be implemented by the developer.  Using this separation,
+generated workflows can easily be altered or extended.
+
+% Schlecht: sehr einfache Workflow-Notationen, nichts agentisches
+However, the expressiveness of WADE is restricted by the simplistic workflow
+model, which allows only the most basic workflows to be modelled.  While the
+transitions can be annotated with guards (conditions), it seems impossible to
+model parallel execution and synchronisation, let alone more advanced concepts
+such as event handling or messaging.  In fact, each workflow diagram covers only
+the behaviour of an isolated agent; to our knowledge, interactions between agents
+can not be modelled.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{GO-BPMN}
+% XXX wenn noetig, hier kuerzen (Intro nicht vergessen)
+
+% Worum es bei GO-BPMN geht: Zielhierarchien und Prozesse, Kritik der Autoren
+In another approach, \emph{GO-BPMN} (Goal-oriented BPMN), process models are
+combined with a goal-hierarchy and executed by agents~\cite{calisti2008goaloriented}.
+The authors praise the high flexibility of the system, and the prospects of
+parallelisation, but they also write that testing the system is difficult due to
+possible side-effects of the processes regarding other goals~\cite{burmeister2008bdiagents}.
+
+% eigene Kritik am Ansatz: BPMN zu low-level, nur einzelne Prozesse, keine Kommunikation
+As the name implies, the individual processes (the ``leafs'' in the goal hierarchy)
+are described as BPMN processes.  However, only a subset of BPMN is used.
+Particularly, each diagram shows only a single Pool, and thus, as in the case of
+WADE, no communication and interaction can be modelled, but just the behaviour of
+a single agent.  While using goals for connecting the individual processes is
+quite promising, in our opinion process diagrams can more efficiently be used at
+a higher level of abstraction, e.g. for providing an overview of the system as a
+whole, instead of for isolated behaviours of individual agents.
+

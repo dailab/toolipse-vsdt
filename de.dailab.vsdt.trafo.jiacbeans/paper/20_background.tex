@@ -1,0 +1,134 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                            %%
+%%  BACKGROUND                                                                %%
+%%                                                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% [x] Intro
+% [x] BPMN
+% [x] JIAC
+
+\section{Background}
+\label{sec:background}
+
+% Mini-Intro
+In the following, we will introduce the reader to the BPMN language and the JIAC
+agent framework, being the domain an co-domain of the mapping proposed in this
+paper.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{BPMN}
+\label{sec:bpmn}
+
+% Standard, Einsatzgebiet, etc.
+The Business Process Modeling Notation~\cite{omg2009bpmn} is a workflow notation
+which can be used both as a description language for real-world processes, and as
+a high-level modelling language for computer programs -- most prominently BPEL
+processes.  It can be seen as a combination of UML's Activity Diagrams and Sequence
+Diagrams, depicting both the actors' internal processes and their interactions.
+An example diagram is shown in Figure~\ref{fig:example} in Section~\ref{sec:example}.
+
+% 3 Levels of BPMN
+BPMN diagrams can be understood at three levels of abstraction:
+
+\begin{enumerate}
+	\item The diagrams are made up of a few easily recognisable elements, i.e.\
+	Events (circles), Activities (boxes) and Gateways (diamonds), connected by
+	Sequence- and Message Flows and situated in one or more Pools.
+	
+	\item These basic elements are further distinguished using sets of marker
+	icons, e.g.\ Message, Timer, and Error Events, or parallel and exclusive
+	Gateways.
+	
+	\item Each element features a number of additional attributes, which are
+	hidden from the diagram, but contain all the information that is necessary
+	for automated code generation, e.g. properties and assignments.
+\end{enumerate}
+
+Consequently, the essence of a BPMN diagram is easily understood by all business
+partners, including those who have great knowledge in their domain but little
+understanding of programming and multi-agent systems.  At the same time, BPMN
+diagrams provide enough information for the generation of executable programs.
+
+% interessante Sprachfeatures: Rollen, Messaging, etc.
+BPMN diagrams have a variety of notational elements, making them well suited for
+the design of distributed systems in general and multi-agent systems in particular.
+The process diagrams are subdivided into Pools, each representing one Participant
+in the process.  Using Message Flows for communication between Pools, even complex
+interaction protocols can be modelled clearly.  Further, the notation supports
+features such as event- and error handling, compensation, transactions and
+\emph{ad-hoc}-behaviour.
+
+% Semantik nicht ganz klar, wird aber besser
+While the semantics of some elements of BPMN -- particularly those not covered in
+the official mapping from BPMN to BPEL~\cite[Appendix A]{omg2009bpmn} -- are not
+very clearly defined, there is an increasing number of approaches describing the
+semantics of BPMN using e.g.\ Petri nets~\cite{dijkman2008formal}, and version
+2.0 of the specification makes things clearer, too.
+
+% XXX wenn noetig, hier kuerzen
+
+% Wieso nicht Petrinetze?
+The reason why Petri nets are not used in the first place is that while Petri
+nets have very clear semantics, and basically everything can be expressed as a
+Petri net, some high-level constructs that are directly supported by BPMN would
+result in huge, incomprehensible Petri nets.
+
+% Positiver Schlusssatz
+BPMN is neither the first process modelling notation, nor will it be the last.
+However, given its high level of adoption in practical process modelling
+\cite{recker2008bpmnmodeling} and its relatively detailed execution semantics,
+it has proven to be a good choice for modelling distributed computing systems.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{JIAC}
+\label{sec:jiac}
+
+% Intro JIAC und Features
+JIAC V (Java Intelligent Agent Componentware, Version 5) is a Java-based
+multi-agent development framework and runtime environment \cite{hirsch2009jiacv}.
+Among others, JIAC features communication, tuple-space based memory, transparent
+distribution of agents and services, and provides support for dynamic reconfiguration
+in distributed environments, such as component exchange at runtime.  Individual
+JIAC agents are situated within Agent Nodes, i.e. runtime containers, which also
+provide support for strong migration.  The agents' behaviours and capabilities
+are defined in a number of so-called \emph{Agent Beans}, which are controlled by
+the agent's life cycle.
+
+% Standard Agent Beans
+One Agent Bean each JIAC agent is equipped with is the \emph{Communication Bean},
+allowing agents to send and receive messages to and from other agents or groups
+of agents (broadcasting to message channels).  The messages are not restricted to
+FIPA messages but can have any serialisable data as payload.  Other commonly used
+Agent Beans are the \emph{Rule Engine Bean}, integrating a Drools\footnote{JBoss
+Drools: \url{http://www.jboss.org/drools/}} rule engine into the agent's memory,
+and the \emph{Interpreter Bean}, providing an interpreter for the service-oriented
+scripting language JADL++~\cite{hirsch2010programming}.
+
+% Custom Beans
+Besides these and other predefined Agent Beans, the programmer is free to add
+more Beans to the agent.  Each Agent Bean can
+
+\begin{itemize}
+	\item implement a number of \emph{life-cycle} methods, which are executed when
+	the agent changes its life-cycle state, such as initialized, or started,
+	
+	\item implement an \emph{execute}-method, which is called automatically at
+	regular intervals once the agent is running,
+	
+	\item attach \emph{observers} to the agent's memory, being called e.g. each
+	time the agent receives a message or a percept is updated, and
+	
+	\item contribute any number of \emph{action}-methods, which are exposed to the
+	directory and can be invoked by other agents or other beans of the same agent.
+\end{itemize}
+
+% Schlusssatz, Verweis auf Manual
+Using these four mechanisms, it is possible to define all of the agents' capabilities
+and behaviours.  For details on programming JIAC Agent Beans, please refer to the
+JIAC Programmers' Manual~\cite{jiacManual}.
+

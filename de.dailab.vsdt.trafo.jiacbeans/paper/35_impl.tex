@@ -1,0 +1,36 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                            %%
+%%  IMPLEMENTIERUNG                                                           %%
+%%                                                                            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% [x] VSDT und Trafo-Framework
+% [x] Implementierung der Trafo
+% [x] Zwischenmodell
+% [x] Umsetzung mit JET
+
+\section{Implementation}
+\label{sec:impl}
+
+% implementiert in Diplomarbeit, als Erweiterung zu bestehendem Tool VSDT
+The mapping has been implemented in the course of the diploma thesis of one of
+the authors of this paper~\cite{tan2011dipl} and is an extension to the BPMN
+editor \emph{VSDT (Visual Service Design Tool)}~\cite{kuester2008vsdt}.
+
+% kurze Beschreibung des Trafo-Frameworks, Strukturierung
+The first step in mapping BPMN to Agent Beans -- or any structured programming
+language -- is to structure the process graph to a tree of sequences, decision
+blocks, loops, etc.  This functionality is provided by the VSDT's transformation
+framework, so that only the actual mapping of individual process elements to
+fragments of Java code, as specified in the last section, had to be implemented.
+
+% Zwischenmodell fuer Agent Beans und Transformation zu Java Code per JET
+This element mapping has been separated into two stages.  First, the structured
+process model is translated to an intermediate model, being a high-level
+representation of the structure of a JIAC Agent Bean.  Then, this model can be
+translated straightforwardly to executable Java code using a number of templates
+for the JET framework.\footnote{JET (Java Emitter Templates) is part of the
+Eclipse Model To Text (M2T) project: \url{http://www.eclipse.org/modeling/m2t/}}
+Using JET and JMerge, parts of the generated code can safely be modified and
+merged in case the process model changes and has be be re-generated.
+
