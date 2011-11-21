@@ -68,7 +68,7 @@ public abstract class AbstractIntermediateBorderItemEditPart extends AbstractBor
 	 */
 	protected IFigure initNodeShape() {
 		EventFigure figure= new EventFigure(EventFigure.INTERMEDIATE, getCastedModel()
-				.getTrigger(), false, getCastedModel().isNonInterrupting());
+				.getTrigger(), false, getCastedModel().isNonInterrupting(), getCastedModel());
 		return figure;
 	}
 

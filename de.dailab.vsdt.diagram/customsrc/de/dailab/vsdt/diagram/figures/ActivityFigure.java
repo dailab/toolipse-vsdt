@@ -3,6 +3,8 @@ package de.dailab.vsdt.diagram.figures;
 import org.eclipse.draw2d.BorderLayout;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
@@ -14,7 +16,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 
+import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
+import de.dailab.vsdt.AssignTimeType;
+import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.LoopType;
 
 
@@ -44,6 +49,8 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 	
 	private int depth= 0;
 	
+	private final Activity activity;
+	
 	private IFigureDecorator decorator;
 	
 	
@@ -53,6 +60,7 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 	public ActivityFigure() {
 		System.err.println("warning: activity default constructor used");
 		init();
+		this.activity = null;
 	}
 	
 	/**
@@ -75,7 +83,8 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 			boolean hasAssignments,
 			boolean hasProperties,
 			boolean isEventedSubprocess,
-			int depth) {
+			int depth,
+			Activity activity) {
 		setDepth(depth);
 		init();
 		setLoopType(loopType);
@@ -86,6 +95,7 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 		setHasAssignments(hasAssignments);
 		setHasProperties(hasProperties);
 		setEventedSubprocess(isEventedSubprocess);
+		this.activity = activity;
 	}
 	
 	/**
@@ -279,7 +289,12 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 	public void setActivityType(ActivityType activityType) {
 		this.activityType= activityType;
 		isSubprocess= activityType == ActivityType.EMBEDDED;
-		// TODO set subprocess flag also if called element is subprocess
+		// set subprocess flag also if called element is subprocess
+		if (activityType == ActivityType.CALL && 
+				activity.getCalledElement() instanceof Activity && 
+				((Activity) activity.getCalledElement()).getActivityType() == ActivityType.EMBEDDED) {
+			isSubprocess = true;
+		}
 		this.createInnerFigures();
 	}
 	
@@ -328,6 +343,28 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 	public static final Color BACKGROUND_COLORED= new Color(null, 250, 250, 250);
 	public static final Color BACKGROUND_COLORED_ALTERNATIVE= new Color(null, 240, 240, 240);
 	public static final Color BACKGROUND_MONOCHROME= ColorConstants.white;
+
+	
+	@Override
+	public IFigure getToolTip() {
+		if (activity != null && ! activity.getAssignments().isEmpty()) {
+			String NL = System.getProperty("line.separator");
+			StringBuffer buffer = new StringBuffer("Assignments:");
+			for (Assignment assignment : activity.getAssignments()) {
+				if (assignment.getAssignTime() == AssignTimeType.START) {
+					buffer.append(NL + assignment.getTo().getName() + " <- " + assignment.getFrom().getExpression());
+				}
+			}
+			for (Assignment assignment : activity.getAssignments()) {
+				if (assignment.getAssignTime() == AssignTimeType.END) {
+					buffer.append(NL + assignment.getTo().getName() + " <- " + assignment.getFrom().getExpression());
+				}
+			}
+			return new Label(buffer.toString());
+		} else {
+			return super.getToolTip();
+		}
+	}
 	
 	
 	// GMF GENERATED SETTERS

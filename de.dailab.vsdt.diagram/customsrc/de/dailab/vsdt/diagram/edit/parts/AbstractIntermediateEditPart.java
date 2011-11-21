@@ -64,7 +64,7 @@ public abstract class AbstractIntermediateEditPart extends AbstractVsdtBorderedS
 	 */
 	protected IFigure initNodeShape() {
 		EventFigure figure= new EventFigure(EventFigure.INTERMEDIATE, getCastedModel()
-				.getTrigger(), getCastedModel().isThrowing(), false);
+				.getTrigger(), getCastedModel().isThrowing(), false, getCastedModel());
 		return figure;
 	}
 

@@ -61,7 +61,7 @@ public abstract class AbstractEndEditPart extends AbstractVsdtBorderedShapeEditP
 	 * sets all fields depending on the underlying model
 	 */
 	protected IFigure initNodeShape() {
-		EventFigure figure= new EventFigure(EventFigure.END, getCastedModel().getTrigger(), true, false);
+		EventFigure figure= new EventFigure(EventFigure.END, getCastedModel().getTrigger(), true, false, getCastedModel());
 		return figure;
 	}
 

@@ -2,6 +2,8 @@ package de.dailab.vsdt.diagram.edit.parts;
 
 import org.eclipse.draw2d.Connection;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ConnectionBendpointEditPolicy;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.notation.View;
 
 import de.dailab.common.gmf.edit.part.AbstractGmfConnectionEditPart;
@@ -73,6 +75,8 @@ public abstract class AbstractSequenceFlowEditPart extends AbstractGmfConnection
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
+		//mac1
+		installEditPolicy(EditPolicyRoles.REFRESH_CONNECTIONS_ROLE,new ConnectionBendpointEditPolicy());
 //		installEditPolicy(EditPolicyRoles.OPEN_ROLE,new DoubleClickOrgAssignEditPolicy());
 	}
 

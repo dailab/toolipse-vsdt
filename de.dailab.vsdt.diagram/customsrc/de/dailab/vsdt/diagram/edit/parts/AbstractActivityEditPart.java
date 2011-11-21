@@ -117,10 +117,11 @@ public abstract class AbstractActivityEditPart extends AbstractVsdtBorderedShape
 				! activity.getAssignments().isEmpty(),
 				! activity.getProperties().isEmpty(),
 				activity.isEventedSubprocess(),
-				VsdtHelper.getDepth(activity));
+				VsdtHelper.getDepth(activity),
+				activity);
 		return figure;
 	}
-
+	
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();

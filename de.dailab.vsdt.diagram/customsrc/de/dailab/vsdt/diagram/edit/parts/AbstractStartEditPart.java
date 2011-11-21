@@ -66,7 +66,7 @@ public abstract class AbstractStartEditPart extends AbstractVsdtBorderedShapeEdi
 	 */
 	protected IFigure initNodeShape() {
 		EventFigure figure= new EventFigure(EventFigure.START, getCastedModel()
-				.getTrigger(), false, getCastedModel().isNonInterrupting());
+				.getTrigger(), false, getCastedModel().isNonInterrupting(), getCastedModel());
 		return figure;
 	}
 

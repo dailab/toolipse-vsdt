@@ -2,9 +2,14 @@ package de.dailab.vsdt.diagram.figures;
 
 import org.eclipse.draw2d.Ellipse;
 import org.eclipse.draw2d.Graphics;
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.swt.SWT;
 
+import de.dailab.vsdt.AssignTimeType;
+import de.dailab.vsdt.Assignment;
+import de.dailab.vsdt.Event;
 import de.dailab.vsdt.TriggerType;
 
 /**
@@ -17,6 +22,8 @@ public class EventFigure extends Ellipse implements IDecoratableFigure {
 	public static final int START= 0;
 	public static final int INTERMEDIATE= 1;
 	public static final int END= 2;
+	
+	private final Event event;
 	
 	private int eventType= START;
 	private TriggerType triggerType= TriggerType.NONE;
@@ -31,6 +38,7 @@ public class EventFigure extends Ellipse implements IDecoratableFigure {
 	public EventFigure() {
 		this.eventType= START;
 		this.triggerType= TriggerType.NONE;
+		this.event = null;
 		System.err.println("warning: event default constructor used");
 		init();
 	}
@@ -41,10 +49,11 @@ public class EventFigure extends Ellipse implements IDecoratableFigure {
 	 * @param throwing			whether the event is throwing or catching
 	 * @param nonInterrupting	whether the event is non-interrupting or not
 	 */
-	public EventFigure(int eventType, TriggerType triggerType, boolean throwing, boolean nonInterrupting) {
+	public EventFigure(int eventType, TriggerType triggerType, boolean throwing, boolean nonInterrupting, Event event) {
 		this.eventType= eventType;
 		this.triggerType= triggerType;
 		this.throwing= throwing;
+		this.event = event;
 		setNonInterrupting(nonInterrupting);
 		init();
 	}
@@ -203,6 +212,27 @@ public class EventFigure extends Ellipse implements IDecoratableFigure {
 	
 	public IFigureDecorator getDecorator() {
 		return decorator;
+	}
+
+	@Override
+	public IFigure getToolTip() {
+		if (event != null && ! event.getAssignments().isEmpty()) {
+			String NL = System.getProperty("line.separator");
+			StringBuffer buffer = new StringBuffer("Assignments:");
+			for (Assignment assignment : event.getAssignments()) {
+				if (assignment.getAssignTime() == AssignTimeType.START) {
+					buffer.append(NL + assignment.getTo().getName() + " <- " + assignment.getFrom().getExpression());
+				}
+			}
+			for (Assignment assignment : event.getAssignments()) {
+				if (assignment.getAssignTime() == AssignTimeType.END) {
+					buffer.append(NL + assignment.getTo().getName() + " <- " + assignment.getFrom().getExpression());
+				}
+			}
+			return new Label(buffer.toString());
+		} else {
+			return super.getToolTip();
+		}
 	}
 	
 	//OTHER STUFF
