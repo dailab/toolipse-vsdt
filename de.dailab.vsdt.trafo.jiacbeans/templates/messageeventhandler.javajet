@@ -91,7 +91,8 @@
 		 *	delete the generated tag after you edited this method
 		 *  @generated
 		 */
-		public void stop(){
+		public void doStop(){
+			stop();
 			detach();
 		}
 		
