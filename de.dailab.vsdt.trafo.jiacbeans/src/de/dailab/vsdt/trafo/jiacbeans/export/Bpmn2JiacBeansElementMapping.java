@@ -168,9 +168,6 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	}
 	
 	private Script visitFlowObject(FlowObject flowObject){
-		if (flowObject == null) {
-			return null;
-		}
 		Script script = beansFac.createCodeElement();
 		if(flowObject==null)return script;
 		//delegate to specialized methods
@@ -310,7 +307,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					CodeElement start = beansFac.createCodeElement();
 					start.setCode(eName+".start();");
 					CodeElement stop = beansFac.createCodeElement();
-					stop.setCode(eName+".stop();");
+					stop.setCode(eName+".doStop();");
 					starter.add(start);
 					stopper.add(stop);
 					Script script = visitFlowObject(c.getCompensationElement());
@@ -780,33 +777,59 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			}
 			break;
 		case NONE:
+			_currentBean.addMethod(_execute);
+			//create executed flag
+			JavaVariable flag = beansFac.createJavaVariable();
+			flag.setName("executed");
+			flag.setType("boolean");
+			_currentBean.getAttributes().add(flag);
+			//create MethodCall
+			Sequence body = beansFac.createSequence();
+			CodeElement methodCall = beansFac.createCodeElement();
+			methodCall.setCode(_currentWorkflow.getName()+"();");
+			body.getScripts().add(methodCall);
+			CodeElement flagAssignment = beansFac.createCodeElement();
+			flagAssignment.setCode("executed = true;");
+			body.getScripts().add(flagAssignment);
+			//create IfThen Block
+			IfThenElse ifNotExecuted = beansFac.createIfThenElse();
+			ifNotExecuted.setCondition("!executed");
+			ifNotExecuted.setThenBranch(body);
+			_execute.setContent(ifNotExecuted);
 			break;
 		case TIMER:
 			if (event instanceof Start) {
 				_currentBean.addMethod(_execute);
 				//create methodCall
-				CodeElement methodCall = beansFac.createCodeElement();
+				methodCall = beansFac.createCodeElement();
 				methodCall.setCode(_currentWorkflow.getName()+"();");
 				if(event.isAsDuration()){
+					//add lastexecuted
+					flag = beansFac.createJavaVariable();
+					flag.setName("lastExecuted");
+					flag.setType("long");
+					_currentBean.getAttributes().add(flag);
 					int duration;
 					try{
 						duration = Integer.parseInt(event.getTimeExpression().getExpression());
 					}catch(NumberFormatException e){
 						duration = -1;//default
 					}
-					//create loop
-					While execLoop = beansFac.createWhile();
-					execLoop.setCondition("true");
-					CodeElement sleep = beansFac.createCodeElement();
-					sleep.setCode("Thread.sleep("+duration+");");
-					TryCatch tryToSleep = beansFac.createTryCatch();
-					tryToSleep.setTry(sleep);
-					tryToSleep.getCatches().put("InterruptedException", beansFac.createCodeElement());
+					//create ifThenElse
 					Sequence seq = beansFac.createSequence();
-					seq.getScripts().add(methodCall);
-					seq.getScripts().add(tryToSleep);
-					execLoop.setContent(seq);
-					_execute.setContent(execLoop);
+					CodeElement now = beansFac.createCodeElement();
+					now.setCode("long now = System.currentTimeMillis();");
+					seq.getScripts().add(now);
+					IfThenElse ifThen = beansFac.createIfThenElse();
+					ifThen.setCondition("now - lastExecuted >= "+duration);
+					body = beansFac.createSequence();
+					body.getScripts().add(methodCall);
+					CodeElement code = beansFac.createCodeElement();
+					code.setCode("lastExecuted = now");
+					body.getScripts().add(code);
+					ifThen.setThenBranch(body);
+					seq.getScripts().add(ifThen);
+					_execute.setContent(seq);
 				}else{
 					_currentBean.getImports().add("java.util.Date");
 					_currentBean.getImports().add("java.text.ParseException");
@@ -1143,19 +1166,9 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		if (activity.getLoopAttributes() instanceof MultiLoopAttSet) {
 			mapping= createMultiInstanceLoop(activity, mapping);
 		}
-		//build activity sequence: properties, assignments, mapping, more assignments
-		mapping= buildSequence(mapping, properties, activity.getAssignments());
+		//build activity method: properties, assignments, mapping, more assignments
+		createActivityMethod(activity.getName(), mapping, properties, activity.getAssignments());
 		
-		ActivityMethod method = beansFac.createActivityMethod();
-		method.setName(Util.toJavaName(activity.getName()));
-		method.setIsStatic(false);
-		method.setVisibility(MethodImpl.PRIVATE);
-		method.setContent(mapping);
-		if(_currentSubProcess==null){
-			_currentBean.addMethod(method);
-		} else {
-			_currentSubProcess.getMethods().add(method);
-		}
 		CodeElement code = beansFac.createCodeElement();
 		code.setCode(Util.toJavaName(activity.getName())+"();");
 		return code;
@@ -1360,6 +1373,57 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		return seq;
 	}
 	
+	/**
+	 * Create and build the content of an ActivityMethod
+	 * 
+	 * @param script		already mapped script
+	 * @param properties	List of BPMN properties to be mapped to variable declarations
+	 * @param assignments	List of BPMN assignments to be mapped to assigns
+	 */
+	private void createActivityMethod(String methodName, Script body, List<Property> properties, List<Assignment> assignments) {
+		Sequence seq= beansFac.createSequence();
+		//Properties
+		List<CodeElement> propScripts = visitProperties(properties);
+		if(!propScripts.isEmpty()){
+			CodeElement comment = beansFac.createCodeElement();
+			comment.setCode("//Properties");
+			seq.getScripts().add(comment);
+			seq.getScripts().addAll(propScripts);
+		}
+		//Start Assignments
+		Sequence start = visitAssignments(assignments, AssignTimeType.START);
+		if(start!=null && !start.getScripts().isEmpty()){
+			CodeElement comment = beansFac.createCodeElement();
+			comment.setCode("//Start-Assignments");	
+			seq.getScripts().add(comment);
+			seq.getScripts().addAll(start.getScripts());
+		}
+		//Body
+		if (body != null && body.toJavaCode() != "") {
+			CodeElement comment = beansFac.createCodeElement();
+			comment.setCode("//Body");
+			seq.getScripts().add(comment);
+			seq.getScripts().add(body);	
+		}
+		//End Assignments
+		Sequence end = visitAssignments(assignments, AssignTimeType.END);
+		if(end!=null && !start.getScripts().isEmpty()){
+			CodeElement comment = beansFac.createCodeElement();
+			comment.setCode("//End-Assignments");	
+			seq.getScripts().add(comment);
+			seq.getScripts().addAll(end.getScripts());
+		}
+		ActivityMethod method = beansFac.createActivityMethod();
+		method.setName(Util.toJavaName(methodName));
+		method.setIsStatic(false);
+		method.setVisibility(MethodImpl.PRIVATE);
+		method.setContent(seq);
+		if(_currentSubProcess==null){
+			_currentBean.addMethod(method);
+		} else {
+			_currentSubProcess.getMethods().add(method);
+		}
+	}
 	
 	/**
 	 * Create a new code element for the given assignment.
