@@ -117,8 +117,6 @@ public class Bpmn2JiacVValidation extends DefaultBpmnValidation {
 	protected boolean visitMessageChannel(MessageChannel messageChannel) {
 		boolean ok= super.visitMessageChannel(messageChannel);
 		
-		ok &= test(messageChannel.getPayload() != null, "Payload must not be null");
-		
 		return ok;
 	}
 

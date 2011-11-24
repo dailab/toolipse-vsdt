@@ -129,7 +129,7 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			visitBusinessProcessDiagram(bpd);
 		}
 		
-		/* CREATION OF AGENT WORD DIAGRAM (deprecated)
+		/* CREATION OF AGENT WORLD DIAGRAM (deprecated)
 		
 		// create AgentWorldDiagram
 		AgentWorld agentWorld= aweFac.createAgentWorld();
@@ -353,7 +353,9 @@ public class Bpmn2JiacVElementMapping extends BpmnElementMapping implements Bpmn
 			List<Property> parameters = new ArrayList<Property>();
 			if (implementation instanceof MessageChannel) {
 				MessageChannel channel = (MessageChannel) implementation;
-				parameters.add(channel.getPayload());
+				if (channel.getPayload() != null) {
+					parameters.add(channel.getPayload());
+				}
 			}
 			if (implementation instanceof de.dailab.vsdt.Service) {
 				de.dailab.vsdt.Service service = (de.dailab.vsdt.Service) implementation;

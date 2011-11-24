@@ -97,10 +97,10 @@ public class JiacVResultSaver extends MappingResultSaver {
 					switch (event.getTrigger()) {
 					case MESSAGE:
 						if (event.getImplementation() instanceof MessageChannel) {
-							objects = new Serializable[] {
-									((MessageChannel) event.getImplementation()).getChannel().getExpression(),
-									((MessageChannel) event.getImplementation()).getPayload().getType()
-							};
+							MessageChannel msgChannel = (MessageChannel) event.getImplementation();
+							String channel = msgChannel.getChannel() != null ? msgChannel.getChannel().getExpression() : null;
+							String type    = msgChannel.getPayload() != null ? msgChannel.getPayload().getType()       : null;
+							objects = new Serializable[] {channel, type};
 						}
 						break;
 					case TIMER:

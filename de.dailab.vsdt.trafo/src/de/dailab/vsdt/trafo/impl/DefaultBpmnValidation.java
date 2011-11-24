@@ -580,6 +580,7 @@ public class DefaultBpmnValidation extends MappingStage {
 			MessageChannel messageChannel = (MessageChannel) implementation;
 			return visitMessageChannel(messageChannel);
 		}
+		TrafoLog.error("Implementation of unknown type or null");
 		return false;
 	}
 	
