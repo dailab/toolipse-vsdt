@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VSDT - Diagram Editor
 Bundle-SymbolicName: de.dailab.vsdt.diagram; singleton:=true
-Bundle-Version: 1.4.1.20110510
+Bundle-Version: 1.4.1.20111125
 Bundle-ClassPath: .
 Bundle-Activator: de.dailab.vsdt.diagram.part.VsdtDiagramEditorPlugin
 Bundle-Vendor: DAI-Labor, TU Berlin
