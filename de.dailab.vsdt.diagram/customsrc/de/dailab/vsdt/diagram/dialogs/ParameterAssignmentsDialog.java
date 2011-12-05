@@ -59,6 +59,8 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 	public static final String WARNING_INCOMPLETE_INPUT= "There are unassigned " +
 			"input parameters left. Exit anyway?";
 	
+	private static final String ARROW = "->"; // "\u2192"; // unicode rightward arrow
+	
 	/** The parent element (Activity or Event) */
 	protected final FlowObject parentElement;
 	
@@ -261,7 +263,7 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 				// create Label
 				Label label= new Label(inputGroup, SWT.NONE);
 				label.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false));
-				label.setText("\u2192 " + property.getName()); // unicode rightward arrow
+				label.setText(ARROW + " " + property.getName());
 			}
 		}
 		
@@ -275,7 +277,7 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 				// create Label
 				Label label= new Label(outputGroup, SWT.NONE);
 				label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false));
-				label.setText(property.getName() + " \u2192"); // unicode rightward arrow
+				label.setText(property.getName() + " " + ARROW);
 				// create ComboBox
 				VsdtFeatureCombo<Property> combo= new VsdtFeatureCombo<Property>(new Combo(outputGroup, SWT.READ_ONLY)) {
 					protected String getLabel(Property o) {
