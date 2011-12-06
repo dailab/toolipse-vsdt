@@ -64,6 +64,4 @@ public abstract class BpmnExportWizard extends BpmnTrafoWizard implements IExpor
 		return null;
 	}
 	
-	protected abstract BpmnExportWizardOptionsPage createOptionsPage(String title,
-			IStructuredSelection selection);
 }
