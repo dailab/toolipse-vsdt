@@ -65,15 +65,11 @@ public class Bpmn2JiacBeansExportWizard extends BpmnExportWizard {
 	@Override
 	protected BpmnExportWizardOptionsPage createOptionsPage(String title,
 			IStructuredSelection selection) {
-		return new Bpmn2JiacBeansExportWizardOptionsPage(title, selection);
+		return new BpmnExportWizardOptionsPage(title, selection);
 	}
 	
 	@Override
 	protected void applyOptions() {
-		if (optionsPage instanceof Bpmn2JiacBeansExportWizardOptionsPage) {
-			Bpmn2JiacBeansExportWizardOptionsPage specificOptPage = (Bpmn2JiacBeansExportWizardOptionsPage) optionsPage;
-//			Bpmn2JadlElementMapping.oneFilePerPool= specificOptPage.isOneFileForAll();
-		}
 	}
 	
 	/**

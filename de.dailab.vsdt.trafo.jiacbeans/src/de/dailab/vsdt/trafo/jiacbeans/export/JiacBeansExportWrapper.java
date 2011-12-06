@@ -1,11 +1,9 @@
 package de.dailab.vsdt.trafo.jiacbeans.export;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import jiacbeans.AgentBean;
 
@@ -24,7 +22,7 @@ public class JiacBeansExportWrapper extends BpmnExportWrapper {
 	
 	private final List<AgentBean> beans;
 	
-	private File baseDirectory;
+//	private File baseDirectory;
 	
 	public JiacBeansExportWrapper(BusinessProcessSystem bps) {
 		super(bps);
@@ -32,9 +30,9 @@ public class JiacBeansExportWrapper extends BpmnExportWrapper {
 		modelPoolMap = new HashMap<AgentBean, Pool>();
 	}
 	
-	public void setBaseDirectory(File base){
-		baseDirectory = base;
-	}
+//	public void setBaseDirectory(File base){
+//		baseDirectory = base;
+//	}
 	
 	public void map(Object key, Object value) {
 		super.map(key, value);

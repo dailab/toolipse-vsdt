@@ -5,7 +5,6 @@ import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.util.VsdtExpressionVisitor;
 import de.dailab.vsdt.vxl.vxl.VxlNegation;
 import de.dailab.vsdt.vxl.vxl.VxlOperator;
-import de.dailab.vsdt.vxl.vxl.VxlVariable;
 
 public class JiacBeansExpressionVisitor extends VsdtExpressionVisitor {
 
