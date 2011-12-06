@@ -8,8 +8,6 @@ package jiacbeans;
 
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Try Catch</b></em>'.

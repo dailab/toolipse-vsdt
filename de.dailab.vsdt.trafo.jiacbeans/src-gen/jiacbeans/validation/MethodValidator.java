@@ -6,10 +6,11 @@
  */
 package jiacbeans.validation;
 
+import jiacbeans.AgentBean;
 import jiacbeans.JavaVariable;
 import jiacbeans.Script;
+
 import org.eclipse.emf.common.util.EList;
-import jiacbeans.AgentBean;
 
 /**
  * A sample validator interface for {@link jiacbeans.Method}.

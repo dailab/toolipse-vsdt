@@ -10,7 +10,6 @@ import jiacbeans.Action;
 import jiacbeans.ActivityMethod;
 import jiacbeans.AgentBean;
 import jiacbeans.CodeElement;
-import jiacbeans.Expression;
 import jiacbeans.ForEach;
 import jiacbeans.IfThenElse;
 import jiacbeans.JavaVariable;
@@ -34,7 +33,6 @@ import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**

@@ -27,7 +27,6 @@ import jiacbeans.Trigger;
 import jiacbeans.TryCatch;
 import jiacbeans.While;
 import jiacbeans.WorkflowMethod;
-import jiacbeans.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;

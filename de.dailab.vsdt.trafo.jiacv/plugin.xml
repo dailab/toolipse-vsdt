@@ -11,7 +11,7 @@
 			name="BPMN to JIAC V"
 			category="de.dailab.vsdt.trafo.export"
 			class="de.dailab.vsdt.trafo.jiacv.wizard.Bpmn2JiacVExportWizard"
-			icon="icons/exportJiac5.gif">
+			icon="icons/exportJiac.gif">
 			<description>
 				A Wizard for Transforming BPMN Diagrams to JIAC V
 			</description>

@@ -10,9 +10,7 @@ import jiacbeans.CodeElement;
 import jiacbeans.JiacbeansPackage;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**

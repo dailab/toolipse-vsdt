@@ -10,6 +10,7 @@
 				id="de.dailab.vsdt.trafo.jiacbeans.export.wizard.jiacbeans"
 				name="BPMN to JIAC AgentBeans"
 				category="de.dailab.vsdt.trafo.export"
+				icon="icons/exportJiac.gif"
 				class="de.dailab.vsdt.trafo.jiacbeans.wizard.Bpmn2JiacBeansExportWizard">
 			<description>
 				A Wizard for Transforming BPMN Diagrams to JIAC AgentBeans
