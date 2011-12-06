@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: JIAC V Node Plugin: VSDT Agents
 Bundle-SymbolicName: de.dailab.vsdt.vsdtagents;singleton:=true
-Bundle-Version: 0.0.3.20110912
+Bundle-Version: 0.0.4.20111206
 Bundle-Activator: de.dailab.vsdt.vsdtagents.VsdtAgents
 Bundle-Vendor: DAI-Labor, TU Berlin
 Require-Bundle: org.eclipse.ui,
@@ -14,7 +14,7 @@ Require-Bundle: org.eclipse.ui,
  de.dailab.vsdt.trafo.jiacv,
  de.dailab.vsdt.diagram,
  de.dailab.vsdt.diagram.interpreter,
- de.dailab.jiactng.nodeplugin2;bundle-version="0.0.3"
+ de.dailab.jiactng.nodeplugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
