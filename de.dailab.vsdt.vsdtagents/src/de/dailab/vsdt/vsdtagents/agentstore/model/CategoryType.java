@@ -14,8 +14,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-@Deprecated
-
 /**
  * <p>Java class for CategoryType complex type.
  * 

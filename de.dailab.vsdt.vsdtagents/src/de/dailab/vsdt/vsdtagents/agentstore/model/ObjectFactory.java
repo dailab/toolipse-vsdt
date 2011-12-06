@@ -13,8 +13,6 @@ import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
-@Deprecated
-
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
