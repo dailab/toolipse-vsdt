@@ -17,7 +17,7 @@
 		</wizard>
 	</extension>
 	
-	<extension point="org.eclipse.jet.transform">
+	<!--<extension point="org.eclipse.jet.transform">
 		<transform
 				private="false"
 				startTemplate="de.dailab.vsdt.trafo.jiacbeans.transform1"
@@ -32,6 +32,6 @@
 				<importLibrary id="org.eclipse.jet.workspaceTags" usePrefix="ws" autoImport="false"/>
 			</tagLibraries>
 		</transform>
-	</extension>
+	</extension>-->
  
 </plugin>
