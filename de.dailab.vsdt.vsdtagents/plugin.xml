@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.5"?>
+<plugin>
+
+   <extension point="org.eclipse.ui.views">
+      <view id       = "de.dailab.jiactng.nodeplugin.deployment.DeploymentView"
+            class    = "de.dailab.vsdt.vsdtagents.deployment.DeploymentView"
+            name     = "JIAC Service Deployment View"
+            category = "de.dailab.category.views"
+            icon     = "icons/action.gif" />
+      
+      <view id       = "de.dailab.jiactng.nodeplugin.agentstore.AgentstoreView"
+            class    = "de.dailab.vsdt.vsdtagents.agentstore.AgentstoreView"
+            name     = "JIAC Agent Store View"
+            category = "de.dailab.category.views"
+            icon     = "icons/agentstore.gif" />
+   </extension>
+   
+	<extension point="org.eclipse.ui.perspectiveExtensions">
+		<perspectiveExtension targetID="de.dailab.vsdt.perspective">
+			<view id="de.dailab.jiactng.nodeplugin.deployment.DeploymentView"
+			      relative="org.eclipse.ui.views.PropertySheet"
+			      relationship="stack" />
+		</perspectiveExtension>
+	</extension>
+   
+</plugin>

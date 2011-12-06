@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+            jxb:version="2.0">
+
+	<xsd:element name="list" type="ListType"/>
+
+	<xsd:complexType name="ListType">
+		<xsd:sequence>
+			<xsd:element name="agentScript" type="ScriptType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ScriptType">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string"/>
+			<xsd:element name="description" type="xsd:string"/>
+			<xsd:element name="scriptFilename" type="xsd:string"/>
+			<xsd:element name="iconFilename" type="xsd:string"/>
+			<xsd:element name="dateCreated" type="xsd:string"/>
+			<xsd:element name="lastUpdated" type="xsd:string"/>
+			<xsd:element name="categories" type="CategoriesType"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:integer"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="CategoriesType">
+		<xsd:sequence>
+			<xsd:element name="category" type="CategoryType" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="CategoryType">
+		<xsd:attribute name="id" type="xsd:integer"/>
+	</xsd:complexType>
+
+</xsd:schema>
+
