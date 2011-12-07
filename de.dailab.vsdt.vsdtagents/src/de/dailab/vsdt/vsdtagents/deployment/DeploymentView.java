@@ -34,6 +34,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 
+import de.dailab.common.swt.dialogs.MultiSelectDialog;
 import de.dailab.common.swt.views.AbstractLabelProvider;
 import de.dailab.common.swt.views.AbstractStructuredViewerView;
 import de.dailab.common.swt.views.AbstractTreeContentProvider;
@@ -438,7 +439,8 @@ public class DeploymentView extends AbstractStructuredViewerView {
 
 					// start progress monitor
 					try {
-						ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(Display.getCurrent().getActiveShell());
+						final Shell shell = Display.getCurrent().getActiveShell();
+						ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(shell);
 						progressMonitorDialog.run(false, false, new IRunnableWithProgress() {
 							@Override
 							public void run(IProgressMonitor monitor) {
@@ -449,23 +451,39 @@ public class DeploymentView extends AbstractStructuredViewerView {
 								
 									// check whether any service source files have been found
 									if (serviceSrcs != null) {
-										// invoke deploy action 
-										Collection<String> newServices = new ArrayList<String>();
-										for (String serviceSrc : serviceSrcs) {
-											newServices.addAll(getBean().deployWithRules(selectedAgent, serviceSrc, starterRules));
-										}
 										
-										if (! newServices.isEmpty()) {
-											StringBuffer msgBuffer = new StringBuffer();
-											int n = newServices.size();
-											msgBuffer.append(String.format("%d Service%s Deployed", n, (n==1 ? "" : "s")));
-											for (String service : newServices) {
-												msgBuffer.append(NL).append(service);
-											}
-											openMessageDialog(MessageDialog.INFORMATION, msgBuffer.toString());
-										} else {
-											openMessageDialog(MessageDialog.INFORMATION, "No Services Deployed");
+										Map<String, Boolean> servicesMap = new HashMap<String, Boolean>();
+										for (String service : serviceSrcs) {
+											servicesMap.put(service, true);
 										}
+										MultiSelectDialog<String> dialog = new MultiSelectDialog<String>(shell, "Select Services", "Select Services to deploy.", servicesMap) {
+											protected String getText(String element) {
+												int start = element.indexOf("service") + 8;
+												int end   = element.indexOf("(") - 1;
+												return element.substring(start, end);
+											};
+										};
+										if (dialog.open() == MultiSelectDialog.OK) {
+											List<String> selectedServices = dialog.getSelected();
+
+											// invoke deploy action 
+											Collection<String> newServices = new ArrayList<String>();
+											for (String serviceSrc : selectedServices) {
+												newServices.addAll(getBean().deployWithRules(selectedAgent, serviceSrc, starterRules));
+											}
+											
+											if (! newServices.isEmpty()) {
+												StringBuffer msgBuffer = new StringBuffer();
+												int n = newServices.size();
+												msgBuffer.append(String.format("%d Service%s Deployed", n, (n==1 ? "" : "s")));
+												for (String service : newServices) {
+													msgBuffer.append(NL).append(service);
+												}
+												openMessageDialog(MessageDialog.INFORMATION, msgBuffer.toString());
+											} else {
+												openMessageDialog(MessageDialog.INFORMATION, "No Services Deployed");
+											}
+										}										
 									} else {
 										// no valid editor -> service source is null, abort
 										openMessageDialog(MessageDialog.INFORMATION, "Active Editor has to hold a JADL or VSDT file.");
