@@ -72,10 +72,10 @@ public abstract class BasicSimulation extends AbstractSimulation {
 			}
 		}
 		// check incoming messages
-		boolean msgOk= true;
+		boolean msgOk = false;
 		for (MessageFlow messageFlow : flowObject.getIncomingMsg()) {
 			if (messageFlow.getSource() instanceof FlowObject) {
-				msgOk&= tokenMap.get(messageFlow) > 0;
+				msgOk |= tokenMap.get(messageFlow) > 0;
 			}
 		}
 		return msgOk;
