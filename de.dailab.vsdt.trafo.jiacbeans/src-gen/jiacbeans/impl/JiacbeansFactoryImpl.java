@@ -24,6 +24,7 @@ import jiacbeans.Sequence;
 import jiacbeans.SubProcess;
 import jiacbeans.Trigger;
 import jiacbeans.TryCatch;
+import jiacbeans.Wait;
 import jiacbeans.While;
 import jiacbeans.WorkflowMethod;
 
@@ -96,6 +97,7 @@ public class JiacbeansFactoryImpl extends EFactoryImpl implements JiacbeansFacto
 			case JiacbeansPackage.RECIEVE: return createRecieve();
 			case JiacbeansPackage.SUB_PROCESS: return createSubProcess();
 			case JiacbeansPackage.SEND: return createSend();
+			case JiacbeansPackage.WAIT: return createWait();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -289,6 +291,16 @@ public class JiacbeansFactoryImpl extends EFactoryImpl implements JiacbeansFacto
 	public Send createSend() {
 		SendImpl send = new SendImpl();
 		return send;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Wait createWait() {
+		WaitImpl wait = new WaitImpl();
+		return wait;
 	}
 
 	/**

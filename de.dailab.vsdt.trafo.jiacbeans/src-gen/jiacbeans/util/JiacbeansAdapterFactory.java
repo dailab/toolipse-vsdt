@@ -23,6 +23,7 @@ import jiacbeans.Sequence;
 import jiacbeans.SubProcess;
 import jiacbeans.Trigger;
 import jiacbeans.TryCatch;
+import jiacbeans.Wait;
 import jiacbeans.While;
 import jiacbeans.WorkflowMethod;
 
@@ -162,6 +163,10 @@ public class JiacbeansAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSend(Send object) {
 				return createSendAdapter();
+			}
+			@Override
+			public Adapter caseWait(Wait object) {
+				return createWaitAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -446,6 +451,20 @@ public class JiacbeansAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSendAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link jiacbeans.Wait <em>Wait</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see jiacbeans.Wait
+	 * @generated
+	 */
+	public Adapter createWaitAdapter() {
 		return null;
 	}
 

@@ -3,6 +3,8 @@ package de.dailab.vsdt.trafo.jiacbeans.export;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.gmf.runtime.common.ui.services.statusline.GetStatusLineContributionOperation;
+
 import jiacbeans.Action;
 import jiacbeans.ActivityMethod;
 import jiacbeans.AgentBean;
@@ -19,6 +21,7 @@ import jiacbeans.Send;
 import jiacbeans.Sequence;
 import jiacbeans.SubProcess;
 import jiacbeans.TryCatch;
+import jiacbeans.Wait;
 import jiacbeans.While;
 import jiacbeans.WorkflowMethod;
 import jiacbeans.impl.MethodImpl;
@@ -468,9 +471,17 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				mapping= lastElement;
 				break;
 			case XOR_EVENT:
-//				Switch block= jadlFac.createSwitch();
-//
-//				for (BpmnBranch branch : bpmnBlock.getElements()) {
+				Wait waitThread = beansFac.createWait();
+				waitThread.setName(fork.getNameOrId()+"_wait_thread");
+				Sequence seq = beansFac.createSequence();
+				seq.getScripts().add(waitThread);
+				List<Script> starter = new ArrayList<Script>();
+				List<Script> stopper = new ArrayList<Script>();
+				CodeElement start = beansFac.createCodeElement();
+				start.setCode(fork.getNameOrId()+"_wait_thread");
+				starter.add(start);
+				for (BpmnBranch branch : block.getElements()) {
+//					XOR_E
 //					FlowObject flowObject = branch.getElement();
 //
 //					// parse body and wrap in sequence
@@ -508,7 +519,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 //						// add listen
 //						messageListeners.get(_currentService).add((Expression) EcoreUtil.copy(address));
 //					}
-//				}
+				}
 //				mapping= block;
 				break;
 			case COMPLEX:
@@ -623,48 +634,24 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				if(payloadType.contains("."))_currentBean.getImports().add(payloadType);
 				payloadType = Util.getType(channel.getPayload());
 				//register to channel
-				CodeElement code = beansFac.createCodeElement();
-				code.setCode("Action joinAction = retrieveAction(ICommunicationBean.ACTION_JOIN_GROUP);");
-				seq.getScripts().add(code);
+				seq.getScripts().add(createCodeElement("Action joinAction = retrieveAction(ICommunicationBean.ACTION_JOIN_GROUP);"));
 				//create Groupaddress
-				code = beansFac.createCodeElement();
-				code.setCode("IGroupAddress groupAddress = CommunicationAddressFactory.createGroupAddress(\""+Address+"\");");
-				seq.getScripts().add(code);
+				seq.getScripts().add(createCodeElement("IGroupAddress groupAddress = CommunicationAddressFactory.createGroupAddress(\""+Address+"\");"));
 				//invoke join action
-				code = beansFac.createCodeElement();
-				code.setCode("invoke(joinAction,new Serializable[]{groupAddress});");
-				seq.getScripts().add(code);
+				seq.getScripts().add(createCodeElement("invoke(joinAction,new Serializable[]{groupAddress});"));
 				//create space Observer
 				String name = Util.toJavaName(event.getId())+"_observer";
-				code = beansFac.createCodeElement();
-				code.setCode("SpaceObserver<IFact> "+ name +" = new SpaceObserver<IFact>(){");
-				seq.getScripts().add(code);
-				code = beansFac.createCodeElement();
-				code.setCode("\tpublic void notify(SpaceEvent<? extends IFact> event) { ");
-				seq.getScripts().add(code);
-				code = beansFac.createCodeElement();
-				code.setCode("\t\tif(event instanceof WriteCallEvent){ ");
-				seq.getScripts().add(code);
-				code = beansFac.createCodeElement();
-				code.setCode("\t\t\tObject obj  = ((WriteCallEvent) event).getObject();");
-				seq.getScripts().add(code);
-				code = beansFac.createCodeElement();
-				code.setCode("\t\t\tif (obj instanceof IJiacMessage){");
-				seq.getScripts().add(code);
-				code = beansFac.createCodeElement();
-				code.setCode("\t\t\t\tIJiacMessage message = (IJiacMessage)obj;");
-				seq.getScripts().add(code);
-				code = beansFac.createCodeElement();
-				code.setCode("\t\t\t\tIFact payload = message.getPayload();");
-				seq.getScripts().add(code);
-				code = beansFac.createCodeElement();
-				code.setCode("\t\t\t\tif(payload!=null && payload instanceof "+payloadType+
-						     "&& message.getHeader(IJiacMessage.Header.SEND_TO).equalsIgnoreCase(\""+Address+"\")){");
-				seq.getScripts().add(code);
-				code = beansFac.createCodeElement();
-				code.setCode("\t\t\t\t\tmemory.remove(message);");
-				seq.getScripts().add(code);
-				code = beansFac.createCodeElement();
+				seq.getScripts().add(createCodeElement("SpaceObserver<IFact> "+ name +" = new SpaceObserver<IFact>(){"));
+				seq.getScripts().add(createCodeElement("\tpublic void notify(SpaceEvent<? extends IFact> event) { "));
+				seq.getScripts().add(createCodeElement("\t\tif(event instanceof WriteCallEvent){ "));
+				seq.getScripts().add(createCodeElement("\t\t\tObject obj  = ((WriteCallEvent) event).getObject();"));
+				seq.getScripts().add(createCodeElement("\t\t\tif (obj instanceof IJiacMessage){"));
+				seq.getScripts().add(createCodeElement("\t\t\t\tIJiacMessage message = (IJiacMessage)obj;"));
+				seq.getScripts().add(createCodeElement("\t\t\t\tIFact payload = message.getPayload();"));
+				seq.getScripts().add(createCodeElement("\t\t\t\tif(payload!=null && payload instanceof "+payloadType+
+						     "&& message.getHeader(IJiacMessage.Header.SEND_TO).equalsIgnoreCase(\""+Address+"\")){"));
+				seq.getScripts().add(createCodeElement("\t\t\t\t\tmemory.remove(message);"));
+				CodeElement code = beansFac.createCodeElement();
 				code.setCode("\t\t\t\t\t"+Util.toJavaName(_currentService)+"(("+payloadType+")payload);");
 				seq.getScripts().add(code);
 				code = beansFac.createCodeElement();
@@ -777,35 +764,37 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			}
 			break;
 		case NONE:
-			_currentBean.addMethod(_execute);
-			//create executed flag
-			JavaVariable flag = beansFac.createJavaVariable();
-			flag.setName("executed");
-			flag.setType("boolean");
-			_currentBean.getAttributes().add(flag);
-			//create MethodCall
-			Sequence body = beansFac.createSequence();
-			CodeElement methodCall = beansFac.createCodeElement();
-			methodCall.setCode(_currentWorkflow.getName()+"();");
-			body.getScripts().add(methodCall);
-			CodeElement flagAssignment = beansFac.createCodeElement();
-			flagAssignment.setCode("executed = true;");
-			body.getScripts().add(flagAssignment);
-			//create IfThen Block
-			IfThenElse ifNotExecuted = beansFac.createIfThenElse();
-			ifNotExecuted.setCondition("!executed");
-			ifNotExecuted.setThenBranch(body);
-			_execute.setContent(ifNotExecuted);
+			if(event instanceof Start){
+				_currentBean.addMethod(_execute);
+				//create executed flag
+				JavaVariable flag = beansFac.createJavaVariable();
+				flag.setName("executed");
+				flag.setType("boolean");
+				_currentBean.getAttributes().add(flag);
+				//create MethodCall
+				Sequence body = beansFac.createSequence();
+				CodeElement methodCall = beansFac.createCodeElement();
+				methodCall.setCode(_currentWorkflow.getName()+"();");
+				body.getScripts().add(methodCall);
+				CodeElement flagAssignment = beansFac.createCodeElement();
+				flagAssignment.setCode("executed = true;");
+				body.getScripts().add(flagAssignment);
+				//create IfThen Block
+				IfThenElse ifNotExecuted = beansFac.createIfThenElse();
+				ifNotExecuted.setCondition("!executed");
+				ifNotExecuted.setThenBranch(body);
+				_execute.setContent(ifNotExecuted);
+			}
 			break;
 		case TIMER:
 			if (event instanceof Start) {
 				_currentBean.addMethod(_execute);
 				//create methodCall
-				methodCall = beansFac.createCodeElement();
+				CodeElement methodCall = beansFac.createCodeElement();
 				methodCall.setCode(_currentWorkflow.getName()+"();");
 				if(event.isAsDuration()){
 					//add lastexecuted
-					flag = beansFac.createJavaVariable();
+					JavaVariable flag = beansFac.createJavaVariable();
 					flag.setName("lastExecuted");
 					flag.setType("long");
 					_currentBean.getAttributes().add(flag);
@@ -822,10 +811,10 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					seq.getScripts().add(now);
 					IfThenElse ifThen = beansFac.createIfThenElse();
 					ifThen.setCondition("now - lastExecuted >= "+duration);
-					body = beansFac.createSequence();
+					Sequence body = beansFac.createSequence();
 					body.getScripts().add(methodCall);
 					CodeElement code = beansFac.createCodeElement();
-					code.setCode("lastExecuted = now");
+					code.setCode("lastExecuted = now;");
 					body.getScripts().add(code);
 					ifThen.setThenBranch(body);
 					seq.getScripts().add(ifThen);
@@ -1039,10 +1028,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				// invoke another plan
 				Sequence invokeSeq = beansFac.createSequence();
 				String varName = (""+service.getOperation()).toLowerCase()+"Action";
-				CodeElement actionVarDeclaration = beansFac.createCodeElement();
-				actionVarDeclaration.setCode("Action "+varName+" = retrieveAction("+service.getInterface()+"."+service.getOperation()+");");
-				CodeElement exception = beansFac.createCodeElement();
-				exception.setCode("throw new RuntimeException(\"action "+service.getOperation()+" not found!\");");
+				CodeElement actionVarDeclaration = createCodeElement("Action "+varName+" = retrieveAction("+service.getInterface()+"."+service.getOperation()+");");
+				CodeElement exception = createCodeElement("throw new RuntimeException(\"action "+service.getOperation()+" not found!\");");
 				IfThenElse actionCheck = beansFac.createIfThenElse();
 				actionCheck.setCondition(varName+" == null");
 				actionCheck.setThenBranch(exception);
@@ -1054,16 +1041,14 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					if(parameter.length()>0) parameter +=",";
 					parameter += property.getName();
 				}
-				CodeElement invokeCall = beansFac.createCodeElement();
-				invokeCall.setCode("Serializable[] results = invokeAndWaitForResult("+varName+", new Serializable[]{"+parameter+"}).getResults();");
+				CodeElement invokeCall = createCodeElement("Serializable[] results = invokeAndWaitForResult("+varName+", new Serializable[]{"+parameter+"}).getResults();");
 				invokeSeq.getScripts().add(invokeCall);
 				int i=0;
 				for (Property property : service.getOutput()) {
 					//assign the results from the serializeable array
 					String type = Util.getNonPrimitiveType(Util.getType(property));
 					String name = Util.toJavaName(property.getName());
-					CodeElement res = beansFac.createCodeElement();
-					res.setCode(name+" = ("+type+")results["+i+"];");
+					CodeElement res = createCodeElement(name+" = ("+type+")results["+i+"];");
 					i++;
 					invokeSeq.getScripts().add(res);
 				}
@@ -1107,18 +1092,15 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			}
 			String varName = Util.toJavaName(activity.getName());
 			Sequence seq = beansFac.createSequence();
-			CodeElement code = beansFac.createCodeElement();
-			code.setCode(className + " " + varName+" = new "+className+"();");
+			CodeElement code = createCodeElement(className + " " + varName+" = new "+className+"();");
 			seq.getScripts().add(code);
-			code = beansFac.createCodeElement();
-			code.setCode(varName+".run();");
+			code = createCodeElement(varName+".run();");
 			seq.getScripts().add(code);
 			return seq;
 		case CALL:
 			if (activity.getCalledElement() instanceof Activity) {
 				Activity calledAct = (Activity)activity.getCalledElement();
-				code = beansFac.createCodeElement();
-				code.setCode(Util.toJavaName(calledAct.getName())+"();");
+				code = createCodeElement(Util.toJavaName(calledAct.getName())+"();");
 				mapping = code;
 			} else if (activity.getCalledElement() instanceof Pool) {
 				// TODO call another service, similar to invoke
@@ -1574,5 +1556,11 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		recieve.setAddress(channel.getChannel().getExpression());
 		recieve.setPayload(payload);
 		return recieve;
+	}
+	
+	private CodeElement createCodeElement(String code){
+		CodeElement codeElem = beansFac.createCodeElement();
+		codeElem.setCode(code);
+		return codeElem;
 	}
 }

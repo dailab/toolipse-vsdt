@@ -227,37 +227,10 @@ public class RecieveImpl extends ScriptImpl implements Recieve {
 	@Override
 	public String toJavaCode() {
 		String result = "";
-		result += "Action joinAction = retrieveAction(ICommunicationBean.ACTION_JOIN_GROUP);\n";
-		result += "Action leaveAction = retrieveAction(ICommunicationBean.ACTION_LEAVE_GROUP);\n";
 		//create Groupaddress
-		result += "IGroupAddress groupAddress = CommunicationAddressFactory.createGroupAddress(\""+address+"\");\n";
-		//invoke join action
-		result += "invoke(joinAction,new Serializable[]{groupAddress});\n";
-		//read
-		result += payload.toString()+" = null;\n";//declare payload variable
-		//wait for message
-		result+="while("+payload.getName()+"==null) {\n";
-		//read message from memory
-		result+="\tSet<IFact> all = memory.readAll();\n";
-		result+="\tfor(IFact fact : all){\n";
-		result+="\t\tif(fact instanceof JiacMessage) {\n";
-		result+="\t\t\tJiacMessage jiacMessage = (JiacMessage)fact;\n";
-		//check the payload and address
-		result+="\t\t\tif(jiacMessage.getPayload() instanceof "+payload.getType()+" && jiacMessage.getHeader(IJiacMessage.Header.SEND_TO).equals(\""+address+"\")) {\n";
-		result+="\t\t\t\tmemory.remove(jiacMessage);\n";
-		result+="\t\t\t\t"+payload.getName()+" = ("+payload.getType()+") jiacMessage.getPayload();\n";
-		result+="\t\t\t\tbreak;\n";//message found leave foreach block
-		result+="\t\t\t}\n";//closing if
-		//next
-		result+="\t\t}\n";//closing if
-		result+="\t}\n";//closing foreach
-		//wait 100 ms and then try again 
-		result+="\ttry{\n";
-		result+="\t\tThread.sleep(100);\n";
-		result+="\t} catch(InterruptedException e) { }\n";
-		result+="}\n";//closing while
-		//leave group
-		result+="invoke(leaveAction, new Serializable[]{groupAddress});\n";
+		result += "String groupName = \""+address+"\";\n";
+		result += "Class payloadClass = "+payload.getType()+".class;\n";
+		result += payload +" = ("+payload.getType()+") recieve(groupName, payloadClass);\n";
 		return result;
 	}
 

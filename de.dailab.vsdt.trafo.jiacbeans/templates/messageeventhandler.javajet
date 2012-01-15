@@ -39,7 +39,7 @@
 						Object obj = ((WriteCallEvent) event).getObject();
 						if(obj instanceof IJiacMessage){
 							IJiacMessage msg = (IJiacMessage)obj;
-							if(msg.getHeader(IJiacMessage.Header.SEND_TO).equals(address) &&
+							if(msg.getHeader(IJiacMessage.Header.SEND_TO).equalsIgnoreCase(address) &&
 							   payloadClass.isInstance(msg.getPayload())){
 								memory.remove(msg);
 								compensate();

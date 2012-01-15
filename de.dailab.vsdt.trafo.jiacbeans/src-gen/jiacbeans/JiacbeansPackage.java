@@ -955,6 +955,34 @@ public interface JiacbeansPackage extends EPackage {
 	int SEND_FEATURE_COUNT = SCRIPT_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link jiacbeans.impl.WaitImpl <em>Wait</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see jiacbeans.impl.WaitImpl
+	 * @see jiacbeans.impl.JiacbeansPackageImpl#getWait()
+	 * @generated
+	 */
+	int WAIT = 19;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WAIT__NAME = SCRIPT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Wait</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WAIT_FEATURE_COUNT = SCRIPT_FEATURE_COUNT + 1;
+
+	/**
 	 * Returns the meta object for class '{@link jiacbeans.AgentBean <em>Agent Bean</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1640,6 +1668,27 @@ public interface JiacbeansPackage extends EPackage {
 	EAttribute getSend_Address();
 
 	/**
+	 * Returns the meta object for class '{@link jiacbeans.Wait <em>Wait</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Wait</em>'.
+	 * @see jiacbeans.Wait
+	 * @generated
+	 */
+	EClass getWait();
+
+	/**
+	 * Returns the meta object for the attribute '{@link jiacbeans.Wait#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see jiacbeans.Wait#getName()
+	 * @see #getWait()
+	 * @generated
+	 */
+	EAttribute getWait_Name();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2210,6 +2259,24 @@ public interface JiacbeansPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SEND__ADDRESS = eINSTANCE.getSend_Address();
+
+		/**
+		 * The meta object literal for the '{@link jiacbeans.impl.WaitImpl <em>Wait</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see jiacbeans.impl.WaitImpl
+		 * @see jiacbeans.impl.JiacbeansPackageImpl#getWait()
+		 * @generated
+		 */
+		EClass WAIT = eINSTANCE.getWait();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WAIT__NAME = eINSTANCE.getWait_Name();
 
 	}
 

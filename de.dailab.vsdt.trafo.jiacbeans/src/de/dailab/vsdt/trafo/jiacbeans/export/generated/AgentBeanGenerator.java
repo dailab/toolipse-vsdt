@@ -67,8 +67,8 @@ public class AgentBeanGenerator
    		actionMap.put(methodName,act);
    }
    SubProcessGenerator spg = new SubProcessGenerator();
-   String importSuperClass = (actions.size()>0)? "import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;\nimport de.dailab.jiactng.agentcore.action.scope.ActionScope;":"import de.dailab.jiactng.agentcore.AbstractAgentBean;";
-   String superClass = (actions.size()>0)?"AbstractMethodExposingBean" : "AbstractAgentBean";
+   String importSuperClass = (actions.size()>0)? "import workflow.WorkflowBean;\nimport de.dailab.jiactng.agentcore.action.scope.ActionScope;":"import workflow.workflowBean;";
+   String superClass = "WorkflowBean";
    String classDeclaration = "public class "+bean.getName()+" extends "+superClass;
 
     stringBuffer.append(TEXT_1);

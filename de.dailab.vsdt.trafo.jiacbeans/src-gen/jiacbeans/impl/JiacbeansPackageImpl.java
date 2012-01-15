@@ -24,6 +24,7 @@ import jiacbeans.Sequence;
 import jiacbeans.SubProcess;
 import jiacbeans.Trigger;
 import jiacbeans.TryCatch;
+import jiacbeans.Wait;
 import jiacbeans.While;
 import jiacbeans.WorkflowMethod;
 
@@ -174,6 +175,13 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * @generated
 	 */
 	private EClass sendEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass waitEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -817,6 +825,24 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getWait() {
+		return waitEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getWait_Name() {
+		return (EAttribute)waitEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public JiacbeansFactory getJiacbeansFactory() {
 		return (JiacbeansFactory)getEFactoryInstance();
 	}
@@ -922,6 +948,9 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		sendEClass = createEClass(SEND);
 		createEReference(sendEClass, SEND__PAYLOAD);
 		createEAttribute(sendEClass, SEND__ADDRESS);
+
+		waitEClass = createEClass(WAIT);
+		createEAttribute(waitEClass, WAIT__NAME);
 	}
 
 	/**
@@ -964,6 +993,7 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		runnableEClass.getESuperTypes().add(this.getScript());
 		recieveEClass.getESuperTypes().add(this.getScript());
 		sendEClass.getESuperTypes().add(this.getScript());
+		waitEClass.getESuperTypes().add(this.getScript());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(agentBeanEClass, AgentBean.class, "AgentBean", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1058,6 +1088,9 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		initEClass(sendEClass, Send.class, "Send", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSend_Payload(), this.getJavaVariable(), null, "payload", null, 1, 1, Send.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSend_Address(), ecorePackage.getEString(), "address", null, 0, 1, Send.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(waitEClass, Wait.class, "Wait", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getWait_Name(), ecorePackage.getEString(), "name", null, 0, 1, Wait.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -228,13 +228,12 @@ public class SendImpl extends ScriptImpl implements Send {
 	@Override
 	public String toJavaCode() {
 		String result = "";
-		result += "Action sendAction = retrieveAction(ICommunicationBean.ACTION_SEND);\n";
 		//Adress
-		result += "IGroupAddress groupAddress = CommunicationAddressFactory.createGroupAddress(\""+address+"\");\n";
+		result += "String groupName = \""+address+"\";\n";
 		//Message
 		result += "JiacMessage jiacMessage = new JiacMessage("+getPayload().getName()+");\n";
 		//invoke
-		result += "invoke(sendAction, new Serializable[]{jiacMessage, groupAddress});\n";
+		result += "send(groupName,jiacMessage);\n";
 		return result;
 	}
 

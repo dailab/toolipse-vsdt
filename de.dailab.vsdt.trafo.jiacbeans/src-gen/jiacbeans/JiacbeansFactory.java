@@ -197,6 +197,15 @@ public interface JiacbeansFactory extends EFactory {
 	Send createSend();
 
 	/**
+	 * Returns a new object of class '<em>Wait</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Wait</em>'.
+	 * @generated
+	 */
+	Wait createWait();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
