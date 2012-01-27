@@ -610,32 +610,29 @@ public class Bpmn2JiacBeansElementMappingTK extends BpmnElementMapping {
 					_currentBean.getImports().add(payloadType);
 				}
 				payloadType = Util.getType(channel.getPayload());
-				Sequence seq = beansFac.createSequence();
-				// register to channel
-				seq.getScripts().add(createCode("Action joinAction = retrieveAction(ICommunicationBean.ACTION_JOIN_GROUP);"));
-				// create Groupaddress
-				seq.getScripts().add(createCode("IGroupAddress groupAddress = CommunicationAddressFactory.createGroupAddress(\""+address+"\");"));
-				// invoke join action
-				seq.getScripts().add(createCode("invoke(joinAction,new Serializable[]{groupAddress});"));
-				// create space Observer
 				String name = Util.toJavaName(event.getId())+"_observer";
-				seq.getScripts().add(createCode("SpaceObserver<IFact> "+ name +" = new SpaceObserver<IFact>(){"));
-				seq.getScripts().add(createCode("\tpublic void notify(SpaceEvent<? extends IFact> event) { "));
-				seq.getScripts().add(createCode("\t\tif(event instanceof WriteCallEvent){ "));
-				seq.getScripts().add(createCode("\t\t\tObject obj  = ((WriteCallEvent) event).getObject();"));
-				seq.getScripts().add(createCode("\t\t\tif (obj instanceof IJiacMessage){"));
-				seq.getScripts().add(createCode("\t\t\t\tIJiacMessage message = (IJiacMessage)obj;"));
-				seq.getScripts().add(createCode("\t\t\t\tIFact payload = message.getPayload();"));
-				seq.getScripts().add(createCode("\t\t\t\tif(payload!=null && payload instanceof " + payloadType +
-						     "&& message.getHeader(IJiacMessage.Header.SEND_TO).equalsIgnoreCase(\"" + address + "\")){"));
-				seq.getScripts().add(createCode("\t\t\t\t\tmemory.remove(message);"));
-				seq.getScripts().add(createCode("\t\t\t\t\t" + Util.toJavaName(_currentService) + "((" + payloadType + ")payload);"));
-				seq.getScripts().add(createCode("\t\t\t\t}"));
-				seq.getScripts().add(createCode("\t\t\t}"));
-				seq.getScripts().add(createCode("\t\t}"));
-				seq.getScripts().add(createCode("\t}"));
-				seq.getScripts().add(createCode("};"));
-				seq.getScripts().add(createCode("memory.attach("+name+");"));
+				// register to channel, create Groupaddress, invoke join action, create space Observer
+				Sequence seq = createSequence(
+						createCode("Action joinAction = retrieveAction(ICommunicationBean.ACTION_JOIN_GROUP);"),
+						createCode("IGroupAddress groupAddress = CommunicationAddressFactory.createGroupAddress(\""+address+"\");"),
+						createCode("invoke(joinAction,new Serializable[]{groupAddress});"),
+						createCode("SpaceObserver<IFact> "+ name +" = new SpaceObserver<IFact>(){"),
+						createCode("\tpublic void notify(SpaceEvent<? extends IFact> event) { "),
+						createCode("\t\tif(event instanceof WriteCallEvent){ "),
+						createCode("\t\t\tObject obj  = ((WriteCallEvent) event).getObject();"),
+						createCode("\t\t\tif (obj instanceof IJiacMessage){"),
+						createCode("\t\t\t\tIJiacMessage message = (IJiacMessage)obj;"),
+						createCode("\t\t\t\tIFact payload = message.getPayload();"),
+						createCode("\t\t\t\tif(payload!=null && payload instanceof " + payloadType +
+								     "&& message.getHeader(IJiacMessage.Header.SEND_TO).equalsIgnoreCase(\"" + address + "\")){"),
+						createCode("\t\t\t\t\tmemory.remove(message);"),
+						createCode("\t\t\t\t\t" + Util.toJavaName(_currentService) + "((" + payloadType + ")payload);"),
+						createCode("\t\t\t\t}"),
+						createCode("\t\t\t}"),
+						createCode("\t\t}"),
+						createCode("\t}"),
+						createCode("};"),
+						createCode("memory.attach("+name+");"));
 				//append the sequence to doStart();
 				Script existing = _doStart.getContent();
 				if (existing != null) {
