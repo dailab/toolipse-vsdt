@@ -27,7 +27,7 @@ import de.dailab.vsdt.trafo.MappingStage;
 import de.dailab.vsdt.trafo.MappingWrapper;
 import de.dailab.vsdt.trafo.base.util.TrafoLog;
 import de.dailab.vsdt.trafo.impl.DefaultBpmnValidation;
-import de.dailab.vsdt.trafo.jiacbeans.export.Bpmn2JiacBeansElementMapping;
+import de.dailab.vsdt.trafo.jiacbeans.export.Bpmn2JiacBeansElementMappingTK;
 import de.dailab.vsdt.trafo.jiacbeans.export.JiacBeansExportWrapper;
 import de.dailab.vsdt.trafo.jiacbeans.export.JiacBeansResultSaver;
 import de.dailab.vsdt.trafo.strucbpmn.export.Bpmn2StrucBpmnTransformation;
@@ -48,7 +48,7 @@ public class Bpmn2JiacBeansExportWizard extends BpmnExportWizard {
 		mappingStages = new ArrayList<MappingStage>();
 		mappingStages.add(new DefaultBpmnValidation());
 		mappingStages.add(new Bpmn2StrucBpmnTransformation());
-		mappingStages.add(new Bpmn2JiacBeansElementMapping());
+		mappingStages.add(new Bpmn2JiacBeansElementMappingTK());
 		
 		resultSaver= new JiacBeansResultSaver();
 	}
