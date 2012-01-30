@@ -204,6 +204,9 @@ public class ParalelImpl extends ScriptImpl implements Paralel {
 		return result.toString();
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	public String toJavaCode(){
 		int counter = 0;
 		String result  = "";

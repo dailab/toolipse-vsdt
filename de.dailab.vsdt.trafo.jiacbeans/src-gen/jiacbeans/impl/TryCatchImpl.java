@@ -282,11 +282,12 @@ public class TryCatchImpl extends ScriptImpl implements TryCatch {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	@Override
 	public String toJavaCode() {
 		String result = "try {\n";
-		if(try_!=null){
+		if (try_ != null) {
 			BufferedReader reader = new BufferedReader(new StringReader(try_.toJavaCode()));
 			try{
 				String line = reader.readLine();
@@ -294,12 +295,12 @@ public class TryCatchImpl extends ScriptImpl implements TryCatch {
 					if(!line.equals("")) result += "\t"+line+"\n";
 					line = reader.readLine();
 				}
-			}catch(IOException e){
+			} catch(IOException e) {
 				result += "\t//Error occured while reading try body\n";
 			}
 		}
 		for (Map.Entry<String, Script> entry : catches.entrySet()) {
-			result+="} catch("+entry.getKey()+" e) {\n";
+			result+="} catch ("+entry.getKey()+" e) {\n";
 			Script content = entry.getValue();
 			if(content!= null){
 				BufferedReader reader = new BufferedReader(new StringReader(content.toJavaCode()));

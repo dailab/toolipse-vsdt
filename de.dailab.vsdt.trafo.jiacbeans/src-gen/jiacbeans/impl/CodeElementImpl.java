@@ -162,6 +162,7 @@ public class CodeElementImpl extends ScriptImpl implements CodeElement {
 
 	/**
 	 * returns the java code representation
+	 * @generated NOT
 	 */
 	@Override
 	public String toJavaCode() {

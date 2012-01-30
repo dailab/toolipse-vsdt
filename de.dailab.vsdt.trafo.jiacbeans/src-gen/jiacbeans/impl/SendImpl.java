@@ -229,11 +229,11 @@ public class SendImpl extends ScriptImpl implements Send {
 	public String toJavaCode() {
 		String result = "";
 		//Adress
-		result += "String groupName = \""+address+"\";\n";
+		result += "String groupName = \"" + address + "\";\n";
 		//Message
 		result += "JiacMessage jiacMessage = new JiacMessage("+getPayload().getName()+");\n";
 		//invoke
-		result += "send(groupName,jiacMessage);\n";
+		result += "send(groupName, jiacMessage);\n";
 		return result;
 	}
 

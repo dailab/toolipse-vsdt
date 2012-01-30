@@ -228,24 +228,27 @@ public class RunnableImpl extends ScriptImpl implements jiacbeans.Runnable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	@Override
 	public String toJavaCode() {
 		String content ="";
-		if(runContent!=null){
+		if (runContent!=null) {
 			BufferedReader reader = new BufferedReader(new StringReader(runContent.toJavaCode()));
 			try{
 				String line = reader.readLine();
-				while(line!=null){
-					if(!line.equals("")) content += "\t\t"+line+"\n";
+				while (line != null) {
+					if (! line.equals("")) {
+						content += "\t\t"+line+"\n";
+					}
 					line = reader.readLine();
 				}
 			}catch(IOException e){
 				content += "\t//Error occured while reading run content\n";
 			}
 		}
-		String result = "Thread "+getName()+" = new Thread(new Runnable(){\n" +
-						"\tpublic void run(){\n"+
+		String result = "Thread " + getName() + " = new Thread(new Runnable(){\n" +
+						"\tpublic void run() {\n"+
 						content+
 						"\t}\n"+//close run Method
 						"});"//Close Runnable and Constructor

@@ -223,6 +223,7 @@ public class RecieveImpl extends ScriptImpl implements Recieve {
 
 	/**
 	 * return the java code representation
+	 * @generated NOT
 	 */
 	@Override
 	public String toJavaCode() {

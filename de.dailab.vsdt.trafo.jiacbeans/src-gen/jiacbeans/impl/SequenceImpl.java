@@ -133,10 +133,11 @@ public class SequenceImpl extends ScriptImpl implements Sequence {
 	
 	/**
 	 *  returns the Java Code representation
+	 *  @generated NOT
 	 */
 	public String toJavaCode(){
 		String result = "";
-		for(Script s : getScripts()){
+		for (Script s : getScripts()) {
 			result += s.toJavaCode()+"\n";
 		}
 		return result;

@@ -229,25 +229,30 @@ public class WhileImpl extends ScriptImpl implements While {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
 	 */
 	@Override
 	public String toJavaCode() {
-		if(condition==null)condition="false";
-		String result = "while("+condition+") {\n";
+		if (condition == null) {
+			condition="false";
+		}
+		String result = "while ("+condition+") {\n";
 		if(content!=null){
 			String cs = content.toJavaCode();
 			BufferedReader reader = new BufferedReader(new StringReader(cs));
 			try{
 				String line = reader.readLine();
-				while(line!=null){
-					if(!line.equals("")) result += "\t"+line+"\n";
+				while (line != null){
+					if (! line.equals("")) {
+						result += "\t" + line + "\n";
+					}
 					line = reader.readLine();
 				}
-			}catch(IOException e){
+			} catch(IOException e) {
 				result += "\t//Error occured while reading loop body\n";
 			}
 		}
-		result +="}";
+		result += "}";
 		return result;
 	}
 

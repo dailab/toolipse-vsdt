@@ -163,6 +163,9 @@ public class WaitImpl extends ScriptImpl implements Wait {
 		return result.toString();
 	}
 	
+	/**
+	 * @generated NOT
+	 */
 	public String toJavaCode(){
 		String result = "Thread "+name+" = new Thread(){\n";
 		result += "\tpublic void run(){\n";
