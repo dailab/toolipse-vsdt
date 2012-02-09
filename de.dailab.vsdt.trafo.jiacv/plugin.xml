@@ -5,15 +5,15 @@
 
 	<extension point="org.eclipse.ui.exportWizards"
 		id="de.dailab.vsdt.trafo.jiacv.export.wizard"
-		name="BPMN to JIAC V" >
+		name="BPMN to JIAC V JADL" >
 		<wizard 
 			id="de.dailab.vsdt.trafo.jiacv.export.wizard.jadl"
-			name="BPMN to JIAC V"
+			name="BPMN to JIAC V JADL"
 			category="de.dailab.vsdt.trafo.export"
 			class="de.dailab.vsdt.trafo.jiacv.wizard.Bpmn2JiacVExportWizard"
 			icon="icons/exportJiac.gif">
 			<description>
-				A Wizard for Transforming BPMN Diagrams to JIAC V
+				A Wizard for Transforming BPMN Diagrams to JIAC V JADL Services
 			</description>
 		</wizard>
 	</extension>

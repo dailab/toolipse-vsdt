@@ -206,7 +206,7 @@ public class JiacVResultSaver extends MappingResultSaver {
 	 * @return				saving successful? otherwise the model can still be saved to XML
 	 * @throws IOException
 	 */
-	/* CREATION OF AGENT WORD DIAGRAM (deprecated)
+	/* CREATION OF AGENT WORLD DIAGRAM (deprecated)
 	private boolean saveAgentWorldDiagram(File file, AgentWorld agentWorld) throws IOException {
 		
 		TransactionalEditingDomain editingDomain= GMFEditingDomainFactory.INSTANCE.createEditingDomain();
@@ -238,7 +238,7 @@ public class JiacVResultSaver extends MappingResultSaver {
 		}
 		return true;
 	}
-	CREATION OF AGENT WORD DIAGRAM (deprecated) */
+	CREATION OF AGENT WORLD DIAGRAM (deprecated) */
 	
 	/**
 	 * Command for creating Agent World Diagram from Model and merging it with 
@@ -246,7 +246,7 @@ public class JiacVResultSaver extends MappingResultSaver {
 	 * 
 	 * @author kuester
 	 */
-	/* CREATION OF AGENT WORD DIAGRAM (deprecated)
+	/* CREATION OF AGENT WORLD DIAGRAM (deprecated)
 	class CreateAgentworldDiagramCommand extends AbstractTransactionalCommand {
 		private final AgentWorld model;
 		private final Resource created;
@@ -279,5 +279,5 @@ public class JiacVResultSaver extends MappingResultSaver {
 			return CommandResult.newOKCommandResult();
 		}
 	}
-	CREATION OF AGENT WORD DIAGRAM (deprecated) */
+	CREATION OF AGENT WORLD DIAGRAM (deprecated) */
 }

@@ -20,7 +20,7 @@ public class Bpmn2JiacVExportWizard extends BpmnExportWizard {
 
 	@Override
 	public String getTitle() {
-		return "BPMN to JIAC V Export Wizard";
+		return "BPMN to JIAC V JADL Export Wizard";
 	}
 
 	@Override

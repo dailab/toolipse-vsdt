@@ -182,7 +182,7 @@ public abstract class BpmnTrafoWizard extends Wizard {
 	 * @param exception		some exception
 	 * @return				exception stacktrace as string
 	 */
-	private String printError(Exception exception) {
+	protected String printError(Exception exception) {
 		StringWriter sw = new StringWriter();
 		exception.printStackTrace(new PrintWriter(sw));
 		String errMsg= sw.toString();
