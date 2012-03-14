@@ -69,6 +69,9 @@ public abstract class AbstractSimulation implements ISimulation {
 	/** The number of (full) steps the simulation has already taken. */
 	protected int step;
 	
+	/** perform assignments inside or outside of activity looping */
+	protected boolean ASSIGNMENTS_INSIDE_LOOP = true;
+	
 	/**
 	 * Initialize fields
 	 */
@@ -180,7 +183,7 @@ public abstract class AbstractSimulation implements ISimulation {
 				}
 			}
 			// skip assignments when looping
-			if (! isInState(flowObject, State.LOOPING_READY)) {
+			if (! isInState(flowObject, State.LOOPING_READY) || ASSIGNMENTS_INSIDE_LOOP) {
 				// handle start Assignments
 				handleAssignments(flowObject, AssignTimeType.START);
 			}
@@ -216,6 +219,10 @@ public abstract class AbstractSimulation implements ISimulation {
 				// set state to DONE, and then right back to LOOPING_READY
 				setState(flowObject, State.DONE);
 				setState(flowObject, State.LOOPING_READY);
+				if (ASSIGNMENTS_INSIDE_LOOP) {
+					// handle end Assignments
+					handleAssignments(flowObject, AssignTimeType.END);
+				}
 			} else {
 				// handle end Assignments
 				handleAssignments(flowObject, AssignTimeType.END);
