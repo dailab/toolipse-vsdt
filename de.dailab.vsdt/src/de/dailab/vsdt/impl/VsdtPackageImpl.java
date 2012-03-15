@@ -2549,7 +2549,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		initEClass(standardLoopAttSetEClass, StandardLoopAttSet.class, "StandardLoopAttSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStandardLoopAttSet_LoopCondition(), this.getExpression(), null, "loopCondition", null, 0, 1, StandardLoopAttSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStandardLoopAttSet_LoopMaximum(), ecorePackage.getEInt(), "loopMaximum", null, 0, 1, StandardLoopAttSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getStandardLoopAttSet_TestBefore(), ecorePackage.getEBoolean(), "testBefore", null, 0, 1, StandardLoopAttSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStandardLoopAttSet_TestBefore(), ecorePackage.getEBoolean(), "testBefore", "true", 0, 1, StandardLoopAttSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(multiLoopAttSetEClass, MultiLoopAttSet.class, "MultiLoopAttSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMultiLoopAttSet_MI_Condition(), this.getExpression(), null, "MI_Condition", null, 1, 1, MultiLoopAttSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

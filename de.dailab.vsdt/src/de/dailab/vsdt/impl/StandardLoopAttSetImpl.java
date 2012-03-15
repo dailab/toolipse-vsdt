@@ -70,7 +70,7 @@ public class StandardLoopAttSetImpl extends LoopAttributeSetImpl implements Stan
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean TEST_BEFORE_EDEFAULT = false;
+	protected static final boolean TEST_BEFORE_EDEFAULT = true;
 
 	/**
 	 * The cached value of the '{@link #isTestBefore() <em>Test Before</em>}' attribute.

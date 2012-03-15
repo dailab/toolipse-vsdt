@@ -80,6 +80,7 @@ public interface StandardLoopAttSet extends LoopAttributeSet {
 
 	/**
 	 * Returns the value of the '<em><b>Test Before</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Test Before</em>' attribute isn't clear,
@@ -89,7 +90,7 @@ public interface StandardLoopAttSet extends LoopAttributeSet {
 	 * @return the value of the '<em>Test Before</em>' attribute.
 	 * @see #setTestBefore(boolean)
 	 * @see de.dailab.vsdt.VsdtPackage#getStandardLoopAttSet_TestBefore()
-	 * @model
+	 * @model default="true"
 	 * @generated
 	 */
 	boolean isTestBefore();
