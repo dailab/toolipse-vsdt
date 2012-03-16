@@ -70,7 +70,7 @@ public abstract class AbstractSimulation implements ISimulation {
 	protected int step;
 	
 	/** perform assignments inside or outside of activity looping */
-	protected boolean ASSIGNMENTS_INSIDE_LOOP = true;
+	protected boolean ASSIGNMENTS_INSIDE_LOOP = false;
 	
 	/**
 	 * Initialize fields

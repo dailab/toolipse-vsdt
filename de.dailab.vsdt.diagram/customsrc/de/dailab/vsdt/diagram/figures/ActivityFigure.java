@@ -290,7 +290,7 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 		this.activityType= activityType;
 		isSubprocess= activityType == ActivityType.EMBEDDED;
 		// set subprocess flag also if called element is subprocess
-		if (activityType == ActivityType.CALL && 
+		if (activity != null && activityType == ActivityType.CALL && 
 				activity.getCalledElement() instanceof Activity && 
 				((Activity) activity.getCalledElement()).getActivityType() == ActivityType.EMBEDDED) {
 			isSubprocess = true;
