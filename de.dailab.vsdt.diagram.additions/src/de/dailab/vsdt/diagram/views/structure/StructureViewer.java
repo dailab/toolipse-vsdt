@@ -1,4 +1,4 @@
-package de.dailab.vsdt.trafo.strucbpmn.view;
+package de.dailab.vsdt.diagram.views.structure;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,7 @@ import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Start;
+import de.dailab.vsdt.diagram.providers.VsdtAdditionsPlugin;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBranch;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnDerivedProcess;
@@ -28,7 +29,6 @@ import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerCase;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnLoopBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnSequence;
 import de.dailab.vsdt.trafo.strucbpmn.StrucBpmnPackage;
-import de.dailab.vsdt.trafo.strucbpmn.VsdtStructureViewPlugin;
 import de.dailab.vsdt.util.VsdtHelper;
 
 /**
@@ -146,51 +146,51 @@ public class StructureViewer extends TreeViewer {
 		
 		protected ImageDescriptor getImageDescriptor(Object element) {
 			if (element instanceof Pool) {
-				return VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_POOL);
+				return VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_POOL);
 			}
 			if (element instanceof Activity) {
 				if (((Activity) element).getActivityType() == ActivityType.EMBEDDED) {
-					return VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_EMBEDDED);
+					return VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_EMBEDDED);
 				} else {
-					return VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_ACTIVITY);
+					return VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_ACTIVITY);
 				}
 			}
 			if (element instanceof Start) {
-				return VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_START);
+				return VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_START);
 			}
 			if (element instanceof Intermediate) {
-				return VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_INTERMEDIATE);
+				return VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_INTERMEDIATE);
 			}
 			if (element instanceof End) {
-				return VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_END);
+				return VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_END);
 			}
 			if (element instanceof Gateway) {
-				return VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_GATEWAY);
+				return VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_GATEWAY);
 			}
 			// structure elements
 			if (element instanceof BpmnSequence) {
-				return VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_SEQUENCE);
+				return VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_SEQUENCE);
 			}
 			if (element instanceof BpmnBlock) {
-				return VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_BLOCK);
+				return VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_BLOCK);
 			}
 			if (element instanceof BpmnBranch) {
-				return VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_BRANCH);
+				return VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_BRANCH);
 			}
 			if (element instanceof BpmnLoopBlock) {
-				return VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_LOOP);
+				return VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_LOOP);
 			}
 			if (element instanceof BpmnEventHandlerBlock) {
-				return VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_EHBLOCK);
+				return VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_EHBLOCK);
 			}
 			if (element instanceof BpmnEventHandlerCase) {
-				return VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_EHCASE);
+				return VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_EHCASE);
 			}
 			if (element instanceof BpmnElementToSkip) {
-				return VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_SKIP);
+				return VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_SKIP);
 			}
 			if (element instanceof BpmnDerivedProcess) {
-				return VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_DERIVED);
+				return VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_DERIVED);
 			}
 			return null;
 		}

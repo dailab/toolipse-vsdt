@@ -1,4 +1,4 @@
-package de.dailab.vsdt.trafo.strucbpmn.view;
+package de.dailab.vsdt.diagram.views.structure;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +35,7 @@ import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
 import de.dailab.vsdt.diagram.layout.StructureLayout;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
+import de.dailab.vsdt.diagram.providers.VsdtAdditionsPlugin;
 import de.dailab.vsdt.trafo.MappingStage;
 import de.dailab.vsdt.trafo.MappingWrapper;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBlock;
@@ -45,7 +46,6 @@ import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnEventHandlerCase;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnLoopBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnSequence;
-import de.dailab.vsdt.trafo.strucbpmn.VsdtStructureViewPlugin;
 import de.dailab.vsdt.trafo.strucbpmn.export.Bpmn2StrucBpmnTransformation;
 import de.dailab.vsdt.util.VsdtHelper;
 
@@ -94,17 +94,17 @@ public class StructureView extends AbstractStructuredViewerView implements ISele
 	}
 
 	protected void makeActions() {
-		structurizeAction= new Action("Structurize", VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_STRUCTURIZE)) {
+		structurizeAction= new Action("Structurize", VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_STRUCTURIZE)) {
 			public void run() {
 				structurize();
 			}
 		};
-		expandAllAction= new Action("Expand All", VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_EXPANDALL)) {
+		expandAllAction= new Action("Expand All", VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_EXPANDALL)) {
 			public void run() {
 				((TreeViewer) viewer).expandAll();
 			}
 		};
-		collapseAllAction= new Action("Collapse All", VsdtStructureViewPlugin.getImageDescriptor(VsdtStructureViewPlugin.IMAGE_COLLAPSEALL)) {
+		collapseAllAction= new Action("Collapse All", VsdtAdditionsPlugin.getImageDescriptor(VsdtAdditionsPlugin.IMAGE_COLLAPSEALL)) {
 			public void run() {
 				((TreeViewer) viewer).collapseAll();
 			}
@@ -271,9 +271,6 @@ public class StructureView extends AbstractStructuredViewerView implements ISele
 			selectInEditor(ehCase.getIntermediate(), editor);
 			if (ehCase.getCompensationElement() != null) {
 				selectInEditor(ehCase.getCompensationElement(), editor);
-			}
-			if (ehCase.getElementToSkip() != null) {
-				selectInEditor(ehCase.getElementToSkip(), editor);
 			}
 		}
 		if (eObject instanceof BpmnElementToSkip) {

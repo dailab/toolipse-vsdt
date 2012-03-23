@@ -405,7 +405,22 @@
 			class="de.dailab.vsdt.diagram.views.pools.PoolVisibilityView"
 			id="de.dailab.vsdt.diagram.views.pools.PoolVisibilityView">
 		</view>
+		<view name="Structure Viewer" icon="icons/StructureViewer.gif"
+			category="de.dailab.vsdt.diagram.views"
+			class="de.dailab.vsdt.diagram.views.structure.StructureView"
+			id="de.dailab.vsdt.diagram.views.structure.StructureView">
+		</view>
 	</extension>
+	
+	
+	<!-- layout -->
+	<!--<extension point="org.eclipse.gmf.runtime.diagram.ui.layoutProviders">
+		<layoutProvider
+			class="de.dailab.vsdt.trafo.strucbpmn.layout.VsdtLayoutProvider">
+			<Priority name="High" />
+		</layoutProvider>
+	</extension>-->
+	
 	
 	<!-- Perspective -->
 	<extension point="org.eclipse.ui.perspectives">
@@ -443,6 +458,10 @@
 				relationship="stack" relative="de.dailab.vsdt.diagram.views.bpmnprop.BpmnPropertiesView">
 			</view>
 			<view id="de.dailab.vsdt.diagram.views.pools.PoolVisibilityView"
+				relationship="stack" relative="org.eclipse.ui.views.ContentOutline">
+			</view>
+			<viewShortcut id="de.dailab.vsdt.diagram.views.structure.StructureView" />
+			<view id="de.dailab.vsdt.diagram.views.structure.StructureView"
 				relationship="stack" relative="org.eclipse.ui.views.ContentOutline">
 			</view>
 		</perspectiveExtension>

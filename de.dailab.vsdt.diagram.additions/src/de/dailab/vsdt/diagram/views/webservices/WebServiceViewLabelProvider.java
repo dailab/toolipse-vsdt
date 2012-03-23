@@ -25,7 +25,6 @@ public class WebServiceViewLabelProvider extends AbstractLabelProvider {
 
 	public static final String UNKNOWN_NAME= "<unknown>";
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public ImageDescriptor getImageDescriptor(Object element) {
 		ImageDescriptor descriptor= null;
@@ -64,7 +63,6 @@ public class WebServiceViewLabelProvider extends AbstractLabelProvider {
 		return descriptor;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public String getText(Object element) {
 		StringBuffer buffer= new StringBuffer();

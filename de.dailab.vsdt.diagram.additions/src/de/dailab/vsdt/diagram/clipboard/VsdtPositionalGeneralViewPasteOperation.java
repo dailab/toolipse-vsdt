@@ -80,6 +80,7 @@ public class VsdtPositionalGeneralViewPasteOperation extends OverridePasteChildO
             return VsdtPositionalGeneralViewPasteOperation.this.shouldPasteAlwaysCopyObject(alwaysCopyObjectInfo);
         }
 
+    	@SuppressWarnings("restriction")
     	@Override
         protected PasteChildOperation makeAuxiliaryChildPasteProcess(ObjectInfo auxiliaryChildEObjectInfo) {             
             EObject semanticPasteTarget = getSemanticPasteTarget((View) getPastedElement());
