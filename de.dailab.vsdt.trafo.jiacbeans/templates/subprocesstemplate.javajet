@@ -1,0 +1,36 @@
+<%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="SubProcessGenerator" imports = "de.dailab.vsdt.trafo.jiacbeans.* jiacbeans.*"%>
+<%	SubProcess process = (SubProcess) argument; %>
+
+/**
+ * <%= process.getDocumentation() %>
+ *  
+ * @generated
+ */
+class <%= process.getName() %> {
+
+<%	for (Variable var: process.getVariables()) {
+%>
+	/** @generated */
+	protected <%= var.getType() %> <%= var.getName() %>;
+	
+<%	}
+
+	for (Method method : process.getMethods()) {
+		String result = Util.indent(SnippetGenerator.methodToCode(method));
+%>
+	/**
+	 * <%= method.getDocumentation() %>
+	 *  
+	 * @generated
+	 */
+<%= result %>
+ 
+<%	} 
+
+	for (SubProcess sub : process.getSubprocesses()) {
+		String result = Util.indent(generate(sub));
+%>
+<%=	result %>
+
+<%	} %>
+}

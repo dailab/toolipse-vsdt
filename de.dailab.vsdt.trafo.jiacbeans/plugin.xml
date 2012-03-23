@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+	<extension point="org.eclipse.ui.exportWizards"
+			id="de.dailab.vsdt.trafo.jiacbeans.export.wizard"
+			name="BPMN to JIAC V AgentBeans" >
+		<wizard 
+				id="de.dailab.vsdt.trafo.jiacbeans.export.wizard.jiacbeans"
+				name="BPMN to JIAC V AgentBeans"
+				category="de.dailab.vsdt.trafo.export"
+				icon="icons/exportJiac.gif"
+				class="de.dailab.vsdt.trafo.jiacbeans.wizard.Bpmn2JiacBeansExportWizard">
+			<description>
+				A Wizard for Transforming BPMN Diagrams to JIAC V AgentBeans
+			</description>
+		</wizard>
+	</extension>
+	
+</plugin>

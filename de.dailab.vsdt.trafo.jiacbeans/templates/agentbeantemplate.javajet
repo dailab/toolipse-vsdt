@@ -1,0 +1,71 @@
+<%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="AgentBeanGenerator" imports = "de.dailab.vsdt.trafo.jiacbeans.* jiacbeans.* "%>
+<%	AgentBean bean = (AgentBean) argument; 
+%>
+package <%= bean.getPackageName() %>;
+
+// common imports
+import java.io.Serializable;
+import org.sercho.masp.space.event.SpaceEvent;
+import org.sercho.masp.space.event.SpaceObserver;
+import org.sercho.masp.space.event.WriteCallEvent;
+import de.dailab.jiactng.agentcore.action.Action;
+import de.dailab.jiactng.agentcore.action.ActionResult;
+import de.dailab.jiactng.agentcore.action.scope.ActionScope;
+import de.dailab.jiactng.agentcore.comm.message.IJiacMessage;
+import de.dailab.jiactng.agentcore.comm.message.JiacMessage;
+import de.dailab.jiactng.agentcore.knowledge.IFact;
+import de.dailab.jiactng.agentcore.ontology.IActionDescription;
+import de.dailab.jiactng.agentcore.workflow.AbstractWorkflowBean;
+
+<%	if (! bean.getImports().isEmpty()) { %>
+// bean-specific imports
+<%		for (String imprt: bean.getImports()) { %>
+import <%= imprt %>;
+<%		}
+	} %>
+
+/**
+ * <%= bean.getDocumentation() %>
+ *
+ * This Bean was created with the VSDT's BPMN-to-AgentBeans Transformation
+ *
+ * @generated
+ */
+public class <%=bean.getName()%> extends AbstractWorkflowBean {
+
+<%	for (Action act: bean.getActions()) { %>
+	public final static String <%= act.getVariableName().toUpperCase() %> = "<%= act.getActionId() %>"; 
+
+<%	}
+
+	for (Variable var: bean.getVariables()) {
+%>
+	/** @generated */
+	protected <%= var.getType() %> <%= var.getName() %>;
+
+<%	}
+
+	for (Method method : bean.getMethods()) {
+		String result = Util.indent(SnippetGenerator.methodToCode(method));
+		// add expose tag?
+		Action act = method.getExposedAs();
+		if (act != null) {
+			String expose = "\t@Expose(name=" + act.getVariableName() + ", scope=ActionScope.GLOBAL)"; 
+			result = expose + "\n" + result;
+		}
+%>
+	/**
+	 * <%= method.getDocumentation() %>
+	 *  
+	 * @generated
+	 */
+<%= result %> 
+<%	}
+
+	SubProcessGenerator spg = new SubProcessGenerator();
+	for (SubProcess sub : bean.getSubprocesses()) {
+		String result = Util.indent(spg.generate(sub));
+%>
+<%= result %>
+<%	} %>
+}
