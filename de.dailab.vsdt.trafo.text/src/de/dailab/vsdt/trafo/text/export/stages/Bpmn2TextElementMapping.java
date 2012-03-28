@@ -474,7 +474,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 	 * sentences will normally have the form "... activity X is executed, doing
 	 * this and that. [It runs in a loop for so and so long.] [Documentation]".
 	 * Further, other objects related to the activity have to be named, such as 
-	 * Messages being sent. However, they should not be described to oblong,
+	 * Messages being sent. However, they should not be described too oblong,
 	 * e.g. with all their properties and their context, as this may be printed
 	 * over and over again and would disrupt the reading very much.
 	 * 
@@ -679,7 +679,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 		String beginning;
 		switch (fork.getGatewayType()) {
 		case AND:
-			builder.append("a number of branches will be " + getRandomParallelTerm() + " in parallel: ");
+			builder.append("a number of branches will be " + getRandomExecutedTerm() + " in parallel: ");
 			builder.beginBlock();
 			beginning= "First, ";
 			for (BpmnBranch branch : bpmnBlock.getElements()) {

@@ -3,14 +3,9 @@
 */
 package de.dailab.vsdt.vxl.parser.antlr;
 
-import org.antlr.runtime.CharStream;
-import org.antlr.runtime.TokenSource;
-import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parser.ParseException;
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
-
 import com.google.inject.Inject;
 
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import de.dailab.vsdt.vxl.services.VxlGrammarAccess;
 
 public class VxlParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
@@ -19,25 +14,13 @@ public class VxlParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParse
 	private VxlGrammarAccess grammarAccess;
 	
 	@Override
-	protected IParseResult parse(String ruleName, CharStream in) {
-		TokenSource tokenSource = createLexer(in);
-		XtextTokenStream tokenStream = createTokenStream(tokenSource);
+	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		de.dailab.vsdt.vxl.parser.antlr.internal.InternalVxlParser parser = createParser(tokenStream);
-		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
-		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
-		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
-		try {
-			if(ruleName != null)
-				return parser.parse(ruleName);
-			return parser.parse();
-		} catch (Exception re) {
-			throw new ParseException(re.getMessage(),re);
-		}
 	}
 	
+	@Override
 	protected de.dailab.vsdt.vxl.parser.antlr.internal.InternalVxlParser createParser(XtextTokenStream stream) {
-		return new de.dailab.vsdt.vxl.parser.antlr.internal.InternalVxlParser(stream, getElementFactory(), getGrammarAccess());
+		return new de.dailab.vsdt.vxl.parser.antlr.internal.InternalVxlParser(stream, getGrammarAccess());
 	}
 	
 	@Override 

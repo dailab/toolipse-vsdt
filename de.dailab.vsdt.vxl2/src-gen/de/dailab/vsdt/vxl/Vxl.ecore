@@ -4,63 +4,63 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="vxl"
     nsURI="http://www.dailab.de/vsdt/vxl/Vxl" nsPrefix="vxl">
   <eClassifiers xsi:type="ecore:EClass" name="VxlTerm">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="#//VxlElement"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="ecore:EClass platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlElement"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//VxlOperator"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tail" eType="#//VxlTerm"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EEnum platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tail" eType="ecore:EClass platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlTerm"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VxlElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="VxlBracketTerm" eSuperTypes="#//VxlElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="term" eType="#//VxlTerm"
+  <eClassifiers xsi:type="ecore:EClass" name="VxlBracketTerm" eSuperTypes="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="term" eType="ecore:EClass platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlTerm"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VxlNegation" eSuperTypes="#//VxlElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="#//VxlElement"
+  <eClassifiers xsi:type="ecore:EClass" name="VxlNegation" eSuperTypes="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="ecore:EClass platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlElement"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VxlMinus" eSuperTypes="#//VxlElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="#//VxlElement"
+  <eClassifiers xsi:type="ecore:EClass" name="VxlMinus" eSuperTypes="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="ecore:EClass platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlElement"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VxlCardinality" eSuperTypes="#//VxlElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="#//VxlElement"
+  <eClassifiers xsi:type="ecore:EClass" name="VxlCardinality" eSuperTypes="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="ecore:EClass platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlElement"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VxlVariable" eSuperTypes="#//VxlElement">
+  <eClassifiers xsi:type="ecore:EClass" name="VxlVariable" eSuperTypes="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="accessor" eType="#//VxlAccessor"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessor" eType="ecore:EClass platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlAccessor"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VxlAccessor">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="accessor" eType="#//VxlAccessor"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessor" eType="ecore:EClass platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlAccessor"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VxlArrayAccessor" eSuperTypes="#//VxlAccessor">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//VxlTerm"
+  <eClassifiers xsi:type="ecore:EClass" name="VxlArrayAccessor" eSuperTypes="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlAccessor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="ecore:EClass platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlTerm"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VxlFieldAccessor" eSuperTypes="#//VxlAccessor">
+  <eClassifiers xsi:type="ecore:EClass" name="VxlFieldAccessor" eSuperTypes="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlAccessor">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VxlList" eSuperTypes="#//VxlElement">
+  <eClassifiers xsi:type="ecore:EClass" name="VxlList" eSuperTypes="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="empty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//VxlListElement"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="ecore:EClass platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlListElement"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VxlListElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="first" eType="#//VxlTerm"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="first" eType="ecore:EClass platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlTerm"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rest" eType="#//VxlListElement"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rest" eType="ecore:EClass platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlListElement"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VxlValue" eSuperTypes="#//VxlElement">
+  <eClassifiers xsi:type="ecore:EClass" name="VxlValue" eSuperTypes="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="const" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VxlBooleanConst" eSuperTypes="#//VxlValue"/>
-  <eClassifiers xsi:type="ecore:EClass" name="VxlNullConst" eSuperTypes="#//VxlValue"/>
-  <eClassifiers xsi:type="ecore:EClass" name="VxlNumericConst" eSuperTypes="#//VxlValue"/>
-  <eClassifiers xsi:type="ecore:EClass" name="VxlStringConst" eSuperTypes="#//VxlValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlBooleanConst" eSuperTypes="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlNullConst" eSuperTypes="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlNumericConst" eSuperTypes="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlStringConst" eSuperTypes="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlValue"/>
   <eClassifiers xsi:type="ecore:EEnum" name="VxlOperator">
     <eLiterals name="LT" literal="&lt;"/>
     <eLiterals name="LE" value="1" literal="&lt;="/>

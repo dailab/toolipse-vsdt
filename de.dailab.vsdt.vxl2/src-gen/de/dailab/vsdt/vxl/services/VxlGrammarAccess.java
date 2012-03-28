@@ -510,7 +510,7 @@ public class VxlGrammarAccess extends AbstractGrammarElementFinder {
 		//// ALTERNATIVES
 		////terminal Numeric: "('0'..'9')+('.' ('0'..'9')+)?";
 		////NumericConst:		const = INT; // keine kommazahlen 
-		////BooleanConst:	isTrue ?= "true" | "false"; NUMERIC returns ecore::EString:
+		////BooleanConst:	isTrue ?= "true" | "false"; NUMERIC:
 		//	INT ("." INT)?;
 		public ParserRule getRule() { return rule; }
 
@@ -901,7 +901,7 @@ public class VxlGrammarAccess extends AbstractGrammarElementFinder {
 	//// ALTERNATIVES
 	////terminal Numeric: "('0'..'9')+('.' ('0'..'9')+)?";
 	////NumericConst:		const = INT; // keine kommazahlen 
-	////BooleanConst:	isTrue ?= "true" | "false"; NUMERIC returns ecore::EString:
+	////BooleanConst:	isTrue ?= "true" | "false"; NUMERIC:
 	//	INT ("." INT)?;
 	public NUMERICElements getNUMERICAccess() {
 		return (pNUMERIC != null) ? pNUMERIC : (pNUMERIC = new NUMERICElements());
@@ -924,8 +924,8 @@ public class VxlGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
-	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
+	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 

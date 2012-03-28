@@ -442,6 +442,7 @@
 			targetID="de.dailab.vsdt.perspective">
 			<!--<newWizardShortcut id="de.dailab.vsdt.diagram.part.VsdtCreationWizardID" />-->
 			<newWizardShortcut id="de.dailab.vsdt.meta.diagram.part.VsdtCreationWizardID" />
+
 			<viewShortcut id="org.eclipse.ui.navigator.ProjectExplorer" />
 			<viewShortcut id="org.eclipse.ui.views.PropertySheet" />
 			<viewShortcut id="org.eclipse.ui.views.ProblemView" />
@@ -451,16 +452,11 @@
 			<viewShortcut id="de.dailab.vsdt.diagram.views.webservices.WebServicesView" />
 			<viewShortcut id="de.dailab.vsdt.diagram.views.bpmnprop.BpmnPropertiesView" />
 			<viewShortcut id="de.dailab.vsdt.diagram.views.pools.PoolVisibilityView" />
+			<viewShortcut id="de.dailab.vsdt.diagram.views.structure.StructureView" />
+
 			<view id="de.dailab.vsdt.diagram.views.bpmnprop.BpmnPropertiesView"
-				relationship="bottom" relative="org.eclipse.ui.navigator.ProjectExplorer">
-			</view>
-			<view id="de.dailab.vsdt.diagram.views.webservices.WebServicesView"
-				relationship="stack" relative="de.dailab.vsdt.diagram.views.bpmnprop.BpmnPropertiesView">
-			</view>
-			<view id="de.dailab.vsdt.diagram.views.pools.PoolVisibilityView"
 				relationship="stack" relative="org.eclipse.ui.views.ContentOutline">
 			</view>
-			<viewShortcut id="de.dailab.vsdt.diagram.views.structure.StructureView" />
 			<view id="de.dailab.vsdt.diagram.views.structure.StructureView"
 				relationship="stack" relative="org.eclipse.ui.views.ContentOutline">
 			</view>
