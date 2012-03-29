@@ -741,10 +741,10 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					}
 					
 					String[] ret = createEventHandler(event, waitThread.getVariableName());
-					String threadName = ret[0], className  = ret[1], parameters = ret[2];
+					String threadName = ret[0], className  = ret[1], parameters = ret[2], impl = ret[3];
 					
 					// common for all event handler: create starter and stopper
-					threads.getScripts().add(createCode("EventHandler " + threadName + " = new " + className + "(" + parameters + ");"));
+					threads.getScripts().add(createCode("EventHandler " + threadName + " = new " + className + "(" + parameters + ")" + impl + ";"));
 					starter.getScripts().add(createCode(threadName + ".start();"));
 					stopper.getScripts().add(createCode(threadName + ".stopEventHandler();"));
 					
@@ -884,10 +884,10 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			} else {
 				// non-error event handlers are implemented as threads
 				String[] ret = createEventHandler(event, mainThread.getVariableName());
-				String threadName = ret[0], className  = ret[1], parameters = ret[2];
+				String threadName = ret[0], className  = ret[1], parameters = ret[2], impl = ret[3];
 				
 				// common for all event handler: create starter and stopper
-				threads.getScripts().add(createCode("EventHandler " + threadName + " = new " + className + "(" + parameters + ");"));
+				threads.getScripts().add(createCode("EventHandler " + threadName + " = new " + className + "(" + parameters + ")" + impl + ";"));
 				starter.getScripts().add(createCode(threadName + ".start();"));
 				stopper.getScripts().add(createCode(threadName + ".stopEventHandler();"));
 				
@@ -1307,6 +1307,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		String threadName = "thread_" + event.getNameOrId();
 		String className = "EventHandler";
 		String parameters = mainThreadName;
+		String implementation = "";
 		
 		// Timer Event (Duration and Date Time)
 		if (event.getTrigger() == TriggerType.TIMER) {
@@ -1333,7 +1334,16 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				parameters = parameters + ", \"" + address + "\", " + payloadType;
 			}
 		}
-		return new String[] {threadName, className, parameters};
+		
+		// Rule Event
+		if (event.getTrigger() == TriggerType.RULE) {
+			String rule = event.getRuleExpression() != null ? event.getRuleExpression().getExpression() : "null";
+			threadName = threadName + "_rule";
+			className = "Rule" + className;
+			implementation = " { public boolean checkRule() {return " + rule +  ";}}";
+		}
+		
+		return new String[] {threadName, className, parameters, implementation};
 	}
 	
 	
