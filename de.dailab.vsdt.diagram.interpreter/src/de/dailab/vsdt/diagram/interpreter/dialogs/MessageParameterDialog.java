@@ -91,7 +91,6 @@ public class MessageParameterDialog extends TitleAreaDialog {
 	@Override
 	protected Control createContents(Composite parent) {
 		Control superContent = super.createContents(parent);
-		parent.getShell().setSize(400, 320);
 		parent.getShell().setText( TITLE );
 		setMessage( incoming ? "Receiving" : "Sending");
 		setErrorMessage(errorMessage);

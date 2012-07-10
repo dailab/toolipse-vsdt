@@ -46,13 +46,10 @@ public class EditExpressionDialog extends TitleAreaDialog {
 
 	public static final String NL= System.getProperty("line.separator");
 	
-	public static final int WIDTH= 550;
-	public static final int HEIGHT= 330;
-	
 	public static final String TITLE= "Edit Expression";
 	public static final String MESSAGE= "Compose and validate expressions according to the " +
-			"VSDT Expression Language (VXL).  If VXL is set as the diagram's Expression Language, " +
-			"these expressions will be translated to the target language when being exported.";
+			"VSDT Expression Language (VXL). \n" +
+			"These expressions will be translated to the target language when being exported.";
 	
 	protected String expression;
 	protected boolean forceValidation;
@@ -81,15 +78,13 @@ public class EditExpressionDialog extends TitleAreaDialog {
 		this.expression= expression;
 		this.forceValidation= forceValidation;
 		this.setTitle(TITLE);
-		this.setShellStyle(getShellStyle());
+		this.setShellStyle(getShellStyle() | SWT.RESIZE);
 	}
 
 	@Override
 	protected Control createContents(Composite parent) {
 		Control superContent = super.createContents(parent);
 		
-		parent.getShell().setMinimumSize( WIDTH, HEIGHT );
-		parent.getShell().setSize( WIDTH, HEIGHT );
 		parent.getShell().setText( TITLE );
 		setMessage( MESSAGE);
 		

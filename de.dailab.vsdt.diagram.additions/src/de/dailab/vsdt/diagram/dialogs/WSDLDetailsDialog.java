@@ -34,9 +34,6 @@ public class WSDLDetailsDialog extends TitleAreaDialog {
 	
 	public static final String WSDL_DEFAULT= "Click here to load the full WSDL Definition";
 	
-	public static final int WIDTH= 640;
-	public static final int HEIGHT= 480;
-
 	private Text wsdlText;
 	
 	private Definition definition;
@@ -78,8 +75,6 @@ public class WSDLDetailsDialog extends TitleAreaDialog {
 	protected Control createContents(Composite parent) {
 		Control superContent = super.createContents(parent);
 		
-		parent.getShell().setMinimumSize( WIDTH, HEIGHT );
-		parent.getShell().setSize( WIDTH, HEIGHT );
 		parent.getShell().setText( TITLE );
 		setMessage(MESSAGE);
 		

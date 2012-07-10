@@ -54,7 +54,7 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 
 	public static final String TITLE= "Parameter Assignments Dialog";
 	public static final String MESSAGE= "Use this dialog for easily organizing " +
-			"Assignments to the input and output Parameters of the Messages " +
+			"Assignments to the input and output Parameters \n of the Messages " +
 			"outgoing and incoming to this Element.";
 	public static final String WARNING_INCOMPLETE_INPUT= "There are unassigned " +
 			"input parameters left. Exit anyway?";
@@ -197,8 +197,6 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 	protected Control createContents(Composite parent) {
 		Control superContent = super.createContents(parent);
 
-		parent.getShell().setSize(640, 320);
-		
 		parent.getShell().setText( TITLE );
 		setMessage( MESSAGE );
 		setErrorMessage(errorMessage);

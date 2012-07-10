@@ -74,11 +74,6 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 		return "Service";
 	}
 	
-	@Override
-	public int getHeight() {
-		return 500;
-	}
-	
 	/**
 	 * create a new Organize Services Dialog
 	 * 

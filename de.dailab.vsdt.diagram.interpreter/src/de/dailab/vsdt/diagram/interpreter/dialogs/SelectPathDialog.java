@@ -39,8 +39,6 @@ public class SelectPathDialog extends TitleAreaDialog {
 	public static final String NL= System.getProperty("line.separator");
 	public static final String TITLE= "Select Path";
 	public static final String MESSAGE= "Select the Path to take at this branching point";
-	public static final int WIDTH= 500;
-	public static final int HEIGHT= 250;
 	
 	/** List of available {@link SequenceFlow}s */
 	protected List<SequenceFlow> seqFlows;
@@ -77,8 +75,6 @@ public class SelectPathDialog extends TitleAreaDialog {
 	@Override
 	protected Control createContents(Composite parent) {
 		Control superContent = super.createContents(parent);
-//		parent.getShell().setMinimumSize( WIDTH, HEIGHT );
-		parent.getShell().setSize( WIDTH, HEIGHT );
 		parent.getShell().setText( TITLE );
 		setMessage( MESSAGE);
 		return superContent;
