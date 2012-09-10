@@ -259,8 +259,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 						currentBean.getVariables().add(createVariable("long", executedFlag));
 						addToMethod(doStartMethod, createCode(executedFlag + " = 0;"));
 						Sequence runWorkflow = createSequence(
-								createCode(currentWorkflow.getName() + "();"),
-								createCode(executedFlag + " = 1;"));
+								createCode(executedFlag + " = 1;"),
+								createCode(currentWorkflow.getName() + "();"));
 						IfThenElse ifthenElse = createIfThenElse(executedFlag + " == 0", runWorkflow, null);
 						
 						// add to execute method
@@ -369,7 +369,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 								createCode("long toSleep = then.getTime() - System.currentTimeMillis();"),
 								createCode("Thread.sleep(toSleep);"));
 					}
-				 	mapping = createTryCatch(doSleep, "Exception", createCode("e.printStackTrace();"));
+				 	mapping = createTryInterrupt(doSleep, true);
 				}
 				// Start Event -> Create time-based process starter in execute()
 				if (event instanceof Start) {
@@ -411,21 +411,25 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 
 				// Start Event -> Check Condition in Execute Method
 				if (event instanceof Start) {
-					// check rule condition and start process
-					Sequence runWorkflow = createSequence(
-							createCode(currentWorkflow.getName() + "();"),
-							createCode(executedFlag + " = now;"));
-					IfThenElse checkAndRun = createIfThenElse(rule, runWorkflow, null);
-
+					// if flag is 1 and the rule does no longer apply -> reset flag
+					IfThenElse resetFlag = createIfThenElse(executedFlag + " != 0 && ! (" + rule + ")",
+							createCode(executedFlag + " = 0;"), 
+							null);
+					// if flag is 0 and rule applies -> start workflow
+					IfThenElse checkRule = createIfThenElse(executedFlag + " == 0 && (" + rule + ")", 
+											createSequence(
+													createCode(executedFlag + " = 1;"),
+													createCode(currentWorkflow.getName() + "();")), 
+											resetFlag);
+					// add lastExecuted flag
+					currentBean.getVariables().add(createVariable("long", executedFlag));
+					addToMethod(doStartMethod, createCode(executedFlag + " = 0;"));
 					// add to execute method
-					addToMethod(executeMethod, checkAndRun);
+					addToMethod(executeMethod, checkRule);
 				}
 				// Intermediate Event: suspend workflow while rule is not true
 				if (event instanceof Intermediate) {
-					TryCatch doSleep = createTryCatch(
-							createCode("Thread.sleep(1000);"),
-							"InterruptedException", createCode(""));
-					mapping = createWhile("! (" + rule + ")", doSleep);
+					mapping = createWhile("! (" + rule + ")", createTryInterrupt(null, true));
 				}
 				break;
 			}
@@ -520,6 +524,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				}
 				break;
 			}
+			// TODO User Task?
 			case SEND: {
 				// Validation checks that the correct implementation type is used
 				// create call to 'send' convenience method
@@ -707,10 +712,9 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			}
 			case XOR_EVENT: {
 				// similar to mapping of Event Handler Block
+
 				// thread waiting for any of the events to happen
-				TryCatch wait = createTryCatch(createCode("Thread.sleep(1000);"),
-						"InterruptedException", createCode(""));
-				While waitLoop = createWhile("true", wait);
+				While waitLoop = createWhile("true", createTryInterrupt(null, true));
 				Runner waitThread = fac.createRunner();
 				waitThread.setVariableName("thread_wait_" + fork.getNameOrId());
 				waitThread.setRunContent(waitLoop);
@@ -821,6 +825,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		
 		// assemble loop body
 		Sequence loopBody= fac.createSequence();
+		loopBody.getScripts().add(createCheckInterrupt());
 		Script whilePart= visitFlowObject(block.getSecondBranch().getElement());
 		if (whilePart != null) {
 			loopBody.getScripts().add(whilePart);
@@ -995,7 +1000,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	 * @param script		already mapped script for the actual activity
 	 */
 	private String addActivityMethod(FlowObject flowObject, Script body) {
-		Method method = createMethod( flowObject.getNameOrId(), body);
+		Method method = createMethod(flowObject.getNameOrId(),
+				createSequence(createCheckInterrupt(), body));
 		method.setVisibility("protected");
 		method.setDocumentation(flowObject.getDocumentation());
 		if (currentSubProcess != null) {
@@ -1109,6 +1115,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 
 		// create loop body holding the mapped activity and the increment for the loop counter
 		Sequence innerSeq= fac.createSequence();
+		innerSeq.getScripts().add(createCheckInterrupt());
 		if (script != null) {
 			innerSeq.getScripts().add(script);
 		}
@@ -1345,6 +1352,23 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		
 		return new String[] {threadName, className, parameters, implementation};
 	}
+	
+	private CodeElement createCheckInterrupt() {
+		// do this as a one liner to not obstruct the code too much
+		return createCode("if (checkInterrupted()) return;");
+	}
+
+	private TryCatch createTryInterrupt(Script script, boolean doReturn) {
+		if (script == null) {
+			script = createCode("Thread.sleep(500);");
+		}
+		Script interrupt = createCode("Thread.currentThread().interrupt();");
+		if (doReturn) {
+			interrupt = createSequence(interrupt, createCode("return;"));
+		}
+		return createTryCatch(script, "InterruptedException", interrupt);
+	}
+	
 	
 	
 	/*
