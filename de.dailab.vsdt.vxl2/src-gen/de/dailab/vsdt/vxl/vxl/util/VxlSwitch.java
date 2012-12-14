@@ -5,12 +5,28 @@
  */
 package de.dailab.vsdt.vxl.vxl.util;
 
-import de.dailab.vsdt.vxl.vxl.*;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
+
+import de.dailab.vsdt.vxl.vxl.VxlAccessor;
+import de.dailab.vsdt.vxl.vxl.VxlArrayAccessor;
+import de.dailab.vsdt.vxl.vxl.VxlBooleanConst;
+import de.dailab.vsdt.vxl.vxl.VxlBracketTerm;
+import de.dailab.vsdt.vxl.vxl.VxlCardinality;
+import de.dailab.vsdt.vxl.vxl.VxlElement;
+import de.dailab.vsdt.vxl.vxl.VxlFieldAccessor;
+import de.dailab.vsdt.vxl.vxl.VxlList;
+import de.dailab.vsdt.vxl.vxl.VxlListElement;
+import de.dailab.vsdt.vxl.vxl.VxlMinus;
+import de.dailab.vsdt.vxl.vxl.VxlNegation;
+import de.dailab.vsdt.vxl.vxl.VxlNullConst;
+import de.dailab.vsdt.vxl.vxl.VxlNumericConst;
+import de.dailab.vsdt.vxl.vxl.VxlPackage;
+import de.dailab.vsdt.vxl.vxl.VxlStringConst;
+import de.dailab.vsdt.vxl.vxl.VxlTerm;
+import de.dailab.vsdt.vxl.vxl.VxlValue;
+import de.dailab.vsdt.vxl.vxl.VxlVariable;
 
 /**
  * <!-- begin-user-doc -->

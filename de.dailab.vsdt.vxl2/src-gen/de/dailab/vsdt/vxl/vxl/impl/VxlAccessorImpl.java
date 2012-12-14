@@ -5,17 +5,15 @@
  */
 package de.dailab.vsdt.vxl.vxl.impl;
 
-import de.dailab.vsdt.vxl.vxl.VxlAccessor;
-import de.dailab.vsdt.vxl.vxl.VxlPackage;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import de.dailab.vsdt.vxl.vxl.VxlAccessor;
+import de.dailab.vsdt.vxl.vxl.VxlPackage;
 
 /**
  * <!-- begin-user-doc -->

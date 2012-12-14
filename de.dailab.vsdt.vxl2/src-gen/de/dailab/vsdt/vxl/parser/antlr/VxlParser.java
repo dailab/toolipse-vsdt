@@ -3,9 +3,10 @@
 */
 package de.dailab.vsdt.vxl.parser.antlr;
 
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import de.dailab.vsdt.vxl.services.VxlGrammarAccess;
 
 public class VxlParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {

@@ -805,7 +805,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 
 	/**
 	 * Create Mapping for BPMN Loop Block. The result is a while-loop placed in
-	 * the worklfow method (as opposed to a while loop to be placed in the
+	 * the workflow method (as opposed to a while loop to be placed in the
 	 * activity method).
 	 * 
 	 * @param block		BPMN Loop Block

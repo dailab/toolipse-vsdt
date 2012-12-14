@@ -87,19 +87,19 @@ public class Util {
 	}
 	
 	/**
-	 * Join a number of objects to a string using a given delimeter string and 
+	 * Join a number of objects to a string using a given delimiter string and 
 	 * the objects' toString method.
 	 * 
 	 * @param objects		objects to join
-	 * @param delimeter		delimeter to be inserted between two objects
+	 * @param delimiter		delimiter to be inserted between two objects
 	 * @return
 	 */
-	public static <T> String join(Collection<T> objects, String delimeter, ObjToStrFunction<T> f) {
+	public static <T> String join(Collection<T> objects, String delimiter, ObjToStrFunction<T> f) {
 		StringBuffer buffer = new StringBuffer();
 		if (objects != null) {
 			for (T object: objects) {
 				if (buffer.length() > 0) {
-					buffer.append(delimeter);
+					buffer.append(delimiter);
 				}
 				if (f == null) {
 					buffer.append(String.valueOf(object));

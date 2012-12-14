@@ -4,6 +4,7 @@
 package de.dailab.vsdt.vxl.parser.antlr;
 
 import java.io.InputStream;
+
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class VxlAntlrTokenFileProvider implements IAntlrTokenFileProvider {

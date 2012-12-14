@@ -5,6 +5,13 @@
  */
 package de.dailab.vsdt.vxl.vxl.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import de.dailab.vsdt.vxl.vxl.VxlAccessor;
 import de.dailab.vsdt.vxl.vxl.VxlArrayAccessor;
 import de.dailab.vsdt.vxl.vxl.VxlBooleanConst;
@@ -25,14 +32,6 @@ import de.dailab.vsdt.vxl.vxl.VxlStringConst;
 import de.dailab.vsdt.vxl.vxl.VxlTerm;
 import de.dailab.vsdt.vxl.vxl.VxlValue;
 import de.dailab.vsdt.vxl.vxl.VxlVariable;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
