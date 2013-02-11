@@ -650,6 +650,29 @@ public class VsdtItemProviderAdapterFactory extends VsdtAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link de.dailab.vsdt.Parameter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ParameterItemProvider parameterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link de.dailab.vsdt.Parameter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createParameterAdapter() {
+		if (parameterItemProvider == null) {
+			parameterItemProvider = new ParameterItemProvider(this);
+		}
+
+		return parameterItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link de.dailab.vsdt.Expression} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -819,6 +842,7 @@ public class VsdtItemProviderAdapterFactory extends VsdtAdapterFactory implement
 		if (serviceItemProvider != null) serviceItemProvider.dispose();
 		if (assignmentItemProvider != null) assignmentItemProvider.dispose();
 		if (propertyItemProvider != null) propertyItemProvider.dispose();
+		if (parameterItemProvider != null) parameterItemProvider.dispose();
 		if (expressionItemProvider != null) expressionItemProvider.dispose();
 		if (dataTypeItemProvider != null) dataTypeItemProvider.dispose();
 	}
