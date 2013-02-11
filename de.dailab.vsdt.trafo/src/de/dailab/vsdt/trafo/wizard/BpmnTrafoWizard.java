@@ -187,6 +187,7 @@ public abstract class BpmnTrafoWizard extends Wizard {
 		exception.printStackTrace(new PrintWriter(sw));
 		String errMsg= sw.toString();
 		ConsoleUtil.printError(VSDT_TRAFO_CONSOLE, errMsg);
+		exception.printStackTrace();
 		return errMsg;
 	}
 	

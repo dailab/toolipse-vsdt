@@ -29,7 +29,7 @@ public class JadlParser {
 	private Resource resource = null;
 	private final XtextResourceSet xtextResourceSet;
 
-	private static final URI jadlURI = org.eclipse.emf.common.util.URI.createURI("platform:/resource/dummy.jadl");
+	private int resourceCounter = 0;
 	
 	private static JadlParser INSTANCE= null;
 	
@@ -64,6 +64,8 @@ public class JadlParser {
 	public Agent parse(String jadlSourceCode) throws JadlParseException {
 		JadlParseException jpe = new JadlParseException();
 		try {
+			String dummyURL = "platform:/resource/dummy" + resourceCounter++ + ".jadl";
+			URI jadlURI = org.eclipse.emf.common.util.URI.createURI(dummyURL);
 			resource = xtextResourceSet.createResource(jadlURI);
 			resource.load(new ByteArrayInputStream(
 					jadlSourceCode.getBytes()), 
@@ -100,6 +102,8 @@ public class JadlParser {
 
 		JadlParseException jpe = new JadlParseException();
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		String dummyURL = "platform:/resource/dummy" + resourceCounter++ + ".jadl";
+		URI jadlURI = org.eclipse.emf.common.util.URI.createURI(dummyURL);
 		resource = xtextResourceSet.createResource(jadlURI);
 		resource.getContents().add(eo);
 		try {

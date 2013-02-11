@@ -37,6 +37,9 @@ public class VxlParser {
 	
 	/** Singleton instance */
 	private static VxlParser INSTANCE;
+
+	/** Workaround for problem with existing resources, since Eclipse Juno 4.2.1 */
+	private int resourceCounter = 0;
 	
 	/**
 	 * Create Parser instance
@@ -64,13 +67,14 @@ public class VxlParser {
 		VxlParseException jpe = new VxlParseException();
 		try {
 			// create and load dummy resource using XText
-			final URI uri = org.eclipse.emf.common.util.URI.createURI("platform:/resource/dummy.vxl");
+			String dummyURL = "platform:/resource/dummy" + resourceCounter++ + ".vxl";
+			URI uri = org.eclipse.emf.common.util.URI.createURI(dummyURL);
 			resource = xtextResourceSet.createResource(uri);
-			resource.load(new ByteArrayInputStream(code.getBytes()),xtextResourceSet.getLoadOptions());
-			for(Diagnostic warn : resource.getWarnings()) {
+			resource.load(new ByteArrayInputStream(code.getBytes()), xtextResourceSet.getLoadOptions());
+			for (Diagnostic warn : resource.getWarnings()) {
 				jpe.addException(warn.getLine(), warn.getColumn(), warn.getMessage());
 			}
-			for(Diagnostic err : resource.getWarnings()) {
+			for (Diagnostic err : resource.getWarnings()) {
 				jpe.addException(err.getLine(), err.getColumn(), err.getMessage());
 			}
 		} catch (IOException e) {
