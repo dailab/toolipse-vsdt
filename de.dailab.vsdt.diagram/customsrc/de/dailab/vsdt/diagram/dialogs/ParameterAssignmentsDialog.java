@@ -141,6 +141,8 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 					input = service.getInput();
 					output = service.getOutput();
 					break;
+				default:
+					break;
 				}
 			}
 		} else if (parentElement instanceof Event) {

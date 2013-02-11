@@ -421,6 +421,9 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			builder.append( (event.getActivity() != null ? "the Activity " + 
 					name(event.getActivity().getName()) : "an Activity ") +  
 					(throwing ? "is" : "will be") + " compensated");
+		case ESCALATION:
+			// TODO
+			break;
 		case MULTIPLE:
 			boolean isNotFirst= false;
 			if (event.getImplementation() != null) {
@@ -546,6 +549,9 @@ public class Bpmn2TextElementMapping extends MappingStage {
 				calledElement = "the Pool " + other.getName() + " in the Process Diagram " + other.getParent().getName();
 			}
 			builder.append(", which references " + calledElement + ".");
+			break;
+		case BUSINESSRULE:
+			// TODO
 			break;
 //		case INDEPENDENT:
 //			String processRef= activity.getProcessRef() != null 

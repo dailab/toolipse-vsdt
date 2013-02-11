@@ -813,6 +813,8 @@ public class MyJavaAudits {
 		case TERMINATE:
 			//none
 			break;
+		default:
+			break;
 		}
 		return ok;
 	}

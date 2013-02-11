@@ -83,6 +83,8 @@ public class Bpmn2JiacVValidation extends DefaultBpmnValidation {
 						"For an Intermediate Message Event, the Implementation must be a MessageChannel");
 			}
 			break;
+		default:
+			break;
 		}
 		
 		return ok;
@@ -103,6 +105,8 @@ public class Bpmn2JiacVValidation extends DefaultBpmnValidation {
 		case RECEIVE:
 			ok &= test(activity.getImplementation() instanceof MessageChannel, 
 					"Implementation must be MessageChannel for Send and Receive Task");
+			break;
+		default:
 			break;
 		}
 		

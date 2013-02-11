@@ -199,6 +199,8 @@ public class EventFigure extends Ellipse implements IDecoratableFigure {
 				g.drawPolygon(startrek);
 			}
 			break;
+		case NONE:
+			break;
 		}
 		// decorate figure
 		if (decorator != null) {

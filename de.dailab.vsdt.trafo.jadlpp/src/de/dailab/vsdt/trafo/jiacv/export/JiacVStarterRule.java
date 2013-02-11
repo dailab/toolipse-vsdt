@@ -110,6 +110,8 @@ public class JiacVStarterRule {
 		case MESSAGE:
 			buffer.append(TAB + "retract( jiacMessage);" + NL);
 			break;
+		default:
+			break;
 		}
 		buffer.append("end" + NL + NL);
 		

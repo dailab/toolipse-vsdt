@@ -113,6 +113,8 @@ public class JiacVResultSaver extends MappingResultSaver {
 							objects = new Serializable[] {DateFormat.getInstance().parse(expression)};
 						}
 						break;
+					default:
+						break;
 					}
 				} catch (Exception e) {
 					System.err.println("Could not create starter for Event " + event);

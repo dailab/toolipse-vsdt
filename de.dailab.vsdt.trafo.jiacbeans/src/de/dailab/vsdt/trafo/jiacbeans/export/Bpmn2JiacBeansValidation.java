@@ -134,6 +134,8 @@ public class Bpmn2JiacBeansValidation extends DefaultBpmnValidation {
 			ok &= test(activity.getImplementation() instanceof MessageChannel, 
 					"Implementation must be MessageChannel for Send and Receive Task");
 			break;
+		default:
+			break;
 		}
 		return ok;
 	}
