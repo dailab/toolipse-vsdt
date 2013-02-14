@@ -46,7 +46,8 @@ public class Bpmn2JiacVValidation extends DefaultBpmnValidation {
 	@Override
 	protected boolean visitBusinessProcessSystem(BusinessProcessSystem bps) {
 		boolean isOk= super.visitBusinessProcessSystem(bps);
-		isOk &= test(bps.isExecutable(), "Business Process System must be Executable");
+		isOk &= test(bps.isExecutable(), "Business Process System must be Executable." +
+				"Please check the corresponding Checkbox in the VSDT Meta Diagram Properties View.");
 		return isOk;
 	}
 
