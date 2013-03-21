@@ -1297,7 +1297,7 @@
 	<!-- commands -->
 	<extension point="org.eclipse.ui.commands">
 		 <?gmfgen generated="false"?>
-      	<category name="Easy Service Creation" description="Commands related to the VSDT." id="de.dailab.vsdt.diagram.commands" />
+      	<category name="VSDT BPMN Editor" description="Commands related to the VSDT BPMN Editor." id="de.dailab.vsdt.diagram.commands" />
 		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.initId" name="Initialize ID" />
 		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.initAllIds" name="Initialize All IDs" />
 		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.initMessage" name="Initialize Message" />
