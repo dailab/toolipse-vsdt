@@ -26,6 +26,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -64,6 +65,7 @@ public class MessageChannelItemProvider
 			super.getPropertyDescriptors(object);
 
 			addChannelPropertyDescriptor(object);
+			addMessageGroupPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -91,6 +93,28 @@ public class MessageChannelItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Message Group feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMessageGroupPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_MessageChannel_messageGroup_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_MessageChannel_messageGroup_feature", "_UI_MessageChannel_type"),
+				 VsdtPackage.Literals.MESSAGE_CHANNEL__MESSAGE_GROUP,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -103,6 +127,8 @@ public class MessageChannelItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(VsdtPackage.Literals.MESSAGE_CHANNEL__PAYLOAD);
+			childrenFeatures.add(VsdtPackage.Literals.MESSAGE_CHANNEL__SENDER);
+			childrenFeatures.add(VsdtPackage.Literals.MESSAGE_CHANNEL__RECEIVER);
 		}
 		return childrenFeatures;
 	}
@@ -139,7 +165,8 @@ public class MessageChannelItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_MessageChannel_type");
+		MessageChannel messageChannel = (MessageChannel)object;
+		return getString("_UI_MessageChannel_type") + " " + messageChannel.isMessageGroup();
 	}
 
 	/**
@@ -154,7 +181,12 @@ public class MessageChannelItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(MessageChannel.class)) {
+			case VsdtPackage.MESSAGE_CHANNEL__MESSAGE_GROUP:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case VsdtPackage.MESSAGE_CHANNEL__PAYLOAD:
+			case VsdtPackage.MESSAGE_CHANNEL__SENDER:
+			case VsdtPackage.MESSAGE_CHANNEL__RECEIVER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -176,6 +208,40 @@ public class MessageChannelItemProvider
 			(createChildParameter
 				(VsdtPackage.Literals.MESSAGE_CHANNEL__PAYLOAD,
 				 VsdtFactory.eINSTANCE.createProperty()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(VsdtPackage.Literals.MESSAGE_CHANNEL__SENDER,
+				 VsdtFactory.eINSTANCE.createProperty()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(VsdtPackage.Literals.MESSAGE_CHANNEL__RECEIVER,
+				 VsdtFactory.eINSTANCE.createProperty()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == VsdtPackage.Literals.MESSAGE_CHANNEL__PAYLOAD ||
+			childFeature == VsdtPackage.Literals.MESSAGE_CHANNEL__SENDER ||
+			childFeature == VsdtPackage.Literals.MESSAGE_CHANNEL__RECEIVER;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

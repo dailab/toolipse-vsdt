@@ -17,6 +17,9 @@ package de.dailab.vsdt;
  * <ul>
  *   <li>{@link de.dailab.vsdt.MessageChannel#getChannel <em>Channel</em>}</li>
  *   <li>{@link de.dailab.vsdt.MessageChannel#getPayload <em>Payload</em>}</li>
+ *   <li>{@link de.dailab.vsdt.MessageChannel#getSender <em>Sender</em>}</li>
+ *   <li>{@link de.dailab.vsdt.MessageChannel#getReceiver <em>Receiver</em>}</li>
+ *   <li>{@link de.dailab.vsdt.MessageChannel#isMessageGroup <em>Message Group</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,5 +79,83 @@ public interface MessageChannel extends Implementation {
 	 * @generated
 	 */
 	void setPayload(Property value);
+
+	/**
+	 * Returns the value of the '<em><b>Sender</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Sender</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Sender</em>' containment reference.
+	 * @see #setSender(Property)
+	 * @see de.dailab.vsdt.VsdtPackage#getMessageChannel_Sender()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Property getSender();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.MessageChannel#getSender <em>Sender</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Sender</em>' containment reference.
+	 * @see #getSender()
+	 * @generated
+	 */
+	void setSender(Property value);
+
+	/**
+	 * Returns the value of the '<em><b>Receiver</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Receiver</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Receiver</em>' containment reference.
+	 * @see #setReceiver(Property)
+	 * @see de.dailab.vsdt.VsdtPackage#getMessageChannel_Receiver()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Property getReceiver();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.MessageChannel#getReceiver <em>Receiver</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Receiver</em>' containment reference.
+	 * @see #getReceiver()
+	 * @generated
+	 */
+	void setReceiver(Property value);
+
+	/**
+	 * Returns the value of the '<em><b>Message Group</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Message Group</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Message Group</em>' attribute.
+	 * @see #setMessageGroup(boolean)
+	 * @see de.dailab.vsdt.VsdtPackage#getMessageChannel_MessageGroup()
+	 * @model
+	 * @generated
+	 */
+	boolean isMessageGroup();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.MessageChannel#isMessageGroup <em>Message Group</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Message Group</em>' attribute.
+	 * @see #isMessageGroup()
+	 * @generated
+	 */
+	void setMessageGroup(boolean value);
 
 } // MessageChannel

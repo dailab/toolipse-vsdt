@@ -1539,6 +1539,33 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getMessageChannel_Sender() {
+		return (EReference)messageChannelEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMessageChannel_Receiver() {
+		return (EReference)messageChannelEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMessageChannel_MessageGroup() {
+		return (EAttribute)messageChannelEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getService() {
 		return serviceEClass;
 	}
@@ -2297,6 +2324,9 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		messageChannelEClass = createEClass(MESSAGE_CHANNEL);
 		createEReference(messageChannelEClass, MESSAGE_CHANNEL__CHANNEL);
 		createEReference(messageChannelEClass, MESSAGE_CHANNEL__PAYLOAD);
+		createEReference(messageChannelEClass, MESSAGE_CHANNEL__SENDER);
+		createEReference(messageChannelEClass, MESSAGE_CHANNEL__RECEIVER);
+		createEAttribute(messageChannelEClass, MESSAGE_CHANNEL__MESSAGE_GROUP);
 
 		serviceEClass = createEClass(SERVICE);
 		createEAttribute(serviceEClass, SERVICE__TYPE);
@@ -2617,6 +2647,9 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		initEClass(messageChannelEClass, MessageChannel.class, "MessageChannel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMessageChannel_Channel(), this.getExpression(), null, "channel", null, 1, 1, MessageChannel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMessageChannel_Payload(), this.getProperty(), null, "payload", null, 0, 1, MessageChannel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMessageChannel_Sender(), this.getProperty(), null, "sender", null, 0, 1, MessageChannel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMessageChannel_Receiver(), this.getProperty(), null, "receiver", null, 0, 1, MessageChannel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMessageChannel_MessageGroup(), ecorePackage.getEBoolean(), "messageGroup", null, 0, 1, MessageChannel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(serviceEClass, Service.class, "Service", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getService_Type(), ecorePackage.getEString(), "type", null, 1, 1, Service.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

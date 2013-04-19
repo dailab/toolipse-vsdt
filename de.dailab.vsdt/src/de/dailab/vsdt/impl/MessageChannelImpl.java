@@ -26,6 +26,9 @@ import de.dailab.vsdt.VsdtPackage;
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.MessageChannelImpl#getChannel <em>Channel</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.MessageChannelImpl#getPayload <em>Payload</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.MessageChannelImpl#getSender <em>Sender</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.MessageChannelImpl#getReceiver <em>Receiver</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.MessageChannelImpl#isMessageGroup <em>Message Group</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,6 +54,46 @@ public class MessageChannelImpl extends ImplementationImpl implements MessageCha
 	 * @ordered
 	 */
 	protected Property payload;
+
+	/**
+	 * The cached value of the '{@link #getSender() <em>Sender</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSender()
+	 * @generated
+	 * @ordered
+	 */
+	protected Property sender;
+
+	/**
+	 * The cached value of the '{@link #getReceiver() <em>Receiver</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReceiver()
+	 * @generated
+	 * @ordered
+	 */
+	protected Property receiver;
+
+	/**
+	 * The default value of the '{@link #isMessageGroup() <em>Message Group</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isMessageGroup()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean MESSAGE_GROUP_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isMessageGroup() <em>Message Group</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isMessageGroup()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean messageGroup = MESSAGE_GROUP_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -162,6 +205,113 @@ public class MessageChannelImpl extends ImplementationImpl implements MessageCha
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Property getSender() {
+		return sender;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSender(Property newSender, NotificationChain msgs) {
+		Property oldSender = sender;
+		sender = newSender;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VsdtPackage.MESSAGE_CHANNEL__SENDER, oldSender, newSender);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSender(Property newSender) {
+		if (newSender != sender) {
+			NotificationChain msgs = null;
+			if (sender != null)
+				msgs = ((InternalEObject)sender).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VsdtPackage.MESSAGE_CHANNEL__SENDER, null, msgs);
+			if (newSender != null)
+				msgs = ((InternalEObject)newSender).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VsdtPackage.MESSAGE_CHANNEL__SENDER, null, msgs);
+			msgs = basicSetSender(newSender, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.MESSAGE_CHANNEL__SENDER, newSender, newSender));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Property getReceiver() {
+		return receiver;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetReceiver(Property newReceiver, NotificationChain msgs) {
+		Property oldReceiver = receiver;
+		receiver = newReceiver;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VsdtPackage.MESSAGE_CHANNEL__RECEIVER, oldReceiver, newReceiver);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReceiver(Property newReceiver) {
+		if (newReceiver != receiver) {
+			NotificationChain msgs = null;
+			if (receiver != null)
+				msgs = ((InternalEObject)receiver).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VsdtPackage.MESSAGE_CHANNEL__RECEIVER, null, msgs);
+			if (newReceiver != null)
+				msgs = ((InternalEObject)newReceiver).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VsdtPackage.MESSAGE_CHANNEL__RECEIVER, null, msgs);
+			msgs = basicSetReceiver(newReceiver, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.MESSAGE_CHANNEL__RECEIVER, newReceiver, newReceiver));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isMessageGroup() {
+		return messageGroup;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMessageGroup(boolean newMessageGroup) {
+		boolean oldMessageGroup = messageGroup;
+		messageGroup = newMessageGroup;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.MESSAGE_CHANNEL__MESSAGE_GROUP, oldMessageGroup, messageGroup));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -169,6 +319,10 @@ public class MessageChannelImpl extends ImplementationImpl implements MessageCha
 				return basicSetChannel(null, msgs);
 			case VsdtPackage.MESSAGE_CHANNEL__PAYLOAD:
 				return basicSetPayload(null, msgs);
+			case VsdtPackage.MESSAGE_CHANNEL__SENDER:
+				return basicSetSender(null, msgs);
+			case VsdtPackage.MESSAGE_CHANNEL__RECEIVER:
+				return basicSetReceiver(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -185,6 +339,12 @@ public class MessageChannelImpl extends ImplementationImpl implements MessageCha
 				return getChannel();
 			case VsdtPackage.MESSAGE_CHANNEL__PAYLOAD:
 				return getPayload();
+			case VsdtPackage.MESSAGE_CHANNEL__SENDER:
+				return getSender();
+			case VsdtPackage.MESSAGE_CHANNEL__RECEIVER:
+				return getReceiver();
+			case VsdtPackage.MESSAGE_CHANNEL__MESSAGE_GROUP:
+				return isMessageGroup();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -202,6 +362,15 @@ public class MessageChannelImpl extends ImplementationImpl implements MessageCha
 				return;
 			case VsdtPackage.MESSAGE_CHANNEL__PAYLOAD:
 				setPayload((Property)newValue);
+				return;
+			case VsdtPackage.MESSAGE_CHANNEL__SENDER:
+				setSender((Property)newValue);
+				return;
+			case VsdtPackage.MESSAGE_CHANNEL__RECEIVER:
+				setReceiver((Property)newValue);
+				return;
+			case VsdtPackage.MESSAGE_CHANNEL__MESSAGE_GROUP:
+				setMessageGroup((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -221,6 +390,15 @@ public class MessageChannelImpl extends ImplementationImpl implements MessageCha
 			case VsdtPackage.MESSAGE_CHANNEL__PAYLOAD:
 				setPayload((Property)null);
 				return;
+			case VsdtPackage.MESSAGE_CHANNEL__SENDER:
+				setSender((Property)null);
+				return;
+			case VsdtPackage.MESSAGE_CHANNEL__RECEIVER:
+				setReceiver((Property)null);
+				return;
+			case VsdtPackage.MESSAGE_CHANNEL__MESSAGE_GROUP:
+				setMessageGroup(MESSAGE_GROUP_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -237,8 +415,30 @@ public class MessageChannelImpl extends ImplementationImpl implements MessageCha
 				return channel != null;
 			case VsdtPackage.MESSAGE_CHANNEL__PAYLOAD:
 				return payload != null;
+			case VsdtPackage.MESSAGE_CHANNEL__SENDER:
+				return sender != null;
+			case VsdtPackage.MESSAGE_CHANNEL__RECEIVER:
+				return receiver != null;
+			case VsdtPackage.MESSAGE_CHANNEL__MESSAGE_GROUP:
+				return messageGroup != MESSAGE_GROUP_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (messageGroup: ");
+		result.append(messageGroup);
+		result.append(')');
+		return result.toString();
 	}
 
 } //MessageChannelImpl

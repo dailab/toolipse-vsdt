@@ -158,8 +158,17 @@ public class VsdtHelper {
 		}
 		if (object instanceof MessageChannel) {
 			MessageChannel channel = (MessageChannel) object;
-			return channel.getPayload() == null ? new ArrayList<Property>() : 
-					Arrays.asList(channel.getPayload());
+			if (channel.getSender() == null) {
+				channel.setSender(VsdtElementFactory.createProperty("__sender", "string"));
+			}
+			if (channel.getReceiver() == null) {
+				channel.setReceiver(VsdtElementFactory.createProperty("__receiver", "string"));
+			}
+			List<Property> props = new ArrayList<Property>(Arrays.asList(channel.getSender(), channel.getReceiver()));
+			if (channel.getPayload() != null) {
+				props.add(channel.getPayload());
+			}
+			return props;
 		}
 		if (object instanceof Service) {
 			Service service = (Service) object;

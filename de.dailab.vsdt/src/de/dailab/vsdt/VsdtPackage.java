@@ -3523,13 +3523,40 @@ public interface VsdtPackage extends EPackage {
 	int MESSAGE_CHANNEL__PAYLOAD = IMPLEMENTATION_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Sender</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_CHANNEL__SENDER = IMPLEMENTATION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Receiver</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_CHANNEL__RECEIVER = IMPLEMENTATION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Message Group</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MESSAGE_CHANNEL__MESSAGE_GROUP = IMPLEMENTATION_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Message Channel</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_CHANNEL_FEATURE_COUNT = IMPLEMENTATION_FEATURE_COUNT + 2;
+	int MESSAGE_CHANNEL_FEATURE_COUNT = IMPLEMENTATION_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.ServiceImpl <em>Service</em>}' class.
@@ -5235,6 +5262,39 @@ public interface VsdtPackage extends EPackage {
 	EReference getMessageChannel_Payload();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link de.dailab.vsdt.MessageChannel#getSender <em>Sender</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Sender</em>'.
+	 * @see de.dailab.vsdt.MessageChannel#getSender()
+	 * @see #getMessageChannel()
+	 * @generated
+	 */
+	EReference getMessageChannel_Sender();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link de.dailab.vsdt.MessageChannel#getReceiver <em>Receiver</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Receiver</em>'.
+	 * @see de.dailab.vsdt.MessageChannel#getReceiver()
+	 * @see #getMessageChannel()
+	 * @generated
+	 */
+	EReference getMessageChannel_Receiver();
+
+	/**
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.MessageChannel#isMessageGroup <em>Message Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Message Group</em>'.
+	 * @see de.dailab.vsdt.MessageChannel#isMessageGroup()
+	 * @see #getMessageChannel()
+	 * @generated
+	 */
+	EAttribute getMessageChannel_MessageGroup();
+
+	/**
 	 * Returns the meta object for class '{@link de.dailab.vsdt.Service <em>Service</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6919,6 +6979,30 @@ public interface VsdtPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MESSAGE_CHANNEL__PAYLOAD = eINSTANCE.getMessageChannel_Payload();
+
+		/**
+		 * The meta object literal for the '<em><b>Sender</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MESSAGE_CHANNEL__SENDER = eINSTANCE.getMessageChannel_Sender();
+
+		/**
+		 * The meta object literal for the '<em><b>Receiver</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MESSAGE_CHANNEL__RECEIVER = eINSTANCE.getMessageChannel_Receiver();
+
+		/**
+		 * The meta object literal for the '<em><b>Message Group</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MESSAGE_CHANNEL__MESSAGE_GROUP = eINSTANCE.getMessageChannel_MessageGroup();
 
 		/**
 		 * The meta object literal for the '{@link de.dailab.vsdt.impl.ServiceImpl <em>Service</em>}' class.
