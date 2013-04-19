@@ -397,8 +397,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				
 					// check condition and start process
 					Sequence runWorkflow = createSequence(
-							createCode(currentWorkflow.getName() + "();"),
-							createCode(executedFlag + " = now;"));
+							createCode(executedFlag + " = now;"), 
+							createCode(currentWorkflow.getName() + "();"));
 					IfThenElse checkAndRun = createIfThenElse(condition, runWorkflow, null);
 
 					// add to execute method
@@ -576,7 +576,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				Script content = visitFlowObjects(activity.getContainedFlowObjects());
 				content = wrapIntoLoop(activity, content);
 				content = buildSequence(content, null, activity.getAssignments(), true);
-				currentSubProcess.getMethods().add(0, createMethod("run", content));
+				currentSubProcess.getMethods().add(0, createMethod("run", content, "Exception"));
 				
 				// create and run subprocess instance
 				String variable = "subprocess_" + activity.getName();
@@ -1276,7 +1276,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		String address = channel.getChannel().getExpression();
 		String payload = channel.getPayload() != null ?
 				channel.getPayload().getName() : "null";
-		return createCode("send(\"" + address + "\", " + payload + ");");
+		// TODO send for non-group-addresses
+		return createCode("send(" + payload + ", \"" + address + "\", true);");
 	}
 	
 	/**
@@ -1298,7 +1299,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				channel.getPayload().getType() + ".class" : "null";
 		String cast = channel.getPayload() != null ?
 				"(" + channel.getPayload().getType() + ") " : "";
-		return createCode(assign + cast + "receive(\"" + address + "\", " + clazz + ", -1);");
+		return createCode(assign + cast + "receive(" + clazz + ", \"" + address + "\", -1);");
 	}
 	
 	/**
