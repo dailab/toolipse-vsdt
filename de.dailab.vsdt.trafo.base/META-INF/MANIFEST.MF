@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Transformation Rules Framework
 Bundle-SymbolicName: de.dailab.vsdt.trafo.base;singleton:=true
-Bundle-Version: 1.4.2.20120323
+Bundle-Version: 1.4.4.20130422
 Bundle-ClassPath: .,
  lib/log4j-1.2.15.jar
 Bundle-Vendor: DAI-Labor, TU Berlin
