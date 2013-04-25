@@ -895,12 +895,14 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				threads.getScripts().add(createCode("EventHandler " + threadName + " = new " + className + "(" + parameters + ")" + impl + ";"));
 				starter.getScripts().add(createCode(threadName + ".start();"));
 				stopper.getScripts().add(createCode(threadName + ".stopEventHandler();"));
+				// TODO das ganze starten und stoppen der threads in hilfsmethode auslagern?
 				
 				// create compensation code
 				Script script = visitFlowObject(ehCase.getCompensationElement());
 				if (script != null) {
 					compensation.getScripts().add(createIfThenElse(threadName + ".isTriggered()", script, null));
 				}
+				// TODO assign message payloads to variables!
 			}
 		}
 		
