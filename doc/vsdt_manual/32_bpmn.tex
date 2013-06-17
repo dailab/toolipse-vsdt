@@ -81,7 +81,9 @@ Further all three Event types have a variety of subtypes which will determine
 e.g. a Start Event's \emph{trigger} and an end Event's \emph{result}.  Each of
 these subtypes can be distinguished by a different icon in the center of the Event
 figure (see figure \ref{fig:triggers}) and results in a number of attributes to
-be set for the Event.
+be set for the Event. For more about the various event types, please refer to the
+BPMN specification~\cite{omg2009bpmn}. Please note that not all the event types
+are fully supported in the VSDT in general or in some particular transformation.
 
 \begin{figure}[ht]
 	\centering
@@ -91,6 +93,21 @@ be set for the Event.
 	Multiple}
 	\label{fig:triggers}
 \end{figure}
+
+\begin{itemize}
+	\item \emph{None:} As a start event, this is triggered once when the application starts; as an intermediate or end event, this has no effect.
+	\item \emph{Message:} Can be used to send- or receive messages or for invoking services, or for marking the process itself as a service.
+	\item \emph{Timer:} As a start event, triggers the process at certain times or in certain intervals; as an intermediate evens, makes the process pause for some time.
+	\item \emph{Rule:} Makes the process start or pause until the specified condition is fulfilled.
+	\item \emph{Signal:} Sends or receives a signal to or from another signal event.
+	\item \emph{Escalation:} Similar to the signal event.
+	\item \emph{Terminate:} Terminates the entire process (not only the current pool/swimlane).
+	\item \emph{Cancel:} Triggered when a transaction has been cancelled.
+	\item \emph{Compensate:} Used to clean up a cancelled transaction.
+	\item \emph{Error:} Used to throw (end event) or catch (intermediate event) some error.
+	\item \emph{Multiple:} Allows to combine multiple event types and their respective effects.
+\end{itemize}
+
 
 Basically, an \textbf{Activity} is something that is \emph{done}.  Activities
 subdivide in \emph{Tasks}, which are atomic Activities, and \emph{Sub Processes},
@@ -110,8 +127,23 @@ Like Events, Activities also have some specializations, each one with special
 attributes: They can be for instance a \emph{Send} or a \emph{Receive} Task, stand
 for some \emph{Manual} work to be done, execute a \emph{Script} or represent the
 call to a whole other business process, just to name a few.  All of these subtypes
-have the same graphical representation, but modelers and modeling tools are
-free to extend the diagrams with additional markers for the subtypes.
+have the same graphical representation, but modelers and modeling tools are free
+to extend the diagrams with additional markers for the subtypes.  For more about
+the various event types, please refer to the BPMN specification~\cite{omg2009bpmn}.
+
+\begin{itemize}
+	\item \emph{None:} Do nothing, except assignments associated to that activity.
+	\item \emph{Service:} Invoke some service, use assignments to link to local variables.
+	\item \emph{Receive:} Wait for and receive some message.
+	\item \emph{Send:} Send a message.
+	\item \emph{User:} Invoke some service which typically requires some user interaction.
+	\item \emph{Manual:} Perform some manual work, outside of the automated process.
+	\item \emph{Script:} Can be used to insert arbitrary code into the generated process.
+	\item \emph{Business Rule:} Invoke some service, triggering a business rule engine.
+	\item \emph{Embedded:} Make the task an embedded subprocess, which an hold other tasks.
+	\item \emph{Call:} A reference to another activity or process.
+\end{itemize}
+
 
 What makes Activities stand out from the other Flow Objects is that they can
 \emph{loop}.  Although in BPMN loops also can be defined by simply connecting a
@@ -219,13 +251,13 @@ BPMN can be seen as having at least three levels of complexity.
 	\item Basic Types: All diagrams are made up of the basic elements of the four
 	categories: Events, Activities, Gateways, Connections, Pools and Artifacts.
 	These can be understood easily even by non-experts.
-	
+
 	\item Subtypes: The Flow Objects each have several subtypes, e.g.  Timer
 	Events, Receive Tasks and Inclusive Gateways.  Using the same shapes as the
 	basic elements enriched with some additional graphical information, like an
 	icon, the symbol's basic type can be clearly identified by non-experts while
 	providing additional visual information for the professionals.
-	
+
 	\item Attributes: Each of the BPMN element types provides a large number of
 	both primitive and complex attributes.  While some of these attributes are
 	visible in the diagram, like a flow object's name or subtype, most are

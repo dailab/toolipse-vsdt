@@ -33,18 +33,18 @@ the modeling assistance in use.
 	show up, showing the elements that can be placed in this compartment.  Thus
 	one does not have to go all the way back to the palette for creating a new
 	node.
-	
+
 	\item When resting the mouse on top of a node, small arrows going in and out
 	of the node will appear.  By dragging these arrows new connections can be
 	drawn.\footnote{Depending on the location, different connections will be
 	offered: In the top and bottom region of a node incoming and outgoing Message
 	Flows, in the left half incoming Sequence Flows and Associations, and in the
 	right half outgoing Sequence Flows and Associations respectively.}
-	
+
 	\item When a connection is drawn and the mouse button is released over the
 	canvas or another compartment, a node can be created in that place along with
 	the connection.
-	
+
 	\item In case multiple node- or connection-types can be created using a given
 	tool in a given context, the user will be prompted to select one.
 \end{itemize}
@@ -62,6 +62,7 @@ In case you do not like this feature, it can be disabled in the Preferences.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Appending Flow Objects}
+
 Even faster than using the GMF modeling assistance, the \emph{Append} Actions can
 be used for quickly appending new Flow Objects after existing ones.  It can be
 reached through a Flow Object's context menu, or -- more conveniently -- by
@@ -74,6 +75,7 @@ action and the TAB key to navigate between the existing nodes.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Connecting Flow Objects to a Sequence}
+
 A group of Flow Objects can be selected and connected with Sequence Flows using
 \emph{Connect to Sequence} Action or the keyboard shortcut \texttt{Ctrl+Shift+C}.
 The Flow Objects will be connected in the order they have been selected.  Therefore
@@ -139,17 +141,17 @@ The various dialogs can be accessed in the following ways:
 	Flow.\footnote{In the case of Message Flows, the Properties of the underlying
 	Message, if any, will be edited, and in the case of Pools, the Properties of
 	the Pool's Process.}
-	
+
 	\item The \emph{Organize Assignments Dialog} can be accessed via the context
 	menu and property sheet of Pools and Flow Objects, and by double-clicking
 	Flow Objects.
-	
+
 	\item The \emph{Organize Message Channels Dialog} can be accessed via the
 	property sheet of the Business Process Diagram.
-	
+
 	\item The \emph{Organize Services Dialog} can be accessed via the property
 	sheet of the Business Process Diagram.
-	
+
 	\item The \emph{Organize Data Types Dialog} can be accessed via the property
 	sheet of the Business Process Diagram.
 \end{itemize}
@@ -312,7 +314,7 @@ is not applicable for non-structured diagram.
 	\caption{\textsc{CalculateBox}($element,~ topLeft,~ layoutMap$)}
 	\label{lst:layout2}
 	\begin{algorithmic}
-		\STATE $hint \leftarrow topLeft$		
+		\STATE $hint \leftarrow topLeft$
 		\IF{$element$ is atomic}
 			\STATE $box \leftarrow (topLeft.x,~topLeft.y,~\textsc{Width}(element),~\textsc{Height}(element))$
 		\ELSE
@@ -378,7 +380,7 @@ available (or planned for the future):
 	when coming to a branching point.  This mode is intended for presentation of
 	documentary processes, but also for detecting e.g.\ deadlocks or other kinds
 	of structural conflicts.
-	
+
 	\item \emph{Interpretation}: In this mode, Expressions used for instance in
 	Assignments and Conditions are evaluated\footnote{Note that only Expressions
 	given in the VSDT Expression Language (VXL) can be automatically evaluated,
@@ -387,7 +389,7 @@ available (or planned for the future):
 	Still, the user has to provide initial parameters and return values for
 	service calls.  This mode is especially useful for testing the various
 	Conditions and Assignments.
-	
+
 	\item \emph{Execution}: This mode integrates with a Service Directory, meaning
 	that in addition to the \emph{Interpretation} mode, services used in the
 	diagram will actually be invoked and their return values will be bound to the
@@ -404,7 +406,7 @@ Note that the latter two methods can be used only for executable process diagram
 
 \subsection{Text Generation}
 \label{sec:user_features_text}
- 
+
 The VSDT features a powerful transformation of the Business Process Diagram to
 natural language text.  Currently only English text is supported, but other
 languages may be included in the future, as well.  The output text can have
