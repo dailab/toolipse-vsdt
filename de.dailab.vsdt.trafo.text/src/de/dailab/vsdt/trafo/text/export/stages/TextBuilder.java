@@ -1,8 +1,10 @@
 package de.dailab.vsdt.trafo.text.export.stages;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 /**
  * This is a pseudo-abstract superclass for all kinds of text / documentation
@@ -63,7 +65,10 @@ public class TextBuilder {
 			file.getParentFile().mkdirs();
 		}
 		file.createNewFile();
-		FileWriter writer= new FileWriter(file);
+		//FileWriter writer= new FileWriter(file);
+		//writer.write(getText());
+		//writer.close();
+		Writer writer = new OutputStreamWriter(new FileOutputStream(file), "utf8");
 		writer.write(getText());
 		writer.close();
 	}
