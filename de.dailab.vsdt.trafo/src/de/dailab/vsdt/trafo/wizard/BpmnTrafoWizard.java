@@ -137,7 +137,7 @@ public abstract class BpmnTrafoWizard extends Wizard {
 
 						// Transform!
 						Object sourceObject = getSouceObject(fileURI);
-						String targetDirectory = optionsPage.getPath() + FS + "target" + FS + getModelName(sourceObject) + FS;
+						String targetDirectory = optionsPage.getPath() + FS + "vsdt-generated" + FS + getModelName(sourceObject) + FS;
 						boolean trafoOk= performTransformation(sourceObject, targetDirectory);
 
 						// show dialog
