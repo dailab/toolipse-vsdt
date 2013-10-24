@@ -1,74 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.dailab.vsdt.vxl2/src-gen"
-    editDirectory="/de.dailab.vsdt.vxl2.edit/src" editorDirectory="/de.dailab.vsdt.vxl2.editor/src"
-    modelPluginID="de.dailab.vsdt.vxl2" forceOverwrite="true" modelName="Vxl" updateClasspath="false"
-    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="5.0"
-    copyrightFields="false" editPluginID="de.dailab.vsdt.vxl2.edit" editorPluginID="de.dailab.vsdt.vxl2.editor">
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.dailab.vsdt.vxl2/src-gen" editDirectory="/de.dailab.vsdt.vxl2.edit/src"
+    editorDirectory="/de.dailab.vsdt.vxl2.editor/src" modelPluginID="de.dailab.vsdt.vxl2"
+    forceOverwrite="true" modelName="Vxl" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="de.dailab.vsdt.vxl2.edit"
+    editorPluginID="de.dailab.vsdt.vxl2.editor" runtimeVersion="2.9">
   <genPackages prefix="Vxl" basePackage="de.dailab.vsdt.vxl" disposableProviderFactory="true"
-      ecorePackage="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlOperator">
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlOperator/LT"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlOperator/LE"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlOperator/EQ"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlOperator/NEQ"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlOperator/GT"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlOperator/GE"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlOperator/ADD"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlOperator/SUB"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlOperator/MULT"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlOperator/DIV"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlOperator/MOD"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlOperator/AND"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlOperator/OR"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlOperator/CONCAT"/>
+      ecorePackage="Vxl.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Vxl.ecore#//VxlOperator">
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//VxlOperator/LT"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//VxlOperator/LE"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//VxlOperator/EQ"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//VxlOperator/NEQ"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//VxlOperator/GT"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//VxlOperator/GE"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//VxlOperator/ADD"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//VxlOperator/SUB"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//VxlOperator/MULT"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//VxlOperator/DIV"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//VxlOperator/MOD"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//VxlOperator/AND"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//VxlOperator/OR"/>
+      <genEnumLiterals ecoreEnumLiteral="Vxl.ecore#//VxlOperator/CONCAT"/>
     </genEnums>
-    <genClasses ecoreClass="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlTerm">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlTerm/head"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlTerm/operator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlTerm/tail"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlTerm">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlTerm/head"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlTerm/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlTerm/tail"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlElement"/>
-    <genClasses ecoreClass="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlBracketTerm">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlBracketTerm/term"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlElement"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlBracketTerm">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlBracketTerm/term"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlNegation">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlNegation/element"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlNegation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlNegation/element"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlMinus">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlMinus/element"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlMinus">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlMinus/element"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlCardinality">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlCardinality/element"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlCardinality">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlCardinality/element"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlVariable">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlVariable/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlVariable/accessor"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlVariable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlVariable/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlVariable/accessor"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlAccessor">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlAccessor/accessor"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlAccessor">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlAccessor/accessor"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlArrayAccessor">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlArrayAccessor/index"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlArrayAccessor">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlArrayAccessor/index"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlFieldAccessor">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlFieldAccessor/name"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlFieldAccessor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlFieldAccessor/name"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlList">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlList/empty"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlList/body"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlList">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlList/empty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlList/body"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlListElement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlListElement/first"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlListElement/rest"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlListElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlListElement/first"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlListElement/rest"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlValue">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlValue/const"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlValue/const"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlBooleanConst"/>
-    <genClasses ecoreClass="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlNullConst"/>
-    <genClasses ecoreClass="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlNumericConst"/>
-    <genClasses ecoreClass="platform:/resource/de.dailab.vsdt.vxl2/src-gen/de/dailab/vsdt/vxl/Vxl.ecore#//VxlStringConst"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlBooleanConst"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlNullConst"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlNumericConst"/>
+    <genClasses ecoreClass="Vxl.ecore#//VxlStringConst"/>
   </genPackages>
 </genmodel:GenModel>

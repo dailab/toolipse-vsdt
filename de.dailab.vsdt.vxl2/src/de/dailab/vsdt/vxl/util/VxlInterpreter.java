@@ -310,7 +310,7 @@ public class VxlInterpreter {
 	 * @param tail		the tail term (to the right)
 	 * @return			result of the operation, applied to the given terms
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked","rawtypes"})
 	private Serializable evaluateOperation(VxlOperator operator, Object head, Object tail) {
 		switch (operator) {
 		case CONCAT:

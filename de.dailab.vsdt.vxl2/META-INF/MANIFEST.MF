@@ -27,4 +27,6 @@ Export-Package: de.dailab.vsdt.vxl,
  de.dailab.vsdt.vxl.validation,
  de.dailab.vsdt.vxl.vxl,
  de.dailab.vsdt.vxl.vxl.impl,
- de.dailab.vsdt.vxl.vxl.util
+ de.dailab.vsdt.vxl.vxl.util,
+ de.dailab.vsdt.vxl.scoping,
+ de.dailab.vsdt.vxl.formatting

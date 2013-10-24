@@ -10,14 +10,13 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import com.google.inject.Inject;
 
 import de.dailab.vsdt.vxl.services.VxlGrammarAccess;
 
 @SuppressWarnings("all")
-public class VxlParsetreeConstructor extends AbstractParseTreeConstructor {
+public class VxlParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private VxlGrammarAccess grammarAccess;

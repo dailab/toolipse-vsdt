@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package de.dailab.vsdt.vxl.vxl.impl;
 
@@ -51,7 +48,7 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
   {
     try
     {
-      VxlFactory theVxlFactory = (VxlFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.dailab.de/vsdt/vxl/Vxl"); 
+      VxlFactory theVxlFactory = (VxlFactory)EPackage.Registry.INSTANCE.getEFactory(VxlPackage.eNS_URI);
       if (theVxlFactory != null)
       {
         return theVxlFactory;
