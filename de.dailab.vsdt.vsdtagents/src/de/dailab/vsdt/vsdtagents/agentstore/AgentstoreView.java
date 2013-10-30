@@ -9,7 +9,11 @@ import java.util.List;
 import javax.xml.bind.JAXB;
 
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.methods.MultipartPostMethod;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.multipart.FilePart;
+import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
+import org.apache.commons.httpclient.methods.multipart.Part;
+import org.apache.commons.httpclient.methods.multipart.StringPart;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.ui.URIEditorInput;
@@ -38,8 +42,8 @@ import org.eclipse.ui.part.FileEditorInput;
 import de.dailab.common.swt.views.AbstractContentProvider;
 import de.dailab.common.swt.views.AbstractLabelProvider;
 import de.dailab.common.swt.views.AbstractStructuredViewerView;
-import de.dailab.vsdt.vsdtagents.VsdtAgents;
 import de.dailab.vsdt.vsdtagents.Util;
+import de.dailab.vsdt.vsdtagents.VsdtAgents;
 import de.dailab.vsdt.vsdtagents.agentstore.model.ListType;
 import de.dailab.vsdt.vsdtagents.agentstore.model.ScriptType;
 
@@ -325,10 +329,8 @@ public class AgentstoreView extends AbstractStructuredViewerView {
 												String serviceSrc = serviceSrcs.get(i);
 												String name = baseName + "_" + i;
 												
-												// TODO use real tmp files
-												
 												// save to temporary file
-												File file = new File(name + ".jadl");
+												File file = File.createTempFile(name, ".jadl");
 												System.out.println(file.getAbsolutePath());
 												file.createNewFile();
 												FileWriter writer = new FileWriter(file);
@@ -336,20 +338,22 @@ public class AgentstoreView extends AbstractStructuredViewerView {
 												writer.close();
 												
 												// upload file using apache commons
-												MultipartPostMethod mPost = new MultipartPostMethod(url);
-												mPost.addParameter("versionNr", version);
-												mPost.addParameter("name", name);
-												mPost.addParameter("description", description);
-												mPost.addParameter("scriptFile", file);
+												PostMethod mPost = new PostMethod(url);
+												mPost.setRequestEntity(new MultipartRequestEntity(new Part[] {
+																new StringPart("versionNr", version),
+																new StringPart("name", name),
+																new StringPart("description", description),
+																new FilePart("scriptFile", file),
+														}, mPost.getParams()));
 												
 												HttpClient client = new HttpClient();
-												client.setConnectionTimeout(5000);
+												client.getHttpConnectionManager().getParams().setConnectionTimeout(5000);
 												client.executeMethod(mPost);
 												System.out.println("statusLine >>> " + mPost.getStatusLine());
 												mPost.releaseConnection();
 												
 												// delete file
-												file.delete();
+//												file.delete();
 											}
 											int n = serviceSrcs.size();
 											String msg = String.format("%d Agent Script%s added to AgentStore", n, (n==1 ? "" : "s"));

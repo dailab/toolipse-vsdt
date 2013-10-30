@@ -37,6 +37,7 @@ import de.dailab.jiactng.agentcore.ontology.IActionDescription;
  *
  * @author kuester
  */
+@SuppressWarnings("rawtypes")
 public class ServiceParameterDialog extends TitleAreaDialog {
 
 	/** Title for the Dialog */

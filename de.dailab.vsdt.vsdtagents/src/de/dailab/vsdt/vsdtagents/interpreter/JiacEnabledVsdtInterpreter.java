@@ -125,6 +125,8 @@ public class JiacEnabledVsdtInterpreter extends InterpretingSimulation {
 			case RECEIVE:
 				// TODO
 				break;
+			default:
+				break;
 			}
 		}
 	}
@@ -181,6 +183,8 @@ public class JiacEnabledVsdtInterpreter extends InterpretingSimulation {
 				if (activity.getImplementation() instanceof Service) {
 					services.add((Service) activity.getImplementation());
 				}
+				break;
+			default:
 				break;
 			}
 			if (activity.getActivityType() == ActivityType.EMBEDDED) {
