@@ -271,7 +271,11 @@ public class VxlInterpreter {
 			return "true".equals(((VxlBooleanConst) value).getConst());
 		}
 		if (value instanceof VxlNumericConst) {
-			return Double.parseDouble(((VxlNumericConst) value).getConst());
+			try {
+				return Integer.parseInt(((VxlNumericConst) value).getConst());
+			} catch (NumberFormatException e) {
+				return Double.parseDouble(((VxlNumericConst) value).getConst());
+			}
 		}
 		if (value instanceof VxlNullConst) {
 			return null;

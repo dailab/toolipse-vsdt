@@ -46,6 +46,9 @@ public class BpelImportWizard extends BpmnImportWizard {
 	@Override
 	protected void applyOptions() {
 		super.applyOptions();
+		if (mappingStages == null) {
+			initializeMappingStages();
+		}
 		if (optionsPage instanceof BpelImportWizardOptionsPage) {
 			BpelImportWizardOptionsPage page= (BpelImportWizardOptionsPage) optionsPage;
 			elementMapping.setIgnoreEmpty(page.isIgnoreEmpty());
