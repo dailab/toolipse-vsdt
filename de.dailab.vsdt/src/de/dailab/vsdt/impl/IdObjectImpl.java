@@ -29,7 +29,6 @@ import de.dailab.vsdt.util.VsdtHelper;
  *   <li>{@link de.dailab.vsdt.impl.IdObjectImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.IdObjectImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.IdObjectImpl#getId <em>Id</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.IdObjectImpl#getCategories <em>Categories</em>}</li>
  * </ul>
  * </p>
  *
@@ -95,16 +94,6 @@ public abstract class IdObjectImpl extends EObjectImpl implements IdObject {
 	 * @ordered
 	 */
 	protected String id = ID_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getCategories() <em>Categories</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCategories()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<String> categories;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -193,18 +182,6 @@ public abstract class IdObjectImpl extends EObjectImpl implements IdObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<String> getCategories() {
-		if (categories == null) {
-			categories = new EDataTypeUniqueEList<String>(String.class, this, VsdtPackage.ID_OBJECT__CATEGORIES);
-		}
-		return categories;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public String getNameOrId() {
@@ -231,8 +208,6 @@ public abstract class IdObjectImpl extends EObjectImpl implements IdObject {
 				return getDocumentation();
 			case VsdtPackage.ID_OBJECT__ID:
 				return getId();
-			case VsdtPackage.ID_OBJECT__CATEGORIES:
-				return getCategories();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -255,10 +230,6 @@ public abstract class IdObjectImpl extends EObjectImpl implements IdObject {
 			case VsdtPackage.ID_OBJECT__ID:
 				setId((String)newValue);
 				return;
-			case VsdtPackage.ID_OBJECT__CATEGORIES:
-				getCategories().clear();
-				getCategories().addAll((Collection<? extends String>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -280,9 +251,6 @@ public abstract class IdObjectImpl extends EObjectImpl implements IdObject {
 			case VsdtPackage.ID_OBJECT__ID:
 				setId(ID_EDEFAULT);
 				return;
-			case VsdtPackage.ID_OBJECT__CATEGORIES:
-				getCategories().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -301,8 +269,6 @@ public abstract class IdObjectImpl extends EObjectImpl implements IdObject {
 				return DOCUMENTATION_EDEFAULT == null ? documentation != null : !DOCUMENTATION_EDEFAULT.equals(documentation);
 			case VsdtPackage.ID_OBJECT__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case VsdtPackage.ID_OBJECT__CATEGORIES:
-				return categories != null && !categories.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -323,8 +289,6 @@ public abstract class IdObjectImpl extends EObjectImpl implements IdObject {
 		result.append(documentation);
 		result.append(", id: ");
 		result.append(id);
-		result.append(", categories: ");
-		result.append(categories);
 		result.append(')');
 		return result.toString();
 	}

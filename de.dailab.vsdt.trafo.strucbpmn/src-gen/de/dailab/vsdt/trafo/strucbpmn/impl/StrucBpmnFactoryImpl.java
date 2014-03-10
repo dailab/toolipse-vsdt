@@ -40,7 +40,7 @@ public class StrucBpmnFactoryImpl extends EFactoryImpl implements StrucBpmnFacto
 	 */
 	public static StrucBpmnFactory init() {
 		try {
-			StrucBpmnFactory theStrucBpmnFactory = (StrucBpmnFactory)EPackage.Registry.INSTANCE.getEFactory("http://de.dailab.vsdt.trafo.strucbpmn"); 
+			StrucBpmnFactory theStrucBpmnFactory = (StrucBpmnFactory)EPackage.Registry.INSTANCE.getEFactory(StrucBpmnPackage.eNS_URI);
 			if (theStrucBpmnFactory != null) {
 				return theStrucBpmnFactory;
 			}

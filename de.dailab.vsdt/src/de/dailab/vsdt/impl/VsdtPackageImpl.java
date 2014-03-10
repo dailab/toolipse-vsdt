@@ -1890,15 +1890,6 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getIdObject_Categories() {
-		return (EAttribute)idObjectEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getBusinessProcessSystem() {
 		return businessProcessSystemEClass;
 	}
@@ -2160,7 +2151,6 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		createEAttribute(idObjectEClass, ID_OBJECT__NAME);
 		createEAttribute(idObjectEClass, ID_OBJECT__DOCUMENTATION);
 		createEAttribute(idObjectEClass, ID_OBJECT__ID);
-		createEAttribute(idObjectEClass, ID_OBJECT__CATEGORIES);
 
 		businessProcessSystemEClass = createEClass(BUSINESS_PROCESS_SYSTEM);
 		createEAttribute(businessProcessSystemEClass, BUSINESS_PROCESS_SYSTEM__VERSION);
@@ -2447,7 +2437,6 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		initEAttribute(getIdObject_Name(), ecorePackage.getEString(), "name", null, 0, 1, IdObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getIdObject_Documentation(), ecorePackage.getEString(), "documentation", "", 0, 1, IdObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getIdObject_Id(), theXMLTypePackage.getID(), "id", null, 1, 1, IdObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getIdObject_Categories(), ecorePackage.getEString(), "categories", null, 0, -1, IdObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(idObjectEClass, ecorePackage.getEString(), "getNameOrId", 0, 1, IS_UNIQUE, IS_ORDERED);
 

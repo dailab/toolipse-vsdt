@@ -6,7 +6,6 @@
  */
 package de.dailab.vsdt;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -20,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.dailab.vsdt.IdObject#getName <em>Name</em>}</li>
  *   <li>{@link de.dailab.vsdt.IdObject#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link de.dailab.vsdt.IdObject#getId <em>Id</em>}</li>
- *   <li>{@link de.dailab.vsdt.IdObject#getCategories <em>Categories</em>}</li>
  * </ul>
  * </p>
  *
@@ -107,22 +105,6 @@ public interface IdObject extends EObject {
 	 * @generated
 	 */
 	void setDocumentation(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Categories</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Categories</em>' attribute list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Categories</em>' attribute list.
-	 * @see de.dailab.vsdt.VsdtPackage#getIdObject_Categories()
-	 * @model
-	 * @generated
-	 */
-	EList<String> getCategories();
 
 	/**
 	 * <!-- begin-user-doc -->

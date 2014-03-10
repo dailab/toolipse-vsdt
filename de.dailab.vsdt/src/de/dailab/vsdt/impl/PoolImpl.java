@@ -254,7 +254,7 @@ public class PoolImpl extends NodeImpl implements Pool {
 	 */
 	public BusinessProcessDiagram getParent() {
 		if (eContainerFeatureID() != VsdtPackage.POOL__PARENT) return null;
-		return (BusinessProcessDiagram)eContainer();
+		return (BusinessProcessDiagram)eInternalContainer();
 	}
 
 	/**

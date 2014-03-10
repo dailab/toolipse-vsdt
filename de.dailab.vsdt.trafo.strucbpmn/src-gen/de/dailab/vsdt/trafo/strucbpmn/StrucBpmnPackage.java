@@ -99,15 +99,6 @@ public interface StrucBpmnPackage extends EPackage {
 	int BPMN_SEQUENCE__ID = VsdtPackage.FLOW_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_SEQUENCE__CATEGORIES = VsdtPackage.FLOW_OBJECT__CATEGORIES;
-
-	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -242,15 +233,6 @@ public interface StrucBpmnPackage extends EPackage {
 	 * @ordered
 	 */
 	int BPMN_BLOCK__ID = VsdtPackage.FLOW_OBJECT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_BLOCK__CATEGORIES = VsdtPackage.FLOW_OBJECT__CATEGORIES;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
@@ -398,15 +380,6 @@ public interface StrucBpmnPackage extends EPackage {
 	int BPMN_BRANCH__ID = VsdtPackage.FLOW_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_BRANCH__CATEGORIES = VsdtPackage.FLOW_OBJECT__CATEGORIES;
-
-	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -550,15 +523,6 @@ public interface StrucBpmnPackage extends EPackage {
 	 * @ordered
 	 */
 	int BPMN_LOOP_BLOCK__ID = VsdtPackage.FLOW_OBJECT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_LOOP_BLOCK__CATEGORIES = VsdtPackage.FLOW_OBJECT__CATEGORIES;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
@@ -724,15 +688,6 @@ public interface StrucBpmnPackage extends EPackage {
 	int BPMN_DERIVED_PROCESS__ID = VsdtPackage.FLOW_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_DERIVED_PROCESS__CATEGORIES = VsdtPackage.FLOW_OBJECT__CATEGORIES;
-
-	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -879,15 +834,6 @@ public interface StrucBpmnPackage extends EPackage {
 	int BPMN_EVENT_HANDLER_BLOCK__ID = VsdtPackage.FLOW_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_EVENT_HANDLER_BLOCK__CATEGORIES = VsdtPackage.FLOW_OBJECT__CATEGORIES;
-
-	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1022,15 +968,6 @@ public interface StrucBpmnPackage extends EPackage {
 	 * @ordered
 	 */
 	int BPMN_EVENT_HANDLER_CASE__ID = VsdtPackage.FLOW_OBJECT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_EVENT_HANDLER_CASE__CATEGORIES = VsdtPackage.FLOW_OBJECT__CATEGORIES;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
@@ -1186,15 +1123,6 @@ public interface StrucBpmnPackage extends EPackage {
 	 * @ordered
 	 */
 	int BPMN_ELEMENT_TO_SKIP__ID = VsdtPackage.FLOW_OBJECT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BPMN_ELEMENT_TO_SKIP__CATEGORIES = VsdtPackage.FLOW_OBJECT__CATEGORIES;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.

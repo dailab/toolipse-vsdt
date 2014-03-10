@@ -105,7 +105,7 @@ public abstract class FlowObjectImpl extends NodeImpl implements FlowObject {
 	 */
 	public FlowObjectContainer getParent() {
 		if (eContainerFeatureID() != VsdtPackage.FLOW_OBJECT__PARENT) return null;
-		return (FlowObjectContainer)eContainer();
+		return (FlowObjectContainer)eInternalContainer();
 	}
 
 	/**

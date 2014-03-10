@@ -57,7 +57,7 @@ public abstract class ConnectingObjectImpl extends GraphicalObjectImpl implement
 	 */
 	public BusinessProcessDiagram getParent() {
 		if (eContainerFeatureID() != VsdtPackage.CONNECTING_OBJECT__PARENT) return null;
-		return (BusinessProcessDiagram)eContainer();
+		return (BusinessProcessDiagram)eInternalContainer();
 	}
 
 	/**

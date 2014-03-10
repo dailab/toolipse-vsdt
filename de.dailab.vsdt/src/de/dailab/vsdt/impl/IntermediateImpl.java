@@ -58,7 +58,7 @@ public class IntermediateImpl extends EventImpl implements Intermediate {
 	 */
 	public Activity getAttachedTo() {
 		if (eContainerFeatureID() != VsdtPackage.INTERMEDIATE__ATTACHED_TO) return null;
-		return (Activity)eContainer();
+		return (Activity)eInternalContainer();
 	}
 
 	/**

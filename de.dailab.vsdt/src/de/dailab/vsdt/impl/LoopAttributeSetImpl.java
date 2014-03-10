@@ -58,7 +58,7 @@ public abstract class LoopAttributeSetImpl extends EObjectImpl implements LoopAt
 	 */
 	public Activity getParent() {
 		if (eContainerFeatureID() != VsdtPackage.LOOP_ATTRIBUTE_SET__PARENT) return null;
-		return (Activity)eContainer();
+		return (Activity)eInternalContainer();
 	}
 
 	/**

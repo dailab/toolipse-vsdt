@@ -98,22 +98,13 @@ public interface VsdtPackage extends EPackage {
 	int ID_OBJECT__ID = 2;
 
 	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ID_OBJECT__CATEGORIES = 3;
-
-	/**
 	 * The number of structural features of the '<em>Id Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ID_OBJECT_FEATURE_COUNT = 4;
+	int ID_OBJECT_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl <em>Business Process System</em>}' class.
@@ -151,15 +142,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int BUSINESS_PROCESS_SYSTEM__ID = ID_OBJECT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUSINESS_PROCESS_SYSTEM__CATEGORIES = ID_OBJECT__CATEGORIES;
 
 	/**
 	 * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -334,15 +316,6 @@ public interface VsdtPackage extends EPackage {
 	int BUSINESS_PROCESS_DIAGRAM__ID = ID_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUSINESS_PROCESS_DIAGRAM__CATEGORIES = ID_OBJECT__CATEGORIES;
-
-	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -490,15 +463,6 @@ public interface VsdtPackage extends EPackage {
 	int GRAPHICAL_OBJECT__ID = ID_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GRAPHICAL_OBJECT__CATEGORIES = ID_OBJECT__CATEGORIES;
-
-	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -561,15 +525,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int NODE__ID = GRAPHICAL_OBJECT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NODE__CATEGORIES = GRAPHICAL_OBJECT__CATEGORIES;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
@@ -784,15 +739,6 @@ public interface VsdtPackage extends EPackage {
 	int POOL__ID = NODE__ID;
 
 	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POOL__CATEGORIES = NODE__CATEGORIES;
-
-	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -947,15 +893,6 @@ public interface VsdtPackage extends EPackage {
 	int LANE__ID = GRAPHICAL_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LANE__CATEGORIES = GRAPHICAL_OBJECT__CATEGORIES;
-
-	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1044,15 +981,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int FLOW_OBJECT__ID = NODE__ID;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FLOW_OBJECT__CATEGORIES = NODE__CATEGORIES;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
@@ -1161,15 +1089,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int EVENT__ID = FLOW_OBJECT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT__CATEGORIES = FLOW_OBJECT__CATEGORIES;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
@@ -1370,15 +1289,6 @@ public interface VsdtPackage extends EPackage {
 	int START__ID = EVENT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int START__CATEGORIES = EVENT__CATEGORIES;
-
-	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1575,15 +1485,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int INTERMEDIATE__ID = EVENT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTERMEDIATE__CATEGORIES = EVENT__CATEGORIES;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
@@ -1793,15 +1694,6 @@ public interface VsdtPackage extends EPackage {
 	int END__ID = EVENT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int END__CATEGORIES = EVENT__CATEGORIES;
-
-	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1998,15 +1890,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int ACTIVITY__ID = FLOW_OBJECT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACTIVITY__CATEGORIES = FLOW_OBJECT__CATEGORIES;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
@@ -2468,15 +2351,6 @@ public interface VsdtPackage extends EPackage {
 	int GATEWAY__ID = FLOW_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GATEWAY__CATEGORIES = FLOW_OBJECT__CATEGORIES;
-
-	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2622,15 +2496,6 @@ public interface VsdtPackage extends EPackage {
 	int ARTIFACT__ID = GRAPHICAL_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ARTIFACT__CATEGORIES = GRAPHICAL_OBJECT__CATEGORIES;
-
-	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2711,15 +2576,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATA_OBJECT__ID = ARTIFACT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_OBJECT__CATEGORIES = ARTIFACT__CATEGORIES;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
@@ -2840,15 +2696,6 @@ public interface VsdtPackage extends EPackage {
 	int TEXT_ANNOTATION__ID = ARTIFACT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT_ANNOTATION__CATEGORIES = ARTIFACT__CATEGORIES;
-
-	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2929,15 +2776,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int GROUP__ID = ARTIFACT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GROUP__CATEGORIES = ARTIFACT__CATEGORIES;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
@@ -3022,15 +2860,6 @@ public interface VsdtPackage extends EPackage {
 	int CONNECTING_OBJECT__ID = GRAPHICAL_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONNECTING_OBJECT__CATEGORIES = GRAPHICAL_OBJECT__CATEGORIES;
-
-	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3102,15 +2931,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int SEQUENCE_FLOW__ID = CONNECTING_OBJECT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SEQUENCE_FLOW__CATEGORIES = CONNECTING_OBJECT__CATEGORIES;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
@@ -3222,15 +3042,6 @@ public interface VsdtPackage extends EPackage {
 	int MESSAGE_FLOW__ID = CONNECTING_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MESSAGE_FLOW__CATEGORIES = CONNECTING_OBJECT__CATEGORIES;
-
-	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3320,15 +3131,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASSOCIATION__ID = CONNECTING_OBJECT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSOCIATION__CATEGORIES = CONNECTING_OBJECT__CATEGORIES;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Ass</b></em>' reference list.
@@ -3429,15 +3231,6 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARTICIPANT__ID = ID_OBJECT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Categories</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARTICIPANT__CATEGORIES = ID_OBJECT__CATEGORIES;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -5684,17 +5477,6 @@ public interface VsdtPackage extends EPackage {
 	EAttribute getIdObject_Documentation();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link de.dailab.vsdt.IdObject#getCategories <em>Categories</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Categories</em>'.
-	 * @see de.dailab.vsdt.IdObject#getCategories()
-	 * @see #getIdObject()
-	 * @generated
-	 */
-	EAttribute getIdObject_Categories();
-
-	/**
 	 * Returns the meta object for class '{@link de.dailab.vsdt.BusinessProcessSystem <em>Business Process System</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7305,14 +7087,6 @@ public interface VsdtPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ID_OBJECT__DOCUMENTATION = eINSTANCE.getIdObject_Documentation();
-
-		/**
-		 * The meta object literal for the '<em><b>Categories</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ID_OBJECT__CATEGORIES = eINSTANCE.getIdObject_Categories();
 
 		/**
 		 * The meta object literal for the '{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl <em>Business Process System</em>}' class.

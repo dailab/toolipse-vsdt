@@ -88,7 +88,7 @@ public class LaneImpl extends GraphicalObjectImpl implements Lane {
 	 */
 	public Pool getParent() {
 		if (eContainerFeatureID() != VsdtPackage.LANE__PARENT) return null;
-		return (Pool)eContainer();
+		return (Pool)eInternalContainer();
 	}
 
 	/**

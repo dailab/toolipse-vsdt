@@ -83,7 +83,6 @@
       <genFeatures createChild="false" propertyCategory="General" ecoreFeature="ecore:EAttribute vsdt.ecore#//IdObject/documentation"/>
       <genFeatures property="Readonly" createChild="false" propertyCategory="General"
           ecoreFeature="ecore:EAttribute vsdt.ecore#//IdObject/id"/>
-      <genFeatures createChild="false" propertyCategory="General" ecoreFeature="ecore:EAttribute vsdt.ecore#//IdObject/categories"/>
       <genOperations ecoreOperation="vsdt.ecore#//IdObject/getNameOrId"/>
     </genClasses>
     <genClasses ecoreClass="vsdt.ecore#//BusinessProcessSystem">

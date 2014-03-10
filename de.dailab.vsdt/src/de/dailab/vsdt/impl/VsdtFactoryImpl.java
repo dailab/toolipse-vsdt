@@ -70,7 +70,7 @@ public class VsdtFactoryImpl extends EFactoryImpl implements VsdtFactory {
 	 */
 	public static VsdtFactory init() {
 		try {
-			VsdtFactory theVsdtFactory = (VsdtFactory)EPackage.Registry.INSTANCE.getEFactory("http://de.dailab.vsdt"); 
+			VsdtFactory theVsdtFactory = (VsdtFactory)EPackage.Registry.INSTANCE.getEFactory(VsdtPackage.eNS_URI);
 			if (theVsdtFactory != null) {
 				return theVsdtFactory;
 			}

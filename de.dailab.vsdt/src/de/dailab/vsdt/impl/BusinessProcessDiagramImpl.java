@@ -111,7 +111,7 @@ public class BusinessProcessDiagramImpl extends IdObjectImpl implements Business
 	 */
 	public BusinessProcessSystem getParent() {
 		if (eContainerFeatureID() != VsdtPackage.BUSINESS_PROCESS_DIAGRAM__PARENT) return null;
-		return (BusinessProcessSystem)eContainer();
+		return (BusinessProcessSystem)eInternalContainer();
 	}
 
 	/**

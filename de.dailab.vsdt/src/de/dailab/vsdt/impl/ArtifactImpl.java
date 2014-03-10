@@ -70,7 +70,7 @@ public abstract class ArtifactImpl extends GraphicalObjectImpl implements Artifa
 	 */
 	public BusinessProcessDiagram getParent() {
 		if (eContainerFeatureID() != VsdtPackage.ARTIFACT__PARENT) return null;
-		return (BusinessProcessDiagram)eContainer();
+		return (BusinessProcessDiagram)eInternalContainer();
 	}
 
 	/**

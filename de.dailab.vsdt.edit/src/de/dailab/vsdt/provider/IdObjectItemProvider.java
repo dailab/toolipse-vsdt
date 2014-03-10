@@ -65,7 +65,6 @@ public class IdObjectItemProvider
 			addNamePropertyDescriptor(object);
 			addDocumentationPropertyDescriptor(object);
 			addIdPropertyDescriptor(object);
-			addCategoriesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -107,28 +106,6 @@ public class IdObjectItemProvider
 				 getString("_UI_PropertyDescriptor_description", "_UI_IdObject_id_feature", "_UI_IdObject_type"),
 				 VsdtPackage.Literals.ID_OBJECT__ID,
 				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 getString("_UI_GeneralPropertyCategory"),
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Categories feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addCategoriesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_IdObject_categories_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_IdObject_categories_feature", "_UI_IdObject_type"),
-				 VsdtPackage.Literals.ID_OBJECT__CATEGORIES,
-				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
@@ -187,7 +164,6 @@ public class IdObjectItemProvider
 			case VsdtPackage.ID_OBJECT__NAME:
 			case VsdtPackage.ID_OBJECT__DOCUMENTATION:
 			case VsdtPackage.ID_OBJECT__ID:
-			case VsdtPackage.ID_OBJECT__CATEGORIES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
