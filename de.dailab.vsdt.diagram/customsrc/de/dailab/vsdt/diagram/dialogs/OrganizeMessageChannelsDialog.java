@@ -29,18 +29,23 @@ public class OrganizeMessageChannelsDialog extends AbstractOrganizeElementsDialo
 
 	// TODO use the same combo boxes for types as in OrganizePropertiesDialog
 	
-	public static final String LABEL_CHANNEL= "Channel";
+	public static final String LABEL_CHANNEL= "Name / Channel";
 	public static final String LABEL_PAYLOAD_NAME= "Name";
 	public static final String LABEL_PAYLOAD_TYPE= "Type";
 
-	public static final String BUTTON_HAS_PAYLOAD= "Has Payload";
+	public static final String BUTTON_IS_CHANNEL= "Message Channel?";
+	public static final String BUTTON_HAS_PAYLOAD= "Has Payload?";
 	
 	/** messagechannel.channel input field */
 	private Text channelText;
 	
-	/** button for opening the organize properties dialog for the selected message */
+	/** check box for whether this message channel is a message channel, or a message to an individual agent */
+	//XXX transitional, until message element is split up in channel and individual message
+	private Button isChannelButton;
+	
+	/** check box for whether the message has a paylod (if no payload, it could be e.g. a pure 'ping' signal) */
 	private Button hasPayloadButton;
-
+	
 	/** group holding information on payload, similar to PropertiesDialog */
 	private Group payloadGroup;
 	
@@ -81,8 +86,13 @@ public class OrganizeMessageChannelsDialog extends AbstractOrganizeElementsDialo
 		//input lines
 		new Label(editGroup, SWT.NONE).setText(LABEL_CHANNEL);
 		channelText= new Text(editGroup, SWT.BORDER);
-		channelText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 2, 1));
+		channelText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		channelText.addModifyListener(this);
+		
+		isChannelButton= new Button(editGroup, SWT.CHECK);
+		isChannelButton.setText(BUTTON_IS_CHANNEL);
+		isChannelButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		isChannelButton.addSelectionListener(this);
 		
 		hasPayloadButton = new Button(editGroup, SWT.CHECK);
 		hasPayloadButton.setText(BUTTON_HAS_PAYLOAD);
@@ -143,6 +153,7 @@ public class OrganizeMessageChannelsDialog extends AbstractOrganizeElementsDialo
 			channelText.setText(channelString);
 			boolean hasPayload = message.getPayload() != null;
 			hasPayloadButton.setSelection(hasPayload);
+			isChannelButton.setSelection(message.isMessageGroup());
 			enableGroupControls(payloadGroup, hasPayload);
 			if (hasPayload) {
 				String payloadNameString= Util.nonNull(message.getPayload().getName());
@@ -173,13 +184,16 @@ public class OrganizeMessageChannelsDialog extends AbstractOrganizeElementsDialo
 	
 	@Override
 	public void widgetSelected(SelectionEvent e) {
+		MessageChannel message = getSelectedElement();
 		if (e.getSource() == hasPayloadButton) {
-			MessageChannel message = getSelectedElement();
 			if (hasPayloadButton.getSelection()) {
 				message.setPayload(VsdtFactory.eINSTANCE.createProperty());
 			} else {
 				message.setPayload(null);
 			}
+		}
+		if (e.getSource() == isChannelButton) {
+			message.setMessageGroup(isChannelButton.getSelection());
 		}
 		super.widgetSelected(e);
 	}

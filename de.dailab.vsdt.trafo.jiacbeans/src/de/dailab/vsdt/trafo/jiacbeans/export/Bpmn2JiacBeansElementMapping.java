@@ -572,17 +572,17 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					currentBean.getSubprocesses().add(currentSubProcess);
 				}
 				
-				// create and add run() method
+				// create and add workflow() method
 				Script content = visitFlowObjects(activity.getContainedFlowObjects());
 				content = wrapIntoLoop(activity, content);
 				content = buildSequence(content, null, activity.getAssignments(), true);
-				currentSubProcess.getMethods().add(0, createMethod("run", content, "Exception"));
+				currentSubProcess.getMethods().add(0, createMethod("workflow", content));
 				
 				// create and run subprocess instance
 				String variable = "subprocess_" + activity.getName();
 				mapping = createSequence(
 						createCode(className + " " + variable + " = new " + className + "();"),
-						createCode(variable + ".run();"));
+						createCode(variable + ".workflow();"));
 				
 				currentSubProcess = lastSubprocess;
 				
@@ -1293,7 +1293,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	private CodeElement createReceive(MessageChannel channel) {
 		//join message group
 		addToMethod(doStartMethod, createJoin(channel.getChannel().getExpression()));
-		
+		//TODO receive for non-group messages
 		String address = channel.getChannel().getExpression();
 		String assign = channel.getPayload() != null ?
 				channel.getPayload().getName() + " = " : "";
