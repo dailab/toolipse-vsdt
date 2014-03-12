@@ -8,6 +8,11 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
+/**
+ * Options page for the abstract VSDT import wizard.
+ *
+ * @author kuester
+ */
 public abstract class BpmnImportWizardOptionsPage extends BpmnTrafoWizardOptionsPage {
 
 	public static final String LABEL_CREATE_MODEL_FILE= "Create only a Model file";

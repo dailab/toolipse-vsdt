@@ -8,6 +8,11 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
+/**
+ * Options page for the abstract VSDT export wizard.
+ *
+ * @author kuester
+ */
 public class BpmnExportWizardOptionsPage extends BpmnTrafoWizardOptionsPage {
 
 	public static final String LABEL_TRANSLATE_EXPRESSIONS= "Translate Expressions given in the VSDT Expression Language (VXL)";

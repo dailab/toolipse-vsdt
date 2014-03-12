@@ -23,6 +23,12 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.WizardExportResourcesPage;
 
+/**
+ * General options page for all VSDT imports and exports, e.g. for selecting
+ * the input file(s) and output folders, etc.
+ *
+ * @author kuester
+ */
 public abstract class BpmnTrafoWizardOptionsPage extends WizardExportResourcesPage {
 	
 	public static final String LABEL_TITLE= "Select model file(s) and destination folder";

@@ -5,6 +5,11 @@ import org.eclipse.ui.IImportWizard;
 
 import de.dailab.vsdt.trafo.impl.BpmnResultSaver;
 
+/**
+ * Abstract super class for all BPMN import wizards.
+ *
+ * @author kuester
+ */
 public abstract class BpmnImportWizard extends BpmnTrafoWizard implements IImportWizard {
 
 	protected abstract BpmnImportWizardOptionsPage createOptionsPage(String title,

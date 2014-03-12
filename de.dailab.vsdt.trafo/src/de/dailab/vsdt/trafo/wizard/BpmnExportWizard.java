@@ -12,7 +12,12 @@ import org.eclipse.ui.IWorkbench;
 
 import de.dailab.vsdt.BusinessProcessSystem;
 
-
+/**
+ * Abstract super class for all BPMN export wizards, providing some commonly
+ * used functionality, particularly for loading the VSDT file to be exported.
+ * 
+ * @author kuester
+ */
 public abstract class BpmnExportWizard extends BpmnTrafoWizard implements IExportWizard {
 	
 	public void init(IWorkbench workbench, IStructuredSelection selection) {

@@ -37,6 +37,12 @@ import de.dailab.vsdt.trafo.MappingStage;
 import de.dailab.vsdt.trafo.MappingWrapper;
 import de.dailab.vsdt.trafo.base.util.TrafoLog;
 
+/**
+ * Abstract Wizard page for all VSDT import and export wizards, providing a uniform
+ * look and feel and also providing much of the required functionality. 
+ *
+ * @author kuester
+ */
 public abstract class BpmnTrafoWizard extends Wizard {
 	
 	public static final String VSDT_TRAFO_CONSOLE= "de.dailab.vsdt.console";
