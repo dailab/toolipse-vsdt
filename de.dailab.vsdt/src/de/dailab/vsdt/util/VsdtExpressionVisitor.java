@@ -237,7 +237,7 @@ public class VsdtExpressionVisitor {
 	}
 	
 	/**
-	 * Negation:		"!" head = Head;
+	 * Cardinality:		"#" head = Head;
 	 */
 	protected void visitCardinality(VxlCardinality cardinality) {
 		buffer.append("# ");

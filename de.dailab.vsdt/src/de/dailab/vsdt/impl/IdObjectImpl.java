@@ -6,14 +6,10 @@
  */
 package de.dailab.vsdt.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 
 import de.dailab.vsdt.IdObject;
 import de.dailab.vsdt.VsdtPackage;
@@ -217,7 +213,6 @@ public abstract class IdObjectImpl extends EObjectImpl implements IdObject {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
