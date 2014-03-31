@@ -48,14 +48,14 @@ public class Util {
 	
 	public static String toJavaName(String s, boolean upperInital) {
 		// replace whitespaces and special characters
-		s = s.replaceAll("\\s+", "_");	// whitespace(s) -> underscore
-		s = s.replaceAll("\\W", "");	// special -> nothing
+		s = s.replaceAll("\\W", " ");	// special -> nothing
+		s = s.replaceAll("\\s+", "%");	// whitespace(s) -> underscore
 			
 		// make title case
 		StringBuilder sb = new StringBuilder();
 		boolean toUpper = upperInital;
 		for (char c : s.toCharArray()) {
-			if (c == '_') {
+			if (c == '%') {
 				toUpper = true;
 			} else {
 				sb.append(toUpper ? Character.toUpperCase(c) : c);
