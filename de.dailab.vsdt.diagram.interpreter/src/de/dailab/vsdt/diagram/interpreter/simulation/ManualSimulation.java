@@ -14,6 +14,7 @@ import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.diagram.interpreter.dialogs.SelectPathDialog;
+import de.dailab.vsdt.interpreter.BasicSimulation;
 import de.dailab.vsdt.util.VsdtHelper;
 
 /**

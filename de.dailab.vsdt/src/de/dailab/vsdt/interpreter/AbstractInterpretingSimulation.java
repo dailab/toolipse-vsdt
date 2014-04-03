@@ -1,4 +1,4 @@
-package de.dailab.vsdt.diagram.interpreter.simulation;
+package de.dailab.vsdt.interpreter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,10 +10,6 @@ import java.util.Map;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
@@ -33,8 +29,7 @@ import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.Service;
 import de.dailab.vsdt.StandardLoopAttSet;
-import de.dailab.vsdt.diagram.dialogs.EditExpressionDialog;
-import de.dailab.vsdt.diagram.interpreter.dialogs.MessageParameterDialog;
+import de.dailab.vsdt.interpreter.ISimulationObserver.LogLevel;
 import de.dailab.vsdt.util.VsdtHelper;
 import de.dailab.vsdt.vxl.util.Util;
 import de.dailab.vsdt.vxl.util.VxlInterpreter;
@@ -51,7 +46,7 @@ import de.dailab.vsdt.vxl.vxl.VxlTerm;
  * 
  * @author kuester
  */
-public class InterpretingSimulation extends ManualSimulation {
+public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 
 	@Override
 	public String getName() {
@@ -66,7 +61,7 @@ public class InterpretingSimulation extends ManualSimulation {
 					"Business Process System's executable flag to True.";
 			throw new Exception(message);
 		}
-		return super.isApplicable(bpd);
+		return true;
 	}
 	
 	/*
@@ -79,10 +74,10 @@ public class InterpretingSimulation extends ManualSimulation {
 	 */
 	
 	/** This Map holds the association of Properties to values */
-	private Map<Property, Serializable> propertyValueMap= new HashMap<Property, Serializable>();
+	protected Map<Property, Serializable> propertyValueMap= new HashMap<Property, Serializable>();
 	
 	/** This Map holds the current loop counter for the several activities  currently looping*/
-	private Map<Activity, Integer> loopCounterMap= new HashMap<Activity, Integer>();
+	protected Map<Activity, Integer> loopCounterMap= new HashMap<Activity, Integer>();
 	
 	/**
 	 * - Before starting the Interpreting Simulation, assert that all expressions
@@ -110,7 +105,6 @@ public class InterpretingSimulation extends ManualSimulation {
 	protected void initialize(BusinessProcessDiagram bpd) {
 		propertyValueMap.clear();
 		loopCounterMap.clear();
-		super.initialize(bpd);
 	}
 	
 	/**
@@ -139,44 +133,18 @@ public class InterpretingSimulation extends ManualSimulation {
 	}
 
 	/**
-	 * Opens an EditExpressionDialog for editing the given property's value in 
-	 * the context of this Simulation.  If the dialog is finished with 'ok', the
-	 * new value is written into the {@link #propertyValueMap}.
-	 *   
-	 * @see EditExpressionDialog
-	 * @param property		Some Property in this Simulation
-	 */
-	public void openEditPropertyDialog(Property property) {
-		Object value= getPropertyValue(property);
-		String expression= value instanceof String ? "\"" + value + "\"" : String.valueOf(value);
-
-		List<Property> properties= VsdtHelper.getVisibleProperties(property.eContainer());
-		
-		Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		EditExpressionDialog dialog= new EditExpressionDialog(shell, expression, true);
-		dialog.setProperties(properties);
-		
-		if (dialog.open() == EditExpressionDialog.OK) {
-			String newExpression= dialog.getExpression();
-			Map<String, Serializable> context= createContext(property.eContainer());
-			Serializable newValue= evaluateTerm(parseExpression(newExpression), context);
-			setPropertyValue(property, newValue);
-		}
-	}
-
-	/**
-	 * Open a MessageParameterDialog for editing the given FlowObject's incoming 
-	 * or outgoing Message's Properties' values in the course of this simulation.
-	 * If the dialog is finished with 'ok', the new value is written into the
-	 * {@link #propertyValueMap}.
+	 * Collect properties of incoming or outgoing messages and services, so they
+	 * can be handles appropriately, e.g. by simply displaying them (or asking for
+	 * them) in a dialogue, or by issuing respective service calls.
 	 * 
 	 * Note: Here, "Incoming" means the Message incoming to the Flow Object, 
 	 * not the Input Message of the Service.
 	 * 
 	 * @param flowObject	Some FlowObject in this Simulation with Messages
 	 * @param incoming		Select Incoming or Outgoing message?
+	 * qreturn				List of properties
 	 */
-	public void openMessageParameterDialog(FlowObject flowObject, boolean incoming) {
+	public List<Property> collectMessageProperties(FlowObject flowObject, boolean incoming) {
 		List<Property> properties = null;
 		if (flowObject instanceof Activity) {
 			Activity activity= (Activity) flowObject;
@@ -209,21 +177,25 @@ public class InterpretingSimulation extends ManualSimulation {
 				}
 			}
 		}
-		if (properties != null) {
-			Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			Map<Property, Object> valueMap= new HashMap<Property, Object>();
-			for (Property property : properties) {
-				valueMap.put(property, propertyValueMap.get(property));
-			}
-			MessageParameterDialog dialog= new MessageParameterDialog(shell, properties, incoming, propertyValueMap);
-			if (dialog.open() == Dialog.OK) {
-				for (Property property : properties) {
-					setPropertyValue(property, dialog.getNewPropertyValue(property));
-				}
-			}
-		}
+		return properties;
 	}
 
+	/**
+	 * Handle properties incoming or outgoing messages and services, e.g. by 
+	 * simply displaying them (or asking for them) in a dialogue, or by issuing 
+	 * respective service calls.
+	 * 
+	 * This method is only called when there's actually a message being sent,
+	 * but the list of properties could be empty!
+	 * 
+	 * Note: Here, "Incoming" means the Message incoming to the Flow Object, 
+	 * not the Input Message of the Service.
+	 * 
+	 * @param properties	The properties (not null, but could be empty list)
+	 * @param incoming		Select Incoming or Outgoing message?
+	 */
+	protected abstract void handleMessageProperties(List<Property> properties, boolean incoming);
+	
 	/**
 	 * Return the right set of parameters (input or output).
 	 * 
@@ -232,7 +204,7 @@ public class InterpretingSimulation extends ManualSimulation {
 	 * @param incoming			incoming or outgoing message?
 	 * @return					right set of parameters, i.e. input or output
 	 */
-	private List<Property> getParameters(Service service, Participant myParticipant, boolean incoming) {
+	protected List<Property> getParameters(Service service, Participant myParticipant, boolean incoming) {
 		// WARNING: This works only if the service provider is
 		// not the same participant as the service requester!
 		//   inc,   same -> input
@@ -251,7 +223,10 @@ public class InterpretingSimulation extends ManualSimulation {
 	protected void executeBegin(FlowObject flowObject) {
 		super.executeBegin(flowObject);
 		// open dialog telling the user which service has been called with which parameters
-		openMessageParameterDialog(flowObject, false);
+		List<Property> properties = collectMessageProperties(flowObject, false);
+		if (properties != null) {
+			handleMessageProperties(properties, false);
+		}
 	}
 
 	/**
@@ -261,7 +236,10 @@ public class InterpretingSimulation extends ManualSimulation {
 	@Override
 	protected void executeEnd(FlowObject flowObject) {
 		// open a dialog asking the user with which results the service shall return 
-		openMessageParameterDialog(flowObject, true);
+		List<Property> properties = collectMessageProperties(flowObject, true);
+		if (properties != null) {
+			handleMessageProperties(properties, true);
+		}
 		super.executeEnd(flowObject);
 	}
 	
@@ -269,10 +247,9 @@ public class InterpretingSimulation extends ManualSimulation {
 	 * - evaluate assignment expressions
 	 * - store value in {@link #propertyValueMap}
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected void handleAssignments(EObject eObject, AssignTimeType assignTime) {
-		super.handleAssignments(eObject, assignTime);
 		List<Assignment> assignments= null;
 		if (eObject instanceof FlowObject) {
 			assignments= ((FlowObject) eObject).getAssignments();
@@ -317,10 +294,8 @@ public class InterpretingSimulation extends ManualSimulation {
 		if ((flowObject instanceof Gateway) && 
 				((Gateway)flowObject).getGatewayType()==GatewayType.COMPLEX) {
 			// not supported yet
-			//XXX
-//			Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-//			MessageDialog.openWarning(shell, "Not Supported", "Complex Gateways are not yet supported");
-			return super.selectOutgoingSequenceFlows(flowObject);
+			logMessage(LogLevel.ERROR, "Not Supported", "Complex Gateways are not yet supported");
+			return new ArrayList<>();
 		}
 		List<SequenceFlow> selectedFlows= new ArrayList<SequenceFlow>();
 		SequenceFlow defaultflow= null;
@@ -375,11 +350,9 @@ public class InterpretingSimulation extends ManualSimulation {
 		}
 		if (activity.getLoopAttributes() instanceof MultiLoopAttSet) {
 			// not supported yet
-			// XXX
-//			Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-//			MessageDialog.openWarning(shell, "Not Supported", "MI Loops are not yet supported");
+			logMessage(LogLevel.WARN, "Not Supported", "MI Loops are not yet supported");
 		}
-		return super.isLooping(activity);
+		return false;
 	}
 
 	/**
@@ -400,6 +373,10 @@ public class InterpretingSimulation extends ManualSimulation {
 		return context;
 	}
 	
+	/*
+	 * VXL CONDITION/EXPRESSION EVALUATION HELPER METHODS
+	 */
+	
 	/**
 	 * Parse and evaluate a condition.  If the result is a Boolean, return it;
 	 * otherwise an error dialog is shown and false is returned.
@@ -410,7 +387,7 @@ public class InterpretingSimulation extends ManualSimulation {
 	 * @param context		Map of Property names and values
 	 * @return				Result of the evaluation, or false in case of error
 	 */
-	public static boolean evaluateCondition(Expression expression, Map<String, Serializable> context) {
+	public boolean evaluateCondition(Expression expression, Map<String, Serializable> context) {
 		if (expression != null) {
 			Serializable value= parseAndEvaluate(expression, context);
 			if (value instanceof Boolean) {
@@ -419,15 +396,13 @@ public class InterpretingSimulation extends ManualSimulation {
 				String title= "Evaluation failed";
 				StringBuffer message= new StringBuffer();
 				message.append("The condition ").append(expression.getExpression()).append(" does not evaluate to a Boolean value.");
-				Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-				MessageDialog.openError(shell, title, message.toString());
+				logMessage(LogLevel.ERROR, title, message.toString());
 			}
 		} else {
 			String title= "Evaluation failed";
 			StringBuffer message= new StringBuffer();
 			message.append("The condition must not be null.");
-			Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			MessageDialog.openError(shell, title, message.toString());
+			logMessage(LogLevel.ERROR, title, message.toString());
 		}
 		return false;
 	}
@@ -442,7 +417,7 @@ public class InterpretingSimulation extends ManualSimulation {
 	 * @param context		Map of Property names and values
 	 * @return				Result of the evaluation, or null in case of error
 	 */
-	public static Serializable parseAndEvaluate(Expression expression, Map<String, Serializable> context) {
+	public Serializable parseAndEvaluate(Expression expression, Map<String, Serializable> context) {
 		return evaluateTerm(parseExpression(getExpression(expression)), context);
 	}
 	
@@ -453,7 +428,7 @@ public class InterpretingSimulation extends ManualSimulation {
 	 * @param expression	Some VXL Expression (as VSDT Expression object)
 	 * @return				Expression string if non-null VXL Expression, or null
 	 */
-	public static String getExpression(Expression expression) {
+	public String getExpression(Expression expression) {
 		if (expression == null) return null;
 		// check expression language
 		String lang= expression.getExpressionLanguageToBeUsed();
@@ -461,9 +436,8 @@ public class InterpretingSimulation extends ManualSimulation {
 //			return expression.getExpression();
 			return VsdtHelper.getExpressionWithParameters(expression);
 		} else {
-			Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 			String message= "Expressions must be given using the VSDT Expression Language (VXL).";
-			MessageDialog.openWarning(shell, "Unsupported Expression Language", message);
+			logMessage(LogLevel.WARN, "Unsupported Expression Language", message.toString());
 			return null;
 		}
 	}
@@ -475,7 +449,7 @@ public class InterpretingSimulation extends ManualSimulation {
 	 * @param expression	Some VXL Expression (as string)
 	 * @return				Result of the parsing, or null in case of error
 	 */
-	public static VxlTerm parseExpression(String expression) {
+	public VxlTerm parseExpression(String expression) {
 		if (expression == null) return null;
 		VxlParser parser= VxlParser.getInstance();
 		try {
@@ -491,8 +465,7 @@ public class InterpretingSimulation extends ManualSimulation {
 					message.append("\r\n- ").append(d.getMessage());
 				}
 			}
-			Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			MessageDialog.openError(shell, title, message.toString());
+			logMessage(LogLevel.ERROR, title, message.toString());
 			return null;
 		}
 	}
@@ -507,7 +480,7 @@ public class InterpretingSimulation extends ManualSimulation {
 	 * @param context		Map of Property names and values
 	 * @return				Result of the evaluation, or null in case of error
 	 */
-	public static Serializable evaluateTerm(VxlTerm term, Map<String, Serializable> context) {
+	public Serializable evaluateTerm(VxlTerm term, Map<String, Serializable> context) {
 		if (term == null) return null;
 		VxlInterpreter interpreter= new VxlInterpreter();
 		Serializable result= interpreter.evaluateTerm(term, context);
@@ -520,8 +493,7 @@ public class InterpretingSimulation extends ManualSimulation {
 			for (String error : errors.values()) {
 				message.append("\r\n- ").append(error);
 			}
-			Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			MessageDialog.openError(shell, title, message.toString());
+			logMessage(LogLevel.ERROR, title, message.toString());
 		}
 		return result;
 	}

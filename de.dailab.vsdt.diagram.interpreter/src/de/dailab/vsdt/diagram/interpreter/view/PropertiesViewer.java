@@ -12,7 +12,7 @@ import de.dailab.common.swt.views.AbstractContentProvider;
 import de.dailab.common.swt.views.AbstractLabelProvider;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.diagram.interpreter.VsdtInterpreterPlugin;
-import de.dailab.vsdt.diagram.interpreter.simulation.InterpretingSimulation;
+import de.dailab.vsdt.diagram.interpreter.simulation.EclipseInterpretingSimulation;
 import de.dailab.vsdt.util.VsdtHelper;
 
 /**
@@ -73,8 +73,8 @@ public class PropertiesViewer extends ListViewer {
 		public String getText(Object element) {
 			if (element instanceof Property) {
 				Property property= (Property) element;
-				if (view.getSimulation() instanceof InterpretingSimulation) {
-					Object value= ((InterpretingSimulation) view.getSimulation()).getPropertyValue(property);
+				if (view.getSimulation() instanceof EclipseInterpretingSimulation) {
+					Object value= ((EclipseInterpretingSimulation) view.getSimulation()).getPropertyValue(property);
 					return property.getName() + " (" + property.getType() + ") = " + value;
 				}
 			}

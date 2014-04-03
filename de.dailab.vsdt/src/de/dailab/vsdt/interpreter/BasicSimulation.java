@@ -1,4 +1,4 @@
-package de.dailab.vsdt.diagram.interpreter.simulation;
+package de.dailab.vsdt.interpreter;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;

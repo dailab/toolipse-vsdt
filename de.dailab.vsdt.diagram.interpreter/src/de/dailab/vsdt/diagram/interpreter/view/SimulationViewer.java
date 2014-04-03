@@ -24,10 +24,11 @@ import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.diagram.edit.parts.PoolEditPart;
+import de.dailab.vsdt.diagram.interpreter.SimulationDecoratorProvider;
 import de.dailab.vsdt.diagram.interpreter.VsdtInterpreterPlugin;
-import de.dailab.vsdt.diagram.interpreter.simulation.InterpretingSimulation;
-import de.dailab.vsdt.diagram.interpreter.simulation.State;
+import de.dailab.vsdt.diagram.interpreter.simulation.EclipseInterpretingSimulation;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
+import de.dailab.vsdt.interpreter.State;
 import de.dailab.vsdt.util.VsdtHelper;
 
 /**
@@ -116,12 +117,12 @@ public class SimulationViewer extends TreeViewer {
 				}
 			}
 			// collect property values
-			if (view.getSimulation() instanceof InterpretingSimulation) {
+			if (view.getSimulation() instanceof EclipseInterpretingSimulation) {
 				if (parentElement instanceof Pool) {
-					displayedChildren.addAll(((Pool)parentElement).getProperties());
+					displayedChildren.addAll(((Pool) parentElement).getProperties());
 				}
 				if (parentElement instanceof Activity) {
-					displayedChildren.addAll(((Activity)parentElement).getProperties());
+					displayedChildren.addAll(((Activity) parentElement).getProperties());
 				}
 			}
 			return displayedChildren.toArray();
@@ -145,7 +146,7 @@ public class SimulationViewer extends TreeViewer {
 				if (eObject instanceof Intermediate && ((Intermediate)eObject).getAttachedTo() != null) {
 					return VsdtInterpreterPlugin.getImageDescriptor(VsdtInterpreterPlugin.IMAGE_SIM_INTER);
 				}
-				return view.getState((FlowObject) eObject).getImageDescriptor();
+				return SimulationDecoratorProvider.getImageForState(view.getState((FlowObject) eObject));
 			} else if (eObject instanceof Property) {
 				return VsdtInterpreterPlugin.getImageDescriptor(VsdtInterpreterPlugin.IMAGE_PROPERTY);
 			}
@@ -159,8 +160,8 @@ public class SimulationViewer extends TreeViewer {
 			}
 			if (element instanceof Property) {
 				Property property= (Property) element;
-				if (view.getSimulation() instanceof InterpretingSimulation) {
-					Object value= ((InterpretingSimulation) view.getSimulation()).getPropertyValue(property);
+				if (view.getSimulation() instanceof EclipseInterpretingSimulation) {
+					Object value= ((EclipseInterpretingSimulation) view.getSimulation()).getPropertyValue(property);
 					String name= property.getName();
 					String type= property.getType();
 					String valString= value instanceof String ? "\""+(String)value+"\"":String.valueOf(value);

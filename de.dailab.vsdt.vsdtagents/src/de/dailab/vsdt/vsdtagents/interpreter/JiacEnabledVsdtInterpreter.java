@@ -16,7 +16,7 @@ import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.Service;
-import de.dailab.vsdt.diagram.interpreter.simulation.InterpretingSimulation;
+import de.dailab.vsdt.diagram.interpreter.simulation.EclipseInterpretingSimulation;
 
 /**
  * JIAC Enabled VSDT Interpreter. This class extends the InterpretingSimulation
@@ -27,7 +27,7 @@ import de.dailab.vsdt.diagram.interpreter.simulation.InterpretingSimulation;
  * 
  * @author kuester
  */
-public class JiacEnabledVsdtInterpreter extends InterpretingSimulation {
+public class JiacEnabledVsdtInterpreter extends EclipseInterpretingSimulation {
 
 	/*
 	 * TODO

@@ -34,12 +34,12 @@ import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
 import de.dailab.vsdt.diagram.interpreter.VsdtInterpreterPlugin;
-import de.dailab.vsdt.diagram.interpreter.simulation.AbstractSimulation;
-import de.dailab.vsdt.diagram.interpreter.simulation.ISimulation;
-import de.dailab.vsdt.diagram.interpreter.simulation.InterpretingSimulation;
+import de.dailab.vsdt.diagram.interpreter.simulation.EclipseInterpretingSimulation;
 import de.dailab.vsdt.diagram.interpreter.simulation.ManualSimulation;
-import de.dailab.vsdt.diagram.interpreter.simulation.State;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
+import de.dailab.vsdt.interpreter.AbstractSimulation;
+import de.dailab.vsdt.interpreter.ISimulation;
+import de.dailab.vsdt.interpreter.State;
 
 /**
  * This class provides an Interpreter View, with which the Business Process
@@ -62,7 +62,7 @@ public class InterpreterView extends AbstractStructuredViewerView {
 	public static List<AbstractSimulation> simulations = new ArrayList<AbstractSimulation>();
 	static {
 		simulations.add(new ManualSimulation());
-		simulations.add(new InterpretingSimulation());
+		simulations.add(new EclipseInterpretingSimulation());
 	}
 	
 	private Action startAction;
@@ -193,8 +193,8 @@ public class InterpreterView extends AbstractStructuredViewerView {
 			TreeViewer tree= (TreeViewer) viewer;
 			tree.setExpandedState(selected, ! tree.getExpandedState(selected));
 		}
-		if (selected instanceof Property && simulation instanceof InterpretingSimulation) {
-			((InterpretingSimulation) simulation).openEditPropertyDialog((Property) selected);
+		if (selected instanceof Property && simulation instanceof EclipseInterpretingSimulation) {
+			((EclipseInterpretingSimulation) simulation).openEditPropertyDialog((Property) selected);
 			viewer.refresh();
 		}
 	}
@@ -242,10 +242,10 @@ public class InterpreterView extends AbstractStructuredViewerView {
 				}
 			} // end for
 
-			// link simulation with viewer, start simulaiton
+			// link simulation with viewer, start simulation
 			if (simulation != null) {
-				simulation.setViewer(viewer);
-				List<FlowObject> result= simulation.start(editPart);
+				simulation.addObserver(new EclipseInterpreterObserver(viewer, editPart));
+				List<FlowObject> result= simulation.start(bpd);
 				setSelection(result);
 				updateActionEnablement();
 			}

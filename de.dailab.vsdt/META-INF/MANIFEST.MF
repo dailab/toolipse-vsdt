@@ -7,6 +7,7 @@ Bundle-ClassPath: .
 Bundle-Vendor: DAI-Labor, TU Berlin
 Export-Package: de.dailab.vsdt,
  de.dailab.vsdt.impl,
+ de.dailab.vsdt.interpreter,
  de.dailab.vsdt.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,

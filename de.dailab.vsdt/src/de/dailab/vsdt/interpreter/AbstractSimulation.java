@@ -1,20 +1,12 @@
-package de.dailab.vsdt.diagram.interpreter.simulation;
+package de.dailab.vsdt.interpreter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.draw2d.ColorConstants;
-import org.eclipse.draw2d.Graphics;
-import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.swt.graphics.Color;
 
-import de.dailab.common.gmf.Util;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.BusinessProcessDiagram;
@@ -26,11 +18,6 @@ import de.dailab.vsdt.GatewayType;
 import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.SequenceFlow;
-import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
-import de.dailab.vsdt.diagram.edit.parts.IVsdtEditPart;
-import de.dailab.vsdt.diagram.figures.FigureHelper;
-import de.dailab.vsdt.diagram.figures.IDecoratableFigure;
-import de.dailab.vsdt.diagram.figures.IFigureDecorator;
 import de.dailab.vsdt.util.VsdtHelper;
 
 /**
@@ -61,11 +48,13 @@ public abstract class AbstractSimulation implements ISimulation {
 	protected final Map<EObject, Integer> stepMap;
 
 	/** The Viewer showing a tree structure of the activities */
-	protected Viewer viewer;
+//	protected Viewer viewer;
 	
 	/** the Business Process Diagram on which to run the simulation */
-	protected BusinessProcessDiagramEditPart diagramEditPart;
+//	protected BusinessProcessDiagramEditPart diagramEditPart;
 
+	protected List<ISimulationObserver> observers;
+	
 	/** The number of (full) steps the simulation has already taken. */
 	protected int step;
 	
@@ -79,7 +68,8 @@ public abstract class AbstractSimulation implements ISimulation {
 		stateMap = new HashMap<FlowObject, State>();
 		tokenMap = new HashMap<ConnectingObject, Integer>();
 		stepMap = new HashMap<EObject, Integer>();
-		diagramEditPart = null;
+		observers = new ArrayList<>();
+//		diagramEditPart = null;
 		step = -1;
 	}
 
@@ -115,21 +105,28 @@ public abstract class AbstractSimulation implements ISimulation {
 					}
 				}
 			}
-			refreshViewer();
+			notifyObservers();
 			return result;
 		} else {
 			return null;
 		}
 	}
 
-	/**
-	 * - set edit part reference
-	 * - see above
-	 */
-	public final List<FlowObject> start(BusinessProcessDiagramEditPart diagramEditPart) {
-		this.diagramEditPart= diagramEditPart;
-		return start(diagramEditPart.getCastedModel());
+	@Override
+	public void addObserver(ISimulationObserver observer) {
+		if (observer != null) {
+			this.observers.add(observer);
+		}
 	}
+	
+//	/**
+//	 * - set edit part reference
+//	 * - see above
+//	 */
+//	public final List<FlowObject> start(BusinessProcessDiagramEditPart diagramEditPart) {
+//		this.diagramEditPart= diagramEditPart;
+//		return start(diagramEditPart.getCastedModel());
+//	}
 
 	/**
 	 * - reset step counter
@@ -144,7 +141,7 @@ public abstract class AbstractSimulation implements ISimulation {
 		tokenMap.clear();
 		stepMap.clear();
 		// remove markers
-		clearViewer();
+		clearObservers();
 	}
 	
 	public final boolean isRunning() {
@@ -196,7 +193,7 @@ public abstract class AbstractSimulation implements ISimulation {
 				result.add(flowObject);
 			}
 		}
-		refreshViewer();
+		notifyObservers();
 		return result;
 	}
 	
@@ -251,7 +248,7 @@ public abstract class AbstractSimulation implements ISimulation {
 				}
 			}
 		}
-		refreshViewer();
+		notifyObservers();
 		return result;
 	}
 
@@ -486,151 +483,22 @@ public abstract class AbstractSimulation implements ISimulation {
 			System.out.println(tokenMap.get(connection) + "\t" + connection.getName());
 		}
 	}
-	
-	////////////////////////////////////////////////////////////////////////////
-	// Graphics and Displaying
-	////////////////////////////////////////////////////////////////////////////
-	
-	/** Map holding the association of EObjects to EditParts */
-	protected final Map<EObject, IFigure > figureMap= new HashMap<EObject, IFigure>();
-	
-	/**
-	 * Sets the Viewer for controlling this Simulation
-	 */
-	public final void setViewer(Viewer viewer) {
-		this.viewer = viewer;
-	}
-	
-	/**
-	 * - refresh the viewer
-	 * - refresh figures
-	 */
-	protected final void refreshViewer() {
-		// refresh tree viewer
-		if (viewer != null) {
-			viewer.refresh();
-		}
-		// refresh diagram view
-		if (diagramEditPart != null) {
-			for (FlowObject flowObject : stateMap.keySet()) {
-				IFigure figure= getFigure(flowObject);
-				// MarkerDecorator
-				if (figure instanceof IDecoratableFigure) {
-					IDecoratableFigure decoratableFigure= (IDecoratableFigure) figure;
-					if (! (decoratableFigure.getDecorator() instanceof FlowObjectMarkerDecorator)) {
-						decoratableFigure.setDecorator(new FlowObjectMarkerDecorator());
-					}
-					FlowObjectMarkerDecorator decorator = (FlowObjectMarkerDecorator) decoratableFigure.getDecorator();
-					decorator.state= getState(flowObject);
-					figure.repaint();
-				}
-			}
-			for (EObject eObject: stepMap.keySet()) {
-				IFigure figure= getFigure(eObject);
-				if (figure instanceof PolylineConnectionEx) {
-					PolylineConnectionEx connectionFigure = (PolylineConnectionEx) figure;
-					int lastVisited= stepMap.get(eObject);
-					if (lastVisited > 0 && figure instanceof PolylineConnectionEx) {
-						connectionFigure.setLineWidth(3);
-						Color color= figure.getForegroundColor();
-						int red= color.getRed();
-						int green= color.getGreen();
-						int blue= (int) (255 * ((float) lastVisited / (float) step));
-						connectionFigure.setForegroundColor(new Color(color.getDevice(), red, green, blue));
-					}
-				}
-			}
-		}
-	}
-	
-	/**
-	 * Remove all decorations and refresh the viewer
-	 */
-	protected final void clearViewer() {
-		// remove decorations
-		if (diagramEditPart != null) {
-			for (EObject eObject : figureMap.keySet()) {
-				IFigure figure= getFigure(eObject);
-				// remove DecorationMarkers from FlowObject Figures
-				if (figure instanceof IDecoratableFigure) {
-					((IDecoratableFigure) figure).setDecorator(null);
-					figure.repaint();
-				}
-				// reset line color and line with for connections
-				if (figure instanceof PolylineConnectionEx) {
-					PolylineConnectionEx connectionFigure = (PolylineConnectionEx) figure;
-					connectionFigure.setForegroundColor(FigureHelper.getForeground(connectionFigure));
-					connectionFigure.setLineWidth(1);
-				}
-			}
-		}
-		// refresh viewer
-		if (viewer != null) {
-			viewer.refresh();
-		}
-	}
-	
-	protected final IFigure getFigure(EObject eObject) {
-		IFigure figure = figureMap.get(eObject);
-		if (figure == null) {
-			IVsdtEditPart editPart= (IVsdtEditPart) Util.findFirstEditPart(eObject, diagramEditPart, IVsdtEditPart.class);
-			if (editPart != null) {
-				figure= editPart.getPrimaryShape();
-				figureMap.put(eObject, figure);
-			}
-		}
-		return figure;
-	}
-	
-	/**
-	 * FigureDecorator responsible for decorating the FlowObjects' figures
-	 * according to the States the FlowObject currently are in. This Decorator 
-	 * will place a small colored circle in the upper left corner of the figure. 
-	 * 
-	 * @author kuester
-	 */
-	protected static class FlowObjectMarkerDecorator implements IFigureDecorator {
-		
-		static final Color butter = new Color(null, 252, 233, 79); // tango butter 1
-		static final Color sky = new Color(null, 114, 159, 207);// tango sky blue 1
-		static final Color chameleon = new Color(null, 138, 226, 52);// tango chameleon 1
-		static final Color scarlet = new Color(null, 239, 41, 41);// tango scarlet red 1
-		
-		State state= null;
 
-		public void decorateFigure(IFigure figure, Graphics g) {
-			if (state == null || state == State.IDLE) return;
-			Point p= figure.getBounds().getTopLeft();
-			Color color= ColorConstants.white;
-			if (state == State.READY) color= butter;
-			if (state == State.LOOPING_READY) color= butter;
-			if (state == State.ACTIVE_WAITING) color= sky;
-			if (state == State.ACTIVE_READY) color= sky;
-			if (state == State.DONE) color= chameleon;
-			if (state == State.FAILED) color= scarlet;
-			g.setForegroundColor(ColorConstants.black);
-			g.setBackgroundColor(color);
-			g.setLineWidth(1);
-			int w= 16;
-			g.fillOval(p.x, p.y, w, w);
-			g.drawOval(p.x, p.y, w, w);
-			if (state == State.ACTIVE_WAITING) {
-				// draw pause symbol
-				g.setBackgroundColor(butter);
-				g.fillRectangle(p.x+2*w/5, p.y+w/2, w/5, w/2);
-				g.fillRectangle(p.x+4*w/5, p.y+w/2, w/5, w/2);
-				g.drawRectangle(p.x+2*w/5, p.y+w/2, w/5, w/2);
-				g.drawRectangle(p.x+4*w/5, p.y+w/2, w/5, w/2);
-			}
-			if (state == State.ACTIVE_READY) {
-				// draw play symbol
-				g.setBackgroundColor(chameleon);
-				g.fillPolygon(new int[] {p.x+w/2, p.y+w/2, p.x+w, p.y+3*w/4, p.x+w/2, p.y+w});
-				g.drawPolygon(new int[] {p.x+w/2, p.y+w/2, p.x+w, p.y+3*w/4, p.x+w/2, p.y+w});
-			}
-			// Icon does not look good in diagram
-//			Image image= ImageLoader.getInstance().getImage(state.getImageDescriptor());
-//			g.drawImage(image, p);
+	void logMessage(ISimulationObserver.LogLevel level, String title, String message) {
+		for (ISimulationObserver observer : observers) {
+			observer.logMessage(level, title, message);
+		}
+	}
+	
+	void notifyObservers() {
+		for (ISimulationObserver observer : observers) {
+			observer.refresh(step, stepMap, stateMap);
+		}
+	}
+	
+	void clearObservers() {
+		for (ISimulationObserver observer : observers) {
+			observer.clear();
 		}
 	}
 	

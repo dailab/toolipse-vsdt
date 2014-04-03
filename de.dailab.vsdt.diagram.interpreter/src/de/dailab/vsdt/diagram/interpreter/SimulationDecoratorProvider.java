@@ -21,17 +21,18 @@ import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.PlatformUI;
 
 import de.dailab.common.swt.ImageLoader;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
-import de.dailab.vsdt.diagram.interpreter.simulation.AbstractSimulation;
-import de.dailab.vsdt.diagram.interpreter.simulation.State;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditorPlugin;
 import de.dailab.vsdt.diagram.part.VsdtVisualIDRegistry;
+import de.dailab.vsdt.interpreter.AbstractSimulation;
+import de.dailab.vsdt.interpreter.State;
 
 /**
  * This class could be used for decorating the flow objects in a more elegant
@@ -110,6 +111,34 @@ public class SimulationDecoratorProvider extends AbstractProvider implements IDe
 		});
 	}
 
+
+	/**
+	 * Get an Icon representing the given state. This icon can be used both as an
+	 * icon for a menu item, e.g. in the InterpreterView, or for the figure in
+	 * the diagram itself (although here scalable graphics would be better). 
+	 * 
+	 * @param state		some state
+	 * @return			Small Icon according to this State
+	 */
+	public static ImageDescriptor getImageForState(State state) {
+		switch (state) {
+		case READY:
+			return VsdtInterpreterPlugin.getImageDescriptor(VsdtInterpreterPlugin.IMAGE_SIM_READY);
+		case ACTIVE_WAITING:
+			return VsdtInterpreterPlugin.getImageDescriptor(VsdtInterpreterPlugin.IMAGE_SIM_ACTIVE_WAITING);
+		case ACTIVE_READY:
+			return VsdtInterpreterPlugin.getImageDescriptor(VsdtInterpreterPlugin.IMAGE_SIM_ACTIVE_READY);
+		case DONE: 
+			return VsdtInterpreterPlugin.getImageDescriptor(VsdtInterpreterPlugin.IMAGE_SIM_DONE);
+		case FAILED:
+			return VsdtInterpreterPlugin.getImageDescriptor(VsdtInterpreterPlugin.IMAGE_SIM_FAILED);
+		case LOOPING_READY:
+			return VsdtInterpreterPlugin.getImageDescriptor(VsdtInterpreterPlugin.IMAGE_SIM_READY);
+		default:
+			return VsdtInterpreterPlugin.getImageDescriptor(VsdtInterpreterPlugin.IMAGE_SIM_IDLE);
+		}
+	}
+	
 	/**
 	 * 
 	 */
@@ -142,7 +171,7 @@ public class SimulationDecoratorProvider extends AbstractProvider implements IDe
 
 				if (state != null && state != State.IDLE) {
 					// add decoration
-					Image image= ImageLoader.getInstance().getImage(state.getImageDescriptor());
+					Image image= ImageLoader.getInstance().getImage(getImageForState(state));
 					EditPart editPart = (EditPart) getDecoratorTarget().getAdapter(EditPart.class);
 					if (editPart instanceof org.eclipse.gef.GraphicalEditPart) {
 						int margin = -1;

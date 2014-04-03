@@ -1,10 +1,9 @@
-package de.dailab.vsdt.diagram.interpreter.simulation;
+package de.dailab.vsdt.interpreter;
 
 import java.util.List;
 
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.FlowObject;
-import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
 
 /**
  * This interface describes a Simulation, i.e. the stepwise "execution" of a
@@ -45,13 +44,12 @@ public interface ISimulation {
 	List<FlowObject> start(BusinessProcessDiagram diagram);
 
 	/**
-	 * Start a new simulation for the given BusinessProcessDiagramEditPart. Use
-	 * this constructor if you are using the Interpreter View.
+	 * Add observer to this simulation, e.g. for logging, or for displaying the
+	 * current state of the simulation.
 	 * 
-	 * @param diagramEditPart	Edit Part of the BusinessProcessDiagram to simulate
-	 * @return					List of newly readied FlowObjects
+	 * @param observer
 	 */
-	List<FlowObject> start(BusinessProcessDiagramEditPart diagramEditPart);
+	void addObserver(ISimulationObserver observer);
 	
 	/**
 	 * Stop the currently running simulation.
