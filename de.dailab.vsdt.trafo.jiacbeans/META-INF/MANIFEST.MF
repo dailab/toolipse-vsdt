@@ -7,7 +7,6 @@ Bundle-Activator: de.dailab.vsdt.trafo.jiacbeans.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  de.dailab.vsdt.trafo.strucbpmn,
- org.eclipse.jet;resolution:=optional,
  org.eclipse.emf.codegen,
  org.eclipse.emf.ecore,
  org.eclipse.gmf.runtime.common.ui
