@@ -279,8 +279,6 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 					if (event instanceof Start) {
 						String payloadCheck = payload == null ? "" :
 								"message.getPayload() instanceof " + payload.getType() + " && ";
-						String payloadParam = payload == null ? "" :
-								"(" + payload.getType() + ") message.getPayload()";
 						// Message Channel Start Event
 						// -> create message observer in doStart method 
 						String name = "messageObserver_" + Util.toJavaName(event.getId(), false);
