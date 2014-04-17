@@ -292,7 +292,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 								createCode("			IJiacMessage message = (IJiacMessage) ((WriteCallEvent<?>) event).getObject();"),
 								createCode("			if (" + payloadCheck + "message.getHeader(IJiacMessage.Header.SEND_TO).equalsIgnoreCase(\"" + address + "\")) {"),
 								createCode("				memory.remove(message);"),
-								createCode("				" + currentWorkflow.getName() + "(" + payloadParam + ");"),
+								createCode("				" + currentWorkflow.getName() + "(message);"),
 								createCode("			}"),
 								createCode("		}"),
 								createCode("	}"),
@@ -302,17 +302,23 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 						
 						// add payload as parameter to workflow method
 						if (payload != null) {
-							currentWorkflow.getParameters().add(createVariable(payload));
+							currentWorkflow.getParameters().add(createVariable("IJiacMessage", "__msg"));
 						}
+						mapping = createSequence(createCode("String __sender = __msg.getSender().getName();"),
+								payload != null ? createCode(payload.getType() + " " + payload.getName() + " = (" + 
+										payload.getType() + ") __msg.getPayload();") : null);
+						
 					} else if (event.isThrowing()) {
 						// Message Channel throwing Intermediate or End Event
 						// -> send message to channel
 						properties.add(payload);
+						properties.add(messageChannel.getReceiver());
 						mapping = createSend(messageChannel);
 					} else {
 						// Message Channel catching Intermediate Event
 						// -> receive message from channel
 						properties.add(payload);
+						properties.add(messageChannel.getSender());
 						mapping = createReceive(messageChannel);
 					}
 				}
@@ -531,6 +537,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				if (activity.getImplementation() instanceof MessageChannel) {
 					MessageChannel channel = (MessageChannel) activity.getImplementation();
 					properties.add(channel.getPayload());
+					properties.add(channel.getReceiver());
 					mapping = createSend(channel);
 				}
 				break;
@@ -541,6 +548,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				if (activity.getImplementation() instanceof MessageChannel) {
 					MessageChannel channel = (MessageChannel) activity.getImplementation();
 					properties.add(channel.getPayload());
+					properties.add(channel.getSender());
 					mapping = createReceive(channel);
 				}
 				break;
@@ -1275,11 +1283,12 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	 * 						ICommunicationBean.sendAction()
 	 */
 	private CodeElement createSend(MessageChannel channel) {
-		String address = channel.getChannel().getExpression();
 		String payload = channel.getPayload() != null ?
 				channel.getPayload().getName() : "null";
-		// TODO send for non-group-addresses
-		return createCode("send(" + payload + ", \"" + address + "\", true);");
+		String address = channel.isMessageGroup() ? 
+				"\"" + channel.getChannel().getExpression() + "\"" : "__receiver";
+		boolean isGroup = channel.isMessageGroup();
+		return createCode("send(" + payload + ", " + address + ", " + isGroup + ");");
 	}
 	
 	/**
@@ -1290,18 +1299,18 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	 * @param participant	to whom the message is directed (e.g. a group)
 	 * @return				Receive element
 	 */
-	private CodeElement createReceive(MessageChannel channel) {
+	private Sequence createReceive(MessageChannel channel) {
 		//join message group
 		addToMethod(doStartMethod, createJoin(channel.getChannel().getExpression()));
-		//TODO receive for non-group messages
-		String address = channel.getChannel().getExpression();
-		String assign = channel.getPayload() != null ?
-				channel.getPayload().getName() + " = " : "";
+		String address = channel.isMessageGroup() ? 
+				channel.getChannel().getExpression() : "null";
+		Property payload = channel.getPayload();
 		String clazz = channel.getPayload() != null ?
 				channel.getPayload().getType() + ".class" : "null";
-		String cast = channel.getPayload() != null ?
-				"(" + channel.getPayload().getType() + ") " : "";
-		return createCode(assign + cast + "receive(" + clazz + ", \"" + address + "\", -1);");
+		return createSequence(
+				createCode("IJiacMessage __msg = receiveMessage(" + clazz + ", \"" + address + "\", -1);"),
+				createCode("__sender = __msg.getSender().getName();"),
+				payload != null ? createCode(payload.getName() + " = (" + payload.getType() + ") __msg.getPayload();") : null);
 	}
 	
 	/**
@@ -1404,7 +1413,9 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	private Sequence createSequence(Script... scripts) {
 		Sequence seq = fac.createSequence();
 		for (Script script: scripts) {
-			seq.getScripts().add(script);
+			if (script != null) {
+				seq.getScripts().add(script);
+			}
 		}
 		return seq;
 	}
