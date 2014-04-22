@@ -9,7 +9,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.gmf.runtime.diagram.ui,
  de.dailab.jiactng.jadl2
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ClassPath: .
 Export-Package: de.dailab.vsdt.trafo.jiacv.export,
  de.dailab.vsdt.trafo.jiacv.util,

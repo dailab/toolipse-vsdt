@@ -7,4 +7,4 @@ Bundle-ClassPath: .
 Bundle-Vendor: DAI-Labor, TU Berlin
 Require-Bundle: de.dailab.vsdt.trafo.strucbpmn;visibility:=reexport
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

@@ -10,4 +10,4 @@ Require-Bundle: de.dailab.vsdt.trafo.strucbpmn,
  org.eclipse.gmf.runtime.diagram.ui,
  org.eclipse.gmf.runtime.diagram.ui.render
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

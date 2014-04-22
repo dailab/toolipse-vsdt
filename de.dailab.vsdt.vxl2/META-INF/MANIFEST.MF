@@ -17,7 +17,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.common,
  org.antlr.runtime
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: de.dailab.vsdt.vxl,
  de.dailab.vsdt.vxl.parseTreeConstruction,
  de.dailab.vsdt.vxl.parser.antlr,

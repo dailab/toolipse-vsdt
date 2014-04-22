@@ -15,7 +15,7 @@ Require-Bundle: org.eclipse.ui,
  de.dailab.vsdt.diagram,
  de.dailab.vsdt.diagram.interpreter,
  de.dailab.jiactng.nodeplugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
  lib/commons-codec-1.4.jar,
