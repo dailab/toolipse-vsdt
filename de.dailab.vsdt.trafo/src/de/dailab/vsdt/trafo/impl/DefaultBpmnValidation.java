@@ -389,6 +389,9 @@ public class DefaultBpmnValidation extends MappingStage {
 		for (FlowObject flowObject : activity.getContainedFlowObjects()) {
 			isOK&= testChild(visitFlowObject(flowObject),activity,vsdt.getFlowObjectContainer_ContainedFlowObjects());
 		}
+		for (Property property : activity.getProperties()) {
+			isOK &= testChild(visitProperty(property), activity, vsdt.getAbstractProcess_Properties());
+		}
 
 		switch (activity.getActivityType().getValue()) {
 		case ActivityType.SERVICE_VALUE:
@@ -595,6 +598,12 @@ public class DefaultBpmnValidation extends MappingStage {
 		
 		if (messageChannel.getPayload() != null) {
 			isOK&= testChild(visitProperty(messageChannel.getPayload()), messageChannel, vsdt.getMessageChannel_Payload());
+		}
+		if (messageChannel.getSender() != null) {
+			isOK&= testChild(visitProperty(messageChannel.getSender()), messageChannel, vsdt.getMessageChannel_Sender());
+		}
+		if (messageChannel.getReceiver() != null) {
+			isOK&= testChild(visitProperty(messageChannel.getReceiver()), messageChannel, vsdt.getMessageChannel_Receiver());
 		}
 		
 		return isOK;
