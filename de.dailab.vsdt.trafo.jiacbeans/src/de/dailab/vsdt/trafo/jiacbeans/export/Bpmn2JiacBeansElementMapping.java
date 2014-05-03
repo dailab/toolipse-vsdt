@@ -603,6 +603,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		// wrap into sequence with properties and assignments
 		mapping = buildSequence(mapping, properties, activity.getAssignments(), true);
 		mapping = wrapIntoLoop(activity, mapping);
+		((Sequence) mapping).getScripts().add(0, createCode("log.trace(\"Executing Activity '" +  activity.getName() + "'\");"));
 		
 		// build activity method: properties, assignments, mapping, more assignments
 		// the actual mapping is the invocation of the activity method
@@ -974,7 +975,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			}
 			for (Property property : properties) {
 				if (property != null) {
-					seq.getScripts().add(createCode(property.getType() + " " + property.getName() + " = null;"));
+					seq.getScripts().add(createCode(property.getType() + " " + property.getName() + " = new " + property.getType() + "();"));
 				}
 			}
 		}
@@ -1301,12 +1302,12 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		//join message group
 		addToMethod(doStartMethod, createJoin(channel.getChannel().getExpression()));
 		String address = channel.isMessageGroup() ? 
-				channel.getChannel().getExpression() : "null";
+				"\"" + channel.getChannel().getExpression() + "\"" : "null";
 		Property payload = channel.getPayload();
 		String clazz = channel.getPayload() != null ?
 				channel.getPayload().getType() + ".class" : "null";
 		return createSequence(
-				createCode("IJiacMessage __msg = receiveMessage(" + clazz + ", \"" + address + "\", -1);"),
+				createCode("IJiacMessage __msg = receiveMessage(" + clazz + ", " + address + ", -1);"),
 				createCode("__sender = __msg.getSender().getName();"),
 				payload != null ? createCode(payload.getName() + " = (" + payload.getType() + ") __msg.getPayload();") : null);
 	}
@@ -1342,13 +1343,14 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		if (event.getTrigger() == TriggerType.MESSAGE) {
 			if (event.getImplementation() instanceof MessageChannel) {
 				MessageChannel channel = (MessageChannel) event.getImplementation();
-				String address = channel.getChannel().getExpression();
+				String address = channel.isMessageGroup() ? 
+						"\"" + channel.getChannel().getExpression() + "\"" : "null";
 				String payloadType = channel.getPayload() != null ?
 						channel.getPayload().getType() + ".class" : "null";
 
 				threadName = threadName + "_message";
 				className  = "Message" + className;
-				parameters = parameters + ", \"" + address + "\", " + payloadType;
+				parameters = parameters + ", " + address + ", " + payloadType;
 			}
 		}
 		
