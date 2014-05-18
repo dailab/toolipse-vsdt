@@ -86,16 +86,17 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 */
 	@Override
 	protected boolean checkDiagram(BusinessProcessDiagram diagram) {
-		boolean isOk = true;
-		for (TreeIterator<EObject> iter= diagram.eAllContents(); iter.hasNext(); ) {
-			EObject next= iter.next();
-			if (next instanceof Expression) {
-				// test-parse the expression, exit if result is null
-				VxlTerm result = parseExpression(getExpression((Expression) next));
-				isOk &= result != null;
-			}
-		}
-		return isOk;
+		return true; // TODO 
+//		boolean isOk = true;
+//		for (TreeIterator<EObject> iter= diagram.eAllContents(); iter.hasNext(); ) {
+//			EObject next= iter.next();
+//			if (next instanceof Expression) {
+//				// test-parse the expression, exit if result is null
+//				VxlTerm result = parseExpression(getExpression((Expression) next));
+//				isOk &= result != null;
+//			}
+//		}
+//		return isOk;
 	}
 
 	/**
@@ -126,7 +127,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 * @param property		Some Property
 	 * @param value			New value to be assigned to this property
 	 */
-	protected void setPropertyValue(Property property, Serializable value) {
+	public void setPropertyValue(Property property, Serializable value) {
 		if (property != null) {
 			propertyValueMap.put(property, value);
 		}
@@ -364,7 +365,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 * @param eObject	Some (Flow) Object
 	 * @return				Map of names of Properties in the scope to their values
 	 */
-	protected Map<String, Serializable> createContext(EObject eObject) {
+	public Map<String, Serializable> createContext(EObject eObject) {
 		// get local properties
 		Map<String, Serializable> context= new HashMap<String, Serializable>();
 		for (Property property : VsdtHelper.getVisibleProperties(eObject)) {
@@ -451,7 +452,9 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 */
 	public VxlTerm parseExpression(String expression) {
 		if (expression == null) return null;
-		VxlParser parser= VxlParser.getInstance();
+
+		VxlParser parser= VxlParser.getInstance();	//TODO errror here
+		
 		try {
 			VxlTerm term= parser.parse(expression);
 			return term;

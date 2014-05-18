@@ -96,6 +96,7 @@ public abstract class AbstractSimulation implements ISimulation {
 					tokenMap.put(connection, 0);
 				}
 			}
+
 			stateMap.clear();
 			for (Pool pool : bpd.getPools()) {
 				for (FlowObject flowObject : VsdtHelper.getAllGraphicalElements(pool)) {
@@ -179,14 +180,18 @@ public abstract class AbstractSimulation implements ISimulation {
 					changeToken(seqFlow, -1);
 				}
 			}
+
 			// skip assignments when looping
 			if (! isInState(flowObject, State.LOOPING_READY) || ASSIGNMENTS_INSIDE_LOOP) {
 				// handle start Assignments
+				
 				handleAssignments(flowObject, AssignTimeType.START);
 			}
+
 			// set state to ACTIVE_WAITING
 			setState(flowObject, State.ACTIVE_WAITING);
 			// execute, part I
+			
 			executeBegin(flowObject);
 			// possibly set state to ACTIVE_READY
 			if (updateState(flowObject)) {
