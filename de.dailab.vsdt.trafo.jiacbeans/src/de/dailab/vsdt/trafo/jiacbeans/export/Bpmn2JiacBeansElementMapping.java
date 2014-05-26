@@ -1252,7 +1252,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		CodeElement notifyError = createCode("log.error(\"Action " + service.getOperation() + " failed: \" + actionResult.getFailure());");
 
 		// assign the results to the respective variables
-		Sequence resultAssigns = createSequence(createCode("Serializable[] results = (Serializable[]) actionResult.getResults()[0];"));
+		Sequence resultAssigns = createSequence(createCode("Serializable[] results = (Serializable[]) actionResult.getResults();"));
 		for (int i = 0; i < service.getOutput().size(); i++) {
 			Property property = service.getOutput().get(i);
 			resultAssigns.getScripts().add(createCode(
