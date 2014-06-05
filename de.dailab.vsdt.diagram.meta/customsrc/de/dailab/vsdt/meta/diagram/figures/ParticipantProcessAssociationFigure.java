@@ -21,7 +21,7 @@ public class ParticipantProcessAssociationFigure extends PolylineConnectionEx {
 		init();
 	}
 	
-	private RotatableDecoration arrowDecoration;
+//	private RotatableDecoration arrowDecoration;
 	
 	private RotatableDecoration deltaDecoration;
 	
@@ -32,7 +32,7 @@ public class ParticipantProcessAssociationFigure extends PolylineConnectionEx {
 		setLineStyle(org.eclipse.draw2d.Graphics.LINE_SOLID);
 		setForegroundColor(ColorConstants.black);
 	
-		arrowDecoration= createArrowDecoration();
+//		arrowDecoration= createArrowDecoration();
 		deltaDecoration= createDeltaDecoration();
 		
 	}
@@ -42,8 +42,11 @@ public class ParticipantProcessAssociationFigure extends PolylineConnectionEx {
 		super.paintFigure(graphics);
 		if (DiagramAppearancePreferencePage.isMetaDiagramStyleUsecase()) {
 			// set arrow decoration
-			if (getTargetDecoration() != arrowDecoration) {
-				setTargetDecoration(arrowDecoration);
+//			if (getTargetDecoration() != arrowDecoration) {
+//				setTargetDecoration(arrowDecoration);
+//			}
+			if (getTargetDecoration() != null) {
+				setTargetDecoration(null);
 			}
 			if (getSourceDecoration() != null) {
 				setSourceDecoration(null);
@@ -63,15 +66,15 @@ public class ParticipantProcessAssociationFigure extends PolylineConnectionEx {
 	/**
 	 * create the decoration used for the target for usecase-style diagrams
 	 */
-	private RotatableDecoration createArrowDecoration() {
-		PolylineDecoration df = new PolylineDecoration();
-		PointList pl = new PointList();
-		pl.addPoint(-2, 2);
-		pl.addPoint(0, 0);
-		pl.addPoint(-2, -2);
-		df.setTemplate(pl);
-		return df;
-	}
+//	private RotatableDecoration createArrowDecoration() {
+//		PolylineDecoration df = new PolylineDecoration();
+//		PointList pl = new PointList();
+//		pl.addPoint(-2, 2);
+//		pl.addPoint(0, 0);
+//		pl.addPoint(-2, -2);
+//		df.setTemplate(pl);
+//		return df;
+//	}
 	
 	/**
 	 * create the decoration used for the source for conversation-style diagrams
