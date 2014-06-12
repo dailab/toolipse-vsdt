@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * <ul>
  *   <li>{@link jiacbeans.impl.ActionImpl#getVariableName <em>Variable Name</em>}</li>
  *   <li>{@link jiacbeans.impl.ActionImpl#getActionId <em>Action Id</em>}</li>
+ *   <li>{@link jiacbeans.impl.ActionImpl#getScope <em>Scope</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,6 +69,26 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * @ordered
 	 */
 	protected String actionId = ACTION_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getScope() <em>Scope</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getScope()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SCOPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getScope() <em>Scope</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getScope()
+	 * @generated
+	 * @ordered
+	 */
+	protected String scope = SCOPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -135,6 +156,27 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getScope() {
+		return scope;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setScope(String newScope) {
+		String oldScope = scope;
+		scope = newScope;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, JiacbeansPackage.ACTION__SCOPE, oldScope, scope));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -142,6 +184,8 @@ public class ActionImpl extends EObjectImpl implements Action {
 				return getVariableName();
 			case JiacbeansPackage.ACTION__ACTION_ID:
 				return getActionId();
+			case JiacbeansPackage.ACTION__SCOPE:
+				return getScope();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -159,6 +203,9 @@ public class ActionImpl extends EObjectImpl implements Action {
 				return;
 			case JiacbeansPackage.ACTION__ACTION_ID:
 				setActionId((String)newValue);
+				return;
+			case JiacbeansPackage.ACTION__SCOPE:
+				setScope((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -178,6 +225,9 @@ public class ActionImpl extends EObjectImpl implements Action {
 			case JiacbeansPackage.ACTION__ACTION_ID:
 				setActionId(ACTION_ID_EDEFAULT);
 				return;
+			case JiacbeansPackage.ACTION__SCOPE:
+				setScope(SCOPE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -194,6 +244,8 @@ public class ActionImpl extends EObjectImpl implements Action {
 				return VARIABLE_NAME_EDEFAULT == null ? variableName != null : !VARIABLE_NAME_EDEFAULT.equals(variableName);
 			case JiacbeansPackage.ACTION__ACTION_ID:
 				return ACTION_ID_EDEFAULT == null ? actionId != null : !ACTION_ID_EDEFAULT.equals(actionId);
+			case JiacbeansPackage.ACTION__SCOPE:
+				return SCOPE_EDEFAULT == null ? scope != null : !SCOPE_EDEFAULT.equals(scope);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -212,6 +264,8 @@ public class ActionImpl extends EObjectImpl implements Action {
 		result.append(variableName);
 		result.append(", actionId: ");
 		result.append(actionId);
+		result.append(", scope: ");
+		result.append(scope);
 		result.append(')');
 		return result.toString();
 	}

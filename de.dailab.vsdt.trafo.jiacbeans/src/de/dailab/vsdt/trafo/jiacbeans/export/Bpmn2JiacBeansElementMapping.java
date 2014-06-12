@@ -1,7 +1,11 @@
 package de.dailab.vsdt.trafo.jiacbeans.export;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import jiacbeans.Action;
 import jiacbeans.AgentBean;
@@ -42,6 +46,7 @@ import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.trafo.base.util.TrafoLog;
 import de.dailab.vsdt.trafo.impl.BpmnElementMapping;
 import de.dailab.vsdt.trafo.jiacbeans.Util;
+import de.dailab.vsdt.trafo.jiacbeans.wizard.Bpmn2JiacBeansExportWizardOptionsPage;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBlock;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnBranch;
 import de.dailab.vsdt.trafo.strucbpmn.BpmnDerivedProcess;
@@ -62,6 +67,9 @@ import de.dailab.vsdt.trafo.strucbpmn.export.rules.l0.InitialGatewayRule;
  */
 public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	final JiacbeansFactory fac = JiacbeansFactory.eINSTANCE;
+
+	/** option: parent package */
+	public static String parentPackage = Bpmn2JiacBeansExportWizardOptionsPage.DEFAULT_PARENT_PACKAGE;
 	
 	/** the currently visited workflow */
 	private Method currentWorkflow;
@@ -128,10 +136,12 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			TrafoLog.warn(pool.getName() + ": A mapping for AdHoc Processes is not defined. Skipping.");
 			return null;
 		}
+
+		String pkg = (parentPackage.isEmpty() ? "" : parentPackage + ".") + pool.getParticipant().getName().toLowerCase();
 		
 		// create AgentBean file model
 		currentBean = fac.createAgentBean();
-		currentBean.setPackageName(pool.getName().toLowerCase());
+		currentBean.setPackageName(pkg);
 		currentBean.setName(pool.getName() + "_" + pool.getParent().getName());
 		currentBean.setDocumentation(pool.getDocumentation());
 		getWrapper().addAgentBean(currentBean, pool);
@@ -139,9 +149,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		// add imports for Data Types
 		for (DataType type : pool.getParent().getParent().getDataTypes()) {
 			String fullType = type.getPackage() + "." + type.getName();
-			currentBean.getImports().add(fullType);
+			currentBean.getImports().addAll(getGenericImports(fullType));
 		}
-		
 		//add variable declarations for pool properties
 		for (Property property : pool.getProperties()) {
 			currentBean.getVariables().add(createVariable(property));
@@ -332,6 +341,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 						//create action to be exposed by the bean
 						Action action = fac.createAction();
 						action.setVariableName("ACTION_" + currentWorkflow.getName().toUpperCase());
+						action.setScope(getActionScope(service));
 //						action.setActionId(currentBean.getPackageName() + "." + currentBean.getName() + "#" + currentWorkflow.getName());
 						action.setActionId(service.getOperation());
 						currentBean.getActions().add(action);
@@ -1381,6 +1391,27 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		return createTryCatch(script, "InterruptedException", interrupt);
 	}
 	
+	private String getActionScope(Service service) {
+		String scope = "ActionScope.GLOBAL";
+		if (service.getType().toLowerCase().contains("web")) {
+			scope = "ActionScope.WEBSERVICE";
+		}
+		return scope;
+	}
+	
+	/**
+	 * Extract all the actual types from a possibly complex generic type, 
+	 * e.g., for "java.util.Map<java.lang.String, java.lang.Integer>", 
+	 * return ["java.util.Map", "java.lang.String", "java.lang.Integer"]
+	 */
+	private static Set<String> getGenericImports(String fullType) {
+		Set<String> imports = new HashSet<>();
+		Matcher m = Pattern.compile("[\\w\\.]+").matcher(fullType);;
+		while (m.find()) {
+			imports.add(m.group());
+		}
+		return imports;
+	}
 	
 	
 	/*

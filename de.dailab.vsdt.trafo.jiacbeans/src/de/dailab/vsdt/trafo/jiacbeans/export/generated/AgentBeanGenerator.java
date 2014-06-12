@@ -79,7 +79,7 @@ public class AgentBeanGenerator
 		// add expose tag?
 		Action act = method.getExposedAs();
 		if (act != null) {
-			String expose = "\t@Expose(name=" + act.getVariableName() + ", scope=ActionScope.GLOBAL)"; 
+			String expose = "\t@Expose(name=" + act.getVariableName() + ", scope=" + act.getScope() + ")"; 
 			result = expose + "\n" + result;
 		}
 

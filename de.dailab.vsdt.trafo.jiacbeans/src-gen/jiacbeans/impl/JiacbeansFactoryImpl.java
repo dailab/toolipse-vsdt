@@ -44,7 +44,7 @@ public class JiacbeansFactoryImpl extends EFactoryImpl implements JiacbeansFacto
 	 */
 	public static JiacbeansFactory init() {
 		try {
-			JiacbeansFactory theJiacbeansFactory = (JiacbeansFactory)EPackage.Registry.INSTANCE.getEFactory("http://jiacbeans/1.0"); 
+			JiacbeansFactory theJiacbeansFactory = (JiacbeansFactory)EPackage.Registry.INSTANCE.getEFactory(JiacbeansPackage.eNS_URI);
 			if (theJiacbeansFactory != null) {
 				return theJiacbeansFactory;
 			}

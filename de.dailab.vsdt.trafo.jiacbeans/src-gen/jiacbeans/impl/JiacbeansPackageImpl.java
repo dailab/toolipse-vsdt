@@ -433,6 +433,15 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAction_Scope() {
+		return (EAttribute)actionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getScript() {
 		return scriptEClass;
 	}
@@ -695,6 +704,7 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		actionEClass = createEClass(ACTION);
 		createEAttribute(actionEClass, ACTION__VARIABLE_NAME);
 		createEAttribute(actionEClass, ACTION__ACTION_ID);
+		createEAttribute(actionEClass, ACTION__SCOPE);
 
 		scriptEClass = createEClass(SCRIPT);
 
@@ -800,6 +810,7 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		initEClass(actionEClass, Action.class, "Action", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAction_VariableName(), ecorePackage.getEString(), "variableName", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAction_ActionId(), ecorePackage.getEString(), "actionId", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAction_Scope(), ecorePackage.getEString(), "scope", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scriptEClass, Script.class, "Script", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

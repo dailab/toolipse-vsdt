@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.dailab.vsdt.trafo.jiacbeans/src-gen"
-    modelPluginID="de.dailab.vsdt.trafo.jiacbeans" modelName="Jiacbeans" importerID="org.eclipse.emf.importer.ecore"
-    containmentProxies="true" complianceLevel="6.0" copyrightFields="false">
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.dailab.vsdt.trafo.jiacbeans/src-gen" modelPluginID="de.dailab.vsdt.trafo.jiacbeans"
+    modelName="Jiacbeans" importerID="org.eclipse.emf.importer.ecore" containmentProxies="true"
+    complianceLevel="6.0" copyrightFields="false">
   <foreignModel>jiacbeans.ecore</foreignModel>
   <genPackages prefix="Jiacbeans" disposableProviderFactory="true" ecorePackage="jiacbeans.ecore#/">
     <genClasses ecoreClass="jiacbeans.ecore#//NamedElement">
@@ -37,6 +36,7 @@
     <genClasses ecoreClass="jiacbeans.ecore#//Action">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//Action/variableName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//Action/actionId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute jiacbeans.ecore#//Action/scope"/>
     </genClasses>
     <genClasses ecoreClass="jiacbeans.ecore#//Script"/>
     <genClasses ecoreClass="jiacbeans.ecore#//Sequence">

@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link jiacbeans.Action#getVariableName <em>Variable Name</em>}</li>
  *   <li>{@link jiacbeans.Action#getActionId <em>Action Id</em>}</li>
+ *   <li>{@link jiacbeans.Action#getScope <em>Scope</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,5 +78,31 @@ public interface Action extends EObject {
 	 * @generated
 	 */
 	void setActionId(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Scope</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Scope</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Scope</em>' attribute.
+	 * @see #setScope(String)
+	 * @see jiacbeans.JiacbeansPackage#getAction_Scope()
+	 * @model
+	 * @generated
+	 */
+	String getScope();
+
+	/**
+	 * Sets the value of the '{@link jiacbeans.Action#getScope <em>Scope</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Scope</em>' attribute.
+	 * @see #getScope()
+	 * @generated
+	 */
+	void setScope(String value);
 
 } // Action

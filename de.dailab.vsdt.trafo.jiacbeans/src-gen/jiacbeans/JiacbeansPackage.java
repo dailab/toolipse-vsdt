@@ -551,13 +551,22 @@ public interface JiacbeansPackage extends EPackage {
 	int ACTION__ACTION_ID = 1;
 
 	/**
+	 * The feature id for the '<em><b>Scope</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__SCOPE = 2;
+
+	/**
 	 * The number of structural features of the '<em>Action</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION_FEATURE_COUNT = 2;
+	int ACTION_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of structural features of the '<em>Script</em>' class.
@@ -1037,6 +1046,17 @@ public interface JiacbeansPackage extends EPackage {
 	EAttribute getAction_ActionId();
 
 	/**
+	 * Returns the meta object for the attribute '{@link jiacbeans.Action#getScope <em>Scope</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Scope</em>'.
+	 * @see jiacbeans.Action#getScope()
+	 * @see #getAction()
+	 * @generated
+	 */
+	EAttribute getAction_Scope();
+
+	/**
 	 * Returns the meta object for class '{@link jiacbeans.Script <em>Script</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1513,6 +1533,14 @@ public interface JiacbeansPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ACTION__ACTION_ID = eINSTANCE.getAction_ActionId();
+
+		/**
+		 * The meta object literal for the '<em><b>Scope</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTION__SCOPE = eINSTANCE.getAction_Scope();
 
 		/**
 		 * The meta object literal for the '{@link jiacbeans.impl.ScriptImpl <em>Script</em>}' class.
