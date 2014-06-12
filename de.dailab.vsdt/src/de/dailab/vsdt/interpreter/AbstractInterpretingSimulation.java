@@ -14,7 +14,7 @@ import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.Assignment;
-import de.dailab.vsdt.BusinessProcessDiagram;
+import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.ConditionType;
 import de.dailab.vsdt.Event;
 import de.dailab.vsdt.Expression;
@@ -53,12 +53,15 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	}
 	
 	@Override
-	public boolean isApplicable(BusinessProcessDiagram bpd) throws Exception {
-		if (! bpd.getParent().isExecutable()) {
-			String message = "The current Process Diagram is not executable. " +
-					"If you want to interpret this Process, please set the " +
-					"Business Process System's executable flag to True.";
-			throw new Exception(message);
+	public boolean isApplicable(EObject object) throws Exception {
+		if (object instanceof BusinessProcessSystem) {
+			BusinessProcessSystem bps = (BusinessProcessSystem) object;
+			if (! bps.isExecutable()) {
+				String message = "The current Process Diagram is not executable. " +
+						"If you want to interpret this Process, please set the " +
+						"Business Process System's executable flag to True.";
+				throw new Exception(message);
+			}
 		}
 		return true;
 	}
@@ -84,7 +87,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 *   then finding an error in the next to last assignment. 
 	 */
 	@Override
-	protected boolean checkDiagram(BusinessProcessDiagram diagram) {
+	protected boolean checkDiagram(EObject object) {
 		return true; // TODO 
 //		boolean isOk = true;
 //		for (TreeIterator<EObject> iter= diagram.eAllContents(); iter.hasNext(); ) {
@@ -102,7 +105,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 * reset property maps
 	 */
 	@Override
-	protected void initialize(BusinessProcessDiagram bpd) {
+	protected void initialize(EObject object) {
 		propertyValueMap.clear();
 		loopCounterMap.clear();
 	}
@@ -181,7 +184,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	}
 
 	/**
-	 * Handle properties incoming or outgoing messages and services, e.g. by 
+	 * Handle properties of incoming or outgoing messages and services, e.g. by 
 	 * simply displaying them (or asking for them) in a dialogue, or by issuing 
 	 * respective service calls.
 	 * 

@@ -12,6 +12,7 @@ import de.dailab.jiactng.agentcore.ontology.IActionDescription;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.BusinessProcessDiagram;
+import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
@@ -62,10 +63,10 @@ public class JiacEnabledVsdtInterpreter extends EclipseInterpretingSimulation {
 	 * actions; populate actiosMap on the fly
 	 */
 	@Override
-	public boolean isApplicable(BusinessProcessDiagram diagram) throws Exception {
+	public boolean isApplicable(EObject object) throws Exception {
 		actionsMap.clear();
 		List<IActionDescription> actions = bean.getActions();
-		for (Service service : getInvokedServices(diagram)) {
+		for (Service service : getInvokedServices(object)) {
 			for (IActionDescription action : actions) {
 				if (matches(action, service)) {
 					actionsMap.put(service, action);
@@ -76,7 +77,7 @@ public class JiacEnabledVsdtInterpreter extends EclipseInterpretingSimulation {
 				throw new Exception("No matching Action found for Service " + service.toString());
 			}
 		}
-		return super.checkDiagram(diagram);
+		return super.isApplicable(object);
 	}
 	
 	/**
@@ -158,6 +159,12 @@ public class JiacEnabledVsdtInterpreter extends EclipseInterpretingSimulation {
 	 */
 	private List<Service> getInvokedServices(EObject eObject) {
 		List<Service> services = new ArrayList<Service>();
+		if (eObject instanceof BusinessProcessSystem) {
+			BusinessProcessSystem bps = (BusinessProcessSystem) eObject;
+			for (BusinessProcessDiagram bpd : bps.getBusinessProcesses()) {
+				services.addAll(getInvokedServices(bpd));
+			}
+		}
 		if (eObject instanceof BusinessProcessDiagram) {
 			BusinessProcessDiagram bpd = (BusinessProcessDiagram) eObject;
 			for (Pool pool : bpd.getPools()) {

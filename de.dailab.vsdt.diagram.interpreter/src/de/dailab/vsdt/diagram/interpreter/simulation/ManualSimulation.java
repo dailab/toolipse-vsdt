@@ -9,7 +9,6 @@ import org.eclipse.ui.PlatformUI;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.AssignTimeType;
-import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.StandardLoopAttSet;
@@ -34,7 +33,7 @@ public class ManualSimulation extends BasicSimulation {
 	 * manual simulation is always applicable
 	 */
 	@Override
-	public boolean isApplicable(BusinessProcessDiagram bpd) throws Exception {
+	public boolean isApplicable(EObject object) throws Exception {
 		return true;
 	}
 	
@@ -42,7 +41,7 @@ public class ManualSimulation extends BasicSimulation {
 	 * manual simulation is always applicable
 	 */
 	@Override
-	protected boolean checkDiagram(BusinessProcessDiagram diagram) {
+	protected boolean checkDiagram(EObject object) {
 		return true;
 	}
 	
@@ -50,7 +49,7 @@ public class ManualSimulation extends BasicSimulation {
 	 * no initialization needed
 	 */
 	@Override
-	protected void initialize(BusinessProcessDiagram bpd) {
+	protected void initialize(EObject object) {
 		// do nothing
 	}
 	

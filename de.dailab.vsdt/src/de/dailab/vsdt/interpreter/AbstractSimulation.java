@@ -5,18 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.AssignTimeType;
-import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.ConditionType;
 import de.dailab.vsdt.ConnectingObject;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.GatewayType;
 import de.dailab.vsdt.MessageFlow;
-import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.util.VsdtHelper;
 
@@ -81,33 +80,43 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * - initialize step counter
 	 * - initialize token and state maps
 	 */
-	public final List<FlowObject> start(BusinessProcessDiagram diagram) {
+	public final List<FlowObject> start(EObject object) {
 		System.out.println("Starting Simulation");
-		BusinessProcessDiagram bpd= diagram;
+
+		// initialize stuff
+		step = 0;
+		tokenMap.clear();
+		stateMap.clear();
+		initialize(object);
+
 		// check diagram
-		initialize(bpd);
-		if (checkDiagram(bpd)) {
-			List<FlowObject> result= new ArrayList<FlowObject>();
+		if (checkDiagram(object)) {
+			List<FlowObject> readyFlowObjects = new ArrayList<FlowObject>();
+
 			// initialize some tables holding the currently activated elements
-			step= 0;
-			tokenMap.clear();
-			for (ConnectingObject connection : bpd.getConnections()) {
-				if (connection instanceof SequenceFlow || connection instanceof MessageFlow) {
-					tokenMap.put(connection, 0);
+			// first, put tokens on the connections...
+			for (TreeIterator<EObject> contents = object.eAllContents(); contents.hasNext(); ) {
+				EObject next = contents.next();
+				if (next instanceof ConnectingObject) {
+					ConnectingObject connection = (ConnectingObject) next;
+					if (connection instanceof SequenceFlow || connection instanceof MessageFlow) {
+						tokenMap.put(connection, 0);
+					}
 				}
 			}
-
-			stateMap.clear();
-			for (Pool pool : bpd.getPools()) {
-				for (FlowObject flowObject : VsdtHelper.getAllGraphicalElements(pool)) {
+			// .., then, check flow object states
+			for (TreeIterator<EObject> contents = object.eAllContents(); contents.hasNext(); ) {
+				EObject next = contents.next();
+				if (next instanceof FlowObject) {
+					FlowObject flowObject = (FlowObject) next;
 					stateMap.put(flowObject, State.IDLE);
 					if (updateState(flowObject)) {
-						result.add(flowObject);
+						readyFlowObjects.add(flowObject);
 					}
 				}
 			}
 			notifyObservers();
-			return result;
+			return readyFlowObjects;
 		} else {
 			return null;
 		}
@@ -270,14 +279,14 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * @param diagram		The Business Process Diagram to be simulated
 	 * @return				Whether there are any Problems with the diagrams
 	 */
-	protected abstract boolean checkDiagram(BusinessProcessDiagram diagram);
+	protected abstract boolean checkDiagram(EObject object);
 	
 	/**
 	 * Do initialization stuff, reset cached property values, etc.
 	 * 
 	 * @param bpd			The Business Process Diagram to be simulated
 	 */
-	protected abstract void initialize(BusinessProcessDiagram bpd);
+	protected abstract void initialize(EObject rootObject);
 	
 	/**
 	 * This method is executed at the end of the {@link #stepInto(FlowObject)}

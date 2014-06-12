@@ -2,7 +2,8 @@ package de.dailab.vsdt.interpreter;
 
 import java.util.List;
 
-import de.dailab.vsdt.BusinessProcessDiagram;
+import org.eclipse.emf.ecore.EObject;
+
 import de.dailab.vsdt.FlowObject;
 
 /**
@@ -27,21 +28,21 @@ public interface ISimulation {
 	 * Check whether this type of Simulation is applicable to the given process
 	 * diagram.
 	 * 
-	 * @param bpd			some business process diagram
+	 * @param bpd			some business process system, diagram, or pool
 	 * @return				applicable or not?
 	 * @throws Exception	generic Exception holding some meaningful error message
 	 */
-	boolean isApplicable(BusinessProcessDiagram bpd) throws Exception;
+	boolean isApplicable(EObject systemDiagramOrPool) throws Exception;
 	
 	/**
 	 * Start a new simulation for the given BusinessProcessDiagram. Use this
 	 * constructor, if you want to simulate a Business Process Diagram without
 	 * using the Interpreter View.
 	 * 
-	 * @param diagram			BusinessProcessDiagram to simulate
+	 * @param diagram			BusinessProcessSystem, Diagram, or Pool
 	 * @return					List of newly readied FlowObjects
 	 */
-	List<FlowObject> start(BusinessProcessDiagram diagram);
+	List<FlowObject> start(EObject systemDiagramOrPool);
 
 	/**
 	 * Add observer to this simulation, e.g. for logging, or for displaying the
