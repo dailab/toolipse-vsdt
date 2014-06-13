@@ -4,8 +4,11 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -14,14 +17,17 @@ import de.dailab.vsdt.trafo.wizard.BpmnExportWizardOptionsPage;
 
 public class Bpmn2JiacBeansExportWizardOptionsPage extends BpmnExportWizardOptionsPage {
 	
-	public static final String LABEL_PARENT_PACKAGE= "Use MAMS Specials";
+	public static final String LABEL_PARENT_PACKAGE= "Parent Package (optional)";
+	public static final String LABEL_CREATE_SUBPACKAGE = "Create sub-packages for individual roles";
 	public static final String DEFAULT_PARENT_PACKAGE = "";
+	public static final boolean DEFAULT_CREATE_SUBPACKAGE = true;
 	
 	/*
 	 * static, so the value is preserved between exports
 	 * might also store this in preferences or in an attribute of the diagram itself
 	 */
 	private static String parentPackage = DEFAULT_PARENT_PACKAGE;
+	private static boolean createSubpackage = DEFAULT_CREATE_SUBPACKAGE;
 	
 	public Bpmn2JiacBeansExportWizardOptionsPage(String title, IStructuredSelection selection) {
 		super(title, selection);
@@ -35,7 +41,7 @@ public class Bpmn2JiacBeansExportWizardOptionsPage extends BpmnExportWizardOptio
 		composite.setLayout(gridLayout);
 		
 		final Label label = new Label(composite, SWT.NONE);
-		label.setText("Parent Package");
+		label.setText(LABEL_PARENT_PACKAGE);
 		
 		final Text parentPackageText = new Text(composite, SWT.BORDER);
 		parentPackageText.setText(parentPackage);
@@ -45,10 +51,23 @@ public class Bpmn2JiacBeansExportWizardOptionsPage extends BpmnExportWizardOptio
 				parentPackage = parentPackageText.getText();
 			}
 		});
+		
+		final Button subpackageCheck= new Button(composite, SWT.CHECK);
+		subpackageCheck.setText(LABEL_CREATE_SUBPACKAGE);
+		subpackageCheck.setSelection(DEFAULT_CREATE_SUBPACKAGE);
+		subpackageCheck.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				createSubpackage = subpackageCheck.getSelection();
+			}
+		});
 	}
 
 	public static String getParentPackage() {
 		return parentPackage;
+	}
+	
+	public static boolean getCreateSubpackages() {
+		return createSubpackage;
 	}
 	
 }

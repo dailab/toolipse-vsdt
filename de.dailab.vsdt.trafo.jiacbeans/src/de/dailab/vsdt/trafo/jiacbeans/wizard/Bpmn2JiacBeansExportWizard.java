@@ -51,6 +51,7 @@ public class Bpmn2JiacBeansExportWizard extends BpmnExportWizard {
 	protected void applyOptions() {
 		if (optionsPage instanceof Bpmn2JiacBeansExportWizardOptionsPage) {
 			Bpmn2JiacBeansElementMapping.parentPackage = Bpmn2JiacBeansExportWizardOptionsPage.getParentPackage();
+			Bpmn2JiacBeansElementMapping.createSubpackages = Bpmn2JiacBeansExportWizardOptionsPage.getCreateSubpackages();
 		}
 	}
 	

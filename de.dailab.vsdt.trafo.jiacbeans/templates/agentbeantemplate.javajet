@@ -1,7 +1,10 @@
 <%@ jet package="de.dailab.vsdt.trafo.jiacbeans.export.generated" class="AgentBeanGenerator" imports = "de.dailab.vsdt.trafo.jiacbeans.* jiacbeans.* "%>
 <%	AgentBean bean = (AgentBean) argument; 
 %>
+
+<%	if (! bean.getPackageName().isEmpty()) { %>
 package <%= bean.getPackageName() %>;
+<%	} %>
 
 // common imports
 import java.io.Serializable;

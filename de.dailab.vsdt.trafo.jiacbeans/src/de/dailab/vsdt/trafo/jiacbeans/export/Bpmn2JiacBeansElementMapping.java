@@ -70,6 +70,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 
 	/** option: parent package */
 	public static String parentPackage = Bpmn2JiacBeansExportWizardOptionsPage.DEFAULT_PARENT_PACKAGE;
+	public static boolean createSubpackages = Bpmn2JiacBeansExportWizardOptionsPage.DEFAULT_CREATE_SUBPACKAGE;
 	
 	/** the currently visited workflow */
 	private Method currentWorkflow;
@@ -137,7 +138,10 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			return null;
 		}
 
-		String pkg = (parentPackage.isEmpty() ? "" : parentPackage + ".") + pool.getParticipant().getName().toLowerCase();
+		String pkg = parentPackage.trim();
+		if (createSubpackages) {
+			pkg = (pkg.isEmpty() ? "" : pkg + ".") + pool.getParticipant().getName().toLowerCase();
+		}
 		
 		// create AgentBean file model
 		currentBean = fac.createAgentBean();
