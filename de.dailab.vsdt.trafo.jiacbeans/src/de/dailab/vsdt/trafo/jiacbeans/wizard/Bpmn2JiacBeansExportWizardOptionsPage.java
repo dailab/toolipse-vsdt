@@ -54,7 +54,7 @@ public class Bpmn2JiacBeansExportWizardOptionsPage extends BpmnExportWizardOptio
 		
 		final Button subpackageCheck= new Button(composite, SWT.CHECK);
 		subpackageCheck.setText(LABEL_CREATE_SUBPACKAGE);
-		subpackageCheck.setSelection(DEFAULT_CREATE_SUBPACKAGE);
+		subpackageCheck.setSelection(createSubpackage);
 		subpackageCheck.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				createSubpackage = subpackageCheck.getSelection();
