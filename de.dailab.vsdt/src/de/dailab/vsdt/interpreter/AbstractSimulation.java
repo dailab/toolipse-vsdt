@@ -15,7 +15,6 @@ import de.dailab.vsdt.ConnectingObject;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.GatewayType;
-import de.dailab.vsdt.MessageFlow;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.util.VsdtHelper;
 
@@ -94,21 +93,21 @@ public abstract class AbstractSimulation implements ISimulation {
 			List<FlowObject> readyFlowObjects = new ArrayList<FlowObject>();
 
 			// initialize some tables holding the currently activated elements
-			// first, put tokens on the connections...
-			for (TreeIterator<EObject> contents = object.eAllContents(); contents.hasNext(); ) {
-				EObject next = contents.next();
-				if (next instanceof ConnectingObject) {
-					ConnectingObject connection = (ConnectingObject) next;
-					if (connection instanceof SequenceFlow || connection instanceof MessageFlow) {
-						tokenMap.put(connection, 0);
-					}
-				}
-			}
-			// .., then, check flow object states
+			// check flow object states, put connections into tokens map
 			for (TreeIterator<EObject> contents = object.eAllContents(); contents.hasNext(); ) {
 				EObject next = contents.next();
 				if (next instanceof FlowObject) {
 					FlowObject flowObject = (FlowObject) next;
+					
+					List<ConnectingObject> connections = new ArrayList<>();
+					connections.addAll(flowObject.getIncomingMsg());
+					connections.addAll(flowObject.getIncomingSeq());
+					connections.addAll(flowObject.getOutgoingMsg());
+					connections.addAll(flowObject.getOutgoingSeq());
+					for (ConnectingObject connection : connections) {
+						tokenMap.put(connection, 0);
+					}
+					
 					stateMap.put(flowObject, State.IDLE);
 					if (updateState(flowObject)) {
 						readyFlowObjects.add(flowObject);
@@ -486,16 +485,18 @@ public abstract class AbstractSimulation implements ISimulation {
 	/**
 	 * Print Information on States and Tokens to console. 
 	 */
-	protected final void printStates() {
-		// print details to console
-		System.out.println("--- State Table ---");
+	public final String getStatesString() {
+		final String NL = System.getProperty("line.separator");
+		StringBuilder builder = new StringBuilder();
+		builder.append("--- State Table ---" + NL);
 		for (FlowObject flowObject : stateMap.keySet()) {
-			System.out.println(stateMap.get(flowObject) + "\t" + VsdtHelper.getDescriptiveName(flowObject));
+			builder.append(stateMap.get(flowObject) + "\t" + VsdtHelper.getDescriptiveName(flowObject) + NL);
 		}
 		System.out.println("--- Token Table ---");
 		for (ConnectingObject connection : tokenMap.keySet()) {
-			System.out.println(tokenMap.get(connection) + "\t" + connection.getName());
+			builder.append(tokenMap.get(connection) + "\t" + connection.getName() + NL);
 		}
+		return builder.toString();
 	}
 
 	void logMessage(ISimulationObserver.LogLevel level, String title, String message) {

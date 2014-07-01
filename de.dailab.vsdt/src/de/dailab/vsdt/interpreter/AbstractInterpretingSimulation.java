@@ -376,6 +376,20 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 		return context;
 	}
 	
+	public final String getPropertiesString() {
+		final String NL = System.getProperty("line.separator");
+		StringBuilder builder = new StringBuilder();
+		builder.append("--- Properties Table ---" + NL);
+		for (Property property : propertyValueMap.keySet()) {
+			builder.append(property.getName() + "\t" + propertyValueMap.get(property) + NL);
+		}
+		System.out.println("--- Loop Counter Table ---");
+		for (Activity activity : loopCounterMap.keySet()) {
+			builder.append(activity.getName() + "\t" + loopCounterMap.get(activity) + NL);
+		}
+		return builder.toString();
+	}
+	
 	/*
 	 * VXL CONDITION/EXPRESSION EVALUATION HELPER METHODS
 	 */

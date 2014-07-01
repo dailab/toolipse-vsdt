@@ -161,7 +161,13 @@ public class DeploymentBean extends AbstractAgentBean {
 	public Serializable[] invokeService(IActionDescription service, Serializable... parameters) throws Exception {
 		ActionResult result = invokeAndWaitForResult(service, parameters);
 		if (result.getFailure() != null) {
-			throw new Exception(result.getFailure().toString());
+			if (result.getFailure() instanceof Exception) {
+				Exception exception = (Exception) result.getFailure();
+				exception.printStackTrace();
+				throw exception;
+			} else {
+				throw new Exception(result.getFailure().toString());
+			}
 		}
 		return result.getResults();
 	}
