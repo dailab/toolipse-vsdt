@@ -7,6 +7,7 @@ import org.osgi.framework.BundleContext;
 import de.dailab.jiactng.nodeplugin.JiacNodePlugin;
 import de.dailab.vsdt.vsdtagents.deployment.DeploymentBean;
 import de.dailab.vsdt.vsdtagents.interpreter.VsdtInterpreterBean;
+import de.dailab.vsdt.vsdtagents.sema.SemaIntegrationAgentBean;
 
 /**
  * The activator class controls the plug-in life cycle. When the plug-in is
@@ -29,6 +30,7 @@ public class VsdtAgents extends AbstractUIPlugin {
 				JiacNodePlugin nodePlugin = JiacNodePlugin.getDefault();
 				nodePlugin.addAgent("DeploymentAgent", 0, new DeploymentBean());
 				nodePlugin.addAgent("InterpreterAgent", 0, new VsdtInterpreterBean());
+				nodePlugin.addAgent("SemaVSDTIntegrationAgent", 0, new SemaIntegrationAgentBean());
 			}
 		}).start();
 	}
