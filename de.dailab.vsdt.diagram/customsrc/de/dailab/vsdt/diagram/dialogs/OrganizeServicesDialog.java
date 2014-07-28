@@ -52,7 +52,7 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 	private Text operationText;
 	
 	/**implementation.type*/
-	private Text typeText;
+	private Combo typeCombo;
 	
 	/**location*/
 	private Text locationText;
@@ -101,9 +101,12 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 		//input lines
 
 		new Label(editGroup,SWT.NONE).setText(LABEL_TYPE);
-		typeText= new Text(editGroup,SWT.BORDER);
-		typeText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		typeText.addModifyListener(this);
+		typeCombo= new Combo(editGroup,SWT.BORDER);
+		typeCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		typeCombo.addModifyListener(this);
+		typeCombo.add("");
+		typeCombo.add("JIAC Action");
+		typeCombo.add("Web Service");
 
 		new Label(editGroup,SWT.NONE).setText(LABEL_PARTICIPANT);
 		partCombo= new VsdtFeatureCombo<Participant>(new Combo(editGroup,SWT.READ_ONLY));
@@ -144,7 +147,7 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 			service.setParticipant(partCombo.getSelected());
 			service.setOperation(Util.nullIfEmpty(operationText.getText()));
 			service.setInterface(Util.nullIfEmpty(interfaceText.getText()));
-			service.setType(Util.nullIfEmpty(typeText.getText()));
+			service.setType(Util.nullIfEmpty(typeCombo.getText()));
 			service.setLocation(Util.nullIfEmpty(locationText.getText()));
 		}
 	}
@@ -161,7 +164,7 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 			operationText.setText(opString);
 			//set type
 			String typeString= Util.nonNull(service.getType());
-			typeText.setText(typeString);
+			typeCombo.setText(typeString);
 			//set location
 			String locString= Util.nonNull(service.getLocation());
 			locationText.setText(locString);

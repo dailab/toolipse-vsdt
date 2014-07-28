@@ -6,6 +6,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -27,8 +28,6 @@ import de.dailab.vsdt.util.VsdtElementFactory;
  */
 public class OrganizeMessageChannelsDialog extends AbstractOrganizeElementsDialog<MessageChannel> {
 
-	// TODO use the same combo boxes for types as in OrganizePropertiesDialog
-	
 	public static final String LABEL_CHANNEL= "Name / Channel";
 	public static final String LABEL_PAYLOAD_NAME= "Name";
 	public static final String LABEL_PAYLOAD_TYPE= "Type";
@@ -53,8 +52,9 @@ public class OrganizeMessageChannelsDialog extends AbstractOrganizeElementsDialo
 	private Text payloadNameText;
 
 	/** messagechannel.payload.type input field */
-	private Text payloadTypeText;
-
+//	private Text payloadTypeText;
+	private Combo payloadTypeCombo;
+	
 	@Override
 	public String getElementName() {
 		return "MessageChannel";
@@ -109,11 +109,16 @@ public class OrganizeMessageChannelsDialog extends AbstractOrganizeElementsDialo
 		payloadNameText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		payloadNameText.addModifyListener(this);
 		
-		new Label(payloadGroup, SWT.NONE).setText(LABEL_PAYLOAD_TYPE);
-		payloadTypeText= new Text(payloadGroup, SWT.BORDER);
-		payloadTypeText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		payloadTypeText.addModifyListener(this);
+//		new Label(payloadGroup, SWT.NONE).setText(LABEL_PAYLOAD_TYPE);
+//		payloadTypeText= new Text(payloadGroup, SWT.BORDER);
+//		payloadTypeText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+//		payloadTypeText.addModifyListener(this);
 		
+		new Label(payloadGroup,SWT.NONE).setText(LABEL_PAYLOAD_TYPE);
+		payloadTypeCombo= new Combo(payloadGroup, SWT.BORDER | SWT.DROP_DOWN);
+		payloadTypeCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+		OrganizePropertiesDialog.updateDataTypes(payloadTypeCombo, parentElement);
+		payloadTypeCombo.addModifyListener(this);
 		enableGroupControls(payloadGroup, false);
 	}
 	
@@ -139,7 +144,7 @@ public class OrganizeMessageChannelsDialog extends AbstractOrganizeElementsDialo
 				String payloadNameString= Util.nullIfEmpty(payloadNameText.getText());
 				message.getPayload().setName(payloadNameString);
 				
-				String payloadTypeString= Util.nullIfEmpty(payloadTypeText.getText());
+				String payloadTypeString= Util.nullIfEmpty(payloadTypeCombo.getText());
 				message.getPayload().setType(payloadTypeString);
 			}
 		}
@@ -159,7 +164,7 @@ public class OrganizeMessageChannelsDialog extends AbstractOrganizeElementsDialo
 				String payloadNameString= Util.nonNull(message.getPayload().getName());
 				payloadNameText.setText(payloadNameString);
 				String payloadTypeString= Util.nonNull(message.getPayload().getType());
-				payloadTypeText.setText(payloadTypeString);
+				payloadTypeCombo.setText(payloadTypeString);
 			}
 		}
 	}

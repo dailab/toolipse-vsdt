@@ -103,7 +103,7 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 		new Label(editGroup,SWT.NONE).setText(LABEL_TYPE);
 		propTypeCombo= new Combo(editGroup, SWT.BORDER | SWT.DROP_DOWN);
 		propTypeCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-		updateDataTypes();
+		updateDataTypes(propTypeCombo, parentElement);
 		propTypeCombo.addModifyListener(this);
 	}
 
@@ -168,7 +168,7 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 			if (BUTTON_DATATYPES.equals(((Button) e.getSource()).getText())) {
 				OrganizeElementsAction.getDataTypesAction().run(VsdtHelper.getRootElement(parentElement));
 				// update data types combo
-				updateDataTypes();
+				updateDataTypes(propTypeCombo, parentElement);
 			}
 		}
 	}
@@ -248,19 +248,19 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 	/**
 	 * Update the data types in the combo box
 	 */
-	private void updateDataTypes() {
-		String selected = propTypeCombo.getText();
-		propTypeCombo.removeAll();
+	public static void updateDataTypes(Combo combo, EObject parentElement) {
+		String selected = combo.getText();
+		combo.removeAll();
 		// basic data types
 		for (String type : de.dailab.vsdt.vxl.util.Util.datatypes) {
-			propTypeCombo.add(type);
+			combo.add(type);
 		}
 		// complex data types
 		BusinessProcessSystem bps = (BusinessProcessSystem) VsdtHelper.getRootElement(parentElement); 
 		for (DataType datatype: bps.getDataTypes()) {
 			String type = datatype.getPackage() + "." + datatype.getName();
-			propTypeCombo.add(type);
+			combo.add(type);
 		}
-		propTypeCombo.setText(selected);
+		combo.setText(selected);
 	}
 }
