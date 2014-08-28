@@ -31,7 +31,7 @@ public class WebServiceViewContentProvider implements ITreeContentProvider {
 	
 	@SuppressWarnings("unchecked")
 	public Object[] getChildren(Object parentElement) {
-		Collection children= new ArrayList();
+		Collection<Object> children= new ArrayList<>();
 		if (parentElement instanceof WebSeviceAccessor) {
 			WebSeviceAccessor accessor = (WebSeviceAccessor) parentElement;
 			children.addAll(accessor.getDefinition());
@@ -59,7 +59,7 @@ public class WebServiceViewContentProvider implements ITreeContentProvider {
 		}
 		// Collections
 		if (parentElement instanceof Collection) {
-			children.addAll((Collection) parentElement);
+			children.addAll((Collection<?>) parentElement);
 		}
 		return children.toArray();
 	}

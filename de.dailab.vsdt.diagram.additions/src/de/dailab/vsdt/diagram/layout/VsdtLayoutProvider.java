@@ -55,7 +55,7 @@ public class VsdtLayoutProvider extends AbstractLayoutEditPartProvider {
 		return layoutEditParts(containerEditPart.getChildren(), layoutHint);
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Command layoutEditParts(List selectedObjects, IAdaptable layoutHint) {
     	// calculate new Layout

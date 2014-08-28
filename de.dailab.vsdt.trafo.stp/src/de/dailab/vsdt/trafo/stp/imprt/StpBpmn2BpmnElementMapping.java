@@ -305,6 +305,8 @@ public class StpBpmn2BpmnElementMapping extends MappingStage {
 		case BOTH_LITERAL:
 			target.setDirection(de.dailab.vsdt.DirectionType.BOTH);
 			break;
+		default:
+			break;
 		}
 		if (target.getSource() == null || target.getTarget() == null) {
 			TrafoLog.warn("Source or Target Feature is null for Association '" + target.getName() + "'");

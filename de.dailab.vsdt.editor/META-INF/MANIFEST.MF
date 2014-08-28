@@ -16,4 +16,4 @@ Require-Bundle: org.eclipse.core.runtime,
  de.dailab.vsdt,
  de.dailab.vsdt.edit
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

@@ -31,7 +31,7 @@ public class WebServiceViewLabelProvider extends AbstractLabelProvider {
 		// handle Collections
 		Object actualElement= element;
 		if (element instanceof Collection) {
-			Collection collection = (Collection) element;
+			Collection<?> collection = (Collection<?>) element;
 			if (! collection.isEmpty()) {
 				actualElement= collection.iterator().next();
 			}
@@ -117,7 +117,7 @@ public class WebServiceViewLabelProvider extends AbstractLabelProvider {
 		}
 		// Collections
 		if (element instanceof Collection) {
-			Collection collection = (Collection) element;
+			Collection<?> collection = (Collection<?>) element;
 			if (! collection.isEmpty()) {
 				Object actualElement= collection.iterator().next();
 				String name= actualElement.getClass().getSimpleName();

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gmfgen:GenEditorGenerator xmi:version="2.0"
+<gmfgen:GenEditorGenerator
+    xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:gmfgen="http://www.eclipse.org/gmf/2008/GenModel" packageNamePrefix="de.dailab.vsdt.meta.diagram"
+    xmlns:gmfgen="http://www.eclipse.org/gmf/2009/GenModel"
+    packageNamePrefix="de.dailab.vsdt.meta.diagram"
     modelID="Vsdt_meta"
     sameFileForDiagramAndModel="true"
     diagramFileExtension="vsdtd"
@@ -11,10 +13,8 @@
       visualID="79"
       editPartClassName="BusinessProcessSystemEditPart"
       itemSemanticEditPolicyClassName="BusinessProcessSystemItemSemanticEditPolicy"
-      notationViewFactoryClassName="BusinessProcessSystemViewFactory"
       canonicalEditPolicyClassName="BusinessProcessSystemCanonicalEditPolicy"
       iconProviderPriority="Low"
-      validationProviderPriority="Low"
       validationEnabled="true"
       validationDecorators="true"
       validationDecoratorProviderPriority="Low">
@@ -32,7 +32,6 @@
         visualID="1001"
         editPartClassName="ParticipantEditPart"
         itemSemanticEditPolicyClassName="ParticipantItemSemanticEditPolicy"
-        notationViewFactoryClassName="ParticipantViewFactory"
         canonicalEditPolicyClassName="ParticipantCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="ParticipantGraphicalNodeEditPolicy"
         createCommandClassName="ParticipantCreateCommand">
@@ -60,8 +59,7 @@
           xsi:type="gmfgen:GenExternalNodeLabel"
           visualID="4001"
           editPartClassName="ParticipantNameEditPart"
-          itemSemanticEditPolicyClassName="ParticipantNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="ParticipantNameViewFactory">
+          itemSemanticEditPolicyClassName="ParticipantNameItemSemanticEditPolicy">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -70,7 +68,8 @@
           <requiredPluginIDs>de.dailab.vsdt.diagram</requiredPluginIDs>
         </viewmap>
         <modelFacet
-            xsi:type="gmfgen:FeatureLabelModelFacet">
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            parser="//@labelParsers/@implementations.0">
           <metaFeatures
               href="vsdt.genmodel#//vsdt/IdObject/name"/>
         </modelFacet>
@@ -80,7 +79,6 @@
         visualID="1002"
         editPartClassName="BusinessProcessDiagramEditPart"
         itemSemanticEditPolicyClassName="BusinessProcessDiagramItemSemanticEditPolicy"
-        notationViewFactoryClassName="BusinessProcessDiagramViewFactory"
         canonicalEditPolicyClassName="BusinessProcessDiagramCanonicalEditPolicy"
         graphicalNodeEditPolicyClassName="BusinessProcessDiagramGraphicalNodeEditPolicy"
         createCommandClassName="BusinessProcessDiagramCreateCommand">
@@ -111,8 +109,7 @@
       <labels
           visualID="4002"
           editPartClassName="BusinessProcessDiagramNameEditPart"
-          itemSemanticEditPolicyClassName="BusinessProcessDiagramNameItemSemanticEditPolicy"
-          notationViewFactoryClassName="BusinessProcessDiagramNameViewFactory">
+          itemSemanticEditPolicyClassName="BusinessProcessDiagramNameItemSemanticEditPolicy">
         <diagramRunTimeClass
             href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap
@@ -120,7 +117,8 @@
             getterName="getFigureBusinessProcessNameFigure"
             figureQualifiedClassName="org.eclipse.draw2d.IFigure"/>
         <modelFacet
-            xsi:type="gmfgen:FeatureLabelModelFacet">
+            xsi:type="gmfgen:FeatureLabelModelFacet"
+            parser="//@labelParsers/@implementations.0">
           <metaFeatures
               href="vsdt.genmodel#//vsdt/IdObject/name"/>
         </modelFacet>
@@ -130,7 +128,6 @@
         visualID="3001"
         editPartClassName="ParticipantAssociatedProcessesEditPart"
         itemSemanticEditPolicyClassName="ParticipantAssociatedProcessesItemSemanticEditPolicy"
-        notationViewFactoryClassName="ParticipantAssociatedProcessesViewFactory"
         createCommandClassName="ParticipantAssociatedProcessesCreateCommand"
         reorientCommandClassName="ParticipantAssociatedProcessesReorientCommand">
       <diagramRunTimeClass
@@ -277,4 +274,15 @@
   </propertySheet>
   <domainGenModel
       href="vsdt.genmodel#/"/>
+  <labelParsers
+      extensibleViaService="true">
+    <implementations
+        xsi:type="gmfgen:PredefinedParser"
+        uses="//@diagram/@topLevelNodes.0/@labels.0/@modelFacet //@diagram/@topLevelNodes.1/@labels.0/@modelFacet"/>
+  </labelParsers>
+  <contextMenus
+      context="//@diagram">
+    <items
+        xsi:type="gmfgen:LoadResourceAction"/>
+  </contextMenus>
 </gmfgen:GenEditorGenerator>

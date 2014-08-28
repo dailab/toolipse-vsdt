@@ -506,7 +506,7 @@ public class TSequenceImpl extends TActivityImpl implements TSequence {
 	 * @return			the list for the given activity
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List getActivityList(TActivity tActivity) {
 		if (tActivity instanceof TAssign) {
 			return getAssign();
@@ -558,7 +558,7 @@ public class TSequenceImpl extends TActivityImpl implements TSequence {
 	 * @param activity	
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void addActivity(TActivity activity) {
 		if (activity != null) {
 			List list= getActivityList(activity);

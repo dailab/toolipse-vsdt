@@ -309,6 +309,8 @@ public class Bpmn2StpBpmnElementMapping extends BpmnElementMapping {
 			case USER:
 				at= org.eclipse.stp.bpmn.ActivityType.TASK_LITERAL;
 				break;
+			default:
+				break;
 			}
 		}
 		if (flowObject instanceof Start) {
@@ -333,6 +335,8 @@ public class Bpmn2StpBpmnElementMapping extends BpmnElementMapping {
 				break;
 			case SIGNAL:
 				at= org.eclipse.stp.bpmn.ActivityType.EVENT_START_SIGNAL_LITERAL;
+				break;
+			default: 
 				break;
 			}
 		}
@@ -364,6 +368,8 @@ public class Bpmn2StpBpmnElementMapping extends BpmnElementMapping {
 				break;
 			case SIGNAL:
 				at= org.eclipse.stp.bpmn.ActivityType.EVENT_END_SIGNAL_LITERAL;
+				break;
+			default:
 				break;
 			}
 		}
@@ -398,6 +404,8 @@ public class Bpmn2StpBpmnElementMapping extends BpmnElementMapping {
 				break;
 			case SIGNAL:
 				at= org.eclipse.stp.bpmn.ActivityType.EVENT_INTERMEDIATE_SIGNAL_LITERAL;
+				break;
+			default:
 				break;
 			}
 		}

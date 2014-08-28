@@ -575,7 +575,7 @@ public class TFlowImpl extends TActivityImpl implements TFlow {
 	 * @return			the list for the given activity
 	 * @generated NOT
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List getActivityList(TActivity tActivity) {
 		if (tActivity instanceof TAssign) {
 			return getAssign();
