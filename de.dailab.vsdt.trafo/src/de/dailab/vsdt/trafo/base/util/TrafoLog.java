@@ -9,6 +9,8 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.RollingFileAppender;
 import org.apache.log4j.WriterAppender;
+import org.eclipse.gmf.runtime.common.ui.util.ConsoleUtil;
+import org.eclipse.ui.console.MessageConsole;
 
 /**
  * Just a simple class to collect logged events and error messages, delegating
@@ -16,6 +18,8 @@ import org.apache.log4j.WriterAppender;
  */
 public class TrafoLog {
 	
+	public static final String VSDT_TRAFO_CONSOLE= "VSDT Transformation Log";
+
 	public static final String PATTERN= "%d [%t] %-5p %c - %m%n";
 	
 	private static CharArrayWriter writer= new CharArrayWriter();
@@ -64,6 +68,10 @@ public class TrafoLog {
 		writer.reset();
 		hasErrors= false;
 		hasWarning= false;
+
+		MessageConsole console = ConsoleUtil.registerConsole(VSDT_TRAFO_CONSOLE);
+		console.clearConsole();
+		ConsoleUtil.showConsole(VSDT_TRAFO_CONSOLE);
 	}
 	
 	/**
@@ -80,6 +88,7 @@ public class TrafoLog {
 	 */
 	public static void trace(String message) {
 		logger.trace(message);
+//		ConsoleUtil.println(VSDT_TRAFO_CONSOLE, "TRACE: " + message);
 	}
 	
 	/**
@@ -89,6 +98,7 @@ public class TrafoLog {
 	 */
 	public static void debug(String message) {
 		logger.debug(message);
+		ConsoleUtil.println(VSDT_TRAFO_CONSOLE, "DEBUG: " + message);
 	}
 	
 	/**
@@ -98,6 +108,7 @@ public class TrafoLog {
 	 */
 	public static void info(String message) {
 		logger.info(message);
+		ConsoleUtil.printInfo(VSDT_TRAFO_CONSOLE, "INFO: " + message);
 	}
 	
 	/**
@@ -107,6 +118,7 @@ public class TrafoLog {
 	 */
 	public static void nyi(String message) {
 		warn("Not Yet Implemented: " + message);
+		ConsoleUtil.printWarning(VSDT_TRAFO_CONSOLE, "NOT YET IMPL.: " + message);
 	}
 	
 	/**
@@ -117,6 +129,7 @@ public class TrafoLog {
 	public static void warn(String message) {
 		hasWarning= true;
 		logger.warn(message);
+		ConsoleUtil.printWarning(VSDT_TRAFO_CONSOLE, "WARNING: " + message);
 	}
 	
 	/**
@@ -127,6 +140,7 @@ public class TrafoLog {
 	public static void error(String message) {
 		hasErrors= true;
 		logger.error(message);
+		ConsoleUtil.printError(VSDT_TRAFO_CONSOLE, "ERROR: " + message);
 	}
 	
 	/**
@@ -136,7 +150,8 @@ public class TrafoLog {
 	 */
 	public static void fatal(String message, Throwable t) {
 		hasErrors= true;
-		logger.fatal(message,t);
+		logger.fatal(message, t);
+		ConsoleUtil.println(VSDT_TRAFO_CONSOLE, "FATAL: " + message);
 	}
 	
 	public static boolean hasWarnings() {

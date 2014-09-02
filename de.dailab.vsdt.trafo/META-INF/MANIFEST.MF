@@ -3,7 +3,8 @@ Bundle-ManifestVersion: 2
 Bundle-Name: VSDT - Transformation Base
 Bundle-SymbolicName: de.dailab.vsdt.trafo;singleton:=true
 Bundle-Version: 1.4.4.20130422
-Bundle-ClassPath: .
+Bundle-ClassPath: .,
+ lib/log4j-1.2.15.jar
 Bundle-Vendor: DAI-Labor, TU Berlin
 Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.core.runtime;visibility:=reexport,
@@ -11,11 +12,13 @@ Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.jface;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport,
  de.dailab.vsdt;visibility:=reexport,
- de.dailab.vsdt.trafo.base;visibility:=reexport,
  org.eclipse.gmf.runtime.diagram.ui;visibility:=reexport,
  de.dailab.vsdt.diagram.meta
 Bundle-ActivationPolicy: lazy
 Export-Package: de.dailab.vsdt.trafo,
+ de.dailab.vsdt.trafo.base,
+ de.dailab.vsdt.trafo.base.constraints,
+ de.dailab.vsdt.trafo.base.util,
  de.dailab.vsdt.trafo.impl,
  de.dailab.vsdt.trafo.wizard
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

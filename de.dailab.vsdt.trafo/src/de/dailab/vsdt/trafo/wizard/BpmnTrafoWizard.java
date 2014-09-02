@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.gmf.runtime.common.ui.util.ConsoleUtil;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
@@ -45,7 +44,6 @@ import de.dailab.vsdt.trafo.base.util.TrafoLog;
  */
 public abstract class BpmnTrafoWizard extends Wizard {
 	
-	public static final String VSDT_TRAFO_CONSOLE= "de.dailab.vsdt.console";
 	public static final String SUCCESS_TITLE= "Transformation Complete";
 	public static final String SUCCESS_MESSAGE= "Transformation completed.";
 	public static final String SUCCESS_WARN_MESSAGE= "Transformation completed with warnings.";
@@ -127,8 +125,6 @@ public abstract class BpmnTrafoWizard extends Wizard {
 	public boolean performFinish() {
 		applyOptions();
 
-		ConsoleUtil.registerConsole(VSDT_TRAFO_CONSOLE);
-		
 		for (final IFile file : optionsPage.getSelectedResources()) {
 			final URI fileURI = URI.createFileURI(
 					new File(file.getLocationURI()).getAbsolutePath());
@@ -192,7 +188,6 @@ public abstract class BpmnTrafoWizard extends Wizard {
 		StringWriter sw = new StringWriter();
 		exception.printStackTrace(new PrintWriter(sw));
 		String errMsg= sw.toString();
-		ConsoleUtil.printError(VSDT_TRAFO_CONSOLE, errMsg);
 		exception.printStackTrace();
 		return errMsg;
 	}
