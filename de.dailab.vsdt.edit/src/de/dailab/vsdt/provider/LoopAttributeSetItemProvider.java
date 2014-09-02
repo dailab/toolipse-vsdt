@@ -20,7 +20,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import de.dailab.common.gmf.ExpandableItemProviderAdapter;
+import de.dailab.common.swt.ExpandableItemProviderAdapter;
 
 /**
  * This is the item provider adapter for a {@link de.dailab.vsdt.LoopAttributeSet} object.

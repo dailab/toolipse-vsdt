@@ -24,7 +24,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import de.dailab.common.gmf.ExpandableItemProviderAdapter;
+import de.dailab.common.swt.ExpandableItemProviderAdapter;
 import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowObject;
