@@ -7,7 +7,7 @@ Bundle-Vendor: DAI-Labor, TU Berlin
 Require-Bundle: org.eclipse.xtext,
  de.dailab.vsdt.trafo.strucbpmn;visibility:=reexport,
  org.eclipse.gmf.runtime.diagram.ui,
- de.dailab.jiactng.jadl2
+ de.dailab.jiactng.jadlpp
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ClassPath: .
