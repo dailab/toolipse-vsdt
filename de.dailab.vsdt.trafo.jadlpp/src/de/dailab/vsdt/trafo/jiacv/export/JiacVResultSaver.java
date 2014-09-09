@@ -10,15 +10,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.xmi.XMLResource;
+
 import de.dailab.jiactng.jadl.Agent;
 import de.dailab.jiactng.jadl.ontology.JadlParseException;
-import de.dailab.jiactng.jadl.util.SimpleJadlParser;
 import de.dailab.vsdt.DataType;
 import de.dailab.vsdt.Event;
 import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.trafo.MappingResultSaver;
 import de.dailab.vsdt.trafo.base.util.TrafoLog;
+import de.dailab.vsdt.trafo.jiacv.util.JadlParser;
 
 public class JiacVResultSaver extends MappingResultSaver {
 
@@ -40,6 +42,7 @@ public class JiacVResultSaver extends MappingResultSaver {
 		// save JADL source code
 		for (Agent model : wrapper.getJadlFiles()) {
 			String fileName= wrapper.getJadlFileName(model);
+			saveJadlXml(new File(baseDirectory, fileName + ".xml"), model);
 			saveJadl(new File(baseDirectory, fileName), model);
 		}
 		// save starter rules
@@ -68,7 +71,7 @@ public class JiacVResultSaver extends MappingResultSaver {
 		JiacVExportWrapper wrapper= (JiacVExportWrapper) this.wrapper;
 		List<String> serviceSources = new ArrayList<String>();
 		for (Agent model : wrapper.getJadlFiles()) {
-			String source= SimpleJadlParser.getInstance().serialize(model);
+			String source= JadlParser.getInstance().serialize(model);
 			serviceSources.add(source);
 		}
 		return serviceSources;
@@ -138,7 +141,7 @@ public class JiacVResultSaver extends MappingResultSaver {
 	private void saveJadl(File file, Agent model) throws IOException {
 		String source= null;
 		try {
-			source= SimpleJadlParser.getInstance().serialize(model);
+			source= JadlParser.getInstance().serialize(model);
 		} catch (JadlParseException e) {
 			TrafoLog.warn(e.getLocalizedMessage());
 		}
@@ -151,6 +154,12 @@ public class JiacVResultSaver extends MappingResultSaver {
 			writer.write(source);
 			writer.close();
 		}
+	}
+	
+	private void saveJadlXml(File file, Agent model) throws IOException {
+		Map<Object, Object> options = new HashMap<Object, Object>();
+		options.put(XMLResource.OPTION_ENCODING, "UTF-8");
+		saveAsXmlResource(file, model, options, null);
 	}
 	
 	/**

@@ -7,7 +7,7 @@
     <package 
        uri = "http://www.dailab.de/vsdt/vxl/Vxl" 
        class = "de.dailab.vsdt.vxl.vxl.VxlPackage"
-       genModel = "de/dailab/vsdt/vxl/Vxl.genmodel" /> 
+       genModel = "src-gen/de/dailab/vsdt/vxl/Vxl.genmodel" /> 
 	
   </extension>
 

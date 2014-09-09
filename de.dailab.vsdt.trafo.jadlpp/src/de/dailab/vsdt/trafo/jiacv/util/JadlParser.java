@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -122,7 +123,49 @@ public class JadlParser {
 		if (resource.getErrors().size() > 0) {
 			throw jpe; 
 		}
-		return bos.toString();
+		String ugly = bos.toString();
+		return postProcess(ugly);
+	}
+	/**
+	 * - after each ';', insert a line break, keep indentation
+	 * - after each '{', insert a line break, increase indentation 
+	 * - after each '}', insert a line break, decrease indentation
+	 * 
+	 * @param uglyCode		blob of ugly JADL code without linebreaks
+	 * @return				nicely formatted jadl code
+	 */
+	private String postProcess(String uglyCode) {
+		int indentation = 0;
+		String NL = System.getProperty("line.separator");
+		StringBuffer buffer = new StringBuffer();
+		
+		StringTokenizer tokenizer = new StringTokenizer(uglyCode);
+		while (tokenizer.hasMoreTokens()) {
+			String token = tokenizer.nextToken();
+			if ("}".equals(token)) {
+ 				indentation--;
+ 				appendLine(buffer, NL, indentation);
+ 				buffer.append(token).append(" ");
+ 				appendLine(buffer, NL, indentation);
+ 			} else {
+ 				buffer.append(token).append(" ");
+ 	 			if (";".equals(token)) {
+ 	 				appendLine(buffer, NL, indentation);
+ 	 			}
+ 	 			if ("{".equals(token)) {
+ 	 				indentation++;
+ 	 				appendLine(buffer, NL, indentation);
+ 	 			}
+ 			}
+		}
+		return buffer.toString();
+	}
+	
+	private void appendLine(StringBuffer buffer, String newline, int indentation) {
+		buffer.append(newline);
+		for (int i = 0; i<indentation; i++) {
+			buffer.append("\t");
+		}
 	}
 	
 }
