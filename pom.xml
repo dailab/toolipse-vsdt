@@ -6,7 +6,7 @@
   <parent>
 	<groupId>de.dailab</groupId>
 	<artifactId>toolipse3</artifactId>
-	<version>3.0.0-SNAPSHOT</version>
+	<version>3.0.1-SNAPSHOT</version>
   </parent>
   
   <groupId>de.dailab.toolipse3</groupId>

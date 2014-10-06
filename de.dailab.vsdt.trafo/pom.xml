@@ -5,7 +5,7 @@
   <parent>
     <groupId>de.dailab.toolipse3</groupId>
     <artifactId>vsdt</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.0.1-SNAPSHOT</version>
   </parent>
   <groupId>de.dailab.toolipse3</groupId>
   <artifactId>de.dailab.vsdt.trafo</artifactId>
