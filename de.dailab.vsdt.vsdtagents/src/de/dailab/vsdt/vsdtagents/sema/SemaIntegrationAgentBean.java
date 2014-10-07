@@ -16,6 +16,12 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 	@Expose(name=ACTION_PUSH_SERVICE, scope=ActionScope.NODE)
 	public Boolean pushServiceIntoVsdt(Object serviceDescription) throws Exception {
 		// TODO implement this method
+		
+		/*
+		 * zwei faelle: template oder komplette action -> zwei actions oder unterscheidung in der action?
+		 * nochmal sicherstellen, wann (und ob) der agent startet
+		 */
+		
 		throw new Exception("Not yet implemented");
 	}
 	
