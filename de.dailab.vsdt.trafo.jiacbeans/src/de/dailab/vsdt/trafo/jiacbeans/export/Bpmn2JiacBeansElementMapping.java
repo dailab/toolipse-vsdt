@@ -1322,7 +1322,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				channel.getPayload().getType() + ".class" : "null";
 		return createSequence(
 				createCode("IJiacMessage __msg = receiveMessage(" + clazz + ", " + address + ", -1);"),
-				createCode("__sender = __msg.getSender().getName();"),
+				createCode("String __sender = __msg.getSender().getName();"),
 				payload != null ? createCode(payload.getName() + " = (" + payload.getType() + ") __msg.getPayload();") : null);
 	}
 	

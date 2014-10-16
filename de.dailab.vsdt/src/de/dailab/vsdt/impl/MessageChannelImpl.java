@@ -83,7 +83,7 @@ public class MessageChannelImpl extends ImplementationImpl implements MessageCha
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean MESSAGE_GROUP_EDEFAULT = false;
+	protected static final boolean MESSAGE_GROUP_EDEFAULT = true;
 
 	/**
 	 * The cached value of the '{@link #isMessageGroup() <em>Message Group</em>}' attribute.

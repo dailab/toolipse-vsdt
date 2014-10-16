@@ -134,6 +134,7 @@ public interface MessageChannel extends Implementation {
 
 	/**
 	 * Returns the value of the '<em><b>Message Group</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Message Group</em>' attribute isn't clear,
@@ -143,7 +144,7 @@ public interface MessageChannel extends Implementation {
 	 * @return the value of the '<em>Message Group</em>' attribute.
 	 * @see #setMessageGroup(boolean)
 	 * @see de.dailab.vsdt.VsdtPackage#getMessageChannel_MessageGroup()
-	 * @model
+	 * @model default="true"
 	 * @generated
 	 */
 	boolean isMessageGroup();
