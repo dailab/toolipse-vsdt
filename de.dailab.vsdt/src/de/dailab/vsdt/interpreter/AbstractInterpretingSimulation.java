@@ -76,10 +76,10 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 */
 	
 	/** This Map holds the association of Properties to values */
-	protected Map<Property, Serializable> propertyValueMap= new HashMap<Property, Serializable>();
+	protected Map<Property, Serializable> propertyValueMap= new HashMap<>();
 	
 	/** This Map holds the current loop counter for the several activities  currently looping*/
-	protected Map<Activity, Integer> loopCounterMap= new HashMap<Activity, Integer>();
+	protected Map<Activity, Integer> loopCounterMap= new HashMap<>();
 	
 	/**
 	 * - Before starting the Interpreting Simulation, assert that all expressions
@@ -145,7 +145,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 * 
 	 * @param flowObject	Some FlowObject in this Simulation with Messages
 	 * @param incoming		Select Incoming or Outgoing message?
-	 * qreturn				List of properties
+	 * @return				List of properties
 	 */
 	public List<Property> collectMessageProperties(FlowObject flowObject, boolean incoming) {
 		List<Property> properties = null;
@@ -300,7 +300,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 			logMessage(LogLevel.ERROR, "Not Supported", "Complex Gateways are not yet supported");
 			return new ArrayList<>();
 		}
-		List<SequenceFlow> selectedFlows= new ArrayList<SequenceFlow>();
+		List<SequenceFlow> selectedFlows= new ArrayList<>();
 		SequenceFlow defaultflow= null;
 		for (SequenceFlow sequenceFlow : flowObject.getOutgoingSeq()) {
 			if (sequenceFlow.getConditionType() == ConditionType.DEFAULT) {
@@ -369,7 +369,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 */
 	public Map<String, Serializable> createContext(EObject eObject) {
 		// get local properties
-		Map<String, Serializable> context= new HashMap<String, Serializable>();
+		Map<String, Serializable> context= new HashMap<>();
 		for (Property property : VsdtHelper.getVisibleProperties(eObject)) {
 			context.put(property.getName(), propertyValueMap.get(property));
 		}

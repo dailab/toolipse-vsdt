@@ -52,9 +52,9 @@ public abstract class BasicSimulation extends AbstractSimulation {
 		boolean seqOk= flowObject.getIncomingSeq().isEmpty() || requiresAll;
 		for (SequenceFlow sequenceFlow : flowObject.getIncomingSeq()) {
 			if (requiresAll) {
-				seqOk&= tokenMap.get(sequenceFlow) > 0;	
+				seqOk &= tokenMap.get(sequenceFlow) > 0;	
 			} else {
-				seqOk|= tokenMap.get(sequenceFlow) > 0;
+				seqOk |= tokenMap.get(sequenceFlow) > 0;
 			}
 		}
 		return seqOk;

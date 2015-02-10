@@ -63,9 +63,9 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * Initialize fields
 	 */
 	public AbstractSimulation() {
-		stateMap = new HashMap<FlowObject, State>();
-		tokenMap = new HashMap<ConnectingObject, Integer>();
-		stepMap = new HashMap<EObject, Integer>();
+		stateMap = new HashMap<>();
+		tokenMap = new HashMap<>();
+		stepMap = new HashMap<>();
 		observers = new ArrayList<>();
 //		diagramEditPart = null;
 		step = -1;
@@ -90,7 +90,7 @@ public abstract class AbstractSimulation implements ISimulation {
 
 		// check diagram
 		if (checkDiagram(object)) {
-			List<FlowObject> readyFlowObjects = new ArrayList<FlowObject>();
+			List<FlowObject> readyFlowObjects = new ArrayList<>();
 
 			// initialize some tables holding the currently activated elements
 			// check flow object states, put connections into tokens map
@@ -144,7 +144,7 @@ public abstract class AbstractSimulation implements ISimulation {
 	 */
 	public final void stop() {
 		System.out.println("Stopping Simulation");
-		step= -1;
+		step = -1;
 		// clear activation tables
 		stateMap.clear();
 		tokenMap.clear();
@@ -170,7 +170,7 @@ public abstract class AbstractSimulation implements ISimulation {
 	 */
 	public final List<FlowObject> stepInto(FlowObject flowObject) {
 		System.out.println("Stepping Into " + flowObject);
-		List<FlowObject> result= new ArrayList<FlowObject>();
+		List<FlowObject> result= new ArrayList<>();
 		if (isInState(flowObject, State.READY, State.LOOPING_READY)) {
 			step++;
 			// remove tokens from incoming flows
@@ -220,7 +220,7 @@ public abstract class AbstractSimulation implements ISimulation {
 	 */
 	public final List<FlowObject> stepOut(FlowObject flowObject) {
 		System.out.println("Stepping out of " + flowObject);
-		List<FlowObject> result= new ArrayList<FlowObject>();
+		List<FlowObject> result= new ArrayList<>();
 		if (isInState(flowObject, State.ACTIVE_READY)) {
 			// execute, part II
 			executeEnd(flowObject);
@@ -445,7 +445,7 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * @param delta			Delta to add on the tokens for this connection
 	 */
 	protected final void changeToken(ConnectingObject connection, int delta) {
-		Integer token= tokenMap.get(connection);
+		Integer token = tokenMap.get(connection);
 		if (token != null) {
 			token= token + delta;
 		} else {
