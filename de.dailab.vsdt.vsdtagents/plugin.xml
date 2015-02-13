@@ -14,6 +14,11 @@
             name     = "JIAC Agent Store View"
             category = "de.dailab.category.views"
             icon     = "icons/agentstore.gif" />
+      
+      <view id       = "de.dailab.vsdt.vsdtagents.processenginebean.ProcessEngineBeanView"
+            class    = "de.dailab.vsdt.vsdtagents.processenginebean.ProcessEngineBeanView"
+            name     = "Process Engine Bean Node"
+            category = "de.dailab.category.views" />
    </extension>
    
 	<extension point="org.eclipse.ui.perspectiveExtensions">

@@ -7,6 +7,7 @@ import org.osgi.framework.BundleContext;
 import de.dailab.jiactng.nodeplugin.JiacNodePlugin;
 import de.dailab.vsdt.vsdtagents.deployment.DeploymentBean;
 import de.dailab.vsdt.vsdtagents.interpreter.VsdtInterpreterBean;
+import de.dailab.vsdt.vsdtagents.processenginebean.ProcessEngineBeanBean;
 import de.dailab.vsdt.vsdtagents.sema.SemaIntegrationAgentBean;
 
 /**
@@ -31,6 +32,7 @@ public class VsdtAgents extends AbstractUIPlugin {
 				nodePlugin.addAgent("DeploymentAgent", 0, new DeploymentBean());
 				nodePlugin.addAgent("InterpreterAgent", 0, new VsdtInterpreterBean());
 				nodePlugin.addAgent("SemaVSDTIntegrationAgent", 0, new SemaIntegrationAgentBean());
+				nodePlugin.addAgent("ProcessEngineBeanAgent", 0, new ProcessEngineBeanBean());
 			}
 		}).start();
 	}
