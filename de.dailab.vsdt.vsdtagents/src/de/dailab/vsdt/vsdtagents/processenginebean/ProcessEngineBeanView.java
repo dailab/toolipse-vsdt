@@ -19,8 +19,10 @@ import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ContentViewer;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
@@ -140,7 +142,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		// check type of selection
 		Object element = getSelectedElement(interpreterViewer);
 		boolean isAgent = element instanceof IAgentDescription;
-		boolean isInterpreter = element instanceof String;
+		boolean isInterpreter = element instanceof Map.Entry;
 		
 		// set action enablements
 		refreshAction.setEnabled(true); // always enabled
@@ -353,19 +355,24 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 			setToolTipText("Undeploy the selected JADL Service from its provider agent.");
 		}
 		
+		@SuppressWarnings("unchecked")
 		@Override
 		public void run() {
-//			IActionDescription service = getSelectedService();
-//			if (service != null) {
-//				if (openMessageDialog(MessageDialog.CONFIRM, "Undeploy Service " + service.getName() + "?")) {
-//					if (getBean().undeploy(service)) {
-//						openMessageDialog(MessageDialog.INFORMATION, "Undeployed Service " + service.getName());
-//						refresh();
-//					} else {
-//						openMessageDialog(MessageDialog.ERROR, "Failed to undeploy Service " + service.getName());
-//					}
-//				}
-//			}
+			ISelection selection = interpreterViewer.getSelection();
+			TreeSelection treeSelection = (TreeSelection) selection;
+			TreePath path = treeSelection.getPaths()[0];
+
+			IAgentDescription agent = (IAgentDescription) path.getSegment(0);
+			String id = ((Map.Entry<String, String>) path.getSegment(1)).getKey();
+
+			if (openMessageDialog(MessageDialog.CONFIRM, "Remove selected Interpreter Runtime?")) {
+				try {
+					getBean().undeployInterpreterRuntime(agent, id);
+					openMessageDialog(MessageDialog.INFORMATION, "Runtime removed");
+				} catch (Exception e) {
+					openMessageDialog(MessageDialog.ERROR, "Failed to remove runtime: " + e.getMessage());
+				}
+			}
 		}
 	}
 

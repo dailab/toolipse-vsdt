@@ -72,4 +72,22 @@ public class ProcessEngineBeanBean extends AbstractAgentBean {
 		}
 	}
 	
+	protected void undeployInterpreterRuntime(IAgentDescription agent, String id) throws Exception {
+		Action template = new Action(ACTION_REMOVE_RUNTIME);
+		template.setProviderDescription(agent);
+		
+		IActionDescription action = thisAgent.searchAction(template);
+		ActionResult result = invokeAndWaitForResult(action, new Serializable[] {id});
+		
+		if (result.getFailure() != null) {
+			if (result.getFailure() instanceof Exception) {
+				throw (Exception) result.getFailure();
+			} else {
+				throw new Exception(result.getFailure().toString());
+			}
+		}
+	}
+
+	// TODO helper method for action invokation, just like in workflow bean, but with action provider
+	
 }
