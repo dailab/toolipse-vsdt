@@ -52,44 +52,42 @@ public class EclipseInterpreterObserver implements ISimulationObserver {
 	 * - refresh figures
 	 */
 	public void refresh(int step, Map<EObject,Integer> stepMap, Map<FlowObject,State> stateMap) {
-		
 		// refresh tree viewer
-				if (viewer != null) {
-					viewer.refresh();
-				}
-				// refresh diagram view
-				if (diagramEditPart != null) {
-					for (FlowObject flowObject : stateMap.keySet()) {
-						IFigure figure= getFigure(flowObject);
-						// MarkerDecorator
-						if (figure instanceof IDecoratableFigure) {
-							IDecoratableFigure decoratableFigure= (IDecoratableFigure) figure;
-							if (! (decoratableFigure.getDecorator() instanceof FlowObjectMarkerDecorator)) {
-								decoratableFigure.setDecorator(new FlowObjectMarkerDecorator());
-							}
-							FlowObjectMarkerDecorator decorator = (FlowObjectMarkerDecorator) decoratableFigure.getDecorator();
-							decorator.state= stateMap.get(flowObject);
-							figure.repaint();
-						}
+		if (viewer != null) {
+			viewer.refresh();
+		}
+		// refresh diagram view
+		if (diagramEditPart != null) {
+			for (FlowObject flowObject : stateMap.keySet()) {
+				IFigure figure= getFigure(flowObject);
+				// MarkerDecorator
+				if (figure instanceof IDecoratableFigure) {
+					IDecoratableFigure decoratableFigure= (IDecoratableFigure) figure;
+					if (! (decoratableFigure.getDecorator() instanceof FlowObjectMarkerDecorator)) {
+						decoratableFigure.setDecorator(new FlowObjectMarkerDecorator());
 					}
-					for (EObject eObject: stepMap.keySet()) {
-						IFigure figure= getFigure(eObject);
-						if (figure instanceof PolylineConnectionEx) {
-							PolylineConnectionEx connectionFigure = (PolylineConnectionEx) figure;
-							int lastVisited= stepMap.get(eObject);
-							if (lastVisited > 0 && figure instanceof PolylineConnectionEx) {
-								connectionFigure.setLineWidth(3);
-								Color color= figure.getForegroundColor();
-								int red= color.getRed();
-								int green= color.getGreen();
-								int blue= (int) (255 * ((float) lastVisited / (float) step));
-								connectionFigure.setForegroundColor(new Color(color.getDevice(), red, green, blue));
-							}
-						}
+					FlowObjectMarkerDecorator decorator = (FlowObjectMarkerDecorator) decoratableFigure.getDecorator();
+					decorator.state= stateMap.get(flowObject);
+					figure.repaint();
+				}
+			}
+			for (EObject eObject: stepMap.keySet()) {
+				IFigure figure= getFigure(eObject);
+				if (figure instanceof PolylineConnectionEx) {
+					PolylineConnectionEx connectionFigure = (PolylineConnectionEx) figure;
+					int lastVisited= stepMap.get(eObject);
+					if (lastVisited > 0 && figure instanceof PolylineConnectionEx) {
+						connectionFigure.setLineWidth(3);
+						Color color= figure.getForegroundColor();
+						int red= color.getRed();
+						int green= color.getGreen();
+						int blue= (int) (255 * ((float) lastVisited / (float) step));
+						connectionFigure.setForegroundColor(new Color(color.getDevice(), red, green, blue));
 					}
 				}
-		
-	};
+			}
+		}
+	}
 
 	/**
 	 * Remove all decorations and refresh the viewer

@@ -383,7 +383,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 		for (Property property : propertyValueMap.keySet()) {
 			builder.append(property.getName() + "\t" + propertyValueMap.get(property) + NL);
 		}
-		System.out.println("--- Loop Counter Table ---");
+		builder.append("--- Loop Counter Table ---" + NL);
 		for (Activity activity : loopCounterMap.keySet()) {
 			builder.append(activity.getName() + "\t" + loopCounterMap.get(activity) + NL);
 		}

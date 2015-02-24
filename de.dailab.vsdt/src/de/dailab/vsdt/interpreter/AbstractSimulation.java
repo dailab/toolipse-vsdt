@@ -492,26 +492,26 @@ public abstract class AbstractSimulation implements ISimulation {
 		for (FlowObject flowObject : stateMap.keySet()) {
 			builder.append(stateMap.get(flowObject) + "\t" + VsdtHelper.getDescriptiveName(flowObject) + NL);
 		}
-		System.out.println("--- Token Table ---");
+		builder.append("--- Token Table ---" + NL);
 		for (ConnectingObject connection : tokenMap.keySet()) {
 			builder.append(tokenMap.get(connection) + "\t" + connection.getName() + NL);
 		}
 		return builder.toString();
 	}
 
-	void logMessage(ISimulationObserver.LogLevel level, String title, String message) {
+	protected void logMessage(ISimulationObserver.LogLevel level, String title, String message) {
 		for (ISimulationObserver observer : observers) {
 			observer.logMessage(level, title, message);
 		}
 	}
 	
-	void notifyObservers() {
+	protected void notifyObservers() {
 		for (ISimulationObserver observer : observers) {
 			observer.refresh(step, stepMap, stateMap);
 		}
 	}
 	
-	void clearObservers() {
+	protected void clearObservers() {
 		for (ISimulationObserver observer : observers) {
 			observer.clear();
 		}
