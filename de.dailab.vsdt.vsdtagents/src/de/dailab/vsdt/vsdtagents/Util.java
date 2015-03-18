@@ -12,11 +12,16 @@ import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 
+import de.dailab.vsdt.BusinessProcessSystem;
+import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
+import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
+import de.dailab.vsdt.meta.diagram.edit.parts.BusinessProcessSystemEditPart;
 import de.dailab.vsdt.trafo.jiacv.wizard.Bpmn2JiacVExportWizard;
 
 /**
@@ -107,6 +112,50 @@ public class Util {
 			e.printStackTrace();
 		}
 		return serviceSrcs;
+	}
+
+	/**
+	 * Get the URI of the currently active editor, if it is some sort of 
+	 * File- or URI-editor, otherwise return null.
+	 * 
+	 * @return		URI of active file- or URI-editor, or null
+	 */
+	public static URI getEditorUri() {
+		IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		if (editor != null) {
+			IEditorInput input = editor.getEditorInput();
+			URI uri = null;
+			if (input instanceof FileEditorInput) {
+				IFile file = ((FileEditorInput) input).getFile();
+				uri = URI.createURI(file.getLocationURI().toString());
+			}
+			if (input instanceof URIEditorInput) {
+				uri = ((URIEditorInput) input).getURI();
+			}
+			return uri;
+		}
+		return null;
+	}
+	
+	/**
+	 * Try to get the Business Process System object from the currently active 
+	 * VSDT editor, if any. If no VSDT editor is opened, returns null.
+	 * 
+	 * @return the BPS in the currently opened VSDT editor, if any, or null
+	 */
+	public static BusinessProcessSystem getVsdtModel() {
+		IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		if (editor instanceof de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditor) {
+			de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditor vsdteditor = (de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditor) editor;
+			BusinessProcessSystemEditPart editPart = (BusinessProcessSystemEditPart) vsdteditor.getDiagramEditPart(); 
+			return (BusinessProcessSystem) ((View) editPart.getModel()).getElement();
+		}
+		if (editor instanceof VsdtDiagramEditor) {
+			VsdtDiagramEditor vsdteditor = (VsdtDiagramEditor) editor;
+			BusinessProcessDiagramEditPart editPart = (BusinessProcessDiagramEditPart) vsdteditor.getDiagramEditPart();
+			return editPart.getCastedModel().getParent();
+		}
+		return null;
 	}
 	
 //	public static void waitForNode(){

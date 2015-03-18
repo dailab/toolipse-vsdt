@@ -8,11 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.common.ui.URIEditorInput;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
@@ -30,10 +26,6 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.part.FileEditorInput;
 
 import de.dailab.common.swt.dialogs.SingleSelectDialog;
 import de.dailab.common.swt.views.AbstractLabelProvider;
@@ -43,9 +35,7 @@ import de.dailab.jiactng.agentcore.ontology.IAgentDescription;
 import de.dailab.jiactng.nodeplugin.JiacNodePlugin;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.Participant;
-import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
-import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
-import de.dailab.vsdt.meta.diagram.edit.parts.BusinessProcessSystemEditPart;
+import de.dailab.vsdt.vsdtagents.Util;
 import de.dailab.vsdt.vsdtagents.VsdtAgents;
 
 /**
@@ -137,7 +127,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 	 */
 	private void updateActions() {
 		// check type of active editor
-		boolean isVsdtEditor = getVsdtModel() != null;
+		boolean isVsdtEditor = Util.getVsdtModel() != null;
 		
 		// check type of selection
 		Object element = getSelectedElement(interpreterViewer);
@@ -149,39 +139,6 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		deployAction.setEnabled(isVsdtEditor && isAgent);
 		undeployAction.setEnabled(isInterpreter);
 	}
-	
-	protected BusinessProcessSystem getVsdtModel() {
-		IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-		if (editor instanceof de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditor) {
-			de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditor vsdteditor = (de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditor) editor;
-			BusinessProcessSystemEditPart editPart = (BusinessProcessSystemEditPart) vsdteditor.getDiagramEditPart(); 
-			return (BusinessProcessSystem) ((View) editPart.getModel()).getElement();
-		}
-		if (editor instanceof VsdtDiagramEditor) {
-			VsdtDiagramEditor vsdteditor = (VsdtDiagramEditor) editor;
-			BusinessProcessDiagramEditPart editPart = (BusinessProcessDiagramEditPart) vsdteditor.getDiagramEditPart();
-			return editPart.getCastedModel().getParent();
-		}
-		return null;
-	}
-	
-	protected URI getEditorUri() {
-		IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-		if (editor != null) {
-			IEditorInput input = editor.getEditorInput();
-			URI uri = null;
-			if (input instanceof FileEditorInput) {
-				IFile file = ((FileEditorInput) input).getFile();
-				uri = URI.createURI(file.getLocationURI().toString());
-			}
-			if (input instanceof URIEditorInput) {
-				uri = ((URIEditorInput) input).getURI();
-			}
-			return uri;
-		}
-		return null;
-	}
-
 	
 	/**
 	 * Content Provider for the Services Viewer.
@@ -304,7 +261,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 						public void run(IProgressMonitor monitor) {
 							try {
 								// get source of VSDT file
-								File file = new File(getEditorUri().toFileString());
+								File file = new File(Util.getEditorUri().toFileString());
 								StringBuilder builder = new StringBuilder();
 								try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 									String line;
@@ -315,7 +272,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 								String vsdtSource = builder.toString();
 								
 								// ask for participant
-								BusinessProcessSystem vsdtModel = getVsdtModel();
+								BusinessProcessSystem vsdtModel = Util.getVsdtModel();
 								SingleSelectDialog<Participant> dialog = new SingleSelectDialog<Participant>(shell, 
 										"Select Participant", "Select Participant to interpret.", vsdtModel.getParticipants()) {
 									protected String getText(Participant p) {
