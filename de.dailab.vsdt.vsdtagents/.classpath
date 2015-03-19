@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="lib/commons-fileupload-1.2.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-httpclient-3.1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.4.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/de.dailab.jiactng.nodeplugin"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

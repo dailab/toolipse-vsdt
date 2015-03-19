@@ -49,31 +49,16 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 
 			// create VSDT Service object corresponding to ServiceDescription
 			Service service = null;
-			
-			ServiceDescription test = new ServiceDescription(null); //XXX test
-			System.out.println(test.getClass().getName());
-			System.out.println(test.getClass().hashCode());
-			System.out.println(action.getClass().getName());
-			System.out.println(action.getClass().hashCode());
-			System.out.println(test.getClass().equals(action.getClass()));
-			System.out.println(test.getClass() == action.getClass());
-			
-			// XXX intanceof funktioniert nicht, weil aus anderem JAR oder was?!
-//			if (action instanceof ServiceDescription) {
-			if (action.getClass().getSimpleName().equals("ServiceDescription")) {
-				
-				/*
-				 * Schaut so aus als waeren da einfach zwei versionen der klasse auf dem classpath...
-				 * 
-				 * Caused by: java.lang.ClassCastException: 
-				 *     de.dailab.jiactng.owlsdescription.ServiceDescription cannot be cast to 
-				 *     de.dailab.jiactng.owlsdescription.ServiceDescription
-				 */
-				
+			if (action instanceof ServiceDescription) {
 				service = createService((ServiceDescription) action);
 			} else {
 				service = createService(action);
 			}
+			
+			/*
+			 * FIXME
+			 * java.lang.IllegalStateException: Cannot modify resource set without a write transaction
+			 */
 			bps.getServices().add(service);
 			
 		} else {
