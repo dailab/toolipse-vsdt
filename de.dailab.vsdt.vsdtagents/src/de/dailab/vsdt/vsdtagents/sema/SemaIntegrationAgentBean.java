@@ -1,8 +1,13 @@
 package de.dailab.vsdt.vsdtagents.sema;
 
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
+
 import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;
 import de.dailab.jiactng.agentcore.action.Action;
 import de.dailab.jiactng.agentcore.action.scope.ActionScope;
+import de.dailab.jiactng.owlsdescription.ServiceDescription;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.Service;
@@ -13,13 +18,8 @@ import de.dailab.vsdt.vsdtagents.Util;
  * This bean will later be used to push services from the SeMa2 into the VSDT.
  * 
  * TODO
- * 
- * nochmal im web service import view angucken, wie ich das da gemacht habe...
- * 
  * zwei faelle: template oder komplette action -> 
  * zwei actions oder unterscheidung in der action?
- * 
- * nochmal sicherstellen, wann (und ob) der agent startet
  *
  * @author kuester
  */
@@ -34,57 +34,120 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 	 * @param action		the Action or ServiceDescription to add a corresponding VSDT service for
 	 * @throws Exception	exception in case anything goes wrong
 	 */
+	//FIXME if this uses 'ServiceDescription' as parameter, then it hangs, while using 'Action 'works
 	@Expose(name=ACTION_PUSH_SERVICE, scope=ActionScope.NODE)
-	public void pushServiceIntoVsdt(Object object) throws Exception {
+	public void pushServiceIntoVsdt(Action action) throws Exception {
 		
 		System.err.println("ACTION CALLED!");
 		
-		Action action = (Action) object;
-		
 		// get BPS, thus check whether current editor is VSDT editor
-		BusinessProcessSystem bps = Util.getVsdtModel();
+		IWorkbenchWindow[] wbws = PlatformUI.getWorkbench().getWorkbenchWindows();
+		IEditorPart editor = wbws[0].getActivePage().getActiveEditor();
+		BusinessProcessSystem bps = Util.getVsdtModel(editor);
+
 		if (bps != null) {
-			
+
 			// create VSDT Service object corresponding to ServiceDescription
-			Service impl = VsdtFactory.eINSTANCE.createService();
+			Service service = null;
 			
-			// set service attributes; this should be compatible to how the mapping maps services to JIAC actions
-			impl.setDescription(null);
-			impl.setInterface(action.getProviderBean().getBeanName());
-			impl.setLocation(null);
-			impl.setOperation(action.getName());
-			impl.setParticipant(null);
-			impl.setType("JIAC Action");
-
-			// set input and output
-			for (int i = 0; i < action.getInputTypeNames().size(); i++) {
-				Property input = VsdtFactory.eINSTANCE.createProperty();
-				input.setName(String.format("arg%d", i));
-				input.setType(action.getInputTypeNames().get(i));
-				impl.getInput().add(input);
-			}
-			for (int i = 0; i < action.getResultTypeNames().size(); i++) {
-				Property output = VsdtFactory.eINSTANCE.createProperty();
-				output.setName(String.format("res%d", i));
-				output.setType(action.getResultTypeNames().get(i));
-				impl.getOutput().add(output);
-			}
-
-			// TODO add data types
-
+			ServiceDescription test = new ServiceDescription(null); //XXX test
+			System.out.println(test.getClass().getName());
+			System.out.println(test.getClass().hashCode());
+			System.out.println(action.getClass().getName());
+			System.out.println(action.getClass().hashCode());
+			System.out.println(test.getClass().equals(action.getClass()));
+			System.out.println(test.getClass() == action.getClass());
+			
+			// XXX intanceof funktioniert nicht, weil aus anderem JAR oder was?!
 //			if (action instanceof ServiceDescription) {
-//				ServiceDescription service = (ServiceDescription) action;
-//				
-//				// TODO add semantic description attributes
-//			}
-			
-			// add service object to business process system
-			bps.getServices().add(impl);
+			if (action.getClass().getSimpleName().equals("ServiceDescription")) {
+				
+				/*
+				 * Schaut so aus als waeren da einfach zwei versionen der klasse auf dem classpath...
+				 * 
+				 * Caused by: java.lang.ClassCastException: 
+				 *     de.dailab.jiactng.owlsdescription.ServiceDescription cannot be cast to 
+				 *     de.dailab.jiactng.owlsdescription.ServiceDescription
+				 */
+				
+				service = createService((ServiceDescription) action);
+			} else {
+				service = createService(action);
+			}
+			bps.getServices().add(service);
 			
 		} else {
 			throw new Exception("Could not get Business Process System from active Editor. "
 					+ "Make sure the active editor is a VSDT process diagram editor.");
 		}
+	}
+	
+	
+	private Service createService(Action action) {
+		Service result = VsdtFactory.eINSTANCE.createService();
+
+		// set service attributes; this should be compatible to how the mapping maps services to JIAC actions
+		result.setOperation(action.getName());
+		result.setType("JIAC Action");
+		if (action.getProviderBean() != null) {
+			result.setInterface(action.getProviderBean().getBeanName());
+		}
+//		impl.setLocation(null);
+//		impl.setParticipant(null);
+//		impl.setDescription(null);
+
+		// set input and output
+		for (int i = 0; i < action.getInputTypeNames().size(); i++) {
+			Property input = VsdtFactory.eINSTANCE.createProperty();
+			input.setName(String.format("arg%d", i));
+			input.setType(action.getInputTypeNames().get(i));
+			result.getInput().add(input);
+		}
+		for (int i = 0; i < action.getResultTypeNames().size(); i++) {
+			Property output = VsdtFactory.eINSTANCE.createProperty();
+			output.setName(String.format("res%d", i));
+			output.setType(action.getResultTypeNames().get(i));
+			result.getOutput().add(output);
+		}
+
+		// TODO add data types
+
+		return result;
+	}
+	
+	private Service createService(ServiceDescription serviceDescription) {
+		Service result = VsdtFactory.eINSTANCE.createService();
+		
+		// set service attributes; this should be compatible to how the mapping maps services to JIAC actions
+		//XXX action.getName ist null bei service-description... soll das so sein???
+//		result.setOperation(action.getName());
+//		result.setType("JIAC Action");
+//		if (action.getProviderBean() != null) {
+//			result.setInterface(action.getProviderBean().getBeanName());
+//		}
+////					impl.setLocation(null);
+////					impl.setParticipant(null);
+////					impl.setDescription(null);
+//
+//		// set input and output
+//		// FIXME service description erbt von action, aber hat keine inputs? WTF?
+//		
+//		for (int i = 0; i < action.getInputTypeNames().size(); i++) {
+//			Property input = VsdtFactory.eINSTANCE.createProperty();
+//			input.setName(String.format("arg%d", i));
+//			input.setType(action.getInputTypeNames().get(i));
+//			impl.getInput().add(input);
+//		}
+//		for (int i = 0; i < action.getResultTypeNames().size(); i++) {
+//			Property output = VsdtFactory.eINSTANCE.createProperty();
+//			output.setName(String.format("res%d", i));
+//			output.setType(action.getResultTypeNames().get(i));
+//			result.getOutput().add(output);
+//		}
+
+		// TODO add data types
+
+		return result;
 	}
 	
 }

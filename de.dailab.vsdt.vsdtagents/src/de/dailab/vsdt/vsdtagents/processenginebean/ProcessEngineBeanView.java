@@ -127,7 +127,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 	 */
 	private void updateActions() {
 		// check type of active editor
-		boolean isVsdtEditor = Util.getVsdtModel() != null;
+		boolean isVsdtEditor = Util.getVsdtModel(null) != null;
 		
 		// check type of selection
 		Object element = getSelectedElement(interpreterViewer);
@@ -272,7 +272,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 								String vsdtSource = builder.toString();
 								
 								// ask for participant
-								BusinessProcessSystem vsdtModel = Util.getVsdtModel();
+								BusinessProcessSystem vsdtModel = Util.getVsdtModel(null);
 								SingleSelectDialog<Participant> dialog = new SingleSelectDialog<Participant>(shell, 
 										"Select Participant", "Select Participant to interpret.", vsdtModel.getParticipants()) {
 									protected String getText(Participant p) {

@@ -141,10 +141,13 @@ public class Util {
 	 * Try to get the Business Process System object from the currently active 
 	 * VSDT editor, if any. If no VSDT editor is opened, returns null.
 	 * 
-	 * @return the BPS in the currently opened VSDT editor, if any, or null
+	 * @param editor	the editor part to use, or null to get active editor
+	 * @return 			the BPS in the currently opened VSDT editor, if any, or null
 	 */
-	public static BusinessProcessSystem getVsdtModel() {
-		IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+	public static BusinessProcessSystem getVsdtModel(IEditorPart editor) {
+		if (editor == null) {
+			editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		}
 		if (editor instanceof de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditor) {
 			de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditor vsdteditor = (de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditor) editor;
 			BusinessProcessSystemEditPart editPart = (BusinessProcessSystemEditPart) vsdteditor.getDiagramEditPart(); 
