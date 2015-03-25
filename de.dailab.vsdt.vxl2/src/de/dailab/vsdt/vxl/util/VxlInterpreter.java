@@ -327,7 +327,7 @@ public class VxlInterpreter {
 				result.add(tail);
 				return result;
 			} else if (head instanceof Number && tail instanceof Number) {
-				return (Double) head + (Double) tail;
+				return toDouble((Number) head) + toDouble((Number) tail);
 			}
 		case MULT:
 			if (head instanceof List && tail instanceof Number) {
@@ -345,26 +345,26 @@ public class VxlInterpreter {
 				}
 				return result.toString();
 			} else if (head instanceof Number && tail instanceof Number) {
-				return (Double) head * (Double) tail;
+				return toDouble((Number) head) * toDouble((Number) tail);
 			}
 		case SUB:
-			return (Double) head - (Double) tail;
+			return toDouble((Number) head) - toDouble((Number) tail);
 		case DIV:
-			return (Double) head / (Double) tail;
+			return toDouble((Number) head) / toDouble((Number) tail);
 		case MOD:
-			return (Double) head % (Double) tail;
+			return toDouble((Number) head) % toDouble((Number) tail);
 		case AND:
 			return (Boolean) head && (Boolean) tail;
 		case OR:
 			return (Boolean) head || (Boolean) tail;
 		case GE:
-			return ((Comparable) head).compareTo(tail) >= 0;
+			return (toDoubleIfNumber(head)).compareTo(toDoubleIfNumber(tail)) >= 0;
 		case GT:
-			return ((Comparable) head).compareTo(tail) >  0;
+			return (toDoubleIfNumber(head)).compareTo(toDoubleIfNumber(tail)) >  0;
 		case LE:
-			return ((Comparable) head).compareTo(tail) <= 0;
+			return (toDoubleIfNumber(head)).compareTo(toDoubleIfNumber(tail)) <= 0;
 		case LT:
-			return ((Comparable) head).compareTo(tail) <  0;
+			return (toDoubleIfNumber(head)).compareTo(toDoubleIfNumber(tail)) <  0;
 		case EQ:
 			return head.equals(tail);
 		case NEQ:
@@ -372,6 +372,34 @@ public class VxlInterpreter {
 		default: 
 			return null;
 		}
+	}
+	
+	/**
+	 * This is used for comparing different kinds of numbers: If it's a number,
+	 * cast it to double, otherwise just return the object in its own class.
+	 * 
+	 * @param o		some comparable object
+	 * @return		object cast to double, if a number, else the object itself
+	 */
+	@SuppressWarnings("rawtypes")
+	private Comparable toDoubleIfNumber(Object o) {
+		if (o instanceof Number) {
+			return toDoubleIfNumber((Number) o);
+		}
+		return (Comparable) o;
+	}
+	
+	private double toDouble(Number n) {
+		if (n instanceof Integer) {
+			return ((Integer) n).doubleValue();
+		}
+		if (n instanceof Long) {
+			return ((Long) n).doubleValue();
+		}
+		if (n instanceof Double) {
+			return (Double) n;
+		}
+		return 0;
 	}
 
 	/**
