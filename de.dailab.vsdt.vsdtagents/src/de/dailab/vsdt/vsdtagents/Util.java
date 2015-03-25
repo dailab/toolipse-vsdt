@@ -118,6 +118,9 @@ public class Util {
 	 * Get the URI of the currently active editor, if it is some sort of 
 	 * File- or URI-editor, otherwise return null.
 	 * 
+	 * Note: this does not work if the editor is a sub-editor, e.g. a 
+	 * VSDT diagram editor as opposed to a VSDT meta diagram editor.
+	 * 
 	 * @return		URI of active file- or URI-editor, or null
 	 */
 	public static URI getEditorUri() {

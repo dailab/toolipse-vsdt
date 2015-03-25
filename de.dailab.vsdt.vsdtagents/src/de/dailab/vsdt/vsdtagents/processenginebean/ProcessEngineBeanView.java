@@ -3,12 +3,17 @@ package de.dailab.vsdt.vsdtagents.processenginebean;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
@@ -26,7 +31,9 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 
+import de.dailab.common.swt.EmfUtils;
 import de.dailab.common.swt.dialogs.SingleSelectDialog;
 import de.dailab.common.swt.views.AbstractLabelProvider;
 import de.dailab.common.swt.views.AbstractStructuredViewerView;
@@ -261,9 +268,15 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 						public void run(IProgressMonitor monitor) {
 							try {
 								// get source of VSDT file
-								File file = new File(Util.getEditorUri().toFileString());
+								BusinessProcessSystem bps = Util.getVsdtModel(null);
+								if (bps == null) {
+									throw new IllegalArgumentException("Active Editor must hold VSDT Process Diagram.");
+								}
+								URI uri = bps.eResource().getURI();
+								InputStream is = bps.eResource().getResourceSet().getURIConverter().createInputStream(uri);
+								
 								StringBuilder builder = new StringBuilder();
-								try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+								try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
 									String line;
 									while ((line = reader.readLine()) != null) {
 										builder.append(line);
@@ -290,6 +303,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 								}
 							} catch (Exception e) {
 								openMessageDialog(MessageDialog.ERROR, "Deploying Service Failed: " + e.getMessage());
+								e.printStackTrace();
 							}
 						}
 					});
