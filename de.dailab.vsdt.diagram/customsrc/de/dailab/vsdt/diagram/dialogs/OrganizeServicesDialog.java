@@ -1,8 +1,6 @@
 package de.dailab.vsdt.diagram.dialogs;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
@@ -10,7 +8,6 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -104,7 +101,6 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 	@Override
 	protected void createEditGroupControls(Group editGroup) {
 		//input lines
-
 		new Label(editGroup,SWT.NONE).setText(LABEL_TYPE);
 		typeCombo= new Combo(editGroup,SWT.BORDER);
 		typeCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
@@ -133,6 +129,24 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 		locationText= new Text(editGroup,SWT.BORDER);
 		locationText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 3, 1));
 		locationText.addModifyListener(this);
+		
+		// buttons for organizing IOPE
+		inputButton = new Button(editGroup, SWT.NONE);
+		inputButton.setText(BUTTON_INPUT);
+		inputButton.addSelectionListener(this);
+		
+		outputButton = new Button(editGroup, SWT.NONE);
+		outputButton.setText(BUTTON_OUTPUT);
+		outputButton.addSelectionListener(this);
+		
+		preButton = new Button(editGroup, SWT.NONE);
+		preButton.setText(BUTTON_PRE);
+		preButton.addSelectionListener(this);
+		
+		effButton = new Button(editGroup, SWT.NONE);
+		effButton.setText(BUTTON_EFF);
+		effButton.addSelectionListener(this);
+		
 	}
 
 	@Override
@@ -184,26 +198,26 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 		effButton.setEnabled(service != null);
 	}
 
-	@Override
-	protected Collection<Button> contributeToButtonsGroup(Composite buttonsGroup) {
-		inputButton = new Button(buttonsGroup, SWT.NONE);
-		inputButton.setText(BUTTON_INPUT);
-		inputButton.addSelectionListener(this);
-		
-		outputButton = new Button(buttonsGroup, SWT.NONE);
-		outputButton.setText(BUTTON_OUTPUT);
-		outputButton.addSelectionListener(this);
-		
-		preButton = new Button(buttonsGroup, SWT.NONE);
-		preButton.setText(BUTTON_PRE);
-		preButton.addSelectionListener(this);
-		
-		effButton = new Button(buttonsGroup, SWT.NONE);
-		effButton.setText(BUTTON_EFF);
-		effButton.addSelectionListener(this);
-		
-		return Arrays.asList(inputButton, outputButton, preButton, effButton);
-	}
+//	@Override
+//	protected Collection<Button> contributeToButtonsGroup(Composite buttonsGroup) {
+//		inputButton = new Button(buttonsGroup, SWT.NONE);
+//		inputButton.setText(BUTTON_INPUT);
+//		inputButton.addSelectionListener(this);
+//		
+//		outputButton = new Button(buttonsGroup, SWT.NONE);
+//		outputButton.setText(BUTTON_OUTPUT);
+//		outputButton.addSelectionListener(this);
+//		
+//		preButton = new Button(buttonsGroup, SWT.NONE);
+//		preButton.setText(BUTTON_PRE);
+//		preButton.addSelectionListener(this);
+//		
+//		effButton = new Button(buttonsGroup, SWT.NONE);
+//		effButton.setText(BUTTON_EFF);
+//		effButton.addSelectionListener(this);
+//		
+//		return Arrays.asList(inputButton, outputButton, preButton, effButton);
+//	}
 	
 	@Override
 	public void widgetSelected(SelectionEvent e) {

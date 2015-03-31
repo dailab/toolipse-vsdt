@@ -12,6 +12,7 @@ import java.util.Set;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
@@ -88,8 +89,12 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 							bps.getServices().add(service);
 							// add data types referred to by service
 							for (DataType dataType : dataTypes) {
-								// XXX EObject does not implement equals (WTF?); just take duplicates, or filter manually?
-								if (!bps.getDataTypes().contains(dataType)) {
+								// EObject does not implement equals, so we have to do this ugly loop...
+								boolean exists = false;
+								for (DataType existing : bps.getDataTypes()) {
+									exists = exists || EcoreUtil.equals(dataType, existing);
+								}
+								if (! exists) {
 									bps.getDataTypes().add(dataType);
 								}
 							}
