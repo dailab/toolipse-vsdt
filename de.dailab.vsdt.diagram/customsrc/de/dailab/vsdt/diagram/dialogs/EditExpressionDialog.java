@@ -44,10 +44,8 @@ import de.dailab.vsdt.vxl.vxl.VxlVariable;
  */
 public class EditExpressionDialog extends TitleAreaDialog {
 
-	public static final String NL= System.getProperty("line.separator");
-	
-	public static final String TITLE= "Edit Expression";
-	public static final String MESSAGE= "Compose and validate expressions according to the " +
+	private static final String TITLE= "Edit Expression";
+	private static final String MESSAGE= "Compose and validate expressions according to the " +
 			"VSDT Expression Language (VXL). \n" +
 			"These expressions will be translated to the target language when being exported.";
 	

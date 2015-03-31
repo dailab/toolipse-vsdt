@@ -28,12 +28,11 @@ import de.dailab.vsdt.util.VsdtElementFactory;
  */
 public class OrganizeMessageChannelsDialog extends AbstractOrganizeElementsDialog<MessageChannel> {
 
-	public static final String LABEL_CHANNEL= "Name / Channel";
-	public static final String LABEL_PAYLOAD_NAME= "Name";
-	public static final String LABEL_PAYLOAD_TYPE= "Type";
-
-	public static final String BUTTON_IS_CHANNEL= "Message Channel?";
-	public static final String BUTTON_HAS_PAYLOAD= "Has Payload?";
+	private static final String LABEL_CHANNEL= "Name / Channel";
+	private static final String LABEL_PAYLOAD_NAME= "Name";
+	private static final String LABEL_PAYLOAD_TYPE= "Type";
+	private static final String BUTTON_IS_CHANNEL= "Message Channel?";
+	private static final String BUTTON_HAS_PAYLOAD= "Has Payload?";
 	
 	/** messagechannel.channel input field */
 	private Text channelText;

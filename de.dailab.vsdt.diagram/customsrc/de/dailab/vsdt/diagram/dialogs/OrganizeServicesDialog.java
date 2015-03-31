@@ -34,16 +34,15 @@ import de.dailab.vsdt.diagram.ui.VsdtFeatureCombo;
  */
 public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Service> {
 
-	public static final String LABEL_PARTICIPANT= "Participant";
-	public static final String LABEL_INTERFACE= "Interface";
-	public static final String LABEL_TYPE= "Type";
-	public static final String LABEL_OPERATION= "Operation";
-	public static final String LABEL_LOCATION= "Location";
-	public static final String LABEL_INPUT= "Input Message";
-	public static final String LABEL_OUTPUT= "Output Message";
-	
-	public static final String BUTTON_INPUT = "Input...";
-	public static final String BUTTON_OUTPUT= "Output...";
+	private static final String LABEL_PARTICIPANT = "Participant";
+	private static final String LABEL_INTERFACE = "Interface";
+	private static final String LABEL_TYPE = "Type";
+	private static final String LABEL_OPERATION = "Operation";
+	private static final String LABEL_LOCATION = "Location";
+	private static final String BUTTON_INPUT = "Input...";
+	private static final String BUTTON_OUTPUT = "Output...";
+	private static final String BUTTON_PRE = "Precond's...";
+	private static final String BUTTON_EFF = "Effects...";
 	
 	/**implementation.interface input field*/
 	private Text interfaceText;
@@ -68,6 +67,12 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 	
 	/**button for opening the organize output properties dialog*/
 	private Button outputButton;
+	
+	/** button for opening the organize preconditions dialog */
+	private Button preButton;
+	
+	/** button for opening the organize effects dialog */
+	private Button effButton;
 	
 	@Override
 	public String getElementName() {
@@ -132,8 +137,7 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 
 	@Override
 	protected Service createNewElement() {
-		Service service= VsdtFactory.eINSTANCE.createService();
-		return service;
+		return VsdtFactory.eINSTANCE.createService();
 	}
 	
 	@Override
@@ -176,8 +180,9 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 		operationText.setEnabled(service != null);
 		inputButton.setEnabled(service != null);
 		outputButton.setEnabled(service != null);
+		preButton.setEnabled(service != null);
+		effButton.setEnabled(service != null);
 	}
-	
 
 	@Override
 	protected Collection<Button> contributeToButtonsGroup(Composite buttonsGroup) {
@@ -189,7 +194,15 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 		outputButton.setText(BUTTON_OUTPUT);
 		outputButton.addSelectionListener(this);
 		
-		return Arrays.asList(inputButton, outputButton);
+		preButton = new Button(buttonsGroup, SWT.NONE);
+		preButton.setText(BUTTON_PRE);
+		preButton.addSelectionListener(this);
+		
+		effButton = new Button(buttonsGroup, SWT.NONE);
+		effButton.setText(BUTTON_EFF);
+		effButton.addSelectionListener(this);
+		
+		return Arrays.asList(inputButton, outputButton, preButton, effButton);
 	}
 	
 	@Override
@@ -202,6 +215,12 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 			}
 			if (e.getSource() == outputButton) {
 				OrganizeElementsAction.getPropertiesAction(1).run(service);
+			}
+			if (e.getSource() == preButton) {
+				OrganizeElementsAction.getExpressionsAction(0).run(service);
+			}
+			if (e.getSource() == effButton) {
+				OrganizeElementsAction.getExpressionsAction(1).run(service);
 			}
 		}
 	}

@@ -52,13 +52,12 @@ import de.dailab.vsdt.util.VsdtHelper;
  */
 public class ParameterAssignmentsDialog extends TitleAreaDialog {
 
-	public static final String TITLE= "Parameter Assignments Dialog";
-	public static final String MESSAGE= "Use this dialog for easily organizing " +
+	private static final String TITLE= "Parameter Assignments Dialog";
+	private static final String MESSAGE= "Use this dialog for easily organizing " +
 			"Assignments to the input and output Parameters \n of the Messages " +
 			"outgoing and incoming to this Element.";
-	public static final String WARNING_INCOMPLETE_INPUT= "There are unassigned " +
+	private static final String WARNING_INCOMPLETE_INPUT= "There are unassigned " +
 			"input parameters left. Exit anyway?";
-	
 	private static final String ARROW = "->"; // "\u2192"; // unicode rightward arrow
 	
 	/** The parent element (Activity or Event) */

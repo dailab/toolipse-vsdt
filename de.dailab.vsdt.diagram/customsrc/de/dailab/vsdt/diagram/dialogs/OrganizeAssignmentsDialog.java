@@ -32,12 +32,10 @@ import de.dailab.vsdt.util.VsdtHelper;
  */
 public class OrganizeAssignmentsDialog extends AbstractOrganizeElementsDialog<Assignment> {
 
-	public static final String LABEL_TO= "To";
-	public static final String LABEL_TOQUERY= "To-Query";
-	public static final String LABEL_FROM= "From";
-	public static final String LABEL_TIME= "AssignTime";
-	public static final String ERROR__NO_GATE= "Sequence Flow does not have a Gate";
-	public static final String ERROR__NO_PROCESS= "Pool does not have a Process object";
+	private static final String LABEL_TO= "To";
+	private static final String LABEL_TOQUERY= "To-Query";
+	private static final String LABEL_FROM= "From";
+	private static final String LABEL_TIME= "AssignTime";
 
 	@Override
 	public String getElementName() {
@@ -68,38 +66,12 @@ public class OrganizeAssignmentsDialog extends AbstractOrganizeElementsDialog<As
 		super(parentShell, parentElement, true, 4);
 
 		//get assignments list from model element
-//		if (parentElement instanceof BpmnProcess) {
-//			elements= ((BpmnProcess) parentElement).getAssignments();
-//			toProperties= ((BpmnProcess) parentElement).getVisibleProperties();
-//		}
 		if (parentElement instanceof FlowObject) {
 			elements= ((FlowObject) parentElement).getAssignments();
 			toProperties= VsdtHelper.getVisibleProperties(parentElement); 
+		} else {
+			throw new IllegalArgumentException("Parent element must be of type FlowObject");
 		}
-//		if (parentElement instanceof Gate) {
-//			elements= ((Gate) parentElement).getAssignments();
-//			toProperties= ((Gate) parentElement).getVisibleProperties();
-//		}
-//		if (parentElement instanceof SequenceFlow) {
-//			Gate gate= ((SequenceFlow) parentElement).getGate();
-//			if (gate != null) {
-//				elements= gate.getAssignments();
-//				toProperties= gate.getVisibleProperties();
-//			} else {
-//				errorMessage= ERROR__NO_GATE;
-//				disable= true;
-//			}
-//		}
-//		if (parentElement instanceof Pool) {
-//			BpmnProcess process= ((Pool) parentElement).getProcess();
-//			if (process != null) {
-//				elements= process.getAssignments();
-//				toProperties= process.getVisibleProperties();
-//			} else {
-//				errorMessage= ERROR__NO_PROCESS;
-//				disable= true;
-//			}
-//		}
 	}
 
 	@Override
@@ -132,8 +104,7 @@ public class OrganizeAssignmentsDialog extends AbstractOrganizeElementsDialog<As
 	
 	@Override
 	protected Assignment createNewElement() {
-		Assignment assignment= VsdtFactory.eINSTANCE.createAssignment();
-		return assignment;
+		return VsdtFactory.eINSTANCE.createAssignment();
 	}
 	
 	@Override

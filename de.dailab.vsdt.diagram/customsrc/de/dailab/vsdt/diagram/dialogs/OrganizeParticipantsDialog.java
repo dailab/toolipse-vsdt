@@ -16,20 +16,20 @@ import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.VsdtFactory;
 
 /**
- * A dialog used for organizing participants of a BPMN model elements
+ * A dialog used for organizing participants of a BPMN model elements.
  * 
- * No longer needed as participants are now handled in a separate diagram view.
+ * Warning: this class is no longer needed and has not been adapted to the latest model changes!
  * 
- * FIXME warning: this class has not been adapted to the latest model changes!
+ * @deprecated No longer needed as participants are now handled in a separate diagram view.
  * 
  * @author kuester
  */
 @Deprecated
 public class OrganizeParticipantsDialog extends AbstractOrganizeElementsDialog<Participant> {
 
-	public static final String LABEL_NAME= "Name";
-	public static final String LABEL_ROLE= "Role";
-	public static final String LABEL_ENTITY= "Entity";
+	private static final String LABEL_NAME= "Name";
+	private static final String LABEL_ROLE= "Role";
+	private static final String LABEL_ENTITY= "Entity";
 
 	/**participant.name input field*/
 	private Text nameText;
@@ -79,8 +79,7 @@ public class OrganizeParticipantsDialog extends AbstractOrganizeElementsDialog<P
 	
 	@Override
 	protected Participant createNewElement() {
-		Participant participant= VsdtFactory.eINSTANCE.createParticipant();
-		return participant;
+		return VsdtFactory.eINSTANCE.createParticipant();
 	}
 
 	@Override

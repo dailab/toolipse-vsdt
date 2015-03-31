@@ -38,16 +38,15 @@ import de.dailab.vsdt.util.VsdtHelper;
  */
 public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Property> {
 	
-	public static final String NEW_PROP_NAME= "";
-	public static final String NEW_PROP_TYPE= de.dailab.vsdt.vxl.util.Util.TYPE_STRING;
-	public static final String LABEL_NAME= "Name";
-	public static final String LABEL_TYPE= "Type";
-	public static final String ERROR__NO_MESSAGE= "Message Flow does not have a Message object";
-	public static final String BUTTON_DATATYPES = "DataTypes...";
+	private static final String NEW_PROP_NAME= "";
+	private static final String NEW_PROP_TYPE= de.dailab.vsdt.vxl.util.Util.TYPE_STRING;
+	private static final String LABEL_NAME= "Name";
+	private static final String LABEL_TYPE= "Type";
+	private static final String BUTTON_DATATYPES = "DataTypes...";
 
-	public static final int CHECK_OK= 0;
-	public static final int CHECK_WARNING= 1;
-	public static final int CHECK_ERROR= 2;
+	private static final int CHECK_OK= 0;
+	private static final int CHECK_WARNING= 1;
+	private static final int CHECK_ERROR= 2;
 	
 	/**property name input field*/
 	private Text propNameText;
@@ -112,7 +111,6 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 		Property property= VsdtFactory.eINSTANCE.createProperty();
 		property.setName(NEW_PROP_NAME);
 		property.setType(NEW_PROP_TYPE);
-		propNameText.setFocus();
 		return property;
 	}
 	

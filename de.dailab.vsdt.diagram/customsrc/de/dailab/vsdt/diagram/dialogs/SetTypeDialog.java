@@ -25,13 +25,10 @@ import de.dailab.vsdt.util.VsdtHelper;
  */
 public class SetTypeDialog extends TitleAreaDialog {
 
-	public static final String NL= System.getProperty("line.separator");
-	
-	public static final int WIDTH= 400;
-	public static final int HEIGHT= 200;
-	
-	public static final String TITLE= "Set Type";
-	public static final String MESSAGE= "Set the new Type for the selected Element.";
+	private static final int WIDTH= 400;
+	private static final int HEIGHT= 200;
+	private static final String TITLE= "Set Type";
+	private static final String MESSAGE= "Set the new Type for the selected Element.";
 	
 	protected FlowObject flowObject;
 	

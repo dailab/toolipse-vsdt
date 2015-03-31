@@ -28,9 +28,9 @@ import de.dailab.vsdt.util.VsdtHelper;
  */
 public class OrganizeParametersDialog extends AbstractOrganizeElementsDialog<Parameter> {
 
-	public static final String LABEL_KEY= "Key";
-	public static final String LABEL_VALUE= "Value";
-	public static final String LABEL_DESCRIPTION= "Description";
+	private static final String LABEL_KEY= "Key";
+	private static final String LABEL_VALUE= "Value";
+	private static final String LABEL_DESCRIPTION= "Description";
 	
 	/** key input field */
 	private Text keyText;
@@ -89,8 +89,7 @@ public class OrganizeParametersDialog extends AbstractOrganizeElementsDialog<Par
 
 	@Override
 	protected Parameter createNewElement() {
-		Parameter parameter = VsdtFactory.eINSTANCE.createParameter();
-		return parameter;
+		return VsdtFactory.eINSTANCE.createParameter();
 	}
 	
 	@Override

@@ -37,13 +37,13 @@ public class OrganizeDataTypesDialog extends AbstractOrganizeElementsDialog<Data
 	 * - add 'view definition' button
 	 */
 
-	public static final String LABEL_PACKAGE= "Package";
-	public static final String LABEL_NAME= "Name";
-	public static final String LABEL_LANGUAGE= "Language";
-	public static final String LABEL_URL= "URL";
-//	public static final String LABEL_MEMBERS= "Members";
-//	public static final String LABEL_INHERITS= "Inherits";
-	public static final String BUTTON_DEF= "Definition...";
+	private static final String LABEL_PACKAGE= "Package";
+	private static final String LABEL_NAME= "Name";
+	private static final String LABEL_LANGUAGE= "Language";
+	private static final String LABEL_URL= "URL";
+//	private static final String LABEL_MEMBERS= "Members";
+//	private static final String LABEL_INHERITS= "Inherits";
+	private static final String BUTTON_DEF= "Definition...";
 	
 	/**package input field*/
 	private Text packageText;
@@ -111,8 +111,7 @@ public class OrganizeDataTypesDialog extends AbstractOrganizeElementsDialog<Data
 
 	@Override
 	protected DataType createNewElement() {
-		DataType dataType= VsdtFactory.eINSTANCE.createDataType();
-		return dataType;
+		return VsdtFactory.eINSTANCE.createDataType();
 	}
 	
 	@Override

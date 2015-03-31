@@ -9,6 +9,7 @@ import de.dailab.common.gmf.action.AbstractGmfAction;
 import de.dailab.common.gmf.command.AbstractDialogWrapperCommand;
 import de.dailab.vsdt.diagram.dialogs.OrganizeAssignmentsDialog;
 import de.dailab.vsdt.diagram.dialogs.OrganizeDataTypesDialog;
+import de.dailab.vsdt.diagram.dialogs.OrganizeExpressionsDialog;
 import de.dailab.vsdt.diagram.dialogs.OrganizeMessageChannelsDialog;
 import de.dailab.vsdt.diagram.dialogs.OrganizeParametersDialog;
 import de.dailab.vsdt.diagram.dialogs.OrganizePropertiesDialog;
@@ -22,48 +23,49 @@ import de.dailab.vsdt.diagram.dialogs.OrganizeServicesDialog;
  */
 public class OrganizeElementsAction extends AbstractGmfAction {
 
-	public static final String TYPE_ASSIGNMENTS = "Assignments";
-	public static final String TYPE_DATATYPES= "Data Types";	
-	public static final String TYPE_SERVICES = "Services";
-	public static final String TYPE_MESSAGES = "Message Channels";
-	public static final String TYPE_PARAMETERS = "Parameters";
-	public static final String TYPE_PROPERTIES = "Properties";
+	enum Type {
+		ASSIGNMENTS, DATATYPES, SERVICES, MESSAGES, PARAMETERS, PROPERTIES, EXPRESSIONS;
+	}
 	
 	public static OrganizeElementsAction getAssignmentsAction() {
-		return new OrganizeElementsAction(TYPE_ASSIGNMENTS, -1);
+		return new OrganizeElementsAction(Type.ASSIGNMENTS, -1);
 	}
 	
 	public static OrganizeElementsAction getDataTypesAction() {
-		return new OrganizeElementsAction(TYPE_DATATYPES, -1);
+		return new OrganizeElementsAction(Type.DATATYPES, -1);
 	}
 	
 	public static OrganizeElementsAction getServicesAction() {
-		return new OrganizeElementsAction(TYPE_SERVICES, -1);
+		return new OrganizeElementsAction(Type.SERVICES, -1);
 	}
 	
 	public static OrganizeElementsAction getMessageChannelAction() {
-		return new OrganizeElementsAction(TYPE_MESSAGES, -1);
+		return new OrganizeElementsAction(Type.MESSAGES, -1);
 	}
 	
 	public static OrganizeElementsAction getParametersAction() {
-		return new OrganizeElementsAction(TYPE_PARAMETERS, -1);
+		return new OrganizeElementsAction(Type.PARAMETERS, -1);
 	}
 	
 	public static OrganizeElementsAction getPropertiesAction(int hint) {
-		return new OrganizeElementsAction(TYPE_PROPERTIES, hint);
+		return new OrganizeElementsAction(Type.PROPERTIES, hint);
+	}
+	
+	public static OrganizeElementsAction getExpressionsAction(int hint) {
+		return new OrganizeElementsAction(Type.EXPRESSIONS, hint);
 	}
 	
 	
-	private final String type;
+	private final Type type;
 	private final int hint;
 	
 	/**
 	 * Create new Organize Elements Action.
 	 * 
-	 * @param type	type of dialog (one of the constants)
+	 * @param type	type of dialog
 	 * @param hint	some additional hint needed for some dialogs, e.g. properties
 	 */
-	public OrganizeElementsAction(String type, int hint) {
+	public OrganizeElementsAction(Type type, int hint) {
 		this.type = type;
 		this.hint = hint;
 	}
@@ -82,25 +84,24 @@ public class OrganizeElementsAction extends AbstractGmfAction {
 		
 		@Override
 		protected Dialog getDialog(Shell shell) {
-			if (type == TYPE_ASSIGNMENTS) {
+			switch (type) {
+			case ASSIGNMENTS:
 				return new OrganizeAssignmentsDialog(shell, modelElement);
-			}
-			if (type == TYPE_DATATYPES) {
+			case DATATYPES:
 				return new OrganizeDataTypesDialog(shell, modelElement);
-			}
-			if (type == TYPE_SERVICES) {
+			case SERVICES:
 				return new OrganizeServicesDialog(shell, modelElement);
-			}
-			if (type == TYPE_MESSAGES) {
+			case MESSAGES:
 				return new OrganizeMessageChannelsDialog(shell, modelElement);
-			}
-			if (type == TYPE_PARAMETERS) {
+			case PARAMETERS:			
 				return new OrganizeParametersDialog(shell, modelElement);
-			}
-			if (type == TYPE_PROPERTIES) {
+			case PROPERTIES:
 				return new OrganizePropertiesDialog(shell, modelElement, hint);
+			case EXPRESSIONS:
+				return new OrganizeExpressionsDialog(shell, modelElement, hint);
+			default:
+				return null;
 			}
-			return null;
 		}
 		
 	}
