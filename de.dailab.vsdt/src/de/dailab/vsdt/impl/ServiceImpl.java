@@ -6,6 +6,7 @@
  */
 package de.dailab.vsdt.impl;
 
+import de.dailab.vsdt.Expression;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -37,6 +38,8 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.ServiceImpl#getLocation <em>Location</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ServiceImpl#getInput <em>Input</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ServiceImpl#getOutput <em>Output</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.ServiceImpl#getPreconditions <em>Preconditions</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.ServiceImpl#getEffects <em>Effects</em>}</li>
  * </ul>
  * </p>
  *
@@ -172,6 +175,26 @@ public class ServiceImpl extends ImplementationImpl implements Service {
 	 * @ordered
 	 */
 	protected EList<Property> output;
+
+	/**
+	 * The cached value of the '{@link #getPreconditions() <em>Preconditions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPreconditions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Expression> preconditions;
+
+	/**
+	 * The cached value of the '{@link #getEffects() <em>Effects</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEffects()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Expression> effects;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -364,6 +387,30 @@ public class ServiceImpl extends ImplementationImpl implements Service {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Expression> getPreconditions() {
+		if (preconditions == null) {
+			preconditions = new EObjectContainmentEList<Expression>(Expression.class, this, VsdtPackage.SERVICE__PRECONDITIONS);
+		}
+		return preconditions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Expression> getEffects() {
+		if (effects == null) {
+			effects = new EObjectContainmentEList<Expression>(Expression.class, this, VsdtPackage.SERVICE__EFFECTS);
+		}
+		return effects;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -371,6 +418,10 @@ public class ServiceImpl extends ImplementationImpl implements Service {
 				return ((InternalEList<?>)getInput()).basicRemove(otherEnd, msgs);
 			case VsdtPackage.SERVICE__OUTPUT:
 				return ((InternalEList<?>)getOutput()).basicRemove(otherEnd, msgs);
+			case VsdtPackage.SERVICE__PRECONDITIONS:
+				return ((InternalEList<?>)getPreconditions()).basicRemove(otherEnd, msgs);
+			case VsdtPackage.SERVICE__EFFECTS:
+				return ((InternalEList<?>)getEffects()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -400,6 +451,10 @@ public class ServiceImpl extends ImplementationImpl implements Service {
 				return getInput();
 			case VsdtPackage.SERVICE__OUTPUT:
 				return getOutput();
+			case VsdtPackage.SERVICE__PRECONDITIONS:
+				return getPreconditions();
+			case VsdtPackage.SERVICE__EFFECTS:
+				return getEffects();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -439,6 +494,14 @@ public class ServiceImpl extends ImplementationImpl implements Service {
 				getOutput().clear();
 				getOutput().addAll((Collection<? extends Property>)newValue);
 				return;
+			case VsdtPackage.SERVICE__PRECONDITIONS:
+				getPreconditions().clear();
+				getPreconditions().addAll((Collection<? extends Expression>)newValue);
+				return;
+			case VsdtPackage.SERVICE__EFFECTS:
+				getEffects().clear();
+				getEffects().addAll((Collection<? extends Expression>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -475,6 +538,12 @@ public class ServiceImpl extends ImplementationImpl implements Service {
 			case VsdtPackage.SERVICE__OUTPUT:
 				getOutput().clear();
 				return;
+			case VsdtPackage.SERVICE__PRECONDITIONS:
+				getPreconditions().clear();
+				return;
+			case VsdtPackage.SERVICE__EFFECTS:
+				getEffects().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -503,6 +572,10 @@ public class ServiceImpl extends ImplementationImpl implements Service {
 				return input != null && !input.isEmpty();
 			case VsdtPackage.SERVICE__OUTPUT:
 				return output != null && !output.isEmpty();
+			case VsdtPackage.SERVICE__PRECONDITIONS:
+				return preconditions != null && !preconditions.isEmpty();
+			case VsdtPackage.SERVICE__EFFECTS:
+				return effects != null && !effects.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

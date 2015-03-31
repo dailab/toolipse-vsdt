@@ -14,12 +14,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
@@ -34,13 +29,7 @@ import de.dailab.vsdt.VsdtPackage;
  * @generated
  */
 public class ServiceItemProvider
-	extends ImplementationItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends ImplementationItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -218,6 +207,8 @@ public class ServiceItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(VsdtPackage.Literals.SERVICE__INPUT);
 			childrenFeatures.add(VsdtPackage.Literals.SERVICE__OUTPUT);
+			childrenFeatures.add(VsdtPackage.Literals.SERVICE__PRECONDITIONS);
+			childrenFeatures.add(VsdtPackage.Literals.SERVICE__EFFECTS);
 		}
 		return childrenFeatures;
 	}
@@ -281,6 +272,8 @@ public class ServiceItemProvider
 				return;
 			case VsdtPackage.SERVICE__INPUT:
 			case VsdtPackage.SERVICE__OUTPUT:
+			case VsdtPackage.SERVICE__PRECONDITIONS:
+			case VsdtPackage.SERVICE__EFFECTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -307,6 +300,16 @@ public class ServiceItemProvider
 			(createChildParameter
 				(VsdtPackage.Literals.SERVICE__OUTPUT,
 				 VsdtFactory.eINSTANCE.createProperty()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(VsdtPackage.Literals.SERVICE__PRECONDITIONS,
+				 VsdtFactory.eINSTANCE.createExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(VsdtPackage.Literals.SERVICE__EFFECTS,
+				 VsdtFactory.eINSTANCE.createExpression()));
 	}
 
 	/**
@@ -322,7 +325,9 @@ public class ServiceItemProvider
 
 		boolean qualify =
 			childFeature == VsdtPackage.Literals.SERVICE__INPUT ||
-			childFeature == VsdtPackage.Literals.SERVICE__OUTPUT;
+			childFeature == VsdtPackage.Literals.SERVICE__OUTPUT ||
+			childFeature == VsdtPackage.Literals.SERVICE__PRECONDITIONS ||
+			childFeature == VsdtPackage.Literals.SERVICE__EFFECTS;
 
 		if (qualify) {
 			return getString

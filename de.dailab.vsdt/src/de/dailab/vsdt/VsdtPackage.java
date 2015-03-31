@@ -3434,13 +3434,31 @@ public interface VsdtPackage extends EPackage {
 	int SERVICE__OUTPUT = IMPLEMENTATION_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>Preconditions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__PRECONDITIONS = IMPLEMENTATION_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Effects</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__EFFECTS = IMPLEMENTATION_FEATURE_COUNT + 9;
+
+	/**
 	 * The number of structural features of the '<em>Service</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_FEATURE_COUNT = IMPLEMENTATION_FEATURE_COUNT + 8;
+	int SERVICE_FEATURE_COUNT = IMPLEMENTATION_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.AssignmentImpl <em>Assignment</em>}' class.
@@ -5186,6 +5204,28 @@ public interface VsdtPackage extends EPackage {
 	EReference getService_Output();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.Service#getPreconditions <em>Preconditions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Preconditions</em>'.
+	 * @see de.dailab.vsdt.Service#getPreconditions()
+	 * @see #getService()
+	 * @generated
+	 */
+	EReference getService_Preconditions();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link de.dailab.vsdt.Service#getEffects <em>Effects</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Effects</em>'.
+	 * @see de.dailab.vsdt.Service#getEffects()
+	 * @see #getService()
+	 * @generated
+	 */
+	EReference getService_Effects();
+
+	/**
 	 * Returns the meta object for class '{@link de.dailab.vsdt.Assignment <em>Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6859,6 +6899,22 @@ public interface VsdtPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SERVICE__OUTPUT = eINSTANCE.getService_Output();
+
+		/**
+		 * The meta object literal for the '<em><b>Preconditions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SERVICE__PRECONDITIONS = eINSTANCE.getService_Preconditions();
+
+		/**
+		 * The meta object literal for the '<em><b>Effects</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SERVICE__EFFECTS = eINSTANCE.getService_Effects();
 
 		/**
 		 * The meta object literal for the '{@link de.dailab.vsdt.impl.AssignmentImpl <em>Assignment</em>}' class.

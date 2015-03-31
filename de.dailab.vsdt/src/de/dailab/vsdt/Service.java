@@ -24,6 +24,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.Service#getLocation <em>Location</em>}</li>
  *   <li>{@link de.dailab.vsdt.Service#getInput <em>Input</em>}</li>
  *   <li>{@link de.dailab.vsdt.Service#getOutput <em>Output</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Service#getPreconditions <em>Preconditions</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Service#getEffects <em>Effects</em>}</li>
  * </ul>
  * </p>
  *
@@ -219,5 +221,37 @@ public interface Service extends Implementation {
 	 * @generated
 	 */
 	EList<Property> getOutput();
+
+	/**
+	 * Returns the value of the '<em><b>Preconditions</b></em>' containment reference list.
+	 * The list contents are of type {@link de.dailab.vsdt.Expression}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Preconditions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Preconditions</em>' containment reference list.
+	 * @see de.dailab.vsdt.VsdtPackage#getService_Preconditions()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Expression> getPreconditions();
+
+	/**
+	 * Returns the value of the '<em><b>Effects</b></em>' containment reference list.
+	 * The list contents are of type {@link de.dailab.vsdt.Expression}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Effects</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Effects</em>' containment reference list.
+	 * @see de.dailab.vsdt.VsdtPackage#getService_Effects()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Expression> getEffects();
 
 } // Service
