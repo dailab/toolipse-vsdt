@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.core.commands.ExecutionException;
@@ -23,6 +24,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
+import org.semanticweb.owlapi.model.SWRLRule;
 
 import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;
 import de.dailab.jiactng.agentcore.action.Action;
@@ -238,9 +240,19 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 			output.setType(getTypeFromTypeUri(param.getType()));
 			result.getOutput().add(output);
 		}
-
-		// TODO add precondition and effect (need to be added to VSDT Service model first)
-		
+		// TODO add precondition and effect
+		// FIXME WTF? Wieso sine precondition und effect jetzt ploetzlich wieder null? TRANSIENT!!!
+		// TODO need to reconstruct pre and eff using OWLS-Generator (?)
+		if (serviceDescription.getProcess().getPreConditions() != null) {
+			for (Entry<String, SWRLRule> entry: serviceDescription.getProcess().getPreConditions().entrySet()) {
+				System.out.println(entry);
+			}
+		}
+		if (serviceDescription.getProcess().getEffects() != null) {
+			for (Entry<String, SWRLRule> entry: serviceDescription.getProcess().getEffects().entrySet()) {
+				System.out.println(entry);
+			}
+		}
 		return result;
 	}
 

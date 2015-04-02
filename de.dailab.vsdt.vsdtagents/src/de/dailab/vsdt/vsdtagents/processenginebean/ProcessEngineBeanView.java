@@ -40,14 +40,14 @@ import de.dailab.vsdt.vsdtagents.Util;
 import de.dailab.vsdt.vsdtagents.VsdtAgents;
 
 /**
- * TODO Javadocs
+ * This view provides a way to deploy the process diagram shown in the current
+ * editor to a running VSDT interpreter agent and to see what interpreter
+ * runtimes are currently running on those agents.
  * 
  * @author kuester
  */
 public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 
-	public static final String NL = System.getProperty("line.separator");
-	
 	// Actions
 	private Action refreshAction;
 	private Action deployAction;
@@ -106,20 +106,24 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 	 * Get Actions from Bean and Refresh Services Viewer accordingly
 	 */
 	private void refresh() {
-
-		// get list of interpreter agents
-		List<IAgentDescription> agents = getBean().getInterpreterAgents();
-		
-		// get list of running interpreters for each interpreter agent
-		interpreterAgents = new HashMap<>();
-		for (IAgentDescription agent : agents) {
-			interpreterAgents.put(agent, getBean().getRunningInterpreters(agent));
+		try {
+			// get list of interpreter agents
+			List<IAgentDescription> agents = getBean().getInterpreterAgents();
+			
+			// get list of running interpreters for each interpreter agent
+			interpreterAgents = new HashMap<>();
+			for (IAgentDescription agent : agents) {
+				interpreterAgents.put(agent, getBean().getRunningInterpreters(agent));
+			}
+			
+			// set viewer's input (input is irrelevant, just to trigger the callback)
+			interpreterViewer.setInput(interpreterAgents);
+			
+			updateActions();
+		} catch (Exception e) {
+			openMessageDialog(MessageDialog.ERROR, "Fetching Interpreter Runtimes Failed: " + e.getMessage());
+			e.printStackTrace();
 		}
-		
-		// set viewer's input (input is irrelevant, just to trigger the callback)
-		interpreterViewer.setInput(interpreterAgents);
-		
-		updateActions();
 	}
 
 	/**
@@ -239,6 +243,8 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 
 	
 	/**
+	 * This action is used to deploy the process from the currently opened VSDT diagram
+	 * to the selected interpreter agent instance.
 	 * 
 	 * @author kuester
 	 */
@@ -310,6 +316,8 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 
 	
 	/**
+	 * This action removed the currently selected interpreter runtime from the
+	 * interpreter agent it is running on.
 	 * 
 	 * @author kuester
 	 */
