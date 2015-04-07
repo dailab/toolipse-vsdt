@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.core.commands.ExecutionException;
@@ -20,6 +19,7 @@ import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -33,6 +33,7 @@ import de.dailab.jiactng.owlsdescription.ServiceDescription;
 import de.dailab.jiactng.owlsdescription.process.Param;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.DataType;
+import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.Service;
 import de.dailab.vsdt.VsdtFactory;
@@ -217,6 +218,14 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 	 * @return						according VSDT Service
 	 */
 	private Service createService(ServiceDescription serviceDescription) {
+		// restore transient fields
+		try {
+			serviceDescription = OntoUtils.reloadOntology(serviceDescription);
+		} catch (Exception e) {
+			MessageDialog.openWarning(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+					"Error loading Ontologies", "Could not load linked ontologies. Some semantic information might have been lost.");
+		}
+		
 		Service result = VsdtFactory.eINSTANCE.createService();
 		
 		// set service attributes; this should be compatible to how the mapping maps services to JIAC actions
@@ -240,21 +249,24 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 			output.setType(getTypeFromTypeUri(param.getType()));
 			result.getOutput().add(output);
 		}
-		// TODO add precondition and effect
-		// FIXME WTF? Wieso sine precondition und effect jetzt ploetzlich wieder null? TRANSIENT!!!
-		// TODO need to reconstruct pre and eff using OWLS-Generator (?)
-		if (serviceDescription.getProcess().getPreConditions() != null) {
-			for (Entry<String, SWRLRule> entry: serviceDescription.getProcess().getPreConditions().entrySet()) {
-				System.out.println(entry);
+		// add precondition and effect, if reconstruction was successful
+		if (serviceDescription.getProcess().getPreConditions() != null && serviceDescription.getProcess().getEffects() != null) {
+			for (SWRLRule rule : serviceDescription.getProcess().getPreConditions().values()) {
+				Expression expression = VsdtFactory.eINSTANCE.createExpression();
+				expression.setExpression(OntoUtils.formatSwrlRule(rule));
+				expression.setLanguage("SWRL");
+				result.getPreconditions().add(expression);
 			}
-		}
-		if (serviceDescription.getProcess().getEffects() != null) {
-			for (Entry<String, SWRLRule> entry: serviceDescription.getProcess().getEffects().entrySet()) {
-				System.out.println(entry);
+			for (SWRLRule rule : serviceDescription.getProcess().getEffects().values()) {
+				Expression expression = VsdtFactory.eINSTANCE.createExpression();
+				expression.setExpression(OntoUtils.formatSwrlRule(rule));
+				expression.setLanguage("SWRL");
+				result.getEffects().add(expression);
 			}
 		}
 		return result;
 	}
+	
 
 	/**
 	 * Create VSDT DataType objects corresponding to the OWL data types used in the service description.
