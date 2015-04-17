@@ -11,6 +11,9 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 
+import de.dailab.vsdt.AssignTimeType;
+import de.dailab.vsdt.Assignment;
+import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditorPlugin;
 import de.dailab.vsdt.diagram.preferences.DiagramAppearancePreferencePage;
 
@@ -172,5 +175,36 @@ public class FigureHelper {
 		g.setForegroundColor(oldForeground);
 		g.setBackgroundColor(oldBackground);	
 	}
+	
+	/*
+	 * Tooltips
+	 */
 
+	public static String getToolTipText(FlowObject flowObject) {
+		if (flowObject != null && ! flowObject.getAssignments().isEmpty()) {
+			String NL = System.getProperty("line.separator");
+			StringBuffer buffer = new StringBuffer("Assignments:");
+			for (Assignment assignment : flowObject.getAssignments()) {
+				if (assignment.getAssignTime() == AssignTimeType.START) {
+					if (assignment.getTo() != null && assignment.getFrom() != null) {
+						buffer.append(NL + assignment.getTo().getName() + " <- " + assignment.getFrom().getExpression());
+					} else {
+						buffer.append(NL + "Error in assignment: To or From part is null!");
+					}
+				}
+			}
+			buffer.append(NL + "- - -");
+			for (Assignment assignment : flowObject.getAssignments()) {
+				if (assignment.getAssignTime() == AssignTimeType.END) {
+					if (assignment.getTo() != null && assignment.getFrom() != null) {
+						buffer.append(NL + assignment.getTo().getName() + " <- " + assignment.getFrom().getExpression());
+					} else {
+						buffer.append(NL + "Error in assignment: To or From part is null!");
+					}
+				}
+			}
+			return buffer.toString();
+		}
+		return null;
+	}
 }

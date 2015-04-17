@@ -7,8 +7,6 @@ import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.swt.SWT;
 
-import de.dailab.vsdt.AssignTimeType;
-import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.Event;
 import de.dailab.vsdt.TriggerType;
 
@@ -218,23 +216,8 @@ public class EventFigure extends Ellipse implements IDecoratableFigure {
 
 	@Override
 	public IFigure getToolTip() {
-		if (event != null && ! event.getAssignments().isEmpty()) {
-			String NL = System.getProperty("line.separator");
-			StringBuffer buffer = new StringBuffer("Assignments:");
-			for (Assignment assignment : event.getAssignments()) {
-				if (assignment.getAssignTime() == AssignTimeType.START) {
-					buffer.append(NL + assignment.getTo().getName() + " <- " + assignment.getFrom().getExpression());
-				}
-			}
-			for (Assignment assignment : event.getAssignments()) {
-				if (assignment.getAssignTime() == AssignTimeType.END) {
-					buffer.append(NL + assignment.getTo().getName() + " <- " + assignment.getFrom().getExpression());
-				}
-			}
-			return new Label(buffer.toString());
-		} else {
-			return super.getToolTip();
-		}
+		String text = FigureHelper.getToolTipText(event);
+		return text != null ? new Label(text) : super.getToolTip();
 	}
 	
 	//OTHER STUFF

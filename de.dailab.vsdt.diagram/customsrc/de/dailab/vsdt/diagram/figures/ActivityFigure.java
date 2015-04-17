@@ -18,8 +18,6 @@ import org.eclipse.swt.graphics.Image;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
-import de.dailab.vsdt.AssignTimeType;
-import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.LoopType;
 
 
@@ -347,23 +345,8 @@ public class ActivityFigure extends RoundedRectangle implements IDecoratableFigu
 	
 	@Override
 	public IFigure getToolTip() {
-		if (activity != null && ! activity.getAssignments().isEmpty()) {
-			String NL = System.getProperty("line.separator");
-			StringBuffer buffer = new StringBuffer("Assignments:");
-			for (Assignment assignment : activity.getAssignments()) {
-				if (assignment.getAssignTime() == AssignTimeType.START) {
-					buffer.append(NL + assignment.getTo().getName() + " <- " + assignment.getFrom().getExpression());
-				}
-			}
-			for (Assignment assignment : activity.getAssignments()) {
-				if (assignment.getAssignTime() == AssignTimeType.END) {
-					buffer.append(NL + assignment.getTo().getName() + " <- " + assignment.getFrom().getExpression());
-				}
-			}
-			return new Label(buffer.toString());
-		} else {
-			return super.getToolTip();
-		}
+		String text = FigureHelper.getToolTipText(activity);
+		return text != null ? new Label(text) : super.getToolTip();
 	}
 	
 	
