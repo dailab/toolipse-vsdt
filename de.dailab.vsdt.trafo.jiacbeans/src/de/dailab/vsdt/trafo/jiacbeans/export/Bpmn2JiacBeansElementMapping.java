@@ -347,7 +347,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 						action.setVariableName("ACTION_" + currentWorkflow.getName().toUpperCase());
 						action.setScope(getActionScope(service));
 //						action.setActionId(currentBean.getPackageName() + "." + currentBean.getName() + "#" + currentWorkflow.getName());
-						action.setActionId(service.getOperation());
+						action.setActionId(getActionName(service));
 						currentBean.getActions().add(action);
 						currentWorkflow.setExposedAs(action);
 					}
@@ -1253,17 +1253,18 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	 * @return			sequence for invoking the corresponding JIAC action
 	 */
 	private Sequence createServiceInvocation(Service service) {
+		String actionName = getActionName(service);
 		// collect code elements
 		CodeElement retrieveAction = createCode("IActionDescription action = thisAgent.searchAction(" +
-				"new Action(\"" + service.getOperation() + "\"));");
-		CodeElement throwException = createCode("throw new RuntimeException(\"Action " + service.getOperation() + " not found!\");");
+				"new Action(\"" + actionName + "\"));");
+		CodeElement throwException = createCode("throw new RuntimeException(\"Action " + actionName + " not found!\");");
 		IfThenElse checkAction = createIfThenElse("action == null", throwException, null);
 		CodeElement invokeAction = createCode("ActionResult actionResult = invokeAndWaitForResult(action, new Serializable[] {" + 
 				buildPropertyString(service.getInput()) + "});");
 
 		// error handling
 		String resultCheck = "actionResult.getFailure() == null";
-		CodeElement notifyError = createCode("log.error(\"Action " + service.getOperation() + " failed: \" + actionResult.getFailure());");
+		CodeElement notifyError = createCode("log.error(\"Action " + actionName + " failed: \" + actionResult.getFailure());");
 
 		// assign the results to the respective variables
 		Sequence resultAssigns = createSequence(createCode("Serializable[] results = (Serializable[]) actionResult.getResults();"));
@@ -1401,6 +1402,19 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			scope = "ActionScope.WEBSERVICE";
 		}
 		return scope;
+	}
+	
+	private String getActionName(Service service) {
+//		StringBuilder builder = new StringBuilder();
+//		if (service.getInterface() != null) {
+//			builder.append(service.getInterface());
+//		}
+//		builder.append("#");
+//		if (service.getOperation() != null) {
+//			builder.append(service.getOperation());
+//		}
+//		return builder.toString();
+		return service.getOperation();
 	}
 	
 	/**
