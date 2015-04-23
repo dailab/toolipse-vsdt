@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VSDT Expression Language
 Bundle-Vendor: DAI-Labor, TU Berlin
-Bundle-Version: 1.4.4.20150325
+Bundle-Version: 1.4.4.20150423
 Bundle-SymbolicName: de.dailab.vsdt.vxl2; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
