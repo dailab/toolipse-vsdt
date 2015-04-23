@@ -384,7 +384,7 @@ public class VxlInterpreter {
 	@SuppressWarnings("rawtypes")
 	private Comparable toDoubleIfNumber(Object o) {
 		if (o instanceof Number) {
-			return toDoubleIfNumber((Number) o);
+			return toDouble((Number) o);
 		}
 		return (Comparable) o;
 	}
