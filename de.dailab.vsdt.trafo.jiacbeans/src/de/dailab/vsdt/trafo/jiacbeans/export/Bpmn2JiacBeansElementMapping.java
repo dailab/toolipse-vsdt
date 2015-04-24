@@ -315,7 +315,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 						if (payload != null) {
 							currentWorkflow.getParameters().add(createVariable("IJiacMessage", "__msg"));
 						}
-						mapping = createSequence(createCode("String __sender = __msg.getSender().getName();"),
+						mapping = createSequence(createCode("__sender = __msg.getSender().getName();"),
 								payload != null ? createCode(payload.getType() + " " + payload.getName() + " = (" + 
 										payload.getType() + ") __msg.getPayload();") : null);
 						
