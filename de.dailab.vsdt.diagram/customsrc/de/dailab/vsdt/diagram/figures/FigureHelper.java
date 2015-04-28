@@ -186,25 +186,30 @@ public class FigureHelper {
 			StringBuffer buffer = new StringBuffer("Assignments:");
 			for (Assignment assignment : flowObject.getAssignments()) {
 				if (assignment.getAssignTime() == AssignTimeType.START) {
-					if (assignment.getTo() != null && assignment.getFrom() != null) {
-						buffer.append(NL + assignment.getTo().getName() + " <- " + assignment.getFrom().getExpression());
-					} else {
-						buffer.append(NL + "Error in assignment: To or From part is null!");
-					}
+					buffer.append(NL + getTextForAssignment(assignment));
 				}
 			}
 			buffer.append(NL + "- - -");
 			for (Assignment assignment : flowObject.getAssignments()) {
 				if (assignment.getAssignTime() == AssignTimeType.END) {
-					if (assignment.getTo() != null && assignment.getFrom() != null) {
-						buffer.append(NL + assignment.getTo().getName() + " <- " + assignment.getFrom().getExpression());
-					} else {
-						buffer.append(NL + "Error in assignment: To or From part is null!");
-					}
+					buffer.append(NL + getTextForAssignment(assignment));
 				}
 			}
 			return buffer.toString();
 		}
 		return null;
+	}
+	
+	private static String getTextForAssignment(Assignment assignment) {
+		if (assignment.getTo() != null && assignment.getFrom() != null) {
+			if (assignment.getToQuery() != null) {
+				return assignment.getTo().getName() + "." + assignment.getToQuery() + " <- " + assignment.getFrom().getExpression();
+				
+			} else {
+				return assignment.getTo().getName() + " <- " + assignment.getFrom().getExpression();
+			}
+		} else {
+			return "Error in assignment: To or From part is null!";
+		}
 	}
 }
