@@ -60,7 +60,7 @@ public abstract class AbstractPoolEditPart extends AbstractVsdtNodeEditPart impl
 	 */
 	protected IFigure initNodeShape() {
 		SwimlaneFigure figure= new SwimlaneFigure(true,
-				getCastedModel().isBoundaryVisible());
+				getCastedModel().isBoundaryVisible(), getCastedModel());
 		return figure;
 	}
 }

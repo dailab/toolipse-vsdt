@@ -3,10 +3,14 @@ package de.dailab.vsdt.diagram.figures;
 import org.eclipse.draw2d.BorderLayout;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.OneLineBorder;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.RectangularDropShadowLineBorder;
+
+import de.dailab.vsdt.Pool;
 
 
 
@@ -22,22 +26,26 @@ public class SwimlaneFigure extends RectangleFigure {
 	
 	private boolean isPool= true;
 	
+	private final Pool pool;
+	
 	/**
 	 * this constructor should not be used. 
 	 */
 	public SwimlaneFigure() {
-		this.boundaryVisible= true;
 		System.err.println("warning: swimlane default constructor used");
+		this.pool = null;
 		init();
 	}
 	
 	/**
 	 * @param isPool			is Pool or Lane?
 	 * @param boundaryVisible	whether the boundary shall be visible
+	 * @param pool				the pool, if it is a pool, else null
 	 */
-	public SwimlaneFigure(boolean isPool, boolean boundaryVisible) {
+	public SwimlaneFigure(boolean isPool, boolean boundaryVisible, Pool pool) {
 		this.boundaryVisible= boundaryVisible;
 		this.isPool= isPool;
+		this.pool = pool;
 		init();
 	}
 	
@@ -93,6 +101,12 @@ public class SwimlaneFigure extends RectangleFigure {
 		}
 	}
 	
+	@Override
+	public IFigure getToolTip() {
+		String text = FigureHelper.getToolTipText(pool);
+		return text != null ? new Label(text) : super.getToolTip();
+	}
+
 
 	// INNER FIGURES
 	

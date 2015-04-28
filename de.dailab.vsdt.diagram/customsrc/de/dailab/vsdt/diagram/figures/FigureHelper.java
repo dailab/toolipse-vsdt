@@ -11,9 +11,12 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 
+import de.dailab.vsdt.AbstractProcess;
 import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.FlowObject;
+import de.dailab.vsdt.IdObject;
+import de.dailab.vsdt.Property;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditorPlugin;
 import de.dailab.vsdt.diagram.preferences.DiagramAppearancePreferencePage;
 
@@ -180,33 +183,48 @@ public class FigureHelper {
 	 * Tooltips
 	 */
 
-	public static String getToolTipText(FlowObject flowObject) {
-		if (flowObject != null && ! flowObject.getAssignments().isEmpty()) {
-			String NL = System.getProperty("line.separator");
-			StringBuffer buffer = new StringBuffer("Assignments:");
-			for (Assignment assignment : flowObject.getAssignments()) {
-				if (assignment.getAssignTime() == AssignTimeType.START) {
-					buffer.append(NL + getTextForAssignment(assignment));
+	public static String getToolTipText(IdObject object) {
+		String NL = System.getProperty("line.separator");
+		StringBuffer buffer = new StringBuffer();
+		
+		if (object instanceof AbstractProcess) {
+			AbstractProcess process = (AbstractProcess) object;
+			if (! process.getProperties().isEmpty()) {
+				buffer.append("Properties:");
+				for (Property property : process.getProperties()) {
+					buffer.append(NL + property.getName() + ": " + property.getType());
 				}
 			}
-			buffer.append(NL + "- - -");
-			for (Assignment assignment : flowObject.getAssignments()) {
-				if (assignment.getAssignTime() == AssignTimeType.END) {
-					buffer.append(NL + getTextForAssignment(assignment));
-				}
-			}
-			return buffer.toString();
 		}
-		return null;
+		if (object instanceof FlowObject) {
+			FlowObject flowObject = (FlowObject) object;
+			if (! flowObject.getAssignments().isEmpty()) {
+				if (! buffer.toString().isEmpty()) {
+					buffer.append(NL + "- - -" + NL);
+				}
+				buffer.append("Assignments:");
+				for (Assignment assignment : flowObject.getAssignments()) {
+					if (assignment.getAssignTime() == AssignTimeType.START) {
+						buffer.append(NL + "< " + getTextForAssignment(assignment));
+					}
+				}
+				for (Assignment assignment : flowObject.getAssignments()) {
+					if (assignment.getAssignTime() == AssignTimeType.END) {
+						buffer.append(NL + "> " + getTextForAssignment(assignment));
+					}
+				}
+			}
+		}
+		return buffer.toString();
 	}
 	
 	private static String getTextForAssignment(Assignment assignment) {
 		if (assignment.getTo() != null && assignment.getFrom() != null) {
 			if (assignment.getToQuery() != null) {
-				return assignment.getTo().getName() + "." + assignment.getToQuery() + " <- " + assignment.getFrom().getExpression();
+				return assignment.getTo().getName() + "." + assignment.getToQuery() + " = " + assignment.getFrom().getExpression();
 				
 			} else {
-				return assignment.getTo().getName() + " <- " + assignment.getFrom().getExpression();
+				return assignment.getTo().getName() + " = " + assignment.getFrom().getExpression();
 			}
 		} else {
 			return "Error in assignment: To or From part is null!";

@@ -1,10 +1,13 @@
 package de.dailab.vsdt.diagram.figures;
 
 import org.eclipse.draw2d.Graphics;
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.XYLayout;
 import org.eclipse.draw2d.geometry.Rectangle;
 
+import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.GatewayType;
 import de.dailab.vsdt.diagram.preferences.DiagramAppearancePreferencePage;
 
@@ -18,23 +21,26 @@ public class GatewayFigure extends RectangleFigure implements IDecoratableFigure
 	
 	private boolean markerVisible= false;
 	
+	private final Gateway gateway;
+	
 	private IFigureDecorator decorator;
 	
 	/**
 	 * this constructor should not be used. 
 	 */
 	public GatewayFigure() {
-		this.gatewayType= GatewayType.XOR_DATA;
-		this.markerVisible= false;
 		System.err.println("warning: gateway default constructor used");
+		this.gateway = null;
 		init();
 	}
 	
 	/**
 	 * @param gatewayType	the gateway's type
+	 * @param gateway		the actual gateway
 	 */
-	public GatewayFigure(GatewayType gatewayType) {
+	public GatewayFigure(GatewayType gatewayType, Gateway gateway) {
 		setGatewayType(gatewayType);
+		this.gateway = gateway;
 		init();
 	}
 	
@@ -115,6 +121,13 @@ public class GatewayFigure extends RectangleFigure implements IDecoratableFigure
 			decorator.decorateFigure(this, g);
 		}
 	}
+	
+	@Override
+	public IFigure getToolTip() {
+		String text = FigureHelper.getToolTipText(gateway);
+		return text != null ? new Label(text) : super.getToolTip();
+	}
+	
 
 	public void setDecorator(IFigureDecorator decorator) {
 		this.decorator= decorator;

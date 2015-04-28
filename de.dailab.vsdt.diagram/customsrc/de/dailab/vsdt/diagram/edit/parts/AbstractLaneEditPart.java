@@ -51,7 +51,7 @@ public abstract class AbstractLaneEditPart extends AbstractVsdtNodeEditPart impl
 	 * sets all fields depending on the underlying model
 	 */
 	protected IFigure initNodeShape() {
-		SwimlaneFigure figure= new SwimlaneFigure(false, false);
+		SwimlaneFigure figure= new SwimlaneFigure(false, false, null);
 		return figure;
 	}
 }

@@ -60,7 +60,7 @@ public abstract class AbstractGatewayEditPart extends AbstractVsdtBorderedShapeE
 	 * sets all fields depending on the underlying model
 	 */
 	protected IFigure initNodeShape() {
-		GatewayFigure figure= new GatewayFigure(getCastedModel().getGatewayType());
+		GatewayFigure figure= new GatewayFigure(getCastedModel().getGatewayType(), getCastedModel());
 		return figure;
 	}
 
