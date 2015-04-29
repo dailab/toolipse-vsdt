@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VSDT - Additions
 Bundle-SymbolicName: de.dailab.vsdt.diagram.additions;singleton:=true
-Bundle-Version: 1.4.4.20130422
+Bundle-Version: 1.4.5.qualifier
 Bundle-Vendor: DAI-Labor, TU Berlin
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.core.resources,
