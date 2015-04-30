@@ -215,7 +215,7 @@ public class FigureHelper {
 				}
 			}
 		}
-		return buffer.toString();
+		return buffer.toString().isEmpty() ? null : buffer.toString();
 	}
 	
 	private static String getTextForAssignment(Assignment assignment) {
