@@ -381,7 +381,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 		StringBuilder builder = new StringBuilder();
 		builder.append("--- Properties Table ---" + NL);
 		for (Property property : propertyValueMap.keySet()) {
-			builder.append(property.getName() + "\t" + propertyValueMap.get(property) + NL);
+			builder.append((property != null ? property.getName() : "null") + "\t" + propertyValueMap.get(property) + NL);
 		}
 		builder.append("--- Loop Counter Table ---" + NL);
 		for (Activity activity : loopCounterMap.keySet()) {

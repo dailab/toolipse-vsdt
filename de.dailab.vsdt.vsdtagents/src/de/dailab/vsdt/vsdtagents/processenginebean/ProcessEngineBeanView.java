@@ -342,6 +342,9 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 				try {
 					getBean().undeployInterpreterRuntime(agent, id);
 					openMessageDialog(MessageDialog.INFORMATION, "Runtime removed");
+					
+					// refresh viewer
+					refresh();
 				} catch (Exception e) {
 					openMessageDialog(MessageDialog.ERROR, "Failed to remove runtime: " + e.getMessage());
 				}

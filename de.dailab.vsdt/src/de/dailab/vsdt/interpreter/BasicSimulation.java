@@ -20,6 +20,8 @@ import de.dailab.vsdt.TriggerType;
  */
 public abstract class BasicSimulation extends AbstractSimulation {
 
+	protected boolean ignoreMessageFlows = false;
+	
 	/*
 	 * TODO
 	 * - "real" event handling (signal, error, cancel, ...)
@@ -72,7 +74,9 @@ public abstract class BasicSimulation extends AbstractSimulation {
 			}
 		}
 		// check incoming messages
-		if (! flowObject.getIncomingMsg().isEmpty()) {
+		if (ignoreMessageFlows || flowObject.getIncomingMsg().isEmpty()) {
+			return true;
+		} else {
 			boolean msgOk = false;
 			for (MessageFlow messageFlow : flowObject.getIncomingMsg()) {
 				if (messageFlow.getSource() instanceof FlowObject) {
@@ -80,19 +84,19 @@ public abstract class BasicSimulation extends AbstractSimulation {
 				}
 			}
 			return msgOk;
-		} else {
-			return true;
 		}
 	}
 	
 	@Override
 	protected void executeBegin(FlowObject flowObject) {
 		// place tokens on outgoing message flows
-		for (MessageFlow msgFlow : flowObject.getOutgoingMsg()) {
-			changeToken(msgFlow, +1);
-			stepMap.put(msgFlow, step);
-			if (msgFlow.getTarget() instanceof FlowObject) {
-				updateState((FlowObject) msgFlow.getTarget());
+		if (! ignoreMessageFlows) {
+			for (MessageFlow msgFlow : flowObject.getOutgoingMsg()) {
+				changeToken(msgFlow, +1);
+				stepMap.put(msgFlow, step);
+				if (msgFlow.getTarget() instanceof FlowObject) {
+					updateState((FlowObject) msgFlow.getTarget());
+				}
 			}
 		}
 	}
@@ -100,8 +104,10 @@ public abstract class BasicSimulation extends AbstractSimulation {
 	@Override
 	protected void executeEnd(FlowObject flowObject) {
 		// consume tokens from incoming message flows
-		for (MessageFlow msgFlow : flowObject.getIncomingMsg()) {
-			changeToken(msgFlow, -1);
+		if (! ignoreMessageFlows) {
+			for (MessageFlow msgFlow : flowObject.getIncomingMsg()) {
+				changeToken(msgFlow, -1);
+			}
 		}
 	}
 
