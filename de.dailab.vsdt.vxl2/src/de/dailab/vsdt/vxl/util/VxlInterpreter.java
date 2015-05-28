@@ -524,7 +524,7 @@ public class VxlInterpreter {
 		return false;
 	}
 
-	private Class[] getParamTypes(List<Serializable> params) {
+	private Class<?>[] getParamTypes(List<Serializable> params) {
 		Class<?>[] paramTypes = new Class[params.size()];
 		for (int i = 0; i < params.size(); i++) {
 			paramTypes[i] = params.get(i).getClass();
