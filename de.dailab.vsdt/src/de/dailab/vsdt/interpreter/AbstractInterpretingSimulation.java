@@ -1,6 +1,9 @@
 package de.dailab.vsdt.interpreter;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -272,6 +275,25 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 							if (propVal instanceof List) {
 								List<Serializable> list = (List) propVal;
 								list.set(Util.asInteger(number), value); 
+							}
+						} else {
+							// try to interpret query as an attribute/setter
+							String fieldName = assignment.getToQuery();
+							Object object = getPropertyValue(assignment.getTo());
+							Class<?> clazz = object.getClass();
+							try {
+								// try to access regular public field
+								Field field = clazz.getField(fieldName);
+								field.set(object, value);
+							} catch (NoSuchFieldException | SecurityException | IllegalAccessException e) {
+								try {
+									// try to access accordingly named getter method
+									String setter = "set" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
+									Method method = clazz.getMethod(setter, value.getClass());
+									method.invoke(object, value);
+								} catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e2) {
+									System.err.println("Could not assign value to to-query " + fieldName);
+								}
 							}
 						}
 					} else {
