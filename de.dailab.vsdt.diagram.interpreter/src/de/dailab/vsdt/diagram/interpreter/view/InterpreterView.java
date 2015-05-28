@@ -121,9 +121,9 @@ public class InterpreterView extends AbstractStructuredViewerView {
 		stepOutAction= new Action("Step Out", VsdtInterpreterPlugin.getImageDescriptor(VsdtInterpreterPlugin.IMAGE_SIM_STEP_OUT)) {
 			public void run() { stepOut(); 	}
 		};
-		contributeToToolBar(startAction, stopAction, stepOverAction, 
-				stepIntoAction, stepOutAction);
-		hookContextMenu(viewer, stepOverAction, stepIntoAction, stepOutAction);
+		contributeToToolBar(startAction, stopAction,  
+				stepIntoAction, stepOverAction, stepOutAction);
+		hookContextMenu(viewer, stepIntoAction, stepOverAction, stepOutAction);
 		updateActionEnablement();
 		
 		// select simulator menu

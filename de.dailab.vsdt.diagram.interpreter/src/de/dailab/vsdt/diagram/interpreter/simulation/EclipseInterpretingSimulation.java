@@ -52,7 +52,7 @@ public class EclipseInterpretingSimulation extends AbstractInterpretingSimulatio
 		if (dialog.open() == EditExpressionDialog.OK) {
 			String newExpression= dialog.getExpression();
 			Map<String, Serializable> context= createContext(property.eContainer());
-			Serializable newValue= evaluateTerm(parseExpression(newExpression), context);
+			Serializable newValue= parseAndEvaluate(newExpression, context);
 			setPropertyValue(property, newValue);
 		}
 	}

@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
@@ -32,12 +31,9 @@ import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.Service;
 import de.dailab.vsdt.StandardLoopAttSet;
 import de.dailab.vsdt.interpreter.ISimulationObserver.LogLevel;
+import de.dailab.vsdt.util.ExpressionHelper;
 import de.dailab.vsdt.util.VsdtHelper;
 import de.dailab.vsdt.vxl.util.Util;
-import de.dailab.vsdt.vxl.util.VxlInterpreter;
-import de.dailab.vsdt.vxl.util.VxlParseException;
-import de.dailab.vsdt.vxl.util.VxlParser;
-import de.dailab.vsdt.vxl.vxl.VxlTerm;
 
 /**
  * This Simulation requires fewer interaction with the user than the Manual
@@ -267,8 +263,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 					Serializable value= parseAndEvaluate(assignment.getFrom(), createContext(eObject));
 					if (assignment.getToQuery() != null) {
 						// try to assign to array index
-						VxlTerm term = parseExpression(assignment.getToQuery());
-						Serializable query = evaluateTerm(term, createContext(eObject));
+						Serializable query = parseAndEvaluate(assignment.getToQuery(), createContext(eObject));
 						if (query instanceof Number) {
 							Number number = (Number) query;
 							Serializable propVal = getPropertyValue(assignment.getTo());
@@ -290,6 +285,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 									// try to access accordingly named getter method
 									String setter = "set" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
 									Method method = clazz.getMethod(setter, value.getClass());
+									// XXX instance types might not match declared param types!
 									method.invoke(object, value);
 								} catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e2) {
 									System.err.println("Could not assign value to to-query " + fieldName);
@@ -416,34 +412,13 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 * VXL CONDITION/EXPRESSION EVALUATION HELPER METHODS
 	 */
 	
-	/**
-	 * Parse and evaluate a condition.  If the result is a Boolean, return it;
-	 * otherwise an error dialog is shown and false is returned.
-	 * 
-	 * @see #parseAndEvaluate(Expression, Map)
-	 * @see #createContext(FlowObject)
-	 * @param expression	Some VXL Condition (Expression evaluating to Boolean)
-	 * @param context		Map of Property names and values
-	 * @return				Result of the evaluation, or false in case of error
-	 */
 	public boolean evaluateCondition(Expression expression, Map<String, Serializable> context) {
-		if (expression != null) {
-			Serializable value= parseAndEvaluate(expression, context);
-			if (value instanceof Boolean) {
-				return (Boolean) value;
-			} else {
-				String title= "Evaluation failed";
-				StringBuffer message= new StringBuffer();
-				message.append("The condition ").append(expression.getExpression()).append(" does not evaluate to a Boolean value.");
-				logMessage(LogLevel.ERROR, title, message.toString());
-			}
-		} else {
-			String title= "Evaluation failed";
-			StringBuffer message= new StringBuffer();
-			message.append("The condition must not be null.");
-			logMessage(LogLevel.ERROR, title, message.toString());
+		try {
+			return ExpressionHelper.evaluateCondition(expression, context);
+		} catch (Exception e) {
+			logMessage(LogLevel.ERROR, "Evaluation Failed", e.getMessage());
+			return false;
 		}
-		return false;
 	}
 	
 	/**
@@ -457,7 +432,16 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 * @return				Result of the evaluation, or null in case of error
 	 */
 	public Serializable parseAndEvaluate(Expression expression, Map<String, Serializable> context) {
-		return evaluateTerm(parseExpression(getExpression(expression)), context);
+		return parseAndEvaluate(getExpression(expression), context);
+	}
+	
+	public Serializable parseAndEvaluate(String expression, Map<String, Serializable> context) {
+		try {
+			return ExpressionHelper.parseAndEvaluate(expression, context);
+		} catch (IllegalArgumentException e) {
+			logMessage(LogLevel.ERROR, "Evaluation failed", e.getMessage());
+			return null;
+		}
 	}
 	
 	/**
@@ -468,75 +452,12 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 * @return				Expression string if non-null VXL Expression, or null
 	 */
 	public String getExpression(Expression expression) {
-		if (expression == null) return null;
-		// check expression language
-		String lang= expression.getExpressionLanguageToBeUsed();
-		if (Util.languageIsVxl(lang)) {
-//			return expression.getExpression();
-			return VsdtHelper.getExpressionWithParameters(expression);
-		} else {
-			String message= "Expressions must be given using the VSDT Expression Language (VXL).";
-			logMessage(LogLevel.WARN, "Unsupported Expression Language", message.toString());
-			return null;
-		}
-	}
-	
-	/**
-	 * Parse the Expression using the VXL parser and return the resulting Term. 
-	 * If there are any errors, this is shown in some dialogs, and null is returned.
-	 * 
-	 * @param expression	Some VXL Expression (as string)
-	 * @return				Result of the parsing, or null in case of error
-	 */
-	public VxlTerm parseExpression(String expression) {
-		if (expression == null) return null;
-
-		VxlParser parser= VxlParser.getInstance();	//TODO errror here
-		
 		try {
-			VxlTerm term= parser.parse(expression);
-			return term;
-		} catch (VxlParseException e) {
-			String title= "Parsing failed";
-			StringBuffer message= new StringBuffer();
-			message.append("The expression ").append(expression).append(" could not be parsed.");
-			if (! parser.getErrors().isEmpty()) {
-				message.append("\r\nErrors:");
-				for (Diagnostic d : parser.getErrors()) {
-					message.append("\r\n- ").append(d.getMessage());
-				}
-			}
-			logMessage(LogLevel.ERROR, title, message.toString());
+			return ExpressionHelper.getExpression(expression);
+		} catch (IllegalArgumentException e) {
+			logMessage(LogLevel.WARN, "Unsupported Expression type", e.getMessage());
 			return null;
 		}
-	}
-	
-	/**
-	 * Parse and Evaluate the Expression using the VXL parser and interpreter.
-	 * If there are any errors, they are shown in some dialogs, and the result 
-	 * is returned; otherwise return null.
-	 * 
-	 * @see #createContext(FlowObject)
-	 * @param expression	Some VXL Term
-	 * @param context		Map of Property names and values
-	 * @return				Result of the evaluation, or null in case of error
-	 */
-	public Serializable evaluateTerm(VxlTerm term, Map<String, Serializable> context) {
-		if (term == null) return null;
-		VxlInterpreter interpreter= new VxlInterpreter();
-		Serializable result= interpreter.evaluateTerm(term, context);
-		Map<Object, String> errors= interpreter.getErrors();
-		if (! errors.isEmpty()) {
-			String title= "Evaluation failed";
-			StringBuffer message= new StringBuffer();
-			message.append("Expression could not be evaluated.");
-			message.append("\r\nErrors:");
-			for (String error : errors.values()) {
-				message.append("\r\n- ").append(error);
-			}
-			logMessage(LogLevel.ERROR, title, message.toString());
-		}
-		return result;
 	}
 	
 }

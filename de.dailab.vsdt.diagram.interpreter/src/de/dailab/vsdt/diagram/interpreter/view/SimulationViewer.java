@@ -164,6 +164,9 @@ public class SimulationViewer extends TreeViewer {
 					Object value= ((EclipseInterpretingSimulation) view.getSimulation()).getPropertyValue(property);
 					String name= property.getName();
 					String type= property.getType();
+					if (type.indexOf('.') != -1) {
+						type = type.substring(type.lastIndexOf('.') + 1);
+					}
 					String valString= value instanceof String ? "\""+(String)value+"\"":String.valueOf(value);
 					return type + " " + name + " = " + valString;
 				}
