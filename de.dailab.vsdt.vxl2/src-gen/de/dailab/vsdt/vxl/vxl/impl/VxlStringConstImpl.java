@@ -2,10 +2,10 @@
  */
 package de.dailab.vsdt.vxl.vxl.impl;
 
-import org.eclipse.emf.ecore.EClass;
-
 import de.dailab.vsdt.vxl.vxl.VxlPackage;
 import de.dailab.vsdt.vxl.vxl.VxlStringConst;
+
+import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

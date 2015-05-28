@@ -2,9 +2,9 @@
  */
 package de.dailab.vsdt.vxl.vxl.impl;
 
-import de.dailab.vsdt.vxl.vxl.VxlBracketTerm;
+import de.dailab.vsdt.vxl.vxl.VxlFunction;
+import de.dailab.vsdt.vxl.vxl.VxlMethodAccessor;
 import de.dailab.vsdt.vxl.vxl.VxlPackage;
-import de.dailab.vsdt.vxl.vxl.VxlTerm;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -16,35 +16,35 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Bracket Term</b></em>'.
+ * An implementation of the model object '<em><b>Method Accessor</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlBracketTermImpl#getTerm <em>Term</em>}</li>
+ *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlMethodAccessorImpl#getFunction <em>Function</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class VxlBracketTermImpl extends VxlElementImpl implements VxlBracketTerm
+public class VxlMethodAccessorImpl extends VxlAccessorImpl implements VxlMethodAccessor
 {
   /**
-   * The cached value of the '{@link #getTerm() <em>Term</em>}' containment reference.
+   * The cached value of the '{@link #getFunction() <em>Function</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTerm()
+   * @see #getFunction()
    * @generated
    * @ordered
    */
-  protected VxlTerm term;
+  protected VxlFunction function;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected VxlBracketTermImpl()
+  protected VxlMethodAccessorImpl()
   {
     super();
   }
@@ -57,7 +57,7 @@ public class VxlBracketTermImpl extends VxlElementImpl implements VxlBracketTerm
   @Override
   protected EClass eStaticClass()
   {
-    return VxlPackage.Literals.VXL_BRACKET_TERM;
+    return VxlPackage.Literals.VXL_METHOD_ACCESSOR;
   }
 
   /**
@@ -65,9 +65,9 @@ public class VxlBracketTermImpl extends VxlElementImpl implements VxlBracketTerm
    * <!-- end-user-doc -->
    * @generated
    */
-  public VxlTerm getTerm()
+  public VxlFunction getFunction()
   {
-    return term;
+    return function;
   }
 
   /**
@@ -75,13 +75,13 @@ public class VxlBracketTermImpl extends VxlElementImpl implements VxlBracketTerm
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTerm(VxlTerm newTerm, NotificationChain msgs)
+  public NotificationChain basicSetFunction(VxlFunction newFunction, NotificationChain msgs)
   {
-    VxlTerm oldTerm = term;
-    term = newTerm;
+    VxlFunction oldFunction = function;
+    function = newFunction;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_BRACKET_TERM__TERM, oldTerm, newTerm);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_METHOD_ACCESSOR__FUNCTION, oldFunction, newFunction);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -92,20 +92,20 @@ public class VxlBracketTermImpl extends VxlElementImpl implements VxlBracketTerm
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setTerm(VxlTerm newTerm)
+  public void setFunction(VxlFunction newFunction)
   {
-    if (newTerm != term)
+    if (newFunction != function)
     {
       NotificationChain msgs = null;
-      if (term != null)
-        msgs = ((InternalEObject)term).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_BRACKET_TERM__TERM, null, msgs);
-      if (newTerm != null)
-        msgs = ((InternalEObject)newTerm).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_BRACKET_TERM__TERM, null, msgs);
-      msgs = basicSetTerm(newTerm, msgs);
+      if (function != null)
+        msgs = ((InternalEObject)function).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_METHOD_ACCESSOR__FUNCTION, null, msgs);
+      if (newFunction != null)
+        msgs = ((InternalEObject)newFunction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_METHOD_ACCESSOR__FUNCTION, null, msgs);
+      msgs = basicSetFunction(newFunction, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_BRACKET_TERM__TERM, newTerm, newTerm));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_METHOD_ACCESSOR__FUNCTION, newFunction, newFunction));
   }
 
   /**
@@ -118,8 +118,8 @@ public class VxlBracketTermImpl extends VxlElementImpl implements VxlBracketTerm
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_BRACKET_TERM__TERM:
-        return basicSetTerm(null, msgs);
+      case VxlPackage.VXL_METHOD_ACCESSOR__FUNCTION:
+        return basicSetFunction(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -134,8 +134,8 @@ public class VxlBracketTermImpl extends VxlElementImpl implements VxlBracketTerm
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_BRACKET_TERM__TERM:
-        return getTerm();
+      case VxlPackage.VXL_METHOD_ACCESSOR__FUNCTION:
+        return getFunction();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -150,8 +150,8 @@ public class VxlBracketTermImpl extends VxlElementImpl implements VxlBracketTerm
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_BRACKET_TERM__TERM:
-        setTerm((VxlTerm)newValue);
+      case VxlPackage.VXL_METHOD_ACCESSOR__FUNCTION:
+        setFunction((VxlFunction)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -167,8 +167,8 @@ public class VxlBracketTermImpl extends VxlElementImpl implements VxlBracketTerm
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_BRACKET_TERM__TERM:
-        setTerm((VxlTerm)null);
+      case VxlPackage.VXL_METHOD_ACCESSOR__FUNCTION:
+        setFunction((VxlFunction)null);
         return;
     }
     super.eUnset(featureID);
@@ -184,10 +184,10 @@ public class VxlBracketTermImpl extends VxlElementImpl implements VxlBracketTerm
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_BRACKET_TERM__TERM:
-        return term != null;
+      case VxlPackage.VXL_METHOD_ACCESSOR__FUNCTION:
+        return function != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //VxlBracketTermImpl
+} //VxlMethodAccessorImpl

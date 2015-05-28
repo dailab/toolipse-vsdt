@@ -1,6 +1,10 @@
 package de.dailab.vsdt.vxl.util;
 
 import java.io.Serializable;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,10 +18,13 @@ import de.dailab.vsdt.vxl.vxl.VxlArrayAccessor;
 import de.dailab.vsdt.vxl.vxl.VxlBooleanConst;
 import de.dailab.vsdt.vxl.vxl.VxlBracketTerm;
 import de.dailab.vsdt.vxl.vxl.VxlCardinality;
+import de.dailab.vsdt.vxl.vxl.VxlConstructor;
 import de.dailab.vsdt.vxl.vxl.VxlElement;
 import de.dailab.vsdt.vxl.vxl.VxlFieldAccessor;
+import de.dailab.vsdt.vxl.vxl.VxlFunction;
 import de.dailab.vsdt.vxl.vxl.VxlList;
 import de.dailab.vsdt.vxl.vxl.VxlListElement;
+import de.dailab.vsdt.vxl.vxl.VxlMethodAccessor;
 import de.dailab.vsdt.vxl.vxl.VxlMinus;
 import de.dailab.vsdt.vxl.vxl.VxlNegation;
 import de.dailab.vsdt.vxl.vxl.VxlNullConst;
@@ -121,7 +128,42 @@ public class VxlInterpreter {
 		if (head instanceof VxlCardinality) {
 			return evalCardinality((VxlCardinality) head);
 		}
+		if (head instanceof VxlFunction) {
+			return evalFunction((VxlFunction) head);
+		}
+		if (head instanceof VxlConstructor) {
+			return evalConstructor((VxlConstructor) head);
+		}
 		return null;
+	}
+	
+	/**
+	 * Function:       name = ID "(" ((empty ?= ")") | (body = ListElement ")" ));
+	 */
+	protected Serializable evalFunction(VxlFunction function) {
+		// XXX what to do here? Java does not have builtin/toplevel-functions
+		throw new UnsupportedOperationException();
+	}
+	
+	/**
+	 * VxlConstructor:    "new" function = VxlFunction;
+	 */
+	protected  Serializable evalConstructor(VxlConstructor constructor) {
+		try {
+			Class<?> clazz = Class.forName(constructor.getName());
+			List<Serializable> params = evalListElement(constructor.getBody());
+			Class<?>[] paramTypes = getParamTypes(params);
+			// XXX instance types might not match declared param types!
+
+			Constructor<?> constr = clazz.getConstructor(paramTypes);
+			Serializable result = (Serializable) constr.newInstance(params.toArray());
+			return result;
+		} catch (InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+			errors.put(constructor, "Failed to use Constructor for " + constructor.getName() + ": " + e.getMessage());
+			return null;
+		}
 	}
 
 	/**
@@ -181,7 +223,7 @@ public class VxlInterpreter {
 			for (String key : context.keySet()) {
 				if (key.equals(variable.getName())) {
 					value= context.get(key);
-					if (value==null) {
+					if (value == null) {
 						errors.put(variable, "Variable has not been initialized");
 					}
 				}
@@ -205,6 +247,9 @@ public class VxlInterpreter {
 		}
 		if (accessor instanceof VxlFieldAccessor) {
 			return evalFieldAccessor((VxlFieldAccessor) accessor, value);
+		}
+		if (accessor instanceof VxlMethodAccessor) {
+			return evalMethodAccessor((VxlMethodAccessor) accessor, value);
 		}
 		return null;
 	}
@@ -247,17 +292,50 @@ public class VxlInterpreter {
 	}
 	
 	/**
-	 * TODO
 	 * FieldAccessor:	"." name = ID (accessor = Accessor)?;
 	 */
 	protected Serializable evalFieldAccessor(VxlFieldAccessor accessor, Serializable value) {
-		throw new UnsupportedOperationException();
-		
+		Class<?> clazz = value.getClass();
+		try {
+			// try to access regular public field
+			Field field = clazz.getField(accessor.getName());
+			value = (Serializable) field.get(value);
+		} catch (NoSuchFieldException | SecurityException | IllegalAccessException e) {
+			try {
+				// try to access accordingly named getter method
+				String getter = "get" + accessor.getName().substring(0, 1).toUpperCase() + accessor.getName().substring(1);
+				Method method = clazz.getMethod(getter);
+				value = (Serializable) method.invoke(value);
+			} catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e2) {
+				errors.put(accessor, "Could not access field: " + accessor.getName());
+			}
+		}
 		// another accessor?
-//		if (accessor.getAccessor() != null) {
-//			value = eval(accessor.getAccessor(), value);
-//		}
-//		return value;
+		if (accessor.getAccessor() != null) {
+			value = evalAccessor(accessor.getAccessor(), value);
+		}
+		return value;
+	}
+	
+	/**
+	 * MethodAccessor:	"." function = Function (accessor = Accessor)?;
+	 */
+	protected Serializable evalMethodAccessor(VxlMethodAccessor accessor, Serializable value) {
+		Class<?> clazz = value.getClass();
+		try {
+			List<Serializable> params = evalListElement(accessor.getFunction().getBody());
+			Class<?>[] paramTypes = getParamTypes(params);
+			// XXX instance types might not match declared param types!
+			Method method = clazz.getMethod(accessor.getFunction().getName(), paramTypes);
+			value = (Serializable) method.invoke(value, params.toArray());
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e) {
+			errors.put(accessor, "Could not access method " + accessor.getFunction().getName() + ": " + e.getMessage());
+		}
+		// another accessor?
+		if (accessor.getAccessor() != null) {
+			value = evalAccessor(accessor.getAccessor(), value);
+		}
+		return value;
 	}
 
 	/**
@@ -295,9 +373,11 @@ public class VxlInterpreter {
 	 */
 	protected Vector<Serializable> evalListElement(VxlListElement listElement) {
 		Vector<Serializable> list = new Vector<Serializable>();
-		list.add(evalTerm(listElement.getFirst()));
-		if (listElement.getRest() != null) {
-			list.addAll(evalListElement(listElement.getRest()));
+		if (listElement != null) {
+			list.add(evalTerm(listElement.getFirst()));
+			if (listElement.getRest() != null) {
+				list.addAll(evalListElement(listElement.getRest()));
+			}
 		}
 		return list;
 	}
@@ -442,6 +522,14 @@ public class VxlInterpreter {
 		} catch (Exception e) {
 		}
 		return false;
+	}
+
+	private Class[] getParamTypes(List<Serializable> params) {
+		Class<?>[] paramTypes = new Class[params.size()];
+		for (int i = 0; i < params.size(); i++) {
+			paramTypes[i] = params.get(i).getClass();
+		}
+		return paramTypes;
 	}
 	
 }

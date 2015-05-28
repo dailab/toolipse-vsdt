@@ -2,29 +2,14 @@
  */
 package de.dailab.vsdt.vxl.vxl.util;
 
+import de.dailab.vsdt.vxl.vxl.*;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-import org.eclipse.emf.ecore.EObject;
 
-import de.dailab.vsdt.vxl.vxl.VxlAccessor;
-import de.dailab.vsdt.vxl.vxl.VxlArrayAccessor;
-import de.dailab.vsdt.vxl.vxl.VxlBooleanConst;
-import de.dailab.vsdt.vxl.vxl.VxlBracketTerm;
-import de.dailab.vsdt.vxl.vxl.VxlCardinality;
-import de.dailab.vsdt.vxl.vxl.VxlElement;
-import de.dailab.vsdt.vxl.vxl.VxlFieldAccessor;
-import de.dailab.vsdt.vxl.vxl.VxlList;
-import de.dailab.vsdt.vxl.vxl.VxlListElement;
-import de.dailab.vsdt.vxl.vxl.VxlMinus;
-import de.dailab.vsdt.vxl.vxl.VxlNegation;
-import de.dailab.vsdt.vxl.vxl.VxlNullConst;
-import de.dailab.vsdt.vxl.vxl.VxlNumericConst;
-import de.dailab.vsdt.vxl.vxl.VxlPackage;
-import de.dailab.vsdt.vxl.vxl.VxlStringConst;
-import de.dailab.vsdt.vxl.vxl.VxlTerm;
-import de.dailab.vsdt.vxl.vxl.VxlValue;
-import de.dailab.vsdt.vxl.vxl.VxlVariable;
+import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -140,6 +125,11 @@ public class VxlAdapterFactory extends AdapterFactoryImpl
         return createVxlFieldAccessorAdapter();
       }
       @Override
+      public Adapter caseVxlMethodAccessor(VxlMethodAccessor object)
+      {
+        return createVxlMethodAccessorAdapter();
+      }
+      @Override
       public Adapter caseVxlList(VxlList object)
       {
         return createVxlListAdapter();
@@ -148,6 +138,16 @@ public class VxlAdapterFactory extends AdapterFactoryImpl
       public Adapter caseVxlListElement(VxlListElement object)
       {
         return createVxlListElementAdapter();
+      }
+      @Override
+      public Adapter caseVxlFunction(VxlFunction object)
+      {
+        return createVxlFunctionAdapter();
+      }
+      @Override
+      public Adapter caseVxlConstructor(VxlConstructor object)
+      {
+        return createVxlConstructorAdapter();
       }
       @Override
       public Adapter caseVxlValue(VxlValue object)
@@ -347,6 +347,21 @@ public class VxlAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlMethodAccessor <em>Method Accessor</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.dailab.vsdt.vxl.vxl.VxlMethodAccessor
+   * @generated
+   */
+  public Adapter createVxlMethodAccessorAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlList <em>List</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -372,6 +387,36 @@ public class VxlAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVxlListElementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlFunction <em>Function</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.dailab.vsdt.vxl.vxl.VxlFunction
+   * @generated
+   */
+  public Adapter createVxlFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlConstructor <em>Constructor</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.dailab.vsdt.vxl.vxl.VxlConstructor
+   * @generated
+   */
+  public Adapter createVxlConstructorAdapter()
   {
     return null;
   }

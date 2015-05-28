@@ -2,9 +2,9 @@
  */
 package de.dailab.vsdt.vxl.vxl.impl;
 
-import de.dailab.vsdt.vxl.vxl.VxlAccessor;
+import de.dailab.vsdt.vxl.vxl.VxlFunction;
+import de.dailab.vsdt.vxl.vxl.VxlListElement;
 import de.dailab.vsdt.vxl.vxl.VxlPackage;
-import de.dailab.vsdt.vxl.vxl.VxlVariable;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -16,19 +16,20 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Variable</b></em>'.
+ * An implementation of the model object '<em><b>Function</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlVariableImpl#getName <em>Name</em>}</li>
- *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlVariableImpl#getAccessor <em>Accessor</em>}</li>
+ *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlFunctionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlFunctionImpl#isEmpty <em>Empty</em>}</li>
+ *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlFunctionImpl#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class VxlVariableImpl extends VxlElementImpl implements VxlVariable
+public class VxlFunctionImpl extends VxlElementImpl implements VxlFunction
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -51,21 +52,41 @@ public class VxlVariableImpl extends VxlElementImpl implements VxlVariable
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getAccessor() <em>Accessor</em>}' containment reference.
+   * The default value of the '{@link #isEmpty() <em>Empty</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAccessor()
+   * @see #isEmpty()
    * @generated
    * @ordered
    */
-  protected VxlAccessor accessor;
+  protected static final boolean EMPTY_EDEFAULT = false;
+
+  /**
+   * The cached value of the '{@link #isEmpty() <em>Empty</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #isEmpty()
+   * @generated
+   * @ordered
+   */
+  protected boolean empty = EMPTY_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getBody()
+   * @generated
+   * @ordered
+   */
+  protected VxlListElement body;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected VxlVariableImpl()
+  protected VxlFunctionImpl()
   {
     super();
   }
@@ -78,7 +99,7 @@ public class VxlVariableImpl extends VxlElementImpl implements VxlVariable
   @Override
   protected EClass eStaticClass()
   {
-    return VxlPackage.Literals.VXL_VARIABLE;
+    return VxlPackage.Literals.VXL_FUNCTION;
   }
 
   /**
@@ -101,7 +122,7 @@ public class VxlVariableImpl extends VxlElementImpl implements VxlVariable
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_VARIABLE__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_FUNCTION__NAME, oldName, name));
   }
 
   /**
@@ -109,9 +130,9 @@ public class VxlVariableImpl extends VxlElementImpl implements VxlVariable
    * <!-- end-user-doc -->
    * @generated
    */
-  public VxlAccessor getAccessor()
+  public boolean isEmpty()
   {
-    return accessor;
+    return empty;
   }
 
   /**
@@ -119,13 +140,36 @@ public class VxlVariableImpl extends VxlElementImpl implements VxlVariable
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetAccessor(VxlAccessor newAccessor, NotificationChain msgs)
+  public void setEmpty(boolean newEmpty)
   {
-    VxlAccessor oldAccessor = accessor;
-    accessor = newAccessor;
+    boolean oldEmpty = empty;
+    empty = newEmpty;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_FUNCTION__EMPTY, oldEmpty, empty));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VxlListElement getBody()
+  {
+    return body;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetBody(VxlListElement newBody, NotificationChain msgs)
+  {
+    VxlListElement oldBody = body;
+    body = newBody;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_VARIABLE__ACCESSOR, oldAccessor, newAccessor);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_FUNCTION__BODY, oldBody, newBody);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -136,20 +180,20 @@ public class VxlVariableImpl extends VxlElementImpl implements VxlVariable
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAccessor(VxlAccessor newAccessor)
+  public void setBody(VxlListElement newBody)
   {
-    if (newAccessor != accessor)
+    if (newBody != body)
     {
       NotificationChain msgs = null;
-      if (accessor != null)
-        msgs = ((InternalEObject)accessor).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_VARIABLE__ACCESSOR, null, msgs);
-      if (newAccessor != null)
-        msgs = ((InternalEObject)newAccessor).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_VARIABLE__ACCESSOR, null, msgs);
-      msgs = basicSetAccessor(newAccessor, msgs);
+      if (body != null)
+        msgs = ((InternalEObject)body).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_FUNCTION__BODY, null, msgs);
+      if (newBody != null)
+        msgs = ((InternalEObject)newBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - VxlPackage.VXL_FUNCTION__BODY, null, msgs);
+      msgs = basicSetBody(newBody, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_VARIABLE__ACCESSOR, newAccessor, newAccessor));
+      eNotify(new ENotificationImpl(this, Notification.SET, VxlPackage.VXL_FUNCTION__BODY, newBody, newBody));
   }
 
   /**
@@ -162,8 +206,8 @@ public class VxlVariableImpl extends VxlElementImpl implements VxlVariable
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_VARIABLE__ACCESSOR:
-        return basicSetAccessor(null, msgs);
+      case VxlPackage.VXL_FUNCTION__BODY:
+        return basicSetBody(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -178,10 +222,12 @@ public class VxlVariableImpl extends VxlElementImpl implements VxlVariable
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_VARIABLE__NAME:
+      case VxlPackage.VXL_FUNCTION__NAME:
         return getName();
-      case VxlPackage.VXL_VARIABLE__ACCESSOR:
-        return getAccessor();
+      case VxlPackage.VXL_FUNCTION__EMPTY:
+        return isEmpty();
+      case VxlPackage.VXL_FUNCTION__BODY:
+        return getBody();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -196,11 +242,14 @@ public class VxlVariableImpl extends VxlElementImpl implements VxlVariable
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_VARIABLE__NAME:
+      case VxlPackage.VXL_FUNCTION__NAME:
         setName((String)newValue);
         return;
-      case VxlPackage.VXL_VARIABLE__ACCESSOR:
-        setAccessor((VxlAccessor)newValue);
+      case VxlPackage.VXL_FUNCTION__EMPTY:
+        setEmpty((Boolean)newValue);
+        return;
+      case VxlPackage.VXL_FUNCTION__BODY:
+        setBody((VxlListElement)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -216,11 +265,14 @@ public class VxlVariableImpl extends VxlElementImpl implements VxlVariable
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_VARIABLE__NAME:
+      case VxlPackage.VXL_FUNCTION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case VxlPackage.VXL_VARIABLE__ACCESSOR:
-        setAccessor((VxlAccessor)null);
+      case VxlPackage.VXL_FUNCTION__EMPTY:
+        setEmpty(EMPTY_EDEFAULT);
+        return;
+      case VxlPackage.VXL_FUNCTION__BODY:
+        setBody((VxlListElement)null);
         return;
     }
     super.eUnset(featureID);
@@ -236,10 +288,12 @@ public class VxlVariableImpl extends VxlElementImpl implements VxlVariable
   {
     switch (featureID)
     {
-      case VxlPackage.VXL_VARIABLE__NAME:
+      case VxlPackage.VXL_FUNCTION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case VxlPackage.VXL_VARIABLE__ACCESSOR:
-        return accessor != null;
+      case VxlPackage.VXL_FUNCTION__EMPTY:
+        return empty != EMPTY_EDEFAULT;
+      case VxlPackage.VXL_FUNCTION__BODY:
+        return body != null;
     }
     return super.eIsSet(featureID);
   }
@@ -257,8 +311,10 @@ public class VxlVariableImpl extends VxlElementImpl implements VxlVariable
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
+    result.append(", empty: ");
+    result.append(empty);
     result.append(')');
     return result.toString();
   }
 
-} //VxlVariableImpl
+} //VxlFunctionImpl

@@ -113,6 +113,15 @@ public interface VxlFactory extends EFactory
   VxlFieldAccessor createVxlFieldAccessor();
 
   /**
+   * Returns a new object of class '<em>Method Accessor</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Method Accessor</em>'.
+   * @generated
+   */
+  VxlMethodAccessor createVxlMethodAccessor();
+
+  /**
    * Returns a new object of class '<em>List</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -129,6 +138,24 @@ public interface VxlFactory extends EFactory
    * @generated
    */
   VxlListElement createVxlListElement();
+
+  /**
+   * Returns a new object of class '<em>Function</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Function</em>'.
+   * @generated
+   */
+  VxlFunction createVxlFunction();
+
+  /**
+   * Returns a new object of class '<em>Constructor</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Constructor</em>'.
+   * @generated
+   */
+  VxlConstructor createVxlConstructor();
 
   /**
    * Returns a new object of class '<em>Value</em>'.

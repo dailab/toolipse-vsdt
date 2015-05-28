@@ -3,8 +3,8 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.dailab.vsdt.vxl2/src-gen" editDirectory="/de.dailab.vsdt.vxl2.edit/src"
     editorDirectory="/de.dailab.vsdt.vxl2.editor/src" modelPluginID="de.dailab.vsdt.vxl2"
     forceOverwrite="true" modelName="Vxl" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    complianceLevel="5.0" copyrightFields="false" editPluginID="de.dailab.vsdt.vxl2.edit"
-    editorPluginID="de.dailab.vsdt.vxl2.editor" runtimeVersion="2.9">
+    complianceLevel="6.0" copyrightFields="false" editPluginID="de.dailab.vsdt.vxl2.edit"
+    editorPluginID="de.dailab.vsdt.vxl2.editor" runtimeVersion="2.10">
   <genPackages prefix="Vxl" basePackage="de.dailab.vsdt.vxl" disposableProviderFactory="true"
       ecorePackage="Vxl.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Vxl.ecore#//VxlOperator">
@@ -54,6 +54,9 @@
     <genClasses ecoreClass="Vxl.ecore#//VxlFieldAccessor">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlFieldAccessor/name"/>
     </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//VxlMethodAccessor">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlMethodAccessor/function"/>
+    </genClasses>
     <genClasses ecoreClass="Vxl.ecore#//VxlList">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlList/empty"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlList/body"/>
@@ -61,6 +64,16 @@
     <genClasses ecoreClass="Vxl.ecore#//VxlListElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlListElement/first"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlListElement/rest"/>
+    </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//VxlFunction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlFunction/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlFunction/empty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlFunction/body"/>
+    </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//VxlConstructor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlConstructor/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlConstructor/empty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlConstructor/body"/>
     </genClasses>
     <genClasses ecoreClass="Vxl.ecore#//VxlValue">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlValue/const"/>

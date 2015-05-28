@@ -2,28 +2,12 @@
  */
 package de.dailab.vsdt.vxl.vxl.util;
 
+import de.dailab.vsdt.vxl.vxl.*;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.util.Switch;
 
-import de.dailab.vsdt.vxl.vxl.VxlAccessor;
-import de.dailab.vsdt.vxl.vxl.VxlArrayAccessor;
-import de.dailab.vsdt.vxl.vxl.VxlBooleanConst;
-import de.dailab.vsdt.vxl.vxl.VxlBracketTerm;
-import de.dailab.vsdt.vxl.vxl.VxlCardinality;
-import de.dailab.vsdt.vxl.vxl.VxlElement;
-import de.dailab.vsdt.vxl.vxl.VxlFieldAccessor;
-import de.dailab.vsdt.vxl.vxl.VxlList;
-import de.dailab.vsdt.vxl.vxl.VxlListElement;
-import de.dailab.vsdt.vxl.vxl.VxlMinus;
-import de.dailab.vsdt.vxl.vxl.VxlNegation;
-import de.dailab.vsdt.vxl.vxl.VxlNullConst;
-import de.dailab.vsdt.vxl.vxl.VxlNumericConst;
-import de.dailab.vsdt.vxl.vxl.VxlPackage;
-import de.dailab.vsdt.vxl.vxl.VxlStringConst;
-import de.dailab.vsdt.vxl.vxl.VxlTerm;
-import de.dailab.vsdt.vxl.vxl.VxlValue;
-import de.dailab.vsdt.vxl.vxl.VxlVariable;
+import org.eclipse.emf.ecore.util.Switch;
 
 /**
  * <!-- begin-user-doc -->
@@ -165,6 +149,14 @@ public class VxlSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case VxlPackage.VXL_METHOD_ACCESSOR:
+      {
+        VxlMethodAccessor vxlMethodAccessor = (VxlMethodAccessor)theEObject;
+        T result = caseVxlMethodAccessor(vxlMethodAccessor);
+        if (result == null) result = caseVxlAccessor(vxlMethodAccessor);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case VxlPackage.VXL_LIST:
       {
         VxlList vxlList = (VxlList)theEObject;
@@ -177,6 +169,22 @@ public class VxlSwitch<T> extends Switch<T>
       {
         VxlListElement vxlListElement = (VxlListElement)theEObject;
         T result = caseVxlListElement(vxlListElement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VxlPackage.VXL_FUNCTION:
+      {
+        VxlFunction vxlFunction = (VxlFunction)theEObject;
+        T result = caseVxlFunction(vxlFunction);
+        if (result == null) result = caseVxlElement(vxlFunction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case VxlPackage.VXL_CONSTRUCTOR:
+      {
+        VxlConstructor vxlConstructor = (VxlConstructor)theEObject;
+        T result = caseVxlConstructor(vxlConstructor);
+        if (result == null) result = caseVxlElement(vxlConstructor);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -389,6 +397,22 @@ public class VxlSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Method Accessor</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Method Accessor</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVxlMethodAccessor(VxlMethodAccessor object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>List</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -416,6 +440,38 @@ public class VxlSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseVxlListElement(VxlListElement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Function</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Function</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVxlFunction(VxlFunction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Constructor</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Constructor</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVxlConstructor(VxlConstructor object)
   {
     return null;
   }

@@ -374,6 +374,43 @@ public interface VxlPackage extends EPackage
   int VXL_FIELD_ACCESSOR_FEATURE_COUNT = VXL_ACCESSOR_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlMethodAccessorImpl <em>Method Accessor</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlMethodAccessorImpl
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlMethodAccessor()
+   * @generated
+   */
+  int VXL_METHOD_ACCESSOR = 10;
+
+  /**
+   * The feature id for the '<em><b>Accessor</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_METHOD_ACCESSOR__ACCESSOR = VXL_ACCESSOR__ACCESSOR;
+
+  /**
+   * The feature id for the '<em><b>Function</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_METHOD_ACCESSOR__FUNCTION = VXL_ACCESSOR_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Method Accessor</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_METHOD_ACCESSOR_FEATURE_COUNT = VXL_ACCESSOR_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlListImpl <em>List</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -381,7 +418,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlList()
    * @generated
    */
-  int VXL_LIST = 10;
+  int VXL_LIST = 11;
 
   /**
    * The feature id for the '<em><b>Empty</b></em>' attribute.
@@ -418,7 +455,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlListElement()
    * @generated
    */
-  int VXL_LIST_ELEMENT = 11;
+  int VXL_LIST_ELEMENT = 12;
 
   /**
    * The feature id for the '<em><b>First</b></em>' containment reference.
@@ -448,6 +485,98 @@ public interface VxlPackage extends EPackage
   int VXL_LIST_ELEMENT_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlFunctionImpl <em>Function</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlFunctionImpl
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlFunction()
+   * @generated
+   */
+  int VXL_FUNCTION = 13;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_FUNCTION__NAME = VXL_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Empty</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_FUNCTION__EMPTY = VXL_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Body</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_FUNCTION__BODY = VXL_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Function</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_FUNCTION_FEATURE_COUNT = VXL_ELEMENT_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlConstructorImpl <em>Constructor</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlConstructorImpl
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlConstructor()
+   * @generated
+   */
+  int VXL_CONSTRUCTOR = 14;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_CONSTRUCTOR__NAME = VXL_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Empty</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_CONSTRUCTOR__EMPTY = VXL_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Body</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_CONSTRUCTOR__BODY = VXL_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Constructor</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_CONSTRUCTOR_FEATURE_COUNT = VXL_ELEMENT_FEATURE_COUNT + 3;
+
+  /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlValueImpl <em>Value</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -455,7 +584,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlValue()
    * @generated
    */
-  int VXL_VALUE = 12;
+  int VXL_VALUE = 15;
 
   /**
    * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -483,7 +612,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlBooleanConst()
    * @generated
    */
-  int VXL_BOOLEAN_CONST = 13;
+  int VXL_BOOLEAN_CONST = 16;
 
   /**
    * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -511,7 +640,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlNullConst()
    * @generated
    */
-  int VXL_NULL_CONST = 14;
+  int VXL_NULL_CONST = 17;
 
   /**
    * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -539,7 +668,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlNumericConst()
    * @generated
    */
-  int VXL_NUMERIC_CONST = 15;
+  int VXL_NUMERIC_CONST = 18;
 
   /**
    * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -567,7 +696,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlStringConst()
    * @generated
    */
-  int VXL_STRING_CONST = 16;
+  int VXL_STRING_CONST = 19;
 
   /**
    * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -595,7 +724,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlOperator()
    * @generated
    */
-  int VXL_OPERATOR = 17;
+  int VXL_OPERATOR = 20;
 
 
   /**
@@ -831,6 +960,27 @@ public interface VxlPackage extends EPackage
   EAttribute getVxlFieldAccessor_Name();
 
   /**
+   * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlMethodAccessor <em>Method Accessor</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Method Accessor</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlMethodAccessor
+   * @generated
+   */
+  EClass getVxlMethodAccessor();
+
+  /**
+   * Returns the meta object for the containment reference '{@link de.dailab.vsdt.vxl.vxl.VxlMethodAccessor#getFunction <em>Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Function</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlMethodAccessor#getFunction()
+   * @see #getVxlMethodAccessor()
+   * @generated
+   */
+  EReference getVxlMethodAccessor_Function();
+
+  /**
    * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlList <em>List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -893,6 +1043,92 @@ public interface VxlPackage extends EPackage
    * @generated
    */
   EReference getVxlListElement_Rest();
+
+  /**
+   * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlFunction <em>Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Function</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlFunction
+   * @generated
+   */
+  EClass getVxlFunction();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.dailab.vsdt.vxl.vxl.VxlFunction#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlFunction#getName()
+   * @see #getVxlFunction()
+   * @generated
+   */
+  EAttribute getVxlFunction_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.dailab.vsdt.vxl.vxl.VxlFunction#isEmpty <em>Empty</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Empty</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlFunction#isEmpty()
+   * @see #getVxlFunction()
+   * @generated
+   */
+  EAttribute getVxlFunction_Empty();
+
+  /**
+   * Returns the meta object for the containment reference '{@link de.dailab.vsdt.vxl.vxl.VxlFunction#getBody <em>Body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Body</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlFunction#getBody()
+   * @see #getVxlFunction()
+   * @generated
+   */
+  EReference getVxlFunction_Body();
+
+  /**
+   * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlConstructor <em>Constructor</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Constructor</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlConstructor
+   * @generated
+   */
+  EClass getVxlConstructor();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.dailab.vsdt.vxl.vxl.VxlConstructor#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlConstructor#getName()
+   * @see #getVxlConstructor()
+   * @generated
+   */
+  EAttribute getVxlConstructor_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.dailab.vsdt.vxl.vxl.VxlConstructor#isEmpty <em>Empty</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Empty</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlConstructor#isEmpty()
+   * @see #getVxlConstructor()
+   * @generated
+   */
+  EAttribute getVxlConstructor_Empty();
+
+  /**
+   * Returns the meta object for the containment reference '{@link de.dailab.vsdt.vxl.vxl.VxlConstructor#getBody <em>Body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Body</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlConstructor#getBody()
+   * @see #getVxlConstructor()
+   * @generated
+   */
+  EReference getVxlConstructor_Body();
 
   /**
    * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlValue <em>Value</em>}'.
@@ -1185,6 +1421,24 @@ public interface VxlPackage extends EPackage
     EAttribute VXL_FIELD_ACCESSOR__NAME = eINSTANCE.getVxlFieldAccessor_Name();
 
     /**
+     * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlMethodAccessorImpl <em>Method Accessor</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlMethodAccessorImpl
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlMethodAccessor()
+     * @generated
+     */
+    EClass VXL_METHOD_ACCESSOR = eINSTANCE.getVxlMethodAccessor();
+
+    /**
+     * The meta object literal for the '<em><b>Function</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VXL_METHOD_ACCESSOR__FUNCTION = eINSTANCE.getVxlMethodAccessor_Function();
+
+    /**
      * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlListImpl <em>List</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1235,6 +1489,74 @@ public interface VxlPackage extends EPackage
      * @generated
      */
     EReference VXL_LIST_ELEMENT__REST = eINSTANCE.getVxlListElement_Rest();
+
+    /**
+     * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlFunctionImpl <em>Function</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlFunctionImpl
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlFunction()
+     * @generated
+     */
+    EClass VXL_FUNCTION = eINSTANCE.getVxlFunction();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VXL_FUNCTION__NAME = eINSTANCE.getVxlFunction_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Empty</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VXL_FUNCTION__EMPTY = eINSTANCE.getVxlFunction_Empty();
+
+    /**
+     * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VXL_FUNCTION__BODY = eINSTANCE.getVxlFunction_Body();
+
+    /**
+     * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlConstructorImpl <em>Constructor</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlConstructorImpl
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlConstructor()
+     * @generated
+     */
+    EClass VXL_CONSTRUCTOR = eINSTANCE.getVxlConstructor();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VXL_CONSTRUCTOR__NAME = eINSTANCE.getVxlConstructor_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Empty</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VXL_CONSTRUCTOR__EMPTY = eINSTANCE.getVxlConstructor_Empty();
+
+    /**
+     * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VXL_CONSTRUCTOR__BODY = eINSTANCE.getVxlConstructor_Body();
 
     /**
      * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlValueImpl <em>Value</em>}' class.

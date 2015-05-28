@@ -2,33 +2,16 @@
  */
 package de.dailab.vsdt.vxl.vxl.impl;
 
+import de.dailab.vsdt.vxl.vxl.*;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.impl.EFactoryImpl;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import de.dailab.vsdt.vxl.vxl.VxlAccessor;
-import de.dailab.vsdt.vxl.vxl.VxlArrayAccessor;
-import de.dailab.vsdt.vxl.vxl.VxlBooleanConst;
-import de.dailab.vsdt.vxl.vxl.VxlBracketTerm;
-import de.dailab.vsdt.vxl.vxl.VxlCardinality;
-import de.dailab.vsdt.vxl.vxl.VxlElement;
-import de.dailab.vsdt.vxl.vxl.VxlFactory;
-import de.dailab.vsdt.vxl.vxl.VxlFieldAccessor;
-import de.dailab.vsdt.vxl.vxl.VxlList;
-import de.dailab.vsdt.vxl.vxl.VxlListElement;
-import de.dailab.vsdt.vxl.vxl.VxlMinus;
-import de.dailab.vsdt.vxl.vxl.VxlNegation;
-import de.dailab.vsdt.vxl.vxl.VxlNullConst;
-import de.dailab.vsdt.vxl.vxl.VxlNumericConst;
-import de.dailab.vsdt.vxl.vxl.VxlOperator;
-import de.dailab.vsdt.vxl.vxl.VxlPackage;
-import de.dailab.vsdt.vxl.vxl.VxlStringConst;
-import de.dailab.vsdt.vxl.vxl.VxlTerm;
-import de.dailab.vsdt.vxl.vxl.VxlValue;
-import de.dailab.vsdt.vxl.vxl.VxlVariable;
+import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
  * <!-- begin-user-doc -->
@@ -92,8 +75,11 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
       case VxlPackage.VXL_ACCESSOR: return createVxlAccessor();
       case VxlPackage.VXL_ARRAY_ACCESSOR: return createVxlArrayAccessor();
       case VxlPackage.VXL_FIELD_ACCESSOR: return createVxlFieldAccessor();
+      case VxlPackage.VXL_METHOD_ACCESSOR: return createVxlMethodAccessor();
       case VxlPackage.VXL_LIST: return createVxlList();
       case VxlPackage.VXL_LIST_ELEMENT: return createVxlListElement();
+      case VxlPackage.VXL_FUNCTION: return createVxlFunction();
+      case VxlPackage.VXL_CONSTRUCTOR: return createVxlConstructor();
       case VxlPackage.VXL_VALUE: return createVxlValue();
       case VxlPackage.VXL_BOOLEAN_CONST: return createVxlBooleanConst();
       case VxlPackage.VXL_NULL_CONST: return createVxlNullConst();
@@ -253,6 +239,17 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public VxlMethodAccessor createVxlMethodAccessor()
+  {
+    VxlMethodAccessorImpl vxlMethodAccessor = new VxlMethodAccessorImpl();
+    return vxlMethodAccessor;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public VxlList createVxlList()
   {
     VxlListImpl vxlList = new VxlListImpl();
@@ -268,6 +265,28 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
   {
     VxlListElementImpl vxlListElement = new VxlListElementImpl();
     return vxlListElement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VxlFunction createVxlFunction()
+  {
+    VxlFunctionImpl vxlFunction = new VxlFunctionImpl();
+    return vxlFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VxlConstructor createVxlConstructor()
+  {
+    VxlConstructorImpl vxlConstructor = new VxlConstructorImpl();
+    return vxlConstructor;
   }
 
   /**

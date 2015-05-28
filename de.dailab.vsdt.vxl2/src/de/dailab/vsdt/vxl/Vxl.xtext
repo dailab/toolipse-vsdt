@@ -5,7 +5,8 @@ generate vxl "http://www.dailab.de/vsdt/vxl/Vxl"
 // COMPLEX TERMS
 VxlTerm:			head = VxlElement (operator = VxlOperator tail = VxlTerm)?;
 VxlElement:			VxlBracketTerm | VxlNegation | VxlMinus | VxlValue |
-                    VxlVariable | VxlList | VxlCardinality;
+                    VxlVariable | VxlList | VxlCardinality |
+                    VxlFunction | VxlConstructor;
 
 // SPECIAL TERMS, UNARY OPERATORS
 VxlBracketTerm:		"(" term = VxlTerm ")";
@@ -15,13 +16,18 @@ VxlCardinality:		"#" element = VxlElement;
 
 // VARIABLES & ACCESSORS
 VxlVariable:		name = ID (accessor = VxlAccessor)?;
-VxlAccessor:		VxlArrayAccessor | VxlFieldAccessor;
+VxlAccessor:		VxlArrayAccessor | VxlFieldAccessor | VxlMethodAccessor;
 VxlArrayAccessor:	"[" index = VxlTerm "]" (accessor = VxlAccessor)?;
 VxlFieldAccessor:	"." name = ID (accessor = VxlAccessor)?;
+VxlMethodAccessor:	"." function = VxlFunction (accessor = VxlAccessor)?;
 
 // LISTS
 VxlList:			"[" ((empty ?= "]") | (body = VxlListElement "]" ));
 VxlListElement:		first = VxlTerm ("," rest = VxlListElement)?;
+
+// FUNCTIONS
+VxlFunction:        name = ID "(" ((empty ?= ")") | (body = VxlListElement ")" ));
+VxlConstructor:     "new" name = FULLY_QUALIFIED "(" ((empty ?= ")") | (body = VxlListElement ")" ));
 
 // CONSTANT VALUES
 VxlValue:			VxlNullConst | VxlBooleanConst | VxlNumericConst | VxlStringConst;
@@ -38,7 +44,8 @@ enum VxlOperator:
 	CONCAT = "++"; 															// String ** String -> String
 
 // NATIVES
-NUMERIC : INT ('.' INT)? ;
+NUMERIC :         INT ('.' INT)? ;
+FULLY_QUALIFIED : ID ('.' FULLY_QUALIFIED)? ;
 
 // ALTERNATIVES
 //terminal Numeric: "('0'..'9')+('.' ('0'..'9')+)?";
