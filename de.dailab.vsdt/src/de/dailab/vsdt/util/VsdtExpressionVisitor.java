@@ -15,10 +15,13 @@ import de.dailab.vsdt.vxl.vxl.VxlArrayAccessor;
 import de.dailab.vsdt.vxl.vxl.VxlBooleanConst;
 import de.dailab.vsdt.vxl.vxl.VxlBracketTerm;
 import de.dailab.vsdt.vxl.vxl.VxlCardinality;
+import de.dailab.vsdt.vxl.vxl.VxlConstructor;
 import de.dailab.vsdt.vxl.vxl.VxlElement;
 import de.dailab.vsdt.vxl.vxl.VxlFieldAccessor;
+import de.dailab.vsdt.vxl.vxl.VxlFunction;
 import de.dailab.vsdt.vxl.vxl.VxlList;
 import de.dailab.vsdt.vxl.vxl.VxlListElement;
+import de.dailab.vsdt.vxl.vxl.VxlMethodAccessor;
 import de.dailab.vsdt.vxl.vxl.VxlMinus;
 import de.dailab.vsdt.vxl.vxl.VxlNegation;
 import de.dailab.vsdt.vxl.vxl.VxlNullConst;
@@ -209,6 +212,12 @@ public class VsdtExpressionVisitor {
 		if (head instanceof VxlList) {
 			visitList((VxlList) head);
 		}
+		if (head instanceof VxlFunction) {
+			visitFunction((VxlFunction) head);
+		}
+		if (head instanceof VxlConstructor) {
+			visitConstructor((VxlConstructor) head);
+		}
 	}
 
 	/**
@@ -287,6 +296,9 @@ public class VsdtExpressionVisitor {
 		if (accessor instanceof VxlFieldAccessor) {
 			visitFieldAccessor((VxlFieldAccessor) accessor);
 		}
+		if (accessor instanceof VxlMethodAccessor) {
+			visitMethodAccessor((VxlMethodAccessor) accessor);
+		}
 	}
 
 	/**
@@ -311,7 +323,40 @@ public class VsdtExpressionVisitor {
 			visitAccessor(accessor.getAccessor());
 		}
 	}
+	
+	/**
+	 * MethodAccessor:	"." function = VxlFunction (accessor = VxlAccessor)?;
+	 */
+	protected void visitMethodAccessor(VxlMethodAccessor accessor) {
+		buffer.append(".");
+		visitFunction(accessor.getFunction());
+	}
 
+	/**
+	 * Function:        name = ID "(" ((empty ?= ")") | (body = VxlListElement ")" ));
+	 */
+	protected void visitFunction(VxlFunction function) {
+		buffer.append(function.getName());
+		buffer.append("(");
+		if (! function.isEmpty()) {
+			visitListElement(function.getBody());
+		}
+		buffer.append(")");
+	}
+
+	/**
+	 * Constructor:     "new" name = FULLY_QUALIFIED "(" ((empty ?= ")") | (body = VxlListElement ")" ));
+	 */
+	protected void visitConstructor(VxlConstructor constructor) {
+		buffer.append("new ");
+		buffer.append(constructor.getName());
+		buffer.append("(");
+		if (! constructor.isEmpty()) {
+			visitListElement(constructor.getBody());
+		}
+		buffer.append(")");
+	}
+	
 	/**
 	 * Value:			StringConst | BooleanConst | NumericConst | Null;
 	 */
