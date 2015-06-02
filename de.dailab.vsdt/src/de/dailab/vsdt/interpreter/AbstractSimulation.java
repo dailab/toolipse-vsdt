@@ -227,7 +227,7 @@ public abstract class AbstractSimulation implements ISimulation {
 			// handle activity looping
 			if (flowObject instanceof Activity && isLooping((Activity) flowObject)) {
 				// set state to DONE, and then right back to LOOPING_READY
-				setState(flowObject, State.DONE);
+//				setState(flowObject, State.DONE); // Why? this resets event handlers!
 				setState(flowObject, State.LOOPING_READY);
 				if (ASSIGNMENTS_INSIDE_LOOP) {
 					// handle end Assignments

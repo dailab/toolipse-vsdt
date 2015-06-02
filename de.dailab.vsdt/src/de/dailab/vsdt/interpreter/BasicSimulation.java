@@ -147,7 +147,8 @@ public abstract class BasicSimulation extends AbstractSimulation {
 				}
 			}
 			for (FlowObject borderItem : activity.getBoundaryEvents()) {
-				if (state == State.ACTIVE_WAITING) {
+				if (state == State.ACTIVE_WAITING && lastState != State.LOOPING_READY) {
+					// do not reset running event handlers when looping
 					setState(borderItem, State.READY);
 				} else if (state == State.DONE || state == State.FAILED) {
 					if (getState(borderItem) != State.DONE) {
