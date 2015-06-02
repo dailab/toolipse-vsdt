@@ -483,18 +483,25 @@ public abstract class AbstractSimulation implements ISimulation {
 	}
 
 	/**
-	 * Print Information on States and Tokens to console. 
+	 * Get tabular string with information on current states
 	 */
 	public final String getStatesString() {
-		final String NL = System.getProperty("line.separator");
 		StringBuilder builder = new StringBuilder();
 		builder.append("--- State Table ---" + NL);
 		for (FlowObject flowObject : stateMap.keySet()) {
-			builder.append(stateMap.get(flowObject) + "\t" + VsdtHelper.getDescriptiveName(flowObject) + NL);
+			builder.append(tabulate(15, stateMap.get(flowObject), VsdtHelper.getDescriptiveName(flowObject)));
 		}
+		return builder.toString();
+	}
+	
+	/**
+	 * Get tabular string with information on current tokens
+	 */
+	public final String getTokensString() {
+		StringBuilder builder = new StringBuilder();
 		builder.append("--- Token Table ---" + NL);
 		for (ConnectingObject connection : tokenMap.keySet()) {
-			builder.append(tokenMap.get(connection) + "\t" + connection.getName() + NL);
+			builder.append(tabulate(10, tokenMap.get(connection), connection.getName()));
 		}
 		return builder.toString();
 	}
@@ -515,6 +522,12 @@ public abstract class AbstractSimulation implements ISimulation {
 		for (ISimulationObserver observer : observers) {
 			observer.clear();
 		}
+	}
+	
+	protected static final String NL = System.getProperty("line.separator");
+	
+	protected final String tabulate(int width, Object first, Object second) {
+		return String.format(String.format("%%-%ds%%s%s", width, NL), first, second);
 	}
 	
 }

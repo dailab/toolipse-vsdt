@@ -393,17 +393,27 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 		}
 		return context;
 	}
-	
+
+	/**
+	 * Get tabular string with information on current property values
+	 */
 	public final String getPropertiesString() {
-		final String NL = System.getProperty("line.separator");
 		StringBuilder builder = new StringBuilder();
 		builder.append("--- Properties Table ---" + NL);
 		for (Property property : propertyValueMap.keySet()) {
-			builder.append((property != null ? property.getName() : "null") + "\t" + propertyValueMap.get(property) + NL);
+			builder.append(tabulate(20, (property != null ? property.getName() : "null"), propertyValueMap.get(property)));
 		}
+		return builder.toString();
+	}
+
+	/**
+	 * Get tabular string with information on current loop counter values
+	 */
+	public final String getCountersString() {
+		StringBuilder builder = new StringBuilder();
 		builder.append("--- Loop Counter Table ---" + NL);
 		for (Activity activity : loopCounterMap.keySet()) {
-			builder.append(activity.getName() + "\t" + loopCounterMap.get(activity) + NL);
+			builder.append(tabulate(20, activity.getName(), loopCounterMap.get(activity)));
 		}
 		return builder.toString();
 	}
