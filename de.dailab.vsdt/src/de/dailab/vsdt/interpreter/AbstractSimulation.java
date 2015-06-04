@@ -1,7 +1,9 @@
 package de.dailab.vsdt.interpreter;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -456,6 +458,10 @@ public abstract class AbstractSimulation implements ISimulation {
 
 	public final State getState(FlowObject flowObject) {
 		return stateMap.get(flowObject);
+	}
+	
+	public final Collection<FlowObject> getFlowObjects() {
+		return new HashSet<>(stateMap.keySet());
 	}
 	
 	public final int getToken(ConnectingObject connection) {
