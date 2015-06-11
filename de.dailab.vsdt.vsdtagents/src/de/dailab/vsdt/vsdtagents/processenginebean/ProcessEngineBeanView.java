@@ -52,8 +52,6 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 	private Action refreshAction;
 	private Action deployAction;
 	private Action undeployAction;
-
-	// TODO actions for invoking actions or sending messages to the interpreter? for testing
 	
 	
 	/** the bean */

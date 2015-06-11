@@ -17,8 +17,9 @@
       
       <view id       = "de.dailab.vsdt.vsdtagents.processenginebean.ProcessEngineBeanView"
             class    = "de.dailab.vsdt.vsdtagents.processenginebean.ProcessEngineBeanView"
-            name     = "Process Engine Bean Node"
-            category = "de.dailab.category.views" />
+            name     = "JIAC Process Engine View"
+            category = "de.dailab.category.views"
+            icon     = "icons/processNode.gif" />
    </extension>
    
 	<extension point="org.eclipse.ui.perspectiveExtensions">
