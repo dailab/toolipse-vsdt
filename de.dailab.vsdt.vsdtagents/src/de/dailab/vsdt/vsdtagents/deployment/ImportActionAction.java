@@ -43,7 +43,6 @@ import de.dailab.vsdt.vxl.util.Util;
  * Editor is a VSDT editor (which is determined by its ID), a corresponding VSDT
  * Service Implementation object along with input and result Messages and 
  * Properties is created and inserted into the VSDT model opened in the Editor.
- * All this is done using EMF Reflection, so no dependency to the VSDT is needed.
  * 
  * @author kuester
  */
