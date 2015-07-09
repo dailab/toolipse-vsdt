@@ -9,7 +9,7 @@ Export-Package: de.dailab.vsdt,
  de.dailab.vsdt.impl,
  de.dailab.vsdt.interpreter,
  de.dailab.vsdt.util
-Require-Bundle: org.eclipse.core.runtime,
+Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  de.dailab.vsdt.vxl2;visibility:=reexport
