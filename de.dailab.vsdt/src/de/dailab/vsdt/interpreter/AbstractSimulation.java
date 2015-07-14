@@ -175,6 +175,7 @@ public abstract class AbstractSimulation implements ISimulation {
 		List<FlowObject> result= new ArrayList<>();
 		if (isInState(flowObject, State.READY, State.LOOPING_READY)) {
 			step++;
+			
 			// remove tokens from incoming flows
 			for (SequenceFlow seqFlow : flowObject.getIncomingSeq()) {
 				if (seqFlow.getSource() instanceof Gateway && 
@@ -194,7 +195,6 @@ public abstract class AbstractSimulation implements ISimulation {
 			// skip assignments when looping
 			if (! isInState(flowObject, State.LOOPING_READY) || ASSIGNMENTS_INSIDE_LOOP) {
 				// handle start Assignments
-				
 				handleAssignments(flowObject, AssignTimeType.START);
 			}
 
@@ -224,8 +224,10 @@ public abstract class AbstractSimulation implements ISimulation {
 		System.out.println("Stepping out of " + flowObject);
 		List<FlowObject> result= new ArrayList<>();
 		if (isInState(flowObject, State.ACTIVE_READY)) {
+			
 			// execute, part II
 			executeEnd(flowObject);
+			
 			// handle activity looping
 			if (flowObject instanceof Activity && isLooping((Activity) flowObject)) {
 				// set state to DONE, and then right back to LOOPING_READY
@@ -235,9 +237,11 @@ public abstract class AbstractSimulation implements ISimulation {
 					// handle end Assignments
 					handleAssignments(flowObject, AssignTimeType.END);
 				}
+				
 			} else {
 				// handle end Assignments
 				handleAssignments(flowObject, AssignTimeType.END);
+				
 				// OR-, XOR-Gateway: select outgoing sequence flow(s)
 				List<SequenceFlow> seqFlows= needsToSelectPath(flowObject) 
 						? selectOutgoingSequenceFlows(flowObject)
@@ -245,8 +249,10 @@ public abstract class AbstractSimulation implements ISimulation {
 				if (seqFlows == null) {
 					return result; // no selection; cancel
 				}
+				
 				// set state to DONE
 				setState(flowObject, State.DONE);
+				
 				// place tokens on outgoing sequence flows
 				for (SequenceFlow seqFlow : seqFlows) {
 					changeToken(seqFlow, +1);
