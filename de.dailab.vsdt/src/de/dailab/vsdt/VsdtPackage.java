@@ -1244,13 +1244,22 @@ public interface VsdtPackage extends EPackage {
 	int EVENT__SIGNAL = FLOW_OBJECT_FEATURE_COUNT + 8;
 
 	/**
+	 * The feature id for the '<em><b>Signal Thrown</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT__SIGNAL_THROWN = FLOW_OBJECT_FEATURE_COUNT + 9;
+
+	/**
 	 * The feature id for the '<em><b>Linked To</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__LINKED_TO = FLOW_OBJECT_FEATURE_COUNT + 9;
+	int EVENT__LINKED_TO = FLOW_OBJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Event</em>' class.
@@ -1259,7 +1268,7 @@ public interface VsdtPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 10;
+	int EVENT_FEATURE_COUNT = FLOW_OBJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1440,6 +1449,15 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int START__SIGNAL = EVENT__SIGNAL;
+
+	/**
+	 * The feature id for the '<em><b>Signal Thrown</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int START__SIGNAL_THROWN = EVENT__SIGNAL_THROWN;
 
 	/**
 	 * The feature id for the '<em><b>Linked To</b></em>' reference.
@@ -1638,6 +1656,15 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int INTERMEDIATE__SIGNAL = EVENT__SIGNAL;
+
+	/**
+	 * The feature id for the '<em><b>Signal Thrown</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERMEDIATE__SIGNAL_THROWN = EVENT__SIGNAL_THROWN;
 
 	/**
 	 * The feature id for the '<em><b>Linked To</b></em>' reference.
@@ -1845,6 +1872,15 @@ public interface VsdtPackage extends EPackage {
 	 * @ordered
 	 */
 	int END__SIGNAL = EVENT__SIGNAL;
+
+	/**
+	 * The feature id for the '<em><b>Signal Thrown</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int END__SIGNAL_THROWN = EVENT__SIGNAL_THROWN;
 
 	/**
 	 * The feature id for the '<em><b>Linked To</b></em>' reference.
@@ -4184,6 +4220,17 @@ public interface VsdtPackage extends EPackage {
 	EAttribute getEvent_Signal();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Event#isSignalThrown <em>Signal Thrown</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Signal Thrown</em>'.
+	 * @see de.dailab.vsdt.Event#isSignalThrown()
+	 * @see #getEvent()
+	 * @generated
+	 */
+	EAttribute getEvent_SignalThrown();
+
+	/**
 	 * Returns the meta object for the reference '{@link de.dailab.vsdt.Event#getLinkedTo <em>Linked To</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6089,6 +6136,14 @@ public interface VsdtPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EVENT__SIGNAL = eINSTANCE.getEvent_Signal();
+
+		/**
+		 * The meta object literal for the '<em><b>Signal Thrown</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EVENT__SIGNAL_THROWN = eINSTANCE.getEvent_SignalThrown();
 
 		/**
 		 * The meta object literal for the '<em><b>Linked To</b></em>' reference feature.

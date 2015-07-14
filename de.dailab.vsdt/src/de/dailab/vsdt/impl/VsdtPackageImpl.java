@@ -792,8 +792,17 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getEvent_SignalThrown() {
+		return (EAttribute)eventEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getEvent_LinkedTo() {
-		return (EReference)eventEClass.getEStructuralFeatures().get(9);
+		return (EReference)eventEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -2235,6 +2244,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		createEAttribute(eventEClass, EVENT__ERROR_CODE);
 		createEReference(eventEClass, EVENT__ACTIVITY);
 		createEAttribute(eventEClass, EVENT__SIGNAL);
+		createEAttribute(eventEClass, EVENT__SIGNAL_THROWN);
 		createEReference(eventEClass, EVENT__LINKED_TO);
 
 		startEClass = createEClass(START);
@@ -2543,6 +2553,7 @@ public class VsdtPackageImpl extends EPackageImpl implements VsdtPackage {
 		initEAttribute(getEvent_ErrorCode(), ecorePackage.getEString(), "errorCode", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEvent_Activity(), this.getActivity(), null, "activity", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEvent_Signal(), ecorePackage.getEString(), "signal", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEvent_SignalThrown(), ecorePackage.getEBoolean(), "signalThrown", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEvent_LinkedTo(), this.getEvent(), null, "linkedTo", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(eventEClass, this.getTriggerType(), "getValidTriggerTypes", 0, -1, IS_UNIQUE, IS_ORDERED);

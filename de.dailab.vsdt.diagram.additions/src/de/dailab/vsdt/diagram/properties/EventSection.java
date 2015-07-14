@@ -52,6 +52,7 @@ public class EventSection extends FlowObjectSection {
 							   DISPLAY_LINK= "Linked To",
 							   DISPLAY_ACTIVITY= "Compensate",
 							   DISPLAY_SIGNAL= "Signal",
+							   DISPLAY_SIGNAL_THROWN = "thrown",
 
 							   DISPLAY_HIGHLIGH_LINK= "Highlight Opposite",
 							   DISPLAY_PAR_ASSIGN= "Parameter Assignments...";
@@ -71,6 +72,7 @@ public class EventSection extends FlowObjectSection {
     private Text errorCodeText;
     private VsdtFeatureCombo<Activity> activityCombo;
     private Text signalText;
+    private Button signalThrownButton;
     
     private Button nonInterruptingButton;
 
@@ -140,6 +142,7 @@ public class EventSection extends FlowObjectSection {
     	linkedToCombo.setSelected(event.getLinkedTo());
     	activityCombo.setSelected(event.getActivity());
     	signalText.setText(nonNull(event.getSignal()));
+    	signalThrownButton.setSelection(event.isSignalThrown());
     	
     	parAssignButton.setEnabled(event.getImplementation() != null && event.getTrigger() == TriggerType.MESSAGE);
     	
@@ -217,7 +220,9 @@ public class EventSection extends FlowObjectSection {
 		
 		//signal trigger
 		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_SIGNAL, linkedToCombo.getCombo(), 50);
-		signalText= FormLayoutUtil.addText(triggerGroup, linkedToCombo.getCombo(), label, 100, SWT.NONE);
+		signalThrownButton = FormLayoutUtil.addButton(triggerGroup, DISPLAY_SIGNAL_THROWN, SWT.CHECK, linkedToCombo.getCombo(), null, 100);
+		signalThrownButton.addSelectionListener(this);
+		signalText= FormLayoutUtil.addText(triggerGroup, linkedToCombo.getCombo(), label, signalThrownButton, SWT.NONE);
 		signalText.addFocusListener(this);
     }
     
@@ -295,6 +300,9 @@ public class EventSection extends FlowObjectSection {
     	}
     	if (src.equals(nonInterruptingButton)) {
     		setPropertyValue(event, pack.getEvent_NonInterrupting(), nonInterruptingButton.getSelection());
+    	}
+    	if (src.equals(signalThrownButton)) {
+    		setPropertyValue(event, pack.getEvent_SignalThrown(), signalThrownButton.getSelection());
     	}
     	refresh();
     }

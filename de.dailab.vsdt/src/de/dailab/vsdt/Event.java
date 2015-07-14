@@ -27,6 +27,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.Event#getErrorCode <em>Error Code</em>}</li>
  *   <li>{@link de.dailab.vsdt.Event#getActivity <em>Activity</em>}</li>
  *   <li>{@link de.dailab.vsdt.Event#getSignal <em>Signal</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Event#isSignalThrown <em>Signal Thrown</em>}</li>
  *   <li>{@link de.dailab.vsdt.Event#getLinkedTo <em>Linked To</em>}</li>
  * </ul>
  * </p>
@@ -273,6 +274,32 @@ public interface Event extends FlowObject {
 	 * @generated
 	 */
 	void setSignal(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Signal Thrown</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Signal Thrown</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Signal Thrown</em>' attribute.
+	 * @see #setSignalThrown(boolean)
+	 * @see de.dailab.vsdt.VsdtPackage#getEvent_SignalThrown()
+	 * @model
+	 * @generated
+	 */
+	boolean isSignalThrown();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.Event#isSignalThrown <em>Signal Thrown</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Signal Thrown</em>' attribute.
+	 * @see #isSignalThrown()
+	 * @generated
+	 */
+	void setSignalThrown(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Linked To</b></em>' reference.

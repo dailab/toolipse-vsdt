@@ -6,7 +6,6 @@
  */
 package de.dailab.vsdt.impl;
 
-import de.dailab.vsdt.Expression;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -18,6 +17,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.Service;

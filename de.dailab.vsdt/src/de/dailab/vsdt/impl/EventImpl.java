@@ -40,6 +40,7 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getErrorCode <em>Error Code</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getActivity <em>Activity</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getSignal <em>Signal</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.EventImpl#isSignalThrown <em>Signal Thrown</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getLinkedTo <em>Linked To</em>}</li>
  * </ul>
  * </p>
@@ -173,6 +174,24 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 	 * @ordered
 	 */
 	protected String signal = SIGNAL_EDEFAULT;
+	/**
+	 * The default value of the '{@link #isSignalThrown() <em>Signal Thrown</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSignalThrown()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean SIGNAL_THROWN_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isSignalThrown() <em>Signal Thrown</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isSignalThrown()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean signalThrown = SIGNAL_THROWN_EDEFAULT;
 	/**
 	 * The cached value of the '{@link #getLinkedTo() <em>Linked To</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -477,6 +496,27 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isSignalThrown() {
+		return signalThrown;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSignalThrown(boolean newSignalThrown) {
+		boolean oldSignalThrown = signalThrown;
+		signalThrown = newSignalThrown;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.EVENT__SIGNAL_THROWN, oldSignalThrown, signalThrown));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Event getLinkedTo() {
 		if (linkedTo != null && linkedTo.eIsProxy()) {
 			InternalEObject oldLinkedTo = (InternalEObject)linkedTo;
@@ -588,19 +628,26 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 			return true;			
 		}
 		if (this instanceof Intermediate) {
-			if (((Intermediate)this).getAttachedTo() != null) {
+			if (((Intermediate) this).getAttachedTo() != null) {
 				return false;
 			}
-			if (getTrigger()==TriggerType.MESSAGE) {
+
+			switch (this.trigger) {
+			case MESSAGE:
 				if (! getOutgoingMsg().isEmpty()) {
 					return true;
 				}
 				if (! getIncomingMsg().isEmpty()) {
 					return false;
 				}
+
+			case SIGNAL:
+				return this.isSignalThrown();
+				
+			default:
+				//defaults to false, if event has no sequence flows at all
+				return ! isStartingNode() && isEndingNode();
 			}
-			boolean b= ! isStartingNode() && isEndingNode(); //defaults to false, if event has no sequence flows at all
-			return b;
 		}
 		return false;
 	}
@@ -674,6 +721,8 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 				return basicGetActivity();
 			case VsdtPackage.EVENT__SIGNAL:
 				return getSignal();
+			case VsdtPackage.EVENT__SIGNAL_THROWN:
+				return isSignalThrown();
 			case VsdtPackage.EVENT__LINKED_TO:
 				if (resolve) return getLinkedTo();
 				return basicGetLinkedTo();
@@ -715,6 +764,9 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 				return;
 			case VsdtPackage.EVENT__SIGNAL:
 				setSignal((String)newValue);
+				return;
+			case VsdtPackage.EVENT__SIGNAL_THROWN:
+				setSignalThrown((Boolean)newValue);
 				return;
 			case VsdtPackage.EVENT__LINKED_TO:
 				setLinkedTo((Event)newValue);
@@ -758,6 +810,9 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 			case VsdtPackage.EVENT__SIGNAL:
 				setSignal(SIGNAL_EDEFAULT);
 				return;
+			case VsdtPackage.EVENT__SIGNAL_THROWN:
+				setSignalThrown(SIGNAL_THROWN_EDEFAULT);
+				return;
 			case VsdtPackage.EVENT__LINKED_TO:
 				setLinkedTo((Event)null);
 				return;
@@ -791,6 +846,8 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 				return activity != null;
 			case VsdtPackage.EVENT__SIGNAL:
 				return SIGNAL_EDEFAULT == null ? signal != null : !SIGNAL_EDEFAULT.equals(signal);
+			case VsdtPackage.EVENT__SIGNAL_THROWN:
+				return signalThrown != SIGNAL_THROWN_EDEFAULT;
 			case VsdtPackage.EVENT__LINKED_TO:
 				return linkedTo != null;
 		}
@@ -817,6 +874,8 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 		result.append(errorCode);
 		result.append(", signal: ");
 		result.append(signal);
+		result.append(", signalThrown: ");
+		result.append(signalThrown);
 		result.append(')');
 		return result.toString();
 	}

@@ -62,6 +62,7 @@ public class EventItemProvider
 			addErrorCodePropertyDescriptor(object);
 			addActivityPropertyDescriptor(object);
 			addSignalPropertyDescriptor(object);
+			addSignalThrownPropertyDescriptor(object);
 			addLinkedToPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -285,6 +286,28 @@ public class EventItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Signal Thrown feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSignalThrownPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Event_signalThrown_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Event_signalThrown_feature", "_UI_Event_type"),
+				 VsdtPackage.Literals.EVENT__SIGNAL_THROWN,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Linked To feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -368,6 +391,7 @@ public class EventItemProvider
 			case VsdtPackage.EVENT__AS_DURATION:
 			case VsdtPackage.EVENT__ERROR_CODE:
 			case VsdtPackage.EVENT__SIGNAL:
+			case VsdtPackage.EVENT__SIGNAL_THROWN:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case VsdtPackage.EVENT__TIME_EXPRESSION:
