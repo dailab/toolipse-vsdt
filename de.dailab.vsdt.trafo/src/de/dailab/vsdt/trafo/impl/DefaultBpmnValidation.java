@@ -425,6 +425,9 @@ public class DefaultBpmnValidation extends MappingStage {
 			isOK&= test(activity.getCalledElement() != null,"Activity Reference Must not be null");
 			isOK&= test(activity.getCalledElement() != activity,"A Call Activity may not call itself");
 			break;
+			
+		default:
+			break;
 		}
 		return isOK;
 	}

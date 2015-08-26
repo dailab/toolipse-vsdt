@@ -95,8 +95,6 @@ public class OverlappedBlockRule extends AbstractVsdtRule {
 	}
 
 	
-	protected VsdtPackage bpmn= VsdtPackage.eINSTANCE;
-	
 	@Override
 	public void initLHSVariables() {
 		

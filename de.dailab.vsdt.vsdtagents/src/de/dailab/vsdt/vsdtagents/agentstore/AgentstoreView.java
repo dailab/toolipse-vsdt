@@ -60,7 +60,7 @@ public class AgentstoreView extends AbstractStructuredViewerView {
 	private static final String NL = System.getProperty("line.separator");
 	
 	/** default agent store URL */
-	public final String DEFAULT_URL = "http://10.0.4.18:8080/AgentStore/";
+	public static final String DEFAULT_URL = "http://10.0.4.18:8080/AgentStore/";
 	
 	// Actions
 	private Action refreshAction;
@@ -332,10 +332,9 @@ public class AgentstoreView extends AbstractStructuredViewerView {
 												// save to temporary file
 												File file = File.createTempFile(name, ".jadl");
 												System.out.println(file.getAbsolutePath());
-												file.createNewFile();
-												FileWriter writer = new FileWriter(file);
-												writer.write(serviceSrc);
-												writer.close();
+												try (FileWriter writer = new FileWriter(file)) {
+													writer.write(serviceSrc);
+												}
 												
 												// upload file using apache commons
 												PostMethod mPost = new PostMethod(url);
@@ -352,8 +351,6 @@ public class AgentstoreView extends AbstractStructuredViewerView {
 												System.out.println("statusLine >>> " + mPost.getStatusLine());
 												mPost.releaseConnection();
 												
-												// delete file
-//												file.delete();
 											}
 											int n = serviceSrcs.size();
 											String msg = String.format("%d Agent Script%s added to AgentStore", n, (n==1 ? "" : "s"));

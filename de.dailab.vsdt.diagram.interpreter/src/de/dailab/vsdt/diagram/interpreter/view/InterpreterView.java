@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Map.Entry;
 
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
@@ -225,9 +226,9 @@ public class InterpreterView extends AbstractStructuredViewerView {
 			
 			// get selected simulation type
 			simulation = null;
-			for (Action selectAction : simulationTypeActions.keySet()) {
-				if (selectAction.isChecked()) {
-					AbstractSimulation selectedSimulation = simulationTypeActions.get(selectAction);
+			for (Entry<Action, AbstractSimulation> entry : simulationTypeActions.entrySet()) {
+				if (entry.getKey().isChecked()) {
+					AbstractSimulation selectedSimulation = entry.getValue();
 					
 					// check applicability
 					try {

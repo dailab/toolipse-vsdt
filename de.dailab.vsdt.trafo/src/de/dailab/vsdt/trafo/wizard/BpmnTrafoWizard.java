@@ -206,6 +206,10 @@ public abstract class BpmnTrafoWizard extends Wizard {
 		if (mappingStages == null) {
 			initializeMappingStages();
 		}
+		if (mappingStages == null) {
+			TrafoLog.error("No Mapping Stages defined!");
+			return false;
+		}
 
 		// preparing transformation
 		TrafoLog.reset();

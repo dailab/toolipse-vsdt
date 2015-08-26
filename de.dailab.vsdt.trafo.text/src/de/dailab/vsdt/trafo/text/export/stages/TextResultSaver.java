@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import de.dailab.vsdt.trafo.MappingResultSaver;
 
@@ -38,13 +39,13 @@ public class TextResultSaver extends MappingResultSaver {
 		// Iterate over generated images, if any, create the file and write
 		// the byte array with the image data.
 		Map<String, byte[]> imageMap= ((TextExportWrapper) wrapper).getImageMap();
-		for (String fileName : imageMap.keySet()) {
-			File file= new File(baseDirectory, fileName);
+		for (Entry<String, byte[]> entry : imageMap.entrySet()) {
+			File file= new File(baseDirectory, entry.getKey());
 			if (! file.exists()) {
 				file.createNewFile();
 			}
 			FileOutputStream fos= new FileOutputStream(file);
-			fos.write(imageMap.get(fileName));
+			fos.write(entry.getValue());
 			fos.close();
 		}
 		return true;

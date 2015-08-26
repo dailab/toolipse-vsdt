@@ -166,7 +166,8 @@ public abstract class BpmnTrafoWizardOptionsPage extends WizardExportResourcesPa
 		
 		setErrorMessage(null);
 		for (IFile file : selected) {
-			if (! file.getFileExtension().endsWith(getExtension())) {
+			String extension = file.getFileExtension();
+			if (extension == null || ! extension.endsWith(getExtension())) {
 				setErrorMessage("Please select a number of ." + getExtension() + " files, and only those, for transformation.");
 				return false;
 			}

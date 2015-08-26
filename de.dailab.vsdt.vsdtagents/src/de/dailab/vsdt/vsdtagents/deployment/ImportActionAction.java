@@ -134,7 +134,6 @@ public class ImportActionAction extends Action {
 			MessageDialog.openInformation(getShell(), TITLE, MESSAGE_NO_ACTION);
 			return;
 		}
-		assert (diagramEditPart != null && selectedAction != null);
 
 		// everything set; do the import
 		if (MessageDialog.openConfirm(getShell(), TITLE, MESSAGE_CONFIRM)) {
@@ -145,41 +144,35 @@ public class ImportActionAction extends Action {
 			final Service service = createService(selectedAction);
 			final List<DataType> dataTypes = createDataTypes(selectedAction);
 
-			// service creation successful?
-			if (service != null) {
-				// create command to put service into root element
-				final AbstractTransactionalCommand command = new AbstractTransactionalCommand(TransactionUtil.getEditingDomain(modelElement),
-				      TITLE, Collections.singletonList(WorkspaceSynchronizer.getFile(modelElement.eResource()))) {
+			// create command to put service into root element
+			final AbstractTransactionalCommand command = new AbstractTransactionalCommand(TransactionUtil.getEditingDomain(modelElement),
+			      TITLE, Collections.singletonList(WorkspaceSynchronizer.getFile(modelElement.eResource()))) {
 
-					@Override
-					protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-						try {
-							// add service to root model
-							rootModel.getServices().add(service);
-							for (DataType type : dataTypes) {
-								// check whether data type is already known
-								boolean isKnown = false;
-								for (DataType other : rootModel.getDataTypes()) {
-									isKnown |= other.getName().equals(type.getName())
-											&& other.getPackage().equals(type.getPackage());
-								}
-								if (! isKnown) {
-									rootModel.getDataTypes().add(type);
-								}
+				@Override
+				protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
+					try {
+						// add service to root model
+						rootModel.getServices().add(service);
+						for (DataType type : dataTypes) {
+							// check whether data type is already known
+							boolean isKnown = false;
+							for (DataType other : rootModel.getDataTypes()) {
+								isKnown |= other.getName().equals(type.getName())
+										&& other.getPackage().equals(type.getPackage());
 							}
-							return CommandResult.newOKCommandResult();
+							if (! isKnown) {
+								rootModel.getDataTypes().add(type);
+							}
 						}
-						catch (final Exception e) {
-							return CommandResult.newErrorCommandResult(e);
-						}
+						return CommandResult.newOKCommandResult();
 					}
-				};
-				diagramEditPart.getDiagramEditDomain().getDiagramCommandStack().execute(new ICommandProxy(command));
-				MessageDialog.openInformation(getShell(), TITLE, MESSAGE_SUCCESS);
-			}
-			else {
-				MessageDialog.openError(getShell(), TITLE, MESSAGE_ERROR);
-			}
+					catch (final Exception e) {
+						return CommandResult.newErrorCommandResult(e);
+					}
+				}
+			};
+			diagramEditPart.getDiagramEditDomain().getDiagramCommandStack().execute(new ICommandProxy(command));
+			MessageDialog.openInformation(getShell(), TITLE, MESSAGE_SUCCESS);
 		}
 	}
 

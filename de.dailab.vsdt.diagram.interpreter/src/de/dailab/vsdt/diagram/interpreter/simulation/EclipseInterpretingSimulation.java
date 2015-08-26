@@ -72,11 +72,11 @@ public class EclipseInterpretingSimulation extends AbstractInterpretingSimulatio
 	public void handleMessageProperties(List<Property> properties, boolean incoming) {
 		if (properties != null) {
 			Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			Map<Property, Object> valueMap= new HashMap<Property, Object>();
+			Map<Property, Serializable> valueMap= new HashMap<>();
 			for (Property property : properties) {
 				valueMap.put(property, propertyValueMap.get(property));
 			}
-			MessageParameterDialog dialog= new MessageParameterDialog(shell, properties, incoming, propertyValueMap);
+			MessageParameterDialog dialog= new MessageParameterDialog(shell, properties, incoming, valueMap);
 			if (dialog.open() == Dialog.OK) {
 				for (Property property : properties) {
 					setPropertyValue(property, dialog.getNewPropertyValue(property));

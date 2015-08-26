@@ -33,7 +33,7 @@ public class JiacBeansResultSaver extends MappingResultSaver {
 
 		for (AgentBean bean : wrapper.getBeans()) {
 			String packageName = bean.getPackageName();
-			packageName.replaceAll(".", "/");
+			packageName = packageName.replace(".", "/");
 			File folder = new File(baseDirectory, packageName);
 			if (! folder.exists()) {
 				folder.mkdirs();

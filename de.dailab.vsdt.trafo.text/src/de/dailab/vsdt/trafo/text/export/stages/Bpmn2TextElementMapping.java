@@ -411,7 +411,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			break;
 		case SIGNAL:
 			String s= event.getSignal();
-			builder.append((s != null ? "a Signal" : "the Signal '" + name(s) + "'") + 
+			builder.append((s == null ? "a Signal" : "the Signal '" + name(s) + "'") + 
 					" is " + (throwing ? "sent" : "received"));
 			break;
 		case CANCEL:
@@ -421,6 +421,7 @@ public class Bpmn2TextElementMapping extends MappingStage {
 			builder.append( (event.getActivity() != null ? "the Activity " + 
 					name(event.getActivity().getName()) : "an Activity ") +  
 					(throwing ? "is" : "will be") + " compensated");
+			break;
 		case ESCALATION:
 			// TODO
 			break;

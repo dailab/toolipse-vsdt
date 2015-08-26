@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
@@ -54,9 +54,6 @@ public class MessageParameterDialog extends TitleAreaDialog {
 	/** Mapping of Properties to their values */
 	protected final Map<Property, Serializable> valuesMap;
 	
-	/** error message to be displayed, or null */
-	protected String errorMessage= null;
-	
 	/**
 	 * Create new Message Parameter Dialog.  Besides the actual Message, also the
 	 * Mapping of Properties to values has to be given.  This mapping is used (a)
@@ -93,10 +90,7 @@ public class MessageParameterDialog extends TitleAreaDialog {
 		Control superContent = super.createContents(parent);
 		parent.getShell().setText( TITLE );
 		setMessage( incoming ? "Receiving" : "Sending");
-		setErrorMessage(errorMessage);
-		if (errorMessage != null) {
-			getButton(IDialogConstants.OK_ID).setEnabled( false );
-		}
+		setErrorMessage(null);
 		return superContent;
 	}
 
@@ -147,10 +141,10 @@ public class MessageParameterDialog extends TitleAreaDialog {
 	protected void okPressed() {
 		Map<Property, Serializable> newValues= new HashMap<Property, Serializable>();
 		// test-parse each value
-		for (Property property : propertyTextMap.keySet()) {
-			String expression= propertyTextMap.get(property).getText().trim();
+		for (Entry<Property, Text> entry : propertyTextMap.entrySet()) {
+			String expression= entry.getValue().getText().trim();
 			if (expression.isEmpty()) {
-				newValues.put(property, null);
+				newValues.put(entry.getKey(), null);
 			} else {
 				VxlParser parser= VxlParser.getInstance();
 				try {
@@ -169,7 +163,7 @@ public class MessageParameterDialog extends TitleAreaDialog {
 						setErrorMessage(message.toString());
 						return;
 					}
-					newValues.put(property, result);
+					newValues.put(entry.getKey(), result);
 				} catch (VxlParseException e) {
 						StringBuffer message= new StringBuffer();
 						message.append("The expression ").append(expression).append(" could not be parsed.");
@@ -185,9 +179,7 @@ public class MessageParameterDialog extends TitleAreaDialog {
 			}
 		}
 		// not returned until now -> put new values in context
-		for (Property property : newValues.keySet()) {
-			valuesMap.put(property, newValues.get(property));
-		}
+		valuesMap.putAll(newValues);
 		super.okPressed();
 	}
 	

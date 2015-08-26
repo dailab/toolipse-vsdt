@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.ecore.xmi.XMLResource;
 
@@ -46,10 +47,9 @@ public class JiacVResultSaver extends MappingResultSaver {
 			saveJadl(new File(baseDirectory, fileName), model);
 		}
 		// save starter rules
-		Map<Participant, List<JiacVStarterRule>> rulesMap= wrapper.getStarterRules();
-		for (Participant participant : rulesMap.keySet()) {
-			List<JiacVStarterRule> rules= rulesMap.get(participant);
-			String fileName= wrapper.getRulesFileName(participant);
+		for (Entry<Participant, List<JiacVStarterRule>> entry: wrapper.getStarterRules().entrySet()) {
+			List<JiacVStarterRule> rules= entry.getValue();
+			String fileName= wrapper.getRulesFileName(entry.getKey());
 			saveRules(new File(baseDirectory, fileName), rules);
 		}
 		// save AWE diagram
@@ -91,9 +91,8 @@ public class JiacVResultSaver extends MappingResultSaver {
 	 */
 	public Map<String, Serializable[]> getStarterRulesSimple() {
 		Map<String, Serializable[]> simpleRules = new HashMap<String, Serializable[]>();
-		Map<Participant, List<JiacVStarterRule>> rules = getStarterRules();
-		for (Participant participant : rules.keySet()) {
-			for (JiacVStarterRule rule : rules.get(participant)) {
+		for (Entry<Participant, List<JiacVStarterRule>> entry : getStarterRules().entrySet()) {
+			for (JiacVStarterRule rule : entry.getValue()) {
 				Serializable[] objects= null;
 				Event event = rule.getStartEvent();
 				try {
@@ -110,7 +109,7 @@ public class JiacVResultSaver extends MappingResultSaver {
 						String expression = event.getTimeExpression().getExpression();
 						if (event.isAsDuration()) {
 							// duration -> Long
-							objects = new Serializable[] {new Long(expression)};
+							objects = new Serializable[] {Long.parseLong(expression)};
 						} else {
 							// date -> Date
 							objects = new Serializable[] {DateFormat.getInstance().parse(expression)};

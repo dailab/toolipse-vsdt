@@ -2,6 +2,7 @@ package de.dailab.vsdt.diagram.interpreter.view;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
@@ -58,8 +59,8 @@ public class EclipseInterpreterObserver implements ISimulationObserver {
 		}
 		// refresh diagram view
 		if (diagramEditPart != null) {
-			for (FlowObject flowObject : stateMap.keySet()) {
-				IFigure figure= getFigure(flowObject);
+			for (Entry<FlowObject, State> entry : stateMap.entrySet()) {
+				IFigure figure= getFigure(entry.getKey());
 				// MarkerDecorator
 				if (figure instanceof IDecoratableFigure) {
 					IDecoratableFigure decoratableFigure= (IDecoratableFigure) figure;
@@ -67,16 +68,16 @@ public class EclipseInterpreterObserver implements ISimulationObserver {
 						decoratableFigure.setDecorator(new FlowObjectMarkerDecorator());
 					}
 					FlowObjectMarkerDecorator decorator = (FlowObjectMarkerDecorator) decoratableFigure.getDecorator();
-					decorator.state= stateMap.get(flowObject);
+					decorator.state= entry.getValue();
 					figure.repaint();
 				}
 			}
-			for (EObject eObject: stepMap.keySet()) {
-				IFigure figure= getFigure(eObject);
+			for (Entry<EObject, Integer> entry : stepMap.entrySet()) {
+				IFigure figure= getFigure(entry.getKey());
 				if (figure instanceof PolylineConnectionEx) {
 					PolylineConnectionEx connectionFigure = (PolylineConnectionEx) figure;
-					int lastVisited= stepMap.get(eObject);
-					if (lastVisited > 0 && figure instanceof PolylineConnectionEx) {
+					int lastVisited= entry.getValue();
+					if (lastVisited > 0) {
 						connectionFigure.setLineWidth(3);
 						Color color= figure.getForegroundColor();
 						int red= color.getRed();

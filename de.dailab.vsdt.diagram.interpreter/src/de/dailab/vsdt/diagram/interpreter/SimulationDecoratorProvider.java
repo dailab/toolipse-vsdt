@@ -164,7 +164,7 @@ public class SimulationDecoratorProvider extends AbstractProvider implements IDe
 		public void refresh() {
 			removeDecoration();
 			if (simulation == null) return;
-			// TODO get state from simulator
+			// get state from simulator
 			if (element instanceof FlowObject) {
 				FlowObject flowObject = (FlowObject) element;
 				State state= simulation.getState(flowObject);
@@ -173,13 +173,11 @@ public class SimulationDecoratorProvider extends AbstractProvider implements IDe
 					// add decoration
 					Image image= ImageLoader.getInstance().getImage(getImageForState(state));
 					EditPart editPart = (EditPart) getDecoratorTarget().getAdapter(EditPart.class);
+					int margin = -1;
 					if (editPart instanceof org.eclipse.gef.GraphicalEditPart) {
-						int margin = -1;
-						if (editPart instanceof org.eclipse.gef.GraphicalEditPart) {
-							margin = MapModeUtil.getMapMode( ((org.eclipse.gef.GraphicalEditPart) editPart).getFigure()).DPtoLP(margin);
-						}
-						setDecoration(getDecoratorTarget().addShapeDecoration(image,IDecoratorTarget.Direction.NORTH_WEST,margin, true));
+						margin = MapModeUtil.getMapMode( ((org.eclipse.gef.GraphicalEditPart) editPart).getFigure()).DPtoLP(margin);
 					}
+					setDecoration(getDecoratorTarget().addShapeDecoration(image,IDecoratorTarget.Direction.NORTH_WEST,margin, true));
 				}
 			}
 		}
