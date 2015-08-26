@@ -54,14 +54,12 @@ public class VsdtPositionalGeneralViewPasteOperation extends OverridePasteChildO
             if (pasted instanceof IdObject) {
                 ((IdObject) pasted).setId(EcoreUtil.generateUUID());
             }
-            if (pasted instanceof EObject) {
-                TreeIterator<EObject> iter = ((EObject) pasted).eAllContents();
-                while (iter.hasNext()) {
-                    EObject next = iter.next();
-                    if (next instanceof IdObject) {
-                    	IdObject elt = (IdObject) next;
-                        elt.setId(EcoreUtil.generateUUID());
-                    }
+            TreeIterator<EObject> iter = ((EObject) pasted).eAllContents();
+            while (iter.hasNext()) {
+                EObject next = iter.next();
+                if (next instanceof IdObject) {
+                	IdObject elt = (IdObject) next;
+                    elt.setId(EcoreUtil.generateUUID());
                 }
             }
             //now paste view

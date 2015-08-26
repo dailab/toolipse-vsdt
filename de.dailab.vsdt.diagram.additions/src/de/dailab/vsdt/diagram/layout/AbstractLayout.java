@@ -172,7 +172,7 @@ public abstract class AbstractLayout {
 	 * @author kuester
 	 */
 	@SuppressWarnings("serial")
-	protected class MockupFrame extends JFrame {
+	protected static class MockupFrame extends JFrame {
 		
 		Map<FlowObject, Rectangle> layoutMap;
 		

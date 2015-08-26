@@ -53,7 +53,7 @@ public class StructureViewer extends TreeViewer {
 	 * 
 	 * @author kuester
 	 */
-	public class ContentProvider extends AbstractContentProvider implements ITreeContentProvider {
+	public static class ContentProvider extends AbstractContentProvider implements ITreeContentProvider {
 
 		public Object getParent(Object element) {
 			if (element instanceof EObject) {
@@ -142,7 +142,7 @@ public class StructureViewer extends TreeViewer {
 	 * 
 	 * @author kuester
 	 */
-	public class LabelProvider extends AbstractLabelProvider {
+	public static class LabelProvider extends AbstractLabelProvider {
 		
 		protected ImageDescriptor getImageDescriptor(Object element) {
 			if (element instanceof Pool) {

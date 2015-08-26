@@ -104,7 +104,7 @@ public class InitializePoolsAction implements IObjectActionDelegate {
 	 * 
 	 * @author kuester
 	 */
-	protected class SetPoolAttributesCommand extends AbstractGmfCommand {
+	protected static class SetPoolAttributesCommand extends AbstractGmfCommand {
 		final IAdaptable poolAdapter;
 		final Participant participant;
 

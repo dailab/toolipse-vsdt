@@ -211,7 +211,7 @@ public class StructureLayout extends AbstractLayout {
 		
 		// put result into layout map
 		if (result != null) {
-			if (layoutMap.get(result) == null) {
+			if (layoutMap.get(flowObject) == null) {
 				layoutMap.put(flowObject, result);
 			}
 		} else {

@@ -34,11 +34,9 @@ public class PoolVisibilityViewLabelProvider extends AbstractLabelProvider {
 			buffer.append(pool.getName());
 		}
 		if (buffer.toString().isEmpty()) {
-			if (actualElement instanceof EObject) {
-				String name= EMFCoreUtil.getName((EObject) actualElement);
-				if (name != null) {
-					buffer.append(name);
-				}
+			String name= EMFCoreUtil.getName((EObject) actualElement);
+			if (name != null) {
+				buffer.append(name);
 			}
 		}
 		return buffer.toString();

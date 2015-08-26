@@ -73,7 +73,7 @@ public class OpenWebServiceAction extends Action {
 	 * 
 	 * @author kuester
 	 */
-	public class UrlInputValidator implements IInputValidator {
+	public static class UrlInputValidator implements IInputValidator {
 		public String isValid(String string) {
 			// allow empty string, meaning that the default URL shall be used
 			if (string == null || string.length() == 0) {

@@ -195,7 +195,7 @@ public abstract class InsertPatternAction implements IObjectActionDelegate {
 	 * 
 	 * @author kuester
 	 */
-	protected class CopySeqFlowAttCommand extends AbstractTransactionalCommand {
+	protected static class CopySeqFlowAttCommand extends AbstractTransactionalCommand {
 		SequenceFlow oldSeqFlow;
 		EditPartViewer viewer;
 		IAdaptable newSeqFlowViewAdapter;
