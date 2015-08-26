@@ -35,7 +35,7 @@ public class InitAllIdsAction extends AbstractGmfAction {
 		}
 	}
 
-	public class InitAllIdsCommand extends AbstractGmfCommand {
+	public static class InitAllIdsCommand extends AbstractGmfCommand {
 		
 		public InitAllIdsCommand(BusinessProcessDiagram bpd) {
 		    super(bpd, "Initialize all IDs");

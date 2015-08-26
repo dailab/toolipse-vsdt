@@ -173,6 +173,6 @@ public class OrganizeDataTypesDialog extends AbstractOrganizeElementsDialog<Data
 			String nameString= Util.nonNull(datatype.getName());
 			return packageString + "." + nameString;
 		}
-		return super.getString(datatype);
+		return super.getString(null);
 	}
 }

@@ -44,6 +44,8 @@ public abstract class AbstractEndEditPart extends AbstractVsdtBorderedShapeEditP
 			getPrimaryShape().setThrowing(getCastedModel().isThrowing());
 			refreshVisuals();
 			break;
+		default:
+			break;
 		}
 	}
 

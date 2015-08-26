@@ -20,7 +20,7 @@ public class ParameterAssignmentsAction extends AbstractGmfAction {
 		return null;
 	}
 
-	public class ParameterAssignmentsCommand extends AbstractDialogWrapperCommand {
+	public static class ParameterAssignmentsCommand extends AbstractDialogWrapperCommand {
 		
 		public ParameterAssignmentsCommand(EObject modelElement) {
 		    super(modelElement, "Create Parameter Assignments");

@@ -117,6 +117,6 @@ public class OrganizeParticipantsDialog extends AbstractOrganizeElementsDialog<P
 			buffer.append(nameString != null ? nameString : "<unnamed>"); //$NON-NLS-1$
 			return buffer.toString();	
 		}
-		return super.getString(participant);
+		return super.getString(null);
 	}
 }

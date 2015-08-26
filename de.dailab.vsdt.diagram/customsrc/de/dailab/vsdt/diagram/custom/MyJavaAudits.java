@@ -808,6 +808,7 @@ public class MyJavaAudits {
 		case SIGNAL:
 			// signal
 			ok&= self.getSignal() != null;
+			break;
 		case MULTIPLE:
 		case CANCEL:
 		case TERMINATE:
@@ -872,15 +873,15 @@ public class MyJavaAudits {
 	 */
 	public static Boolean gatewayType(Gateway self) {
 		boolean ok= true;
-		switch (self.getGatewayType().getValue()) {
-		case GatewayType.XOR_DATA_VALUE:
-		case GatewayType.XOR_EVENT_VALUE:
+		switch (self.getGatewayType()) {
+		case XOR_DATA:
+		case XOR_EVENT:
 			// (instantiate)
-		case GatewayType.OR_VALUE:
-		case GatewayType.AND_VALUE:
+		case OR:
+		case AND:
 			//none
 			break;
-		case GatewayType.COMPLEX_VALUE:
+		case COMPLEX:
 			//incoming and outgoing condition
 			ok&= self.getIncomingSeq().size() > 1 ? self.getIncomingCondition() != null : true;
 			ok&= self.getOutgoingSeq().size() > 1 ? self.getOutgoingCondition() != null : true;

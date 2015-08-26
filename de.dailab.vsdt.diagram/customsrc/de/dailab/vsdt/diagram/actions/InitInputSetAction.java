@@ -21,7 +21,7 @@ public class InitInputSetAction extends AbstractGmfAction {
 		return null;
 	}
 
-	public class InitInputSetCommand extends AbstractGmfCommand {
+	public static class InitInputSetCommand extends AbstractGmfCommand {
 		
 		public InitInputSetCommand(Activity activity) {
 		    super(activity, "Initialize Input Set");

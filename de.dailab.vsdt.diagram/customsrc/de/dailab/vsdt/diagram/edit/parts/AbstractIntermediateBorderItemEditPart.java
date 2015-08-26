@@ -50,6 +50,8 @@ public abstract class AbstractIntermediateBorderItemEditPart extends AbstractBor
 			getPrimaryShape().setNonInterrupting(getCastedModel().isNonInterrupting());
 			refreshVisuals();
 			break;
+		default:
+			break;
 		}
 	}
 

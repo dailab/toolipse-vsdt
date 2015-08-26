@@ -183,7 +183,7 @@ public class OrganizeMessageChannelsDialog extends AbstractOrganizeElementsDialo
 			buffer.append(")");
 			return buffer.toString();	
 		}
-		return super.getString(message);
+		return super.getString(null);
 	}
 	
 	@Override

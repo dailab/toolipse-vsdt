@@ -30,7 +30,7 @@ public class InitMessageAction extends AbstractGmfAction {
 		}
 	}
 
-	public class InitMessageCommand extends AbstractGmfCommand {
+	public static class InitMessageCommand extends AbstractGmfCommand {
 		
 		public InitMessageCommand(MessageFlow messageFlow) {
 		    super(messageFlow, "Initialize Message");

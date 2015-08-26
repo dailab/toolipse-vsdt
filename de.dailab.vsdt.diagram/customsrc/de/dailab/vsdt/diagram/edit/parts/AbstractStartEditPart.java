@@ -48,6 +48,8 @@ public abstract class AbstractStartEditPart extends AbstractVsdtBorderedShapeEdi
 			getPrimaryShape().setNonInterrupting(getCastedModel().isNonInterrupting());
 			refreshVisuals();
 			break;
+		default:
+			break;
 		}
 	}
 

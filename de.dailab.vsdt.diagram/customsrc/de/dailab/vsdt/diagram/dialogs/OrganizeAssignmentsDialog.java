@@ -170,7 +170,7 @@ public class OrganizeAssignmentsDialog extends AbstractOrganizeElementsDialog<As
 			buffer.append(from != null ? (from.getExpression() != null ? from.getExpression() : "") : "<null>"); //$NON-NLS-1$
 			return buffer.toString();
 		}
-		return super.getString(assignment);
+		return super.getString(null);
 	}
 
 }

@@ -22,7 +22,7 @@ public class InitIDAction extends AbstractGmfAction {
 		return null;
 	}
 
-	public class InitIdCommand extends AbstractGmfCommand {
+	public static class InitIdCommand extends AbstractGmfCommand {
 		
 		public InitIdCommand(IdObject idObject) {
 		    super(idObject, "Initialize ID");

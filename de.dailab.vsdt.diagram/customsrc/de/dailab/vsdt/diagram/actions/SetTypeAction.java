@@ -30,7 +30,7 @@ public class SetTypeAction extends AbstractGmfAction {
 		return null;
 	}
 
-	public class SetTypeCommand extends AbstractGmfCommand {
+	public static class SetTypeCommand extends AbstractGmfCommand {
 
 		private FlowObject flowObject;
 		

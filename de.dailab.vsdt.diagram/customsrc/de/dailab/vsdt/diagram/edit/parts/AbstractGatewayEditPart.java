@@ -43,6 +43,8 @@ public abstract class AbstractGatewayEditPart extends AbstractVsdtBorderedShapeE
 //			// the gates each time the model file is loaded
 //			getCastedModel().refreshGates();
 //			break;
+		default:
+			break;
 		}
 	}
 

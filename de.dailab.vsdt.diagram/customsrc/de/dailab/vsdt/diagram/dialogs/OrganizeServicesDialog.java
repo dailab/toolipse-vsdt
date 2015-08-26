@@ -258,6 +258,6 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 			buffer.append(")");
 			return buffer.toString();
 		}
-		return super.getString(service);
+		return super.getString(null);
 	}
 }

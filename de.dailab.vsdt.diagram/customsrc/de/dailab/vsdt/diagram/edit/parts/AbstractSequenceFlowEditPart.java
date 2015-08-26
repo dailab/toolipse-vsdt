@@ -49,6 +49,8 @@ public abstract class AbstractSequenceFlowEditPart extends AbstractGmfConnection
 				refreshVisuals();
 			}
 			break;
+		default:
+			break;
 		}
 	}
 	

@@ -41,6 +41,8 @@ public abstract class AbstractPoolEditPart extends AbstractVsdtNodeEditPart impl
 //		case VsdtPackage.POOL__LANES:
 //			getCastedModel().setBoundaryVisibility();
 //			break;
+		default:
+			break;
 		}
 		refreshVisuals();
 	}

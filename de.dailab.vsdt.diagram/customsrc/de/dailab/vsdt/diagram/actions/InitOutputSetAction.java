@@ -21,7 +21,7 @@ public class InitOutputSetAction extends AbstractGmfAction {
 		return null;
 	}
 
-	public class InitOutputSetCommand extends AbstractGmfCommand {
+	public static class InitOutputSetCommand extends AbstractGmfCommand {
 		
 		public InitOutputSetCommand(Activity activity) {
 		    super(activity, "Initialize Output Set");

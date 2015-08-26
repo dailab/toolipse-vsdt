@@ -69,14 +69,16 @@ public class SequenceFlowFigure extends RoundedPolylineConnection {
 	 */
 	public void refreshDecoration() {
 		setSourceDecoration(null);
-		switch(conditionType.getValue()) {
-		case ConditionType.DEFAULT_VALUE:
+		switch(conditionType) {
+		case DEFAULT:
 			setSourceDecoration(createSourceDefaultDecoration());
 			break;
-		case ConditionType.EXPRESSION_VALUE:
+		case EXPRESSION:
 			if (! sourceIsGateway) {
 				setSourceDecoration(createSourceExpressionDecoration());
 			}
+			break;
+		case NONE:
 			break;
 		}
 	}

@@ -123,6 +123,6 @@ public class OrganizeParametersDialog extends AbstractOrganizeElementsDialog<Par
 			String valueString= Util.nonNull(parameter.getValue());
 			return VsdtHelper.ESCAPE_PARAMETER + keyString + " = " + valueString;
 		}
-		return super.getString(parameter);
+		return super.getString(null);
 	}
 }

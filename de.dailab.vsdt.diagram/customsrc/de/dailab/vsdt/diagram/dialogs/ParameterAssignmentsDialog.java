@@ -81,9 +81,6 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 	/** Existing assignments to and from service parameters */
 	protected final Map<Property, Assignment> parameterAssignmentsMap;
 	
-	/** error message to be displayed, or null */
-	protected String errorMessage= null;
-	
 	/**
 	 * Create new Parameter Assignment Dialog.  Besides the Shell, the element
 	 * being parent to the Assignment to create has to be passed.  As this dialog
@@ -200,10 +197,7 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 
 		parent.getShell().setText( TITLE );
 		setMessage( MESSAGE );
-		setErrorMessage(errorMessage);
-		if (errorMessage != null) {
-			getButton(IDialogConstants.OK_ID).setEnabled( false );
-		}
+		setErrorMessage(null);
 		return superContent;
 	}
 	

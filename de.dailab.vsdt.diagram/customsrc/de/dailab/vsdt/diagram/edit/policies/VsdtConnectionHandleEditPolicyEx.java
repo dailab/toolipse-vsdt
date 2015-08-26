@@ -48,6 +48,8 @@ public class VsdtConnectionHandleEditPolicyEx extends ConnectionHandleEditPolicy
 			addConnectionHandle(srcEltTypes, list, false, VsdtElementTypes.SequenceFlow_3001);
 			addConnectionHandle(srcEltTypes, list, false, VsdtElementTypes.Association_3003);
 			break;
+		default:
+			break;
 		}
 		return list;
 	}

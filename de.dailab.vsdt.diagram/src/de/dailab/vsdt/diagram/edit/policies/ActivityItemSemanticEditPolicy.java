@@ -100,6 +100,8 @@ public class ActivityItemSemanticEditPolicy extends
 					case StartEditPart.VISUAL_ID:
 						cmd.add(getDestroyElementCommand(cnode));
 						break;
+					default:
+						break;
 					}
 				}
 				break;

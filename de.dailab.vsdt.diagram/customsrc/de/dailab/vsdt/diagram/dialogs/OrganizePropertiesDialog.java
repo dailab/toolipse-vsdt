@@ -148,7 +148,7 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 			buffer.append(property.getType());
 			return buffer.toString();
 		}
-		return super.getString(property);
+		return super.getString(null);
 	}
 	
 	@Override

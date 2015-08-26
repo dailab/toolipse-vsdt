@@ -113,7 +113,7 @@ public class OrganizeExpressionsDialog extends AbstractOrganizeElementsDialog<Ex
 			}
 			return builder.toString();
 		}
-		return super.getString(expression);
+		return super.getString(null);
 	}
 	
 //	@Override

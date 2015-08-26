@@ -90,6 +90,8 @@ public class EventFigure extends Ellipse implements IDecoratableFigure {
 			g.setBackgroundColor(FigureHelper.getBackground(this, eventType));
 			g.fillOval(x, y, s, s);
 			break;
+		default:
+			break;
 		}
 		g.setLineStyle(SWT.LINE_SOLID);
 

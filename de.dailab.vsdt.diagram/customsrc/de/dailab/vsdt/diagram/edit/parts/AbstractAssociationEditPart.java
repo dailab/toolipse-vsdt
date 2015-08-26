@@ -36,6 +36,9 @@ public abstract class AbstractAssociationEditPart extends AbstractGmfConnectionE
 		case VsdtPackage.ASSOCIATION__DIRECTION:
 			((AssociationFigure)getFigure()).setDirectionType(getCastedModel().getDirection());
 			refreshVisuals();
+			break;
+		default:
+			break;
 		}
 	}
 	

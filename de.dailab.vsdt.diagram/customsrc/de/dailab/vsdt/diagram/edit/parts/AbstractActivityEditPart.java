@@ -62,6 +62,8 @@ public abstract class AbstractActivityEditPart extends AbstractVsdtBorderedShape
 		case VsdtPackage.ACTIVITY__EVENTED_SUBPROCESS:
 			getPrimaryShape().setEventedSubprocess(getCastedModel().isEventedSubprocess());
 			break;
+		default:
+			break;
 		}
 		if (feature != VsdtPackage.ACTIVITY__BOUNDARY_EVENTS) {
 			// problem with refreshing in this case since GMF 2.1
