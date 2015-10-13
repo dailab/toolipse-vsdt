@@ -171,7 +171,7 @@ public class OrganizeDataTypesDialog extends AbstractOrganizeElementsDialog<Data
 		if (datatype != null) {
 			String packageString= Util.nonNull(datatype.getPackage());
 			String nameString= Util.nonNull(datatype.getName());
-			return packageString + "." + nameString;
+			return packageString.isEmpty() ? nameString : (packageString + "." + nameString);
 		}
 		return super.getString(null);
 	}

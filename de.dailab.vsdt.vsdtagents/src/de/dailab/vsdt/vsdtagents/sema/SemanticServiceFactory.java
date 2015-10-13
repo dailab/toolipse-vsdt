@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,6 +21,7 @@ import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.Service;
 import de.dailab.vsdt.VsdtFactory;
+import de.dailab.vsdt.vxl.util.Util;
 
 /**
  * Class providing some of the helper methods formerly found in 
@@ -197,6 +199,7 @@ public class SemanticServiceFactory {
 	 * @return						VSDT DataTypes according to those used by service
 	 */
 	public static Set<DataType> createDatatypes(ServiceDescription serviceDescription) {
+		Set<String> primitives = new HashSet<>(Arrays.asList(Util.datatypes));
 		Set<DataType> result = new HashSet<>();
 		
 		List<Param> allParams = new ArrayList<>();
@@ -204,13 +207,16 @@ public class SemanticServiceFactory {
 		allParams.addAll(serviceDescription.getProcess().getOutput());
 
 		for (Param param : allParams) {
-			DataType dataType = VsdtFactory.eINSTANCE.createDataType();
-			dataType.setLanguage("OWL-S");
-			dataType.setName(getTypeFromTypeUri(param.getType()));
-			// param.getJavaClass() would be useful here, but it is null
-//			dataType.setPackage(null);
-			dataType.setUrl(param.getType().toString());
-			result.add(dataType);
+			String name = getTypeFromTypeUri(param.getType());
+			if (! primitives.contains(name)) {
+				DataType dataType = VsdtFactory.eINSTANCE.createDataType();
+				dataType.setLanguage("OWL-S");
+				dataType.setName(name);
+				// param.getJavaClass() would be useful here, but it is null
+				// dataType.setPackage(null);
+				dataType.setUrl(param.getType().toString());
+				result.add(dataType);
+			}
 		}
 		return result;
 	}
