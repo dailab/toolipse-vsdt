@@ -260,7 +260,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		List<Property> properties= new ArrayList<Property>();
 
 		// name to use for executed flags for this start event
-		String executedFlag = "executed_" + event.getNameOrId();
+		String executedFlag = "executed_" + Util.toJavaName(event.getNameOrId(), false);
 		
 		Script mapping = null;
 		switch (event.getTrigger()) {
