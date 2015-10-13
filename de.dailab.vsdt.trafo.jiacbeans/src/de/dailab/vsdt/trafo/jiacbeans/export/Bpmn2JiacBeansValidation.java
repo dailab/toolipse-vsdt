@@ -12,13 +12,13 @@ import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.Service;
 import de.dailab.vsdt.VsdtFactory;
+import de.dailab.vsdt.trafo.base.util.TrafoLog;
 import de.dailab.vsdt.trafo.impl.DefaultBpmnValidation;
 import de.dailab.vsdt.vxl.util.Util;
 
 public class Bpmn2JiacBeansValidation extends DefaultBpmnValidation {
 	
 	private static Map<String, String> basicDataTypeMap;
-	
 	static {
 		basicDataTypeMap= new HashMap<String, String>();
 		basicDataTypeMap.put(Util.TYPE_INTEGER, "Integer");
@@ -34,6 +34,9 @@ public class Bpmn2JiacBeansValidation extends DefaultBpmnValidation {
 	
 	/** data types of the currently visited BPS */
 	private Set<String> definedDataTypes;
+
+	/** already taken activity method names */
+	private Map<String, Integer> takenActivityNames;
 	
 	/**
 	 * replace white space and special characters and make title case, so the 
@@ -50,7 +53,8 @@ public class Bpmn2JiacBeansValidation extends DefaultBpmnValidation {
 	@Override
 	protected boolean visitBusinessProcessSystem(BusinessProcessSystem bps) {
 		this.currentBps = bps;
-		this.definedDataTypes = new HashSet<String>();
+		this.takenActivityNames = new HashMap<>();
+		this.definedDataTypes = new HashSet<>();
 		for (DataType type : bps.getDataTypes()) {
 			String full = type.getPackage() + "." + type.getName();
 			this.definedDataTypes.add(full);
@@ -123,6 +127,16 @@ public class Bpmn2JiacBeansValidation extends DefaultBpmnValidation {
 	@Override
 	protected boolean visitActivity(Activity activity) {
 		boolean ok= super.visitActivity(activity);
+		
+		// de-duplicate activity name
+		if (takenActivityNames.containsKey(activity.getName())) {
+			int count = takenActivityNames.get(activity.getName());
+			activity.setName(activity.getName() + "_" + count);
+			takenActivityNames.put(activity.getName(), count + 1);
+			TrafoLog.info("Activity Name changed to '" + activity.getName()+ "'");
+		} else {
+			takenActivityNames.put(activity.getName(), 1);
+		}
 		
 		switch (activity.getActivityType()) {
 		case SERVICE:
