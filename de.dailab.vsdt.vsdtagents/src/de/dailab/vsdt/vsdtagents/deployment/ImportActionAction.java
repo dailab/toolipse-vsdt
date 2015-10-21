@@ -192,7 +192,7 @@ public class ImportActionAction extends Action {
 	private Service createService(IActionDescription action) {
 		// create basic service description
 		Service service = VsdtFactory.eINSTANCE.createService();
-		service.setType("JIAC Service");
+		service.setType("JIAC Action");
 		service.setOperation(action.getName());
 		service.setInterface(action.getProviderDescription().getName());
 
