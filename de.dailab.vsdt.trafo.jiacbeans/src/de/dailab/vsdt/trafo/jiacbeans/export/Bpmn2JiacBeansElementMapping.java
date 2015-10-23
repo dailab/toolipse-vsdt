@@ -596,7 +596,11 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				Script content = visitFlowObjects(activity.getContainedFlowObjects());
 				content = wrapIntoLoop(activity, content);
 				content = buildSequence(content, null, activity.getAssignments(), true);
-				currentSubProcess.getMethods().add(0, createMethod("workflow", content));
+				if (hasError(activity)) {
+					currentSubProcess.getMethods().add(0, createMethod("workflow", content, "Exception"));
+				} else {
+					currentSubProcess.getMethods().add(0, createMethod("workflow", content));
+				}
 				
 				// create and run subprocess instance
 				String variable = "subprocess_" + activity.getName();
@@ -1431,7 +1435,24 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		}
 		return imports;
 	}
-	
+
+	/**
+	 * Check whether the given activity has an ERROR event handler attached.
+	 * 
+	 * @param activity		some activity
+	 * @return				error event handler attached?
+	 */
+	private boolean hasError(Activity activity) {
+		if (activity.eContainer() instanceof BpmnEventHandlerBlock) {
+			BpmnEventHandlerBlock ehBlock = (BpmnEventHandlerBlock) activity.eContainer();
+			for (BpmnEventHandlerCase ehCase : ehBlock.getEventHandlerCases()) {
+				if (ehCase.getIntermediate().getTrigger() == TriggerType.ERROR) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 	
 	/*
 	 * SIMPLE, SIDE-EFFECT FREE ELEMENT CREATION HELPER METHODS
