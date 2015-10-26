@@ -170,11 +170,13 @@ public class ServiceParameterDialog extends TitleAreaDialog {
 					Serializable value = parseValue(string, clazz);
 					inputValues.add(value);
 				}
+				super.okPressed();
 			} catch (ClassNotFoundException e) {
 				setErrorMessage("Class Not Found: " + e.getMessage());
+			} catch (NumberFormatException e) {
+				setErrorMessage("Parameter could not be parsed to required type " + e.getMessage());
 			}
 		}
-		super.okPressed();
 	}
 
 	/**
@@ -191,7 +193,7 @@ public class ServiceParameterDialog extends TitleAreaDialog {
 	 * @param clazz		some Class
 	 * @return			Instance of Class according to Value
 	 */
-	private Serializable parseValue(String string, Class clazz) {
+	private Serializable parseValue(String string, Class clazz) throws NumberFormatException {
 		Serializable value = null;
 		if (clazz == String.class)
 			value = string;

@@ -120,7 +120,7 @@ public class DeploymentView extends AbstractStructuredViewerView {
 	 * @return		the DeploymentBean behind this view.
 	 */
 	private DeploymentBean getBean() {
-		if (bean == null) {
+		if (bean == null && JiacNodePlugin.getDefault().getNode() != null) {
 			bean = JiacNodePlugin.getAgentBean(DeploymentBean.class);
 		}
 		return bean;
@@ -130,6 +130,12 @@ public class DeploymentView extends AbstractStructuredViewerView {
 	 * Get Actions from Bean and Refresh Services Viewer accordingly
 	 */
 	private void refresh() {
+		if (getBean() == null) {
+			// node not yet started
+			openMessageDialog(MessageDialog.ERROR, "JIAC Node has now yet started. Please try again later.");
+			return;
+		}
+		
 		// get list of services from bean
 		List<IActionDescription> actions = getBean().getServices();
 
