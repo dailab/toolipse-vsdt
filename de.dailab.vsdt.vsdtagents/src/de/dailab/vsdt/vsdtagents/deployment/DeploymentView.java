@@ -545,14 +545,16 @@ public class DeploymentView extends AbstractStructuredViewerView {
 						servicesViewer.getControl().getShell(), service);
 				
 				if (parameterDialog.open() == ServiceParameterDialog.OK) {
-					
 					try {
 						Shell shell= Display.getCurrent().getActiveShell();
 						ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(shell);
 						progressMonitorDialog.run(false, false, new IRunnableWithProgress() {
+							/*
+							 * Currently, this freezes the UI during a long-running action. Can be solved to some
+							 * extend by setting 'fork' to true and opening the dialogs using Display.syncExec...
+							 */
 							@Override
 							public void run(IProgressMonitor monitor) {
-
 								try {
 									Serializable[] inputs = parameterDialog.getInputValues();
 									Serializable[] results = getBean().invokeService(service, inputs);
@@ -574,7 +576,7 @@ public class DeploymentView extends AbstractStructuredViewerView {
 						e.printStackTrace();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
-					}	
+					}
 				}
 			}
 		}
