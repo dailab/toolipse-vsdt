@@ -33,7 +33,7 @@ public class DiagramGeneralPreferencePage extends DiagramsPreferencePage {
 	public static void initDefaults(IPreferenceStore preferenceStore) {
 		DiagramsPreferencePage.initDefaults(preferenceStore);
 		
-		preferenceStore.setDefault(PREF_AUTHOR, "");
+		preferenceStore.setDefault(PREF_AUTHOR, System.getProperty("user.name"));
 		preferenceStore.setDefault(PREF_ASSISTANCE, true);
 	}
 
