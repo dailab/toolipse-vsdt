@@ -19,8 +19,11 @@ public class Bpmn2JiacBeansExportWizardOptionsPage extends BpmnExportWizardOptio
 	
 	public static final String LABEL_PARENT_PACKAGE= "Parent Package (optional)";
 	public static final String LABEL_CREATE_SUBPACKAGE = "Create sub-packages for individual roles";
+	public static final String LABEL_INITIALIZE_PROPERTIES = "Initialize all Properties with 'new ClassName();'";
+	
 	public static final String DEFAULT_PARENT_PACKAGE = "";
 	public static final boolean DEFAULT_CREATE_SUBPACKAGE = true;
+	public static final boolean DEFAULT_INITIALIZE_PROPERTIES = false;
 	
 	/*
 	 * static, so the value is preserved between exports
@@ -28,6 +31,7 @@ public class Bpmn2JiacBeansExportWizardOptionsPage extends BpmnExportWizardOptio
 	 */
 	private static String parentPackage = DEFAULT_PARENT_PACKAGE;
 	private static boolean createSubpackage = DEFAULT_CREATE_SUBPACKAGE;
+	private static boolean initializeProperties = DEFAULT_INITIALIZE_PROPERTIES;
 	
 	public Bpmn2JiacBeansExportWizardOptionsPage(String title, IStructuredSelection selection) {
 		super(title, selection);
@@ -60,6 +64,15 @@ public class Bpmn2JiacBeansExportWizardOptionsPage extends BpmnExportWizardOptio
 				createSubpackage = subpackageCheck.getSelection();
 			}
 		});
+		
+		final Button propertiesCheck= new Button(composite, SWT.CHECK);
+		propertiesCheck.setText(LABEL_INITIALIZE_PROPERTIES);
+		propertiesCheck.setSelection(initializeProperties);
+		propertiesCheck.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				initializeProperties = propertiesCheck.getSelection();
+			}
+		});
 	}
 
 	public static String getParentPackage() {
@@ -68,6 +81,10 @@ public class Bpmn2JiacBeansExportWizardOptionsPage extends BpmnExportWizardOptio
 	
 	public static boolean getCreateSubpackages() {
 		return createSubpackage;
+	}
+	
+	public static boolean getInitializeProperties() {
+		return initializeProperties;
 	}
 	
 }

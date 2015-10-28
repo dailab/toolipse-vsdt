@@ -993,7 +993,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			}
 			for (Property property : properties) {
 				if (property != null) {
-					seq.getScripts().add(createCode(property.getType() + " " + property.getName() + " = new " + property.getType() + "();"));
+					seq.getScripts().add(createCode(property.getType() + " " + property.getName() + " = " + createInitializer(property) + ";"));
 				}
 			}
 		}
@@ -1383,6 +1383,25 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		}
 		
 		return new String[] {threadName, className, parameters, implementation};
+	}
+	
+	private String createInitializer(Property prop) {
+		if (Bpmn2JiacBeansExportWizardOptionsPage.getInitializeProperties()) {
+			// more diverse initialization based on property type
+			switch (prop.getType()) {
+			case "Integer": return "0";
+			case "Boolean": return "false";
+			case "String":  return "\"\"";
+			case "Float":   return "0f";
+			case "Double":  return "0d";
+			case "Long":    return "0l";
+			// or just 'new ClassName' for everything else
+			default:        return "new " + prop.getType() + "()";
+			}
+		} else {
+			// or just 'null' for everything
+			return "null";
+		}
 	}
 	
 	private CodeElement createCheckInterrupt() {
