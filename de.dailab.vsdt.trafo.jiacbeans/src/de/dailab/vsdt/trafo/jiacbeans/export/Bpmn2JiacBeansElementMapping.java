@@ -1259,13 +1259,9 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	private Sequence createServiceInvocation(Service service) {
 		String actionName = getActionName(service);
 		// collect code elements
-		CodeElement retrieveAction = createCode("IActionDescription action = thisAgent.searchAction(" +
-				"new Action(\"" + actionName + "\"));");
-		CodeElement throwException = createCode("throw new RuntimeException(\"Action " + actionName + " not found!\");");
-		IfThenElse checkAction = createIfThenElse("action == null", throwException, null);
-		CodeElement invokeAction = createCode("ActionResult actionResult = invokeAndWaitForResult(action, new Serializable[] {" + 
+		CodeElement invokeAction = createCode("ActionResult actionResult = findAndInvoke(\"" + actionName + "\", new Serializable[] {" + 
 				buildPropertyString(service.getInput()) + "});");
-
+		
 		// error handling
 		String resultCheck = "actionResult.getFailure() == null";
 		CodeElement notifyError = createCode("log.error(\"Action " + actionName + " failed: \" + actionResult.getFailure());");
@@ -1280,7 +1276,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		IfThenElse resultHandling = createIfThenElse(resultCheck, resultAssigns, notifyError);
 		
 		// put it all together
-		return createSequence(retrieveAction, checkAction, invokeAction, resultHandling);
+		return createSequence(invokeAction, resultHandling);
 	}
 	
 	/**
