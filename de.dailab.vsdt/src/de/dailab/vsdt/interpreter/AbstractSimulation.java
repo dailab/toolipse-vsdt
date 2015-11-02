@@ -178,18 +178,19 @@ public abstract class AbstractSimulation implements ISimulation {
 			
 			// remove tokens from incoming flows
 			for (SequenceFlow seqFlow : flowObject.getIncomingSeq()) {
-				if (seqFlow.getSource() instanceof Gateway && 
-						((Gateway)seqFlow.getSource()).getGatewayType() == GatewayType.XOR_EVENT) {
-					// event-based XOR: remove other tokens, too
-					for (SequenceFlow seqFlow2 : seqFlow.getSource().getOutgoingSeq()) {
-						changeToken(seqFlow2, -1);
-						if (updateState(seqFlow2.getTarget())) {
-							result.add(seqFlow2.getTarget());
-						}
-					}
-				} else {
+				// nov15: Special treatment for event-based XOR-gateway moved to stepOut; otherwise problems with automatic interpreter
+//				if (seqFlow.getSource() instanceof Gateway && 
+//						((Gateway)seqFlow.getSource()).getGatewayType() == GatewayType.XOR_EVENT) {
+//					// event-based XOR: remove other tokens, too
+//					for (SequenceFlow seqFlow2 : seqFlow.getSource().getOutgoingSeq()) {
+//						changeToken(seqFlow2, -1);
+//						if (updateState(seqFlow2.getTarget())) {
+//							result.add(seqFlow2.getTarget());
+//						}
+//					}
+//				} else {
 					changeToken(seqFlow, -1);
-				}
+//				}
 			}
 
 			// skip assignments when looping
@@ -266,6 +267,20 @@ public abstract class AbstractSimulation implements ISimulation {
 			if (flowObject.getParent() instanceof Activity) {
 				if (updateState((Activity) flowObject.getParent())) {
 					result.add((Activity) flowObject.getParent());
+				}
+			}
+			// cancel other events after event-based XOR gateway
+			// this was previously done in stepInto, but this breaks the automatic interpreter
+			for (SequenceFlow seqFlow : flowObject.getIncomingSeq()) {
+				FlowObject source = seqFlow.getSource();
+				if (source instanceof Gateway && 
+						((Gateway) source).getGatewayType() == GatewayType.XOR_EVENT) {
+					// event-based XOR: remove other tokens, too
+					for (SequenceFlow seqFlow2 : source.getOutgoingSeq()) {
+						if (seqFlow2.getTarget() != flowObject) {
+							setState(seqFlow2.getTarget(), State.IDLE);
+						}
+					}
 				}
 			}
 		}
