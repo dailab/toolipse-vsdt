@@ -236,7 +236,7 @@ public class VsdtHelper {
 		if (container instanceof Service) {
 			name= ((Service) container).getOperation();
 		}
-		if (container instanceof MessageChannel) {
+		if (container instanceof MessageChannel && ((MessageChannel) container).getChannel() != null) {
 			name= ((MessageChannel) container).getChannel().getExpression();
 		}
 		if (name != null) {
