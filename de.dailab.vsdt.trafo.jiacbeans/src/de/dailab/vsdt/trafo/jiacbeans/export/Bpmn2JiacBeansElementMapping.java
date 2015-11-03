@@ -1334,7 +1334,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		return createSequence(
 				createCode("IJiacMessage __msg = receiveMessage(" + clazz + ", " + address + ", -1);"),
 				createCode("if (__msg == null) return; // in case of interruption"),
-				createCode("__sender = __msg.getSender().getName();"),
+				createCode("String __sender = __msg.getSender().getName();"),
 				payload != null ? createCode(payload.getName() + " = (" + payload.getType() + ") __msg.getPayload();") : null);
 	}
 	
