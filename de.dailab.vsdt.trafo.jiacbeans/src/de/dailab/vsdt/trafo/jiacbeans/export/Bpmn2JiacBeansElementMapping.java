@@ -294,38 +294,18 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 								"message.getPayload() instanceof " + payload.getType() + " && ";
 						// Message Channel Start Event
 						// -> create message observer in doStart method 
-						String nameObs = "messageObserver_" + Util.toJavaName(event.getId(), false);
-						String nameQue = "msgQueue_" + Util.toJavaName(event.getId(), false);
-						Sequence attachObserver = createSequence(
-								createJoin(address),
-								createCode(nameQue + " = new LinkedList<>();"),
-								createCode("SpaceObserver<IFact> " + nameObs + " = new SpaceObserver<IFact>() {"),
-								createCode("	public void notify(SpaceEvent<? extends IFact> event) { "),
-								createCode("		if (event instanceof WriteCallEvent) { "),
-								createCode("			IJiacMessage message = (IJiacMessage) ((WriteCallEvent<?>) event).getObject();"),
-								createCode("			if (" + payloadCheck + "message.getHeader(IJiacMessage.Header.SEND_TO).equalsIgnoreCase(\"" + address + "\")) {"),
-								createCode("				memory.remove(message);"),
-								createCode("				" + nameQue + ".add(message);"),
-								createCode("			}"),
-								createCode("		}"),
-								createCode("	}"),
-								createCode("};"),
-								createCode("memory.attach(" + nameObs + ", new JiacMessage());"));
-						addToMethod(doStartMethod, attachObserver);
+						addToMethod(doStartMethod, createJoin(address));
 						
 						// check for new messages in msgQueue in execute (if started in the observer, that gives a deadlock)
-						Sequence checkMsgQueue = createSequence(
-								createCode("while (! " + nameQue + ".isEmpty()) {"),
-								createCode("	IJiacMessage message = " +  nameQue + ".pop();"),
-								createCode("	" + currentWorkflow.getName() + "(message);"),
+						Sequence checkMessage = createSequence(
+								createCode("for (JiacMessage message : memory.readAll(new JiacMessage())) {"),
+								createCode("	if (" + payloadCheck + "message.getHeader(IJiacMessage.Header.SEND_TO).equalsIgnoreCase(\"" + address + "\")) {"),
+								createCode("		memory.remove(message);"),
+								createCode("		" + currentWorkflow.getName() + "(message);"),
+								createCode("	}"),
 								createCode("}"));
-						addToMethod(executeMethod, checkMsgQueue);
+						addToMethod(executeMethod, checkMessage);
 						
-						currentBean.getImports().add("java.util.LinkedList");
-
-						// add msgQueue variable
-						currentBean.getVariables().add(createVariable("LinkedList<IJiacMessage>", nameQue));
-
 						// add payload as parameter to workflow method
 						if (payload != null) {
 							currentWorkflow.getParameters().add(createVariable("IJiacMessage", "__msg"));
