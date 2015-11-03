@@ -1008,7 +1008,6 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			}
 			for (Property property : properties) {
 				if (property != null) {
-					// TODO no need for full-qualified property name here, right? those have been imported
 					seq.getScripts().add(createCode(property.getType() + " " + property.getName() + " = " + createInitializer(property) + ";"));
 				}
 			}
