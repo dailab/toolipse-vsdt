@@ -442,6 +442,15 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAction_ReturnTypes() {
+		return (EAttribute)actionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getScript() {
 		return scriptEClass;
 	}
@@ -705,6 +714,7 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		createEAttribute(actionEClass, ACTION__VARIABLE_NAME);
 		createEAttribute(actionEClass, ACTION__ACTION_ID);
 		createEAttribute(actionEClass, ACTION__SCOPE);
+		createEAttribute(actionEClass, ACTION__RETURN_TYPES);
 
 		scriptEClass = createEClass(SCRIPT);
 
@@ -811,6 +821,9 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 		initEAttribute(getAction_VariableName(), ecorePackage.getEString(), "variableName", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAction_ActionId(), ecorePackage.getEString(), "actionId", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAction_Scope(), ecorePackage.getEString(), "scope", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAction_ReturnTypes(), ecorePackage.getEString(), "returnTypes", null, 0, -1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(actionEClass, ecorePackage.getEString(), "getReturnTypesString", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(scriptEClass, Script.class, "Script", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -862,7 +875,7 @@ public class JiacbeansPackageImpl extends EPackageImpl implements JiacbeansPacka
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";	
 		addAnnotation
 		  (getTryCatch_Catches(), 
 		   source, 

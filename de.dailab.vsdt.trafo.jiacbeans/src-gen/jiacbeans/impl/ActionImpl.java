@@ -6,13 +6,16 @@
  */
 package jiacbeans.impl;
 
+import java.util.Collection;
 import jiacbeans.Action;
 import jiacbeans.JiacbeansPackage;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,6 +27,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  *   <li>{@link jiacbeans.impl.ActionImpl#getVariableName <em>Variable Name</em>}</li>
  *   <li>{@link jiacbeans.impl.ActionImpl#getActionId <em>Action Id</em>}</li>
  *   <li>{@link jiacbeans.impl.ActionImpl#getScope <em>Scope</em>}</li>
+ *   <li>{@link jiacbeans.impl.ActionImpl#getReturnTypes <em>Return Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -89,6 +93,16 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * @ordered
 	 */
 	protected String scope = SCOPE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getReturnTypes() <em>Return Types</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReturnTypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> returnTypes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -177,6 +191,38 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getReturnTypes() {
+		if (returnTypes == null) {
+			returnTypes = new EDataTypeUniqueEList<String>(String.class, this, JiacbeansPackage.ACTION__RETURN_TYPES);
+		}
+		return returnTypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getReturnTypesString() {
+		StringBuffer buffer = new StringBuffer();
+		if (! getReturnTypes().isEmpty()) {
+			buffer.append(", returnTypes={");
+			for (int i = 0; i < getReturnTypes().size(); i++) {
+				if (i > 0) {
+					buffer.append(", ");
+				}
+				buffer.append(getReturnTypes().get(i)).append(".class");
+			}
+			buffer.append("}");
+		}
+		return buffer.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -186,6 +232,8 @@ public class ActionImpl extends EObjectImpl implements Action {
 				return getActionId();
 			case JiacbeansPackage.ACTION__SCOPE:
 				return getScope();
+			case JiacbeansPackage.ACTION__RETURN_TYPES:
+				return getReturnTypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -195,6 +243,7 @@ public class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -206,6 +255,10 @@ public class ActionImpl extends EObjectImpl implements Action {
 				return;
 			case JiacbeansPackage.ACTION__SCOPE:
 				setScope((String)newValue);
+				return;
+			case JiacbeansPackage.ACTION__RETURN_TYPES:
+				getReturnTypes().clear();
+				getReturnTypes().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -228,6 +281,9 @@ public class ActionImpl extends EObjectImpl implements Action {
 			case JiacbeansPackage.ACTION__SCOPE:
 				setScope(SCOPE_EDEFAULT);
 				return;
+			case JiacbeansPackage.ACTION__RETURN_TYPES:
+				getReturnTypes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -246,6 +302,8 @@ public class ActionImpl extends EObjectImpl implements Action {
 				return ACTION_ID_EDEFAULT == null ? actionId != null : !ACTION_ID_EDEFAULT.equals(actionId);
 			case JiacbeansPackage.ACTION__SCOPE:
 				return SCOPE_EDEFAULT == null ? scope != null : !SCOPE_EDEFAULT.equals(scope);
+			case JiacbeansPackage.ACTION__RETURN_TYPES:
+				return returnTypes != null && !returnTypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -266,6 +324,8 @@ public class ActionImpl extends EObjectImpl implements Action {
 		result.append(actionId);
 		result.append(", scope: ");
 		result.append(scope);
+		result.append(", returnTypes: ");
+		result.append(returnTypes);
 		result.append(')');
 		return result.toString();
 	}

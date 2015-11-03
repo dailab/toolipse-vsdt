@@ -346,19 +346,34 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 						Action action = fac.createAction();
 						action.setVariableName("ACTION_" + currentWorkflow.getName().toUpperCase());
 						action.setScope(getActionScope(service));
-//						action.setActionId(currentBean.getPackageName() + "." + currentBean.getName() + "#" + currentWorkflow.getName());
 						action.setActionId(getActionName(service));
+						if (service.getOutput().size() > 1) {
+							for (Property output : service.getOutput()) {
+								action.getReturnTypes().add(output.getType());
+							}
+						}
 						currentBean.getActions().add(action);
 						currentWorkflow.setExposedAs(action);
 					}
 					if (event instanceof End) {
 						// Service End Event -> Return Values of Workflow Method
-						// assignments are made to local variables ...
+						if (service.getOutput().size() == 0) {
+							// nothing to return
+							currentWorkflow.setReturnType("void");
+							mapping = createCode("return;");
+						}
+						if (service.getOutput().size() == 1) {
+							// return just single value
+							currentWorkflow.setReturnType(service.getOutput().get(0).getType());
+							mapping = createCode("return " + service.getOutput().get(0).getName() + ";");
+						}
+						if (service.getOutput().size() > 1) {
+							// output properties returned, wrapped in an array, using @Expose(returnTypes=...)
+							currentWorkflow.setReturnType("Serializable[]");
+							mapping = createCode("return new Serializable[] {" + buildPropertyString(service.getOutput()) + "};");
+						}
+						// all assignments are made to local variables
 						properties.addAll(service.getOutput());
-						// ... which are then returned, wrapped in an array
-						currentWorkflow.setReturnType("Serializable[]");
-						String allOutputs = buildPropertyString(service.getOutput());
-						mapping = createCode("return new Serializable[] {" + allOutputs + "};");
 					}
 					if (event instanceof Intermediate) {
 						// Service Intermediate Event -> Service Invocation
@@ -993,6 +1008,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			}
 			for (Property property : properties) {
 				if (property != null) {
+					// TODO no need for full-qualified property name here, right? those have been imported
 					seq.getScripts().add(createCode(property.getType() + " " + property.getName() + " = " + createInitializer(property) + ";"));
 				}
 			}
@@ -1401,6 +1417,8 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	}
 	
 	private CodeElement createCheckInterrupt() {
+		// TODO return null or new Serializable[n] in workflow method
+		// not trivial, as we do not really know what is the 'current' method...
 		// do this as a one liner to not obstruct the code too much
 		return createCode("if (checkInterrupted()) return;");
 	}

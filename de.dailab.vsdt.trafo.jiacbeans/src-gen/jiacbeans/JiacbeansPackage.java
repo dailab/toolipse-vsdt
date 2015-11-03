@@ -560,13 +560,22 @@ public interface JiacbeansPackage extends EPackage {
 	int ACTION__SCOPE = 2;
 
 	/**
+	 * The feature id for the '<em><b>Return Types</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__RETURN_TYPES = 3;
+
+	/**
 	 * The number of structural features of the '<em>Action</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION_FEATURE_COUNT = 3;
+	int ACTION_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of structural features of the '<em>Script</em>' class.
@@ -1057,6 +1066,17 @@ public interface JiacbeansPackage extends EPackage {
 	EAttribute getAction_Scope();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link jiacbeans.Action#getReturnTypes <em>Return Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Return Types</em>'.
+	 * @see jiacbeans.Action#getReturnTypes()
+	 * @see #getAction()
+	 * @generated
+	 */
+	EAttribute getAction_ReturnTypes();
+
+	/**
 	 * Returns the meta object for class '{@link jiacbeans.Script <em>Script</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1541,6 +1561,14 @@ public interface JiacbeansPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ACTION__SCOPE = eINSTANCE.getAction_Scope();
+
+		/**
+		 * The meta object literal for the '<em><b>Return Types</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTION__RETURN_TYPES = eINSTANCE.getAction_ReturnTypes();
 
 		/**
 		 * The meta object literal for the '{@link jiacbeans.impl.ScriptImpl <em>Script</em>}' class.

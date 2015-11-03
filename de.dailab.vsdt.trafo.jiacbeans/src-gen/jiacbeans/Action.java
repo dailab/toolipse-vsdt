@@ -6,6 +6,7 @@
  */
 package jiacbeans;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link jiacbeans.Action#getVariableName <em>Variable Name</em>}</li>
  *   <li>{@link jiacbeans.Action#getActionId <em>Action Id</em>}</li>
  *   <li>{@link jiacbeans.Action#getScope <em>Scope</em>}</li>
+ *   <li>{@link jiacbeans.Action#getReturnTypes <em>Return Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,5 +106,29 @@ public interface Action extends EObject {
 	 * @generated
 	 */
 	void setScope(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Return Types</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Return Types</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Return Types</em>' attribute list.
+	 * @see jiacbeans.JiacbeansPackage#getAction_ReturnTypes()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getReturnTypes();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getReturnTypesString();
 
 } // Action
