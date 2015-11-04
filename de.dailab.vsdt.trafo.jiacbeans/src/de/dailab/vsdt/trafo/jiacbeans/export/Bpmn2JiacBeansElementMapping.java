@@ -307,9 +307,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 						addToMethod(executeMethod, checkMessage);
 						
 						// add payload as parameter to workflow method
-						if (payload != null) {
-							currentWorkflow.getParameters().add(createVariable("IJiacMessage", "__msg"));
-						}
+						currentWorkflow.getParameters().add(createVariable("IJiacMessage", "__msg"));
 						mapping = createSequence(createCode("String __sender = __msg.getSender().getName();"),
 								payload != null ? createCode(payload.getType() + " " + payload.getName() + " = (" + 
 										payload.getType() + ") __msg.getPayload();") : null);
@@ -779,17 +777,12 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 						return null;
 					}
 					
-					String[] ret = createEventHandler(event, waitThread.getVariableName());
-					String threadName = ret[0], className  = ret[1], parameters = ret[2], impl = ret[3];
-					
-					// common for all event handler: create starter and stopper
-					threads.getScripts().add(createCode("EventHandler " + threadName + " = new " + className + "(" + parameters + ")" + impl + ";"));
-					starter.getScripts().add(createCode(threadName + ".start();"));
-					stopper.getScripts().add(createCode(threadName + ".stopEventHandler();"));
-					
 					// create compensation code
-					compensation.getScripts().add(createIfThenElse(
-							threadName + ".isTriggered()", visitFlowObject(branchSeq), null));
+					Script script = visitFlowObject(branchSeq);
+					script = builtEventHandlerThread(event, script, waitThread.getVariableName(), threads, starter, stopper);
+					if (script != null) {
+						compensation.getScripts().add(script);
+					}
 				}
 				// assemble sequence: create, start and join threads, do compensation
 				TryCatch tryCatch = createTryCatch(
@@ -923,21 +916,12 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 
 			} else {
 				// non-error event handlers are implemented as threads
-				String[] ret = createEventHandler(event, mainThread.getVariableName());
-				String threadName = ret[0], className  = ret[1], parameters = ret[2], impl = ret[3];
-				
-				// common for all event handler: create starter and stopper
-				threads.getScripts().add(createCode("EventHandler " + threadName + " = new " + className + "(" + parameters + ")" + impl + ";"));
-				starter.getScripts().add(createCode(threadName + ".start();"));
-				stopper.getScripts().add(createCode(threadName + ".stopEventHandler();"));
-				// TODO das ganze starten und stoppen der threads in hilfsmethode auslagern?
-				
 				// create compensation code
 				Script script = visitFlowObject(ehCase.getCompensationElement());
+				script = builtEventHandlerThread(event, script, mainThread.getVariableName(), threads, starter, stopper);
 				if (script != null) {
-					compensation.getScripts().add(createIfThenElse(threadName + ".isTriggered()", script, null));
+					compensation.getScripts().add(script);
 				}
-				// TODO assign message payloads to variables!
 			}
 		}
 		
@@ -1027,6 +1011,65 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 		}
 		seq.getScripts().addAll(endAss);
 		return seq;
+	}
+	
+	/**
+	 * This code is used for both, Event-based XOR Gateways and Event Handlers. 
+	 * It creates the event handler thread and adds it to the respective sequences
+	 * for maintaining the threads. Finally, it creates the conditional block for
+	 * handling the actual event handler code, including the assignments of the
+	 * event itself.
+	 * 
+	 * This will automatically add scripts for creating, starting and stopping 
+	 * the thread to the respective sequences.
+	 * 
+	 * @param event				the actual event triggering the event handler
+	 * @param script			the script that has been derived from the body
+	 * @param mainThreadName	the name of the main thread
+	 * @param threads			sequence for creating the threads
+	 * @param starter			sequence for starting the threads
+	 * @param stopper			sequence for stopping the threads
+	 * @return					the code to be put into the compensation sequence, or null
+	 */
+	private Script builtEventHandlerThread(Event event, Script script, String mainThreadName, Sequence threads, Sequence starter, Sequence stopper) {
+		String[] ret = createEventHandler(event, mainThreadName);
+		String threadName = ret[0], className  = ret[1], parameters = ret[2], impl = ret[3];
+		
+		// common for all event handler: create starter and stopper
+		threads.getScripts().add(createCode(className + " " + threadName + " = new " + className + "(" + parameters + ")" + impl + ";"));
+		starter.getScripts().add(createCode(threadName + ".start();"));
+		stopper.getScripts().add(createCode(threadName + ".stopEventHandler();"));
+		
+		// create compensation code
+		if (script != null || ! event.getAssignments().isEmpty()) {
+			// if the event had assignments, do those assignments now
+			if (! event.getAssignments().isEmpty()) {
+				Sequence sequence = fac.createSequence();
+				
+				// if message event: get received message from event handler
+				if (event.getTrigger() == TriggerType.MESSAGE && event.getImplementation() instanceof MessageChannel) {
+					Property payload = ((MessageChannel) event.getImplementation()).getPayload();
+					sequence.getScripts().add(createCode("IJiacMessage __msg = " + threadName + ".getReceived();"));
+					sequence.getScripts().add(createCode("String __sender = __msg.getSender().getName();"));
+					if (payload != null) {
+						sequence.getScripts().add(createCode(String.format("%1$s %2$s = (%1$s) __msg.getPayload();", payload.getType(), payload.getName())));
+					}
+				}
+				
+				// add assignments
+				sequence.getScripts().addAll(createAssigns(event.getAssignments(), null));
+				
+				// then do the script
+				if (script != null) {
+					sequence.getScripts().add(script);
+				}
+				script = sequence;
+			}
+			// create and return the compensation code
+			return createIfThenElse(threadName + ".isTriggered()", script, null);
+		}
+		// nothing to do
+		return null;
 	}
 	
 	/**
