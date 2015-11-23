@@ -434,7 +434,16 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			}
 			case RULE: {
 				String rule = event.getRuleExpression().getExpression();
-
+				/*
+				 * TODO Support for other types of rules, particularly for start events?
+				 * Problem with current approach: Rule operates on process variables only, which
+				 * can not really change until the process has started. Alternatives: Use Drools 
+				 * rules (at least for start event, not sure about intermediate) or match simple
+				 * template object against agent memory, e.g. using "x = Foo("bar"); Bar(x)" for
+				 * x = memory.read(new Foo("bar")); y = memory.read(new Bar(x)); if (y != null) ...
+				 * 
+				 * Problem with that approach: This would be the only part that uses the agent's memory.
+				 */
 				// Start Event -> Check Condition in Execute Method
 				if (event instanceof Start) {
 					// if flag is 1 and the rule does no longer apply -> reset flag
@@ -621,6 +630,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 				// skip remainder of method, i.e. do not create Activity Method for Subprocess
 				return mapping;
 			}
+			// TODO business rule: match template in memory, or fire some drools rule? any different from rule event?
 			default: {
 				TrafoLog.nyi("No Mapping for Activity with type " + activity.getActivityType().getName() + "; " + activity);
 			}
@@ -1429,6 +1439,7 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 			threadName = threadName + "_rule";
 			className = "Rule" + className;
 			implementation = " { public boolean checkRule() {return " + rule +  ";}}";
+			// TODO Support different kinds of rules? Try to read template from memory? Use Drools?
 		}
 		
 		return new String[] {threadName, className, parameters, implementation};
