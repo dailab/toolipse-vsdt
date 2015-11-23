@@ -21,11 +21,15 @@
     <module>de.dailab.vsdt.edit</module>
     <module>de.dailab.vsdt.trafo</module>
     <module>de.dailab.vsdt.trafo.bpel</module>
+<!--
     <module>de.dailab.vsdt.trafo.jadlpp</module>
+-->
     <module>de.dailab.vsdt.trafo.jiacbeans</module>
     <module>de.dailab.vsdt.trafo.strucbpmn</module>
     <module>de.dailab.vsdt.trafo.text</module>
+<!--
     <module>de.dailab.vsdt.vsdtagents</module>
+-->
     <module>de.dailab.vsdt.vxl2</module>
   </modules>
 
