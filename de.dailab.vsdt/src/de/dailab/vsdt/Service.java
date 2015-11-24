@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.Service#getOutput <em>Output</em>}</li>
  *   <li>{@link de.dailab.vsdt.Service#getPreconditions <em>Preconditions</em>}</li>
  *   <li>{@link de.dailab.vsdt.Service#getEffects <em>Effects</em>}</li>
+ *   <li>{@link de.dailab.vsdt.Service#isTemplate <em>Template</em>}</li>
  * </ul>
  * </p>
  *
@@ -253,5 +254,32 @@ public interface Service extends Implementation {
 	 * @generated
 	 */
 	EList<Expression> getEffects();
+
+	/**
+	 * Returns the value of the '<em><b>Template</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Template</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Template</em>' attribute.
+	 * @see #setTemplate(boolean)
+	 * @see de.dailab.vsdt.VsdtPackage#getService_Template()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isTemplate();
+
+	/**
+	 * Sets the value of the '{@link de.dailab.vsdt.Service#isTemplate <em>Template</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Template</em>' attribute.
+	 * @see #isTemplate()
+	 * @generated
+	 */
+	void setTemplate(boolean value);
 
 } // Service

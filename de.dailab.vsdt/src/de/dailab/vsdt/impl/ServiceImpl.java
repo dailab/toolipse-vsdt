@@ -40,6 +40,7 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.ServiceImpl#getOutput <em>Output</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ServiceImpl#getPreconditions <em>Preconditions</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ServiceImpl#getEffects <em>Effects</em>}</li>
+ *   <li>{@link de.dailab.vsdt.impl.ServiceImpl#isTemplate <em>Template</em>}</li>
  * </ul>
  * </p>
  *
@@ -195,6 +196,26 @@ public class ServiceImpl extends ImplementationImpl implements Service {
 	 * @ordered
 	 */
 	protected EList<Expression> effects;
+
+	/**
+	 * The default value of the '{@link #isTemplate() <em>Template</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTemplate()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean TEMPLATE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isTemplate() <em>Template</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTemplate()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean template = TEMPLATE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -411,6 +432,27 @@ public class ServiceImpl extends ImplementationImpl implements Service {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isTemplate() {
+		return template;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTemplate(boolean newTemplate) {
+		boolean oldTemplate = template;
+		template = newTemplate;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.SERVICE__TEMPLATE, oldTemplate, template));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -455,6 +497,8 @@ public class ServiceImpl extends ImplementationImpl implements Service {
 				return getPreconditions();
 			case VsdtPackage.SERVICE__EFFECTS:
 				return getEffects();
+			case VsdtPackage.SERVICE__TEMPLATE:
+				return isTemplate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -502,6 +546,9 @@ public class ServiceImpl extends ImplementationImpl implements Service {
 				getEffects().clear();
 				getEffects().addAll((Collection<? extends Expression>)newValue);
 				return;
+			case VsdtPackage.SERVICE__TEMPLATE:
+				setTemplate((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -544,6 +591,9 @@ public class ServiceImpl extends ImplementationImpl implements Service {
 			case VsdtPackage.SERVICE__EFFECTS:
 				getEffects().clear();
 				return;
+			case VsdtPackage.SERVICE__TEMPLATE:
+				setTemplate(TEMPLATE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -576,6 +626,8 @@ public class ServiceImpl extends ImplementationImpl implements Service {
 				return preconditions != null && !preconditions.isEmpty();
 			case VsdtPackage.SERVICE__EFFECTS:
 				return effects != null && !effects.isEmpty();
+			case VsdtPackage.SERVICE__TEMPLATE:
+				return template != TEMPLATE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -600,6 +652,8 @@ public class ServiceImpl extends ImplementationImpl implements Service {
 		result.append(description);
 		result.append(", location: ");
 		result.append(location);
+		result.append(", template: ");
+		result.append(template);
 		result.append(')');
 		return result.toString();
 	}

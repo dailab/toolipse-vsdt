@@ -3488,13 +3488,22 @@ public interface VsdtPackage extends EPackage {
 	int SERVICE__EFFECTS = IMPLEMENTATION_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SERVICE__TEMPLATE = IMPLEMENTATION_FEATURE_COUNT + 10;
+
+	/**
 	 * The number of structural features of the '<em>Service</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SERVICE_FEATURE_COUNT = IMPLEMENTATION_FEATURE_COUNT + 10;
+	int SERVICE_FEATURE_COUNT = IMPLEMENTATION_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.AssignmentImpl <em>Assignment</em>}' class.
@@ -5273,6 +5282,17 @@ public interface VsdtPackage extends EPackage {
 	EReference getService_Effects();
 
 	/**
+	 * Returns the meta object for the attribute '{@link de.dailab.vsdt.Service#isTemplate <em>Template</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Template</em>'.
+	 * @see de.dailab.vsdt.Service#isTemplate()
+	 * @see #getService()
+	 * @generated
+	 */
+	EAttribute getService_Template();
+
+	/**
 	 * Returns the meta object for class '{@link de.dailab.vsdt.Assignment <em>Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6970,6 +6990,14 @@ public interface VsdtPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SERVICE__EFFECTS = eINSTANCE.getService_Effects();
+
+		/**
+		 * The meta object literal for the '<em><b>Template</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SERVICE__TEMPLATE = eINSTANCE.getService_Template();
 
 		/**
 		 * The meta object literal for the '{@link de.dailab.vsdt.impl.AssignmentImpl <em>Assignment</em>}' class.

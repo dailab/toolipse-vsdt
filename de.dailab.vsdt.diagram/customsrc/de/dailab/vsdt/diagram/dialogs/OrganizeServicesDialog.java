@@ -40,6 +40,7 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 	private static final String BUTTON_OUTPUT = "Output...";
 	private static final String BUTTON_PRE = "Precond's...";
 	private static final String BUTTON_EFF = "Effects...";
+	private static final String BUTTON_TEMPL = "Template";
 	
 	/**implementation.interface input field*/
 	private Text interfaceText;
@@ -70,6 +71,9 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 	
 	/** button for opening the organize effects dialog */
 	private Button effButton;
+	
+	/** checkbox button for whether the service is a template */
+	private Button templButton;
 	
 	@Override
 	public String getElementName() {
@@ -147,6 +151,9 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 		effButton.setText(BUTTON_EFF);
 		effButton.addSelectionListener(this);
 		
+		templButton = new Button(editGroup, SWT.CHECK);
+		templButton.setText(BUTTON_TEMPL);
+		templButton.addSelectionListener(this);
 	}
 
 	@Override
@@ -188,6 +195,7 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 			locationText.setText(locString);
 			//set participant, input / output message
 			partCombo.setSelected(service.getParticipant());
+			templButton.setSelection(service.isTemplate());
 		}
 		partCombo.getCombo().setEnabled(service != null);
 		interfaceText.setEnabled(service != null);
@@ -196,6 +204,7 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 		outputButton.setEnabled(service != null);
 		preButton.setEnabled(service != null);
 		effButton.setEnabled(service != null);
+		templButton.setEnabled(service != null);
 	}
 
 //	@Override
@@ -221,7 +230,6 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 	
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		super.widgetSelected(e);
 		Service service = getSelectedElement();
 		if (service != null) {
 			if (e.getSource() == inputButton) {
@@ -236,7 +244,11 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 			if (e.getSource() == effButton) {
 				OrganizeElementsAction.getExpressionsAction(1).run(service);
 			}
+			if (e.getSource() == templButton) {
+				service.setTemplate(templButton.getSelection());
+			}
 		}
+		super.widgetSelected(e);
 	}
 	
 	@Override

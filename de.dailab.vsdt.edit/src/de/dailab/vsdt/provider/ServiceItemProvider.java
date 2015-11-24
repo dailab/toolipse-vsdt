@@ -57,6 +57,7 @@ public class ServiceItemProvider
 			addOperationPropertyDescriptor(object);
 			addDescriptionPropertyDescriptor(object);
 			addLocationPropertyDescriptor(object);
+			addTemplatePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -194,6 +195,28 @@ public class ServiceItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Template feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTemplatePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Service_template_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Service_template_feature", "_UI_Service_type"),
+				 VsdtPackage.Literals.SERVICE__TEMPLATE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -268,6 +291,7 @@ public class ServiceItemProvider
 			case VsdtPackage.SERVICE__OPERATION:
 			case VsdtPackage.SERVICE__DESCRIPTION:
 			case VsdtPackage.SERVICE__LOCATION:
+			case VsdtPackage.SERVICE__TEMPLATE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case VsdtPackage.SERVICE__INPUT:
