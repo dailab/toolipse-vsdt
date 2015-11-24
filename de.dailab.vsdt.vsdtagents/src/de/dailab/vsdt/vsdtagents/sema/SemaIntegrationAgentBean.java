@@ -55,10 +55,11 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 	 * and add it to the VSDT diagram opened in the active editor, if any.
 	 * 
 	 * @param action		the Action or ServiceDescription to add a corresponding VSDT service for
+	 * @param asTemplate	whether the service description is just a template or actual service
 	 * @throws Exception	exception in case anything goes wrong
 	 */
 	@Expose(name=ACTION_PUSH_SERVICE, scope=ActionScope.NODE)
-	public void pushServiceIntoVsdt(Action action) throws Exception {
+	public void pushServiceIntoVsdt(Action action, Boolean asTemplate) throws Exception {
 		
 		// get BPS from editor, thus checking whether current editor is VSDT editor
 		final IWorkbenchWindow[] wbws = PlatformUI.getWorkbench().getWorkbenchWindows();
@@ -71,6 +72,7 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 			final Service service = (action instanceof ServiceDescription)
 					? SemanticServiceFactory.createService((ServiceDescription) action)
 					: SemanticServiceFactory.createService(action);
+			service.setTemplate(asTemplate);
 
 			// create VSDT DataType objects corresponding to those used by the service
 			final Set<DataType> dataTypes = (action instanceof ServiceDescription)

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.semanticweb.owlapi.model.SWRLRule;
 
@@ -140,8 +141,13 @@ public class SemanticServiceFactory {
 		try {
 			serviceDescription = OntoUtils.reloadOntology(serviceDescription);
 		} catch (Exception e) {
-			MessageDialog.openWarning(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
-					"Error loading Ontologies", "Could not load linked ontologies. Some semantic information might have been lost.");
+			Display.getDefault().asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					MessageDialog.openWarning(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+							"Error loading Ontologies", "Could not load linked ontologies. Some semantic information might have been lost.");
+				}
+			});
 		}
 		
 		Service result = VsdtFactory.eINSTANCE.createService();
