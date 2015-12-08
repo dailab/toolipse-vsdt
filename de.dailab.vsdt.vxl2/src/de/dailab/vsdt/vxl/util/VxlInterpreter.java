@@ -343,13 +343,17 @@ public class VxlInterpreter {
 	 */
 	protected Serializable evalValue(VxlValue value) {
 		if (value instanceof VxlStringConst) {
-			return ((VxlStringConst) value).getConst();
+			return value.getConst();
 		}
 		if (value instanceof VxlBooleanConst) {
-			return "true".equals(((VxlBooleanConst) value).getConst());
+			return "true".equals(value.getConst());
 		}
 		if (value instanceof VxlNumericConst) {
-			return Double.parseDouble(((VxlNumericConst) value).getConst());
+			try {
+				return Integer.parseInt(value.getConst());
+			} catch (NumberFormatException e) {
+				return Double.parseDouble(value.getConst());
+			}
 		}
 		if (value instanceof VxlNullConst) {
 			return null;
@@ -407,32 +411,52 @@ public class VxlInterpreter {
 				result.add(tail);
 				return result;
 			} else if (head instanceof Number && tail instanceof Number) {
-				return toDouble((Number) head) + toDouble((Number) tail);
+				if (head instanceof Double || tail instanceof Double) {
+					return toDouble(head) + toDouble(tail);
+				} else {
+					return toInteger(head) + toInteger(tail);
+				}
 			}
 		case MULT:
 			if (head instanceof List && tail instanceof Number) {
 				Vector result = new Vector();
-				double t = (Double) tail;
+				int t = ((Number) tail).intValue();
 				for (int i=0; i < t; i++) {
 					result.addAll((Vector) head);
 				}
 				return result;
 			} else if (head instanceof String && tail instanceof Number) {
 				StringBuffer result = new StringBuffer();
-				double t = (Double) tail;
+				int t = ((Number) tail).intValue();
 				for (int i=0; i < t; i++) {
 					result.append((String) head);
 				}
 				return result.toString();
 			} else if (head instanceof Number && tail instanceof Number) {
-				return toDouble((Number) head) * toDouble((Number) tail);
+				if (head instanceof Double || tail instanceof Double) {
+					return toDouble(head) * toDouble(tail);
+				} else {
+					return toInteger(head) * toInteger(tail);
+				}
 			}
 		case SUB:
-			return toDouble((Number) head) - toDouble((Number) tail);
+			if (head instanceof Double || tail instanceof Double) {
+				return toDouble(head) - toDouble(tail);
+			} else {
+				return toInteger(head) - toInteger(tail);
+			}
 		case DIV:
-			return toDouble((Number) head) / toDouble((Number) tail);
+			if (head instanceof Double || tail instanceof Double) {
+				return toDouble(head) / toDouble(tail);
+			} else {
+				return toInteger(head) / toInteger(tail);
+			}
 		case MOD:
-			return toDouble((Number) head) % toDouble((Number) tail);
+			if (head instanceof Double || tail instanceof Double) {
+				return toDouble(head) % toDouble(tail);
+			} else {
+				return toInteger(head) % toInteger(tail);
+			}
 		case AND:
 			return (Boolean) head && (Boolean) tail;
 		case OR:
@@ -464,24 +488,19 @@ public class VxlInterpreter {
 	@SuppressWarnings("rawtypes")
 	private Comparable toDoubleIfNumber(Object o) {
 		if (o instanceof Number) {
-			return toDouble((Number) o);
+			return toDouble(o);
 		}
 		return (Comparable) o;
 	}
 	
-	private double toDouble(Number n) {
-		if (n instanceof Integer) {
-			return ((Integer) n).doubleValue();
-		}
-		if (n instanceof Long) {
-			return ((Long) n).doubleValue();
-		}
-		if (n instanceof Double) {
-			return (Double) n;
-		}
-		return 0;
+	private double toDouble(Object number) {
+		return ((Number) number).doubleValue();
 	}
-
+	
+	private int toInteger(Object number) {
+		return ((Number) number).intValue();
+	}
+	
 	/**
 	 * Check whether the given terms match the operator.
 	 *  
