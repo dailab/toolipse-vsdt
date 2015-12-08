@@ -133,6 +133,18 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	public void setPropertyValue(Property property, Serializable value) {
 		if (property != null) {
 			propertyValueMap.put(property, value);
+			// check whether value's type matches property's type
+			try {
+				Class<?> clazz = Class.forName(VsdtHelper.getProperType(property));
+				if (! clazz.isAssignableFrom(value.getClass())) {
+					logMessage(LogLevel.WARN, "Mismatched Types", 
+							String.format("Type of value does not match type of Property. Expected %s, but found %s.", 
+									clazz.getName(), value.getClass().getName()));
+				}
+			} catch (ClassNotFoundException e) {
+				logMessage(LogLevel.WARN, "Could not find class", 
+						String.format("Could not find Class corresponding do Property's type: %s", property.getType()));
+			}
 		}
 	}
 	
@@ -398,7 +410,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 		// get local properties
 		Map<String, Serializable> context= new HashMap<>();
 		for (Property property : VsdtHelper.getVisibleProperties(eObject)) {
-			context.put(property.getName(), propertyValueMap.get(property));
+			context.put(property.getName(), getPropertyValue(property));
 		}
 		return context;
 	}
@@ -409,8 +421,8 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	public final String getPropertiesString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("--- Properties Table ---" + NL);
-		for (Property property : propertyValueMap.keySet()) {
-			builder.append(tabulate(20, (property != null ? property.getName() : "null"), propertyValueMap.get(property)));
+		for (Property property : getProperties()) {
+			builder.append(tabulate(20, (property != null ? property.getName() : "null"), getPropertyValue(property)));
 		}
 		return builder.toString();
 	}

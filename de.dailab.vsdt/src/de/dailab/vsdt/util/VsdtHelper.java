@@ -36,6 +36,7 @@ import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.Service;
 import de.dailab.vsdt.StandardLoopAttSet;
+import de.dailab.vsdt.vxl.util.Util;
 
 
 /**
@@ -49,6 +50,20 @@ import de.dailab.vsdt.StandardLoopAttSet;
 public class VsdtHelper {
 
 	public static final String ESCAPE_PARAMETER = "@";
+	
+	
+	/**
+	 * Find substitute for basic 'VXL' data types, like integer, boolean, etc.
+	 * 
+	 * @param property	some property
+	 * @return			substitute data type, if primitive, or actual data type
+	 */
+	public static String getProperType(Property property) {
+		if (property != null) {
+			return Util.getProperType(property.getType());
+		}
+		return null;
+	}
 	
 	/**
 	 * create and initialize a new id object for the given
