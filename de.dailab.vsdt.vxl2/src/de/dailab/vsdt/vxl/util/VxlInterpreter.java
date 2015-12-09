@@ -148,22 +148,23 @@ public class VxlInterpreter {
 	/**
 	 * VxlConstructor:    "new" function = VxlFunction;
 	 */
-	protected  Serializable evalConstructor(VxlConstructor constructor) {
+	protected Serializable evalConstructor(VxlConstructor constructor) {
 		try {
 			Class<?> clazz = Class.forName(constructor.getName());
 			List<Serializable> params = evalListElement(constructor.getBody());
-			Class<?>[] paramTypes = getParamTypes(params);
-			// XXX instance types might not match declared param types!
-
-			Constructor<?> constr = clazz.getConstructor(paramTypes);
-			Serializable result = (Serializable) constr.newInstance(params.toArray());
-			return result;
-		} catch (InstantiationException | IllegalAccessException
-				| IllegalArgumentException | InvocationTargetException
-				| NoSuchMethodException | SecurityException | ClassNotFoundException e) {
+			for (Constructor<?> constr : clazz.getConstructors()) {
+				try {
+					return (Serializable) constr.newInstance(params.toArray());
+				} catch (InstantiationException | IllegalAccessException
+						| IllegalArgumentException | InvocationTargetException e) {
+					// nothing to do, just try the next constructor
+				}
+			}
+			throw new IllegalArgumentException("No match for given parameters found.");
+		} catch (ClassNotFoundException | IllegalArgumentException e) {
 			errors.put(constructor, "Failed to use Constructor for " + constructor.getName() + ": " + e.getMessage());
-			return null;
 		}
+		return null;
 	}
 
 	/**
@@ -219,16 +220,9 @@ public class VxlInterpreter {
 		// get value from context
 		if (context != null) {
 			Serializable value= context.get(variable.getName());
-			//XXX why does context.get not work here?
-			for (String key : context.keySet()) {
-				if (key.equals(variable.getName())) {
-					value= context.get(key);
-					if (value == null) {
-						errors.put(variable, "Variable has not been initialized");
-					}
-				}
-			}
-			if (variable.getAccessor() != null) {
+			if (value == null) {
+				errors.put(variable, "Variable has not been initialized");
+			} else if (variable.getAccessor() != null) {
 				value = evalAccessor(variable.getAccessor(), value);
 			}
 			return value;
@@ -321,19 +315,30 @@ public class VxlInterpreter {
 	 * MethodAccessor:	"." function = Function (accessor = Accessor)?;
 	 */
 	protected Serializable evalMethodAccessor(VxlMethodAccessor accessor, Serializable value) {
-		Class<?> clazz = value.getClass();
 		try {
+			Class<?> clazz = value.getClass();
 			List<Serializable> params = evalListElement(accessor.getFunction().getBody());
-			Class<?>[] paramTypes = getParamTypes(params);
-			// XXX instance types might not match declared param types!
-			Method method = clazz.getMethod(accessor.getFunction().getName(), paramTypes);
-			value = (Serializable) method.invoke(value, params.toArray());
-		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e) {
+			boolean foundOne = false;
+			for (Method method : clazz.getMethods()) {
+				if (method.getName().equals(accessor.getFunction().getName())) {
+					try {
+						value = (Serializable) method.invoke(value, params.toArray());
+						foundOne = true;
+						break;
+					} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+						// nothing to do, just try the next method
+					}
+				}
+			}
+			if (! foundOne) {
+				throw new IllegalArgumentException("No match for given parameters found.");
+			}
+			// another accessor?
+			if (accessor.getAccessor() != null) {
+				value = evalAccessor(accessor.getAccessor(), value);
+			}
+		} catch (IllegalArgumentException e) {
 			errors.put(accessor, "Could not access method " + accessor.getFunction().getName() + ": " + e.getMessage());
-		}
-		// another accessor?
-		if (accessor.getAccessor() != null) {
-			value = evalAccessor(accessor.getAccessor(), value);
 		}
 		return value;
 	}
@@ -543,12 +548,4 @@ public class VxlInterpreter {
 		return false;
 	}
 
-	private Class<?>[] getParamTypes(List<Serializable> params) {
-		Class<?>[] paramTypes = new Class[params.size()];
-		for (int i = 0; i < params.size(); i++) {
-			paramTypes[i] = params.get(i).getClass();
-		}
-		return paramTypes;
-	}
-	
 }

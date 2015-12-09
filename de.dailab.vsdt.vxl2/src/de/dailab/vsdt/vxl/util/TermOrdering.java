@@ -221,6 +221,11 @@ public class TermOrdering {
 		public TermLeaf(VxlElement term) {
 			this.term= term;
 		}
+		
+		@Override
+		public String toString() {
+			return String.format("TermLeaf(%s)", term);
+		}
 	}
 	
 	/**
@@ -237,6 +242,11 @@ public class TermOrdering {
 			this.left= left;
 			this.right= right;
 			this.operator= operator;
+		}
+		
+		@Override
+		public String toString() {
+			return String.format("TermNode(%s, %s, %s)", left, operator, right);
 		}
 	}
 	

@@ -136,7 +136,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 			// check whether value's type matches property's type
 			try {
 				Class<?> clazz = Class.forName(VsdtHelper.getProperType(property));
-				if (! clazz.isAssignableFrom(value.getClass())) {
+				if (value != null && ! clazz.isAssignableFrom(value.getClass())) {
 					logMessage(LogLevel.WARN, "Mismatched Types", 
 							String.format("Type of value does not match type of Property. Expected %s, but found %s.", 
 									clazz.getName(), value.getClass().getName()));
@@ -283,31 +283,30 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 				if (assignment.getAssignTime() == assignTime && assignment.getFrom() != null) {
 					Serializable value= parseAndEvaluate(assignment.getFrom(), createContext(eObject));
 					if (assignment.getToQuery() != null) {
-						// try to assign to array index
-						Serializable query = parseAndEvaluate(assignment.getToQuery(), createContext(eObject));
-						if (query instanceof Number) {
-							Number number = (Number) query;
-							Serializable propVal = getPropertyValue(assignment.getTo());
-							if (propVal instanceof List) {
+						Serializable propVal = getPropertyValue(assignment.getTo());
+						if (propVal instanceof List) {
+							// try to assign to array index
+							Serializable query = parseAndEvaluate(assignment.getToQuery(), createContext(eObject));
+							if (query instanceof Number) {
+								Number number = (Number) query;
 								List<Serializable> list = (List) propVal;
 								list.set(Util.asInteger(number), value); 
 							}
 						} else {
 							// try to interpret query as an attribute/setter
 							String fieldName = assignment.getToQuery();
-							Object object = getPropertyValue(assignment.getTo());
-							Class<?> clazz = object.getClass();
+							Class<?> clazz = propVal.getClass();
 							try {
 								// try to access regular public field
 								Field field = clazz.getField(fieldName);
-								field.set(object, value);
+								field.set(propVal, value);
 							} catch (NoSuchFieldException | SecurityException | IllegalAccessException e) {
 								try {
 									// try to access accordingly named getter method
 									String setter = "set" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
 									Method method = clazz.getMethod(setter, value.getClass());
 									// XXX instance types might not match declared param types!
-									method.invoke(object, value);
+									method.invoke(propVal, value);
 								} catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e2) {
 									System.err.println("Could not assign value to to-query " + fieldName);
 								}
