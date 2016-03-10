@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,7 +21,6 @@ import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.Service;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.vxl.util.Util;
 
 /**
  * Class providing some of the helper methods formerly found in 
@@ -71,13 +69,13 @@ public class SemanticServiceFactory {
 		for (int i = 0; i < action.getInputTypeNames().size(); i++) {
 			Property input = VsdtFactory.eINSTANCE.createProperty();
 			input.setName(String.format("arg%d", i));
-			input.setType(action.getInputTypeNames().get(i));
+			input.setType(getProperType(action.getInputTypeNames().get(i)));
 			result.getInput().add(input);
 		}
 		for (int i = 0; i < action.getResultTypeNames().size(); i++) {
 			Property output = VsdtFactory.eINSTANCE.createProperty();
 			output.setName(String.format("res%d", i));
-			output.setType(action.getResultTypeNames().get(i));
+			output.setType(getProperType(action.getResultTypeNames().get(i)));
 			result.getOutput().add(output);
 		}
 		return result;
@@ -103,13 +101,15 @@ public class SemanticServiceFactory {
 		allTypeNames.addAll(action.getResultTypeNames());
 
 		for (String typeName : allTypeNames) {
-			DataType dataType = VsdtFactory.eINSTANCE.createDataType();
-			dataType.setLanguage("Java");
-			int dot = typeName.lastIndexOf('.');
-			dataType.setName(typeName.substring(dot + 1));
-			dataType.setPackage(typeName.substring(0, dot));
-//			dataType.setUrl(null);
-			result.add(dataType);
+			if (! OntoUtils.specialTypes.containsKey(typeName)) {
+				DataType dataType = VsdtFactory.eINSTANCE.createDataType();
+				dataType.setLanguage("Java");
+				int dot = typeName.lastIndexOf('.');
+				dataType.setName(typeName.substring(dot + 1));
+				dataType.setPackage(typeName.substring(0, dot));
+//				dataType.setUrl(null);
+				result.add(dataType);
+			}
 		}
 		return result;
 	}
@@ -164,13 +164,13 @@ public class SemanticServiceFactory {
 		for (Param param : serviceDescription.getProcess().getInput()) {
 			Property input = VsdtFactory.eINSTANCE.createProperty();
 			input.setName(param.getName());
-			input.setType(getTypeFromTypeUri(param.getType()));
+			input.setType(getTypeFromParam(param));
 			result.getInput().add(input);
 		}
 		for (Param param : serviceDescription.getProcess().getOutput()) {
 			Property output = VsdtFactory.eINSTANCE.createProperty();
 			output.setName(param.getName());
-			output.setType(getTypeFromTypeUri(param.getType()));
+			output.setType(getTypeFromParam(param));
 			result.getOutput().add(output);
 		}
 		// add precondition and effect, if reconstruction was successful
@@ -205,7 +205,6 @@ public class SemanticServiceFactory {
 	 * @return						VSDT DataTypes according to those used by service
 	 */
 	public static Set<DataType> createDatatypes(ServiceDescription serviceDescription) {
-		Set<String> primitives = new HashSet<>(Arrays.asList(Util.datatypes));
 		Set<DataType> result = new HashSet<>();
 		
 		List<Param> allParams = new ArrayList<>();
@@ -213,14 +212,19 @@ public class SemanticServiceFactory {
 		allParams.addAll(serviceDescription.getProcess().getOutput());
 
 		for (Param param : allParams) {
-			String name = getTypeFromTypeUri(param.getType());
-			if (! primitives.contains(name)) {
+			String fullName = getTypeFromParam(param);
+			if (! OntoUtils.specialTypes.containsKey(fullName)) {
 				DataType dataType = VsdtFactory.eINSTANCE.createDataType();
-				dataType.setLanguage("OWL-S");
+				
+				int sep = fullName.lastIndexOf('.');
+				String pkg = fullName.substring(0, sep);
+				String name = fullName.substring(sep);
+
 				dataType.setName(name);
-				// param.getJavaClass() would be useful here, but it is null
-				// dataType.setPackage(null);
+				dataType.setPackage(pkg);
+				dataType.setLanguage("OWL-S");
 				dataType.setUrl(param.getType().toString());
+
 				result.add(dataType);
 			}
 		}
@@ -245,6 +249,21 @@ public class SemanticServiceFactory {
 	}
 	
 	/**
+	 * Get Type name from Param.
+	 * 
+	 * @param param		some OWL-S Param
+	 * @return			the corresponding Java type name
+	 */
+	public static String getTypeFromParam(Param param) {
+		String name = getTypeFromTypeUri(param.getType());
+		if (OntoUtils.specialTypes.containsKey(name)) {
+			return OntoUtils.specialTypes.get(name);
+		} else {
+			return param.getJavaClassName();
+		}
+	}
+	
+	/**
 	 * Get the name of the data type from the URL. It appears at the end after '#'
 	 * Example: http://dai-labor.de/~masuch/ontology/mams_types.owl#MessageText
 	 * 
@@ -256,5 +275,19 @@ public class SemanticServiceFactory {
 		int hash = uriString.lastIndexOf('#');
 		String typeName = uriString.substring(hash + 1);
 		return typeName;
+	}
+	
+	/**
+	 * Get substitution type, if necessary.
+	 * 
+	 * @param type		original type
+	 * @return			substitution type, or original type
+	 */
+	public static String getProperType(String type) {
+		if (OntoUtils.specialTypes.containsKey(type)) {
+			return OntoUtils.specialTypes.get(type);
+		} else {
+			return type;
+		}
 	}
 }

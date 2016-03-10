@@ -1,6 +1,8 @@
 package de.dailab.vsdt.vsdtagents.sema;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLNamedObject;
@@ -18,6 +20,7 @@ import org.semanticweb.owlapi.model.SWRLVariable;
 
 import de.dailab.jiactng.owlsGenerator.OWLSFactory;
 import de.dailab.jiactng.owlsdescription.ServiceDescription;
+import de.dailab.vsdt.vxl.util.Util;
 
 
 /**
@@ -35,6 +38,16 @@ import de.dailab.jiactng.owlsdescription.ServiceDescription;
  */
 public class OntoUtils {
 
+	public static Map<String, String> specialTypes = new HashMap<>();
+	static {
+		for (String s : Util.datatypes) {
+			specialTypes.put(s, s);
+		}
+		specialTypes.put("int", "integer");
+//		specialTypes.put("anyType", "java.lang.Object");
+	}
+
+	
 	/**
 	 * This method is used to reconstruct a service description after some information,
 	 * particularly precondition and effect, have been lost due to serialization and
