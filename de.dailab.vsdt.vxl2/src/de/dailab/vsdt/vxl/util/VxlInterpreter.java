@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Vector;
 
 import de.dailab.vsdt.vxl.util.TermOrdering.TermLeaf;
@@ -220,9 +221,7 @@ public class VxlInterpreter {
 		// get value from context
 		if (context != null) {
 			Serializable value= context.get(variable.getName());
-			if (value == null) {
-				errors.put(variable, "Variable has not been initialized");
-			} else if (variable.getAccessor() != null) {
+			if (variable.getAccessor() != null) {
 				value = evalAccessor(variable.getAccessor(), value);
 			}
 			return value;
@@ -475,9 +474,9 @@ public class VxlInterpreter {
 		case LT:
 			return (toDoubleIfNumber(head)).compareTo(toDoubleIfNumber(tail)) <  0;
 		case EQ:
-			return head.equals(tail);
+			return Objects.equals(head, tail);
 		case NEQ:
-			return ! head.equals(tail);
+			return ! Objects.equals(head, tail);
 		default: 
 			return null;
 		}
@@ -540,7 +539,7 @@ public class VxlInterpreter {
 				return head instanceof Comparable && tail instanceof Comparable;
 			case EQ:
 			case NEQ:
-				return head != null && tail != null;
+				return true; // head != null && tail != null;
 			}
 			return true;
 		} catch (Exception e) {

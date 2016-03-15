@@ -21,9 +21,10 @@ public class Util {
 	public static final String TYPE_FLOAT= "float";
 	public static final String TYPE_DOUBLE= "double";
 	public static final String TYPE_STRING= "string";
+	public static final String TYPE_ANY = "anyType";
 
 	public static final String[] datatypes= { 
-		TYPE_STRING, TYPE_INTEGER, TYPE_LONG, TYPE_FLOAT, TYPE_DOUBLE, TYPE_BOOLEAN
+		TYPE_STRING, TYPE_INTEGER, TYPE_LONG, TYPE_FLOAT, TYPE_DOUBLE, TYPE_BOOLEAN, TYPE_ANY
 	};
 
 	@SuppressWarnings("serial")
@@ -34,6 +35,7 @@ public class Util {
 		put(Util.TYPE_FLOAT,   Float.class.getCanonicalName());
 		put(Util.TYPE_DOUBLE,  Double.class.getCanonicalName());
 		put(Util.TYPE_LONG,    Long.class.getCanonicalName());
+		put(Util.TYPE_ANY,     Object.class.getCanonicalName());
 	}};
 	
 	/**
