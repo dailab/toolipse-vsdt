@@ -2,6 +2,7 @@ package de.dailab.vsdt.vsdtagents.sema;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.semanticweb.owlapi.model.IRI;
@@ -44,6 +45,7 @@ public class OntoUtils {
 			specialTypes.put(s, s);
 		}
 		specialTypes.put("int", "integer");
+		specialTypes.put("OWLList", List.class.getCanonicalName());
 //		specialTypes.put("anyType", "java.lang.Object");
 	}
 

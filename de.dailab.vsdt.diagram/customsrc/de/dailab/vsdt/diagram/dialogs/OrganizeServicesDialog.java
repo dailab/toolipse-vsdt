@@ -31,6 +31,8 @@ import de.dailab.vsdt.diagram.ui.VsdtFeatureCombo;
  */
 public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Service> {
 
+	public static final String[] TYPES = {"JIAC Action", "Web Service", "User Task"};
+	
 	private static final String LABEL_PARTICIPANT = "Participant";
 	private static final String LABEL_INTERFACE = "Interface";
 	private static final String LABEL_TYPE = "Type";
@@ -110,8 +112,9 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 		typeCombo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		typeCombo.addModifyListener(this);
 		typeCombo.add("");
-		typeCombo.add("JIAC Action");
-		typeCombo.add("Web Service");
+		for (String type : TYPES) {
+			typeCombo.add(type);
+		}
 
 		new Label(editGroup,SWT.NONE).setText(LABEL_PARTICIPANT);
 		partCombo= new VsdtFeatureCombo<Participant>(new Combo(editGroup,SWT.READ_ONLY));

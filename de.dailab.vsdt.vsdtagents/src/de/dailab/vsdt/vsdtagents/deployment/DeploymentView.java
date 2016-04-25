@@ -152,7 +152,7 @@ public class DeploymentView extends AbstractStructuredViewerView {
 		// populate nodes-to-agents map
 		nodesToAgents = new HashMap<String, List<IAgentDescription>>();
 		for (IAgentDescription agent : agentsToServices.keySet()) {
-			String nodeID = agent.getAgentNodeUUID();
+			String nodeID = agent.getAgentNodeUUID() + "@" + agent.getOwner();
 			if (! nodesToAgents.containsKey(nodeID)) {
 				nodesToAgents.put(nodeID, new ArrayList<IAgentDescription>());
 			}
