@@ -46,6 +46,7 @@ public class OntoUtils {
 		}
 		specialTypes.put("int", "integer");
 		specialTypes.put("OWLList", List.class.getCanonicalName());
+		specialTypes.put("List", List.class.getCanonicalName());
 //		specialTypes.put("anyType", "java.lang.Object");
 	}
 
