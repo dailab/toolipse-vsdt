@@ -22,7 +22,7 @@ import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
 import de.dailab.vsdt.meta.diagram.edit.parts.BusinessProcessSystemEditPart;
-import de.dailab.vsdt.trafo.jiacv.wizard.Bpmn2JiacVExportWizard;
+import de.dailab.vsdt.trafo.wizard.BpmnExportWizard;
 
 /**
  * Utility Class providing functionality needed for more than one view.
@@ -96,21 +96,33 @@ public class Util {
 	 * @return			content of JADL files generated from VSDT file
 	 * @throws Exception
 	 */
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static List<String> getSrcFromVsdtFile(URI uri, Map<String, Serializable[]> starterRules) throws Exception {
 		List<String> serviceSrcs = new ArrayList<String>();
 		// invoke transformation for given file
-		Bpmn2JiacVExportWizard wizard = new Bpmn2JiacVExportWizard();
-		Object sourceObject = wizard.getSouceObject(uri);
-		wizard.performTransformation(sourceObject, null);
+		
 		try {
-			serviceSrcs = wizard.getResultSaver().getServiceSources();
-			if (starterRules != null) {
-				Map<String, Serializable[]> rules = wizard.getResultSaver().getStarterRulesSimple();
-				starterRules.putAll(rules);
+			// using reflection so we do not need reference to JADL++ module
+			Class wizardClass = Class.forName("de.dailab.vsdt.trafo.jiacv.wizard.Bpmn2JiacVExportWizard");
+			Class resultClass = Class.forName("de.dailab.vsdt.trafo.jiacv.export.JiacVResultSaver");
+			
+			BpmnExportWizard wizard = (BpmnExportWizard) wizardClass.newInstance();
+			Object sourceObject = wizard.getSouceObject(uri);
+			wizard.performTransformation(sourceObject, null);
+			try {
+				serviceSrcs = (List) resultClass.getMethod("getServiceSources").invoke(wizard.getResultSaver());
+				if (starterRules != null) {
+					Map<String, Serializable[]> rules = (Map) resultClass.getMethod("getStarterRulesSimple").invoke(wizard.getResultSaver());
+					starterRules.putAll(rules);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			
+		} catch (ClassNotFoundException e) {
+			System.err.println("Could not create JADL Sources: JADL++ Transformation not found!");
 		}
+		
 		return serviceSrcs;
 	}
 
