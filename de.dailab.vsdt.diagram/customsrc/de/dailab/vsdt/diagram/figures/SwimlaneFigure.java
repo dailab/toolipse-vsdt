@@ -5,10 +5,10 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
+import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.OneLineBorder;
-import org.eclipse.gmf.runtime.draw2d.ui.figures.RectangularDropShadowLineBorder;
 
 import de.dailab.vsdt.Pool;
 
@@ -19,9 +19,6 @@ import de.dailab.vsdt.Pool;
  */
 public class SwimlaneFigure extends RectangleFigure {
 
-	private RectangularDropShadowLineBorder poolBorder= new RectangularDropShadowLineBorder();
-	private OneLineBorder nameBorder= new OneLineBorder(1, PositionConstants.RIGHT);
-	
 	private boolean boundaryVisible= true;
 	
 	private boolean isPool= true;
@@ -94,10 +91,10 @@ public class SwimlaneFigure extends RectangleFigure {
 		this.setForegroundColor(boundaryVisible ? FigureHelper.getForeground(this, isPool) : ColorConstants.lightGray);
 		if (_swimlaneNamefigure != null) {
 //			_swimlaneNamefigure.setVisible(boundaryVisible);
-			_swimlaneNamefigure.setBorder(boundaryVisible ? nameBorder : null);
+			_swimlaneNamefigure.setBorder(boundaryVisible ? new OneLineBorder(1, PositionConstants.RIGHT) : null);
 		}
 		if (isPool) {
-			this.setBorder(boundaryVisible ? poolBorder : null);
+			this.setBorder(boundaryVisible ? new LineBorder() : null);
 		}
 	}
 	
