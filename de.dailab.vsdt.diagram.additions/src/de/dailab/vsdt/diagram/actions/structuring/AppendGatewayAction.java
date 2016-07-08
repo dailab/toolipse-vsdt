@@ -1,6 +1,11 @@
 package de.dailab.vsdt.diagram.actions.structuring;
 
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.gmf.runtime.emf.type.core.IElementType;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.ui.handlers.HandlerUtil;
 
 import de.dailab.vsdt.diagram.providers.VsdtElementTypes;
 
@@ -15,5 +20,18 @@ public class AppendGatewayAction extends AppendNodeAction {
 	public IElementType getElementType() {
 		return VsdtElementTypes.Gateway_2006;
 	}
+	
+	public static class Handler extends AbstractHandler {
+	
+		@Override
+		public Object execute(ExecutionEvent event) throws ExecutionException {
+			ISelection selection = HandlerUtil.getCurrentSelection(event);
+			AppendGatewayAction action = new AppendGatewayAction();
+			action.selectionChanged(null, selection);
+			action.run(null);
+			return null;
+		}
+	}
+	
 	
 }

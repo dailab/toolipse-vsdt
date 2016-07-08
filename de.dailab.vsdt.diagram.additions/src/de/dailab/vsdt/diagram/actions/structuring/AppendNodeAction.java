@@ -96,6 +96,8 @@ public abstract class AppendNodeAction implements IActionDelegate {
 	}
 	
 	public void run(IAction action) {
+		if (compEditPart == null || flowObjectEditPart == null) return;
+		
 		//this compound command will hold the various partial commands
 		CompoundCommand cc= new CompoundCommand(getCommandName());
 		

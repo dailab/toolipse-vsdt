@@ -4,6 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
@@ -19,6 +22,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.handlers.HandlerUtil;
 
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.SequenceFlow;
@@ -111,5 +115,16 @@ public class ConnectToSequenceAction implements IActionDelegate {
 			last.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
 		}
 	}
+		
+	public static class Handler extends AbstractHandler {
 	
+		@Override
+		public Object execute(ExecutionEvent event) throws ExecutionException {
+			ISelection selection = HandlerUtil.getCurrentSelection(event);
+			ConnectToSequenceAction action = new ConnectToSequenceAction();
+			action.selectionChanged(null, selection);
+			action.run(null);
+			return null;
+		}
+	}
 }

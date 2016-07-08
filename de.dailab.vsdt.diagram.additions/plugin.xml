@@ -28,7 +28,13 @@
 		<key commandId="de.dailab.vsdt.diagram.commands.connectToSequence" contextId="de.dailab.vsdt.diagram.ui.diagramContext" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" sequence="Ctrl+Shift+C"/>
 	</extension>
 	
-	
+	<extension point="org.eclipse.ui.handlers">
+		<handler commandId="de.dailab.vsdt.diagram.commands.appendActivity" class="de.dailab.vsdt.diagram.actions.structuring.AppendActivityAction$Handler" />
+		<handler commandId="de.dailab.vsdt.diagram.commands.appendGateway" class="de.dailab.vsdt.diagram.actions.structuring.AppendGatewayAction$Handler" />
+		<handler commandId="de.dailab.vsdt.diagram.commands.appendIntermediate" class="de.dailab.vsdt.diagram.actions.structuring.AppendIntermediateAction$Handler" />
+		<handler commandId="de.dailab.vsdt.diagram.commands.appendEnd" class="de.dailab.vsdt.diagram.actions.structuring.AppendEndAction$Handler" />
+    	<handler commandId="de.dailab.vsdt.diagram.commands.connectToSequence" class="de.dailab.vsdt.diagram.actions.structuring.ConnectToSequenceAction$Handler" />
+	</extension>
    
    <extension point="org.eclipse.ui.popupMenus">
 		<objectContribution adaptable="false"
