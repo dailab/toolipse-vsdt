@@ -1514,5 +1514,12 @@
 			
 		</objectContribution>
 	</extension>
+ <extension point="org.eclipse.ui.handlers">
+	<?gmfgen generated="false"?>
+    <handler
+          class="de.dailab.vsdt.diagram.handlers.SetTypeHandler"
+          commandId="de.dailab.vsdt.diagram.commands.setType">
+    </handler>
+ </extension>
 
 </plugin>
