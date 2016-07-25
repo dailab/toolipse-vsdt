@@ -1,5 +1,6 @@
 package de.dailab.vsdt.vsdtagents.sema;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -47,6 +48,7 @@ public class OntoUtils {
 		specialTypes.put("int", "integer");
 		specialTypes.put("OWLList", List.class.getCanonicalName());
 		specialTypes.put("List", List.class.getCanonicalName());
+		specialTypes.put("Date", Date.class.getCanonicalName());
 //		specialTypes.put("anyType", "java.lang.Object");
 	}
 
@@ -64,10 +66,15 @@ public class OntoUtils {
 	public static ServiceDescription reloadOntology(ServiceDescription service) throws OWLOntologyCreationException {
 		IRI iri = IRI.create(service.getIRI());
 		OWLOntologyManager manager = OWLSFactory.getOWLOntologyManager();
-		for (OWLOntology ontology: manager.getDirectImports(manager.getOntology(iri))) {
-			manager.loadOntology(ontology.getOntologyID().getOntologyIRI());
+		OWLOntology onto = manager.getOntology(iri);
+		if (onto != null) {
+			for (OWLOntology ontology: manager.getDirectImports(onto)) {
+				manager.loadOntology(ontology.getOntologyID().getOntologyIRI());
+			}
+			return OWLSFactory.loadOntology(iri);
+		} else{
+			throw new RuntimeException("Could not load ontology from IRI " + iri);
 		}
-		return OWLSFactory.loadOntology(iri);
 	}
 	
 	/**

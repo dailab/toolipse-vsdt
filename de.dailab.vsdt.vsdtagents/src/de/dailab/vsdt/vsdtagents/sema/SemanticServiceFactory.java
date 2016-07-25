@@ -61,6 +61,7 @@ public class SemanticServiceFactory {
 		if (action.getProviderBean() != null) {
 			result.setInterface(action.getProviderBean().getBeanName());
 		}
+		result.setTemplate(true);
 //		result.setLocation(null);
 //		result.setParticipant(null);
 //		result.setDescription(null);
@@ -140,12 +141,13 @@ public class SemanticServiceFactory {
 		// restore transient fields
 		try {
 			serviceDescription = OntoUtils.reloadOntology(serviceDescription);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			Display.getDefault().asyncExec(new Runnable() {
 				@Override
 				public void run() {
 					MessageDialog.openWarning(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
-							"Error loading Ontologies", "Could not load linked ontologies. Some semantic information might have been lost.");
+							"Error loading Ontologies", "Could not load linked ontologies. Some semantic information might have been lost. "
+									+ "Error was: " + e.getMessage());
 				}
 			});
 		}
@@ -159,19 +161,23 @@ public class SemanticServiceFactory {
 		result.setLocation(serviceDescription.getIRI());
 //		result.setParticipant(null);
 		result.setDescription(serviceDescription.getProfile().getDescription());
-
+		
 		// set input and output
-		for (Param param : serviceDescription.getProcess().getInput()) {
-			Property input = VsdtFactory.eINSTANCE.createProperty();
-			input.setName(param.getName());
-			input.setType(getTypeFromParam(param));
-			result.getInput().add(input);
+		if (serviceDescription.getProcess().getInput() != null) {
+			for (Param param : serviceDescription.getProcess().getInput()) {
+				Property input = VsdtFactory.eINSTANCE.createProperty();
+				input.setName(param.getName());
+				input.setType(getTypeFromParam(param));
+				result.getInput().add(input);
+			}
 		}
-		for (Param param : serviceDescription.getProcess().getOutput()) {
-			Property output = VsdtFactory.eINSTANCE.createProperty();
-			output.setName(param.getName());
-			output.setType(getTypeFromParam(param));
-			result.getOutput().add(output);
+		if (serviceDescription.getProcess().getOutput() != null) {
+			for (Param param : serviceDescription.getProcess().getOutput()) {
+				Property output = VsdtFactory.eINSTANCE.createProperty();
+				output.setName(param.getName());
+				output.setType(getTypeFromParam(param));
+				result.getOutput().add(output);
+			}
 		}
 		// add precondition and effect, if reconstruction was successful
 		if (serviceDescription.getProcess().getPreConditions() != null && serviceDescription.getProcess().getEffects() != null) {
