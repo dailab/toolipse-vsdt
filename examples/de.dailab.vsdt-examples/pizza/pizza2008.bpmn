@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vsdt:BusinessProcessDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:vsdt="http://de.dailab.vsdt" xmi:id="_h3eeUBh0Ed66E93M8g1yVg" name="new Business Process Diagram" id="BusinessProcessDiagram_1204897770361" creationDate="2008-03-07T14:49:30.361+0100" modificationDate="2008-03-07T14:49:30.361+0100">
+  <pools xmi:type="vsdt:Pool" xmi:id="_h3eeUhh0Ed66E93M8g1yVg" name="PizzaUser_Agent" id="Pool_1204897781859" participant="_h3notBh0Ed66E93M8g1yVg">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_h3eeVBh0Ed66E93M8g1yVg" name="PizzaUser_Agent_Process" id="BpmnProcess_1204897781859">
+      <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_h3eeVRh0Ed66E93M8g1yVg"/>
+    </process>
+    <lanes xmi:type="vsdt:Lane" xmi:id="_h3eeVxh0Ed66E93M8g1yVg" name="Default Lane" id="Lane_1204897781859" boundaryVisible="false">
+      <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_h3eeWRh0Ed66E93M8g1yVg" name="" id="Start_1204897963310">
+        <ruleExpression xmi:type="vsdt:Expression" xmi:id="_h3eeWhh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_h3eeXBh0Ed66E93M8g1yVg" name="" id="Gateway_1204897973575">
+        <gates xmi:type="vsdt:Gate" xmi:id="_h3eeXRh0Ed66E93M8g1yVg" name="SequenceFlow_1204898060578" outgoingSequenceFlow="_h3nokRh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_h3eeXxh0Ed66E93M8g1yVg" name="Send Wish" id="Activity_1204897977616">
+        <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_h3eeYBh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_h3eeYhh0Ed66E93M8g1yVg" id="Gateway_1204897985603" markerVisible="true">
+        <gates xmi:type="vsdt:Gate" xmi:id="_h3eeYxh0Ed66E93M8g1yVg" name="SequenceFlow_1204898065523" outgoingSequenceFlow="_h3nolRh0Ed66E93M8g1yVg"/>
+        <gates xmi:type="vsdt:Gate" xmi:id="_h3noQBh0Ed66E93M8g1yVg" name="SequenceFlow_1204898082246" outgoingSequenceFlow="_h3nomxh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_h3noQhh0Ed66E93M8g1yVg" name="Display Message" id="Activity_1204897990938">
+        <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_h3noQxh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_h3noRRh0Ed66E93M8g1yVg" name="Receive Result" id="Activity_1204898000767">
+        <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_h3noRhh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:End" xmi:id="_h3noSBh0Ed66E93M8g1yVg" name="" id="End_1204898009877">
+        <ruleExpression xmi:type="vsdt:Expression" xmi:id="_h3noSRh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_h3noSxh0Ed66E93M8g1yVg" name="CallPizzaBroker" id="Activity_1205150675215">
+        <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_h3noTBh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+    </lanes>
+  </pools>
+  <pools xmi:type="vsdt:Pool" xmi:id="_h3noThh0Ed66E93M8g1yVg" name="PizzaBroker_Agent" id="Pool_1204897797179" participant="_h3notRh0Ed66E93M8g1yVg">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_h3noUBh0Ed66E93M8g1yVg" name="PizzaBroker_Agent_Process" id="BpmnProcess_1204897797194">
+      <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_h3noURh0Ed66E93M8g1yVg"/>
+    </process>
+    <lanes xmi:type="vsdt:Lane" xmi:id="_h3noUxh0Ed66E93M8g1yVg" name="Default Lane" id="Lane_1204897797179" boundaryVisible="false">
+      <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_h3noVRh0Ed66E93M8g1yVg" name="" id="Start_1204898229441" trigger="MESSAGE">
+        <ruleExpression xmi:type="vsdt:Expression" xmi:id="_h3noVhh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_h3noWBh0Ed66E93M8g1yVg" name="" id="Gateway_1204898235260">
+        <gates xmi:type="vsdt:Gate" xmi:id="_h3noWRh0Ed66E93M8g1yVg" name="SequenceFlow_1204898334315" outgoingSequenceFlow="_h3nonxh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_h3noWxh0Ed66E93M8g1yVg" id="Gateway_1204898238146" markerVisible="true">
+        <gates xmi:type="vsdt:Gate" xmi:id="_h3noXBh0Ed66E93M8g1yVg" name="SequenceFlow_1204898339104" outgoingSequenceFlow="_h3nooxh0Ed66E93M8g1yVg"/>
+        <gates xmi:type="vsdt:Gate" xmi:id="_h3noXRh0Ed66E93M8g1yVg" name="SequenceFlow_1204898357184" outgoingSequenceFlow="_h3noqxh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_h3noXxh0Ed66E93M8g1yVg" name="Receive Wish" id="Activity_1204898241047">
+        <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_h3noYBh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_h3noYhh0Ed66E93M8g1yVg" name="Assemble Goal" id="Activity_1204898248426">
+        <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_h3noYxh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_h3noZRh0Ed66E93M8g1yVg" name="Goal: Order Pizza" id="Activity_1204898253932" adHoc="true">
+        <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_h3noZhh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_h3noaBh0Ed66E93M8g1yVg" name="Send Result" id="Activity_1204898265835">
+        <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_h3noaRh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:End" xmi:id="_h3noaxh0Ed66E93M8g1yVg" id="End_1204898311182">
+        <ruleExpression xmi:type="vsdt:Expression" xmi:id="_h3nobBh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+    </lanes>
+  </pools>
+  <pools xmi:type="vsdt:Pool" xmi:id="_h3nobhh0Ed66E93M8g1yVg" name="VegPizza_Agent" id="Pool_1204897829753" participant="_h3notxh0Ed66E93M8g1yVg">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_h3nocBh0Ed66E93M8g1yVg" name="VegPizza_Agent_Process" id="BpmnProcess_1204897829753">
+      <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_h3nocRh0Ed66E93M8g1yVg"/>
+    </process>
+    <lanes xmi:type="vsdt:Lane" xmi:id="_h3nocxh0Ed66E93M8g1yVg" id="Lane_1205143352210" boundaryVisible="false">
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_h3nodRh0Ed66E93M8g1yVg" name="Bake Vegetarian Pizza" id="Activity_1205143367108" activityType="EMBEDDED">
+        <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_h3nodhh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_h3noeBh0Ed66E93M8g1yVg" name="Deliver Pizza" id="Activity_1205143397701" activityType="EMBEDDED">
+        <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_h3noeRh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+    </lanes>
+  </pools>
+  <pools xmi:type="vsdt:Pool" xmi:id="_h3noexh0Ed66E93M8g1yVg" name="GeneralPizza_Agent" id="Pool_1204897859285" participant="_h3nouBh0Ed66E93M8g1yVg">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_h3nofRh0Ed66E93M8g1yVg" name="GeneralPizza_Agent_Process" id="BpmnProcess_1204897859285">
+      <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_h3nofhh0Ed66E93M8g1yVg"/>
+    </process>
+    <lanes xmi:type="vsdt:Lane" xmi:id="_h3nogBh0Ed66E93M8g1yVg" id="Lane_1205143355221" boundaryVisible="false">
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_h3noghh0Ed66E93M8g1yVg" name="Bake Pizza" id="Activity_1205143367108" activityType="EMBEDDED">
+        <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_h3nogxh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+    </lanes>
+  </pools>
+  <pools xmi:type="vsdt:Pool" xmi:id="_h3nohRh0Ed66E93M8g1yVg" name="Delivery_Agent" id="Pool_1204897867288" participant="_h3nouRh0Ed66E93M8g1yVg">
+    <process xmi:type="vsdt:BpmnProcess" xmi:id="_h3nohxh0Ed66E93M8g1yVg" name="Delivery_Agent_Process" id="BpmnProcess_1204897867288">
+      <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_h3noiBh0Ed66E93M8g1yVg"/>
+    </process>
+    <lanes xmi:type="vsdt:Lane" xmi:id="_h3noihh0Ed66E93M8g1yVg" id="Lane_1205143357358" boundaryVisible="false">
+      <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_h3nojBh0Ed66E93M8g1yVg" name="Deliver Package" id="Activity_1205143397701" activityType="EMBEDDED">
+        <adHocCompletionCondition xmi:type="vsdt:Expression" xmi:id="_h3nojRh0Ed66E93M8g1yVg"/>
+      </containedFlowObjects>
+    </lanes>
+  </pools>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_h3nojxh0Ed66E93M8g1yVg" id="SequenceFlow_1204898056865" source="_h3eeWRh0Ed66E93M8g1yVg" target="_h3noSxh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_h3nokRh0Ed66E93M8g1yVg" id="SequenceFlow_1204898060578" source="_h3eeXBh0Ed66E93M8g1yVg" target="_h3eeXxh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_h3nokxh0Ed66E93M8g1yVg" id="SequenceFlow_1204898063074" source="_h3eeXxh0Ed66E93M8g1yVg" target="_h3eeYhh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_h3nolRh0Ed66E93M8g1yVg" name="done" id="SequenceFlow_1204898065523" source="_h3eeYhh0Ed66E93M8g1yVg" target="_h3noRRh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_h3nolxh0Ed66E93M8g1yVg" id="SequenceFlow_1204898067941" source="_h3noRRh0Ed66E93M8g1yVg" target="_h3noQhh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_h3nomRh0Ed66E93M8g1yVg" id="SequenceFlow_1204898070624" source="_h3noQhh0Ed66E93M8g1yVg" target="_h3noSBh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_h3nomxh0Ed66E93M8g1yVg" name="" id="SequenceFlow_1204898082246" conditionType="DEFAULT" source="_h3eeYhh0Ed66E93M8g1yVg" target="_h3eeXBh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_h3nonRh0Ed66E93M8g1yVg" id="SequenceFlow_1204898331929" source="_h3noVRh0Ed66E93M8g1yVg" target="_h3noWBh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_h3nonxh0Ed66E93M8g1yVg" id="SequenceFlow_1204898334315" source="_h3noWBh0Ed66E93M8g1yVg" target="_h3noXxh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_h3nooRh0Ed66E93M8g1yVg" id="SequenceFlow_1204898336733" source="_h3noXxh0Ed66E93M8g1yVg" target="_h3noWxh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_h3nooxh0Ed66E93M8g1yVg" name="last wish = null" id="SequenceFlow_1204898339104" source="_h3noWxh0Ed66E93M8g1yVg" target="_h3noYhh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_h3nopRh0Ed66E93M8g1yVg" id="SequenceFlow_1204898340898" source="_h3noYhh0Ed66E93M8g1yVg" target="_h3noZRh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_h3nopxh0Ed66E93M8g1yVg" id="SequenceFlow_1204898343129" source="_h3noZRh0Ed66E93M8g1yVg" target="_h3noaBh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_h3noqRh0Ed66E93M8g1yVg" id="SequenceFlow_1204898345937" source="_h3noaBh0Ed66E93M8g1yVg" target="_h3noaxh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_h3noqxh0Ed66E93M8g1yVg" name="" id="SequenceFlow_1204898357184" conditionType="DEFAULT" source="_h3noWxh0Ed66E93M8g1yVg" target="_h3noWBh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_h3norRh0Ed66E93M8g1yVg" name="Wish" id="MessageFlow_1204898497987" source="_h3eeXxh0Ed66E93M8g1yVg" target="_h3noXxh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_h3norxh0Ed66E93M8g1yVg" name="Result: OK / unavailable" id="MessageFlow_1204898513181" source="_h3noaBh0Ed66E93M8g1yVg" target="_h3noRRh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:SequenceFlow" xmi:id="_h3nosRh0Ed66E93M8g1yVg" id="SequenceFlow_1205150738473" source="_h3noSxh0Ed66E93M8g1yVg" target="_h3eeXBh0Ed66E93M8g1yVg"/>
+  <connections xmi:type="vsdt:MessageFlow" xmi:id="_h3nosxh0Ed66E93M8g1yVg" name="User's Address" id="MessageFlow_1205150752528" source="_h3noSxh0Ed66E93M8g1yVg" target="_h3noVRh0Ed66E93M8g1yVg"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_h3notBh0Ed66E93M8g1yVg" name="PizzaUser_Agent_Participant"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_h3notRh0Ed66E93M8g1yVg" name="PizzaBroker_Agent_Participant"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_h3nothh0Ed66E93M8g1yVg" name="GUI_Role_Participant"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_h3notxh0Ed66E93M8g1yVg" name="VegPizza_Agent_Participant"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_h3nouBh0Ed66E93M8g1yVg" name="GeneralPizza_Agent_Participant"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_h3nouRh0Ed66E93M8g1yVg" name="Delivery_Agent_Participant"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_h3nouhh0Ed66E93M8g1yVg" name="Bakery_Role_Participant"/>
+  <participants xmi:type="vsdt:Participant" xmi:id="_h3nouxh0Ed66E93M8g1yVg" name="DeliveryRole_Participant"/>
+</vsdt:BusinessProcessDiagram>

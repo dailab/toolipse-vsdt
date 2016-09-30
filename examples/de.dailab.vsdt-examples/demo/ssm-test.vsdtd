@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:vsdt="http://de.dailab.vsdt">
+  <vsdt:BusinessProcessSystem xmi:id="_UYAuwOHbEeSz8pgswVigAA" name="SSM-Test" documentation="Process diagram for testing and demonstrating the integration with semantic service manager SSM" id="_UX_goOHbEeSz8pgswVigAA" version="0.1" expressionLanguage="VSDT Expression Language" creationDate="2015-04-13T14:48:00.938+0200" modificationDate="2015-04-13T14:48:00.938+0200">
+    <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_XWbAoeHbEeSz8pgswVigAA" name="Process 1" id="_XWbAoOHbEeSz8pgswVigAA" participants="_VWJK8OHbEeSz8pgswVigAA _I26-QeHoEeSz8pgswVigAA">
+      <pools xmi:type="vsdt:Pool" xmi:id="_ZiXTwOHbEeSz8pgswVigAA" name="Send SMS Wrapper" id="_ZiWssOHbEeSz8pgswVigAA" participant="_VWJK8OHbEeSz8pgswVigAA">
+        <properties xmi:type="vsdt:Property" xmi:id="_LgMSIOHeEeSz8pgswVigAA" name="phonenumber" type="string"/>
+        <properties xmi:type="vsdt:Property" xmi:id="_LiZRkOHeEeSz8pgswVigAA" name="message" type="string"/>
+        <lanes xmi:type="vsdt:Lane" xmi:id="_ZiZwAeHbEeSz8pgswVigAA" id="_ZiZwAOHbEeSz8pgswVigAA">
+          <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_uh7zEeHdEeSz8pgswVigAA" id="_uh7zEOHdEeSz8pgswVigAA" trigger="MESSAGE" implementation="_FICdQOHeEeSz8pgswVigAA">
+            <assignments xmi:type="vsdt:Assignment" xmi:id="_VFW1kOHeEeSz8pgswVigAA" to="_LgMSIOHeEeSz8pgswVigAA" assignTime="END">
+              <from xmi:type="vsdt:Expression" xmi:id="_VFW1keHeEeSz8pgswVigAA" expression="in_phonenumber"/>
+            </assignments>
+            <assignments xmi:type="vsdt:Assignment" xmi:id="_VFZR0OHeEeSz8pgswVigAA" to="_LiZRkOHeEeSz8pgswVigAA" assignTime="END">
+              <from xmi:type="vsdt:Expression" xmi:id="_VFZR0eHeEeSz8pgswVigAA" expression="in_message"/>
+            </assignments>
+          </containedFlowObjects>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_zA5RseHdEeSz8pgswVigAA" name="message okay?" id="_zA5RsOHdEeSz8pgswVigAA"/>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_zjBuYeHdEeSz8pgswVigAA" id="_zjBuYOHdEeSz8pgswVigAA" trigger="ERROR" errorCode="&quot;input not okay&quot;"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_zzoWMeHdEeSz8pgswVigAA" name="send SMS" id="_zzoWMOHdEeSz8pgswVigAA" activityType="SERVICE"/>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_0-lGYeHdEeSz8pgswVigAA" id="_0-lGYOHdEeSz8pgswVigAA"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_k9F4YeHgEeSz8pgswVigAA" name="result okay?" id="_k9F4YOHgEeSz8pgswVigAA"/>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_pZNeYeHgEeSz8pgswVigAA" id="_pZNeYOHgEeSz8pgswVigAA" trigger="ERROR" errorCode="&quot;result not okay&quot;"/>
+        </lanes>
+      </pools>
+      <pools xmi:type="vsdt:Pool" xmi:id="_LYqiQeHoEeSz8pgswVigAA" name="Service" id="_LYqiQOHoEeSz8pgswVigAA" participant="_I26-QeHoEeSz8pgswVigAA"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_5V1ageHdEeSz8pgswVigAA" id="_5V1agOHdEeSz8pgswVigAA" source="_uh7zEeHdEeSz8pgswVigAA" target="_zA5RseHdEeSz8pgswVigAA"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_5WEEAeHdEeSz8pgswVigAA" id="_5WEEAOHdEeSz8pgswVigAA" conditionType="DEFAULT" source="_zA5RseHdEeSz8pgswVigAA" target="_zzoWMeHdEeSz8pgswVigAA"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_6FLMweHdEeSz8pgswVigAA" name="len(msg) > 144" id="_6FLMwOHdEeSz8pgswVigAA" conditionType="EXPRESSION" source="_zA5RseHdEeSz8pgswVigAA" target="_zjBuYeHdEeSz8pgswVigAA">
+        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_aWvPoOHeEeSz8pgswVigAA" expression="#message > 144"/>
+      </connections>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_k9LX8eHgEeSz8pgswVigAA" id="_k9LX8OHgEeSz8pgswVigAA" conditionType="DEFAULT" source="_k9F4YeHgEeSz8pgswVigAA" target="_0-lGYeHdEeSz8pgswVigAA"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_k9N0MeHgEeSz8pgswVigAA" id="_5WI8gOHdEeSz8pgswVigAA" source="_zzoWMeHdEeSz8pgswVigAA" target="_k9F4YeHgEeSz8pgswVigAA"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_qgczQeHgEeSz8pgswVigAA" name="error" id="_qgczQOHgEeSz8pgswVigAA" conditionType="EXPRESSION" source="_k9F4YeHgEeSz8pgswVigAA" target="_pZNeYeHgEeSz8pgswVigAA">
+        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_jE6VIOHoEeSz8pgswVigAA" expression="false"/>
+      </connections>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_Nfym0eHoEeSz8pgswVigAA" id="_Nfym0OHoEeSz8pgswVigAA" source="_zzoWMeHdEeSz8pgswVigAA" target="_LYqiQeHoEeSz8pgswVigAA"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_N3bqweHoEeSz8pgswVigAA" id="_N3bqwOHoEeSz8pgswVigAA" source="_LYqiQeHoEeSz8pgswVigAA" target="_zzoWMeHdEeSz8pgswVigAA"/>
+    </businessProcesses>
+    <participants xmi:type="vsdt:Participant" xmi:id="_VWJK8OHbEeSz8pgswVigAA" name="Participan 1" id="_VWIj4OHbEeSz8pgswVigAA" associatedProcesses="_XWbAoeHbEeSz8pgswVigAA" associatedPools="_ZiXTwOHbEeSz8pgswVigAA"/>
+    <participants xmi:type="vsdt:Participant" xmi:id="_I26-QeHoEeSz8pgswVigAA" name="Participant 2" id="_I26-QOHoEeSz8pgswVigAA" associatedProcesses="_XWbAoeHbEeSz8pgswVigAA" associatedPools="_LYqiQeHoEeSz8pgswVigAA"/>
+    <services xmi:type="vsdt:Service" xmi:id="_FICdQOHeEeSz8pgswVigAA" type="JIAC Action" participant="_VWJK8OHbEeSz8pgswVigAA" interface="foo" operation="smsWrapper">
+      <input xmi:type="vsdt:Property" xmi:id="_Hc9GMOHeEeSz8pgswVigAA" name="in_phonenumber" type="string"/>
+      <input xmi:type="vsdt:Property" xmi:id="_IHM9EOHeEeSz8pgswVigAA" name="in_message" type="string"/>
+    </services>
+  </vsdt:BusinessProcessSystem>
+  <notation:Diagram xmi:id="_UY4RcOHbEeSz8pgswVigAA" type="Vsdt_meta" element="_UYAuwOHbEeSz8pgswVigAA" name="ssm-test.vsdtd" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_VWX0cOHbEeSz8pgswVigAA" type="1001" element="_VWJK8OHbEeSz8pgswVigAA">
+      <children xmi:type="notation:Node" xmi:id="_VWaQsOHbEeSz8pgswVigAA" type="4001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VWaQseHbEeSz8pgswVigAA" y="5"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_VWX0ceHbEeSz8pgswVigAA" fontName="Droid Sans"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VWX0cuHbEeSz8pgswVigAA" x="76" y="97"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_XWc10OHbEeSz8pgswVigAA" type="1002" element="_XWbAoeHbEeSz8pgswVigAA">
+      <children xmi:type="notation:Node" xmi:id="_XWfSEOHbEeSz8pgswVigAA" type="4002"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_XWc10eHbEeSz8pgswVigAA" fontName="Droid Sans"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_XWc10uHbEeSz8pgswVigAA" diagramLink="_YwDtEOHbEeSz8pgswVigAA" hint="Vsdt"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XWc10-HbEeSz8pgswVigAA" x="221" y="108"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_I2-BkOHoEeSz8pgswVigAA" type="1001" element="_I26-QeHoEeSz8pgswVigAA">
+      <children xmi:type="notation:Node" xmi:id="_I2_PsOHoEeSz8pgswVigAA" type="4001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_I2_PseHoEeSz8pgswVigAA" y="5"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_I2-BkeHoEeSz8pgswVigAA" fontName="Droid Sans"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_I2-BkuHoEeSz8pgswVigAA" x="427" y="106"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_UY4RceHbEeSz8pgswVigAA"/>
+    <edges xmi:type="notation:Edge" xmi:id="_YZcj4OHbEeSz8pgswVigAA" type="3001" source="_VWX0cOHbEeSz8pgswVigAA" target="_XWc10OHbEeSz8pgswVigAA">
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_YZcj4eHbEeSz8pgswVigAA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_YZcj4uHbEeSz8pgswVigAA" fontName="Droid Sans"/>
+      <element xsi:nil="true"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_YZcj4-HbEeSz8pgswVigAA" points="[20, 1, -140, -7]$[167, 36, 7, 28]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_KDoB8OHoEeSz8pgswVigAA" type="3001" source="_I2-BkOHoEeSz8pgswVigAA" target="_XWc10OHbEeSz8pgswVigAA">
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_KDoB8eHoEeSz8pgswVigAA"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_KDoB8uHoEeSz8pgswVigAA" fontName="Droid Sans"/>
+      <element xsi:nil="true"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_KDoB8-HoEeSz8pgswVigAA" points="[-20, -2, 192, 12]$[-218, -41, -6, -27]"/>
+    </edges>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_YwDtEOHbEeSz8pgswVigAA" type="Vsdt" element="_XWbAoeHbEeSz8pgswVigAA" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_ZicMQOHbEeSz8pgswVigAA" type="1004" element="_ZiXTwOHbEeSz8pgswVigAA">
+      <children xmi:type="notation:Node" xmi:id="_ZieBcOHbEeSz8pgswVigAA" type="4009"/>
+      <children xmi:type="notation:Node" xmi:id="_ZiiS4OHbEeSz8pgswVigAA" type="5001">
+        <children xmi:type="notation:Node" xmi:id="_Zi5fQOHbEeSz8pgswVigAA" type="2001" element="_ZiZwAeHbEeSz8pgswVigAA">
+          <children xmi:type="notation:Node" xmi:id="_Zi6GUOHbEeSz8pgswVigAA" type="4008"/>
+          <children xmi:type="notation:Node" xmi:id="_Zi6tYOHbEeSz8pgswVigAA" type="5002">
+            <children xmi:type="notation:Node" xmi:id="_uh-2YOHdEeSz8pgswVigAA" type="2002" element="_uh7zEeHdEeSz8pgswVigAA">
+              <children xmi:type="notation:Node" xmi:id="_uiBSoOHdEeSz8pgswVigAA" type="4003">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_uiBSoeHdEeSz8pgswVigAA" y="5"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_uh_dcOHdEeSz8pgswVigAA" fontName="Droid Sans"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uh_dceHdEeSz8pgswVigAA" x="14" y="46"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_zA7t8OHdEeSz8pgswVigAA" type="2006" element="_zA5RseHdEeSz8pgswVigAA">
+              <children xmi:type="notation:Node" xmi:id="_zA88EOHdEeSz8pgswVigAA" type="4006">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_zA88EeHdEeSz8pgswVigAA" x="-10" y="-25"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_zA7t8eHdEeSz8pgswVigAA" fontName="Droid Sans"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zA7t8uHdEeSz8pgswVigAA" x="103" y="46"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_zjFYwOHdEeSz8pgswVigAA" type="2004" element="_zjBuYeHdEeSz8pgswVigAA">
+              <children xmi:type="notation:Node" xmi:id="_zjHN8OHdEeSz8pgswVigAA" type="4005">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_zjHN8eHdEeSz8pgswVigAA" y="5"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_zjFYweHdEeSz8pgswVigAA" fontName="Droid Sans"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zjFYwuHdEeSz8pgswVigAA" x="233" y="120"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_zzqycOHdEeSz8pgswVigAA" type="2005" element="_zzoWMeHdEeSz8pgswVigAA">
+              <children xmi:type="notation:Node" xmi:id="_zzsAkOHdEeSz8pgswVigAA" type="4007"/>
+              <children xmi:type="notation:Node" xmi:id="_zztOsOHdEeSz8pgswVigAA" type="5003">
+                <styles xmi:type="notation:DrawerStyle" xmi:id="_zztOseHdEeSz8pgswVigAA"/>
+                <styles xmi:type="notation:SortingStyle" xmi:id="_zztOsuHdEeSz8pgswVigAA"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="_zztOs-HdEeSz8pgswVigAA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_zzqyceHdEeSz8pgswVigAA" fontName="Droid Sans"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zzqycuHdEeSz8pgswVigAA" x="255" y="46" width="81"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_0-m7kOHdEeSz8pgswVigAA" type="2004" element="_0-lGYeHdEeSz8pgswVigAA">
+              <children xmi:type="notation:Node" xmi:id="_0-oJsOHdEeSz8pgswVigAA" type="4005">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_0-oJseHdEeSz8pgswVigAA" y="5"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_0-m7keHdEeSz8pgswVigAA" fontName="Droid Sans"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0-m7kuHdEeSz8pgswVigAA" x="498" y="46"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_k9HGgOHgEeSz8pgswVigAA" type="2006" element="_k9F4YeHgEeSz8pgswVigAA">
+              <children xmi:type="notation:Node" xmi:id="_k9IUoOHgEeSz8pgswVigAA" type="4006">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_k9IUoeHgEeSz8pgswVigAA" x="-10" y="-25"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_k9HGgeHgEeSz8pgswVigAA" fontName="Droid Sans"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_k9HGguHgEeSz8pgswVigAA" x="370" y="46"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_pZOsgOHgEeSz8pgswVigAA" type="2004" element="_pZNeYeHgEeSz8pgswVigAA">
+              <children xmi:type="notation:Node" xmi:id="_pZPTkOHgEeSz8pgswVigAA" type="4005">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_pZPTkeHgEeSz8pgswVigAA" y="5"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_pZOsgeHgEeSz8pgswVigAA" fontName="Droid Sans"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_pZOsguHgEeSz8pgswVigAA" x="498" y="120"/>
+            </children>
+            <styles xmi:type="notation:SortingStyle" xmi:id="_Zi6tYeHbEeSz8pgswVigAA"/>
+            <styles xmi:type="notation:FilteringStyle" xmi:id="_Zi6tYuHbEeSz8pgswVigAA"/>
+          </children>
+          <styles xmi:type="notation:ShapeStyle" xmi:id="_Zi5fQeHbEeSz8pgswVigAA" fontName="Droid Sans"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Zi5fQuHbEeSz8pgswVigAA"/>
+        </children>
+        <styles xmi:type="notation:DrawerStyle" xmi:id="_ZiiS4eHbEeSz8pgswVigAA"/>
+        <styles xmi:type="notation:SortingStyle" xmi:id="_ZiiS4uHbEeSz8pgswVigAA"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_ZiiS4-HbEeSz8pgswVigAA"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_ZicMQeHbEeSz8pgswVigAA" fontName="Droid Sans"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZicMQuHbEeSz8pgswVigAA" x="29" y="26" width="621" height="205"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_LYrwYOHoEeSz8pgswVigAA" type="1004" element="_LYqiQeHoEeSz8pgswVigAA">
+      <children xmi:type="notation:Node" xmi:id="_LYsXcOHoEeSz8pgswVigAA" type="4009"/>
+      <children xmi:type="notation:Node" xmi:id="_LYsXceHoEeSz8pgswVigAA" type="5001">
+        <styles xmi:type="notation:DrawerStyle" xmi:id="_LYsXcuHoEeSz8pgswVigAA"/>
+        <styles xmi:type="notation:SortingStyle" xmi:id="_LYsXc-HoEeSz8pgswVigAA"/>
+        <styles xmi:type="notation:FilteringStyle" xmi:id="_LYsXdOHoEeSz8pgswVigAA"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_LYrwYeHoEeSz8pgswVigAA" fontName="Droid Sans"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LYrwYuHoEeSz8pgswVigAA" x="29" y="290" width="621" height="105"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_YwDtEeHbEeSz8pgswVigAA"/>
+    <edges xmi:type="notation:Edge" xmi:id="_5V4d0OHdEeSz8pgswVigAA" type="3001" element="_5V1ageHdEeSz8pgswVigAA" source="_uh-2YOHdEeSz8pgswVigAA" target="_zA7t8OHdEeSz8pgswVigAA">
+      <children xmi:type="notation:Node" xmi:id="_5V5r8OHdEeSz8pgswVigAA" type="4012">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_5V6TAOHdEeSz8pgswVigAA" y="40"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_5V4d0eHdEeSz8pgswVigAA" routing="Rectilinear"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_5V4d0uHdEeSz8pgswVigAA" fontName="Droid Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5V4d0-HdEeSz8pgswVigAA" points="[20, 0, -123, 0]$[123, 0, -20, 0]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_5WFSIOHdEeSz8pgswVigAA" type="3001" element="_5WEEAeHdEeSz8pgswVigAA" source="_zA7t8OHdEeSz8pgswVigAA" target="_zzqycOHdEeSz8pgswVigAA">
+      <children xmi:type="notation:Node" xmi:id="_5WFSJOHdEeSz8pgswVigAA" type="4012">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_5WFSJeHdEeSz8pgswVigAA" y="40"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_5WFSIeHdEeSz8pgswVigAA" routing="Rectilinear"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_5WFSIuHdEeSz8pgswVigAA" fontName="Droid Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5WFSI-HdEeSz8pgswVigAA" points="[20, 0, -102, 0]$[90, 0, -32, 0]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_6FOQEOHdEeSz8pgswVigAA" type="3001" element="_6FLMweHdEeSz8pgswVigAA" source="_zA7t8OHdEeSz8pgswVigAA" target="_zjFYwOHdEeSz8pgswVigAA">
+      <children xmi:type="notation:Node" xmi:id="_6FO3IOHdEeSz8pgswVigAA" type="4012">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_6FO3IeHdEeSz8pgswVigAA" x="18" y="-12"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_6FOQEeHdEeSz8pgswVigAA" routing="Rectilinear"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_6FOQEuHdEeSz8pgswVigAA" fontName="Droid Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_6FOQE-HdEeSz8pgswVigAA" points="[-2, 20, -132, -54]$[-2, 73, -132, -1]$[110, 73, -20, -1]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_k9L_AOHgEeSz8pgswVigAA" type="3001" element="_k9LX8eHgEeSz8pgswVigAA" source="_k9HGgOHgEeSz8pgswVigAA" target="_0-m7kOHdEeSz8pgswVigAA">
+      <children xmi:type="notation:Node" xmi:id="_k9L_BOHgEeSz8pgswVigAA" type="4012">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_k9L_BeHgEeSz8pgswVigAA" y="40"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_k9L_AeHgEeSz8pgswVigAA" routing="Rectilinear"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_k9L_AuHgEeSz8pgswVigAA" fontName="Droid Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_k9L_A-HgEeSz8pgswVigAA" points="[20, -1, -99, -1]$[99, -1, -20, -1]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_k9ObQOHgEeSz8pgswVigAA" type="3001" element="_k9N0MeHgEeSz8pgswVigAA" source="_zzqycOHdEeSz8pgswVigAA" target="_k9HGgOHgEeSz8pgswVigAA">
+      <children xmi:type="notation:Node" xmi:id="_k9PCUOHgEeSz8pgswVigAA" type="4012">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_k9PCUeHgEeSz8pgswVigAA" y="40"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_k9ObQeHgEeSz8pgswVigAA" routing="Rectilinear"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_k9ObQuHgEeSz8pgswVigAA" fontName="Droid Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_k9ObQ-HgEeSz8pgswVigAA" points="[32, 0, -82, 0]$[94, 0, -20, 0]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_qghrwOHgEeSz8pgswVigAA" type="3001" element="_qgczQeHgEeSz8pgswVigAA" source="_k9HGgOHgEeSz8pgswVigAA" target="_pZOsgOHgEeSz8pgswVigAA">
+      <children xmi:type="notation:Node" xmi:id="_qgiS0OHgEeSz8pgswVigAA" type="4012">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_qgiS0eHgEeSz8pgswVigAA" x="6" y="-13"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_qghrweHgEeSz8pgswVigAA" routing="Rectilinear"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_qghrwuHgEeSz8pgswVigAA" fontName="Droid Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_qghrw-HgEeSz8pgswVigAA" points="[-1, 20, -129, -54]$[-1, 74, -129, 0]$[108, 74, -20, 0]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_Nf1DEOHoEeSz8pgswVigAA" type="3002" element="_Nfym0eHoEeSz8pgswVigAA" source="_zzqycOHdEeSz8pgswVigAA" target="_LYrwYOHoEeSz8pgswVigAA">
+      <children xmi:type="notation:Node" xmi:id="_Nf1qIOHoEeSz8pgswVigAA" type="4013">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Nf1qIeHoEeSz8pgswVigAA" y="40"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_Nf1DEeHoEeSz8pgswVigAA" routing="Rectilinear"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_Nf1DEuHoEeSz8pgswVigAA" fontName="Droid Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Nf1DE-HoEeSz8pgswVigAA" points="[-5, 20, 20, -221]$[-5, 189, 20, -52]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_N3cR0OHoEeSz8pgswVigAA" type="3002" element="_N3bqweHoEeSz8pgswVigAA" source="_LYrwYOHoEeSz8pgswVigAA" target="_zzqycOHdEeSz8pgswVigAA">
+      <children xmi:type="notation:Node" xmi:id="_N3c44OHoEeSz8pgswVigAA" type="4013">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_N3c44eHoEeSz8pgswVigAA" y="40"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_N3cR0eHoEeSz8pgswVigAA" routing="Rectilinear"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_N3cR0uHoEeSz8pgswVigAA" fontName="Droid Sans"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_N3cR0-HoEeSz8pgswVigAA" points="[-5, -20, 22, 189]$[-5, -189, 22, 20]"/>
+      <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_N3euEOHoEeSz8pgswVigAA" id="(0.5684380032206119,0.19047619047619047)"/>
+    </edges>
+  </notation:Diagram>
+</xmi:XMI>

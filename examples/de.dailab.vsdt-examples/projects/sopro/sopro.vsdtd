@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:vsdt="http://de.dailab.vsdt">
+  <notation:Diagram xmi:id="_xfdIMBXvEeGOzdAZdJ8H5w" type="Vsdt_meta" element="_xfqjkBXvEeGOzdAZdJ8H5w" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_xhjZ8BXvEeGOzdAZdJ8H5w" type="1001" element="_xfrLAxXvEeGOzdAZdJ8H5w">
+      <children xmi:type="notation:Node" xmi:id="_xhkoEBXvEeGOzdAZdJ8H5w" type="4001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_xhkoERXvEeGOzdAZdJ8H5w" y="5"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_xhjZ8RXvEeGOzdAZdJ8H5w" fontName="Sans"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xhjZ8hXvEeGOzdAZdJ8H5w" x="218"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_xhlPIBXvEeGOzdAZdJ8H5w" type="1001" element="_xfrLBBXvEeGOzdAZdJ8H5w">
+      <children xmi:type="notation:Node" xmi:id="_xhlPIxXvEeGOzdAZdJ8H5w" type="4001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_xhlPJBXvEeGOzdAZdJ8H5w" y="5"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_xhlPIRXvEeGOzdAZdJ8H5w" fontName="Sans"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xhlPIhXvEeGOzdAZdJ8H5w" x="318"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_xhl2MBXvEeGOzdAZdJ8H5w" type="1001" element="_xfrLBRXvEeGOzdAZdJ8H5w">
+      <children xmi:type="notation:Node" xmi:id="_xhl2MxXvEeGOzdAZdJ8H5w" type="4001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_xhl2NBXvEeGOzdAZdJ8H5w" y="5"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_xhl2MRXvEeGOzdAZdJ8H5w" fontName="Sans"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xhl2MhXvEeGOzdAZdJ8H5w" x="37"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_xhmdQBXvEeGOzdAZdJ8H5w" type="1001" element="_xfrLBhXvEeGOzdAZdJ8H5w">
+      <children xmi:type="notation:Node" xmi:id="_xhmdQxXvEeGOzdAZdJ8H5w" type="4001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_xhmdRBXvEeGOzdAZdJ8H5w" y="5"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_xhmdQRXvEeGOzdAZdJ8H5w" fontName="Sans"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xhmdQhXvEeGOzdAZdJ8H5w" x="418"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_xhnEUBXvEeGOzdAZdJ8H5w" type="1002" element="_xfqjkRXvEeGOzdAZdJ8H5w">
+      <children xmi:type="notation:Node" xmi:id="_xhnrYBXvEeGOzdAZdJ8H5w" type="4002"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_xhnEURXvEeGOzdAZdJ8H5w" fontName="Sans"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_xhnEUhXvEeGOzdAZdJ8H5w" diagramLink="_yfoy0BXvEeGOzdAZdJ8H5w" hint="Vsdt"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xhnEUxXvEeGOzdAZdJ8H5w" x="364" y="120"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_xhoScBXvEeGOzdAZdJ8H5w" type="1002" element="_xfrKrBXvEeGOzdAZdJ8H5w">
+      <children xmi:type="notation:Node" xmi:id="_xhoSdBXvEeGOzdAZdJ8H5w" type="4002"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_xhoScRXvEeGOzdAZdJ8H5w" fontName="Sans"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_xhoSchXvEeGOzdAZdJ8H5w" diagramLink="_yPT30BXvEeGOzdAZdJ8H5w" hint="Vsdt"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xhoScxXvEeGOzdAZdJ8H5w" x="174" y="120"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_xho5gBXvEeGOzdAZdJ8H5w" type="1002" element="_xfrKxxXvEeGOzdAZdJ8H5w">
+      <children xmi:type="notation:Node" xmi:id="_xho5hBXvEeGOzdAZdJ8H5w" type="4002"/>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_xho5gRXvEeGOzdAZdJ8H5w" fontName="Sans"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_xho5ghXvEeGOzdAZdJ8H5w" diagramLink="_x4WwYBXvEeGOzdAZdJ8H5w" hint="Vsdt"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xho5gxXvEeGOzdAZdJ8H5w" y="120"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_xfdIMRXvEeGOzdAZdJ8H5w"/>
+  </notation:Diagram>
+  <vsdt:BusinessProcessSystem xmi:id="_xfqjkBXvEeGOzdAZdJ8H5w" name="SOPRO" id="_KTKLUIsmEd6gCtoBEhtPhA" version="0.1" author="Tobias Küster" expressionLanguage="VSDT Expression Language" creationDate="2009-08-17T14:04:48.389+0200" modificationDate="2009-08-17T14:04:48.389+0200">
+    <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_xfqjkRXvEeGOzdAZdJ8H5w" name="Schedule Assembly" id="_lRwUMIswEd6gCtoBEhtPhA" participants="_xfrLAxXvEeGOzdAZdJ8H5w _xfrLBBXvEeGOzdAZdJ8H5w _xfrLBhXvEeGOzdAZdJ8H5w">
+      <pools xmi:type="vsdt:Pool" xmi:id="_xfqjkhXvEeGOzdAZdJ8H5w" name="Work Piece" id="_8xR5sIswEd6gCtoBEhtPhA" participant="_xfrLAxXvEeGOzdAZdJ8H5w">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_xfqjkxXvEeGOzdAZdJ8H5w" id="_8xbqsIswEd6gCtoBEhtPhA">
+          <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_xfqjlBXvEeGOzdAZdJ8H5w" id="__5r1EIswEd6gCtoBEhtPhA" trigger="MESSAGE"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjlRXvEeGOzdAZdJ8H5w" name="search &#xD;&#xA;machines" id="_BJblsIsxEd6gCtoBEhtPhA" activityType="SCRIPT"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjlhXvEeGOzdAZdJ8H5w" name="get available machines" id="_CgA-IIsxEd6gCtoBEhtPhA" activityType="EMBEDDED">
+            <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjlxXvEeGOzdAZdJ8H5w" name="send &#xD;&#xA;request" id="_Sa1cEIsxEd6gCtoBEhtPhA" activityType="SEND"/>
+            <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjmBXvEeGOzdAZdJ8H5w" name="receive &#xD;&#xA;response" id="_TNkgkIsxEd6gCtoBEhtPhA" activityType="RECEIVE"/>
+            <loopAttributes xmi:type="vsdt:MultiLoopAttSet" xmi:id="_xfqjmRXvEeGOzdAZdJ8H5w"/>
+            <boundaryEvents xmi:type="vsdt:Intermediate" xmi:id="_xfqjmhXvEeGOzdAZdJ8H5w" id="_fuIeIIsxEd6gCtoBEhtPhA" trigger="TIMER"/>
+          </containedFlowObjects>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_xfqjmxXvEeGOzdAZdJ8H5w" id="_ESRl8IsxEd6gCtoBEhtPhA"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_xfqjnBXvEeGOzdAZdJ8H5w" name="positive replies?" id="_Ei74IIsxEd6gCtoBEhtPhA"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjnRXvEeGOzdAZdJ8H5w" name="negotiate &#xD;&#xA;with other &#xD;&#xA;work pieces" id="_IpO_IIsxEd6gCtoBEhtPhA" activityType="CALL"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjnhXvEeGOzdAZdJ8H5w" name="get resources" id="_KgQLIIsxEd6gCtoBEhtPhA" activityType="EMBEDDED">
+            <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjnxXvEeGOzdAZdJ8H5w" name="send &#xD;&#xA;request" id="_2HP1MIsxEd6gCtoBEhtPhA" activityType="SEND"/>
+            <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjoBXvEeGOzdAZdJ8H5w" name="receive &#xD;&#xA;response" id="_4sO6cIsxEd6gCtoBEhtPhA" activityType="RECEIVE"/>
+            <loopAttributes xmi:type="vsdt:MultiLoopAttSet" xmi:id="_xfqjoRXvEeGOzdAZdJ8H5w"/>
+          </containedFlowObjects>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_xfqjohXvEeGOzdAZdJ8H5w" id="_M1oHEIsxEd6gCtoBEhtPhA"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjoxXvEeGOzdAZdJ8H5w" name="calc. cost, &#xD;&#xA;pick best &#xD;&#xA;machine" id="_L9oLQIs1Ed6gCtoBEhtPhA" activityType="SCRIPT"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjpBXvEeGOzdAZdJ8H5w" name="confirm &#xD;&#xA;reservation / &#xD;&#xA;send relesase" id="_6RhD8Is2Ed6gCtoBEhtPhA">
+            <loopAttributes xmi:type="vsdt:MultiLoopAttSet" xmi:id="_xfqjpRXvEeGOzdAZdJ8H5w"/>
+          </containedFlowObjects>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjphXvEeGOzdAZdJ8H5w" name="order &#xD;&#xA;missing res." id="_xS9GIIs5Ed6gCtoBEhtPhA" activityType="SERVICE"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjpxXvEeGOzdAZdJ8H5w" name="execute &#xD;&#xA;assembly" id="__ETWIIs5Ed6gCtoBEhtPhA" activityType="CALL"/>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_xfqjqBXvEeGOzdAZdJ8H5w" id="_BqSZkIs9Ed6gCtoBEhtPhA"/>
+        </lanes>
+      </pools>
+      <pools xmi:type="vsdt:Pool" xmi:id="_xfqjqRXvEeGOzdAZdJ8H5w" name="Machine" id="_8xbqwYswEd6gCtoBEhtPhA" participant="_xfrLBBXvEeGOzdAZdJ8H5w">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_xfqjqhXvEeGOzdAZdJ8H5w" id="_8xbqwoswEd6gCtoBEhtPhA">
+          <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_xfqjqxXvEeGOzdAZdJ8H5w" id="_P8JZ0Is2Ed6gCtoBEhtPhA" trigger="MESSAGE"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjrBXvEeGOzdAZdJ8H5w" name="check availability" id="_Q7q9IIs2Ed6gCtoBEhtPhA" activityType="SCRIPT"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjrRXvEeGOzdAZdJ8H5w" name="send &#xD;&#xA;response" id="_T21GsIs2Ed6gCtoBEhtPhA" activityType="SEND"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_xfqjrhXvEeGOzdAZdJ8H5w" id="_WYZrkIs2Ed6gCtoBEhtPhA" gatewayType="XOR_EVENT"/>
+          <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_xfqjrxXvEeGOzdAZdJ8H5w" name="resource req." id="_XR--8Is2Ed6gCtoBEhtPhA" trigger="MESSAGE"/>
+          <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_xfqjsBXvEeGOzdAZdJ8H5w" name="timeout" id="_ZebBUIs2Ed6gCtoBEhtPhA" trigger="TIMER"/>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_xfqjsRXvEeGOzdAZdJ8H5w" id="_aF2NsIs2Ed6gCtoBEhtPhA"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjshXvEeGOzdAZdJ8H5w" name="send &#xD;&#xA;resource list" id="_eMcPoIs2Ed6gCtoBEhtPhA" activityType="SEND"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjsxXvEeGOzdAZdJ8H5w" name="receive &#xD;&#xA;response" id="_C1KgAIs3Ed6gCtoBEhtPhA" activityType="RECEIVE"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjtBXvEeGOzdAZdJ8H5w" name="update &#xD;&#xA;state" id="_TNbu8Is3Ed6gCtoBEhtPhA" activityType="SCRIPT"/>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_xfqjtRXvEeGOzdAZdJ8H5w" id="_aKrYcIs4Ed6gCtoBEhtPhA"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfqjthXvEeGOzdAZdJ8H5w" name="update &#xD;&#xA;state" id="_mt62kIs4Ed6gCtoBEhtPhA" activityType="SCRIPT"/>
+        </lanes>
+      </pools>
+      <pools xmi:type="vsdt:Pool" xmi:id="_xfqjtxXvEeGOzdAZdJ8H5w" name="PPS" id="_BzgZQIs4Ed6gCtoBEhtPhA" participant="_xfrLBhXvEeGOzdAZdJ8H5w"/>
+      <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_xfqjuBXvEeGOzdAZdJ8H5w" documentation="same message type &#xD;&#xA;for confirm and reject, &#xD;&#xA;thus no 'pick' used here" id="_YdNOMIsxEd6gCtoBEhtPhA"/>
+      <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_xfqjuRXvEeGOzdAZdJ8H5w" documentation="again, same message &#xD;&#xA;type for confirmation &#xD;&#xA;and deallocation" id="_9g6YIIs2Ed6gCtoBEhtPhA"/>
+      <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_xfqjuhXvEeGOzdAZdJ8H5w" documentation="the machine process could also be split up" id="_x9vacIs3Ed6gCtoBEhtPhA"/>
+      <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_xfqjuxXvEeGOzdAZdJ8H5w" documentation="TBD" id="_JCfWMIs9Ed6gCtoBEhtPhA"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjvBXvEeGOzdAZdJ8H5w" id="_BJkvoIsxEd6gCtoBEhtPhA" source="_xfqjlBXvEeGOzdAZdJ8H5w" target="_xfqjlRXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjvRXvEeGOzdAZdJ8H5w" id="_CgKvKIsxEd6gCtoBEhtPhA" source="_xfqjlRXvEeGOzdAZdJ8H5w" target="_xfqjlhXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjvhXvEeGOzdAZdJ8H5w" id="_ESbW8IsxEd6gCtoBEhtPhA" source="_xfqjlhXvEeGOzdAZdJ8H5w" target="_xfqjmxXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjvxXvEeGOzdAZdJ8H5w" id="_EjFpIIsxEd6gCtoBEhtPhA" source="_xfqjmxXvEeGOzdAZdJ8H5w" target="_xfqjnBXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjwBXvEeGOzdAZdJ8H5w" name="no" id="_IpYJEIsxEd6gCtoBEhtPhA" conditionType="EXPRESSION" source="_xfqjnBXvEeGOzdAZdJ8H5w" target="_xfqjnRXvEeGOzdAZdJ8H5w">
+        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_xfqjwRXvEeGOzdAZdJ8H5w" expression="'no positive replies'"/>
+      </connections>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjwhXvEeGOzdAZdJ8H5w" id="_TNtqgIsxEd6gCtoBEhtPhA" source="_xfqjlxXvEeGOzdAZdJ8H5w" target="_xfqjmBXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjwxXvEeGOzdAZdJ8H5w" id="_hbewwIsxEd6gCtoBEhtPhA" source="_xfqjmhXvEeGOzdAZdJ8H5w" target="_xfqjmxXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjxBXvEeGOzdAZdJ8H5w" id="_4sO6eYsxEd6gCtoBEhtPhA" source="_xfqjnxXvEeGOzdAZdJ8H5w" target="_xfqjoBXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjxRXvEeGOzdAZdJ8H5w" name="yes" id="__lClUIsxEd6gCtoBEhtPhA" conditionType="DEFAULT" source="_xfqjnBXvEeGOzdAZdJ8H5w" target="_xfqjnhXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjxhXvEeGOzdAZdJ8H5w" id="_M1xRAIsxEd6gCtoBEhtPhA" source="_xfqjnhXvEeGOzdAZdJ8H5w" target="_xfqjoxXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjxxXvEeGOzdAZdJ8H5w" id="_Q70uIIs2Ed6gCtoBEhtPhA" source="_xfqjqxXvEeGOzdAZdJ8H5w" target="_xfqjrBXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjyBXvEeGOzdAZdJ8H5w" id="_T2-3sIs2Ed6gCtoBEhtPhA" source="_xfqjrBXvEeGOzdAZdJ8H5w" target="_xfqjrRXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjyRXvEeGOzdAZdJ8H5w" id="_XSII4Is2Ed6gCtoBEhtPhA" source="_xfqjrhXvEeGOzdAZdJ8H5w" target="_xfqjrxXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjyhXvEeGOzdAZdJ8H5w" id="_ZebBVos2Ed6gCtoBEhtPhA" source="_xfqjrhXvEeGOzdAZdJ8H5w" target="_xfqjsBXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjyxXvEeGOzdAZdJ8H5w" id="_aF2Ntos2Ed6gCtoBEhtPhA" source="_xfqjsBXvEeGOzdAZdJ8H5w" target="_xfqjsRXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjzBXvEeGOzdAZdJ8H5w" id="_eMcPqYs2Ed6gCtoBEhtPhA" source="_xfqjrxXvEeGOzdAZdJ8H5w" target="_xfqjshXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjzRXvEeGOzdAZdJ8H5w" id="_5ykeIIs2Ed6gCtoBEhtPhA" source="_xfqjoxXvEeGOzdAZdJ8H5w" target="_xfqjpBXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjzhXvEeGOzdAZdJ8H5w" id="_C1KgCYs3Ed6gCtoBEhtPhA" source="_xfqjshXvEeGOzdAZdJ8H5w" target="_xfqjsxXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfqjzxXvEeGOzdAZdJ8H5w" id="_N6hq5os3Ed6gCtoBEhtPhA" source="_xfqjsxXvEeGOzdAZdJ8H5w" target="_xfqjtBXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_xfqj0BXvEeGOzdAZdJ8H5w" id="_2_GbgIs3Ed6gCtoBEhtPhA" source="_xfqjlxXvEeGOzdAZdJ8H5w" target="_xfqjqxXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_xfqj0RXvEeGOzdAZdJ8H5w" id="_51px4Is3Ed6gCtoBEhtPhA" source="_xfqjrRXvEeGOzdAZdJ8H5w" target="_xfqjmBXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_xfqj0hXvEeGOzdAZdJ8H5w" id="_7QZ4oIs3Ed6gCtoBEhtPhA" source="_xfqjnxXvEeGOzdAZdJ8H5w" target="_xfqjrxXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_xfqj0xXvEeGOzdAZdJ8H5w" id="_80YM0Is3Ed6gCtoBEhtPhA" source="_xfqjshXvEeGOzdAZdJ8H5w" target="_xfqjoBXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_xfqj1BXvEeGOzdAZdJ8H5w" id="_-UfUsIs3Ed6gCtoBEhtPhA" source="_xfqjpBXvEeGOzdAZdJ8H5w" target="_xfqjsxXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_xfqj1RXvEeGOzdAZdJ8H5w" id="_EyFqQIs4Ed6gCtoBEhtPhA" source="_xfqjtxXvEeGOzdAZdJ8H5w" target="_xfqjlBXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:Association" xmi:id="_xfqj1hXvEeGOzdAZdJ8H5w" id="_Qxn-YIs4Ed6gCtoBEhtPhA" source="_xfqjuRXvEeGOzdAZdJ8H5w" target="_xfqj1BXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:Association" xmi:id="_xfrKoBXvEeGOzdAZdJ8H5w" id="_Rdp98Is4Ed6gCtoBEhtPhA" source="_xfqjuBXvEeGOzdAZdJ8H5w" target="_xfqj0RXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:Association" xmi:id="_xfrKoRXvEeGOzdAZdJ8H5w" id="_TTMjQIs4Ed6gCtoBEhtPhA" source="_xfqjuhXvEeGOzdAZdJ8H5w" target="_xfqjqRXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrKohXvEeGOzdAZdJ8H5w" id="_aK1JcIs4Ed6gCtoBEhtPhA" source="_xfqjtBXvEeGOzdAZdJ8H5w" target="_xfqjtRXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrKoxXvEeGOzdAZdJ8H5w" id="_mt62mYs4Ed6gCtoBEhtPhA" source="_xfqjthXvEeGOzdAZdJ8H5w" target="_xfqjrhXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrKpBXvEeGOzdAZdJ8H5w" id="_WYZrlos2Ed6gCtoBEhtPhA" source="_xfqjrRXvEeGOzdAZdJ8H5w" target="_xfqjthXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrKpRXvEeGOzdAZdJ8H5w" id="_xS9GKYs5Ed6gCtoBEhtPhA" source="_xfqjpBXvEeGOzdAZdJ8H5w" target="_xfqjphXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_xfrKphXvEeGOzdAZdJ8H5w" id="_2luAQIs5Ed6gCtoBEhtPhA" source="_xfqjphXvEeGOzdAZdJ8H5w" target="_xfqjtxXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_xfrKpxXvEeGOzdAZdJ8H5w" id="_3aFccIs5Ed6gCtoBEhtPhA" source="_xfqjtxXvEeGOzdAZdJ8H5w" target="_xfqjphXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrKqBXvEeGOzdAZdJ8H5w" id="_CQHx4Is6Ed6gCtoBEhtPhA" source="_xfqjphXvEeGOzdAZdJ8H5w" target="_xfqjpxXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrKqRXvEeGOzdAZdJ8H5w" id="_DOT4cIs6Ed6gCtoBEhtPhA" source="_xfqjpxXvEeGOzdAZdJ8H5w" target="_xfqjohXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrKqhXvEeGOzdAZdJ8H5w" id="_BqbjgIs9Ed6gCtoBEhtPhA" source="_xfqjnRXvEeGOzdAZdJ8H5w" target="_xfqjqBXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:Association" xmi:id="_xfrKqxXvEeGOzdAZdJ8H5w" id="_KYL90Is9Ed6gCtoBEhtPhA" source="_xfqjuxXvEeGOzdAZdJ8H5w" target="_xfqjnRXvEeGOzdAZdJ8H5w"/>
+    </businessProcesses>
+    <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_xfrKrBXvEeGOzdAZdJ8H5w" name="Execute Assembly" id="_bsLVgIs6Ed6gCtoBEhtPhA" participants="_xfrLAxXvEeGOzdAZdJ8H5w _xfrLBBXvEeGOzdAZdJ8H5w">
+      <pools xmi:type="vsdt:Pool" xmi:id="_xfrKrRXvEeGOzdAZdJ8H5w" name="Work Piece" id="_pShPYIs6Ed6gCtoBEhtPhA" participant="_xfrLAxXvEeGOzdAZdJ8H5w">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_xfrKrhXvEeGOzdAZdJ8H5w" id="_pShPYYs6Ed6gCtoBEhtPhA">
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfrKrxXvEeGOzdAZdJ8H5w" name="order transport &#xD;&#xA;to machine" id="_v2qR0Is6Ed6gCtoBEhtPhA" activityType="CALL"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfrKsBXvEeGOzdAZdJ8H5w" name="order transport &#xD;&#xA;to interim storage" id="_3Z4ysIs6Ed6gCtoBEhtPhA" activityType="CALL"/>
+          <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_xfrKsRXvEeGOzdAZdJ8H5w" id="_vQuTMIs6Ed6gCtoBEhtPhA"/>
+          <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_xfrKshXvEeGOzdAZdJ8H5w" name="notify machine" id="_yb85EIs6Ed6gCtoBEhtPhA" trigger="MESSAGE"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfrKsxXvEeGOzdAZdJ8H5w" name="[ be assembled ]" id="_zFK1MIs6Ed6gCtoBEhtPhA">
+            <boundaryEvents xmi:type="vsdt:Intermediate" xmi:id="_xfrKtBXvEeGOzdAZdJ8H5w" id="_KwHnkIs7Ed6gCtoBEhtPhA" trigger="MESSAGE"/>
+          </containedFlowObjects>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_xfrKtRXvEeGOzdAZdJ8H5w" id="_5wKGgIs6Ed6gCtoBEhtPhA"/>
+        </lanes>
+      </pools>
+      <pools xmi:type="vsdt:Pool" xmi:id="_xfrKthXvEeGOzdAZdJ8H5w" name="Machine" id="_pS0KUIs6Ed6gCtoBEhtPhA" participant="_xfrLBBXvEeGOzdAZdJ8H5w">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_xfrKtxXvEeGOzdAZdJ8H5w" id="_pS0KUYs6Ed6gCtoBEhtPhA">
+          <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_xfrKuBXvEeGOzdAZdJ8H5w" id="_6bvaIIs6Ed6gCtoBEhtPhA" trigger="MESSAGE"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfrKuRXvEeGOzdAZdJ8H5w" name="[ assemble work piece ]" id="_8keBMIs6Ed6gCtoBEhtPhA"/>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_xfrKuhXvEeGOzdAZdJ8H5w" id="_Fk-YYIs7Ed6gCtoBEhtPhA" trigger="MESSAGE"/>
+        </lanes>
+      </pools>
+      <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_xfrKuxXvEeGOzdAZdJ8H5w" documentation="assumption: there's always a &#xD;&#xA;way and enough time to be &#xD;&#xA;transported to the machine's site" id="_ptnoQItAEd6bjaTfprwawQ"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrKvBXvEeGOzdAZdJ8H5w" id="_v2qR2Ys6Ed6gCtoBEhtPhA" source="_xfrKsRXvEeGOzdAZdJ8H5w" target="_xfrKrxXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrKvRXvEeGOzdAZdJ8H5w" id="_ycGqEIs6Ed6gCtoBEhtPhA" source="_xfrKrxXvEeGOzdAZdJ8H5w" target="_xfrKshXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrKvhXvEeGOzdAZdJ8H5w" id="_zFK1OYs6Ed6gCtoBEhtPhA" source="_xfrKshXvEeGOzdAZdJ8H5w" target="_xfrKsxXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrKvxXvEeGOzdAZdJ8H5w" id="_3aCjuIs6Ed6gCtoBEhtPhA" source="_xfrKsxXvEeGOzdAZdJ8H5w" target="_xfrKsBXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrKwBXvEeGOzdAZdJ8H5w" id="_5wKGhos6Ed6gCtoBEhtPhA" source="_xfrKsBXvEeGOzdAZdJ8H5w" target="_xfrKtRXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrKwRXvEeGOzdAZdJ8H5w" id="_8knyMIs6Ed6gCtoBEhtPhA" source="_xfrKuBXvEeGOzdAZdJ8H5w" target="_xfrKuRXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrKwhXvEeGOzdAZdJ8H5w" id="_B5dv8Is7Ed6gCtoBEhtPhA" source="_xfrKuRXvEeGOzdAZdJ8H5w" target="_xfrKuhXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrKwxXvEeGOzdAZdJ8H5w" id="_vBoR0Is7Ed6gCtoBEhtPhA" source="_xfrKtBXvEeGOzdAZdJ8H5w" target="_xfrKsBXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_xfrKxBXvEeGOzdAZdJ8H5w" id="_xk0AQIs7Ed6gCtoBEhtPhA" source="_xfrKuhXvEeGOzdAZdJ8H5w" target="_xfrKtBXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_xfrKxRXvEeGOzdAZdJ8H5w" id="_zWUaIIs7Ed6gCtoBEhtPhA" source="_xfrKshXvEeGOzdAZdJ8H5w" target="_xfrKuBXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:Association" xmi:id="_xfrKxhXvEeGOzdAZdJ8H5w" id="_vm698ItAEd6bjaTfprwawQ" source="_xfrKuxXvEeGOzdAZdJ8H5w" target="_xfrKrxXvEeGOzdAZdJ8H5w"/>
+    </businessProcesses>
+    <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_xfrKxxXvEeGOzdAZdJ8H5w" name="Order Transport" id="_Wh7PcItAEd6bjaTfprwawQ" participants="_xfrLBRXvEeGOzdAZdJ8H5w _xfrLAxXvEeGOzdAZdJ8H5w">
+      <pools xmi:type="vsdt:Pool" xmi:id="_xfrKyBXvEeGOzdAZdJ8H5w" name="Transport" id="_1hZ_YItAEd6bjaTfprwawQ" participant="_xfrLBRXvEeGOzdAZdJ8H5w">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_xfrKyRXvEeGOzdAZdJ8H5w" id="_1hZ_YYtAEd6bjaTfprwawQ">
+          <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_xfrKyhXvEeGOzdAZdJ8H5w" id="_bRrGoItBEd6bjaTfprwawQ" trigger="MESSAGE"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfrKyxXvEeGOzdAZdJ8H5w" name="check schedule &#xD;&#xA;and calculate route" id="_cRgL8ItBEd6bjaTfprwawQ" activityType="SCRIPT"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_xfrKzBXvEeGOzdAZdJ8H5w" name="can transport?" id="_hV1BcItBEd6bjaTfprwawQ"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfrKzRXvEeGOzdAZdJ8H5w" name="send &#xD;&#xA;proposal" id="_kpi08ItBEd6bjaTfprwawQ" activityType="SEND"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_xfrKzhXvEeGOzdAZdJ8H5w" name="await response" id="_mQ8QkItBEd6bjaTfprwawQ" gatewayType="XOR_EVENT"/>
+          <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_xfrKzxXvEeGOzdAZdJ8H5w" name="response" id="_okhcwItBEd6bjaTfprwawQ" trigger="MESSAGE"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfrK0BXvEeGOzdAZdJ8H5w" name="[ transport ]" id="_pmvHsItBEd6bjaTfprwawQ"/>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_xfrK0RXvEeGOzdAZdJ8H5w" name="send notification" id="_ssmscItBEd6bjaTfprwawQ" trigger="MESSAGE"/>
+          <containedFlowObjects xmi:type="vsdt:Intermediate" xmi:id="_xfrK0hXvEeGOzdAZdJ8H5w" name="timeout" id="_vQjP4ItBEd6bjaTfprwawQ" trigger="TIMER"/>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_xfrK0xXvEeGOzdAZdJ8H5w" id="_wb1XQItBEd6bjaTfprwawQ"/>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_xfrK1BXvEeGOzdAZdJ8H5w" id="_daD6AItCEd6bjaTfprwawQ"/>
+        </lanes>
+      </pools>
+      <pools xmi:type="vsdt:Pool" xmi:id="_xfrK1RXvEeGOzdAZdJ8H5w" name="Work Piece" id="_1iSwMItAEd6bjaTfprwawQ" participant="_xfrLAxXvEeGOzdAZdJ8H5w">
+        <lanes xmi:type="vsdt:Lane" xmi:id="_xfrK1hXvEeGOzdAZdJ8H5w" id="_1iSwMYtAEd6bjaTfprwawQ">
+          <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_xfrK1xXvEeGOzdAZdJ8H5w" id="_6yh6wItAEd6bjaTfprwawQ"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfrK2BXvEeGOzdAZdJ8H5w" name="broadcast inquiry to nearby transports" id="_7mAmIItAEd6bjaTfprwawQ" activityType="EMBEDDED">
+            <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfrK2RXvEeGOzdAZdJ8H5w" name="send &#xD;&#xA;inquiry" id="_Qh1qYItCEd6bjaTfprwawQ" activityType="SEND"/>
+            <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfrK2hXvEeGOzdAZdJ8H5w" name="receive &#xD;&#xA;result" id="_RMPSQItCEd6bjaTfprwawQ" activityType="RECEIVE"/>
+            <loopAttributes xmi:type="vsdt:MultiLoopAttSet" xmi:id="_xfrK2xXvEeGOzdAZdJ8H5w"/>
+            <boundaryEvents xmi:type="vsdt:Intermediate" xmi:id="_xfrK3BXvEeGOzdAZdJ8H5w" id="_UZQA0ItCEd6bjaTfprwawQ" trigger="TIMER"/>
+          </containedFlowObjects>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_xfrK3RXvEeGOzdAZdJ8H5w" name="any results?" id="_EGFJwItBEd6bjaTfprwawQ"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfrK3hXvEeGOzdAZdJ8H5w" name="pick best &#xD;&#xA;offer" id="_F1EbIItBEd6bjaTfprwawQ" activityType="SCRIPT"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfrK3xXvEeGOzdAZdJ8H5w" name="send &#xD;&#xA;reply" id="_IGkjsItBEd6bjaTfprwawQ" activityType="SEND"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_xfrK4BXvEeGOzdAZdJ8H5w" name="[ be transported ]" id="_KHtVAItBEd6bjaTfprwawQ">
+            <boundaryEvents xmi:type="vsdt:Intermediate" xmi:id="_xfrK4RXvEeGOzdAZdJ8H5w" id="_ObihsItBEd6bjaTfprwawQ" trigger="MESSAGE"/>
+          </containedFlowObjects>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_xfrK4hXvEeGOzdAZdJ8H5w" id="_NiG_UItBEd6bjaTfprwawQ"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_xfrK4xXvEeGOzdAZdJ8H5w" id="_XBayYItBEd6bjaTfprwawQ"/>
+          <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_xfrK5BXvEeGOzdAZdJ8H5w" id="_YzL1gItCEd6bjaTfprwawQ"/>
+        </lanes>
+      </pools>
+      <artifacts xmi:type="vsdt:TextAnnotation" xmi:id="_xfrK5RXvEeGOzdAZdJ8H5w" documentation="assuming the transport is scheduled more &#xD;&#xA;or less immediately before it is required; &#xD;&#xA;otherwise a wait could be inserted here" id="_n0kxEItCEd6bjaTfprwawQ"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK5hXvEeGOzdAZdJ8H5w" name="yes" id="_F1OMIItBEd6bjaTfprwawQ" conditionType="EXPRESSION" source="_xfrK3RXvEeGOzdAZdJ8H5w" target="_xfrK3hXvEeGOzdAZdJ8H5w">
+        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_xfrK5xXvEeGOzdAZdJ8H5w" expression="'has results'"/>
+      </connections>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK6BXvEeGOzdAZdJ8H5w" id="_IGuUsItBEd6bjaTfprwawQ" source="_xfrK3hXvEeGOzdAZdJ8H5w" target="_xfrK3xXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK6RXvEeGOzdAZdJ8H5w" id="_KH3GAItBEd6bjaTfprwawQ" source="_xfrK3xXvEeGOzdAZdJ8H5w" target="_xfrK4BXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK6hXvEeGOzdAZdJ8H5w" id="_NiahUotBEd6bjaTfprwawQ" source="_xfrK4BXvEeGOzdAZdJ8H5w" target="_xfrK4hXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK6xXvEeGOzdAZdJ8H5w" id="_PiW_0ItBEd6bjaTfprwawQ" source="_xfrK4RXvEeGOzdAZdJ8H5w" target="_xfrK4hXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK7BXvEeGOzdAZdJ8H5w" name="no, try again" id="_T3raQItBEd6bjaTfprwawQ" conditionType="DEFAULT" source="_xfrK3RXvEeGOzdAZdJ8H5w" target="_xfrK4xXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK7RXvEeGOzdAZdJ8H5w" id="_XBayZotBEd6bjaTfprwawQ" source="_xfrK4xXvEeGOzdAZdJ8H5w" target="_xfrK2BXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK7hXvEeGOzdAZdJ8H5w" id="_7mwNAItAEd6bjaTfprwawQ" source="_xfrK1xXvEeGOzdAZdJ8H5w" target="_xfrK4xXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK7xXvEeGOzdAZdJ8H5w" id="_cRgL-YtBEd6bjaTfprwawQ" source="_xfrKyhXvEeGOzdAZdJ8H5w" target="_xfrKyxXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK8BXvEeGOzdAZdJ8H5w" id="_hV1BdotBEd6bjaTfprwawQ" source="_xfrKyxXvEeGOzdAZdJ8H5w" target="_xfrKzBXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK8RXvEeGOzdAZdJ8H5w" name="yes" id="_kpr-4ItBEd6bjaTfprwawQ" conditionType="EXPRESSION" source="_xfrKzBXvEeGOzdAZdJ8H5w" target="_xfrKzRXvEeGOzdAZdJ8H5w">
+        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_xfrK8hXvEeGOzdAZdJ8H5w" expression="'can provide transport'"/>
+      </connections>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK8xXvEeGOzdAZdJ8H5w" id="_mRGBkItBEd6bjaTfprwawQ" source="_xfrKzRXvEeGOzdAZdJ8H5w" target="_xfrKzhXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK9BXvEeGOzdAZdJ8H5w" id="_ok-IsotBEd6bjaTfprwawQ" source="_xfrKzhXvEeGOzdAZdJ8H5w" target="_xfrKzxXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK9RXvEeGOzdAZdJ8H5w" id="_pm4RoItBEd6bjaTfprwawQ" source="_xfrKzxXvEeGOzdAZdJ8H5w" target="_xfrK0BXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK9hXvEeGOzdAZdJ8H5w" id="_ssmsdotBEd6bjaTfprwawQ" source="_xfrK0BXvEeGOzdAZdJ8H5w" target="_xfrK0RXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK9xXvEeGOzdAZdJ8H5w" id="_vQjP5otBEd6bjaTfprwawQ" source="_xfrKzhXvEeGOzdAZdJ8H5w" target="_xfrK0hXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK-BXvEeGOzdAZdJ8H5w" id="_wb_IQItBEd6bjaTfprwawQ" source="_xfrK0hXvEeGOzdAZdJ8H5w" target="_xfrK0xXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_xfrK-RXvEeGOzdAZdJ8H5w" id="_2OlZAItBEd6bjaTfprwawQ" source="_xfrK2RXvEeGOzdAZdJ8H5w" target="_xfrKyhXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK-hXvEeGOzdAZdJ8H5w" id="_RMPSSYtCEd6bjaTfprwawQ" source="_xfrK2RXvEeGOzdAZdJ8H5w" target="_xfrK2hXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK-xXvEeGOzdAZdJ8H5w" id="_YzL1hotCEd6bjaTfprwawQ" source="_xfrK5BXvEeGOzdAZdJ8H5w" target="_xfrK3RXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK_BXvEeGOzdAZdJ8H5w" id="_YNGF4ItCEd6bjaTfprwawQ" source="_xfrK2BXvEeGOzdAZdJ8H5w" target="_xfrK5BXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK_RXvEeGOzdAZdJ8H5w" id="_aEaz4ItCEd6bjaTfprwawQ" source="_xfrK3BXvEeGOzdAZdJ8H5w" target="_xfrK5BXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_xfrK_hXvEeGOzdAZdJ8H5w" name="no" id="_daND8ItCEd6bjaTfprwawQ" conditionType="DEFAULT" source="_xfrKzBXvEeGOzdAZdJ8H5w" target="_xfrK1BXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:Association" xmi:id="_xfrK_xXvEeGOzdAZdJ8H5w" id="_ye3JgItCEd6bjaTfprwawQ" direction="NONE" source="_xfrK5RXvEeGOzdAZdJ8H5w" target="_xfrK0BXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_xfrLABXvEeGOzdAZdJ8H5w" id="_3r-HkItCEd6bjaTfprwawQ" source="_xfrKzRXvEeGOzdAZdJ8H5w" target="_xfrK2hXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_xfrLARXvEeGOzdAZdJ8H5w" id="_5lX5MItCEd6bjaTfprwawQ" source="_xfrK3xXvEeGOzdAZdJ8H5w" target="_xfrKzxXvEeGOzdAZdJ8H5w"/>
+      <connections xmi:type="vsdt:MessageFlow" xmi:id="_xfrLAhXvEeGOzdAZdJ8H5w" id="_6bheEItCEd6bjaTfprwawQ" source="_xfrK0RXvEeGOzdAZdJ8H5w" target="_xfrK4RXvEeGOzdAZdJ8H5w"/>
+    </businessProcesses>
+    <participants xmi:type="vsdt:Participant" xmi:id="_xfrLAxXvEeGOzdAZdJ8H5w" name="Work Piece" documentation="aka A-Node" id="_LRpM0IsmEd6gCtoBEhtPhA" associatedProcesses="_xfqjkRXvEeGOzdAZdJ8H5w _xfrKrBXvEeGOzdAZdJ8H5w _xfrKxxXvEeGOzdAZdJ8H5w" associatedPools="_xfqjkhXvEeGOzdAZdJ8H5w _xfrKrRXvEeGOzdAZdJ8H5w _xfrK1RXvEeGOzdAZdJ8H5w"/>
+    <participants xmi:type="vsdt:Participant" xmi:id="_xfrLBBXvEeGOzdAZdJ8H5w" name="Machine" documentation="aka M-Node" id="_MbJLgIsmEd6gCtoBEhtPhA" associatedProcesses="_xfqjkRXvEeGOzdAZdJ8H5w _xfrKrBXvEeGOzdAZdJ8H5w" associatedPools="_xfqjqRXvEeGOzdAZdJ8H5w _xfrKthXvEeGOzdAZdJ8H5w"/>
+    <participants xmi:type="vsdt:Participant" xmi:id="_xfrLBRXvEeGOzdAZdJ8H5w" name="Transport" id="_OeXngIsmEd6gCtoBEhtPhA" associatedProcesses="_xfrKxxXvEeGOzdAZdJ8H5w" associatedPools="_xfrKyBXvEeGOzdAZdJ8H5w"/>
+    <participants xmi:type="vsdt:Participant" xmi:id="_xfrLBhXvEeGOzdAZdJ8H5w" name="Product Planning System" id="_ZGbLUIsmEd6gCtoBEhtPhA" associatedProcesses="_xfqjkRXvEeGOzdAZdJ8H5w" associatedPools="_xfqjtxXvEeGOzdAZdJ8H5w"/>
+  </vsdt:BusinessProcessSystem>
+  <notation:Diagram xmi:id="_x4WwYBXvEeGOzdAZdJ8H5w" type="Vsdt" element="_xfrKxxXvEeGOzdAZdJ8H5w" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_x4WwYRXvEeGOzdAZdJ8H5w"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_yPT30BXvEeGOzdAZdJ8H5w" type="Vsdt" element="_xfrKrBXvEeGOzdAZdJ8H5w" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_yPT30RXvEeGOzdAZdJ8H5w"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_yfoy0BXvEeGOzdAZdJ8H5w" type="Vsdt" element="_xfqjkRXvEeGOzdAZdJ8H5w" measurementUnit="Pixel">
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_yfoy0RXvEeGOzdAZdJ8H5w"/>
+  </notation:Diagram>
+</xmi:XMI>

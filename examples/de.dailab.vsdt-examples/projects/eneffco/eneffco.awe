@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<awe:AgentWorld xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:awe="http://www.jiac.de/AWE" author="kuester" provider="DAI Labor, TU Berlin, Germany" aweVersion="0.2.0" exportPath="de.dailab.vsdt-examples/src/main/resources">
+  <hosts xsi:type="awe:NodeType" name="ClientNode" outgoingLinks="//@hosts.10"/>
+  <hosts xsi:type="awe:NodeType" name="ServerNode" outgoingLinks="//@hosts.9"/>
+  <hosts xsi:type="awe:AgentType" name="ClientAgent" outgoingLinks="//@hosts.11" incomingLinks="//@hosts.10"/>
+  <hosts xsi:type="awe:AgentType" name="ServerAgent" outgoingLinks="//@hosts.12" incomingLinks="//@hosts.9"/>
+  <hosts xsi:type="awe:Protocol" protocolParticipations="//@hosts.7 //@hosts.8">
+    <interactionLinks xsi:type="awe:SendMessageLink" from="//@hosts.4/@roles.0/@activationBars.0" to="//@hosts.4/@roles.1/@activationBars.0" note="request"/>
+    <interactionLinks xsi:type="awe:SendMessageLink" from="//@hosts.4/@roles.1/@activationBars.0" to="//@hosts.4/@roles.0/@activationBars.1" note="none"/>
+    <roles name="Client" protocolParticipations="//@hosts.7">
+      <activationBars outgoing="//@hosts.4/@interactionLinks.0"/>
+      <activationBars incomming="//@hosts.4/@interactionLinks.1"/>
+    </roles>
+    <roles name="Server" namespace="opt" description="optimization server" protocolParticipations="//@hosts.8">
+      <activationBars outgoing="//@hosts.4/@interactionLinks.1" incomming="//@hosts.4/@interactionLinks.0"/>
+    </roles>
+  </hosts>
+  <hosts xsi:type="awe:Component" name="OptClientBean" incomingLinks="//@hosts.11" protocolParticipations="//@hosts.7"/>
+  <hosts xsi:type="awe:Component" name="OptServerBean" incomingLinks="//@hosts.12" protocolParticipations="//@hosts.8"/>
+  <hosts xsi:type="awe:ProtocolParticipation" name="c" role="//@hosts.4/@roles.0" communicator="//@hosts.5" protocol="//@hosts.4"/>
+  <hosts xsi:type="awe:ProtocolParticipation" name="s" role="//@hosts.4/@roles.1" communicator="//@hosts.6" protocol="//@hosts.4"/>
+  <hosts xsi:type="awe:AgentNodeLink" source="//@hosts.1" target="//@hosts.3" nPropertyName="s1..s8"/>
+  <hosts xsi:type="awe:AgentNodeLink" source="//@hosts.0" target="//@hosts.2" nPropertyName="c"/>
+  <hosts xsi:type="awe:ComponentLink" source="//@hosts.2" target="//@hosts.5"/>
+  <hosts xsi:type="awe:ComponentLink" source="//@hosts.3" target="//@hosts.6"/>
+</awe:AgentWorld>
