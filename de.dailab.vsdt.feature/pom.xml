@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.dailab.toolipse3</groupId>
+		<artifactId>features</artifactId>
+		<version>3.0.1-SNAPSHOT</version>
+	</parent>
+
+	<groupId>de.dailab.toolipse3.features</groupId>
+	<artifactId>de.dailab.vsdt.feature</artifactId>
+	
+	<packaging>eclipse-feature</packaging>
+	
+	<name>JIAC Toolipse VSDT Feature</name>
+	
+	<description>VSDT (Visual Service Design Tool) BPMN Editor</description>
+
+</project> 
