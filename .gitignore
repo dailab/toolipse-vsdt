@@ -1,0 +1,5 @@
+# ignore generated class files
+*/bin
+
+# Eclipse generates one .gitignore for each project; we just need one
+*/.gitignore
