@@ -18,7 +18,6 @@ Require-Bundle: org.eclipse.ui,
  de.dailab.vsdt.diagram.meta,
  de.dailab.vsdt.diagram.interpreter,
  de.dailab.vsdt.trafo,
- de.dailab.vsdt.trafo.jadlpp;resolution:=optional,
  de.dailab.jiactng.nodeplugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

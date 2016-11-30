@@ -218,7 +218,11 @@
               <from xmi:type="vsdt:Expression" xmi:id="_at-jQSoREeWjcfNqaFdbgg" expression="in_y2"/>
             </assignments>
           </containedFlowObjects>
-          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_IrE-gSoREeWjcfNqaFdbgg" id="_IrE-gCoREeWjcfNqaFdbgg" trigger="MESSAGE" implementation="_-Y-ckCoQEeWjcfNqaFdbgg"/>
+          <containedFlowObjects xmi:type="vsdt:End" xmi:id="_IrE-gSoREeWjcfNqaFdbgg" id="_IrE-gCoREeWjcfNqaFdbgg" trigger="MESSAGE" implementation="_-Y-ckCoQEeWjcfNqaFdbgg">
+            <assignments xmi:type="vsdt:Assignment" xmi:id="_YH_wULYTEeahhdvl2pNLeQ" to="_WE0XoLYTEeahhdvl2pNLeQ">
+              <from xmi:type="vsdt:Expression" xmi:id="_YH_wUbYTEeahhdvl2pNLeQ" expression="d"/>
+            </assignments>
+          </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_NWGjMSoREeWjcfNqaFdbgg" name="invoke" id="_NWGjMCoREeWjcfNqaFdbgg" activityType="SERVICE" implementation="_j6oNTtN-Ed6IL7PHwv22lw">
             <assignments xmi:type="vsdt:Assignment" xmi:id="_u8RBgCoREeWjcfNqaFdbgg" to="_BVjBwCoZEeWjcfNqaFdbgg">
               <from xmi:type="vsdt:Expression" xmi:id="_x960oCoREeWjcfNqaFdbgg" expression="x2 - x1"/>
@@ -265,6 +269,7 @@
       <input xmi:type="vsdt:Property" xmi:id="_Bl6SoCoREeWjcfNqaFdbgg" name="in_y1" type="double"/>
       <input xmi:type="vsdt:Property" xmi:id="_BYPqECoREeWjcfNqaFdbgg" name="in_x2" type="double"/>
       <input xmi:type="vsdt:Property" xmi:id="_BwlRkCoREeWjcfNqaFdbgg" name="in_y2" type="double"/>
+      <output xmi:type="vsdt:Property" xmi:id="_WE0XoLYTEeahhdvl2pNLeQ" name="res" type="double"/>
     </services>
   </vsdt:BusinessProcessSystem>
   <notation:Diagram xmi:id="_kqjOUNN-Ed6IL7PHwv22lw" type="Vsdt" element="_j6m_IdN-Ed6IL7PHwv22lw" measurementUnit="Pixel">
