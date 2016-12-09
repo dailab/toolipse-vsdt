@@ -323,7 +323,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		
 		public UndeployAction() {
 			super("Undeploy", VsdtAgents.getImageDescriptor("delete.gif"));
-			setToolTipText("Undeploy the selected JADL Service from its provider agent.");
+			setToolTipText("Undeploy the selected Process from the Interpreter Agent.");
 		}
 		
 		@SuppressWarnings("unchecked")
