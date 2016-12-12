@@ -42,20 +42,16 @@
       <pools xmi:type="vsdt:Pool" xmi:id="_o8mGgbtiEeS0mskGl5NCbg" name="timer abs" id="_o8mGgLtiEeS0mskGl5NCbg" participant="_bX0S4btiEeS0mskGl5NCbg">
         <lanes xmi:type="vsdt:Lane" xmi:id="_o8mGg7tiEeS0mskGl5NCbg" id="_o8mGgrtiEeS0mskGl5NCbg">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_FWf7UbtjEeS0mskGl5NCbg" id="_FWf7ULtjEeS0mskGl5NCbg" trigger="TIMER" asDuration="false">
-            <timeExpression xmi:type="vsdt:Expression" xmi:id="_RdgYwL4rEea3FoMvTxUTYQ" expression="2016-12-09T16:20:00Z"/>
+            <timeExpression xmi:type="vsdt:Expression" xmi:id="_3pEI8MBcEeaeEd4gohioSw" expression="&quot;2016-12-12T11:20:00Z&quot;"/>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_MlbAIbtjEeS0mskGl5NCbg" name="TIMER ABS" id="_MlbAILtjEeS0mskGl5NCbg" activityType="SCRIPT" script="System.out.println(&quot;Start Event TIMER (ABSOLUTE) executed &quot; + new java.util.Date());"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_QQMowbtjEeS0mskGl5NCbg" id="_QQMowLtjEeS0mskGl5NCbg"/>
         </lanes>
       </pools>
       <pools xmi:type="vsdt:Pool" xmi:id="_o8rmEbtiEeS0mskGl5NCbg" name="timer rel" id="_o8rmELtiEeS0mskGl5NCbg" participant="_aaP3YbtiEeS0mskGl5NCbg">
-        <properties xmi:type="vsdt:Property" xmi:id="_yKH1YL4qEea3FoMvTxUTYQ" name="seconds" type="integer"/>
         <lanes xmi:type="vsdt:Lane" xmi:id="_o8rmE7tiEeS0mskGl5NCbg" id="_o8rmErtiEeS0mskGl5NCbg">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_FAAG4btjEeS0mskGl5NCbg" id="_FAAG4LtjEeS0mskGl5NCbg" trigger="TIMER">
-            <assignments xmi:type="vsdt:Assignment" xmi:id="_z_c_UL4qEea3FoMvTxUTYQ" to="_yKH1YL4qEea3FoMvTxUTYQ">
-              <from xmi:type="vsdt:Expression" xmi:id="_04L-IL4qEea3FoMvTxUTYQ" expression="5"/>
-            </assignments>
-            <timeExpression xmi:type="vsdt:Expression" xmi:id="_fyr5IL4sEeavkuUzZ3_wpQ" expression="PT5S"/>
+            <timeExpression xmi:type="vsdt:Expression" xmi:id="_fwz6YMBcEeaeEd4gohioSw" expression="&quot;PT5S&quot;"/>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_NiwLEbtjEeS0mskGl5NCbg" name="TIMER REL" id="_NiwLELtjEeS0mskGl5NCbg" activityType="SCRIPT" script="System.out.println(&quot;Start Event TIMER (RELATIVE) Executed &quot; + new java.util.Date());"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_P8S1UbtjEeS0mskGl5NCbg" id="_P8S1ULtjEeS0mskGl5NCbg"/>
