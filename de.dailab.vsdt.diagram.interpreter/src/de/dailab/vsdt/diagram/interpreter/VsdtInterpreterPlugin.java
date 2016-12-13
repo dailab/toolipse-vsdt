@@ -31,6 +31,7 @@ public final class VsdtInterpreterPlugin extends AbstractUIPlugin {
 	public static final String IMAGE_SIM_DONE= "SimDone.gif";
 	public static final String IMAGE_SIM_FAILED= "SimFailed.gif";
 	public static final String IMAGE_SIM_TOKEN= "SimToken.gif";
+	public static final String IMAGE_REFRESH= "refresh.gif";
 	
 	/**
 	 * get an image from the icons/ directory. The directory name must not be

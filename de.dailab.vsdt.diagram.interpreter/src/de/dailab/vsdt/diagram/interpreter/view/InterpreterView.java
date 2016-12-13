@@ -71,6 +71,7 @@ public class InterpreterView extends AbstractStructuredViewerView {
 	private Action stepOverAction;
 	private Action stepIntoAction;
 	private Action stepOutAction;
+	private Action refreshAction;
 	
 	private Map<Action, AbstractSimulation> simulationTypeActions;
 	
@@ -122,15 +123,17 @@ public class InterpreterView extends AbstractStructuredViewerView {
 		stepOutAction= new Action("Step Out", VsdtInterpreterPlugin.getImageDescriptor(VsdtInterpreterPlugin.IMAGE_SIM_STEP_OUT)) {
 			public void run() { stepOut(); 	}
 		};
+		refreshAction = new Action("Refresh Simulation Engines", VsdtInterpreterPlugin.getImageDescriptor(VsdtInterpreterPlugin.IMAGE_REFRESH)) {
+			public void run() {refreshSimulationTypes(); }
+		};
 		contributeToToolBar(startAction, stopAction,  
 				stepIntoAction, stepOverAction, stepOutAction);
 		hookContextMenu(viewer, stepIntoAction, stepOverAction, stepOutAction);
 		updateActionEnablement();
 		
 		// select simulator menu
-		for (AbstractSimulation simulation : simulations) {
-			addSimulationType(simulation);
-		}
+		getViewSite().getActionBars().getMenuManager().add(refreshAction);
+		refreshSimulationTypes();
 	}
 
 	protected void updateActionEnablement() {
@@ -203,15 +206,15 @@ public class InterpreterView extends AbstractStructuredViewerView {
 	/**
 	 * Create action for selecting a Simulation type and add it to the menu.
 	 * The first action will also be initially selected.
-	 * 
-	 * @param simulation		instance of some of the AbstractSimulation classes
 	 */
-	protected void addSimulationType(AbstractSimulation simulation) {
-		if (simulation != null) {
-			Action selectAction= new Action(simulation.getName(), IAction.AS_RADIO_BUTTON) {};
-			selectAction.setChecked(simulationTypeActions.isEmpty());
-			simulationTypeActions.put(selectAction, simulation);
-			getViewSite().getActionBars().getMenuManager().add(selectAction);
+	protected void refreshSimulationTypes() {
+		for (AbstractSimulation simulation : simulations) {
+			if (simulation != null && ! simulationTypeActions.values().contains(simulation)) {
+				Action selectAction= new Action(simulation.getName(), IAction.AS_RADIO_BUTTON) {};
+				selectAction.setChecked(simulationTypeActions.isEmpty());
+				simulationTypeActions.put(selectAction, simulation);
+				getViewSite().getActionBars().getMenuManager().add(selectAction);
+			}
 		}
 	}
 	
