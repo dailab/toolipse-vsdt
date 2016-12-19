@@ -173,7 +173,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 			Activity activity= (Activity) flowObject;
 			if (activity.getImplementation() instanceof Service) {
 				Service service = (Service) activity.getImplementation();
-				properties = getParameters(service, activity.getPool().getParticipant(), incoming);
+				properties = incoming ? service.getOutput() : service.getInput();
 			}
 			if (activity.getImplementation() instanceof MessageChannel) {
 				MessageChannel channel = (MessageChannel) activity.getImplementation();
@@ -190,7 +190,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 			if (event.isThrowing() != incoming) {
 				if (event.getImplementation() instanceof Service) {
 					Service service = (Service) event.getImplementation();
-					properties = getParameters(service, event.getPool().getParticipant(), incoming);
+					properties = event.isThrowing() ? service.getOutput() : service.getInput();
 				}
 				if (event.getImplementation() instanceof MessageChannel) {
 					MessageChannel channel = (MessageChannel) event.getImplementation();
