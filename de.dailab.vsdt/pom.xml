@@ -9,6 +9,6 @@
   </parent>
   <groupId>de.dailab.toolipse3</groupId>
   <artifactId>de.dailab.vsdt</artifactId>
-  <version>1.4.6-SNAPSHOT</version>
+  <version>1.4.6</version>
   <packaging>eclipse-plugin</packaging>
 </project>
