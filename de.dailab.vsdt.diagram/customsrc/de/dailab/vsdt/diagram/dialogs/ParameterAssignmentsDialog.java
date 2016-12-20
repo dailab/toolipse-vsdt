@@ -29,6 +29,7 @@ import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.Event;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Implementation;
+import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.Service;
@@ -156,11 +157,11 @@ public class ParameterAssignmentsDialog extends TitleAreaDialog {
 			}
 			if (implementation instanceof Service) {
 				Service service = (Service) implementation;
-				boolean notSameParticipant = event.getPool().getParticipant() != service.getParticipant();
+				boolean isIntermediate = event instanceof Intermediate;
 				if (event.isThrowing()) {
-					input= notSameParticipant ? service.getInput() : service.getOutput();
+					input= isIntermediate ? service.getInput() : service.getOutput();
 				} else {
-					output= notSameParticipant ? service.getOutput() : service.getInput();
+					output= isIntermediate ? service.getOutput() : service.getInput();
 				}
 			}
 		} else {
