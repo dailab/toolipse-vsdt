@@ -62,14 +62,14 @@ public class VxlInterpreter {
 	public Serializable evaluateTerm(VxlTerm term, Map<String, Serializable> context) {
 		this.errors= new HashMap<Object, String>();
 		this.context= context;
-		return evalTerm(term);
+		return (Serializable) evalTerm(term);
 	}
 	
 	/**
 	 * Term:			head = Head (tail = Tail)?;
 	 * The term is transcribed to an ordered TermTree and evaluated.
 	 */
-	protected Serializable evalTerm(VxlTerm term) {
+	protected Object evalTerm(VxlTerm term) {
 		TermTree orderedTermTree= TermOrdering.createOrderedTermTree(term);
 //		TermOrdering.print(orderedTermTree, 0);
 		return evalTermTree(orderedTermTree);
@@ -82,7 +82,7 @@ public class VxlInterpreter {
 	 * @param term	Some ordered TermTree
 	 * @return		Evaluation result (e.g. a Sting, Number, or Boolean)
 	 */
-	protected Serializable evalTermTree(TermTree term) {
+	protected Object evalTermTree(TermTree term) {
 		if (term instanceof TermLeaf) {
 			TermLeaf leaf= (TermLeaf) term;
 			return evalElement(leaf.term);
@@ -107,7 +107,7 @@ public class VxlInterpreter {
 	/**
 	 * Head:			BracketTerm | Negation | Minus | Value | Variable | List | Cardinality;
 	 */
-	protected Serializable evalElement(VxlElement head) {
+	protected Object evalElement(VxlElement head) {
 		if (head instanceof VxlBracketTerm) {
 			return evalTerm(((VxlBracketTerm) head).getTerm());
 		}
@@ -141,7 +141,7 @@ public class VxlInterpreter {
 	/**
 	 * Function:       name = ID "(" ((empty ?= ")") | (body = ListElement ")" ));
 	 */
-	protected Serializable evalFunction(VxlFunction function) {
+	protected Object evalFunction(VxlFunction function) {
 		// XXX what to do here? Java does not have builtin/toplevel-functions
 		throw new UnsupportedOperationException();
 	}
@@ -149,13 +149,13 @@ public class VxlInterpreter {
 	/**
 	 * VxlConstructor:    "new" function = VxlFunction;
 	 */
-	protected Serializable evalConstructor(VxlConstructor constructor) {
+	protected Object evalConstructor(VxlConstructor constructor) {
 		try {
 			Class<?> clazz = Class.forName(constructor.getName());
-			List<Serializable> params = evalListElement(constructor.getBody());
+			List<Object> params = evalListElement(constructor.getBody());
 			for (Constructor<?> constr : clazz.getConstructors()) {
 				try {
-					return (Serializable) constr.newInstance(params.toArray());
+					return constr.newInstance(params.toArray());
 				} catch (InstantiationException | IllegalAccessException
 						| IllegalArgumentException | InvocationTargetException e) {
 					// nothing to do, just try the next constructor
@@ -171,8 +171,8 @@ public class VxlInterpreter {
 	/**
 	 * Negation:		"!" term = Element;
 	 */
-	protected Serializable evalNegation(VxlNegation negation) {
-		Serializable result= evalElement(negation.getElement());
+	protected Object evalNegation(VxlNegation negation) {
+		Object result= evalElement(negation.getElement());
 		if (result instanceof Boolean) {
 			return ! (Boolean) result;
 		} else {
@@ -184,8 +184,8 @@ public class VxlInterpreter {
 	/**
 	 * Minus:		"-" term = Element;
 	 */
-	protected Serializable evalMinus(VxlMinus minus) {
-		Serializable result= evalElement(minus.getElement());
+	protected Object evalMinus(VxlMinus minus) {
+		Object result= evalElement(minus.getElement());
 		if (result instanceof Number) {
 			return - ((Number) result).doubleValue();
 		} else {
@@ -198,7 +198,7 @@ public class VxlInterpreter {
 	 * Cardinality:		"#" term = Element
 	 */
 	protected Double evalCardinality(VxlCardinality cardinality) {
-		Serializable value = evalElement(cardinality.getElement());
+		Object value = evalElement(cardinality.getElement());
 		if (value instanceof Double) {
 			return Math.abs((Double) value);
 		}
@@ -217,10 +217,10 @@ public class VxlInterpreter {
 	/**
 	 * Variable:		name = ID (accessor = Accessor)?;
 	 */
-	protected Serializable evalVariable(VxlVariable variable) {
+	protected Object evalVariable(VxlVariable variable) {
 		// get value from context
 		if (context != null) {
-			Serializable value= context.get(variable.getName());
+			Object value= context.get(variable.getName());
 			if (variable.getAccessor() != null) {
 				value = evalAccessor(variable.getAccessor(), value);
 			}
@@ -234,7 +234,7 @@ public class VxlInterpreter {
 	/**
 	 * Accessor:		ArrayAccessor | FieldAccessor;
 	 */
-	protected Serializable evalAccessor(VxlAccessor accessor, Serializable value) {
+	protected Object evalAccessor(VxlAccessor accessor, Object value) {
 		if (accessor instanceof VxlArrayAccessor) {
 			return evalArrayAccessor((VxlArrayAccessor) accessor, value);
 		}
@@ -252,15 +252,15 @@ public class VxlInterpreter {
 	 * ArrayAccessor:	"[" index = Term "]" (accessor = Accessor)?;
 	 */
 	@SuppressWarnings("unchecked")
-	protected Serializable evalArrayAccessor(VxlArrayAccessor accessor, Serializable value) {
+	protected Object evalArrayAccessor(VxlArrayAccessor accessor, Object value) {
 		// evaluate index
-		Serializable index = evalTerm(accessor.getIndex());
+		Object index = evalTerm(accessor.getIndex());
 		if (index instanceof Number) {
 			int i = ((Number) index).intValue();
 			
 			// access element
-			if (value instanceof Serializable[]) {
-				Serializable[] asArray = (Serializable[]) value;
+			if (value instanceof Object[]) {
+				Object[] asArray = (Object[]) value;
 				if (asArray.length >= i) {
 					value = asArray[i];
 				} else {
@@ -268,7 +268,7 @@ public class VxlInterpreter {
 				}
 			} else
 			if (value instanceof List) {
-				List<Serializable> asList = (List<Serializable>) value;
+				List<Object> asList = (List<Object>) value;
 				if (asList.size() >= i) {
 					value = asList.get(i);
 				} else {
@@ -287,18 +287,18 @@ public class VxlInterpreter {
 	/**
 	 * FieldAccessor:	"." name = ID (accessor = Accessor)?;
 	 */
-	protected Serializable evalFieldAccessor(VxlFieldAccessor accessor, Serializable value) {
+	protected Object evalFieldAccessor(VxlFieldAccessor accessor, Object value) {
 		Class<?> clazz = value.getClass();
 		try {
 			// try to access regular public field
 			Field field = clazz.getField(accessor.getName());
-			value = (Serializable) field.get(value);
+			value = field.get(value);
 		} catch (NoSuchFieldException | SecurityException | IllegalAccessException e) {
 			try {
 				// try to access accordingly named getter method
 				String getter = "get" + accessor.getName().substring(0, 1).toUpperCase() + accessor.getName().substring(1);
 				Method method = clazz.getMethod(getter);
-				value = (Serializable) method.invoke(value);
+				value = method.invoke(value);
 			} catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e2) {
 				errors.put(accessor, "Could not access field: " + accessor.getName());
 			}
@@ -313,15 +313,15 @@ public class VxlInterpreter {
 	/**
 	 * MethodAccessor:	"." function = Function (accessor = Accessor)?;
 	 */
-	protected Serializable evalMethodAccessor(VxlMethodAccessor accessor, Serializable value) {
+	protected Object evalMethodAccessor(VxlMethodAccessor accessor, Object value) {
 		try {
 			Class<?> clazz = value.getClass();
-			List<Serializable> params = evalListElement(accessor.getFunction().getBody());
+			List<Object> params = evalListElement(accessor.getFunction().getBody());
 			boolean foundOne = false;
 			for (Method method : clazz.getMethods()) {
 				if (method.getName().equals(accessor.getFunction().getName())) {
 					try {
-						value = (Serializable) method.invoke(value, params.toArray());
+						value = method.invoke(value, params.toArray());
 						foundOne = true;
 						break;
 					} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -345,7 +345,7 @@ public class VxlInterpreter {
 	/**
 	 * Value:			StringConst | BooleanConst | NumericConst | Null;
 	 */
-	protected Serializable evalValue(VxlValue value) {
+	protected Object evalValue(VxlValue value) {
 		if (value instanceof VxlStringConst) {
 			return value.getConst();
 		}
@@ -368,19 +368,19 @@ public class VxlInterpreter {
 	/**
 	 * List:			"[" (body = VxlListElement)? "]";
 	 */
-	protected Vector<Serializable> evalList(VxlList list) {
+	protected List<Object> evalList(VxlList list) {
 		if (list.getBody() != null) {
 			return evalListElement(list.getBody());
 		} else {
-			return new Vector<Serializable>();
+			return new Vector<>();
 		}
 	}
 	
 	/**
 	 * ListElement:		first = VxlTerm ("," rest = VxlListElement)?;
 	 */
-	protected Vector<Serializable> evalListElement(VxlListElement listElement) {
-		Vector<Serializable> list = new Vector<Serializable>();
+	protected List<Object> evalListElement(VxlListElement listElement) {
+		List<Object> list = new Vector<>();
 		if (listElement != null) {
 			list.add(evalTerm(listElement.getFirst()));
 			if (listElement.getRest() != null) {
@@ -399,7 +399,7 @@ public class VxlInterpreter {
 	 * @return			result of the operation, applied to the given terms
 	 */
 	@SuppressWarnings({"unchecked","rawtypes"})
-	private Serializable evaluateOperation(VxlOperator operator, Object head, Object tail) {
+	private Object evaluateOperation(VxlOperator operator, Object head, Object tail) {
 		switch (operator) {
 		case CONCAT:
 			if (head instanceof List && tail instanceof List) {
