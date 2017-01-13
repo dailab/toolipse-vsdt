@@ -196,10 +196,12 @@ public class ImportActionAction extends Action {
 		service.setOperation(action.getName());
 		service.setInterface(action.getProviderDescription().getName());
 
+		List<String> names = action.getInputNames();
+		
 		// create input message
 		for (int i = 0; i < action.getInputTypeNames().size(); i++) {
 			Property property = VsdtFactory.eINSTANCE.createProperty();
-			property.setName("arg" + i);
+			property.setName(names != null && ! names.isEmpty() ? names.get(i) : ("arg" + i));
 			property.setType(getType(action.getInputTypeNames().get(i)));
 			service.getInput().add(property);
 		}

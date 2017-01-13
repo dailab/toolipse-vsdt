@@ -135,13 +135,15 @@ public class ServiceParameterDialog extends TitleAreaDialog {
 		try {
 			inputFields = new ArrayList<Text>();
 			
+			List<String> names = service.getInputNames();
 			for (int i = 0; i < service.getInputTypes().size(); i++) {
 				Class clazz = service.getInputTypes().get(i);
 				
 				// create Label
 				Label label= new Label(group, SWT.NONE);
 				label.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false));
-				label.setText(String.format("arg%d (%s):", i, clazz.getSimpleName()));
+				String name = names != null && ! names.isEmpty() ? names.get(i) : ("arg" + i);
+				label.setText(String.format("%s (%s):", name, clazz.getSimpleName()));
 				
 				// create Text field
 				Text text= new Text(group, SWT.BORDER);
