@@ -17,10 +17,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlValueImpl#getConst <em>Const</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -10,10 +10,10 @@ package de.dailab.vsdt.vxl.vxl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.VxlValue#getConst <em>Const</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlValue()
  * @model

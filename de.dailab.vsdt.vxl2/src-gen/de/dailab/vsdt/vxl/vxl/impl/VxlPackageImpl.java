@@ -14,6 +14,8 @@ import de.dailab.vsdt.vxl.vxl.VxlFieldAccessor;
 import de.dailab.vsdt.vxl.vxl.VxlFunction;
 import de.dailab.vsdt.vxl.vxl.VxlList;
 import de.dailab.vsdt.vxl.vxl.VxlListElement;
+import de.dailab.vsdt.vxl.vxl.VxlMap;
+import de.dailab.vsdt.vxl.vxl.VxlMapElement;
 import de.dailab.vsdt.vxl.vxl.VxlMethodAccessor;
 import de.dailab.vsdt.vxl.vxl.VxlMinus;
 import de.dailab.vsdt.vxl.vxl.VxlNegation;
@@ -132,6 +134,20 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * @generated
    */
   private EClass vxlListElementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass vxlMapEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass vxlMapElementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -557,6 +573,76 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getVxlMap()
+  {
+    return vxlMapEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getVxlMap_Empty()
+  {
+    return (EAttribute)vxlMapEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getVxlMap_Body()
+  {
+    return (EReference)vxlMapEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getVxlMapElement()
+  {
+    return vxlMapElementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getVxlMapElement_Key()
+  {
+    return (EReference)vxlMapElementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getVxlMapElement_Value()
+  {
+    return (EReference)vxlMapElementEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getVxlMapElement_Rest()
+  {
+    return (EReference)vxlMapElementEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getVxlFunction()
   {
     return vxlFunctionEClass;
@@ -775,6 +861,15 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
     createEReference(vxlListElementEClass, VXL_LIST_ELEMENT__FIRST);
     createEReference(vxlListElementEClass, VXL_LIST_ELEMENT__REST);
 
+    vxlMapEClass = createEClass(VXL_MAP);
+    createEAttribute(vxlMapEClass, VXL_MAP__EMPTY);
+    createEReference(vxlMapEClass, VXL_MAP__BODY);
+
+    vxlMapElementEClass = createEClass(VXL_MAP_ELEMENT);
+    createEReference(vxlMapElementEClass, VXL_MAP_ELEMENT__KEY);
+    createEReference(vxlMapElementEClass, VXL_MAP_ELEMENT__VALUE);
+    createEReference(vxlMapElementEClass, VXL_MAP_ELEMENT__REST);
+
     vxlFunctionEClass = createEClass(VXL_FUNCTION);
     createEAttribute(vxlFunctionEClass, VXL_FUNCTION__NAME);
     createEAttribute(vxlFunctionEClass, VXL_FUNCTION__EMPTY);
@@ -838,6 +933,7 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
     vxlFieldAccessorEClass.getESuperTypes().add(this.getVxlAccessor());
     vxlMethodAccessorEClass.getESuperTypes().add(this.getVxlAccessor());
     vxlListEClass.getESuperTypes().add(this.getVxlElement());
+    vxlMapEClass.getESuperTypes().add(this.getVxlElement());
     vxlFunctionEClass.getESuperTypes().add(this.getVxlElement());
     vxlConstructorEClass.getESuperTypes().add(this.getVxlElement());
     vxlValueEClass.getESuperTypes().add(this.getVxlElement());
@@ -889,6 +985,15 @@ public class VxlPackageImpl extends EPackageImpl implements VxlPackage
     initEClass(vxlListElementEClass, VxlListElement.class, "VxlListElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getVxlListElement_First(), this.getVxlTerm(), null, "first", null, 0, 1, VxlListElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getVxlListElement_Rest(), this.getVxlListElement(), null, "rest", null, 0, 1, VxlListElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(vxlMapEClass, VxlMap.class, "VxlMap", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getVxlMap_Empty(), ecorePackage.getEBoolean(), "empty", null, 0, 1, VxlMap.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getVxlMap_Body(), this.getVxlMapElement(), null, "body", null, 0, 1, VxlMap.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(vxlMapElementEClass, VxlMapElement.class, "VxlMapElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getVxlMapElement_Key(), this.getVxlTerm(), null, "key", null, 0, 1, VxlMapElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getVxlMapElement_Value(), this.getVxlTerm(), null, "value", null, 0, 1, VxlMapElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getVxlMapElement_Rest(), this.getVxlMapElement(), null, "rest", null, 0, 1, VxlMapElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(vxlFunctionEClass, VxlFunction.class, "VxlFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getVxlFunction_Name(), ecorePackage.getEString(), "name", null, 0, 1, VxlFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

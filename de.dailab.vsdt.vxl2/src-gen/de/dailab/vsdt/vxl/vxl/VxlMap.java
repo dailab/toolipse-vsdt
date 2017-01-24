@@ -5,22 +5,22 @@ package de.dailab.vsdt.vxl.vxl;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>List</b></em>'.
+ * A representation of the model object '<em><b>Map</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link de.dailab.vsdt.vxl.vxl.VxlList#isEmpty <em>Empty</em>}</li>
- *   <li>{@link de.dailab.vsdt.vxl.vxl.VxlList#getBody <em>Body</em>}</li>
+ *   <li>{@link de.dailab.vsdt.vxl.vxl.VxlMap#isEmpty <em>Empty</em>}</li>
+ *   <li>{@link de.dailab.vsdt.vxl.vxl.VxlMap#getBody <em>Body</em>}</li>
  * </ul>
  *
- * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlList()
+ * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlMap()
  * @model
  * @generated
  */
-public interface VxlList extends VxlElement
+public interface VxlMap extends VxlElement
 {
   /**
    * Returns the value of the '<em><b>Empty</b></em>' attribute.
@@ -32,14 +32,14 @@ public interface VxlList extends VxlElement
    * <!-- end-user-doc -->
    * @return the value of the '<em>Empty</em>' attribute.
    * @see #setEmpty(boolean)
-   * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlList_Empty()
+   * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlMap_Empty()
    * @model
    * @generated
    */
   boolean isEmpty();
 
   /**
-   * Sets the value of the '{@link de.dailab.vsdt.vxl.vxl.VxlList#isEmpty <em>Empty</em>}' attribute.
+   * Sets the value of the '{@link de.dailab.vsdt.vxl.vxl.VxlMap#isEmpty <em>Empty</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Empty</em>' attribute.
@@ -57,21 +57,21 @@ public interface VxlList extends VxlElement
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Body</em>' containment reference.
-   * @see #setBody(VxlListElement)
-   * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlList_Body()
+   * @see #setBody(VxlMapElement)
+   * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlMap_Body()
    * @model containment="true"
    * @generated
    */
-  VxlListElement getBody();
+  VxlMapElement getBody();
 
   /**
-   * Sets the value of the '{@link de.dailab.vsdt.vxl.vxl.VxlList#getBody <em>Body</em>}' containment reference.
+   * Sets the value of the '{@link de.dailab.vsdt.vxl.vxl.VxlMap#getBody <em>Body</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Body</em>' containment reference.
    * @see #getBody()
    * @generated
    */
-  void setBody(VxlListElement value);
+  void setBody(VxlMapElement value);
 
-} // VxlList
+} // VxlMap

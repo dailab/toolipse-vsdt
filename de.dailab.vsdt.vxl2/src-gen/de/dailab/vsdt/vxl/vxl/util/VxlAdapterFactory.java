@@ -140,6 +140,16 @@ public class VxlAdapterFactory extends AdapterFactoryImpl
         return createVxlListElementAdapter();
       }
       @Override
+      public Adapter caseVxlMap(VxlMap object)
+      {
+        return createVxlMapAdapter();
+      }
+      @Override
+      public Adapter caseVxlMapElement(VxlMapElement object)
+      {
+        return createVxlMapElementAdapter();
+      }
+      @Override
       public Adapter caseVxlFunction(VxlFunction object)
       {
         return createVxlFunctionAdapter();
@@ -387,6 +397,36 @@ public class VxlAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVxlListElementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlMap <em>Map</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.dailab.vsdt.vxl.vxl.VxlMap
+   * @generated
+   */
+  public Adapter createVxlMapAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.dailab.vsdt.vxl.vxl.VxlMapElement <em>Map Element</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.dailab.vsdt.vxl.vxl.VxlMapElement
+   * @generated
+   */
+  public Adapter createVxlMapElementAdapter()
   {
     return null;
   }

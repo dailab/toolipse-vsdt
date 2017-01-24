@@ -43,13 +43,15 @@ protected class ThisRootNode extends RootToken {
 			case 10: return new VxlMethodAccessor_Group(this, this, 10, inst);
 			case 11: return new VxlList_Group(this, this, 11, inst);
 			case 12: return new VxlListElement_Group(this, this, 12, inst);
-			case 13: return new VxlFunction_Group(this, this, 13, inst);
-			case 14: return new VxlConstructor_Group(this, this, 14, inst);
-			case 15: return new VxlValue_Alternatives(this, this, 15, inst);
-			case 16: return new VxlBooleanConst_ConstAssignment(this, this, 16, inst);
-			case 17: return new VxlNullConst_ConstAssignment(this, this, 17, inst);
-			case 18: return new VxlNumericConst_ConstAssignment(this, this, 18, inst);
-			case 19: return new VxlStringConst_ConstAssignment(this, this, 19, inst);
+			case 13: return new VxlMap_Group(this, this, 13, inst);
+			case 14: return new VxlMapElement_Group(this, this, 14, inst);
+			case 15: return new VxlFunction_Group(this, this, 15, inst);
+			case 16: return new VxlConstructor_Group(this, this, 16, inst);
+			case 17: return new VxlValue_Alternatives(this, this, 17, inst);
+			case 18: return new VxlBooleanConst_ConstAssignment(this, this, 18, inst);
+			case 19: return new VxlNullConst_ConstAssignment(this, this, 19, inst);
+			case 20: return new VxlNumericConst_ConstAssignment(this, this, 20, inst);
+			case 21: return new VxlStringConst_ConstAssignment(this, this, 21, inst);
 			default: return null;
 		}	
 	}	
@@ -249,12 +251,12 @@ protected class VxlTerm_TailAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule VxlElement ****************
  *
  * VxlElement:
- * 	VxlBracketTerm | VxlNegation | VxlMinus | VxlValue | VxlVariable | VxlList | VxlCardinality | VxlFunction |
+ * 	VxlBracketTerm | VxlNegation | VxlMinus | VxlValue | VxlVariable | VxlList | VxlMap | VxlCardinality | VxlFunction |
  * 	VxlConstructor;
  *
  **/
 
-// VxlBracketTerm | VxlNegation | VxlMinus | VxlValue | VxlVariable | VxlList | VxlCardinality | VxlFunction |
+// VxlBracketTerm | VxlNegation | VxlMinus | VxlValue | VxlVariable | VxlList | VxlMap | VxlCardinality | VxlFunction |
 // VxlConstructor
 protected class VxlElement_Alternatives extends AlternativesToken {
 
@@ -276,9 +278,10 @@ protected class VxlElement_Alternatives extends AlternativesToken {
 			case 3: return new VxlElement_VxlValueParserRuleCall_3(lastRuleCallOrigin, this, 3, inst);
 			case 4: return new VxlElement_VxlVariableParserRuleCall_4(lastRuleCallOrigin, this, 4, inst);
 			case 5: return new VxlElement_VxlListParserRuleCall_5(lastRuleCallOrigin, this, 5, inst);
-			case 6: return new VxlElement_VxlCardinalityParserRuleCall_6(lastRuleCallOrigin, this, 6, inst);
-			case 7: return new VxlElement_VxlFunctionParserRuleCall_7(lastRuleCallOrigin, this, 7, inst);
-			case 8: return new VxlElement_VxlConstructorParserRuleCall_8(lastRuleCallOrigin, this, 8, inst);
+			case 6: return new VxlElement_VxlMapParserRuleCall_6(lastRuleCallOrigin, this, 6, inst);
+			case 7: return new VxlElement_VxlCardinalityParserRuleCall_7(lastRuleCallOrigin, this, 7, inst);
+			case 8: return new VxlElement_VxlFunctionParserRuleCall_8(lastRuleCallOrigin, this, 8, inst);
+			case 9: return new VxlElement_VxlConstructorParserRuleCall_9(lastRuleCallOrigin, this, 9, inst);
 			default: return null;
 		}	
 	}
@@ -291,6 +294,7 @@ protected class VxlElement_Alternatives extends AlternativesToken {
 		   getEObject().eClass() != grammarAccess.getVxlConstructorRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getVxlFunctionRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getVxlListRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getVxlMapRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getVxlMinusRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getVxlNegationRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getVxlNullConstRule().getType().getClassifier() && 
@@ -522,16 +526,52 @@ protected class VxlElement_VxlListParserRuleCall_5 extends RuleCallToken {
 	}	
 }
 
-// VxlCardinality
-protected class VxlElement_VxlCardinalityParserRuleCall_6 extends RuleCallToken {
+// VxlMap
+protected class VxlElement_VxlMapParserRuleCall_6 extends RuleCallToken {
 	
-	public VxlElement_VxlCardinalityParserRuleCall_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public VxlElement_VxlMapParserRuleCall_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getVxlElementAccess().getVxlCardinalityParserRuleCall_6();
+		return grammarAccess.getVxlElementAccess().getVxlMapParserRuleCall_6();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new VxlMap_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getVxlMapRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(VxlMap_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// VxlCardinality
+protected class VxlElement_VxlCardinalityParserRuleCall_7 extends RuleCallToken {
+	
+	public VxlElement_VxlCardinalityParserRuleCall_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getVxlElementAccess().getVxlCardinalityParserRuleCall_7();
 	}
 
     @Override
@@ -559,15 +599,15 @@ protected class VxlElement_VxlCardinalityParserRuleCall_6 extends RuleCallToken 
 }
 
 // VxlFunction
-protected class VxlElement_VxlFunctionParserRuleCall_7 extends RuleCallToken {
+protected class VxlElement_VxlFunctionParserRuleCall_8 extends RuleCallToken {
 	
-	public VxlElement_VxlFunctionParserRuleCall_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public VxlElement_VxlFunctionParserRuleCall_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getVxlElementAccess().getVxlFunctionParserRuleCall_7();
+		return grammarAccess.getVxlElementAccess().getVxlFunctionParserRuleCall_8();
 	}
 
     @Override
@@ -595,15 +635,15 @@ protected class VxlElement_VxlFunctionParserRuleCall_7 extends RuleCallToken {
 }
 
 // VxlConstructor
-protected class VxlElement_VxlConstructorParserRuleCall_8 extends RuleCallToken {
+protected class VxlElement_VxlConstructorParserRuleCall_9 extends RuleCallToken {
 	
-	public VxlElement_VxlConstructorParserRuleCall_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public VxlElement_VxlConstructorParserRuleCall_9(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getVxlElementAccess().getVxlConstructorParserRuleCall_8();
+		return grammarAccess.getVxlElementAccess().getVxlConstructorParserRuleCall_9();
 	}
 
     @Override
@@ -1888,7 +1928,7 @@ protected class VxlList_LeftSquareBracketKeyword_0 extends KeywordToken  {
 
 }
 
-// empty?="]" | body=VxlListElement "]"
+// (empty?="]" | body=VxlListElement "]")
 protected class VxlList_Alternatives_1 extends AlternativesToken {
 
 	public VxlList_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2218,6 +2258,462 @@ protected class VxlListElement_RestAssignment_1_1 extends AssignmentToken  {
 /************ end Rule VxlListElement ****************/
 
 
+/************ begin Rule VxlMap ****************
+ *
+ * // MAPS
+ * VxlMap:
+ * 	"{" (empty?="}" | body=VxlMapElement "}");
+ *
+ **/
+
+// "{" (empty?="}" | body=VxlMapElement "}")
+protected class VxlMap_Group extends GroupToken {
+	
+	public VxlMap_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getVxlMapAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new VxlMap_Alternatives_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getVxlMapRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "{"
+protected class VxlMap_LeftCurlyBracketKeyword_0 extends KeywordToken  {
+	
+	public VxlMap_LeftCurlyBracketKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getVxlMapAccess().getLeftCurlyBracketKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// (empty?="}" | body=VxlMapElement "}")
+protected class VxlMap_Alternatives_1 extends AlternativesToken {
+
+	public VxlMap_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getVxlMapAccess().getAlternatives_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new VxlMap_EmptyAssignment_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new VxlMap_Group_1_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// empty?="}"
+protected class VxlMap_EmptyAssignment_1_0 extends AssignmentToken  {
+	
+	public VxlMap_EmptyAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getVxlMapAccess().getEmptyAssignment_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new VxlMap_LeftCurlyBracketKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("empty",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("empty");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getVxlMapAccess().getEmptyRightCurlyBracketKeyword_1_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// body=VxlMapElement "}"
+protected class VxlMap_Group_1_1 extends GroupToken {
+	
+	public VxlMap_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getVxlMapAccess().getGroup_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new VxlMap_RightCurlyBracketKeyword_1_1_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// body=VxlMapElement
+protected class VxlMap_BodyAssignment_1_1_0 extends AssignmentToken  {
+	
+	public VxlMap_BodyAssignment_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getVxlMapAccess().getBodyAssignment_1_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new VxlMapElement_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("body",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("body");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getVxlMapElementRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getVxlMapAccess().getBodyVxlMapElementParserRuleCall_1_1_0_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new VxlMap_LeftCurlyBracketKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// "}"
+protected class VxlMap_RightCurlyBracketKeyword_1_1_1 extends KeywordToken  {
+	
+	public VxlMap_RightCurlyBracketKeyword_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getVxlMapAccess().getRightCurlyBracketKeyword_1_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new VxlMap_BodyAssignment_1_1_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+
+
+
+/************ end Rule VxlMap ****************/
+
+
+/************ begin Rule VxlMapElement ****************
+ *
+ * VxlMapElement:
+ * 	key=VxlTerm ":" value=VxlTerm ("," rest=VxlMapElement)?;
+ *
+ **/
+
+// key=VxlTerm ":" value=VxlTerm ("," rest=VxlMapElement)?
+protected class VxlMapElement_Group extends GroupToken {
+	
+	public VxlMapElement_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getVxlMapElementAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new VxlMapElement_Group_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new VxlMapElement_ValueAssignment_2(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getVxlMapElementRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// key=VxlTerm
+protected class VxlMapElement_KeyAssignment_0 extends AssignmentToken  {
+	
+	public VxlMapElement_KeyAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getVxlMapElementAccess().getKeyAssignment_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new VxlTerm_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("key",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("key");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getVxlTermRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getVxlMapElementAccess().getKeyVxlTermParserRuleCall_0_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// ":"
+protected class VxlMapElement_ColonKeyword_1 extends KeywordToken  {
+	
+	public VxlMapElement_ColonKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getVxlMapElementAccess().getColonKeyword_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new VxlMapElement_KeyAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// value=VxlTerm
+protected class VxlMapElement_ValueAssignment_2 extends AssignmentToken  {
+	
+	public VxlMapElement_ValueAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getVxlMapElementAccess().getValueAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new VxlTerm_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("value",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("value");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getVxlTermRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getVxlMapElementAccess().getValueVxlTermParserRuleCall_2_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new VxlMapElement_ColonKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// ("," rest=VxlMapElement)?
+protected class VxlMapElement_Group_3 extends GroupToken {
+	
+	public VxlMapElement_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getVxlMapElementAccess().getGroup_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new VxlMapElement_RestAssignment_3_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// ","
+protected class VxlMapElement_CommaKeyword_3_0 extends KeywordToken  {
+	
+	public VxlMapElement_CommaKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getVxlMapElementAccess().getCommaKeyword_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new VxlMapElement_ValueAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// rest=VxlMapElement
+protected class VxlMapElement_RestAssignment_3_1 extends AssignmentToken  {
+	
+	public VxlMapElement_RestAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getVxlMapElementAccess().getRestAssignment_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new VxlMapElement_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("rest",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("rest");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getVxlMapElementRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getVxlMapElementAccess().getRestVxlMapElementParserRuleCall_3_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new VxlMapElement_CommaKeyword_3_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+
+/************ end Rule VxlMapElement ****************/
+
+
 /************ begin Rule VxlFunction ****************
  *
  * // FUNCTIONS
@@ -2310,7 +2806,7 @@ protected class VxlFunction_LeftParenthesisKeyword_1 extends KeywordToken  {
 
 }
 
-// empty?=")" | body=VxlListElement ")"
+// (empty?=")" | body=VxlListElement ")")
 protected class VxlFunction_Alternatives_2 extends AlternativesToken {
 
 	public VxlFunction_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2576,7 +3072,7 @@ protected class VxlConstructor_LeftParenthesisKeyword_2 extends KeywordToken  {
 
 }
 
-// empty?=")" | body=VxlListElement ")"
+// (empty?=")" | body=VxlListElement ")")
 protected class VxlConstructor_Alternatives_3 extends AlternativesToken {
 
 	public VxlConstructor_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2923,11 +3419,11 @@ protected class VxlValue_VxlStringConstParserRuleCall_3 extends RuleCallToken {
 /************ begin Rule VxlBooleanConst ****************
  *
  * VxlBooleanConst:
- * 	const=("true" | "false");
+ * 	const=('true' | 'false');
  *
  **/
 
-// const=("true" | "false")
+// const=('true' | 'false')
 protected class VxlBooleanConst_ConstAssignment extends AssignmentToken  {
 	
 	public VxlBooleanConst_ConstAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

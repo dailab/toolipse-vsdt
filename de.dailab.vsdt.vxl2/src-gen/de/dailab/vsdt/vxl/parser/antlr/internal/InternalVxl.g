@@ -91,7 +91,7 @@ ruleVxlTerm returns [EObject current=null]
        			$current, 
        			"head",
         		lv_head_0_0, 
-        		"VxlElement");
+        		"de.dailab.vsdt.vxl.Vxl.VxlElement");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -109,7 +109,7 @@ ruleVxlTerm returns [EObject current=null]
        			$current, 
        			"operator",
         		lv_operator_1_0, 
-        		"VxlOperator");
+        		"de.dailab.vsdt.vxl.Vxl.VxlOperator");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -127,7 +127,7 @@ ruleVxlTerm returns [EObject current=null]
        			$current, 
        			"tail",
         		lv_tail_2_0, 
-        		"VxlTerm");
+        		"de.dailab.vsdt.vxl.Vxl.VxlTerm");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -215,31 +215,41 @@ ruleVxlElement returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getVxlElementAccess().getVxlCardinalityParserRuleCall_6()); 
+        newCompositeNode(grammarAccess.getVxlElementAccess().getVxlMapParserRuleCall_6()); 
     }
-    this_VxlCardinality_6=ruleVxlCardinality
+    this_VxlMap_6=ruleVxlMap
     { 
-        $current = $this_VxlCardinality_6.current; 
+        $current = $this_VxlMap_6.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getVxlElementAccess().getVxlFunctionParserRuleCall_7()); 
+        newCompositeNode(grammarAccess.getVxlElementAccess().getVxlCardinalityParserRuleCall_7()); 
     }
-    this_VxlFunction_7=ruleVxlFunction
+    this_VxlCardinality_7=ruleVxlCardinality
     { 
-        $current = $this_VxlFunction_7.current; 
+        $current = $this_VxlCardinality_7.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getVxlElementAccess().getVxlConstructorParserRuleCall_8()); 
+        newCompositeNode(grammarAccess.getVxlElementAccess().getVxlFunctionParserRuleCall_8()); 
     }
-    this_VxlConstructor_8=ruleVxlConstructor
+    this_VxlFunction_8=ruleVxlFunction
     { 
-        $current = $this_VxlConstructor_8.current; 
+        $current = $this_VxlFunction_8.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVxlElementAccess().getVxlConstructorParserRuleCall_9()); 
+    }
+    this_VxlConstructor_9=ruleVxlConstructor
+    { 
+        $current = $this_VxlConstructor_9.current; 
         afterParserOrEnumRuleCall();
     }
 )
@@ -280,7 +290,7 @@ ruleVxlBracketTerm returns [EObject current=null]
        			$current, 
        			"term",
         		lv_term_1_0, 
-        		"VxlTerm");
+        		"de.dailab.vsdt.vxl.Vxl.VxlTerm");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -327,7 +337,7 @@ ruleVxlNegation returns [EObject current=null]
        			$current, 
        			"element",
         		lv_element_1_0, 
-        		"VxlElement");
+        		"de.dailab.vsdt.vxl.Vxl.VxlElement");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -370,7 +380,7 @@ ruleVxlMinus returns [EObject current=null]
        			$current, 
        			"element",
         		lv_element_1_0, 
-        		"VxlElement");
+        		"de.dailab.vsdt.vxl.Vxl.VxlElement");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -413,7 +423,7 @@ ruleVxlCardinality returns [EObject current=null]
        			$current, 
        			"element",
         		lv_element_1_0, 
-        		"VxlElement");
+        		"de.dailab.vsdt.vxl.Vxl.VxlElement");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -453,7 +463,7 @@ ruleVxlVariable returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -470,7 +480,7 @@ ruleVxlVariable returns [EObject current=null]
        			$current, 
        			"accessor",
         		lv_accessor_1_0, 
-        		"VxlAccessor");
+        		"de.dailab.vsdt.vxl.Vxl.VxlAccessor");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -563,7 +573,7 @@ ruleVxlArrayAccessor returns [EObject current=null]
        			$current, 
        			"index",
         		lv_index_1_0, 
-        		"VxlTerm");
+        		"de.dailab.vsdt.vxl.Vxl.VxlTerm");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -585,7 +595,7 @@ ruleVxlArrayAccessor returns [EObject current=null]
        			$current, 
        			"accessor",
         		lv_accessor_3_0, 
-        		"VxlAccessor");
+        		"de.dailab.vsdt.vxl.Vxl.VxlAccessor");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -629,7 +639,7 @@ ruleVxlFieldAccessor returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -646,7 +656,7 @@ ruleVxlFieldAccessor returns [EObject current=null]
        			$current, 
        			"accessor",
         		lv_accessor_2_0, 
-        		"VxlAccessor");
+        		"de.dailab.vsdt.vxl.Vxl.VxlAccessor");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -689,7 +699,7 @@ ruleVxlMethodAccessor returns [EObject current=null]
        			$current, 
        			"function",
         		lv_function_1_0, 
-        		"VxlFunction");
+        		"de.dailab.vsdt.vxl.Vxl.VxlFunction");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -707,7 +717,7 @@ ruleVxlMethodAccessor returns [EObject current=null]
        			$current, 
        			"accessor",
         		lv_accessor_2_0, 
-        		"VxlAccessor");
+        		"de.dailab.vsdt.vxl.Vxl.VxlAccessor");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -766,7 +776,7 @@ ruleVxlList returns [EObject current=null]
        			$current, 
        			"body",
         		lv_body_2_0, 
-        		"VxlListElement");
+        		"de.dailab.vsdt.vxl.Vxl.VxlListElement");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -809,7 +819,7 @@ ruleVxlListElement returns [EObject current=null]
        			$current, 
        			"first",
         		lv_first_0_0, 
-        		"VxlTerm");
+        		"de.dailab.vsdt.vxl.Vxl.VxlTerm");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -831,7 +841,153 @@ ruleVxlListElement returns [EObject current=null]
        			$current, 
        			"rest",
         		lv_rest_2_0, 
-        		"VxlListElement");
+        		"de.dailab.vsdt.vxl.Vxl.VxlListElement");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?)
+;
+
+
+
+
+
+// Entry rule entryRuleVxlMap
+entryRuleVxlMap returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getVxlMapRule()); }
+	 iv_ruleVxlMap=ruleVxlMap 
+	 { $current=$iv_ruleVxlMap.current; } 
+	 EOF 
+;
+
+// Rule VxlMap
+ruleVxlMap returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='{' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getVxlMapAccess().getLeftCurlyBracketKeyword_0());
+    }
+((
+(
+		lv_empty_1_0=	'}' 
+    {
+        newLeafNode(lv_empty_1_0, grammarAccess.getVxlMapAccess().getEmptyRightCurlyBracketKeyword_1_0_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getVxlMapRule());
+	        }
+       		setWithLastConsumed($current, "empty", true, "}");
+	    }
+
+)
+)
+    |((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getVxlMapAccess().getBodyVxlMapElementParserRuleCall_1_1_0_0()); 
+	    }
+		lv_body_2_0=ruleVxlMapElement		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getVxlMapRule());
+	        }
+       		set(
+       			$current, 
+       			"body",
+        		lv_body_2_0, 
+        		"de.dailab.vsdt.vxl.Vxl.VxlMapElement");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_3='}' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getVxlMapAccess().getRightCurlyBracketKeyword_1_1_1());
+    }
+)))
+;
+
+
+
+
+
+// Entry rule entryRuleVxlMapElement
+entryRuleVxlMapElement returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getVxlMapElementRule()); }
+	 iv_ruleVxlMapElement=ruleVxlMapElement 
+	 { $current=$iv_ruleVxlMapElement.current; } 
+	 EOF 
+;
+
+// Rule VxlMapElement
+ruleVxlMapElement returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getVxlMapElementAccess().getKeyVxlTermParserRuleCall_0_0()); 
+	    }
+		lv_key_0_0=ruleVxlTerm		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getVxlMapElementRule());
+	        }
+       		set(
+       			$current, 
+       			"key",
+        		lv_key_0_0, 
+        		"de.dailab.vsdt.vxl.Vxl.VxlTerm");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_1=':' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getVxlMapElementAccess().getColonKeyword_1());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getVxlMapElementAccess().getValueVxlTermParserRuleCall_2_0()); 
+	    }
+		lv_value_2_0=ruleVxlTerm		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getVxlMapElementRule());
+	        }
+       		set(
+       			$current, 
+       			"value",
+        		lv_value_2_0, 
+        		"de.dailab.vsdt.vxl.Vxl.VxlTerm");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_3=',' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getVxlMapElementAccess().getCommaKeyword_3_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getVxlMapElementAccess().getRestVxlMapElementParserRuleCall_3_1_0()); 
+	    }
+		lv_rest_4_0=ruleVxlMapElement		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getVxlMapElementRule());
+	        }
+       		set(
+       			$current, 
+       			"rest",
+        		lv_rest_4_0, 
+        		"de.dailab.vsdt.vxl.Vxl.VxlMapElement");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -871,7 +1027,7 @@ ruleVxlFunction returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -908,7 +1064,7 @@ ruleVxlFunction returns [EObject current=null]
        			$current, 
        			"body",
         		lv_body_3_0, 
-        		"VxlListElement");
+        		"de.dailab.vsdt.vxl.Vxl.VxlListElement");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -955,7 +1111,7 @@ ruleVxlConstructor returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"FULLY_QUALIFIED");
+        		"de.dailab.vsdt.vxl.Vxl.FULLY_QUALIFIED");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -993,7 +1149,7 @@ ruleVxlConstructor returns [EObject current=null]
        			$current, 
        			"body",
         		lv_body_4_0, 
-        		"VxlListElement");
+        		"de.dailab.vsdt.vxl.Vxl.VxlListElement");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1183,7 +1339,7 @@ ruleVxlNumericConst returns [EObject current=null]
        			$current, 
        			"const",
         		lv_const_0_0, 
-        		"NUMERIC");
+        		"de.dailab.vsdt.vxl.Vxl.NUMERIC");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1223,7 +1379,7 @@ ruleVxlStringConst returns [EObject current=null]
        			$current, 
        			"const",
         		lv_const_0_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )

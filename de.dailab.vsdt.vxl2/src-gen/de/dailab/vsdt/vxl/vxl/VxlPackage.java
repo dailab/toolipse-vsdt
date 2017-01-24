@@ -485,6 +485,89 @@ public interface VxlPackage extends EPackage
   int VXL_LIST_ELEMENT_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlMapImpl <em>Map</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlMapImpl
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlMap()
+   * @generated
+   */
+  int VXL_MAP = 13;
+
+  /**
+   * The feature id for the '<em><b>Empty</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_MAP__EMPTY = VXL_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Body</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_MAP__BODY = VXL_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Map</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_MAP_FEATURE_COUNT = VXL_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlMapElementImpl <em>Map Element</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlMapElementImpl
+   * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlMapElement()
+   * @generated
+   */
+  int VXL_MAP_ELEMENT = 14;
+
+  /**
+   * The feature id for the '<em><b>Key</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_MAP_ELEMENT__KEY = 0;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_MAP_ELEMENT__VALUE = 1;
+
+  /**
+   * The feature id for the '<em><b>Rest</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_MAP_ELEMENT__REST = 2;
+
+  /**
+   * The number of structural features of the '<em>Map Element</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int VXL_MAP_ELEMENT_FEATURE_COUNT = 3;
+
+  /**
    * The meta object id for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlFunctionImpl <em>Function</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -492,7 +575,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlFunction()
    * @generated
    */
-  int VXL_FUNCTION = 13;
+  int VXL_FUNCTION = 15;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -538,7 +621,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlConstructor()
    * @generated
    */
-  int VXL_CONSTRUCTOR = 14;
+  int VXL_CONSTRUCTOR = 16;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -584,7 +667,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlValue()
    * @generated
    */
-  int VXL_VALUE = 15;
+  int VXL_VALUE = 17;
 
   /**
    * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -612,7 +695,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlBooleanConst()
    * @generated
    */
-  int VXL_BOOLEAN_CONST = 16;
+  int VXL_BOOLEAN_CONST = 18;
 
   /**
    * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -640,7 +723,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlNullConst()
    * @generated
    */
-  int VXL_NULL_CONST = 17;
+  int VXL_NULL_CONST = 19;
 
   /**
    * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -668,7 +751,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlNumericConst()
    * @generated
    */
-  int VXL_NUMERIC_CONST = 18;
+  int VXL_NUMERIC_CONST = 20;
 
   /**
    * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -696,7 +779,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlStringConst()
    * @generated
    */
-  int VXL_STRING_CONST = 19;
+  int VXL_STRING_CONST = 21;
 
   /**
    * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -724,7 +807,7 @@ public interface VxlPackage extends EPackage
    * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlOperator()
    * @generated
    */
-  int VXL_OPERATOR = 20;
+  int VXL_OPERATOR = 22;
 
 
   /**
@@ -1043,6 +1126,81 @@ public interface VxlPackage extends EPackage
    * @generated
    */
   EReference getVxlListElement_Rest();
+
+  /**
+   * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlMap <em>Map</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Map</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlMap
+   * @generated
+   */
+  EClass getVxlMap();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.dailab.vsdt.vxl.vxl.VxlMap#isEmpty <em>Empty</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Empty</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlMap#isEmpty()
+   * @see #getVxlMap()
+   * @generated
+   */
+  EAttribute getVxlMap_Empty();
+
+  /**
+   * Returns the meta object for the containment reference '{@link de.dailab.vsdt.vxl.vxl.VxlMap#getBody <em>Body</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Body</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlMap#getBody()
+   * @see #getVxlMap()
+   * @generated
+   */
+  EReference getVxlMap_Body();
+
+  /**
+   * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlMapElement <em>Map Element</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Map Element</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlMapElement
+   * @generated
+   */
+  EClass getVxlMapElement();
+
+  /**
+   * Returns the meta object for the containment reference '{@link de.dailab.vsdt.vxl.vxl.VxlMapElement#getKey <em>Key</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Key</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlMapElement#getKey()
+   * @see #getVxlMapElement()
+   * @generated
+   */
+  EReference getVxlMapElement_Key();
+
+  /**
+   * Returns the meta object for the containment reference '{@link de.dailab.vsdt.vxl.vxl.VxlMapElement#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Value</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlMapElement#getValue()
+   * @see #getVxlMapElement()
+   * @generated
+   */
+  EReference getVxlMapElement_Value();
+
+  /**
+   * Returns the meta object for the containment reference '{@link de.dailab.vsdt.vxl.vxl.VxlMapElement#getRest <em>Rest</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Rest</em>'.
+   * @see de.dailab.vsdt.vxl.vxl.VxlMapElement#getRest()
+   * @see #getVxlMapElement()
+   * @generated
+   */
+  EReference getVxlMapElement_Rest();
 
   /**
    * Returns the meta object for class '{@link de.dailab.vsdt.vxl.vxl.VxlFunction <em>Function</em>}'.
@@ -1489,6 +1647,66 @@ public interface VxlPackage extends EPackage
      * @generated
      */
     EReference VXL_LIST_ELEMENT__REST = eINSTANCE.getVxlListElement_Rest();
+
+    /**
+     * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlMapImpl <em>Map</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlMapImpl
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlMap()
+     * @generated
+     */
+    EClass VXL_MAP = eINSTANCE.getVxlMap();
+
+    /**
+     * The meta object literal for the '<em><b>Empty</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute VXL_MAP__EMPTY = eINSTANCE.getVxlMap_Empty();
+
+    /**
+     * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VXL_MAP__BODY = eINSTANCE.getVxlMap_Body();
+
+    /**
+     * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlMapElementImpl <em>Map Element</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlMapElementImpl
+     * @see de.dailab.vsdt.vxl.vxl.impl.VxlPackageImpl#getVxlMapElement()
+     * @generated
+     */
+    EClass VXL_MAP_ELEMENT = eINSTANCE.getVxlMapElement();
+
+    /**
+     * The meta object literal for the '<em><b>Key</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VXL_MAP_ELEMENT__KEY = eINSTANCE.getVxlMapElement_Key();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VXL_MAP_ELEMENT__VALUE = eINSTANCE.getVxlMapElement_Value();
+
+    /**
+     * The meta object literal for the '<em><b>Rest</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference VXL_MAP_ELEMENT__REST = eINSTANCE.getVxlMapElement_Rest();
 
     /**
      * The meta object literal for the '{@link de.dailab.vsdt.vxl.vxl.impl.VxlFunctionImpl <em>Function</em>}' class.

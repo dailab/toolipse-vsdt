@@ -78,6 +78,8 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
       case VxlPackage.VXL_METHOD_ACCESSOR: return createVxlMethodAccessor();
       case VxlPackage.VXL_LIST: return createVxlList();
       case VxlPackage.VXL_LIST_ELEMENT: return createVxlListElement();
+      case VxlPackage.VXL_MAP: return createVxlMap();
+      case VxlPackage.VXL_MAP_ELEMENT: return createVxlMapElement();
       case VxlPackage.VXL_FUNCTION: return createVxlFunction();
       case VxlPackage.VXL_CONSTRUCTOR: return createVxlConstructor();
       case VxlPackage.VXL_VALUE: return createVxlValue();
@@ -265,6 +267,28 @@ public class VxlFactoryImpl extends EFactoryImpl implements VxlFactory
   {
     VxlListElementImpl vxlListElement = new VxlListElementImpl();
     return vxlListElement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VxlMap createVxlMap()
+  {
+    VxlMapImpl vxlMap = new VxlMapImpl();
+    return vxlMap;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VxlMapElement createVxlMapElement()
+  {
+    VxlMapElementImpl vxlMapElement = new VxlMapElementImpl();
+    return vxlMapElement;
   }
 
   /**

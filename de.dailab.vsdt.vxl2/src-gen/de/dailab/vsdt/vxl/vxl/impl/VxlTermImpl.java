@@ -22,12 +22,12 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlTermImpl#getHead <em>Head</em>}</li>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlTermImpl#getOperator <em>Operator</em>}</li>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlTermImpl#getTail <em>Tail</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

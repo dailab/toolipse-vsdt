@@ -4,7 +4,7 @@
     editorDirectory="/de.dailab.vsdt.vxl2.editor/src" modelPluginID="de.dailab.vsdt.vxl2"
     forceOverwrite="true" modelName="Vxl" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="6.0" copyrightFields="false" editPluginID="de.dailab.vsdt.vxl2.edit"
-    editorPluginID="de.dailab.vsdt.vxl2.editor" runtimeVersion="2.10">
+    editorPluginID="de.dailab.vsdt.vxl2.editor" runtimeVersion="2.12">
   <genPackages prefix="Vxl" basePackage="de.dailab.vsdt.vxl" disposableProviderFactory="true"
       ecorePackage="Vxl.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Vxl.ecore#//VxlOperator">
@@ -64,6 +64,15 @@
     <genClasses ecoreClass="Vxl.ecore#//VxlListElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlListElement/first"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlListElement/rest"/>
+    </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//VxlMap">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlMap/empty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlMap/body"/>
+    </genClasses>
+    <genClasses ecoreClass="Vxl.ecore#//VxlMapElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlMapElement/key"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlMapElement/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Vxl.ecore#//VxlMapElement/rest"/>
     </genClasses>
     <genClasses ecoreClass="Vxl.ecore#//VxlFunction">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Vxl.ecore#//VxlFunction/name"/>

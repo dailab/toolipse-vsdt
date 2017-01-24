@@ -11,12 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.VxlTerm#getHead <em>Head</em>}</li>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.VxlTerm#getOperator <em>Operator</em>}</li>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.VxlTerm#getTail <em>Tail</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlTerm()
  * @model

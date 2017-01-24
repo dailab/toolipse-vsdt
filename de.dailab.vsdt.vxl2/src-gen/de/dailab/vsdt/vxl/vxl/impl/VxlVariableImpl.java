@@ -20,11 +20,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlVariableImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlVariableImpl#getAccessor <em>Accessor</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

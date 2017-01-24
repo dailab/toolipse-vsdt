@@ -10,12 +10,12 @@ package de.dailab.vsdt.vxl.vxl;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.VxlFunction#getName <em>Name</em>}</li>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.VxlFunction#isEmpty <em>Empty</em>}</li>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.VxlFunction#getBody <em>Body</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.vxl.vxl.VxlPackage#getVxlFunction()
  * @model

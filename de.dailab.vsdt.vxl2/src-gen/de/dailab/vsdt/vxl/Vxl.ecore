@@ -56,6 +56,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="rest" eType="#//VxlListElement"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlMap" eSuperTypes="#//VxlElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="empty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//VxlMapElement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VxlMapElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="#//VxlTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//VxlTerm"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rest" eType="#//VxlMapElement"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VxlFunction" eSuperTypes="#//VxlElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="empty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

@@ -20,12 +20,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlFunctionImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlFunctionImpl#isEmpty <em>Empty</em>}</li>
  *   <li>{@link de.dailab.vsdt.vxl.vxl.impl.VxlFunctionImpl#getBody <em>Body</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

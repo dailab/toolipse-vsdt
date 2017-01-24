@@ -140,6 +140,24 @@ public interface VxlFactory extends EFactory
   VxlListElement createVxlListElement();
 
   /**
+   * Returns a new object of class '<em>Map</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Map</em>'.
+   * @generated
+   */
+  VxlMap createVxlMap();
+
+  /**
+   * Returns a new object of class '<em>Map Element</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Map Element</em>'.
+   * @generated
+   */
+  VxlMapElement createVxlMapElement();
+
+  /**
    * Returns a new object of class '<em>Function</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
