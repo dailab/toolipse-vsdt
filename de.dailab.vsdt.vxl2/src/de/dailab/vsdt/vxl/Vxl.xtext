@@ -5,7 +5,7 @@ generate vxl "http://www.dailab.de/vsdt/vxl/Vxl"
 // COMPLEX TERMS
 VxlTerm:			head = VxlElement (operator = VxlOperator tail = VxlTerm)?;
 VxlElement:			VxlBracketTerm | VxlNegation | VxlMinus | VxlValue |
-                    VxlVariable | VxlList | VxlCardinality |
+                    VxlVariable | VxlList | VxlMap | VxlCardinality |
                     VxlFunction | VxlConstructor;
 
 // SPECIAL TERMS, UNARY OPERATORS
@@ -24,6 +24,10 @@ VxlMethodAccessor:	"." function = VxlFunction (accessor = VxlAccessor)?;
 // LISTS
 VxlList:			"[" ((empty ?= "]") | (body = VxlListElement "]" ));
 VxlListElement:		first = VxlTerm ("," rest = VxlListElement)?;
+
+// MAPS
+VxlMap:				"{" ((empty ?= "}") | (body = VxlMapElement "}" ));
+VxlMapElement:		key = VxlTerm ":" value = VxlTerm ("," rest = VxlMapElement)?;
 
 // FUNCTIONS
 VxlFunction:        name = ID "(" ((empty ?= ")") | (body = VxlListElement ")" ));
