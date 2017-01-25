@@ -1274,12 +1274,12 @@ public class Bpmn2JiacBeansElementMapping extends BpmnElementMapping {
 	private CodeElement createAssign(String from, String toVarName, String toQuery) {
 		String code = toVarName;
 		if (toQuery != null) {
-			// try to parse as array index, if this fails interpret as complex property
-			try {
-				int index= Integer.parseInt(toQuery);
-				code += "[" + index + "]";
-			} catch (NumberFormatException e) {
+			// check whether toQuery is identifier and use as attribute or index accordingly
+			Matcher m = Pattern.compile("[a-zA-Z_][a-zA-Z0-9_]*").matcher(toQuery);
+			if (m.matches()) {
 				code += "." + toQuery;
+			} else {
+				code += ".get(" + toQuery + ")";
 			}
 		}
 		code += " = " + from + ";";

@@ -21,6 +21,8 @@ import de.dailab.vsdt.vxl.vxl.VxlFieldAccessor;
 import de.dailab.vsdt.vxl.vxl.VxlFunction;
 import de.dailab.vsdt.vxl.vxl.VxlList;
 import de.dailab.vsdt.vxl.vxl.VxlListElement;
+import de.dailab.vsdt.vxl.vxl.VxlMap;
+import de.dailab.vsdt.vxl.vxl.VxlMapElement;
 import de.dailab.vsdt.vxl.vxl.VxlMethodAccessor;
 import de.dailab.vsdt.vxl.vxl.VxlMinus;
 import de.dailab.vsdt.vxl.vxl.VxlNegation;
@@ -212,6 +214,9 @@ public class VsdtExpressionVisitor {
 		if (head instanceof VxlList) {
 			visitList((VxlList) head);
 		}
+		if (head instanceof VxlMap) {
+			visitMap((VxlMap) head);
+		}
 		if (head instanceof VxlFunction) {
 			visitFunction((VxlFunction) head);
 		}
@@ -272,6 +277,30 @@ public class VsdtExpressionVisitor {
 		if (listElement.getRest() != null) {
 			buffer.append(", ");
 			visitListElement(listElement.getRest());
+		}
+	}
+	
+	/**
+	 * VxlMap:			"{" ((empty ?= "}") | (body = VxlMapElement "}" ));
+	 */
+	protected void visitMap(VxlMap map) {
+		buffer.append("{");
+		if (map.getBody() != null) {
+			visitMapElement(map.getBody());
+		}
+		buffer.append("}");
+	}
+
+	/**
+	 * VxlMapElement:	key = VxlTerm ":" value = VxlTerm ("," rest = VxlMapElement)?;
+	 */
+	protected void visitMapElement(VxlMapElement mapElement) {
+		visitTerm(mapElement.getKey());
+		buffer.append(": ");
+		visitTerm(mapElement.getValue());
+		if (mapElement.getRest() != null) {
+			buffer.append(", ");
+			visitMapElement(mapElement.getRest());
 		}
 	}
 	
