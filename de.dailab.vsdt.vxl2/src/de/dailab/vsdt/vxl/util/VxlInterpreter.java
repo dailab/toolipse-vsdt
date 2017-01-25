@@ -5,6 +5,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,8 @@ import de.dailab.vsdt.vxl.vxl.VxlFieldAccessor;
 import de.dailab.vsdt.vxl.vxl.VxlFunction;
 import de.dailab.vsdt.vxl.vxl.VxlList;
 import de.dailab.vsdt.vxl.vxl.VxlListElement;
+import de.dailab.vsdt.vxl.vxl.VxlMap;
+import de.dailab.vsdt.vxl.vxl.VxlMapElement;
 import de.dailab.vsdt.vxl.vxl.VxlMethodAccessor;
 import de.dailab.vsdt.vxl.vxl.VxlMinus;
 import de.dailab.vsdt.vxl.vxl.VxlNegation;
@@ -126,6 +129,9 @@ public class VxlInterpreter {
 		if (head instanceof VxlList) {
 			return evalList((VxlList) head);
 		}
+		if (head instanceof VxlMap) {
+			return evalMap((VxlMap) head);
+		}
 		if (head instanceof VxlCardinality) {
 			return evalCardinality((VxlCardinality) head);
 		}
@@ -197,19 +203,25 @@ public class VxlInterpreter {
 	/**
 	 * Cardinality:		"#" term = Element
 	 */
-	protected Double evalCardinality(VxlCardinality cardinality) {
+	protected Number evalCardinality(VxlCardinality cardinality) {
 		Object value = evalElement(cardinality.getElement());
 		if (value instanceof Double) {
 			return Math.abs((Double) value);
 		}
-		if (value instanceof List<?>) {
-			return (double) ((List<?>) value).size();
+		if (value instanceof Integer) {
+			return Math.abs((Integer) value);
+		}
+		if (value instanceof Collection<?>) {
+			return ((Collection<?>) value).size();
+		}
+		if (value instanceof Map<?, ?>) {
+			return ((Map<?, ?>) value).size();
 		}
 		if (value instanceof Boolean) {
-			return ((Boolean) value) ? 1. : 0.;
+			return ((Boolean) value) ? 1 : 0;
 		}
 		if (value instanceof String) {
-			return (double) ((String) value).length();
+			return ((String) value).length();
 		}
 		return null;
 	}
@@ -248,38 +260,45 @@ public class VxlInterpreter {
 	}
 
 	/**
-	 * TODO test
 	 * ArrayAccessor:	"[" index = Term "]" (accessor = Accessor)?;
 	 */
-	@SuppressWarnings("unchecked")
 	protected Object evalArrayAccessor(VxlArrayAccessor accessor, Object value) {
 		// evaluate index
 		Object index = evalTerm(accessor.getIndex());
-		if (index instanceof Number) {
-			int i = ((Number) index).intValue();
-			
+		try {
 			// access element
 			if (value instanceof Object[]) {
+				int i = ((Number) index).intValue();
 				Object[] asArray = (Object[]) value;
 				if (asArray.length >= i) {
 					value = asArray[i];
 				} else {
-					errors.put(accessor, "Array Index out of range");
+					errors.put(accessor, "Array Index out of range: " + index);
 				}
 			} else
-			if (value instanceof List) {
-				List<Object> asList = (List<Object>) value;
+			if (value instanceof List<?>) {
+				int i = ((Number) index).intValue();
+				List<?> asList = (List<?>) value;
 				if (asList.size() >= i) {
 					value = asList.get(i);
 				} else {
-					errors.put(accessor, "List Index out of range");
+					errors.put(accessor, "List Index out of range: " + index);
+				}
+			} else
+			if (value instanceof Map<?, ?>) {
+				Map<?, ?> asMap = (Map<?, ?>) value;
+				if (asMap.containsKey(index)) {
+					value = asMap.get(index);
+				} else {
+					errors.put(accessor, "Map does not contain key: " + index);
 				}
 			}
-			
 			// another accessor?
 			if (accessor.getAccessor() != null) {
 				value = evalAccessor(accessor.getAccessor(), value);
 			}
+		} catch (ClassCastException e) {
+			errors.put(accessor, "Index to Array or List must be a number");
 		}
 		return value;
 	}
@@ -366,7 +385,7 @@ public class VxlInterpreter {
 	}
 	
 	/**
-	 * List:			"[" (body = VxlListElement)? "]";
+	 * VxlList:			"[" ((empty ?= "]") | (body = VxlListElement "]" ));
 	 */
 	protected List<Object> evalList(VxlList list) {
 		if (list.getBody() != null) {
@@ -388,6 +407,33 @@ public class VxlInterpreter {
 			}
 		}
 		return list;
+	}
+	
+	/**
+	 * VxlMap:			"{" ((empty ?= "}") | (body = VxlMapElement "}" ));
+	 */
+	protected Map<Object, Object> evalMap(VxlMap map) {
+		if (map.getBody() != null) {
+			return evalMapElement(map.getBody());
+		} else {
+			return new HashMap<>();
+		}
+	}
+
+	/**
+	 * VxlMapElement:	key = VxlTerm ":" value = VxlTerm ("," rest = VxlMapElement)?;
+	 */
+	protected Map<Object, Object> evalMapElement(VxlMapElement mapElement) {
+		Map<Object, Object> map = new HashMap<>();
+		if (mapElement != null) {
+			Object key = evalTerm(mapElement.getKey());
+			Object value = evalTerm(mapElement.getValue());
+			map.put(key, value);
+			if (mapElement.getRest() != null) {
+				map.putAll(evalMapElement(mapElement.getRest()));
+			}
+		}
+		return map;
 	}
 	
 	/**

@@ -5,6 +5,12 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Custom Exception type raised by the VxlParser. This can wrap 
+ * multiple individual parsing errors into one throwable exception.
+ *
+ * @author kuester
+ */
 public class VxlParseException extends Throwable {
 	
 	private static final long serialVersionUID = 7998366745798352696L;
@@ -53,8 +59,11 @@ public class VxlParseException extends Throwable {
 		}
 	}
 	
-	
-
+	/**
+	 * Wrapper for a single parsing error
+	 *
+	 * @author kuester
+	 */
 	private class Entry {
 		
 		final int _line;
@@ -75,9 +84,6 @@ public class VxlParseException extends Throwable {
 			sb.append(":"+_message);
 			return sb.toString();
 		}
-		
 	}
-	
 
-	
 }

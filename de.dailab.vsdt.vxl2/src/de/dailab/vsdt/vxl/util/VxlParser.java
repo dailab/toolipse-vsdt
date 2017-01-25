@@ -24,6 +24,7 @@ import de.dailab.vsdt.vxl.vxl.VxlVariable;
  * This is a simple implementation for parsing JADL++ code. This parser is using EMF Resource and 
  * ResourceSet. Two use cases are covered by this parser; parse JADL++ source code into a 
  * JADL++ model and serialize a JADL++ model into JADL++ source code. 
+ * 
  * @author Michael Burkhardt
  * @author kuester
  */

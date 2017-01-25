@@ -26,16 +26,15 @@ public class TermOrdering {
 	/** initialize priority map */
 	static {
 		priorityMap= new HashMap<VxlOperator, Integer>();
-		// modulo has highest priority / strongest binding
-		priorityMap.put(VxlOperator.MOD, 5);
-		// next goes multiplication, division, and power
+		// modulo, multiplication and division have all the same priority
+		priorityMap.put(VxlOperator.MOD, 4);
 		priorityMap.put(VxlOperator.MULT, 4);
 		priorityMap.put(VxlOperator.DIV, 4);
 		// then addition, subtraction, and concatenation (on strings)
 		priorityMap.put(VxlOperator.CONCAT, 3);
 		priorityMap.put(VxlOperator.ADD, 3);
 		priorityMap.put(VxlOperator.SUB, 3);
-		// now all kinds of comparisons and equations
+		// now all kinds of comparisons
 		priorityMap.put(VxlOperator.GT, 2);
 		priorityMap.put(VxlOperator.GE, 2);
 		priorityMap.put(VxlOperator.LT, 2);

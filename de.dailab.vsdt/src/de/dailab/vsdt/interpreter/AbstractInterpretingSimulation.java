@@ -292,6 +292,10 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 								List<Serializable> list = (List) propVal;
 								list.set(Util.asInteger(number), value); 
 							}
+						} else if (propVal instanceof Map) {
+							// try to assign to map key
+							Serializable query = parseAndEvaluate(assignment.getToQuery(), createContext(eObject));
+							((Map) propVal).put(query, value);
 						} else {
 							// try to interpret query as an attribute/setter
 							String fieldName = assignment.getToQuery();
