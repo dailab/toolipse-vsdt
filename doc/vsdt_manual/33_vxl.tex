@@ -31,22 +31,24 @@ of course accessors can only be used if the target language and data type suppor
 them.
 
 \begin{verbatim}
-Term:           Element (Operator Term)?;
+Term:           Element (Operator Term)?
 Element:        BracketTerm | Negation | Minus | Card |
-                List | Variable | Value;
-BracketTerm:    "(" Term ")";
-Negation:       "not" Element;
-Minus:          "-" Element;
-Card:           "#" Element;
-List:           "[" (ListElement)? "]";
-ListElement:    Term ("," ListElement)?;
-Variable:       ID (Accessor)?;
-Accessor:       ArrayAccessor | FieldAccessor;
-ArrayAccessor:  "[" Term "]" (Accessor)?;
-FieldAccessor:  "." ID (Accessor)?;
-Value:          STRING | INT | FLOAT| "true" | "false" | "null";
-Operator:      "<" | "<=" | "==" | "!=" | ">" | ">=" | 
-                "+" | "-" | "*" | "/" | "%" | "and" | "or" | "++";
+                List | Map | Variable | Value
+BracketTerm:    "(" Term ")"
+Negation:       "not" Element
+Minus:          "-" Element
+Card:           "#" Element
+List:           "[" ListElement? "]"
+ListElement:    Term ("," ListElement)?
+Map:            "{" MapElement? "}"
+MapElement:     key = Term ":" value = Term ("," MapElement)?
+Variable:       ID Accessor?
+Accessor:       ArrayAccessor | FieldAccessor
+ArrayAccessor:  "[" Term "]" Accessor?
+FieldAccessor:  "." ID Accessor?
+Value:          STRING | INT | FLOAT| "true" | "false" | "null"
+Operator:       "<" | "<=" | "==" | "!=" | ">" | ">=" | 
+                "+" | "-" | "*" | "/" | "%" | "and" | "or" | "++"
 \end{verbatim}
 
 
