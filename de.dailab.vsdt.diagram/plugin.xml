@@ -91,9 +91,9 @@
    </extension>
 	
    <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders">
-      <?gmfgen generated="true"?>
+      <?gmfgen generated="false"?>
       <GlobalActionHandlerProvider
-         class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
+         class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
          id="VsdtPresentation">
          <Priority name="Lowest"/>
          <ViewId id="de.dailab.vsdt.diagram.part.VsdtDiagramEditorID">
@@ -106,7 +106,7 @@
          </ViewId>
       </GlobalActionHandlerProvider>
       <GlobalActionHandlerProvider
-         class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
+         class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
          id="VsdtPresentationIDE">
          <Priority name="Lowest"/>
          <ViewId id="de.dailab.vsdt.diagram.part.VsdtDiagramEditorID">
@@ -116,7 +116,7 @@
          </ViewId>
       </GlobalActionHandlerProvider>
       <GlobalActionHandlerProvider
-            class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
+            class="de.dailab.vsdt.diagram.clipboard.VsdtEditorGlobalActionHandlerProvider"
             id="VsdtRender">
          <Priority name="Lowest"/>
          <ViewId id="de.dailab.vsdt.diagram.part.VsdtDiagramEditorID">
