@@ -93,7 +93,7 @@
    <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders">
       <?gmfgen generated="false"?>
       <GlobalActionHandlerProvider
-         class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
          id="VsdtPresentation">
          <Priority name="Lowest"/>
          <ViewId id="de.dailab.vsdt.diagram.part.VsdtDiagramEditorID">
@@ -106,7 +106,7 @@
          </ViewId>
       </GlobalActionHandlerProvider>
       <GlobalActionHandlerProvider
-         class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
          id="VsdtPresentationIDE">
          <Priority name="Lowest"/>
          <ViewId id="de.dailab.vsdt.diagram.part.VsdtDiagramEditorID">
