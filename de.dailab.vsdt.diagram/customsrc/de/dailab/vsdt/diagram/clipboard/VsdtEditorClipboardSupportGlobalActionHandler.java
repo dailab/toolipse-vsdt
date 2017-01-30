@@ -2,8 +2,6 @@ package de.dailab.vsdt.diagram.clipboard;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
@@ -33,7 +31,6 @@ public class VsdtEditorClipboardSupportGlobalActionHandler extends DiagramGlobal
 		}
 		IDiagramWorkbenchPart diagramPart = (IDiagramWorkbenchPart) part;
 		String actionId = cntxt.getActionId();
-		System.out.println("CALLING GET COMMAND for " + actionId);
 		if (actionId.equals(GlobalActionId.COPY)) {
 			return getCopyCommand(cntxt, diagramPart, false);
 		} else if (actionId.equals(GlobalActionId.PASTE)) {
@@ -49,12 +46,10 @@ public class VsdtEditorClipboardSupportGlobalActionHandler extends DiagramGlobal
 	}
 	
 	protected ICommand getCopyCommand(IGlobalActionContext cntxt, IDiagramWorkbenchPart diagramPart, final boolean isUndoable) {
-		System.out.println("GET COPY COMMAND");
 		return new VsdtEditorCopyCommand(getSelectedElements(cntxt.getSelection()));
 	}
 
 	protected ICommand getPasteCommand(IGlobalActionContext cntxt, IDiagramWorkbenchPart diagramPart) {
-		System.out.println("GET PASTE COMMAND");
 		return new VsdtEditorPasteCommand((IGraphicalEditPart) ((StructuredSelection) cntxt.getSelection()).getFirstElement());
 	}
 

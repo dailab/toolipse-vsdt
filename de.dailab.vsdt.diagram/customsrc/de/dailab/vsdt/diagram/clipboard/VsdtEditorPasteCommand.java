@@ -1,8 +1,6 @@
 package de.dailab.vsdt.diagram.clipboard;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,9 +28,14 @@ import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.FlowObjectContainer;
 import de.dailab.vsdt.IdObject;
 import de.dailab.vsdt.Pool;
-import de.dailab.vsdt.diagram.part.VsdtUriEditorInputTester;
 import de.dailab.vsdt.util.VsdtHelper;
 
+/**
+ * VSDT paste command. Create the actual copies of the elements to be copied
+ * and insert them into their new target containers.
+ *
+ * @author kuester
+ */
 public class VsdtEditorPasteCommand extends AbstractCommand {
 
 	private final IGraphicalEditPart targetEditPart;
@@ -48,7 +51,6 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 	
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor progressMonitor, IAdaptable info) throws ExecutionException {
-		System.out.println("CALLING PASTE EXECUTE WITH RESULT");
 		Map<EObject, EditPart> copied = VsdtEditorCopyCommand.elementsToCopy;
 		if (copied != null) {
 			
@@ -93,14 +95,12 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 		
 		public PasteTransactionalCommand(TransactionalEditingDomain domain, Map<EObject, EditPart> mapping) {
 	        super(domain, PasteTransactionalCommand.class.getName(),
-	        		getWorkspaceFiles(new ArrayList(mapping.keySet())));
+	        		getWorkspaceFiles(new ArrayList<>(mapping.keySet())));
 	        this.mapping = mapping;
 	    }
 
 		@Override
 		protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-			System.out.println("CALLING PASTE INNER EXECUTE WITH RESULT");
-			
 			List<EObject> originalObjects = new ArrayList<>(mapping.keySet());
 			List<EObject> copiedObjects = new ArrayList<>(EcoreUtil.copyAll(originalObjects));
 			for (EObject obj : copiedObjects) {
@@ -173,14 +173,16 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 			return null;
 		}
 
-		
 		@Override
 		public void addContext(IUndoContext context) {
 			super.addContext(context);
 			VsdtEditorPasteCommand.this.addContext(context);
 		}
 	}
-	
+
+	/*
+	 * helper methods
+	 */
 	
 	private BusinessProcessDiagram getRootDiagram(EObject obj) {
 		while (obj.eContainer() != null && ! (obj instanceof BusinessProcessDiagram)) {
