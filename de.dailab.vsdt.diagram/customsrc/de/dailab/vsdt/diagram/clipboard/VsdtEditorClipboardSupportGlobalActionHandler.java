@@ -1,8 +1,10 @@
 package de.dailab.vsdt.diagram.clipboard;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
@@ -43,14 +45,12 @@ public class VsdtEditorClipboardSupportGlobalActionHandler extends DiagramGlobal
 	
 	@Override
 	protected boolean canPaste(IGlobalActionContext cntxt) {
-		return VsdtEditorCopyCommand.objectsToCopy != null;
+		return VsdtEditorCopyCommand.elementsToCopy != null;
 	}
 	
 	protected ICommand getCopyCommand(IGlobalActionContext cntxt, IDiagramWorkbenchPart diagramPart, final boolean isUndoable) {
 		System.out.println("GET COPY COMMAND");
-		List<EObject> toCopyElements = this.getSelectedElements(cntxt.getSelection());
-		List<EditPart> toCopyEditParts = this.getSelectedEditParts(cntxt.getSelection());
-		return new VsdtEditorCopyCommand(toCopyElements, toCopyEditParts);
+		return new VsdtEditorCopyCommand(getSelectedElements(cntxt.getSelection()));
 	}
 
 	protected ICommand getPasteCommand(IGlobalActionContext cntxt, IDiagramWorkbenchPart diagramPart) {
@@ -63,26 +63,16 @@ public class VsdtEditorClipboardSupportGlobalActionHandler extends DiagramGlobal
 	 */
 
 	@SuppressWarnings("unchecked")
-	protected List<EObject> getSelectedElements(ISelection selection) {
-		List<EObject> results = new LinkedList<>();
+	protected Map<EObject, EditPart> getSelectedElements(ISelection selection) {
+		Map<EObject, EditPart> results = new HashMap<>();
 		if (selection == null || selection.isEmpty())
 			return results;
-		Iterator<EObject> iterator = ((IStructuredSelection) selection).iterator();
-		while (iterator.hasNext()) {
-			Object selectedElement = iterator.next();
-			EObject element = (EObject) ((EditPart) selectedElement).getAdapter(EObject.class);
-			results.add(element);
-		}
-		return results;
-	}
 
-	@SuppressWarnings("unchecked")
-	private List<EditPart> getSelectedEditParts(ISelection selection) {
-		List<EditPart> results = new LinkedList<>();
 		Iterator<EditPart> iterator = ((IStructuredSelection) selection).iterator();
 		while (iterator.hasNext()) {
-			Object selectedElement = iterator.next();
-			results.add((EditPart) selectedElement);
+			EditPart selectedElement = iterator.next();
+			EObject element = (EObject) selectedElement.getAdapter(EObject.class);
+			results.put(element, selectedElement);
 		}
 		return results;
 	}

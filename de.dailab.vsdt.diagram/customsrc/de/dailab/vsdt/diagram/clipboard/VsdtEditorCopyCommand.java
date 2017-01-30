@@ -1,37 +1,30 @@
 package de.dailab.vsdt.diagram.clipboard;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.common.core.command.AbstractCommand;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
-import org.eclipse.gmf.runtime.emf.clipboard.core.ClipboardSupportUtil;
 
 public class VsdtEditorCopyCommand extends AbstractCommand {
 
-	protected static List<EObject> objectsToCopy = null;
+	protected static Map<EObject, EditPart> elementsToCopy;
 	
-	private final List<EObject> toCopyElements;
-	private final List<EditPart> toCopyEditParts; 
+	private final Map<EObject, EditPart> selectedElements;
 	
-	public VsdtEditorCopyCommand(List<EObject> toCopyElements, List<EditPart> toCopyEditParts) {
+	public VsdtEditorCopyCommand(Map<EObject, EditPart> selectedElements) {
 		super("Copy");
-		 this.toCopyEditParts = toCopyEditParts;
-		 this.toCopyElements = toCopyElements;
+		this.selectedElements = selectedElements;
 	}
 
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor progressMonitor, IAdaptable info) throws ExecutionException {
 
-		objectsToCopy = new ArrayList<>(EcoreUtil.copyAll(toCopyElements));
-		
+		VsdtEditorCopyCommand.elementsToCopy = selectedElements;
 		
 		System.out.println("CALLING COPY EXECUTE WITH RESULT");
 		

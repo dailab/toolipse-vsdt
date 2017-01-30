@@ -1,8 +1,10 @@
 package de.dailab.vsdt.diagram.clipboard;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.IUndoContext;
@@ -47,18 +49,11 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor progressMonitor, IAdaptable info) throws ExecutionException {
 		System.out.println("CALLING PASTE EXECUTE WITH RESULT");
-		List<EObject> copied = VsdtEditorCopyCommand.objectsToCopy;
+		Map<EObject, EditPart> copied = VsdtEditorCopyCommand.elementsToCopy;
 		if (copied != null) {
-
-			List<EObject> objectsToPaste = new ArrayList<>(EcoreUtil.copyAll(copied));
-			for (EObject obj : objectsToPaste) {
-				if (obj instanceof IdObject) {
-					VsdtHelper.generateNewID((IdObject) obj);
-				}
-			}
 			
 			TransactionalEditingDomain domain = (TransactionalEditingDomain) AdapterFactoryEditingDomain.getEditingDomainFor(targetElement);
-			pasteCmd = new PasteTransactionalCommand(domain, objectsToPaste);
+			pasteCmd = new PasteTransactionalCommand(domain, copied);
 			IStatus status = pasteCmd.execute(progressMonitor, info);
 			
 			// position newly created edit parts?
@@ -87,28 +82,37 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 		return new CommandResult(pasteCmd.redo(progressMonitor, info));
 	}
 	
-	
+
+	/**
+	 *
+	 * @author kuester
+	 */
 	private class PasteTransactionalCommand extends AbstractTransactionalCommand {
 
-		protected final List<EObject> elementsToPaste;
-		protected final List<EObject> elementsCreated;
+		final Map<EObject, EditPart> mapping;
 		
-		public PasteTransactionalCommand(TransactionalEditingDomain domain, List<EObject> elemToPaste) {
+		public PasteTransactionalCommand(TransactionalEditingDomain domain, Map<EObject, EditPart> mapping) {
 	        super(domain, PasteTransactionalCommand.class.getName(),
-	        getWorkspaceFiles(elemToPaste));
-	        this.elementsToPaste = elemToPaste;
-	        this.elementsCreated = new LinkedList<>();
+	        		getWorkspaceFiles(new ArrayList(mapping.keySet())));
+	        this.mapping = mapping;
 	    }
 
 		@Override
 		protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-			// TODO Auto-generated method stub
 			System.out.println("CALLING PASTE INNER EXECUTE WITH RESULT");
+			
+			List<EObject> originalObjects = new ArrayList<>(mapping.keySet());
+			List<EObject> copiedObjects = new ArrayList<>(EcoreUtil.copyAll(originalObjects));
+			for (EObject obj : copiedObjects) {
+				if (obj instanceof IdObject) {
+					VsdtHelper.generateNewID((IdObject) obj);
+				}
+			}
 			
 			if (targetElement instanceof FlowObjectContainer) {
 				FlowObjectContainer container = (FlowObjectContainer) targetElement;
 				
-				for (EObject obj : elementsToPaste) {
+				for (EObject obj : copiedObjects) {
 					if (obj instanceof FlowObject) {
 						FlowObject flowObj = (FlowObject) obj;
 						container.getContainedFlowObjects().add(flowObj);
@@ -124,7 +128,7 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 			
 			if (targetElement instanceof BusinessProcessDiagram) {
 				BusinessProcessDiagram container = (BusinessProcessDiagram) targetElement;
-				for (EObject obj : elementsToPaste) {
+				for (EObject obj : copiedObjects) {
 					if (obj instanceof Pool) {
 						Pool pool = (Pool) obj;
 						container.getPools().add(pool);
@@ -135,6 +139,8 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 					}
 				}
 			}
+			
+			// TODO position new edit parts?
 			
 			
 //			@Override
