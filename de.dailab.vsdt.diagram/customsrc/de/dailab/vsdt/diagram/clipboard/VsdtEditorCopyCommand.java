@@ -1,5 +1,6 @@
 package de.dailab.vsdt.diagram.clipboard;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.common.core.command.AbstractCommand;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
+import org.eclipse.gmf.runtime.emf.clipboard.core.ClipboardSupportUtil;
 
 public class VsdtEditorCopyCommand extends AbstractCommand {
 
@@ -28,29 +30,28 @@ public class VsdtEditorCopyCommand extends AbstractCommand {
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor progressMonitor, IAdaptable info) throws ExecutionException {
 
-		objectsToCopy = new LinkedList<>(EcoreUtil.copyAll(toCopyElements));
+		objectsToCopy = new ArrayList<>(EcoreUtil.copyAll(toCopyElements));
+		
 		
 		System.out.println("CALLING COPY EXECUTE WITH RESULT");
 		
-		// TODO filter and preprocess elements
+		// TODO filter and preprocess elements... here or in paste?
 		// TODO what to do with edit parts?
 		
 		// TODO use proper clipboard?
 		
-		return null;
+		return CommandResult.newOKCommandResult();
 	}
 	
 	@Override
 	protected CommandResult doUndoWithResult(IProgressMonitor progressMonitor, IAdaptable info) throws ExecutionException {
 		System.out.println("CALLING COPY UNDO WITH RESULT");
-		
 		return null;
 	}
 
 	@Override
 	protected CommandResult doRedoWithResult(IProgressMonitor progressMonitor, IAdaptable info) throws ExecutionException {
 		System.out.println("CALLING COPY REDO WITH RESULT");
-		
 		return null;
 	}
 	
