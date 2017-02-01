@@ -25,7 +25,7 @@ import de.dailab.vsdt.util.VsdtHelper;
  *
  * @author kuester
  */
-public class Copier {
+public class VsdtCopier {
 
 	/** holding mapping from original to copied elements */
 	private final Map<EObject, EObject> mapping = new HashMap<>();

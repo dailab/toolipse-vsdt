@@ -10,6 +10,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.EditPart;
@@ -100,8 +101,22 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 		@Override
 		protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 			List<EObject> originalObjects = new ArrayList<>(mapping.keySet());
-			List<EObject> copiedObjects = new Copier().deepCopyWithReferences(originalObjects);
+		
+			try {
+				// VSDT Copier can handle some stuff that EcoreUtil can't, but can't copy between files
+				List<EObject> copiedObjects = new VsdtCopier().deepCopyWithReferences(originalObjects);
+				insertCopies(targetElement, copiedObjects);
+			} catch (Exception e) {
+				// use EcoreUtil.copyAll as fallback for copying between resources
+				System.err.println("VSDT Copier failed. Using EcoreUtil.copyAll.");
+				List<EObject> copiedObjects = new ArrayList<>(EcoreUtil.copyAll(originalObjects));
+				insertCopies(targetElement, copiedObjects);
+			}
 			
+			return CommandResult.newOKCommandResult();
+		}
+		
+		private void insertCopies(EObject targetElement, List<EObject> copiedObjects) {
 			if (targetElement instanceof FlowObjectContainer) {
 				FlowObjectContainer container = (FlowObjectContainer) targetElement;
 				
@@ -134,38 +149,6 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 					}
 				}
 			}
-			
-			// TODO position new edit parts?
-			
-			
-//			@Override
-//			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-//			// Code taken from the duplicate command
-//
-//			// Remove elements whose container is getting copied.
-//			ClipboardSupportUtil.getCopyElements(BuilderEditorCopyCommand.mySelectedEObjectsList);
-//
-//			// Perform the copy and update the references.
-//			EcoreUtil.Copier copier = new EcoreUtil.Copier();
-//			copier.copyAll(BuilderEditorCopyCommand.mySelectedEObjectsList);
-//			copier.copyReferences();
-//
-//			// Add the duplicates to the original's container.
-//			for (Iterator i = BuilderEditorCopyCommand.mySelectedEObjectsList.iterator(); i.hasNext();) {
-//			EObject original = (EObject) i.next();
-//			EObject duplicate = copier.get(original);
-//
-//			EReference reference = original.eContainmentFeature();
-//			if (reference != null && FeatureMapUtil.isMany(this.targetElement, reference)
-//			&& ClipboardSupportUtil.isOkToAppendEObjectAt(this.targetElement, reference, duplicate)) {
-//
-//			ClipboardSupportUtil.appendEObjectAt(this.targetElement, reference, duplicate);
-//			}
-//			}
-//			return CommandResult.newOKCommandResult();
-//			}
-			
-			return CommandResult.newOKCommandResult();
 		}
 
 		@Override
