@@ -137,6 +137,10 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 						Artifact artifact = (Artifact) obj;
 						container.getArtifacts().add(artifact);
 					}
+					if (obj instanceof ConnectingObject) {
+						ConnectingObject connection = (ConnectingObject) obj;
+						container.getConnections().add(connection);
+					}
 				}
 			}
 			
