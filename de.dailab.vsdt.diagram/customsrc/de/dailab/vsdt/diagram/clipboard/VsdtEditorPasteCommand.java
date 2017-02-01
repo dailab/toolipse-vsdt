@@ -102,7 +102,8 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 		@Override
 		protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 			List<EObject> originalObjects = new ArrayList<>(mapping.keySet());
-			List<EObject> copiedObjects = new ArrayList<>(EcoreUtil.copyAll(originalObjects));
+//			List<EObject> copiedObjects = new ArrayList<>(EcoreUtil.copyAll(originalObjects));
+			List<EObject> copiedObjects = new Copier().deepCopyWithReferences(originalObjects);
 			for (EObject obj : copiedObjects) {
 				if (obj instanceof IdObject) {
 					VsdtHelper.generateNewID((IdObject) obj);
@@ -120,7 +121,7 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 					}
 					if (obj instanceof ConnectingObject) {
 						ConnectingObject connection = (ConnectingObject) obj;
-						getRootDiagram(targetElement).getConnections().add(connection);
+						VsdtHelper.getRootBPD(targetElement).getConnections().add(connection);
 					}
 					
 				}
@@ -180,18 +181,4 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 		}
 	}
 
-	/*
-	 * helper methods
-	 */
-	
-	private BusinessProcessDiagram getRootDiagram(EObject obj) {
-		while (obj.eContainer() != null && ! (obj instanceof BusinessProcessDiagram)) {
-			obj = obj.eContainer();
-		}
-		if (obj instanceof BusinessProcessDiagram) {
-			return (BusinessProcessDiagram) obj;
-		}
-		return null;
-	}
-	
 }
