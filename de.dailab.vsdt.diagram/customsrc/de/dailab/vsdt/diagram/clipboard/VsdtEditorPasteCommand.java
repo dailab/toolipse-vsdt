@@ -26,7 +26,6 @@ import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.ConnectingObject;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.FlowObjectContainer;
-import de.dailab.vsdt.IdObject;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.util.VsdtHelper;
 
@@ -99,13 +98,21 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 
 		@Override
 		protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-			copiedObjects = new ArrayList<>(EcoreUtil.copyAll(originalObjects));
-			for (EObject obj : copiedObjects) {
-				if (obj instanceof IdObject) {
-					VsdtHelper.generateNewID((IdObject) obj);
-				}
+			try {
+				// VSDT Copier can handle some stuff that EcoreUtil can't, but can't copy between files
+				copiedObjects = new VsdtCopier().deepCopyWithReferences(originalObjects);
+				insertCopies(targetElement, copiedObjects);
+			} catch (Exception e) {
+				// use EcoreUtil.copyAll as fallback for copying between resources
+				System.err.println("VSDT Copier failed. Using EcoreUtil.copyAll.");
+				copiedObjects = new ArrayList<>(EcoreUtil.copyAll(originalObjects));
+				insertCopies(targetElement, copiedObjects);
 			}
 			
+			return CommandResult.newOKCommandResult();
+		}
+		
+		private void insertCopies(EObject targetElement, List<EObject> copiedObjects) {
 			if (targetElement instanceof FlowObjectContainer) {
 				FlowObjectContainer container = (FlowObjectContainer) targetElement;
 				
@@ -113,13 +120,15 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 					if (obj instanceof FlowObject) {
 						FlowObject flowObj = (FlowObject) obj;
 						container.getContainedFlowObjects().add(flowObj);
-						
 					}
 					if (obj instanceof ConnectingObject) {
 						ConnectingObject connection = (ConnectingObject) obj;
-						getRootDiagram(targetElement).getConnections().add(connection);
+						VsdtHelper.getRootBPD(targetElement).getConnections().add(connection);
 					}
-					
+					if (obj instanceof Artifact) {
+						Artifact artifact = (Artifact) obj;
+						VsdtHelper.getRootBPD(targetElement).getArtifacts().add(artifact);
+					}
 				}
 			}
 			
@@ -140,38 +149,6 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 					}
 				}
 			}
-			
-			// TODO position new edit parts?
-			
-			
-//			@Override
-//			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-//			// Code taken from the duplicate command
-//
-//			// Remove elements whose container is getting copied.
-//			ClipboardSupportUtil.getCopyElements(BuilderEditorCopyCommand.mySelectedEObjectsList);
-//
-//			// Perform the copy and update the references.
-//			EcoreUtil.Copier copier = new EcoreUtil.Copier();
-//			copier.copyAll(BuilderEditorCopyCommand.mySelectedEObjectsList);
-//			copier.copyReferences();
-//
-//			// Add the duplicates to the original's container.
-//			for (Iterator i = BuilderEditorCopyCommand.mySelectedEObjectsList.iterator(); i.hasNext();) {
-//			EObject original = (EObject) i.next();
-//			EObject duplicate = copier.get(original);
-//
-//			EReference reference = original.eContainmentFeature();
-//			if (reference != null && FeatureMapUtil.isMany(this.targetElement, reference)
-//			&& ClipboardSupportUtil.isOkToAppendEObjectAt(this.targetElement, reference, duplicate)) {
-//
-//			ClipboardSupportUtil.appendEObjectAt(this.targetElement, reference, duplicate);
-//			}
-//			}
-//			return CommandResult.newOKCommandResult();
-//			}
-			
-			return null;
 		}
 
 		@Override
@@ -181,18 +158,4 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 		}
 	}
 
-	/*
-	 * helper methods
-	 */
-	
-	private BusinessProcessDiagram getRootDiagram(EObject obj) {
-		while (obj.eContainer() != null && ! (obj instanceof BusinessProcessDiagram)) {
-			obj = obj.eContainer();
-		}
-		if (obj instanceof BusinessProcessDiagram) {
-			return (BusinessProcessDiagram) obj;
-		}
-		return null;
-	}
-	
 }

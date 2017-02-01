@@ -14,6 +14,7 @@ import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.Association;
+import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.ConnectingObject;
 import de.dailab.vsdt.DataObject;
@@ -441,5 +442,22 @@ public class VsdtHelper {
 		}
 		return theExpression;
 	}
+
+	/**
+	 * Get the root BPD for a given Element below that BPD.
+	 * 
+	 * @param obj	some object contained in a BPD
+	 * @return		the containing BPD
+	 */
+	public static BusinessProcessDiagram getRootBPD(EObject obj) {
+		while (obj.eContainer() != null && ! (obj instanceof BusinessProcessDiagram)) {
+			obj = obj.eContainer();
+		}
+		if (obj instanceof BusinessProcessDiagram) {
+			return (BusinessProcessDiagram) obj;
+		}
+		return null;
+	}
+	
 	
 }
