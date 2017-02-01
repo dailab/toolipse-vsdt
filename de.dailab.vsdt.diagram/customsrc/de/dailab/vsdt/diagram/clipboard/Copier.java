@@ -74,6 +74,12 @@ public class Copier {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private EObject copy(EObject obj) {
 		if (obj != null) {
+			// first, check whether object has already been copied
+			// this can be the case if both container and contained are selected
+			if (mapping.containsKey(obj)) {
+				return mapping.get(obj);
+			}
+			
 			// create new instance and add it to the mapping
 			EClass clazz = obj.eClass();
 			EObject copy = clazz.getEPackage().getEFactoryInstance().create(clazz);

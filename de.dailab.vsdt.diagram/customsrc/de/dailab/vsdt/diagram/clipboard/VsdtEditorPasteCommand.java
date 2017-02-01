@@ -109,13 +109,15 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 					if (obj instanceof FlowObject) {
 						FlowObject flowObj = (FlowObject) obj;
 						container.getContainedFlowObjects().add(flowObj);
-						
 					}
 					if (obj instanceof ConnectingObject) {
 						ConnectingObject connection = (ConnectingObject) obj;
 						VsdtHelper.getRootBPD(targetElement).getConnections().add(connection);
 					}
-					
+					if (obj instanceof Artifact) {
+						Artifact artifact = (Artifact) obj;
+						VsdtHelper.getRootBPD(targetElement).getArtifacts().add(artifact);
+					}
 				}
 			}
 			
