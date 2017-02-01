@@ -2,7 +2,7 @@ package de.dailab.vsdt.diagram.views.bpmnprop;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.jface.viewers.ViewerComparator;
 
 import de.dailab.vsdt.Property;
 
@@ -11,7 +11,7 @@ import de.dailab.vsdt.Property;
  * 
  * @author kuester
  */
-public class BpmnPropertiesViewSorter extends ViewerSorter {
+public class BpmnPropertiesViewSorter extends ViewerComparator {
 	
 	public static final int CRITERION_OWNER= 0;
 	public static final int CRITERION_NAME= 1;

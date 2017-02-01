@@ -9,7 +9,6 @@ import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtFactory;
-import de.dailab.vsdt.VsdtPackage;
 import de.dailab.vsdt.trafo.strucbpmn.export.AbstractVsdtRule;
 
 /**

@@ -60,7 +60,7 @@ public class BpmnPropertiesView extends AbstractStructuredViewerView {
 		viewer.setContentProvider(new BpmnPropertiesViewContentProvider());
 		viewer.setLabelProvider(new BpmnPropertiesViewLabelProvider());
 		viewer.setInput(input);
-		viewer.setSorter(new BpmnPropertiesViewSorter(-1));
+		viewer.setComparator(new BpmnPropertiesViewSorter(-1));
 		viewer.setColumnProperties(COLUMN_NAMES);
 		
 		viewer.addDoubleClickListener(new IDoubleClickListener() {
@@ -122,7 +122,7 @@ public class BpmnPropertiesView extends AbstractStructuredViewerView {
 			this.criterion= criterion;
 		}
 		public void widgetSelected(SelectionEvent e) {
-			viewer.setSorter(new BpmnPropertiesViewSorter(criterion));
+			viewer.setComparator(new BpmnPropertiesViewSorter(criterion));
 		}
 	}
 }
