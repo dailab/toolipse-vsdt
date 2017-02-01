@@ -55,11 +55,8 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 		if (copied != null) {
 			
 			TransactionalEditingDomain domain = (TransactionalEditingDomain) AdapterFactoryEditingDomain.getEditingDomainFor(targetElement);
-			pasteCmd = new PasteTransactionalCommand(domain, copied);
+			pasteCmd = new PasteTransactionalCommand(domain, new ArrayList<>(copied.keySet()));
 			IStatus status = pasteCmd.execute(progressMonitor, info);
-			
-			// position newly created edit parts?
-//			 EditPart eoEditPart = targetEditPart.findEditPart(targetEditPart,eObject);
 			
 			// refresh
 			EditPart mainEditPart = (EditPart) (targetEditPart.getRoot().getChildren().get(0));
@@ -91,18 +88,18 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 	 */
 	private class PasteTransactionalCommand extends AbstractTransactionalCommand {
 
-		final Map<EObject, EditPart> mapping;
+		protected final List<EObject> originalObjects;
+		protected List<EObject> copiedObjects;
 		
-		public PasteTransactionalCommand(TransactionalEditingDomain domain, Map<EObject, EditPart> mapping) {
+		public PasteTransactionalCommand(TransactionalEditingDomain domain, List<EObject> originalObjects) {
 	        super(domain, PasteTransactionalCommand.class.getName(),
-	        		getWorkspaceFiles(new ArrayList<>(mapping.keySet())));
-	        this.mapping = mapping;
+	        		getWorkspaceFiles(originalObjects));
+	        this.originalObjects = originalObjects;
 	    }
 
 		@Override
 		protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-			List<EObject> originalObjects = new ArrayList<>(mapping.keySet());
-			List<EObject> copiedObjects = new ArrayList<>(EcoreUtil.copyAll(originalObjects));
+			copiedObjects = new ArrayList<>(EcoreUtil.copyAll(originalObjects));
 			for (EObject obj : copiedObjects) {
 				if (obj instanceof IdObject) {
 					VsdtHelper.generateNewID((IdObject) obj);
