@@ -367,24 +367,6 @@
    </extension>
    
    
-   <!-- Register the clipboard support for the BPMN metamodel 
-   no need to register a special resource as GMFResource are already used
-   both for the domain model and the diagram notation -->
-   <!--
-   <extension point="org.eclipse.gmf.runtime.emf.clipboard.core.clipboardSupport">
-      <factory
-            class="de.dailab.vsdt.diagram.clipboard.VsdtClipboardFactory"
-            nsURI="http://de.dailab.vsdt"
-            priority="highest"/>
-      <factory
-            class="de.dailab.vsdt.diagram.clipboard.VsdtClipboardFactory"
-            nsURI="http://www.eclipse.org/gmf/runtime/1.0.0/notation"
-            priority="highest"/>
-   </extension>
-	-->
-
-
-
 	<!-- layout -->
 	<extension point="org.eclipse.gmf.runtime.diagram.ui.layoutProviders">
 		<layoutProvider
