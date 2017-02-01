@@ -10,7 +10,6 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.EditPart;
@@ -26,7 +25,6 @@ import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.ConnectingObject;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.FlowObjectContainer;
-import de.dailab.vsdt.IdObject;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.util.VsdtHelper;
 
@@ -102,13 +100,7 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 		@Override
 		protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 			List<EObject> originalObjects = new ArrayList<>(mapping.keySet());
-//			List<EObject> copiedObjects = new ArrayList<>(EcoreUtil.copyAll(originalObjects));
 			List<EObject> copiedObjects = new Copier().deepCopyWithReferences(originalObjects);
-			for (EObject obj : copiedObjects) {
-				if (obj instanceof IdObject) {
-					VsdtHelper.generateNewID((IdObject) obj);
-				}
-			}
 			
 			if (targetElement instanceof FlowObjectContainer) {
 				FlowObjectContainer container = (FlowObjectContainer) targetElement;
@@ -171,7 +163,7 @@ public class VsdtEditorPasteCommand extends AbstractCommand {
 //			return CommandResult.newOKCommandResult();
 //			}
 			
-			return null;
+			return CommandResult.newOKCommandResult();
 		}
 
 		@Override

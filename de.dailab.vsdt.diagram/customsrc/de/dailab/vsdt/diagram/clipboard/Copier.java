@@ -12,20 +12,32 @@ import org.eclipse.emf.ecore.EReference;
 
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.ConnectingObject;
+import de.dailab.vsdt.IdObject;
 import de.dailab.vsdt.util.VsdtHelper;
 
 /**
- * Because EcoreUtil.copyAll just does not do it...
+ * Because EcoreUtil.copyAll just does not do it... this class is probably not as
+ * complete and as EcoreUtil and does not cover every case, but it should be enough
+ * for the VSDT and it fixes some problems with EcoreUtil.copyAll:
  * 
- * - when pool is copied, connections connecting the contained flow objects are not copied
- * - when flow object is copied, reference to process-properties is lost in assignments
+ * - copies connections between flow objects in copied pool
+ * - correctly sets reference to non-copied elements
  *
  * @author kuester
  */
 public class Copier {
 
+	/** holding mapping from original to copied elements */
 	private final Map<EObject, EObject> mapping = new HashMap<>();
 	
+	/**
+	 * Deep-copy the selected elements. Note: More than just the selected
+	 * elements can be copied, e.g. also any element contained in those,
+	 * or connections between copied elements.
+	 *
+	 * @param originals		list of selected elements to be copied
+	 * @return				list of copies of those elements
+	 */
 	public List<EObject> deepCopyWithReferences(List<EObject> originals) {
 		
 		// create copy of elements and all contained elements
@@ -35,19 +47,19 @@ public class Copier {
 			results.add(copy);
 		}
 		
-		// TODO add connections where source and target is in mapping
-		
-		BusinessProcessDiagram bpd = VsdtHelper.getRootBPD(originals.get(0));
-		for (ConnectingObject conn : bpd.getConnections()) {
-			if (! mapping.containsKey(conn)
-					&& mapping.containsKey(VsdtHelper.getSource(conn)) 
-					&& mapping.containsKey(VsdtHelper.getTarget(conn))) {
-				copy(conn);
+		// copy connections where source and target have been copied
+		if (! originals.isEmpty()) {
+			BusinessProcessDiagram bpd = VsdtHelper.getRootBPD(originals.get(0));
+			for (ConnectingObject conn : bpd.getConnections()) {
+				if (! mapping.containsKey(conn)
+						&& mapping.containsKey(VsdtHelper.getSource(conn))
+						&& mapping.containsKey(VsdtHelper.getTarget(conn))) {
+					copy(conn);
+				}
 			}
 		}
 		
-		
-		// restore references
+		// restore references in copied elements
 		for (EObject original: mapping.keySet()) {
 			copyReferences(original, mapping.get(original));
 		}
@@ -56,14 +68,17 @@ public class Copier {
 	}
 	
 	/**
-	 * Copy attributes and recursively copy contained objects, but don't change references
+	 * Copy attributes and recursively copy contained objects, but don't set references.
+	 * References are set in another method.
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private EObject copy(EObject obj) {
 		if (obj != null) {
+			// create new instance and add it to the mapping
 			EClass clazz = obj.eClass();
 			EObject copy = clazz.getEPackage().getEFactoryInstance().create(clazz);
 			mapping.put(obj, copy);
-			
+						
 			// copy attributes (assuming non-mutable values)
 			for (EAttribute attribute : clazz.getEAllAttributes()) {
 				if (attribute.isMany()) {
@@ -85,20 +100,30 @@ public class Copier {
 					copy.eSet(ref, copy((EObject) obj.eGet(ref)));
 				}
 			}
+
+			// generate new ID (do this after setting the attributes)
+			if (copy instanceof IdObject) {
+				VsdtHelper.generateNewID((IdObject) copy);
+			}
+
 			return copy;
 		}
 		return null;
 	}
 	
 	/**
-	 * if target of reference has been copied, use the copy, otherwise use original
+	 * Set references in copied object according to original object. If the referred
+	 * object also has been copied, use the copy, otherwise use the original, unless
+	 * the reference has an opposite with cardinality 1, and setting the reference
+	 * to the original would un-set its original target.
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void copyReferences(EObject orig, EObject copy) {
 		EClass clazz = orig.eClass();
 		
 		for (EReference ref : clazz.getEAllReferences()) {
 			if (ref.isMany()) {
-				
+				// iterate objects and set reference according to original
 				List<EObject> objects = new ArrayList();
 				for (EObject obj : (List<EObject>) orig.eGet(ref)) {
 					if (mapping.containsKey(obj)) {
@@ -112,6 +137,7 @@ public class Copier {
 				((List) copy.eGet(ref)).addAll(objects);
 
 			} else {
+				// same as above, just without the loop...
 				EObject obj = (EObject) orig.eGet(ref);
 				if (mapping.containsKey(obj)) {
 					// target has been copied -> use copy
