@@ -48,6 +48,20 @@ public class EclipseInterpreterObserver implements ISimulationObserver {
 		this.diagramEditPart = diagramEditPart;
 	}
 
+	@Override
+	public int hashCode() {
+		return this.getClass().hashCode() + this.viewer.hashCode();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof EclipseInterpreterObserver) {
+			EclipseInterpreterObserver other = (EclipseInterpreterObserver) obj;
+			return other.viewer.equals(this.viewer);
+		}
+		return super.equals(obj);
+	}
+	
 	/**
 	 * - refresh the viewer
 	 * - refresh figures

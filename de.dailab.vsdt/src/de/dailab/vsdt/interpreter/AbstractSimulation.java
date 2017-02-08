@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -17,7 +18,10 @@ import de.dailab.vsdt.ConnectingObject;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.GatewayType;
+import de.dailab.vsdt.Intermediate;
 import de.dailab.vsdt.SequenceFlow;
+import de.dailab.vsdt.TriggerType;
+import de.dailab.vsdt.interpreter.ISimulationObserver.LogLevel;
 import de.dailab.vsdt.util.VsdtHelper;
 
 /**
@@ -53,7 +57,7 @@ public abstract class AbstractSimulation implements ISimulation {
 	/** the Business Process Diagram on which to run the simulation */
 //	protected BusinessProcessDiagramEditPart diagramEditPart;
 
-	protected List<ISimulationObserver> observers;
+	protected Set<ISimulationObserver> observers;
 	
 	/** The number of (full) steps the simulation has already taken. */
 	protected int step;
@@ -68,7 +72,7 @@ public abstract class AbstractSimulation implements ISimulation {
 		stateMap = new HashMap<>();
 		tokenMap = new HashMap<>();
 		stepMap = new HashMap<>();
-		observers = new ArrayList<>();
+		observers = new HashSet<>();
 //		diagramEditPart = null;
 		step = -1;
 	}
@@ -201,9 +205,20 @@ public abstract class AbstractSimulation implements ISimulation {
 
 			// set state to ACTIVE_WAITING
 			setState(flowObject, State.ACTIVE_WAITING);
+
 			// execute, part I
+			try {
+				executeBegin(flowObject);
+			} catch (Exception e) {
+				logMessage(LogLevel.ERROR, "Error stepping into " + flowObject.getNameOrId(), e.getMessage());
+				System.err.println("Error stepping into " + flowObject + ": " + e.getMessage());
+				// check whether there is an error boundary event
+				Intermediate error = getEventHandler(flowObject, TriggerType.ERROR);
+				if (error != null) {
+					return stepOver(error);
+				}
+			}
 			
-			executeBegin(flowObject);
 			// possibly set state to ACTIVE_READY
 			if (updateState(flowObject)) {
 				result.add(flowObject);
@@ -227,7 +242,17 @@ public abstract class AbstractSimulation implements ISimulation {
 		if (isInState(flowObject, State.ACTIVE_READY)) {
 			
 			// execute, part II
-			executeEnd(flowObject);
+			try {
+				executeEnd(flowObject);
+			} catch (Exception e) {
+				logMessage(LogLevel.ERROR, "Error stepping out of " + flowObject.getNameOrId(), e.getMessage());
+				System.err.println("Error stepping out of " + flowObject + ": " + e.getMessage());
+				// check if there is error event attached
+				Intermediate error = getEventHandler(flowObject, TriggerType.ERROR);
+				if (error != null) {
+					return stepOver(error);
+				}
+			}
 			
 			// handle activity looping
 			if (flowObject instanceof Activity && isLooping((Activity) flowObject)) {
@@ -315,8 +340,8 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * method and after the Start Assignments. Typically, Message handling should
 	 * go here, depending on the type of the simulation e.g. placing tokens on 
 	 * outgoing Message Flows or Messages, passing values to message parameters, 
-	 * etc. Other stuff that has to be done when "executing an activity may also 
-	 * go here. 
+	 * etc. Other stuff that has to be done when "executing" an activity may also
+	 * go here, for example searching and invoking an actual service.
 	 * 
 	 * @param flowObject	Some FlowObject being "executed"
 	 */
@@ -324,11 +349,12 @@ public abstract class AbstractSimulation implements ISimulation {
 	
 	/**
 	 * Analogous to {@link #executeBegin(FlowObject)}, this method is executed 
-	 * at the end of the {@link #stepInto(FlowObject)} method and before the End
+	 * at the beginning of the {@link #stepOut(FlowObject)} method and before the End
 	 * Assignments. Typically, Message handling should go here, depending on the 
 	 * type of the simulation e.g. removing tokens from incoming Message Flows 
 	 * or Messages, reading values from message parameters, etc.. Other stuff 
-	 * that has to be done when "executing" an activity may also go here. 
+	 * that has to be done when "executing" an activity may also go here,
+	 * for example getting the result from an invoked service.
 	 * 
 	 * @param flowObject	Some FlowObject being "executed"
 	 */
@@ -406,6 +432,27 @@ public abstract class AbstractSimulation implements ISimulation {
 	////////////////////////////////////////////////////////////////////////////
 	// Helper Methods
 	////////////////////////////////////////////////////////////////////////////
+	
+	/**
+	 * Find and return first boundary event of given type, if any, otherwise null.
+	 * Parameter is FlowObject so that no instanceof check is needed in the interpreter
+	 * methods.
+	 *
+	 * @param flowObject	the flow object, should be an activity
+	 * @param type			the type of event, e.g. Error, Message, etc.
+	 * @return				first boundary event with given type, or null
+	 */
+	protected Intermediate getEventHandler(FlowObject flowObject, TriggerType type) {
+		if (flowObject instanceof Activity) {
+			Activity activity = (Activity) flowObject;
+			for (Intermediate event : activity.getBoundaryEvents()) {
+				if (event.getTrigger() == type) {
+					return event;
+				}
+			}
+		}
+		return null;
+	}
 	
 	/**
 	 * Depending on whether the FlowObject is IDLE or ACTIVE_WAITING, check 
