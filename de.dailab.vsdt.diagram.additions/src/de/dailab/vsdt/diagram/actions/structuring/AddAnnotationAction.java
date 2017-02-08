@@ -95,26 +95,20 @@ public class AddAnnotationAction implements IActionDelegate {
 	}
 	
 	public void run(IAction action) {
-		if (diagramEditPart == null || flowObjectEditPart == null) return;
-		
-		//this compound command will hold the various partial commands
-		CompoundCommand cc= new CompoundCommand(getCommandName());
-		
+		if (diagramEditPart == null) return;
+		EditPartViewer viewer = diagramEditPart.getViewer();
+				
 		// Create Node Command
 		CreateViewRequest nodeRequest = CreateViewRequestFactory.getCreateShapeRequest(
 				VsdtElementTypes.TextAnnotation_1002, flowObjectEditPart.getDiagramPreferencesHint());
-		Point p= flowObjectEditPart.getFigure().getBounds().getBottomLeft();
-		p.translate(20, 75);
+		Point p= flowObjectEditPart.getFigure().getBounds().getBottomLeft().translate(20, 75);
 		flowObjectEditPart.getFigure().translateToAbsolute(p);
 		nodeRequest.setLocation(p);
-
 		Command creatNodeCmd = diagramEditPart.getCommand(nodeRequest);
-		cc.add(creatNodeCmd);
 		
 		IAdaptable adapterForNewNode = (IAdaptable) ((List<?>) nodeRequest.getNewObject()).get(0);
-		EditPartViewer viewer = diagramEditPart.getViewer();
 		
-		// Create Sequence Flow Command
+		// Create Association Command
 		CreateConnectionViewAndElementRequest associationRequest= new CreateConnectionViewAndElementRequest(
 				VsdtElementTypes.Association_3003,
 				((IHintedType) VsdtElementTypes.Association_3003).getSemanticHint(),
@@ -124,7 +118,6 @@ public class AddAnnotationAction implements IActionDelegate {
 				new EObjectAdapter((EObject) flowObjectEditPart.getModel()),
 				adapterForNewNode,
 				flowObjectEditPart.getViewer());
-		cc.add(new ICommandProxy(createSequenceFlowCmd));
 		
 		// Set tool tip text
 		AbstractGmfCommand setTextCommand= new AbstractGmfCommand(flowObject, "Set Documentation") {
@@ -137,9 +130,12 @@ public class AddAnnotationAction implements IActionDelegate {
 				return CommandResult.newOKCommandResult();
 			}
 		};
-		cc.add(new ICommandProxy(setTextCommand));
 		
-		// execute commands
+		//this compound command will hold the various partial commands
+		CompoundCommand cc= new CompoundCommand(getCommandName());
+		cc.add(creatNodeCmd);
+		cc.add(new ICommandProxy(createSequenceFlowCmd));
+		cc.add(new ICommandProxy(setTextCommand));
 		diagramEditPart.getDiagramEditDomain().getDiagramCommandStack().execute(cc);
 
 		// put node into edit mode
