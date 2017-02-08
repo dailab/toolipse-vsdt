@@ -15,6 +15,8 @@
 		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.appendIntermediate" name="Append Intermediate Event" />
 		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.appendEnd" name="Append End Event" />
 		
+		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.addAnnotation" name="Add Annotation" />
+		
 		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.connectToSequence" name="Connect to Sequence" />
 		
 		<command categoryId="de.dailab.vsdt.diagram.commands" id="de.dailab.vsdt.diagram.commands.initializePools" name="Initialize Pools" />
@@ -26,6 +28,7 @@
 		<key commandId="de.dailab.vsdt.diagram.commands.appendIntermediate" contextId="de.dailab.vsdt.diagram.ui.diagramContext" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" sequence="Ctrl+Shift+I"/>
 		<key commandId="de.dailab.vsdt.diagram.commands.appendEnd" contextId="de.dailab.vsdt.diagram.ui.diagramContext" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" sequence="Ctrl+Shift+E"/>
 		<key commandId="de.dailab.vsdt.diagram.commands.connectToSequence" contextId="de.dailab.vsdt.diagram.ui.diagramContext" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" sequence="Ctrl+Shift+C"/>
+		<key commandId="de.dailab.vsdt.diagram.commands.addAnnotation" contextId="de.dailab.vsdt.diagram.ui.diagramContext" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" sequence="Ctrl+Shift+N"/>
 	</extension>
 	
 	<extension point="org.eclipse.ui.handlers">
@@ -34,6 +37,8 @@
 		<handler commandId="de.dailab.vsdt.diagram.commands.appendIntermediate" class="de.dailab.vsdt.diagram.actions.structuring.AppendIntermediateAction$Handler" />
 		<handler commandId="de.dailab.vsdt.diagram.commands.appendEnd" class="de.dailab.vsdt.diagram.actions.structuring.AppendEndAction$Handler" />
     	<handler commandId="de.dailab.vsdt.diagram.commands.connectToSequence" class="de.dailab.vsdt.diagram.actions.structuring.ConnectToSequenceAction$Handler" />
+    	
+    	<handler commandId="de.dailab.vsdt.diagram.commands.addAnnotation" class="de.dailab.vsdt.diagram.actions.structuring.AddAnnotationAction$Handler" />
 	</extension>
    
    <extension point="org.eclipse.ui.popupMenus">
@@ -206,6 +211,24 @@
 	         label="&amp;Append Activity"
 	         menubarPath="bpmn_append/group1"
 	         tooltip="Sequentially append a new Activity after this element.">
+				<enablement>
+					<or>
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractActivityEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractGatewayEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractStartEditPart" />
+						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractIntermediateEditPart" />
+					</or>
+				</enablement>
+			</action>
+			<action
+	         class="de.dailab.vsdt.diagram.actions.structuring.AddAnnotationAction"
+	         definitionId="de.dailab.vsdt.diagram.commands.addAnnotation"
+	         enablesFor="1"
+	         icon="icons/TextAnnotation.gif"
+	         id="de.dailab.vsdt.actions.AddAnnotation"
+	         label="&amp;Add Annotation"
+	         menubarPath="bpmn_append/group1"
+	         tooltip="Add Text Annotation showing Tool Tip content.">
 				<enablement>
 					<or>
 						<objectClass name="de.dailab.vsdt.diagram.edit.parts.AbstractActivityEditPart" />
