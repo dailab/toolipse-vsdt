@@ -23,6 +23,7 @@ import de.dailab.vsdt.Service;
 import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.diagram.actions.OrganizeElementsAction;
 import de.dailab.vsdt.diagram.ui.VsdtFeatureCombo;
+import de.dailab.vsdt.util.VsdtToStringHelper;
 
 /**
  * A dialog used for organizing web services of a BPMN model elements
@@ -257,22 +258,9 @@ public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Servi
 	@Override
 	protected String getString(Service service) {
 		if (service != null) {
-			String ifString= service.getInterface();
-			String opString= service.getOperation();
-			String typeString= service.getType();
-			StringBuffer buffer= new StringBuffer();
-			buffer.append(ifString != null ? ifString : "<unknown>"); //$NON-NLS-1$
-			buffer.append(".");
-			buffer.append(opString != null ? opString : "<unknown>"); //$NON-NLS-1$
-			if (service.getParticipant() != null) {
-				buffer.append(" @ "); //$NON-NLS-1$
-				buffer.append(service.getParticipant().getName());
-			}
-			buffer.append(" (");
-			buffer.append(typeString != null ? typeString : "unknown type"); //$NON-NLS-1$
-			buffer.append(")");
-			return buffer.toString();
+			return VsdtToStringHelper.getString(service);
 		}
 		return super.getString(null);
 	}
+	
 }

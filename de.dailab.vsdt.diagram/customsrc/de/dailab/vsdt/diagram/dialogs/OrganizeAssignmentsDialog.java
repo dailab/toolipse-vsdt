@@ -16,7 +16,6 @@ import de.dailab.common.gmf.Util;
 import de.dailab.common.swt.dialogs.AbstractOrganizeElementsDialog;
 import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.Assignment;
-import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.VsdtFactory;
@@ -24,6 +23,7 @@ import de.dailab.vsdt.VsdtPackage;
 import de.dailab.vsdt.diagram.ui.ExpressionComposite;
 import de.dailab.vsdt.diagram.ui.VsdtFeatureCombo;
 import de.dailab.vsdt.util.VsdtHelper;
+import de.dailab.vsdt.util.VsdtToStringHelper;
 
 /**
  * A dialog used for organizing assignments of a BPMN model elements
@@ -157,18 +157,7 @@ public class OrganizeAssignmentsDialog extends AbstractOrganizeElementsDialog<As
 	@Override
 	protected String getString(Assignment assignment) {
 		if (assignment != null) {
-			Property to= assignment.getTo();
-			Expression from= assignment.getFrom();
-			StringBuffer buffer= new StringBuffer();
-			buffer.append(assignment.getAssignTime() == AssignTimeType.START ? "S: " : "E: ");
-			buffer.append(VsdtHelper.getPropertyString(to, true));
-			if (assignment.getToQuery() != null) {
-				buffer.append(" / "); //$NON-NLS-1$
-				buffer.append(assignment.getToQuery());
-			}
-			buffer.append(" := ");//$NON-NLS-1$
-			buffer.append(from != null ? (from.getExpression() != null ? from.getExpression() : "") : "<null>"); //$NON-NLS-1$
-			return buffer.toString();
+			return VsdtToStringHelper.getString(assignment);
 		}
 		return super.getString(null);
 	}

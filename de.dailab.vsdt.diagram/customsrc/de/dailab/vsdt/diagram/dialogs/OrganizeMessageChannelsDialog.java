@@ -20,6 +20,7 @@ import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.util.VsdtElementFactory;
+import de.dailab.vsdt.util.VsdtToStringHelper;
 
 /**
  * A dialog used for organizing messages of a BPMN model elements
@@ -171,17 +172,7 @@ public class OrganizeMessageChannelsDialog extends AbstractOrganizeElementsDialo
 	@Override
 	protected String getString(MessageChannel message) {
 		if (message != null) {
-			String nameString= message.getChannel() != null ? message.getChannel().getExpression() : "<unknown>";
-			StringBuffer buffer= new StringBuffer();
-			buffer.append(nameString != null ? nameString : "<null>"); //$NON-NLS-1$
-			buffer.append("(");
-			if (message.getPayload() != null) {
-				buffer.append(message.getPayload().getName());
-				buffer.append(": ");
-				buffer.append(message.getPayload().getType());
-			}
-			buffer.append(")");
-			return buffer.toString();	
+			return VsdtToStringHelper.getString(message);	
 		}
 		return super.getString(null);
 	}
