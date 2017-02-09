@@ -9,6 +9,7 @@ import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.Service;
 import de.dailab.vsdt.util.VsdtHelper;
+import de.dailab.vsdt.util.VsdtToStringHelper;
 
 public class VsdtFeatureCombo<T extends Object> extends FeatureCombo<T> {
 
@@ -28,15 +29,13 @@ public class VsdtFeatureCombo<T extends Object> extends FeatureCombo<T> {
 	protected String getLabel(T o) {
 		String result= null;
 		if (o instanceof MessageChannel) {
-			if (((MessageChannel) o).getChannel() != null) {
-				result= ((MessageChannel) o).getChannel().getExpression();
-			}
+			result = VsdtToStringHelper.getString((MessageChannel) o);
 		}
 		if (o instanceof IdObject) {
 			result=  ((IdObject)o).getNameOrId();
 		}
 		if (o instanceof Service) {
-			result=  ((Service) o).getInterface() + "." + ((Service) o).getOperation();
+			result = VsdtToStringHelper.getString((Service) o);
 		}
 		if (o instanceof Participant) {
 			result=  ((Participant)o).getName();

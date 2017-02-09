@@ -30,6 +30,7 @@ import de.dailab.vsdt.Service;
 import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.diagram.actions.OrganizeElementsAction;
 import de.dailab.vsdt.util.VsdtHelper;
+import de.dailab.vsdt.util.VsdtToStringHelper;
 
 /**
  * A dialog used for organizing Properties of a BPMN model element
@@ -142,11 +143,7 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 	@Override
 	protected String getString(Property property) {
 		if (property != null) {
-			StringBuffer buffer= new StringBuffer();
-			buffer.append(property.getName());
-			buffer.append(": "); //$NON-NLS-1$
-			buffer.append(property.getType());
-			return buffer.toString();
+			return VsdtToStringHelper.getString(property);
 		}
 		return super.getString(null);
 	}

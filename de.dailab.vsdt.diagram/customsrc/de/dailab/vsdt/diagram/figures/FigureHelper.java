@@ -12,13 +12,20 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 
 import de.dailab.vsdt.AbstractProcess;
+import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.Assignment;
+import de.dailab.vsdt.Event;
+import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.IdObject;
+import de.dailab.vsdt.Implementation;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Property;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditorPlugin;
 import de.dailab.vsdt.diagram.preferences.DiagramAppearancePreferencePage;
+import de.dailab.vsdt.util.VsdtToStringHelper;
 
 /**
  * Helper class providing some graphical helper stuff as well as constants
@@ -183,8 +190,9 @@ public class FigureHelper {
 	 * Tooltips
 	 */
 
+	private static final String NL = System.getProperty("line.separator");
+	
 	public static String getToolTipText(IdObject object) {
-		String NL = System.getProperty("line.separator");
 		StringBuffer buffer = new StringBuffer();
 		
 		if (object instanceof AbstractProcess) {
@@ -192,7 +200,7 @@ public class FigureHelper {
 			if (! process.getProperties().isEmpty()) {
 				buffer.append("Properties:");
 				for (Property property : process.getProperties()) {
-					buffer.append(NL + property.getName() + ": " + property.getType());
+					buffer.append(NL + "- " + VsdtToStringHelper.getString(property));
 				}
 			}
 		}
@@ -205,12 +213,38 @@ public class FigureHelper {
 				buffer.append("Assignments:");
 				for (Assignment assignment : flowObject.getAssignments()) {
 					if (assignment.getAssignTime() == AssignTimeType.START) {
-						buffer.append(NL + "< " + getTextForAssignment(assignment));
+						buffer.append(NL + "< " + VsdtToStringHelper.getString(assignment));
 					}
 				}
 				for (Assignment assignment : flowObject.getAssignments()) {
 					if (assignment.getAssignTime() == AssignTimeType.END) {
-						buffer.append(NL + "> " + getTextForAssignment(assignment));
+						buffer.append(NL + "> " + VsdtToStringHelper.getString(assignment));
+					}
+				}
+				if (flowObject instanceof Event) {
+					Event event = (Event) flowObject;
+					buffer.append(NL + "- - -");
+					if (event.getImplementation() != null) {
+						buffer.append(NL + "Implementation: " + getTextForImplementation(event.getImplementation()));
+					}
+					if (event.getRuleExpression() != null) {
+						buffer.append(NL + "Rule: " + event.getRuleExpression().getExpression());
+					}
+					if (event.getSignal() != null) {
+						buffer.append(NL + "Signal: " + event.getSignal());
+					}
+					if (event.getTimeExpression() != null) {
+						buffer.append(NL + "Time: " + event.getTimeExpression().getExpression());
+					}
+				}
+				if (flowObject instanceof Activity) {
+					Activity activity = (Activity) flowObject;
+					buffer.append(NL + "- - -");
+					if (activity.getImplementation() != null) {
+						buffer.append(NL + "Implementation: " + getTextForImplementation(activity.getImplementation()));
+					}
+					if (activity.getScript() != null) {
+						buffer.append(NL + "Script:" + NL + activity.getScript());
 					}
 				}
 			}
@@ -218,16 +252,28 @@ public class FigureHelper {
 		return buffer.toString().isEmpty() ? null : buffer.toString();
 	}
 	
-	private static String getTextForAssignment(Assignment assignment) {
-		if (assignment.getTo() != null && assignment.getFrom() != null) {
-			if (assignment.getToQuery() != null) {
-				return assignment.getTo().getName() + "." + assignment.getToQuery() + " = " + assignment.getFrom().getExpression();
-				
-			} else {
-				return assignment.getTo().getName() + " = " + assignment.getFrom().getExpression();
+	private static String getTextForImplementation(Implementation impl) {
+		StringBuffer buffer = new StringBuffer();
+		if (impl instanceof Service) {
+			Service service = (Service) impl;
+			buffer.append(VsdtToStringHelper.getString(service));
+			if (! service.getPreconditions().isEmpty()) {
+				buffer.append(NL + "- Preconditions: ");
+				for (Expression exp : service.getPreconditions()) {
+					buffer.append(NL + "  - " + exp.getExpression());
+				}
 			}
-		} else {
-			return "Error in assignment: To or From part is null!";
+			if (! service.getEffects().isEmpty()) {
+				buffer.append(NL + "- Effects: ");
+				for (Expression exp : service.getEffects()) {
+					buffer.append(NL + "  - " + exp.getExpression());
+				}
+			}
 		}
+		if (impl instanceof MessageChannel) {
+			MessageChannel channel = (MessageChannel) impl;
+			buffer.append(VsdtToStringHelper.getString(channel));
+		}
+		return buffer.toString();
 	}
 }
