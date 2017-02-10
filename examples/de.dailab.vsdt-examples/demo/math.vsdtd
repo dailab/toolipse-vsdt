@@ -128,7 +128,7 @@
       </pools>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_j6nmV9N-Ed6IL7PHwv22lw" id="_dAcuUJIgEd6PkL1AU2eJuA" source="_j6m_K9N-Ed6IL7PHwv22lw" target="_j6nmNdN-Ed6IL7PHwv22lw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_j6nmWNN-Ed6IL7PHwv22lw" id="_aIZtsJIhEd6PkL1AU2eJuA" conditionType="EXPRESSION" source="_j6nmNdN-Ed6IL7PHwv22lw" target="_j6nmNtN-Ed6IL7PHwv22lw">
-        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_OKotkEyREd-Ilfmw5Rk-Mw" expression="(number &lt; 0) and (eps &lt;= 0)"/>
+        <conditionExpression xmi:type="vsdt:Expression" xmi:id="_lEf-gO-kEeakNMHlhBrWYg" expression="number &lt; 0 or eps &lt;= 0"/>
       </connections>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_j6nmWtN-Ed6IL7PHwv22lw" id="_CCR65JIkEd6PkL1AU2eJuA" source="_j6nmO9N-Ed6IL7PHwv22lw" target="_j6nmNNN-Ed6IL7PHwv22lw"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_j6nmW9N-Ed6IL7PHwv22lw" id="_Vz1hMJIhEd6PkL1AU2eJuA" conditionType="DEFAULT" source="_j6nmNdN-Ed6IL7PHwv22lw" target="_j6nmO9N-Ed6IL7PHwv22lw"/>
