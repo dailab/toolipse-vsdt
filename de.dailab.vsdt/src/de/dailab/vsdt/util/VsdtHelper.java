@@ -2,6 +2,7 @@ package de.dailab.vsdt.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -228,7 +229,7 @@ public class VsdtHelper {
 			properties.addAll(getVisibleProperties(flowObject.getAbstractProcess()));
 			return properties;
 		}
-		return new ArrayList<Property>();
+		return Collections.emptyList();
 	}
 	
 	/**

@@ -413,7 +413,10 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 		// get local properties
 		Map<String, Serializable> context= new HashMap<>();
 		for (Property property : VsdtHelper.getVisibleProperties(eObject)) {
-			context.put(property.getName(), getPropertyValue(property));
+			// yields Properties from inner to outer scope --> do not overwrite
+			if (! context.containsKey(property.getName())) {
+				context.put(property.getName(), getPropertyValue(property));
+			}
 		}
 		return context;
 	}
