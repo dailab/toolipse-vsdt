@@ -14,7 +14,13 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
 import de.dailab.common.swt.FormLayoutUtil;
+import de.dailab.vsdt.Activity;
+import de.dailab.vsdt.ActivityType;
+import de.dailab.vsdt.Event;
 import de.dailab.vsdt.FlowObject;
+import de.dailab.vsdt.Gateway;
+import de.dailab.vsdt.GatewayType;
+import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.util.VsdtHelper;
 
 /**
@@ -25,8 +31,6 @@ import de.dailab.vsdt.util.VsdtHelper;
  */
 public class SetTypeDialog extends TitleAreaDialog {
 
-	private static final int WIDTH= 400;
-	private static final int HEIGHT= 200;
 	private static final String TITLE= "Set Type";
 	private static final String MESSAGE= "Set the new Type for the selected Element.";
 	
@@ -51,9 +55,9 @@ public class SetTypeDialog extends TitleAreaDialog {
 	@Override
 	protected Control createContents(Composite parent) {
 		Control superContent = super.createContents(parent);
+
+		// setting size here messes up dialog's placement on the screen
 		
-		parent.getShell().setMinimumSize( WIDTH, HEIGHT );
-		parent.getShell().setSize( WIDTH, HEIGHT );
 		parent.getShell().setText( TITLE );
 		setMessage( MESSAGE);
 		
@@ -87,4 +91,20 @@ public class SetTypeDialog extends TitleAreaDialog {
 		return selected;
 	}
 	
+	@Override
+	protected void okPressed() {
+		if (selected != null) {
+			if (flowObject instanceof Event) {
+				((Event) flowObject).setTrigger(TriggerType.get(selected));
+			}
+			if (flowObject instanceof Gateway) {
+				((Gateway) flowObject).setGatewayType(GatewayType.get(selected));
+			}
+			if (flowObject instanceof Activity) {
+				((Activity) flowObject).setActivityType(ActivityType.get(selected));
+			}
+		}
+		super.okPressed();
+	}
+
 }

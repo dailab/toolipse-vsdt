@@ -3,25 +3,16 @@ package de.dailab.vsdt.diagram.actions;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 import de.dailab.common.gmf.Util;
 import de.dailab.common.gmf.action.AbstractGmfAction;
-import de.dailab.common.gmf.command.AbstractGmfCommand;
-import de.dailab.vsdt.Activity;
-import de.dailab.vsdt.ActivityType;
-import de.dailab.vsdt.Event;
+import de.dailab.common.gmf.command.AbstractDialogWrapperCommand;
 import de.dailab.vsdt.FlowObject;
-import de.dailab.vsdt.Gateway;
-import de.dailab.vsdt.GatewayType;
-import de.dailab.vsdt.TriggerType;
 import de.dailab.vsdt.diagram.dialogs.SetTypeDialog;
 
 public class SetTypeAction extends AbstractGmfAction {
@@ -29,46 +20,20 @@ public class SetTypeAction extends AbstractGmfAction {
 	@Override
 	protected AbstractTransactionalCommand getCommand() {
 		if (eObject instanceof FlowObject) {
-			FlowObject flowObject= (FlowObject) eObject;
-			return new SetTypeCommand(flowObject);
+			return new SetTypeCommand((FlowObject) eObject);
 		}
 		return null;
 	}
 
-	public static class SetTypeCommand extends AbstractGmfCommand {
+	public static class SetTypeCommand extends AbstractDialogWrapperCommand {
 
-		private FlowObject flowObject;
-		
 		public SetTypeCommand(FlowObject flowObject) {
 		    super(flowObject, "Set Type");
-		    this.flowObject= flowObject;
 		}
 		
 		@Override
-		protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
-				IAdaptable info) throws ExecutionException {
-
-			//display simple dialog, ask for new type, set new type
-			Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			SetTypeDialog dialog= new SetTypeDialog( shell, flowObject);
-			if (dialog.open() == SetTypeDialog.OK) {
-				if (dialog.getSelected() != null) {
-					if (flowObject instanceof Event) {
-						((Event)flowObject).setTrigger(TriggerType.get(dialog.getSelected()));
-					}
-					if (flowObject instanceof Gateway) {
-						((Gateway)flowObject).setGatewayType(GatewayType.get(dialog.getSelected()));
-					}
-					if (flowObject instanceof Activity) {
-						((Activity)flowObject).setActivityType(ActivityType.get(dialog.getSelected()));
-					}
-					return CommandResult.newOKCommandResult(modelElement);	
-				} else {
-					return CommandResult.newCancelledCommandResult();
-				}
-			} else {
-				return CommandResult.newErrorCommandResult("No Type Selected");
-			}
+		protected Dialog getDialog(Shell shell) {
+			return new SetTypeDialog(shell, (FlowObject) modelElement);
 		}
 	}
 	
