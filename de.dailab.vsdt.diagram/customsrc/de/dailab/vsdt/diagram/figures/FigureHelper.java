@@ -221,31 +221,31 @@ public class FigureHelper {
 						buffer.append(NL + "> " + VsdtToStringHelper.getString(assignment));
 					}
 				}
-				if (flowObject instanceof Event) {
-					Event event = (Event) flowObject;
-					buffer.append(NL + "- - -");
-					if (event.getImplementation() != null) {
-						buffer.append(NL + "Implementation: " + getTextForImplementation(event.getImplementation()));
-					}
-					if (event.getRuleExpression() != null) {
-						buffer.append(NL + "Rule: " + event.getRuleExpression().getExpression());
-					}
-					if (event.getSignal() != null) {
-						buffer.append(NL + "Signal: " + event.getSignal());
-					}
-					if (event.getTimeExpression() != null) {
-						buffer.append(NL + "Time: " + event.getTimeExpression().getExpression());
-					}
+			}
+			if (flowObject instanceof Event) {
+				Event event = (Event) flowObject;
+				buffer.append(NL + "- - -");
+				if (event.getImplementation() != null) {
+					buffer.append(NL + "Implementation: " + getTextForImplementation(event.getImplementation()));
 				}
-				if (flowObject instanceof Activity) {
-					Activity activity = (Activity) flowObject;
-					buffer.append(NL + "- - -");
-					if (activity.getImplementation() != null) {
-						buffer.append(NL + "Implementation: " + getTextForImplementation(activity.getImplementation()));
-					}
-					if (activity.getScript() != null) {
-						buffer.append(NL + "Script:" + NL + activity.getScript());
-					}
+				if (event.getRuleExpression() != null) {
+					buffer.append(NL + "Rule: " + event.getRuleExpression().getExpression());
+				}
+				if (event.getSignal() != null) {
+					buffer.append(NL + "Signal: " + event.getSignal());
+				}
+				if (event.getTimeExpression() != null) {
+					buffer.append(NL + "Time: " + event.getTimeExpression().getExpression());
+				}
+			}
+			if (flowObject instanceof Activity) {
+				Activity activity = (Activity) flowObject;
+				buffer.append(NL + "- - -");
+				if (activity.getImplementation() != null) {
+					buffer.append(NL + "Implementation: " + getTextForImplementation(activity.getImplementation()));
+				}
+				if (activity.getScript() != null) {
+					buffer.append(NL + "Script:" + NL + activity.getScript());
 				}
 			}
 		}
