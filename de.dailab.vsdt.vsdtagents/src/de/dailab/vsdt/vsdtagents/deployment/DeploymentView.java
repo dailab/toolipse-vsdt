@@ -132,7 +132,7 @@ public class DeploymentView extends AbstractStructuredViewerView {
 	private void refresh() {
 		if (getBean() == null) {
 			// node not yet started
-			openMessageDialog(MessageDialog.ERROR, "JIAC Node has now yet started. Please try again later.");
+			openMessageDialog(MessageDialog.ERROR, "JIAC Node has not yet started. Please try again later.");
 			return;
 		}
 		
