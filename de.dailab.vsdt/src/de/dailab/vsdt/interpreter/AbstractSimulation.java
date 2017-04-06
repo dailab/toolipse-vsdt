@@ -153,6 +153,8 @@ public abstract class AbstractSimulation implements ISimulation {
 		stepMap.clear();
 		// remove markers
 		clearObservers();
+		// do implementation-specific finalization stuff
+		cleanup();
 	}
 	
 	public final boolean isRunning() {
@@ -309,6 +311,11 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * @param bpd			The Business Process Diagram to be simulated
 	 */
 	protected abstract void initialize(EObject rootObject);
+	
+	/**
+	 * Do implementation-specific clean-up stuff.
+	 */
+	protected void cleanup() {};
 	
 	/**
 	 * This method is executed at the end of the {@link #stepInto(FlowObject)}
