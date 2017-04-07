@@ -249,9 +249,14 @@ public class InterpreterView extends AbstractStructuredViewerView {
 			// link simulation with viewer, start simulation
 			if (simulation != null) {
 				simulation.addObserver(new EclipseInterpreterObserver(viewer, editPart));
-				List<FlowObject> result= simulation.start(bpd);
-				setSelection(result);
-				updateActionEnablement();
+				try {
+					List<FlowObject> result= simulation.start(bpd);
+					setSelection(result);
+					updateActionEnablement();
+				} catch (Exception e) {
+					MessageDialog.openError(viewer.getControl().getShell(),
+							"Simulation could not be started", e.getMessage());
+				}
 			}
 		}
 	}

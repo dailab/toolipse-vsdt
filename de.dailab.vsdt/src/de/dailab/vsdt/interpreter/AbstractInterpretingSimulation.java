@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
 import de.dailab.vsdt.Activity;
@@ -89,17 +90,18 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 */
 	@Override
 	protected boolean checkDiagram(EObject object) {
-		return true; // TODO 
-//		boolean isOk = true;
-//		for (TreeIterator<EObject> iter= diagram.eAllContents(); iter.hasNext(); ) {
-//			EObject next= iter.next();
-//			if (next instanceof Expression) {
-//				// test-parse the expression, exit if result is null
-//				VxlTerm result = parseExpression(getExpression((Expression) next));
-//				isOk &= result != null;
-//			}
-//		}
-//		return isOk;
+		for (TreeIterator<EObject> iter= object.eAllContents(); iter.hasNext(); ) {
+			EObject next= iter.next();
+			if (next instanceof Expression) {
+				try {
+					ExpressionHelper.parseExpression(((Expression) next).getExpression());
+				} catch (IllegalArgumentException e) {
+					// this try/catch is redundant, but that way it's a bit clearer
+					throw e;
+				}
+			}
+		}
+		return true;
 	}
 
 	/**

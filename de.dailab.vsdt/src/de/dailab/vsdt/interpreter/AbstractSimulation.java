@@ -51,12 +51,7 @@ public abstract class AbstractSimulation implements ISimulation {
 	/** Another Map, holding information in which step each element has been visited (last) */
 	protected final Map<EObject, Integer> stepMap;
 
-	/** The Viewer showing a tree structure of the activities */
-//	protected Viewer viewer;
-	
-	/** the Business Process Diagram on which to run the simulation */
-//	protected BusinessProcessDiagramEditPart diagramEditPart;
-
+	/** observers, e.g. for adding tokens to diagram editor, or for updating interpreter UI */
 	protected Set<ISimulationObserver> observers;
 	
 	/** The number of (full) steps the simulation has already taken. */
@@ -73,7 +68,6 @@ public abstract class AbstractSimulation implements ISimulation {
 		tokenMap = new HashMap<>();
 		stepMap = new HashMap<>();
 		observers = new HashSet<>();
-//		diagramEditPart = null;
 		step = -1;
 	}
 
@@ -133,15 +127,6 @@ public abstract class AbstractSimulation implements ISimulation {
 			this.observers.add(observer);
 		}
 	}
-	
-//	/**
-//	 * - set edit part reference
-//	 * - see above
-//	 */
-//	public final List<FlowObject> start(BusinessProcessDiagramEditPart diagramEditPart) {
-//		this.diagramEditPart= diagramEditPart;
-//		return start(diagramEditPart.getCastedModel());
-//	}
 
 	/**
 	 * - reset step counter
@@ -184,19 +169,7 @@ public abstract class AbstractSimulation implements ISimulation {
 			
 			// remove tokens from incoming flows
 			for (SequenceFlow seqFlow : flowObject.getIncomingSeq()) {
-				// nov15: Special treatment for event-based XOR-gateway moved to stepOut; otherwise problems with automatic interpreter
-//				if (seqFlow.getSource() instanceof Gateway && 
-//						((Gateway)seqFlow.getSource()).getGatewayType() == GatewayType.XOR_EVENT) {
-//					// event-based XOR: remove other tokens, too
-//					for (SequenceFlow seqFlow2 : seqFlow.getSource().getOutgoingSeq()) {
-//						changeToken(seqFlow2, -1);
-//						if (updateState(seqFlow2.getTarget())) {
-//							result.add(seqFlow2.getTarget());
-//						}
-//					}
-//				} else {
-					changeToken(seqFlow, -1);
-//				}
+				changeToken(seqFlow, -1);
 			}
 
 			// skip assignments when looping
