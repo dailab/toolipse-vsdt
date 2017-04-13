@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VSDT - Edit Support
 Bundle-SymbolicName: de.dailab.vsdt.edit;singleton:=true
-Bundle-Version: 1.4.6.qualifier
+Bundle-Version: 1.4.7.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: de.dailab.vsdt.provider.VsdtEditPlugin$Implementation
 Bundle-Vendor: DAI-Labor, TU Berlin

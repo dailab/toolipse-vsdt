@@ -2,7 +2,7 @@
 <feature
       id="de.dailab.vsdt.feature"
       label="Toolipse VSDT Process Editor"
-      version="3.0.1.qualifier"
+      version="3.0.2.qualifier"
       provider-name="DAI-Labor, TU Berlin">
 
    <description url="http://www.jiac.de/development-tools/jiac-toolipse/visual-service-design-tool/">
@@ -104,6 +104,11 @@ Everyone is permitted to copy and distribute copies of this Agreement, but in or
 This Agreement is governed by the laws of the State of New York and the intellectual property laws of the United States of America. No party to this Agreement will bring a legal action under this Agreement more than one year after the cause of action arose. Each party waives its rights to a jury trial in any resulting litigation.
    </license>
 
+   <url>
+      <discovery label="VSDT @ JIAC.de" url="http://www.jiac.de/development-tools/jiac-toolipse/visual-service-design-tool/"/>
+      <discovery label="DAI-Labor" url="http://www.dai-labor.de"/>
+   </url>
+
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.ecore"/>
@@ -141,16 +146,10 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.eclipse.gmf.runtime.common.ui"/>
       <import plugin="org.eclipse.gmf.runtime.notation"/>
       <import plugin="org.eclipse.emf.ecore.editor"/>
-<!--
-      <import plugin="de.dailab.jiactng.nodeplugin"/>
--->
       <import plugin="org.eclipse.xtext.util"/>
       <import plugin="org.eclipse.emf.common"/>
       <import plugin="org.antlr.runtime"/>
       <import plugin="org.apache.log4j"/>
-<!--
-      <import plugin="de.dailab.jiactng.jadlpp"/>
--->
    </requires>
 
    <plugin
@@ -209,15 +208,6 @@ This Agreement is governed by the laws of the State of New York and the intellec
          version="0.0.0"
          unpack="false"/>
 
-<!--
-   <plugin
-         id="de.dailab.vsdt.trafo.jadlpp"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
--->
-
    <plugin
          id="de.dailab.vsdt.trafo.jiacbeans"
          download-size="0"
@@ -239,17 +229,22 @@ This Agreement is governed by the laws of the State of New York and the intellec
          version="0.0.0"
          unpack="false"/>
 
-<!--
    <plugin
-         id="de.dailab.vsdt.vsdtagents"
+         id="de.dailab.vsdt.vxl2"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
--->
 
    <plugin
-         id="de.dailab.vsdt.vxl2"
+         id="de.dailab.common.gmf"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="de.dailab.common.swt"
          download-size="0"
          install-size="0"
          version="0.0.0"
