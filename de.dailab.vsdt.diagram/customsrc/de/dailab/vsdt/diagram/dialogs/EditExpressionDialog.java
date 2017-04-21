@@ -1,5 +1,9 @@
 package de.dailab.vsdt.diagram.dialogs;
 
+import static de.dailab.vsdt.vxl.util.Util.LANG_NAME_MVEL;
+import static de.dailab.vsdt.vxl.util.Util.LANG_NAME_SHORT;
+import static de.dailab.vsdt.vxl.util.Util.languageIsVxl;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,13 +52,15 @@ public class EditExpressionDialog extends TitleAreaDialog {
 	private static final String MESSAGE= "Compose and validate expressions according to the " +
 			"VSDT Expression Language (VXL). \n" +
 			"These expressions will be translated to the target language when being exported.";
+	private static final String DEFAULT = "(default)";
 	
 	protected String expression;
 	protected boolean forceValidation;
+	protected String language;
 	
 	protected Text expressionText;
 	protected Button checkButton;
-	protected Button isVxlButton;
+	protected Combo languageCombo;
 	
 	protected List<Property> properties = null;
 	protected VsdtFeatureCombo<Property> propertiesCombo;
@@ -71,10 +77,11 @@ public class EditExpressionDialog extends TitleAreaDialog {
 	 * @param expression		the expression to edit
 	 * @param forceValidation	force validation when hitting ok button
 	 */
-	public EditExpressionDialog(Shell parentShell, String expression, boolean forceValidation) {
+	public EditExpressionDialog(Shell parentShell, String expression, String language, boolean forceValidation) {
 		super(parentShell);
 		this.expression= expression;
 		this.forceValidation= forceValidation;
+		this.language = language != null ? language : DEFAULT;
 		this.setTitle(TITLE);
 		this.setShellStyle(getShellStyle() | SWT.RESIZE);
 	}
@@ -110,20 +117,25 @@ public class EditExpressionDialog extends TitleAreaDialog {
 		expressionText.setText(Util.nonNull(expression));
 
 		// is VXL Expression?
-		isVxlButton= FormLayoutUtil.addButton(composite, "Using VSDT Expression Language?", SWT.CHECK, expressionText, 0, null);
-		isVxlButton.setBackground(null);
-		isVxlButton.addSelectionListener(new SelectionAdapter() {
+		label= FormLayoutUtil.addLabel(composite, "Language", expressionText, 0);
+		languageCombo= FormLayoutUtil.addCombo(composite, SWT.NONE, expressionText, label, null);
+		languageCombo.setBackground(null);
+		languageCombo.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				checkButton.setEnabled(isVxlButton.getSelection());
-				// TODO set expression type... needs access to the actual expression
+				String selected = languageCombo.getText();
+				language = selected.equals(DEFAULT) ? null : selected;
+				checkButton.setEnabled(languageIsVxl(language));
 			}
 		});
-		// TODO set initial selection
-		isVxlButton.setSelection(true);
+		languageCombo.add(language);
+		if (! DEFAULT.equals(language)) languageCombo.add(DEFAULT);
+		if (! LANG_NAME_SHORT.equals(language)) languageCombo.add(LANG_NAME_SHORT);
+		if (! LANG_NAME_MVEL.equals(language)) languageCombo.add(LANG_NAME_MVEL);
+		languageCombo.setText(language != null ? language : DEFAULT);
 		
 		// Syntax check
-		checkButton= FormLayoutUtil.addButton(composite, "Check", SWT.NONE, isVxlButton, null, 100);
+		checkButton= FormLayoutUtil.addButton(composite, "Check", SWT.NONE, languageCombo, null, 100);
 		checkButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -132,7 +144,7 @@ public class EditExpressionDialog extends TitleAreaDialog {
 		});
 		
 		// Properties
-		insertPropertyButton= FormLayoutUtil.addButton(composite, "Insert Property", SWT.NONE, isVxlButton, null, checkButton);
+		insertPropertyButton= FormLayoutUtil.addButton(composite, "Insert Property", SWT.NONE, languageCombo, null, checkButton);
 		insertPropertyButton.setEnabled(properties != null);
 		insertPropertyButton.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -142,8 +154,8 @@ public class EditExpressionDialog extends TitleAreaDialog {
 			}
 		});
 		
-		label= FormLayoutUtil.addLabel(composite, "Properties", isVxlButton, 0);
-		Combo theCombo = FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, isVxlButton, label, insertPropertyButton);
+		label= FormLayoutUtil.addLabel(composite, "Properties", languageCombo, 0);
+		Combo theCombo = FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, languageCombo, label, insertPropertyButton);
 		propertiesCombo= new VsdtFeatureCombo<Property>(theCombo);
 		propertiesCombo.getCombo().setEnabled(properties != null);
 		if (properties != null) {
@@ -185,6 +197,10 @@ public class EditExpressionDialog extends TitleAreaDialog {
 		return Util.nullIfEmpty(expression);
 	}
 	
+	public String getLanguage() {
+		return Util.nullIfEmpty(language);
+	}
+
 	/**
 	 * Pass the properties that are visible in the scope of the Expression's owner.
 	 * These properties are then displayed in a drop-down menu and can be inserted
@@ -265,7 +281,7 @@ public class EditExpressionDialog extends TitleAreaDialog {
 	
 	@Override
 	protected void okPressed() {
-		if (! forceValidation || ! isVxlButton.getSelection() || checkExpression()) {
+		if (! forceValidation || ! languageIsVxl(language) || checkExpression()) {
 			super.okPressed();	
 		}
 	}

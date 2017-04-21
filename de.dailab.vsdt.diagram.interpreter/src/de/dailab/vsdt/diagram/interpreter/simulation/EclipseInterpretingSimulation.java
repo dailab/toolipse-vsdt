@@ -46,7 +46,7 @@ public class EclipseInterpretingSimulation extends AbstractInterpretingSimulatio
 		List<Property> properties= VsdtHelper.getVisibleProperties(property.eContainer());
 		
 		Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		EditExpressionDialog dialog= new EditExpressionDialog(shell, expression, true);
+		EditExpressionDialog dialog= new EditExpressionDialog(shell, expression, null, true);
 		dialog.setProperties(properties);
 		
 		if (dialog.open() == EditExpressionDialog.OK) {

@@ -39,7 +39,7 @@ import de.dailab.vsdt.util.VsdtHelper;
  * for inserting existing properties into an expression and for checking whether there are
  * undefined properties used in the expression.
  * 
- * TODO improve layout
+ * TODO for some reason, this appears as black on some systems (e.g. for Michael B., Fedora, Gnome 3)
  * 
  * @author kuester
  */
@@ -48,6 +48,8 @@ public class ExpressionComposite extends Composite {
 	protected final Text expressionText;
 	protected final Button editButton;
 	
+	protected String language;
+
 	/** the owner of the expression, i.e. the EObject the Expression is contained in */
 	protected EObject owner;
 	
@@ -133,6 +135,7 @@ public class ExpressionComposite extends Composite {
 		//TODO do not create new expression if expression already exists
 		if (owner != null && feature != null) {
 			Expression expression= VsdtElementFactory.createExpression(expressionText.getText());
+			expression.setLanguage(language);
 			SetPropertyValueCommand command= new SetPropertyValueCommand(owner, feature, expression);
 	    	try {
 	        	OperationHistoryFactory.getOperationHistory().execute(command, new NullProgressMonitor(), null);	
@@ -153,7 +156,7 @@ public class ExpressionComposite extends Composite {
 		public void widgetSelected(SelectionEvent e) {
 			Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 			String expression= expressionText.getText(); 
-			EditExpressionDialog dialog= new EditExpressionDialog(shell, expression, false);
+			EditExpressionDialog dialog= new EditExpressionDialog(shell, expression, language, false);
 			if (owner != null) {
 				BusinessProcessSystem bps = (BusinessProcessSystem) VsdtHelper.getRootElement(owner);
 				dialog.setProperties(VsdtHelper.getVisibleProperties(owner));
@@ -161,6 +164,7 @@ public class ExpressionComposite extends Composite {
 			}
 			if (dialog.open() == Dialog.OK) {
 				expressionText.setText(dialog.getExpression());
+				language = dialog.getLanguage();
 				updateModelElement();
 			}
 		}

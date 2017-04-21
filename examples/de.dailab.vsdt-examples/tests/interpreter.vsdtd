@@ -231,11 +231,15 @@
       <pools xmi:type="vsdt:Pool" xmi:id="_-LaHISaPEee9i6WaSIQEWg" name="Pool" id="_-LaHICaPEee9i6WaSIQEWg">
         <properties xmi:type="vsdt:Property" xmi:id="_HxMVoCaQEee9i6WaSIQEWg" name="date" type="java.time.LocalDate"/>
         <properties xmi:type="vsdt:Property" xmi:id="_IantICaQEee9i6WaSIQEWg" name="s" type="string"/>
+        <properties xmi:type="vsdt:Property" xmi:id="_ePbRsCaaEeea-OM4fCXkYQ" name="x" type="integer"/>
         <lanes xmi:type="vsdt:Lane" xmi:id="_-Lb8UCaPEee9i6WaSIQEWg" id="_-LbVQCaPEee9i6WaSIQEWg">
           <containedFlowObjects xmi:type="vsdt:Start" xmi:id="_-4UQcSaPEee9i6WaSIQEWg" id="_-4UQcCaPEee9i6WaSIQEWg"/>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="__ks1USaPEee9i6WaSIQEWg" name="Create Date" id="__ks1UCaPEee9i6WaSIQEWg">
+            <assignments xmi:type="vsdt:Assignment" xmi:id="_fRWBsCaaEeea-OM4fCXkYQ" to="_ePbRsCaaEeea-OM4fCXkYQ">
+              <from xmi:type="vsdt:Expression" xmi:id="_gxhbACaaEeea-OM4fCXkYQ" expression="1+2+3"/>
+            </assignments>
             <assignments xmi:type="vsdt:Assignment" xmi:id="_LwGbMCaQEee9i6WaSIQEWg" to="_HxMVoCaQEee9i6WaSIQEWg">
-              <from xmi:type="vsdt:Expression" xmi:id="_QgwmcCaTEeeHlduffK-1Uw" expression="java.time.LocalDate.of(2017, 4, 21)"/>
+              <from xmi:type="vsdt:Expression" xmi:id="_H_rugCaZEeegFpQeRX4gfg" expression="java.time.LocalDate.of(2017, 4, 21)"/>
             </assignments>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_AXztQSaQEee9i6WaSIQEWg" name="Print Date" id="_AXztQCaQEee9i6WaSIQEWg" activityType="SCRIPT" script="s = date.toString();&#xA;System.out.println(s);"/>
@@ -292,7 +296,7 @@
       <children xmi:type="notation:Node" xmi:id="_8OegYCaPEee9i6WaSIQEWg" type="4002"/>
       <styles xmi:type="notation:ShapeStyle" xmi:id="_8ObdESaPEee9i6WaSIQEWg" fontName="Sans"/>
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_8ObdEiaPEee9i6WaSIQEWg" diagramLink="_9Y3P4CaPEee9i6WaSIQEWg" hint="Vsdt"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_8ObdEyaPEee9i6WaSIQEWg" x="186" y="347"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_8ObdEyaPEee9i6WaSIQEWg" x="195" y="311"/>
     </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_0JeWwQUxEeWofoB0QHuTTw"/>
     <edges xmi:type="notation:Edge" xmi:id="_22vOQAUxEeWofoB0QHuTTw" type="3001" source="_1yEsQAUxEeWofoB0QHuTTw" target="_0wbpEAUxEeWofoB0QHuTTw">
@@ -1015,14 +1019,14 @@
                 <styles xmi:type="notation:FilteringStyle" xmi:id="_AX2JhCaQEee9i6WaSIQEWg"/>
               </children>
               <styles xmi:type="notation:ShapeStyle" xmi:id="_AX07YSaQEee9i6WaSIQEWg" fontName="Sans"/>
-              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AX07YiaQEee9i6WaSIQEWg" x="270" y="48"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AX07YiaQEee9i6WaSIQEWg" x="270" y="48" width="86"/>
             </children>
             <children xmi:type="notation:Node" xmi:id="_Ay9_QCaQEee9i6WaSIQEWg" type="2004" element="_Ay7jASaQEee9i6WaSIQEWg">
               <children xmi:type="notation:Node" xmi:id="_Ay_NYCaQEee9i6WaSIQEWg" type="4005">
                 <layoutConstraint xmi:type="notation:Location" xmi:id="_Ay_NYSaQEee9i6WaSIQEWg" y="5"/>
               </children>
               <styles xmi:type="notation:ShapeStyle" xmi:id="_Ay9_QSaQEee9i6WaSIQEWg" fontName="Sans"/>
-              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Ay9_QiaQEee9i6WaSIQEWg" x="394" y="48"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Ay9_QiaQEee9i6WaSIQEWg" x="418" y="48"/>
             </children>
             <styles xmi:type="notation:SortingStyle" xmi:id="_-LzvwSaPEee9i6WaSIQEWg"/>
             <styles xmi:type="notation:FilteringStyle" xmi:id="_-LzvwiaPEee9i6WaSIQEWg"/>
