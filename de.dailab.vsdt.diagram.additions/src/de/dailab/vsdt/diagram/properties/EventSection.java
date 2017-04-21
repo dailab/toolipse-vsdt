@@ -135,10 +135,10 @@ public class EventSection extends FlowObjectSection {
 
 //		messageCombo.setSelected(event.getMessage());
     	implementationCombo.setSelected(event.getImplementation());
-    	timeExpressionComp.setText(getExpression(event.getTimeExpression()));
+    	timeExpressionComp.setValues(event.getTimeExpression());
     	asDurationButton.setSelection(event.isAsDuration());
     	errorCodeText.setText(nonNull(event.getErrorCode()));
-    	ruleExpText.setText(getExpression(event.getRuleExpression()));
+    	ruleExpText.setValues(event.getRuleExpression());
     	linkedToCombo.setSelected(event.getLinkedTo());
     	activityCombo.setSelected(event.getActivity());
     	signalText.setText(nonNull(event.getSignal()));

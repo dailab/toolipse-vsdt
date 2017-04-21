@@ -239,7 +239,7 @@
               <from xmi:type="vsdt:Expression" xmi:id="_gxhbACaaEeea-OM4fCXkYQ" expression="1+2+3"/>
             </assignments>
             <assignments xmi:type="vsdt:Assignment" xmi:id="_LwGbMCaQEee9i6WaSIQEWg" to="_HxMVoCaQEee9i6WaSIQEWg">
-              <from xmi:type="vsdt:Expression" xmi:id="_H_rugCaZEeegFpQeRX4gfg" expression="java.time.LocalDate.of(2017, 4, 21)"/>
+              <from xmi:type="vsdt:Expression" xmi:id="_NnlRgCahEeeNi4n0w94FBw" expression="java.time.LocalDate.of(2017, 4, 21)" language="MVEL"/>
             </assignments>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_AXztQSaQEee9i6WaSIQEWg" name="Print Date" id="_AXztQCaQEee9i6WaSIQEWg" activityType="SCRIPT" script="s = date.toString();&#xA;System.out.println(s);"/>

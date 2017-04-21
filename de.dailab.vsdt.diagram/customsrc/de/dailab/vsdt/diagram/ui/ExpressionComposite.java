@@ -93,17 +93,30 @@ public class ExpressionComposite extends Composite {
 	/**
 	 * @return			The Expression
 	 */
-	public String getText() {
+	public String getExpression() {
 		return expressionText.getText();
 	}
 	
+	public void setValues(Expression expression) {
+		this.expressionText.setText(expression != null ? expression.getExpression() : "");
+		this.language = expression != null ? expression.getLanguage() : null;
+	}
+
 	/**
 	 * @param string	New value for Expression
 	 */
-	public void setText(String string) {
+	public void setExpression(String string) {
 		expressionText.setText(string);
 	}
-	
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
 	@Override
 	public void setEnabled(boolean enabled) {
 		expressionText.setEnabled(enabled);

@@ -112,8 +112,8 @@ public class OrganizeAssignmentsDialog extends AbstractOrganizeElementsDialog<As
 		if (assignment != null) {
 			assignment.setTo(assToCombo.getSelected());
 					
-			String expression= assFromText.getText();
-			assignment.getFrom().setExpression(Util.nullIfEmpty(expression));
+			assignment.getFrom().setExpression(Util.nullIfEmpty(assFromText.getExpression()));
+			assignment.getFrom().setLanguage(Util.nullIfEmpty(assFromText.getLanguage()));
 			
 			String toQuery= assToQueryText.getText();
 			assignment.setToQuery(Util.nullIfEmpty(toQuery));
@@ -142,8 +142,7 @@ public class OrganizeAssignmentsDialog extends AbstractOrganizeElementsDialog<As
 			assToQueryText.setText(Util.nonNull(assignment.getToQuery()));
 			
 			//set expression
-			String expression= assignment.getFrom() != null? assignment.getFrom().getExpression() : null;
-			assFromText.setText(Util.nonNull(expression));
+			assFromText.setValues(assignment.getFrom());
 			
 			//set assign time
 			assTimeCombo.select(assignment.getAssignTime().getValue());

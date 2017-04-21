@@ -120,14 +120,6 @@ public class EditExpressionDialog extends TitleAreaDialog {
 		label= FormLayoutUtil.addLabel(composite, "Language", expressionText, 0);
 		languageCombo= FormLayoutUtil.addCombo(composite, SWT.NONE, expressionText, label, null);
 		languageCombo.setBackground(null);
-		languageCombo.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				String selected = languageCombo.getText();
-				language = selected.equals(DEFAULT) ? null : selected;
-				checkButton.setEnabled(languageIsVxl(language));
-			}
-		});
 		languageCombo.add(language);
 		if (! DEFAULT.equals(language)) languageCombo.add(DEFAULT);
 		if (! LANG_NAME_SHORT.equals(language)) languageCombo.add(LANG_NAME_SHORT);
@@ -140,6 +132,15 @@ public class EditExpressionDialog extends TitleAreaDialog {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				checkExpression();
+			}
+		});
+
+		languageCombo.addModifyListener(new ModifyListener() {
+			@Override
+			public void modifyText(ModifyEvent e) {
+				String selected = languageCombo.getText();
+				language = selected.equals(DEFAULT) ? null : selected;
+				checkButton.setEnabled(languageIsVxl(language));
 			}
 		});
 		

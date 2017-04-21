@@ -81,7 +81,7 @@ public class PoolSection extends AbstractVsdtPropertySection {
 
     	adHocButton.setSelection(pool.isAdHoc());
     	adHocConditionText.setEnabled(adHocButton.getSelection());
-    	adHocConditionText.setText(getExpression(pool.getAdHocCompletionCondition()));
+    	adHocConditionText.setValues(pool.getAdHocCompletionCondition());
     	adHocConditionText.setOwnerAndFeature(pool, pack.getAbstractProcess_AdHocCompletionCondition());
     }
  

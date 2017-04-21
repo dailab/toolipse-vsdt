@@ -12,6 +12,7 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.ConditionType;
+import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.VsdtPackage;
 import de.dailab.vsdt.diagram.ui.ExpressionComposite;
@@ -52,7 +53,7 @@ public class SequenceFlowSection extends AbstractVsdtPropertySection {
  	protected void internalRefresh() {
     	super.internalRefresh();
     	if (sequenceFlow.getConditionExpression() != null) {
-        	conditionText.setText(getExpression(sequenceFlow.getConditionExpression()));	
+        	conditionText.setValues(sequenceFlow.getConditionExpression());	
     	}
         typeNoneButton.setSelection(sequenceFlow.getConditionType() == ConditionType.NONE);
         typeDefButton.setSelection(sequenceFlow.getConditionType() == ConditionType.DEFAULT);
@@ -93,7 +94,9 @@ public class SequenceFlowSection extends AbstractVsdtPropertySection {
     	if (src.equals(typeCondButton)) {
     		conditionText.setEnabled(true);
 			setPropertyValue(sequenceFlow, pack.getSequenceFlow_ConditionType(), ConditionType.EXPRESSION);
-			setPropertyValue(sequenceFlow, pack.getSequenceFlow_ConditionExpression(), createExpression(conditionText.getText()));
+			Expression expression = createExpression(conditionText.getExpression());
+			expression.setLanguage(conditionText.getLanguage());
+			setPropertyValue(sequenceFlow, pack.getSequenceFlow_ConditionExpression(), expression);
     	}
     }
 }

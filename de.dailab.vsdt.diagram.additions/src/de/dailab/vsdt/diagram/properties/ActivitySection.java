@@ -203,12 +203,12 @@ implements FocusListener, SelectionListener {
     	transactionButton.setSelection(activity.getTransaction() != null);
     	adHocButton.setSelection(activity.isAdHoc());
     	eventedSubprocessButton.setSelection(activity.isEventedSubprocess());
-    	adHocConditionText.setText(getExpression(activity.getAdHocCompletionCondition()));
+    	adHocConditionText.setValues(activity.getAdHocCompletionCondition());
     	
     	if (activity.getLoopAttributes() instanceof MultiLoopAttSet) {
 			MultiLoopAttSet attSet = (MultiLoopAttSet) activity.getLoopAttributes();
-			multiMIConditionText.setText(getExpression(attSet.getMI_Condition()));
-			multiComplexMICondText.setText(getExpression(attSet.getComplexMI_FlowCondition()));
+			multiMIConditionText.setValues(attSet.getMI_Condition());
+			multiComplexMICondText.setValues(attSet.getComplexMI_FlowCondition());
 			multiFlowCombo.select(attSet.getMI_FlowCondition().getValue());
 			multiOrderingSeqButton.setSelection(attSet.isSequential());
 			multiFlowCombo.setEnabled(! attSet.isSequential());
@@ -218,7 +218,7 @@ implements FocusListener, SelectionListener {
     	}
     	if (activity.getLoopAttributes() instanceof StandardLoopAttSet) {
 			StandardLoopAttSet attSet = (StandardLoopAttSet) activity.getLoopAttributes();
-			stdCondText.setText(getExpression(attSet.getLoopCondition()));
+			stdCondText.setValues(attSet.getLoopCondition());
 			stdMaxSpinner.setSelection(attSet.getLoopMaximum());
 			stdBeforeButton.setSelection(attSet.isTestBefore());
 			stdCondText.setOwnerAndFeature(attSet, pack.getStandardLoopAttSet_LoopCondition());

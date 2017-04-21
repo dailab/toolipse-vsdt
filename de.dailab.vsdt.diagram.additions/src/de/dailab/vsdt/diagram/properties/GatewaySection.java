@@ -58,8 +58,8 @@ implements SelectionListener {
     	complexIncomingCondText.setEnabled(gateway.getGatewayType() == GatewayType.COMPLEX);
     	complexOutgoingCondText.setEnabled(gateway.getGatewayType() == GatewayType.COMPLEX);
     	
-		complexIncomingCondText.setText(getExpression(gateway.getIncomingCondition()));
-		complexOutgoingCondText.setText(getExpression(gateway.getOutgoingCondition()));
+		complexIncomingCondText.setValues(gateway.getIncomingCondition());
+		complexOutgoingCondText.setValues(gateway.getOutgoingCondition());
     }
  
     @Override
