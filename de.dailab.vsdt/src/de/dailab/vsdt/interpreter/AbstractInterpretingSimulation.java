@@ -93,8 +93,11 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 		for (TreeIterator<EObject> iter= object.eAllContents(); iter.hasNext(); ) {
 			EObject next= iter.next();
 			if (next instanceof Expression) {
+				Expression expression = ((Expression) next);
 				try {
-					ExpressionHelper.parseVxlExpression(((Expression) next).getExpression());
+					if (Util.languageIsVxl(expression.getExpressionLanguageToBeUsed())) {
+						ExpressionHelper.parseVxlExpression(expression.getExpression());
+					}
 				} catch (IllegalArgumentException e) {
 					// this try/catch is redundant, but that way it's a bit clearer
 					throw e;
