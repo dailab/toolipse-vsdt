@@ -15,6 +15,8 @@ public class Util {
 	public static final String LANG_NAME= "VSDT Expression Language";
 	public static final String LANG_NAME_SHORT= "VXL";
 	
+	public static final String LANG_NAME_MVEL= "MVEL";
+
 	public static final String TYPE_INTEGER= "integer";
 	public static final String TYPE_LONG= "long";
 	public static final String TYPE_BOOLEAN= "boolean";
@@ -59,6 +61,13 @@ public class Util {
 		return LANG_NAME.equalsIgnoreCase(expLang) || LANG_NAME_SHORT.equalsIgnoreCase(expLang);
 	}
 	
+	/**
+	 * Check whether the given expression language matches MVEL
+	 */
+	public static boolean languageIsMvel(String expLang) {
+		return LANG_NAME_MVEL.equalsIgnoreCase(expLang);
+	}
+
 	public static int asInteger(Number number) {
 		if (number instanceof Double) {
 			double d= (Double) number;

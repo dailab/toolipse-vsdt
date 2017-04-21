@@ -52,7 +52,7 @@ public class MessageParameterDialog extends TitleAreaDialog {
 	protected final Map<Property, Text> propertyTextMap;
 	
 	/** Mapping of Properties to their values */
-	protected final Map<Property, Serializable> valuesMap;
+	protected final Map<Property, Object> valuesMap;
 	
 	/**
 	 * Create new Message Parameter Dialog.  Besides the actual Message, also the
@@ -69,7 +69,7 @@ public class MessageParameterDialog extends TitleAreaDialog {
 	 * @param incoming		Incoming or outgoing message? Only used for a label
 	 * @param valuesMap		Map holding the Properties' values
 	 */
-	public MessageParameterDialog(Shell parentShell, List<Property> properties, boolean incoming, Map<Property, Serializable> valuesMap) {
+	public MessageParameterDialog(Shell parentShell, List<Property> properties, boolean incoming, Map<Property, Object> valuesMap) {
 		super(parentShell);
 		setTitle(TITLE);
 		setShellStyle(getShellStyle() | SWT.RESIZE);
@@ -187,7 +187,7 @@ public class MessageParameterDialog extends TitleAreaDialog {
 	 * @param property	One of the message's Properties
 	 * @return			The Property's (new) value
 	 */
-	public Serializable getNewPropertyValue(Property property) {
+	public Object getNewPropertyValue(Property property) {
 		if (property != null) {
 			return valuesMap.get(property);
 		} else {

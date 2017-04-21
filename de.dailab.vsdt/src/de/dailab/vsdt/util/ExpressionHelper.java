@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.mvel2.MVEL;
 
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowObject;
@@ -35,9 +36,9 @@ public class ExpressionHelper {
 	 * @param context		Map of Property names and values
 	 * @return				Result of the evaluation, or false in case of error
 	 */
-	public static boolean evaluateCondition(Expression expression, Map<String, Serializable> context) {
+	public static boolean evaluateCondition(Expression expression, Map<String, Object> context) {
 		if (expression != null) {
-			Serializable value= parseAndEvaluate(expression, context);
+			Object value= parseAndEvaluate(expression, context);
 			if (value instanceof Boolean) {
 				return (Boolean) value;
 			} else {
@@ -60,12 +61,18 @@ public class ExpressionHelper {
 	 * @param context		Map of Property names and values
 	 * @return				Result of the evaluation, or null in case of error
 	 */
-	public static Serializable parseAndEvaluate(Expression expression, Map<String, Serializable> context) {
-		return parseAndEvaluate(getExpression(expression), context);
+	public static Object parseAndEvaluate(Expression expression, Map<String, Object> context) {
+		return parseAndEvaluate(getExpression(expression), context, expression.getExpressionLanguageToBeUsed());
 	}
 
-	public static Serializable parseAndEvaluate(String expression, Map<String, Serializable> context) {
-		return evaluateTerm(parseExpression(expression), context);
+	public static Object parseAndEvaluate(String expression, Map<String, Object> context, String language) {
+		if (Util.languageIsVxl(language)) {
+			return evaluateVxlTerm(parseVxlExpression(expression), context);
+		}
+		if (Util.languageIsMvel(language)) {
+			return evaluateMvelExpression(expression, context);
+		}
+		throw new IllegalArgumentException("Unsupported Expression Language");
 	}
 
 	/**
@@ -79,7 +86,7 @@ public class ExpressionHelper {
 		if (expression == null) return null;
 		// check expression language
 		String lang= expression.getExpressionLanguageToBeUsed();
-		if (Util.languageIsVxl(lang)) {
+		if (Util.languageIsVxl(lang) || Util.languageIsMvel(lang)) {
 //			return expression.getExpression();
 			return VsdtHelper.getExpressionWithParameters(expression);
 		} else {
@@ -94,7 +101,7 @@ public class ExpressionHelper {
 	 * @param expression	Some VXL Expression (as string)
 	 * @return				Result of the parsing, or null in case of error
 	 */
-	public static VxlTerm parseExpression(String expression) {
+	public static VxlTerm parseVxlExpression(String expression) {
 		if (expression == null) return null;
 
 		VxlParser parser= VxlParser.getInstance();
@@ -125,7 +132,7 @@ public class ExpressionHelper {
 	 * @param context		Map of Property names and values
 	 * @return				Result of the evaluation, or null in case of error
 	 */
-	public static Serializable evaluateTerm(VxlTerm term, Map<String, Serializable> context) {
+	public static Serializable evaluateVxlTerm(VxlTerm term, Map<String, Object> context) {
 		if (term == null) return null;
 		VxlInterpreter interpreter= new VxlInterpreter();
 		Serializable result= interpreter.evaluateTerm(term, context);
@@ -142,4 +149,8 @@ public class ExpressionHelper {
 		return result;
 	}
 	
+	
+	public static Object evaluateMvelExpression(String expression, Map<String, Object> context) {
+		return MVEL.eval(expression, context);
+	}
 }

@@ -1,6 +1,5 @@
 package de.dailab.vsdt.diagram.interpreter.simulation;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +13,7 @@ import de.dailab.vsdt.diagram.dialogs.EditExpressionDialog;
 import de.dailab.vsdt.diagram.interpreter.dialogs.MessageParameterDialog;
 import de.dailab.vsdt.interpreter.AbstractInterpretingSimulation;
 import de.dailab.vsdt.util.VsdtHelper;
+import de.dailab.vsdt.vxl.util.Util;
 
 /**
  * This Simulation requires fewer interaction with the user than the Manual
@@ -51,8 +51,8 @@ public class EclipseInterpretingSimulation extends AbstractInterpretingSimulatio
 		
 		if (dialog.open() == EditExpressionDialog.OK) {
 			String newExpression= dialog.getExpression();
-			Map<String, Serializable> context= createContext(property.eContainer());
-			Serializable newValue= parseAndEvaluate(newExpression, context);
+			Map<String, Object> context= createContext(property.eContainer());
+			Object newValue= parseAndEvaluate(newExpression, context, Util.LANG_NAME_MVEL);
 			setPropertyValue(property, newValue);
 		}
 	}
@@ -72,7 +72,7 @@ public class EclipseInterpretingSimulation extends AbstractInterpretingSimulatio
 	public void handleMessageProperties(List<Property> properties, boolean incoming) {
 		if (properties != null) {
 			Shell shell= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-			Map<Property, Serializable> valueMap= new HashMap<>();
+			Map<Property, Object> valueMap= new HashMap<>();
 			for (Property property : properties) {
 				valueMap.put(property, propertyValueMap.get(property));
 			}

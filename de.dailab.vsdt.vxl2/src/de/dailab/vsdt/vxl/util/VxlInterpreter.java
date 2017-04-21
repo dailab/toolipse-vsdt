@@ -50,7 +50,7 @@ public class VxlInterpreter {
 	protected Map<Object, String> errors= null;
 	
 	/** the context, e.g. the association of variables to actual values */
-	protected Map<String, Serializable> context= null;
+	protected Map<String, Object> context= null;
 	
 	public Map<Object, String> getErrors() {
 		return errors;
@@ -62,7 +62,7 @@ public class VxlInterpreter {
 	 * @param term		Some Term
 	 * @return			Result, e.g. a String, Number, or Boolean, or whatever else
 	 */
-	public Serializable evaluateTerm(VxlTerm term, Map<String, Serializable> context) {
+	public Serializable evaluateTerm(VxlTerm term, Map<String, Object> context) {
 		this.errors= new HashMap<Object, String>();
 		this.context= context;
 		return (Serializable) evalTerm(term);

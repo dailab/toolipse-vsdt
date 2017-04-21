@@ -1,6 +1,5 @@
 package de.dailab.vsdt.vsdtagents.interpreter;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -99,20 +98,20 @@ public class JiacEnabledVsdtInterpreter extends EclipseInterpretingSimulation {
 					
 					try {
 						// get parameters
-						List<Serializable> parameters = new ArrayList<Serializable>();
+						List<Object> parameters = new ArrayList<>();
 						for (Property input : service.getInput()) {
-							Serializable value = getPropertyValue(input);
+							Object value = getPropertyValue(input);
 							parameters.add(value);
 						}
 					
 						// invoke action with parameters
-						Serializable[] results = bean.invokeAction(action, parameters.toArray(new Serializable[parameters.size()]));
+						Object[] results = bean.invokeAction(action, parameters.toArray());
 						assert results.length == service.getOutput().size();
 						
 						// assign action results to properties
 						for (int i=0; i < service.getOutput().size(); i++) {
 							Property output = service.getOutput().get(i);
-							Serializable result = results[i];
+							Object result = results[i];
 							setPropertyValue(output, result);
 						}
 						

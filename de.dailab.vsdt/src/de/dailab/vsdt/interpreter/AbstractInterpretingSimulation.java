@@ -78,7 +78,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 */
 	
 	/** This Map holds the association of Properties to values */
-	protected Map<Property, Serializable> propertyValueMap= new HashMap<>();
+	protected Map<Property, Object> propertyValueMap= new HashMap<>();
 	
 	/** This Map holds the current loop counter for the several activities  currently looping*/
 	protected Map<Activity, Integer> loopCounterMap= new HashMap<>();
@@ -94,7 +94,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 			EObject next= iter.next();
 			if (next instanceof Expression) {
 				try {
-					ExpressionHelper.parseExpression(((Expression) next).getExpression());
+					ExpressionHelper.parseVxlExpression(((Expression) next).getExpression());
 				} catch (IllegalArgumentException e) {
 					// this try/catch is redundant, but that way it's a bit clearer
 					throw e;
@@ -119,7 +119,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 * @param property		Some Property
 	 * @return				Current Value in this Simulation instance
 	 */
-	public Serializable getPropertyValue(Property property) {
+	public Object getPropertyValue(Property property) {
 		if (property != null) {
 			return propertyValueMap.get(property);
 		}
@@ -132,7 +132,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 * @param property		Some Property
 	 * @param value			New value to be assigned to this property
 	 */
-	public void setPropertyValue(Property property, Serializable value) {
+	public void setPropertyValue(Property property, Object value) {
 		if (property != null) {
 			propertyValueMap.put(property, value);
 			// check whether value's type matches property's type
@@ -296,20 +296,20 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 		if (assignments != null) {
 			for (Assignment assignment : assignments) {
 				if (assignment.getAssignTime() == assignTime && assignment.getFrom() != null) {
-					Serializable value= parseAndEvaluate(assignment.getFrom(), createContext(eObject));
+					Object value= parseAndEvaluate(assignment.getFrom(), createContext(eObject));
 					if (assignment.getToQuery() != null) {
-						Serializable propVal = getPropertyValue(assignment.getTo());
+						Object propVal = getPropertyValue(assignment.getTo());
 						if (propVal instanceof List) {
 							// try to assign to array index
-							Serializable query = parseAndEvaluate(assignment.getToQuery(), createContext(eObject));
+							Object query = parseAndEvaluate(assignment.getToQuery(), createContext(eObject), assignment.getFrom().getExpressionLanguageToBeUsed());
 							if (query instanceof Number) {
 								Number number = (Number) query;
-								List<Serializable> list = (List) propVal;
+								List<Object> list = (List) propVal;
 								list.set(Util.asInteger(number), value); 
 							}
 						} else if (propVal instanceof Map) {
 							// try to assign to map key
-							Serializable query = parseAndEvaluate(assignment.getToQuery(), createContext(eObject));
+							Object query = parseAndEvaluate(assignment.getToQuery(), createContext(eObject), assignment.getFrom().getExpressionLanguageToBeUsed());
 							((Map) propVal).put(query, value);
 						} else {
 							// try to interpret query as an attribute/setter
@@ -424,9 +424,9 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 * @param eObject	Some (Flow) Object
 	 * @return				Map of names of Properties in the scope to their values
 	 */
-	public Map<String, Serializable> createContext(EObject eObject) {
+	public Map<String, Object> createContext(EObject eObject) {
 		// get local properties
-		Map<String, Serializable> context= new HashMap<>();
+		Map<String, Object> context= new HashMap<>();
 		for (Property property : VsdtHelper.getVisibleProperties(eObject)) {
 			// yields Properties from inner to outer scope --> do not overwrite
 			if (! context.containsKey(property.getName())) {
@@ -464,7 +464,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 * VXL CONDITION/EXPRESSION EVALUATION HELPER METHODS
 	 */
 	
-	public boolean evaluateCondition(Expression expression, Map<String, Serializable> context) {
+	public boolean evaluateCondition(Expression expression, Map<String, Object> context) {
 		try {
 			return ExpressionHelper.evaluateCondition(expression, context);
 		} catch (Exception e) {
@@ -483,31 +483,20 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 * @param context		Map of Property names and values
 	 * @return				Result of the evaluation, or null in case of error
 	 */
-	public Serializable parseAndEvaluate(Expression expression, Map<String, Serializable> context) {
-		return parseAndEvaluate(getExpression(expression), context);
-	}
-	
-	public Serializable parseAndEvaluate(String expression, Map<String, Serializable> context) {
-		try {
-			return ExpressionHelper.parseAndEvaluate(expression, context);
+	public Object parseAndEvaluate(Expression expression, Map<String, Object> context) {
+		try { 
+			return parseAndEvaluate(ExpressionHelper.getExpression(expression), context, expression.getExpressionLanguageToBeUsed());
 		} catch (IllegalArgumentException e) {
 			logMessage(LogLevel.ERROR, "Evaluation failed", e.getMessage());
 			return null;
 		}
 	}
 	
-	/**
-	 * If the Expression is a non-null VSDT Expression with Expression Language
-	 * set to VXL, return the Expression string, otherwise return null.
-	 * 
-	 * @param expression	Some VXL Expression (as VSDT Expression object)
-	 * @return				Expression string if non-null VXL Expression, or null
-	 */
-	public String getExpression(Expression expression) {
+	public Object parseAndEvaluate(String expression, Map<String, Object> context, String expLang) {
 		try {
-			return ExpressionHelper.getExpression(expression);
+			return ExpressionHelper.parseAndEvaluate(expression, context, expLang);
 		} catch (IllegalArgumentException e) {
-			logMessage(LogLevel.WARN, "Unsupported Expression type", e.getMessage());
+			logMessage(LogLevel.ERROR, "Evaluation failed", e.getMessage());
 			return null;
 		}
 	}
