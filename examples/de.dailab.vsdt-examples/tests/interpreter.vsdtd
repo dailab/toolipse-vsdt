@@ -228,7 +228,7 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_7tOTkf21EeaWDOVbY-RbvA" id="_pvlpUP21EeaWDOVbY-RbvA" source="_ph0TEf21EeaWDOVbY-RbvA" target="_7tIM8P21EeaWDOVbY-RbvA"/>
     </businessProcesses>
     <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_8NjTUSaPEee9i6WaSIQEWg" name="MVEL" id="_8NjTUCaPEee9i6WaSIQEWg" participants="_1yCQAQUxEeWofoB0QHuTTw">
-      <pools xmi:type="vsdt:Pool" xmi:id="_-LaHISaPEee9i6WaSIQEWg" name="Pool" id="_-LaHICaPEee9i6WaSIQEWg">
+      <pools xmi:type="vsdt:Pool" xmi:id="_-LaHISaPEee9i6WaSIQEWg" name="Pool" id="_-LaHICaPEee9i6WaSIQEWg" participant="_1yCQAQUxEeWofoB0QHuTTw">
         <properties xmi:type="vsdt:Property" xmi:id="_HxMVoCaQEee9i6WaSIQEWg" name="date" type="java.time.LocalDate"/>
         <properties xmi:type="vsdt:Property" xmi:id="_IantICaQEee9i6WaSIQEWg" name="s" type="string"/>
         <properties xmi:type="vsdt:Property" xmi:id="_ePbRsCaaEeea-OM4fCXkYQ" name="x" type="integer"/>
@@ -250,7 +250,7 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_AX9eQSaQEee9i6WaSIQEWg" id="_AX9eQCaQEee9i6WaSIQEWg" source="__ks1USaPEee9i6WaSIQEWg" target="_AXztQSaQEee9i6WaSIQEWg"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_AzI-YSaQEee9i6WaSIQEWg" id="_AzI-YCaQEee9i6WaSIQEWg" source="_AXztQSaQEee9i6WaSIQEWg" target="_Ay7jASaQEee9i6WaSIQEWg"/>
     </businessProcesses>
-    <participants xmi:type="vsdt:Participant" xmi:id="_1yCQAQUxEeWofoB0QHuTTw" name="Test" id="_1yCQAAUxEeWofoB0QHuTTw" associatedProcesses="_0wMYgQUxEeWofoB0QHuTTw _44kRwZ0AEeWNANb3q_f06Q _RY62UZ2qEeWlSbeDmS5D2w _0lVsQZ5kEeWOEu_6EV6jMQ _iYm0sf21EeaWDOVbY-RbvA _8NjTUSaPEee9i6WaSIQEWg" associatedPools="_4D8oQQUxEeWofoB0QHuTTw _703q0Z0AEeWNANb3q_f06Q _TVlXUZ2qEeWlSbeDmS5D2w _2aczwZ5kEeWOEu_6EV6jMQ _kRyj4f21EeaWDOVbY-RbvA"/>
+    <participants xmi:type="vsdt:Participant" xmi:id="_1yCQAQUxEeWofoB0QHuTTw" name="Test" id="_1yCQAAUxEeWofoB0QHuTTw" associatedProcesses="_0wMYgQUxEeWofoB0QHuTTw _44kRwZ0AEeWNANb3q_f06Q _RY62UZ2qEeWlSbeDmS5D2w _0lVsQZ5kEeWOEu_6EV6jMQ _iYm0sf21EeaWDOVbY-RbvA _8NjTUSaPEee9i6WaSIQEWg" associatedPools="_4D8oQQUxEeWofoB0QHuTTw _703q0Z0AEeWNANb3q_f06Q _TVlXUZ2qEeWlSbeDmS5D2w _2aczwZ5kEeWOEu_6EV6jMQ _kRyj4f21EeaWDOVbY-RbvA _-LaHISaPEee9i6WaSIQEWg"/>
     <dataTypes xmi:type="vsdt:DataType" xmi:id="_fLfYkAU_EeWe9JWmqdZqkg" name="Point" package="java.awt" language="Java"/>
     <dataTypes xmi:type="vsdt:DataType" xmi:id="_GXZRICaQEee9i6WaSIQEWg" name="LocalDate" package="java.time"/>
   </vsdt:BusinessProcessSystem>
