@@ -3,7 +3,8 @@ Bundle-ManifestVersion: 2
 Bundle-Name: VSDT - BPMN Model
 Bundle-SymbolicName: de.dailab.vsdt;singleton:=true
 Bundle-Version: 1.4.7.qualifier
-Bundle-ClassPath: .
+Bundle-ClassPath: .,
+ libs/mvel2-2.3.0.Final.jar
 Bundle-Vendor: DAI-Labor, TU Berlin
 Export-Package: de.dailab.vsdt,
  de.dailab.vsdt.impl,

@@ -14,6 +14,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.mvel2.MVEL;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
@@ -70,7 +71,6 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	
 	/*
 	 * TODO 
-	 * - support for complex types and arrays
 	 * - standard loop: test before
 	 * - multiInstance loop
 	 * - forget local property values when exiting activity (message's, too)
@@ -265,6 +265,19 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 		if (properties != null) {
 			handleMessageProperties(properties, true);
 		}
+
+		// try to execute MVEL script
+		if (flowObject instanceof Activity) {
+			Activity activity = (Activity) flowObject;
+
+			switch (activity.getActivityType()) {
+			case SCRIPT:
+				executeScript(activity, activity.getScript());
+			default:
+				break;
+			}
+		}
+
 		super.executeEnd(flowObject);
 	}
 	
@@ -499,4 +512,23 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 		}
 	}
 	
+	/**
+	 * Execute some script from a Script Task using MVEL
+	 *
+	 * @param object	the enclosing flow object, providing the context
+	 * @param script	script as a string
+	 */
+	protected void executeScript(FlowObject object, String script) {
+		Map<String, Object> context = new HashMap<>();
+		for (Property prop : getProperties()) {
+			context.put(prop.getName(), getPropertyValue(prop));
+		}
+		MVEL.eval(script, context);
+		for (Property prop : VsdtHelper.getVisibleProperties(object)) {
+			if (context.containsKey(prop.getName())) {
+				setPropertyValue(prop, (Serializable) context.get(prop.getName()));
+			}
+		}
+	}
+
 }
