@@ -1,6 +1,6 @@
 package de.dailab.vsdt.diagram.views.pools;
 
-import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTreeViewer;
@@ -76,8 +76,8 @@ public class PoolVisibilityView extends AbstractStructuredViewerView {
 				// center on and highlight clicked Pool
 				Object selected= getSelectedElement(viewer);
 				IEditorPart editor= PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-				if (selected instanceof AbstractGraphicalEditPart && editor instanceof DiagramEditor) {
-					Util.highlight((AbstractGraphicalEditPart) selected, (DiagramEditor) editor);
+				if (selected instanceof IGraphicalEditPart && editor instanceof DiagramEditor) {
+					Util.highlight((IGraphicalEditPart) selected, (DiagramEditor) editor);
 				}
 			}
 		});

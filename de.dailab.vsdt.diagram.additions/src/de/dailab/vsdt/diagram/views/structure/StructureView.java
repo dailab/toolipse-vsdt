@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -229,7 +230,7 @@ public class StructureView extends AbstractStructuredViewerView implements ISele
 	 */
 	protected void selectInEditor(EObject eObject, DiagramEditor editor) {
 		if (eObject instanceof Pool || eObject instanceof FlowObject) {
-			AbstractGraphicalEditPart editPart= Util.getEditPart(eObject, editor, "id");
+			IGraphicalEditPart editPart= Util.getEditPart(eObject, editor, "id");
 			if (editPart != null) {
 				Util.highlight(editPart, editor);
 			}

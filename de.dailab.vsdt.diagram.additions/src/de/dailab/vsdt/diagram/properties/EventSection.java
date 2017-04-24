@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
@@ -288,7 +288,7 @@ public class EventSection extends FlowObjectSection {
     	if (src.equals(highlightOpposite)) {
     		if (event.getLinkedTo() != null) {
     			DiagramEditor editor= (DiagramEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-    			AbstractGraphicalEditPart editPart= Util.getEditPart(event.getLinkedTo(), editor, null);
+    			IGraphicalEditPart editPart= Util.getEditPart(event.getLinkedTo(), editor, null);
     			Util.highlight(editPart, editor);
     		}
     	}
