@@ -48,6 +48,7 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 	
 	public static final String BEAN_NAME = "de.dailab.vsdt.vsdtagents.sema#SemaIntegrationAgentBean";
 	public static final String ACTION_PUSH_SERVICE = BEAN_NAME + "#PushServiceIntoVSDT";
+	public static final String ACTION_PUSH_SERVICE_PLAN = BEAN_NAME + "#pushServicePlanIntoVsdt";
 	public static final String ACTION_GET_CONTEXT  = BEAN_NAME + "#GetContextOfSelectedElement";
 
 	/**
@@ -113,6 +114,30 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 			throw new Exception("Could not get Business Process System from active Editor. "
 					+ "Make sure the active editor is a VSDT process diagram editor.");
 		}
+	}
+
+	/**
+	 * Create several VSDT service objects from the grounded services that make up
+	 * the given Plan. The services are represented with tasks, that are connected
+	 * with sequence flows and assignments. The plan can be inserted as a new pool,
+	 * or onto an existing sequence flow edge.
+	 *
+	 * @param groundedPlan	the plan, consisting of several grounded services
+	 * @throws Exception	exception in case anything goes wrong
+	 */
+	@Expose(name=ACTION_PUSH_SERVICE_PLAN, scope=ActionScope.NODE)
+	public void pushServicePlanIntoVsdt(Object groundedPlan) throws Exception {
+		// TODO get currently opened BPMN diagram
+		// TODO get selection
+
+		// TODO if selection is sequence flow, insert on that flow
+		// TODO if selection is pool or subprocess, insert into that pool (with start and end event)
+		// TODO if no selection, add new pool with plan to process diagram
+
+		// TODO for each service, derive a VSDT service (like in above action; maybe derive some common helper methods)
+		// TODO for each service, create a task, invoking that service
+		// TODO for each grounded service parameter, create an assignment for that parameter
+		// TODO for each fact in the initial state (?) create a property in the pool
 	}
 
 	/**
