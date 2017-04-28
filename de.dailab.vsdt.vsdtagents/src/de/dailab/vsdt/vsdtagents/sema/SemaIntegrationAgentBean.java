@@ -38,9 +38,7 @@ import de.dailab.vsdt.util.VsdtHelper;
 import de.dailab.vsdt.vsdtagents.Util;
 
 /**
- * This bean will later be used to push services from the SeMa2 into the VSDT.
- * 
- * TODO add another action (or action parameter) for service-templates?
+ * This bean is used to push services from the SeMa2 into the VSDT.
  *
  * @author kuester
  */
@@ -127,6 +125,9 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 	 */
 	@Expose(name=ACTION_PUSH_SERVICE_PLAN, scope=ActionScope.NODE)
 	public void pushServicePlanIntoVsdt(Object groundedPlan) throws Exception {
+		System.out.println("CALLING PUSH SERVICE PLAN INTO VSDT");
+		System.out.println("groundedPlan: " + groundedPlan);
+
 		// TODO get currently opened BPMN diagram
 		// TODO get selection
 
