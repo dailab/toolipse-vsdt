@@ -1,5 +1,7 @@
 package de.dailab.vsdt.vsdtagents.sema;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -23,17 +25,22 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
 import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;
 import de.dailab.jiactng.agentcore.action.Action;
 import de.dailab.jiactng.agentcore.action.scope.ActionScope;
 import de.dailab.jiactng.owlsdescription.ServiceDescription;
+import de.dailab.jiactng.sema2.planning.util.GroundedRatedServiceDescription;
+import de.dailab.vsdt.Activity;
+import de.dailab.vsdt.ActivityType;
+import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.DataType;
 import de.dailab.vsdt.Property;
+import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.Service;
+import de.dailab.vsdt.VsdtFactory;
 import de.dailab.vsdt.util.VsdtHelper;
 import de.dailab.vsdt.vsdtagents.Util;
 
@@ -59,12 +66,8 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 	 */
 	@Expose(name=ACTION_PUSH_SERVICE, scope=ActionScope.NODE)
 	public void pushServiceIntoVsdt(Action action, Boolean asTemplate) throws Exception {
-		
-		// get BPS from editor, thus checking whether current editor is VSDT editor
-		final IWorkbenchWindow[] wbws = PlatformUI.getWorkbench().getWorkbenchWindows();
-		final IEditorPart editor = wbws[0].getActivePage().getActiveEditor();
-		final BusinessProcessSystem bps = Util.getVsdtModel(editor);
-		
+		DiagramEditor editor = getEditor();
+		BusinessProcessSystem bps = Util.getVsdtModelBps(editor);
 		if (bps != null) {
 
 			// create VSDT Service object corresponding to ServiceDescription
@@ -91,20 +94,11 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 							// finally, add the service to the BPS' list of services
 							bps.getServices().add(service);
 							// add data types referred to by service
-							for (DataType dataType : dataTypes) {
-								// EObject does not implement equals, so we have to do this ugly loop...
-								boolean exists = false;
-								for (DataType existing : bps.getDataTypes()) {
-									exists = exists || EcoreUtil.equals(dataType, existing);
-								}
-								if (! exists) {
-									bps.getDataTypes().add(dataType);
-								}
-							}
+							mergeInto(dataTypes, bps.getDataTypes());
 							return CommandResult.newOKCommandResult(bps);
 						}
 					});
-					((DiagramEditor) editor).getDiagramEditDomain().getDiagramCommandStack().execute(command);
+					editor.getDiagramEditDomain().getDiagramCommandStack().execute(command);
 				}
 			});
 
@@ -124,21 +118,80 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 	 * @throws Exception	exception in case anything goes wrong
 	 */
 	@Expose(name=ACTION_PUSH_SERVICE_PLAN, scope=ActionScope.NODE)
-	public void pushServicePlanIntoVsdt(Object groundedPlan) throws Exception {
+	public void pushServicePlanIntoVsdt(List<GroundedRatedServiceDescription> groundedPlan) throws Exception {
 		System.out.println("CALLING PUSH SERVICE PLAN INTO VSDT");
 		System.out.println("groundedPlan: " + groundedPlan);
 
-		// TODO get currently opened BPMN diagram
-		// TODO get selection
+		// get BPS from editor, thus checking whether current editor is VSDT editor
+		DiagramEditor editor = getEditor();
+		BusinessProcessDiagram bpd = Util.getVsdtModelBpd(editor);
+		if (bpd != null) {
 
-		// TODO if selection is sequence flow, insert on that flow
-		// TODO if selection is pool or subprocess, insert into that pool (with start and end event)
-		// TODO if no selection, add new pool with plan to process diagram
+			// stuff that will get created in this action
+			List<DataType> allTypes = new ArrayList<>();
+			List<Service> services = new ArrayList<>();
+			List<Activity> tasks = new ArrayList<>();
+			List<SequenceFlow> flows = new ArrayList<>();
 
-		// TODO for each service, derive a VSDT service (like in above action; maybe derive some common helper methods)
-		// TODO for each service, create a task, invoking that service
-		// TODO for each grounded service parameter, create an assignment for that parameter
-		// TODO for each fact in the initial state (?) create a property in the pool
+			// for each service constituting the plan...
+			for (GroundedRatedServiceDescription grsd : groundedPlan) {
+				// ... derive the service and the data types used therein
+				Service service = SemanticServiceFactory.createService(grsd.getSd());
+				allTypes.addAll(SemanticServiceFactory.createDatatypes(grsd.getSd()));
+
+				// ... create a task, invoking that service
+				Activity task = VsdtFactory.eINSTANCE.createActivity();
+				task.setName("Invoke " + grsd.getSd().getName());
+				task.setActivityType(ActivityType.SERVICE);
+				task.setImplementation(service);
+
+				// TODO ...create assignments for the grounded parameters
+
+				services.add(service);
+				tasks.add(task);
+			}
+
+			// finally, connect the tasks with sequence flows
+			for (int i = 1; i < tasks.size(); i++) {
+				SequenceFlow flow = VsdtFactory.eINSTANCE.createSequenceFlow();
+				flow.setSource(tasks.get(i - 1));
+				flow.setTarget(tasks.get(i));
+				flows.add(flow);
+			}
+
+			// TODO for each fact in the initial state (?) create a property in the pool?
+
+			// this JIAC agent is not running in the UI thread, so we have to asynch-exec this
+			Display.getDefault().asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					// also, we have to put this inside a command
+					ICommandProxy command = new ICommandProxy(new AbstractTransactionalCommand(
+							TransactionUtil.getEditingDomain(bpd), "Import Grounded Services Plan",
+							Collections.singletonList(WorkspaceSynchronizer.getFile(bpd.eResource()))) {
+						@Override
+						protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
+
+							// merge newly created services and data types
+							mergeInto(services, bpd.getParent().getServices());
+							mergeInto(allTypes, bpd.getParent().getDataTypes());
+
+							// TODO get selection
+
+							// TODO if selection is sequence flow, insert on that flow
+							// TODO if selection is pool or subprocess, insert into that pool (with start and end event)
+							// TODO if no selection, add new pool with plan to process diagram
+
+							return CommandResult.newOKCommandResult(bpd);
+						}
+					});
+					editor.getDiagramEditDomain().getDiagramCommandStack().execute(command);
+				}
+			});
+		} else {
+			throw new Exception("Could not get Business Process System from active Editor. "
+					+ "Make sure the active editor is a VSDT process diagram editor.");
+		}
 	}
 
 	/**
@@ -152,16 +205,12 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 	 */
 	@Expose(name=ACTION_GET_CONTEXT, scope=ActionScope.NODE)
 	public Map<String, String> getContextOfSelectedElement() {
-		
-		// get BPS from editor, thus checking whether current editor is VSDT editor
-		final IWorkbenchWindow[] wbws = PlatformUI.getWorkbench().getWorkbenchWindows();
-		final IEditorPart editor = wbws[0].getActivePage().getActiveEditor();
+		DiagramEditor editor = getEditor();
 		
 		// get selected elements
 		EObject selected = null;
-		if (editor instanceof DiagramEditor) {
-			DiagramEditor diagramEditor= (DiagramEditor) editor;
-			ISelectionProvider selProvider= diagramEditor.getEditorSite().getSelectionProvider();
+		if (editor != null) {
+			ISelectionProvider selProvider= editor.getEditorSite().getSelectionProvider();
 			if (selProvider.getSelection() instanceof IStructuredSelection) {
 				Object selection= ((IStructuredSelection) selProvider.getSelection()).getFirstElement();
 				if (selection instanceof IGraphicalEditPart) {
@@ -170,7 +219,6 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 				}
 			}
 		}
-
 		// get properties in scope of selected element
 		if (selected != null) {
 			Map<String, String> result = new HashMap<>();
@@ -184,5 +232,40 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 		}
 		return null;
 	}
-	
+
+
+	/*
+	 * HELPER METHODS
+	 */
+
+	/**
+	 * Get and return the active editor from the workbench
+	 */
+	private DiagramEditor getEditor() {
+		IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		if (editor instanceof DiagramEditor) {
+			return (DiagramEditor) editor;
+		}
+		return null;
+	}
+
+	/**
+	 * EObject does not implement equals properly, so we can't rely on Sets here...
+	 * instead, compare each and every pair using EcoreUtils.equals. Annoying, but
+	 * not a problem assuming that those lists are not excessively large.
+	 *
+	 * @param source	newly created services or datatypes
+	 * @param target	list of existing elements, to be modified
+	 */
+	private <T extends EObject> void mergeInto(Collection<T> source, Collection<T> target) {
+		for (T element : source) {
+			boolean exists = false;
+			for (T existing : target) {
+				exists |= EcoreUtil.equals(element, existing);
+			}
+			if (! exists) {
+				target.add(element);
+			}
+		}
+	}
 }

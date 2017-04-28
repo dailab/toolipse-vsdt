@@ -130,7 +130,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 	 */
 	private void updateActions() {
 		// check type of active editor
-		boolean isVsdtEditor = Util.getVsdtModel(null) != null;
+		boolean isVsdtEditor = Util.getVsdtModelBps(null) != null;
 		
 		// check type of selection
 		Object element = getSelectedElement(interpreterViewer);
@@ -266,7 +266,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 						public void run(IProgressMonitor monitor) {
 							try {
 								// get source of VSDT file
-								BusinessProcessSystem bps = Util.getVsdtModel(null);
+								BusinessProcessSystem bps = Util.getVsdtModelBps(null);
 								if (bps == null) {
 									throw new IllegalArgumentException("Active Editor must hold VSDT Process Diagram.");
 								}
@@ -283,7 +283,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 								String vsdtSource = builder.toString();
 								
 								// ask for participant
-								BusinessProcessSystem vsdtModel = Util.getVsdtModel(null);
+								BusinessProcessSystem vsdtModel = Util.getVsdtModelBps(null);
 								SingleSelectDialog<Participant> dialog = new SingleSelectDialog<Participant>(shell, 
 										"Select Participant", "Select Participant to interpret.", vsdtModel.getParticipants()) {
 									protected String getText(Participant p) {

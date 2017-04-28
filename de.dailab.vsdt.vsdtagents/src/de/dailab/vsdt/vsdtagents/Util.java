@@ -18,6 +18,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 
+import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
@@ -155,11 +156,12 @@ public class Util {
 	/**
 	 * Try to get the Business Process System object from the currently active 
 	 * VSDT editor, if any. If no VSDT editor is opened, returns null.
+	 * works for both VSDT "Meta" and VSDT "BPMN" editors.
 	 * 
 	 * @param editor	the editor part to use, or null to get active editor
 	 * @return 			the BPS in the currently opened VSDT editor, if any, or null
 	 */
-	public static BusinessProcessSystem getVsdtModel(IEditorPart editor) {
+	public static BusinessProcessSystem getVsdtModelBps(IEditorPart editor) {
 		if (editor == null) {
 			editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		}
@@ -176,6 +178,25 @@ public class Util {
 		return null;
 	}
 	
+	/**
+	 * Try to get the Business Process Diagram object from the currently active
+	 * VSDT editor, if any. If no VSDT BPMN editor is opened, return null.
+	 *
+	 * @param editor	the editor part to use, or null to get active editor
+	 * @return			the BPD is the currently opened VSDT BPMN editor, if any, or null
+	 */
+	public static BusinessProcessDiagram getVsdtModelBpd(IEditorPart editor) {
+		if (editor == null) {
+			editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		}
+		if (editor instanceof VsdtDiagramEditor) {
+			VsdtDiagramEditor vsdteditor = (VsdtDiagramEditor) editor;
+			BusinessProcessDiagramEditPart editPart = (BusinessProcessDiagramEditPart) vsdteditor.getDiagramEditPart();
+			return editPart.getCastedModel();
+		}
+		return null;
+	}
+
 //	public static void waitForNode(){
 //		//Wait for node to be initialized
 //		while(!JiacNodePlugin.getDefault().isInitialized()){
