@@ -25,6 +25,7 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
 import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;
@@ -133,6 +134,8 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 			List<Activity> tasks = new ArrayList<>();
 			List<SequenceFlow> flows = new ArrayList<>();
 
+			// TODO for each fact, create a property in the pool, if not already exists
+			
 			// for each service constituting the plan...
 			for (GroundedRatedServiceDescription grsd : groundedPlan) {
 				// ... derive the service and the data types used therein
@@ -158,10 +161,8 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 				flow.setTarget(tasks.get(i));
 				flows.add(flow);
 			}
-
-			// TODO for each fact in the initial state (?) create a property in the pool?
-
-			// this JIAC agent is not running in the UI thread, so we have to asynch-exec this
+			
+			// this JIAC agent is not running in the UI thread, so we have to async-exec this
 			Display.getDefault().asyncExec(new Runnable() {
 				@Override
 				public void run() {
@@ -176,6 +177,10 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 							mergeInto(services, bpd.getParent().getServices());
 							mergeInto(allTypes, bpd.getParent().getDataTypes());
 
+							// XXX for now, just insert the activities into the first pool and see what happens...
+							bpd.getPools().get(0).getLanes().get(0).getContainedFlowObjects().addAll(tasks);
+							
+							
 							// TODO get selection
 
 							// TODO if selection is sequence flow, insert on that flow
@@ -242,7 +247,8 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 	 * Get and return the active editor from the workbench
 	 */
 	private DiagramEditor getEditor() {
-		IEditorPart editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		IWorkbenchWindow[] wbws = PlatformUI.getWorkbench().getWorkbenchWindows();
+		IEditorPart editor = wbws[0].getActivePage().getActiveEditor();
 		if (editor instanceof DiagramEditor) {
 			return (DiagramEditor) editor;
 		}
