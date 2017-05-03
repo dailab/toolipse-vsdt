@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
@@ -133,14 +134,19 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 		BusinessProcessDiagram bpd = Util.getVsdtModelBpd(editor);
 		if (bpd != null) {
 
+			// TODO get selection
+			Pool pool = bpd.getPools().get(0);
+			// TODO if selection is sequence flow, insert on that flow?
+			// TODO if selection is pool or subprocess, insert into that pool (with start and end event)
+			// TODO if no selection, add new pool with plan to process diagram
+
 			// stuff that will get created in this action
 			List<DataType> allTypes = new ArrayList<>();
 			List<Service> services = new ArrayList<>();
 			List<Activity> tasks = new ArrayList<>();
 			List<SequenceFlow> flows = new ArrayList<>();
-			Map<String, Property> properties = new HashMap<>();
-
-			// TODO for each fact, create a property in the pool, if not already exists
+			Map<String, Property> properties = pool.getProperties().stream()
+					.collect(Collectors.toMap(p -> p.getName(), p -> p));
 			
 			// for each service constituting the plan...
 			for (GroundedRatedServiceDescription grsd : groundedPlan) {
@@ -158,13 +164,10 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 				int index = 0;
 				for (OWLNamedIndividual individual : grsd.getInputBinding()) {
 					String name = individual.getIRI().getFragment();
-					Property prop = properties.get(name);
-					if (prop == null) {
-						// XXX this is not what we want; how to get the actual type from the individual?
-						String type = individual.getEntityType().getName();
-						prop = VsdtElementFactory.createProperty(name, type);
-						properties.put(name, prop);
-					}
+					// XXX this is not what we want; how to get the actual type from the individual?
+					String type = individual.getEntityType().getName();
+					// for each fact, create a property, if not already exists
+					properties.putIfAbsent(name, VsdtElementFactory.createProperty(name, type));
 					Assignment assign = VsdtElementFactory.createAssignmen(service.getInput().get(index++),
 							VsdtElementFactory.createExpression(name), AssignTimeType.START);
 					task.getAssignments().add(assign);
@@ -194,23 +197,15 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 						@Override
 						protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 
-							// merge newly created services and data types
+							// merge newly created services, data types and properties
 							mergeInto(services, bpd.getParent().getServices());
 							mergeInto(allTypes, bpd.getParent().getDataTypes());
+							mergeInto(properties.values(), pool.getProperties());
 
-							// XXX for now, just insert the activities into the first pool and see what happens...
 							// this actually works quite well, except they are not laid out properly
-							Pool pool = bpd.getPools().get(0);
 							pool.getLanes().get(0).getContainedFlowObjects().addAll(tasks);
 							// flows appear only upon reloading the diagram, though. still okay for testing
 							bpd.getConnections().addAll(flows);
-							mergeInto(properties.values(), pool.getProperties());
-							
-							// TODO get selection
-
-							// TODO if selection is sequence flow, insert on that flow
-							// TODO if selection is pool or subprocess, insert into that pool (with start and end event)
-							// TODO if no selection, add new pool with plan to process diagram
 
 							return CommandResult.newOKCommandResult(bpd);
 						}
