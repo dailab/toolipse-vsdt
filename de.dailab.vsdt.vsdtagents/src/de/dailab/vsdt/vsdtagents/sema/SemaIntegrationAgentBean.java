@@ -144,7 +144,7 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 
 				// ... create a task, invoking that service
 				Activity task = VsdtFactory.eINSTANCE.createActivity();
-				task.setName("Invoke " + grsd.getSd().getName());
+				task.setName("Invoke " + grsd.getSd().getServiceName());
 				task.setActivityType(ActivityType.SERVICE);
 				task.setImplementation(service);
 
@@ -178,8 +178,10 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 							mergeInto(allTypes, bpd.getParent().getDataTypes());
 
 							// XXX for now, just insert the activities into the first pool and see what happens...
+							// this actually works quite well, except they are not laid out properly
 							bpd.getPools().get(0).getLanes().get(0).getContainedFlowObjects().addAll(tasks);
-							
+							// flows appear only upon reloading the diagram, though. still okay for testing
+							bpd.getConnections().addAll(flows);
 							
 							// TODO get selection
 

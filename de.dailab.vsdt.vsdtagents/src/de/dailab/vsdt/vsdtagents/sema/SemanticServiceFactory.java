@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -214,8 +216,8 @@ public class SemanticServiceFactory {
 		Set<DataType> result = new HashSet<>();
 		
 		List<Param> allParams = new ArrayList<>();
-		allParams.addAll(serviceDescription.getProcess().getInput());
-		allParams.addAll(serviceDescription.getProcess().getOutput());
+		allParams.addAll(emptyIfNull(serviceDescription.getProcess().getInput()));
+		allParams.addAll(emptyIfNull(serviceDescription.getProcess().getOutput()));
 
 		for (Param param : allParams) {
 			String fullName = getTypeFromParam(param);
@@ -223,8 +225,8 @@ public class SemanticServiceFactory {
 				DataType dataType = VsdtFactory.eINSTANCE.createDataType();
 				
 				int sep = fullName.lastIndexOf('.');
-				String pkg = fullName.substring(0, sep);
-				String name = fullName.substring(sep);
+				String pkg = sep != -1 ? fullName.substring(0, sep) : null;
+				String name = sep != -1 ? fullName.substring(sep) : fullName;
 
 				dataType.setName(name);
 				dataType.setPackage(pkg);
@@ -265,7 +267,7 @@ public class SemanticServiceFactory {
 		if (OntoUtils.specialTypes.containsKey(name)) {
 			return OntoUtils.specialTypes.get(name);
 		} else {
-			return param.getJavaClassName();
+			return param.getJavaClassName() != null ? param.getJavaClassName() : param.getName();
 		}
 	}
 	
@@ -296,4 +298,13 @@ public class SemanticServiceFactory {
 			return type;
 		}
 	}
+
+	/*
+	 * other helper stuff
+	 */
+
+	private static <T> Collection<T> emptyIfNull(Collection<T> stuff) {
+		return stuff == null ? Collections.emptyList() : stuff;
+	}
+
 }
