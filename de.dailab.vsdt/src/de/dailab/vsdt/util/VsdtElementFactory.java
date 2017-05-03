@@ -2,6 +2,8 @@ package de.dailab.vsdt.util;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
+import de.dailab.vsdt.AssignTimeType;
+import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.GatewayType;
@@ -94,5 +96,13 @@ public class VsdtElementFactory {
 		property.setName(name);
 		property.setType(type);
 		return property;
+	}
+
+	public static Assignment createAssignmen(Property to, Expression from, AssignTimeType time) {
+		Assignment assign = VsdtFactory.eINSTANCE.createAssignment();
+		assign.setTo(to);
+		assign.setFrom(from);
+		assign.setAssignTime(time);
+		return assign;
 	}
 }

@@ -27,6 +27,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
+import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;
 import de.dailab.jiactng.agentcore.action.Action;
@@ -35,13 +36,17 @@ import de.dailab.jiactng.owlsdescription.ServiceDescription;
 import de.dailab.jiactng.sema2.planning.util.GroundedRatedServiceDescription;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
+import de.dailab.vsdt.AssignTimeType;
+import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.DataType;
+import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
 import de.dailab.vsdt.Service;
 import de.dailab.vsdt.VsdtFactory;
+import de.dailab.vsdt.util.VsdtElementFactory;
 import de.dailab.vsdt.util.VsdtHelper;
 import de.dailab.vsdt.vsdtagents.Util;
 
@@ -133,6 +138,7 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 			List<Service> services = new ArrayList<>();
 			List<Activity> tasks = new ArrayList<>();
 			List<SequenceFlow> flows = new ArrayList<>();
+			Map<String, Property> properties = new HashMap<>();
 
 			// TODO for each fact, create a property in the pool, if not already exists
 			
@@ -148,7 +154,22 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 				task.setActivityType(ActivityType.SERVICE);
 				task.setImplementation(service);
 
-				// TODO ...create assignments for the grounded parameters
+				// ...create assignments for the grounded parameters
+				int index = 0;
+				for (OWLNamedIndividual individual : grsd.getInputBinding()) {
+					String name = individual.getIRI().getFragment();
+					Property prop = properties.get(name);
+					if (prop == null) {
+						// XXX this is not what we want; how to get the actual type from the individual?
+						String type = individual.getEntityType().getName();
+						prop = VsdtElementFactory.createProperty(name, type);
+						properties.put(name, prop);
+					}
+					Assignment assign = VsdtElementFactory.createAssignmen(service.getInput().get(index++),
+							VsdtElementFactory.createExpression(name), AssignTimeType.START);
+					task.getAssignments().add(assign);
+				}
+				// TODO do the same for the outputs...
 
 				services.add(service);
 				tasks.add(task);
@@ -179,9 +200,11 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 
 							// XXX for now, just insert the activities into the first pool and see what happens...
 							// this actually works quite well, except they are not laid out properly
-							bpd.getPools().get(0).getLanes().get(0).getContainedFlowObjects().addAll(tasks);
+							Pool pool = bpd.getPools().get(0);
+							pool.getLanes().get(0).getContainedFlowObjects().addAll(tasks);
 							// flows appear only upon reloading the diagram, though. still okay for testing
 							bpd.getConnections().addAll(flows);
+							mergeInto(properties.values(), pool.getProperties());
 							
 							// TODO get selection
 
