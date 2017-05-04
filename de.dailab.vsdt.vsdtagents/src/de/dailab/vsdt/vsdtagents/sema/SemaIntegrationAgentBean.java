@@ -22,8 +22,10 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -36,6 +38,7 @@ import de.dailab.jiactng.agentcore.action.Action;
 import de.dailab.jiactng.agentcore.action.scope.ActionScope;
 import de.dailab.jiactng.owlsdescription.ServiceDescription;
 import de.dailab.jiactng.sema2.planning.util.GroundedRatedServiceDescription;
+import de.dailab.vsdt.AbstractProcess;
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.AssignTimeType;
@@ -43,6 +46,8 @@ import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.DataType;
+import de.dailab.vsdt.Lane;
+import de.dailab.vsdt.FlowObjectContainer;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
@@ -135,18 +140,45 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 		BusinessProcessDiagram bpd = Util.getVsdtModelBpd(editor);
 		if (bpd != null) {
 
-			// TODO get selection
-			Pool pool = bpd.getPools().get(0);
+			// get selection
+			AbstractProcess process = null;
+			FlowObjectContainer container = null;
+			ISelection selection = editor.getEditorSite().getSelectionProvider().getSelection();
+			if (selection instanceof StructuredSelection) {
+				StructuredSelection ssel = (StructuredSelection) selection;
+				System.out.println(ssel);
+				if (ssel.getFirstElement() instanceof IGraphicalEditPart) {
+					IGraphicalEditPart editPart= (IGraphicalEditPart) ssel.getFirstElement();
+					EObject selected = ((View) editPart.getModel()).getElement();
+					if (selected instanceof Activity && ((Activity) selected).getActivityType() == ActivityType.EMBEDDED) {
+						process = (Activity) selected;
+						container = (Activity) selected;
+					}
+					if (selected instanceof Pool && ! ((Pool) selected).getLanes().isEmpty()) {
+						process = (Pool) selected;
+						container = ((Pool) selected).getLanes().get(0);
+					}
+					if (selected instanceof Lane) {
+						process = ((Lane) selected).getParent();
+						container = (Lane) selected;
+					}
+				}
+			}
+			if (process == null || container == null) {
+				// XXX this kind of exception does not get propagated correctly
+				throw new RuntimeException("Please select the Pool or Subprocess where to insert the plan!");
+			}
+			final AbstractProcess theProcess = process;
+			final FlowObjectContainer theContainer = container;
 			// TODO if selection is sequence flow, insert on that flow?
-			// TODO if selection is pool or subprocess, insert into that pool (with start and end event)
-			// TODO if no selection, add new pool with plan to process diagram
+			// TODO if no selection, add new pool with plan to process diagram?
 
 			// stuff that will get created in this action
 			List<DataType> allTypes = new ArrayList<>();
 			List<Service> services = new ArrayList<>();
 			List<Activity> tasks = new ArrayList<>();
 			List<SequenceFlow> flows = new ArrayList<>();
-			Map<String, Property> properties = pool.getProperties().stream()
+			Map<String, Property> properties = process.getProperties().stream()
 					.collect(Collectors.toMap(p -> p.getName(), p -> p));
 			
 			// for each service constituting the plan...
@@ -167,7 +199,7 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 				for (OWLNamedIndividual individual : grsd.getInputBinding()) {
 					String name = individual.getIRI().getFragment();
 					// XXX not working correctly yet, maybe no class for some individuals?
-					String type = inputTypes.get(individual).getIRI().getFragment();
+					String type = inputTypes.containsKey(individual) ? inputTypes.get(individual).getIRI().getFragment() : "unknown";
 					// for each fact, create a property, if not already exists
 					properties.putIfAbsent(name, VsdtElementFactory.createProperty(name, type));
 					Assignment assign = VsdtElementFactory.createAssignmen(service.getInput().get(index++),
@@ -202,10 +234,10 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 							// merge newly created services, data types and properties
 							mergeInto(services, bpd.getParent().getServices());
 							mergeInto(allTypes, bpd.getParent().getDataTypes());
-							mergeInto(properties.values(), pool.getProperties());
+							mergeInto(properties.values(), theProcess.getProperties());
 
 							// this actually works quite well, except they are not laid out properly
-							pool.getLanes().get(0).getContainedFlowObjects().addAll(tasks);
+							theContainer.getContainedFlowObjects().addAll(tasks);
 							// flows appear only upon reloading the diagram, though. still okay for testing
 							bpd.getConnections().addAll(flows);
 
