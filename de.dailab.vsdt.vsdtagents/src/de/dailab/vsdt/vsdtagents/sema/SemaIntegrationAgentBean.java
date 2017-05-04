@@ -28,6 +28,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
+import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
 import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;
@@ -161,11 +162,12 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 				task.setImplementation(service);
 
 				// ...create assignments for the grounded parameters
+				Map<OWLNamedIndividual, OWLClass> inputTypes = reverse(grsd.getInputBindingClassMapping());
 				int index = 0;
 				for (OWLNamedIndividual individual : grsd.getInputBinding()) {
 					String name = individual.getIRI().getFragment();
-					// XXX this is not what we want; how to get the actual type from the individual?
-					String type = individual.getEntityType().getName();
+					// XXX not working correctly yet, maybe no class for some individuals?
+					String type = inputTypes.get(individual).getIRI().getFragment();
 					// for each fact, create a property, if not already exists
 					properties.putIfAbsent(name, VsdtElementFactory.createProperty(name, type));
 					Assignment assign = VsdtElementFactory.createAssignmen(service.getInput().get(index++),
@@ -293,5 +295,27 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 				target.add(element);
 			}
 		}
+	}
+
+	/**
+	 * Inverse a Map<K, Collection<V>> to Map<V, K>. Obviously, the V should
+	 * be unique across all collections, otherwise the result is undefined.
+	 * This can be used e.g. for reversing the class-to-instances map.
+	 *
+	 * @param map	map mapping X to some Y
+	 * @return		map mapping Y to X
+	 */
+	private <K, V, C extends Collection<V>> Map<V, K> reverse(Map<K, C> map) {
+		Map<V, K> result = new HashMap<>();
+		for (K key : map.keySet()) {
+			for (V value : map.get(key)) {
+				result.put(value, key);
+			}
+		}
+		return result;
+//		return map.entrySet().stream()
+//				.flatMap(e -> e.getValue().stream()
+//						.map(v -> new SimpleEntry<K, V>(e.getKey(), v)))
+//				.collect(Collectors.toMap(e -> e.getValue(), e -> e.getKey()));
 	}
 }
