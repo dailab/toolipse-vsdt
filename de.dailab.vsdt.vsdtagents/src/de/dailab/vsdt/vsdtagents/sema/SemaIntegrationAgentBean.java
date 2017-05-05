@@ -16,8 +16,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
-import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
+import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
@@ -31,6 +31,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
+import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
@@ -48,8 +49,8 @@ import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.DataType;
-import de.dailab.vsdt.Lane;
 import de.dailab.vsdt.FlowObjectContainer;
+import de.dailab.vsdt.Lane;
 import de.dailab.vsdt.Pool;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.SequenceFlow;
@@ -193,15 +194,29 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 				int index = 0;
 				for (OWLNamedIndividual individual : grsd.getInputBinding()) {
 					String name = individual.getIRI().getFragment();
-					// XXX not working correctly yet, maybe no class for some individuals?
-					String type = inputTypes.containsKey(individual) ? inputTypes.get(individual).getIRI().getFragment() : "unknown";
+					IRI type = inputTypes.get(individual).getIRI();
+					allTypes.add(VsdtElementFactory.createDatatype(type.getFragment(), null, "OWL-S", type.toString()));
+
 					// for each fact, create a property, if not already exists
-					properties.putIfAbsent(name, VsdtElementFactory.createProperty(name, type));
+					properties.putIfAbsent(name, VsdtElementFactory.createProperty(name, type.getFragment()));
 					Assignment assign = VsdtElementFactory.createAssignmen(service.getInput().get(index++),
 							VsdtElementFactory.createExpression(name), AssignTimeType.START);
 					task.getAssignments().add(assign);
 				}
-				// TODO do the same for the outputs...
+				// do the same for the outputs... XXX currently, we only have the map, so no order
+				Map<OWLNamedIndividual, OWLClass> outputTypes = reverse(grsd.getOutputBindingClassMapping());
+				if (! service.getOutput().isEmpty() && ! grsd.getOutputBindingClassMapping().isEmpty()) {
+					OWLNamedIndividual individual = grsd.getOutputBindingClassMapping().values().stream().flatMap(Collection::stream).findAny().get();
+					String name = individual.getIRI().getFragment();
+					IRI type = outputTypes.get(individual).getIRI();
+					allTypes.add(VsdtElementFactory.createDatatype(type.getFragment(), null, "OWL-S", type.toString()));
+
+					// for each fact, create a property, if not already exists
+					properties.putIfAbsent(name, VsdtElementFactory.createProperty(name, type.getFragment()));
+					Assignment assign = VsdtElementFactory.createAssignmen(properties.get(name),
+							VsdtElementFactory.createExpression(service.getOutput().get(0).getName()), AssignTimeType.END);
+					task.getAssignments().add(assign);
+				}
 
 				services.add(service);
 				tasks.add(task);
@@ -215,33 +230,26 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 				flows.add(flow);
 			}
 			
-			// this JIAC agent is not running in the UI thread, so we have to async-exec this
-			Display.getDefault().asyncExec(new Runnable() {
+			// also, we have to put this inside a command
+			ICommand command = new AbstractGmfCommand(bpd, "Import Grounded Services Plan") {
 				@Override
-				public void run() {
-					// also, we have to put this inside a command
-					ICommandProxy command = new ICommandProxy(new AbstractTransactionalCommand(
-							TransactionUtil.getEditingDomain(bpd), "Import Grounded Services Plan",
-							Collections.singletonList(WorkspaceSynchronizer.getFile(bpd.eResource()))) {
-						@Override
-						protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
+				protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 
-							// merge newly created services, data types and properties
-							mergeInto(services, bpd.getParent().getServices());
-							mergeInto(allTypes, bpd.getParent().getDataTypes());
-							mergeInto(properties.values(), theProcess.getProperties());
+					// merge newly created services, data types and properties
+					mergeInto(services, bpd.getParent().getServices());
+					mergeInto(allTypes, bpd.getParent().getDataTypes());
+					mergeInto(properties.values(), theProcess.getProperties());
 
-							// this actually works quite well, except they are not laid out properly
-							theContainer.getContainedFlowObjects().addAll(tasks);
-							// flows appear only upon reloading the diagram, though. still okay for testing
-							bpd.getConnections().addAll(flows);
+					// this actually works quite well, except they are not laid out properly
+					theContainer.getContainedFlowObjects().addAll(tasks);
+					// flows appear only upon reloading the diagram, though. still okay for testing
+					bpd.getConnections().addAll(flows);
 
-							return CommandResult.newOKCommandResult(bpd);
-						}
-					});
-					editor.getDiagramEditDomain().getDiagramCommandStack().execute(command);
+					return CommandResult.newOKCommandResult(bpd);
 				}
-			});
+			};
+			// this JIAC agent is not running in the UI thread, so we have to async-exec this
+			Display.getDefault().asyncExec(() -> editor.getDiagramEditDomain().getDiagramCommandStack().execute(new ICommandProxy(command)));
 		} else {
 			throw new Exception("Could not get Business Process System from active Editor. "
 					+ "Make sure the active editor is a VSDT process diagram editor.");

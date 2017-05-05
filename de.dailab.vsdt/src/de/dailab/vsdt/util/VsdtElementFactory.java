@@ -4,6 +4,7 @@ import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
 import de.dailab.vsdt.AssignTimeType;
 import de.dailab.vsdt.Assignment;
+import de.dailab.vsdt.DataType;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.GatewayType;
@@ -104,5 +105,14 @@ public class VsdtElementFactory {
 		assign.setFrom(from);
 		assign.setAssignTime(time);
 		return assign;
+	}
+
+	public static DataType createDatatype(String name, String pkg, String lang, String url) {
+		DataType dataType = VsdtFactory.eINSTANCE.createDataType();
+		dataType.setName(name);
+		dataType.setPackage(pkg);
+		dataType.setLanguage(lang);
+		dataType.setUrl(url);
+		return dataType;
 	}
 }

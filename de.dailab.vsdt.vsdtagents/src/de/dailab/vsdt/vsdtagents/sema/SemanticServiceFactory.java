@@ -23,6 +23,7 @@ import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.Service;
 import de.dailab.vsdt.VsdtFactory;
+import de.dailab.vsdt.util.VsdtElementFactory;
 
 /**
  * Class providing some of the helper methods formerly found in 
@@ -144,14 +145,9 @@ public class SemanticServiceFactory {
 		try {
 			serviceDescription = OntoUtils.reloadOntology(serviceDescription);
 		} catch (final Exception e) {
-			Display.getDefault().asyncExec(new Runnable() {
-				@Override
-				public void run() {
-					MessageDialog.openWarning(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
+			Display.getDefault().asyncExec(() -> MessageDialog.openWarning(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
 							"Error loading Ontologies", "Could not load linked ontologies. Some semantic information might have been lost. "
-									+ "Error was: " + e.getMessage());
-				}
-			});
+									+ "Error was: " + e.getMessage()));
 		}
 		
 		Service result = VsdtFactory.eINSTANCE.createService();
@@ -222,18 +218,11 @@ public class SemanticServiceFactory {
 		for (Param param : allParams) {
 			String fullName = getTypeFromParam(param);
 			if (! OntoUtils.specialTypes.containsKey(fullName)) {
-				DataType dataType = VsdtFactory.eINSTANCE.createDataType();
-				
 				int sep = fullName.lastIndexOf('.');
 				String pkg = sep != -1 ? fullName.substring(0, sep) : null;
 				String name = sep != -1 ? fullName.substring(sep) : fullName;
 
-				dataType.setName(name);
-				dataType.setPackage(pkg);
-				dataType.setLanguage("OWL-S");
-				dataType.setUrl(param.getType().toString());
-
-				result.add(dataType);
+				result.add(VsdtElementFactory.createDatatype(name, pkg, "OWL-S", param.getType().toString()));
 			}
 		}
 		return result;
