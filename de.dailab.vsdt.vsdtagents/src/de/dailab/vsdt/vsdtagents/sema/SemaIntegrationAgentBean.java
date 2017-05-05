@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
@@ -33,6 +34,7 @@ import org.eclipse.ui.PlatformUI;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLNamedIndividual;
 
+import de.dailab.common.gmf.command.AbstractGmfCommand;
 import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;
 import de.dailab.jiactng.agentcore.action.Action;
 import de.dailab.jiactng.agentcore.action.scope.ActionScope;
@@ -93,28 +95,21 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 			final Set<DataType> dataTypes = (action instanceof ServiceDescription)
 					? SemanticServiceFactory.createDatatypes((ServiceDescription) action)
 					: SemanticServiceFactory.createDatatypes(action);
-					
-			// this JIAC agent is not running in the UI thread, so we have to asynch-exec this
-			Display.getDefault().asyncExec(new Runnable() {
+			
+			// also, we have to put this inside a command
+			AbstractGmfCommand command = new AbstractGmfCommand(bps, "Import Semantic Service") {
 				@Override
-				public void run() {
-					// also, we have to put this inside a command
-					ICommandProxy command = new ICommandProxy(new AbstractTransactionalCommand(
-							TransactionUtil.getEditingDomain(bps), "Import Semantic Service", 
-							Collections.singletonList(WorkspaceSynchronizer.getFile(bps.eResource()))) {
-						@Override
-						protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-							// finally, add the service to the BPS' list of services
-							bps.getServices().add(service);
-							// add data types referred to by service
-							mergeInto(dataTypes, bps.getDataTypes());
-							return CommandResult.newOKCommandResult(bps);
-						}
-					});
-					editor.getDiagramEditDomain().getDiagramCommandStack().execute(command);
+				protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
+					// finally, add the service to the BPS' list of services
+					bps.getServices().add(service);
+					// add data types referred to by service
+					mergeInto(dataTypes, bps.getDataTypes());
+					return CommandResult.newOKCommandResult(bps);
 				}
-			});
-
+			};
+			
+			// this JIAC agent is not running in the UI thread, so we have to asynch-exec this
+			Display.getDefault().asyncExec(() -> editor.getDiagramEditDomain().getDiagramCommandStack().execute(new ICommandProxy(command)));
 		} else {
 			throw new Exception("Could not get Business Process System from active Editor. "
 					+ "Make sure the active editor is a VSDT process diagram editor.");
