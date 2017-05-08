@@ -134,9 +134,9 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 			FlowObjectContainer container = null;
 			ISelection selection = editor.getEditorSite().getSelectionProvider().getSelection();
 			if (selection instanceof StructuredSelection) {
-				StructuredSelection ssel = (StructuredSelection) selection;
-				if (ssel.getFirstElement() instanceof IGraphicalEditPart) {
-					IGraphicalEditPart editPart= (IGraphicalEditPart) ssel.getFirstElement();
+				Object selObj = ((StructuredSelection) selection).getFirstElement();
+				if (selObj instanceof IGraphicalEditPart) {
+					IGraphicalEditPart editPart= (IGraphicalEditPart) selObj;
 					EObject selected = ((View) editPart.getModel()).getElement();
 					if (selected instanceof Activity && ((Activity) selected).getActivityType() == ActivityType.EMBEDDED) {
 						process = (Activity) selected;
@@ -153,13 +153,10 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 				}
 			}
 			if (process == null || container == null) {
-				// XXX this kind of exception does not get propagated correctly
 				throw new RuntimeException("Please select the Pool or Subprocess where to insert the plan!");
 			}
 			final AbstractProcess theProcess = process;
 			final FlowObjectContainer theContainer = container;
-			// TODO if selection is sequence flow, insert on that flow?
-			// TODO if no selection, add new pool with plan to process diagram?
 
 			// stuff that will get created in this action
 			List<DataType> allTypes = new ArrayList<>();
