@@ -17,9 +17,9 @@ import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -241,9 +241,10 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 				}
 			};
 			// this JIAC agent is not running in the UI thread, so we have to async-exec this
-			Display.getDefault().asyncExec(() -> editor.getDiagramEditDomain().getDiagramCommandStack().execute(new ICommandProxy(command)));
-			Display.getDefault().asyncExec(() -> MessageDialog.openWarning(editor.getSite().getShell(),
-					"Reload Required", "Please Reload the Diagram (F5) for all changes to take effect."));
+			Display.getDefault().asyncExec(() -> {
+				editor.getDiagramEditDomain().getDiagramCommandStack().execute(new ICommandProxy(command));
+				CanonicalEditPolicy.getRegisteredEditPolicies(bpd).forEach(CanonicalEditPolicy::refresh);
+			});
 		} else {
 			throw new Exception("Could not get Business Process System from active Editor. "
 					+ "Make sure the active editor is a VSDT process diagram editor.");
