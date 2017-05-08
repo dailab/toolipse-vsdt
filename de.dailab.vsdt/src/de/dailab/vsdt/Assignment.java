@@ -15,13 +15,13 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.Assignment#getTo <em>To</em>}</li>
  *   <li>{@link de.dailab.vsdt.Assignment#getFrom <em>From</em>}</li>
  *   <li>{@link de.dailab.vsdt.Assignment#getAssignTime <em>Assign Time</em>}</li>
  *   <li>{@link de.dailab.vsdt.Assignment#getToQuery <em>To Query</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getAssignment()
  * @model
@@ -30,7 +30,6 @@ import org.eclipse.emf.ecore.EObject;
 public interface Assignment extends EObject {
 	/**
 	 * Returns the value of the '<em><b>To</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.Property#getAssignments <em>Assignments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>To</em>' reference isn't clear,
@@ -40,8 +39,7 @@ public interface Assignment extends EObject {
 	 * @return the value of the '<em>To</em>' reference.
 	 * @see #setTo(Property)
 	 * @see de.dailab.vsdt.VsdtPackage#getAssignment_To()
-	 * @see de.dailab.vsdt.Property#getAssignments
-	 * @model opposite="assignments" resolveProxies="false" required="true"
+	 * @model resolveProxies="false" required="true"
 	 * @generated
 	 */
 	Property getTo();

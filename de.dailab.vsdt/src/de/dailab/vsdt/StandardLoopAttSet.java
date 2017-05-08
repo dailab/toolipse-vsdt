@@ -14,12 +14,12 @@ package de.dailab.vsdt;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.StandardLoopAttSet#getLoopCondition <em>Loop Condition</em>}</li>
  *   <li>{@link de.dailab.vsdt.StandardLoopAttSet#getLoopMaximum <em>Loop Maximum</em>}</li>
  *   <li>{@link de.dailab.vsdt.StandardLoopAttSet#isTestBefore <em>Test Before</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getStandardLoopAttSet()
  * @model

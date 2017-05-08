@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.Activity#getInputSets <em>Input Sets</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getOutputSets <em>Output Sets</em>}</li>
@@ -31,7 +32,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.Activity#getInputPropertyMaps <em>Input Property Maps</em>}</li>
  *   <li>{@link de.dailab.vsdt.Activity#getOutputPropertyMaps <em>Output Property Maps</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getActivity()
  * @model

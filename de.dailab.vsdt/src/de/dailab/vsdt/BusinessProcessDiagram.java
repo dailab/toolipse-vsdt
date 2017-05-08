@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.BusinessProcessDiagram#getParent <em>Parent</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessDiagram#getPools <em>Pools</em>}</li>
@@ -22,7 +23,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.BusinessProcessDiagram#getConnections <em>Connections</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessDiagram#getParticipants <em>Participants</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getBusinessProcessDiagram()
  * @model

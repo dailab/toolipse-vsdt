@@ -15,13 +15,13 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.FlowObject#getParent <em>Parent</em>}</li>
  *   <li>{@link de.dailab.vsdt.FlowObject#getAssignments <em>Assignments</em>}</li>
  *   <li>{@link de.dailab.vsdt.FlowObject#getOutgoingSeq <em>Outgoing Seq</em>}</li>
  *   <li>{@link de.dailab.vsdt.FlowObject#getIncomingSeq <em>Incoming Seq</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getFlowObject()
  * @model abstract="true"

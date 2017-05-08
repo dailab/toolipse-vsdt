@@ -38,13 +38,13 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.FlowObjectImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.FlowObjectImpl#getAssignments <em>Assignments</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.FlowObjectImpl#getOutgoingSeq <em>Outgoing Seq</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.FlowObjectImpl#getIncomingSeq <em>Incoming Seq</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -20,12 +20,12 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.ParameterImpl#getKey <em>Key</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ParameterImpl#getValue <em>Value</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ParameterImpl#getDescription <em>Description</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

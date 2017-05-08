@@ -15,11 +15,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.Node#getOutgoingMsg <em>Outgoing Msg</em>}</li>
  *   <li>{@link de.dailab.vsdt.Node#getIncomingMsg <em>Incoming Msg</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getNode()
  * @model abstract="true"

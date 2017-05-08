@@ -6,19 +6,11 @@
  */
 package de.dailab.vsdt.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectWithInverseEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
-import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.VsdtPackage;
 
@@ -28,12 +20,11 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.PropertyImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.PropertyImpl#getType <em>Type</em>}</li>
- *   <li>{@link de.dailab.vsdt.impl.PropertyImpl#getAssignments <em>Assignments</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -77,16 +68,6 @@ public class PropertyImpl extends EObjectImpl implements Property {
 	 * @ordered
 	 */
 	protected String type = TYPE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getAssignments() <em>Assignments</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getAssignments()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Assignment> assignments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -154,47 +135,6 @@ public class PropertyImpl extends EObjectImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Assignment> getAssignments() {
-		if (assignments == null) {
-			assignments = new EObjectWithInverseEList<Assignment>(Assignment.class, this, VsdtPackage.PROPERTY__ASSIGNMENTS, VsdtPackage.ASSIGNMENT__TO);
-		}
-		return assignments;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case VsdtPackage.PROPERTY__ASSIGNMENTS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAssignments()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case VsdtPackage.PROPERTY__ASSIGNMENTS:
-				return ((InternalEList<?>)getAssignments()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -202,8 +142,6 @@ public class PropertyImpl extends EObjectImpl implements Property {
 				return getName();
 			case VsdtPackage.PROPERTY__TYPE:
 				return getType();
-			case VsdtPackage.PROPERTY__ASSIGNMENTS:
-				return getAssignments();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -213,7 +151,6 @@ public class PropertyImpl extends EObjectImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -222,10 +159,6 @@ public class PropertyImpl extends EObjectImpl implements Property {
 				return;
 			case VsdtPackage.PROPERTY__TYPE:
 				setType((String)newValue);
-				return;
-			case VsdtPackage.PROPERTY__ASSIGNMENTS:
-				getAssignments().clear();
-				getAssignments().addAll((Collection<? extends Assignment>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -245,9 +178,6 @@ public class PropertyImpl extends EObjectImpl implements Property {
 			case VsdtPackage.PROPERTY__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
-			case VsdtPackage.PROPERTY__ASSIGNMENTS:
-				getAssignments().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -264,8 +194,6 @@ public class PropertyImpl extends EObjectImpl implements Property {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case VsdtPackage.PROPERTY__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
-			case VsdtPackage.PROPERTY__ASSIGNMENTS:
-				return assignments != null && !assignments.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

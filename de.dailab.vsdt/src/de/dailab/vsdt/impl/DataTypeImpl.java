@@ -25,6 +25,7 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.DataTypeImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.DataTypeImpl#getPackage <em>Package</em>}</li>
@@ -33,7 +34,6 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.DataTypeImpl#getInherits <em>Inherits</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.DataTypeImpl#getMembers <em>Members</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

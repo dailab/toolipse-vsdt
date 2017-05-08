@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.DataType#getName <em>Name</em>}</li>
  *   <li>{@link de.dailab.vsdt.DataType#getPackage <em>Package</em>}</li>
@@ -24,7 +25,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link de.dailab.vsdt.DataType#getInherits <em>Inherits</em>}</li>
  *   <li>{@link de.dailab.vsdt.DataType#getMembers <em>Members</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getDataType()
  * @model

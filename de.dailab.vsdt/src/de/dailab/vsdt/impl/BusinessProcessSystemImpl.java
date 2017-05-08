@@ -34,6 +34,7 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getVersion <em>Version</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getAuthor <em>Author</em>}</li>
@@ -50,7 +51,6 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getDataTypes <em>Data Types</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessSystemImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

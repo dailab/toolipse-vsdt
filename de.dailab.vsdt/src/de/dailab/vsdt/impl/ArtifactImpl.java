@@ -25,11 +25,11 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.ArtifactImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ArtifactImpl#getPool <em>Pool</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -23,12 +23,12 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.AssociationImpl#getDirection <em>Direction</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.AssociationImpl#getSource <em>Source</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.AssociationImpl#getTarget <em>Target</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

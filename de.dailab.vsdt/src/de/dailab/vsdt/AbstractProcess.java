@@ -16,12 +16,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.AbstractProcess#isAdHoc <em>Ad Hoc</em>}</li>
  *   <li>{@link de.dailab.vsdt.AbstractProcess#getAdHocCompletionCondition <em>Ad Hoc Completion Condition</em>}</li>
  *   <li>{@link de.dailab.vsdt.AbstractProcess#getProperties <em>Properties</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getAbstractProcess()
  * @model abstract="true"

@@ -14,11 +14,11 @@ package de.dailab.vsdt;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.Artifact#getParent <em>Parent</em>}</li>
  *   <li>{@link de.dailab.vsdt.Artifact#getPool <em>Pool</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getArtifact()
  * @model abstract="true"

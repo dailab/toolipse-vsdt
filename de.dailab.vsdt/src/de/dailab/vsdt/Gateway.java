@@ -14,12 +14,12 @@ package de.dailab.vsdt;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.Gateway#getGatewayType <em>Gateway Type</em>}</li>
  *   <li>{@link de.dailab.vsdt.Gateway#getIncomingCondition <em>Incoming Condition</em>}</li>
  *   <li>{@link de.dailab.vsdt.Gateway#getOutgoingCondition <em>Outgoing Condition</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getGateway()
  * @model

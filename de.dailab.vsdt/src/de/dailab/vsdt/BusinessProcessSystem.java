@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getVersion <em>Version</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getAuthor <em>Author</em>}</li>
@@ -33,7 +34,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getDataTypes <em>Data Types</em>}</li>
  *   <li>{@link de.dailab.vsdt.BusinessProcessSystem#getParameters <em>Parameters</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getBusinessProcessSystem()
  * @model

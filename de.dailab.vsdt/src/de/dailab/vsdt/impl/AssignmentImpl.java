@@ -27,13 +27,13 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.AssignmentImpl#getTo <em>To</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.AssignmentImpl#getFrom <em>From</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.AssignmentImpl#getAssignTime <em>Assign Time</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.AssignmentImpl#getToQuery <em>To Query</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -131,33 +131,11 @@ public class AssignmentImpl extends EObjectImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTo(Property newTo, NotificationChain msgs) {
+	public void setTo(Property newTo) {
 		Property oldTo = to;
 		to = newTo;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VsdtPackage.ASSIGNMENT__TO, oldTo, newTo);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTo(Property newTo) {
-		if (newTo != to) {
-			NotificationChain msgs = null;
-			if (to != null)
-				msgs = ((InternalEObject)to).eInverseRemove(this, VsdtPackage.PROPERTY__ASSIGNMENTS, Property.class, msgs);
-			if (newTo != null)
-				msgs = ((InternalEObject)newTo).eInverseAdd(this, VsdtPackage.PROPERTY__ASSIGNMENTS, Property.class, msgs);
-			msgs = basicSetTo(newTo, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ASSIGNMENT__TO, newTo, newTo));
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, VsdtPackage.ASSIGNMENT__TO, oldTo, to));
 	}
 
 	/**
@@ -255,26 +233,8 @@ public class AssignmentImpl extends EObjectImpl implements Assignment {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case VsdtPackage.ASSIGNMENT__TO:
-				if (to != null)
-					msgs = ((InternalEObject)to).eInverseRemove(this, VsdtPackage.PROPERTY__ASSIGNMENTS, Property.class, msgs);
-				return basicSetTo((Property)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case VsdtPackage.ASSIGNMENT__TO:
-				return basicSetTo(null, msgs);
 			case VsdtPackage.ASSIGNMENT__FROM:
 				return basicSetFrom(null, msgs);
 		}

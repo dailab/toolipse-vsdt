@@ -14,13 +14,13 @@ package de.dailab.vsdt;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.SequenceFlow#getConditionType <em>Condition Type</em>}</li>
  *   <li>{@link de.dailab.vsdt.SequenceFlow#getConditionExpression <em>Condition Expression</em>}</li>
  *   <li>{@link de.dailab.vsdt.SequenceFlow#getSource <em>Source</em>}</li>
  *   <li>{@link de.dailab.vsdt.SequenceFlow#getTarget <em>Target</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getSequenceFlow()
  * @model

@@ -30,6 +30,7 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#isNonInterrupting <em>Non Interrupting</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getTrigger <em>Trigger</em>}</li>
@@ -43,7 +44,6 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#isSignalThrown <em>Signal Thrown</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.EventImpl#getLinkedTo <em>Linked To</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

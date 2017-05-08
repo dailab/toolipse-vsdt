@@ -17,8 +17,6 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>End</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

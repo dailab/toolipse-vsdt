@@ -15,13 +15,13 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.DataObject#getProperties <em>Properties</em>}</li>
  *   <li>{@link de.dailab.vsdt.DataObject#isRequiredForStart <em>Required For Start</em>}</li>
  *   <li>{@link de.dailab.vsdt.DataObject#isProducedAtCompletion <em>Produced At Completion</em>}</li>
  *   <li>{@link de.dailab.vsdt.DataObject#getState <em>State</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getDataObject()
  * @model

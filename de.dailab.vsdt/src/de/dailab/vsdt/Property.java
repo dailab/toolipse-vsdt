@@ -6,7 +6,6 @@
  */
 package de.dailab.vsdt;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -16,12 +15,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.Property#getName <em>Name</em>}</li>
  *   <li>{@link de.dailab.vsdt.Property#getType <em>Type</em>}</li>
- *   <li>{@link de.dailab.vsdt.Property#getAssignments <em>Assignments</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getProperty()
  * @model
@@ -79,23 +77,5 @@ public interface Property extends EObject {
 	 * @generated
 	 */
 	void setType(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Assignments</b></em>' reference list.
-	 * The list contents are of type {@link de.dailab.vsdt.Assignment}.
-	 * It is bidirectional and its opposite is '{@link de.dailab.vsdt.Assignment#getTo <em>To</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Assignments</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Assignments</em>' reference list.
-	 * @see de.dailab.vsdt.VsdtPackage#getProperty_Assignments()
-	 * @see de.dailab.vsdt.Assignment#getTo
-	 * @model opposite="to" resolveProxies="false" transient="true"
-	 * @generated
-	 */
-	EList<Assignment> getAssignments();
 
 } // Property

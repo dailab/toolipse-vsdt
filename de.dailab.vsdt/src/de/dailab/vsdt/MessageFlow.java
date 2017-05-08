@@ -14,11 +14,11 @@ package de.dailab.vsdt;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.MessageFlow#getSource <em>Source</em>}</li>
  *   <li>{@link de.dailab.vsdt.MessageFlow#getTarget <em>Target</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getMessageFlow()
  * @model

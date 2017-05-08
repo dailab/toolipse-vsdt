@@ -25,11 +25,11 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.GraphicalObjectImpl#getOutgoingAss <em>Outgoing Ass</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.GraphicalObjectImpl#getIncomingAss <em>Incoming Ass</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

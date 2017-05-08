@@ -21,12 +21,12 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.TransactionImpl#getTransactionId <em>Transaction Id</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.TransactionImpl#getTransactionProtocol <em>Transaction Protocol</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.TransactionImpl#getTransactionMethod <em>Transaction Method</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

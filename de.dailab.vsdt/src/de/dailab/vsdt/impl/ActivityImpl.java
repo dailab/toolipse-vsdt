@@ -47,6 +47,7 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#isAdHoc <em>Ad Hoc</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getAdHocCompletionCondition <em>Ad Hoc Completion Condition</em>}</li>
@@ -67,7 +68,6 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getInputPropertyMaps <em>Input Property Maps</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ActivityImpl#getOutputPropertyMaps <em>Output Property Maps</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

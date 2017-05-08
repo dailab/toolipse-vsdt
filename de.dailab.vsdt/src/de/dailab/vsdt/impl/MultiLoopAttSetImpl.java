@@ -23,13 +23,13 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.MultiLoopAttSetImpl#getMI_Condition <em>MI Condition</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.MultiLoopAttSetImpl#getMI_FlowCondition <em>MI Flow Condition</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.MultiLoopAttSetImpl#getComplexMI_FlowCondition <em>Complex MI Flow Condition</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.MultiLoopAttSetImpl#isSequential <em>Sequential</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

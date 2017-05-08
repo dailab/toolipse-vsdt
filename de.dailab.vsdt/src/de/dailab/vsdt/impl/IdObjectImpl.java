@@ -21,12 +21,12 @@ import de.dailab.vsdt.util.VsdtHelper;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.IdObjectImpl#getName <em>Name</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.IdObjectImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.IdObjectImpl#getId <em>Id</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.Service#getType <em>Type</em>}</li>
  *   <li>{@link de.dailab.vsdt.Service#getParticipant <em>Participant</em>}</li>
@@ -28,7 +29,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.Service#getEffects <em>Effects</em>}</li>
  *   <li>{@link de.dailab.vsdt.Service#isTemplate <em>Template</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getService()
  * @model

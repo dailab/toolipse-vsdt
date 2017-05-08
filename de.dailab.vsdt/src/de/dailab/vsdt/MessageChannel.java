@@ -14,6 +14,7 @@ package de.dailab.vsdt;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.MessageChannel#getChannel <em>Channel</em>}</li>
  *   <li>{@link de.dailab.vsdt.MessageChannel#getPayload <em>Payload</em>}</li>
@@ -21,7 +22,6 @@ package de.dailab.vsdt;
  *   <li>{@link de.dailab.vsdt.MessageChannel#getReceiver <em>Receiver</em>}</li>
  *   <li>{@link de.dailab.vsdt.MessageChannel#isMessageGroup <em>Message Group</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getMessageChannel()
  * @model

@@ -15,11 +15,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.Expression#getExpression <em>Expression</em>}</li>
  *   <li>{@link de.dailab.vsdt.Expression#getLanguage <em>Language</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getExpression()
  * @model
