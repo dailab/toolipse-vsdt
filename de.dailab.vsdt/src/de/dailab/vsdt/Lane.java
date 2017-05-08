@@ -14,10 +14,10 @@ package de.dailab.vsdt;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.Lane#getParent <em>Parent</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getLane()
  * @model

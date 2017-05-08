@@ -29,12 +29,12 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.ParticipantImpl#getType <em>Type</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ParticipantImpl#getAssociatedProcesses <em>Associated Processes</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ParticipantImpl#getAssociatedPools <em>Associated Pools</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

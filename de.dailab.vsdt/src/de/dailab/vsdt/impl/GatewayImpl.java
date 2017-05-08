@@ -24,12 +24,12 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.GatewayImpl#getGatewayType <em>Gateway Type</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.GatewayImpl#getIncomingCondition <em>Incoming Condition</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.GatewayImpl#getOutgoingCondition <em>Outgoing Condition</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

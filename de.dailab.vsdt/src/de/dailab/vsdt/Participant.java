@@ -17,12 +17,12 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.Participant#getType <em>Type</em>}</li>
  *   <li>{@link de.dailab.vsdt.Participant#getAssociatedProcesses <em>Associated Processes</em>}</li>
  *   <li>{@link de.dailab.vsdt.Participant#getAssociatedPools <em>Associated Pools</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getParticipant()
  * @model

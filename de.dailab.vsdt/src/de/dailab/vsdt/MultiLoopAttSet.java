@@ -14,13 +14,13 @@ package de.dailab.vsdt;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.MultiLoopAttSet#getMI_Condition <em>MI Condition</em>}</li>
  *   <li>{@link de.dailab.vsdt.MultiLoopAttSet#getMI_FlowCondition <em>MI Flow Condition</em>}</li>
  *   <li>{@link de.dailab.vsdt.MultiLoopAttSet#getComplexMI_FlowCondition <em>Complex MI Flow Condition</em>}</li>
  *   <li>{@link de.dailab.vsdt.MultiLoopAttSet#isSequential <em>Sequential</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getMultiLoopAttSet()
  * @model

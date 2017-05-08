@@ -15,11 +15,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.GraphicalObject#getOutgoingAss <em>Outgoing Ass</em>}</li>
  *   <li>{@link de.dailab.vsdt.GraphicalObject#getIncomingAss <em>Incoming Ass</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getGraphicalObject()
  * @model abstract="true"

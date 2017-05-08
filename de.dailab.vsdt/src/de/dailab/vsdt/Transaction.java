@@ -15,12 +15,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.Transaction#getTransactionId <em>Transaction Id</em>}</li>
  *   <li>{@link de.dailab.vsdt.Transaction#getTransactionProtocol <em>Transaction Protocol</em>}</li>
  *   <li>{@link de.dailab.vsdt.Transaction#getTransactionMethod <em>Transaction Method</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getTransaction()
  * @model

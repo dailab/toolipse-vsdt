@@ -30,11 +30,11 @@ import de.dailab.vsdt.vxl.util.VxlParser;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.ExpressionImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.ExpressionImpl#getLanguage <em>Language</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

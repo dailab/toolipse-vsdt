@@ -3589,22 +3589,13 @@ public interface VsdtPackage extends EPackage {
 	int PROPERTY__TYPE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Assignments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__ASSIGNMENTS = 2;
-
-	/**
 	 * The number of structural features of the '<em>Property</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_FEATURE_COUNT = 3;
+	int PROPERTY_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link de.dailab.vsdt.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -5379,17 +5370,6 @@ public interface VsdtPackage extends EPackage {
 	EAttribute getProperty_Type();
 
 	/**
-	 * Returns the meta object for the reference list '{@link de.dailab.vsdt.Property#getAssignments <em>Assignments</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Assignments</em>'.
-	 * @see de.dailab.vsdt.Property#getAssignments()
-	 * @see #getProperty()
-	 * @generated
-	 */
-	EReference getProperty_Assignments();
-
-	/**
 	 * Returns the meta object for class '{@link de.dailab.vsdt.Parameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7066,14 +7046,6 @@ public interface VsdtPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PROPERTY__TYPE = eINSTANCE.getProperty_Type();
-
-		/**
-		 * The meta object literal for the '<em><b>Assignments</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PROPERTY__ASSIGNMENTS = eINSTANCE.getProperty_Assignments();
 
 		/**
 		 * The meta object literal for the '{@link de.dailab.vsdt.impl.ParameterImpl <em>Parameter</em>}' class.

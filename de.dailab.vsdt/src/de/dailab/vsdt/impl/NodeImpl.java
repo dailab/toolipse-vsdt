@@ -33,11 +33,11 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.NodeImpl#getOutgoingMsg <em>Outgoing Msg</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.NodeImpl#getIncomingMsg <em>Incoming Msg</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

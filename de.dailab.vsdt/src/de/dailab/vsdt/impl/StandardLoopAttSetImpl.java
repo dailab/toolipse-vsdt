@@ -22,12 +22,12 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.StandardLoopAttSetImpl#getLoopCondition <em>Loop Condition</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.StandardLoopAttSetImpl#getLoopMaximum <em>Loop Maximum</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.StandardLoopAttSetImpl#isTestBefore <em>Test Before</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

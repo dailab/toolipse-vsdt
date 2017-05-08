@@ -23,11 +23,11 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.MessageFlowImpl#getSource <em>Source</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.MessageFlowImpl#getTarget <em>Target</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

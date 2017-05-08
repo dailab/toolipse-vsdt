@@ -27,13 +27,13 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.DataObjectImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.DataObjectImpl#isRequiredForStart <em>Required For Start</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.DataObjectImpl#isProducedAtCompletion <em>Produced At Completion</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.DataObjectImpl#getState <em>State</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

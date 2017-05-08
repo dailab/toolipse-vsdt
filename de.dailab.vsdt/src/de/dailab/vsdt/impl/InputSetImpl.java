@@ -23,10 +23,10 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.InputSetImpl#getInputs <em>Inputs</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -24,13 +24,13 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.SequenceFlowImpl#getConditionType <em>Condition Type</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.SequenceFlowImpl#getConditionExpression <em>Condition Expression</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.SequenceFlowImpl#getSource <em>Source</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.SequenceFlowImpl#getTarget <em>Target</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

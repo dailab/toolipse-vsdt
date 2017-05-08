@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.Event#isNonInterrupting <em>Non Interrupting</em>}</li>
  *   <li>{@link de.dailab.vsdt.Event#getTrigger <em>Trigger</em>}</li>
@@ -30,7 +31,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.Event#isSignalThrown <em>Signal Thrown</em>}</li>
  *   <li>{@link de.dailab.vsdt.Event#getLinkedTo <em>Linked To</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getEvent()
  * @model abstract="true"

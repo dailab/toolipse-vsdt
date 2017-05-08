@@ -30,12 +30,12 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.AbstractProcessImpl#isAdHoc <em>Ad Hoc</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.AbstractProcessImpl#getAdHocCompletionCondition <em>Ad Hoc Completion Condition</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.AbstractProcessImpl#getProperties <em>Properties</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

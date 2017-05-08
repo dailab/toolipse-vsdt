@@ -15,12 +15,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.IdObject#getName <em>Name</em>}</li>
  *   <li>{@link de.dailab.vsdt.IdObject#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link de.dailab.vsdt.IdObject#getId <em>Id</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getIdObject()
  * @model abstract="true"

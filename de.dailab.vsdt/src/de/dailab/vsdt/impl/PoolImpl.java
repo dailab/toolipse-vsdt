@@ -37,6 +37,7 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.PoolImpl#isAdHoc <em>Ad Hoc</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.PoolImpl#getAdHocCompletionCondition <em>Ad Hoc Completion Condition</em>}</li>
@@ -47,7 +48,6 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.PoolImpl#isBoundaryVisible <em>Boundary Visible</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.PoolImpl#getProcessType <em>Process Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

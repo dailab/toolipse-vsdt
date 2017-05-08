@@ -33,6 +33,7 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessDiagramImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessDiagramImpl#getPools <em>Pools</em>}</li>
@@ -40,7 +41,6 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessDiagramImpl#getConnections <em>Connections</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.BusinessProcessDiagramImpl#getParticipants <em>Participants</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

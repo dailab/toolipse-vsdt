@@ -15,12 +15,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.Parameter#getKey <em>Key</em>}</li>
  *   <li>{@link de.dailab.vsdt.Parameter#getValue <em>Value</em>}</li>
  *   <li>{@link de.dailab.vsdt.Parameter#getDescription <em>Description</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getParameter()
  * @model

@@ -31,11 +31,11 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.LaneImpl#getContainedFlowObjects <em>Contained Flow Objects</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.LaneImpl#getParent <em>Parent</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

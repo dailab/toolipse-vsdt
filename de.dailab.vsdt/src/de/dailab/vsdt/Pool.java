@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.Pool#getParent <em>Parent</em>}</li>
  *   <li>{@link de.dailab.vsdt.Pool#getParticipant <em>Participant</em>}</li>
@@ -22,7 +23,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link de.dailab.vsdt.Pool#isBoundaryVisible <em>Boundary Visible</em>}</li>
  *   <li>{@link de.dailab.vsdt.Pool#getProcessType <em>Process Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getPool()
  * @model

@@ -23,6 +23,7 @@ import de.dailab.vsdt.VsdtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.impl.MessageChannelImpl#getChannel <em>Channel</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.MessageChannelImpl#getPayload <em>Payload</em>}</li>
@@ -30,7 +31,6 @@ import de.dailab.vsdt.VsdtPackage;
  *   <li>{@link de.dailab.vsdt.impl.MessageChannelImpl#getReceiver <em>Receiver</em>}</li>
  *   <li>{@link de.dailab.vsdt.impl.MessageChannelImpl#isMessageGroup <em>Message Group</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

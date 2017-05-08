@@ -14,12 +14,12 @@ package de.dailab.vsdt;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link de.dailab.vsdt.Association#getDirection <em>Direction</em>}</li>
  *   <li>{@link de.dailab.vsdt.Association#getSource <em>Source</em>}</li>
  *   <li>{@link de.dailab.vsdt.Association#getTarget <em>Target</em>}</li>
  * </ul>
- * </p>
  *
  * @see de.dailab.vsdt.VsdtPackage#getAssociation()
  * @model
