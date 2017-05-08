@@ -125,10 +125,6 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 	 */
 	@Expose(name=ACTION_PUSH_SERVICE_PLAN, scope=ActionScope.NODE)
 	public void pushServicePlanIntoVsdt(List<GroundedRatedServiceDescription> groundedPlan) throws Exception {
-		System.out.println("CALLING PUSH SERVICE PLAN INTO VSDT");
-		System.out.println("groundedPlan: " + groundedPlan);
-
-		// get BPS from editor, thus checking whether current editor is VSDT editor
 		DiagramEditor editor = getEditor();
 		BusinessProcessDiagram bpd = Util.getVsdtModelBpd(editor);
 		if (bpd != null) {
@@ -139,7 +135,6 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 			ISelection selection = editor.getEditorSite().getSelectionProvider().getSelection();
 			if (selection instanceof StructuredSelection) {
 				StructuredSelection ssel = (StructuredSelection) selection;
-				System.out.println(ssel);
 				if (ssel.getFirstElement() instanceof IGraphicalEditPart) {
 					IGraphicalEditPart editPart= (IGraphicalEditPart) ssel.getFirstElement();
 					EObject selected = ((View) editPart.getModel()).getElement();
@@ -347,9 +342,5 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 			}
 		}
 		return result;
-//		return map.entrySet().stream()
-//				.flatMap(e -> e.getValue().stream()
-//						.map(v -> new SimpleEntry<K, V>(e.getKey(), v)))
-//				.collect(Collectors.toMap(e -> e.getValue(), e -> e.getKey()));
 	}
 }
