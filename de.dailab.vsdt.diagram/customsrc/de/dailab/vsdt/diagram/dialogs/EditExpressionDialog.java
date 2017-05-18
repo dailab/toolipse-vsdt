@@ -231,7 +231,7 @@ public class EditExpressionDialog extends TitleAreaDialog {
 	private boolean checkExpression() {
 		setMessage(MESSAGE);
 		setErrorMessage(null);
-		String expression= expressionText.getText();
+		String expression = VsdtHelper.substituteParameters(expressionText.getText(), parameters);
 		VxlParser parser= VxlParser.getInstance();
 		try {
 			parser.parse(expression);
@@ -244,11 +244,11 @@ public class EditExpressionDialog extends TitleAreaDialog {
 					varNames.add(prop.getName());
 				}
 			}
-			if (parameters != null) {
-				for (Parameter par : parameters) {
-					varNames.add(VsdtHelper.ESCAPE_PARAMETER + par.getKey());
-				}
-			}
+//			if (parameters != null) {
+//				for (Parameter par : parameters) {
+//					varNames.add(VsdtHelper.ESCAPE_PARAMETER + par.getKey());
+//				}
+//			}
 			List<VxlVariable> unknownVars= parser.getUnknownVariables(varNames);
 			if (! unknownVars.isEmpty()) {
 				setErrorMessage("Variable '" + unknownVars.get(0).getName() + "' cannot be resolved");

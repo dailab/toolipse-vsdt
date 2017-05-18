@@ -436,12 +436,23 @@ public class VsdtHelper {
 	public static String getExpressionWithParameters(Expression expression) {
 		String theExpression = expression.getExpression();
 		BusinessProcessSystem bps = (BusinessProcessSystem) getRootElement(expression);
-		if (bps != null) {
-			for (Parameter parameter : bps.getParameters()) {
-				theExpression = theExpression.replaceAll(ESCAPE_PARAMETER + parameter.getKey(), parameter.getValue());
+		return bps != null ? substituteParameters(theExpression, bps.getParameters()) : theExpression;
+	}
+
+	/**
+	 * Substitute all parameters with their respective values.
+	 *
+	 * @param expression	some expression
+	 * @param parameters	list of parameters with values
+	 * @return				expression with parameters replaced
+	 */
+	public static String substituteParameters(String expression, List<Parameter> parameters) {
+		if (parameters != null) {
+			for (Parameter parameter : parameters) {
+				expression = expression.replace(ESCAPE_PARAMETER + parameter.getKey(), parameter.getValue());
 			}
 		}
-		return theExpression;
+		return expression;
 	}
 
 	/**
