@@ -96,7 +96,8 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 				Expression expression = ((Expression) next);
 				try {
 					if (Util.languageIsVxl(expression.getExpressionLanguageToBeUsed())) {
-						ExpressionHelper.parseVxlExpression(expression.getExpression());
+						String theExpression = VsdtHelper.getExpressionWithParameters(expression);
+						ExpressionHelper.parseVxlExpression(theExpression);
 					}
 				} catch (IllegalArgumentException e) {
 					// this try/catch is redundant, but that way it's a bit clearer
