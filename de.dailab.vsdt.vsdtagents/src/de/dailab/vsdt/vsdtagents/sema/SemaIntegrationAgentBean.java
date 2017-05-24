@@ -192,10 +192,10 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 							VsdtElementFactory.createExpression(name), AssignTimeType.START);
 					task.getAssignments().add(assign);
 				}
-				// do the same for the outputs... XXX currently, we only have the map, so no order
+				// same for the outputs (but to/from in assignmens swapped)
 				Map<OWLNamedIndividual, OWLClass> outputTypes = reverse(grsd.getOutputBindingClassMapping());
-				if (! service.getOutput().isEmpty() && ! grsd.getOutputBindingClassMapping().isEmpty()) {
-					OWLNamedIndividual individual = grsd.getOutputBindingClassMapping().values().stream().flatMap(Collection::stream).findAny().get();
+				index = 0;
+				for (OWLNamedIndividual individual : grsd.getOutputBinding()) {
 					String name = individual.getIRI().getFragment();
 					IRI type = outputTypes.get(individual).getIRI();
 					allTypes.add(VsdtElementFactory.createDatatype(type.getFragment(), null, "OWL-S", type.toString()));
@@ -203,7 +203,7 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 					// for each fact, create a property, if not already exists
 					properties.putIfAbsent(name, VsdtElementFactory.createProperty(name, type.getFragment()));
 					Assignment assign = VsdtElementFactory.createAssignmen(properties.get(name),
-							VsdtElementFactory.createExpression(service.getOutput().get(0).getName()), AssignTimeType.END);
+							VsdtElementFactory.createExpression(service.getOutput().get(index++).getName()), AssignTimeType.END);
 					task.getAssignments().add(assign);
 				}
 
