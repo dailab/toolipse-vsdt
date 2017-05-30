@@ -220,7 +220,7 @@ public class SemanticServiceFactory {
 			if (! OntoUtils.specialTypes.containsKey(fullName)) {
 				int sep = fullName.lastIndexOf('.');
 				String pkg = sep != -1 ? fullName.substring(0, sep) : null;
-				String name = sep != -1 ? fullName.substring(sep) : fullName;
+				String name = sep != -1 ? fullName.substring(sep + 1) : fullName;
 
 				result.add(VsdtElementFactory.createDatatype(name, pkg, "OWL-S", param.getType().toString()));
 			}

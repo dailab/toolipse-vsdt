@@ -184,7 +184,7 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 				for (OWLNamedIndividual individual : grsd.getInputBinding()) {
 					String name = individual.getIRI().getFragment();
 					IRI type = inputTypes.get(individual).getIRI();
-					allTypes.add(VsdtElementFactory.createDatatype(type.getFragment(), null, "OWL-S", type.toString()));
+//					allTypes.add(VsdtElementFactory.createDatatype(type.getFragment(), null, "OWL-S", type.toString()));
 
 					// for each fact, create a property, if not already exists
 					properties.putIfAbsent(name, VsdtElementFactory.createProperty(name, type.getFragment()));
@@ -198,7 +198,7 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 				for (OWLNamedIndividual individual : grsd.getOutputBinding()) {
 					String name = individual.getIRI().getFragment();
 					IRI type = outputTypes.get(individual).getIRI();
-					allTypes.add(VsdtElementFactory.createDatatype(type.getFragment(), null, "OWL-S", type.toString()));
+//					allTypes.add(VsdtElementFactory.createDatatype(type.getFragment(), null, "OWL-S", type.toString()));
 
 					// for each fact, create a property, if not already exists
 					properties.putIfAbsent(name, VsdtElementFactory.createProperty(name, type.getFragment()));
