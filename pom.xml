@@ -11,6 +11,8 @@
   
   <groupId>de.dailab.toolipse3</groupId>
   <artifactId>vsdt</artifactId>
+  <version>1.4.8-SNAPSHOT</version>
+
   <packaging>pom</packaging>
   <modules>
     <module>de.dailab.vsdt</module>

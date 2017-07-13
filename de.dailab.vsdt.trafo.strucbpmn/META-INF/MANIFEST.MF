@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VSDT - Structure Transformation
 Bundle-SymbolicName: de.dailab.vsdt.trafo.strucbpmn;singleton:=true
-Bundle-Version: 1.4.7.qualifier
+Bundle-Version: 1.4.8.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: DAI-Labor, TU Berlin
 Export-Package: de.dailab.vsdt.trafo.strucbpmn,

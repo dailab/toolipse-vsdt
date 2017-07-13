@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: VSDT - Meta Diagram Editor
 Bundle-SymbolicName: de.dailab.vsdt.diagram.meta; singleton:=true
-Bundle-Version: 1.4.7.qualifier
+Bundle-Version: 1.4.8.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: de.dailab.vsdt.meta.diagram.part.VsdtMetaDiagramEditorPlugin
 Bundle-Vendor: DAI-Labor, TU Berlin

@@ -5,10 +5,9 @@
   <parent>
     <groupId>de.dailab.toolipse3</groupId>
     <artifactId>vsdt</artifactId>
-    <version>3.0.1-SNAPSHOT</version>
+    <version>1.4.8-SNAPSHOT</version>
   </parent>
   <groupId>de.dailab.toolipse3</groupId>
   <artifactId>de.dailab.vsdt.trafo.text</artifactId>
-  <version>1.4.6-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
 </project>
