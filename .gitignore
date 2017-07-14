@@ -11,7 +11,7 @@
 examples/**/vsdt-generated
 
 # ignore Maven target directories
-*/target
+target
 
 # basic tree editor does not have to be checked in
 de.dailab.vsdt.editor
