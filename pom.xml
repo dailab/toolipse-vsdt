@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-        xmlns="http://maven.apache.org/POM/4.0.0"xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
 	<properties>
@@ -60,9 +60,9 @@
 			<url>http://repositories.dai-labor.de/extern/content/repositories/dai-open/</url>
 		</repository>
 		<snapshotRepository>
-			<id>dai-snapshots</id>
-			<name>dai-snapshots</name>
-			<url>http://repositories.dai-labor.de/nexus/content/repositories/dai-snapshots/</url>
+			<id>dai-open-snapshot</id>
+			<name>DAI Open Snapshot</name>
+			<url>http://repositories.dai-labor.de/extern/content/repositories/dai-open-snapshot/</url>
 		</snapshotRepository>
 	</distributionManagement>
 
@@ -98,9 +98,9 @@
 				<artifactId>tycho-compiler-plugin</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
-					<compilerVersion>1.7</compilerVersion>
-					<target>1.7</target>
-					<source>1.7</source>
+					<compilerVersion>1.8</compilerVersion>
+					<target>1.8</target>
+					<source>1.8</source>
 				</configuration>
 			</plugin>
 
