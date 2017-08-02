@@ -1,6 +1,5 @@
 package de.dailab.vsdt.diagram.interpreter.dialogs;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -139,7 +138,7 @@ public class MessageParameterDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected void okPressed() {
-		Map<Property, Serializable> newValues= new HashMap<Property, Serializable>();
+		Map<Property, Object> newValues= new HashMap<>();
 		// test-parse each value
 		for (Entry<Property, Text> entry : propertyTextMap.entrySet()) {
 			String expression= entry.getValue().getText().trim();
@@ -151,7 +150,7 @@ public class MessageParameterDialog extends TitleAreaDialog {
 					VxlTerm term= parser.parse(expression);
 					// evaluate term
 					VxlInterpreter interpreter= new VxlInterpreter();
-					Serializable result= interpreter.evaluateTerm(term, null);
+					Object result= interpreter.evaluateTerm(term, null);
 					Map<Object, String> errors= interpreter.getErrors();
 					if (! errors.isEmpty()) {
 						StringBuffer message= new StringBuffer();

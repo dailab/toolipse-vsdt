@@ -44,10 +44,9 @@ The arguments and results of service invocations are being stored in the Service
 input and output Properties.  So if a service is to be called with the argument
 ``Hello World'', that value has to be assigned to the service's respective input
 Property using the \emph{Organize Assignments Dialog} of the Activity calling the
-service.  Note, that Assignments to the input parameters have to be made
+service.  Note that Assignments to the input parameters have to be made
 \emph{before}, and Assignments storing the output parameters in local variables
-have to be made \emph{after} the Activities execution.  The Assign Time can be
-specified in the Dialog, too.
+have to be made \emph{after} the Activity's execution (this can be specified in the same Dialog, too).
 
 
 A more convenient way, and sufficient in most situations, is to use the
@@ -67,10 +66,10 @@ well.
 \section{Troubleshooting}
 
 \paragraph*{My diagram file is broken. How can I fix it?}
-In case the diagram is broken, it can be recreated from the model.  In case you
+In case the diagram is broken, it can be recreated from the model.  If you
 are using separate files for semantic model and notational model, delete the
 diagram file \texttt{vsdt\_diagram} and create a new one by right-clicking the
-model file \texttt{vsdt} and selecting the respective menu item.  In case you are
+model file \texttt{vsdt} and selecting the respective menu item.  If you are
 using one file for both semantic and notational model, \texttt{vsdtd}, open the
 file in a text editor and remove the \texttt{notation:Diagram} elements (one for
 each diagram contained in the file).  Now rename the file to \texttt{vsdt} and
@@ -100,3 +99,8 @@ element will be created in the target model, such as a \verb_empty_ Activity in
 BPEL or a \verb_logwarn_ in JIAC.  Be sure to substitute these elements with a
 proper implementation after the transformation.
 
+\paragraph*{All I can see is a Use case diagram; isn't VSDT supposed to be a BPMN editor?}
+The VSDT consists of two editors: A use-case editor, and a business process editor. 
+When opening a file, the use-case view is shown, where each use-case corresponds to 
+a business process between the participants involved in that use case. To get to the 
+business process diagram, just perform a double-click on one of the use-case nodes.

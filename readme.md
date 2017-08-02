@@ -15,7 +15,7 @@ Getting Started
 ---------------
 The VSDT is implemented as an Eclipse plugin, meaning that you have to use the [Eclipse](http://www.eclipse.org/)
 IDE for developing and running it.  The latest version of Eclipse the VSDT has been tested with is 
-[Eclipse Luna](http://www.eclipse.org/luna/). Correct working on newer version can not be guaranteed.
+[Eclipse Neon](http://www.eclipse.org/neon/). Correct working on newer version can not be guaranteed.
 
 ### Running the VSDT (as developer)
 1. If you haven't yet, install the GMF (Graphical Modeling Framework) and XText SDKs into your Eclipse (go to _Help_ -> _Install new software..._)

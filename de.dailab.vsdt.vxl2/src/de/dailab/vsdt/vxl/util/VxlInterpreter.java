@@ -1,6 +1,5 @@
 package de.dailab.vsdt.vxl.util;
 
-import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -62,10 +61,10 @@ public class VxlInterpreter {
 	 * @param term		Some Term
 	 * @return			Result, e.g. a String, Number, or Boolean, or whatever else
 	 */
-	public Serializable evaluateTerm(VxlTerm term, Map<String, Object> context) {
+	public Object evaluateTerm(VxlTerm term, Map<String, Object> context) {
 		this.errors= new HashMap<Object, String>();
 		this.context= context;
-		return (Serializable) evalTerm(term);
+		return (Object) evalTerm(term);
 	}
 	
 	/**
