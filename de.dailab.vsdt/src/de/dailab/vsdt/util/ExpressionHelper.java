@@ -1,6 +1,5 @@
 package de.dailab.vsdt.util;
 
-import java.io.Serializable;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
@@ -132,10 +131,10 @@ public class ExpressionHelper {
 	 * @param context		Map of Property names and values
 	 * @return				Result of the evaluation, or null in case of error
 	 */
-	public static Serializable evaluateVxlTerm(VxlTerm term, Map<String, Object> context) {
+	public static Object evaluateVxlTerm(VxlTerm term, Map<String, Object> context) {
 		if (term == null) return null;
 		VxlInterpreter interpreter= new VxlInterpreter();
-		Serializable result= interpreter.evaluateTerm(term, context);
+		Object result= interpreter.evaluateTerm(term, context);
 		Map<Object, String> errors= interpreter.getErrors();
 		if (! errors.isEmpty()) {
 			StringBuffer message= new StringBuffer();
