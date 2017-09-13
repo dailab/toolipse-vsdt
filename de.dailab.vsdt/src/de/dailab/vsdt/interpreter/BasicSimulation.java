@@ -125,6 +125,7 @@ public abstract class BasicSimulation extends AbstractSimulation {
 						setState(activity, State.ACTIVE_WAITING);
 					}
 				}
+				// XXX do the following only if not ad-hoc? useful for JIAC interpreter, but not inside VSDT...
 				for (FlowObject child : activity.getGraphicalElements()) {
 					if (state == State.ACTIVE_WAITING) {
 						updateState(child);

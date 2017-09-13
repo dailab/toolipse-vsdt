@@ -563,7 +563,7 @@ public class DeploymentView extends AbstractStructuredViewerView {
 									buffer.append(String.format("Result for Service %s:", service.getName()));
 									for (Serializable result : results) {
 										buffer.append(NL);
-										buffer.append(result.getClass().isArray() ?
+										buffer.append(result != null && result.getClass().isArray() ?
 												Arrays.toString((Object[]) result) : String.valueOf(result));
 									}
 									openMessageDialog(MessageDialog.INFORMATION, buffer.toString());
