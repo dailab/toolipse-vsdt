@@ -255,7 +255,7 @@ public class InterpreterView extends AbstractStructuredViewerView {
 					updateActionEnablement();
 				} catch (Exception e) {
 					MessageDialog.openError(viewer.getControl().getShell(),
-							"Simulation could not be started", e.getMessage());
+							"Simulation could not be started", e.toString());
 				}
 			}
 		}

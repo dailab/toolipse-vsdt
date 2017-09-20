@@ -297,9 +297,11 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 	 */
 	private DiagramEditor getEditor() {
 		IWorkbenchWindow[] wbws = PlatformUI.getWorkbench().getWorkbenchWindows();
-		IEditorPart editor = wbws[0].getActivePage().getActiveEditor();
-		if (editor instanceof DiagramEditor) {
-			return (DiagramEditor) editor;
+		if (wbws.length > 0 && wbws[0].getActivePage() != null) {
+			IEditorPart editor = wbws[0].getActivePage().getActiveEditor();
+			if (editor instanceof DiagramEditor) {
+				return (DiagramEditor) editor;
+			}
 		}
 		return null;
 	}

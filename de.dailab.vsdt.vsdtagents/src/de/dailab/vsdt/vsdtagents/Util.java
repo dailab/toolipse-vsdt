@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 
@@ -163,7 +164,8 @@ public class Util {
 	 */
 	public static BusinessProcessSystem getVsdtModelBps(IEditorPart editor) {
 		if (editor == null) {
-			editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+			IWorkbenchWindow wbw = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+			editor = wbw != null ? wbw.getActivePage().getActiveEditor() : null;
 		}
 		if (editor instanceof de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditor) {
 			de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditor vsdteditor = (de.dailab.vsdt.meta.diagram.part.VsdtDiagramEditor) editor;
@@ -187,7 +189,8 @@ public class Util {
 	 */
 	public static BusinessProcessDiagram getVsdtModelBpd(IEditorPart editor) {
 		if (editor == null) {
-			editor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+			IWorkbenchWindow wbw = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+			editor = wbw != null ? wbw.getActivePage().getActiveEditor() : null;
 		}
 		if (editor instanceof VsdtDiagramEditor) {
 			VsdtDiagramEditor vsdteditor = (VsdtDiagramEditor) editor;
