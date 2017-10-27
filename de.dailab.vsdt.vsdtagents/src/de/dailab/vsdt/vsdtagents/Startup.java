@@ -13,8 +13,8 @@ public class Startup implements IStartup {
 
 	@Override
 	public void earlyStartup() {
-		System.out.println("Auto-starting VSDT agents for SSM integration."
-				+ "If you do not want this to happen at start up, go to"
+		System.out.println("Auto-starting VSDT agents for SSM integration. "
+				+ "If you do not want this to happen at start up, go to "
 				+ "Preferences -> General -> Startup and deactivate it.");
 	}
 	
