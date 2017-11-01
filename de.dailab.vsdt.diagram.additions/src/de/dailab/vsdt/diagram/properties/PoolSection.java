@@ -76,8 +76,8 @@ public class PoolSection extends AbstractVsdtPropertySection {
         participantCombo.setSelected(pool.getParticipant());
 
         procTypeNoneButton.setSelection(pool.getProcessType() == ProcessType.NONE);
-        procTypePrivateButton.setSelection(pool.getProcessType() == ProcessType.PUBLIC);
-        procTypePublicButton.setSelection(pool.getProcessType() == ProcessType.PRIVATE);
+        procTypePrivateButton.setSelection(pool.getProcessType() == ProcessType.PRIVATE);
+        procTypePublicButton.setSelection(pool.getProcessType() == ProcessType.PUBLIC);
 
     	adHocButton.setSelection(pool.isAdHoc());
     	adHocConditionText.setEnabled(adHocButton.getSelection());
