@@ -6,6 +6,8 @@
  */
 package de.dailab.vsdt.impl;
 
+import java.util.Collections;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
@@ -608,6 +610,7 @@ public abstract class EventImpl extends FlowObjectImpl implements Event {
 			triggers.add(TriggerType.COMPENSATION);
 			triggers.add(TriggerType.TERMINATE);
 		}
+		Collections.sort(triggers);
 		return triggers;
 	}
 
