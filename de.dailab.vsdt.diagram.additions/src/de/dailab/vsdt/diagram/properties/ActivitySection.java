@@ -7,16 +7,20 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
@@ -223,40 +227,55 @@ implements FocusListener, SelectionListener {
         parAssignButton = addButton(DISPLAY_PAR_ASSIGN);
         orgPropButton = addButton(DISPLAY_ORG_PROP);
 
+        CTabFolder tabs = getWidgetFactory().createTabFolder(composite, SWT.NONE);
+        tabs.setLayoutData(FormLayoutUtil.createFormData(lastControl, 0, 100));
+        
+        CTabItem attrTab = getWidgetFactory().createTabItem(tabs, SWT.NONE);
+        attrTab.setText("Attributes");
+        CTabItem loopTab = getWidgetFactory().createTabItem(tabs, SWT.NONE);
+        loopTab.setText("Looping");
+        
+        Composite attrComposite = getWidgetFactory().createFlatFormComposite(tabs);
+        Composite loopComposite = getWidgetFactory().createFlatFormComposite(tabs);
+        
         // activity type and attributes
-        label= FormLayoutUtil.addLabel(composite, DISPLAY_ACT_TYPE, lastControl, 0);
-        actTypeCombo= FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, lastControl, label, 50);
+        label= FormLayoutUtil.addLabel(attrComposite, DISPLAY_ACT_TYPE, lastControl, 0);
+        actTypeCombo= FormLayoutUtil.addCombo(attrComposite, SWT.READ_ONLY, lastControl, label, 100);
         actTypeCombo.addSelectionListener(this);
         for (ActivityType activityType : ActivityType.values()) {
         	actTypeCombo.add(activityType.getLiteral());
         }
         // loop type and attributes
-        label= FormLayoutUtil.addLabel(composite, DISPLAY_LOOP_TYPE, lastControl, 50);
-        loopTypeCombo= FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, lastControl, label, 100);
+        label= FormLayoutUtil.addLabel(loopComposite, DISPLAY_LOOP_TYPE, lastControl, 0);
+        loopTypeCombo= FormLayoutUtil.addCombo(loopComposite, SWT.READ_ONLY, lastControl, label, 100);
         loopTypeCombo.addSelectionListener(this);
         for (LoopType loopType : LoopType.values()) {
         	loopTypeCombo.add(loopType.getLiteral());
         }
 
         // task group
-        taskAttGroup= FormLayoutUtil.addGroup(composite, DISPLAY_TASK_GROUP, actTypeCombo, 0, 50);
+        taskAttGroup= FormLayoutUtil.addGroup(attrComposite, DISPLAY_TASK_GROUP, actTypeCombo, 0, 100);
         fillTaskAttributesGroup(taskAttGroup);
         
         // subprocess group
-        subprocessAttGroup= FormLayoutUtil.addGroup(composite, DISPLAY_SUBPROCESS_GROUP, actTypeCombo, 0, 50);
+        subprocessAttGroup= FormLayoutUtil.addGroup(attrComposite, DISPLAY_SUBPROCESS_GROUP, actTypeCombo, 0, 100);
         fillSubprocessAttributesGroup(subprocessAttGroup);
         
         // call activity group
-        callActivityAttGroup= FormLayoutUtil.addGroup(composite, DISPLAY_CALLACTIVITY_GROUP, actTypeCombo, 0, 50);
+        callActivityAttGroup= FormLayoutUtil.addGroup(attrComposite, DISPLAY_CALLACTIVITY_GROUP, actTypeCombo, 0, 100);
         fillCallActivityAttributesGroup(callActivityAttGroup);
         
         // standard loop type group
-        loopTypeStdGroup= FormLayoutUtil.addGroup(composite, DISPLAY_LOOP_GROUP, loopTypeCombo, taskAttGroup, 100);
+        loopTypeStdGroup= FormLayoutUtil.addGroup(loopComposite, DISPLAY_LOOP_GROUP, loopTypeCombo, 0, 100);
         fillLoopTypeStandardGroup(loopTypeStdGroup);
 		
 		// multi instance loop attributes
-		loopTypeMultiGroup= FormLayoutUtil.addGroup(composite, DISPLAY_LOOP_GROUP, loopTypeCombo, taskAttGroup, 100);
+		loopTypeMultiGroup= FormLayoutUtil.addGroup(loopComposite, DISPLAY_LOOP_GROUP, loopTypeCombo, 0, 100);
 		fillLoopTypeMultiGroup(loopTypeMultiGroup);
+		
+		attrTab.setControl(attrComposite);
+		loopTab.setControl(loopComposite);
+		tabs.setSelection(attrTab);
     }
     
     public void focusLost(FocusEvent e) {
