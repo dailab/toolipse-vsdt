@@ -96,7 +96,7 @@ public class AddAnnotationAction implements IActionDelegate {
 	
 	public void run(IAction action) {
 		if (diagramEditPart == null) return;
-		EditPartViewer viewer = diagramEditPart.getViewer();
+		final EditPartViewer viewer = diagramEditPart.getViewer();
 				
 		// Create Node Command
 		CreateViewRequest nodeRequest = CreateViewRequestFactory.getCreateShapeRequest(
@@ -106,7 +106,7 @@ public class AddAnnotationAction implements IActionDelegate {
 		nodeRequest.setLocation(p);
 		Command creatNodeCmd = diagramEditPart.getCommand(nodeRequest);
 		
-		IAdaptable adapterForNewNode = (IAdaptable) ((List<?>) nodeRequest.getNewObject()).get(0);
+		final IAdaptable adapterForNewNode = (IAdaptable) ((List<?>) nodeRequest.getNewObject()).get(0);
 		
 		// Create Association Command
 		CreateConnectionViewAndElementRequest associationRequest= new CreateConnectionViewAndElementRequest(
