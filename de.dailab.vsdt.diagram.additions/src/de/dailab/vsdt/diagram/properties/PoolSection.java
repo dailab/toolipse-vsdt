@@ -32,6 +32,7 @@ public class PoolSection extends AbstractVsdtPropertySection {
 							   DISPLAY_PROC_PUBLIC= "Public",
 							   DISPLAY_PROC_PRIVATE= "Private",
 							   DISPLAY_SUB_ADHOC= "Ad Hoc",
+							   DISPLAY_SUB_IS_ADHOC= "Ad Hoc",
 							   DISPLAY_SUB_ADHOCCONDITION= "Compltn. Cond.",
 							   
 							   DISPLAY_PARTICIPANT= "Participant",
@@ -95,23 +96,23 @@ public class PoolSection extends AbstractVsdtPropertySection {
 
         // main group
         label= FormLayoutUtil.addLabel(composite, DISPLAY_PARTICIPANT, lastControl, 0);
-        participantCombo= new VsdtFeatureCombo<Participant>(FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, lastControl, label, 50));
+        participantCombo= new VsdtFeatureCombo<Participant>(FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, lastControl, label, 100));
         participantCombo.getCombo().addSelectionListener(this);
 
-        boundaryvisButton= FormLayoutUtil.addButton(composite, DISPLAY_BOUNDARY_VISIBLE, SWT.CHECK, lastControl, participantCombo.getCombo(), null);
+        boundaryvisButton= FormLayoutUtil.addButton(composite, DISPLAY_BOUNDARY_VISIBLE, SWT.CHECK, participantCombo.getCombo(), 0, null);
         boundaryvisButton.addSelectionListener(this);
 
         // process group
-        Group processGroup= FormLayoutUtil.addGroup(composite, DISPLAY_PROCESS_GROUP, participantCombo.getCombo(), 0, 50);
+        Group processGroup= FormLayoutUtil.addGroup(composite, DISPLAY_PROCESS_GROUP, boundaryvisButton, 0, 100);
         label= FormLayoutUtil.addLabel(processGroup, DISPLAY_PROC_TYPE, 0, 0);
-        procTypeNoneButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_NONE, SWT.RADIO, 0, label, 50);
-        procTypePrivateButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_PRIVATE, SWT.RADIO, 0, procTypeNoneButton, 100);
-        procTypePublicButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_PUBLIC, SWT.RADIO, label, label, 50);
+        procTypeNoneButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_NONE, SWT.RADIO, 0, label, null);
+        procTypePrivateButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_PRIVATE, SWT.RADIO, 0, procTypeNoneButton, null);
+        procTypePublicButton= FormLayoutUtil.addButton(processGroup, DISPLAY_PROC_PUBLIC, SWT.RADIO, 0, procTypePrivateButton, null);
         procTypeNoneButton.addSelectionListener(this);
         procTypePrivateButton.addSelectionListener(this);
         procTypePublicButton.addSelectionListener(this);
         
-        Group adHocGroup= FormLayoutUtil.addGroup(composite, DISPLAY_SUB_ADHOC, participantCombo.getCombo(), processGroup, 100);
+        Group adHocGroup= FormLayoutUtil.addGroup(composite, DISPLAY_SUB_ADHOC, processGroup, 0, 100);
         adHocButton= FormLayoutUtil.addButton(adHocGroup, DISPLAY_SUB_ADHOC, SWT.CHECK, procTypePrivateButton, 0, null);
     	adHocButton.addSelectionListener(this);
         label= FormLayoutUtil.addLabel(adHocGroup, DISPLAY_SUB_ADHOCCONDITION, adHocButton, 0);

@@ -121,29 +121,14 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
         
         // author
         label = FormLayoutUtil.addLabel(composite, DISPLAY_AUTHOR, lastControl, 0);
-        authorText = FormLayoutUtil.addText(composite, lastControl, label, 50, 0);
+        authorText = FormLayoutUtil.addText(composite, lastControl, label, 100, 0);
         authorText.addFocusListener(this);
         
         // version
         label = FormLayoutUtil.addLabel(composite, DISPLAY_VERSION, label, 0);
-        versionText = FormLayoutUtil.addText(composite, authorText, label, 50, 0);
+        versionText = FormLayoutUtil.addText(composite, authorText, label, 100, 0);
         versionText.addFocusListener(this);
        
-        // language
-        label = FormLayoutUtil.addLabel(composite, DISPLAY_LANGUAGE, lastControl, 50);
-        languageText = FormLayoutUtil.addText(composite, lastControl, label, 100, 0);
-        languageText.addFocusListener(this);
-        
-        // expression language
-        label= FormLayoutUtil.addLabel(composite, DISPLAY_EXP_LANG, label, 50);
-        expLangText= FormLayoutUtil.addText(composite, languageText, label, 100, 0);
-        expLangText.addFocusListener(this);
-        
-        // query language
-        label = FormLayoutUtil.addLabel(composite, DISPLAY_QUERY_LANG, label, 50);
-        queryLangText = FormLayoutUtil.addText(composite, expLangText, label, 100, 0);
-        queryLangText.addFocusListener(this); 
-
         // creation date and time
         label= FormLayoutUtil.addLabel(composite, DISPLAY_CREATE_DATE, versionText, 0);
         creationDate= FormLayoutUtil.addDateTime(composite, versionText, label, null, SWT.DATE);
@@ -162,6 +147,21 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
         setModifiedTimeButton= FormLayoutUtil.addButton(composite, DISPLAY_MODIFIED_NOW, 0, creationDate, modificationTime, null);
         setModifiedTimeButton.addSelectionListener(this);
         
+        // language
+        label = FormLayoutUtil.addLabel(composite, DISPLAY_LANGUAGE, modificationDate, 0);
+        languageText = FormLayoutUtil.addText(composite, modificationDate, label, 100, 0);
+        languageText.addFocusListener(this);
+        
+        // expression language
+        label= FormLayoutUtil.addLabel(composite, DISPLAY_EXP_LANG, label, 0);
+        expLangText= FormLayoutUtil.addText(composite, languageText, label, 100, 0);
+        expLangText.addFocusListener(this);
+        
+        // query language
+        label = FormLayoutUtil.addLabel(composite, DISPLAY_QUERY_LANG, label, 0);
+        queryLangText = FormLayoutUtil.addText(composite, expLangText, label, 100, 0);
+        queryLangText.addFocusListener(this); 
+
     }
     
     public void focusLost(FocusEvent e) {

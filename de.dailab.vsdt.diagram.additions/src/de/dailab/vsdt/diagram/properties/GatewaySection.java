@@ -79,10 +79,10 @@ implements SelectionListener {
         Group attributesGroup= FormLayoutUtil.addGroup(composite, DISPLAY_TYPE_GROUP, typeCombo, 0, 100);
         
     	label= FormLayoutUtil.addLabel(attributesGroup, DISPLAY_COMPLEX_INCOMINGCOND, lastControl, 0);
-    	complexIncomingCondText= addExpressionComposite(attributesGroup, lastControl, label, 50);
+    	complexIncomingCondText= addExpressionComposite(attributesGroup, lastControl, label, 100);
 
-    	label= FormLayoutUtil.addLabel(attributesGroup, DISPLAY_COMPLEX_OUTGOINGCOND, lastControl, 50);
-    	complexOutgoingCondText= addExpressionComposite(attributesGroup, lastControl, label, 100);
+    	label= FormLayoutUtil.addLabel(attributesGroup, DISPLAY_COMPLEX_OUTGOINGCOND, complexIncomingCondText, 0);
+    	complexOutgoingCondText= addExpressionComposite(attributesGroup, complexIncomingCondText, label, 100);
     }
     
     

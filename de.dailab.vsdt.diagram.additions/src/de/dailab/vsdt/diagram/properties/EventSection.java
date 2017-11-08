@@ -170,56 +170,56 @@ public class EventSection extends FlowObjectSection {
         
         parAssignButton = addButton(DISPLAY_PAR_ASSIGN);
 
+        // non-interrupting?
+        nonInterruptingButton= FormLayoutUtil.addButton(composite, DISPLAY_INTERRUPTING, SWT.CHECK, lastControl, null, 100);
+        nonInterruptingButton.addSelectionListener(this);
+        
         // event type and attributes
         label= FormLayoutUtil.addLabel(composite, DISPLAY_TRIGGER, lastControl, 0);
-        eventTypeCombo= FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, lastControl, label, 50);
+        eventTypeCombo= FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, lastControl, label, nonInterruptingButton);
         eventTypeCombo.addSelectionListener(this);
-        
-        // non-interrupting?
-        nonInterruptingButton= FormLayoutUtil.addButton(composite, DISPLAY_INTERRUPTING, SWT.CHECK, lastControl, eventTypeCombo, null);
-        nonInterruptingButton.addSelectionListener(this);
         
         // trigger type group
         triggerGroup= FormLayoutUtil.addGroup(composite, DISPLAY_GROUP, eventTypeCombo, 0, 100);
         
         //message trigger
         label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_IMPL, 0, 0);
-    	implementationCombo= new VsdtFeatureCombo<Implementation>(FormLayoutUtil.addCombo(triggerGroup, SWT.READ_ONLY, 0, label, 50));
+    	implementationCombo= new VsdtFeatureCombo<Implementation>(FormLayoutUtil.addCombo(triggerGroup, SWT.READ_ONLY, 0, label, 100));
 		implementationCombo.getCombo().addSelectionListener(this);
 		
 //        label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_MESSAGE, implementationCombo.getCombo(), 0);
-//    	messageCombo= new VsdtFeatureCombo<Message>(FormLayoutUtil.addCombo(triggerGroup, SWT.READ_ONLY, implementationCombo.getCombo(), label, 50));
+//    	messageCombo= new VsdtFeatureCombo<Message>(FormLayoutUtil.addCombo(triggerGroup, SWT.READ_ONLY, implementationCombo.getCombo(), label, 100));
 //    	messageCombo.getCombo().addSelectionListener(this);
 		
 		//timer trigger
-        asDurationButton= FormLayoutUtil.addButton(triggerGroup, DISPLAY_TIME_IS_DURATION, SWT.CHECK, implementationCombo.getCombo(), null, 50);
+        asDurationButton= FormLayoutUtil.addButton(triggerGroup, DISPLAY_TIME_IS_DURATION, SWT.CHECK, implementationCombo.getCombo(), null, 100);
         asDurationButton.addSelectionListener(this);
 		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_TIME_EXPRESSION, implementationCombo.getCombo(), 0);
 		timeExpressionComp= addExpressionComposite(triggerGroup, implementationCombo.getCombo(), label, asDurationButton);
 		
 		//error trigger
 		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_ERROR, timeExpressionComp, 0);
-		errorCodeText= FormLayoutUtil.addText(triggerGroup, timeExpressionComp, label, 50, SWT.NONE);
+		errorCodeText= FormLayoutUtil.addText(triggerGroup, timeExpressionComp, label, 100, SWT.NONE);
 		errorCodeText.addFocusListener(this);
 		
 		//compensation trigger
 		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_ACTIVITY, errorCodeText, 0);
-		activityCombo= new VsdtFeatureCombo<Activity>(FormLayoutUtil.addCombo(triggerGroup, SWT.READ_ONLY, errorCodeText, label, 50));
+		activityCombo= new VsdtFeatureCombo<Activity>(FormLayoutUtil.addCombo(triggerGroup, SWT.READ_ONLY, errorCodeText, label, 100));
 		activityCombo.getCombo().addSelectionListener(this);
 		
 		//rule trigger
-		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_RULE_EXP, 0, 50);
-		ruleExpText= addExpressionComposite(triggerGroup, 0, label, 100);
+		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_RULE_EXP, activityCombo.getCombo(), 0);
+		ruleExpText= addExpressionComposite(triggerGroup, activityCombo.getCombo(), label, 100);
 		
 		//link trigger
-		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_LINK, ruleExpText, 50);
+		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_LINK, ruleExpText, 0);
 		highlightOpposite= FormLayoutUtil.addButton(triggerGroup, DISPLAY_HIGHLIGH_LINK, SWT.NONE, ruleExpText, null, 100);
 		highlightOpposite.addSelectionListener(this);
 		linkedToCombo= new VsdtFeatureCombo<Event>(FormLayoutUtil.addCombo(triggerGroup, SWT.READ_ONLY, ruleExpText, label, highlightOpposite));
 		linkedToCombo.getCombo().addSelectionListener(this);
 		
 		//signal trigger
-		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_SIGNAL, linkedToCombo.getCombo(), 50);
+		label= FormLayoutUtil.addLabel(triggerGroup, DISPLAY_SIGNAL, linkedToCombo.getCombo(), 0);
 		signalThrownButton = FormLayoutUtil.addButton(triggerGroup, DISPLAY_SIGNAL_THROWN, SWT.CHECK, linkedToCombo.getCombo(), null, 100);
 		signalThrownButton.addSelectionListener(this);
 		signalText= FormLayoutUtil.addText(triggerGroup, linkedToCombo.getCombo(), label, signalThrownButton, SWT.NONE);
