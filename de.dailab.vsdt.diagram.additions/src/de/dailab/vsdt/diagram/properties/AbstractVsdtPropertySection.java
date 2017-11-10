@@ -14,7 +14,6 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
@@ -85,18 +84,8 @@ implements FocusListener, SelectionListener {
         
         // name
         label = FormLayoutUtil.addLabel(composite, DISPLAY_NAME, 0, 0);
-        nameText= FormLayoutUtil.addText(composite, 0, label, 50, SWT.NONE);
+        nameText= FormLayoutUtil.addText(composite, 0, label, 100, SWT.NONE);
         nameText.addFocusListener(this); 
-
-        // button composite
-        buttonComposite = new Composite(composite, SWT.NONE);
-        RowLayout layout = new RowLayout();
-        layout.marginTop = 0;
-        layout.marginBottom = 0;
-        buttonComposite.setLayout(layout);
-        buttonComposite.setLayoutData(FormLayoutUtil.createFormData(0, 50, 100));
-        // insert empty label -- otherwise the component will be too high if empty
-        new Label(buttonComposite, SWT.None);
         
         // documentation
         label = FormLayoutUtil.addLabel(composite, DISPLAY_DOCUMENTATION, nameText, 0);
@@ -105,8 +94,16 @@ implements FocusListener, SelectionListener {
         // improve text wrap
         ((FormData) docText.getLayoutData()).width= composite.getBounds().width;
         docText.addFocusListener(this);
+
+        // button composite
+        buttonComposite = new Composite(composite, SWT.NONE);
+        RowLayout layout = new RowLayout();
+        layout.marginTop = 0;
+        layout.marginBottom = 0;
+        buttonComposite.setLayout(layout);
+        buttonComposite.setLayoutData(FormLayoutUtil.createFormData(docText, 0, 100));
         
-        this.lastControl = docText;
+        this.lastControl = buttonComposite;
     }
     
     
