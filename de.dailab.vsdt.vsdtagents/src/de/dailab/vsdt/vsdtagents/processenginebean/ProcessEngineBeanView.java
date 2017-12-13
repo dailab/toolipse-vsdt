@@ -184,7 +184,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 			}
 			if (element instanceof Map.Entry) {
 				Map.Entry<String, String> entry = (Map.Entry<String, String>) element; 
-				return entry.getKey() + ": " + entry.getValue();
+				return entry.getValue();
 			}
 			return super.getText(element);
 		}
@@ -194,8 +194,8 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 			if (element instanceof IAgentDescription) {
 				return VsdtAgents.getImageDescriptor("agent.gif");
 			}
-			if (element instanceof String) {
-				return VsdtAgents.getImageDescriptor("action.gif");
+			if (element instanceof Map.Entry) {
+				return VsdtAgents.getImageDescriptor("role.gif");
 			}
 			return null;
 		}
