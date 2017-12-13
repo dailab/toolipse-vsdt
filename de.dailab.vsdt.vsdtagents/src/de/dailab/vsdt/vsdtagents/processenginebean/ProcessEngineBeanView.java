@@ -179,8 +179,8 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		@Override
 		public String getText(Object element) {
 			if (element instanceof IAgentDescription) {
-				// XXX der name ist vermutlich immer gleich; der node waere interessanter
-				return ((IAgentDescription) element).getName();
+				IAgentDescription agent = (IAgentDescription) element;
+				return agent.getName() + " @ " + agent.getOwner();
 			}
 			if (element instanceof Map.Entry) {
 				Map.Entry<String, String> entry = (Map.Entry<String, String>) element; 
