@@ -5,14 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import de.dailab.jiactng.agentcore.AbstractAgentBean;
+import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;
 import de.dailab.jiactng.agentcore.action.Action;
 import de.dailab.jiactng.agentcore.action.ActionResult;
-import de.dailab.jiactng.agentcore.action.IMethodExposingBean.Expose;
 import de.dailab.jiactng.agentcore.action.scope.ActionScope;
 import de.dailab.jiactng.agentcore.ontology.IActionDescription;
 import de.dailab.jiactng.agentcore.ontology.IAgentDescription;
-import de.dailab.vsdt.interpreter.State;
 
 /**
  * Proxy-Bean for invoking actions on ProcessEngineBean, providing a bridge 
@@ -20,7 +18,7 @@ import de.dailab.vsdt.interpreter.State;
  * 
  * @author kuester
  */
-public class ProcessEngineBeanBean extends AbstractAgentBean {
+public class ProcessEngineBeanBean extends AbstractMethodExposingBean {
 
 	// The actions from ProcessEngineBean
 	static final String PROVIDER = "de.dailab.jiactng.vsdt.interpreter.ProcessEngineBean#";
@@ -43,7 +41,7 @@ public class ProcessEngineBeanBean extends AbstractAgentBean {
 	 * @param allSteps		mapping Connection IDs to last visited step
 	 */
 	@Expose(name=ACTION_SHOW_STATE, scope=ActionScope.GLOBAL)
-	public void showState(Map<String, State> allStates, Map<String, Integer> allSteps) {
+	public void showState(Map<String, String> allStates, Map<String, Integer> allSteps) {
 		// TODO implement this method
 		System.out.println("ACTION INVOKED");
 		System.out.println(allStates);
