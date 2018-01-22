@@ -2,15 +2,44 @@ package de.dailab.vsdt.vsdtagents.processenginebean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.draw2d.IFigure;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gmf.runtime.common.core.command.CommandResult;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
+
+import de.dailab.common.gmf.Util;
+import de.dailab.common.gmf.command.AbstractGmfCommand;
 import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;
 import de.dailab.jiactng.agentcore.action.Action;
 import de.dailab.jiactng.agentcore.action.ActionResult;
 import de.dailab.jiactng.agentcore.action.scope.ActionScope;
 import de.dailab.jiactng.agentcore.ontology.IActionDescription;
 import de.dailab.jiactng.agentcore.ontology.IAgentDescription;
+import de.dailab.vsdt.BusinessProcessDiagram;
+import de.dailab.vsdt.FlowObject;
+import de.dailab.vsdt.IdObject;
+import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
+import de.dailab.vsdt.diagram.edit.parts.IVsdtEditPart;
+import de.dailab.vsdt.diagram.figures.IDecoratableFigure;
+import de.dailab.vsdt.diagram.interpreter.view.EclipseInterpreterObserver;
+import de.dailab.vsdt.diagram.interpreter.view.EclipseInterpreterObserver.FlowObjectMarkerDecorator;
+import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
+import de.dailab.vsdt.interpreter.State;
 
 /**
  * Proxy-Bean for invoking actions on ProcessEngineBean, providing a bridge 
@@ -36,6 +65,8 @@ public class ProcessEngineBeanBean extends AbstractMethodExposingBean {
 	/**
 	 * Receive interpreter state from process engine bean and set tokens in
 	 * currently opened VSDT editor accordingly.
+	 * 
+	 * Parts of this are more or less copied/adapted from {@link EclipseInterpreterObserver}
 	 *
 	 * @param allStates		Mapping FlowObject IDs to interpreter State
 	 * @param allSteps		mapping Connection IDs to last visited step
@@ -46,8 +77,100 @@ public class ProcessEngineBeanBean extends AbstractMethodExposingBean {
 		System.out.println("ACTION INVOKED");
 		System.out.println(allStates);
 		System.out.println(allSteps);
+		
+		IEditorPart editor = getEditor();
+		if (editor instanceof VsdtDiagramEditor) {
+			BusinessProcessDiagramEditPart editPart = (BusinessProcessDiagramEditPart) ((VsdtDiagramEditor) editor).getDiagramEditPart();
+			BusinessProcessDiagram bpd = editPart.getCastedModel();
+			
+			for (TreeIterator<EObject> iter = bpd.eAllContents(); iter.hasNext(); ) {
+				EObject next = iter.next();
+				
+				if (next instanceof IdObject) {
+					String id = ((IdObject) next).getId();
+
+					if (allStates.containsKey(id)) {
+
+						IFigure figure= getFigure(editPart, next);
+						// MarkerDecorator
+						if (figure instanceof IDecoratableFigure) {
+							IDecoratableFigure decoratableFigure= (IDecoratableFigure) figure;
+							if (! (decoratableFigure.getDecorator() instanceof FlowObjectMarkerDecorator)) {
+								decoratableFigure.setDecorator(new FlowObjectMarkerDecorator());
+							}
+							FlowObjectMarkerDecorator decorator = (FlowObjectMarkerDecorator) decoratableFigure.getDecorator();
+							decorator.state = State.valueOf(allStates.get(id));
+							figure.repaint();
+						}
+					}
+				}
+			}
+			
+//			for (Entry<EObject, Integer> entry : stepMap.entrySet()) {
+//				IFigure figure= getFigure(entry.getKey());
+//				if (figure instanceof PolylineConnectionEx) {
+//					PolylineConnectionEx connectionFigure = (PolylineConnectionEx) figure;
+//					int lastVisited= entry.getValue();
+//					if (lastVisited > 0) {
+//						connectionFigure.setLineWidth(3);
+//						Color color= figure.getForegroundColor();
+//						int red= color.getRed();
+//						int green= color.getGreen();
+//						int blue= (int) (255 * ((float) lastVisited / (float) step));
+//						connectionFigure.setForegroundColor(new Color(color.getDevice(), red, green, blue));
+//					}
+//				}
+//			}
+		} else {
+			System.out.println("NOT A VSDT EDITOR");
+		}
+		
+//		// also, we have to put this inside a command
+//		AbstractGmfCommand command = new AbstractGmfCommand(bps, "Import Semantic Service") {
+//			@Override
+//			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
+//				// finally, add the service to the BPS' list of services
+//				bps.getServices().add(service);
+//				// add data types referred to by service
+//				mergeInto(dataTypes, bps.getDataTypes());
+//				return CommandResult.newOKCommandResult(bps);
+//			}
+//		};
 	}
 
+	/**
+	 * Get and return the active editor from the workbench
+	 */
+	private DiagramEditor getEditor() {
+		IWorkbenchWindow[] wbws = PlatformUI.getWorkbench().getWorkbenchWindows();
+		if (wbws.length > 0 && wbws[0].getActivePage() != null) {
+			IEditorPart editor = wbws[0].getActivePage().getActiveEditor();
+			if (editor instanceof DiagramEditor) {
+				return (DiagramEditor) editor;
+			}
+		}
+		return null;
+	}
+
+	
+	/** Map holding the association of EObjects to EditParts */
+	protected final Map<EObject, IFigure> figureMap= new HashMap<>();
+
+	/*
+	 * copied from {@link EclipseInterpreterObserver}
+	 */
+	protected final IFigure getFigure(BusinessProcessDiagramEditPart diagramEditPart, EObject eObject) {
+		IFigure figure = figureMap.get(eObject);
+		if (figure == null) {
+			IVsdtEditPart editPart= (IVsdtEditPart) Util.findFirstEditPart(eObject, diagramEditPart, IVsdtEditPart.class);
+			if (editPart != null) {
+				figure= editPart.getPrimaryShape();
+				figureMap.put(eObject, figure);
+			}
+		}
+		return figure;
+	}
+	
 	/*
 	 * METHODS TO INVOKE ACTIONS AT PROCESS ENGINE BEAN
 	 */

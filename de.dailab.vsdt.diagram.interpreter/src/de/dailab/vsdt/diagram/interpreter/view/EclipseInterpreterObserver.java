@@ -166,14 +166,14 @@ public class EclipseInterpreterObserver implements ISimulationObserver {
 	 * 
 	 * @author kuester
 	 */
-	protected static class FlowObjectMarkerDecorator implements IFigureDecorator {
+	public static class FlowObjectMarkerDecorator implements IFigureDecorator {
 		
 		static final Color butter = new Color(null, 252, 233, 79); // tango butter 1
 		static final Color sky = new Color(null, 114, 159, 207);// tango sky blue 1
 		static final Color chameleon = new Color(null, 138, 226, 52);// tango chameleon 1
 		static final Color scarlet = new Color(null, 239, 41, 41);// tango scarlet red 1
 		
-		State state= null;
+		public State state= null;
 
 		public void decorateFigure(IFigure figure, Graphics g) {
 			if (state == null || state == State.IDLE) return;
