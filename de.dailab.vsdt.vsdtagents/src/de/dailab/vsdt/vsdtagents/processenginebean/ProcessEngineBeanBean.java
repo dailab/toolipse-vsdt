@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.ui.PlatformUI;
 
 import de.dailab.common.gmf.Util;
@@ -29,6 +31,7 @@ import de.dailab.vsdt.diagram.interpreter.view.EclipseInterpreterObserver;
 import de.dailab.vsdt.diagram.interpreter.view.EclipseInterpreterObserver.FlowObjectMarkerDecorator;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
 import de.dailab.vsdt.interpreter.State;
+import de.dailab.vsdt.util.VsdtHelper;
 
 /**
  * Proxy-Bean for invoking actions on ProcessEngineBean, providing a bridge 
@@ -70,49 +73,52 @@ public class ProcessEngineBeanBean extends AbstractMethodExposingBean {
 				.filter(VsdtDiagramEditor.class::isInstance)
 				.map(VsdtDiagramEditor.class::cast)
 				.collect(Collectors.toList());
-		
+
+		// this can show the state in multiple VSDT editors opened side-by-side at once
 		for (VsdtDiagramEditor editor : editors) {
 			BusinessProcessDiagramEditPart editPart = (BusinessProcessDiagramEditPart) ((VsdtDiagramEditor) editor).getDiagramEditPart();
 			BusinessProcessDiagram bpd = editPart.getCastedModel();
 			
-			// XXX this is somewhat wasteful; better iterate the edit parts directly?
-			for (TreeIterator<EObject> iter = bpd.eAllContents(); iter.hasNext(); ) {
-				EObject next = iter.next();
-				
-				if (next instanceof IdObject) {
-					String id = ((IdObject) next).getId();
+			// filter states and steps for current BPD (for getting max step)
+			Map<IdObject, State> stateMap = bpd.getPools().stream()
+					.flatMap(p -> VsdtHelper.getAllGraphicalElements(p).stream())
+					.filter(x -> allStates.containsKey(x.getId()))
+					.collect(Collectors.toMap(x -> x, x -> State.valueOf(allStates.get(x.getId()))));
 
-					if (allStates.containsKey(id)) {
-						IFigure figure = getFigure(editPart, next);
-						// MarkerDecorator
-						if (figure instanceof IDecoratableFigure) {
-							IDecoratableFigure decoratableFigure= (IDecoratableFigure) figure;
-							if (! (decoratableFigure.getDecorator() instanceof FlowObjectMarkerDecorator)) {
-								decoratableFigure.setDecorator(new FlowObjectMarkerDecorator());
-							}
-							FlowObjectMarkerDecorator decorator = (FlowObjectMarkerDecorator) decoratableFigure.getDecorator();
-							decorator.state = State.valueOf(allStates.get(id));
-							figure.repaint();
-						}
+			Map<IdObject, Integer> stepMap = bpd.getConnections().stream()
+					.filter(x -> allSteps.containsKey(x.getId()))
+					.collect(Collectors.toMap(x -> x, x -> allSteps.get(x.getId())));
+
+			for (Entry<IdObject, State> entry : stateMap.entrySet()) {
+				IFigure figure = getFigure(editPart, entry.getKey());
+				// MarkerDecorator
+				if (figure instanceof IDecoratableFigure) {
+					IDecoratableFigure decoratableFigure= (IDecoratableFigure) figure;
+					if (! (decoratableFigure.getDecorator() instanceof FlowObjectMarkerDecorator)) {
+						decoratableFigure.setDecorator(new FlowObjectMarkerDecorator());
+					}
+					FlowObjectMarkerDecorator decorator = (FlowObjectMarkerDecorator) decoratableFigure.getDecorator();
+					decorator.state = entry.getValue();
+					figure.repaint();
+				}
+			}
+
+			int maxStep = stepMap.values().stream().mapToInt(x -> x).max().orElseGet(() -> 0);
+			for (Entry<IdObject, Integer> entry : stepMap.entrySet()) {
+				IFigure figure= getFigure(editPart, entry.getKey());
+				if (figure instanceof PolylineConnectionEx) {
+					PolylineConnectionEx connectionFigure = (PolylineConnectionEx) figure;
+					int lastVisited= entry.getValue();
+					if (lastVisited > 0) {
+						connectionFigure.setLineWidth(3);
+						Color color= figure.getForegroundColor();
+						int red= color.getRed();
+						int green= color.getGreen();
+						int blue= (int) (255 * ((float) lastVisited / (float) maxStep));
+						connectionFigure.setForegroundColor(new Color(color.getDevice(), red, green, blue));
 					}
 				}
 			}
-			// XXX for this to work properly we first have to group all the idobjects per pool
-//			for (Entry<EObject, Integer> entry : stepMap.entrySet()) {
-//				IFigure figure= getFigure(entry.getKey());
-//				if (figure instanceof PolylineConnectionEx) {
-//					PolylineConnectionEx connectionFigure = (PolylineConnectionEx) figure;
-//					int lastVisited= entry.getValue();
-//					if (lastVisited > 0) {
-//						connectionFigure.setLineWidth(3);
-//						Color color= figure.getForegroundColor();
-//						int red= color.getRed();
-//						int green= color.getGreen();
-//						int blue= (int) (255 * ((float) lastVisited / (float) step));
-//						connectionFigure.setForegroundColor(new Color(color.getDevice(), red, green, blue));
-//					}
-//				}
-//			}
 		}
 		
 	}
