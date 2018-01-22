@@ -5,25 +5,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.gmf.runtime.common.core.command.CommandResult;
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditor;
-import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 
 import de.dailab.common.gmf.Util;
-import de.dailab.common.gmf.command.AbstractGmfCommand;
 import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;
 import de.dailab.jiactng.agentcore.action.Action;
 import de.dailab.jiactng.agentcore.action.ActionResult;
@@ -31,7 +21,6 @@ import de.dailab.jiactng.agentcore.action.scope.ActionScope;
 import de.dailab.jiactng.agentcore.ontology.IActionDescription;
 import de.dailab.jiactng.agentcore.ontology.IAgentDescription;
 import de.dailab.vsdt.BusinessProcessDiagram;
-import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.IdObject;
 import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
 import de.dailab.vsdt.diagram.edit.parts.IVsdtEditPart;
@@ -73,16 +62,20 @@ public class ProcessEngineBeanBean extends AbstractMethodExposingBean {
 	 */
 	@Expose(name=ACTION_SHOW_STATE, scope=ActionScope.GLOBAL)
 	public void showState(Map<String, String> allStates, Map<String, Integer> allSteps) {
-		// TODO implement this method
-		System.out.println("ACTION INVOKED");
-		System.out.println(allStates);
-		System.out.println(allSteps);
+		// get all opened VSDT editors
+		List<VsdtDiagramEditor> editors = Stream.of(PlatformUI.getWorkbench().getWorkbenchWindows())
+				.flatMap(wbw -> Stream.of(wbw.getPages()))
+				.flatMap(wbp -> Stream.of(wbp.getEditorReferences()))
+				.map(ref -> ref.getEditor(false))
+				.filter(VsdtDiagramEditor.class::isInstance)
+				.map(VsdtDiagramEditor.class::cast)
+				.collect(Collectors.toList());
 		
-		IEditorPart editor = getEditor();
-		if (editor instanceof VsdtDiagramEditor) {
+		for (VsdtDiagramEditor editor : editors) {
 			BusinessProcessDiagramEditPart editPart = (BusinessProcessDiagramEditPart) ((VsdtDiagramEditor) editor).getDiagramEditPart();
 			BusinessProcessDiagram bpd = editPart.getCastedModel();
 			
+			// XXX this is somewhat wasteful; better iterate the edit parts directly?
 			for (TreeIterator<EObject> iter = bpd.eAllContents(); iter.hasNext(); ) {
 				EObject next = iter.next();
 				
@@ -90,8 +83,7 @@ public class ProcessEngineBeanBean extends AbstractMethodExposingBean {
 					String id = ((IdObject) next).getId();
 
 					if (allStates.containsKey(id)) {
-
-						IFigure figure= getFigure(editPart, next);
+						IFigure figure = getFigure(editPart, next);
 						// MarkerDecorator
 						if (figure instanceof IDecoratableFigure) {
 							IDecoratableFigure decoratableFigure= (IDecoratableFigure) figure;
@@ -105,7 +97,7 @@ public class ProcessEngineBeanBean extends AbstractMethodExposingBean {
 					}
 				}
 			}
-			
+			// XXX for this to work properly we first have to group all the idobjects per pool
 //			for (Entry<EObject, Integer> entry : stepMap.entrySet()) {
 //				IFigure figure= getFigure(entry.getKey());
 //				if (figure instanceof PolylineConnectionEx) {
@@ -121,38 +113,10 @@ public class ProcessEngineBeanBean extends AbstractMethodExposingBean {
 //					}
 //				}
 //			}
-		} else {
-			System.out.println("NOT A VSDT EDITOR");
 		}
 		
-//		// also, we have to put this inside a command
-//		AbstractGmfCommand command = new AbstractGmfCommand(bps, "Import Semantic Service") {
-//			@Override
-//			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
-//				// finally, add the service to the BPS' list of services
-//				bps.getServices().add(service);
-//				// add data types referred to by service
-//				mergeInto(dataTypes, bps.getDataTypes());
-//				return CommandResult.newOKCommandResult(bps);
-//			}
-//		};
 	}
 
-	/**
-	 * Get and return the active editor from the workbench
-	 */
-	private DiagramEditor getEditor() {
-		IWorkbenchWindow[] wbws = PlatformUI.getWorkbench().getWorkbenchWindows();
-		if (wbws.length > 0 && wbws[0].getActivePage() != null) {
-			IEditorPart editor = wbws[0].getActivePage().getActiveEditor();
-			if (editor instanceof DiagramEditor) {
-				return (DiagramEditor) editor;
-			}
-		}
-		return null;
-	}
-
-	
 	/** Map holding the association of EObjects to EditParts */
 	protected final Map<EObject, IFigure> figureMap= new HashMap<>();
 
