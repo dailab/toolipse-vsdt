@@ -1,21 +1,18 @@
 package de.dailab.vsdt.vsdtagents.processenginebean;
 
+import static de.dailab.vsdt.diagram.interpreter.view.DecorationHelper.decorateEdge;
+import static de.dailab.vsdt.diagram.interpreter.view.DecorationHelper.decorateNode;
+import static de.dailab.vsdt.diagram.interpreter.view.DecorationHelper.getFigure;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.eclipse.draw2d.IFigure;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.ui.PlatformUI;
 
-import de.dailab.common.gmf.Util;
 import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;
 import de.dailab.jiactng.agentcore.action.Action;
 import de.dailab.jiactng.agentcore.action.ActionResult;
@@ -23,12 +20,8 @@ import de.dailab.jiactng.agentcore.action.scope.ActionScope;
 import de.dailab.jiactng.agentcore.ontology.IActionDescription;
 import de.dailab.jiactng.agentcore.ontology.IAgentDescription;
 import de.dailab.vsdt.BusinessProcessDiagram;
-import de.dailab.vsdt.IdObject;
 import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
-import de.dailab.vsdt.diagram.edit.parts.IVsdtEditPart;
-import de.dailab.vsdt.diagram.figures.IDecoratableFigure;
 import de.dailab.vsdt.diagram.interpreter.view.EclipseInterpreterObserver;
-import de.dailab.vsdt.diagram.interpreter.view.EclipseInterpreterObserver.FlowObjectMarkerDecorator;
 import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
 import de.dailab.vsdt.interpreter.State;
 import de.dailab.vsdt.util.VsdtHelper;
@@ -79,66 +72,17 @@ public class ProcessEngineBeanBean extends AbstractMethodExposingBean {
 			BusinessProcessDiagramEditPart editPart = (BusinessProcessDiagramEditPart) ((VsdtDiagramEditor) editor).getDiagramEditPart();
 			BusinessProcessDiagram bpd = editPart.getCastedModel();
 			
-			// filter states and steps for current BPD (for getting max step)
-			Map<IdObject, State> stateMap = bpd.getPools().stream()
+			// filter objects by states, get state, and decorate accordingly
+			bpd.getPools().stream()
 					.flatMap(p -> VsdtHelper.getAllGraphicalElements(p).stream())
 					.filter(x -> allStates.containsKey(x.getId()))
-					.collect(Collectors.toMap(x -> x, x -> State.valueOf(allStates.get(x.getId()))));
+					.forEach(x -> decorateNode(getFigure(editPart, x), State.valueOf(allStates.get(x.getId()))));
 
-			Map<IdObject, Integer> stepMap = bpd.getConnections().stream()
-					.filter(x -> allSteps.containsKey(x.getId()))
-					.collect(Collectors.toMap(x -> x, x -> allSteps.get(x.getId())));
-
-			for (Entry<IdObject, State> entry : stateMap.entrySet()) {
-				IFigure figure = getFigure(editPart, entry.getKey());
-				// MarkerDecorator
-				if (figure instanceof IDecoratableFigure) {
-					IDecoratableFigure decoratableFigure= (IDecoratableFigure) figure;
-					if (! (decoratableFigure.getDecorator() instanceof FlowObjectMarkerDecorator)) {
-						decoratableFigure.setDecorator(new FlowObjectMarkerDecorator());
-					}
-					FlowObjectMarkerDecorator decorator = (FlowObjectMarkerDecorator) decoratableFigure.getDecorator();
-					decorator.state = entry.getValue();
-					figure.repaint();
-				}
-			}
-
-			int maxStep = stepMap.values().stream().mapToInt(x -> x).max().orElseGet(() -> 0);
-			for (Entry<IdObject, Integer> entry : stepMap.entrySet()) {
-				IFigure figure= getFigure(editPart, entry.getKey());
-				if (figure instanceof PolylineConnectionEx) {
-					PolylineConnectionEx connectionFigure = (PolylineConnectionEx) figure;
-					int lastVisited= entry.getValue();
-					if (lastVisited > 0) {
-						connectionFigure.setLineWidth(3);
-						Color color= figure.getForegroundColor();
-						int red= color.getRed();
-						int green= color.getGreen();
-						int blue= (int) (255 * ((float) lastVisited / (float) maxStep));
-						connectionFigure.setForegroundColor(new Color(color.getDevice(), red, green, blue));
-					}
-				}
-			}
+			// get max step, filter connections by step set, and decorate accordingly
+			int maxStep = bpd.getConnections().stream().mapToInt(x -> allSteps.getOrDefault(x.getId(), 0)).max().orElseGet(() -> 1);
+			bpd.getConnections().stream()
+					.forEach(x -> decorateEdge(getFigure(editPart, x), allSteps.getOrDefault(x.getId(), 0), maxStep));
 		}
-		
-	}
-
-	/** Map holding the association of EObjects to EditParts */
-	protected final Map<EObject, IFigure> figureMap= new HashMap<>();
-
-	/*
-	 * copied from {@link EclipseInterpreterObserver}
-	 */
-	protected final IFigure getFigure(BusinessProcessDiagramEditPart diagramEditPart, EObject eObject) {
-		IFigure figure = figureMap.get(eObject);
-		if (figure == null) {
-			IVsdtEditPart editPart= (IVsdtEditPart) Util.findFirstEditPart(eObject, diagramEditPart, IVsdtEditPart.class);
-			if (editPart != null) {
-				figure= editPart.getPrimaryShape();
-				figureMap.put(eObject, figure);
-			}
-		}
-		return figure;
 	}
 	
 	/*
