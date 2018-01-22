@@ -8,8 +8,11 @@ import java.util.Map;
 import de.dailab.jiactng.agentcore.AbstractAgentBean;
 import de.dailab.jiactng.agentcore.action.Action;
 import de.dailab.jiactng.agentcore.action.ActionResult;
+import de.dailab.jiactng.agentcore.action.IMethodExposingBean.Expose;
+import de.dailab.jiactng.agentcore.action.scope.ActionScope;
 import de.dailab.jiactng.agentcore.ontology.IActionDescription;
 import de.dailab.jiactng.agentcore.ontology.IAgentDescription;
+import de.dailab.vsdt.interpreter.State;
 
 /**
  * Proxy-Bean for invoking actions on ProcessEngineBean, providing a bridge 
@@ -25,6 +28,31 @@ public class ProcessEngineBeanBean extends AbstractAgentBean {
 	static final String ACTION_REMOVE_RUNTIME   = PROVIDER + "removeInterpreterRuntime";
 	static final String ACTION_GET_RUNTIMES     = PROVIDER + "getAllInterpreters";
 	
+	// own actions
+	public static final String ACTION_SHOW_STATE = "de.dailab.vsdt.vsdtagents.processenginebean.ProcessEngineBeanBean#showState";
+
+	/*
+	 * OWN ACTIONS TO BE INVOKED BY PROCESS ENGINE BEAN
+	 */
+
+	/**
+	 * Receive interpreter state from process engine bean and set tokens in
+	 * currently opened VSDT editor accordingly.
+	 *
+	 * @param allStates		Mapping FlowObject IDs to interpreter State
+	 * @param allSteps		mapping Connection IDs to last visited step
+	 */
+	@Expose(name=ACTION_SHOW_STATE, scope=ActionScope.GLOBAL)
+	public void showState(Map<String, State> allStates, Map<String, Integer> allSteps) {
+		// TODO implement this method
+		System.out.println("ACTION INVOKED");
+		System.out.println(allStates);
+		System.out.println(allSteps);
+	}
+
+	/*
+	 * METHODS TO INVOKE ACTIONS AT PROCESS ENGINE BEAN
+	 */
 
 	/**
 	 * Get a list of all the interpreter agents, by searching for all running 
