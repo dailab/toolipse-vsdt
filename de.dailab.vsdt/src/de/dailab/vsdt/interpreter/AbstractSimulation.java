@@ -2,6 +2,7 @@ package de.dailab.vsdt.interpreter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -520,6 +521,22 @@ public abstract class AbstractSimulation implements ISimulation {
 		return stepMap.get(object);
 	}
 	
+	/*
+	 * protected getters for internal state
+	 */
+
+	public Map<FlowObject, State> getStateMap() {
+		return Collections.unmodifiableMap(stateMap);
+	}
+
+	public Map<EObject, Integer> getStepMap() {
+		return Collections.unmodifiableMap(stepMap);
+	}
+
+	public Map<ConnectingObject, Integer> getTokenMap() {
+		return Collections.unmodifiableMap(tokenMap);
+	}
+
 	/**
 	 * Check whether the given FlowObject is in one of the given states.
 	 * 

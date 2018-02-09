@@ -1,15 +1,30 @@
 package de.dailab.vsdt.vsdtagents.processenginebean;
 
+import static de.dailab.vsdt.diagram.interpreter.view.DecorationHelper.decorateEdge;
+import static de.dailab.vsdt.diagram.interpreter.view.DecorationHelper.decorateNode;
+import static de.dailab.vsdt.diagram.interpreter.view.DecorationHelper.getFigure;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import de.dailab.jiactng.agentcore.AbstractAgentBean;
+import org.eclipse.ui.PlatformUI;
+
+import de.dailab.jiactng.agentcore.action.AbstractMethodExposingBean;
 import de.dailab.jiactng.agentcore.action.Action;
 import de.dailab.jiactng.agentcore.action.ActionResult;
+import de.dailab.jiactng.agentcore.action.scope.ActionScope;
 import de.dailab.jiactng.agentcore.ontology.IActionDescription;
 import de.dailab.jiactng.agentcore.ontology.IAgentDescription;
+import de.dailab.vsdt.BusinessProcessDiagram;
+import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
+import de.dailab.vsdt.diagram.interpreter.view.EclipseInterpreterObserver;
+import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
+import de.dailab.vsdt.interpreter.State;
+import de.dailab.vsdt.util.VsdtHelper;
 
 /**
  * Proxy-Bean for invoking actions on ProcessEngineBean, providing a bridge 
@@ -17,7 +32,7 @@ import de.dailab.jiactng.agentcore.ontology.IAgentDescription;
  * 
  * @author kuester
  */
-public class ProcessEngineBeanBean extends AbstractAgentBean {
+public class ProcessEngineBeanBean extends AbstractMethodExposingBean {
 
 	// The actions from ProcessEngineBean
 	static final String PROVIDER = "de.dailab.jiactng.vsdt.interpreter.ProcessEngineBean#";
@@ -25,6 +40,54 @@ public class ProcessEngineBeanBean extends AbstractAgentBean {
 	static final String ACTION_REMOVE_RUNTIME   = PROVIDER + "removeInterpreterRuntime";
 	static final String ACTION_GET_RUNTIMES     = PROVIDER + "getAllInterpreters";
 	
+	// own actions
+	public static final String ACTION_SHOW_STATE = "de.dailab.vsdt.vsdtagents.processenginebean.ProcessEngineBeanBean#showState";
+
+	/*
+	 * OWN ACTIONS TO BE INVOKED BY PROCESS ENGINE BEAN
+	 */
+
+	/**
+	 * Receive interpreter state from process engine bean and set tokens in
+	 * currently opened VSDT editor accordingly.
+	 * 
+	 * Parts of this are more or less copied/adapted from {@link EclipseInterpreterObserver}
+	 *
+	 * @param allStates		Mapping FlowObject IDs to interpreter State
+	 * @param allSteps		mapping Connection IDs to last visited step
+	 */
+	@Expose(name=ACTION_SHOW_STATE, scope=ActionScope.GLOBAL)
+	public void showState(Map<String, String> allStates, Map<String, Integer> allSteps) {
+		// get all opened VSDT editors
+		List<VsdtDiagramEditor> editors = Stream.of(PlatformUI.getWorkbench().getWorkbenchWindows())
+				.flatMap(wbw -> Stream.of(wbw.getPages()))
+				.flatMap(wbp -> Stream.of(wbp.getEditorReferences()))
+				.map(ref -> ref.getEditor(false))
+				.filter(VsdtDiagramEditor.class::isInstance)
+				.map(VsdtDiagramEditor.class::cast)
+				.collect(Collectors.toList());
+
+		// this can show the state in multiple VSDT editors opened side-by-side at once
+		for (VsdtDiagramEditor editor : editors) {
+			BusinessProcessDiagramEditPart editPart = (BusinessProcessDiagramEditPart) ((VsdtDiagramEditor) editor).getDiagramEditPart();
+			BusinessProcessDiagram bpd = editPart.getCastedModel();
+			
+			// filter objects by states, get state, and decorate accordingly
+			bpd.getPools().stream()
+					.flatMap(p -> VsdtHelper.getAllGraphicalElements(p).stream())
+					.filter(x -> allStates.containsKey(x.getId()))
+					.forEach(x -> decorateNode(getFigure(editPart, x), State.valueOf(allStates.get(x.getId()))));
+
+			// get max step, filter connections by step set, and decorate accordingly
+			int maxStep = bpd.getConnections().stream().mapToInt(x -> allSteps.getOrDefault(x.getId(), 0)).max().orElseGet(() -> 1);
+			bpd.getConnections().stream()
+					.forEach(x -> decorateEdge(getFigure(editPart, x), allSteps.getOrDefault(x.getId(), 0), maxStep));
+		}
+	}
+	
+	/*
+	 * METHODS TO INVOKE ACTIONS AT PROCESS ENGINE BEAN
+	 */
 
 	/**
 	 * Get a list of all the interpreter agents, by searching for all running 
