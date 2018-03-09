@@ -2,6 +2,7 @@ package de.dailab.vsdt.interpreter;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
+import de.dailab.vsdt.Event;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.Gateway;
 import de.dailab.vsdt.GatewayType;
@@ -114,6 +115,7 @@ public abstract class BasicSimulation extends AbstractSimulation {
 	@Override
 	protected void setState(FlowObject flowObject, State state) {
 		State lastState= getState(flowObject);
+		if (stateMap.get(flowObject) == state) return;
 		stateMap.put(flowObject, state);
 		
 		if (flowObject instanceof Activity) {
@@ -147,11 +149,16 @@ public abstract class BasicSimulation extends AbstractSimulation {
 					}
 				}
 			}
-			for (FlowObject borderItem : activity.getBoundaryEvents()) {
+			for (Event borderItem : activity.getBoundaryEvents()) {
 				if (state == State.ACTIVE_WAITING && lastState != State.LOOPING_READY) {
 					// do not reset running event handlers when looping
 					setState(borderItem, State.READY);
 				} else if (state == State.DONE || state == State.FAILED) {
+					// activate error handlers
+					if (state == State.FAILED && borderItem.getTrigger() == TriggerType.ERROR) {
+						setState(borderItem, State.ACTIVE_READY);
+					} else
+					// deactivate all other
 					if (getState(borderItem) != State.DONE) {
 						setState(borderItem, State.IDLE);
 					}

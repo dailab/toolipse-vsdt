@@ -189,10 +189,11 @@ public abstract class AbstractSimulation implements ISimulation {
 				logMessage(LogLevel.ERROR, "Error stepping into " + flowObject.getNameOrId(), e.getMessage());
 				System.err.println("Error stepping into " + flowObject + ": " + e.getMessage());
 				// check whether there is an error boundary event
-				Intermediate error = getEventHandler(flowObject, TriggerType.ERROR);
-				if (error != null) {
-					return stepOver(error);
-				}
+//				Intermediate error = getEventHandler(flowObject, TriggerType.ERROR);
+//				if (error != null) {
+//					return stepOver(error);
+//				}
+				setState(flowObject, State.FAILED);
 			}
 			
 			// possibly set state to ACTIVE_READY
@@ -224,10 +225,11 @@ public abstract class AbstractSimulation implements ISimulation {
 				logMessage(LogLevel.ERROR, "Error stepping out of " + flowObject.getNameOrId(), e.getMessage());
 				System.err.println("Error stepping out of " + flowObject + ": " + e.getMessage());
 				// check if there is error event attached
-				Intermediate error = getEventHandler(flowObject, TriggerType.ERROR);
-				if (error != null) {
-					return stepOver(error);
-				}
+//				Intermediate error = getEventHandler(flowObject, TriggerType.ERROR);
+//				if (error != null) {
+//					return stepOver(error);
+//				}
+				setState(flowObject, State.FAILED);
 			}
 			
 			// handle activity looping
