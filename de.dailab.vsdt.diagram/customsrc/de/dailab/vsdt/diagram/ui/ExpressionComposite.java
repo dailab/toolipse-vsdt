@@ -98,7 +98,7 @@ public class ExpressionComposite extends Composite {
 	}
 	
 	public void setValues(Expression expression) {
-		this.expressionText.setText(expression != null ? expression.getExpression() : "");
+		this.expressionText.setText(expression != null && expression.getExpression() != null ? expression.getExpression() : "");
 		this.language = expression != null ? expression.getLanguage() : null;
 	}
 
