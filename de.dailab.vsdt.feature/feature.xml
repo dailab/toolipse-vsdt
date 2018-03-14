@@ -2,7 +2,7 @@
 <feature
       id="de.dailab.vsdt.feature"
       label="Toolipse VSDT Process Editor"
-      version="3.0.2.qualifier"
+      version="3.0.3.qualifier"
       provider-name="DAI-Labor, TU Berlin">
 
    <description url="http://www.jiac.de/development-tools/jiac-toolipse/visual-service-design-tool/">
@@ -135,17 +135,14 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import plugin="org.eclipse.emf.validation"/>
       <import plugin="org.eclipse.emf.validation.ui"/>
       <import plugin="org.eclipse.gef"/>
-      <import plugin="de.dailab.common.gmf"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.ui.views.properties.tabbed"/>
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="org.eclipse.emf.workspace"/>
-      <import plugin="de.dailab.common.swt"/>
-      <import plugin="org.eclipse.xtext"/>
       <import plugin="org.eclipse.emf.codegen"/>
       <import plugin="org.eclipse.gmf.runtime.common.ui"/>
       <import plugin="org.eclipse.gmf.runtime.notation"/>
-      <import plugin="org.eclipse.emf.ecore.editor"/>
+      <import plugin="org.eclipse.xtext"/>
       <import plugin="org.eclipse.xtext.util"/>
       <import plugin="org.eclipse.emf.common"/>
       <import plugin="org.antlr.runtime"/>
