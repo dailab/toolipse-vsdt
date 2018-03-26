@@ -2,7 +2,6 @@ package de.dailab.vsdt.vsdtagents.deployment;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -17,6 +16,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import de.dailab.jiactng.agentcore.ontology.IActionDescription;
+import de.dailab.vsdt.util.ExpressionHelper;
 
 /**
  * A Simple Dialog for entering Parameter values for a Service Call. For each
@@ -68,11 +68,7 @@ public class ServiceParameterDialog extends TitleAreaDialog {
 	 */
 	public static boolean isSupported(IActionDescription service) {
 		try {
-			for (Class clazz : service.getInputTypes()) {
-				if (! Arrays.asList(supported).contains(clazz)) {
-					return false;
-				}
-			}
+			service.getInputTypes();
 			return true;
 		} catch (ClassNotFoundException e) {
 			return false;
@@ -199,22 +195,26 @@ public class ServiceParameterDialog extends TitleAreaDialog {
 		Serializable value = null;
 		if (clazz == String.class)
 			value = string;
-		if (clazz == Boolean.class || clazz == boolean.class)
+		else if (clazz == Boolean.class || clazz == boolean.class)
 			value = Boolean.parseBoolean(string);
-		if (clazz == Byte.class || clazz == byte.class)
+		else if (clazz == Byte.class || clazz == byte.class)
 			value = Byte.parseByte(string);
-		if (clazz == Character.class || clazz == char.class)
+		else if (clazz == Character.class || clazz == char.class)
 			value = string.charAt(0);
-		if (clazz == Short.class || clazz == short.class)
+		else if (clazz == Short.class || clazz == short.class)
 			value = Short.parseShort(string);
-		if (clazz == Integer.class || clazz == int.class)
+		else if (clazz == Integer.class || clazz == int.class)
 			value = Integer.parseInt(string);
-		if (clazz == Long.class || clazz == long.class)
+		else if (clazz == Long.class || clazz == long.class)
 			value = Long.parseLong(string);
-		if (clazz == Float.class || clazz == float.class)
+		else if (clazz == Float.class || clazz == float.class)
 			value = Float.parseFloat(string);
-		if (clazz == Double.class || clazz == double.class)
+		else if (clazz == Double.class || clazz == double.class)
 			value = Double.parseDouble(string);
+		else {
+			System.out.println("Using MVEL to parse expression " + string);
+			value = (Serializable) ExpressionHelper.evaluateMvelExpression(string, null);
+		}
 		return value;
 	}
 
