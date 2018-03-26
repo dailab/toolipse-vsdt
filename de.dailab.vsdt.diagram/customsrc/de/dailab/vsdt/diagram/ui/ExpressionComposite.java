@@ -148,7 +148,9 @@ public class ExpressionComposite extends Composite {
 		//TODO do not create new expression if expression already exists
 		if (owner != null && feature != null) {
 			Expression expression= VsdtElementFactory.createExpression(expressionText.getText());
-			expression.setLanguage(language);
+			if (expression != null) {
+				expression.setLanguage(language);
+			}
 			SetPropertyValueCommand command= new SetPropertyValueCommand(owner, feature, expression);
 	    	try {
 	        	OperationHistoryFactory.getOperationHistory().execute(command, new NullProgressMonitor(), null);	
