@@ -24,6 +24,7 @@ import de.dailab.vsdt.meta.diagram.part.VsdtMetaDiagramEditorPlugin;
 /**
  * @generated
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class VsdtDomainNavigatorContentProvider implements
 		ICommonContentProvider {
 

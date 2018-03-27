@@ -9,6 +9,7 @@ import org.eclipse.gmf.runtime.notation.View;
 /**
  * @generated
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class VsdtNavigatorItem extends VsdtAbstractNavigatorItem {
 
 	/**

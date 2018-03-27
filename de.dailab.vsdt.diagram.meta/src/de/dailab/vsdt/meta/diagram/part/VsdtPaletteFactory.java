@@ -16,6 +16,7 @@ import de.dailab.vsdt.meta.diagram.providers.VsdtElementTypes;
 /**
  * @generated
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class VsdtPaletteFactory {
 
 	/**

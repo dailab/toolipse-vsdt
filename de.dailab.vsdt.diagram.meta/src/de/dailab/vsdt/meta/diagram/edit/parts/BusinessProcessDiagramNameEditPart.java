@@ -53,6 +53,7 @@ import de.dailab.vsdt.meta.diagram.providers.VsdtParserProvider;
 /**
  * @generated
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class BusinessProcessDiagramNameEditPart extends CompartmentEditPart
 		implements ITextAwareEditPart {
 

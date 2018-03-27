@@ -148,7 +148,7 @@ public class AgentstoreView extends AbstractStructuredViewerView {
 	 * @return		valid agent store URL?
 	 */
 	private boolean checkUrl(String url) {
-		// TODO
+		// TODO implement check URL
 		return true;
 	}
 

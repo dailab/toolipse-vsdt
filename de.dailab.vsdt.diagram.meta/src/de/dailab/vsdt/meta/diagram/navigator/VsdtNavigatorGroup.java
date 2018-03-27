@@ -6,6 +6,7 @@ import java.util.LinkedList;
 /**
  * @generated
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class VsdtNavigatorGroup extends VsdtAbstractNavigatorItem {
 
 	/**

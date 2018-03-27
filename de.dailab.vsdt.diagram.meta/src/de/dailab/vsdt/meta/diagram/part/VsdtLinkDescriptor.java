@@ -8,6 +8,7 @@ import org.eclipse.gmf.runtime.emf.type.core.IElementType;
 /**
  * @generated
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class VsdtLinkDescriptor extends VsdtNodeDescriptor {
 
 	/**

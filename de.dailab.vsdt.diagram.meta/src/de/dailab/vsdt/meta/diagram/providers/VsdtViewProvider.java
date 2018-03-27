@@ -24,6 +24,7 @@ import de.dailab.vsdt.meta.diagram.view.factories.ParticipantViewFactory;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class VsdtViewProvider extends AbstractViewProvider {
 
 	/**

@@ -34,6 +34,7 @@ import de.dailab.vsdt.meta.diagram.edit.parts.BusinessProcessSystemEditPart;
 /**
  * @generated
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class VsdtNewDiagramFileWizard extends Wizard {
 
 	/**

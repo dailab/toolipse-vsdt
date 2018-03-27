@@ -29,6 +29,7 @@ import de.dailab.vsdt.meta.diagram.part.VsdtMetaDiagramEditorPlugin;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public abstract class AbstractParser implements IParser {
 
 	/**

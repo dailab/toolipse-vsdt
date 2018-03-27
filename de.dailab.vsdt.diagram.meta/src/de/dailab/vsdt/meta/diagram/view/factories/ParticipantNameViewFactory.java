@@ -36,6 +36,7 @@ public class ParticipantNameViewFactory extends AbstractLabelViewFactory {
 	/**
 	 * @generated
 	 */
+	@SuppressWarnings("rawtypes")
 	protected List createStyles(View view) {
 		List styles = new ArrayList();
 		return styles;

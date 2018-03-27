@@ -44,6 +44,7 @@ import de.dailab.vsdt.meta.diagram.providers.VsdtValidationProvider;
 /**
  * @generated
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class ValidateAction extends Action {
 
 	/**

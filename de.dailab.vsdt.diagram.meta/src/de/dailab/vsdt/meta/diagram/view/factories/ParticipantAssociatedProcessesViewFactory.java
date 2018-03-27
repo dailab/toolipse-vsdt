@@ -14,6 +14,7 @@ import de.dailab.vsdt.meta.diagram.part.VsdtVisualIDRegistry;
 /**
  * @generated
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class ParticipantAssociatedProcessesViewFactory extends
 		ConnectionViewFactory {
 

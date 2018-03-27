@@ -9,6 +9,7 @@ import org.eclipse.gmf.runtime.notation.View;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class BusinessProcessDiagramNameViewFactory extends BasicNodeViewFactory {
 
 	/**
