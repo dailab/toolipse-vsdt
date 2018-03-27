@@ -737,7 +737,6 @@ public class VsdtDocumentProvider extends AbstractDocumentProvider implements
 					: new FileEditorInput(newFile));
 			return;
 		}
-		// TODO: append suffix to the URI! (use diagram as a parameter)
 		fireElementMoved(input, new URIEditorInput(uri));
 	}
 

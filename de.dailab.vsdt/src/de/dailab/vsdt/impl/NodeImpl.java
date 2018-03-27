@@ -108,13 +108,9 @@ public abstract class NodeImpl extends GraphicalObjectImpl implements Node {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-	public Pool getPool() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
+	public abstract Pool getPool();
 
 	/**
 	 * <!-- begin-user-doc -->

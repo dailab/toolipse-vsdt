@@ -123,7 +123,7 @@ public class JiacEnabledVsdtInterpreter extends EclipseInterpretingSimulation {
 				break;
 			case SEND:
 			case RECEIVE:
-				// TODO
+				// TODO send, receive message
 				break;
 			default:
 				break;

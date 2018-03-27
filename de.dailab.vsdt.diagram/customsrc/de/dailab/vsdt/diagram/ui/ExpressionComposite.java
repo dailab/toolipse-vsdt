@@ -141,11 +141,14 @@ public class ExpressionComposite extends Composite {
 	}
 	
 	/**
-	 * If owner and Feature are set, the expression is updated with the current value 
+	 * If owner and Feature are set, the expression is updated with the current value
 	 * of the expression text field and the information provided by the dialog.
+	 *
+	 * This will always create a new Expression (or set the expression to null if the
+	 * text is empty) instead of changing an existing instance, as this would be much
+	 * more complicated and error-prone for very limited benefit.
 	 */
 	private void updateModelElement() {
-		//TODO do not create new expression if expression already exists
 		if (owner != null && feature != null) {
 			Expression expression= VsdtElementFactory.createExpression(expressionText.getText());
 			if (expression != null) {

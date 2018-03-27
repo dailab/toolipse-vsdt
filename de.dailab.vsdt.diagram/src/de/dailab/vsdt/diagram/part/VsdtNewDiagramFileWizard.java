@@ -76,7 +76,6 @@ public class VsdtNewDiagramFileWizard extends Wizard {
 		} else if (domainModelURI.isFile()) {
 			filePath = new Path(domainModelURI.trimSegments(1).toFileString());
 		} else {
-			// TODO : use some default path
 			throw new IllegalArgumentException(
 					"Unsupported URI: " + domainModelURI); //$NON-NLS-1$
 		}

@@ -104,7 +104,6 @@ public class VsdtElementTypes extends ElementInitializers {
 										.create(eClass));
 			}
 		}
-		// TODO : support structural features
 		return null;
 	}
 

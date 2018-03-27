@@ -22,6 +22,7 @@ import de.dailab.vsdt.diagram.part.VsdtDiagramEditorPlugin;
 /**
  * @generated
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class VsdtElementTypes extends ElementInitializers {
 
 	/**
@@ -148,7 +149,6 @@ public class VsdtElementTypes extends ElementInitializers {
 										.create(eClass));
 			}
 		}
-		// TODO : support structural features
 		return null;
 	}
 

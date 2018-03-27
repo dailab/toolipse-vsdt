@@ -242,11 +242,7 @@ public class StrucBpmn2BpmnStructureMapping extends MappingStage {
 	 * @throws Exception
 	 */
 	protected List<EObject> visitEHBlock(BpmnEventHandlerBlock ehBlock) throws Exception {
-
-		/*
-		 * TODO Join non-compensating EHCase directly after activity, 
-		 * 		if there is no joining gateway
-		 */
+		// TODO Join non-compensating EHCase directly after activity, if there is no joining gateway
 		
 		TrafoLog.trace("Visiting EH-Block " + ehBlock.toString());
 		List<FlowObject> children= new ArrayList<FlowObject>();
@@ -272,10 +268,7 @@ public class StrucBpmn2BpmnStructureMapping extends MappingStage {
 			children.add(ehCase.getCompensationElement());
 		}
 		
-		/*
-		 * TODO
-		 * if necessary, create gateway after the activity, which will be the last element.
-		 */
+		// TODO if necessary, create gateway after the activity, which will be the last element.
 		
 		substituteBlock(ehBlock, activity, activity, children);
 		return new ArrayList<EObject>(children);

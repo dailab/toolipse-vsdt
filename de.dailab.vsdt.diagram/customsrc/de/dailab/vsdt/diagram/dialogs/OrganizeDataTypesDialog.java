@@ -1,15 +1,9 @@
 package de.dailab.vsdt.diagram.dialogs;
 
-import java.util.Arrays;
-import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -30,12 +24,7 @@ import de.dailab.vsdt.VsdtFactory;
  */
 public class OrganizeDataTypesDialog extends AbstractOrganizeElementsDialog<DataType> {
 
-	/*
-	 * TODO 
-	 * - add attributes inherits, members
-	 *   - controls, update, refresh
-	 * - add 'view definition' button
-	 */
+	// TODO implement "add definition" feature, show attributes, etc.
 
 	private static final String LABEL_PACKAGE= "Package";
 	private static final String LABEL_NAME= "Name";
@@ -43,7 +32,7 @@ public class OrganizeDataTypesDialog extends AbstractOrganizeElementsDialog<Data
 	private static final String LABEL_URL= "URL";
 //	private static final String LABEL_MEMBERS= "Members";
 //	private static final String LABEL_INHERITS= "Inherits";
-	private static final String BUTTON_DEF= "Definition...";
+//	private static final String BUTTON_DEF= "Definition...";
 	
 	/**package input field*/
 	private Text packageText;
@@ -141,7 +130,7 @@ public class OrganizeDataTypesDialog extends AbstractOrganizeElementsDialog<Data
 //		partCombo.getCombo().setEnabled(implementation != null);
 	}
 	
-
+/*
 	@Override
 	protected Collection<Button> contributeToButtonsGroup(Composite buttonsGroup) {
 		Button button= new Button(buttonsGroup,SWT.NONE);
@@ -155,17 +144,15 @@ public class OrganizeDataTypesDialog extends AbstractOrganizeElementsDialog<Data
 		super.widgetSelected(e);
 		if (e.getSource() instanceof Button	) {
 			if (BUTTON_DEF.equals(((Button) e.getSource()).getText())) {
-				/*
-				 * TODO
-				 * - open file dialog
-				 * - parse file (XSD, OWL, Java-Class, ...)
-				 * - create DataTypes accordingly 
-				 */
+				// open file dialog
+				// parse file (XSD, OWL, Java-Class, ...)
+				// create DataTypes accordingly 
 				MessageDialog.openInformation(getShell(), "Not yet implemented", "This feature is not yet implemented.");
 			}
 		}
 	}
-	
+*/
+
 	@Override
 	protected String getString(DataType datatype) {
 		if (datatype != null) {

@@ -61,8 +61,6 @@ public class DiagramAppearancePreferencePage extends AppearancePreferencePage {
 		addField(new BooleanFieldEditor(PREF_SHOW_XORMARKER_BY_DEFAULT,
 				"Show XOR-Marker for new Gateways", parent));
 
-		// TODO add two radio buttons for usecase / conversation diagram
-
 		addField(new RadioGroupFieldEditor(PREF_META_DIAGRAM_STYLE, 
 				"Meta Diagram Style", 2, 
 				new String[][]{{"Use Case", PREF_META_DIAGRAM_STYLE_USECASE},
