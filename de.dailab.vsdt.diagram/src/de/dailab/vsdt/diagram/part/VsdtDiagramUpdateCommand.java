@@ -18,6 +18,7 @@ import org.eclipse.ui.PlatformUI;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class VsdtDiagramUpdateCommand implements IHandler {
 
 	/**

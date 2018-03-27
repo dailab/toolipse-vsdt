@@ -54,6 +54,7 @@ import de.dailab.vsdt.diagram.part.VsdtVisualIDRegistry;
 /**
  * @generated
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class VsdtBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 
 	/**
@@ -277,7 +278,6 @@ public class VsdtBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 	 * @generated
 	 */
 	protected final Command getMSLWrapper(ICommand cmd) {
-		// XXX deprecated: use getGEFWrapper() instead
 		return getGEFWrapper(cmd);
 	}
 

@@ -24,6 +24,7 @@ import de.dailab.vsdt.diagram.part.VsdtDiagramEditorPlugin;
 /**
  * @generated
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class VsdtDomainNavigatorContentProvider implements
 		ICommonContentProvider {
 
@@ -60,6 +61,7 @@ public class VsdtDomainNavigatorContentProvider implements
 	/**
 	 * @generated
 	 */
+	@SuppressWarnings("serial")
 	public VsdtDomainNavigatorContentProvider() {
 		myAdapterFctoryContentProvier = new AdapterFactoryContentProvider(
 				VsdtDiagramEditorPlugin.getInstance()

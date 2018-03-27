@@ -57,6 +57,7 @@ import org.eclipse.ui.part.FileEditorInput;
 /**
  * @generated
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class VsdtDocumentProvider extends AbstractDocumentProvider implements
 		IDiagramDocumentProvider {
 
@@ -737,7 +738,6 @@ public class VsdtDocumentProvider extends AbstractDocumentProvider implements
 					: new FileEditorInput(newFile));
 			return;
 		}
-		// TODO: append suffix to the URI! (use diagram as a parameter)
 		fireElementMoved(input, new URIEditorInput(uri));
 	}
 

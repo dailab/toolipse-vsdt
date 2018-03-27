@@ -45,6 +45,7 @@ import de.dailab.vsdt.diagram.part.VsdtVisualIDRegistry;
 /**
  * @generated
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class VsdtNavigatorContentProvider implements ICommonContentProvider {
 
 	/**
@@ -75,6 +76,7 @@ public class VsdtNavigatorContentProvider implements ICommonContentProvider {
 	/**
 	 * @generated
 	 */
+	@SuppressWarnings("serial")
 	public VsdtNavigatorContentProvider() {
 		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE
 				.createEditingDomain();

@@ -42,6 +42,7 @@ import de.dailab.vsdt.diagram.preferences.DiagramGeneralPreferencePage;
 /**
  * @generated
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class VsdtModelingAssistantProvider extends ModelingAssistantProvider {
 
 	/**
@@ -219,7 +220,7 @@ public class VsdtModelingAssistantProvider extends ModelingAssistantProvider {
 
 		// provide modeling assistance
 		if (! DiagramGeneralPreferencePage.isAssistanceEnabled()) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 		
 		List<IElementType> list = new ArrayList<IElementType>();

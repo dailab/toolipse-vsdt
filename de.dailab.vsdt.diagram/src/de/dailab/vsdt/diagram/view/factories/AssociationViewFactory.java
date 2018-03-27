@@ -23,6 +23,7 @@ import de.dailab.vsdt.diagram.preferences.DiagramConnectionsPreferencePage;
 /**
  * @generated
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class AssociationViewFactory extends ConnectionViewFactory {
 
 	/**

@@ -40,6 +40,7 @@ import de.dailab.vsdt.meta.diagram.part.VsdtMetaDiagramEditorPlugin;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class OpenDiagramEditPolicy extends OpenEditPolicy {
 
 	/**

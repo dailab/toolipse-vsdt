@@ -11,6 +11,7 @@ import org.eclipse.ui.views.properties.IPropertySourceProvider;
 /**
  * @generated
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class VsdtDomainNavigatorItem extends PlatformObject {
 
 	/**

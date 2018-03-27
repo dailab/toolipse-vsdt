@@ -53,6 +53,7 @@ import de.dailab.vsdt.diagram.providers.VsdtParserProvider;
 /**
  * @generated
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class DataObjectNameEditPart extends LabelEditPart implements
 		ITextAwareEditPart, IBorderItemEditPart {
 

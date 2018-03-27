@@ -31,6 +31,7 @@ import de.dailab.vsdt.diagram.part.VsdtVisualIDRegistry;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class VsdtParserProvider extends AbstractProvider implements
 		IParserProvider {
 
@@ -112,41 +113,11 @@ public class VsdtParserProvider extends AbstractProvider implements
 	/**
 	 * @generated
 	 */
-	private IParser agentName_4010Parser;
-
-	/**
-	 * @generated
-	 */
-	private IParser getAgentName_4010Parser() {
-		if (agentName_4010Parser == null) {
-			agentName_4010Parser = createAgentName_4010Parser();
-		}
-		return agentName_4010Parser;
-	}
-
-	/**
-	 * @generated
-	 */
 	protected IParser createAgentName_4010Parser() {
 		EAttribute[] features = new EAttribute[] { VsdtPackage.eINSTANCE
 				.getIdObject_Name(), };
 		MessageFormatParser parser = new MessageFormatParser(features);
 		return parser;
-	}
-
-	/**
-	 * @generated
-	 */
-	private IParser serviceName_4011Parser;
-
-	/**
-	 * @generated
-	 */
-	private IParser getServiceName_4011Parser() {
-		if (serviceName_4011Parser == null) {
-			serviceName_4011Parser = createServiceName_4011Parser();
-		}
-		return serviceName_4011Parser;
 	}
 
 	/**

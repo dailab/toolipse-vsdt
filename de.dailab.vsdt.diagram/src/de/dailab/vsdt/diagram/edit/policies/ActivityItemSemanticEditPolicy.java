@@ -37,6 +37,7 @@ import de.dailab.vsdt.diagram.providers.VsdtElementTypes;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class ActivityItemSemanticEditPolicy extends
 		VsdtBaseItemSemanticEditPolicy {
 

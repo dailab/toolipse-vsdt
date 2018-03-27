@@ -18,6 +18,7 @@ import de.dailab.vsdt.diagram.part.VsdtVisualIDRegistry;
 /**
  * @generated
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class VsdtEditPartProvider extends AbstractEditPartProvider {
 
 	/**

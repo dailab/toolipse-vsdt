@@ -18,6 +18,7 @@ import de.dailab.vsdt.diagram.part.VsdtDiagramEditorPlugin;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public abstract class VsdtAbstractExpression {
 
 	/**

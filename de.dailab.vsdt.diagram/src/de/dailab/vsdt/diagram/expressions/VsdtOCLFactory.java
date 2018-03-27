@@ -22,6 +22,7 @@ import org.eclipse.ocl.utilities.PredefinedType;
 /**
  * @generated
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class VsdtOCLFactory {
 
 	/**

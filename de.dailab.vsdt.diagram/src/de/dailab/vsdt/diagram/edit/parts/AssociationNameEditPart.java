@@ -51,6 +51,7 @@ import de.dailab.vsdt.diagram.providers.VsdtParserProvider;
 /**
  * @generated
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class AssociationNameEditPart extends LabelEditPart implements
 		ITextAwareEditPart {
 

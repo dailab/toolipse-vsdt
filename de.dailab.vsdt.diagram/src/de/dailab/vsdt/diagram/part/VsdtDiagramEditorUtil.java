@@ -56,6 +56,7 @@ import de.dailab.vsdt.diagram.edit.parts.BusinessProcessDiagramEditPart;
 /**
  * @generated
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class VsdtDiagramEditorUtil {
 
 	/**

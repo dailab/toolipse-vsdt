@@ -25,6 +25,7 @@ import de.dailab.vsdt.provider.VsdtItemProviderAdapterFactory;
 /**
  * @generated
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class VsdtDiagramEditorPlugin extends AbstractUIPlugin {
 
 	/**

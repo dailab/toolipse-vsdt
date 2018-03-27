@@ -29,6 +29,7 @@ import de.dailab.vsdt.diagram.part.VsdtDiagramEditorPlugin;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class VsdtNavigatorLinkHelper implements ILinkHelper {
 
 	/**

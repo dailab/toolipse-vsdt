@@ -72,6 +72,7 @@ import de.dailab.vsdt.diagram.view.factories.TextAnnotationViewFactory;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class VsdtViewProvider extends AbstractViewProvider {
 
 	/**

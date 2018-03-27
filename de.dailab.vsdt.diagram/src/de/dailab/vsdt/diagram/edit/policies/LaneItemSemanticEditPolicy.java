@@ -27,6 +27,7 @@ import de.dailab.vsdt.diagram.providers.VsdtElementTypes;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class LaneItemSemanticEditPolicy extends VsdtBaseItemSemanticEditPolicy {
 
 	/**

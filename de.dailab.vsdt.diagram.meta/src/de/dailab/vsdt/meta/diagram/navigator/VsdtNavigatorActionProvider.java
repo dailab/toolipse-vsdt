@@ -32,6 +32,7 @@ import de.dailab.vsdt.meta.diagram.part.VsdtVisualIDRegistry;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class VsdtNavigatorActionProvider extends CommonActionProvider {
 
 	/**

@@ -26,6 +26,7 @@ import de.dailab.vsdt.diagram.providers.VsdtElementTypes;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class PoolItemSemanticEditPolicy extends VsdtBaseItemSemanticEditPolicy {
 
 	/**

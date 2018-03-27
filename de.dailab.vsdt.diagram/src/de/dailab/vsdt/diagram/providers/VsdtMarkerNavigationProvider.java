@@ -19,6 +19,7 @@ import de.dailab.vsdt.diagram.part.VsdtDiagramEditorUtil;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class VsdtMarkerNavigationProvider extends
 		AbstractModelMarkerNavigationProvider {
 

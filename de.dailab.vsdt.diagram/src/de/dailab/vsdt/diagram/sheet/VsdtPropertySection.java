@@ -22,6 +22,7 @@ import org.eclipse.ui.views.properties.IPropertySourceProvider;
 /**
  * @generated
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class VsdtPropertySection extends AdvancedPropertySection implements
 		IPropertySourceProvider {
 

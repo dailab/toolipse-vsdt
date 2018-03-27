@@ -53,6 +53,7 @@ import de.dailab.vsdt.diagram.providers.VsdtParserProvider;
 /**
  * @generated
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class LaneNameEditPart extends CompartmentEditPart implements
 		ITextAwareEditPart {
 

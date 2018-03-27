@@ -19,6 +19,7 @@ import de.dailab.vsdt.diagram.part.VsdtVisualIDRegistry;
 /**
  * @generated
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class ActivityCanonicalEditPolicy extends CanonicalEditPolicy {
 
 	/**

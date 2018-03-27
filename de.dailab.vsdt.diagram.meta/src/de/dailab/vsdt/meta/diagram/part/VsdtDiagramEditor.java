@@ -46,6 +46,7 @@ import de.dailab.vsdt.meta.diagram.navigator.VsdtNavigatorItem;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class VsdtDiagramEditor extends DiagramDocumentEditor implements
 		IGotoMarker {
 

@@ -5,6 +5,7 @@ import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramActionBarContributor;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class VsdtDiagramActionBarContributor extends
 		DiagramActionBarContributor {
 

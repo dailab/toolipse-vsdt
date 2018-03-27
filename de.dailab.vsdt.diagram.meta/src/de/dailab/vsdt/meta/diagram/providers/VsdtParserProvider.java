@@ -21,6 +21,7 @@ import de.dailab.vsdt.meta.diagram.part.VsdtVisualIDRegistry;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class VsdtParserProvider extends AbstractProvider implements
 		IParserProvider {
 

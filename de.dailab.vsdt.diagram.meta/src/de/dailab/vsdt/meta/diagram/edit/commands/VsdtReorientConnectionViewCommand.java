@@ -13,6 +13,7 @@ import org.eclipse.gmf.runtime.notation.View;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class VsdtReorientConnectionViewCommand extends
 		AbstractTransactionalCommand {
 

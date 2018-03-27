@@ -19,6 +19,7 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class VsdtTextNonResizableEditPolicy extends NonResizableEditPolicyEx {
 
 	/**

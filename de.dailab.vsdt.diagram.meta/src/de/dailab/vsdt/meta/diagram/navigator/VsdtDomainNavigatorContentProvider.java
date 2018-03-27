@@ -61,6 +61,7 @@ public class VsdtDomainNavigatorContentProvider implements
 	/**
 	 * @generated
 	 */
+	@SuppressWarnings("serial")
 	public VsdtDomainNavigatorContentProvider() {
 		myAdapterFctoryContentProvier = new AdapterFactoryContentProvider(
 				VsdtMetaDiagramEditorPlugin.getInstance()

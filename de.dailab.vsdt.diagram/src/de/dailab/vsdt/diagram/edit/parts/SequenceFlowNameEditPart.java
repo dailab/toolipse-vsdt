@@ -51,6 +51,7 @@ import de.dailab.vsdt.diagram.providers.VsdtParserProvider;
 /**
  * @generated
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class SequenceFlowNameEditPart extends LabelEditPart implements
 		ITextAwareEditPart {
 

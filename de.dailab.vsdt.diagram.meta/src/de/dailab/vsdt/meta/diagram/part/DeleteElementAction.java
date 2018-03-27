@@ -21,6 +21,7 @@ import org.eclipse.ui.PlatformUI;
 /**
  * @generated
  */
+@SuppressWarnings("rawtypes")
 public class DeleteElementAction extends AbstractDeleteFromAction {
 
 	/**

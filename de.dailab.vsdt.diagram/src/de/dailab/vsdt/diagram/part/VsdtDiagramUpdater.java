@@ -54,6 +54,7 @@ import de.dailab.vsdt.diagram.providers.VsdtElementTypes;
 /**
  * @generated
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class VsdtDiagramUpdater {
 
 	/**

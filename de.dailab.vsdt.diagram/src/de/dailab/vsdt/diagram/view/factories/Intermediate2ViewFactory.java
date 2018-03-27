@@ -14,6 +14,7 @@ import de.dailab.vsdt.diagram.part.VsdtVisualIDRegistry;
 /**
  * @generated
  */
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class Intermediate2ViewFactory extends AbstractShapeViewFactory {
 
 	/**

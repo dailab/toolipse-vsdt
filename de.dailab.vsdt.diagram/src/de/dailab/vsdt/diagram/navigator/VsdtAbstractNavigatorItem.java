@@ -8,6 +8,7 @@ import org.eclipse.ui.views.properties.tabbed.ITabbedPropertySheetPageContributo
 /**
  * @generated
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public abstract class VsdtAbstractNavigatorItem extends PlatformObject {
 
 	/**
