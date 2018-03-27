@@ -8,3 +8,4 @@ Bundle-Vendor: DAI-Labor, TU Berlin
 Require-Bundle: de.dailab.vsdt.trafo.strucbpmn;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Automatic-Module-Name: de.dailab.vsdt.trafo.bpel

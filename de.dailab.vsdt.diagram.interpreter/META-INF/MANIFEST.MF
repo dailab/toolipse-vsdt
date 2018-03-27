@@ -19,3 +19,4 @@ Export-Package: de.dailab.vsdt.diagram.interpreter,
  de.dailab.vsdt.diagram.interpreter.dialogs,
  de.dailab.vsdt.diagram.interpreter.simulation,
  de.dailab.vsdt.diagram.interpreter.view
+Automatic-Module-Name: de.dailab.vsdt.diagram.interpreter

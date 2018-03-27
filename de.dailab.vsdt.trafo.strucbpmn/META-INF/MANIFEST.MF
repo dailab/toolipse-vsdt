@@ -18,3 +18,4 @@ Require-Bundle: de.dailab.vsdt;visibility:=reexport,
  de.dailab.vsdt.trafo;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Automatic-Module-Name: de.dailab.vsdt.trafo.strucbpmn

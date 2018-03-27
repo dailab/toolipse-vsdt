@@ -14,3 +14,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-Vendor: DAI-Labor, TU Berlin
 Bundle-ClassPath: .
+Automatic-Module-Name: de.dailab.vsdt.trafo.jiacbeans

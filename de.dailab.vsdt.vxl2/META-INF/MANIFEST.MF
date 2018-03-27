@@ -31,3 +31,4 @@ Export-Package: de.dailab.vsdt.vxl,
  de.dailab.vsdt.vxl.vxl.util,
  de.dailab.vsdt.vxl.scoping,
  de.dailab.vsdt.vxl.formatting
+Automatic-Module-Name: de.dailab.vsdt.vxl2
