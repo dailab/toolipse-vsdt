@@ -470,23 +470,22 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * both path (i.e. to return false in this method) and then to deactivate 
 	 * the other paths after one path has been selected.
 	 * 
+	 * In practice, this could probably be changed to just return whether any of the
+	 * outgoing flows has a condition, but it should also work in "manual" simulation.
+	 * 
 	 * @param flowObject	Some FlowObject, possibly with more than one outgoing SequenceFlow
 	 * @return				Whether a path needs to be selected.
 	 */
 	protected final boolean needsToSelectPath(FlowObject flowObject) {
-		if (flowObject.getOutgoingSeq().size() > 1) {
-			if (flowObject instanceof Gateway) {
-				return ((Gateway)flowObject).getGatewayType() != GatewayType.AND
-						&& ((Gateway)flowObject).getGatewayType() != GatewayType.XOR_EVENT;
-			} else {
-				for (SequenceFlow seqFlow : flowObject.getOutgoingSeq()) {
-					if (seqFlow.getConditionType() != ConditionType.NONE) {
-						return true;
-					}
-				}
-			}
+		if (flowObject instanceof Gateway) {
+			GatewayType type = ((Gateway) flowObject).getGatewayType();
+			return flowObject.getOutgoingSeq().size() > 1
+					&& type != GatewayType.AND
+					&& type != GatewayType.XOR_EVENT;
+		} else {
+			return flowObject.getOutgoingSeq().stream()
+					.anyMatch(sf -> sf.getConditionType() != ConditionType.NONE);
 		}
-		return false;
 	}
 	
 	/**
