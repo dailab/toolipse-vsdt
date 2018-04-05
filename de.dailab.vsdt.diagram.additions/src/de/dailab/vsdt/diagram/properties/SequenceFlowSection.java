@@ -95,7 +95,9 @@ public class SequenceFlowSection extends AbstractVsdtPropertySection {
     		conditionText.setEnabled(true);
 			setPropertyValue(sequenceFlow, pack.getSequenceFlow_ConditionType(), ConditionType.EXPRESSION);
 			Expression expression = createExpression(conditionText.getExpression());
-			expression.setLanguage(conditionText.getLanguage());
+			if (expression != null) {
+				expression.setLanguage(conditionText.getLanguage());
+			}
 			setPropertyValue(sequenceFlow, pack.getSequenceFlow_ConditionExpression(), expression);
     	}
     }
