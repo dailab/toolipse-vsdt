@@ -163,7 +163,7 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * - handle start assignments
 	 */
 	public final List<FlowObject> stepInto(FlowObject flowObject) {
-		System.out.println("Stepping Into " + flowObject);
+		System.out.println("Stepping Into " + getReadable(flowObject));
 		List<FlowObject> result= new ArrayList<>();
 		if (isInState(flowObject, State.READY, State.LOOPING_READY)) {
 			step++;
@@ -187,7 +187,6 @@ public abstract class AbstractSimulation implements ISimulation {
 				executeBegin(flowObject);
 			} catch (Exception e) {
 				logMessage(LogLevel.ERROR, "Error stepping into " + flowObject.getNameOrId(), e.getMessage());
-				System.err.println("Error stepping into " + flowObject + ": " + e.getMessage());
 				// check whether there is an error boundary event
 //				Intermediate error = getEventHandler(flowObject, TriggerType.ERROR);
 //				if (error != null) {
@@ -214,7 +213,7 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * - update states of succeeding flow objects
 	 */
 	public final List<FlowObject> stepOut(FlowObject flowObject) {
-		System.out.println("Stepping out of " + flowObject);
+		System.out.println("Stepping out of " + getReadable(flowObject));
 		List<FlowObject> result= new ArrayList<>();
 		if (isInState(flowObject, State.ACTIVE_READY)) {
 			
@@ -223,7 +222,6 @@ public abstract class AbstractSimulation implements ISimulation {
 				executeEnd(flowObject);
 			} catch (Exception e) {
 				logMessage(LogLevel.ERROR, "Error stepping out of " + flowObject.getNameOrId(), e.getMessage());
-				System.err.println("Error stepping out of " + flowObject + ": " + e.getMessage());
 				// check if there is error event attached
 //				Intermediate error = getEventHandler(flowObject, TriggerType.ERROR);
 //				if (error != null) {
@@ -579,6 +577,11 @@ public abstract class AbstractSimulation implements ISimulation {
 	}
 
 	protected void logMessage(ISimulationObserver.LogLevel level, String title, String message) {
+		if (level == LogLevel.INFO) {
+			System.out.println(title + ": " + message);
+		} else {
+			System.err.println(title + ": " + message);
+		}
 		for (ISimulationObserver observer : observers) {
 			observer.logMessage(level, title, message);
 		}
@@ -602,4 +605,8 @@ public abstract class AbstractSimulation implements ISimulation {
 		return String.format(String.format("%%-%ds%%s%s", width, NL), first, second);
 	}
 	
+	protected final String getReadable(FlowObject fo) {
+		return fo != null ? String.format("%s '%s'", fo.eClass().getName(), fo.getNameOrId()) : "null";
+	}
+
 }
