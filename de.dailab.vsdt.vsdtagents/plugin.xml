@@ -29,5 +29,9 @@
 			      relationship="stack" />
 		</perspectiveExtension>
 	</extension>
-   
+
+	<extension point="org.eclipse.ui.startup">
+		<startup class="de.dailab.vsdt.vsdtagents.Startup" />
+	</extension>
+
 </plugin>
