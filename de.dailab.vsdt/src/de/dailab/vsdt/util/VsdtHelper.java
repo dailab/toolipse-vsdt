@@ -19,6 +19,7 @@ import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.ConnectingObject;
 import de.dailab.vsdt.DataObject;
+import de.dailab.vsdt.DataType;
 import de.dailab.vsdt.Event;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowObject;
@@ -52,7 +53,15 @@ import de.dailab.vsdt.vxl.util.Util;
 public class VsdtHelper {
 
 	public static final String ESCAPE_PARAMETER = "@";
-	
+
+	/**
+	 * Get type name for given data type
+	 */
+	public static String getTypeName(DataType type) {
+		return type.getPackage() != null
+				? (type.getPackage() + "." + type.getName())
+				: type.getName();
+	}
 	
 	/**
 	 * Find substitute for basic 'VXL' data types, like integer, boolean, etc.

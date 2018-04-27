@@ -10,6 +10,7 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import de.dailab.vsdt.BusinessProcessDiagram;
 import de.dailab.vsdt.VsdtPackage;
+import de.dailab.vsdt.diagram.actions.CleanupAction;
 import de.dailab.vsdt.diagram.actions.OrganizeElementsAction;
 
 
@@ -18,7 +19,8 @@ public class BusinessProcessDiagramSection extends AbstractVsdtPropertySection {
 	public static final String DISPLAY_ORG_IMPL="Services...",
 							   DISPLAY_ORG_MSG= "Message Channels...",
 							   DISPLAY_ORG_DATA= "Data Types...",
-							   DISPLAY_ORG_PARAM= "Parameters...";
+							   DISPLAY_ORG_PARAM= "Parameters...",
+							   DISPLAY_CLEANUP = "Cleanup Diagram...";
 	
     protected BusinessProcessDiagram bpd;
 
@@ -26,6 +28,7 @@ public class BusinessProcessDiagramSection extends AbstractVsdtPropertySection {
     private Button orgMsgButton;
     private Button orgDataButton;
     private Button orgParamButton;
+    private Button cleanupButton;
     
     @Override
     protected EClass getObjectClass() {
@@ -49,6 +52,7 @@ public class BusinessProcessDiagramSection extends AbstractVsdtPropertySection {
         orgMsgButton = addButton(DISPLAY_ORG_MSG);
         orgDataButton = addButton(DISPLAY_ORG_DATA);
         orgParamButton = addButton(DISPLAY_ORG_PARAM);
+        cleanupButton = addButton(DISPLAY_CLEANUP);
     }
     
     public void widgetSelected(SelectionEvent e) {
@@ -65,6 +69,9 @@ public class BusinessProcessDiagramSection extends AbstractVsdtPropertySection {
     	}
     	if (src.equals(orgParamButton)) {
 			OrganizeElementsAction.getParametersAction().run(bpd.getParent());
+    	}
+    	if (src.equals(cleanupButton)) {
+    		new CleanupAction().run(bpd.getParent());
     	}
     }
 

@@ -253,9 +253,7 @@ public class OrganizePropertiesDialog extends AbstractOrganizeElementsDialog<Pro
 		// complex data types
 		BusinessProcessSystem bps = (BusinessProcessSystem) VsdtHelper.getRootElement(parentElement); 
 		for (DataType datatype: bps.getDataTypes()) {
-			String type = datatype.getPackage() != null ? 
-					(datatype.getPackage() + "." + datatype.getName()) : datatype.getName();
-			combo.add(type);
+			combo.add(VsdtHelper.getTypeName(datatype));
 		}
 		combo.setText(selected);
 	}
