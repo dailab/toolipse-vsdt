@@ -19,6 +19,7 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import de.dailab.common.swt.FormLayoutUtil;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.VsdtPackage;
+import de.dailab.vsdt.diagram.actions.CleanupAction;
 import de.dailab.vsdt.diagram.actions.OrganizeElementsAction;
 
 
@@ -37,7 +38,8 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
 							   DISPLAY_ORG_IMPL= "Services...",
 							   DISPLAY_ORG_MSG= "Message Channels...",
 							   DISPLAY_ORG_DATA= "Data Types...",
-							   DISPLAY_ORG_PARAM= "Parameters...";
+							   DISPLAY_ORG_PARAM= "Parameters...",
+							   DISPLAY_CLEANUP = "Cleanup Diagram...";
 	
     protected BusinessProcessSystem bps;
 
@@ -52,6 +54,7 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
     private Button orgMsgButton;
     private Button orgDataButton;
     private Button orgParamButton;
+    private Button cleanupButton;
     
     private Button executableButton;
     
@@ -118,6 +121,7 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
         orgMsgButton = addButton(DISPLAY_ORG_MSG);
         orgDataButton = addButton(DISPLAY_ORG_DATA);
         orgParamButton = addButton(DISPLAY_ORG_PARAM);
+        cleanupButton = addButton(DISPLAY_CLEANUP);
         
         // author
         label = FormLayoutUtil.addLabel(composite, DISPLAY_AUTHOR, lastControl, 0);
@@ -224,6 +228,9 @@ public class BusinessProcessSystemSection extends AbstractVsdtPropertySection {
     	}
     	if (src.equals(orgParamButton)) {
 			OrganizeElementsAction.getParametersAction().run(bps);
+    	}
+    	if (src.equals(cleanupButton)) {
+    		new CleanupAction().run(bps);
     	}
     	if (src.equals(executableButton)) {
     		setPropertyValue(bps, pack.getBusinessProcessSystem_Executable(), executableButton.getSelection());
