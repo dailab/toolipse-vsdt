@@ -1,5 +1,6 @@
 package de.dailab.vsdt.diagram.actions;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -76,12 +78,16 @@ public class CleanupAction extends AbstractGmfAction {
 	}
 
 	/**
-	 * Perform the actual cleanup
+	 * Perform the actual cleanup. Get the containing feature (which always
+	 * has multiplicity "many") and remove the element from the collection.
 	 *
 	 * @param objects	elements selected in the dialogue
 	 */
 	protected void removeElements(List<EObject> objects) {
-		// TODO
+		for (EObject obj : objects) {
+			EStructuralFeature feature = obj.eContainingFeature();
+			((Collection<?>) obj.eContainer().eGet(feature)).remove(obj);
+		}
 	}
 
 	/**
