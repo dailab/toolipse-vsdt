@@ -31,8 +31,11 @@ import de.dailab.vsdt.Assignment;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.DataType;
 import de.dailab.vsdt.Event;
+import de.dailab.vsdt.MessageChannel;
 import de.dailab.vsdt.Property;
+import de.dailab.vsdt.Service;
 import de.dailab.vsdt.util.VsdtHelper;
+import de.dailab.vsdt.util.VsdtToStringHelper;
 
 /**
  * Action used for cleaning up the diagram, removing unused Services,
@@ -147,7 +150,22 @@ public class CleanupAction extends AbstractGmfAction {
 
 		@Override
 		public String getText(Object element) {
-			// TODO Auto-generated method stub
+			if (element instanceof Property) {
+				Property prop = (Property) element;
+				return "Property " + VsdtToStringHelper.getString(prop);
+			}
+			if (element instanceof Service) {
+				Service service = (Service) element;
+				return "Service " + VsdtToStringHelper.getString(service);
+			}
+			if (element instanceof MessageChannel) {
+				MessageChannel channel = (MessageChannel) element;
+				return "MessageChannel " + VsdtToStringHelper.getString(channel);
+			}
+			if (element instanceof DataType) {
+				DataType type = (DataType) element;
+				return "Datatype " + VsdtHelper.getTypeName(type);
+			}
 			return super.getText(element);
 		}
 	}
