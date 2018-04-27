@@ -45,7 +45,7 @@ Require-Bundle: org.eclipse.core.runtime,
  de.dailab.common.gmf;visibility:=reexport,
  de.dailab.vsdt;visibility:=reexport,
  de.dailab.vsdt.edit
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
 Automatic-Module-Name: de.dailab.vsdt.diagram
