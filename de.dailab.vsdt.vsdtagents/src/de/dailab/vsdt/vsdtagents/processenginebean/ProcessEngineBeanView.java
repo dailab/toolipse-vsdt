@@ -1,12 +1,14 @@
 package de.dailab.vsdt.vsdtagents.processenginebean;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -142,6 +144,36 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		deployAction.setEnabled(isVsdtEditor && isAgent);
 		undeployAction.setEnabled(isInterpreter);
 	}
+
+	/**
+	 * get source of VSDT file in active editor, if any
+	 * @return
+	 */
+	private String getVsdtSource() throws IOException {
+		BusinessProcessSystem bps = Util.getVsdtModelBps(null);
+		if (bps == null) {
+			throw new IllegalArgumentException("Active Editor must hold VSDT Process Diagram.");
+		}
+		URI uri = bps.eResource().getURI();
+		InputStream is = bps.eResource().getResourceSet().getURIConverter().createInputStream(uri);
+
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
+			return reader.lines().collect(Collectors.joining("\n"));
+		}
+	}
+
+	/**
+	 * Ask user for participant from the given VSDT model.
+	 */
+	private Participant askForParticipant(Shell shell, BusinessProcessSystem vsdtModel) {
+		SingleSelectDialog<Participant> dialog = new SingleSelectDialog<Participant>(shell,
+				"Select Participant", "Select Participant:", vsdtModel.getParticipants()) {
+			protected String getText(Participant p) {
+				return p.getName();
+			};
+		};
+		return dialog.open() == SingleSelectDialog.OK ? dialog.getSelected() : null;
+	}
 	
 	/**
 	 * Content Provider for the Services Viewer.
@@ -265,35 +297,13 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 						@Override
 						public void run(IProgressMonitor monitor) {
 							try {
-								// get source of VSDT file
-								BusinessProcessSystem bps = Util.getVsdtModelBps(null);
-								if (bps == null) {
-									throw new IllegalArgumentException("Active Editor must hold VSDT Process Diagram.");
-								}
-								URI uri = bps.eResource().getURI();
-								InputStream is = bps.eResource().getResourceSet().getURIConverter().createInputStream(uri);
-								
-								StringBuilder builder = new StringBuilder();
-								try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
-									String line;
-									while ((line = reader.readLine()) != null) {
-										builder.append(line);
-									}
-								}
-								String vsdtSource = builder.toString();
-								
 								// ask for participant
 								BusinessProcessSystem vsdtModel = Util.getVsdtModelBps(null);
-								SingleSelectDialog<Participant> dialog = new SingleSelectDialog<Participant>(shell, 
-										"Select Participant", "Select Participant to interpret.", vsdtModel.getParticipants()) {
-									protected String getText(Participant p) {
-										return p.getName();
-									};
-								};
-								if (dialog.open() == SingleSelectDialog.OK) {
+								Participant participant = askForParticipant(shell, vsdtModel);
+								if (participant != null) {
 									// deploy process to interpreter
 									IAgentDescription agent = getSelected(interpreterViewer, IAgentDescription.class);
-									getBean().deployProcessToInterpreter(agent, vsdtSource, dialog.getSelected().getName());
+									getBean().deployProcessToInterpreter(agent, getVsdtSource(), participant.getName());
 									openMessageDialog(MessageDialog.INFORMATION, "Process sucessfully deployed");
 
 									// refresh viewer
