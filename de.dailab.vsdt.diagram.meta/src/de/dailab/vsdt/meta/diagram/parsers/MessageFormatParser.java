@@ -194,7 +194,7 @@ public class MessageFormatParser extends AbstractParser {
 			return new ParserEditStatus(VsdtMetaDiagramEditorPlugin.ID,
 					IParserEditStatus.UNEDITABLE, NLS.bind(
 							Messages.MessageFormatParser_InvalidInputError,
-							new Integer(pos.getErrorIndex())));
+							Integer.valueOf(pos.getErrorIndex())));
 		}
 		return validateNewValues(values);
 	}

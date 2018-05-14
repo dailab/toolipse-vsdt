@@ -108,7 +108,7 @@ public class Util {
 			Class wizardClass = Class.forName("de.dailab.vsdt.trafo.jiacv.wizard.Bpmn2JiacVExportWizard");
 			Class resultClass = Class.forName("de.dailab.vsdt.trafo.jiacv.export.JiacVResultSaver");
 			
-			BpmnExportWizard wizard = (BpmnExportWizard) wizardClass.newInstance();
+			BpmnExportWizard wizard = (BpmnExportWizard) wizardClass.getConstructor().newInstance();
 			Object sourceObject = wizard.getSouceObject(uri);
 			wizard.performTransformation(sourceObject, null);
 			try {
