@@ -237,7 +237,7 @@ public abstract class AbstractParser implements IParser {
 					if (s.length() == 0) {
 						value = null;
 					} else {
-						value = new Character(s.charAt(0));
+						value = Character.valueOf(s.charAt(0));
 					}
 				} else {
 					value = new InvalidValue(NLS.bind(
@@ -248,7 +248,7 @@ public abstract class AbstractParser implements IParser {
 				if (value instanceof Byte) {
 					// ok
 				} else if (value instanceof Number) {
-					value = new Byte(((Number) value).byteValue());
+					value = Byte.valueOf(((Number) value).byteValue());
 				} else if (value instanceof String) {
 					String s = (String) value;
 					if (s.length() == 0) {
@@ -273,7 +273,7 @@ public abstract class AbstractParser implements IParser {
 				if (value instanceof Short) {
 					// ok
 				} else if (value instanceof Number) {
-					value = new Short(((Number) value).shortValue());
+					value = Short.valueOf(((Number) value).shortValue());
 				} else if (value instanceof String) {
 					String s = (String) value;
 					if (s.length() == 0) {
@@ -298,7 +298,7 @@ public abstract class AbstractParser implements IParser {
 				if (value instanceof Integer) {
 					// ok
 				} else if (value instanceof Number) {
-					value = new Integer(((Number) value).intValue());
+					value = Integer.valueOf(((Number) value).intValue());
 				} else if (value instanceof String) {
 					String s = (String) value;
 					if (s.length() == 0) {
@@ -323,7 +323,7 @@ public abstract class AbstractParser implements IParser {
 				if (value instanceof Long) {
 					// ok
 				} else if (value instanceof Number) {
-					value = new Long(((Number) value).longValue());
+					value = Long.valueOf(((Number) value).longValue());
 				} else if (value instanceof String) {
 					String s = (String) value;
 					if (s.length() == 0) {
@@ -348,7 +348,7 @@ public abstract class AbstractParser implements IParser {
 				if (value instanceof Float) {
 					// ok
 				} else if (value instanceof Number) {
-					value = new Float(((Number) value).floatValue());
+					value = Float.valueOf(((Number) value).floatValue());
 				} else if (value instanceof String) {
 					String s = (String) value;
 					if (s.length() == 0) {
@@ -373,7 +373,7 @@ public abstract class AbstractParser implements IParser {
 				if (value instanceof Double) {
 					// ok
 				} else if (value instanceof Number) {
-					value = new Double(((Number) value).doubleValue());
+					value = Double.valueOf(((Number) value).doubleValue());
 				} else if (value instanceof String) {
 					String s = (String) value;
 					if (s.length() == 0) {

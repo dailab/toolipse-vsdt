@@ -78,7 +78,7 @@ public class VsdtBaseItemSemanticEditPolicy extends SemanticEditPolicy {
 			Object view = ((ReconnectRequest) request).getConnectionEditPart()
 					.getModel();
 			if (view instanceof View) {
-				Integer id = new Integer(VsdtVisualIDRegistry
+				Integer id = Integer.valueOf(VsdtVisualIDRegistry
 						.getVisualID((View) view));
 				request.getExtendedData().put(VISUAL_ID_KEY, id);
 			}
