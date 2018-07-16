@@ -388,7 +388,7 @@ implements FocusListener, SelectionListener {
 		implCombo.getCombo().addSelectionListener(this);
 		
 		label= FormLayoutUtil.addLabel(group, DISPLAY_TASK_SCRIPT, implCombo.getCombo(), 0);
-		scriptText= FormLayoutUtil.addText(group, implCombo.getCombo(), label, 100, SWT.MULTI | SWT.V_SCROLL);
+		scriptText= FormLayoutUtil.addText(group, implCombo.getCombo(), label, 100, SWT.MULTI | SWT.V_SCROLL | SWT.BORDER);
 		((FormData) scriptText.getLayoutData()).height= 50;
 		scriptText.addFocusListener(this);
     }
