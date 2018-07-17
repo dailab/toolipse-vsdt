@@ -64,7 +64,7 @@ public class ExpressionComposite extends Composite {
 	 */
 	public ExpressionComposite(Composite parent) {
 		super(parent, SWT.NONE);
-    	setBackground(parent.getBackground());
+    	setBackground(null); // prevent black background in some cases
     	setLayout(new GridLayout(2, false));
 		
     	expressionText= new Text(this, SWT.BORDER);

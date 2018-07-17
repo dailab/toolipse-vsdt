@@ -127,7 +127,9 @@ public class EditExpressionDialog extends TitleAreaDialog {
 		languageCombo.setText(language != null ? language : DEFAULT);
 		
 		// Syntax check
-		checkButton= FormLayoutUtil.addButton(composite, "Check", SWT.NONE, languageCombo, null, 100);
+		checkButton= new Button(composite, SWT.NONE);
+		checkButton.setText("Check");
+		checkButton.setLayoutData(FormLayoutUtil.createFormData(languageCombo, null, 100));
 		checkButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -145,7 +147,9 @@ public class EditExpressionDialog extends TitleAreaDialog {
 		});
 		
 		// Properties
-		insertPropertyButton= FormLayoutUtil.addButton(composite, "Insert Property", SWT.NONE, languageCombo, null, checkButton);
+		insertPropertyButton= new Button(composite, SWT.NONE);
+		insertPropertyButton.setText("Insert Property");
+		insertPropertyButton.setLayoutData(FormLayoutUtil.createFormData(languageCombo, null, checkButton));
 		insertPropertyButton.setEnabled(properties != null);
 		insertPropertyButton.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -163,29 +167,29 @@ public class EditExpressionDialog extends TitleAreaDialog {
 			propertiesCombo.fillCombo(properties);
 		}
 	
-		if (parameters != null) {
-			// Parameters
-			insertParameterButton= FormLayoutUtil.addButton(composite, "Insert Parameter", SWT.NONE, checkButton, null, checkButton);
-			insertParameterButton.setEnabled(properties != null);
-			insertParameterButton.addSelectionListener(new SelectionAdapter() {
-				@Override
-				public void widgetSelected(SelectionEvent e) {
-					if (parametersCombo.getSelected() != null)
-						insert(VsdtHelper.ESCAPE_PARAMETER + parametersCombo.getSelected().getKey());
-				}
-			});
-			
-			label= FormLayoutUtil.addLabel(composite, "Parameters", insertPropertyButton, 0);
-			theCombo = FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, insertPropertyButton, label, insertParameterButton);
-			parametersCombo= new VsdtFeatureCombo<Parameter>(theCombo) {
-				protected String getLabel(Parameter o) {
-					return VsdtHelper.ESCAPE_PARAMETER + o.getKey() + " = " + o.getValue();
-				}
-			};
-			parametersCombo.getCombo().setEnabled(parameters != null);
-			if (parameters != null) {
-				parametersCombo.fillCombo(parameters);
+		// Parameters
+		insertParameterButton= new Button(composite, SWT.NONE);
+		insertParameterButton.setText("Insert Parameter");
+		insertParameterButton.setLayoutData(FormLayoutUtil.createFormData(checkButton, null, checkButton));
+		insertParameterButton.setEnabled(parameters != null);
+		insertParameterButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if (parametersCombo.getSelected() != null)
+					insert(VsdtHelper.ESCAPE_PARAMETER + parametersCombo.getSelected().getKey());
 			}
+		});
+		
+		label= FormLayoutUtil.addLabel(composite, "Parameters", insertPropertyButton, 0);
+		theCombo = FormLayoutUtil.addCombo(composite, SWT.READ_ONLY, insertPropertyButton, label, insertParameterButton);
+		parametersCombo= new VsdtFeatureCombo<Parameter>(theCombo) {
+			protected String getLabel(Parameter o) {
+				return VsdtHelper.ESCAPE_PARAMETER + o.getKey() + " = " + o.getValue();
+			}
+		};
+		parametersCombo.getCombo().setEnabled(parameters != null);
+		if (parameters != null) {
+			parametersCombo.fillCombo(parameters);
 		}
 		
 		return superComposite;
@@ -210,7 +214,7 @@ public class EditExpressionDialog extends TitleAreaDialog {
 	 * @param properties	Properties in the scope of the Expression to be edited
 	 */
 	public void setProperties(List<Property> properties) {
-		this.properties = properties;
+		this.properties = properties.isEmpty() ? null : properties;
 	}
 	
 	/**
@@ -219,7 +223,7 @@ public class EditExpressionDialog extends TitleAreaDialog {
 	 * @param parameters	Parameters of the Process
 	 */
 	public void setParameters(List<Parameter> parameters) {
-		this.parameters = parameters;
+		this.parameters = parameters.isEmpty() ? null : parameters;
 	}
 	
 	/**
