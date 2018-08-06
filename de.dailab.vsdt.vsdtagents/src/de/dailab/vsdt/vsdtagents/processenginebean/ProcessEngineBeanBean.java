@@ -155,6 +155,29 @@ public class ProcessEngineBeanBean extends AbstractMethodExposingBean {
 	protected void undeployInterpreterRuntime(IAgentDescription agent, String id) throws Exception {
 		invokeAction(agent, ACTION_REMOVE_RUNTIME, 5000, id);
 	}
+	
+	
+	/**
+	 * Invoke the VSDT Process corresponding to the given Action Description
+	 * with the given input parameters. The Service is invoked synchronously and
+	 * the result is returned.
+	 * 
+	 * @param service		some Action Description for an interpreter process
+	 * @param parameters	input parameters for the service invocation
+	 * @return				result of the service invocation
+	 * @throws Exception	any Exception that occurred during the invocation
+	 */
+	protected Serializable[] invokeProcess(IActionDescription service, Serializable... parameters) throws Exception {
+		ActionResult result = invokeAndWaitForResult(service, parameters);
+		if (result.getFailure() != null) {
+			if (result.getFailure() instanceof Exception) {
+				throw (Exception) result.getFailure();
+			} else {
+				throw new Exception(result.getFailure().toString());
+			}
+		}
+		return result.getResults();
+	}
 
 	/**
 	 * Invoke action, log errors and throw exception in case there are failures

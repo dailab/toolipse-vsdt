@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +43,8 @@ import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.Participant;
 import de.dailab.vsdt.vsdtagents.Util;
 import de.dailab.vsdt.vsdtagents.VsdtAgents;
+import de.dailab.vsdt.vsdtagents.deployment.DeploymentView;
+import de.dailab.vsdt.vsdtagents.deployment.ServiceParameterDialog;
 
 /**
  * This view provides a way to deploy the process diagram shown in the current
@@ -55,6 +59,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 	private Action refreshAction;
 	private Action deployAction;
 	private Action undeployAction;
+	private Action invokeAction;
 	
 	
 	/** the bean */
@@ -85,8 +90,9 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		// create actions
 		refreshAction = new RefreshAction();
 		deployAction = new DeployAction();
+		invokeAction = new InvokeAction();
 		undeployAction = new UndeployAction();
-		contributeToToolBar(refreshAction, deployAction, undeployAction);
+		contributeToToolBar(refreshAction, deployAction, invokeAction, undeployAction);
 		updateActions();
 	}
 
@@ -147,11 +153,13 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		Object element = getSelectedElement(interpreterViewer);
 		boolean isAgent = element instanceof IAgentDescription;
 		boolean isInterpreter = element instanceof Map.Entry;
+		boolean isAction = element instanceof IActionDescription;
 		
 		// set action enablements
 		refreshAction.setEnabled(true); // always enabled
 		deployAction.setEnabled(isVsdtEditor && isAgent);
 		undeployAction.setEnabled(isInterpreter);
+		invokeAction.setEnabled(isAction);
 	}
 
 	/**
@@ -375,6 +383,76 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 					refresh();
 				} catch (Exception e) {
 					openMessageDialog(MessageDialog.ERROR, "Failed to remove runtime: " + e.getMessage());
+				}
+			}
+		}
+	}
+	
+	/**
+	 * This Action calls the Bean's invoke Method for the Service currently
+	 * selected in the Viewer and with a list of Parameters asked from the user
+	 * using a special Parameter Dialog. The Results of the service invocation,
+	 * if any, are again displayed to the user using a similar Dialog.
+	 * 
+	 * TODO unify/reduce code duplication with similar method in {@link DeploymentView}.
+	 * 
+	 * @author kuester
+	 */
+	protected class InvokeAction extends Action {
+		
+		public InvokeAction() {
+			super("Invoke", VsdtAgents.getImageDescriptor("action.gif"));
+			setToolTipText("Invoke selected Process (for primitive argument and result types only).");
+		}
+		
+		@Override
+		public void run() {
+			Object selected = getSelectedElement(interpreterViewer);
+			if (selected instanceof IActionDescription) {
+				IActionDescription service = (IActionDescription) selected;
+
+				// check input parameters for being primitive types or String
+				if (! ServiceParameterDialog.isSupported(service)) {
+					openMessageDialog(MessageDialog.ERROR, "Can not invoke: Unsupported Service Parameter Types.");
+				}
+				
+				// open dialog, asking for input parameters
+				final ServiceParameterDialog parameterDialog = new ServiceParameterDialog(
+						interpreterViewer.getControl().getShell(), service);
+				
+				if (parameterDialog.open() == ServiceParameterDialog.OK) {
+					try {
+						Shell shell= Display.getCurrent().getActiveShell();
+						ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(shell);
+						progressMonitorDialog.run(false, false, new IRunnableWithProgress() {
+							/*
+							 * Currently, this freezes the UI during a long-running action. Can be solved to some
+							 * extend by setting 'fork' to true and opening the dialogs using Display.syncExec...
+							 */
+							@Override
+							public void run(IProgressMonitor monitor) {
+								try {
+									Serializable[] inputs = parameterDialog.getInputValues();
+									Serializable[] results = getBean().invokeProcess(service, inputs);
+									// open dialog showing the result
+									StringBuffer buffer = new StringBuffer();
+									buffer.append(String.format("Result for Service %s:", service.getName()));
+									for (Serializable result : results) {
+										buffer.append(DeploymentView.NL);
+										buffer.append(result != null && result.getClass().isArray() ?
+												Arrays.toString((Object[]) result) : String.valueOf(result));
+									}
+									openMessageDialog(MessageDialog.INFORMATION, buffer.toString());
+								} catch (Exception e) {
+									openMessageDialog(MessageDialog.ERROR, "Invocation failed: " + e.getMessage());
+								}
+							}
+						});
+					} catch (InvocationTargetException e) {
+						e.printStackTrace();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}
