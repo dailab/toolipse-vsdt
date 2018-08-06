@@ -39,6 +39,7 @@ public class ProcessEngineBeanBean extends AbstractMethodExposingBean {
 	static final String ACTION_REGISTER_RUNTIME = PROVIDER + "registerInterpreterRuntime";
 	static final String ACTION_REMOVE_RUNTIME   = PROVIDER + "removeInterpreterRuntime";
 	static final String ACTION_GET_RUNTIMES     = PROVIDER + "getAllInterpreters";
+	static final String ACTION_GET_ACTIONS      = PROVIDER + "getAllInterpreterActions";
 	
 	// own actions
 	public static final String ACTION_SHOW_STATE = "de.dailab.vsdt.vsdtagents.processenginebean.ProcessEngineBeanBean#showState";
@@ -108,13 +109,26 @@ public class ProcessEngineBeanBean extends AbstractMethodExposingBean {
 	 * Get all the interpreter runtimes running on some interpreter agent.
 	 * 
 	 * @param agent				the interpreter agent
-	 * @return					list of running interpreter runtimes (maps id -> toString)
+	 * @return					map of running interpreter runtimes (maps id -> toString)
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
 	protected Map<String, String> getRunningInterpreters(IAgentDescription agent) throws Exception {
 		Serializable[] result = invokeAction(agent, ACTION_GET_RUNTIMES, 5000);
 		return (Map<String, String>) result[0]; 
+	}
+	
+	/**
+	 * Get all processes exposed as actions
+	 * 
+	 * @param agent				the interpreter agent
+	 * @return					map of available processes (maps id -> [actions])
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	protected Map<String, List<Action>> getExposedProcesses(IAgentDescription agent) throws Exception {
+		Serializable[] result = invokeAction(agent, ACTION_GET_ACTIONS, 5000);
+		return (Map<String, List<Action>>) result[0];
 	}
 
 	/**

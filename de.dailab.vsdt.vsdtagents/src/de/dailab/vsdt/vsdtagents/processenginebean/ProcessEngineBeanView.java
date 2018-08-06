@@ -34,6 +34,7 @@ import de.dailab.common.swt.dialogs.SingleSelectDialog;
 import de.dailab.common.swt.views.AbstractLabelProvider;
 import de.dailab.common.swt.views.AbstractStructuredViewerView;
 import de.dailab.common.swt.views.AbstractTreeContentProvider;
+import de.dailab.jiactng.agentcore.ontology.IActionDescription;
 import de.dailab.jiactng.agentcore.ontology.IAgentDescription;
 import de.dailab.jiactng.nodeplugin.JiacNodePlugin;
 import de.dailab.vsdt.BusinessProcessSystem;
@@ -64,6 +65,9 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 	
 	/** map holding interpreter agents and their respective interpreter runtimes */
 	private Map<IAgentDescription, Map<String, String>> interpreterAgents = null;
+	
+	/** map holding interpreter agents and their respective interpreter runtimes' actions */
+	private Map<String, List<de.dailab.jiactng.agentcore.action.Action>> interpreterAgentActions = null;
 	
 	/**
 	 * Create the View's Controls and Actions
@@ -111,9 +115,14 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 			List<IAgentDescription> agents = getBean().getInterpreterAgents();
 			
 			// get list of running interpreters for each interpreter agent
+			// can not be lambda-fied due to checked exceptions
 			interpreterAgents = new HashMap<>();
 			for (IAgentDescription agent : agents) {
 				interpreterAgents.put(agent, getBean().getRunningInterpreters(agent));
+			}
+			interpreterAgentActions = new HashMap<>();
+			for (IAgentDescription agent : agents) {
+				interpreterAgentActions.putAll(getBean().getExposedProcesses(agent));
 			}
 			
 			// set viewer's input (input is irrelevant, just to trigger the callback)
@@ -190,10 +199,14 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 			return new Object[] {};
 		}
 		
+		@SuppressWarnings("rawtypes")
 		@Override
 		public Object[] getChildren(Object parentElement) {
 			if (parentElement instanceof IAgentDescription) {
 				return interpreterAgents.get(parentElement).entrySet().toArray();
+			}
+			if (parentElement instanceof Map.Entry) {
+				return interpreterAgentActions.get(((Map.Entry) parentElement).getKey()).toArray();
 			}
 			return new Object[] {};
 		}
@@ -218,6 +231,10 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 				Map.Entry<String, String> entry = (Map.Entry<String, String>) element; 
 				return entry.getValue();
 			}
+			if (element instanceof IActionDescription) {
+				IActionDescription action = (IActionDescription) element;
+				return String.format("%s: %s -> %s", action.getName(), action.getInputTypeNames(), action.getResultTypeNames());
+			}
 			return super.getText(element);
 		}
 		
@@ -228,6 +245,9 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 			}
 			if (element instanceof Map.Entry) {
 				return VsdtAgents.getImageDescriptor("role.gif");
+			}
+			if (element instanceof IActionDescription) {
+				return VsdtAgents.getImageDescriptor("action.gif");
 			}
 			return null;
 		}
