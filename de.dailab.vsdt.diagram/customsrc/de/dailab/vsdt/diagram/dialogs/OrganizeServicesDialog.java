@@ -32,7 +32,7 @@ import de.dailab.vsdt.util.VsdtToStringHelper;
  */
 public class OrganizeServicesDialog extends AbstractOrganizeElementsDialog<Service> {
 
-	public static final String[] TYPES = {"JIAC Action", "Web Service", "User Task"};
+	public static final String[] TYPES = {"BPMN Process", "JIAC Action", "Web Service", "User Task"};
 	
 	private static final String LABEL_PARTICIPANT = "Participant";
 	private static final String LABEL_INTERFACE = "Interface";
