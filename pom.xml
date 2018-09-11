@@ -5,8 +5,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<tycho.version>0.21.0</tycho.version>
-		<eclipse-repo.url>http://download.eclipse.org/releases/neon</eclipse-repo.url>
+		<tycho.version>1.2.0</tycho.version>
+		<eclipse-repo.url>http://download.eclipse.org/releases/oxygen</eclipse-repo.url>
 		<xtext-repo.url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/</xtext-repo.url>
 		<m2e-repo.url>http://download.eclipse.org/technology/m2e/releases</m2e-repo.url>
 	</properties>
@@ -70,7 +70,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.6</version>
+				<version>1.8</version>
 				<executions>
 					<execution>
 						<phase>validate</phase>
