@@ -519,7 +519,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 		MVEL.eval(script, context);
 		for (Property prop : VsdtHelper.getVisibleProperties(object)) {
 			if (context.containsKey(prop.getName())) {
-				setPropertyValue(prop, (Serializable) context.get(prop.getName()));
+				setPropertyValue(prop, context.get(prop.getName()));
 			}
 		}
 	}
