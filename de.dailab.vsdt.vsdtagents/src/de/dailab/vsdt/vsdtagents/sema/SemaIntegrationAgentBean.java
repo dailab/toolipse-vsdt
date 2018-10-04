@@ -172,6 +172,9 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 				Service service = SemanticServiceFactory.createService(grsd.getSd());
 				allTypes.addAll(SemanticServiceFactory.createDatatypes(grsd.getSd()));
 
+				// service already exists?
+				service = findExisting(service, bpd.getParent().getServices(), true);
+				
 				// ... create a task, invoking that service
 				Activity task = VsdtFactory.eINSTANCE.createActivity();
 				task.setName("Invoke " + grsd.getSd().getServiceName());
@@ -324,6 +327,25 @@ public class SemaIntegrationAgentBean extends AbstractMethodExposingBean {
 				target.add(element);
 			}
 		}
+	}
+
+	/**
+	 * Find and return existing version of given element in given collections. If duplicate
+	 * exists, return the original from the collection, otherwise return the new element or null,
+	 * depending on the third parameter.
+	 * 
+	 * @param element		new element that may be added to the collection
+	 * @param collection	collection that may already contain the element
+	 * @param returnSelf	whether to return the new element or null in case it is new
+	 * @return				new element, existing element, or null
+	 */
+	private <T extends EObject> T findExisting(T element, Collection<T> collection, boolean returnSelf) {
+		for (T existing : collection) {
+			if (EcoreUtil.equals(element, existing)) {
+				return existing;
+			}
+		}
+		return returnSelf ? element : null;
 	}
 
 	/**
