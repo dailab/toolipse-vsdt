@@ -8,6 +8,7 @@ import org.mvel2.MVEL;
 import de.dailab.vsdt.Expression;
 import de.dailab.vsdt.FlowObject;
 import de.dailab.vsdt.vxl.util.Util;
+import de.dailab.vsdt.vxl.util.VxlEvalException;
 import de.dailab.vsdt.vxl.util.VxlInterpreter;
 import de.dailab.vsdt.vxl.util.VxlParseException;
 import de.dailab.vsdt.vxl.util.VxlParser;
@@ -134,18 +135,11 @@ public class ExpressionHelper {
 	public static Object evaluateVxlTerm(String originalExpression, VxlTerm term, Map<String, Object> context) {
 		if (term == null) return null;
 		VxlInterpreter interpreter= new VxlInterpreter();
-		Object result= interpreter.evaluateTerm(term, context);
-		Map<Object, String> errors= interpreter.getErrors();
-		if (! errors.isEmpty()) {
-			StringBuffer message= new StringBuffer();
-			message.append("The Expression '").append(originalExpression).append("' could not be evaluated.");
-			message.append("\r\nErrors:");
-			for (String error : errors.values()) {
-				message.append("\r\n- ").append(error);
-			}
-			throw new IllegalArgumentException(message.toString());
+		try {
+			return interpreter.evaluateTerm(term, context);
+		} catch (VxlEvalException e) {
+			throw new IllegalArgumentException("The Expression '" + originalExpression + "' could not be evaluated.", e);
 		}
-		return result;
 	}
 	
 	
