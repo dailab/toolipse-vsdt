@@ -66,7 +66,7 @@ public class ExpressionHelper {
 
 	public static Object parseAndEvaluate(String expression, Map<String, Object> context, String language) {
 		if (Util.languageIsVxl(language)) {
-			return evaluateVxlTerm(parseVxlExpression(expression), context);
+			return evaluateVxlTerm(expression, parseVxlExpression(expression), context);
 		}
 		if (Util.languageIsMvel(language)) {
 			return evaluateMvelExpression(expression, context);
@@ -110,7 +110,7 @@ public class ExpressionHelper {
 			return term;
 		} catch (VxlParseException e) {
 			StringBuffer message= new StringBuffer();
-			message.append("The expression ").append(expression).append(" could not be parsed.");
+			message.append("The expression '").append(expression).append("' could not be parsed.");
 			if (! parser.getErrors().isEmpty()) {
 				message.append("\r\nErrors:");
 				for (Diagnostic d : parser.getErrors()) {
@@ -131,14 +131,14 @@ public class ExpressionHelper {
 	 * @param context		Map of Property names and values
 	 * @return				Result of the evaluation, or null in case of error
 	 */
-	public static Object evaluateVxlTerm(VxlTerm term, Map<String, Object> context) {
+	public static Object evaluateVxlTerm(String originalExpression, VxlTerm term, Map<String, Object> context) {
 		if (term == null) return null;
 		VxlInterpreter interpreter= new VxlInterpreter();
 		Object result= interpreter.evaluateTerm(term, context);
 		Map<Object, String> errors= interpreter.getErrors();
 		if (! errors.isEmpty()) {
 			StringBuffer message= new StringBuffer();
-			message.append("Expression could not be evaluated.");
+			message.append("The Expression '").append(originalExpression).append("' could not be evaluated.");
 			message.append("\r\nErrors:");
 			for (String error : errors.values()) {
 				message.append("\r\n- ").append(error);

@@ -231,6 +231,10 @@ public class VxlInterpreter {
 	protected Object evalVariable(VxlVariable variable) {
 		// get value from context
 		if (context != null) {
+			if (! context.containsKey(variable.getName())) {
+				errors.put(variable, "Variable not in context / not initialized");
+				return null;
+			}
 			Object value= context.get(variable.getName());
 			if (variable.getAccessor() != null) {
 				value = evalAccessor(variable.getAccessor(), value);

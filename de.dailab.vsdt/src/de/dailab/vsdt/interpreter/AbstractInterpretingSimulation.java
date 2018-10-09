@@ -125,6 +125,9 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 */
 	public Object getPropertyValue(Property property) {
 		if (property != null) {
+			if (! propertyValueMap.containsKey(property)) {
+				System.err.println("WARNING: Property not initialized: " + property);
+			}
 			return propertyValueMap.get(property);
 		}
 		return null;
@@ -433,7 +436,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 		Map<String, Object> context= new HashMap<>();
 		for (Property property : VsdtHelper.getVisibleProperties(eObject)) {
 			// yields Properties from inner to outer scope --> do not overwrite
-			if (! context.containsKey(property.getName())) {
+			if (! context.containsKey(property.getName()) && propertyValueMap.containsKey(property)) {
 				context.put(property.getName(), getPropertyValue(property));
 			}
 		}
