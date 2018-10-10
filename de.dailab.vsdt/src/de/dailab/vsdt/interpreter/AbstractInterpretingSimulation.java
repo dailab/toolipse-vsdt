@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -161,7 +162,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 * Return the set of Properties currently in the context.
 	 */
 	public Collection<Property> getProperties() {
-		return new HashSet<>(propertyValueMap.keySet());
+		return Collections.unmodifiableSet(propertyValueMap.keySet());
 	}
 
 	/**

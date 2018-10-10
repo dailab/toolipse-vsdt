@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Vector;
 
-import de.dailab.vsdt.vxl.services.VxlGrammarAccess.VxlElementElements;
 import de.dailab.vsdt.vxl.util.TermOrdering.TermLeaf;
 import de.dailab.vsdt.vxl.util.TermOrdering.TermNode;
 import de.dailab.vsdt.vxl.util.TermOrdering.TermTree;
