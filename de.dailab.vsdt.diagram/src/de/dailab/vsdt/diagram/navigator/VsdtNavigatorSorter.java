@@ -1,13 +1,13 @@
 package de.dailab.vsdt.diagram.navigator;
 
-import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.jface.viewers.ViewerComparator;
 
 import de.dailab.vsdt.diagram.part.VsdtVisualIDRegistry;
 
 /**
  * @generated
  */
-public class VsdtNavigatorSorter extends ViewerSorter {
+public class VsdtNavigatorSorter extends ViewerComparator {
 
 	/**
 	 * @generated

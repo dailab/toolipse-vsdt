@@ -20,7 +20,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -203,7 +203,7 @@ public class VsdtDiagramEditorUtil {
 		};
 		try {
 			OperationHistoryFactory.getOperationHistory().execute(command,
-					new SubProgressMonitor(progressMonitor, 1), null);
+					SubMonitor.convert(progressMonitor, 1), null);
 		} catch (ExecutionException e) {
 			VsdtDiagramEditorPlugin.getInstance().logError(
 					"Unable to create model and diagram", e); //$NON-NLS-1$
