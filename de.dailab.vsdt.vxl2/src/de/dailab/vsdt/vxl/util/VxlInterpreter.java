@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Vector;
 
+import de.dailab.vsdt.vxl.services.VxlGrammarAccess.VxlElementElements;
 import de.dailab.vsdt.vxl.util.TermOrdering.TermLeaf;
 import de.dailab.vsdt.vxl.util.TermOrdering.TermNode;
 import de.dailab.vsdt.vxl.util.TermOrdering.TermTree;
@@ -89,7 +90,11 @@ public class VxlInterpreter {
 			VxlOperator op= node.operator;
 			
 			if (checkType(op, head, tail)) {
-				return evaluateOperation(op, head, tail);
+				try {
+					return evaluateOperation(op, head, tail);
+				} catch (Exception e) {
+					throw new VxlEvalException(term, "Could not evaluate term: " + e.getMessage(), e);
+				}
 			} else {
 				throw new VxlEvalException(term, "Types do not match operator", null);
 			}
@@ -437,7 +442,7 @@ public class VxlInterpreter {
 	 * @return			result of the operation, applied to the given terms
 	 */
 	@SuppressWarnings({"unchecked","rawtypes"})
-	private Object evaluateOperation(VxlOperator operator, Object head, Object tail) {
+	private Object evaluateOperation(VxlOperator operator, Object head, Object tail) throws Exception {
 		switch (operator) {
 		case CONCAT:
 			if (head instanceof List && tail instanceof List) {
