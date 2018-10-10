@@ -138,7 +138,7 @@ public class ExpressionHelper {
 		try {
 			return interpreter.evaluateTerm(term, context);
 		} catch (VxlEvalException e) {
-			throw new IllegalArgumentException("The Expression '" + originalExpression + "' could not be evaluated.", e);
+			throw new IllegalArgumentException("The Expression '" + originalExpression + "' could not be evaluated: " + e.getMessage(), e);
 		}
 	}
 	

@@ -220,7 +220,7 @@ public class VxlInterpreter {
 		// get value from context
 		if (context != null) {
 			if (! context.containsKey(variable.getName())) {
-				throw new VxlEvalException(variable, "Variable not in context / not initialized", null);
+				throw new VxlEvalException(variable, "Variable " + variable.getName() + " not initialized", null);
 			}
 			Object value= context.get(variable.getName());
 			if (variable.getAccessor() != null) {
@@ -236,6 +236,9 @@ public class VxlInterpreter {
 	 * Accessor:		ArrayAccessor | FieldAccessor;
 	 */
 	protected Object evalAccessor(VxlAccessor accessor, Object value) throws VxlEvalException {
+		if (value == null) {
+			throw new VxlEvalException(accessor, "Can not access property of null object", null);
+		}
 		if (accessor instanceof VxlArrayAccessor) {
 			return evalArrayAccessor((VxlArrayAccessor) accessor, value);
 		}
