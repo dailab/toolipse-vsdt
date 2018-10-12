@@ -233,23 +233,15 @@ public abstract class AbstractSimulation implements ISimulation {
 			}
 			
 			// handle activity looping
-			if (flowObject instanceof Activity && isLooping((Activity) flowObject)) {
-				// set state to DONE, and then right back to LOOPING_READY
-				setState(flowObject, State.LOOPING_READY);
-				if (ASSIGNMENTS_INSIDE_LOOP) {
-					// handle end Assignments
-					if (! handleAssignments(flowObject, AssignTimeType.END)) {
-						return stepFailed(flowObject);
-					}
-				}
-				// XXX invert if / else, remove duplicate assignments handling
-				
-			} else {
+			boolean looping = flowObject instanceof Activity && isLooping((Activity) flowObject);
+			
+			if (! looping || ASSIGNMENTS_INSIDE_LOOP) {
 				// handle end Assignments
 				if (! handleAssignments(flowObject, AssignTimeType.END)) {
 					return stepFailed(flowObject);
 				}
-				
+			}
+			if (! looping) {				
 				// OR-, XOR-Gateway: select outgoing sequence flow(s)
 				List<SequenceFlow> seqFlows= needsToSelectPath(flowObject) 
 						? selectOutgoingSequenceFlows(flowObject)
@@ -257,9 +249,6 @@ public abstract class AbstractSimulation implements ISimulation {
 				if (seqFlows == null) {
 					return result; // no selection; cancel
 				}
-				
-				// set state to DONE
-				setState(flowObject, State.DONE);
 				
 				// place tokens on outgoing sequence flows
 				for (SequenceFlow seqFlow : seqFlows) {
@@ -270,6 +259,9 @@ public abstract class AbstractSimulation implements ISimulation {
 					stepMap.put(seqFlow, step);
 				}
 			}
+			// set state to DONE or LOOPING_READY
+			setState(flowObject, looping ? State.LOOPING_READY : State.DONE);
+			
 			// set containing subprocess to ACTIVE_READY
 			if (flowObject.getParent() instanceof Activity) {
 				if (updateState((Activity) flowObject.getParent())) {
