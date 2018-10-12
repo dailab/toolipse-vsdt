@@ -334,6 +334,7 @@ public class EndNameEditPart extends LabelEditPart implements
 	/**
 	 * @generated
 	 */
+	@SuppressWarnings("deprecation")
 	protected DirectEditManager getManager() {
 		if (manager == null) {
 			setManager(new TextDirectEditManager(this, TextDirectEditManager

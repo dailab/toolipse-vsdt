@@ -57,7 +57,7 @@ import org.eclipse.ui.part.FileEditorInput;
 /**
  * @generated
  */
-@SuppressWarnings({"unchecked", "rawtypes"})
+@SuppressWarnings({"unchecked", "rawtypes", "restriction"})
 public class VsdtDocumentProvider extends AbstractDocumentProvider implements
 		IDiagramDocumentProvider {
 
