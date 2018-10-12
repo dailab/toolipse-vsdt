@@ -241,6 +241,9 @@ public abstract class AbstractSimulation implements ISimulation {
 					return stepFailed(flowObject);
 				}
 			}
+			// set state to DONE or LOOPING_READY
+			setState(flowObject, looping ? State.LOOPING_READY : State.DONE);
+
 			if (! looping) {				
 				// OR-, XOR-Gateway: select outgoing sequence flow(s)
 				List<SequenceFlow> seqFlows= needsToSelectPath(flowObject) 
@@ -259,8 +262,6 @@ public abstract class AbstractSimulation implements ISimulation {
 					stepMap.put(seqFlow, step);
 				}
 			}
-			// set state to DONE or LOOPING_READY
-			setState(flowObject, looping ? State.LOOPING_READY : State.DONE);
 			
 			// set containing subprocess to ACTIVE_READY
 			if (flowObject.getParent() instanceof Activity) {
