@@ -349,13 +349,14 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 						// XXX instance types might not match declared param types!
 						method.invoke(propVal, value);
 					} catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e2) {
-						System.err.println("Could not assign value to to-query " + fieldName);
+						throw new IllegalArgumentException("Could not assign value to field " + fieldName);
 					}
 				}
 			}
+			System.out.println(String.format("%s[%s] <- %s", assignment.getTo().getName(), assignment.getToQuery(), value));
 		} else {
 			setPropertyValue(assignment.getTo(), value);
-			System.out.println(assignment.getTo().getName() + " <- " + value);
+			System.out.println(String.format("%s <- %s", assignment.getTo().getName(), value));
 		}
 	}
 	

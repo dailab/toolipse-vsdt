@@ -163,7 +163,7 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * - handle start assignments
 	 */
 	public final List<FlowObject> stepInto(FlowObject flowObject) {
-		System.out.println("Stepping Into " + getReadable(flowObject));
+		System.out.println("--> " + getReadable(flowObject));
 		List<FlowObject> result= new ArrayList<>();
 		if (isInState(flowObject, State.READY, State.LOOPING_READY)) {
 			step++;
@@ -215,7 +215,6 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * - update states of succeeding flow objects
 	 */
 	public final List<FlowObject> stepOut(FlowObject flowObject) {
-		System.out.println("Stepping out of " + getReadable(flowObject));
 		List<FlowObject> result= new ArrayList<>();
 		if (isInState(flowObject, State.ACTIVE_READY)) {
 			
@@ -280,6 +279,7 @@ public abstract class AbstractSimulation implements ISimulation {
 					.forEach(f -> setState(f, State.IDLE));
 		}
 		notifyObservers();
+		System.out.println("<-- " + getReadable(flowObject));
 		return result;
 	}
 	
