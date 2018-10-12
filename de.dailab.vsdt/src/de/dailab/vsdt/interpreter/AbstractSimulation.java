@@ -270,19 +270,13 @@ public abstract class AbstractSimulation implements ISimulation {
 			}
 			// cancel other events after event-based XOR gateway
 			// this was previously done in stepInto, but this breaks the automatic interpreter
-			// XXX rewrite using streams?
-			for (SequenceFlow seqFlow : flowObject.getIncomingSeq()) {
-				FlowObject source = seqFlow.getSource();
-				if (source instanceof Gateway && 
-						((Gateway) source).getGatewayType() == GatewayType.XOR_EVENT) {
-					// event-based XOR: remove other tokens, too
-					for (SequenceFlow seqFlow2 : source.getOutgoingSeq()) {
-						if (seqFlow2.getTarget() != flowObject) {
-							setState(seqFlow2.getTarget(), State.IDLE);
-						}
-					}
-				}
-			}
+			flowObject.getIncomingSeq().stream()
+					.map(SequenceFlow::getSource)
+					.filter(s -> s instanceof Gateway && ((Gateway) s).getGatewayType() == GatewayType.XOR_EVENT)
+					.flatMap(s -> s.getOutgoingSeq().stream())
+					.map(SequenceFlow::getTarget)
+					.filter(f -> f != flowObject)
+					.forEach(f -> setState(f, State.IDLE));
 		}
 		notifyObservers();
 		return result;
