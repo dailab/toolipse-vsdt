@@ -94,8 +94,9 @@ public class ManualSimulation extends BasicSimulation {
 	 * no assignments handling in manual simulation
 	 */
 	@Override
-	protected void handleAssignments(EObject eObject, AssignTimeType assignTime) {
+	protected boolean handleAssignments(EObject eObject, AssignTimeType assignTime) {
 		// do nothing
+		return true;
 	}
 	
 }

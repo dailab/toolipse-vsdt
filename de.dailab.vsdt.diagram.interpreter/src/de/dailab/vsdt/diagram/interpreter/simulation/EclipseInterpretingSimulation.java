@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
@@ -52,8 +53,12 @@ public class EclipseInterpretingSimulation extends AbstractInterpretingSimulatio
 		if (dialog.open() == EditExpressionDialog.OK) {
 			String newExpression= dialog.getExpression();
 			Map<String, Object> context= createContext(property.eContainer());
-			Object newValue= parseAndEvaluate(newExpression, context, Util.LANG_NAME_MVEL);
-			setPropertyValue(property, newValue);
+			try {
+				Object newValue= parseAndEvaluate(newExpression, context, Util.LANG_NAME_MVEL);
+				setPropertyValue(property, newValue);
+			} catch (IllegalArgumentException e) {
+				MessageDialog.openError(shell, "Error", e.getMessage());
+			}
 		}
 	}
 

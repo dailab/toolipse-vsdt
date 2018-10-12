@@ -176,7 +176,9 @@ public abstract class AbstractSimulation implements ISimulation {
 			// skip assignments when looping
 			if (! isInState(flowObject, State.LOOPING_READY) || ASSIGNMENTS_INSIDE_LOOP) {
 				// handle start Assignments
-				handleAssignments(flowObject, AssignTimeType.START);
+				if (! handleAssignments(flowObject, AssignTimeType.START)) {
+					return stepFailed(flowObject);
+				}
 			}
 
 			// set state to ACTIVE_WAITING
@@ -192,7 +194,7 @@ public abstract class AbstractSimulation implements ISimulation {
 //				if (error != null) {
 //					return stepOver(error);
 //				}
-				setState(flowObject, State.FAILED);
+				return stepFailed(flowObject);
 			}
 			
 			// possibly set state to ACTIVE_READY
@@ -227,22 +229,26 @@ public abstract class AbstractSimulation implements ISimulation {
 //				if (error != null) {
 //					return stepOver(error);
 //				}
-				setState(flowObject, State.FAILED);
+				return stepFailed(flowObject);
 			}
 			
 			// handle activity looping
 			if (flowObject instanceof Activity && isLooping((Activity) flowObject)) {
 				// set state to DONE, and then right back to LOOPING_READY
-//				setState(flowObject, State.DONE); // Why? this resets event handlers!
 				setState(flowObject, State.LOOPING_READY);
 				if (ASSIGNMENTS_INSIDE_LOOP) {
 					// handle end Assignments
-					handleAssignments(flowObject, AssignTimeType.END);
+					if (! handleAssignments(flowObject, AssignTimeType.END)) {
+						return stepFailed(flowObject);
+					}
 				}
+				// XXX invert if / else, remove duplicate assignments handling
 				
 			} else {
 				// handle end Assignments
-				handleAssignments(flowObject, AssignTimeType.END);
+				if (! handleAssignments(flowObject, AssignTimeType.END)) {
+					return stepFailed(flowObject);
+				}
 				
 				// OR-, XOR-Gateway: select outgoing sequence flow(s)
 				List<SequenceFlow> seqFlows= needsToSelectPath(flowObject) 
@@ -272,6 +278,7 @@ public abstract class AbstractSimulation implements ISimulation {
 			}
 			// cancel other events after event-based XOR gateway
 			// this was previously done in stepInto, but this breaks the automatic interpreter
+			// XXX rewrite using streams?
 			for (SequenceFlow seqFlow : flowObject.getIncomingSeq()) {
 				FlowObject source = seqFlow.getSource();
 				if (source instanceof Gateway && 
@@ -287,6 +294,15 @@ public abstract class AbstractSimulation implements ISimulation {
 		}
 		notifyObservers();
 		return result;
+	}
+	
+	/**
+	 * - shorthand for when stepping into or out of a flow object fails
+	 */
+	protected List<FlowObject> stepFailed(FlowObject flowObject) {
+		setState(flowObject, State.FAILED);
+		notifyObservers();
+		return Collections.emptyList();
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -348,7 +364,7 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * @param eObject	Some FlowObject or the Process
 	 * @param assignTime	AssignTime (START or STOP)
 	 */
-	protected abstract void handleAssignments(EObject eObject, AssignTimeType assignTime);
+	protected abstract boolean handleAssignments(EObject eObject, AssignTimeType assignTime);
 	
 	/**
 	 * Determine whether the activity shall be looping, e.g. by prompting the
