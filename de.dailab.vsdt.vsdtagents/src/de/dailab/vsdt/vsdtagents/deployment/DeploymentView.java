@@ -1,7 +1,6 @@
 package de.dailab.vsdt.vsdtagents.deployment;
 
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,8 +14,6 @@ import org.eclipse.emf.common.ui.URIEditorInput;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ContentViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -443,13 +440,8 @@ public class DeploymentView extends AbstractStructuredViewerView {
 				final IAgentDescription selectedAgent = getSelectedAgent(true);
 				if (selectedAgent != null) {
 
-					// start progress monitor
-					try {
-						final Shell shell = Display.getCurrent().getActiveShell();
-						ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(shell);
-						progressMonitorDialog.run(false, false, new IRunnableWithProgress() {
-							@Override
-							public void run(IProgressMonitor monitor) {
+						final Shell shell = Display.getDefault().getActiveShell();
+						runInProgressMonitor(shell, false, false, (IProgressMonitor monitor) -> {
 
 								try {
 									// get service sources from active editor
@@ -501,14 +493,7 @@ public class DeploymentView extends AbstractStructuredViewerView {
 								} catch (Exception e) {
 									openMessageDialog(MessageDialog.ERROR, "Deploying Service Failed: " + e.getMessage());
 								}
-							}
-
 						});
-					} catch (InvocationTargetException e) {
-						e.printStackTrace();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 				}
 			}
 		}
@@ -541,20 +526,10 @@ public class DeploymentView extends AbstractStructuredViewerView {
 				}
 				
 				// open dialog, asking for input parameters
-				final ServiceParameterDialog parameterDialog = new ServiceParameterDialog(
-						servicesViewer.getControl().getShell(), service);
-				
+				Shell shell = Display.getDefault().getActiveShell();
+				ServiceParameterDialog parameterDialog = new ServiceParameterDialog(shell, service);
 				if (parameterDialog.open() == ServiceParameterDialog.OK) {
-					try {
-						Shell shell= Display.getCurrent().getActiveShell();
-						ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(shell);
-						progressMonitorDialog.run(false, false, new IRunnableWithProgress() {
-							/*
-							 * Currently, this freezes the UI during a long-running action. Can be solved to some
-							 * extend by setting 'fork' to true and opening the dialogs using Display.syncExec...
-							 */
-							@Override
-							public void run(IProgressMonitor monitor) {
+					runInProgressMonitor(shell, true, false, (IProgressMonitor monitor) -> {
 								try {
 									Serializable[] inputs = parameterDialog.getInputValues();
 									Serializable[] results = getBean().invokeService(service, inputs);
@@ -566,17 +541,12 @@ public class DeploymentView extends AbstractStructuredViewerView {
 										buffer.append(result != null && result.getClass().isArray() ?
 												Arrays.toString((Object[]) result) : String.valueOf(result));
 									}
-									openMessageDialog(MessageDialog.INFORMATION, buffer.toString());
+									openMessageDialogSafe(MessageDialog.INFORMATION, buffer.toString());
 								} catch (Exception e) {
-									openMessageDialog(MessageDialog.ERROR, "Invocation failed: " + e.getMessage());
+									// error raised by the called service
+									openMessageDialogSafe(MessageDialog.ERROR, "Invocation failed: " + e.getMessage());
 								}
-							}
 						});
-					} catch (InvocationTargetException e) {
-						e.printStackTrace();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 				}
 			}
 		}
