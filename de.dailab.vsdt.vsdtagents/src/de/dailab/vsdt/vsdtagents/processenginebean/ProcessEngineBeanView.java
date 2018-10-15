@@ -317,13 +317,8 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		@Override
 		public void run() {
 			if (openMessageDialog(MessageDialog.CONFIRM, "Deploy Process from active Editor to selected Interpreter Agent?")) {
-			
-				// start progress monitor
-				try {
-					final Shell shell = Display.getCurrent().getActiveShell();
-					new ProgressMonitorDialog(shell).run(false, false, new IRunnableWithProgress() {
-						@Override
-						public void run(IProgressMonitor monitor) {
+				Shell shell = Display.getDefault().getActiveShell();
+				runInProgressMonitor(shell, false, false, (IProgressMonitor monitor) -> {
 							try {
 								// ask for participant
 								BusinessProcessSystem vsdtModel = Util.getVsdtModelBps(null);
@@ -338,14 +333,11 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 									refresh();
 								}
 							} catch (Exception e) {
+								// thrown by deploy method
 								openMessageDialog(MessageDialog.ERROR, "Deploying Service Failed: " + e.getMessage());
 								e.printStackTrace();
 							}
-						}
 					});
-				} catch (InvocationTargetException | InterruptedException e) {
-					e.printStackTrace();
-				}
 			}
 		}
 	}
@@ -417,20 +409,10 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 				}
 				
 				// open dialog, asking for input parameters
-				final ServiceParameterDialog parameterDialog = new ServiceParameterDialog(
-						interpreterViewer.getControl().getShell(), service);
-				
+				Shell shell = Display.getDefault().getActiveShell();
+				ServiceParameterDialog parameterDialog = new ServiceParameterDialog(shell, service);
 				if (parameterDialog.open() == ServiceParameterDialog.OK) {
-					try {
-						Shell shell= Display.getCurrent().getActiveShell();
-						ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(shell);
-						progressMonitorDialog.run(false, false, new IRunnableWithProgress() {
-							/*
-							 * Currently, this freezes the UI during a long-running action. Can be solved to some
-							 * extend by setting 'fork' to true and opening the dialogs using Display.syncExec...
-							 */
-							@Override
-							public void run(IProgressMonitor monitor) {
+					runInProgressMonitor(shell, true, false, (IProgressMonitor monitor) -> {
 								try {
 									Serializable[] inputs = parameterDialog.getInputValues();
 									Serializable[] results = getBean().invokeProcess(service, inputs);
@@ -442,17 +424,12 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 										buffer.append(result != null && result.getClass().isArray() ?
 												Arrays.toString((Object[]) result) : String.valueOf(result));
 									}
-									openMessageDialog(MessageDialog.INFORMATION, buffer.toString());
+									openMessageDialogSafe(MessageDialog.INFORMATION, buffer.toString());
 								} catch (Exception e) {
-									openMessageDialog(MessageDialog.ERROR, "Invocation failed: " + e.getMessage());
+									// error raised by the called process
+									openMessageDialogSafe(MessageDialog.ERROR, "Invocation failed: " + e.getMessage());
 								}
-							}
 						});
-					} catch (InvocationTargetException e) {
-						e.printStackTrace();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 				}
 			}
 		}
