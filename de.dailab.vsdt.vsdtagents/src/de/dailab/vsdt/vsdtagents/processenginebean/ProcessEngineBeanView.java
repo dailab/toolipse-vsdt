@@ -315,26 +315,29 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		public void run() {
 			if (openMessageDialog(MessageDialog.CONFIRM, "Deploy Process from active Editor to selected Interpreter Agent?")) {
 				Shell shell = Display.getDefault().getActiveShell();
-				runInProgressMonitor(shell, false, false, (IProgressMonitor monitor) -> {
+				// ask for participant
+				BusinessProcessSystem vsdtModel = Util.getVsdtModelBps(null);
+				Participant participant = askForParticipant(shell, vsdtModel);
+				if (participant != null) {
+					IAgentDescription agent = getSelected(interpreterViewer, IAgentDescription.class);
+					try {
+						String source = getVsdtSource();
+						runInProgressMonitor(shell, true, false, (IProgressMonitor monitor) -> {
 							try {
-								// ask for participant
-								BusinessProcessSystem vsdtModel = Util.getVsdtModelBps(null);
-								Participant participant = askForParticipant(shell, vsdtModel);
-								if (participant != null) {
-									// deploy process to interpreter
-									IAgentDescription agent = getSelected(interpreterViewer, IAgentDescription.class);
-									getBean().deployProcessToInterpreter(agent, getVsdtSource(), participant.getName());
-									openMessageDialog(MessageDialog.INFORMATION, "Process sucessfully deployed");
-
-									// refresh viewer
-									refresh();
-								}
+								// deploy process to interpreter
+								getBean().deployProcessToInterpreter(agent, source, participant.getName());
+								openMessageDialogSafe(MessageDialog.INFORMATION, "Process sucessfully deployed");
 							} catch (Exception e) {
 								// thrown by deploy method
-								openMessageDialog(MessageDialog.ERROR, "Deploying Service Failed: " + e.getMessage());
-								e.printStackTrace();
+								openMessageDialogSafe(MessageDialog.ERROR, "Deploying Service Failed: " + e.getMessage());
 							}
-					});
+						});
+						// refresh viewer
+						refresh();
+					} catch (IOException e) {
+						openMessageDialog(MessageDialog.ERROR, "Could not read VSDT source: " + e.getMessage());
+					}
+				}
 			}
 		}
 	}
@@ -367,12 +370,11 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 				try {
 					getBean().undeployInterpreterRuntime(agent, id);
 					openMessageDialog(MessageDialog.INFORMATION, "Runtime removed");
-					
-					// refresh viewer
-					refresh();
 				} catch (Exception e) {
 					openMessageDialog(MessageDialog.ERROR, "Failed to remove runtime: " + e.getMessage());
 				}
+				// refresh viewer
+				refresh();
 			}
 		}
 	}
