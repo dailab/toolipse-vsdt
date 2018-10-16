@@ -133,7 +133,7 @@ public abstract class BpmnTrafoWizard extends Wizard {
 			final Shell shell= Display.getCurrent().getActiveShell();
 			try {
 				ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(shell);
-				progressMonitorDialog.run(false, true, new IRunnableWithProgress() {
+				progressMonitorDialog.run(true, true, new IRunnableWithProgress() {
 					@Override
 					public void run(IProgressMonitor monitor) {
 
@@ -146,18 +146,20 @@ public abstract class BpmnTrafoWizard extends Wizard {
 						String logMsg = TrafoLog.getBufferedMessages();
 						String id = "de.dailab.vsdt.trafo";
 						String details = "Please see the transformation log for details";
-						if (trafoOk) {
-							if (TrafoLog.hasWarnings()) {
-								IStatus status = new Status(IStatus.WARNING, id, details, new Throwable(logMsg));
-								ErrorDialog.openError(shell, SUCCESS_TITLE, SUCCESS_WARN_MESSAGE, status);
-								
+						
+						Display.getDefault().syncExec(() -> { 
+							if (trafoOk) {
+								if (TrafoLog.hasWarnings()) {
+									IStatus status = new Status(IStatus.WARNING, id, details, new Throwable(logMsg));
+									ErrorDialog.openError(shell, SUCCESS_TITLE, SUCCESS_WARN_MESSAGE, status);
+								} else {
+									MessageDialog.openInformation(shell, SUCCESS_TITLE, SUCCESS_MESSAGE);
+								}
 							} else {
-								MessageDialog.openInformation(shell, SUCCESS_TITLE, SUCCESS_MESSAGE);
+								IStatus status = new Status(IStatus.ERROR, id, details, new Throwable(logMsg));
+								ErrorDialog.openError(shell, ERROR_TRAFO_TITLE, ERROR_TRAFO_MESSAGE, status);
 							}
-						} else {
-							IStatus status = new Status(IStatus.ERROR, id, details, new Throwable(logMsg));
-							ErrorDialog.openError(shell, ERROR_TRAFO_TITLE, ERROR_TRAFO_MESSAGE, status);
-						}
+						});
 						
 						//refresh projects
 						try {

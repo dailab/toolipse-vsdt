@@ -2,7 +2,6 @@ package de.dailab.vsdt.vsdtagents.agentstore;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.List;
 
@@ -21,8 +20,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ContentViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -313,12 +310,7 @@ public class AgentstoreView extends AbstractStructuredViewerView {
 						final String version = dialog.getVersion();
 						
 						// start progress monitor
-						try {
-							ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(shell);
-							progressMonitorDialog.run(false, false, new IRunnableWithProgress() {
-								@Override
-								public void run(IProgressMonitor monitor) {
-		
+						runInProgressMonitor(shell, false, false, (IProgressMonitor monitor) -> {
 									try {
 										// get service sources from active editor
 										List<String> serviceSrcs = Util.getServiceSrcs(null);
@@ -364,14 +356,7 @@ public class AgentstoreView extends AbstractStructuredViewerView {
 									} catch (Exception e) {
 										openMessageDialog(MessageDialog.ERROR, "Uploading Service Failed: " + e.getMessage());
 									}
-								}
-		
 							});
-						} catch (InvocationTargetException e) {
-							e.printStackTrace();
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
 					}
 				}
 			}

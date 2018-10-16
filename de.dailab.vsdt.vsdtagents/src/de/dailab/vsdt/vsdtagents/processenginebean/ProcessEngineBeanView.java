@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +15,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.dialogs.ProgressMonitorDialog;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ContentViewer;
 import org.eclipse.jface.viewers.ISelection;
@@ -317,34 +314,29 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		@Override
 		public void run() {
 			if (openMessageDialog(MessageDialog.CONFIRM, "Deploy Process from active Editor to selected Interpreter Agent?")) {
-			
-				// start progress monitor
-				try {
-					final Shell shell = Display.getCurrent().getActiveShell();
-					new ProgressMonitorDialog(shell).run(false, false, new IRunnableWithProgress() {
-						@Override
-						public void run(IProgressMonitor monitor) {
+				Shell shell = Display.getDefault().getActiveShell();
+				// ask for participant
+				BusinessProcessSystem vsdtModel = Util.getVsdtModelBps(null);
+				Participant participant = askForParticipant(shell, vsdtModel);
+				if (participant != null) {
+					IAgentDescription agent = getSelected(interpreterViewer, IAgentDescription.class);
+					try {
+						String source = getVsdtSource();
+						runInProgressMonitor(shell, true, false, (IProgressMonitor monitor) -> {
 							try {
-								// ask for participant
-								BusinessProcessSystem vsdtModel = Util.getVsdtModelBps(null);
-								Participant participant = askForParticipant(shell, vsdtModel);
-								if (participant != null) {
-									// deploy process to interpreter
-									IAgentDescription agent = getSelected(interpreterViewer, IAgentDescription.class);
-									getBean().deployProcessToInterpreter(agent, getVsdtSource(), participant.getName());
-									openMessageDialog(MessageDialog.INFORMATION, "Process sucessfully deployed");
-
-									// refresh viewer
-									refresh();
-								}
+								// deploy process to interpreter
+								getBean().deployProcessToInterpreter(agent, source, participant.getName());
+								openMessageDialogSafe(MessageDialog.INFORMATION, "Process sucessfully deployed");
 							} catch (Exception e) {
-								openMessageDialog(MessageDialog.ERROR, "Deploying Service Failed: " + e.getMessage());
-								e.printStackTrace();
+								// thrown by deploy method
+								openMessageDialogSafe(MessageDialog.ERROR, "Deploying Service Failed: " + e.getMessage());
 							}
-						}
-					});
-				} catch (InvocationTargetException | InterruptedException e) {
-					e.printStackTrace();
+						});
+						// refresh viewer
+						refresh();
+					} catch (IOException e) {
+						openMessageDialog(MessageDialog.ERROR, "Could not read VSDT source: " + e.getMessage());
+					}
 				}
 			}
 		}
@@ -378,12 +370,11 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 				try {
 					getBean().undeployInterpreterRuntime(agent, id);
 					openMessageDialog(MessageDialog.INFORMATION, "Runtime removed");
-					
-					// refresh viewer
-					refresh();
 				} catch (Exception e) {
 					openMessageDialog(MessageDialog.ERROR, "Failed to remove runtime: " + e.getMessage());
 				}
+				// refresh viewer
+				refresh();
 			}
 		}
 	}
@@ -417,20 +408,10 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 				}
 				
 				// open dialog, asking for input parameters
-				final ServiceParameterDialog parameterDialog = new ServiceParameterDialog(
-						interpreterViewer.getControl().getShell(), service);
-				
+				Shell shell = Display.getDefault().getActiveShell();
+				ServiceParameterDialog parameterDialog = new ServiceParameterDialog(shell, service);
 				if (parameterDialog.open() == ServiceParameterDialog.OK) {
-					try {
-						Shell shell= Display.getCurrent().getActiveShell();
-						ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(shell);
-						progressMonitorDialog.run(false, false, new IRunnableWithProgress() {
-							/*
-							 * Currently, this freezes the UI during a long-running action. Can be solved to some
-							 * extend by setting 'fork' to true and opening the dialogs using Display.syncExec...
-							 */
-							@Override
-							public void run(IProgressMonitor monitor) {
+					runInProgressMonitor(shell, true, false, (IProgressMonitor monitor) -> {
 								try {
 									Serializable[] inputs = parameterDialog.getInputValues();
 									Serializable[] results = getBean().invokeProcess(service, inputs);
@@ -442,17 +423,12 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 										buffer.append(result != null && result.getClass().isArray() ?
 												Arrays.toString((Object[]) result) : String.valueOf(result));
 									}
-									openMessageDialog(MessageDialog.INFORMATION, buffer.toString());
+									openMessageDialogSafe(MessageDialog.INFORMATION, buffer.toString());
 								} catch (Exception e) {
-									openMessageDialog(MessageDialog.ERROR, "Invocation failed: " + e.getMessage());
+									// error raised by the called process
+									openMessageDialogSafe(MessageDialog.ERROR, "Invocation failed: " + e.getMessage());
 								}
-							}
 						});
-					} catch (InvocationTargetException e) {
-						e.printStackTrace();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 				}
 			}
 		}
