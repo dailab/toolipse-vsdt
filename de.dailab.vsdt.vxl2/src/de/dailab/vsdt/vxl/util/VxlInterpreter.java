@@ -45,24 +45,16 @@ import de.dailab.vsdt.vxl.vxl.VxlVariable;
  */
 public class VxlInterpreter {
 	
-	/** errors that occurred during the evaluation, e.g. non-matching operations */
-	protected Map<Object, String> errors= null;
-	
 	/** the context, e.g. the association of variables to actual values */
 	protected Map<String, Object> context= null;
 	
-	public Map<Object, String> getErrors() {
-		return errors;
-	}
-
 	/**
 	 * Evaluate the given Term and return the result.
 	 * 
 	 * @param term		Some Term
 	 * @return			Result, e.g. a String, Number, or Boolean, or whatever else
 	 */
-	public Object evaluateTerm(VxlTerm term, Map<String, Object> context) {
-		this.errors= new HashMap<Object, String>();
+	public Object evaluateTerm(VxlTerm term, Map<String, Object> context) throws VxlEvalException {
 		this.context= context;
 		return (Object) evalTerm(term);
 	}
@@ -71,7 +63,7 @@ public class VxlInterpreter {
 	 * Term:			head = Head (tail = Tail)?;
 	 * The term is transcribed to an ordered TermTree and evaluated.
 	 */
-	protected Object evalTerm(VxlTerm term) {
+	protected Object evalTerm(VxlTerm term) throws VxlEvalException {
 		TermTree orderedTermTree= TermOrdering.createOrderedTermTree(term);
 //		TermOrdering.print(orderedTermTree, 0);
 		return evalTermTree(orderedTermTree);
@@ -84,7 +76,7 @@ public class VxlInterpreter {
 	 * @param term	Some ordered TermTree
 	 * @return		Evaluation result (e.g. a Sting, Number, or Boolean)
 	 */
-	protected Object evalTermTree(TermTree term) {
+	protected Object evalTermTree(TermTree term) throws VxlEvalException {
 		if (term instanceof TermLeaf) {
 			TermLeaf leaf= (TermLeaf) term;
 			return evalElement(leaf.term);
@@ -97,10 +89,13 @@ public class VxlInterpreter {
 			VxlOperator op= node.operator;
 			
 			if (checkType(op, head, tail)) {
-				return evaluateOperation(op, head, tail);
+				try {
+					return evaluateOperation(op, head, tail);
+				} catch (Exception e) {
+					throw new VxlEvalException(term, "Could not evaluate term: " + e.getMessage(), e);
+				}
 			} else {
-				errors.put(term, "Types do not match operator");
-				return null;
+				throw new VxlEvalException(term, "Types do not match operator", null);
 			}
 		}
 		return null;
@@ -109,7 +104,7 @@ public class VxlInterpreter {
 	/**
 	 * Head:			BracketTerm | Negation | Minus | Value | Variable | List | Cardinality;
 	 */
-	protected Object evalElement(VxlElement head) {
+	protected Object evalElement(VxlElement head) throws VxlEvalException {
 		if (head instanceof VxlBracketTerm) {
 			return evalTerm(((VxlBracketTerm) head).getTerm());
 		}
@@ -154,7 +149,7 @@ public class VxlInterpreter {
 	/**
 	 * VxlConstructor:    "new" function = VxlFunction;
 	 */
-	protected Object evalConstructor(VxlConstructor constructor) {
+	protected Object evalConstructor(VxlConstructor constructor) throws VxlEvalException {
 		try {
 			Class<?> clazz = Class.forName(constructor.getName());
 			List<Object> params = evalListElement(constructor.getBody());
@@ -168,41 +163,38 @@ public class VxlInterpreter {
 			}
 			throw new IllegalArgumentException("No match for given parameters found.");
 		} catch (ClassNotFoundException | IllegalArgumentException e) {
-			errors.put(constructor, "Failed to use Constructor for " + constructor.getName() + ": " + e.getMessage());
+			throw new VxlEvalException(constructor, "Failed to use Constructor for " + constructor.getName(), e);
 		}
-		return null;
 	}
 
 	/**
 	 * Negation:		"!" term = Element;
 	 */
-	protected Object evalNegation(VxlNegation negation) {
+	protected Object evalNegation(VxlNegation negation) throws VxlEvalException {
 		Object result= evalElement(negation.getElement());
 		if (result instanceof Boolean) {
 			return ! (Boolean) result;
 		} else {
-			errors.put(negation, "Negation only applicable to Boolean");
-			return null;
+			throw new VxlEvalException(negation, "Negation only applicable to Boolean", null);
 		}
 	}
 
 	/**
 	 * Minus:		"-" term = Element;
 	 */
-	protected Object evalMinus(VxlMinus minus) {
+	protected Object evalMinus(VxlMinus minus) throws VxlEvalException {
 		Object result= evalElement(minus.getElement());
 		if (result instanceof Number) {
 			return - ((Number) result).doubleValue();
 		} else {
-			errors.put(minus, "Minus only applicable to Numeric");
-			return null;
+			throw new VxlEvalException(minus, "Minus only applicable to Numeric", null);
 		}
 	}
 	
 	/**
 	 * Cardinality:		"#" term = Element
 	 */
-	protected Number evalCardinality(VxlCardinality cardinality) {
+	protected Number evalCardinality(VxlCardinality cardinality) throws VxlEvalException {
 		Object value = evalElement(cardinality.getElement());
 		if (value instanceof Double) {
 			return Math.abs((Double) value);
@@ -228,12 +220,11 @@ public class VxlInterpreter {
 	/**
 	 * Variable:		name = ID (accessor = Accessor)?;
 	 */
-	protected Object evalVariable(VxlVariable variable) {
+	protected Object evalVariable(VxlVariable variable) throws VxlEvalException {
 		// get value from context
 		if (context != null) {
 			if (! context.containsKey(variable.getName())) {
-				errors.put(variable, "Variable not in context / not initialized");
-				return null;
+				throw new VxlEvalException(variable, "Variable " + variable.getName() + " not initialized", null);
 			}
 			Object value= context.get(variable.getName());
 			if (variable.getAccessor() != null) {
@@ -241,15 +232,17 @@ public class VxlInterpreter {
 			}
 			return value;
 		} else {
-			errors.put(variable, "Can not evaluate a Variable without a context");
-			return null;
+			throw new VxlEvalException(variable, "Can not evaluate a Variable without a context", null);
 		}
 	}
 	
 	/**
 	 * Accessor:		ArrayAccessor | FieldAccessor;
 	 */
-	protected Object evalAccessor(VxlAccessor accessor, Object value) {
+	protected Object evalAccessor(VxlAccessor accessor, Object value) throws VxlEvalException {
+		if (value == null) {
+			throw new VxlEvalException(accessor, "Can not access property of null object", null);
+		}
 		if (accessor instanceof VxlArrayAccessor) {
 			return evalArrayAccessor((VxlArrayAccessor) accessor, value);
 		}
@@ -265,7 +258,7 @@ public class VxlInterpreter {
 	/**
 	 * ArrayAccessor:	"[" index = Term "]" (accessor = Accessor)?;
 	 */
-	protected Object evalArrayAccessor(VxlArrayAccessor accessor, Object value) {
+	protected Object evalArrayAccessor(VxlArrayAccessor accessor, Object value) throws VxlEvalException {
 		// evaluate index
 		Object index = evalTerm(accessor.getIndex());
 		try {
@@ -276,7 +269,7 @@ public class VxlInterpreter {
 				if (asArray.length >= i) {
 					value = asArray[i];
 				} else {
-					errors.put(accessor, "Array Index out of range: " + index);
+					throw new VxlEvalException(accessor, "Array Index out of range: " + index, null);
 				}
 			} else
 			if (value instanceof List<?>) {
@@ -285,7 +278,7 @@ public class VxlInterpreter {
 				if (asList.size() >= i) {
 					value = asList.get(i);
 				} else {
-					errors.put(accessor, "List Index out of range: " + index);
+					throw new VxlEvalException(accessor, "List Index out of range: " + index, null);
 				}
 			} else
 			if (value instanceof Map<?, ?>) {
@@ -293,7 +286,7 @@ public class VxlInterpreter {
 				if (asMap.containsKey(index)) {
 					value = asMap.get(index);
 				} else {
-					errors.put(accessor, "Map does not contain key: " + index);
+					throw new VxlEvalException(accessor, "Map does not contain key: " + index, null);
 				}
 			}
 			// another accessor?
@@ -301,7 +294,7 @@ public class VxlInterpreter {
 				value = evalAccessor(accessor.getAccessor(), value);
 			}
 		} catch (ClassCastException e) {
-			errors.put(accessor, "Index to Array or List must be a number");
+			throw new VxlEvalException(accessor, "Index to Array or List must be a number", null);
 		}
 		return value;
 	}
@@ -309,7 +302,7 @@ public class VxlInterpreter {
 	/**
 	 * FieldAccessor:	"." name = ID (accessor = Accessor)?;
 	 */
-	protected Object evalFieldAccessor(VxlFieldAccessor accessor, Object value) {
+	protected Object evalFieldAccessor(VxlFieldAccessor accessor, Object value) throws VxlEvalException {
 		Class<?> clazz = value.getClass();
 		try {
 			// try to access regular public field
@@ -322,7 +315,7 @@ public class VxlInterpreter {
 				Method method = clazz.getMethod(getter);
 				value = method.invoke(value);
 			} catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e2) {
-				errors.put(accessor, "Could not access field: " + accessor.getName());
+				throw new VxlEvalException(accessor, "Could not access field: " + accessor.getName(), null);
 			}
 		}
 		// another accessor?
@@ -335,7 +328,7 @@ public class VxlInterpreter {
 	/**
 	 * MethodAccessor:	"." function = Function (accessor = Accessor)?;
 	 */
-	protected Object evalMethodAccessor(VxlMethodAccessor accessor, Object value) {
+	protected Object evalMethodAccessor(VxlMethodAccessor accessor, Object value) throws VxlEvalException {
 		try {
 			Class<?> clazz = value.getClass();
 			List<Object> params = evalListElement(accessor.getFunction().getBody());
@@ -359,7 +352,7 @@ public class VxlInterpreter {
 				value = evalAccessor(accessor.getAccessor(), value);
 			}
 		} catch (IllegalArgumentException e) {
-			errors.put(accessor, "Could not access method " + accessor.getFunction().getName() + ": " + e.getMessage());
+			throw new VxlEvalException(accessor, "Could not access method " + accessor.getFunction().getName() + ": " + e.getMessage(), null);
 		}
 		return value;
 	}
@@ -390,7 +383,7 @@ public class VxlInterpreter {
 	/**
 	 * VxlList:			"[" ((empty ?= "]") | (body = VxlListElement "]" ));
 	 */
-	protected List<Object> evalList(VxlList list) {
+	protected List<Object> evalList(VxlList list) throws VxlEvalException {
 		if (list.getBody() != null) {
 			return evalListElement(list.getBody());
 		} else {
@@ -401,7 +394,7 @@ public class VxlInterpreter {
 	/**
 	 * ListElement:		first = VxlTerm ("," rest = VxlListElement)?;
 	 */
-	protected List<Object> evalListElement(VxlListElement listElement) {
+	protected List<Object> evalListElement(VxlListElement listElement) throws VxlEvalException {
 		List<Object> list = new Vector<>();
 		if (listElement != null) {
 			list.add(evalTerm(listElement.getFirst()));
@@ -415,7 +408,7 @@ public class VxlInterpreter {
 	/**
 	 * VxlMap:			"{" ((empty ?= "}") | (body = VxlMapElement "}" ));
 	 */
-	protected Map<Object, Object> evalMap(VxlMap map) {
+	protected Map<Object, Object> evalMap(VxlMap map) throws VxlEvalException {
 		if (map.getBody() != null) {
 			return evalMapElement(map.getBody());
 		} else {
@@ -426,7 +419,7 @@ public class VxlInterpreter {
 	/**
 	 * VxlMapElement:	key = VxlTerm ":" value = VxlTerm ("," rest = VxlMapElement)?;
 	 */
-	protected Map<Object, Object> evalMapElement(VxlMapElement mapElement) {
+	protected Map<Object, Object> evalMapElement(VxlMapElement mapElement) throws VxlEvalException {
 		Map<Object, Object> map = new HashMap<>();
 		if (mapElement != null) {
 			Object key = evalTerm(mapElement.getKey());
@@ -448,7 +441,7 @@ public class VxlInterpreter {
 	 * @return			result of the operation, applied to the given terms
 	 */
 	@SuppressWarnings({"unchecked","rawtypes"})
-	private Object evaluateOperation(VxlOperator operator, Object head, Object tail) {
+	private Object evaluateOperation(VxlOperator operator, Object head, Object tail) throws Exception {
 		switch (operator) {
 		case CONCAT:
 			if (head instanceof List && tail instanceof List) {

@@ -163,7 +163,7 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * - handle start assignments
 	 */
 	public final List<FlowObject> stepInto(FlowObject flowObject) {
-		System.out.println("Stepping Into " + getReadable(flowObject));
+		System.out.println("--> " + getReadable(flowObject));
 		List<FlowObject> result= new ArrayList<>();
 		if (isInState(flowObject, State.READY, State.LOOPING_READY)) {
 			step++;
@@ -176,7 +176,9 @@ public abstract class AbstractSimulation implements ISimulation {
 			// skip assignments when looping
 			if (! isInState(flowObject, State.LOOPING_READY) || ASSIGNMENTS_INSIDE_LOOP) {
 				// handle start Assignments
-				handleAssignments(flowObject, AssignTimeType.START);
+				if (! handleAssignments(flowObject, AssignTimeType.START)) {
+					return stepFailed(flowObject);
+				}
 			}
 
 			// set state to ACTIVE_WAITING
@@ -192,7 +194,7 @@ public abstract class AbstractSimulation implements ISimulation {
 //				if (error != null) {
 //					return stepOver(error);
 //				}
-				setState(flowObject, State.FAILED);
+				return stepFailed(flowObject);
 			}
 			
 			// possibly set state to ACTIVE_READY
@@ -213,7 +215,6 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * - update states of succeeding flow objects
 	 */
 	public final List<FlowObject> stepOut(FlowObject flowObject) {
-		System.out.println("Stepping out of " + getReadable(flowObject));
 		List<FlowObject> result= new ArrayList<>();
 		if (isInState(flowObject, State.ACTIVE_READY)) {
 			
@@ -227,23 +228,22 @@ public abstract class AbstractSimulation implements ISimulation {
 //				if (error != null) {
 //					return stepOver(error);
 //				}
-				setState(flowObject, State.FAILED);
+				return stepFailed(flowObject);
 			}
 			
 			// handle activity looping
-			if (flowObject instanceof Activity && isLooping((Activity) flowObject)) {
-				// set state to DONE, and then right back to LOOPING_READY
-//				setState(flowObject, State.DONE); // Why? this resets event handlers!
-				setState(flowObject, State.LOOPING_READY);
-				if (ASSIGNMENTS_INSIDE_LOOP) {
-					// handle end Assignments
-					handleAssignments(flowObject, AssignTimeType.END);
-				}
-				
-			} else {
+			boolean looping = flowObject instanceof Activity && isLooping((Activity) flowObject);
+			
+			if (! looping || ASSIGNMENTS_INSIDE_LOOP) {
 				// handle end Assignments
-				handleAssignments(flowObject, AssignTimeType.END);
-				
+				if (! handleAssignments(flowObject, AssignTimeType.END)) {
+					return stepFailed(flowObject);
+				}
+			}
+			// set state to DONE or LOOPING_READY
+			setState(flowObject, looping ? State.LOOPING_READY : State.DONE);
+
+			if (! looping) {				
 				// OR-, XOR-Gateway: select outgoing sequence flow(s)
 				List<SequenceFlow> seqFlows= needsToSelectPath(flowObject) 
 						? selectOutgoingSequenceFlows(flowObject)
@@ -251,9 +251,6 @@ public abstract class AbstractSimulation implements ISimulation {
 				if (seqFlows == null) {
 					return result; // no selection; cancel
 				}
-				
-				// set state to DONE
-				setState(flowObject, State.DONE);
 				
 				// place tokens on outgoing sequence flows
 				for (SequenceFlow seqFlow : seqFlows) {
@@ -264,6 +261,7 @@ public abstract class AbstractSimulation implements ISimulation {
 					stepMap.put(seqFlow, step);
 				}
 			}
+			
 			// set containing subprocess to ACTIVE_READY
 			if (flowObject.getParent() instanceof Activity) {
 				if (updateState((Activity) flowObject.getParent())) {
@@ -272,21 +270,26 @@ public abstract class AbstractSimulation implements ISimulation {
 			}
 			// cancel other events after event-based XOR gateway
 			// this was previously done in stepInto, but this breaks the automatic interpreter
-			for (SequenceFlow seqFlow : flowObject.getIncomingSeq()) {
-				FlowObject source = seqFlow.getSource();
-				if (source instanceof Gateway && 
-						((Gateway) source).getGatewayType() == GatewayType.XOR_EVENT) {
-					// event-based XOR: remove other tokens, too
-					for (SequenceFlow seqFlow2 : source.getOutgoingSeq()) {
-						if (seqFlow2.getTarget() != flowObject) {
-							setState(seqFlow2.getTarget(), State.IDLE);
-						}
-					}
-				}
-			}
+			flowObject.getIncomingSeq().stream()
+					.map(SequenceFlow::getSource)
+					.filter(s -> s instanceof Gateway && ((Gateway) s).getGatewayType() == GatewayType.XOR_EVENT)
+					.flatMap(s -> s.getOutgoingSeq().stream())
+					.map(SequenceFlow::getTarget)
+					.filter(f -> f != flowObject)
+					.forEach(f -> setState(f, State.IDLE));
 		}
 		notifyObservers();
+		System.out.println("<-- " + getReadable(flowObject));
 		return result;
+	}
+	
+	/**
+	 * - shorthand for when stepping into or out of a flow object fails
+	 */
+	protected List<FlowObject> stepFailed(FlowObject flowObject) {
+		setState(flowObject, State.FAILED);
+		notifyObservers();
+		return Collections.emptyList();
 	}
 
 	////////////////////////////////////////////////////////////////////////////
@@ -348,7 +351,7 @@ public abstract class AbstractSimulation implements ISimulation {
 	 * @param eObject	Some FlowObject or the Process
 	 * @param assignTime	AssignTime (START or STOP)
 	 */
-	protected abstract void handleAssignments(EObject eObject, AssignTimeType assignTime);
+	protected abstract boolean handleAssignments(EObject eObject, AssignTimeType assignTime);
 	
 	/**
 	 * Determine whether the activity shall be looping, e.g. by prompting the

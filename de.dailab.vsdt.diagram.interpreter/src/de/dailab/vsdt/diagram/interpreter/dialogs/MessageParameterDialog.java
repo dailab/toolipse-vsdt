@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
@@ -20,10 +19,7 @@ import org.eclipse.swt.widgets.Text;
 
 import de.dailab.vsdt.Property;
 import de.dailab.vsdt.diagram.ui.ExpressionComposite;
-import de.dailab.vsdt.vxl.util.VxlInterpreter;
-import de.dailab.vsdt.vxl.util.VxlParseException;
-import de.dailab.vsdt.vxl.util.VxlParser;
-import de.dailab.vsdt.vxl.vxl.VxlTerm;
+import de.dailab.vsdt.util.ExpressionHelper;
 
 /**
  * This dialog is used for (a) inspecting and (b) setting the values passed from 
@@ -145,35 +141,12 @@ public class MessageParameterDialog extends TitleAreaDialog {
 			if (expression.isEmpty()) {
 				newValues.put(entry.getKey(), null);
 			} else {
-				VxlParser parser= VxlParser.getInstance();
 				try {
-					VxlTerm term= parser.parse(expression);
-					// evaluate term
-					VxlInterpreter interpreter= new VxlInterpreter();
-					Object result= interpreter.evaluateTerm(term, null);
-					Map<Object, String> errors= interpreter.getErrors();
-					if (! errors.isEmpty()) {
-						StringBuffer message= new StringBuffer();
-						message.append("The expression ").append(expression).append(" could not be evaluated.");
-						message.append("\r\nErrors:");
-						for (String error : errors.values()) {
-							message.append("\r\n- ").append(error);
-						}
-						setErrorMessage(message.toString());
-						return;
-					}
+					Object result = ExpressionHelper.parseAndEvaluate(expression, null, "VXL");
 					newValues.put(entry.getKey(), result);
-				} catch (VxlParseException e) {
-						StringBuffer message= new StringBuffer();
-						message.append("The expression ").append(expression).append(" could not be parsed.");
-						if (! parser.getErrors().isEmpty()) {
-							message.append("\r\nErrors:");
-							for (Diagnostic d : parser.getErrors()) {
-								message.append("\r\n- ").append(d.getMessage());
-							}
-						}
-						setErrorMessage(message.toString());
-						return;
+				} catch (IllegalArgumentException e) {
+					setErrorMessage(e.getMessage());
+					return;
 				}
 			}
 		}

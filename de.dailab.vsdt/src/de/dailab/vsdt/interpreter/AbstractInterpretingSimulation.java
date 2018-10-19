@@ -6,8 +6,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -160,7 +160,7 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 * Return the set of Properties currently in the context.
 	 */
 	public Collection<Property> getProperties() {
-		return new HashSet<>(propertyValueMap.keySet());
+		return Collections.unmodifiableSet(propertyValueMap.keySet());
 	}
 
 	/**
@@ -288,12 +288,10 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	}
 	
 	/**
-	 * - evaluate assignment expressions
-	 * - store value in {@link #propertyValueMap}
+	 * - handle all assignments of given flow object that have correct assign time
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	protected void handleAssignments(EObject eObject, AssignTimeType assignTime) {
+	protected boolean handleAssignments(EObject eObject, AssignTimeType assignTime) {
 		List<Assignment> assignments= null;
 		if (eObject instanceof FlowObject) {
 			assignments= ((FlowObject) eObject).getAssignments();
@@ -302,47 +300,63 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 		if (assignments != null) {
 			for (Assignment assignment : assignments) {
 				if (assignment.getAssignTime() == assignTime && assignment.getFrom() != null) {
-					Object value= parseAndEvaluate(assignment.getFrom(), createContext(eObject));
-					if (assignment.getToQuery() != null) {
-						Object propVal = getPropertyValue(assignment.getTo());
-						if (propVal instanceof List) {
-							// try to assign to array index
-							Object query = parseAndEvaluate(assignment.getToQuery(), createContext(eObject), assignment.getFrom().getExpressionLanguageToBeUsed());
-							if (query instanceof Number) {
-								Number number = (Number) query;
-								List<Object> list = (List) propVal;
-								list.set(Util.asInteger(number), value); 
-							}
-						} else if (propVal instanceof Map) {
-							// try to assign to map key
-							Object query = parseAndEvaluate(assignment.getToQuery(), createContext(eObject), assignment.getFrom().getExpressionLanguageToBeUsed());
-							((Map) propVal).put(query, value);
-						} else {
-							// try to interpret query as an attribute/setter
-							String fieldName = assignment.getToQuery();
-							Class<?> clazz = propVal.getClass();
-							try {
-								// try to access regular public field
-								Field field = clazz.getField(fieldName);
-								field.set(propVal, value);
-							} catch (NoSuchFieldException | SecurityException | IllegalAccessException e) {
-								try {
-									// try to access accordingly named getter method
-									String setter = "set" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
-									Method method = clazz.getMethod(setter, value.getClass());
-									// XXX instance types might not match declared param types!
-									method.invoke(propVal, value);
-								} catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e2) {
-									System.err.println("Could not assign value to to-query " + fieldName);
-								}
-							}
-						}
-					} else {
-						setPropertyValue(assignment.getTo(), value);
-						System.out.println(assignment.getTo().getName() + " <- " + value);
+					try {
+						handleAssignment(eObject, assignment);
+					} catch (IllegalArgumentException e) {
+						logMessage(LogLevel.ERROR, "Evaluation failed", e.getMessage());
+						return false;
 					}
 				}
 			}
+		}
+		return true;
+	}
+	
+	/**
+	 * - evaluate assignment expressions
+	 * - store value in {@link #propertyValueMap}
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected void handleAssignment(EObject eObject, Assignment assignment) {
+		Object value= parseAndEvaluate(assignment.getFrom(), createContext(eObject));
+		if (assignment.getToQuery() != null) {
+			Object propVal = getPropertyValue(assignment.getTo());
+			if (propVal instanceof List) {
+				// try to assign to array index
+				Object query = parseAndEvaluate(assignment.getToQuery(), createContext(eObject), assignment.getFrom().getExpressionLanguageToBeUsed());
+				if (query instanceof Number) {
+					Number number = (Number) query;
+					List<Object> list = (List) propVal;
+					list.set(Util.asInteger(number), value); 
+				}
+			} else if (propVal instanceof Map) {
+				// try to assign to map key
+				Object query = parseAndEvaluate(assignment.getToQuery(), createContext(eObject), assignment.getFrom().getExpressionLanguageToBeUsed());
+				((Map) propVal).put(query, value);
+			} else {
+				// try to interpret query as an attribute/setter
+				String fieldName = assignment.getToQuery();
+				Class<?> clazz = propVal.getClass();
+				try {
+					// try to access regular public field
+					Field field = clazz.getField(fieldName);
+					field.set(propVal, value);
+				} catch (NoSuchFieldException | SecurityException | IllegalAccessException e) {
+					try {
+						// try to access accordingly named getter method
+						String setter = "set" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
+						Method method = clazz.getMethod(setter, value.getClass());
+						// XXX instance types might not match declared param types!
+						method.invoke(propVal, value);
+					} catch (NoSuchMethodException | SecurityException | IllegalAccessException | InvocationTargetException e2) {
+						throw new IllegalArgumentException("Could not assign value to field " + fieldName);
+					}
+				}
+			}
+			System.out.println(String.format("%s[%s] <- %s", assignment.getTo().getName(), assignment.getToQuery(), value));
+		} else {
+			setPropertyValue(assignment.getTo(), value);
+			System.out.println(String.format("%s <- %s", assignment.getTo().getName(), value));
 		}
 	}
 	
@@ -489,22 +503,12 @@ public abstract class AbstractInterpretingSimulation extends BasicSimulation {
 	 * @param context		Map of Property names and values
 	 * @return				Result of the evaluation, or null in case of error
 	 */
-	public Object parseAndEvaluate(Expression expression, Map<String, Object> context) {
-		try { 
-			return parseAndEvaluate(ExpressionHelper.getExpression(expression), context, expression.getExpressionLanguageToBeUsed());
-		} catch (IllegalArgumentException e) {
-			logMessage(LogLevel.ERROR, "Evaluation failed", e.getMessage());
-			return null;
-		}
+	public Object parseAndEvaluate(Expression expression, Map<String, Object> context) throws IllegalArgumentException {
+		return parseAndEvaluate(ExpressionHelper.getExpression(expression), context, expression.getExpressionLanguageToBeUsed());
 	}
 	
-	public Object parseAndEvaluate(String expression, Map<String, Object> context, String expLang) {
-		try {
-			return ExpressionHelper.parseAndEvaluate(expression, context, expLang);
-		} catch (IllegalArgumentException e) {
-			logMessage(LogLevel.ERROR, "Evaluation failed", e.getMessage());
-			return null;
-		}
+	public Object parseAndEvaluate(String expression, Map<String, Object> context, String expLang) throws IllegalArgumentException {
+		return ExpressionHelper.parseAndEvaluate(expression, context, expLang);
 	}
 	
 	/**

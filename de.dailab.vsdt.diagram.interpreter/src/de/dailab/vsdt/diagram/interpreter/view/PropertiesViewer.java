@@ -25,8 +25,11 @@ import de.dailab.vsdt.util.VsdtHelper;
  * - more effort in implementation
  * - synchronization of views still posing some problems
  * 
+ * @deprecated Currently not used
+ * 
  * @author kuester
  */
+@Deprecated
 public class PropertiesViewer extends ListViewer {
 	
 	private InterpreterView view;
@@ -74,7 +77,8 @@ public class PropertiesViewer extends ListViewer {
 			if (element instanceof Property) {
 				Property property= (Property) element;
 				if (view.getSimulation() instanceof EclipseInterpretingSimulation) {
-					Object value= ((EclipseInterpretingSimulation) view.getSimulation()).getPropertyValue(property);
+					EclipseInterpretingSimulation simulation = (EclipseInterpretingSimulation) view.getSimulation();
+					Object value = simulation.getProperties().contains(property) ? simulation.getPropertyValue(property) : "";
 					return property.getName() + " (" + property.getType() + ") = " + value;
 				}
 			}

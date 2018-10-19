@@ -161,13 +161,17 @@ public class SimulationViewer extends TreeViewer {
 			if (element instanceof Property) {
 				Property property= (Property) element;
 				if (view.getSimulation() instanceof EclipseInterpretingSimulation) {
-					Object value= ((EclipseInterpretingSimulation) view.getSimulation()).getPropertyValue(property);
+					EclipseInterpretingSimulation simulation = (EclipseInterpretingSimulation) view.getSimulation();
+					String valString = "";
+					if (simulation.getProperties().contains(property)) {
+						Object value = simulation.getPropertyValue(property);
+						valString= value instanceof String ? "\""+(String)value+"\"":String.valueOf(value);
+					}
 					String name= property.getName();
 					String type= property.getType();
 					if (type.indexOf('.') != -1) {
 						type = type.substring(type.lastIndexOf('.') + 1);
 					}
-					String valString= value instanceof String ? "\""+(String)value+"\"":String.valueOf(value);
 					return type + " " + name + " = " + valString;
 				}
 			}
