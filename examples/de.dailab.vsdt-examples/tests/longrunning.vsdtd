@@ -19,20 +19,22 @@
             </assignments>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_VSn2Ida4EeiljsCRLd3rRQ" id="_VSn2INa4EeiljsCRLd3rRQ"/>
-          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_Vf6rQda4EeiljsCRLd3rRQ" name="Sleep" id="_Vf6rQNa4EeiljsCRLd3rRQ" activityType="SCRIPT" script="System.out.println(i + &quot; / &quot; + n);&#xA;Thread.sleep(s);">
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_Vf6rQda4EeiljsCRLd3rRQ" name="Tik" id="_Vf6rQNa4EeiljsCRLd3rRQ" activityType="SCRIPT" script="System.out.println(i + &quot; / &quot; + n);&#xA;Thread.sleep(s);">
             <assignments xmi:type="vsdt:Assignment" xmi:id="_lxZ8wNa4EeiljsCRLd3rRQ" to="_QUu_0Na4EeiljsCRLd3rRQ">
               <from xmi:type="vsdt:Expression" xmi:id="_mtHXENa4EeiljsCRLd3rRQ" expression="i + 1"/>
             </assignments>
           </containedFlowObjects>
           <containedFlowObjects xmi:type="vsdt:Gateway" xmi:id="_XvpSMda4EeiljsCRLd3rRQ" id="_XvpSMNa4EeiljsCRLd3rRQ"/>
           <containedFlowObjects xmi:type="vsdt:End" xmi:id="_X03wcNa4EeiljsCRLd3rRQ" id="_X03JYNa4EeiljsCRLd3rRQ"/>
+          <containedFlowObjects xmi:type="vsdt:Activity" xmi:id="_Vn5o8NbAEeiAyZ-GpY_1HA" name="Tok" id="_Vn5B4NbAEeiAyZ-GpY_1HA" activityType="SCRIPT" script="Thread.sleep(s);"/>
         </lanes>
       </pools>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_VV9eAda4EeiljsCRLd3rRQ" id="_VV9eANa4EeiljsCRLd3rRQ" source="_MoFu8da4EeiljsCRLd3rRQ" target="_VSn2Ida4EeiljsCRLd3rRQ"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_VgQpgda4EeiljsCRLd3rRQ" id="_VgQpgNa4EeiljsCRLd3rRQ" source="_VSn2Ida4EeiljsCRLd3rRQ" target="_Vf6rQda4EeiljsCRLd3rRQ"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_Xv5w4Na4EeiljsCRLd3rRQ" id="_Xv5J0Na4EeiljsCRLd3rRQ" source="_Vf6rQda4EeiljsCRLd3rRQ" target="_XvpSMda4EeiljsCRLd3rRQ"/>
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_X1KEUNa4EeiljsCRLd3rRQ" id="_X1JdQNa4EeiljsCRLd3rRQ" conditionType="DEFAULT" source="_XvpSMda4EeiljsCRLd3rRQ" target="_X03wcNa4EeiljsCRLd3rRQ"/>
-      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_ZUHVoda4EeiljsCRLd3rRQ" id="_ZUHVoNa4EeiljsCRLd3rRQ" conditionType="EXPRESSION" source="_XvpSMda4EeiljsCRLd3rRQ" target="_VSn2Ida4EeiljsCRLd3rRQ">
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_Vp6bIdbAEeiAyZ-GpY_1HA" id="_Vp6bINbAEeiAyZ-GpY_1HA" source="_Vn5o8NbAEeiAyZ-GpY_1HA" target="_VSn2Ida4EeiljsCRLd3rRQ"/>
+      <connections xmi:type="vsdt:SequenceFlow" xmi:id="_VqAhwdbAEeiAyZ-GpY_1HA" id="_ZUHVoNa4EeiljsCRLd3rRQ" conditionType="EXPRESSION" source="_XvpSMda4EeiljsCRLd3rRQ" target="_Vn5o8NbAEeiAyZ-GpY_1HA">
         <conditionExpression xmi:type="vsdt:Expression" xmi:id="_GpovUNa_EeiAyZ-GpY_1HA" expression="n &lt; 0 or i &lt; n"/>
       </connections>
     </businessProcesses>
@@ -109,6 +111,16 @@
               <styles xmi:type="notation:ShapeStyle" xmi:id="_X07a0da4EeiljsCRLd3rRQ" fontName="Cantarell"/>
               <layoutConstraint xmi:type="notation:Bounds" xmi:id="_X07a0ta4EeiljsCRLd3rRQ" x="442" y="51"/>
             </children>
+            <children xmi:type="notation:Node" xmi:id="_VoEBANbAEeiAyZ-GpY_1HA" type="2005" element="_Vn5o8NbAEeiAyZ-GpY_1HA">
+              <children xmi:type="notation:Node" xmi:id="_VoHrYNbAEeiAyZ-GpY_1HA" type="4007"/>
+              <children xmi:type="notation:Node" xmi:id="_VoIScNbAEeiAyZ-GpY_1HA" type="5003">
+                <styles xmi:type="notation:DrawerStyle" xmi:id="_VoIScdbAEeiAyZ-GpY_1HA"/>
+                <styles xmi:type="notation:SortingStyle" xmi:id="_VoISctbAEeiAyZ-GpY_1HA"/>
+                <styles xmi:type="notation:FilteringStyle" xmi:id="_VoISc9bAEeiAyZ-GpY_1HA"/>
+              </children>
+              <styles xmi:type="notation:ShapeStyle" xmi:id="_VoEBAdbAEeiAyZ-GpY_1HA" fontName="Cantarell"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VoEBAtbAEeiAyZ-GpY_1HA" x="227" y="124" width="61"/>
+            </children>
             <styles xmi:type="notation:SortingStyle" xmi:id="_EDzZsda4EeiljsCRLd3rRQ"/>
             <styles xmi:type="notation:FilteringStyle" xmi:id="_EDzZsta4EeiljsCRLd3rRQ"/>
           </children>
@@ -155,13 +167,21 @@
       <styles xmi:type="notation:FontStyle" xmi:id="_X1Nusta4EeiljsCRLd3rRQ" fontName="Cantarell"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_X1Nus9a4EeiljsCRLd3rRQ" points="[-20, -5, 320, 66]$[-340, -71, 0, 0]"/>
     </edges>
-    <edges xmi:type="notation:Edge" xmi:id="_ZUKY8Na4EeiljsCRLd3rRQ" type="3001" element="_ZUHVoda4EeiljsCRLd3rRQ" source="_XvrHYNa4EeiljsCRLd3rRQ" target="_VSvK4Na4EeiljsCRLd3rRQ">
-      <children xmi:type="notation:Node" xmi:id="_ZULAANa4EeiljsCRLd3rRQ" type="4012">
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_ZULAAda4EeiljsCRLd3rRQ" y="40"/>
+    <edges xmi:type="notation:Edge" xmi:id="_Vp7pQNbAEeiAyZ-GpY_1HA" type="3001" element="_Vp6bIdbAEeiAyZ-GpY_1HA" source="_VoEBANbAEeiAyZ-GpY_1HA" target="_VSvK4Na4EeiljsCRLd3rRQ">
+      <children xmi:type="notation:Node" xmi:id="_Vp83YNbAEeiAyZ-GpY_1HA" type="4012">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Vp83YdbAEeiAyZ-GpY_1HA" y="40"/>
       </children>
-      <styles xmi:type="notation:RoutingStyle" xmi:id="_ZUKY8da4EeiljsCRLd3rRQ" routing="Rectilinear"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_ZUKY8ta4EeiljsCRLd3rRQ" fontName="Cantarell"/>
-      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ZUKY89a4EeiljsCRLd3rRQ" points="[0, 20, 220, 20]$[0, 56, 220, 56]$[-220, 56, 0, 56]$[-220, 20, 0, 20]"/>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_Vp7pQdbAEeiAyZ-GpY_1HA" routing="Rectilinear"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_Vp7pQtbAEeiAyZ-GpY_1HA" fontName="Cantarell"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Vp7pQ9bAEeiAyZ-GpY_1HA" points="[-30, -1, 75, 72]$[-106, -1, -1, 72]$[-106, -53, -1, 20]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_VqBI0NbAEeiAyZ-GpY_1HA" type="3001" element="_VqAhwdbAEeiAyZ-GpY_1HA" source="_XvrHYNa4EeiljsCRLd3rRQ" target="_VoEBANbAEeiAyZ-GpY_1HA">
+      <children xmi:type="notation:Node" xmi:id="_VqBv4NbAEeiAyZ-GpY_1HA" type="4012">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VqBv4dbAEeiAyZ-GpY_1HA" y="40"/>
+      </children>
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_VqBI0dbAEeiAyZ-GpY_1HA" routing="Rectilinear"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_VqBI0tbAEeiAyZ-GpY_1HA" fontName="Cantarell"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_VqBI09bAEeiAyZ-GpY_1HA" points="[-1, 20, 122, -53]$[-1, 73, 122, 0]$[-101, 73, 22, 0]"/>
     </edges>
   </notation:Diagram>
 </xmi:XMI>
