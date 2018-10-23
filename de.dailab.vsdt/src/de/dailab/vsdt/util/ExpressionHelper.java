@@ -42,9 +42,8 @@ public class ExpressionHelper {
 			if (value instanceof Boolean) {
 				return (Boolean) value;
 			} else {
-				StringBuffer message= new StringBuffer();
-				message.append("The condition ").append(expression.getExpression()).append(" does not evaluate to a Boolean value.");
-				throw new IllegalArgumentException(message.toString());
+				String message = String.format("The condition '%s' does not evaluate to a Boolean value.", expression.getExpression());
+				throw new IllegalArgumentException(message);
 			}
 		} else {
 			throw new IllegalArgumentException("The condition must not be null.");

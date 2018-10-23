@@ -81,7 +81,7 @@ public class EditExpressionDialog extends TitleAreaDialog {
 		super(parentShell);
 		this.expression= expression;
 		this.forceValidation= forceValidation;
-		this.language = language != null ? language : DEFAULT;
+		this.language = DEFAULT.equals(language) ? null : language;
 		this.setTitle(TITLE);
 		this.setShellStyle(getShellStyle() | SWT.RESIZE);
 	}
@@ -120,7 +120,7 @@ public class EditExpressionDialog extends TitleAreaDialog {
 		label= FormLayoutUtil.addLabel(composite, "Language", expressionText, 0);
 		languageCombo= FormLayoutUtil.addCombo(composite, SWT.NONE, expressionText, label, null);
 		languageCombo.setBackground(null);
-		languageCombo.add(language);
+		if (language != null) languageCombo.add(language);
 		if (! DEFAULT.equals(language)) languageCombo.add(DEFAULT);
 		if (! LANG_NAME_SHORT.equals(language)) languageCombo.add(LANG_NAME_SHORT);
 		if (! LANG_NAME_MVEL.equals(language)) languageCombo.add(LANG_NAME_MVEL);
