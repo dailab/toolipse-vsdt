@@ -39,8 +39,6 @@ import de.dailab.vsdt.util.VsdtHelper;
  * for inserting existing properties into an expression and for checking whether there are
  * undefined properties used in the expression.
  * 
- * TODO for some reason, this appears as black on some systems (e.g. for Michael B., Fedora, Gnome 3)
- * 
  * @author kuester
  */
 public class ExpressionComposite extends Composite {
