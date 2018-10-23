@@ -20,6 +20,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 
+import de.dailab.common.gmf.command.AbstractGmfCommand;
+import de.dailab.common.gmf.command.GenericRunnableCommand;
 import de.dailab.common.gmf.command.SetPropertyValueCommand;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.Expression;
@@ -141,10 +143,6 @@ public class ExpressionComposite extends Composite {
 	/**
 	 * If owner and Feature are set, the expression is updated with the current value
 	 * of the expression text field and the information provided by the dialog.
-	 *
-	 * This will always create a new Expression (or set the expression to null if the
-	 * text is empty) instead of changing an existing instance, as this would be much
-	 * more complicated and error-prone for very limited benefit.
 	 */
 	private void updateModelElement() {
 		if (owner != null && feature != null) {
@@ -152,7 +150,13 @@ public class ExpressionComposite extends Composite {
 			if (expression != null) {
 				expression.setLanguage(language);
 			}
-			SetPropertyValueCommand command= new SetPropertyValueCommand(owner, feature, expression);
+			Expression existing = (Expression) owner.eGet(feature);
+			AbstractGmfCommand command = (expression != null && existing != null)
+					? new GenericRunnableCommand(existing, "Update " + feature.getName(), () -> {
+						existing.setExpression(expression.getExpression());
+						existing.setLanguage(expression.getLanguage());
+					})
+					: new SetPropertyValueCommand(owner, feature, expression);
 	    	try {
 	        	OperationHistoryFactory.getOperationHistory().execute(command, new NullProgressMonitor(), null);	
 	    	} catch (ExecutionException e) {
