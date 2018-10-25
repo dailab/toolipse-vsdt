@@ -21,5 +21,5 @@ Export-Package: de.dailab.vsdt.trafo,
  de.dailab.vsdt.trafo.base.util,
  de.dailab.vsdt.trafo.impl,
  de.dailab.vsdt.trafo.wizard
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: de.dailab.vsdt.trafo

@@ -17,7 +17,7 @@ Require-Bundle: org.eclipse.core.resources,
  de.dailab.vsdt.diagram;visibility:=reexport,
  org.eclipse.gmf.runtime.diagram.ui.providers,
  de.dailab.vsdt.trafo.strucbpmn
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ClassPath: lib/wsdl4j-1.5.1.jar,
  .
 Bundle-Activator: de.dailab.vsdt.diagram.providers.VsdtAdditionsPlugin
