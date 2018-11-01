@@ -256,7 +256,9 @@ public class SemanticServiceFactory {
 		if (OntoUtils.specialTypes.containsKey(name)) {
 			return OntoUtils.specialTypes.get(name);
 		} else {
-			return param.getJavaClassName() != null ? param.getJavaClassName() : param.getName();
+			return param.getJavaClassName() != null
+					? param.getJavaClassName()
+					: param.getType().getFragment();
 		}
 	}
 	
