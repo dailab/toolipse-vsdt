@@ -67,6 +67,7 @@ public class OntoUtils {
 		IRI iri = IRI.create(service.getIRI());
 		OWLOntologyManager manager = OWLSFactory.getOWLOntologyManager();
 		OWLOntology onto = manager.getOntology(iri);
+		if (onto == null) onto = manager.loadOntology(iri);
 		if (onto != null) {
 			for (OWLOntology ontology: manager.getDirectImports(onto)) {
 				manager.loadOntology(ontology.getOntologyID().getOntologyIRI());
