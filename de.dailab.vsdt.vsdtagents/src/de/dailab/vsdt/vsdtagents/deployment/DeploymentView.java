@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -321,7 +322,8 @@ public class DeploymentView extends AbstractStructuredViewerView {
 			if (parentElement instanceof IAgentDescription) {
 				IAgentDescription agent = (IAgentDescription) parentElement;
 				if (agentsToServices != null && agentsToServices.containsKey(agent)) {
-					return (agentsToServices.get(parentElement)).toArray();
+					return (agentsToServices.get(parentElement)).stream()
+							.sorted(Comparator.comparing(IActionDescription::getName)).toArray();
 				}
 			}
 			return new Object[] {};
