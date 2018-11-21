@@ -168,7 +168,14 @@ public class DeploymentView extends AbstractStructuredViewerView {
 	 * @param element	element for which to show details
 	 */
 	private void showDetails(Object element) {
-		detailsText.setText(element != null ? String.valueOf(element).trim() : "");
+		if (element instanceof String) {
+			// node
+			String[] parts = ((String) element).split(" @ ");
+			detailsText.setText(String.format("Node:\n uuid='%s'\n owner='%s'", parts[0], parts[1]));
+		} else {
+			// Agent or Action -> just use toString
+			detailsText.setText(element != null ? String.valueOf(element).trim() : "");
+		}
 	}
 
 	/**
@@ -305,8 +312,7 @@ public class DeploymentView extends AbstractStructuredViewerView {
 		@Override
 		public Object[] getElements(Object input) {
 			if (nodesToAgents != null) {
-				Collection<String> nodeIDs= nodesToAgents.keySet();
-				return nodeIDs.toArray();
+				return nodesToAgents.keySet().toArray();
 			}
 			return new Object[] {};
 		}
@@ -340,8 +346,11 @@ public class DeploymentView extends AbstractStructuredViewerView {
 
 		@Override
 		public String getText(Object element) {
+			if (element instanceof String) { // i.e. AgentNode
+				return String.format("%s (%d)", element, nodesToAgents.get(element).size());
+			}
 			if (element instanceof IAgentDescription) {
-				return ((IAgentDescription) element).getName();
+				return String.format("%s (%d)", ((IAgentDescription) element).getName(), agentsToServices.get(element).size());
 			}
 			if (element instanceof IActionDescription) {
 				return ((IActionDescription) element).getName();
