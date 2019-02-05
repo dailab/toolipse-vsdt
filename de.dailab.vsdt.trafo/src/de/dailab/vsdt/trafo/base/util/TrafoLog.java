@@ -41,6 +41,8 @@ public class TrafoLog {
 	/**whether warnings occurred during the transformation*/
 	private static boolean hasWarning= false;
 	
+	private static boolean useEclipseConsole = true;
+	
 	/**
 	 * add a file appender for a logging file
 	 * 
@@ -69,9 +71,11 @@ public class TrafoLog {
 		hasErrors= false;
 		hasWarning= false;
 
-		MessageConsole console = ConsoleUtil.registerConsole(VSDT_TRAFO_CONSOLE);
-		console.clearConsole();
-		ConsoleUtil.showConsole(VSDT_TRAFO_CONSOLE);
+		if (useEclipseConsole) {
+			MessageConsole console = ConsoleUtil.registerConsole(VSDT_TRAFO_CONSOLE);
+			console.clearConsole();
+			ConsoleUtil.showConsole(VSDT_TRAFO_CONSOLE);
+		}
 	}
 	
 	/**
@@ -98,7 +102,8 @@ public class TrafoLog {
 	 */
 	public static void debug(String message) {
 		logger.debug(message);
-		ConsoleUtil.println(VSDT_TRAFO_CONSOLE, "DEBUG: " + message);
+		if (useEclipseConsole) 
+			ConsoleUtil.println(VSDT_TRAFO_CONSOLE, "DEBUG: " + message);
 	}
 	
 	/**
@@ -108,7 +113,8 @@ public class TrafoLog {
 	 */
 	public static void info(String message) {
 		logger.info(message);
-		ConsoleUtil.printInfo(VSDT_TRAFO_CONSOLE, "INFO: " + message);
+		if (useEclipseConsole) 
+			ConsoleUtil.printInfo(VSDT_TRAFO_CONSOLE, "INFO: " + message);
 	}
 	
 	/**
@@ -118,7 +124,8 @@ public class TrafoLog {
 	 */
 	public static void nyi(String message) {
 		warn("Not Yet Implemented: " + message);
-		ConsoleUtil.printWarning(VSDT_TRAFO_CONSOLE, "NOT YET IMPL.: " + message);
+		if (useEclipseConsole) 
+			ConsoleUtil.printWarning(VSDT_TRAFO_CONSOLE, "NOT YET IMPL.: " + message);
 	}
 	
 	/**
@@ -129,7 +136,8 @@ public class TrafoLog {
 	public static void warn(String message) {
 		hasWarning= true;
 		logger.warn(message);
-		ConsoleUtil.printWarning(VSDT_TRAFO_CONSOLE, "WARNING: " + message);
+		if (useEclipseConsole) 
+			ConsoleUtil.printWarning(VSDT_TRAFO_CONSOLE, "WARNING: " + message);
 	}
 	
 	/**
@@ -140,7 +148,8 @@ public class TrafoLog {
 	public static void error(String message) {
 		hasErrors= true;
 		logger.error(message);
-		ConsoleUtil.printError(VSDT_TRAFO_CONSOLE, "ERROR: " + message);
+		if (useEclipseConsole) 
+			ConsoleUtil.printError(VSDT_TRAFO_CONSOLE, "ERROR: " + message);
 	}
 	
 	/**
@@ -151,7 +160,8 @@ public class TrafoLog {
 	public static void fatal(String message, Throwable t) {
 		hasErrors= true;
 		logger.fatal(message, t);
-		ConsoleUtil.println(VSDT_TRAFO_CONSOLE, "FATAL: " + message);
+		if (useEclipseConsole) 
+			ConsoleUtil.println(VSDT_TRAFO_CONSOLE, "FATAL: " + message);
 	}
 	
 	public static boolean hasWarnings() {
@@ -166,4 +176,7 @@ public class TrafoLog {
 		return writer.toString();
 	}
 	
+	public static void setUseEclipseConsole(boolean useEclipseConsole) {
+		TrafoLog.useEclipseConsole = useEclipseConsole;
+	}
 }
