@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -28,6 +29,7 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 
 import de.dailab.common.swt.dialogs.SingleSelectDialog;
 import de.dailab.common.swt.views.AbstractLabelProvider;
@@ -38,6 +40,8 @@ import de.dailab.jiactng.agentcore.ontology.IAgentDescription;
 import de.dailab.jiactng.nodeplugin.JiacNodePlugin;
 import de.dailab.vsdt.BusinessProcessSystem;
 import de.dailab.vsdt.Participant;
+import de.dailab.vsdt.diagram.interpreter.view.DecorationHelper;
+import de.dailab.vsdt.diagram.part.VsdtDiagramEditor;
 import de.dailab.vsdt.vsdtagents.Util;
 import de.dailab.vsdt.vsdtagents.VsdtAgents;
 import de.dailab.vsdt.vsdtagents.deployment.DeploymentView;
@@ -57,6 +61,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 	private Action deployAction;
 	private Action undeployAction;
 	private Action invokeAction;
+	private Action clearDecoration;
 	
 	
 	/** the bean */
@@ -89,7 +94,9 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		deployAction = new DeployAction();
 		invokeAction = new InvokeAction();
 		undeployAction = new UndeployAction();
+		clearDecoration = new ClearDecorationAction();
 		contributeToToolBar(refreshAction, deployAction, invokeAction, undeployAction);
+		contributeToMenu(clearDecoration);
 		updateActions();
 	}
 
@@ -157,6 +164,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		deployAction.setEnabled(isVsdtEditor && isAgent);
 		undeployAction.setEnabled(isInterpreter);
 		invokeAction.setEnabled(isAction);
+		clearDecoration.setEnabled(true);
 	}
 
 	/**
@@ -293,6 +301,32 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		@Override
 		public void run() {
 			refresh();
+		}
+	}
+	
+
+	/**
+	 * Clear decoration (state markers) from all opened diagrams.
+	 * 
+	 * @author kuester
+	 */
+	protected class ClearDecorationAction extends Action {
+		
+		public ClearDecorationAction() {
+			super("Clear Decoration", null);
+			setToolTipText("Clear state decoration markers from opened diagrams.");
+		}
+		
+		@Override
+		public void run() {
+			Stream.of(PlatformUI.getWorkbench().getWorkbenchWindows())
+					.flatMap(wbw -> Stream.of(wbw.getPages()))
+					.flatMap(wbp -> Stream.of(wbp.getEditorReferences()))
+					.map(ref -> ref.getEditor(false))
+					.filter(VsdtDiagramEditor.class::isInstance)
+					.map(VsdtDiagramEditor.class::cast)
+					.map(VsdtDiagramEditor::getDiagramEditPart)
+					.forEach(DecorationHelper::clearDecorators);
 		}
 	}
 
