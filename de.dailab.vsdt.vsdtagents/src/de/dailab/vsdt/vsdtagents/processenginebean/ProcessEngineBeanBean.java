@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -54,11 +55,12 @@ public class ProcessEngineBeanBean extends AbstractMethodExposingBean {
 	 * 
 	 * Parts of this are more or less copied/adapted from {@link EclipseInterpreterObserver}
 	 *
+	 * @param diagrams		Set of diagrams covered by that set of states
 	 * @param allStates		Mapping FlowObject IDs to interpreter State
 	 * @param allSteps		mapping Connection IDs to last visited step
 	 */
 	@Expose(name=ACTION_SHOW_STATE, scope=ActionScope.GLOBAL)
-	public void showState(Map<String, String> allStates, Map<String, Integer> allSteps) {
+	public void showState(Set<String> diagrams, Map<String, String> allStates, Map<String, Integer> allSteps) {
 		// get all opened VSDT editors
 		List<VsdtDiagramEditor> editors = Stream.of(PlatformUI.getWorkbench().getWorkbenchWindows())
 				.flatMap(wbw -> Stream.of(wbw.getPages()))
@@ -72,6 +74,9 @@ public class ProcessEngineBeanBean extends AbstractMethodExposingBean {
 		for (VsdtDiagramEditor editor : editors) {
 			BusinessProcessDiagramEditPart editPart = (BusinessProcessDiagramEditPart) ((VsdtDiagramEditor) editor).getDiagramEditPart();
 			BusinessProcessDiagram bpd = editPart.getCastedModel();
+			if (! diagrams.contains(bpd.getId())) {
+				continue;
+			}
 			
 			// filter objects by states, get state, and decorate accordingly
 			bpd.getPools().stream()
