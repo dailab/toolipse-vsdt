@@ -62,6 +62,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 	private Action undeployAction;
 	private Action invokeAction;
 	private Action clearDecoration;
+	private Action toggleShowState;
 	
 	
 	/** the bean */
@@ -95,8 +96,9 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		invokeAction = new InvokeAction();
 		undeployAction = new UndeployAction();
 		clearDecoration = new ClearDecorationAction();
+		toggleShowState = new ToggleShowStateAction();
 		contributeToToolBar(refreshAction, deployAction, invokeAction, undeployAction);
-		contributeToMenu(clearDecoration);
+		contributeToMenu(clearDecoration, toggleShowState);
 		updateActions();
 	}
 
@@ -165,6 +167,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		undeployAction.setEnabled(isInterpreter);
 		invokeAction.setEnabled(isAction);
 		clearDecoration.setEnabled(true);
+		toggleShowState.setEnabled(isInterpreter);
 	}
 
 	/**
@@ -330,6 +333,30 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		}
 	}
 
+
+	/**
+	 * Toggle whether to show the state of the currently selected interpreter in the VSDT
+	 * 
+	 * @author kuester
+	 */
+	protected class ToggleShowStateAction extends Action {
+		
+		public ToggleShowStateAction() {
+			super("Toggle Show State", null);
+			setToolTipText("Toggle whether to show the state of the selected interpreter in the VSDT.");
+		}
+		
+		@Override
+		public void run() {
+			try {
+				IAgentDescription agent = getSelected(interpreterViewer, IAgentDescription.class);
+				getBean().toggleShowState(agent);
+			} catch (Exception e) {
+				openMessageDialog(MessageDialog.ERROR, "Action failed: " + e.getMessage());
+			}
+		}
+	}
+	
 	
 	/**
 	 * This action is used to deploy the process from the currently opened VSDT diagram
@@ -342,7 +369,6 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		public DeployAction() {
 			super("Deploy", VsdtAgents.getImageDescriptor("import.gif"));
 			setToolTipText("Deploy Process from active Editor to selected Interpreter Agent.");
-
 		}
 		
 		@Override

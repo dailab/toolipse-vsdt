@@ -41,6 +41,7 @@ public class ProcessEngineBeanBean extends AbstractMethodExposingBean {
 	static final String ACTION_REMOVE_RUNTIME   = PROVIDER + "removeInterpreterRuntime";
 	static final String ACTION_GET_RUNTIMES     = PROVIDER + "getAllInterpreters";
 	static final String ACTION_GET_ACTIONS      = PROVIDER + "getAllInterpreterActions";
+	static final String ACTION_TOGGLE_SHOW_STATE= PROVIDER + "showState";
 	
 	// own actions
 	public static final String ACTION_SHOW_STATE = "de.dailab.vsdt.vsdtagents.processenginebean.ProcessEngineBeanBean#showState";
@@ -182,6 +183,16 @@ public class ProcessEngineBeanBean extends AbstractMethodExposingBean {
 			}
 		}
 		return result.getResults();
+	}
+	
+	/**
+	 * Toggle whether to show the state of the given interpreter agent in the VSDT.
+	 * 
+	 * @param agent			the interpreter agent
+	 * @throws Exception	any Exception that occurred during the invocation
+	 */
+	protected void toggleShowState(IAgentDescription agent) throws Exception {
+		invokeAction(agent, ACTION_TOGGLE_SHOW_STATE, 5000, new Serializable[] {null});
 	}
 
 	/**
