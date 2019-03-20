@@ -11,6 +11,7 @@ import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.image.ImageFileFormat;
 import org.eclipse.gmf.runtime.diagram.ui.render.util.CopyToImageUtil;
 import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.swt.widgets.Display;
 
 import de.dailab.vsdt.Activity;
 import de.dailab.vsdt.ActivityType;
@@ -1011,14 +1012,19 @@ public class Bpmn2TextElementMapping extends MappingStage {
 					String path= getImagePath(diagramElement);
 					
 					TransactionalEditingDomain.Factory.INSTANCE.createEditingDomain(resource.getResourceSet());
-					try {
-						byte[] imageData= new CopyToImageUtil().copyToImageByteArray(
-								(Diagram) o, -1, -1, IMAGE_FORMAT, new NullProgressMonitor(), 
-								new PreferencesHint("de.dailab.vsdt.diagram"), true);
-						((TextExportWrapper) Bpmn2TextElementMapping.this.wrapper).addImage(path, imageData);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+
+					Display.getDefault().syncExec(() -> {
+						try {
+							// XXX some exception is raised within this method and printed,
+							// but it still works fine...
+							byte[] imageData= new CopyToImageUtil().copyToImageByteArray(
+									(Diagram) o, -1, -1, IMAGE_FORMAT, new NullProgressMonitor(), 
+									new PreferencesHint("de.dailab.vsdt.diagram"), true);
+							((TextExportWrapper) Bpmn2TextElementMapping.this.wrapper).addImage(path, imageData);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					});
 					return true;
 				}
 			}
