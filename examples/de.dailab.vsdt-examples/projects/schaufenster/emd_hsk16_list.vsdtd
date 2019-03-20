@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:vsdt="http://de.dailab.vsdt">
   <vsdt:BusinessProcessSystem xmi:id="_Uq6UIeFZEeWyJP7jEdzaRw" name="emd_hsk16" documentation="EMD Example Diagram for Hauptstadtkonferenz 2016" id="_Uq6UIOFZEeWyJP7jEdzaRw" version="0.1" expressionLanguage="VSDT Expression Language" creationDate="2016-03-03T17:02:26.018+0100" modificationDate="2016-03-03T17:02:26.018+0100">
-    <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_XM7k8OFZEeWyJP7jEdzaRw" name="Search and Book" id="_XM694OFZEeWyJP7jEdzaRw" participants="_VNVEseFZEeWyJP7jEdzaRw">
+    <businessProcesses xmi:type="vsdt:BusinessProcessDiagram" xmi:id="_XM7k8OFZEeWyJP7jEdzaRw" name="Search and Book" id="_XM694OFZEeWyJP7jEdzaRw" participants="_VNVEseFZEeWyJP7jEdzaRw _yE2rcUskEemAXK4RZcfTUg">
       <pools xmi:type="vsdt:Pool" xmi:id="_asn-8OFZEeWyJP7jEdzaRw" name="Pool" id="_asnX4OFZEeWyJP7jEdzaRw" participant="_VNVEseFZEeWyJP7jEdzaRw">
         <properties xmi:type="vsdt:Property" xmi:id="_0cbIgOFaEeWyJP7jEdzaRw" name="user_id" type="string"/>
         <properties xmi:type="vsdt:Property" xmi:id="_2Cri4OnlEeWFm-VHPDVaVw" name="authenticated" type="string"/>
@@ -140,6 +140,7 @@
       <connections xmi:type="vsdt:SequenceFlow" xmi:id="_hIdFgeoCEeWH4I5OfgYq0Q" id="_hIdFgOoCEeWH4I5OfgYq0Q" source="_e5QqEeoCEeWH4I5OfgYq0Q" target="_fgZ3AOFZEeWyJP7jEdzaRw"/>
     </businessProcesses>
     <participants xmi:type="vsdt:Participant" xmi:id="_VNVEseFZEeWyJP7jEdzaRw" name="Service User" id="_VNVEsOFZEeWyJP7jEdzaRw" associatedProcesses="_XM7k8OFZEeWyJP7jEdzaRw" associatedPools="_asn-8OFZEeWyJP7jEdzaRw"/>
+    <participants xmi:type="vsdt:Participant" xmi:id="_yE2rcUskEemAXK4RZcfTUg" name="Services" id="_yE2rcEskEemAXK4RZcfTUg" associatedProcesses="_XM7k8OFZEeWyJP7jEdzaRw"/>
     <services xmi:type="vsdt:Service" xmi:id="_FiH6oOFaEeWyJP7jEdzaRw" type="JIAC Action" participant="_VNVEseFZEeWyJP7jEdzaRw" interface="hsk16" operation="HSKExampleService">
       <input xmi:type="vsdt:Property" xmi:id="_xn6ZgOFaEeWyJP7jEdzaRw" name="uid" type="string"/>
     </services>
@@ -161,23 +162,23 @@
       <input xmi:type="vsdt:Property" xmi:id="_2LLRYOoCEeWH4I5OfgYq0Q" name="hint" type="string"/>
       <output xmi:type="vsdt:Property" xmi:id="_3jYacOoCEeWH4I5OfgYq0Q" name="selected" type="de.dailab.model.domainModel.mobility.charging.ChargingStation"/>
     </services>
-    <services xmi:type="vsdt:Service" xmi:id="_H3skAOnjEeWFm-VHPDVaVw" type="JIAC Action" operation="DAIChargingStationAuthServerBean.authenticate">
+    <services xmi:type="vsdt:Service" xmi:id="_H3skAOnjEeWFm-VHPDVaVw" type="JIAC Action" participant="_yE2rcUskEemAXK4RZcfTUg" interface="Services" operation="DAIChargingStationAuthServerBean.authenticate">
       <input xmi:type="vsdt:Property" xmi:id="_H3tLEOnjEeWFm-VHPDVaVw" name="arg0" type="java.lang.Object"/>
       <output xmi:type="vsdt:Property" xmi:id="_H3tLEenjEeWFm-VHPDVaVw" name="res0" type="java.lang.Object"/>
     </services>
-    <services xmi:type="vsdt:Service" xmi:id="_IhzQ8OnjEeWFm-VHPDVaVw" type="JIAC Action" operation="DAIAgentBean.getClosestDAIChargingPoints">
+    <services xmi:type="vsdt:Service" xmi:id="_IhzQ8OnjEeWFm-VHPDVaVw" type="JIAC Action" participant="_yE2rcUskEemAXK4RZcfTUg" interface="Services" operation="DAIAgentBean.getClosestDAIChargingPoints">
       <input xmi:type="vsdt:Property" xmi:id="_IhzQ8enjEeWFm-VHPDVaVw" name="arg0" type="de.dailab.model.domainModel.location.GeoLocation"/>
       <input xmi:type="vsdt:Property" xmi:id="_IhzQ8unjEeWFm-VHPDVaVw" name="arg1" type="integer"/>
       <output xmi:type="vsdt:Property" xmi:id="_IhzQ8-njEeWFm-VHPDVaVw" name="res0" type="de.dailab.model.domainModel.mobility.charging.ChargingStation"/>
     </services>
-    <services xmi:type="vsdt:Service" xmi:id="_K0zOUOnjEeWFm-VHPDVaVw" type="JIAC Action" operation="DAIChargingStationAuthServerBean.reserveChargingStation">
+    <services xmi:type="vsdt:Service" xmi:id="_K0zOUOnjEeWFm-VHPDVaVw" type="JIAC Action" participant="_yE2rcUskEemAXK4RZcfTUg" interface="Services" operation="DAIChargingStationAuthServerBean.reserveChargingStation">
       <input xmi:type="vsdt:Property" xmi:id="_K0zOUenjEeWFm-VHPDVaVw" name="arg0" type="string"/>
       <input xmi:type="vsdt:Property" xmi:id="_K0zOUunjEeWFm-VHPDVaVw" name="arg1" type="java.util.Date"/>
       <input xmi:type="vsdt:Property" xmi:id="_K0zOU-njEeWFm-VHPDVaVw" name="arg2" type="java.util.Date"/>
       <input xmi:type="vsdt:Property" xmi:id="_K0zOVOnjEeWFm-VHPDVaVw" name="arg3" type="de.dailab.model.domainModel.mobility.charging.ChargingStation"/>
       <output xmi:type="vsdt:Property" xmi:id="_K0zOVenjEeWFm-VHPDVaVw" name="res0" type="boolean"/>
     </services>
-    <services xmi:type="vsdt:Service" xmi:id="_ZFFsAOoCEeWH4I5OfgYq0Q" type="JIAC Action" operation="DAIAgentBean.getLocalDAIChargingPoints">
+    <services xmi:type="vsdt:Service" xmi:id="_ZFFsAOoCEeWH4I5OfgYq0Q" type="JIAC Action" participant="_yE2rcUskEemAXK4RZcfTUg" interface="Services" operation="DAIAgentBean.getLocalDAIChargingPoints">
       <input xmi:type="vsdt:Property" xmi:id="_ZFFsAeoCEeWH4I5OfgYq0Q" name="arg0" type="[Lde.dailab.model.domainModel.location.Place;"/>
       <input xmi:type="vsdt:Property" xmi:id="_ZFFsAuoCEeWH4I5OfgYq0Q" name="arg1" type="[Lde.dailab.model.domainModel.mobility.charging.ChargingStationOperatorEnum;"/>
       <input xmi:type="vsdt:Property" xmi:id="_ZFFsA-oCEeWH4I5OfgYq0Q" name="arg2" type="[Lde.dailab.model.domainModel.mobility.charging.ChargingReceptableTypeEnum;"/>
@@ -187,7 +188,7 @@
       <input xmi:type="vsdt:Property" xmi:id="_ZFFsB-oCEeWH4I5OfgYq0Q" name="arg6" type="integer"/>
       <output xmi:type="vsdt:Property" xmi:id="_ZFFsCOoCEeWH4I5OfgYq0Q" name="res0" type="java.util.List"/>
     </services>
-    <services xmi:type="vsdt:Service" xmi:id="_LZtJYCKSEea7HcfutnRKIw" type="JIAC Semantic Service" operation="GateServiceAgent.OpenGate" description="Opens the gate for the parking spots with DAI charging stations near Ernst-Reuter-Platz, Berlin." template="true">
+    <services xmi:type="vsdt:Service" xmi:id="_LZtJYCKSEea7HcfutnRKIw" type="JIAC Semantic Service" participant="_yE2rcUskEemAXK4RZcfTUg" interface="Services" operation="GateServiceAgent.OpenGate" description="Opens the gate for the parking spots with DAI charging stations near Ernst-Reuter-Platz, Berlin." template="true">
       <input xmi:type="vsdt:Property" xmi:id="_LZtJYSKSEea7HcfutnRKIw" name="evcoId" type="anyType"/>
       <output xmi:type="vsdt:Property" xmi:id="_LZtJYiKSEea7HcfutnRKIw" name="output" type="boolean"/>
     </services>
@@ -216,12 +217,25 @@
       <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_XM-BMuFZEeWyJP7jEdzaRw" diagramLink="_ZfgEgOFZEeWyJP7jEdzaRw" hint="Vsdt"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XM-BM-FZEeWyJP7jEdzaRw" x="175" y="69"/>
     </children>
+    <children xmi:type="notation:Node" xmi:id="_yFEt4EskEemAXK4RZcfTUg" type="1001" element="_yE2rcUskEemAXK4RZcfTUg">
+      <children xmi:type="notation:Node" xmi:id="_yFIYQEskEemAXK4RZcfTUg" type="4001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_yFIYQUskEemAXK4RZcfTUg" y="5"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_yFEt4UskEemAXK4RZcfTUg" fontName="Cantarell"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_yFEt4kskEemAXK4RZcfTUg" x="426" y="66"/>
+    </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_UrBo4eFZEeWyJP7jEdzaRw"/>
     <edges xmi:type="notation:Edge" xmi:id="_ZSkbwOFZEeWyJP7jEdzaRw" type="3001" source="_VNe1sOFZEeWyJP7jEdzaRw" target="_XM-BMOFZEeWyJP7jEdzaRw">
       <styles xmi:type="notation:RoutingStyle" xmi:id="_ZSkbweFZEeWyJP7jEdzaRw"/>
       <styles xmi:type="notation:FontStyle" xmi:id="_ZSkbwuFZEeWyJP7jEdzaRw" fontName="Droid Sans"/>
       <element xsi:nil="true"/>
       <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ZSkbw-FZEeWyJP7jEdzaRw" points="[20, -1, -195, 0]$[210, -28, -5, -27]"/>
+    </edges>
+    <edges xmi:type="notation:Edge" xmi:id="_zBFDIEskEemAXK4RZcfTUg" type="3001" source="_yFEt4EskEemAXK4RZcfTUg" target="_XM-BMOFZEeWyJP7jEdzaRw">
+      <styles xmi:type="notation:RoutingStyle" xmi:id="_zBFDIUskEemAXK4RZcfTUg"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_zBFDIkskEemAXK4RZcfTUg" fontName="Cantarell"/>
+      <element xsi:nil="true"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_zBFDI0skEemAXK4RZcfTUg" points="[-20, 1, 180, -2]$[-198, 34, 2, 31]"/>
     </edges>
   </notation:Diagram>
   <notation:Diagram xmi:id="_ZfgEgOFZEeWyJP7jEdzaRw" type="Vsdt" element="_XM7k8OFZEeWyJP7jEdzaRw" measurementUnit="Pixel">
