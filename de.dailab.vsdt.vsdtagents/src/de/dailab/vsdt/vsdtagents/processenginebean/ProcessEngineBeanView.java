@@ -167,7 +167,7 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		undeployAction.setEnabled(isInterpreter);
 		invokeAction.setEnabled(isAction);
 		clearDecoration.setEnabled(true);
-		toggleShowState.setEnabled(isInterpreter);
+		toggleShowState.setEnabled(isInterpreter || isAgent);
 	}
 
 	/**
