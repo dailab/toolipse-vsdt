@@ -352,9 +352,9 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		@Override
 		public void run() {
 			Shell shell = Display.getDefault().getActiveShell();
+			IAgentDescription agent = getSelected(interpreterViewer, IAgentDescription.class);
 			runInProgressMonitor(shell, true, false, (IProgressMonitor monitor) -> {
 					try {
-						IAgentDescription agent = getSelected(interpreterViewer, IAgentDescription.class);
 						getBean().toggleShowState(agent);
 					} catch (Exception e) {
 						openMessageDialogSafe(MessageDialog.ERROR, "Action failed: " + e.getMessage());
