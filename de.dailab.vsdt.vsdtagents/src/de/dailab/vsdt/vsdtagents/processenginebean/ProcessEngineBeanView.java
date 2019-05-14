@@ -119,7 +119,8 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 	}
 	
 	/**
-	 * Get Actions from Bean and Refresh Services Viewer accordingly
+	 * Get Actions from Bean and Refresh Services Viewer accordingly.
+	 * This method can be called asynchronously, e.g. from a progress monitor thread
 	 */
 	private void refresh() {
 		try {
@@ -138,11 +139,12 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 			}
 			
 			// set viewer's input (input is irrelevant, just to trigger the callback)
-			interpreterViewer.setInput(interpreterAgents);
-			
-			updateActions();
+			Display.getDefault().asyncExec(() -> {
+				interpreterViewer.setInput(interpreterAgents);
+				updateActions();
+			});
 		} catch (Exception e) {
-			openMessageDialog(MessageDialog.ERROR, "Fetching Interpreter Runtimes Failed: " + e.getMessage());
+			openMessageDialogSafe(MessageDialog.ERROR, "Fetching Interpreter Runtimes Failed: " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -303,7 +305,8 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		
 		@Override
 		public void run() {
-			refresh();
+			Shell shell = Display.getDefault().getActiveShell();
+			runInProgressMonitor(shell, true, false, pm -> refresh());
 		}
 	}
 	
@@ -348,12 +351,15 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 		
 		@Override
 		public void run() {
-			try {
-				IAgentDescription agent = getSelected(interpreterViewer, IAgentDescription.class);
-				getBean().toggleShowState(agent);
-			} catch (Exception e) {
-				openMessageDialog(MessageDialog.ERROR, "Action failed: " + e.getMessage());
-			}
+			Shell shell = Display.getDefault().getActiveShell();
+			runInProgressMonitor(shell, true, false, (IProgressMonitor monitor) -> {
+					try {
+						IAgentDescription agent = getSelected(interpreterViewer, IAgentDescription.class);
+						getBean().toggleShowState(agent);
+					} catch (Exception e) {
+						openMessageDialogSafe(MessageDialog.ERROR, "Action failed: " + e.getMessage());
+					}
+			});
 		}
 	}
 	
@@ -383,17 +389,17 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 					try {
 						String source = getVsdtSource();
 						runInProgressMonitor(shell, true, false, (IProgressMonitor monitor) -> {
-							try {
-								// deploy process to interpreter
-								getBean().deployProcessToInterpreter(agent, source, participant.getName());
-								openMessageDialogSafe(MessageDialog.INFORMATION, "Process sucessfully deployed");
-							} catch (Exception e) {
-								// thrown by deploy method
-								openMessageDialogSafe(MessageDialog.ERROR, "Deploying Service Failed: " + e.getMessage());
-							}
+								try {
+									// deploy process to interpreter
+									getBean().deployProcessToInterpreter(agent, source, participant.getName());
+									openMessageDialogSafe(MessageDialog.INFORMATION, "Process sucessfully deployed");
+								} catch (Exception e) {
+									// thrown by deploy method
+									openMessageDialogSafe(MessageDialog.ERROR, "Deploying Service Failed: " + e.getMessage());
+								}
+								// refresh viewer
+								refresh();
 						});
-						// refresh viewer
-						refresh();
 					} catch (IOException e) {
 						openMessageDialog(MessageDialog.ERROR, "Could not read VSDT source: " + e.getMessage());
 					}
@@ -427,14 +433,17 @@ public class ProcessEngineBeanView extends AbstractStructuredViewerView {
 			String id = ((Map.Entry<String, String>) path.getSegment(1)).getKey();
 
 			if (openMessageDialog(MessageDialog.CONFIRM, "Remove selected Interpreter Runtime?")) {
-				try {
-					getBean().undeployInterpreterRuntime(agent, id);
-					openMessageDialog(MessageDialog.INFORMATION, "Runtime removed");
-				} catch (Exception e) {
-					openMessageDialog(MessageDialog.ERROR, "Failed to remove runtime: " + e.getMessage());
-				}
-				// refresh viewer
-				refresh();
+				Shell shell = Display.getDefault().getActiveShell();
+				runInProgressMonitor(shell, true, false, (IProgressMonitor p) -> {
+						try {
+							getBean().undeployInterpreterRuntime(agent, id);
+							openMessageDialogSafe(MessageDialog.INFORMATION, "Runtime removed");
+						} catch (Exception e) {
+							openMessageDialogSafe(MessageDialog.ERROR, "Failed to remove runtime: " + e.getMessage());
+						}
+						// refresh viewer
+						refresh();
+				});
 			}
 		}
 	}
