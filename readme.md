@@ -7,7 +7,7 @@ The Visual Service Design Tool (VSDT) is a [BPMN](https://en.wikipedia.org/wiki/
 that can be used for automatically creating executable code for various target languages,
 most notably different flavours of JIAC agents, but also BPEL, or just plain english text.
 
-The first version of the VSDT was developed in 2007 during the diploma thesis of Tobias Kuester
+The first version of the VSDT was developed in 2007 during the diploma thesis of Tobias Küster
 and has since then been extended upon in the context of various research projects at DAI-Labor.
 
 
@@ -40,11 +40,10 @@ Just a few pointer where to look in case you want to make certain additions or c
 
 Developers
 ----------
-* Tobias Kuester <tobias.kuester@dai-labor.de>
+* Tobias Küster <tobias.kuester@dai-labor.de>
 
 Documentation
 -------------
-* [JIAC Website](http://www.jiac.de/development-tools/jiac-toolipse/visual-service-design-tool/)
-* [VSDT Manual](https://cvs.dai-labor.de/jiac/toolipse3/trunk/doc/vsdt_manual)
-* [DAI-Wiki (obsolete)](https://wiki.dai-labor.de/ClusterSET:VSDT)
-* [Redmine Wiki](https://redmine.dai-labor.de/redmine/projects/jiac-tools-und-toolipse/wiki/VSDT)
+* JIAC Website: <https://www.jiac.de/development-tools/jiac-toolipse/>
+* VSDT Manual: within this repository
+* Old Redmine Tickets (internal): <https://redmine.dai-labor.de/redmine/projects/jiac-tools-und-toolipse/wiki/VSDT>
