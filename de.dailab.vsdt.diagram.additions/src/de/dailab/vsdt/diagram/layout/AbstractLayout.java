@@ -2,6 +2,7 @@ package de.dailab.vsdt.diagram.layout;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -124,7 +125,7 @@ public abstract class AbstractLayout {
 			if (element instanceof ConnectingObject) {
 				// TODO remove all bend-points but one
 			}
-			editParts.addAll(editPart.getChildren());
+			editParts.addAll((Collection<? extends AbstractGraphicalEditPart>) editPart.getChildren());
 		}
 		return cc;
 	}

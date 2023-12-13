@@ -122,7 +122,7 @@ public class StructureView extends AbstractStructuredViewerView implements ISele
 					VsdtDiagramEditor editor= (VsdtDiagramEditor) workbenchPage.getActiveEditor();
 					StructureLayout layout= new StructureLayout();
 					Map<FlowObject, Rectangle> layoutMap= layout.createLayoutMap(editor);
-					List<AbstractGraphicalEditPart> editParts = editor.getDiagramEditPart().getChildren();
+					List<AbstractGraphicalEditPart> editParts = (List<AbstractGraphicalEditPart>) editor.getDiagramEditPart().getChildren();
 					Command cmd= layout.getLayoutCommand(editParts, true, layoutMap);
 					editor.getDiagramEditDomain().getDiagramCommandStack().execute(cmd);
 				}
