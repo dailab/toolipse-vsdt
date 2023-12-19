@@ -15,19 +15,23 @@ Getting Started
 ---------------
 The VSDT is implemented as an Eclipse plugin, meaning that you have to use the [Eclipse](http://www.eclipse.org/)
 IDE for developing and running it.  The latest version of Eclipse the VSDT has been tested with is 
-[Eclipse Neon](http://www.eclipse.org/neon/). Correct working on newer version can not be guaranteed.
+Eclipse 2023-12. Correct working on newer version can not be guaranteed.
 
 ### Running the VSDT (as developer)
-1. If you haven't yet, install the GMF (Graphical Modeling Framework) and XText SDKs into your Eclipse (go to _Help_ -> _Install new software..._)
-2. Check out the modules in this directory (`vsdt/de.dailab.vsdt.*`) into your Eclipse workspace
-3. Check out additional plugins from other directories:
+1. Download the Eclipse Installer and Install Eclipse (which version does not really matter, "Eclipse for Java Developers" works fine)
+2. Import the modules in this repository (`vsdt/de.dailab.vsdt.*`) into your Eclipse workspace
+3. Import additional plugin projects from other repositories:
   * `common/de.dailab.common.swt` and `*.gmf`
   * `jadl/de.dailab.jiactng.jadlpp` (optional)
   * `jiac/de.dailab.jiactng.nodeplugin` (optional)
 4. The VSDT consists of several different modules, not all might be needed. If you still have missing dependencies for some, check the list in the Redmine Wiki (see Documentation) whether you really need those, and close them if you don't.
-5. Once everything compiles without error, right-click on any of the VSDT modules and select _Run as_ -> _Eclipse Application_
+5. Install the GMF Tooling and ATL Plugins into Eclipse (from the Eclipse marketplace menu)
+6. Once everything compiles without error, right-click on any of the VSDT modules and select _Run as_ -> _Eclipse Application_
   * A new Eclipse runtime will start from within your current Eclipse runtime, being equipped with all the plugins currently opened in the workspace, including the VSDT
+  * Import the `examples` project and open one of the examples, e.g. in the `demo` folder, to see if everything works
   * A detailled description of how to use the VSDT can be found in the VSDT Manual (see Documentation)
+
+Note: Currently, VSDT does not work well with a dark UI theme, so best switch to a light theme before starting Eclipse. You can select a light theme in Window -> Preferences -> General -> Appearance.
 
 ### Contributing to the VSDT
 Just a few pointer where to look in case you want to make certain additions or changes:
