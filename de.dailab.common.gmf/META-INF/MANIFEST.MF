@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Common GMF Library
+Bundle-SymbolicName: de.dailab.common.gmf;singleton:=true
+Bundle-Version: 4.0.4.qualifier
+Bundle-Vendor: DAI-Labor, TU Berlin
+Require-Bundle: org.eclipse.gmf.runtime.diagram.ui;visibility:=reexport,
+ org.eclipse.emf.edit.ui;visibility:=reexport,
+ de.dailab.common.swt;visibility:=reexport
+Export-Package: de.dailab.common.gmf,
+ de.dailab.common.gmf.action,
+ de.dailab.common.gmf.command,
+ de.dailab.common.gmf.edit.part,
+ de.dailab.common.gmf.edit.policy,
+ de.dailab.common.gmf.figures,
+ de.dailab.common.gmf.imprt,
+ de.dailab.common.gmf.properties
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
